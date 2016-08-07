@@ -1,0 +1,498 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2EF1E8CF1D57F95100E02C33 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1E8CE1D57F95100E02C33 /* AppDelegate.swift */; };
+		2EF1E8D11D57F95100E02C33 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1E8D01D57F95100E02C33 /* ViewController.swift */; };
+		2EF1E8D31D57F95100E02C33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EF1E8D21D57F95100E02C33 /* Assets.xcassets */; };
+		2EF1E8D61D57F95100E02C33 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EF1E8D41D57F95100E02C33 /* Main.storyboard */; };
+		2EF1E8E11D57F95100E02C33 /* VocalTrainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1E8E01D57F95100E02C33 /* VocalTrainerTests.swift */; };
+		2EF1E8EC1D57F95100E02C33 /* VocalTrainerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1E8EB1D57F95100E02C33 /* VocalTrainerUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2EF1E8DD1D57F95100E02C33 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2EF1E8C31D57F95100E02C33 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2EF1E8CA1D57F95100E02C33;
+			remoteInfo = VocalTrainer;
+		};
+		2EF1E8E81D57F95100E02C33 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2EF1E8C31D57F95100E02C33 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2EF1E8CA1D57F95100E02C33;
+			remoteInfo = VocalTrainer;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2EF1E8CB1D57F95100E02C33 /* VocalTrainer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VocalTrainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EF1E8CE1D57F95100E02C33 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2EF1E8D01D57F95100E02C33 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2EF1E8D21D57F95100E02C33 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2EF1E8D51D57F95100E02C33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2EF1E8D71D57F95100E02C33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2EF1E8DC1D57F95100E02C33 /* VocalTrainerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VocalTrainerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EF1E8E01D57F95100E02C33 /* VocalTrainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocalTrainerTests.swift; sourceTree = "<group>"; };
+		2EF1E8E21D57F95100E02C33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2EF1E8E71D57F95100E02C33 /* VocalTrainerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VocalTrainerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EF1E8EB1D57F95100E02C33 /* VocalTrainerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocalTrainerUITests.swift; sourceTree = "<group>"; };
+		2EF1E8ED1D57F95100E02C33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2EF1E8C81D57F95100E02C33 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EF1E8D91D57F95100E02C33 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EF1E8E41D57F95100E02C33 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2EF1E8C21D57F95100E02C33 = {
+			isa = PBXGroup;
+			children = (
+				2EF1E8CD1D57F95100E02C33 /* VocalTrainer */,
+				2EF1E8DF1D57F95100E02C33 /* VocalTrainerTests */,
+				2EF1E8EA1D57F95100E02C33 /* VocalTrainerUITests */,
+				2EF1E8CC1D57F95100E02C33 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2EF1E8CC1D57F95100E02C33 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2EF1E8CB1D57F95100E02C33 /* VocalTrainer.app */,
+				2EF1E8DC1D57F95100E02C33 /* VocalTrainerTests.xctest */,
+				2EF1E8E71D57F95100E02C33 /* VocalTrainerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2EF1E8CD1D57F95100E02C33 /* VocalTrainer */ = {
+			isa = PBXGroup;
+			children = (
+				2EF1E8CE1D57F95100E02C33 /* AppDelegate.swift */,
+				2EF1E8D01D57F95100E02C33 /* ViewController.swift */,
+				2EF1E8D21D57F95100E02C33 /* Assets.xcassets */,
+				2EF1E8D41D57F95100E02C33 /* Main.storyboard */,
+				2EF1E8D71D57F95100E02C33 /* Info.plist */,
+			);
+			path = VocalTrainer;
+			sourceTree = "<group>";
+		};
+		2EF1E8DF1D57F95100E02C33 /* VocalTrainerTests */ = {
+			isa = PBXGroup;
+			children = (
+				2EF1E8E01D57F95100E02C33 /* VocalTrainerTests.swift */,
+				2EF1E8E21D57F95100E02C33 /* Info.plist */,
+			);
+			path = VocalTrainerTests;
+			sourceTree = "<group>";
+		};
+		2EF1E8EA1D57F95100E02C33 /* VocalTrainerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				2EF1E8EB1D57F95100E02C33 /* VocalTrainerUITests.swift */,
+				2EF1E8ED1D57F95100E02C33 /* Info.plist */,
+			);
+			path = VocalTrainerUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2EF1E8CA1D57F95100E02C33 /* VocalTrainer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2EF1E8F01D57F95100E02C33 /* Build configuration list for PBXNativeTarget "VocalTrainer" */;
+			buildPhases = (
+				2EF1E8C71D57F95100E02C33 /* Sources */,
+				2EF1E8C81D57F95100E02C33 /* Frameworks */,
+				2EF1E8C91D57F95100E02C33 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VocalTrainer;
+			productName = VocalTrainer;
+			productReference = 2EF1E8CB1D57F95100E02C33 /* VocalTrainer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2EF1E8DB1D57F95100E02C33 /* VocalTrainerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2EF1E8F31D57F95100E02C33 /* Build configuration list for PBXNativeTarget "VocalTrainerTests" */;
+			buildPhases = (
+				2EF1E8D81D57F95100E02C33 /* Sources */,
+				2EF1E8D91D57F95100E02C33 /* Frameworks */,
+				2EF1E8DA1D57F95100E02C33 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2EF1E8DE1D57F95100E02C33 /* PBXTargetDependency */,
+			);
+			name = VocalTrainerTests;
+			productName = VocalTrainerTests;
+			productReference = 2EF1E8DC1D57F95100E02C33 /* VocalTrainerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2EF1E8E61D57F95100E02C33 /* VocalTrainerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2EF1E8F61D57F95100E02C33 /* Build configuration list for PBXNativeTarget "VocalTrainerUITests" */;
+			buildPhases = (
+				2EF1E8E31D57F95100E02C33 /* Sources */,
+				2EF1E8E41D57F95100E02C33 /* Frameworks */,
+				2EF1E8E51D57F95100E02C33 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2EF1E8E91D57F95100E02C33 /* PBXTargetDependency */,
+			);
+			name = VocalTrainerUITests;
+			productName = VocalTrainerUITests;
+			productReference = 2EF1E8E71D57F95100E02C33 /* VocalTrainerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2EF1E8C31D57F95100E02C33 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = Mac;
+				TargetAttributes = {
+					2EF1E8CA1D57F95100E02C33 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					2EF1E8DB1D57F95100E02C33 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 2EF1E8CA1D57F95100E02C33;
+					};
+					2EF1E8E61D57F95100E02C33 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 2EF1E8CA1D57F95100E02C33;
+					};
+				};
+			};
+			buildConfigurationList = 2EF1E8C61D57F95100E02C33 /* Build configuration list for PBXProject "VocalTrainer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2EF1E8C21D57F95100E02C33;
+			productRefGroup = 2EF1E8CC1D57F95100E02C33 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2EF1E8CA1D57F95100E02C33 /* VocalTrainer */,
+				2EF1E8DB1D57F95100E02C33 /* VocalTrainerTests */,
+				2EF1E8E61D57F95100E02C33 /* VocalTrainerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2EF1E8C91D57F95100E02C33 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EF1E8D31D57F95100E02C33 /* Assets.xcassets in Resources */,
+				2EF1E8D61D57F95100E02C33 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EF1E8DA1D57F95100E02C33 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EF1E8E51D57F95100E02C33 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2EF1E8C71D57F95100E02C33 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EF1E8D11D57F95100E02C33 /* ViewController.swift in Sources */,
+				2EF1E8CF1D57F95100E02C33 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EF1E8D81D57F95100E02C33 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EF1E8E11D57F95100E02C33 /* VocalTrainerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EF1E8E31D57F95100E02C33 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EF1E8EC1D57F95100E02C33 /* VocalTrainerUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2EF1E8DE1D57F95100E02C33 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2EF1E8CA1D57F95100E02C33 /* VocalTrainer */;
+			targetProxy = 2EF1E8DD1D57F95100E02C33 /* PBXContainerItemProxy */;
+		};
+		2EF1E8E91D57F95100E02C33 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2EF1E8CA1D57F95100E02C33 /* VocalTrainer */;
+			targetProxy = 2EF1E8E81D57F95100E02C33 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2EF1E8D41D57F95100E02C33 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2EF1E8D51D57F95100E02C33 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2EF1E8EE1D57F95100E02C33 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2EF1E8EF1D57F95100E02C33 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		2EF1E8F11D57F95100E02C33 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = VocalTrainer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Azazai.VocalTrainer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		2EF1E8F21D57F95100E02C33 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = VocalTrainer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Azazai.VocalTrainer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		2EF1E8F41D57F95100E02C33 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = VocalTrainerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Azazai.VocalTrainerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VocalTrainer.app/Contents/MacOS/VocalTrainer";
+			};
+			name = Debug;
+		};
+		2EF1E8F51D57F95100E02C33 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = VocalTrainerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Azazai.VocalTrainerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VocalTrainer.app/Contents/MacOS/VocalTrainer";
+			};
+			name = Release;
+		};
+		2EF1E8F71D57F95100E02C33 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = VocalTrainerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Azazai.VocalTrainerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = VocalTrainer;
+			};
+			name = Debug;
+		};
+		2EF1E8F81D57F95100E02C33 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = VocalTrainerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Azazai.VocalTrainerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = VocalTrainer;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2EF1E8C61D57F95100E02C33 /* Build configuration list for PBXProject "VocalTrainer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EF1E8EE1D57F95100E02C33 /* Debug */,
+				2EF1E8EF1D57F95100E02C33 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2EF1E8F01D57F95100E02C33 /* Build configuration list for PBXNativeTarget "VocalTrainer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EF1E8F11D57F95100E02C33 /* Debug */,
+				2EF1E8F21D57F95100E02C33 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		2EF1E8F31D57F95100E02C33 /* Build configuration list for PBXNativeTarget "VocalTrainerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EF1E8F41D57F95100E02C33 /* Debug */,
+				2EF1E8F51D57F95100E02C33 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		2EF1E8F61D57F95100E02C33 /* Build configuration list for PBXNativeTarget "VocalTrainerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EF1E8F71D57F95100E02C33 /* Debug */,
+				2EF1E8F81D57F95100E02C33 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2EF1E8C31D57F95100E02C33 /* Project object */;
+}
