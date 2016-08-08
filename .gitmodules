@@ -1,0 +1,3 @@
+[submodule "SwiftUtils"]
+	path = SwiftUtils
+	url = https://github.com/tiksem/SwiftUtils.git

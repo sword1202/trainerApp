@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>SwiftUtils.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>VocalTrainer.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -23,6 +28,26 @@
 			<true/>
 		</dict>
 		<key>2EF1E8E61D57F95100E02C33</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2EF1E93A1D580B3500E02C33</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2EF1E9441D580B4600E02C33</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2EF1E9521D580BB100E02C33</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2EF1E95B1D580BB100E02C33</key>
 		<dict>
 			<key>primary</key>
 			<true/>
