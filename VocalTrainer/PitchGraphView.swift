@@ -4,35 +4,29 @@
 //
 
 import Foundation
-import AppKit
-import SwiftUtils
+import Cocoa
+import OpenGL
+import GLKit
+import GLUT
 
-class PitchGraphView : AppKit.NSView {
-    var i:CGFloat = 0;
-    var loop:Loop!;
-
-    required override init?(coder: NSCoder) {
+class PitchGraphView : AppKit.NSOpenGLView {
+    required init?(coder: NSCoder) {
         super.init(coder: coder)
-        loop = Loop(delay: 0.01, action: {
-            [unowned self] in
-            self.i++;
-            if self.i < 1000 {
-                self.display();
-            } else {
-                self.loop.stop();
-            }
-        })
-        loop.start()
     }
 
-    override func drawRect(dirtyRect: NSRect) {
-        let x:CGFloat = 10;
-        let y:CGFloat = 10;
-        NSColor.redColor().set() // choose color
-        let figure = NSBezierPath() // container for line(s)
-        figure.moveToPoint(NSMakePoint(x, y)) // start point
-        figure.lineToPoint(NSMakePoint(x+10.0 + i, y+10.0 + i)) // destination
-        figure.lineWidth = 1  // hair line
-        figure.stroke()  // draw line(s) in color
+    override func drawRect(dirtyRect:NSRect) {
+        glClearColor(0, 0, 0, 0);
+        glClear(GLenum(GL_COLOR_BUFFER_BIT));
+        drawObject();
+        glFlush();
+    }
+
+    func drawObject() {
+        glColor3f(1.0, 0.85, 0.35)
+        glBegin(GLenum(GL_TRIANGLES))
+            glVertex3f(  0.0,  0.6, 0.0)
+            glVertex3f( -0.2, -0.3, 0.0)
+            glVertex3f(  0.2, -0.3 ,0.0)
+        glEnd()
     }
 }
