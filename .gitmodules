@@ -1,3 +1,6 @@
 [submodule "SwiftUtils"]
 	path = SwiftUtils
 	url = https://github.com/tiksem/SwiftUtils.git
+[submodule "PitchDetection"]
+	path = PitchDetection
+	url = https://github.com/tiksem/Pit-hDetection.git
