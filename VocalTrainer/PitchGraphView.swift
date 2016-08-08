@@ -14,11 +14,25 @@ class PitchGraphView : AppKit.NSOpenGLView {
 
     required init?(coder: NSCoder) {
         pitchReader = PitchInputReaderObjC(sampleSize: 2400)
+        pitchReader.start()
         super.init(coder: coder)
     }
 
+    override func prepareOpenGL() {
+        window!.makeFirstResponder(self)
+        glClearColor(0, 0, 0, 0)
+
+        let timer = NSTimer(timeInterval: 1.0/60.0, target:self, selector: #selector(PitchGraphView.idle), userInfo:nil, repeats:true);
+        NSRunLoop.currentRunLoop().addTimer(timer, forMode:NSDefaultRunLoopMode);
+}
+
+    func idle(timer:NSTimer) {
+        if(!NSApplication.sharedApplication().hidden) {
+            display()
+        }
+    }
+
     override func drawRect(dirtyRect:NSRect) {
-        glClearColor(0, 0, 0, 0);
         glClear(GLenum(GL_COLOR_BUFFER_BIT));
         drawObject();
         glFlush();
@@ -26,10 +40,12 @@ class PitchGraphView : AppKit.NSOpenGLView {
 
     func drawObject() {
         glColor3f(1.0, 0.85, 0.35)
-        glBegin(GLenum(GL_TRIANGLES))
-            glVertex3f(  0.0,  0.6, 0.0)
+        if let pitch = pitchReader.getLastDetectedPitch() {
+            glBegin(GLenum(GL_TRIANGLES))
+            glVertex3f(  0.0, pitch.getFrequency() / 2000.0, 0.0)
             glVertex3f( -0.2, -0.3, 0.0)
             glVertex3f(  0.2, -0.3 ,0.0)
-        glEnd()
+            glEnd()
+        }
     }
 }
