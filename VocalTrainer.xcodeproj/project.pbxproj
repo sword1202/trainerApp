@@ -49,7 +49,6 @@
 		2EF1E98B1D580BDF00E02C33 /* Timers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1E9191D580A1700E02C33 /* Timers.swift */; };
 		2EF1E98C1D580BDF00E02C33 /* UiUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1E91A1D580A1700E02C33 /* UiUtils.swift */; };
 		2EF1E99F1D592EC100E02C33 /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2EF1E9971D592EC100E02C33 /* CMakeLists.txt */; };
-		2EF1E9A01D592EC100E02C33 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1E9981D592EC100E02C33 /* main.cpp */; };
 		2EF1E9A11D592EC100E02C33 /* Pitch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1E9991D592EC100E02C33 /* Pitch.cpp */; };
 		2EF1E9A21D592EC100E02C33 /* PitchInputReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1E99B1D592EC100E02C33 /* PitchInputReader.cpp */; };
 		2EF1E9A31D592EC100E02C33 /* tests in Resources */ = {isa = PBXBuildFile; fileRef = 2EF1E99D1D592EC100E02C33 /* tests */; };
@@ -168,7 +167,7 @@
 		2EF1E99B1D592EC100E02C33 /* PitchInputReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PitchInputReader.cpp; path = PitchDetection/PitchInputReader.cpp; sourceTree = "<group>"; };
 		2EF1E99C1D592EC100E02C33 /* PitchInputReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PitchInputReader.h; path = PitchDetection/PitchInputReader.h; sourceTree = "<group>"; };
 		2EF1E99D1D592EC100E02C33 /* tests */ = {isa = PBXFileReference; lastKnownFileType = folder; name = tests; path = PitchDetection/tests; sourceTree = "<group>"; };
-		2EF1E9AA1D592F9E00E02C33 /* VocalTrainer-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VocalTrainer-Bridging-Header.h"; sourceTree = "<group>"; };
+		2EF1E9AC1D5941EC00E02C33 /* VocalTrainer-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VocalTrainer-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +214,7 @@
 		2EF1E8C21D57F95100E02C33 = {
 			isa = PBXGroup;
 			children = (
+				2EF1E9AC1D5941EC00E02C33 /* VocalTrainer-Bridging-Header.h */,
 				2EF1E9921D592EA700E02C33 /* PitchDetection */,
 				2EF1E8FE1D580A0600E02C33 /* SwiftUtils */,
 				2EF1E8CD1D57F95100E02C33 /* VocalTrainer */,
@@ -240,7 +240,6 @@
 		2EF1E8CD1D57F95100E02C33 /* VocalTrainer */ = {
 			isa = PBXGroup;
 			children = (
-				2EF1E9AA1D592F9E00E02C33 /* VocalTrainer-Bridging-Header.h */,
 				2EF1E8CE1D57F95100E02C33 /* AppDelegate.swift */,
 				2EF1E8D01D57F95100E02C33 /* ViewController.swift */,
 				2EF1E8D21D57F95100E02C33 /* Assets.xcassets */,
@@ -543,7 +542,6 @@
 				2EF1E8D11D57F95100E02C33 /* ViewController.swift in Sources */,
 				2EF1E9A21D592EC100E02C33 /* PitchInputReader.cpp in Sources */,
 				2EF1E8CF1D57F95100E02C33 /* AppDelegate.swift in Sources */,
-				2EF1E9A01D592EC100E02C33 /* main.cpp in Sources */,
 				2EF1E9A91D592F1600E02C33 /* AudoInputReader.cpp in Sources */,
 				106283694737127F8F9B4862 /* PitchGraphView.swift in Sources */,
 				10628581F6DA01039C75CDD9 /* PitchInputReaderObjC.mm in Sources */,
@@ -691,6 +689,13 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				OTHER_LDFLAGS = (
+					"-framework",
+					AudioToolbox,
+					"-framework",
+					CoreFoundation,
+				);
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -729,6 +734,13 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				OTHER_LDFLAGS = (
+					"-framework",
+					AudioToolbox,
+					"-framework",
+					CoreFoundation,
+				);
 				SDKROOT = macosx;
 			};
 			name = Release;

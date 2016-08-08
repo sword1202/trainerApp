@@ -10,7 +10,10 @@ import GLKit
 import GLUT
 
 class PitchGraphView : AppKit.NSOpenGLView {
+    let pitchReader:PitchInputReaderObjC
+
     required init?(coder: NSCoder) {
+        pitchReader = PitchInputReaderObjC(sampleSize: 2400)
         super.init(coder: coder)
     }
 
