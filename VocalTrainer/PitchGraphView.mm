@@ -22,7 +22,6 @@ struct PitchDetection {
 @implementation PitchGraphView {
     PitchInputReader* _pitchInputReader;
     std::vector<PitchDetection> detectedPitches;
-    double logLastTime;
 }
 
 - (void)prepareOpenGL {
@@ -62,6 +61,13 @@ struct PitchDetection {
     [self display];
 }
 
+static double getPitchPosition(const Pitch& pitch) {
+    int pitchIndexInOctave = pitch.getPitchInOctaveIndex();
+    float pitchUnit = 2.0f / Pitch::PITCHES_IN_OCTAVE;
+    float lowerBoundPosition = pitchUnit * pitchIndexInOctave;
+    return (lowerBoundPosition + pitch.getDistanceFromLowerBound() / 2 * pitchUnit) - 1.0f;
+}
+
 - (void)drawRect:(NSRect)dirtyRect {
     double now = [[NSDate date] timeIntervalSince1970];
     auto iter = std::find_if(detectedPitches.begin(), detectedPitches.end(), [=](const PitchDetection& pitchDetection) {
@@ -78,25 +84,14 @@ struct PitchDetection {
     int index = 0;
     for (const auto& item : detectedPitches) {
         double x = (item.time + DISPLAY_PITCH_TIME_LIMIT - now) / DISPLAY_PITCH_TIME_LIMIT - 1.0;
-        double y = 0.0;
+        double y = getPitchPosition(item.pitch);
 
         if (index > 0 && index < detectedPitches.size() - 1) {
             glVertex2f((GLfloat) x, (GLfloat) y);
-            if (logLastTime < now - 5.0) {
-                NSLog(@"(%f,%f)", x, y);
-            }
         }
         glVertex2f((GLfloat) x, (GLfloat) y);
 
-        if (logLastTime < now - 5.0) {
-            NSLog(@"(%f,%f)", x, y);
-        }
         index++;
-    }
-
-    if (logLastTime < now - 5.0) {
-        logLastTime = now;
-        NSLog(@"----------------------------");
     }
 
     glEnd();
