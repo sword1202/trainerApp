@@ -38,8 +38,8 @@ struct PitchDetection {
 - (id)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
-        _pitchInputReader = new PitchInputReader(CreateAudioInputReader(2400));
-        _pitchInputReader->setThreshold(0.05);
+        _pitchInputReader = new PitchInputReader(CreateAudioInputReader(1200));
+        _pitchInputReader->setThreshold(0.20);
         __weak PitchGraphView * weakSelf = self;
         _pitchInputReader->setCallback([weakSelf](Pitch pitch) {
             if (PitchGraphView * strongSelf = weakSelf) {
@@ -53,6 +53,10 @@ struct PitchDetection {
 }
 
 - (void)pitchDetected:(Pitch)pitch {
+    if (!pitch.hasPerfectFrequency()) {
+        return;
+    }
+
     double time = [[NSDate date] timeIntervalSince1970];
     detectedPitches.push_back(PitchDetection(pitch, time));
 }
@@ -93,8 +97,19 @@ static double getPitchPosition(const Pitch& pitch) {
 
         index++;
     }
-
     glEnd();
+
+    glColor3f(0.5, 0.85, 0.42);
+    glBegin(GL_LINES);
+    float pitchUnit = 2.0f / Pitch::PITCHES_IN_OCTAVE;
+    float startPosition = -1.0f + pitchUnit;
+    for (int i = 0; i < Pitch::PITCHES_IN_OCTAVE - 1; ++i) {
+        glVertex2f(-1.0f, startPosition);
+        glVertex2f(1.0f, startPosition);
+        startPosition += pitchUnit;
+    }
+    glEnd();
+
     glFlush();
     assert(glGetError() == GL_NO_ERROR);
 }
