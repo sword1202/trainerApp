@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		106283694737127F8F9B4862 /* PitchGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10628AF4B382F99492EF1547 /* PitchGraphView.swift */; };
-		10628581F6DA01039C75CDD9 /* PitchInputReaderObjC.mm in Sources */ = {isa = PBXBuildFile; fileRef = 106289ED13EEEE847ACBC30D /* PitchInputReaderObjC.mm */; };
-		10628760A250767B87D7BE11 /* PitchObjC.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10628A5290DF892F06E3462C /* PitchObjC.mm */; };
+		10628C29AFB8E691B41FCBA6 /* PitchGraphView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10628CC6E59FD24DBBEAC78F /* PitchGraphView.mm */; };
 		2EF1E8CF1D57F95100E02C33 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1E8CE1D57F95100E02C33 /* AppDelegate.swift */; };
 		2EF1E8D11D57F95100E02C33 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1E8D01D57F95100E02C33 /* ViewController.swift */; };
 		2EF1E8D31D57F95100E02C33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EF1E8D21D57F95100E02C33 /* Assets.xcassets */; };
@@ -108,11 +106,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		106282A242B7CB0E0CD184AB /* PitchInputReaderObjC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PitchInputReaderObjC.h; path = PitchDetection/PitchInputReaderObjC.h; sourceTree = "<group>"; };
-		106288E83506AD420F2E6C3C /* PitchObjC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PitchObjC.h; path = PitchDetection/PitchObjC.h; sourceTree = "<group>"; };
-		106289ED13EEEE847ACBC30D /* PitchInputReaderObjC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PitchInputReaderObjC.mm; path = PitchDetection/PitchInputReaderObjC.mm; sourceTree = "<group>"; };
-		10628A5290DF892F06E3462C /* PitchObjC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PitchObjC.mm; path = PitchDetection/PitchObjC.mm; sourceTree = "<group>"; };
-		10628AF4B382F99492EF1547 /* PitchGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PitchGraphView.swift; sourceTree = "<group>"; };
+		106287AD54960ADE2E597BB7 /* PitchGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchGraphView.h; sourceTree = "<group>"; };
+		10628CC6E59FD24DBBEAC78F /* PitchGraphView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PitchGraphView.mm; sourceTree = "<group>"; };
 		2EF1E8CB1D57F95100E02C33 /* VocalTrainer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VocalTrainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EF1E8CE1D57F95100E02C33 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EF1E8D01D57F95100E02C33 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -245,7 +240,8 @@
 				2EF1E8D21D57F95100E02C33 /* Assets.xcassets */,
 				2EF1E8D41D57F95100E02C33 /* Main.storyboard */,
 				2EF1E8D71D57F95100E02C33 /* Info.plist */,
-				10628AF4B382F99492EF1547 /* PitchGraphView.swift */,
+				10628CC6E59FD24DBBEAC78F /* PitchGraphView.mm */,
+				106287AD54960ADE2E597BB7 /* PitchGraphView.h */,
 			);
 			path = VocalTrainer;
 			sourceTree = "<group>";
@@ -315,8 +311,6 @@
 		2EF1E9921D592EA700E02C33 /* PitchDetection */ = {
 			isa = PBXGroup;
 			children = (
-				106282A242B7CB0E0CD184AB /* PitchInputReaderObjC.h */,
-				106289ED13EEEE847ACBC30D /* PitchInputReaderObjC.mm */,
 				2EF1E9941D592EC100E02C33 /* AudoInputReader.cpp */,
 				2EF1E9951D592EC100E02C33 /* AudoInputReader.h */,
 				2EF1E9961D592EC100E02C33 /* azazai_algo.h */,
@@ -327,8 +321,6 @@
 				2EF1E99B1D592EC100E02C33 /* PitchInputReader.cpp */,
 				2EF1E99C1D592EC100E02C33 /* PitchInputReader.h */,
 				2EF1E99D1D592EC100E02C33 /* tests */,
-				10628A5290DF892F06E3462C /* PitchObjC.mm */,
-				106288E83506AD420F2E6C3C /* PitchObjC.h */,
 			);
 			name = PitchDetection;
 			sourceTree = "<group>";
@@ -543,9 +535,7 @@
 				2EF1E9A21D592EC100E02C33 /* PitchInputReader.cpp in Sources */,
 				2EF1E8CF1D57F95100E02C33 /* AppDelegate.swift in Sources */,
 				2EF1E9A91D592F1600E02C33 /* AudoInputReader.cpp in Sources */,
-				106283694737127F8F9B4862 /* PitchGraphView.swift in Sources */,
-				10628581F6DA01039C75CDD9 /* PitchInputReaderObjC.mm in Sources */,
-				10628760A250767B87D7BE11 /* PitchObjC.mm in Sources */,
+				10628C29AFB8E691B41FCBA6 /* PitchGraphView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -673,7 +673,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uID-Be-fzm" customClass="PitchGraphView" customModule="VocalTrainer">
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uID-Be-fzm" customClass="PitchGraphView">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                             </customView>
                         </subviews>
