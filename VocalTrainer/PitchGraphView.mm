@@ -82,8 +82,16 @@ static double getPitchPosition(const Pitch& pitch) {
 
     glClear(GLenum(GL_COLOR_BUFFER_BIT));
 
-    glColor3f(1.0, 0.85, 0.35);
+    [self drawPitchesGraph:now];
 
+    [self drawDividers];
+
+    glFlush();
+    assert(glGetError() == GL_NO_ERROR);
+}
+
+- (void)drawPitchesGraph:(double)now {
+    glColor3f(1.0, 0.85, 0.35);
     glBegin(GL_LINES);
     int index = 0;
     for (const auto& item : detectedPitches) {
@@ -98,7 +106,9 @@ static double getPitchPosition(const Pitch& pitch) {
         index++;
     }
     glEnd();
+}
 
+- (void)drawDividers {
     glColor3f(0.5, 0.85, 0.42);
     glBegin(GL_LINES);
     float pitchUnit = 2.0f / Pitch::PITCHES_IN_OCTAVE;
@@ -109,9 +119,6 @@ static double getPitchPosition(const Pitch& pitch) {
         startPosition += pitchUnit;
     }
     glEnd();
-
-    glFlush();
-    assert(glGetError() == GL_NO_ERROR);
 }
 
 - (void)dealloc {
