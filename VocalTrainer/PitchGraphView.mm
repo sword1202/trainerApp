@@ -7,6 +7,7 @@
 #include <GLKit/GLKit.h>
 #include <GLUT/GLUT.h>
 #include "PitchInputReader.h"
+#import "WavFileAudioInputReader.h"
 #include <vector>
 
 static const double DISPLAY_PITCH_TIME_LIMIT = 5.0;
@@ -20,8 +21,9 @@ struct PitchDetection {
 };
 
 @implementation PitchGraphView {
-    PitchInputReader* _pitchInputReader;
+    PitchInputReader* _studentPitchInputReader;
     std::vector<PitchDetection> detectedPitches;
+    std::fstream wavFile;
 }
 
 - (void)prepareOpenGL {
@@ -38,21 +40,30 @@ struct PitchDetection {
 - (id)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
-        _pitchInputReader = new PitchInputReader(CreateAudioInputReader(1200));
-        _pitchInputReader->setThreshold(0.20);
-        __weak PitchGraphView * weakSelf = self;
-        _pitchInputReader->setCallback([weakSelf](Pitch pitch) {
-            if (PitchGraphView * strongSelf = weakSelf) {
-                [strongSelf pitchDetected:pitch];
-            }
-        });
-        _pitchInputReader->start();
+        [self setupStudentPitchInputReader];
+        wavFile.open("3285.wav", std::ios::in);
     }
 
     return self;
 }
 
-- (void)pitchDetected:(Pitch)pitch {
+- (void)readPitchesFromWav {
+
+}
+
+- (void)setupStudentPitchInputReader {
+    _studentPitchInputReader = new PitchInputReader(CreateDefaultAudioInputReader(1200));
+    _studentPitchInputReader->setThreshold(0.05);
+    __weak PitchGraphView * weakSelf = self;
+    _studentPitchInputReader->setCallback([weakSelf](Pitch pitch) {
+            if (PitchGraphView * strongSelf = weakSelf) {
+                [strongSelf studentPitchDetected:pitch];
+            }
+        });
+    _studentPitchInputReader->start();
+}
+
+- (void)studentPitchDetected:(Pitch)pitch {
     if (!pitch.hasPerfectFrequency()) {
         return;
     }
@@ -87,7 +98,10 @@ static double getPitchPosition(const Pitch& pitch) {
     [self drawDividers];
 
     glFlush();
-    assert(glGetError() == GL_NO_ERROR);
+    GLenum glError = glGetError();
+    if (glError != GL_NO_ERROR) {
+        NSLog(@"Gl error: %d", glError);
+    }
 }
 
 - (void)drawPitchesGraph:(double)now {
@@ -122,7 +136,7 @@ static double getPitchPosition(const Pitch& pitch) {
 }
 
 - (void)dealloc {
-    delete _pitchInputReader;
+    delete _studentPitchInputReader;
 }
 
 
