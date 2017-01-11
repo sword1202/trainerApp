@@ -7,16 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10628786DBDC38E7524C3C23 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10628FA6CAC3BA12D337D093 /* MainViewController.m */; };
+		10628AB2C6E402BC9F64184D /* NSAlert+AlertUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 10628BD21361CCE663757D1C /* NSAlert+AlertUtils.m */; };
+		10628B669C2A1C9418DA18F2 /* TimeUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10628A09E4A4FF967D852FDA /* TimeUtils.cpp */; };
 		10628C29AFB8E691B41FCBA6 /* PitchGraphView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10628CC6E59FD24DBBEAC78F /* PitchGraphView.mm */; };
+		10628FD4F0C13D5F84BF3D13 /* NSString+StringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1062895A4CC981402519305B /* NSString+StringUtils.m */; };
 		2E7A67C41D8E57AE00DFAF8B /* WAVFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E7A67C01D8E57AE00DFAF8B /* WAVFile.cpp */; };
 		2E7A67C51D8E57AE00DFAF8B /* WavFileAudioInputReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E7A67C21D8E57AE00DFAF8B /* WavFileAudioInputReader.cpp */; };
-		2EDCC6B31DB3D1EE0086A6CE /* 3285.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2EDCC6B21DB3D1EE0086A6CE /* 3285.wav */; };
 		2EDCC6BC1DB432E40086A6CE /* AudioUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EDCC6B41DB432E40086A6CE /* AudioUtils.cpp */; };
 		2EDCC6BD1DB432E40086A6CE /* WavBufferReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EDCC6B61DB432E40086A6CE /* WavBufferReader.cpp */; };
 		2EDCC6BE1DB432E40086A6CE /* WavFilePitchesReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EDCC6B81DB432E40086A6CE /* WavFilePitchesReader.cpp */; };
 		2EDCC6BF1DB432E40086A6CE /* YinPitchDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EDCC6BA1DB432E40086A6CE /* YinPitchDetector.cpp */; };
 		2EF1E8CF1D57F95100E02C33 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1E8CE1D57F95100E02C33 /* AppDelegate.swift */; };
-		2EF1E8D11D57F95100E02C33 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1E8D01D57F95100E02C33 /* ViewController.swift */; };
 		2EF1E8D31D57F95100E02C33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EF1E8D21D57F95100E02C33 /* Assets.xcassets */; };
 		2EF1E8D61D57F95100E02C33 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EF1E8D41D57F95100E02C33 /* Main.storyboard */; };
 		2EF1E8E11D57F95100E02C33 /* VocalTrainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1E8E01D57F95100E02C33 /* VocalTrainerTests.swift */; };
@@ -59,13 +61,20 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		106284A0F8AC10317E40E862 /* TimeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimeUtils.h; path = PitchDetection/TimeUtils.h; sourceTree = "<group>"; };
 		106287AD54960ADE2E597BB7 /* PitchGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchGraphView.h; sourceTree = "<group>"; };
+		1062895A4CC981402519305B /* NSString+StringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StringUtils.m"; sourceTree = "<group>"; };
+		10628A09E4A4FF967D852FDA /* TimeUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimeUtils.cpp; path = PitchDetection/TimeUtils.cpp; sourceTree = "<group>"; };
+		10628BD21361CCE663757D1C /* NSAlert+AlertUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAlert+AlertUtils.m"; sourceTree = "<group>"; };
 		10628CC6E59FD24DBBEAC78F /* PitchGraphView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PitchGraphView.mm; sourceTree = "<group>"; };
+		10628CD8AFBF8E3AC1A10E6A /* NSAlert+AlertUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAlert+AlertUtils.h"; sourceTree = "<group>"; };
+		10628F00AB8135BF2B435BAC /* NSString+StringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+StringUtils.h"; sourceTree = "<group>"; };
+		10628FA6CAC3BA12D337D093 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		10628FEE388BA8402590A69F /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		2E7A67C01D8E57AE00DFAF8B /* WAVFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WAVFile.cpp; path = PitchDetection/WAVFile.cpp; sourceTree = "<group>"; };
 		2E7A67C11D8E57AE00DFAF8B /* WAVFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAVFile.h; path = PitchDetection/WAVFile.h; sourceTree = "<group>"; };
 		2E7A67C21D8E57AE00DFAF8B /* WavFileAudioInputReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WavFileAudioInputReader.cpp; path = PitchDetection/WavFileAudioInputReader.cpp; sourceTree = "<group>"; };
 		2E7A67C31D8E57AE00DFAF8B /* WavFileAudioInputReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WavFileAudioInputReader.h; path = PitchDetection/WavFileAudioInputReader.h; sourceTree = "<group>"; };
-		2EDCC6B21DB3D1EE0086A6CE /* 3285.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 3285.wav; sourceTree = "<group>"; };
 		2EDCC6B41DB432E40086A6CE /* AudioUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AudioUtils.cpp; path = PitchDetection/AudioUtils.cpp; sourceTree = "<group>"; };
 		2EDCC6B51DB432E40086A6CE /* AudioUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioUtils.h; path = PitchDetection/AudioUtils.h; sourceTree = "<group>"; };
 		2EDCC6B61DB432E40086A6CE /* WavBufferReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WavBufferReader.cpp; path = PitchDetection/WavBufferReader.cpp; sourceTree = "<group>"; };
@@ -76,7 +85,6 @@
 		2EDCC6BB1DB432E40086A6CE /* YinPitchDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YinPitchDetector.h; path = PitchDetection/YinPitchDetector.h; sourceTree = "<group>"; };
 		2EF1E8CB1D57F95100E02C33 /* VocalTrainer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VocalTrainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EF1E8CE1D57F95100E02C33 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2EF1E8D01D57F95100E02C33 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2EF1E8D21D57F95100E02C33 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EF1E8D51D57F95100E02C33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2EF1E8D71D57F95100E02C33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -96,7 +104,6 @@
 		2EF1E99B1D592EC100E02C33 /* PitchInputReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PitchInputReader.cpp; path = PitchDetection/PitchInputReader.cpp; sourceTree = "<group>"; };
 		2EF1E99C1D592EC100E02C33 /* PitchInputReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PitchInputReader.h; path = PitchDetection/PitchInputReader.h; sourceTree = "<group>"; };
 		2EF1E99D1D592EC100E02C33 /* tests */ = {isa = PBXFileReference; lastKnownFileType = folder; name = tests; path = PitchDetection/tests; sourceTree = "<group>"; };
-		2EF1E9AC1D5941EC00E02C33 /* VocalTrainer-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VocalTrainer-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,10 +131,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		106289779E14B72C075BE323 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				1062895A4CC981402519305B /* NSString+StringUtils.m */,
+				10628F00AB8135BF2B435BAC /* NSString+StringUtils.h */,
+				10628BD21361CCE663757D1C /* NSAlert+AlertUtils.m */,
+				10628CD8AFBF8E3AC1A10E6A /* NSAlert+AlertUtils.h */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		2EF1E8C21D57F95100E02C33 = {
 			isa = PBXGroup;
 			children = (
-				2EF1E9AC1D5941EC00E02C33 /* VocalTrainer-Bridging-Header.h */,
 				2EF1E9921D592EA700E02C33 /* PitchDetection */,
 				2EF1E8CD1D57F95100E02C33 /* VocalTrainer */,
 				2EF1E8DF1D57F95100E02C33 /* VocalTrainerTests */,
@@ -149,14 +166,15 @@
 		2EF1E8CD1D57F95100E02C33 /* VocalTrainer */ = {
 			isa = PBXGroup;
 			children = (
-				2EDCC6B21DB3D1EE0086A6CE /* 3285.wav */,
 				2EF1E8CE1D57F95100E02C33 /* AppDelegate.swift */,
-				2EF1E8D01D57F95100E02C33 /* ViewController.swift */,
 				2EF1E8D21D57F95100E02C33 /* Assets.xcassets */,
 				2EF1E8D41D57F95100E02C33 /* Main.storyboard */,
 				2EF1E8D71D57F95100E02C33 /* Info.plist */,
 				10628CC6E59FD24DBBEAC78F /* PitchGraphView.mm */,
 				106287AD54960ADE2E597BB7 /* PitchGraphView.h */,
+				10628FA6CAC3BA12D337D093 /* MainViewController.m */,
+				10628FEE388BA8402590A69F /* MainViewController.h */,
+				106289779E14B72C075BE323 /* Utils */,
 			);
 			path = VocalTrainer;
 			sourceTree = "<group>";
@@ -204,6 +222,8 @@
 				2EF1E99B1D592EC100E02C33 /* PitchInputReader.cpp */,
 				2EF1E99C1D592EC100E02C33 /* PitchInputReader.h */,
 				2EF1E99D1D592EC100E02C33 /* tests */,
+				106284A0F8AC10317E40E862 /* TimeUtils.h */,
+				10628A09E4A4FF967D852FDA /* TimeUtils.cpp */,
 			);
 			name = PitchDetection;
 			sourceTree = "<group>";
@@ -317,7 +337,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EF1E9A31D592EC100E02C33 /* tests in Resources */,
-				2EDCC6B31DB3D1EE0086A6CE /* 3285.wav in Resources */,
 				2EF1E8D31D57F95100E02C33 /* Assets.xcassets in Resources */,
 				2EF1E8D61D57F95100E02C33 /* Main.storyboard in Resources */,
 				2EF1E99F1D592EC100E02C33 /* CMakeLists.txt in Resources */,
@@ -346,7 +365,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EF1E9A11D592EC100E02C33 /* Pitch.cpp in Sources */,
-				2EF1E8D11D57F95100E02C33 /* ViewController.swift in Sources */,
 				2EDCC6BC1DB432E40086A6CE /* AudioUtils.cpp in Sources */,
 				2EDCC6BF1DB432E40086A6CE /* YinPitchDetector.cpp in Sources */,
 				2E7A67C41D8E57AE00DFAF8B /* WAVFile.cpp in Sources */,
@@ -357,6 +375,10 @@
 				2EDCC6BD1DB432E40086A6CE /* WavBufferReader.cpp in Sources */,
 				10628C29AFB8E691B41FCBA6 /* PitchGraphView.mm in Sources */,
 				2E7A67C51D8E57AE00DFAF8B /* WavFileAudioInputReader.cpp in Sources */,
+				10628786DBDC38E7524C3C23 /* MainViewController.m in Sources */,
+				10628FD4F0C13D5F84BF3D13 /* NSString+StringUtils.m in Sources */,
+				10628AB2C6E402BC9F64184D /* NSAlert+AlertUtils.m in Sources */,
+				10628B669C2A1C9418DA18F2 /* TimeUtils.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,7 +532,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Azazai.VocalTrainer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "VocalTrainer-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -527,7 +549,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Azazai.VocalTrainer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "VocalTrainer-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

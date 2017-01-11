@@ -9,4 +9,6 @@
 
 @interface PitchGraphView : NSOpenGLView
 
+-(void)onWavFileSelected:(NSString*)path;
+
 @end

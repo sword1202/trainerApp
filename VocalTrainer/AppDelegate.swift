@@ -21,6 +21,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
 
+    func applicationDidBecomeActive(_ notification: Notification) {
+        //mainMenu.
+    }
 
+    func application(_ sender: NSApplication, openFile filename: String) -> Bool {
+        return true
+    }
 }
 
