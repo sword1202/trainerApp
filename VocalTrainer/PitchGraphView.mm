@@ -9,8 +9,6 @@
 #include "PitchInputReader.h"
 #import "WavFileAudioInputReader.h"
 #import "WavFilePitchesReader.h"
-#import "TimeUtils.h"
-#include <vector>
 #import <iostream>
 
 static const double DISPLAY_PITCH_TIME_LIMIT = 5.0;
@@ -53,7 +51,7 @@ struct SingerPitchDetection {
 }
 
 - (void)readPitchesFromWav:(NSString*)wavFile {
-    std::fstream file(std::string(wavFile.UTF8String).data());
+    std::fstream file(wavFile.UTF8String);
     WavFilePitchesReader reader;
     float threshold = 0.15;
     pitchesFromWavFile = reader.readPitchesFromWavFile(&file, threshold);
@@ -69,7 +67,7 @@ struct SingerPitchDetection {
                 [strongSelf studentPitchDetected:pitch];
             }
         });
-    //_studentPitchInputReader->start();
+    _studentPitchInputReader->start();
 }
 
 - (void)studentPitchDetected:(Pitch)pitch {

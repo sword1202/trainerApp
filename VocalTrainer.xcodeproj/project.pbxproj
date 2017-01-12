@@ -62,6 +62,7 @@
 
 /* Begin PBXFileReference section */
 		106284A0F8AC10317E40E862 /* TimeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimeUtils.h; path = PitchDetection/TimeUtils.h; sourceTree = "<group>"; };
+		1062875FBB53BC5F1B7766DC /* stlassert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stlassert.h; path = PitchDetection/stlassert.h; sourceTree = "<group>"; };
 		106287AD54960ADE2E597BB7 /* PitchGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchGraphView.h; sourceTree = "<group>"; };
 		1062895A4CC981402519305B /* NSString+StringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StringUtils.m"; sourceTree = "<group>"; };
 		10628A09E4A4FF967D852FDA /* TimeUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimeUtils.cpp; path = PitchDetection/TimeUtils.cpp; sourceTree = "<group>"; };
@@ -224,6 +225,7 @@
 				2EF1E99D1D592EC100E02C33 /* tests */,
 				106284A0F8AC10317E40E862 /* TimeUtils.h */,
 				10628A09E4A4FF967D852FDA /* TimeUtils.cpp */,
+				1062875FBB53BC5F1B7766DC /* stlassert.h */,
 			);
 			name = PitchDetection;
 			sourceTree = "<group>";
@@ -456,6 +458,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -530,6 +533,13 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = VocalTrainer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				OTHER_LDFLAGS = (
+					"-framework",
+					AudioToolbox,
+					"-framework",
+					CoreFoundation,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = Azazai.VocalTrainer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -547,6 +557,13 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = VocalTrainer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				OTHER_LDFLAGS = (
+					"-framework",
+					AudioToolbox,
+					"-framework",
+					CoreFoundation,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = Azazai.VocalTrainer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
