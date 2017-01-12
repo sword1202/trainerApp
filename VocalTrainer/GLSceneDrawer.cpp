@@ -14,7 +14,7 @@ using std::endl;
 static const int64_t DISPLAY_PITCH_TIME_LIMIT = 5000000; // in microseconds
 static const float PITCH_UNIT = 2.0f / Pitch::PITCHES_IN_OCTAVE;
 
-void GLSceneDrawer::draw() {
+void GLSceneDrawer::draw(int width, int height) {
     int64_t now = TimeUtils::nowInMicroseconds();
     auto iter = std::find_if(detectedPitches.begin(), detectedPitches.end(),
             [=](const SingerPitchDetection &pitchDetection) {
@@ -24,6 +24,7 @@ void GLSceneDrawer::draw() {
     detectedPitches.erase(detectedPitches.begin(), iter);
 
     glClear(GLenum(GL_COLOR_BUFFER_BIT));
+    glViewport(0, 0, width, height);
     drawPitchesGraph(now);
     drawWavPitches(now);
     drawDividers();

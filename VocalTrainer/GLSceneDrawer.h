@@ -24,7 +24,7 @@ public:
     GLSceneDrawer();
     ~GLSceneDrawer();
 
-    void draw();
+    void draw(int width, int height);
     void readPitchesFromWav(const char* wavFileName);
 private:
     void drawPitchesGraph(int64_t now);

@@ -673,11 +673,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uID-Be-fzm" customClass="PitchGraphView">
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="uID-Be-fzm" customClass="PitchGraphView">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </customView>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="uID-Be-fzm" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="1tD-gP-xW0"/>
+                            <constraint firstItem="uID-Be-fzm" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="Ws5-qt-Mia"/>
+                            <constraint firstItem="uID-Be-fzm" firstAttribute="height" secondItem="m2S-Jp-Qdl" secondAttribute="height" id="h1Z-r0-YMs"/>
+                            <constraint firstItem="uID-Be-fzm" firstAttribute="width" secondItem="m2S-Jp-Qdl" secondAttribute="width" id="nni-hG-aie"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="pitchGraphView" destination="uID-Be-fzm" id="gVv-lw-1Q3"/>

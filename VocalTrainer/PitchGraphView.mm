@@ -36,7 +36,7 @@
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
-    _glSceneDrawer->draw();
+    _glSceneDrawer->draw(dirtyRect.size.width, dirtyRect.size.height);
 }
 
 - (void)onWavFileSelected:(NSString *)path {
