@@ -13,6 +13,7 @@ using std::endl;
 
 static const int64_t DISPLAY_PITCH_TIME_LIMIT = 5000000; // in microseconds
 static const float PITCH_UNIT = 2.0f / Pitch::PITCHES_IN_OCTAVE;
+static const float PIANO_WIDTH = 0.2f;
 
 void GLSceneDrawer::draw(int width, int height) {
     int64_t now = TimeUtils::nowInMicroseconds();
@@ -28,11 +29,52 @@ void GLSceneDrawer::draw(int width, int height) {
     drawPitchesGraph(now);
     drawWavPitches(now);
     drawDividers();
+    drawPiano();
 
     glFlush();
     GLenum glError = glGetError();
     if (glError != GL_NO_ERROR) {
         cerr<<"Gl error: "<<glError<<endl;
+    }
+}
+
+void GLSceneDrawer::drawPiano() {
+    glColor3f(0.9, 0.9, 0.9);
+    float x1 = -1.0f;
+    float x2 = -1.0f + PIANO_WIDTH;
+    float y1 = -1.0f;
+    float y2 = 1.0f;
+    glBegin(GL_POLYGON);
+    {
+        // draw white canvas
+        glVertex2f(x1, y1);
+        glVertex2f(x2, y1);
+        glVertex2f(x2, y2);
+        glVertex2f(x1, y2);
+    }
+    glEnd();
+
+    static const float blackPoints[5][2] {
+            {0.20186335403726707f, 0.3136645962732919f},
+            {0.5434782608695652f, 0.65527950310559f},
+            {1.0590062111801242f, 1.170807453416149f},
+            {1.372670807453416f, 1.4844720496894408f},
+            {1.6863354037267078f, 1.7981366459627326f}
+    };
+
+    glColor3f(0.1, 0.1, 0.1);
+    for (const float* point : blackPoints) {
+        float blackY1 = point[0] - 1.0f;
+        float blackY2 = point[1] - 1.0f;
+
+        glBegin(GL_POLYGON);
+        {
+            glVertex2f(x1, blackY1);
+            glVertex2f(x2, blackY1);
+            glVertex2f(x2, blackY2);
+            glVertex2f(x1, blackY2);
+        }
+        glEnd();
     }
 }
 
@@ -131,7 +173,7 @@ GLSceneDrawer::GLSceneDrawer() {
     pitchesLoadedTime = -1;
 
     studentPitchInputReader = new PitchInputReader(CreateDefaultAudioInputReader(1200));
-    studentPitchInputReader->setThreshold(0.05);
+    studentPitchInputReader->setThreshold(0.2);
     studentPitchInputReader->setCallback([this](Pitch pitch) {
         this->studentPitchDetected(pitch);
     });

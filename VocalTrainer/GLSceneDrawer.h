@@ -36,6 +36,8 @@ private:
     std::vector<SingerPitchDetection> detectedPitches;
     std::vector<PitchDetection> pitchesFromWavFile;
     int64_t pitchesLoadedTime;
+
+    void drawPiano();
 };
 
 
