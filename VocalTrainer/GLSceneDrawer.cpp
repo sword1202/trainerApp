@@ -55,10 +55,20 @@ void GLSceneDrawer::drawPiano() {
     }
     glEnd();
 
+    static const float blackPoints[5][2] {
+            {0.20186335403726707f, 0.3136645962732919f},
+            {0.5434782608695652f, 0.65527950310559f},
+            {1.0590062111801242f, 1.170807453416149f},
+            {1.372670807453416f, 1.4844720496894408f},
+            {1.6863354037267078f, 1.7981366459627326f}
+    };
+    
+    float dividerOffset = 23.0f / 161.0f * 2;
+    float blackButtonWidth = 9.0f / 161.0f * 2;
+
     // draw piano buttons dividers
     glColor3f(0.5, 0.5, 0.5);
     int dividersCount = 6;
-    float dividerOffset = 23.0f / 161.0f * 2;
     float dividerY1 = dividerOffset - 1.0f;
     for (int i = 0; i < dividersCount; i++) {
         float dividerX1 = -1.0f;
@@ -74,14 +84,6 @@ void GLSceneDrawer::drawPiano() {
 
         dividerY1 += dividerOffset;
     }
-
-    static const float blackPoints[5][2] {
-            {0.20186335403726707f, 0.3136645962732919f},
-            {0.5434782608695652f, 0.65527950310559f},
-            {1.0590062111801242f, 1.170807453416149f},
-            {1.372670807453416f, 1.4844720496894408f},
-            {1.6863354037267078f, 1.7981366459627326f}
-    };
 
     // draw black piano buttons
     glColor3f(0.1, 0.1, 0.1);
@@ -105,8 +107,32 @@ void GLSceneDrawer::drawPiano() {
         const SingerPitchDetection& lastPitchDetection = detectedPitches.back();
         const Pitch& pitch = lastPitchDetection.pitch;
         int pitchInOctaveIndex = pitch.getPitchInOctaveIndex();
-        if (pitch.isWhite()) {
+        if (pitchInOctaveIndex >= 0) {
+            glColor3f(161 / 255.0f, 204 / 255.0f , 157 / 255.0f);
+            float selectedPitchX1 = -1.0f;
+            float selectedPitchX2, selectedPitchY1, selectedPitchY2;
+            if (Pitch::isWhite(pitchInOctaveIndex)) {
+                selectedPitchX2 = -1.0f + PIANO_WIDTH;
+                int whitePitchIndex = Pitch::getWhitePitchInOctaveIndex(pitchInOctaveIndex);
+                selectedPitchY1 = whitePitchIndex * dividerOffset - 1.0f;
+                selectedPitchY2 = selectedPitchY1 + dividerOffset;
+            } else {
+                selectedPitchX2 = -1.0f + PIANO_WIDTH * BLACK_WHITE_PIANO_BUTTON_RELATION;
+                int blackPointIndex = Pitch::getBlackPitchInOctaveIndex(pitchInOctaveIndex);
 
+                const float* blackPoint = blackPoints[blackPointIndex];
+                selectedPitchY1 = blackPoint[0];
+                selectedPitchY2 = blackPoint[1];
+            }
+
+            glBegin(GL_POLYGON);
+            {
+                glVertex2f(selectedPitchX1, selectedPitchY1);
+                glVertex2f(selectedPitchX2, selectedPitchY1);
+                glVertex2f(selectedPitchX2, selectedPitchY2);
+                glVertex2f(selectedPitchX1, selectedPitchY2);
+            }
+            glEnd();
         }
     }
 }
