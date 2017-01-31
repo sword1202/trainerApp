@@ -55,6 +55,26 @@ void GLSceneDrawer::drawPiano() {
     }
     glEnd();
 
+    // draw piano buttons dividers
+    glColor3f(0.5, 0.5, 0.5);
+    int dividersCount = 6;
+    float dividerOffset = 23.0f / 161.0f * 2;
+    float dividerY1 = dividerOffset - 1.0f;
+    for (int i = 0; i < dividersCount; i++) {
+        float dividerX1 = -1.0f;
+        float dividerX2 = -1.0f + PIANO_WIDTH;
+        float dividerY2 = dividerY1;
+
+        glBegin(GL_LINES);
+        {
+            glVertex2f(dividerX1, dividerY1);
+            glVertex2f(dividerX2, dividerY2);
+        }
+        glEnd();
+
+        dividerY1 += dividerOffset;
+    }
+
     static const float blackPoints[5][2] {
             {0.20186335403726707f, 0.3136645962732919f},
             {0.5434782608695652f, 0.65527950310559f},
@@ -63,6 +83,7 @@ void GLSceneDrawer::drawPiano() {
             {1.6863354037267078f, 1.7981366459627326f}
     };
 
+    // draw black piano buttons
     glColor3f(0.1, 0.1, 0.1);
     for (const float* point : blackPoints) {
         float blackY1 = point[0] - 1.0f;
@@ -78,6 +99,15 @@ void GLSceneDrawer::drawPiano() {
             glVertex2f(x1, blackY2);
         }
         glEnd();
+    }
+
+    if (!detectedPitches.empty()) {
+        const SingerPitchDetection& lastPitchDetection = detectedPitches.back();
+        const Pitch& pitch = lastPitchDetection.pitch;
+        int pitchInOctaveIndex = pitch.getPitchInOctaveIndex();
+        if (pitch.isWhite()) {
+
+        }
     }
 }
 
