@@ -14,6 +14,7 @@ using std::endl;
 static const int64_t DISPLAY_PITCH_TIME_LIMIT = 5000000; // in microseconds
 static const float PITCH_UNIT = 2.0f / Pitch::PITCHES_IN_OCTAVE;
 static const float PIANO_WIDTH = 0.2f;
+static const float BLACK_WHITE_PIANO_BUTTON_RELATION = 85.0f / 145.0f;
 
 void GLSceneDrawer::draw(int width, int height) {
     int64_t now = TimeUtils::nowInMicroseconds();
@@ -66,12 +67,14 @@ void GLSceneDrawer::drawPiano() {
     for (const float* point : blackPoints) {
         float blackY1 = point[0] - 1.0f;
         float blackY2 = point[1] - 1.0f;
+        float blackX2 = -1.0f + PIANO_WIDTH * BLACK_WHITE_PIANO_BUTTON_RELATION;
+
 
         glBegin(GL_POLYGON);
         {
             glVertex2f(x1, blackY1);
-            glVertex2f(x2, blackY1);
-            glVertex2f(x2, blackY2);
+            glVertex2f(blackX2, blackY1);
+            glVertex2f(blackX2, blackY2);
             glVertex2f(x1, blackY2);
         }
         glEnd();
