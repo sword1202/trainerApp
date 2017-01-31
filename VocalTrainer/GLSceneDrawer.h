@@ -13,6 +13,7 @@
 #include "WavFilePitchesReader.h"
 
 class GLSceneDrawer {
+public:
     struct SingerPitchDetection {
         double time;
         Pitch pitch;
@@ -20,12 +21,15 @@ class GLSceneDrawer {
         SingerPitchDetection(const Pitch &pitch, double time) : pitch(pitch), time(time) {
         }
     };
-public:
+
     GLSceneDrawer();
     ~GLSceneDrawer();
 
     void draw(int width, int height);
     void readPitchesFromWav(const char* wavFileName);
+
+    const std::vector<SingerPitchDetection> &getDetectedPitches() const;
+
 private:
     void drawPitchesGraph(int64_t now);
     void drawWavPitches(int64_t now);
@@ -36,6 +40,7 @@ private:
     std::vector<SingerPitchDetection> detectedPitches;
     std::vector<PitchDetection> pitchesFromWavFile;
     int64_t pitchesLoadedTime;
+
 
     void drawPiano();
 };
