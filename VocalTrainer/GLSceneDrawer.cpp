@@ -62,7 +62,7 @@ class PitchSelectionDrawer {
 public:
     PitchSelectionDrawer(const GLSceneDrawer *out) : out(out) {
     }
-    
+
     void setup() {
         const auto& detectedPitches = out->getDetectedPitches();
         if (!detectedPitches.empty()) {
@@ -88,7 +88,7 @@ public:
             }
         }
     }
-    
+
     void draw() {
         glColor3f(161 / 255.0f, 204 / 255.0f , 157 / 255.0f);
         glBegin(GL_POLYGON);
@@ -189,20 +189,35 @@ static void getPitchLowerAndUpperBoundsPositions(const Pitch& pitch, float *outL
 
 void GLSceneDrawer::drawPitchesGraph(int64_t now) {
     glColor3f(1.0, 0.85, 0.35);
-    glBegin(GL_LINES);
-    int index = 0;
-    for (const auto& item : detectedPitches) {
-        double x = (item.time + DISPLAY_PITCH_TIME_LIMIT - now) / DISPLAY_PITCH_TIME_LIMIT - 1.0;
-        double y = getPitchPosition(item.pitch);
 
-        if (index > 0 && index < detectedPitches.size() - 1) {
-            glVertex2f((GLfloat) x, (GLfloat) y);
+    auto getXAndY = [&](const SingerPitchDetection item, double* x, double* y) {
+        *x = (item.time + DISPLAY_PITCH_TIME_LIMIT - now) / DISPLAY_PITCH_TIME_LIMIT - 1.0;
+        *y = getPitchPosition(item.pitch);
+    };
+
+    for (auto iter = detectedPitches.begin(); iter != detectedPitches.end() - 1; iter++) {
+        if (!iter->pitch.hasPerfectFrequency()) {
+            continue;
         }
-        glVertex2f((GLfloat) x, (GLfloat) y);
 
-        index++;
+        auto next = iter + 1;
+        if (!next->pitch.hasPerfectFrequency()) {
+            continue;
+        }
+
+        double x, y;
+        getXAndY(*iter, &x, &y);
+
+        double nextX, nextY;
+        getXAndY(*next, &nextX, &nextY);
+
+        glBegin(GL_LINES);
+        {
+            glVertex2f((GLfloat) x, (GLfloat) y);
+            glVertex2f((GLfloat) nextX, (GLfloat) nextY);
+        }
+        glEnd();
     }
-    glEnd();
 }
 
 void GLSceneDrawer::drawWavPitches(int64_t now) {
@@ -270,7 +285,8 @@ GLSceneDrawer::GLSceneDrawer() {
     pitchesLoadedTime = -1;
 
     studentPitchInputReader = new PitchInputReader(CreateDefaultAudioInputReader(1200));
-    studentPitchInputReader->setThreshold(0.2);
+    studentPitchInputReader->setThreshold(0.05);
+    studentPitchInputReader->setExecuteCallBackOnInvalidPitches(true);
     studentPitchInputReader->setCallback([this](Pitch pitch) {
         this->studentPitchDetected(pitch);
     });
@@ -286,10 +302,6 @@ void GLSceneDrawer::readPitchesFromWav(const char *wavFileName) {
 }
 
 void GLSceneDrawer::studentPitchDetected(const Pitch &pitch) {
-    if (!pitch.hasPerfectFrequency()) {
-        return;
-    }
-
     int64_t time = TimeUtils::nowInMicroseconds();
     detectedPitches.push_back(SingerPitchDetection(pitch, time));
 }
