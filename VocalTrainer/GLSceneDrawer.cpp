@@ -121,8 +121,8 @@ void GLSceneDrawer::drawPiano() {
                 int blackPointIndex = Pitch::getBlackPitchInOctaveIndex(pitchInOctaveIndex);
 
                 const float* blackPoint = blackPoints[blackPointIndex];
-                selectedPitchY1 = blackPoint[0];
-                selectedPitchY2 = blackPoint[1];
+                selectedPitchY1 = blackPoint[0] - 1.0f;
+                selectedPitchY2 = blackPoint[1] - 1.0f;
             }
 
             glBegin(GL_POLYGON);
