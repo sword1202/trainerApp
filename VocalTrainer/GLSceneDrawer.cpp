@@ -195,13 +195,25 @@ void GLSceneDrawer::drawPitchesGraph(int64_t now) {
         *y = getPitchPosition(item.pitch);
     };
 
+    auto current = std::find_if(detectedPitches.crbegin(), detectedPitches.crend(),
+            [](const SingerPitchDetection& item) {
+        return item.pitch.hasPerfectFrequency();
+    });
+
+    Pitch currentPitch;
+    if (current == detectedPitches.crend()) {
+        return;
+    } else {
+        currentPitch = current->pitch;
+    }
+
     for (auto iter = detectedPitches.begin(); iter != detectedPitches.end() - 1; iter++) {
-        if (!iter->pitch.hasPerfectFrequency()) {
+        if (iter->pitch.getOctave() != currentPitch.getOctave()) {
             continue;
         }
 
         auto next = iter + 1;
-        if (!next->pitch.hasPerfectFrequency()) {
+        if (next->pitch.getOctave() != currentPitch.getOctave()) {
             continue;
         }
 
@@ -285,7 +297,7 @@ GLSceneDrawer::GLSceneDrawer() {
     pitchesLoadedTime = -1;
 
     studentPitchInputReader = new PitchInputReader(CreateDefaultAudioInputReader(1200));
-    studentPitchInputReader->setThreshold(0.05);
+    studentPitchInputReader->setThreshold(0.25);
     studentPitchInputReader->setExecuteCallBackOnInvalidPitches(true);
     studentPitchInputReader->setCallback([this](Pitch pitch) {
         this->studentPitchDetected(pitch);
