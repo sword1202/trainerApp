@@ -11,6 +11,7 @@
 using std::cerr;
 using std::endl;
 
+static const int STUDENT_PITCH_SMOOTH_LEVEL = 4;
 static const int64_t DISPLAY_PITCH_TIME_LIMIT = 5000000; // in microseconds
 static const float PITCH_UNIT = 2.0f / Pitch::PITCHES_IN_OCTAVE;
 static const float PIANO_WIDTH = 0.2f;
@@ -238,7 +239,6 @@ void GLSceneDrawer::drawWavPitches(int64_t now) {
     }
 
     glColor3f(0.3, 0.2, 0.67);
-    glBegin(GL_POLYGON);
     int64_t pitchSummaryTime = 0;
     for (PitchDetection pitchDetection : pitchesFromWavFile) {
         int64_t pitchBeginTime = pitchSummaryTime;
@@ -272,12 +272,15 @@ void GLSceneDrawer::drawWavPitches(int64_t now) {
         float y2;
         getPitchLowerAndUpperBoundsPositions(pitchDetection.pitch, &y1, &y2);
 
-        glVertex2f(x1, y1);
-        glVertex2f(x2, y1);
-        glVertex2f(x2, y2);
-        glVertex2f(x1, y2);
+        glBegin(GL_POLYGON);
+        {
+            glVertex2f(x1, y1);
+            glVertex2f(x2, y1);
+            glVertex2f(x2, y2);
+            glVertex2f(x1, y2);
+        }
+        glEnd();
     }
-    glEnd();
 }
 
 void GLSceneDrawer::drawDividers() {
@@ -296,7 +299,7 @@ void GLSceneDrawer::drawDividers() {
 GLSceneDrawer::GLSceneDrawer() {
     pitchesLoadedTime = -1;
 
-    studentPitchInputReader = new PitchInputReader(CreateDefaultAudioInputReader(1200));
+    studentPitchInputReader = new PitchInputReader(CreateDefaultAudioInputReader(1200), STUDENT_PITCH_SMOOTH_LEVEL);
     studentPitchInputReader->setThreshold(0.25);
     studentPitchInputReader->setExecuteCallBackOnInvalidPitches(true);
     studentPitchInputReader->setCallback([this](Pitch pitch) {
@@ -308,7 +311,7 @@ GLSceneDrawer::GLSceneDrawer() {
 void GLSceneDrawer::readPitchesFromWav(const char *wavFileName) {
     std::fstream file(wavFileName);
     WavFilePitchesReader reader;
-    float threshold = 0.15;
+    float threshold = 0.05;
     pitchesFromWavFile = reader.readPitchesFromWavFile(&file, threshold);
     pitchesLoadedTime = TimeUtils::nowInMicroseconds();
 }
