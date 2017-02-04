@@ -8,11 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		106281681E5563B2FED83F72 /* PitchDetectionSmoothingAudioBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10628B2FFD73C634F03CC7B0 /* PitchDetectionSmoothingAudioBuffer.cpp */; };
-		106281F3FA2FE57E71D8064A /* GLSceneDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 106281093DFEA311CA2CAF94 /* GLSceneDrawer.cpp */; };
+		1062877EEEEAFF024E60F5D7 /* PianoDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 106288191F2221EDCECE7EA4 /* PianoDrawer.cpp */; };
 		10628786DBDC38E7524C3C23 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10628FA6CAC3BA12D337D093 /* MainViewController.m */; };
 		1062887678542AB36F11CAFB /* TimeUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10628AEB8EFAA83D2F4564EA /* TimeUtils.cpp */; };
 		10628AB2C6E402BC9F64184D /* NSAlert+AlertUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 10628BD21361CCE663757D1C /* NSAlert+AlertUtils.m */; };
 		10628C29AFB8E691B41FCBA6 /* PitchGraphView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10628CC6E59FD24DBBEAC78F /* PitchGraphView.mm */; };
+		10628D622AFAD438A68372AC /* GLSceneDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10628B0673304FF90E2FF31F /* GLSceneDrawer.cpp */; };
 		10628FD4F0C13D5F84BF3D13 /* NSString+StringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1062895A4CC981402519305B /* NSString+StringUtils.m */; };
 		2E7A67C41D8E57AE00DFAF8B /* WAVFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E7A67C01D8E57AE00DFAF8B /* WAVFile.cpp */; };
 		2E7A67C51D8E57AE00DFAF8B /* WavFileAudioInputReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E7A67C21D8E57AE00DFAF8B /* WavFileAudioInputReader.cpp */; };
@@ -63,13 +64,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		106281093DFEA311CA2CAF94 /* GLSceneDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLSceneDrawer.cpp; sourceTree = "<group>"; };
+		106283B54F8B2F436C5B7D9F /* GLSceneDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLSceneDrawer.h; sourceTree = "<group>"; };
 		1062863543FF8E030543FC94 /* PitchDetectionSmoothingAudioBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PitchDetectionSmoothingAudioBuffer.h; path = PitchDetection/PitchDetectionSmoothingAudioBuffer.h; sourceTree = "<group>"; };
 		106287AD54960ADE2E597BB7 /* PitchGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchGraphView.h; sourceTree = "<group>"; };
-		106287E1497FA0C0B8BA7E2A /* GLSceneDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLSceneDrawer.h; sourceTree = "<group>"; };
+		106288191F2221EDCECE7EA4 /* PianoDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PianoDrawer.cpp; sourceTree = "<group>"; };
+		1062882FF5EA6AD3618BC4E8 /* PianoDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PianoDrawer.h; sourceTree = "<group>"; };
 		1062895A4CC981402519305B /* NSString+StringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StringUtils.m"; sourceTree = "<group>"; };
 		10628A3DB6D60988F7EF0386 /* CircularBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircularBuffer.h; path = PitchDetection/CppUtils/CircularBuffer.h; sourceTree = "<group>"; };
 		10628AEB8EFAA83D2F4564EA /* TimeUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimeUtils.cpp; path = PitchDetection/CppUtils/TimeUtils.cpp; sourceTree = "<group>"; };
+		10628B0673304FF90E2FF31F /* GLSceneDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLSceneDrawer.cpp; sourceTree = "<group>"; };
 		10628B2FFD73C634F03CC7B0 /* PitchDetectionSmoothingAudioBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PitchDetectionSmoothingAudioBuffer.cpp; path = PitchDetection/PitchDetectionSmoothingAudioBuffer.cpp; sourceTree = "<group>"; };
 		10628BD21361CCE663757D1C /* NSAlert+AlertUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAlert+AlertUtils.m"; sourceTree = "<group>"; };
 		10628CC6E59FD24DBBEAC78F /* PitchGraphView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PitchGraphView.mm; sourceTree = "<group>"; };
@@ -162,6 +165,17 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		10628F99ACFB6F50A805A23B /* GLScene */ = {
+			isa = PBXGroup;
+			children = (
+				10628B0673304FF90E2FF31F /* GLSceneDrawer.cpp */,
+				106283B54F8B2F436C5B7D9F /* GLSceneDrawer.h */,
+				106288191F2221EDCECE7EA4 /* PianoDrawer.cpp */,
+				1062882FF5EA6AD3618BC4E8 /* PianoDrawer.h */,
+			);
+			path = GLScene;
+			sourceTree = "<group>";
+		};
 		2EF1E8C21D57F95100E02C33 = {
 			isa = PBXGroup;
 			children = (
@@ -195,8 +209,7 @@
 				10628FA6CAC3BA12D337D093 /* MainViewController.m */,
 				10628FEE388BA8402590A69F /* MainViewController.h */,
 				106289779E14B72C075BE323 /* Utils */,
-				106281093DFEA311CA2CAF94 /* GLSceneDrawer.cpp */,
-				106287E1497FA0C0B8BA7E2A /* GLSceneDrawer.h */,
+				10628F99ACFB6F50A805A23B /* GLScene */,
 			);
 			path = VocalTrainer;
 			sourceTree = "<group>";
@@ -400,9 +413,10 @@
 				10628786DBDC38E7524C3C23 /* MainViewController.m in Sources */,
 				10628FD4F0C13D5F84BF3D13 /* NSString+StringUtils.m in Sources */,
 				10628AB2C6E402BC9F64184D /* NSAlert+AlertUtils.m in Sources */,
-				106281F3FA2FE57E71D8064A /* GLSceneDrawer.cpp in Sources */,
 				106281681E5563B2FED83F72 /* PitchDetectionSmoothingAudioBuffer.cpp in Sources */,
 				1062887678542AB36F11CAFB /* TimeUtils.cpp in Sources */,
+				10628D622AFAD438A68372AC /* GLSceneDrawer.cpp in Sources */,
+				1062877EEEEAFF024E60F5D7 /* PianoDrawer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

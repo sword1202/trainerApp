@@ -11,6 +11,7 @@
 #include "Pitch.h"
 #include "PitchInputReader.h"
 #include "WavFilePitchesReader.h"
+#include "PianoDrawer.h"
 
 class GLSceneDrawer {
 public:
@@ -36,7 +37,6 @@ private:
     void drawPitchesGraph(int64_t now);
     void drawWavPitches(int64_t now);
     void drawDividers();
-    void drawPiano();
     void studentPitchDetected(const Pitch &pitch);
 
     PitchInputReader* studentPitchInputReader;
@@ -45,6 +45,7 @@ private:
     int64_t pitchesLoadedTime;
     bool moveBetweenOctaves;
     std::mutex pitchesMutex;
+    PianoDrawer pianoDrawer;
 };
 
 
