@@ -138,10 +138,6 @@ GLSceneDrawer::~GLSceneDrawer() {
     delete studentPitchInputReader;
 }
 
-bool GLSceneDrawer::getMoveBetweenOctaves() const {
-    return moveBetweenOctaves;
-}
-
 void GLSceneDrawer::setMoveBetweenOctaves(bool moveBetweenOctaves) {
-    this->moveBetweenOctaves = moveBetweenOctaves;
+    studentPitchGraphDrawer.setMoveBetweenOctaves(moveBetweenOctaves);
 }

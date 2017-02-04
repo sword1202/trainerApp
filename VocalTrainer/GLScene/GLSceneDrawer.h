@@ -22,7 +22,6 @@ public:
     void draw(int width, int height);
     void readPitchesFromWav(const char* wavFileName);
 
-    bool getMoveBetweenOctaves() const;
     void setMoveBetweenOctaves(bool moveBetweenOctaves);
 private:
     void drawWavPitches(int64_t now);
@@ -32,7 +31,6 @@ private:
     PitchInputReader* studentPitchInputReader;
     std::vector<PitchDetection> pitchesFromWavFile;
     int64_t pitchesLoadedTime;
-    bool moveBetweenOctaves;
     std::mutex pitchesMutex;
     PianoDrawer pianoDrawer;
     PitchGraphDrawer studentPitchGraphDrawer;

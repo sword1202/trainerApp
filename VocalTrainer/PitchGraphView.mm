@@ -26,6 +26,7 @@
     self = [super initWithCoder:coder];
     if (self) {
         _glSceneDrawer = new GLSceneDrawer();
+        _glSceneDrawer->setMoveBetweenOctaves(true);
     }
 
     return self;
@@ -44,7 +45,7 @@
 }
 
 - (void)moveBetweenOctavesFlagDidChange:(BOOL)value {
-
+    _glSceneDrawer->setMoveBetweenOctaves(value);
 }
 
 

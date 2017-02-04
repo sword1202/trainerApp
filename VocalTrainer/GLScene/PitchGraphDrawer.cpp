@@ -7,62 +7,139 @@
 #include "TimeUtils.h"
 #include "DrawConstants.h"
 #include <GLUT/GLUT.h>
+#include <iostream>
+#include "GeometryUtils.h"
 
 using namespace Azazai;
+using std::cout;
+using std::endl;
 
 void PitchGraphDrawer::onPitchDetected(const Pitch &pitch) {
     int64_t time = TimeUtils::nowInMicroseconds();
     detectedPitches.push_back(SingerPitchDetection(pitch, time));
 }
 
-static double getPitchPosition(const Pitch& pitch) {
+static GLfloat getPitchPosition(const Pitch& pitch) {
     int pitchIndexInOctave = pitch.getPitchInOctaveIndex();
     float lowerBoundPosition = PITCH_UNIT * pitchIndexInOctave;
     return (lowerBoundPosition + pitch.getDistanceFromLowerBound() / 2 * PITCH_UNIT) - 1.0f;
 }
 
+static void getXAndY(int64_t now, SingerPitchDetection& item, GLfloat *x, GLfloat *y) {
+    *x = (GLfloat) ((item.time + DISPLAY_PITCH_TIME_LIMIT - now) / DISPLAY_PITCH_TIME_LIMIT - 1.0);
+    *y = getPitchPosition(item.pitch);
+}
+
 void PitchGraphDrawer::draw(int64_t now) {
-    glColor3f(1.0, 0.85, 0.35);
-
-    auto getXAndY = [&](const SingerPitchDetection item, double* x, double* y) {
-        *x = (item.time + DISPLAY_PITCH_TIME_LIMIT - now) / DISPLAY_PITCH_TIME_LIMIT - 1.0;
-        *y = getPitchPosition(item.pitch);
-    };
-
-    auto current = std::find_if(detectedPitches.crbegin(), detectedPitches.crend(),
-            [](const SingerPitchDetection& item) {
-                return item.pitch.hasPerfectFrequency();
-            });
+    glColor3f(PITCH_GRAPH_COLOR);
 
     Pitch currentPitch;
-    if (current == detectedPitches.crend()) {
-        return;
-    } else {
-        currentPitch = current->pitch;
+    if (moveBetweenOctaves) {
+        auto current = std::find_if(detectedPitches.crbegin(), detectedPitches.crend(),
+                [](const SingerPitchDetection& item) {
+                    return item.pitch.hasPerfectFrequency();
+                });
+
+        if (current == detectedPitches.crend()) {
+            return;
+        } else {
+            currentPitch = current->pitch;
+        }
     }
 
+    auto checkPitch = [&](const Pitch& pitch) {
+        if (moveBetweenOctaves) {
+            if (pitch.getOctave() != currentPitch.getOctave()) {
+                return false;
+            }
+        } else if(!pitch.hasPerfectFrequency()) {
+            return false;
+        }
+
+        return true;
+    };
+
     for (auto iter = detectedPitches.begin(); iter != detectedPitches.end() - 1; iter++) {
-        if (iter->pitch.getOctave() != currentPitch.getOctave()) {
+        if (!checkPitch(iter->pitch)) {
             continue;
         }
 
         auto next = iter + 1;
-        if (next->pitch.getOctave() != currentPitch.getOctave()) {
+        if (next == detectedPitches.end()) {
+            break;
+        }
+
+        if (!checkPitch(next->pitch)) {
             continue;
         }
 
-        double x, y;
-        getXAndY(*iter, &x, &y);
+        GLfloat x, y;
+        getXAndY(now, *iter, &x, &y);
 
-        double nextX, nextY;
-        getXAndY(*next, &nextX, &nextY);
+        GLfloat nextX, nextY;
+        getXAndY(now, *next, &nextX, &nextY);
 
-        glBegin(GL_LINES);
-        {
-            glVertex2f((GLfloat) x, (GLfloat) y);
-            glVertex2f((GLfloat) nextX, (GLfloat) nextY);
+        if (moveBetweenOctaves || iter->pitch.getOctave() == next->pitch.getOctave()) {
+            glBegin(GL_LINES);
+            {
+                glVertex2f(x, y);
+                glVertex2f(nextX, nextY);
+            }
+            glEnd();
+        } else {
+            GLfloat intersectionX;
+            GLfloat currentPitchIntersectionY,
+                    nextPitchIntersectionY;
+            if (nextY > y) {
+                GeometryUtils::getLinesIntersection(
+                        // line1
+                        x, y,
+                        nextX, nextY,
+                        //line2
+                        0.0f, -1.0f,
+                        1.0f, -1.0f,
+                        // result
+                        &intersectionX, (GLfloat*)0);
+
+                currentPitchIntersectionY = -1.0f;
+                nextPitchIntersectionY = 1.0f;
+            } else {
+                GeometryUtils::getLinesIntersection(
+                        // line1
+                        x, y,
+                        nextX, nextY,
+                        //line2
+                        0.0f, 1.0f,
+                        1.0f, 1.0f,
+                        // result
+                        &intersectionX, (GLfloat*)0);
+
+                currentPitchIntersectionY = 1.0f;
+                nextPitchIntersectionY = -1.0f;
+            }
+
+            static bool ye = true;
+            if (ye) {
+                cout<<"x = "<<x<<" y = "<<y<<" nextX = "<<nextX<<" nextY = "<<nextY<<endl;
+                cout<<"intersectionX = "<<intersectionX<<" currentPitchIntersectionY = "
+                    <<currentPitchIntersectionY<<" nextPitchIntersectionY = "<<nextPitchIntersectionY<<endl;
+                ye = false;
+            }
+
+            glBegin(GL_LINES);
+            {
+                glVertex2f(x, y);
+                glVertex2f(intersectionX, currentPitchIntersectionY);
+            }
+            glEnd();
+
+            glBegin(GL_LINES);
+            {
+                glVertex2f(intersectionX, nextPitchIntersectionY);
+                glVertex2f(nextX, nextY);
+            }
+            glEnd();
         }
-        glEnd();
     }
 }
 
@@ -74,4 +151,8 @@ const std::vector<SingerPitchDetection> & PitchGraphDrawer::updatePitches(int64_
 
     detectedPitches.erase(detectedPitches.begin(), iter);
     return detectedPitches;
+}
+
+void PitchGraphDrawer::setMoveBetweenOctaves(bool moveBetweenOctaves) {
+    this->moveBetweenOctaves = moveBetweenOctaves;
 }

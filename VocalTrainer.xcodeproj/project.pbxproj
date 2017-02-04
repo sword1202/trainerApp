@@ -76,6 +76,7 @@
 		106288B8C1482DF0324AE789 /* SingerPitchDetection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SingerPitchDetection.cpp; sourceTree = "<group>"; };
 		1062895A4CC981402519305B /* NSString+StringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StringUtils.m"; sourceTree = "<group>"; };
 		10628A3DB6D60988F7EF0386 /* CircularBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircularBuffer.h; path = PitchDetection/CppUtils/CircularBuffer.h; sourceTree = "<group>"; };
+		10628A440894814F3B6A4FEA /* GeometryUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GeometryUtils.h; path = PitchDetection/CppUtils/GeometryUtils.h; sourceTree = "<group>"; };
 		10628AEB8EFAA83D2F4564EA /* TimeUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimeUtils.cpp; path = PitchDetection/CppUtils/TimeUtils.cpp; sourceTree = "<group>"; };
 		10628B0673304FF90E2FF31F /* GLSceneDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLSceneDrawer.cpp; sourceTree = "<group>"; };
 		10628B2FFD73C634F03CC7B0 /* PitchDetectionSmoothingAudioBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PitchDetectionSmoothingAudioBuffer.cpp; path = PitchDetection/PitchDetectionSmoothingAudioBuffer.cpp; sourceTree = "<group>"; };
@@ -157,6 +158,7 @@
 				10628E2960377E84F59F41F0 /* stlassert.h */,
 				10628AEB8EFAA83D2F4564EA /* TimeUtils.cpp */,
 				10628FE3AEE2CC419D4F59CD /* TimeUtils.h */,
+				10628A440894814F3B6A4FEA /* GeometryUtils.h */,
 			);
 			name = CppUtils;
 			sourceTree = "<group>";

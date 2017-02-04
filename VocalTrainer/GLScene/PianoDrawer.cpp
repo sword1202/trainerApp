@@ -4,6 +4,7 @@
 //
 
 #include "PianoDrawer.h"
+#include "DrawConstants.h"
 #include <GLUT/GLUT.h>
 
 static const float PIANO_WIDTH = 0.2f;
@@ -20,7 +21,7 @@ static const float BLACK_POINTS[5][2] {
 static const float DIVIDER_OFFSET = 23.0f / 161.0f * 2;
 
 void PianoDrawer::draw(const Pitch& pitch) {
-    glColor3f(0.9, 0.9, 0.9);
+    glColor3f(PIANO_WHITE_BUTTON_COLOR);
     float x1 = -1.0f;
     float x2 = -1.0f + PIANO_WIDTH;
     float y1 = -1.0f;
@@ -61,7 +62,7 @@ void PianoDrawer::draw(const Pitch& pitch) {
     }
 
     // draw black piano buttons
-    glColor3f(0.1, 0.1, 0.1);
+    glColor3f(PIANO_BLACK_BUTTON_COLOR);
     for (const float* point : BLACK_POINTS) {
         float blackY1 = point[0] - 1.0f;
         float blackY2 = point[1] - 1.0f;
@@ -84,7 +85,7 @@ void PianoDrawer::draw(const Pitch& pitch) {
 }
 
 void PianoDrawer::drawPitchSelector() {
-    glColor3f(161 / 255.0f, 204 / 255.0f , 157 / 255.0f);
+    glColor3f(PIANO_SELECTION_COLOR);
     glBegin(GL_POLYGON);
     {
         glVertex2f(selectedPitchX1, selectedPitchY1);

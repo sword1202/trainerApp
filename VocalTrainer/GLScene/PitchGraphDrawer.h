@@ -16,8 +16,12 @@ public:
     void onPitchDetected(const Pitch& pitch);
     const std::vector<SingerPitchDetection>& updatePitches(int64_t now);
     void draw(int64_t now);
+
+    void setMoveBetweenOctaves(bool moveBetweenOctaves);
+
 private:
     std::vector<SingerPitchDetection> detectedPitches;
+    bool moveBetweenOctaves;
 };
 
 
