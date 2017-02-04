@@ -5,6 +5,7 @@
 
 #include "GLSceneDrawer.h"
 #include "TimeUtils.h"
+#include "DrawConstants.h"
 #include <GLUT/GLUT.h>
 #include <iostream>
 
@@ -12,8 +13,6 @@ using std::cerr;
 using std::endl;
 
 static const int STUDENT_PITCH_SMOOTH_LEVEL = 4;
-static const int64_t DISPLAY_PITCH_TIME_LIMIT = 5000000; // in microseconds
-static const float PITCH_UNIT = 2.0f / Pitch::PITCHES_IN_OCTAVE;
 
 void GLSceneDrawer::draw(int width, int height) {
     glClear(GLenum(GL_COLOR_BUFFER_BIT));
@@ -23,17 +22,12 @@ void GLSceneDrawer::draw(int width, int height) {
     Pitch currentPitch;
     {
         std::lock_guard<std::mutex> _(pitchesMutex);
-        auto iter = std::find_if(detectedPitches.begin(), detectedPitches.end(),
-                [=](const SingerPitchDetection &pitchDetection) {
-                    return now - pitchDetection.time <= DISPLAY_PITCH_TIME_LIMIT;
-                });
-
-        detectedPitches.erase(detectedPitches.begin(), iter);
+        const auto& detectedPitches = studentPitchGraphDrawer.updatePitches(now);
         if (!detectedPitches.empty()) {
             currentPitch = detectedPitches.back().pitch;
         }
 
-        drawPitchesGraph(now);
+        studentPitchGraphDrawer.draw(now);
     }
     drawWavPitches(now);
     drawDividers();
@@ -46,61 +40,10 @@ void GLSceneDrawer::draw(int width, int height) {
     }
 }
 
-static double getPitchPosition(const Pitch& pitch) {
-    int pitchIndexInOctave = pitch.getPitchInOctaveIndex();
-    float lowerBoundPosition = PITCH_UNIT * pitchIndexInOctave;
-    return (lowerBoundPosition + pitch.getDistanceFromLowerBound() / 2 * PITCH_UNIT) - 1.0f;
-}
-
 static void getPitchLowerAndUpperBoundsPositions(const Pitch& pitch, float *outLower, float *outUpper) {
     int pitchIndexInOctave = pitch.getPitchInOctaveIndex();
     *outLower = PITCH_UNIT * pitchIndexInOctave - 1.0f;
     *outUpper = *outLower + PITCH_UNIT;
-}
-
-void GLSceneDrawer::drawPitchesGraph(int64_t now) {
-    glColor3f(1.0, 0.85, 0.35);
-
-    auto getXAndY = [&](const SingerPitchDetection item, double* x, double* y) {
-        *x = (item.time + DISPLAY_PITCH_TIME_LIMIT - now) / DISPLAY_PITCH_TIME_LIMIT - 1.0;
-        *y = getPitchPosition(item.pitch);
-    };
-
-    auto current = std::find_if(detectedPitches.crbegin(), detectedPitches.crend(),
-            [](const SingerPitchDetection& item) {
-        return item.pitch.hasPerfectFrequency();
-    });
-
-    Pitch currentPitch;
-    if (current == detectedPitches.crend()) {
-        return;
-    } else {
-        currentPitch = current->pitch;
-    }
-
-    for (auto iter = detectedPitches.begin(); iter != detectedPitches.end() - 1; iter++) {
-        if (iter->pitch.getOctave() != currentPitch.getOctave()) {
-            continue;
-        }
-
-        auto next = iter + 1;
-        if (next->pitch.getOctave() != currentPitch.getOctave()) {
-            continue;
-        }
-
-        double x, y;
-        getXAndY(*iter, &x, &y);
-
-        double nextX, nextY;
-        getXAndY(*next, &nextX, &nextY);
-
-        glBegin(GL_LINES);
-        {
-            glVertex2f((GLfloat) x, (GLfloat) y);
-            glVertex2f((GLfloat) nextX, (GLfloat) nextY);
-        }
-        glEnd();
-    }
 }
 
 void GLSceneDrawer::drawWavPitches(int64_t now) {
@@ -187,17 +130,12 @@ void GLSceneDrawer::readPitchesFromWav(const char *wavFileName) {
 }
 
 void GLSceneDrawer::studentPitchDetected(const Pitch &pitch) {
-    int64_t time = TimeUtils::nowInMicroseconds();
     std::lock_guard<std::mutex> _(pitchesMutex);
-    detectedPitches.push_back(SingerPitchDetection(pitch, time));
+    studentPitchGraphDrawer.onPitchDetected(pitch);
 }
 
 GLSceneDrawer::~GLSceneDrawer() {
     delete studentPitchInputReader;
-}
-
-const std::vector<GLSceneDrawer::SingerPitchDetection> &GLSceneDrawer::getDetectedPitches() const {
-    return detectedPitches;
 }
 
 bool GLSceneDrawer::getMoveBetweenOctaves() const {

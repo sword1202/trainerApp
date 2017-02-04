@@ -12,40 +12,30 @@
 #include "PitchInputReader.h"
 #include "WavFilePitchesReader.h"
 #include "PianoDrawer.h"
+#include "PitchGraphDrawer.h"
 
 class GLSceneDrawer {
 public:
-    struct SingerPitchDetection {
-        double time;
-        Pitch pitch;
-
-        SingerPitchDetection(const Pitch &pitch, double time) : pitch(pitch), time(time) {
-        }
-    };
-
     GLSceneDrawer();
     ~GLSceneDrawer();
 
     void draw(int width, int height);
     void readPitchesFromWav(const char* wavFileName);
 
-    const std::vector<SingerPitchDetection> &getDetectedPitches() const;
-
     bool getMoveBetweenOctaves() const;
     void setMoveBetweenOctaves(bool moveBetweenOctaves);
 private:
-    void drawPitchesGraph(int64_t now);
     void drawWavPitches(int64_t now);
     void drawDividers();
     void studentPitchDetected(const Pitch &pitch);
 
     PitchInputReader* studentPitchInputReader;
-    std::vector<SingerPitchDetection> detectedPitches;
     std::vector<PitchDetection> pitchesFromWavFile;
     int64_t pitchesLoadedTime;
     bool moveBetweenOctaves;
     std::mutex pitchesMutex;
     PianoDrawer pianoDrawer;
+    PitchGraphDrawer studentPitchGraphDrawer;
 };
 
 
