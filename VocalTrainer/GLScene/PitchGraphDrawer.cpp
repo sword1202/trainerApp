@@ -118,14 +118,6 @@ void PitchGraphDrawer::draw(int64_t now) {
                 nextPitchIntersectionY = -1.0f;
             }
 
-            static bool ye = true;
-            if (ye) {
-                cout<<"x = "<<x<<" y = "<<y<<" nextX = "<<nextX<<" nextY = "<<nextY<<endl;
-                cout<<"intersectionX = "<<intersectionX<<" currentPitchIntersectionY = "
-                    <<currentPitchIntersectionY<<" nextPitchIntersectionY = "<<nextPitchIntersectionY<<endl;
-                ye = false;
-            }
-
             glBegin(GL_LINES);
             {
                 glVertex2f(x, y);
