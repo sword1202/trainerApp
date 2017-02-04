@@ -9,12 +9,15 @@
 #import "NSAlert+AlertUtils.h"
 
 @implementation MainViewController {
-
     __weak IBOutlet PitchGraphView *pitchGraphView;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+
+- (IBAction)moveBetweenOctavesDidPress:(NSButton*)sender {
+    [pitchGraphView moveBetweenOctavesFlagDidChange:sender.state == NSOnState];
 }
 
 

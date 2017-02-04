@@ -30,19 +30,21 @@ public:
 
     const std::vector<SingerPitchDetection> &getDetectedPitches() const;
 
+    bool getMoveBetweenOctaves() const;
+    void setMoveBetweenOctaves(bool moveBetweenOctaves);
 private:
     void drawPitchesGraph(int64_t now);
     void drawWavPitches(int64_t now);
     void drawDividers();
+    void drawPiano();
     void studentPitchDetected(const Pitch &pitch);
 
     PitchInputReader* studentPitchInputReader;
     std::vector<SingerPitchDetection> detectedPitches;
     std::vector<PitchDetection> pitchesFromWavFile;
     int64_t pitchesLoadedTime;
-
-
-    void drawPiano();
+    bool moveBetweenOctaves;
+    std::mutex pitchesMutex;
 };
 
 

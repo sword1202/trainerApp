@@ -43,6 +43,11 @@
     _glSceneDrawer->readPitchesFromWav(path.UTF8String);
 }
 
+- (void)moveBetweenOctavesFlagDidChange:(BOOL)value {
+
+}
+
+
 - (void)dealloc {
     delete _glSceneDrawer;
 }

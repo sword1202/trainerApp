@@ -10,5 +10,6 @@
 @interface PitchGraphView : NSOpenGLView
 
 -(void)onWavFileSelected:(NSString*)path;
+-(void)moveBetweenOctavesFlagDidChange:(BOOL)value;
 
 @end

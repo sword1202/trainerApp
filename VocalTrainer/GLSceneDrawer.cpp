@@ -28,17 +28,20 @@ static const float BLACK_POINTS[5][2] {
 static const float DIVIDER_OFFSET = 23.0f / 161.0f * 2;
 
 void GLSceneDrawer::draw(int width, int height) {
-    int64_t now = TimeUtils::nowInMicroseconds();
-    auto iter = std::find_if(detectedPitches.begin(), detectedPitches.end(),
-            [=](const SingerPitchDetection &pitchDetection) {
-                return now - pitchDetection.time <= DISPLAY_PITCH_TIME_LIMIT;
-            });
-
-    detectedPitches.erase(detectedPitches.begin(), iter);
-
     glClear(GLenum(GL_COLOR_BUFFER_BIT));
+    int64_t now = TimeUtils::nowInMicroseconds();
     glViewport(0, 0, width, height);
-    drawPitchesGraph(now);
+
+    {
+        std::lock_guard<std::mutex> _(pitchesMutex);
+        auto iter = std::find_if(detectedPitches.begin(), detectedPitches.end(),
+                [=](const SingerPitchDetection &pitchDetection) {
+                    return now - pitchDetection.time <= DISPLAY_PITCH_TIME_LIMIT;
+                });
+
+        detectedPitches.erase(detectedPitches.begin(), iter);
+        drawPitchesGraph(now);
+    }
     drawWavPitches(now);
     drawDividers();
     drawPiano();
@@ -318,6 +321,7 @@ void GLSceneDrawer::readPitchesFromWav(const char *wavFileName) {
 
 void GLSceneDrawer::studentPitchDetected(const Pitch &pitch) {
     int64_t time = TimeUtils::nowInMicroseconds();
+    std::lock_guard<std::mutex> _(pitchesMutex);
     detectedPitches.push_back(SingerPitchDetection(pitch, time));
 }
 
@@ -327,4 +331,12 @@ GLSceneDrawer::~GLSceneDrawer() {
 
 const std::vector<GLSceneDrawer::SingerPitchDetection> &GLSceneDrawer::getDetectedPitches() const {
     return detectedPitches;
+}
+
+bool GLSceneDrawer::getMoveBetweenOctaves() const {
+    return moveBetweenOctaves;
+}
+
+void GLSceneDrawer::setMoveBetweenOctaves(bool moveBetweenOctaves) {
+    this->moveBetweenOctaves = moveBetweenOctaves;
 }
