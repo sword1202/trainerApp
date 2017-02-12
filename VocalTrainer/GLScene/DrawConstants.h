@@ -11,5 +11,6 @@ static const float PITCH_UNIT = 2.0f / Pitch::PITCHES_IN_OCTAVE;
 #define PIANO_BLACK_BUTTON_COLOR 0.1, 0.1, 0.1
 #define PIANO_WHITE_BUTTON_COLOR 0.9, 0.9, 0.9
 #define PIANO_SELECTION_COLOR 161 / 255.0f, 204 / 255.0f , 157 / 255.0f
+#define PIANO_DIVIDER_COLOR 0.5, 0.85, 0.42
 
 #endif

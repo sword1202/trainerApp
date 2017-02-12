@@ -13,6 +13,9 @@ using std::cerr;
 using std::endl;
 
 static const int STUDENT_PITCH_SMOOTH_LEVEL = 4;
+// minimum pitch detection probability is 0.75. Pitches with lower probability are marked as invalid
+static const float PITCH_DETECTION_THRESHOLD = 0.25;
+static const int PITCH_DETECTION_BUFFER_SIZE = 1200;
 
 void GLSceneDrawer::draw(int width, int height) {
     glClear(GLenum(GL_COLOR_BUFFER_BIT));
@@ -97,7 +100,7 @@ void GLSceneDrawer::drawWavPitches(int64_t now) {
 }
 
 void GLSceneDrawer::drawDividers() {
-    glColor3f(0.5, 0.85, 0.42);
+    glColor3f(PIANO_DIVIDER_COLOR);
     glBegin(GL_LINES);
     float pitchUnit = 2.0f / Pitch::PITCHES_IN_OCTAVE;
     float startPosition = -1.0f + pitchUnit;
@@ -112,8 +115,9 @@ void GLSceneDrawer::drawDividers() {
 GLSceneDrawer::GLSceneDrawer() {
     pitchesLoadedTime = -1;
 
-    studentPitchInputReader = new PitchInputReader(CreateDefaultAudioInputReader(1200), STUDENT_PITCH_SMOOTH_LEVEL);
-    studentPitchInputReader->setThreshold(0.25);
+    AudioInputReader *audioInputReader = CreateDefaultAudioInputReader(PITCH_DETECTION_BUFFER_SIZE);
+    studentPitchInputReader = new PitchInputReader(audioInputReader, STUDENT_PITCH_SMOOTH_LEVEL);
+    studentPitchInputReader->setThreshold(PITCH_DETECTION_THRESHOLD);
     studentPitchInputReader->setExecuteCallBackOnInvalidPitches(true);
     studentPitchInputReader->setCallback([this](Pitch pitch) {
         this->studentPitchDetected(pitch);
