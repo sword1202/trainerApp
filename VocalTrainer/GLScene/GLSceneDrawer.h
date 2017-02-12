@@ -25,7 +25,7 @@ public:
     void setMoveBetweenOctaves(bool moveBetweenOctaves);
 private:
     void drawWavPitches(int64_t now);
-    void drawDividers();
+    void drawBlackPitchesBackground();
     void studentPitchDetected(const Pitch &pitch);
 
     PitchInputReader* studentPitchInputReader;

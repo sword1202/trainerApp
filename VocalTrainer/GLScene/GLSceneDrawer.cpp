@@ -22,6 +22,8 @@ void GLSceneDrawer::draw(int width, int height) {
     int64_t now = TimeUtils::nowInMicroseconds();
     glViewport(0, 0, width, height);
 
+    drawBlackPitchesBackground();
+
     Pitch currentPitch;
     {
         std::lock_guard<std::mutex> _(pitchesMutex);
@@ -33,7 +35,7 @@ void GLSceneDrawer::draw(int width, int height) {
         studentPitchGraphDrawer.draw(now);
     }
     drawWavPitches(now);
-    drawDividers();
+    //drawDividers();
     pianoDrawer.draw(currentPitch);
 
     glFlush();
@@ -99,15 +101,30 @@ void GLSceneDrawer::drawWavPitches(int64_t now) {
     }
 }
 
-void GLSceneDrawer::drawDividers() {
-    glColor3f(PIANO_DIVIDER_COLOR);
+void GLSceneDrawer::drawBlackPitchesBackground() {
+    glColor3f(PIANO_BLACK_PITCH_BACKGROUND_COLOR);
+
+    float startPosition = -1.0f;
+    for (int i = 0; i < Pitch::PITCHES_IN_OCTAVE; ++i) {
+        if (!Pitch::isWhite(i)) {
+            glBegin(GL_POLYGON);
+            {
+                glVertex2f(-1.0f, startPosition);
+                glVertex2f(1.0f, startPosition);
+                glVertex2f(1.0f, startPosition + PITCH_UNIT);
+                glVertex2f(-1.0f, startPosition + PITCH_UNIT);
+            }
+            glEnd();
+        }
+
+        startPosition += PITCH_UNIT;
+    }
+
+    float efPitchDividerPosition = -1.0f + PITCH_UNIT * 5;
     glBegin(GL_LINES);
-    float pitchUnit = 2.0f / Pitch::PITCHES_IN_OCTAVE;
-    float startPosition = -1.0f + pitchUnit;
-    for (int i = 0; i < Pitch::PITCHES_IN_OCTAVE - 1; ++i) {
-        glVertex2f(-1.0f, startPosition);
-        glVertex2f(1.0f, startPosition);
-        startPosition += pitchUnit;
+    {
+        glVertex2f(-1.0f, efPitchDividerPosition);
+        glVertex2f(1.0f, efPitchDividerPosition);
     }
     glEnd();
 }
