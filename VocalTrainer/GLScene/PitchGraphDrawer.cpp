@@ -10,7 +10,7 @@
 #include <iostream>
 #include "GeometryUtils.h"
 
-using namespace Azazai;
+using namespace CppUtils;
 using std::cout;
 using std::endl;
 
@@ -91,7 +91,7 @@ void PitchGraphDrawer::draw(int64_t now) {
             GLfloat currentPitchIntersectionY,
                     nextPitchIntersectionY;
             if (nextY > y) {
-                GeometryUtils::getLinesIntersection(
+                GeometryUtils::GetLinesIntersection(
                         // line1
                         x, y,
                         nextX, nextY,
@@ -104,7 +104,7 @@ void PitchGraphDrawer::draw(int64_t now) {
                 currentPitchIntersectionY = -1.0f;
                 nextPitchIntersectionY = 1.0f;
             } else {
-                GeometryUtils::getLinesIntersection(
+                GeometryUtils::GetLinesIntersection(
                         // line1
                         x, y,
                         nextX, nextY,

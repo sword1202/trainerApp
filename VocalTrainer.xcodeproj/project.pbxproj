@@ -84,7 +84,6 @@
 		10628BD21361CCE663757D1C /* NSAlert+AlertUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAlert+AlertUtils.m"; sourceTree = "<group>"; };
 		10628CC6E59FD24DBBEAC78F /* PitchGraphView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PitchGraphView.mm; sourceTree = "<group>"; };
 		10628CD8AFBF8E3AC1A10E6A /* NSAlert+AlertUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAlert+AlertUtils.h"; sourceTree = "<group>"; };
-		10628D005EA46F07A468B015 /* azazai_algo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = azazai_algo.h; path = PitchDetection/CppUtils/azazai_algo.h; sourceTree = "<group>"; };
 		10628E2960377E84F59F41F0 /* stlassert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stlassert.h; path = PitchDetection/CppUtils/stlassert.h; sourceTree = "<group>"; };
 		10628EE91D6AB3F8ABA54268 /* SingerPitchDetection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingerPitchDetection.h; sourceTree = "<group>"; };
 		10628F00AB8135BF2B435BAC /* NSString+StringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+StringUtils.h"; sourceTree = "<group>"; };
@@ -123,6 +122,7 @@
 		2EF1E99B1D592EC100E02C33 /* PitchInputReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PitchInputReader.cpp; path = PitchDetection/PitchInputReader.cpp; sourceTree = "<group>"; };
 		2EF1E99C1D592EC100E02C33 /* PitchInputReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PitchInputReader.h; path = PitchDetection/PitchInputReader.h; sourceTree = "<group>"; };
 		2EF1E99D1D592EC100E02C33 /* tests */ = {isa = PBXFileReference; lastKnownFileType = folder; name = tests; path = PitchDetection/tests; sourceTree = "<group>"; };
+		C9FFFE67C10A6A65023BE764 /* Algorithms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Algorithms.h; path = PitchDetection/CppUtils/Algorithms.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,12 +153,12 @@
 		106283405CA62A3E2D402AAB /* CppUtils */ = {
 			isa = PBXGroup;
 			children = (
-				10628D005EA46F07A468B015 /* azazai_algo.h */,
 				10628A3DB6D60988F7EF0386 /* CircularBuffer.h */,
 				10628E2960377E84F59F41F0 /* stlassert.h */,
 				10628AEB8EFAA83D2F4564EA /* TimeUtils.cpp */,
 				10628FE3AEE2CC419D4F59CD /* TimeUtils.h */,
 				10628A440894814F3B6A4FEA /* GeometryUtils.h */,
+				C9FFFE67C10A6A65023BE764 /* Algorithms.h */,
 			);
 			name = CppUtils;
 			sourceTree = "<group>";
