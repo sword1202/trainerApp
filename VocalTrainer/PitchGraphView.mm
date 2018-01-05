@@ -6,9 +6,11 @@
 #import "PitchGraphView.h"
 #include <GLKit/GLKit.h>
 #import "GLSceneDrawer.h"
+#import "TsfTest.h"
 
 @implementation PitchGraphView {
     GLSceneDrawer* _glSceneDrawer;
+    AVAudioPlayer *_player;
 }
 
 - (void)prepareOpenGL {
@@ -20,6 +22,7 @@
                                    selector:@selector(onTimer:)
                                    userInfo:nil
                                     repeats:YES];
+    _player = testTsf();
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
