@@ -6,10 +6,6 @@
 #ifndef VOCALTRAINER_AUDIOPLAYER_H
 #define VOCALTRAINER_AUDIOPLAYER_H
 
-#ifdef __OBJC__
-#import <AVFoundation/AVAudioPlayer.h>
-#endif
-
 class AudioPlayer {
 #ifdef __APPLE__
     void* player = 0;
