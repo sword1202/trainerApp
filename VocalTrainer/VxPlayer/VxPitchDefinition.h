@@ -8,10 +8,12 @@
 
 
 #import "Pitch.h"
+#include <vector>
 
 struct VxPitchDefinition {
     Pitch pitch;
     double timestamp;
+    std::vector<char> audioData;
     VxPitchDefinition(const Pitch &pitch, double timestamp);
     VxPitchDefinition();
 };

@@ -33,12 +33,13 @@
 		2EF1E9A31D592EC100E02C33 /* tests in Resources */ = {isa = PBXBuildFile; fileRef = 2EF1E99D1D592EC100E02C33 /* tests */; };
 		2EF1E9A91D592F1600E02C33 /* AudoInputReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1E9941D592EC100E02C33 /* AudoInputReader.cpp */; };
 		54F6744120004BD1007A419D /* libjsoncpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54F6744020004BD1007A419D /* libjsoncpp.a */; };
+		C9FFF051780243EF07304B84 /* 1.json in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFDD798D0EB7C53086DD3 /* 1.json */; };
 		C9FFF36A1CDCD744183C2194 /* WavAudioDataFromPitchGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6290709A6DA1F3392E1 /* WavAudioDataFromPitchGenerator.cpp */; };
 		C9FFF3994C66634963735E68 /* GetSf2FilePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF5D6CB0CEACB514B6CCE /* GetSf2FilePath.mm */; };
 		C9FFF4581D453DAD39B44ED4 /* VxFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF1EF16D6C62AE05568D4 /* VxFile.cpp */; };
 		C9FFF4F62C12797FCDF8E4E0 /* a.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF7FAE4AA3B321D53908D /* a.sf2 */; };
 		C9FFFEB3BFD86EDFAD0BB4EA /* AudioUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF0A71BF842FC6C348D0C /* AudioUtils.cpp */; };
-		C9FFFF0EE051E053AD0F4F27 /* AudioPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFBE238D301064F720BAA /* AudioPlayer.mm */; };
+		C9FFFF0EE051E053AD0F4F27 /* AudioPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFBE238D301064F720BAA /* AudioPlayer.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,6 +150,7 @@
 		C9FFFBD6A30B20FDF84FEC57 /* allocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = allocator.h; sourceTree = "<group>"; };
 		C9FFFBE238D301064F720BAA /* AudioPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioPlayer.mm; sourceTree = "<group>"; };
 		C9FFFC69E7006646D0B7FBF2 /* assertions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = assertions.h; sourceTree = "<group>"; };
+		C9FFFDD798D0EB7C53086DD3 /* 1.json */ = {isa = PBXFileReference; lastKnownFileType = file.vx; path = 1.json; sourceTree = "<group>"; };
 		C9FFFDF76019B54B1A20A866 /* AudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayer.h; sourceTree = "<group>"; };
 		C9FFFDFA5FE4750E603649E8 /* GetSf2FilePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetSf2FilePath.h; sourceTree = "<group>"; };
 		C9FFFE67C10A6A65023BE764 /* Algorithms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Algorithms.h; path = PitchDetection/CppUtils/Algorithms.h; sourceTree = "<group>"; };
@@ -334,6 +336,7 @@
 				C9FFFDFA5FE4750E603649E8 /* GetSf2FilePath.h */,
 				C9FFF6290709A6DA1F3392E1 /* WavAudioDataFromPitchGenerator.cpp */,
 				C9FFF256437C12F42C60BC92 /* WavAudioDataFromPitchGenerator.h */,
+				C9FFFDD798D0EB7C53086DD3 /* 1.json */,
 			);
 			path = VxPlayer;
 			sourceTree = "<group>";
@@ -469,6 +472,7 @@
 				2EF1E8D61D57F95100E02C33 /* Main.storyboard in Resources */,
 				2EF1E99F1D592EC100E02C33 /* CMakeLists.txt in Resources */,
 				C9FFF4F62C12797FCDF8E4E0 /* a.sf2 in Resources */,
+				C9FFF051780243EF07304B84 /* 1.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

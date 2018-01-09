@@ -5,8 +5,17 @@
 
 #include "VxFile.h"
 #include <fstream>
+#include <thread>
 #include "../json/reader.h"
 #include "WavAudioDataFromPitchGenerator.h"
+#include "../../../CppUtils/TimeUtils.h"
+#include "Algorithms.h"
+
+using namespace CppUtils;
+
+static bool ComparePitches(const VxPitchDefinition& a, const VxPitchDefinition& b) {
+    return a.timestamp < b.timestamp;
+}
 
 VxPitchDefinition::VxPitchDefinition(const Pitch &pitch, double timestamp) : pitch(pitch), timestamp(timestamp) {}
 VxPitchDefinition::VxPitchDefinition() {}
@@ -39,6 +48,7 @@ void VxFile::initFromStream(std::istream &stream) {
         if (value.isNull()) {
             double timestamp = strtod(key.data(), 0);
             this->pitches.push_back(VxPitchDefinition(Pitch(), timestamp));
+            continue;
         } else if (!value.isString()) {
             continue;
         }
@@ -51,9 +61,7 @@ void VxFile::initFromStream(std::istream &stream) {
         }
     }
 
-    std::sort(this->pitches.begin(), this->pitches.end(), [](const VxPitchDefinition& a, const VxPitchDefinition& b){
-        return a.timestamp < b.timestamp;
-    });
+    std::sort(this->pitches.begin(), this->pitches.end(), ComparePitches);
 
     // the file should always end at silence
     if (!this->pitches.empty()) {
@@ -68,9 +76,12 @@ void VxFile::initFromStream(std::istream &stream) {
         VxPitchDefinition &current = this->pitches[i];
         VxPitchDefinition &next = this->pitches[i + 1];
         double duration = next.timestamp - current.timestamp;
-        std::vector<char> wavAudioData = generator.pitchToWavAudioData(current.pitch, duration);
-        audioData.push_back(wavAudioData);
+        if (current.pitch.isValid()) {
+            current.audioData = generator.pitchToWavAudioData(current.pitch, duration);
+        }
     }
+
+    player = new AudioPlayer();
 }
 
 VxFile::~VxFile() {
@@ -80,11 +91,33 @@ VxFile::~VxFile() {
 }
 
 void VxFile::play() {
+    if (!isPlaying) {
+        isPlaying = true;
+        std::thread thread([this] {
+            int64_t time = TimeUtils::nowInMicroseconds();
+            VxPitchDefinition searchPlaceholder;
+            while (isPlaying) {
+                std::this_thread::sleep_for(std::chrono::microseconds(10));
+                int64_t now = TimeUtils::nowInMicroseconds();
+                currentSeek += (now - time) / 1000000.0;
+                time = now;
 
+                if (!player->isPlaying()) {
+                    searchPlaceholder.timestamp = currentSeek;
+                    auto iter = CppUtils::FindLessOrEqualInSortedCollection(pitches, searchPlaceholder, ComparePitches);
+                    if (iter != pitches.end() && iter->pitch.isValid()) {
+                        player->play(iter->audioData.data(), iter->audioData.size(), currentSeek - iter->timestamp);
+                    }
+                }
+            }
+        });
+        thread.detach();
+    }
 }
 
 void VxFile::stop() {
-
+    isPlaying = false;
+    player->stop();
 }
 
 void VxFile::seek(double timeStamp) {

@@ -7,9 +7,11 @@
 #include "AudioPlayer.h"
 #include <string>
 
-void AudioPlayer::play(const char *audioData, int size) {
+#import <AVFoundation/AVAudioPlayer.h>
+
+void AudioPlayer::play(const char *audioData, int size, double seek) {
     NSError* error = nil;
-    player = [[AVAudioPlayer alloc] initWithData:[NSData dataWithBytes:audioData
+    AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithData:[NSData dataWithBytes:audioData
                                                        length:size]
                                   error:&error];
     if (error) {
@@ -19,4 +21,23 @@ void AudioPlayer::play(const char *audioData, int size) {
     }
 
     [player play];
+    if (this->player) {
+        [(NSObject *)this->player release];
+    }
+
+    this->player = (__bridge void*)player;
+}
+
+bool AudioPlayer::isPlaying() {
+    return player && [(__bridge AVAudioPlayer*)player isPlaying];
+}
+
+void AudioPlayer::stop() {
+    [(__bridge AVAudioPlayer*)player stop];
+}
+
+AudioPlayer::~AudioPlayer() {
+    if (this->player) {
+        [(NSObject *)this->player release];
+    }
 }

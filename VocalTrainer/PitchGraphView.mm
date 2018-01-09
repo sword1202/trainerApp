@@ -6,9 +6,11 @@
 #import "PitchGraphView.h"
 #include <GLKit/GLKit.h>
 #import "GLSceneDrawer.h"
+#import "VxFile.h"
 
 @implementation PitchGraphView {
     GLSceneDrawer* _glSceneDrawer;
+    VxFile* file;
 }
 
 - (void)prepareOpenGL {
@@ -20,6 +22,9 @@
                                    selector:@selector(onTimer:)
                                    userInfo:nil
                                     repeats:YES];
+    const char* path = [[NSBundle mainBundle] pathForResource:@"1" ofType:@"json"].cString;
+    file = new VxFile(path);
+    file->play();
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
@@ -51,6 +56,7 @@
 
 - (void)dealloc {
     delete _glSceneDrawer;
+    delete file;
 }
 
 

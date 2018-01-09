@@ -14,8 +14,9 @@
 
 class VxFile {
     std::vector<VxPitchDefinition> pitches;
-    std::vector<std::vector<char>> audioData;
     AudioPlayer* player = 0;
+    volatile bool isPlaying = false;
+    double currentSeek = 0;
 
     void initFromStream(std::istream& stream);
 public:

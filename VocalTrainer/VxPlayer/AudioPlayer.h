@@ -11,11 +11,14 @@
 #endif
 
 class AudioPlayer {
-#ifdef __OBJC__
-    AVAudioPlayer *player;
+#ifdef __APPLE__
+    void* player = 0;
 #endif
 public:
-    void play(const char* audioData, int size);
+    ~AudioPlayer();
+    void play(const char* audioData, int size, double seek);
+    bool isPlaying();
+    void stop();
 };
 
 
