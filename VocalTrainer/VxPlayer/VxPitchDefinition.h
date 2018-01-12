@@ -13,6 +13,7 @@
 struct VxPitchDefinition {
     Pitch pitch;
     double timestamp;
+    double duration;
     std::vector<char> audioData;
     VxPitchDefinition(const Pitch &pitch, double timestamp);
     VxPitchDefinition();

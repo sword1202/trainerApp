@@ -6,11 +6,17 @@
 #import <stdexcept>
 #include "AudioPlayer.h"
 #include <string>
+#include "../../../CppUtils/TimeUtils.h"
 
 #import <AVFoundation/AVAudioPlayer.h>
+#import <iostream>
+
+using namespace CppUtils;
+using std::cout;
 
 void AudioPlayer::play(const char *audioData, int size, double seek) {
     NSError* error = nil;
+    int64_t i = TimeUtils::nowInMicroseconds();
     AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithData:[NSData dataWithBytes:audioData
                                                        length:size]
                                   error:&error];
@@ -20,6 +26,7 @@ void AudioPlayer::play(const char *audioData, int size, double seek) {
         throw std::runtime_error(message);
     }
 
+    player.currentTime = seek;
     [player play];
     if (this->player) {
         [(NSObject *)this->player release];

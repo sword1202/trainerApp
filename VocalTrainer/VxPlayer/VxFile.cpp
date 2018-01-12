@@ -6,12 +6,14 @@
 #include "VxFile.h"
 #include <fstream>
 #include <thread>
+#include <iostream>
 #include "../json/reader.h"
 #include "WavAudioDataFromPitchGenerator.h"
 #include "../../../CppUtils/TimeUtils.h"
 #include "Algorithms.h"
 
 using namespace CppUtils;
+using std::cout;
 
 static bool ComparePitches(const VxPitchDefinition& a, const VxPitchDefinition& b) {
     return a.timestamp < b.timestamp;
@@ -76,6 +78,7 @@ void VxFile::initFromStream(std::istream &stream) {
         VxPitchDefinition &current = this->pitches[i];
         VxPitchDefinition &next = this->pitches[i + 1];
         double duration = next.timestamp - current.timestamp;
+        current.duration = duration;
         if (current.pitch.isValid()) {
             current.audioData = generator.pitchToWavAudioData(current.pitch, duration);
         }
@@ -96,16 +99,22 @@ void VxFile::play() {
         std::thread thread([this] {
             int64_t time = TimeUtils::nowInMicroseconds();
             VxPitchDefinition searchPlaceholder;
+            double startPlayCurrentSeek = 0;
+            double lastDuration = 0;
             while (isPlaying) {
                 std::this_thread::sleep_for(std::chrono::microseconds(10));
                 int64_t now = TimeUtils::nowInMicroseconds();
                 currentSeek += (now - time) / 1000000.0;
                 time = now;
 
-                if (!player->isPlaying()) {
+                if (currentSeek - startPlayCurrentSeek >= lastDuration) {
                     searchPlaceholder.timestamp = currentSeek;
                     auto iter = CppUtils::FindLessOrEqualInSortedCollection(pitches, searchPlaceholder, ComparePitches);
+
                     if (iter != pitches.end() && iter->pitch.isValid()) {
+                        cout<<"currentSeek = "<<currentSeek<<" timestamp = "<<iter->timestamp<<"pitch = "<<iter->pitch<<"\n";
+                        startPlayCurrentSeek = currentSeek;
+                        lastDuration = iter->duration;
                         player->play(iter->audioData.data(), iter->audioData.size(), currentSeek - iter->timestamp);
                     }
                 }
