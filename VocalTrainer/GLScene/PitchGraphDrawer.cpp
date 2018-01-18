@@ -15,7 +15,7 @@ using std::cout;
 using std::endl;
 
 void PitchGraphDrawer::onPitchDetected(const Pitch &pitch) {
-    int64_t time = TimeUtils::nowInMicroseconds();
+    int64_t time = TimeUtils::NowInMicroseconds();
     detectedPitches.push_back(SingerPitchDetection(pitch, time));
 }
 

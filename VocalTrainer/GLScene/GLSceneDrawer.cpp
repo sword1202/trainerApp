@@ -19,7 +19,7 @@ static const int PITCH_DETECTION_BUFFER_SIZE = 1200;
 
 void GLSceneDrawer::draw(int width, int height) {
     glClear(GLenum(GL_COLOR_BUFFER_BIT));
-    int64_t now = TimeUtils::nowInMicroseconds();
+    int64_t now = TimeUtils::NowInMicroseconds();
     glViewport(0, 0, width, height);
 
     drawBlackPitchesBackground();
@@ -147,7 +147,7 @@ void GLSceneDrawer::readPitchesFromWav(const char *wavFileName) {
     WavFilePitchesReader reader;
     float threshold = 0.05;
     pitchesFromWavFile = reader.readPitchesFromWavFile(&file, threshold);
-    pitchesLoadedTime = TimeUtils::nowInMicroseconds();
+    pitchesLoadedTime = TimeUtils::NowInMicroseconds();
 }
 
 void GLSceneDrawer::studentPitchDetected(const Pitch &pitch) {

@@ -16,7 +16,7 @@ using std::cout;
 
 void AudioPlayer::play(const char *audioData, int size, double seek) {
     NSError* error = nil;
-    int64_t i = TimeUtils::nowInMicroseconds();
+    int64_t i = TimeUtils::NowInMicroseconds();
     AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithData:[NSData dataWithBytes:audioData
                                                        length:size]
                                   error:&error];

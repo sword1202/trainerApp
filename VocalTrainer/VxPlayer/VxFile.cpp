@@ -98,13 +98,13 @@ void VxFile::play() {
         isPlaying = true;
         currentSeek = 0;
         std::thread thread([this] {
-            int64_t time = TimeUtils::nowInMicroseconds();
+            int64_t time = TimeUtils::NowInMicroseconds();
             VxPitchDefinition searchPlaceholder;
             double startPlayCurrentSeek = 0;
             double lastDuration = 0;
             while (isPlaying) {
                 std::this_thread::sleep_for(std::chrono::microseconds(10));
-                int64_t now = TimeUtils::nowInMicroseconds();
+                int64_t now = TimeUtils::NowInMicroseconds();
                 if (!isPaused) {
                     currentSeek += (now - time) / 1000000.0;
                 }
