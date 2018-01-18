@@ -23,7 +23,8 @@
                                    userInfo:nil
                                     repeats:YES];
     const char* path = [[NSBundle mainBundle] pathForResource:@"1" ofType:@"json"].cString;
-    file = new VxFile(path);
+    file = new VxFile();
+    file->load(path);
     file->play();
 }
 

@@ -15,6 +15,9 @@ public:
     void play(const char* audioData, int size, double seek);
     bool isPlaying();
     void stop();
+    void pause();
+    void resume();
+    void seek(double timeStamp);
 };
 
 

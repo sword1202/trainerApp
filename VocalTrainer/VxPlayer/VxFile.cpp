@@ -9,7 +9,7 @@
 #include <iostream>
 #include "../json/reader.h"
 #include "WavAudioDataFromPitchGenerator.h"
-#include "../../../CppUtils/TimeUtils.h"
+#include "TimeUtils.h"
 #include "Algorithms.h"
 
 using namespace CppUtils;
@@ -25,11 +25,11 @@ VxPitchDefinition::VxPitchDefinition() {}
 VxFile::VxFile(const std::vector<VxPitchDefinition> &pitches) : pitches(pitches) {
 }
 
-VxFile::VxFile(std::istream &stream) {
+void VxFile::load(std::istream &stream) {
     initFromStream(stream);
 }
 
-VxFile::VxFile(const char *fileName) {
+void VxFile::load(const char *fileName) {
     std::ifstream file(fileName);
     initFromStream(file);
 }
@@ -96,6 +96,7 @@ VxFile::~VxFile() {
 void VxFile::play() {
     if (!isPlaying) {
         isPlaying = true;
+        currentSeek = 0;
         std::thread thread([this] {
             int64_t time = TimeUtils::nowInMicroseconds();
             VxPitchDefinition searchPlaceholder;
@@ -104,7 +105,9 @@ void VxFile::play() {
             while (isPlaying) {
                 std::this_thread::sleep_for(std::chrono::microseconds(10));
                 int64_t now = TimeUtils::nowInMicroseconds();
-                currentSeek += (now - time) / 1000000.0;
+                if (!isPaused) {
+                    currentSeek += (now - time) / 1000000.0;
+                }
                 time = now;
 
                 if (currentSeek - startPlayCurrentSeek >= lastDuration) {
@@ -112,7 +115,6 @@ void VxFile::play() {
                     auto iter = CppUtils::FindLessOrEqualInSortedCollection(pitches, searchPlaceholder, ComparePitches);
 
                     if (iter != pitches.end() && iter->pitch.isValid()) {
-                        cout<<"currentSeek = "<<currentSeek<<" timestamp = "<<iter->timestamp<<"pitch = "<<iter->pitch<<"\n";
                         startPlayCurrentSeek = currentSeek;
                         lastDuration = iter->duration;
                         player->play(iter->audioData.data(), iter->audioData.size(), currentSeek - iter->timestamp);
@@ -121,6 +123,8 @@ void VxFile::play() {
             }
         });
         thread.detach();
+    } else if (isPaused) {
+        player->resume();
     }
 }
 
@@ -129,11 +133,20 @@ void VxFile::stop() {
     player->stop();
 }
 
-void VxFile::seek(double timeStamp) {
+void VxFile::pause() {
+    player->pause();
+}
 
+void VxFile::seek(double timeStamp) {
+    player->stop();
+    currentSeek = timeStamp;
 }
 
 void VxFile::reset() {
     stop();
     seek(0);
+}
+
+VxFile::VxFile() {
+
 }

@@ -6,7 +6,7 @@
 #import <stdexcept>
 #include "AudioPlayer.h"
 #include <string>
-#include "../../../CppUtils/TimeUtils.h"
+#include "TimeUtils.h"
 
 #import <AVFoundation/AVAudioPlayer.h>
 #import <iostream>
@@ -40,11 +40,27 @@ bool AudioPlayer::isPlaying() {
 }
 
 void AudioPlayer::stop() {
-    [(__bridge AVAudioPlayer*)player stop];
+    if (this->player) {
+        [(NSObject *)this->player release];
+        [(__bridge AVAudioPlayer*)player stop];
+        this->player = 0;
+    }
 }
 
 AudioPlayer::~AudioPlayer() {
     if (this->player) {
         [(NSObject *)this->player release];
     }
+}
+
+void AudioPlayer::pause() {
+    [(__bridge AVAudioPlayer*)player pause];
+}
+
+void AudioPlayer::resume() {
+    [(__bridge AVAudioPlayer*)player play];
+}
+
+void AudioPlayer::seek(double timeStamp) {
+    ((__bridge AVAudioPlayer*)player).currentTime = timeStamp;
 }
