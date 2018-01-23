@@ -12,6 +12,8 @@
 #include "TimeUtils.h"
 #include "Algorithms.h"
 
+#define LOCK_CURRENT_SEEK std::lock_guard<std::mutex> _(currentSeekMutex)
+
 using namespace CppUtils;
 using std::cout;
 
@@ -106,18 +108,31 @@ void VxFile::play() {
                 std::this_thread::sleep_for(std::chrono::microseconds(10));
                 int64_t now = TimeUtils::NowInMicroseconds();
                 if (!isPaused) {
+                    LOCK_CURRENT_SEEK;
                     currentSeek += (now - time) / 1000000.0;
                 }
                 time = now;
 
-                if (currentSeek - startPlayCurrentSeek >= lastDuration) {
-                    searchPlaceholder.timestamp = currentSeek;
+                bool isPlayBackFinished;
+                {
+                    LOCK_CURRENT_SEEK;
+                    isPlayBackFinished = currentSeek - startPlayCurrentSeek >= lastDuration;
+                }
+
+                if (isPlayBackFinished) {
+                    {
+                        LOCK_CURRENT_SEEK;
+                        searchPlaceholder.timestamp = currentSeek;
+                    }
                     auto iter = CppUtils::FindLessOrEqualInSortedCollection(pitches, searchPlaceholder, ComparePitches);
 
                     if (iter != pitches.end() && iter->pitch.isValid()) {
-                        startPlayCurrentSeek = currentSeek;
+                        {
+                            LOCK_CURRENT_SEEK;
+                            startPlayCurrentSeek = currentSeek;
+                        }
                         lastDuration = iter->duration;
-                        player->play(iter->audioData.data(), iter->audioData.size(), currentSeek - iter->timestamp);
+                        player->play(iter->audioData.data(), iter->audioData.size(), startPlayCurrentSeek - iter->timestamp);
                     }
                 }
             }
@@ -139,6 +154,7 @@ void VxFile::pause() {
 
 void VxFile::seek(double timeStamp) {
     player->stop();
+    LOCK_CURRENT_SEEK;
     currentSeek = timeStamp;
 }
 

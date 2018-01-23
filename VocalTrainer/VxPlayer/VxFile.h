@@ -17,7 +17,8 @@ class VxFile {
     AudioPlayer* player = 0;
     volatile bool isPlaying = false;
     volatile bool isPaused = false;
-    double currentSeek = 0;
+    double currentSeek;
+    std::mutex currentSeekMutex;
 
     void initFromStream(std::istream& stream);
 public:
