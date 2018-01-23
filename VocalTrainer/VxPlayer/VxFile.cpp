@@ -106,33 +106,21 @@ void VxFile::play() {
             double lastDuration = 0;
             while (isPlaying) {
                 std::this_thread::sleep_for(std::chrono::microseconds(10));
+                LOCK_CURRENT_SEEK;
                 int64_t now = TimeUtils::NowInMicroseconds();
                 if (!isPaused) {
-                    LOCK_CURRENT_SEEK;
                     currentSeek += (now - time) / 1000000.0;
                 }
                 time = now;
 
-                bool isPlayBackFinished;
-                {
-                    LOCK_CURRENT_SEEK;
-                    isPlayBackFinished = currentSeek - startPlayCurrentSeek >= lastDuration;
-                }
-
-                if (isPlayBackFinished) {
-                    {
-                        LOCK_CURRENT_SEEK;
-                        searchPlaceholder.timestamp = currentSeek;
-                    }
+                if (currentSeek - startPlayCurrentSeek >= lastDuration) {
+                    searchPlaceholder.timestamp = currentSeek;
                     auto iter = CppUtils::FindLessOrEqualInSortedCollection(pitches, searchPlaceholder, ComparePitches);
 
                     if (iter != pitches.end() && iter->pitch.isValid()) {
-                        {
-                            LOCK_CURRENT_SEEK;
-                            startPlayCurrentSeek = currentSeek;
-                        }
+                        startPlayCurrentSeek = currentSeek;
                         lastDuration = iter->duration;
-                        player->play(iter->audioData.data(), iter->audioData.size(), startPlayCurrentSeek - iter->timestamp);
+                        player->play(iter->audioData.data(), iter->audioData.size(), currentSeek - iter->timestamp);
                     }
                 }
             }
