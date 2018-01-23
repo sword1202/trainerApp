@@ -105,8 +105,13 @@ void VxFile::play() {
             double startPlayCurrentSeek = 0;
             double lastDuration = 0;
             while (isPlaying) {
+                double currentSeek;
+                {
+                    LOCK_CURRENT_SEEK;
+                    currentSeek = this->currentSeek;
+                }
+
                 std::this_thread::sleep_for(std::chrono::microseconds(10));
-                LOCK_CURRENT_SEEK;
                 int64_t now = TimeUtils::NowInMicroseconds();
                 if (!isPaused) {
                     currentSeek += (now - time) / 1000000.0;
