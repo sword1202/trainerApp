@@ -12,8 +12,6 @@
 #include "TimeUtils.h"
 #include "Algorithms.h"
 
-#define LOCK_CURRENT_SEEK std::lock_guard<std::mutex> _(currentSeekMutex)
-
 using namespace CppUtils;
 using std::cout;
 
@@ -106,7 +104,6 @@ void VxFile::play() {
             double lastDuration = 0;
             while (isPlaying) {
                 std::this_thread::sleep_for(std::chrono::microseconds(10));
-                LOCK_CURRENT_SEEK;
                 int64_t now = TimeUtils::NowInMicroseconds();
                 if (!isPaused) {
                     currentSeek += (now - time) / 1000000.0;
@@ -123,6 +120,8 @@ void VxFile::play() {
                         player->play(iter->audioData.data(), iter->audioData.size(), currentSeek - iter->timestamp);
                     }
                 }
+
+                playerQueue.process();
             }
         });
         thread.detach();
@@ -142,8 +141,9 @@ void VxFile::pause() {
 
 void VxFile::seek(double timeStamp) {
     player->stop();
-    LOCK_CURRENT_SEEK;
-    currentSeek = timeStamp;
+    playerQueue.post([=] {
+        this->currentSeek = timeStamp;
+    });
 }
 
 void VxFile::reset() {

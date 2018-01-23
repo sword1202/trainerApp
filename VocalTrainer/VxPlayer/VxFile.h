@@ -11,6 +11,7 @@
 #include "VxPitchDefinition.h"
 #include "AudioPlayer.h"
 #include <vector>
+#include "SynchronizedCallbacksQueue.h"
 
 class VxFile {
     std::vector<VxPitchDefinition> pitches;
@@ -18,7 +19,7 @@ class VxFile {
     volatile bool isPlaying = false;
     volatile bool isPaused = false;
     double currentSeek;
-    std::mutex currentSeekMutex;
+    CppUtils::SynchronizedCallbacksQueue playerQueue;
 
     void initFromStream(std::istream& stream);
 public:
