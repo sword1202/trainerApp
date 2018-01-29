@@ -10,15 +10,6 @@
 
 #include <windows.h>
 
-struct PlayingData {
-	HWAVEOUT     queue;
-	WAVEHDR		header;
-	uint32_t bufferSizeInBytes = 0;
-	char* _pBuffer = nullptr;
-	double currentTime = 0;
-	WAVEFORMATEX format;
-};
-
 #endif 
 
 class AudioPlayer {
@@ -28,6 +19,17 @@ class AudioPlayer {
 	void* player = 0;
 
 #else
+
+	
+	struct PlayingData {
+		HWAVEOUT     queue;
+		WAVEHDR		header;
+		uint32_t bufferSizeInBytes = 0;
+		char* _pBuffer = nullptr;
+		double currentTime = 0;
+		WAVEFORMATEX format;
+	};
+
 	PlayingData playingData;
 	MMRESULT _status;
 	bool bPlaying;
