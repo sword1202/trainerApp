@@ -25,3 +25,11 @@ build/
 
 .idea/
 *.iml
+/VocalTrainer/json/jsoncpp.cpp
+/VocalTrainer/json/json/json.h
+/VocalTrainer/json/json/json-forwards.h
+/VocalTrainerWinCLI/.vs/VocalTrainer/v15/Solution.VC.db-wal
+/VocalTrainerWinCLI/.vs/VocalTrainer/v15/Solution.VC.db-shm
+/VocalTrainerWinCLI/.vs/VocalTrainer/v15/Solution.VC.db
+/VocalTrainerWinCLI/.vs/VocalTrainer/v15/Browse.VC.opendb
+/VocalTrainerWinCLI/.vs/VocalTrainer/v15/Browse.VC.db

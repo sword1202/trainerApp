@@ -13,6 +13,7 @@
 #include "WavFilePitchesReader.h"
 #include "PianoDrawer.h"
 #include "PitchGraphDrawer.h"
+#include <mutex>
 
 class GLSceneDrawer {
 public:

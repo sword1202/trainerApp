@@ -5,7 +5,13 @@
 
 #include "PianoDrawer.h"
 #include "DrawConstants.h"
+#ifdef __APPLE__
 #include <GLUT/GLUT.h>
+#else
+#include <windows.h>
+#include <gl/GL.h>
+#include <gl/GLU.h>
+#endif
 
 static const float PIANO_WIDTH = 0.2f;
 static const float BLACK_WHITE_PIANO_BUTTON_RELATION = 85.0f / 145.0f;

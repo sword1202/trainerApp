@@ -6,8 +6,11 @@
 #ifndef VOCALTRAINER_VXPITCHDEFENITION_H
 #define VOCALTRAINER_VXPITCHDEFENITION_H
 
-
+#ifdef __APPLE__
 #import "Pitch.h"
+#else
+#include "Pitch.h"
+#endif
 #include <vector>
 
 struct VxPitchDefinition {

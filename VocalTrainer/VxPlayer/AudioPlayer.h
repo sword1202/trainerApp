@@ -9,6 +9,8 @@
 class AudioPlayer {
 #ifdef __APPLE__
     void* player = 0;
+#else
+	void* player = 0;
 #endif
 public:
     ~AudioPlayer();
