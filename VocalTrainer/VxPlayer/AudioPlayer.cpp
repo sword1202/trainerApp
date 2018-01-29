@@ -7,6 +7,8 @@
 #include "AudioPlayer.h"
 #include <string>
 #include "TimeUtils.h"
+#include "WAVFile.h"
+#include <sstream>
 
 #include <iostream>
 
@@ -16,268 +18,152 @@ using std::cout;
 #include <windows.h>
 #include <cassert>
 
-struct PlayingData {
-	HWAVEOUT     queue;
-	WAVEHDR		header;
-	uint32_t bufferSizeInBytes;
-	char* _pBuffer;
-	double currentTime;
-	HANDLE waveOutThreadHandle;
-	DWORD waveOutThreadId;
-	CRITICAL_SECTION criticalSection;
-	WAVEFORMATEX format;
-};
-
-/*DWORD WINAPI WaveOutThread(void *Arg)
-{
-	MSG Msg;
-
-	PlayingData* recordingData = (PlayingData*)Arg;
-	AudioInputReader::Callback& callback = recordingData->callback;
-
-	while (GetMessage(&Msg, NULL, 0, 0) == TRUE)
-	{
-		if (MM_WIM_DATA == Msg.message)
-		{
-			// data is received in current buffer
-			WAVEHDR *Hdr = (WAVEHDR *)Msg.lParam;
-
-			// fetch data from the recording queue
-			MMRESULT res = waveInUnprepareHeader(recordingData->queue, &recordingData->header[recordingData->currentBuffer], sizeof(WAVEHDR));
-			int prevBuf = recordingData->currentBuffer - 1;
-			if (prevBuf < 0)
-				prevBuf = kNumberBuffers - 1;
-
-			if (res != MMSYSERR_NOERROR)
-				continue;
-
-			// enter critical section to process received data
-			EnterCriticalSection(&recordingData->criticalSection);
-
-			// call processing callback
-			if (callback)
-			{
-				int16_t* receivedBuffer = &(recordingData->_pBuffer[recordingData->currentBuffer * recordingData->bufferSizeInBytes]);
-				callback(receivedBuffer, (recordingData->bufferSizeInBytes) / sizeof(int16_t));
-			}
-
-			// increase current buffer index
-			recordingData->currentBuffer++;
-			if (recordingData->currentBuffer == kNumberBuffers)
-				recordingData->currentBuffer = 0;
-
-			// refill received buffer and pass to processing 
-			int16_t* pHeaderBuffer = &(recordingData->_pBuffer[prevBuf * recordingData->bufferSizeInBytes]);
-			recordingData->header[prevBuf].lpData = (LPSTR)pHeaderBuffer;
-			recordingData->header[prevBuf].dwBufferLength = recordingData->bufferSizeInBytes * 2;
-			recordingData->header[prevBuf].dwFlags = 0;
-			recordingData->header[prevBuf].dwLoops = 0;
-
-			LeaveCriticalSection(&recordingData->criticalSection);
-
-			// prepare processed buffer to receive data again
-			res = waveInPrepareHeader(recordingData->queue, &recordingData->header[prevBuf], sizeof(WAVEHDR));
-			if (res == MMSYSERR_NOERROR && recordingData->callback)
-			{
-				waveInAddBuffer(recordingData->queue, &recordingData->header[prevBuf], sizeof(WAVEHDR));
-			}
-		}
-
-		if (MM_WIM_CLOSE == Msg.message)
-		{
-			// fetch all buffers and leave the loop
-			for (int i = 0; i < kNumberBuffers; i++)
-			{
-				waveInUnprepareHeader(recordingData->queue, &recordingData->header[i], sizeof(WAVEHDR));
-			}
-			break;
-		}
-	}
-
-	return 0;
-}*/
-
-class WinAudioPlayer{
-	static const int kSamplingRate = 44100;
-
-	PlayingData playingData;
-	MMRESULT _status;
-	bool bPlaying;
-public:
-	WinAudioPlayer(const char* audioData, int maximumBufferSize) {
-		assert(maximumBufferSize > 0);
-		playingData.bufferSizeInBytes = (uint32_t)maximumBufferSize;
-		bPlaying = false;
-
-		// fill WAVE data format
-		playingData.format.nSamplesPerSec = kSamplingRate;
-		playingData.format.wFormatTag = WAVE_FORMAT_PCM;
-		playingData.format.nChannels = 1;
-		playingData.format.wBitsPerSample = 16;
-		playingData.format.nBlockAlign = playingData.format.nChannels * playingData.format.wBitsPerSample / 8;
-		playingData.format.nAvgBytesPerSec = playingData.format.nBlockAlign * playingData.format.nSamplesPerSec;
-		playingData.format.cbSize = 0;
-
-		// open recording device and null callback, because we are already in a separate thread
-		_status = waveOutOpen(
-			&playingData.queue,
-			WAVE_MAPPER,
-			&playingData.format,
-			0,
-			0,
-			CALLBACK_NULL);
-
-		if (_status == MMSYSERR_NOERROR)
-		{
-			// create kNumberBuffers to store recorded data
-			playingData._pBuffer = new char[maximumBufferSize] {0};
-			memcpy(playingData._pBuffer, audioData, maximumBufferSize);
-		}
-	}
-
-	void stop() {
-		bPlaying = false;
-		if (playingData.header.dwFlags & WHDR_PREPARED) {
-			waveOutUnprepareHeader(playingData.queue, &playingData.header, sizeof(WAVEHDR));
-		}
-	}
-
-	void setCurrentTimestamp(double seek) {
-		playingData.currentTime = seek;
-	}
-
-	void pause() {
-		bPlaying = false;
-		waveOutPause(playingData.queue);
-	}
-
-	void resume() {
-		bPlaying = true;
-		waveOutRestart(playingData.queue);
-	}
-
-	bool isPlaying() {
-		return bPlaying;
-	}
-
-	MMRESULT setupHeaderData()
-	{
-		if (playingData.header.dwFlags & WHDR_PREPARED) {
-			waveOutUnprepareHeader(playingData.queue, &playingData.header, sizeof(WAVEHDR));
-		}
-
-		// calculate position by timestamp (ms)
-		DWORD cb = (int)playingData.currentTime * playingData.format.nAvgBytesPerSec / 1000;
-		if (cb % playingData.format.nBlockAlign) 
-		{
-			if ((cb % playingData.format.nBlockAlign) <= (playingData.format.nBlockAlign / 2)) {
-				cb -= (cb % playingData.format.nBlockAlign);
-			}
-			else {
-				cb += (playingData.format.nBlockAlign - (cb % playingData.format.nBlockAlign));
-			}
-		}
-
-		if (cb<0 || cb >= playingData.bufferSizeInBytes) 
-			return MMSYSERR_BADERRNUM;
-
-		waveOutReset(playingData.queue);
-		
-		ZeroMemory(&playingData.header, sizeof(WAVEHDR));
-		char* pHeaderBuffer = playingData._pBuffer;
-		playingData.header.lpData = (LPSTR)(pHeaderBuffer + cb);
-		playingData.header.dwBufferLength = playingData.bufferSizeInBytes - cb;
-		playingData.header.dwFlags = 0;
-		playingData.header.dwLoops = 0;
-
-		MMRESULT res = waveOutPrepareHeader(playingData.queue, &playingData.header, sizeof(WAVEHDR));
-		return res;
-	}
-
-	void play() {
-
-		_status = setupHeaderData();
-		if (_status == MMSYSERR_NOERROR)
-		{
-			_status = waveOutWrite(playingData.queue, &playingData.header, sizeof(WAVEHDR));
-		}
-		
-		if (_status != MMSYSERR_NOERROR)
-		{
-			std::string message = "Failed to play audio data, errorCode: ";
-			message += std::to_string(_status);
-			throw std::runtime_error(message);
-		}
-
-		bPlaying = true;
-	}
-
-	~WinAudioPlayer() {
-		if (_status == MMSYSERR_NOERROR)
-		{
-			stop();
-			waveOutReset(playingData.queue);
-			waveOutClose(playingData.queue);
-		}
-	}
-};
-
 void AudioPlayer::play(const char *audioData, int size, double seek) 
 {
-    int64_t i = TimeUtils::NowInMicroseconds();
-	WinAudioPlayer *audioPlayer = new WinAudioPlayer(audioData, size);
-    
-	audioPlayer->setCurrentTimestamp(seek);
-	audioPlayer->play();
-    if (this->player)
+	if (playingData._pBuffer)
 	{
-		delete this->player;
-    }
+		stop();
+		waveOutReset(playingData.queue);
+		waveOutClose(playingData.queue);
+	}
 
-	this->player = (void*)audioPlayer;
+    int64_t i = TimeUtils::NowInMicroseconds();
+	initAudioDevice(audioData, size); 
+	playingData.currentTime = seek;
+
+	_status = setupHeaderData();
+	if (_status == MMSYSERR_NOERROR)
+	{
+		_status = waveOutWrite(playingData.queue, &playingData.header, sizeof(WAVEHDR));
+	}
+
+	if (_status != MMSYSERR_NOERROR)
+	{
+		std::string message = "Failed to play audio data, errorCode: ";
+		message += std::to_string(_status);
+		throw std::runtime_error(message);
+	}
+
+	bPlaying = true;
 }
 
 bool AudioPlayer::isPlaying() {
-    return player && ((WinAudioPlayer*)player)->isPlaying();
+	return bPlaying;
 }
 
 void AudioPlayer::stop() {
-    if (this->player) {
-		WinAudioPlayer* pointer = (WinAudioPlayer*)this->player;
-		pointer->stop();
-		delete pointer;
-        this->player = 0;
-    }
+	bPlaying = false;
+	if (playingData.header.dwFlags & WHDR_PREPARED) {
+		waveOutUnprepareHeader(playingData.queue, &playingData.header, sizeof(WAVEHDR));
+	}
 }
 
 AudioPlayer::~AudioPlayer() {
-    if (this->player) 
+	if (_status == MMSYSERR_NOERROR)
 	{
-		WinAudioPlayer* pointer = (WinAudioPlayer*)this->player;
-		delete pointer;
-    }
+		stop();
+		waveOutReset(playingData.queue);
+		waveOutClose(playingData.queue);
+	}
 }
 
 void AudioPlayer::pause() {
-	if (this->player)
-	{
-		WinAudioPlayer* pointer = (WinAudioPlayer*)this->player;
-		pointer->pause();
-	}
+	bPlaying = false;
+	waveOutPause(playingData.queue);
 }
 
 void AudioPlayer::resume() {
-	if (this->player)
-	{
-		WinAudioPlayer* pointer = (WinAudioPlayer*)this->player;
-		pointer->resume();
-	}
+	bPlaying = true;
+	waveOutRestart(playingData.queue);
 }
 
 void AudioPlayer::seek(double timeStamp) {
-    if (this->player)
+	playingData.currentTime = timeStamp;
+}
+
+MMRESULT AudioPlayer::setupHeaderData()
+{
+	if (playingData.header.dwFlags & WHDR_PREPARED) {
+		waveOutUnprepareHeader(playingData.queue, &playingData.header, sizeof(WAVEHDR));
+	}
+
+	// calculate position by timestamp (ms)
+	DWORD cb = (int)playingData.currentTime * playingData.format.nAvgBytesPerSec / 1000;
+	if (cb % playingData.format.nBlockAlign)
 	{
-		WinAudioPlayer* pointer = (WinAudioPlayer*)this->player;
-		pointer->setCurrentTimestamp(timeStamp);
+		if ((cb % playingData.format.nBlockAlign) <= (playingData.format.nBlockAlign / 2)) {
+			cb -= (cb % playingData.format.nBlockAlign);
+		}
+		else {
+			cb += (playingData.format.nBlockAlign - (cb % playingData.format.nBlockAlign));
+		}
+	}
+
+	if (cb<0 || cb >= playingData.bufferSizeInBytes)
+		return MMSYSERR_BADERRNUM;
+
+	waveOutReset(playingData.queue);
+
+	ZeroMemory(&playingData.header, sizeof(WAVEHDR));
+	char* pHeaderBuffer = playingData._pBuffer;
+	playingData.header.lpData = (LPSTR)(pHeaderBuffer + cb);
+	playingData.header.dwBufferLength = playingData.bufferSizeInBytes - cb;
+	playingData.header.dwFlags = 0;
+	playingData.header.dwLoops = 0;
+
+	MMRESULT res = waveOutPrepareHeader(playingData.queue, &playingData.header, sizeof(WAVEHDR));
+	return res;
+}
+
+void AudioPlayer::initAudioDevice(const char* audioData, int size)
+{
+	assert(size > 0);
+	playingData.bufferSizeInBytes = (uint32_t)size;
+	bPlaying = false;
+
+	if (playingData._pBuffer)
+		delete playingData._pBuffer;
+	
+	playingData._pBuffer = nullptr;
+
+	// parse stream
+	std::stringstream stream(std::ios::in | std::ios::out | std::ios::binary);
+	stream.write((char*)audioData, size);
+
+	WAVFile wavFileParser(&stream);
+	if (!wavFileParser.isValid())
+	{
+		std::string message = "Failed to read audio data";
+		throw std::runtime_error(message);
+	}
+
+	// fill WAVE data format
+	playingData.format.nSamplesPerSec = wavFileParser.getSampleRate();
+	playingData.format.wFormatTag = WAVE_FORMAT_PCM;
+	playingData.format.nChannels = wavFileParser.getNumberOfChannels();
+	playingData.format.wBitsPerSample = wavFileParser.getBytesPerChannel() * 8;
+	playingData.format.nBlockAlign = playingData.format.nChannels * playingData.format.wBitsPerSample / 8;
+	playingData.format.nAvgBytesPerSec = playingData.format.nBlockAlign * playingData.format.nSamplesPerSec;
+	playingData.format.cbSize = 0;
+
+	// open recording device and null callback, because we are already in a separate thread
+	_status = waveOutOpen(
+		&playingData.queue,
+		WAVE_MAPPER,
+		&playingData.format,
+		0,
+		0,
+		CALLBACK_NULL);
+
+	if (_status == MMSYSERR_NOERROR)
+	{
+		// create kNumberBuffers to store recorded data
+		if (playingData._pBuffer)
+			delete playingData._pBuffer;
+
+		// read audio data from its start position and update buffer size parameter
+		playingData._pBuffer = new char[size] {0};
+		int rawWavDataSize = wavFileParser.readData(playingData._pBuffer, size);
+		playingData.bufferSizeInBytes = rawWavDataSize;
 	}
 }

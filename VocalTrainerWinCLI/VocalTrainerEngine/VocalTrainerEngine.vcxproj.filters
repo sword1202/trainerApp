@@ -93,14 +93,14 @@
     <ClCompile Include="..\..\PitchDetection\YinPitchDetector.cpp">
       <Filter>PitchDetection</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\VocalTrainer\VxPlayer\AudioPlayer.cpp">
-      <Filter>VxPlayer</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\VocalTrainer\VxPlayer\GetSf2FilePath.cpp">
       <Filter>VxPlayer</Filter>
     </ClCompile>
     <ClCompile Include="VTEManager.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\AudioPlayer.cpp">
+      <Filter>VxPlayer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -124,9 +124,6 @@
     </ClInclude>
     <ClInclude Include="..\..\VocalTrainer\GLScene\SingerPitchDetection.h">
       <Filter>GLSceneDrawer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\VocalTrainer\VxPlayer\AudioPlayer.h">
-      <Filter>VxPlayer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\VocalTrainer\VxPlayer\GetSf2FilePath.h">
       <Filter>VxPlayer</Filter>
@@ -205,6 +202,9 @@
     </ClInclude>
     <ClInclude Include="VTEManager.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\AudioPlayer.h">
+      <Filter>VxPlayer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
