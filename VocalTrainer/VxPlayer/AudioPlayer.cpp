@@ -27,7 +27,6 @@ void AudioPlayer::play(const char *audioData, int size, double seek)
 		waveOutClose(playingData.queue);
 	}
 
-    int64_t i = TimeUtils::NowInMicroseconds();
 	initAudioDevice(audioData, size); 
 	playingData.currentTime = seek;
 
