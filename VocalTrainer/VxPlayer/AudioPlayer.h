@@ -8,7 +8,7 @@
 
 #ifndef __APPLE__
 
-#include <Windows.h>
+#include <windows.h>
 
 struct PlayingData {
 	HWAVEOUT     queue;
@@ -24,7 +24,9 @@ struct PlayingData {
 class AudioPlayer {
 
 #ifdef __APPLE__
-    void* player = 0;
+    
+	void* player = 0;
+
 #else
 	PlayingData playingData;
 	MMRESULT _status;
@@ -33,6 +35,7 @@ class AudioPlayer {
 private:
 	MMRESULT setupHeaderData();
 	void initAudioDevice(const char* audioData, int size);
+
 #endif 
 
 public:
