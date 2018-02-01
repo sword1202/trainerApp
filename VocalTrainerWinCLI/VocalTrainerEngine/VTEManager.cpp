@@ -18,8 +18,9 @@ namespace VTE
 		if (sceneDrawerPtr)
 			delete sceneDrawerPtr;
 
-		if (_vxPlayer)
-			delete _vxPlayer;
+		VxFile* vxPlayerPtr = static_cast<VxFile*>(_vxPlayer);
+		if (vxPlayerPtr)
+			delete vxPlayerPtr;
 	}
 
 	void VTEManager::initScene()
