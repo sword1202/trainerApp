@@ -31,7 +31,6 @@ namespace VocalTrainer {
 			vteManager = new VTE::VTEManager();
 			OpenGL = gcnew COpenGL(vteManager, this->scenePanel, this->scenePanel->Width, this->scenePanel->Height);
 			OpenGL->setMoveBetweenOctaves(this->chkMoveOctaves->Checked);
-			this->scenePanel->ResetCursor();
 		}
 
 	protected:
@@ -150,6 +149,8 @@ namespace VocalTrainer {
 				OpenGL->Render(this->scenePanel->Width, this->scenePanel->Height);
 				OpenGL->SwapOpenGLBuffers();
 			}
+
+			this->scenePanel->ResetCursor();
 		}
 
 		private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) 

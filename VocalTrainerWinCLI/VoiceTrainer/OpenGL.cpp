@@ -24,7 +24,7 @@ namespace OpenGLForm
 
 		// Create the actual window
 		this->CreateHandle(cp);
-
+		
 		m_hDC = GetDC((HWND)this->Handle.ToPointer());
 
 		if (m_hDC)
