@@ -30,12 +30,10 @@ namespace OpenGLForm
 		if (m_hDC)
 		{
 			MySetPixelFormat(m_hDC);
-			//ReSizeGLScene(iWidth, iHeight);
-			//InitGL();
 		}
 
 		vteManager = pManager;
-		if(vteManager)
+		if (vteManager)
 			vteManager->initScene();
 	}
 

@@ -26,10 +26,12 @@ namespace VocalTrainer {
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
-			//
-			vteManager = new VTE::VTEManager();	
+			//			
+
+			vteManager = new VTE::VTEManager();
 			OpenGL = gcnew COpenGL(vteManager, this->scenePanel, this->scenePanel->Width, this->scenePanel->Height);
 			OpenGL->setMoveBetweenOctaves(this->chkMoveOctaves->Checked);
+			this->scenePanel->ResetCursor();
 		}
 
 	protected:
@@ -142,9 +144,12 @@ namespace VocalTrainer {
 			UNREFERENCED_PARAMETER(sender);
 			UNREFERENCED_PARAMETER(e);
 
-			OpenGL->setMoveBetweenOctaves(this->chkMoveOctaves->Checked);
-			OpenGL->Render(this->scenePanel->Width, this->scenePanel->Height);
-			OpenGL->SwapOpenGLBuffers();
+			if (OpenGL)
+			{
+				OpenGL->setMoveBetweenOctaves(this->chkMoveOctaves->Checked);
+				OpenGL->Render(this->scenePanel->Width, this->scenePanel->Height);
+				OpenGL->SwapOpenGLBuffers();
+			}
 		}
 
 		private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) 

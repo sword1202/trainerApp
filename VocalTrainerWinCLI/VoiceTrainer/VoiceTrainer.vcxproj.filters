@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="json">
-      <UniqueIdentifier>{a2cb5339-340d-4a7c-ad07-9f28d1feb960}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="PitchDetection">
-      <UniqueIdentifier>{1d8fec1b-b99f-4c1f-9812-10dd3f0ddb00}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />

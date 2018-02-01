@@ -30,6 +30,15 @@ void AudioPlayer::play(const char *audioData, int size, double seek)
 	initAudioDevice(audioData, size); 
 	playingData.currentTime = seek;
 
+	DWORD volLevel = 0;
+
+	// check volume level: 0xFFFFFFFF - max level, 0x00000000 - min level, HighWord - right channel, LowWord - left channel
+	//waveOutGetVolume(playingData.queue, &volLevel);
+
+	// set volume to max
+	volLevel = 0xFFFFFFFF;
+	waveOutSetVolume(playingData.queue, 0xFFFFFFFF);
+
 	_status = setupHeaderData();
 	if (_status == MMSYSERR_NOERROR)
 	{
