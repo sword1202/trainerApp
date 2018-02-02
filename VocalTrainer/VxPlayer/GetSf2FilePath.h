@@ -6,8 +6,15 @@
 #ifndef VOCALTRAINER_GETSF2FILEPATH_H
 #define VOCALTRAINER_GETSF2FILEPATH_H
 
+#ifdef __APPLE__
 #import <string>
+std::string GetSf2FilePath();
+#else
+#include <string>
 
 std::string GetSf2FilePath();
+#endif
+
+
 
 #endif //VOCALTRAINER_GETSF2FILEPATH_H

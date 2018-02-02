@@ -6,10 +6,40 @@
 #ifndef VOCALTRAINER_AUDIOPLAYER_H
 #define VOCALTRAINER_AUDIOPLAYER_H
 
+#ifndef __APPLE__
+
+#include <windows.h>
+
+#endif 
+
 class AudioPlayer {
+
 #ifdef __APPLE__
-    void* player = 0;
-#endif
+    
+	void* player = 0;
+
+#else
+
+	
+	struct PlayingData {
+		HWAVEOUT     queue;
+		WAVEHDR		header;
+		uint32_t bufferSizeInBytes = 0;
+		char* _pBuffer = nullptr;
+		double currentTime = 0;
+		WAVEFORMATEX format;
+	};
+
+	PlayingData playingData;
+	MMRESULT _status;
+	bool bPlaying;
+
+private:
+	MMRESULT setupHeaderData();
+	void initAudioDevice(const char* audioData, int size);
+
+#endif 
+
 public:
     ~AudioPlayer();
     void play(const char* audioData, int size, double seek);
@@ -19,6 +49,4 @@ public:
     void resume();
     void seek(double timeStamp);
 };
-
-
 #endif //VOCALTRAINER_AUDIOPLAYER_H

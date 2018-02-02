@@ -6,7 +6,14 @@
 #include "PitchGraphDrawer.h"
 #include "TimeUtils.h"
 #include "DrawConstants.h"
+#ifdef __APPLE__
 #include <GLUT/GLUT.h>
+#else
+#include <windows.h>
+#include <gl/GL.h>
+#include <gl/GLU.h>
+#include <algorithm>
+#endif
 #include <iostream>
 #include "GeometryUtils.h"
 

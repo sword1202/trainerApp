@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="GLSceneDrawer">
+      <UniqueIdentifier>{8485e03f-a5b4-484c-bdaf-02eca4591db0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PitchDetection">
+      <UniqueIdentifier>{c0748f31-2e3c-4597-8a47-82e3466fac68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VxPlayer">
+      <UniqueIdentifier>{78c21bb2-76a8-4052-8f70-c22feeb03df9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="json">
+      <UniqueIdentifier>{bfe6cecc-9785-434d-81cd-7845d5a409ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PitchDetection\CppUtils">
+      <UniqueIdentifier>{616f0d99-f367-4df9-a26c-66117c76b75f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\VocalTrainer\json\jsoncpp.cpp">
+      <Filter>json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\VocalTrainer\GLScene\GLSceneDrawer.cpp">
+      <Filter>GLSceneDrawer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\VocalTrainer\GLScene\PianoDrawer.cpp">
+      <Filter>GLSceneDrawer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\VocalTrainer\GLScene\PitchGraphDrawer.cpp">
+      <Filter>GLSceneDrawer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\VocalTrainer\GLScene\SingerPitchDetection.cpp">
+      <Filter>GLSceneDrawer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\MvxPlayer.cpp">
+      <Filter>VxPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\VxFile.cpp">
+      <Filter>VxPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\WavAudioDataFromPitchGenerator.cpp">
+      <Filter>VxPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\PitchDetection\CppUtils\SynchronizedCallbacksQueue.cpp">
+      <Filter>PitchDetection\CppUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\PitchDetection\CppUtils\System.cpp">
+      <Filter>PitchDetection\CppUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\PitchDetection\CppUtils\TimeUtils.cpp">
+      <Filter>PitchDetection\CppUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\PitchDetection\AudioUtils.cpp">
+      <Filter>PitchDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\PitchDetection\AudoInputReader.cpp">
+      <Filter>PitchDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\PitchDetection\Pitch.cpp">
+      <Filter>PitchDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\PitchDetection\PitchDetectionSmoothingAudioBuffer.cpp">
+      <Filter>PitchDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\PitchDetection\PitchInputReader.cpp">
+      <Filter>PitchDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\PitchDetection\WavBufferReader.cpp">
+      <Filter>PitchDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\PitchDetection\WAVFile.cpp">
+      <Filter>PitchDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\PitchDetection\WavFileAudioInputReader.cpp">
+      <Filter>PitchDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\PitchDetection\WavFilePitchesReader.cpp">
+      <Filter>PitchDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\PitchDetection\YinPitchDetector.cpp">
+      <Filter>PitchDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\GetSf2FilePath.cpp">
+      <Filter>VxPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="VTEManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\AudioPlayer.cpp">
+      <Filter>VxPlayer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\VocalTrainer\json\json\json.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VocalTrainer\json\json\json-forwards.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VocalTrainer\GLScene\DrawConstants.h">
+      <Filter>GLSceneDrawer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VocalTrainer\GLScene\GLSceneDrawer.h">
+      <Filter>GLSceneDrawer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VocalTrainer\GLScene\PianoDrawer.h">
+      <Filter>GLSceneDrawer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VocalTrainer\GLScene\PitchGraphDrawer.h">
+      <Filter>GLSceneDrawer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VocalTrainer\GLScene\SingerPitchDetection.h">
+      <Filter>GLSceneDrawer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\GetSf2FilePath.h">
+      <Filter>VxPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\MvxPlayer.h">
+      <Filter>VxPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\tsf.h">
+      <Filter>VxPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\VxFile.h">
+      <Filter>VxPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\VxPitchDefinition.h">
+      <Filter>VxPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\WavAudioDataFromPitchGenerator.h">
+      <Filter>VxPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PitchDetection\CppUtils\Algorithms.h">
+      <Filter>PitchDetection\CppUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PitchDetection\CppUtils\CircularBuffer.h">
+      <Filter>PitchDetection\CppUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PitchDetection\CppUtils\config.h">
+      <Filter>PitchDetection\CppUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PitchDetection\CppUtils\GeometryUtils.h">
+      <Filter>PitchDetection\CppUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PitchDetection\CppUtils\stlassert.h">
+      <Filter>PitchDetection\CppUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PitchDetection\CppUtils\Strings.h">
+      <Filter>PitchDetection\CppUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PitchDetection\CppUtils\SynchronizedCallbacksQueue.h">
+      <Filter>PitchDetection\CppUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PitchDetection\CppUtils\System.h">
+      <Filter>PitchDetection\CppUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PitchDetection\CppUtils\TimeUtils.h">
+      <Filter>PitchDetection\CppUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PitchDetection\AudioUtils.h">
+      <Filter>PitchDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PitchDetection\AudoInputReader.h">
+      <Filter>PitchDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PitchDetection\Pitch.h">
+      <Filter>PitchDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PitchDetection\PitchDetectionSmoothingAudioBuffer.h">
+      <Filter>PitchDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PitchDetection\PitchInputReader.h">
+      <Filter>PitchDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PitchDetection\WavBufferReader.h">
+      <Filter>PitchDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PitchDetection\WAVFile.h">
+      <Filter>PitchDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PitchDetection\WavFileAudioInputReader.h">
+      <Filter>PitchDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PitchDetection\WavFilePitchesReader.h">
+      <Filter>PitchDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PitchDetection\YinPitchDetector.h">
+      <Filter>PitchDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="VTEManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\AudioPlayer.h">
+      <Filter>VxPlayer</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\VocalTrainer\VxPlayer\1.json">
+      <Filter>VxPlayer</Filter>
+    </None>
+    <None Include="..\..\VocalTrainer\VxPlayer\a.sf2">
+      <Filter>VxPlayer</Filter>
+    </None>
+  </ItemGroup>
+</Project>

@@ -13,6 +13,7 @@
 #include <vector>
 #include "SynchronizedCallbacksQueue.h"
 
+
 class VxFile {
     std::vector<VxPitchDefinition> pitches;
     AudioPlayer* player = 0;
