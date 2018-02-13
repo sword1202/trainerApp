@@ -4,9 +4,7 @@
 #include "tsf.h"
 #include "GetSf2FilePath.h"
 #include "WAVFile.h"
-#include "Strings.h"
 
-using namespace CppUtils;
 static const char *const SILENCE_MARK = "*";
 
 VxFile::VxFile(const std::vector<VxPitch> &pitches, int trackEndSilenceBitsCount, int bitsPerMinute)
@@ -172,11 +170,11 @@ int VxFile::getTrackEndSilenceBitsCount() const {
 void VxFile::writeToStream(std::ostream &os) const {
     os<<bitsPerMinute<<" ";
 
-    Strings::JoinToStream(os, pitches, " ", [](std::ostream& os, const VxPitch& vxPitch) {
-        os<<vxPitch.pitch.getFullName()<<" "<<vxPitch.startBitNumber<<" "<<vxPitch.bitsCount;
-    });
+    for (const VxPitch& vxPitch : pitches) {
+        os<<vxPitch.pitch.getFullName()<<" "<<vxPitch.startBitNumber<<" "<<vxPitch.bitsCount<<" ";
+    }
 
-    os<<" * "<<trackEndSilenceBitsCount;
+    os<<"* "<<trackEndSilenceBitsCount;
 }
 
 VxFile VxFile::fromFilePath(const char *filePath) {
