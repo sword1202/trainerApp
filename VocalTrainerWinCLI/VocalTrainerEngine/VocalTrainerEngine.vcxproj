@@ -41,7 +41,7 @@
     <ClCompile Include="..\..\VocalTrainer\VxPlayer\GetSf2FilePath.cpp" />
     <ClCompile Include="..\..\VocalTrainer\VxPlayer\MvxPlayer.cpp" />
     <ClCompile Include="..\..\VocalTrainer\VxPlayer\VxFile.cpp" />
-    <ClCompile Include="..\..\VocalTrainer\VxPlayer\WavAudioDataFromPitchGenerator.cpp" />
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\AudioDataFromPitchGenerator.cpp" />
     <ClCompile Include="VTEManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -77,7 +77,7 @@
     <ClInclude Include="..\..\VocalTrainer\VxPlayer\tsf.h" />
     <ClInclude Include="..\..\VocalTrainer\VxPlayer\VxFile.h" />
     <ClInclude Include="..\..\VocalTrainer\VxPlayer\VxPitchDefinition.h" />
-    <ClInclude Include="..\..\VocalTrainer\VxPlayer\WavAudioDataFromPitchGenerator.h" />
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\AudioDataFromPitchGenerator.h" />
     <ClInclude Include="VTEManager.h" />
   </ItemGroup>
   <ItemGroup>

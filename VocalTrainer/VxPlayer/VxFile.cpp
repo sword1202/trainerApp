@@ -1,156 +1,185 @@
-//
-// Created by Semyon Tikhonenko on 1/5/18.
-// Copyright (c) 2018 Mac. All rights reserved.
-//
-
+#include <assert.h>
 #include "VxFile.h"
-#include <fstream>
-#include <thread>
-#include <iostream>
-#include "../json/reader.h"
-#include "WavAudioDataFromPitchGenerator.h"
-#include "TimeUtils.h"
-#include "Algorithms.h"
+#define TSF_IMPLEMENTATION
+#include "tsf.h"
+#include "GetSf2FilePath.h"
+#include "WAVFile.h"
+#include "Strings.h"
 
 using namespace CppUtils;
-using std::cout;
+static const char *const SILENCE_MARK = "*";
 
-static bool ComparePitches(const VxPitchDefinition& a, const VxPitchDefinition& b) {
-    return a.timestamp < b.timestamp;
+VxFile::VxFile(const std::vector<VxPitch> &pitches, int trackEndSilenceBitsCount, int bitsPerMinute)
+        : pitches(pitches), bitsPerMinute(bitsPerMinute), trackEndSilenceBitsCount(trackEndSilenceBitsCount) {
+    postInit();
 }
 
-VxPitchDefinition::VxPitchDefinition(const Pitch &pitch, double timestamp) : pitch(pitch), timestamp(timestamp) {}
-VxPitchDefinition::VxPitchDefinition() {}
+VxFile::VxFile(std::istream &is) {
+    is >> bitsPerMinute;
 
-VxFile::VxFile(const std::vector<VxPitchDefinition> &pitches) : pitches(pitches) {
-}
+    std::string pitchName;
+    while (!is.eof()) {
+        is >> pitchName;
+        if (pitchName == SILENCE_MARK) {
+            is >> trackEndSilenceBitsCount;
+            break;
+        }
+        
+        VxPitch vxPitch;
+        vxPitch.pitch = Pitch(pitchName.data());
+        if (!vxPitch.pitch.hasPerfectFrequency()) {
+            throw std::runtime_error("Error while parsing pitch with " + pitchName + " name");
+        }
 
-void VxFile::load(std::istream &stream) {
-    initFromStream(stream);
-}
+        is >> vxPitch.startBitNumber;
+        is >> vxPitch.bitsCount;
 
-void VxFile::load(const char *fileName) {
-    std::ifstream file(fileName);
-    initFromStream(file);
-}
-
-void VxFile::initFromStream(std::istream &stream) {
-    Json::Reader reader;
-    Json::Value root;
-    if (!reader.parse(stream, root, false)) {
-        throw std::runtime_error("json parse failed, " + reader.getFormattedErrorMessages());
+        pitches.push_back(vxPitch);
     }
-    Json::Value pitches = root["pitches"];
-    if (!pitches.isObject()) {
-        throw std::runtime_error("the file has no pitches key or pitches is not an object");
+
+    postInit();
+}
+
+static inline size_t addSilence(std::vector<char>& pcmData, double duration, int sampleRate) {
+    size_t size = static_cast<size_t>(duration * sampleRate * sizeof(short));
+    pcmData.resize(pcmData.size() + size);
+    return size;
+}
+
+// make sure tsf is properly destroyed
+struct TsfHolder {
+    tsf* t;
+
+    TsfHolder(int sampleRate) {
+        t = tsf_load_filename(GetSf2FilePath().data());
+        tsf_set_output(t, TSF_MONO, sampleRate, 0);
+    }
+
+    ~TsfHolder() {
+        tsf_close(t);
+    }
+};
+
+std::vector<char> VxFile::generateRawPcmAudioData(int sampleRate) const {
+    double bitDuration = getBitDuration();
+
+    tsf* t = TsfHolder(sampleRate).t;
+
+    int size = static_cast<int>(getDurationInSeconds() * sampleRate);
+    
+    std::vector<char> pcmData;
+    // make sure there is no buffer overflow
+    pcmData.reserve(size + 10u);
+
+    auto iter = pitches.begin();
+    auto end = pitches.end();
+    if (iter == end) {
+        return pcmData;
+    }
+
+    int silenceStart = 0;
+    while (iter != end) {
+        // add silence between pitches
+        addSilence(pcmData, (iter->startBitNumber - silenceStart) * bitDuration, sampleRate);
+        tsf_note_on(t, 0, iter->pitch.getSoundFont2Index(), 1.0f);
+        silenceStart = iter->startBitNumber + iter->bitsCount;
+
+        // add pitch itself
+        size_t currentSize = pcmData.size();
+        double duration = bitDuration * iter->bitsCount;
+        // resize pcmData to append pitch data
+        size_t sizeInBytes = addSilence(pcmData, duration, sampleRate);
+        tsf_render_short(t, (short*)(pcmData.data() + currentSize), (int)sizeInBytes / 2, 0);
+        
+        iter++;
+    }
+
+    double endSilenceDuration = trackEndSilenceBitsCount * bitDuration;
+    addSilence(pcmData, endSilenceDuration, sampleRate);
+
+    return pcmData;
+}
+
+std::vector<char> VxFile::generateWavAudioData() const {
+    WavConfig wavConfig;
+    std::vector<char> pcmData = generateRawPcmAudioData(wavConfig.sampleRate);
+    return WAVFile::addWavHeaderToRawPcmData(pcmData.data(), (int)pcmData.size(), wavConfig);
+}
+
+double VxFile::getBitDuration() const {
+    return 60.0 / (double) bitsPerMinute;
+}
+
+bool VxFile::validate() {
+    if (!pitches.empty()) {
+        if (pitches[0].startBitNumber < 0) {
+            return false;
+        }
+        
+        if (pitches[0].bitsCount < 1) {
+            return false;
+        }
     }
     
-    for (const std::string& key : pitches.getMemberNames()) {
-        const Json::Value &value = pitches[key];
-        if (value.isNull()) {
-            double timestamp = strtod(key.data(), 0);
-            this->pitches.push_back(VxPitchDefinition(Pitch(), timestamp));
-            continue;
-        } else if (!value.isString()) {
-            continue;
+    for (int i = 1; i < pitches.size(); ++i) {
+        const VxPitch &vxPitch = pitches[i];
+        if (!vxPitch.pitch.hasPerfectFrequency()) {
+            return false;
+        }
+        
+        if (vxPitch.bitsCount < 1) {
+            return false;
         }
 
-        const char* pitchName = value.asCString();
-        Pitch pitch(pitchName);
-        if (pitch.isValid()) {
-            double timestamp = strtod(key.data(), 0);
-            this->pitches.push_back(VxPitchDefinition(pitch, timestamp));
+        const VxPitch &prev = pitches[i - 1];
+        if (vxPitch.startBitNumber < prev.startBitNumber + prev.bitsCount) {
+            return false;
         }
     }
 
-    std::sort(this->pitches.begin(), this->pitches.end(), ComparePitches);
-
-    // the file should always end at silence
-    if (!this->pitches.empty()) {
-        VxPitchDefinition &back = this->pitches.back();
-        if (back.pitch.isValid()) {
-            back.pitch = Pitch();
-        }
-    }
-
-    WavAudioDataFromPitchGenerator generator;
-    for (int i = 0; i < this->pitches.size() - 1; ++i) {
-        VxPitchDefinition &current = this->pitches[i];
-        VxPitchDefinition &next = this->pitches[i + 1];
-        double duration = next.timestamp - current.timestamp;
-        current.duration = duration;
-        if (current.pitch.isValid()) {
-            current.audioData = generator.pitchToWavAudioData(current.pitch, duration);
-        }
-    }
-
-    player = new AudioPlayer();
+    return true;
 }
 
-VxFile::~VxFile() {
-    if (player) {
-        delete player;
+void VxFile::postInit() {
+    assert(trackEndSilenceBitsCount >= 0);
+    assert(validate());
+    if (!pitches.empty()) {
+        const VxPitch &lastPitch = pitches.back();
+        durationInBits = lastPitch.startBitNumber + lastPitch.bitsCount + trackEndSilenceBitsCount;
     }
 }
 
-void VxFile::play() {
-    if (!isPlaying) {
-        isPlaying = true;
-        currentSeek = 0;
-        std::thread thread([this] {
-            int64_t time = TimeUtils::NowInMicroseconds();
-            VxPitchDefinition searchPlaceholder;
-            double startPlayCurrentSeek = 0;
-            double lastDuration = 0;
-            while (isPlaying) {
-                std::this_thread::sleep_for(std::chrono::microseconds(10));
-                int64_t now = TimeUtils::NowInMicroseconds();
-                if (!isPaused) {
-                    currentSeek += (now - time) / 1000000.0;
-                }
-                time = now;
-
-                if (currentSeek - startPlayCurrentSeek >= lastDuration) {
-                    searchPlaceholder.timestamp = currentSeek;
-                    auto iter = CppUtils::FindLessOrEqualInSortedCollection(pitches, searchPlaceholder, ComparePitches);
-
-                    if (iter != pitches.end() && iter->pitch.isValid()) {
-                        startPlayCurrentSeek = currentSeek;
-                        lastDuration = iter->duration;
-                        player->play(iter->audioData.data(), iter->audioData.size(), currentSeek - iter->timestamp);
-                    }
-                }
-
-                playerQueue.process();
-            }
-        });
-        thread.detach();
-    } else if (isPaused) {
-        player->resume();
-    }
+double VxFile::getDurationInSeconds() const {
+    return getBitDuration() * durationInBits;
 }
 
-void VxFile::stop() {
-    isPlaying = false;
-    player->stop();
+const std::vector<VxPitch> &VxFile::getPitches() const {
+    return pitches;
 }
 
-void VxFile::pause() {
-    player->pause();
+int VxFile::getBitsPerMinute() const {
+    return bitsPerMinute;
 }
 
-void VxFile::seek(double timeStamp) {
-    player->stop();
-    playerQueue.post([=] {
-        this->currentSeek = timeStamp;
+int VxFile::getDurationInBits() const {
+    return durationInBits;
+}
+
+int VxFile::getTrackEndSilenceBitsCount() const {
+    return trackEndSilenceBitsCount;
+}
+
+void VxFile::writeToStream(std::ostream &os) const {
+    os<<bitsPerMinute<<" ";
+
+    Strings::JoinToStream(os, pitches, " ", [](std::ostream& os, const VxPitch& vxPitch) {
+        os<<vxPitch.pitch.getFullName()<<" "<<vxPitch.startBitNumber<<" "<<vxPitch.bitsCount;
     });
+
+    os<<" * "<<trackEndSilenceBitsCount;
 }
 
-void VxFile::reset() {
-    stop();
-    seek(0);
-}
-
-VxFile::VxFile() {
-
+VxFile VxFile::fromFilePath(const char *filePath) {
+    std::ifstream is(filePath);
+    return VxFile(is);
 }

@@ -9,12 +9,12 @@
 using namespace CppUtils;
 
 void MvxPlayer::load(std::istream &audioFile, std::istream &vxFile) {
-    this->vxFile.load(vxFile);
     audioData = Strings::StreamToString(audioFile);
+    vxAudioData = VxFile(vxFile).generateWavAudioData();
 }
 
 void MvxPlayer::play() {
-    vxFile.play();
+    vxPlayer.play(vxAudioData.data(), vxAudioData.size(), 0);
     player.play(audioData.data(), audioData.size(), 0);
 }
 
@@ -23,7 +23,7 @@ MvxPlayer::MvxPlayer() {
 
 void MvxPlayer::pause() {
     player.pause();
-    vxFile.pause();
+    vxPlayer.pause();
 }
 
 void MvxPlayer::resume() {
@@ -32,5 +32,5 @@ void MvxPlayer::resume() {
 
 void MvxPlayer::seek(double value) {
     player.seek(value);
-    vxFile.seek(value);
+    vxPlayer.seek(value);
 }

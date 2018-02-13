@@ -13,13 +13,10 @@
 #endif
 #include <vector>
 
-struct VxPitchDefinition {
+struct VxPitch {
     Pitch pitch;
-    double timestamp;
-    double duration;
-    std::vector<char> audioData;
-    VxPitchDefinition(const Pitch &pitch, double timestamp);
-    VxPitchDefinition();
+    int startBitNumber;
+    int bitsCount;
 };
 
 

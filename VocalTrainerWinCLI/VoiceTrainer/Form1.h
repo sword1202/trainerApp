@@ -164,7 +164,7 @@ namespace VocalTrainer {
 				MessageBox::Show(gcnew System::String(ex.what()));
 			}
 
-			const char* path = "1.json";
+			const char* path = "1.vx";
 			if (vteManager)
 			{
 				try

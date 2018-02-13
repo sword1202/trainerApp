@@ -20,8 +20,7 @@ class AudioPlayer {
 
 #else
 
-	
-	struct PlayingData {
+    struct PlayingData {
 		HWAVEOUT     queue;
 		WAVEHDR		header;
 		uint32_t bufferSizeInBytes = 0;

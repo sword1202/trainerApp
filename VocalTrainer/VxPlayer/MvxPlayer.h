@@ -10,9 +10,10 @@
 #include "VxFile.h"
 
 class MvxPlayer {
-    VxFile vxFile;
     std::string audioData;
+    std::vector<char> vxAudioData;
     AudioPlayer player;
+    AudioPlayer vxPlayer;
 public:
     MvxPlayer();
     void load(std::istream& audioFile, std::istream& vxFile);

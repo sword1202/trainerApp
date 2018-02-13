@@ -51,7 +51,7 @@
     <ClCompile Include="..\..\VocalTrainer\VxPlayer\VxFile.cpp">
       <Filter>VxPlayer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\VocalTrainer\VxPlayer\WavAudioDataFromPitchGenerator.cpp">
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\AudioDataFromPitchGenerator.cpp">
       <Filter>VxPlayer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\PitchDetection\CppUtils\SynchronizedCallbacksQueue.cpp">
@@ -140,7 +140,7 @@
     <ClInclude Include="..\..\VocalTrainer\VxPlayer\VxPitchDefinition.h">
       <Filter>VxPlayer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\VocalTrainer\VxPlayer\WavAudioDataFromPitchGenerator.h">
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\AudioDataFromPitchGenerator.h">
       <Filter>VxPlayer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\PitchDetection\CppUtils\Algorithms.h">

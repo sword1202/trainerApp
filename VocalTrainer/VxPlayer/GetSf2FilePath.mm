@@ -8,6 +8,6 @@
 
 std::string GetSf2FilePath() {
     NSBundle *myBundle = [NSBundle mainBundle];
-    NSString *absPath= [myBundle pathForResource:@"a" ofType:@"sf2"];
+    NSString *absPath = [myBundle pathForResource:@"a" ofType:@"sf2"];
     return absPath.cString;
 }

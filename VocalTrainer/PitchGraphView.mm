@@ -10,7 +10,7 @@
 
 @implementation PitchGraphView {
     GLSceneDrawer* _glSceneDrawer;
-    VxFile* file;
+    AudioPlayer* player;
 }
 
 - (void)prepareOpenGL {
@@ -22,10 +22,11 @@
                                    selector:@selector(onTimer:)
                                    userInfo:nil
                                     repeats:YES];
-    const char* path = [[NSBundle mainBundle] pathForResource:@"1" ofType:@"json"].cString;
-    file = new VxFile();
-    file->load(path);
-    file->play();
+    const char* path = [[NSBundle mainBundle] pathForResource:@"1" ofType:@"vx"].cString;
+    VxFile vxFile = VxFile::fromFilePath(path);
+    std::vector<char> wavAudioData = vxFile.generateWavAudioData();
+    player = new AudioPlayer();
+    player->play(wavAudioData.data(), wavAudioData.size(), 0);
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
@@ -57,7 +58,7 @@
 
 - (void)dealloc {
     delete _glSceneDrawer;
-    delete file;
+    delete player;
 }
 
 
