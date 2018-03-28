@@ -42,10 +42,14 @@ namespace VTE
 
 	void VTEManager::PlayInVxFile(const char* fileName)
 	{
+		/* COMMENTED BY IVAN K.
+		
 		if (!_vxPlayer)
 			_vxPlayer = new VxFile();
 
 		((VxFile*)_vxPlayer)->load(fileName);
 		((VxFile*)_vxPlayer)->play();
+
+		*/
 	}
 }

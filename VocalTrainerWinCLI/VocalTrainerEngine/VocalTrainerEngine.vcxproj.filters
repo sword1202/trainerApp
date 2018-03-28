@@ -28,11 +28,11 @@
     <Filter Include="PitchDetection\CppUtils">
       <UniqueIdentifier>{616f0d99-f367-4df9-a26c-66117c76b75f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="VxPlayer\craigsapp_midifile">
+      <UniqueIdentifier>{6ab7245a-ad51-42c9-80ae-126d15993780}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\VocalTrainer\json\jsoncpp.cpp">
-      <Filter>json</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\VocalTrainer\GLScene\GLSceneDrawer.cpp">
       <Filter>GLSceneDrawer</Filter>
     </ClCompile>
@@ -49,9 +49,6 @@
       <Filter>VxPlayer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\VocalTrainer\VxPlayer\VxFile.cpp">
-      <Filter>VxPlayer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\VocalTrainer\VxPlayer\AudioDataFromPitchGenerator.cpp">
       <Filter>VxPlayer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\PitchDetection\CppUtils\SynchronizedCallbacksQueue.cpp">
@@ -102,6 +99,27 @@
     <ClCompile Include="..\..\VocalTrainer\VxPlayer\AudioPlayer.cpp">
       <Filter>VxPlayer</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\midifileparser.cpp">
+      <Filter>VxPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\Options.cpp">
+      <Filter>VxPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiEvent.cpp">
+      <Filter>VxPlayer\craigsapp_midifile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiEventList.cpp">
+      <Filter>VxPlayer\craigsapp_midifile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiFile.cpp">
+      <Filter>VxPlayer\craigsapp_midifile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiMessage.cpp">
+      <Filter>VxPlayer\craigsapp_midifile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\Binasc.cpp">
+      <Filter>VxPlayer\craigsapp_midifile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\VocalTrainer\json\json\json.h">
@@ -138,9 +156,6 @@
       <Filter>VxPlayer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\VocalTrainer\VxPlayer\VxPitchDefinition.h">
-      <Filter>VxPlayer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\VocalTrainer\VxPlayer\AudioDataFromPitchGenerator.h">
       <Filter>VxPlayer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\PitchDetection\CppUtils\Algorithms.h">
@@ -205,6 +220,33 @@
     </ClInclude>
     <ClInclude Include="..\..\VocalTrainer\VxPlayer\AudioPlayer.h">
       <Filter>VxPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\midifileparser.h">
+      <Filter>VxPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\midinote.h">
+      <Filter>VxPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\miditrack.h">
+      <Filter>VxPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\Options.h">
+      <Filter>VxPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiEvent.h">
+      <Filter>VxPlayer\craigsapp_midifile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiEventList.h">
+      <Filter>VxPlayer\craigsapp_midifile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiFile.h">
+      <Filter>VxPlayer\craigsapp_midifile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiMessage.h">
+      <Filter>VxPlayer\craigsapp_midifile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\Binasc.h">
+      <Filter>VxPlayer\craigsapp_midifile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
