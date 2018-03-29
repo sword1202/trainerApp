@@ -42,9 +42,9 @@
     <ClCompile Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiEventList.cpp" />
     <ClCompile Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiFile.cpp" />
     <ClCompile Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiMessage.cpp" />
-    <ClCompile Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\Options.cpp" />
     <ClCompile Include="..\..\VocalTrainer\VxPlayer\GetSf2FilePath.cpp" />
-    <ClCompile Include="..\..\VocalTrainer\VxPlayer\midifileparser.cpp" />
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\MidiFileReader.cpp" />
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\MidiTrack.cpp" />
     <ClCompile Include="..\..\VocalTrainer\VxPlayer\MvxPlayer.cpp" />
     <ClCompile Include="..\..\VocalTrainer\VxPlayer\VxFile.cpp" />
     <ClCompile Include="VTEManager.cpp" />
@@ -82,15 +82,14 @@
     <ClInclude Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiEventList.h" />
     <ClInclude Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiFile.h" />
     <ClInclude Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiMessage.h" />
-    <ClInclude Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\Options.h" />
     <ClInclude Include="..\..\VocalTrainer\VxPlayer\GetSf2FilePath.h" />
-    <ClInclude Include="..\..\VocalTrainer\VxPlayer\midifileparser.h" />
-    <ClInclude Include="..\..\VocalTrainer\VxPlayer\midinote.h" />
-    <ClInclude Include="..\..\VocalTrainer\VxPlayer\miditrack.h" />
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\MidiFileReader.h" />
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\MidiNote.h" />
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\MidiTrack.h" />
     <ClInclude Include="..\..\VocalTrainer\VxPlayer\MvxPlayer.h" />
     <ClInclude Include="..\..\VocalTrainer\VxPlayer\tsf.h" />
     <ClInclude Include="..\..\VocalTrainer\VxPlayer\VxFile.h" />
-    <ClInclude Include="..\..\VocalTrainer\VxPlayer\VxPitchDefinition.h" />
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\VxPitch.h" />
     <ClInclude Include="VTEManager.h" />
   </ItemGroup>
   <ItemGroup>

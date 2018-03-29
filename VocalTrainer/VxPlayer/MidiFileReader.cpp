@@ -3,11 +3,43 @@
 // Copyright (c) 2018 Mac. All rights reserved.
 //
 
-#include "midifileparser.h"
+#include "MidiFileReader.h"
 #include "MidiFile.h"
 
 #include <iostream>
 #include <algorithm>
+
+static constexpr int    MIN_NOTE_COUNT = 40.0;
+static constexpr int    MAX_NOTE_COUNT = 1000.0;
+static constexpr double MAX_TRACK_DURATION = 3600;
+static constexpr int    DRUMS_CHANNEL_ID = 9;
+
+static constexpr double NAME_WEIGHT = 3.0;
+
+static constexpr double LOWEST_NOTE_WEIGHT = 1.0;
+static constexpr double LOWEST_NOTE_MX = 58.5;
+static constexpr double LOWEST_NOTE_SIGMA = 9.25;
+
+static constexpr double HEIGHEST_NOTE_WEIGHT = 1.0;
+static constexpr double HEIGHEST_NOTE_MX = 74.91;
+static constexpr double HEIGHEST_NOTE_SIGMA = 8.84;
+
+static constexpr double DIAPASONE_WEIGHT = 1.0;
+static constexpr double DIAPASONE_MX = 16.0;
+static constexpr double DIAPASONE_SIGMA = 7.0;
+
+static constexpr double MAX_NOTE_LENGTH_WEIGHT = 1.0;
+static constexpr double MAX_NOTE_LENGTH_MX = 63.0;
+static constexpr double MAX_NOTE_LENGTH_SIGMA = 21.0;
+
+static constexpr double NOTES_PER_SECOND_WEIGHT = 1.0;
+static constexpr double NOTES_PER_SECOND_MX = 2.43;
+static constexpr double NOTES_PER_SECOND_SIGMA = 1.95;
+
+static constexpr char   SUBSTRING_VOCAL[]  = "vocal";
+static constexpr char   SUBSTRING_LEAD[]   = "lead";
+static constexpr char   SUBSTRING_SONG[]   = "song";
+static constexpr char   SUBSTRING_MELODY[] = "melod";
 
 MidiFileReader::MidiFileReader()
 {
@@ -19,13 +51,6 @@ MidiFileReader::~MidiFileReader()
 
 }
 
-/*!
- * \brief MidiFileReader::read
- *
- *
- * \param filename
- * \return
- */
 std::vector<VxFile> MidiFileReader::read(const string &filename)
 {
     MidiFile f;
@@ -46,18 +71,6 @@ std::vector<VxFile> MidiFileReader::read(istream &is)
     }
 }
 
-void MidiFileReader::clear()
-{
-    m_tickCount = 0;
-    m_durationInSeconds = 0.0;
-    m_durationInTicks = 0;
-    m_tpq = 0;
-    m_tps = 0.0;
-    m_currentChannelPrefix = -1;
-    m_tracksMap.clear();
-    m_trackNamesMap.clear();
-}
-
 /*!
  * \brief MidiFileReader::processMidiFile
  *
@@ -67,20 +80,20 @@ void MidiFileReader::clear()
  */
 std::vector<VxFile> MidiFileReader::processMidiFile(MidiFile &midi)
 {
-    clear();
-    m_durationInSeconds = midi.getTotalTimeInSeconds();
-    m_durationInTicks = midi.getTotalTimeInTicks();
-    m_tpq = midi.getTPQ();
-    m_tps = m_durationInTicks / m_durationInSeconds;
+    currentChannelPrefix = -1;
+    durationInSeconds = midi.getTotalTimeInSeconds();
+    durationInTicks = midi.getTotalTimeInTicks();
+    tpq = midi.getTPQ();
+    tps = durationInTicks / durationInSeconds;
 
     int trackCount = midi.getTrackCount();
     for (int track = 0; track < trackCount; ++ track) {
-        for (int event = 0; event < midi[track].size(); ++ event) {
+        for (size_t event = 0; event < midi[track].size(); ++ event) {
             processEvent(midi[track][event]);
         }
     }
     postProcess();
-    auto trackList = getAvilableTracks();
+    auto trackList = getAvailableTracks();
     std::vector<VxFile> result;
     for (auto track : trackList) {
         std::vector<VxPitch> pitches;
@@ -89,10 +102,10 @@ std::vector<VxFile> MidiFileReader::processMidiFile(MidiFile &midi)
             pitch.pitch = Pitch::fromMidiIndex(note->keyNumber);
             pitch.startBitNumber = note->startTick;
             pitch.bitsCount = note->durationInTicks();
-            pitches.push_back(pitch);
+            pitches.emplace_back(pitch);
         }
-        VxFile f(pitches, m_durationInTicks - track->finalTick, m_tps * 60.0);
-        result.push_back(f);
+        VxFile f(pitches, durationInTicks - track->finalTick, tps * 60.0);
+        result.emplace_back(f);
     }
     return result;
 }
@@ -122,7 +135,7 @@ void MidiFileReader::processEvent(const MidiEvent &event)
         // This event is optional. It's interpretation depends on its context. If it occurs in the first track of a format 0 or 1 MIDI file, then it gives the Sequence Name. Otherwise it gives the Track Name
         case 0x03: {
             std::string trackName = eventText(event, 3, event[2]);
-            m_trackNamesMap[eventTrackID] = trackName;
+            trackNamesMap[eventTrackID] = trackName;
             break;
         }
             // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -131,8 +144,8 @@ void MidiFileReader::processEvent(const MidiEvent &event)
         case 0x04: {
             std::string instrumentName = eventText(event, 3, event[2]);
             // If prefix is set, appending name to track
-            if (m_currentChannelPrefix != -1) {
-                auto track = getTrack(eventTrackID, m_currentChannelPrefix);
+            if (currentChannelPrefix != -1) {
+                auto track = getTrack(eventTrackID, currentChannelPrefix);
                 track->instrumentName = instrumentName;
             }
             break;
@@ -141,14 +154,14 @@ void MidiFileReader::processEvent(const MidiEvent &event)
             // FF 20 01 сс
             // Midi channel prefix (cc is a byte specifying the MIDI channel (0-15). This optional event is used to associate any subsequent SysEx and Meta events with a particular MIDI channel, and will remain in effect until the next MIDI Channel Prefix Meta event or the next MIDI event)
         case 0x20: {
-            m_currentChannelPrefix = event[3];
+            currentChannelPrefix = event[3];
             break;
         }
             // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             // FF 2F 00
             // End of track
         case 0x2F: {
-            for (auto track: m_tracksMap) {
+            for (auto track: tracksMap) {
                 if(track.second->trackId == eventTrackID) {
                     track.second->closeAllNotes(eventTick);
                     track.second->finalTick = eventTick;
@@ -176,7 +189,7 @@ void MidiFileReader::processEvent(const MidiEvent &event)
         }
         }
     } else {
-        m_currentChannelPrefix = -1; // If event is midi-event, channel prefix removes
+        currentChannelPrefix = -1; // If event is midi-event, channel prefix removes
         int command = event.getCommandNibble(); // P0 & 0x11110000
         auto currentTrack = getTrack(eventTrackID, eventChannelID);
 
@@ -258,10 +271,10 @@ void MidiFileReader::processEvent(const MidiEvent &event)
 std::shared_ptr<MidiTrack> MidiFileReader::getTrack(int trackID, int channelID)
 {
     int id = trackID * 15 + channelID;
-    TrackMap::iterator it = m_tracksMap.find(id);
-    if (it == m_tracksMap.end()) {
+    TrackMap::iterator it = tracksMap.find(id);
+    if (it == tracksMap.end()) {
         std::shared_ptr<MidiTrack> track = std::make_shared<MidiTrack>();
-        m_tracksMap[id] = track;
+        tracksMap[id] = track;
         track->trackId = trackID;
         track->channelId = channelID;
         return track;
@@ -299,17 +312,17 @@ string MidiFileReader::eventText(const MidiEvent &event, int start, int n)
  */
 void MidiFileReader::postProcess()
 {
-    for (auto trackMapItem : m_tracksMap) {
+    for (auto trackMapItem : tracksMap) {
         std::shared_ptr<MidiTrack> track = trackMapItem.second;
 
         // Assigning track name
-        TrackNamesMap::iterator it = m_trackNamesMap.find(track->trackId);
-        if (it != m_trackNamesMap.end()) {
+        TrackNamesMap::iterator it = trackNamesMap.find(track->trackId);
+        if (it != trackNamesMap.end()) {
             track->trackName = it->second;
         }
 
-        track->postProcess(m_tpq, m_durationInTicks);
-        track->durationInTime = 1.0 * track->durationInTicks() / m_tps;
+        track->postProcess(tpq, durationInTicks);
+        track->durationInTime = 1.0 * track->durationInTicks() / tps;
     }
 }
 
@@ -319,25 +332,25 @@ void MidiFileReader::postProcess()
  * Gets track list that satisfies conditions
  * \return
  */
-std::vector<std::shared_ptr<MidiTrack> > MidiFileReader::getAvilableTracks()
+std::vector<std::shared_ptr<MidiTrack> > MidiFileReader::getAvailableTracks()
 {
     std::vector<std::shared_ptr<MidiTrack> > tracks;
 
     // If duration more than 1 hour, return nothing
-    if (m_durationInSeconds > 3600.0)
+    if (durationInSeconds > MAX_TRACK_DURATION)
         return tracks;
-    for (auto trackMapItem : m_tracksMap) {
+    for (auto trackMapItem : tracksMap) {
         // Throwing out drums, empty and polyphonical tracks;
         std::shared_ptr<MidiTrack> track = trackMapItem.second;
-        if ((track->noteCount > 40)
-                && (track->noteCount < 500)
-                && (track->channelId != 9)
+        if ((track->noteCount > MIN_NOTE_COUNT)
+                && (track->noteCount < MAX_NOTE_COUNT)
+                && (track->channelId != DRUMS_CHANNEL_ID)
                 && (!track->isPolyphonical)
                 ) {
-            tracks.push_back(track);
+            tracks.emplace_back(track);
         }
     }
-    std::sort(tracks.begin(), tracks.end(), sortAlghorythm);
+    std::sort(tracks.begin(), tracks.end(), sortCompare);
     return tracks;
 }
 
@@ -349,7 +362,7 @@ std::vector<std::shared_ptr<MidiTrack> > MidiFileReader::getAvilableTracks()
  * \param second
  * \return
  */
-bool MidiFileReader::sortAlghorythm(const std::shared_ptr<MidiTrack> &left, const std::shared_ptr<MidiTrack> &right)
+bool MidiFileReader::sortCompare(const std::shared_ptr<MidiTrack> &left, const std::shared_ptr<MidiTrack> &right)
 {
     // Comparing names
     // Returns left > right, so best result must be in right to be true
@@ -358,38 +371,32 @@ bool MidiFileReader::sortAlghorythm(const std::shared_ptr<MidiTrack> &left, cons
 
     double lPoints = 0.0;
     double rPoints = 0.0;
-    double nameWeight = 3.0;
-    double lowestNoteWeight = 1.0;
-    double heighestNoteWeight = 1.0;
-    double diapasoneWeight = 1.0;
-    double maxNoteLengthWeight = 1.0;
-    double npsWeight = 1.0;
 
     bool lContainsTrackName = containsTrackName(lTrackName);
     bool rContainsTrackName = containsTrackName(rTrackName);
 
-    lPoints += lContainsTrackName * nameWeight;
-    rPoints += rContainsTrackName * nameWeight;
+    if (lContainsTrackName) lPoints = NAME_WEIGHT;
+    if (rContainsTrackName) rPoints = NAME_WEIGHT;
 
     // Lowest note distribution
-    lPoints += getWeight(left->lowestNote, lowestNoteWeight, 58.5, 9.25);
-    rPoints += getWeight(right->lowestNote, lowestNoteWeight, 58.5, 9.25);
+    lPoints += getWeight(left->lowestNote,  LOWEST_NOTE_WEIGHT, LOWEST_NOTE_MX, LOWEST_NOTE_SIGMA);
+    rPoints += getWeight(right->lowestNote, LOWEST_NOTE_WEIGHT, LOWEST_NOTE_MX, LOWEST_NOTE_SIGMA);
 
     // Highest note distribution
-    lPoints += getWeight(left->highestNote, heighestNoteWeight, 58.5, 9.25);
-    rPoints += getWeight(right->highestNote, heighestNoteWeight, 58.5, 9.25);
+    lPoints += getWeight(left->highestNote,  HEIGHEST_NOTE_WEIGHT, HEIGHEST_NOTE_MX, HEIGHEST_NOTE_SIGMA);
+    rPoints += getWeight(right->highestNote, HEIGHEST_NOTE_WEIGHT, HEIGHEST_NOTE_MX, HEIGHEST_NOTE_SIGMA);
 
     // Diapasone distribution
-    lPoints += getWeight(left->highestNote - left->lowestNote, diapasoneWeight, 16, 7);
-    rPoints += getWeight(right->highestNote - right->lowestNote, diapasoneWeight, 16, 7);
+    lPoints += getWeight(left->highestNote - left->lowestNote, DIAPASONE_WEIGHT, DIAPASONE_MX, DIAPASONE_SIGMA);
+    rPoints += getWeight(right->highestNote - right->lowestNote, DIAPASONE_WEIGHT, DIAPASONE_MX, DIAPASONE_SIGMA);
 
     // Note length distribution
-    lPoints += getWeight(left->maxNoteLengthPercent, maxNoteLengthWeight, 63, 21);
-    rPoints += getWeight(right->maxNoteLengthPercent, maxNoteLengthWeight, 63, 21);
+    lPoints += getWeight(left->maxNoteLengthPercent, MAX_NOTE_LENGTH_WEIGHT, MAX_NOTE_LENGTH_MX, MAX_NOTE_LENGTH_SIGMA);
+    rPoints += getWeight(right->maxNoteLengthPercent, MAX_NOTE_LENGTH_WEIGHT, MAX_NOTE_LENGTH_MX, MAX_NOTE_LENGTH_SIGMA);
 
     // Notes per second distribution
-    lPoints += getWeight(left->noteCount / left->durationInTime, npsWeight, 2.43, 1.95);
-    rPoints += getWeight(right->noteCount / right->durationInTime, npsWeight, 2.43, 1.95);
+    lPoints += getWeight(left->noteCount / left->durationInTime, NOTES_PER_SECOND_WEIGHT, NOTES_PER_SECOND_MX, NOTES_PER_SECOND_SIGMA);
+    rPoints += getWeight(right->noteCount / right->durationInTime, NOTES_PER_SECOND_WEIGHT, NOTES_PER_SECOND_MX, NOTES_PER_SECOND_SIGMA);
 
     return lPoints > rPoints;
 }
@@ -407,7 +414,7 @@ bool MidiFileReader::sortAlghorythm(const std::shared_ptr<MidiTrack> &left, cons
 double MidiFileReader::getWeight(const double &value, const double &baseWeight, const double &mx, const double &sigma)
 {
     bool isGood = satisfiesDistribution(value, mx, sigma);
-    return baseWeight * isGood;
+    return isGood ? baseWeight : 0.0;
 }
 
 /*!
@@ -421,11 +428,10 @@ bool MidiFileReader::containsTrackName(const string &name)
 {
     std::string s = name;
     std::transform(s.begin(), s.end(), s.begin(), ::tolower);
-    return s.find("vocal") != std::string::npos
-            || s.find("lead") != std::string::npos
-            || s.find("song") != std::string::npos
-            || s.find("melod") != std::string::npos
-            ;
+    return     s.find(SUBSTRING_VOCAL)  != std::string::npos
+            || s.find(SUBSTRING_LEAD)   != std::string::npos
+            || s.find(SUBSTRING_SONG)   != std::string::npos
+            || s.find(SUBSTRING_MELODY) != std::string::npos;
 }
 
 /*!
@@ -439,5 +445,6 @@ bool MidiFileReader::containsTrackName(const string &name)
  */
 bool MidiFileReader::satisfiesDistribution(const double &value, const double &mx, const double &sigma)
 {
-    return value >= mx-sigma && value <= mx+sigma;
+    return (value >= mx - sigma)
+            && (value <= mx + sigma);
 }

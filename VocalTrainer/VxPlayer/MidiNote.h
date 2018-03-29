@@ -8,14 +8,14 @@
 
 struct MidiNote
 {
-    enum Duration {
-        D64,
-        D32,
-        D16,
-        D8,
-        D4,
-        D2,
-        D1
+    enum class Duration : int {
+        D64 = 0x0,
+        D32 = 0x1,
+        D16 = 0x2,
+        D8  = 0x3,
+        D4  = 0x4,
+        D2  = 0x5,
+        D1  = 0x6
     };
     int      keyNumber;
     int      startTick;

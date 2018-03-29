@@ -163,6 +163,7 @@
     </None>
     <None Include="app.ico" />
     <None Include="ReadMe.txt" />
+    <None Include="TakeOnMe.mid" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OpenGL.cpp" />

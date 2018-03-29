@@ -2,6 +2,7 @@
 #include "VTEManager.h"
 #include "GLSceneDrawer.h"
 #include "VxFile.h"
+#include "MidiFileReader.h"
 
 namespace VTE
 {
@@ -9,7 +10,17 @@ namespace VTE
 		: _glSceneDrawer(nullptr)
 		, _vxPlayer(nullptr)
 	{
-
+		/*
+		MidiFileReader reader;
+		std::vector<VxFile> v = reader.read("C:/dev/coding/Upwork/VocalTrainerOsX/VocalTrainerWinCLI/VoiceTrainer/TakeOnMe.mid");
+		for (size_t s = 0; s < v.size(); s++) {
+			std::cerr << v[s].getDurationInBits() << ' ' << v[s].getDurationInSeconds() << ' ' << v[s].getTrackEndSilenceBitsCount() << "\n";
+			for (auto pitch : v[s].getPitches()) {
+				std::cerr << pitch.pitch.getName() << '_' << pitch.bitsCount << ' ';
+			}
+			std::cerr << "\n\n";
+		}
+		*/
 	}
 
 	VTEManager::~VTEManager()
