@@ -19,12 +19,13 @@ static constexpr int    MIDI_MESSAGE_BYTE_INDEX_1 = 1;
 static constexpr int    MIDI_MESSAGE_BYTE_INDEX_2 = 2;
 static constexpr int    MIDI_MESSAGE_BYTE_INDEX_3 = 3;
 
-static constexpr int    MIN_NOTE_COUNT = 40.0;
-static constexpr int    MAX_NOTE_COUNT = 1000.0;
+static constexpr int    MIN_NOTE_COUNT = 40;
+static constexpr int    MAX_NOTE_COUNT = 1000;
 static constexpr double MAX_TRACK_DURATION = 3600;
 static constexpr int    DRUMS_CHANNEL_ID = 9;
 
 static constexpr double NAME_WEIGHT = 3.0;
+static constexpr double NOTE_COUNT_WEIGHT = 2.0;
 
 static constexpr double LOWEST_NOTE_WEIGHT = 1.0;
 static constexpr double LOWEST_NOTE_MX = 58.5;
@@ -351,8 +352,7 @@ std::vector<std::shared_ptr<MidiTrack> > MidiFileReader::getAvailableTracks()
     for (auto trackMapItem : tracksMap) {
         // Throwing out drums, empty and polyphonical tracks;
         std::shared_ptr<MidiTrack> track = trackMapItem.second;
-        if ((track->noteCount > MIN_NOTE_COUNT)
-                && (track->noteCount < MAX_NOTE_COUNT)
+        if (track->noteCount > 0
                 && (track->channelId != DRUMS_CHANNEL_ID)
                 && (!track->isPolyphonical)
                 ) {
@@ -366,46 +366,15 @@ std::vector<std::shared_ptr<MidiTrack> > MidiFileReader::getAvailableTracks()
 /*!
  * \brief MidiFileReader::sortAlghorythm
  *
- * Algorythm to order tracks by the possibilities of being vocal
+ * Sort function to order tracks by the possibilities of being a vocal part
  * \param first
  * \param second
  * \return
  */
 bool MidiFileReader::sortCompare(const std::shared_ptr<MidiTrack> &left, const std::shared_ptr<MidiTrack> &right)
 {
-    // Comparing names
-    // Returns left > right, so best result must be in right to be true
-    std::string lTrackName = left->trackName + left->instrumentName;
-    std::string rTrackName = right->trackName + right->instrumentName;
-
-    double lPoints = 0.0;
-    double rPoints = 0.0;
-
-    bool lContainsTrackName = containsTrackName(lTrackName);
-    bool rContainsTrackName = containsTrackName(rTrackName);
-
-    if (lContainsTrackName) lPoints = NAME_WEIGHT;
-    if (rContainsTrackName) rPoints = NAME_WEIGHT;
-
-    // Lowest note distribution
-    lPoints += getWeight(left->lowestNote,  LOWEST_NOTE_WEIGHT, LOWEST_NOTE_MX, LOWEST_NOTE_SIGMA);
-    rPoints += getWeight(right->lowestNote, LOWEST_NOTE_WEIGHT, LOWEST_NOTE_MX, LOWEST_NOTE_SIGMA);
-
-    // Highest note distribution
-    lPoints += getWeight(left->highestNote,  HEIGHEST_NOTE_WEIGHT, HEIGHEST_NOTE_MX, HEIGHEST_NOTE_SIGMA);
-    rPoints += getWeight(right->highestNote, HEIGHEST_NOTE_WEIGHT, HEIGHEST_NOTE_MX, HEIGHEST_NOTE_SIGMA);
-
-    // Note range distribution
-    lPoints += getWeight(left->highestNote - left->lowestNote, RANGE_OF_NOTES_WEIGHT, RANGE_OF_NOTES_MX, RANGE_OF_NOTES_SIGMA);
-    rPoints += getWeight(right->highestNote - right->lowestNote, RANGE_OF_NOTES_WEIGHT, RANGE_OF_NOTES_MX, RANGE_OF_NOTES_SIGMA);
-
-    // Note values distribution
-    lPoints += getWeight(left->maxNoteValuePercent, MAX_NOTE_VALUE_WEIGHT, MAX_NOTE_VALUE_MX, MAX_NOTE_VALUE_SIGMA);
-    rPoints += getWeight(right->maxNoteValuePercent, MAX_NOTE_VALUE_WEIGHT, MAX_NOTE_VALUE_MX, MAX_NOTE_VALUE_SIGMA);
-
-    // Notes per second distribution
-    lPoints += getWeight(left->noteCount / left->durationInTime, NOTES_PER_SECOND_WEIGHT, NOTES_PER_SECOND_MX, NOTES_PER_SECOND_SIGMA);
-    rPoints += getWeight(right->noteCount / right->durationInTime, NOTES_PER_SECOND_WEIGHT, NOTES_PER_SECOND_MX, NOTES_PER_SECOND_SIGMA);
+    double lPoints = getSummaryWeight(left);
+    double rPoints = getSummaryWeight(right);
 
     return lPoints > rPoints;
 }
@@ -424,6 +393,36 @@ double MidiFileReader::getWeight(const double &value, const double &baseWeight, 
 {
     bool isGood = satisfiesDistribution(value, mx, sigma);
     return isGood ? baseWeight : 0.0;
+}
+
+double MidiFileReader::getSummaryWeight(const std::shared_ptr<MidiTrack> &value) {
+    double result = 0.0;
+
+    if (containsTrackName(value->trackName + value->instrumentName)) {
+        result += NAME_WEIGHT;
+    }
+
+    int noteCount = value->noteCount;
+    if (noteCount >= MIN_NOTE_COUNT && noteCount <= MAX_NOTE_COUNT) {
+        result += NOTE_COUNT_WEIGHT;
+    }
+
+    // Lowest note distribution
+    result += getWeight(value->lowestNote,  LOWEST_NOTE_WEIGHT, LOWEST_NOTE_MX, LOWEST_NOTE_SIGMA);
+
+    // Highest note distribution
+    result += getWeight(value->highestNote,  HEIGHEST_NOTE_WEIGHT, HEIGHEST_NOTE_MX, HEIGHEST_NOTE_SIGMA);
+
+    // Note range distribution
+    result += getWeight(value->highestNote - value->lowestNote, RANGE_OF_NOTES_WEIGHT, RANGE_OF_NOTES_MX, RANGE_OF_NOTES_SIGMA);
+
+    // Note values distribution
+    result += getWeight(value->maxNoteValuePercent, MAX_NOTE_VALUE_WEIGHT, MAX_NOTE_VALUE_MX, MAX_NOTE_VALUE_SIGMA);
+
+    // Notes per second distribution
+    result += getWeight(noteCount / value->durationInTime, NOTES_PER_SECOND_WEIGHT, NOTES_PER_SECOND_MX, NOTES_PER_SECOND_SIGMA);
+
+    return result;
 }
 
 /*!

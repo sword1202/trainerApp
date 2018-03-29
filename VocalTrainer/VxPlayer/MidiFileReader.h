@@ -50,6 +50,7 @@ private:
     std::vector<std::shared_ptr<MidiTrack> > getAvailableTracks();
     static bool sortCompare(const std::shared_ptr<MidiTrack> &first, const std::shared_ptr<MidiTrack> &second);
     static double getWeight(const double &value, const double &baseWeight, const double &mx, const double &sigma);
+    static double getSummaryWeight(const std::shared_ptr<MidiTrack> &value);
 
     static bool containsTrackName(const std::string &name);
     static bool satisfiesDistribution(const double &value, const double &mid, const double &sko);
