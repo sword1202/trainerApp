@@ -23,7 +23,6 @@ class MidiFile;
 
 class MidiFileReader {
 
-    int    tickCount;
     double durationInSeconds;
     int    durationInTicks;
     int    tpq;
