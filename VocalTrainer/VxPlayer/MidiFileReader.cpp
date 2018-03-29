@@ -364,7 +364,7 @@ std::vector<std::shared_ptr<MidiTrack> > MidiFileReader::getAvailableTracks()
 }
 
 /*!
- * \brief MidiFileReader::sortAlghorythm
+ * \brief MidiFileReader::sortCompare
  *
  * Sort function to order tracks by the possibilities of being a vocal part
  * \param first
