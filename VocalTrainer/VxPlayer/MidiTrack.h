@@ -24,7 +24,7 @@ struct MidiTrack
     int                   lowestNote;
     int                   highestNote;
     double                averageVelocity;
-    double                maxNoteLengthPercent;
+    double                maxNoteValuePercent;
     double                durationInTime;
 
     int                   startTick = -1;

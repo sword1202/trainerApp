@@ -13,10 +13,11 @@ static constexpr int    MAX_MIDI_CHANNELS = 15;
 
 static constexpr int    NO_CHANNEL_PREFIX = -1;
 
-static constexpr int    CHANNEL_STATUS_BYTE = 0;
-static constexpr int    CHANNEL_BYTE_1 = 1;
-static constexpr int    CHANNEL_BYTE_2 = 2;
-static constexpr int    CHANNEL_BYTE_3 = 3;
+// MIDI Message = array[status_midi_message_byte, midi_message_byte_1, midi_message_byte_2, midi_message_byte_3, ...]
+static constexpr int    STATUS_MIDI_MESSAGE_BYTE_INDEX = 0;
+static constexpr int    MIDI_MESSAGE_BYTE_INDEX_1 = 1;
+static constexpr int    MIDI_MESSAGE_BYTE_INDEX_2 = 2;
+static constexpr int    MIDI_MESSAGE_BYTE_INDEX_3 = 3;
 
 static constexpr int    MIN_NOTE_COUNT = 40.0;
 static constexpr int    MAX_NOTE_COUNT = 1000.0;
@@ -37,9 +38,9 @@ static constexpr double RANGE_OF_NOTES_WEIGHT = 1.0;
 static constexpr double RANGE_OF_NOTES_MX = 16.0;
 static constexpr double RANGE_OF_NOTES_SIGMA = 7.0;
 
-static constexpr double MAX_NOTE_LENGTH_WEIGHT = 1.0;
-static constexpr double MAX_NOTE_LENGTH_MX = 63.0;
-static constexpr double MAX_NOTE_LENGTH_SIGMA = 21.0;
+static constexpr double MAX_NOTE_VALUE_WEIGHT = 1.0;
+static constexpr double MAX_NOTE_VALUE_MX = 63.0;
+static constexpr double MAX_NOTE_VALUE_SIGMA = 21.0;
 
 static constexpr double NOTES_PER_SECOND_WEIGHT = 1.0;
 static constexpr double NOTES_PER_SECOND_MX = 2.43;
@@ -142,7 +143,7 @@ void MidiFileReader::processEvent(const MidiEvent &event)
         // FF 03 length text.
         // This event is optional. It's interpretation depends on its context. If it occurs in the first track of a format 0 or 1 MIDI file, then it gives the Sequence Name. Otherwise it gives the Track Name
         case 0x03: {
-            std::string trackName = eventText(event, CHANNEL_BYTE_3, event[CHANNEL_BYTE_2]);
+            std::string trackName = eventText(event, MIDI_MESSAGE_BYTE_INDEX_3, event[MIDI_MESSAGE_BYTE_INDEX_2]);
             trackNamesMap[eventTrackID] = trackName;
             break;
         }
@@ -150,7 +151,7 @@ void MidiFileReader::processEvent(const MidiEvent &event)
             // FF 04 length text
             // Instrument name of length. This optional event is used to provide a textual clue regarding the intended instrumentation for a track (e.g. 'Piano' or 'Flute', etc). If used, it is reccommended to place this event near the start of a track)
         case 0x04: {
-            std::string instrumentName = eventText(event, CHANNEL_BYTE_3, event[CHANNEL_BYTE_2]);
+            std::string instrumentName = eventText(event, MIDI_MESSAGE_BYTE_INDEX_3, event[MIDI_MESSAGE_BYTE_INDEX_2]);
             // If prefix is set, appending name to track
             if (currentChannelPrefix != NO_CHANNEL_PREFIX) {
                 auto track = getTrack(eventTrackID, currentChannelPrefix);
@@ -162,7 +163,7 @@ void MidiFileReader::processEvent(const MidiEvent &event)
             // FF 20 01 сс
             // Midi channel prefix (cc is a byte specifying the MIDI channel (0-15). This optional event is used to associate any subsequent SysEx and Meta events with a particular MIDI channel, and will remain in effect until the next MIDI Channel Prefix Meta event or the next MIDI event)
         case 0x20: {
-            currentChannelPrefix = event[CHANNEL_BYTE_3];
+            currentChannelPrefix = event[MIDI_MESSAGE_BYTE_INDEX_3];
             break;
         }
             // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -398,9 +399,9 @@ bool MidiFileReader::sortCompare(const std::shared_ptr<MidiTrack> &left, const s
     lPoints += getWeight(left->highestNote - left->lowestNote, RANGE_OF_NOTES_WEIGHT, RANGE_OF_NOTES_MX, RANGE_OF_NOTES_SIGMA);
     rPoints += getWeight(right->highestNote - right->lowestNote, RANGE_OF_NOTES_WEIGHT, RANGE_OF_NOTES_MX, RANGE_OF_NOTES_SIGMA);
 
-    // Note length distribution
-    lPoints += getWeight(left->maxNoteLengthPercent, MAX_NOTE_LENGTH_WEIGHT, MAX_NOTE_LENGTH_MX, MAX_NOTE_LENGTH_SIGMA);
-    rPoints += getWeight(right->maxNoteLengthPercent, MAX_NOTE_LENGTH_WEIGHT, MAX_NOTE_LENGTH_MX, MAX_NOTE_LENGTH_SIGMA);
+    // Note values distribution
+    lPoints += getWeight(left->maxNoteValuePercent, MAX_NOTE_VALUE_WEIGHT, MAX_NOTE_VALUE_MX, MAX_NOTE_VALUE_SIGMA);
+    rPoints += getWeight(right->maxNoteValuePercent, MAX_NOTE_VALUE_WEIGHT, MAX_NOTE_VALUE_MX, MAX_NOTE_VALUE_SIGMA);
 
     // Notes per second distribution
     lPoints += getWeight(left->noteCount / left->durationInTime, NOTES_PER_SECOND_WEIGHT, NOTES_PER_SECOND_MX, NOTES_PER_SECOND_SIGMA);

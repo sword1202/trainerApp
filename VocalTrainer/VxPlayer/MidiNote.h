@@ -8,20 +8,20 @@
 
 struct MidiNote
 {
-    enum class Value : int {
-        D64 = 0x0,
-        D32 = 0x1,
-        D16 = 0x2,
-        D8  = 0x3,
-        D4  = 0x4,
-        D2  = 0x5,
-        D1  = 0x6
+    enum class NoteValue : int {
+		SIXTY_FOURTH_NOTE = 0x0,
+        THIRTY_SECOND_NOTE = 0x1,
+        SIXTEENTH_NOTE = 0x2,
+        EIGHTH_NOTE  = 0x3,
+        QUARTER_NOTE  = 0x4,
+        HALF_NOTE  = 0x5,
+        WHOLE_NOTE  = 0x6
     };
     int      keyNumber;
     int      startTick;
     int      finalTick;
     int      velocity;
-    Value duration;
+    NoteValue duration;
 
     int durationInTicks() {
         return finalTick - startTick;

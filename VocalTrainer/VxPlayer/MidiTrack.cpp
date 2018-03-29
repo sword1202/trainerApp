@@ -7,12 +7,20 @@
 
 #include <iostream>
 
-static constexpr double    NOTE_VALUE_32 = 3.0 / 32.0;
-static constexpr double    NOTE_VALUE_16 = 3.0 / 16.0;
-static constexpr double    NOTE_VALUE_8 = 3.0 / 8.0;
-static constexpr double    NOTE_VALUE_4 = 3.0 / 4.0;
-static constexpr double    NOTE_VALUE_2 = 3.0 / 2.0;
-static constexpr double    NOTE_VALUE_1 = 3.0 / 1.0;
+// Considering 
+// length of 4th      note == 1, 
+// getting 
+// length of 8th      note =  1/2
+// length of 8th.dot  note = (1/2 + 1) / 2 = 3/4
+// length of 16th     note =  1/4
+// length of 16th.dot note =  (1/4 + 1/2) / 2 = 3/8
+// etc.
+static constexpr double    NOTE_VALUE_64TH_DOT_RELATIVE_TO_4TH = 3.0 / 32.0;
+static constexpr double    NOTE_VALUE_32TH_DOT_RELATIVE_TO_4TH = 3.0 / 16.0;
+static constexpr double    NOTE_VALUE_16TH_DOT_RELATIVE_TO_4TH = 3.0 / 8.0;
+static constexpr double    NOTE_VALUE_8TH_DOT_RELATIVE_TO_4TH  = 3.0 / 4.0;
+static constexpr double    NOTE_VALUE_4TH_DOT_RELATIVE_TO_4TH  = 3.0 / 2.0;
+static constexpr double    NOTE_VALUE_2ND_DOT_RELATIVE_TO_4TH  = 3.0 / 1.0;
 
 MidiTrack::MidiTrack() :
     startTick(-1),
@@ -106,6 +114,8 @@ void MidiTrack::closeAllNotes(const int tick) {
  * \brief MidiTrack::postProcess
  *
  * Counts necessary values for current track
+ * Among others, counts note values distribution and percent of most frequently used value
+ * All notes with values between 2n'th dot and n'th dot are considered to be n'th value (say, notes between 8th dot and 4th dot are considered to be 4th value)
  * \param tpq
  * \param lastTick
  */
@@ -131,24 +141,24 @@ void MidiTrack::postProcess(const int tpq, const int lastTick) {
 
     double velocitySum = 0.0;
 
-    int maxNoteLength = 0;
+    int maxNoteValue = 0;
     for (auto note: notes) {
         int ticks = note->durationInTicks();
-        double fraq = 1.0 * ticks / tpq;
-        if (fraq < NOTE_VALUE_32) {
-            note->duration = MidiNote::Value::D64;
-        } else if (fraq < NOTE_VALUE_16) {
-            note->duration = MidiNote::Value::D32;
-        } else if (fraq < NOTE_VALUE_8) {
-            note->duration = MidiNote::Value::D16;
-        } else if (fraq < NOTE_VALUE_4) {
-            note->duration = MidiNote::Value::D8;
-        } else if (fraq < NOTE_VALUE_2) {
-            note->duration = MidiNote::Value::D4;
-        } else if (fraq < NOTE_VALUE_1) {
-            note->duration = MidiNote::Value::D2;
+        double noteValueRelativeToQuater = 1.0 * ticks / tpq;
+        if (noteValueRelativeToQuater < NOTE_VALUE_64TH_DOT_RELATIVE_TO_4TH) {
+            note->duration = MidiNote::NoteValue::SIXTY_FOURTH_NOTE;
+        } else if (noteValueRelativeToQuater < NOTE_VALUE_32TH_DOT_RELATIVE_TO_4TH) {
+            note->duration = MidiNote::NoteValue::THIRTY_SECOND_NOTE;
+        } else if (noteValueRelativeToQuater < NOTE_VALUE_16TH_DOT_RELATIVE_TO_4TH) {
+            note->duration = MidiNote::NoteValue::SIXTEENTH_NOTE;
+        } else if (noteValueRelativeToQuater < NOTE_VALUE_8TH_DOT_RELATIVE_TO_4TH) {
+            note->duration = MidiNote::NoteValue::EIGHTH_NOTE;
+        } else if (noteValueRelativeToQuater < NOTE_VALUE_4TH_DOT_RELATIVE_TO_4TH) {
+            note->duration = MidiNote::NoteValue::QUARTER_NOTE;
+        } else if (noteValueRelativeToQuater < NOTE_VALUE_2ND_DOT_RELATIVE_TO_4TH) {
+            note->duration = MidiNote::NoteValue::HALF_NOTE;
         } else {
-            note->duration = MidiNote::Value::D1;
+            note->duration = MidiNote::NoteValue::WHOLE_NOTE;
         }
 
         // Getting distribution of note's length
@@ -157,8 +167,8 @@ void MidiTrack::postProcess(const int tpq, const int lastTick) {
             durationDistrib[static_cast<int>(note->duration)] = 1;
         } else {
             it->second += 1;
-            if (it->second > maxNoteLength)
-                maxNoteLength = it->second;
+            if (it->second > maxNoteValue)
+                maxNoteValue = it->second;
         }
 
         // Updating top and bottom notes
@@ -173,7 +183,7 @@ void MidiTrack::postProcess(const int tpq, const int lastTick) {
         velocitySum += note->velocity;
     }
     averageVelocity = velocitySum / noteCount;
-    maxNoteLengthPercent = 100.0 * maxNoteLength / noteCount;
+    maxNoteValuePercent = 100.0 * maxNoteValue / noteCount;
 }
 
 int MidiTrack::durationInTicks() {
