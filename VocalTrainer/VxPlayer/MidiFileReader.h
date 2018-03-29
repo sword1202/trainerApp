@@ -37,7 +37,7 @@ class MidiFileReader {
     TrackNamesMap trackNamesMap; // key = trackID
 public:
     explicit MidiFileReader();
-    virtual ~MidiFileReader();
+    ~MidiFileReader();
 
     std::vector<VxFile> read(const std::string &filename);
     std::vector<VxFile> read(std::istream &is);
