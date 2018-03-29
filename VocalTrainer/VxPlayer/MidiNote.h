@@ -8,7 +8,7 @@
 
 struct MidiNote
 {
-    enum class Duration : int {
+    enum class Value : int {
         D64 = 0x0,
         D32 = 0x1,
         D16 = 0x2,
@@ -21,7 +21,7 @@ struct MidiNote
     int      startTick;
     int      finalTick;
     int      velocity;
-    Duration duration;
+    Value duration;
 
     int durationInTicks() {
         return finalTick - startTick;

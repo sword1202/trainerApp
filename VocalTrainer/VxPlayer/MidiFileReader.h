@@ -45,8 +45,8 @@ public:
 private:
     std::vector<VxFile> processMidiFile(MidiFile &midi);
     void processEvent(const MidiEvent &event);
-    std::shared_ptr<MidiTrack> getTrack(int trackID, int channelID);
-    std::string eventText(const MidiEvent &event, int start, int n);
+    std::shared_ptr<MidiTrack> getTrack(const int trackID, const int channelID);
+    std::string eventText(const MidiEvent &event, const int startByte, const int bytesAmount);
     void postProcess();
     std::vector<std::shared_ptr<MidiTrack> > getAvailableTracks();
     static bool sortCompare(const std::shared_ptr<MidiTrack> &first, const std::shared_ptr<MidiTrack> &second);

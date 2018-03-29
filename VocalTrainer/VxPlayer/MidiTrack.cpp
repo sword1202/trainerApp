@@ -7,6 +7,13 @@
 
 #include <iostream>
 
+static constexpr double    NOTE_VALUE_32 = 3.0 / 32.0;
+static constexpr double    NOTE_VALUE_16 = 3.0 / 16.0;
+static constexpr double    NOTE_VALUE_8 = 3.0 / 8.0;
+static constexpr double    NOTE_VALUE_4 = 3.0 / 4.0;
+static constexpr double    NOTE_VALUE_2 = 3.0 / 2.0;
+static constexpr double    NOTE_VALUE_1 = 3.0 / 1.0;
+
 MidiTrack::MidiTrack() :
     startTick(-1),
     finalTick(-1),
@@ -128,20 +135,20 @@ void MidiTrack::postProcess(const int tpq, const int lastTick) {
     for (auto note: notes) {
         int ticks = note->durationInTicks();
         double fraq = 1.0 * ticks / tpq;
-        if (fraq < 3. / 32.) {
-            note->duration = MidiNote::Duration::D64;
-        } else if (fraq < 3. / 16.) {
-            note->duration = MidiNote::Duration::D32;
-        } else if (fraq < 3. / 8.) {
-            note->duration = MidiNote::Duration::D16;
-        } else if (fraq < 3. / 4.) {
-            note->duration = MidiNote::Duration::D8;
-        } else if (fraq < 3. / 2.) {
-            note->duration = MidiNote::Duration::D4;
-        } else if (fraq < 3. / 1.) {
-            note->duration = MidiNote::Duration::D2;
+        if (fraq < NOTE_VALUE_32) {
+            note->duration = MidiNote::Value::D64;
+        } else if (fraq < NOTE_VALUE_16) {
+            note->duration = MidiNote::Value::D32;
+        } else if (fraq < NOTE_VALUE_8) {
+            note->duration = MidiNote::Value::D16;
+        } else if (fraq < NOTE_VALUE_4) {
+            note->duration = MidiNote::Value::D8;
+        } else if (fraq < NOTE_VALUE_2) {
+            note->duration = MidiNote::Value::D4;
+        } else if (fraq < NOTE_VALUE_1) {
+            note->duration = MidiNote::Value::D2;
         } else {
-            note->duration = MidiNote::Duration::D1;
+            note->duration = MidiNote::Value::D1;
         }
 
         // Getting distribution of note's length
