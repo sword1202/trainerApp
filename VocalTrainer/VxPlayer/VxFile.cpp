@@ -61,7 +61,8 @@ struct TsfHolder {
 std::vector<char> VxFile::generateRawPcmAudioData(int sampleRate) const {
     double bitDuration = getBitDuration();
 
-    tsf* t = TsfHolder(sampleRate).t;
+    TsfHolder tsfHolder(sampleRate);
+    tsf* t = tsfHolder.t;
 
     int size = static_cast<int>(getDurationInSeconds() * sampleRate);
     

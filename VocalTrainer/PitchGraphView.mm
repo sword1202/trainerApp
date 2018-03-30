@@ -7,6 +7,7 @@
 #include <GLKit/GLKit.h>
 #import "GLSceneDrawer.h"
 #import "VxFile.h"
+#import "MidiFileReader.h"
 
 @implementation PitchGraphView {
     GLSceneDrawer* _glSceneDrawer;
@@ -22,8 +23,17 @@
                                    selector:@selector(onTimer:)
                                    userInfo:nil
                                     repeats:YES];
-    const char* path = [[NSBundle mainBundle] pathForResource:@"1" ofType:@"vx"].cString;
-    VxFile vxFile = VxFile::fromFilePath(path);
+//    const char* path = [[NSBundle mainBundle] pathForResource:@"1" ofType:@"vx"].cString;
+//    VxFile vxFile = VxFile::fromFilePath(path);
+    MidiFileReader midiFileReader;
+    std::vector<VxFile> vxFiles = midiFileReader.read(
+            [NSBundle.mainBundle pathForResource:@"melody" ofType:@"mid"].UTF8String);
+    for (const VxFile& a : vxFiles) {
+        std::cout<<"Pitches from midi:\n";
+        a.writeToStream(std::cout);
+        std::cout<<"\n";
+    }
+    const VxFile& vxFile = vxFiles[0];
     std::vector<char> wavAudioData = vxFile.generateWavAudioData();
     player = new AudioPlayer();
     player->play(wavAudioData.data(), wavAudioData.size(), 0);
