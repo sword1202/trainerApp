@@ -14,14 +14,14 @@
 
 class VxFile {
     std::vector<VxPitch> pitches;
-    int bitsPerMinute;
+    int ticksPerMinute;
     int durationInBits = 0;
-    int trackEndSilenceBitsCount = 0;
+    int distanceInTicksBetweenLastPitchEndAndTrackEnd = 0;
 
     bool validate();
     void postInit();
 public:
-    VxFile(const std::vector<VxPitch> &pitches, int trackEndSilenceBitsCount, int bitsPerMinute);
+    VxFile(const std::vector<VxPitch> &pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int bitsPerMinute);
     VxFile(std::istream& is);
     static VxFile fromFilePath(const char* filePath);
 
@@ -32,9 +32,9 @@ public:
     double getBitDuration() const;
 
     const std::vector<VxPitch> &getPitches() const;
-    int getBitsPerMinute() const;
-    int getDurationInBits() const;
-    int getTrackEndSilenceBitsCount() const;
+    int getTicksPerMinute() const;
+    int getDurationInTicks() const;
+    int getDistanceInTicksBetweenLastPitchEndAndTrackEnd() const;
 
     void writeToStream(std::ostream& os) const;
 };

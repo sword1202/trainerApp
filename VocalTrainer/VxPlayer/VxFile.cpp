@@ -7,19 +7,20 @@
 
 static const char *const SILENCE_MARK = "*";
 
-VxFile::VxFile(const std::vector<VxPitch> &pitches, int trackEndSilenceBitsCount, int bitsPerMinute)
-        : pitches(pitches), bitsPerMinute(bitsPerMinute), trackEndSilenceBitsCount(trackEndSilenceBitsCount) {
+VxFile::VxFile(const std::vector<VxPitch> &pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int bitsPerMinute)
+        : pitches(pitches), ticksPerMinute(bitsPerMinute),
+          distanceInTicksBetweenLastPitchEndAndTrackEnd(distanceInTicksBetweenLastPitchEndAndTrackEnd) {
     postInit();
 }
 
 VxFile::VxFile(std::istream &is) {
-    is >> bitsPerMinute;
+    is >> ticksPerMinute;
 
     std::string pitchName;
     while (!is.eof()) {
         is >> pitchName;
         if (pitchName == SILENCE_MARK) {
-            is >> trackEndSilenceBitsCount;
+            is >> distanceInTicksBetweenLastPitchEndAndTrackEnd;
             break;
         }
         
@@ -93,7 +94,7 @@ std::vector<char> VxFile::generateRawPcmAudioData(int sampleRate) const {
         iter++;
     }
 
-    double endSilenceDuration = trackEndSilenceBitsCount * bitDuration;
+    double endSilenceDuration = distanceInTicksBetweenLastPitchEndAndTrackEnd * bitDuration;
     addSilence(pcmData, endSilenceDuration, sampleRate);
 
     return pcmData;
@@ -106,7 +107,7 @@ std::vector<char> VxFile::generateWavAudioData() const {
 }
 
 double VxFile::getBitDuration() const {
-    return 60.0 / (double) bitsPerMinute;
+    return 60.0 / (double) ticksPerMinute;
 }
 
 bool VxFile::validate() {
@@ -140,11 +141,11 @@ bool VxFile::validate() {
 }
 
 void VxFile::postInit() {
-    assert(trackEndSilenceBitsCount >= 0);
+    assert(distanceInTicksBetweenLastPitchEndAndTrackEnd >= 0);
     assert(validate());
     if (!pitches.empty()) {
         const VxPitch &lastPitch = pitches.back();
-        durationInBits = lastPitch.startBitNumber + lastPitch.bitsCount + trackEndSilenceBitsCount;
+        durationInBits = lastPitch.startBitNumber + lastPitch.bitsCount + distanceInTicksBetweenLastPitchEndAndTrackEnd;
     }
 }
 
@@ -156,26 +157,26 @@ const std::vector<VxPitch> &VxFile::getPitches() const {
     return pitches;
 }
 
-int VxFile::getBitsPerMinute() const {
-    return bitsPerMinute;
+int VxFile::getTicksPerMinute() const {
+    return ticksPerMinute;
 }
 
-int VxFile::getDurationInBits() const {
+int VxFile::getDurationInTicks() const {
     return durationInBits;
 }
 
-int VxFile::getTrackEndSilenceBitsCount() const {
-    return trackEndSilenceBitsCount;
+int VxFile::getDistanceInTicksBetweenLastPitchEndAndTrackEnd() const {
+    return distanceInTicksBetweenLastPitchEndAndTrackEnd;
 }
 
 void VxFile::writeToStream(std::ostream &os) const {
-    os<<bitsPerMinute<<" ";
+    os<<ticksPerMinute<<" ";
 
     for (const VxPitch& vxPitch : pitches) {
         os<<vxPitch.pitch.getFullName()<<" "<<vxPitch.startBitNumber<<" "<<vxPitch.bitsCount<<" ";
     }
 
-    os<<"* "<<trackEndSilenceBitsCount;
+    os<<"* "<<distanceInTicksBetweenLastPitchEndAndTrackEnd;
 }
 
 VxFile VxFile::fromFilePath(const char *filePath) {
