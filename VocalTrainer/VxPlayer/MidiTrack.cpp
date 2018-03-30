@@ -8,12 +8,12 @@
 #include <iostream>
 
 // Considering 
-// length of 4th      note == 1, 
+// value of 4th      note == n, 
 // getting 
-// length of 8th      note =  1/2
-// length of 8th.dot  note = (1/2 + 1) / 2 = 3/4
-// length of 16th     note =  1/4
-// length of 16th.dot note =  (1/4 + 1/2) / 2 = 3/8
+// value of 8th      note =  1/2n
+// value of 8th.dot  note = (1/2n + n) / 2 = 3/4n
+// value of 16th     note =  1/4n
+// value of 16th.dot note =  (1/4n + 1/2n) / 2 = 3/8n
 // etc.
 static constexpr double    NOTE_VALUE_64TH_DOT_RELATIVE_TO_4TH = 3.0 / 32.0;
 static constexpr double    NOTE_VALUE_32TH_DOT_RELATIVE_TO_4TH = 3.0 / 16.0;
@@ -56,7 +56,7 @@ void MidiTrack::openNote(const int keyNumber, const int tick, const int velocity
     // If the same note is already in pending, closing it and opening new
     std::list<int>::iterator it;
     for (it = pendingNoteIndexes.begin(); it != pendingNoteIndexes.end();) {
-        auto pendingNote = notes.at(*it);
+        const auto &pendingNote = notes.at(*it);
         if (pendingNote->keyNumber == keyNumber) {
             it = closeNote(keyNumber, tick);
         } else {
@@ -85,7 +85,7 @@ void MidiTrack::openNote(const int keyNumber, const int tick, const int velocity
 std::list<int>::iterator MidiTrack::closeNote(const int keyNumber, const int tick) {
     std::list<int>::iterator it;
     for (it = pendingNoteIndexes.begin(); it != pendingNoteIndexes.end();) {
-        auto note = notes.at(*it);
+        auto &note = notes.at(*it);
         if (note->keyNumber == keyNumber) {
             note->finalTick = tick;
             it = pendingNoteIndexes.erase(it);
@@ -105,7 +105,7 @@ std::list<int>::iterator MidiTrack::closeNote(const int keyNumber, const int tic
  */
 void MidiTrack::closeAllNotes(const int tick) {
     for (auto index : pendingNoteIndexes) {
-        auto note = notes.at(index);
+        const auto &note = notes.at(index);
         closeNote(note->keyNumber, tick);
     }
 }
@@ -142,7 +142,7 @@ void MidiTrack::postProcess(const int tpq, const int lastTick) {
     double velocitySum = 0.0;
 
     int maxNoteValue = 0;
-    for (auto note: notes) {
+    for (auto &note: notes) {
         int ticks = note->durationInTicks();
         double noteValueRelativeToQuater = 1.0 * ticks / tpq;
         if (noteValueRelativeToQuater < NOTE_VALUE_64TH_DOT_RELATIVE_TO_4TH) {

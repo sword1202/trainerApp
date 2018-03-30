@@ -13,11 +13,16 @@ static constexpr int    MAX_MIDI_CHANNELS = 15;
 
 static constexpr int    NO_CHANNEL_PREFIX = -1;
 
+static constexpr int    MILLISECONDS_IN_MINUTE = 60'000'000;
+static constexpr int    SECONDS_IN_MINUTE = 60;
+
 // MIDI Message = array[status_midi_message_byte, midi_message_byte_1, midi_message_byte_2, midi_message_byte_3, ...]
 static constexpr int    STATUS_MIDI_MESSAGE_BYTE_INDEX = 0;
 static constexpr int    MIDI_MESSAGE_BYTE_INDEX_1 = 1;
 static constexpr int    MIDI_MESSAGE_BYTE_INDEX_2 = 2;
 static constexpr int    MIDI_MESSAGE_BYTE_INDEX_3 = 3;
+static constexpr int    MIDI_MESSAGE_BYTE_INDEX_4 = 4;
+static constexpr int    MIDI_MESSAGE_BYTE_INDEX_5 = 5;
 
 static constexpr int    MIN_NOTE_COUNT = 40;
 static constexpr int    MAX_NOTE_COUNT = 1000;
@@ -94,8 +99,8 @@ std::vector<VxFile> MidiFileReader::processMidiFile(MidiFile &midi)
     currentChannelPrefix = NO_CHANNEL_PREFIX;
     durationInSeconds = midi.getTotalTimeInSeconds();
     durationInTicks = midi.getTotalTimeInTicks();
-    tpq = midi.getTPQ();
-    tps = durationInTicks / durationInSeconds;
+    ticksPerQuarter = midi.getTPQ();
+    ticksPerSecond = durationInTicks / durationInSeconds;
 
     int trackCount = midi.getTrackCount();
     for (int track = 0; track < trackCount; ++ track) {
@@ -104,18 +109,18 @@ std::vector<VxFile> MidiFileReader::processMidiFile(MidiFile &midi)
         }
     }
     postProcess();
-    auto trackList = getAvailableTracks();
+    const auto &trackList = getAvailableTracks();
     std::vector<VxFile> result;
-    for (auto track : trackList) {
+    for (const auto &track : trackList) {
         std::vector<VxPitch> pitches;
-        for (auto note : track->getNotes()) {
+        for (const auto &note : track->getNotes()) {
             VxPitch pitch;
             pitch.pitch = Pitch::fromMidiIndex(note->keyNumber);
-            pitch.startBitNumber = note->startTick;
-            pitch.bitsCount = note->durationInTicks();
+            pitch.startBitNumber = tickToBeat(note->startTick);
+            pitch.bitsCount = tickToBeat(note->durationInTicks());
             pitches.emplace_back(std::move(pitch));
         }
-        result.emplace_back(pitches, durationInTicks - track->finalTick, tps * 60.0);
+        result.emplace_back(pitches, tickToBeat(durationInTicks - track->finalTick), beatsPerMinute);
     }
     return result;
 }
@@ -155,7 +160,7 @@ void MidiFileReader::processEvent(const MidiEvent &event)
             std::string instrumentName = eventText(event, MIDI_MESSAGE_BYTE_INDEX_3, event[MIDI_MESSAGE_BYTE_INDEX_2]);
             // If prefix is set, appending name to track
             if (currentChannelPrefix != NO_CHANNEL_PREFIX) {
-                auto track = getTrack(eventTrackID, currentChannelPrefix);
+                auto &track = getTrack(eventTrackID, currentChannelPrefix);
                 track->instrumentName = instrumentName;
             }
             break;
@@ -171,7 +176,7 @@ void MidiFileReader::processEvent(const MidiEvent &event)
             // FF 2F 00
             // End of track
         case 0x2F: {
-            for (auto track: tracksMap) {
+            for (auto &track: tracksMap) {
                 if(track.second->trackId == eventTrackID) {
                     track.second->closeAllNotes(eventTick);
                     track.second->finalTick = eventTick;
@@ -184,6 +189,12 @@ void MidiFileReader::processEvent(const MidiEvent &event)
             // FF 51 03 tt tt tt
             // Tempo (tt tt tt is a 24-bit value specifying the tempo as the number of microseconds per quarter note)
         case 0x51: {
+			int microsecondsPerQuarter = event[MIDI_MESSAGE_BYTE_INDEX_3] << 16 | 
+									     event[MIDI_MESSAGE_BYTE_INDEX_4] << 8  | 
+				                         event[MIDI_MESSAGE_BYTE_INDEX_5];
+			beatsPerMinute = MILLISECONDS_IN_MINUTE / microsecondsPerQuarter;
+			ticksPerBit   =  ticksPerSecond * SECONDS_IN_MINUTE / beatsPerMinute;
+			beatsPerTick =   1.0 / ticksPerBit;
             break;
         }
 
@@ -201,7 +212,7 @@ void MidiFileReader::processEvent(const MidiEvent &event)
     } else {
         currentChannelPrefix = NO_CHANNEL_PREFIX; // If event is midi-event, channel prefix removes
         int command = event.getCommandNibble(); // P0 & 0x11110000
-        auto currentTrack = getTrack(eventTrackID, eventChannelID);
+        auto &currentTrack = getTrack(eventTrackID, eventChannelID);
 
         switch (command) {
 
@@ -322,7 +333,7 @@ string MidiFileReader::eventText(const MidiEvent &event, const int start, const 
  */
 void MidiFileReader::postProcess()
 {
-    for (auto trackMapItem : tracksMap) {
+    for (auto &trackMapItem : tracksMap) {
         std::shared_ptr<MidiTrack> track = trackMapItem.second;
 
         // Assigning track name
@@ -331,8 +342,8 @@ void MidiFileReader::postProcess()
             track->trackName = it->second;
         }
 
-        track->postProcess(tpq, durationInTicks);
-        track->durationInTime = 1.0 * track->durationInTicks() / tps;
+        track->postProcess(ticksPerQuarter, durationInTicks);
+        track->durationInTime = 1.0 * track->durationInTicks() / ticksPerSecond;
     }
 }
 
@@ -349,7 +360,7 @@ std::vector<std::shared_ptr<MidiTrack> > MidiFileReader::getAvailableTracks()
     // If duration is more than 1 hour, return nothing
     if (durationInSeconds > MAX_TRACK_DURATION)
         return tracks;
-    for (auto trackMapItem : tracksMap) {
+    for (auto &trackMapItem : tracksMap) {
         // Throwing out drums, empty and polyphonical tracks;
         std::shared_ptr<MidiTrack> track = trackMapItem.second;
         if (track->noteCount > 0
@@ -455,4 +466,9 @@ bool MidiFileReader::satisfiesDistribution(const double &value, const double &mx
 {
     return (value >= mx - sigma)
             && (value <= mx + sigma);
+}
+
+int MidiFileReader::tickToBeat(const int tick)
+{
+	return tick / ticksPerBit;
 }

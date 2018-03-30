@@ -37,11 +37,12 @@
     <ClCompile Include="..\..\VocalTrainer\GLScene\PitchGraphDrawer.cpp" />
     <ClCompile Include="..\..\VocalTrainer\GLScene\SingerPitchDetection.cpp" />
     <ClCompile Include="..\..\VocalTrainer\VxPlayer\AudioPlayer.cpp" />
-    <ClCompile Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\Binasc.cpp" />
-    <ClCompile Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiEvent.cpp" />
-    <ClCompile Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiEventList.cpp" />
-    <ClCompile Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiFile.cpp" />
-    <ClCompile Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiMessage.cpp" />
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\CraigsappMidifile\Binasc.cpp" />
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\CraigsappMidifile\MidiEvent.cpp" />
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\CraigsappMidifile\MidiEventList.cpp" />
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\CraigsappMidifile\MidiFile.cpp" />
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\CraigsappMidifile\MidiMessage.cpp" />
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\CraigsappMidifile\Options.cpp" />
     <ClCompile Include="..\..\VocalTrainer\VxPlayer\GetSf2FilePath.cpp" />
     <ClCompile Include="..\..\VocalTrainer\VxPlayer\MidiFileReader.cpp" />
     <ClCompile Include="..\..\VocalTrainer\VxPlayer\MidiTrack.cpp" />
@@ -77,11 +78,12 @@
     <ClInclude Include="..\..\VocalTrainer\json\json\json-forwards.h" />
     <ClInclude Include="..\..\VocalTrainer\json\json\json.h" />
     <ClInclude Include="..\..\VocalTrainer\VxPlayer\AudioPlayer.h" />
-    <ClInclude Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\Binasc.h" />
-    <ClInclude Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiEvent.h" />
-    <ClInclude Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiEventList.h" />
-    <ClInclude Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiFile.h" />
-    <ClInclude Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiMessage.h" />
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\CraigsappMidifile\Binasc.h" />
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\CraigsappMidifile\MidiEvent.h" />
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\CraigsappMidifile\MidiEventList.h" />
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\CraigsappMidifile\MidiFile.h" />
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\CraigsappMidifile\MidiMessage.h" />
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\CraigsappMidifile\Options.h" />
     <ClInclude Include="..\..\VocalTrainer\VxPlayer\GetSf2FilePath.h" />
     <ClInclude Include="..\..\VocalTrainer\VxPlayer\MidiFileReader.h" />
     <ClInclude Include="..\..\VocalTrainer\VxPlayer\MidiNote.h" />
@@ -187,7 +189,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;VTE_DLL_BUILD;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <DisableSpecificWarnings>4996;4703</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>../../PitchDetection;../../PitchDetection/CppUtils;../../VocalTrainer/GLScene;../../VocalTrainer/VxPlayer;../../VocalTrainer/VxPlayer/craigsapp_midifile;../../VocalTrainer/Json;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../PitchDetection;../../PitchDetection/CppUtils;../../VocalTrainer/GLScene;../../VocalTrainer/VxPlayer;../../VocalTrainer/VxPlayer/CraigsappMidifile;../../VocalTrainer/Json;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

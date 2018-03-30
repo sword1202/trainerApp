@@ -28,7 +28,7 @@
     <Filter Include="PitchDetection\CppUtils">
       <UniqueIdentifier>{616f0d99-f367-4df9-a26c-66117c76b75f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="VxPlayer\craigsapp_midifile">
+    <Filter Include="VxPlayer\CraigsappMidifile">
       <UniqueIdentifier>{6ab7245a-ad51-42c9-80ae-126d15993780}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -99,26 +99,29 @@
     <ClCompile Include="..\..\VocalTrainer\VxPlayer\AudioPlayer.cpp">
       <Filter>VxPlayer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiEvent.cpp">
-      <Filter>VxPlayer\craigsapp_midifile</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiEventList.cpp">
-      <Filter>VxPlayer\craigsapp_midifile</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiFile.cpp">
-      <Filter>VxPlayer\craigsapp_midifile</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiMessage.cpp">
-      <Filter>VxPlayer\craigsapp_midifile</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\Binasc.cpp">
-      <Filter>VxPlayer\craigsapp_midifile</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\VocalTrainer\VxPlayer\MidiFileReader.cpp">
       <Filter>VxPlayer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\VocalTrainer\VxPlayer\MidiTrack.cpp">
       <Filter>VxPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\CraigsappMidifile\Binasc.cpp">
+      <Filter>VxPlayer\CraigsappMidifile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\CraigsappMidifile\MidiEvent.cpp">
+      <Filter>VxPlayer\CraigsappMidifile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\CraigsappMidifile\MidiEventList.cpp">
+      <Filter>VxPlayer\CraigsappMidifile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\CraigsappMidifile\MidiFile.cpp">
+      <Filter>VxPlayer\CraigsappMidifile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\CraigsappMidifile\MidiMessage.cpp">
+      <Filter>VxPlayer\CraigsappMidifile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\VocalTrainer\VxPlayer\CraigsappMidifile\Options.cpp">
+      <Filter>VxPlayer\CraigsappMidifile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -218,20 +221,8 @@
     <ClInclude Include="..\..\VocalTrainer\VxPlayer\AudioPlayer.h">
       <Filter>VxPlayer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiEvent.h">
-      <Filter>VxPlayer\craigsapp_midifile</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiEventList.h">
-      <Filter>VxPlayer\craigsapp_midifile</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiFile.h">
-      <Filter>VxPlayer\craigsapp_midifile</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\MidiMessage.h">
-      <Filter>VxPlayer\craigsapp_midifile</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\VocalTrainer\VxPlayer\craigsapp_midifile\Binasc.h">
-      <Filter>VxPlayer\craigsapp_midifile</Filter>
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\VxPitch.h">
+      <Filter>VxPlayer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\VocalTrainer\VxPlayer\MidiFileReader.h">
       <Filter>VxPlayer</Filter>
@@ -242,8 +233,23 @@
     <ClInclude Include="..\..\VocalTrainer\VxPlayer\MidiTrack.h">
       <Filter>VxPlayer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\VocalTrainer\VxPlayer\VxPitch.h">
-      <Filter>VxPlayer</Filter>
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\CraigsappMidifile\Binasc.h">
+      <Filter>VxPlayer\CraigsappMidifile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\CraigsappMidifile\MidiEvent.h">
+      <Filter>VxPlayer\CraigsappMidifile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\CraigsappMidifile\MidiEventList.h">
+      <Filter>VxPlayer\CraigsappMidifile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\CraigsappMidifile\MidiFile.h">
+      <Filter>VxPlayer\CraigsappMidifile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\CraigsappMidifile\MidiMessage.h">
+      <Filter>VxPlayer\CraigsappMidifile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VocalTrainer\VxPlayer\CraigsappMidifile\Options.h">
+      <Filter>VxPlayer\CraigsappMidifile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

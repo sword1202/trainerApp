@@ -25,8 +25,11 @@ class MidiFileReader {
 
     double durationInSeconds;
     int    durationInTicks;
-    int    tpq;
-    double tps;
+    int    ticksPerQuarter;
+    double ticksPerSecond;
+	int beatsPerMinute;
+	int ticksPerBit;
+	double beatsPerTick;
 
     int    currentChannelPrefix;
 
@@ -54,6 +57,9 @@ private:
 
     static bool containsTrackName(const std::string &name);
     static bool satisfiesDistribution(const double &value, const double &mid, const double &sko);
+
+	int tickToBeat(const int tick);
+
 };
 
 #endif // MIDIFILEREADER_H
