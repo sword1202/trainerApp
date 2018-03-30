@@ -111,16 +111,17 @@ std::vector<VxFile> MidiFileReader::processMidiFile(MidiFile &midi)
     postProcess();
     const auto &trackList = getAvailableTracks();
     std::vector<VxFile> result;
+
     for (const auto &track : trackList) {
         std::vector<VxPitch> pitches;
         for (const auto &note : track->getNotes()) {
             VxPitch pitch;
             pitch.pitch = Pitch::fromMidiIndex(note->keyNumber);
-            pitch.startBitNumber = tickToBeat(note->startTick);
-            pitch.bitsCount = tickToBeat(note->durationInTicks());
+            pitch.startBitNumber = note->startTick;
+            pitch.bitsCount = note->durationInTicks();
             pitches.emplace_back(std::move(pitch));
         }
-        result.emplace_back(pitches, tickToBeat(durationInTicks - track->finalTick), beatsPerMinute);
+        result.emplace_back(pitches, durationInTicks - track->finalTick, ticksPerSecond * SECONDS_IN_MINUTE);
     }
     return result;
 }
