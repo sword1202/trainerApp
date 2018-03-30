@@ -39,7 +39,7 @@ VxFile::VxFile(std::istream &is) {
 }
 
 static inline size_t addSilence(std::vector<char>& pcmData, double duration, int sampleRate) {
-    size_t size = static_cast<size_t>(duration * sampleRate * sizeof(short));
+    size_t size = static_cast<size_t>((int)round(duration * sampleRate) * sizeof(short));
     pcmData.resize(pcmData.size() + size);
     return size;
 }
@@ -80,7 +80,7 @@ std::vector<char> VxFile::generateRawPcmAudioData(int sampleRate) const {
     while (iter != end) {
         // add silence between pitches
         addSilence(pcmData, (iter->startBitNumber - silenceStart) * bitDuration, sampleRate);
-        tsf_note_on(t, 0, iter->pitch.getSoundFont2Index(), 1.0f);
+        tsf_note_on(t, 0, iter->pitch.getSoundFont2Index(), 0.5f);
         silenceStart = iter->startBitNumber + iter->bitsCount;
 
         // add pitch itself

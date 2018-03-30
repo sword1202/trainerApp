@@ -23,8 +23,8 @@
                                    selector:@selector(onTimer:)
                                    userInfo:nil
                                     repeats:YES];
-//    const char* path = [[NSBundle mainBundle] pathForResource:@"1" ofType:@"vx"].cString;
-//    VxFile vxFile = VxFile::fromFilePath(path);
+    const char* path = [[NSBundle mainBundle] pathForResource:@"1" ofType:@"vx"].cString;
+    //VxFile vxFile = VxFile::fromFilePath(path);
     MidiFileReader midiFileReader;
     std::vector<VxFile> vxFiles = midiFileReader.read(
             [NSBundle.mainBundle pathForResource:@"melody" ofType:@"mid"].UTF8String);
