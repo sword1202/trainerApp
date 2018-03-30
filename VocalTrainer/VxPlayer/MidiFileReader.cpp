@@ -160,7 +160,7 @@ void MidiFileReader::processEvent(const MidiEvent &event)
             std::string instrumentName = eventText(event, MIDI_MESSAGE_BYTE_INDEX_3, event[MIDI_MESSAGE_BYTE_INDEX_2]);
             // If prefix is set, appending name to track
             if (currentChannelPrefix != NO_CHANNEL_PREFIX) {
-                auto &track = getTrack(eventTrackID, currentChannelPrefix);
+                auto track = getTrack(eventTrackID, currentChannelPrefix);
                 track->instrumentName = instrumentName;
             }
             break;
@@ -212,7 +212,7 @@ void MidiFileReader::processEvent(const MidiEvent &event)
     } else {
         currentChannelPrefix = NO_CHANNEL_PREFIX; // If event is midi-event, channel prefix removes
         int command = event.getCommandNibble(); // P0 & 0x11110000
-        auto &currentTrack = getTrack(eventTrackID, eventChannelID);
+        auto currentTrack = getTrack(eventTrackID, eventChannelID);
 
         switch (command) {
 
