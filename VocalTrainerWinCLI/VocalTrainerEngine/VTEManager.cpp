@@ -12,7 +12,7 @@ namespace VTE
 	{
 		/*
 		MidiFileReader reader;
-		std::vector<VxFile> v = reader.read("C:/dev/coding/Upwork/VocalTrainerOsX/VocalTrainerWinCLI/VoiceTrainer/TakeOnMe.mid");
+		std::vector<VxFile> v = reader.read("C:/dev/coding/Upwork/VocalTrainerOsX/VocalTrainer/melody.mid");
 		for (size_t s = 0; s < v.size(); s++) {
 			std::cout << v[s].getDurationInBits() << ' ' << v[s].getDurationInSeconds() << ' ' << v[s].getTrackEndSilenceBitsCount() << "\n";
 			for (auto pitch : v[s].getPitches()) {
