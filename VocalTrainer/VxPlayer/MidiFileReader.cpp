@@ -179,7 +179,6 @@ void MidiFileReader::processEvent(const MidiEvent &event)
             for (auto &track: tracksMap) {
                 if(track.second->trackId == eventTrackID) {
                     track.second->closeAllNotes(eventTick);
-                    track.second->finalTick = eventTick;
                 }
             }
             break;

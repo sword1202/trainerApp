@@ -88,6 +88,8 @@ std::list<int>::iterator MidiTrack::closeNote(const int keyNumber, const int tic
         auto &note = notes.at(*it);
         if (note->keyNumber == keyNumber) {
             note->finalTick = tick;
+			if (finalTick < tick)
+				finalTick = tick;
             it = pendingNoteIndexes.erase(it);
             return it;
         } else {
