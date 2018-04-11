@@ -31,6 +31,9 @@
     <Filter Include="VxPlayer\CraigsappMidifile">
       <UniqueIdentifier>{6ab7245a-ad51-42c9-80ae-126d15993780}</UniqueIdentifier>
     </Filter>
+    <Filter Include="VxPlayer\Tests">
+      <UniqueIdentifier>{a6030d75-fb11-40f9-99c5-2d305af63c10}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\VocalTrainer\GLScene\GLSceneDrawer.cpp">
@@ -122,6 +125,9 @@
     </ClCompile>
     <ClCompile Include="..\..\VocalTrainer\VxPlayer\CraigsappMidifile\Options.cpp">
       <Filter>VxPlayer\CraigsappMidifile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\VocalTrainerTests\MidiFileTest.cpp">
+      <Filter>VxPlayer\Tests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

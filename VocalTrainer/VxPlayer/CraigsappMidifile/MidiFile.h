@@ -47,8 +47,13 @@ class _TickTime {
       double seconds;
 };
 
+#if defined(VTE_DLL_BUILD)
+#define VTEMANAGER_API __declspec(dllexport)
+#elif defined(VTE_DLL)
+#define VTEMANAGER_API __declspec(dllimport)
+#endif
 
-class MidiFile {
+class VTEMANAGER_API MidiFile {
    public:
                 MidiFile                  (void);
                 MidiFile                  (const char* aFile);

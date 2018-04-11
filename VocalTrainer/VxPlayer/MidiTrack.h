@@ -41,6 +41,7 @@ private:
     std::list<int> pendingNoteIndexes;
 
 public:
+    void reset();
 	std::vector<std::shared_ptr<MidiNote> > &getNotes();
     void openNote(const int keyNumber, const int tick, const int velocity);
     std::list<int>::iterator closeNote(const int keyNumber, const int tick);

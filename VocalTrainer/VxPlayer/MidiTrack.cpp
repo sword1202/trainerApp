@@ -22,11 +22,31 @@ static constexpr double    NOTE_VALUE_8TH_DOT_RELATIVE_TO_4TH  = 3.0 / 4.0;
 static constexpr double    NOTE_VALUE_4TH_DOT_RELATIVE_TO_4TH  = 3.0 / 2.0;
 static constexpr double    NOTE_VALUE_2ND_DOT_RELATIVE_TO_4TH  = 3.0 / 1.0;
 
-MidiTrack::MidiTrack() :
-    startTick(-1),
-    finalTick(-1),
-	isPolyphonical(false)
+MidiTrack::MidiTrack()
 {
+    reset();
+}
+
+void MidiTrack::reset()
+{
+    instrumentName = "";
+    trackName = "";
+    isPolyphonical = false;
+    channelId = -1;
+    trackId = -1;
+    noteCount = 0;
+    lowestNote = 0;
+    highestNote = 0;
+    averageVelocity = 0.0;
+    maxNoteValuePercent = 0.0;
+    durationInTime = 0.0;
+
+    startTick = -1;
+    finalTick = -1;
+
+    notes.clear();
+    durationDistrib.clear();
+    pendingNoteIndexes.clear();
 }
 
 std::vector<std::shared_ptr<MidiNote> > &MidiTrack::getNotes()

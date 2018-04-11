@@ -5,6 +5,7 @@
 
 #include "MidiFileReader.h"
 #include "MidiFile.h"
+#include "VxFile.h"
 
 #include <iostream>
 #include <algorithm>
@@ -58,6 +59,14 @@ static constexpr char   SUBSTRING_SONG[]   = "song";
 static constexpr char   SUBSTRING_MELODY[] = "melod";
 
 MidiFileReader::MidiFileReader()
+    : durationInSeconds(0.0),
+      durationInTicks(0),
+      ticksPerQuarter(0),
+      ticksPerSecond(0.0),
+      beatsPerMinute(0.0),
+      ticksPerBeat(0),
+      beatsPerTick(0.0),
+      currentChannelPrefix(-1)
 {
 
 }
@@ -67,24 +76,52 @@ MidiFileReader::~MidiFileReader()
 
 }
 
-std::vector<VxFile> MidiFileReader::read(const string &filename)
+void MidiFileReader::read(const string &filename, std::vector<VxFile> *outResult, double *outBeatsPerMinute)
 {
-    MidiFile f;
-    if (f.read(filename) != 0) {
-        return processMidiFile(f);
-    } else {
-        return std::vector<VxFile>();
+    reset();
+    MidiFile midifile;
+    if (midifile.read(filename) != 0) {
+        processMidiFile(midifile, outResult, outBeatsPerMinute);
     }
 }
 
-std::vector<VxFile> MidiFileReader::read(istream &is)
+void MidiFileReader::read(istream &is, std::vector<VxFile> *outResult, double *outBeatsPerMinute)
 {
-    MidiFile f;
-    if (f.read(is) != 0) {
-        return processMidiFile(f);
-    } else {
-        return std::vector<VxFile>();
+    reset();
+    MidiFile midifile;
+    if (midifile.read(is) != 0) {
+        processMidiFile(midifile, outResult, outBeatsPerMinute);
     }
+}
+
+/*!
+ * \brief MidiFileReader::reset
+ *
+ * Clears all data
+ */
+void MidiFileReader::reset()
+{
+    durationInSeconds = 0.0;
+    durationInTicks = 0;
+    ticksPerQuarter = 0;
+    ticksPerSecond = 0.0;
+    beatsPerMinute = 0.0;
+    ticksPerBeat = 0;
+    beatsPerTick = 0.0;
+    currentChannelPrefix = NO_CHANNEL_PREFIX;
+    tracksMap.clear();
+    trackNamesMap.clear();
+}
+
+/*!
+ * \brief MidiFileReader::getAvailableTracks
+ *
+ * Gets track list that satisfies conditions ordered by probability of being a vocal part
+ * \return
+ */
+std::vector<std::shared_ptr<MidiTrack> > MidiFileReader::getAvailableTracks()
+{
+    return availableTracks;
 }
 
 /*!
@@ -92,9 +129,10 @@ std::vector<VxFile> MidiFileReader::read(istream &is)
  *
  * Processes MidiFile object
  * \param midi
- * \return
+ * \param outResult
+ * \param outBeatsPerMinute
  */
-std::vector<VxFile> MidiFileReader::processMidiFile(MidiFile &midi)
+void MidiFileReader::processMidiFile(MidiFile &midi, std::vector<VxFile> *outResult, double *outBeatsPerMinute)
 {
     currentChannelPrefix = NO_CHANNEL_PREFIX;
     durationInSeconds = midi.getTotalTimeInSeconds();
@@ -110,7 +148,7 @@ std::vector<VxFile> MidiFileReader::processMidiFile(MidiFile &midi)
     }
     postProcess();
     const auto &trackList = getAvailableTracks();
-    std::vector<VxFile> result;
+    *outBeatsPerMinute = beatsPerMinute;
 
     for (const auto &track : trackList) {
         std::vector<VxPitch> pitches;
@@ -121,9 +159,8 @@ std::vector<VxFile> MidiFileReader::processMidiFile(MidiFile &midi)
             pitch.bitsCount = note->durationInTicks();
             pitches.emplace_back(std::move(pitch));
         }
-        result.emplace_back(pitches, durationInTicks - track->finalTick, ticksPerSecond * SECONDS_IN_MINUTE);
+        outResult->emplace_back(pitches, durationInTicks - track->finalTick, ticksPerSecond * SECONDS_IN_MINUTE);
     }
-    return result;
 }
 
 /*!
@@ -192,9 +229,9 @@ void MidiFileReader::processEvent(const MidiEvent &event)
 			int microsecondsPerQuarter = event[MIDI_MESSAGE_BYTE_INDEX_3] << 16 | 
 									     event[MIDI_MESSAGE_BYTE_INDEX_4] << 8  | 
 				                         event[MIDI_MESSAGE_BYTE_INDEX_5];
-			beatsPerMinute = MILLISECONDS_IN_MINUTE / microsecondsPerQuarter;
-			ticksPerBit   =  ticksPerSecond * SECONDS_IN_MINUTE / beatsPerMinute;
-			beatsPerTick =   1.0 / ticksPerBit;
+            beatsPerMinute = 1.0 * MILLISECONDS_IN_MINUTE / microsecondsPerQuarter;
+            ticksPerBeat   =  ticksPerSecond * SECONDS_IN_MINUTE / beatsPerMinute;
+            beatsPerTick =   1.0 / ticksPerBeat;
             break;
         }
 
@@ -344,40 +381,23 @@ void MidiFileReader::postProcess()
 
         track->postProcess(ticksPerQuarter, durationInTicks);
         track->durationInTime = 1.0 * track->durationInTicks() / ticksPerSecond;
-    }
-}
 
-/*!
- * \brief MidiFileReader::getTracks
- *
- * Gets track list that satisfies conditions
- * \return
- */
-std::vector<std::shared_ptr<MidiTrack> > MidiFileReader::getAvailableTracks()
-{
-    std::vector<std::shared_ptr<MidiTrack> > tracks;
-
-    // If duration is more than 1 hour, return nothing
-    if (durationInSeconds > MAX_TRACK_DURATION)
-        return tracks;
-    for (auto &trackMapItem : tracksMap) {
-        // Throwing out drums, empty and polyphonical tracks;
-        std::shared_ptr<MidiTrack> track = trackMapItem.second;
+        // If track satisfies base conditions, then add it to vector of available tracks
         if (track->noteCount > 0
                 && (track->channelId != DRUMS_CHANNEL_ID)
                 && (!track->isPolyphonical)
                 ) {
-            tracks.emplace_back(track);
+            availableTracks.emplace_back(track);
         }
     }
-    std::sort(tracks.begin(), tracks.end(), sortCompare);
-    return tracks;
+
+    std::sort(availableTracks.begin(), availableTracks.end(), sortCompare);
 }
 
 /*!
  * \brief MidiFileReader::sortCompare
  *
- * Sort function to order tracks by the possibilities of being a vocal part
+ * Sort function to order tracks by the probabilities of being a vocal part
  * \param first
  * \param second
  * \return
@@ -470,5 +490,5 @@ bool MidiFileReader::satisfiesDistribution(const double &value, const double &mx
 
 int MidiFileReader::tickToBeat(const int tick)
 {
-	return tick / ticksPerBit;
+    return tick / ticksPerBeat;
 }

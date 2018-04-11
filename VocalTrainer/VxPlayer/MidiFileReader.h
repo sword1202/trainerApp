@@ -16,10 +16,11 @@
 #include "MidiNote.h"
 #include "MidiTrack.h"
 
-#include "VxFile.h"
+//#include "VxFile.h"
 
 class MidiEvent;
 class MidiFile;
+class VxFile;
 
 class MidiFileReader {
 
@@ -27,9 +28,9 @@ class MidiFileReader {
     int    durationInTicks;
     int    ticksPerQuarter;
     double ticksPerSecond;
-	int beatsPerMinute;
-	int ticksPerBit;
-	double beatsPerTick;
+    double beatsPerMinute;
+    int    ticksPerBeat;
+    double beatsPerTick;
 
     int    currentChannelPrefix;
 
@@ -37,20 +38,22 @@ class MidiFileReader {
     using TrackNamesMap = std::unordered_map<int, std::string>;
     TrackMap      tracksMap;     // key = 15 * trackID + channelID
     TrackNamesMap trackNamesMap; // key = trackID
+    std::vector<std::shared_ptr<MidiTrack> > availableTracks;
 public:
     explicit MidiFileReader();
     ~MidiFileReader();
 
-    std::vector<VxFile> read(const std::string &filename);
-    std::vector<VxFile> read(std::istream &is);
+    void read(const std::string  &filename, std::vector<VxFile> *outResult, double *outBeatsPerMinute);
+    void read(      std::istream &is,       std::vector<VxFile> *outResult, double *outBeatsPerMinute);
 
 private:
-    std::vector<VxFile> processMidiFile(MidiFile &midi);
+	void reset();
+    void processMidiFile(MidiFile &midi, std::vector<VxFile> *outResult, double *outBeatsPerMinute);
     void processEvent(const MidiEvent &event);
     std::shared_ptr<MidiTrack> getTrack(const int trackID, const int channelID);
+    std::vector<std::shared_ptr<MidiTrack> > getAvailableTracks();
     std::string eventText(const MidiEvent &event, const int startByte, const int bytesAmount);
     void postProcess();
-    std::vector<std::shared_ptr<MidiTrack> > getAvailableTracks();
     static bool sortCompare(const std::shared_ptr<MidiTrack> &first, const std::shared_ptr<MidiTrack> &second);
     static double getWeight(const double &value, const double &baseWeight, const double &mx, const double &sigma);
     static double getSummaryWeight(const std::shared_ptr<MidiTrack> &value);
@@ -58,7 +61,7 @@ private:
     static bool containsTrackName(const std::string &name);
     static bool satisfiesDistribution(const double &value, const double &mid, const double &sko);
 
-	int tickToBeat(const int tick);
+    int tickToBeat(const int tick);
 
 };
 
