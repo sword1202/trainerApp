@@ -33,9 +33,9 @@ static constexpr double MIDI_RYTHM_RANGE[] = {1., 2., -1.};
 static constexpr double MIDI_RYTHM_RANGE_MONO[] = { 1., 1., -1. };
 static constexpr double MIDI_RYTHM_RANGE_MONO_FAST[] = { 0.1, 0.1, -1. };
 
-static constexpr char   SUBSTRING_VOCAL[] = "1_vocal";
-static constexpr char   SUBSTRING_LEAD[] = "lead1";
-static constexpr char   SUBSTRING_SONG[] = "0song";
+static constexpr char   SUBSTRING_VOCAL[] = "1_VocAl";
+static constexpr char   SUBSTRING_LEAD[] = "leAd1";
+static constexpr char   SUBSTRING_SONG[] = "SONG";
 static constexpr char   SUBSTRING_MELODY[] = "melod1";
 
 static constexpr char   MIDI_GENERATION_TEST[] = "MIDI generation test";
@@ -490,8 +490,6 @@ stringstream midiDataVocalSubstring() {
 	return s;
 }
 
-
-
 TEST_CASE("MIDI reader unit test") {
 	std::stringstream midiBuffer;
 	MidiFile midifile;
@@ -533,7 +531,7 @@ TEST_CASE("MIDI reader unit test") {
 			SECTION("MIDI pitches data test") {
 				auto pitches = outResult[0].getPitches();
 				REQUIRE(pitches.size() == 6);
-				for (int i = 0; i < pitches.size(); i++) {
+				for (size_t i = 0; i < pitches.size(); i++) {
 					REQUIRE(pitches[i].pitch.getMidiIndex() == MIDI_MELODY[i]);
 					// Checking duration of pitches
 					REQUIRE(pitches[i].bitsCount == MIDI_RYTHM[i] * MIDI_TPQ);
@@ -695,10 +693,10 @@ TEST_CASE("MIDI reader unit test") {
 				auto &pitches2 = outResult.at(1).getPitches();
 				REQUIRE(pitches1.size() == 2);
 				REQUIRE(pitches2.size() == 2);
-				for (int i = 0; i < pitches1.size(); ++i) {
+				for (size_t i = 0; i < pitches1.size(); ++i) {
 					REQUIRE(pitches1[i].bitsCount == MIDI_RYTHM_RANGE[i] * MIDI_TPQ);
 				}
-				for (int i = 0; i < pitches2.size(); ++i) {
+				for (size_t i = 0; i < pitches2.size(); ++i) {
 					REQUIRE(pitches2[i].bitsCount == MIDI_RYTHM_RANGE_MONO[i] * MIDI_TPQ);
 				}
 			}
@@ -719,10 +717,10 @@ TEST_CASE("MIDI reader unit test") {
 				auto &pitches2 = outResult.at(1).getPitches();
 				REQUIRE(pitches1.size() == 2);
 				REQUIRE(pitches2.size() == 2);
-				for (int i = 0; i < pitches1.size(); ++i) {
+				for (size_t i = 0; i < pitches1.size(); ++i) {
 					REQUIRE(pitches1[i].bitsCount == MIDI_RYTHM_RANGE_MONO[i] * MIDI_TPQ);
 				}
-				for (int i = 0; i < pitches2.size(); ++i) {
+				for (size_t i = 0; i < pitches2.size(); ++i) {
 					REQUIRE(pitches2[i].bitsCount == MIDI_RYTHM_RANGE_MONO_FAST[i] * MIDI_TPQ);
 				}
 			}
