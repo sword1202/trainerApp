@@ -114,17 +114,6 @@ void MidiFileReader::reset()
 }
 
 /*!
- * \brief MidiFileReader::getAvailableTracks
- *
- * Gets track list that satisfies conditions ordered by probability of being a vocal part
- * \return
- */
-std::vector<std::shared_ptr<MidiTrack> > MidiFileReader::getAvailableTracks()
-{
-    return availableTracks;
-}
-
-/*!
  * \brief MidiFileReader::processMidiFile
  *
  * Processes MidiFile object
@@ -147,7 +136,7 @@ void MidiFileReader::processMidiFile(MidiFile &midi, std::vector<VxFile> *outRes
         }
     }
     postProcess();
-    const auto &trackList = getAvailableTracks();
+	const auto &trackList = availableTracks;
     *outBeatsPerMinute = beatsPerMinute;
 
     for (const auto &track : trackList) {
