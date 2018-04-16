@@ -206,13 +206,19 @@ bool VxFile::validateLyrics() {
             return false;
         }
 
-        if (first.ticksCount < 1) {
+        if (first.letterStartIndex != 0) {
+            return false;
+        }
+
+        if (first.letterEndIndex <= 0) {
             return false;
         }
 
         if (!validateSingleLyricsInterval(first)) {
             return false;
         }
+    } else {
+        return true;
     }
 
     for (int i = 1; i < lyricsInfo.size(); ++i) {
@@ -237,6 +243,10 @@ bool VxFile::validateLyrics() {
         if (!validateSingleLyricsInterval(interval)) {
             return false;
         }
+    }
+
+    if (lyricsInfo.back().letterEndIndex != lyrics.size()) {
+        return false;
     }
 
     return true;

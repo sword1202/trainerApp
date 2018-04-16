@@ -152,6 +152,7 @@
 		C9FFF56C3AAB87110FBA08F2 /* VxPitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxPitch.h; sourceTree = "<group>"; };
 		C9FFF594ADB2309B5CA2334F /* MidiFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiFile.h; sourceTree = "<group>"; };
 		C9FFF5D6CB0CEACB514B6CCE /* GetSf2FilePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GetSf2FilePath.mm; sourceTree = "<group>"; };
+		C9FFF7CA744DC079874F4516 /* VxLyricsInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxLyricsInterval.h; sourceTree = "<group>"; };
 		C9FFF7FAE4AA3B321D53908D /* a.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file.sf2; path = a.sf2; sourceTree = "<group>"; };
 		C9FFF8263643024E19C9E8FC /* MidiEventList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiEventList.h; sourceTree = "<group>"; };
 		C9FFF96387DAC07E60D1628B /* AudioUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioUtils.h; path = PitchDetection/AudioUtils.h; sourceTree = "<group>"; };
@@ -382,6 +383,7 @@
 				C9FFF28F2B5B96F80B0C1DE4 /* MidiNote.h */,
 				C9FFFCD76FEB1522C118489D /* MidiFileReader.h */,
 				C9FFFA4AD1B24E2B29267701 /* MidiFileReader.cpp */,
+				C9FFF7CA744DC079874F4516 /* VxLyricsInterval.h */,
 			);
 			path = VxPlayer;
 			sourceTree = "<group>";
