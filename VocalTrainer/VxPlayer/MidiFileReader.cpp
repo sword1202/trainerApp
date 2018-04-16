@@ -144,9 +144,9 @@ void MidiFileReader::processMidiFile(MidiFile &midi, std::vector<VxFile> *outRes
         for (const auto &note : track->getNotes()) {
             VxPitch pitch;
             pitch.pitch = Pitch::fromMidiIndex(note->keyNumber);
-            pitch.startBitNumber = note->startTick;
-            pitch.bitsCount = note->durationInTicks();
-            pitches.emplace_back(std::move(pitch));
+            pitch.startTickNumber = note->startTick;
+            pitch.ticksCount = note->durationInTicks();
+            pitches.push_back(pitch);
         }
         outResult->emplace_back(pitches, durationInTicks - track->finalTick, ticksPerSecond * SECONDS_IN_MINUTE);
     }

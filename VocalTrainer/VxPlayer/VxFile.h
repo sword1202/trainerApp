@@ -11,17 +11,22 @@
 #include "AudioPlayer.h"
 #include <vector>
 #include "SynchronizedCallbacksQueue.h"
+#include "VxLyricsInterval.h"
 
 class VxFile {
     std::vector<VxPitch> pitches;
     int ticksPerMinute;
     int durationInBits = 0;
     int distanceInTicksBetweenLastPitchEndAndTrackEnd = 0;
+    std::string lyrics;
+    std::vector<VxLyricsInterval> lyricsInfo;
 
     bool validate();
+    bool validateLyrics();
+    bool validateSingleLyricsInterval(const VxLyricsInterval& interval);
     void postInit();
 public:
-    VxFile(const std::vector<VxPitch> &pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int bitsPerMinute);
+    VxFile(std::vector<VxPitch> &&pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int bitsPerMinute);
     VxFile(std::istream& is);
     static VxFile fromFilePath(const char* filePath);
 
@@ -35,6 +40,8 @@ public:
     int getTicksPerMinute() const;
     int getDurationInTicks() const;
     int getDistanceInTicksBetweenLastPitchEndAndTrackEnd() const;
+
+    void setLyrics(const std::string& lyrics, const std::vector<VxLyricsInterval>& lyricsInfo);
 
     void writeToStream(std::ostream& os) const;
 };

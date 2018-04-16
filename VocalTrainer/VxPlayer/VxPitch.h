@@ -15,8 +15,8 @@
 
 struct VxPitch {
     Pitch pitch;
-    int startBitNumber;
-    int bitsCount;
+    int startTickNumber;
+    int ticksCount;
 };
 
 

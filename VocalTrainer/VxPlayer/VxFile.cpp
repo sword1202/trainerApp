@@ -4,10 +4,11 @@
 #include "tsf.h"
 #include "GetSf2FilePath.h"
 #include "WAVFile.h"
+#include "Algorithms.h"
 
 static const char *const SILENCE_MARK = "*";
 
-VxFile::VxFile(const std::vector<VxPitch> &pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int bitsPerMinute)
+VxFile::VxFile(std::vector<VxPitch> &&pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int bitsPerMinute)
         : pitches(pitches), ticksPerMinute(bitsPerMinute),
           distanceInTicksBetweenLastPitchEndAndTrackEnd(distanceInTicksBetweenLastPitchEndAndTrackEnd) {
     postInit();
@@ -30,8 +31,8 @@ VxFile::VxFile(std::istream &is) {
             throw std::runtime_error("Error while parsing pitch with " + pitchName + " name");
         }
 
-        is >> vxPitch.startBitNumber;
-        is >> vxPitch.bitsCount;
+        is >> vxPitch.startTickNumber;
+        is >> vxPitch.ticksCount;
 
         pitches.push_back(vxPitch);
     }
@@ -80,13 +81,13 @@ std::vector<char> VxFile::generateRawPcmAudioData(int sampleRate) const {
     int silenceStart = 0;
     while (iter != end) {
         // add silence between pitches
-        addSilence(pcmData, (iter->startBitNumber - silenceStart) * bitDuration, sampleRate);
+        addSilence(pcmData, (iter->startTickNumber - silenceStart) * bitDuration, sampleRate);
         tsf_note_on(t, 0, iter->pitch.getSoundFont2Index(), 0.5f);
-        silenceStart = iter->startBitNumber + iter->bitsCount;
+        silenceStart = iter->startTickNumber + iter->ticksCount;
 
         // add pitch itself
         size_t currentSize = pcmData.size();
-        double duration = bitDuration * iter->bitsCount;
+        double duration = bitDuration * iter->ticksCount;
         // resize pcmData to append pitch data
         size_t sizeInBytes = addSilence(pcmData, duration, sampleRate);
         tsf_render_short(t, (short*)(pcmData.data() + currentSize), (int)sizeInBytes / 2, 0);
@@ -112,11 +113,11 @@ double VxFile::getBitDuration() const {
 
 bool VxFile::validate() {
     if (!pitches.empty()) {
-        if (pitches[0].startBitNumber < 0) {
+        if (pitches[0].startTickNumber < 0) {
             return false;
         }
         
-        if (pitches[0].bitsCount < 1) {
+        if (pitches[0].ticksCount < 1) {
             return false;
         }
     }
@@ -127,12 +128,12 @@ bool VxFile::validate() {
             return false;
         }
         
-        if (vxPitch.bitsCount < 1) {
+        if (vxPitch.ticksCount < 1) {
             return false;
         }
 
         const VxPitch &prev = pitches[i - 1];
-        if (vxPitch.startBitNumber < prev.startBitNumber + prev.bitsCount) {
+        if (vxPitch.startTickNumber < prev.startTickNumber + prev.ticksCount) {
             return false;
         }
     }
@@ -145,7 +146,7 @@ void VxFile::postInit() {
     assert(validate());
     if (!pitches.empty()) {
         const VxPitch &lastPitch = pitches.back();
-        durationInBits = lastPitch.startBitNumber + lastPitch.bitsCount + distanceInTicksBetweenLastPitchEndAndTrackEnd;
+        durationInBits = lastPitch.startTickNumber + lastPitch.ticksCount + distanceInTicksBetweenLastPitchEndAndTrackEnd;
     }
 }
 
@@ -173,7 +174,7 @@ void VxFile::writeToStream(std::ostream &os) const {
     os<<ticksPerMinute<<" ";
 
     for (const VxPitch& vxPitch : pitches) {
-        os<<vxPitch.pitch.getFullName()<<" "<<vxPitch.startBitNumber<<" "<<vxPitch.bitsCount<<" ";
+        os<<vxPitch.pitch.getFullName()<<" "<<vxPitch.startTickNumber<<" "<<vxPitch.ticksCount<<" ";
     }
 
     os<<"* "<<distanceInTicksBetweenLastPitchEndAndTrackEnd;
@@ -182,4 +183,85 @@ void VxFile::writeToStream(std::ostream &os) const {
 VxFile VxFile::fromFilePath(const char *filePath) {
     std::ifstream is(filePath);
     return VxFile(is);
+}
+
+void VxFile::setLyrics(const std::string &lyrics, const std::vector<VxLyricsInterval> &lyricsInfo) {
+    this->lyrics = lyrics;
+    this->lyricsInfo = lyricsInfo;
+    assert(validateLyrics());
+}
+
+bool VxFile::validateLyrics() {
+    if (!lyricsInfo.empty()) {
+        const VxLyricsInterval &first = lyricsInfo[0];
+        if (first.startTickNumber < 0) {
+            return false;
+        }
+
+        if (first.ticksCount < 1) {
+            return false;
+        }
+
+        if (first.startTickNumber < 0) {
+            return false;
+        }
+
+        if (first.ticksCount < 1) {
+            return false;
+        }
+
+        if (!validateSingleLyricsInterval(first)) {
+            return false;
+        }
+    }
+
+    for (int i = 1; i < lyricsInfo.size(); ++i) {
+        const VxLyricsInterval &interval = lyricsInfo[i];
+        if (interval.ticksCount < 1) {
+            return false;
+        }
+
+        if (interval.letterStartIndex >= interval.letterEndIndex) {
+            return false;
+        }
+
+        const VxLyricsInterval &prev = lyricsInfo[i - 1];
+        if (prev.letterStartIndex != interval.letterEndIndex) {
+            return false;
+        }
+
+        if (interval.startTickNumber < prev.startTickNumber + prev.ticksCount) {
+            return false;
+        }
+
+        if (!validateSingleLyricsInterval(interval)) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool VxFile::validateSingleLyricsInterval(const VxLyricsInterval &interval) {
+    VxPitch pitchHolder;
+    pitchHolder.startTickNumber = interval.startTickNumber;
+    auto iter = CppUtils::FindLessOrEqualInSortedCollection(pitches, pitchHolder,
+            [](const VxPitch& a, const VxPitch& b) {
+                return a.startTickNumber < b.startTickNumber;
+            });
+
+    if (iter == pitches.end()) {
+        return false;
+    }
+
+    int pitchTickEndPosition = iter->startTickNumber + iter->ticksCount;
+    if (pitchTickEndPosition <= interval.startTickNumber) {
+        return false;
+    }
+
+    if (pitchTickEndPosition < interval.startTickNumber + interval.ticksCount) {
+        return false;
+    }
+
+    return true;
 }
