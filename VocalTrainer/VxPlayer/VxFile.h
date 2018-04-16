@@ -26,7 +26,7 @@ class VxFile {
     bool validateSingleLyricsInterval(const VxLyricsInterval& interval);
     void postInit();
 public:
-    VxFile(std::vector<VxPitch> &&pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int bitsPerMinute);
+    VxFile(const std::vector<VxPitch> &pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int bitsPerMinute);
     VxFile(std::istream& is);
     static VxFile fromFilePath(const char* filePath);
 

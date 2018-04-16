@@ -5,10 +5,16 @@
 #include "GetSf2FilePath.h"
 #include "WAVFile.h"
 #include "Algorithms.h"
+#include "Strings.h"
 
-static const char *const SILENCE_MARK = "*";
+static constexpr char SILENCE_MARK[] = "*";
+static constexpr char LYRICS_START[] = "lyricsStart*";
+static constexpr char LYRICS_END[] = " lyricsEnd*";
+static constexpr char NO_LYRICS[] = "noLyrics*";
 
-VxFile::VxFile(std::vector<VxPitch> &&pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int bitsPerMinute)
+using namespace CppUtils;
+
+VxFile::VxFile(const std::vector<VxPitch> &pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int bitsPerMinute)
         : pitches(pitches), ticksPerMinute(bitsPerMinute),
           distanceInTicksBetweenLastPitchEndAndTrackEnd(distanceInTicksBetweenLastPitchEndAndTrackEnd) {
     postInit();
@@ -16,6 +22,15 @@ VxFile::VxFile(std::vector<VxPitch> &&pitches, int distanceInTicksBetweenLastPit
 
 VxFile::VxFile(std::istream &is) {
     is >> ticksPerMinute;
+
+    std::string lyricsState;
+    is >> lyricsState;
+    if (lyricsState == LYRICS_START) {
+        std::string lyricsData = Strings::ReadUntilTokenOrEof(is, LYRICS_END);
+
+    } else if(lyricsState != NO_LYRICS) {
+        throw std::runtime_error("Invalid vx file");
+    }
 
     std::string pitchName;
     while (!is.eof()) {
@@ -38,6 +53,7 @@ VxFile::VxFile(std::istream &is) {
     }
 
     postInit();
+    assert(validateLyrics());
 }
 
 static inline size_t addSilence(std::vector<char>& pcmData, double duration, int sampleRate) {

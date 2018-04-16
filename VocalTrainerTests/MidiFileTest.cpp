@@ -1,6 +1,3 @@
-// MidiFileTest.cpp: определяет точку входа для консольного приложения.
-//
-
 #include "MidiFile.h"
 #include "MidiFileReader.h"
 #include "VxFile.h"
@@ -162,7 +159,7 @@ stringstream midiDataPolyphonic() {
 * Num of tracks = 1
 * Num of channels = 1
 * TicksPerQuarterNote = MIDI_TPQ
-* Channel № = 9
+* Channel пїЅ = 9
 *
 * \return
 */
@@ -534,7 +531,7 @@ TEST_CASE("MIDI reader unit test") {
 				for (size_t i = 0; i < pitches.size(); i++) {
 					REQUIRE(pitches[i].pitch.getMidiIndex() == MIDI_MELODY[i]);
 					// Checking duration of pitches
-					REQUIRE(pitches[i].bitsCount == MIDI_RYTHM[i] * MIDI_TPQ);
+					REQUIRE(pitches[i].ticksCount == MIDI_RYTHM[i] * MIDI_TPQ);
 				}
 			}
 		}
@@ -694,10 +691,10 @@ TEST_CASE("MIDI reader unit test") {
 				REQUIRE(pitches1.size() == 2);
 				REQUIRE(pitches2.size() == 2);
 				for (size_t i = 0; i < pitches1.size(); ++i) {
-					REQUIRE(pitches1[i].bitsCount == MIDI_RYTHM_RANGE[i] * MIDI_TPQ);
+					REQUIRE(pitches1[i].ticksCount == MIDI_RYTHM_RANGE[i] * MIDI_TPQ);
 				}
 				for (size_t i = 0; i < pitches2.size(); ++i) {
-					REQUIRE(pitches2[i].bitsCount == MIDI_RYTHM_RANGE_MONO[i] * MIDI_TPQ);
+					REQUIRE(pitches2[i].ticksCount == MIDI_RYTHM_RANGE_MONO[i] * MIDI_TPQ);
 				}
 			}
 		}
@@ -718,10 +715,10 @@ TEST_CASE("MIDI reader unit test") {
 				REQUIRE(pitches1.size() == 2);
 				REQUIRE(pitches2.size() == 2);
 				for (size_t i = 0; i < pitches1.size(); ++i) {
-					REQUIRE(pitches1[i].bitsCount == MIDI_RYTHM_RANGE_MONO[i] * MIDI_TPQ);
+					REQUIRE(pitches1[i].ticksCount == MIDI_RYTHM_RANGE_MONO[i] * MIDI_TPQ);
 				}
 				for (size_t i = 0; i < pitches2.size(); ++i) {
-					REQUIRE(pitches2[i].bitsCount == MIDI_RYTHM_RANGE_MONO_FAST[i] * MIDI_TPQ);
+					REQUIRE(pitches2[i].ticksCount == MIDI_RYTHM_RANGE_MONO_FAST[i] * MIDI_TPQ);
 				}
 			}
 		}
