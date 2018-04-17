@@ -20,17 +20,53 @@ VxFile::VxFile(const std::vector<VxPitch> &pitches, int distanceInTicksBetweenLa
     postInit();
 }
 
-VxFile::VxFile(std::istream &is) {
-    is >> ticksPerMinute;
+void VxFile::processLyrics(const std::string& lyricsData) {
+    std::vector<int> bracketsPositions;
+    size_t size = lyricsData.size();
+    bracketsPositions.reserve(size);
+    for (int i = 0; i < size; ++i) {
+        char ch = lyricsData[i];
+        if (ch == '(' || ch == ')') {
+            bracketsPositions.push_back(i);
+        }
+    }
 
+    size_t bracketsPositionsSize = bracketsPositions.size();
+    int lyricsAppendingBegin = 0;
+    VxLyricsInterval lyricsInterval;
+    for (int i = 0; i < bracketsPositionsSize; i+=2) {
+        int firstBracketIndex = bracketsPositions[i];
+        int secondBracketIndex = bracketsPositions[i + 1];
+
+        bool success;
+        auto split = Strings::SplitIntegers(lyricsData, firstBracketIndex + 1, secondBracketIndex, ',', &success);
+        if (!success || split.size() != 2) {
+            throw new std::runtime_error("Invalid vxFile, unable to parse lyrics");
+        }
+
+        lyricsInterval.startTickNumber = split[0];
+        lyricsInterval.ticksCount = split[1];
+
+        lyricsInterval.letterStartIndex = lyrics.size();
+        lyrics.append(lyricsData.begin() + lyricsAppendingBegin, lyricsData.begin() + firstBracketIndex);
+        lyricsAppendingBegin = secondBracketIndex + 1;
+        lyricsInterval.letterEndIndex = lyrics.size() - 1;
+
+        lyricsInfo.push_back(lyricsInterval);
+    }
+}
+
+VxFile::VxFile(std::istream &is) {
     std::string lyricsState;
     is >> lyricsState;
     if (lyricsState == LYRICS_START) {
         std::string lyricsData = Strings::ReadUntilTokenOrEof(is, LYRICS_END);
-
+        processLyrics(lyricsData);
     } else if(lyricsState != NO_LYRICS) {
         throw std::runtime_error("Invalid vx file");
     }
+
+    is >> ticksPerMinute;
 
     std::string pitchName;
     while (!is.eof()) {
@@ -248,7 +284,7 @@ bool VxFile::validateLyrics() {
         }
 
         const VxLyricsInterval &prev = lyricsInfo[i - 1];
-        if (prev.letterStartIndex != interval.letterEndIndex) {
+        if (interval.letterStartIndex != prev.letterEndIndex + 1) {
             return false;
         }
 
@@ -261,7 +297,9 @@ bool VxFile::validateLyrics() {
         }
     }
 
-    if (lyricsInfo.back().letterEndIndex != lyrics.size()) {
+    int endIndex = lyricsInfo.back().letterEndIndex;
+    int size = lyrics.size();
+    if (endIndex != size - 1) {
         return false;
     }
 

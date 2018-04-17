@@ -58,6 +58,7 @@
 		C9FFF7AE7C2048B9BE210E7C /* MidiEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF9C3A05CC2DBEF0526B6 /* MidiEvent.cpp */; };
 		C9FFF872E56D467F24FAEC7B /* MidiFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF1E4F9CFE2324A18F83D /* MidiFile.cpp */; };
 		C9FFF9E99BD59AA43EE09CE7 /* Options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFB62B47690E086FA2F2D /* Options.cpp */; };
+		C9FFFB8AC795FE59874A01F4 /* VxFileTests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFCBC01CCBEA7B458BB66 /* VxFileTests.cpp */; };
 		C9FFFBDE33761CD24C30F32D /* Binasc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF0789AD2038BA3DA38A5 /* Binasc.cpp */; };
 		C9FFFCCC2A217925D1F6324B /* PitchTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8FE4DFBA5720805C7E3 /* PitchTest.cpp */; };
 		C9FFFD0B153AE4CF499D8D66 /* SynchronizedCallbacksQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2E6D7DC2EC87198D5C0 /* SynchronizedCallbacksQueue.cpp */; };
@@ -178,6 +179,7 @@
 		C9FFFBE238D301064F720BAA /* AudioPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioPlayer.mm; sourceTree = "<group>"; };
 		C9FFFC6D53C891B61A3E964C /* Binasc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Binasc.h; sourceTree = "<group>"; };
 		C9FFFCB360CEFC7173BF1492 /* MidiTrack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiTrack.cpp; sourceTree = "<group>"; };
+		C9FFFCBC01CCBEA7B458BB66 /* VxFileTests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VxFileTests.cpp; sourceTree = "<group>"; };
 		C9FFFCD76FEB1522C118489D /* MidiFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiFileReader.h; sourceTree = "<group>"; };
 		C9FFFDD798D0EB7C53086DD3 /* 1.vx */ = {isa = PBXFileReference; lastKnownFileType = file.vx; path = 1.vx; sourceTree = "<group>"; };
 		C9FFFDF76019B54B1A20A866 /* AudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayer.h; sourceTree = "<group>"; };
@@ -329,7 +331,7 @@
 				C9FFF49EDE81D0B46952137F /* AlgorithmsTest.cpp */,
 				C9FFF6F024954CC62D511B38 /* StringsTest.cpp */,
 				C9FFFE55AF6D32018F3AB842 /* GeometryUtilsTest.cpp */,
-				C9FFF5B39738738A01C9EB82 /* VxPlayer */,
+				C9FFFCBC01CCBEA7B458BB66 /* VxFileTests.cpp */,
 			);
 			path = VocalTrainerTests;
 			sourceTree = "<group>";
@@ -385,13 +387,6 @@
 				C9FFF7CA744DC079874F4516 /* VxLyricsInterval.h */,
 			);
 			path = VxPlayer;
-			sourceTree = "<group>";
-		};
-		C9FFF5B39738738A01C9EB82 /* VxPlayer */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = VxPlayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -554,6 +549,7 @@
 				C9FFF038BC9107AE07369791 /* AlgorithmsTest.cpp in Sources */,
 				C9FFFFA05630CAB959DB47F5 /* StringsTest.cpp in Sources */,
 				C9FFF428255BE42EB50BBBD7 /* GeometryUtilsTest.cpp in Sources */,
+				C9FFFB8AC795FE59874A01F4 /* VxFileTests.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
