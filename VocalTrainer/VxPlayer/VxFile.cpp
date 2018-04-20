@@ -59,6 +59,8 @@ void VxFile::processLyrics(const std::string& lyricsData) {
 VxFile::VxFile(std::istream &is) {
     std::string lyricsState;
     is >> lyricsState;
+    // skip space
+    is.get();
     if (lyricsState == LYRICS_START) {
         std::string lyricsData = Strings::ReadUntilTokenOrEof(is, LYRICS_END);
         processLyrics(lyricsData);
@@ -113,7 +115,7 @@ struct TsfHolder {
 };
 
 std::vector<char> VxFile::generateRawPcmAudioData(int sampleRate) const {
-    double bitDuration = getBitDuration();
+    double bitDuration = getTickDuration();
 
     TsfHolder tsfHolder(sampleRate);
     tsf* t = tsfHolder.t;
@@ -159,7 +161,7 @@ std::vector<char> VxFile::generateWavAudioData() const {
     return WAVFile::addWavHeaderToRawPcmData(pcmData.data(), (int)pcmData.size(), wavConfig);
 }
 
-double VxFile::getBitDuration() const {
+double VxFile::getTickDuration() const {
     return 60.0 / (double) ticksPerMinute;
 }
 
@@ -198,12 +200,12 @@ void VxFile::postInit() {
     assert(validate());
     if (!pitches.empty()) {
         const VxPitch &lastPitch = pitches.back();
-        durationInBits = lastPitch.startTickNumber + lastPitch.ticksCount + distanceInTicksBetweenLastPitchEndAndTrackEnd;
+        durationInTicks = lastPitch.startTickNumber + lastPitch.ticksCount + distanceInTicksBetweenLastPitchEndAndTrackEnd;
     }
 }
 
 double VxFile::getDurationInSeconds() const {
-    return getBitDuration() * durationInBits;
+    return getTickDuration() * durationInTicks;
 }
 
 const std::vector<VxPitch> &VxFile::getPitches() const {
@@ -215,7 +217,7 @@ int VxFile::getTicksPerMinute() const {
 }
 
 int VxFile::getDurationInTicks() const {
-    return durationInBits;
+    return durationInTicks;
 }
 
 int VxFile::getDistanceInTicksBetweenLastPitchEndAndTrackEnd() const {
@@ -328,4 +330,12 @@ bool VxFile::validateSingleLyricsInterval(const VxLyricsInterval &interval) {
     }
 
     return true;
+}
+
+const std::string &VxFile::getLyrics() const {
+    return lyrics;
+}
+
+const std::vector<VxLyricsInterval> &VxFile::getLyricsInfo() const {
+    return lyricsInfo;
 }

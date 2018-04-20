@@ -16,7 +16,7 @@
 class VxFile {
     std::vector<VxPitch> pitches;
     int ticksPerMinute;
-    int durationInBits = 0;
+    int durationInTicks = 0;
     int distanceInTicksBetweenLastPitchEndAndTrackEnd = 0;
     std::string lyrics;
     std::vector<VxLyricsInterval> lyricsInfo;
@@ -35,12 +35,15 @@ public:
     std::vector<char> generateWavAudioData() const;
 
     double getDurationInSeconds() const;
-    double getBitDuration() const;
+    double getTickDuration() const;
 
     const std::vector<VxPitch> &getPitches() const;
     int getTicksPerMinute() const;
     int getDurationInTicks() const;
     int getDistanceInTicksBetweenLastPitchEndAndTrackEnd() const;
+
+    const std::string &getLyrics() const;
+    const std::vector<VxLyricsInterval> &getLyricsInfo() const;
 
     void setLyrics(const std::string& lyrics, const std::vector<VxLyricsInterval>& lyricsInfo);
 
