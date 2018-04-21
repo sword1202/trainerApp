@@ -1,20 +1,10 @@
-//
-// Created by Semyon Tikhonenko on 4/16/18.
-// Copyright (c) 2018 Mac. All rights reserved.
-//
-
-#ifndef VOCALTRAINER_VXLYRICSINTERVAL_H
-#define VOCALTRAINER_VXLYRICSINTERVAL_H
-
-
-#import <assert.h>
+#ifndef VXFILE_LYRICS_INTERVAL_H
+#define VXFILE_LYRICS_INTERVAL_H
 
 struct VxLyricsInterval {
-    int letterStartIndex;
-    int letterEndIndex;
-    int startTickNumber;
-    int ticksCount;
+    int startTimestampInMilliseconds;
+    int endTimestampInMilliseconds;
+    std::wstring lyrics;
 };
 
-
-#endif //VOCALTRAINER_VXLYRICSINTERVAL_H
+#endif //VXFILE_LYRICS_INTERVAL_H

@@ -18,12 +18,10 @@ class VxFile {
     int ticksPerMinute;
     int durationInTicks = 0;
     int distanceInTicksBetweenLastPitchEndAndTrackEnd = 0;
-    std::string lyrics;
-    std::vector<VxLyricsInterval> lyricsInfo;
+    std::vector<VxLyricsInterval> lyrics;
 
     bool validate();
     bool validateLyrics();
-    bool validateSingleLyricsInterval(const VxLyricsInterval& interval);
     void postInit();
     void processLyrics(const std::string& lyricsData);
 public:
@@ -42,10 +40,10 @@ public:
     int getDurationInTicks() const;
     int getDistanceInTicksBetweenLastPitchEndAndTrackEnd() const;
 
-    const std::string &getLyrics() const;
-    const std::vector<VxLyricsInterval> &getLyricsInfo() const;
+    const std::vector<VxLyricsInterval> &getLyrics() const;
 
-    void setLyrics(const std::string& lyrics, const std::vector<VxLyricsInterval>& lyricsInfo);
+
+    void setLyrics(const std::vector<VxLyricsInterval>& lyrics);
 
     void writeToStream(std::ostream& os) const;
 };

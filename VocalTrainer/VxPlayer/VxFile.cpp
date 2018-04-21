@@ -6,6 +6,7 @@
 #include "WAVFile.h"
 #include "Algorithms.h"
 #include "Strings.h"
+#include <utf8.h>
 
 static constexpr char SILENCE_MARK[] = "*";
 static constexpr char LYRICS_START[] = "lyricsStart*";
@@ -26,7 +27,7 @@ void VxFile::processLyrics(const std::string& lyricsData) {
     bracketsPositions.reserve(size);
     for (int i = 0; i < size; ++i) {
         char ch = lyricsData[i];
-        if (ch == '(' || ch == ')') {
+        if (ch == '<' || ch == '>') {
             bracketsPositions.push_back(i);
         }
     }
@@ -44,15 +45,16 @@ void VxFile::processLyrics(const std::string& lyricsData) {
             throw new std::runtime_error("Invalid vxFile, unable to parse lyrics");
         }
 
-        lyricsInterval.startTickNumber = split[0];
-        lyricsInterval.ticksCount = split[1];
+        lyricsInterval.startTimestampInMilliseconds = split[0];
+        lyricsInterval.endTimestampInMilliseconds = split[1];
 
-        lyricsInterval.letterStartIndex = lyrics.size();
-        lyrics.append(lyricsData.begin() + lyricsAppendingBegin, lyricsData.begin() + firstBracketIndex);
+        utf8::utf8to16(lyricsData.begin() + lyricsAppendingBegin,
+                lyricsData.begin() + firstBracketIndex,
+                std::back_inserter(lyricsInterval.lyrics));
+
         lyricsAppendingBegin = secondBracketIndex + 1;
-        lyricsInterval.letterEndIndex = lyrics.size() - 1;
 
-        lyricsInfo.push_back(lyricsInterval);
+        lyrics.push_back(lyricsInterval);
     }
 }
 
@@ -239,103 +241,50 @@ VxFile VxFile::fromFilePath(const char *filePath) {
     return VxFile(is);
 }
 
-void VxFile::setLyrics(const std::string &lyrics, const std::vector<VxLyricsInterval> &lyricsInfo) {
+void VxFile::setLyrics(const std::vector<VxLyricsInterval> &lyrics) {
     this->lyrics = lyrics;
-    this->lyricsInfo = lyricsInfo;
     assert(validateLyrics());
 }
 
 bool VxFile::validateLyrics() {
-    if (!lyricsInfo.empty()) {
-        const VxLyricsInterval &first = lyricsInfo[0];
-        if (first.startTickNumber < 0) {
+    if (!lyrics.empty()) {
+        if (lyrics[0].startTimestampInMilliseconds < 0) {
             return false;
         }
 
-        if (first.ticksCount < 1) {
+        if (lyrics[0].endTimestampInMilliseconds < 1) {
             return false;
         }
 
-        if (first.startTickNumber < 0) {
-            return false;
-        }
-
-        if (first.letterStartIndex != 0) {
-            return false;
-        }
-
-        if (first.letterEndIndex <= 0) {
-            return false;
-        }
-
-        if (!validateSingleLyricsInterval(first)) {
-            return false;
-        }
-    } else {
-        return true;
-    }
-
-    for (int i = 1; i < lyricsInfo.size(); ++i) {
-        const VxLyricsInterval &interval = lyricsInfo[i];
-        if (interval.ticksCount < 1) {
-            return false;
-        }
-
-        if (interval.letterStartIndex >= interval.letterEndIndex) {
-            return false;
-        }
-
-        const VxLyricsInterval &prev = lyricsInfo[i - 1];
-        if (interval.letterStartIndex != prev.letterEndIndex + 1) {
-            return false;
-        }
-
-        if (interval.startTickNumber < prev.startTickNumber + prev.ticksCount) {
-            return false;
-        }
-
-        if (!validateSingleLyricsInterval(interval)) {
+        if (lyrics[0].endTimestampInMilliseconds < lyrics[0].startTimestampInMilliseconds) {
             return false;
         }
     }
 
-    int endIndex = lyricsInfo.back().letterEndIndex;
-    int size = lyrics.size();
-    if (endIndex != size - 1) {
+    for (int i = 1; i < lyrics.size(); ++i) {
+        const VxLyricsInterval &interval = lyrics[i];
+        const VxLyricsInterval &prev = lyrics[i - 1];
+
+        if (interval.startTimestampInMilliseconds < 0) {
+            return false;
+        }
+
+        if (interval.endTimestampInMilliseconds <= interval.startTimestampInMilliseconds) {
+            return false;
+        }
+
+        if (interval.startTimestampInMilliseconds < prev.endTimestampInMilliseconds) {
+            return false;
+        }
+    }
+
+    if (lyrics.back().endTimestampInMilliseconds > getDurationInSeconds() * 1000) {
         return false;
     }
 
     return true;
 }
 
-bool VxFile::validateSingleLyricsInterval(const VxLyricsInterval &interval) {
-    VxPitch pitchHolder;
-    pitchHolder.startTickNumber = interval.startTickNumber;
-    auto iter = CppUtils::FindLessOrEqualInSortedCollection(pitches, pitchHolder,
-            [](const VxPitch& a, const VxPitch& b) {
-                return a.startTickNumber < b.startTickNumber;
-            });
-
-    if (iter == pitches.end()) {
-        return false;
-    }
-
-    int pitchTickEndPosition = iter->startTickNumber + iter->ticksCount;
-    if (pitchTickEndPosition <= interval.startTickNumber) {
-        return false;
-    }
-
-    if (pitchTickEndPosition < interval.startTickNumber + interval.ticksCount) {
-        return false;
-    }
-
-    return true;
-}
-
-const std::string &VxFile::getLyrics() const {
+const std::vector<VxLyricsInterval> &VxFile::getLyrics() const {
     return lyrics;
-}
-
-const std::vector<VxLyricsInterval> &VxFile::getLyricsInfo() const {
-    return lyricsInfo;
 }
