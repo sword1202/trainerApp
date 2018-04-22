@@ -129,6 +129,7 @@ std::vector<char> VxFile::generateRawPcmAudioData(int sampleRate) const {
     pcmData.reserve(size + 10u);
 
     auto iter = pitches.begin();
+    auto prevIter = iter;
     auto end = pitches.end();
     if (iter == end) {
         return pcmData;
@@ -138,6 +139,9 @@ std::vector<char> VxFile::generateRawPcmAudioData(int sampleRate) const {
     while (iter != end) {
         // add silence between pitches
         addSilence(pcmData, (iter->startTickNumber - silenceStart) * bitDuration, sampleRate);
+        if (prevIter != iter) {
+            tsf_note_off(t, 0, prevIter->pitch.getSoundFont2Index());
+        }
         tsf_note_on(t, 0, iter->pitch.getSoundFont2Index(), 0.5f);
         silenceStart = iter->startTickNumber + iter->ticksCount;
 
@@ -147,7 +151,8 @@ std::vector<char> VxFile::generateRawPcmAudioData(int sampleRate) const {
         // resize pcmData to append pitch data
         size_t sizeInBytes = addSilence(pcmData, duration, sampleRate);
         tsf_render_short(t, (short*)(pcmData.data() + currentSize), (int)sizeInBytes / 2, 0);
-        
+
+        prevIter = iter;
         iter++;
     }
 
