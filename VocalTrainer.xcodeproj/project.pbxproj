@@ -47,18 +47,17 @@
 		C9FFF038BC9107AE07369791 /* AlgorithmsTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF49EDE81D0B46952137F /* AlgorithmsTest.cpp */; };
 		C9FFF0408858AAFAB5542709 /* MidiEventList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFF63DF93064D05413294 /* MidiEventList.cpp */; };
 		C9FFF051780243EF07304B84 /* 1.vx in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFDD798D0EB7C53086DD3 /* 1.vx */; };
+		C9FFF09DC78A783FDD0F5A3B /* a.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFEF6E23B96974A519665 /* a.sf2 */; };
 		C9FFF0C3BC65E9F88000F019 /* MvxPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF12A4E0AAAD8E783983E /* MvxPlayer.cpp */; };
 		C9FFF1454B1B19FD66D82BE7 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFFC2EAB3D64E9E8BCC71 /* LICENSE.txt */; };
 		C9FFF29A2778D812DD86DAD9 /* PitchDetectionSmoothingBufferTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFB1B7C3F160B173A4071 /* PitchDetectionSmoothingBufferTest.cpp */; };
 		C9FFF3994C66634963735E68 /* GetSf2FilePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF5D6CB0CEACB514B6CCE /* GetSf2FilePath.mm */; };
 		C9FFF428255BE42EB50BBBD7 /* GeometryUtilsTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE55AF6D32018F3AB842 /* GeometryUtilsTest.cpp */; };
 		C9FFF4B18FE6B96EF2809623 /* VxFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFBD710C1F3DE858A19B5 /* VxFile.cpp */; };
-		C9FFF4F62C12797FCDF8E4E0 /* a.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF7FAE4AA3B321D53908D /* a.sf2 */; };
 		C9FFF55D72509AEB32441277 /* MidiTrack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFCB360CEFC7173BF1492 /* MidiTrack.cpp */; };
 		C9FFF7AE7C2048B9BE210E7C /* MidiEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF9C3A05CC2DBEF0526B6 /* MidiEvent.cpp */; };
 		C9FFF872E56D467F24FAEC7B /* MidiFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF1E4F9CFE2324A18F83D /* MidiFile.cpp */; };
 		C9FFF9E99BD59AA43EE09CE7 /* Options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFB62B47690E086FA2F2D /* Options.cpp */; };
-		C9FFFA513E4E9A30385C975D /* VxLyricsInterval.h in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFC162E33AC13C87792C4 /* VxLyricsInterval.h */; };
 		C9FFFB8AC795FE59874A01F4 /* VxFileTests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFCBC01CCBEA7B458BB66 /* VxFileTests.cpp */; };
 		C9FFFBDE33761CD24C30F32D /* Binasc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF0789AD2038BA3DA38A5 /* Binasc.cpp */; };
 		C9FFFCCC2A217925D1F6324B /* PitchTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8FE4DFBA5720805C7E3 /* PitchTest.cpp */; };
@@ -158,11 +157,11 @@
 		C9FFF3A0BB69C8E7F02351A6 /* tsf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tsf.h; sourceTree = "<group>"; };
 		C9FFF460C4A9ADFB00392E76 /* MidiMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiMessage.h; sourceTree = "<group>"; };
 		C9FFF49EDE81D0B46952137F /* AlgorithmsTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlgorithmsTest.cpp; path = PitchDetection/CppUtils/tests/AlgorithmsTest.cpp; sourceTree = SOURCE_ROOT; };
+		C9FFF523E4CAB6655C922543 /* VxLyricsInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxLyricsInterval.h; sourceTree = "<group>"; };
 		C9FFF56C3AAB87110FBA08F2 /* VxPitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxPitch.h; sourceTree = "<group>"; };
 		C9FFF594ADB2309B5CA2334F /* MidiFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiFile.h; sourceTree = "<group>"; };
 		C9FFF5D6CB0CEACB514B6CCE /* GetSf2FilePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GetSf2FilePath.mm; sourceTree = "<group>"; };
 		C9FFF6F024954CC62D511B38 /* StringsTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StringsTest.cpp; path = PitchDetection/CppUtils/tests/StringsTest.cpp; sourceTree = SOURCE_ROOT; };
-		C9FFF7FAE4AA3B321D53908D /* a.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file.sf2; path = a.sf2; sourceTree = "<group>"; };
 		C9FFF8263643024E19C9E8FC /* MidiEventList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiEventList.h; sourceTree = "<group>"; };
 		C9FFF8FE4DFBA5720805C7E3 /* PitchTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PitchTest.cpp; path = PitchDetection/tests/PitchTest.cpp; sourceTree = SOURCE_ROOT; };
 		C9FFF96387DAC07E60D1628B /* AudioUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioUtils.h; path = PitchDetection/AudioUtils.h; sourceTree = "<group>"; };
@@ -178,7 +177,6 @@
 		C9FFFBCE6261AC60FFBF3B9F /* MidiEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiEvent.h; sourceTree = "<group>"; };
 		C9FFFBD710C1F3DE858A19B5 /* VxFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VxFile.cpp; sourceTree = "<group>"; };
 		C9FFFBE238D301064F720BAA /* AudioPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioPlayer.mm; sourceTree = "<group>"; };
-		C9FFFC162E33AC13C87792C4 /* VxLyricsInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VxLyricsInterval.h; path = VxPlayer/VxLyricsInterval.h; sourceTree = "<group>"; };
 		C9FFFC6D53C891B61A3E964C /* Binasc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Binasc.h; sourceTree = "<group>"; };
 		C9FFFCB360CEFC7173BF1492 /* MidiTrack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiTrack.cpp; sourceTree = "<group>"; };
 		C9FFFCBC01CCBEA7B458BB66 /* VxFileTests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VxFileTests.cpp; sourceTree = "<group>"; };
@@ -188,6 +186,7 @@
 		C9FFFDFA5FE4750E603649E8 /* GetSf2FilePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetSf2FilePath.h; sourceTree = "<group>"; };
 		C9FFFE55AF6D32018F3AB842 /* GeometryUtilsTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GeometryUtilsTest.cpp; path = PitchDetection/CppUtils/tests/GeometryUtilsTest.cpp; sourceTree = SOURCE_ROOT; };
 		C9FFFE67C10A6A65023BE764 /* Algorithms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Algorithms.h; path = PitchDetection/CppUtils/Algorithms.h; sourceTree = "<group>"; };
+		C9FFFEF6E23B96974A519665 /* a.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file.sf2; path = a.sf2; sourceTree = "<group>"; };
 		C9FFFF63DF93064D05413294 /* MidiEventList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiEventList.cpp; sourceTree = "<group>"; };
 		C9FFFFC2EAB3D64E9E8BCC71 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -289,7 +288,6 @@
 				10628F99ACFB6F50A805A23B /* GLScene */,
 				C9FFF1536A6FDAC558B00F51 /* VxPlayer */,
 				C9FFF0A770C7C4A877771027 /* melody.mid */,
-				C9FFFC162E33AC13C87792C4 /* VxLyricsInterval.h */,
 			);
 			path = VocalTrainer;
 			sourceTree = "<group>";
@@ -371,7 +369,6 @@
 			isa = PBXGroup;
 			children = (
 				C9FFF3A0BB69C8E7F02351A6 /* tsf.h */,
-				C9FFF7FAE4AA3B321D53908D /* a.sf2 */,
 				C9FFFBE238D301064F720BAA /* AudioPlayer.mm */,
 				C9FFFDF76019B54B1A20A866 /* AudioPlayer.h */,
 				C9FFF56C3AAB87110FBA08F2 /* VxPitch.h */,
@@ -388,6 +385,8 @@
 				C9FFF28F2B5B96F80B0C1DE4 /* MidiNote.h */,
 				C9FFFCD76FEB1522C118489D /* MidiFileReader.h */,
 				C9FFFA4AD1B24E2B29267701 /* MidiFileReader.cpp */,
+				C9FFF523E4CAB6655C922543 /* VxLyricsInterval.h */,
+				C9FFFEF6E23B96974A519665 /* a.sf2 */,
 			);
 			path = VxPlayer;
 			sourceTree = "<group>";
@@ -479,11 +478,10 @@
 				2EF1E8D31D57F95100E02C33 /* Assets.xcassets in Resources */,
 				2EF1E8D61D57F95100E02C33 /* Main.storyboard in Resources */,
 				2EF1E99F1D592EC100E02C33 /* CMakeLists.txt in Resources */,
-				C9FFF4F62C12797FCDF8E4E0 /* a.sf2 in Resources */,
 				C9FFF051780243EF07304B84 /* 1.vx in Resources */,
 				C9FFF1454B1B19FD66D82BE7 /* LICENSE.txt in Resources */,
 				C9FFFF17382758D3A423FB58 /* melody.mid in Resources */,
-				C9FFFA513E4E9A30385C975D /* VxLyricsInterval.h in Resources */,
+				C9FFF09DC78A783FDD0F5A3B /* a.sf2 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

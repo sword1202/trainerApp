@@ -4,7 +4,7 @@
 #include "tsf.h"
 #include "GetSf2FilePath.h"
 #include "WAVFile.h"
-#include "Algorithms.h"
+#include "AudioUtils.h"
 #include "Strings.h"
 #include <utf8.h>
 
@@ -150,7 +150,13 @@ std::vector<char> VxFile::generateRawPcmAudioData(int sampleRate) const {
         double duration = bitDuration * iter->ticksCount;
         // resize pcmData to append pitch data
         size_t sizeInBytes = addSilence(pcmData, duration, sampleRate);
-        tsf_render_short(t, (short*)(pcmData.data() + currentSize), (int)sizeInBytes / 2, 0);
+
+        short* arrayToRender = (short*)(pcmData.data() + currentSize);
+        int arrayToRenderSize = (int)sizeInBytes / 2;
+
+        tsf_render_short(t, arrayToRender, arrayToRenderSize, 0);
+        AudioUtils::MakeSmoothBeginning(arrayToRender, arrayToRenderSize, 0.2);
+        AudioUtils::MakeSmoothEnding(arrayToRender, arrayToRenderSize, 0.2);
 
         prevIter = iter;
         iter++;
