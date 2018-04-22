@@ -270,18 +270,20 @@ void VxFile::setLyrics(const std::vector<VxLyricsInterval> &lyrics) {
 }
 
 bool VxFile::validateLyrics() {
-    if (!lyrics.empty()) {
-        if (lyrics[0].startTimestampInMilliseconds < 0) {
-            return false;
-        }
+    if (lyrics.empty()) {
+        return true;
+    }
 
-        if (lyrics[0].endTimestampInMilliseconds < 1) {
-            return false;
-        }
+    if (lyrics[0].startTimestampInMilliseconds < 0) {
+        return false;
+    }
 
-        if (lyrics[0].endTimestampInMilliseconds < lyrics[0].startTimestampInMilliseconds) {
-            return false;
-        }
+    if (lyrics[0].endTimestampInMilliseconds < 1) {
+        return false;
+    }
+
+    if (lyrics[0].endTimestampInMilliseconds < lyrics[0].startTimestampInMilliseconds) {
+        return false;
     }
 
     for (int i = 1; i < lyrics.size(); ++i) {
