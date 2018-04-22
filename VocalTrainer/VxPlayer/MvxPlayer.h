@@ -12,12 +12,17 @@
 class MvxPlayer {
     std::string audioData;
     std::vector<char> vxAudioData;
-    AudioPlayer player;
+    AudioPlayer instrumentalPlayer;
     AudioPlayer vxPlayer;
 public:
     MvxPlayer();
-    void load(std::istream& audioFile, std::istream& vxFile);
-    void play();
+    void loadFromFile(const char* filePath);
+    void loadFromStream(std::istream& is);
+    void initFromInstrumentalFileAndVxFile(const char* instrumentalFilePath, VxFile vxFile);
+    void initFromInstrumentalStreamAndVxFile(std::istream& instrumentalStream, VxFile vxFile);
+    void play(float instrumentalVolume, float pianoVolume);
+    void setInstrumentalVolume(float instrumentalVolume);
+    void setPianoVolume(float pianoVolume);
     void pause();
     void resume();
     void seek(double value);

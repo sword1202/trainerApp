@@ -79,7 +79,7 @@ VxFile::VxFile(std::istream &is) {
             is >> distanceInTicksBetweenLastPitchEndAndTrackEnd;
             break;
         }
-        
+
         VxPitch vxPitch;
         vxPitch.pitch = Pitch(pitchName.data());
         if (!vxPitch.pitch.hasPerfectFrequency()) {
@@ -116,7 +116,7 @@ struct TsfHolder {
     }
 };
 
-std::vector<char> VxFile::generateRawPcmAudioData(int sampleRate) const {
+std::vector<char> VxFile::generateRawPcmAudioData(int sampleRate, float volume) const {
     double bitDuration = getTickDuration();
 
     TsfHolder tsfHolder(sampleRate);
@@ -142,7 +142,7 @@ std::vector<char> VxFile::generateRawPcmAudioData(int sampleRate) const {
         if (prevIter != iter) {
             tsf_note_off(t, 0, prevIter->pitch.getSoundFont2Index());
         }
-        tsf_note_on(t, 0, iter->pitch.getSoundFont2Index(), 0.5f);
+        tsf_note_on(t, 0, iter->pitch.getSoundFont2Index(), volume);
         silenceStart = iter->startTickNumber + iter->ticksCount;
 
         // add pitch itself
@@ -168,9 +168,9 @@ std::vector<char> VxFile::generateRawPcmAudioData(int sampleRate) const {
     return pcmData;
 }
 
-std::vector<char> VxFile::generateWavAudioData() const {
+std::vector<char> VxFile::generateWavAudioData(float volume) const {
     WavConfig wavConfig;
-    std::vector<char> pcmData = generateRawPcmAudioData(wavConfig.sampleRate);
+    std::vector<char> pcmData = generateRawPcmAudioData(wavConfig.sampleRate, volume);
     return WAVFile::addWavHeaderToRawPcmData(pcmData.data(), (int)pcmData.size(), wavConfig);
 }
 
@@ -238,7 +238,19 @@ int VxFile::getDistanceInTicksBetweenLastPitchEndAndTrackEnd() const {
 }
 
 void VxFile::writeToStream(std::ostream &os) const {
-    os<<ticksPerMinute<<" ";
+    if (lyrics.empty()) {
+        os<<NO_LYRICS;
+    } else {
+        os<<LYRICS_START<<" ";
+        for (const auto& interval : lyrics) {
+            std::string utf8lyrics;
+            utf8::utf16to8(interval.lyrics.begin(), interval.lyrics.end(), std::back_inserter(utf8lyrics));
+            os<<utf8lyrics<<'<'<<interval.startTimestampInMilliseconds<<','<<interval.endTimestampInMilliseconds<<'>';
+        }
+        os<<LYRICS_END;
+    }
+
+    os<<" "<<ticksPerMinute<<" ";
 
     for (const VxPitch& vxPitch : pitches) {
         os<<vxPitch.pitch.getFullName()<<" "<<vxPitch.startTickNumber<<" "<<vxPitch.ticksCount<<" ";

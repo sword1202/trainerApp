@@ -8,6 +8,7 @@
 #import "GLSceneDrawer.h"
 #import "VxFile.h"
 #import "MidiFileReader.h"
+#import "MvxFileWriter.h"
 
 @implementation PitchGraphView {
     GLSceneDrawer* _glSceneDrawer;
@@ -23,6 +24,10 @@
                                    selector:@selector(onTimer:)
                                    userInfo:nil
                                     repeats:YES];
+    [self testReadFromMidi];
+}
+
+- (void)testReadFromMidi {
     const char* path = [[NSBundle mainBundle] pathForResource:@"1" ofType:@"vx"].cString;
     //VxFile vxFile = VxFile::fromFilePath(path);
     MidiFileReader midiFileReader;
@@ -33,14 +38,17 @@
             &vxFiles,
             &beatsPerMinute);
     for (const VxFile& a : vxFiles) {
-        std::cout<<"Pitches from midi:\n";
+        std::cout << "Pitches from midi:\n";
         a.writeToStream(std::cout);
-        std::cout<<"\n";
+        std::cout << "\n";
     }
     const VxFile& vxFile = vxFiles[0];
-    std::vector<char> wavAudioData = vxFile.generateWavAudioData();
-    player = new AudioPlayer();
-    player->play(wavAudioData.data(), wavAudioData.size(), 0);
+//    std::vector<char> wavAudioData = vxFile.generateWavAudioData(0.5f);
+//    player = new AudioPlayer();
+//    player->play(wavAudioData.data(), wavAudioData.size(), 0);
+
+    const char* instrumentalPath = [[NSBundle mainBundle] pathForResource:@"yo" ofType:@"mp3"].cString;
+    MvxFileWriter::writeToFile(vxFile, instrumentalPath, "/Users/semyon/Desktop/yo.mvx");
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
@@ -72,7 +80,9 @@
 
 - (void)dealloc {
     delete _glSceneDrawer;
-    delete player;
+    if (player) {
+        delete player;
+    }
 }
 
 

@@ -15,7 +15,7 @@
 
 class VxFile {
     std::vector<VxPitch> pitches;
-    int ticksPerMinute;
+    int ticksPerMinute = 0;
     int durationInTicks = 0;
     int distanceInTicksBetweenLastPitchEndAndTrackEnd = 0;
     std::vector<VxLyricsInterval> lyrics;
@@ -29,8 +29,9 @@ public:
     VxFile(std::istream& is);
     static VxFile fromFilePath(const char* filePath);
 
-    std::vector<char> generateRawPcmAudioData(int sampleRate) const;
-    std::vector<char> generateWavAudioData() const;
+    // volume - [0.0, 1.0]
+    std::vector<char> generateRawPcmAudioData(int sampleRate, float volume) const;
+    std::vector<char> generateWavAudioData(float volume) const;
 
     double getDurationInSeconds() const;
     double getTickDuration() const;

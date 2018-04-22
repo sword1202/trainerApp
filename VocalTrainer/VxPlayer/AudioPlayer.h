@@ -46,6 +46,8 @@ public:
     void stop();
     void pause();
     void resume();
+	// volume - [0.0, 1.0]
+	void setVolume(float volume);
     void seek(double timeStamp);
 };
 #endif //VOCALTRAINER_AUDIOPLAYER_H

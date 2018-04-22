@@ -64,3 +64,7 @@ void AudioPlayer::resume() {
 void AudioPlayer::seek(double timeStamp) {
     ((__bridge AVAudioPlayer*)player).currentTime = timeStamp;
 }
+
+void AudioPlayer::setVolume(float volume) {
+    [(__bridge AVAudioPlayer*)player setVolume:volume];
+}
