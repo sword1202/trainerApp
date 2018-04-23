@@ -49,5 +49,6 @@ public:
 	// volume - [0.0, 1.0]
 	void setVolume(float volume);
     void seek(double timeStamp);
+	double getTrackDurationInSeconds();
 };
 #endif //VOCALTRAINER_AUDIOPLAYER_H

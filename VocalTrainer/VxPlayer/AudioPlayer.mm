@@ -49,6 +49,8 @@ void AudioPlayer::stop() {
 
 AudioPlayer::~AudioPlayer() {
     if (this->player) {
+        assert(![(__bridge AVAudioPlayer*)player isPlaying]
+                && "~AudioPlayer, player was playing while destructor was called");
         [(NSObject *)this->player release];
     }
 }
@@ -67,4 +69,8 @@ void AudioPlayer::seek(double timeStamp) {
 
 void AudioPlayer::setVolume(float volume) {
     [(__bridge AVAudioPlayer*)player setVolume:volume];
+}
+
+double AudioPlayer::getTrackDurationInSeconds() {
+    return [(__bridge AVAudioPlayer*)player duration];
 }

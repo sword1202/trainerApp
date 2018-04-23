@@ -8,10 +8,11 @@
 #include "Strings.h"
 #include <utf8.h>
 
-static constexpr char SILENCE_MARK[] = "*";
-static constexpr char LYRICS_START[] = "lyricsStart*";
-static constexpr char LYRICS_END[] = " lyricsEnd*";
-static constexpr char NO_LYRICS[] = "noLyrics*";
+constexpr char SILENCE_MARK[] = "*";
+constexpr char LYRICS_START[] = "lyricsStart*";
+constexpr char LYRICS_END[] = " lyricsEnd*";
+constexpr char NO_LYRICS[] = "noLyrics*";
+constexpr double PITCH_AUDIO_FADE_PERCENTAGE = 0.2;
 
 using namespace CppUtils;
 
@@ -155,8 +156,8 @@ std::vector<char> VxFile::generateRawPcmAudioData(int sampleRate, float volume) 
         int arrayToRenderSize = (int)sizeInBytes / 2;
 
         tsf_render_short(t, arrayToRender, arrayToRenderSize, 0);
-        AudioUtils::MakeSmoothBeginning(arrayToRender, arrayToRenderSize, 0.2);
-        AudioUtils::MakeSmoothEnding(arrayToRender, arrayToRenderSize, 0.2);
+        AudioUtils::MakeLinearFadeInAtBeginning(arrayToRender, arrayToRenderSize, PITCH_AUDIO_FADE_PERCENTAGE);
+        AudioUtils::MakeLinearFadeOutAtEnding(arrayToRender, arrayToRenderSize, PITCH_AUDIO_FADE_PERCENTAGE);
 
         prevIter = iter;
         iter++;
