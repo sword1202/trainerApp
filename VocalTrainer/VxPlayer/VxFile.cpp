@@ -17,8 +17,8 @@ constexpr double PITCH_AUDIO_FADE_PERCENTAGE = 0.2;
 
 using namespace CppUtils;
 
-VxFile::VxFile(const std::vector<VxPitch> &pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int bitsPerMinute)
-        : pitches(pitches), ticksPerMinute(bitsPerMinute),
+VxFile::VxFile(const std::vector<VxPitch> &pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int ticksPerMinute)
+        : pitches(pitches), ticksPerMinute(ticksPerMinute),
           distanceInTicksBetweenLastPitchEndAndTrackEnd(distanceInTicksBetweenLastPitchEndAndTrackEnd) {
     postInit();
 }

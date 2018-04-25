@@ -27,7 +27,6 @@ static constexpr int    MIDI_MESSAGE_BYTE_INDEX_5 = 5;
 
 static constexpr int    MIN_NOTE_COUNT = 40;
 static constexpr int    MAX_NOTE_COUNT = 1000;
-static constexpr double MAX_TRACK_DURATION = 3600;
 static constexpr int    DRUMS_CHANNEL_ID = 9;
 
 static constexpr double NAME_WEIGHT = 3.0;
@@ -136,10 +135,9 @@ void MidiFileReader::processMidiFile(MidiFile &midi, std::vector<VxFile> *outRes
         }
     }
     postProcess();
-	const auto &trackList = availableTracks;
     *outBeatsPerMinute = beatsPerMinute;
 
-    for (const auto &track : trackList) {
+    for (const auto &track : availableTracks) {
         std::vector<VxPitch> pitches;
         for (const auto &note : track->getNotes()) {
             VxPitch pitch;
@@ -148,7 +146,13 @@ void MidiFileReader::processMidiFile(MidiFile &midi, std::vector<VxFile> *outRes
             pitch.ticksCount = note->durationInTicks();
             pitches.push_back(pitch);
         }
-        outResult->emplace_back(pitches, durationInTicks - track->finalTick, ticksPerSecond * SECONDS_IN_MINUTE);
+
+        // VxFile
+        outResult->emplace_back(
+                pitches,
+                durationInTicks - track->finalTick, //distanceInTicksBetweenLastPitchEndAndTrackEnd
+                ticksPerSecond * SECONDS_IN_MINUTE //ticksPerMinute
+        );
     }
 }
 
@@ -374,7 +378,6 @@ void MidiFileReader::postProcess()
         // If track satisfies base conditions, then add it to vector of available tracks
         if (track->noteCount > 0
                 && (track->channelId != DRUMS_CHANNEL_ID)
-                && (!track->isPolyphonical)
                 ) {
             availableTracks.emplace_back(track);
         }

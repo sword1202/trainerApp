@@ -49,8 +49,7 @@ void MidiTrack::reset()
     pendingNoteIndexes.clear();
 }
 
-std::vector<std::shared_ptr<MidiNote> > &MidiTrack::getNotes()
-{
+std::vector<std::shared_ptr<MidiNote> > &MidiTrack::getNotes() {
 	return notes;
 }
 
