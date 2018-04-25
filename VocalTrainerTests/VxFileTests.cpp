@@ -21,3 +21,21 @@ TEST_CASE("VxFile parse") {
     REQUIRE(vxFile.getDurationInTicks() == 2000 + 345 + 25);
     REQUIRE(Primitives::CompareFloats(vxFile.getDurationInSeconds(), 60.0 / 24000 * (2000 + 345 + 25)));
 }
+
+namespace boost {
+    void assertion_failed(char const * expr, char const * function, char const * file, long line) {
+        throw std::runtime_error("Assertion Failed");
+    }
+}
+
+TEST_CASE("VxFile parse validatePitches failed") {
+    std::string data = "noLyrics* 250 D2 99 0";
+    std::stringstream stream(data);
+    REQUIRE_THROWS_AS(VxFile(stream), std::runtime_error);
+}
+
+TEST_CASE("VxFile parse validatePitches successed") {
+    std::string data = "noLyrics* 250 D2 120 50 E3 99 40 * 76";
+    std::stringstream stream(data);
+    VxFile vxFile(stream);
+}

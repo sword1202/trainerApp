@@ -30,6 +30,7 @@
 		2EF1E9A21D592EC100E02C33 /* PitchInputReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1E99B1D592EC100E02C33 /* PitchInputReader.cpp */; };
 		2EF1E9A31D592EC100E02C33 /* tests in Resources */ = {isa = PBXBuildFile; fileRef = 2EF1E99D1D592EC100E02C33 /* tests */; };
 		2EF1E9A91D592F1600E02C33 /* AudoInputReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1E9941D592EC100E02C33 /* AudoInputReader.cpp */; };
+		549968082090DAF20082B354 /* AudioUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF0A71BF842FC6C348D0C /* AudioUtils.cpp */; };
 		54CCB92720854CB3009639AD /* MidiFileTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54CCB92620854CB3009639AD /* MidiFileTest.cpp */; };
 		54CCB928208551A2009639AD /* Pitch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1E9991D592EC100E02C33 /* Pitch.cpp */; };
 		54CCB929208551A2009639AD /* VxFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFBD710C1F3DE858A19B5 /* VxFile.cpp */; };
@@ -544,6 +545,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				549968082090DAF20082B354 /* AudioUtils.cpp in Sources */,
 				54CCB9342085531F009639AD /* WAVFile.cpp in Sources */,
 				54CCB933208552FB009639AD /* PitchDetectionSmoothingAudioBuffer.cpp in Sources */,
 				54CCB932208552DC009639AD /* GetSf2FilePath.mm in Sources */,
@@ -765,9 +767,9 @@
 				DEVELOPMENT_TEAM = PULWZ8FYD5;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
-					"$(inherited)",
 					"PITCH_DETECTION_NO_CATCH_CONFIG_MAIN=1",
-					CPP_UTILS_NO_CATCH_CONFIG_MAIN,
+					"CPP_UTILS_NO_CATCH_CONFIG_MAIN=1",
+					"BOOST_ENABLE_ASSERT_HANDLER=1",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_NAME = "$(TARGET_NAME)";

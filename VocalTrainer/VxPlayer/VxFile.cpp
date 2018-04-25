@@ -1,4 +1,4 @@
-#include <assert.h>
+#include <boost/assert.hpp>
 #include "VxFile.h"
 #define TSF_IMPLEMENTATION
 #include "tsf.h"
@@ -6,6 +6,7 @@
 #include "WAVFile.h"
 #include "AudioUtils.h"
 #include "Strings.h"
+#include "Algorithms.h"
 #include <utf8.h>
 
 constexpr char SILENCE_MARK[] = "*";
@@ -94,7 +95,7 @@ VxFile::VxFile(std::istream &is) {
     }
 
     postInit();
-    assert(validateLyrics());
+    BOOST_ASSERT(validateLyrics());
 }
 
 static inline size_t addSilence(std::vector<char>& pcmData, double duration, int sampleRate) {
@@ -179,7 +180,7 @@ double VxFile::getTickDuration() const {
     return 60.0 / (double) ticksPerMinute;
 }
 
-bool VxFile::validate() {
+bool VxFile::validatePitches() {
     if (!pitches.empty()) {
         if (pitches[0].startTickNumber < 0) {
             return false;
@@ -199,19 +200,16 @@ bool VxFile::validate() {
         if (vxPitch.ticksCount < 1) {
             return false;
         }
-
-        const VxPitch &prev = pitches[i - 1];
-        if (vxPitch.startTickNumber < prev.startTickNumber + prev.ticksCount) {
-            return false;
-        }
     }
 
     return true;
 }
 
 void VxFile::postInit() {
-    assert(distanceInTicksBetweenLastPitchEndAndTrackEnd >= 0);
-    assert(validate());
+    SortByKey(pitches, [](const VxPitch& a) { return a.startTickNumber; });
+
+    BOOST_ASSERT(distanceInTicksBetweenLastPitchEndAndTrackEnd >= 0);
+    BOOST_ASSERT(validatePitches());
     if (!pitches.empty()) {
         const VxPitch &lastPitch = pitches.back();
         durationInTicks = lastPitch.startTickNumber + lastPitch.ticksCount + distanceInTicksBetweenLastPitchEndAndTrackEnd;
@@ -267,7 +265,7 @@ VxFile VxFile::fromFilePath(const char *filePath) {
 
 void VxFile::setLyrics(const std::vector<VxLyricsInterval> &lyrics) {
     this->lyrics = lyrics;
-    assert(validateLyrics());
+    BOOST_ASSERT(validateLyrics());
 }
 
 bool VxFile::validateLyrics() {

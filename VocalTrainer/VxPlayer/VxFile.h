@@ -20,7 +20,7 @@ class VxFile {
     int distanceInTicksBetweenLastPitchEndAndTrackEnd = 0;
     std::vector<VxLyricsInterval> lyrics;
 
-    bool validate();
+    bool validatePitches();
     bool validateLyrics();
     void postInit();
     void processLyrics(const std::string& lyricsData);
