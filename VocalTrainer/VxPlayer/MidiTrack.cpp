@@ -31,7 +31,7 @@ void MidiTrack::reset()
 {
     instrumentName = "";
     trackName = "";
-    isPolyphonical = false;
+    polyphonicTracksCount = -1;
     channelId = -1;
     trackId = -1;
     noteCount = 0;
@@ -72,20 +72,8 @@ void MidiTrack::openNote(const int keyNumber, const int tick, const int velocity
     note->velocity = velocity;
     notes.push_back(note);
 
-    // If the same note is already in pending, closing it and opening new
-    std::list<int>::iterator it;
-    for (it = pendingNoteIndexes.begin(); it != pendingNoteIndexes.end();) {
-        const auto &pendingNote = notes.at(*it);
-        if (pendingNote->keyNumber == keyNumber) {
-            it = closeNote(keyNumber, tick);
-        } else {
-            ++it;
-        }
-    }
-    if (pendingNoteIndexes.size() > 0) {
-        isPolyphonical = true;
-    }
-    pendingNoteIndexes.emplace_back(notes.size() - 1);
+    pendingNoteIndexes.push_back(notes.size() - 1);
+    polyphonicTracksCount = std::max(polyphonicTracksCount, (int)pendingNoteIndexes.size());
 
     if (startTick == -1) {
         startTick = tick;

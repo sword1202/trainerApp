@@ -8,8 +8,11 @@
 #import "GLSceneDrawer.h"
 #import "VxFile.h"
 #import "MidiFileReader.h"
-#import "MvxFileWriter.h"
+#import "MvxFile.h"
 #import "MvxPlayer.h"
+#include "TimeUtils.h"
+
+using namespace CppUtils;
 
 @implementation PitchGraphView {
     GLSceneDrawer* _glSceneDrawer;
@@ -26,12 +29,12 @@
                                    selector:@selector(onTimer:)
                                    userInfo:nil
                                     repeats:YES];
-    //[self testReadFromMidi];
-    const char* path = "/Users/semyon/Desktop/yo.mvx";
-    std::fstream ee;
-    _mvxPlayer = new MvxPlayer();
-    _mvxPlayer->loadFromFile(path);
-    _mvxPlayer->play(1.0, 0.5);
+    [self testReadFromMidi];
+//    const char* path = "/Users/semyon/Desktop/yo.mvx";
+//    std::fstream ee;
+//    _mvxPlayer = new MvxPlayer();
+//    _mvxPlayer->loadFromFile(path);
+//    _mvxPlayer->play(1.0, 0.5);
 }
 
 - (void)testReadFromMidi {
@@ -50,12 +53,12 @@
         std::cout << "\n";
     }
     const VxFile& vxFile = vxFiles[0];
-//    std::vector<char> wavAudioData = vxFile.generateWavAudioData(0.5f);
-//    _player = new AudioPlayer();
-//    _player->play(wavAudioData.data(), wavAudioData.size(), 0);
+    std::vector<char> wavAudioData = vxFile.generateWavAudioData(0.5f);
+    _player = new AudioPlayer();
+    _player->play(wavAudioData.data(), wavAudioData.size(), 0);
 
-    const char* instrumentalPath = [[NSBundle mainBundle] pathForResource:@"yo" ofType:@"mp3"].cString;
-    MvxFileWriter::writeToFile(vxFile, instrumentalPath, "/Users/semyon/Desktop/yo.mvx");
+//    const char* instrumentalPath = [[NSBundle mainBundle] pathForResource:@"yo" ofType:@"mp3"].cString;
+//    MvxFile::writeToFile(vxFile, instrumentalPath, "/Users/semyon/Desktop/yo.mvx");
 }
 
 - (id)initWithCoder:(NSCoder *)coder {

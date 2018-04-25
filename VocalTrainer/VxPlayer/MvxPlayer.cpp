@@ -17,12 +17,12 @@ void MvxPlayer::loadFromStream(std::istream &is) {
     initFromInstrumentalStreamAndVxFile(is, vxFile);
 }
 
-void MvxPlayer::initFromInstrumentalFileAndVxFile(const char *instrumentalFilePath, VxFile vxFile) {
+void MvxPlayer::initFromInstrumentalFileAndVxFile(const char *instrumentalFilePath, const VxFile& vxFile) {
     std::fstream file(instrumentalFilePath, std::ios::binary | std::ios::in);
     initFromInstrumentalStreamAndVxFile(file, vxFile);
 }
 
-void MvxPlayer::initFromInstrumentalStreamAndVxFile(std::istream &instrumentalStream, VxFile vxFile) {
+void MvxPlayer::initFromInstrumentalStreamAndVxFile(std::istream &instrumentalStream, const VxFile& vxFile) {
     audioData = Strings::StreamToString(instrumentalStream);
     vxAudioData = vxFile.generateWavAudioData(MAX_PIANO_VOLUME);
 }

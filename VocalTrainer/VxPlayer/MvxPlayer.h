@@ -18,8 +18,8 @@ public:
     MvxPlayer();
     void loadFromFile(const char* filePath);
     void loadFromStream(std::istream& is);
-    void initFromInstrumentalFileAndVxFile(const char* instrumentalFilePath, VxFile vxFile);
-    void initFromInstrumentalStreamAndVxFile(std::istream& instrumentalStream, VxFile vxFile);
+    void initFromInstrumentalFileAndVxFile(const char* instrumentalFilePath, const VxFile& vxFile);
+    void initFromInstrumentalStreamAndVxFile(std::istream& instrumentalStream, const VxFile& vxFile);
     void play(float instrumentalVolume, float pianoVolume);
     void setInstrumentalVolume(float instrumentalVolume);
     void setPianoVolume(float pianoVolume);

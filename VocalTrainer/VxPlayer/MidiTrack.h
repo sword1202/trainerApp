@@ -17,7 +17,7 @@ struct MidiTrack
 {
     std::string           instrumentName;
     std::string           trackName;
-    bool                  isPolyphonical;
+    int                   polyphonicTracksCount = 1;
     int                   channelId;
     int                   trackId;
     int                   noteCount;

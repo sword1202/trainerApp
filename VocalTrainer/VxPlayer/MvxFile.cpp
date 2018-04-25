@@ -3,18 +3,21 @@
 // Copyright (c) 2018 Mac. All rights reserved.
 //
 
-#include "MvxFileWriter.h"
+#include "MvxFile.h"
 #include <fstream>
 #include "Strings.h"
 
 using namespace CppUtils;
 
-void MvxFileWriter::writeToFile(const VxFile& vxFile, const char* instrumentalFilePath, const char* outFilePath) {
+void MvxFile::writeToFile(const VxFile& vxFile, const char* instrumentalFilePath,
+        double beatsPerMinute, const char* outFilePath) {
     std::fstream file = Streams::OpenFile(outFilePath, std::ios::binary | std::ios::out);
-    writeToStream(vxFile, instrumentalFilePath, file);
+    writeToStream(vxFile, instrumentalFilePath, beatsPerMinute, file);
 }
 
-void MvxFileWriter::writeToStream(const VxFile &vxFile, const char *instrumentalFilePath, std::ostream &os) {
+void MvxFile::writeToStream(const VxFile& vxFile, const char* instrumentalFilePath,
+        double beatsPerMinute, std::ostream& os) {
+    os << beatsPerMinute;
     vxFile.writeToStream(os);
     // add space between vxFile Data and instrumental data
     os<<' ';
