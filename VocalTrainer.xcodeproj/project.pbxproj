@@ -31,6 +31,7 @@
 		2EF1E9A31D592EC100E02C33 /* tests in Resources */ = {isa = PBXBuildFile; fileRef = 2EF1E99D1D592EC100E02C33 /* tests */; };
 		2EF1E9A91D592F1600E02C33 /* AudoInputReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1E9941D592EC100E02C33 /* AudoInputReader.cpp */; };
 		549968082090DAF20082B354 /* AudioUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF0A71BF842FC6C348D0C /* AudioUtils.cpp */; };
+		5499680F209137AD0082B354 /* libportaudio.la in Frameworks */ = {isa = PBXBuildFile; fileRef = 5499680E209137AD0082B354 /* libportaudio.la */; };
 		54CCB92720854CB3009639AD /* MidiFileTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54CCB92620854CB3009639AD /* MidiFileTest.cpp */; };
 		54CCB928208551A2009639AD /* Pitch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1E9991D592EC100E02C33 /* Pitch.cpp */; };
 		54CCB929208551A2009639AD /* VxFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFBD710C1F3DE858A19B5 /* VxFile.cpp */; };
@@ -144,6 +145,7 @@
 		2EF1E99B1D592EC100E02C33 /* PitchInputReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PitchInputReader.cpp; path = PitchDetection/PitchInputReader.cpp; sourceTree = "<group>"; };
 		2EF1E99C1D592EC100E02C33 /* PitchInputReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PitchInputReader.h; path = PitchDetection/PitchInputReader.h; sourceTree = "<group>"; };
 		2EF1E99D1D592EC100E02C33 /* tests */ = {isa = PBXFileReference; lastKnownFileType = folder; name = tests; path = PitchDetection/tests; sourceTree = "<group>"; };
+		5499680E209137AD0082B354 /* libportaudio.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = libportaudio.la; path = libs/Release/libportaudio.la; sourceTree = "<group>"; };
 		54CCB91E20854C96009639AD /* VocalTrainerTests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = VocalTrainerTests; sourceTree = BUILT_PRODUCTS_DIR; };
 		54CCB92520854CB3009639AD /* catch.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = catch.hpp; sourceTree = "<group>"; };
 		54CCB92620854CB3009639AD /* MidiFileTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiFileTest.cpp; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5499680F209137AD0082B354 /* libportaudio.la in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,6 +352,7 @@
 		54F6743F20004BD1007A419D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5499680E209137AD0082B354 /* libportaudio.la */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
