@@ -41,13 +41,12 @@
 		54CCB92D208551A2009639AD /* MidiEventList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFF63DF93064D05413294 /* MidiEventList.cpp */; };
 		54CCB92E208551A2009639AD /* MidiEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF9C3A05CC2DBEF0526B6 /* MidiEvent.cpp */; };
 		54CCB92F208551A2009639AD /* Binasc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF0789AD2038BA3DA38A5 /* Binasc.cpp */; };
-		54CCB930208551A2009639AD /* MidiTrack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFCB360CEFC7173BF1492 /* MidiTrack.cpp */; };
-		54CCB931208551A2009639AD /* MidiFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA4AD1B24E2B29267701 /* MidiFileReader.cpp */; };
 		54CCB932208552DC009639AD /* GetSf2FilePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF5D6CB0CEACB514B6CCE /* GetSf2FilePath.mm */; };
 		54CCB933208552FB009639AD /* PitchDetectionSmoothingAudioBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10628B2FFD73C634F03CC7B0 /* PitchDetectionSmoothingAudioBuffer.cpp */; };
 		54CCB9342085531F009639AD /* WAVFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E7A67C01D8E57AE00DFAF8B /* WAVFile.cpp */; };
 		C9FFF038BC9107AE07369791 /* AlgorithmsTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF49EDE81D0B46952137F /* AlgorithmsTest.cpp */; };
 		C9FFF0408858AAFAB5542709 /* MidiEventList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFF63DF93064D05413294 /* MidiEventList.cpp */; };
+		C9FFF045E64DA74C0FF7618C /* MidiTrack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA423EB35396AF0A6669 /* MidiTrack.cpp */; };
 		C9FFF051780243EF07304B84 /* 1.vx in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFDD798D0EB7C53086DD3 /* 1.vx */; };
 		C9FFF09DC78A783FDD0F5A3B /* a.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFEF6E23B96974A519665 /* a.sf2 */; };
 		C9FFF0C3BC65E9F88000F019 /* MvxPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF12A4E0AAAD8E783983E /* MvxPlayer.cpp */; };
@@ -55,16 +54,17 @@
 		C9FFF29A2778D812DD86DAD9 /* PitchDetectionSmoothingBufferTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFB1B7C3F160B173A4071 /* PitchDetectionSmoothingBufferTest.cpp */; };
 		C9FFF3994C66634963735E68 /* GetSf2FilePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF5D6CB0CEACB514B6CCE /* GetSf2FilePath.mm */; };
 		C9FFF428255BE42EB50BBBD7 /* GeometryUtilsTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE55AF6D32018F3AB842 /* GeometryUtilsTest.cpp */; };
+		C9FFF44E5CD2E1B12CBD365B /* MidiFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF51CA94B2770B893C639 /* MidiFileReader.cpp */; };
 		C9FFF4B18FE6B96EF2809623 /* VxFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFBD710C1F3DE858A19B5 /* VxFile.cpp */; };
-		C9FFF55D72509AEB32441277 /* MidiTrack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFCB360CEFC7173BF1492 /* MidiTrack.cpp */; };
 		C9FFF7AE7C2048B9BE210E7C /* MidiEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF9C3A05CC2DBEF0526B6 /* MidiEvent.cpp */; };
 		C9FFF872E56D467F24FAEC7B /* MidiFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF1E4F9CFE2324A18F83D /* MidiFile.cpp */; };
+		C9FFF8BCB6895CF2BEF1C29D /* MidiFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF51CA94B2770B893C639 /* MidiFileReader.cpp */; };
 		C9FFF9E99BD59AA43EE09CE7 /* Options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFB62B47690E086FA2F2D /* Options.cpp */; };
 		C9FFFB8AC795FE59874A01F4 /* VxFileTests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFCBC01CCBEA7B458BB66 /* VxFileTests.cpp */; };
 		C9FFFBDE33761CD24C30F32D /* Binasc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF0789AD2038BA3DA38A5 /* Binasc.cpp */; };
 		C9FFFCCC2A217925D1F6324B /* PitchTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8FE4DFBA5720805C7E3 /* PitchTest.cpp */; };
 		C9FFFD0B153AE4CF499D8D66 /* SynchronizedCallbacksQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2E6D7DC2EC87198D5C0 /* SynchronizedCallbacksQueue.cpp */; };
-		C9FFFD774C6820880CA2EF69 /* MidiFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA4AD1B24E2B29267701 /* MidiFileReader.cpp */; };
+		C9FFFDB2CD9C369890BABFDC /* MidiTrack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA423EB35396AF0A6669 /* MidiTrack.cpp */; };
 		C9FFFE752940964F501E6446 /* MvxFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF08E11535354E15CC819 /* MvxFile.cpp */; };
 		C9FFFEB3BFD86EDFAD0BB4EA /* AudioUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF0A71BF842FC6C348D0C /* AudioUtils.cpp */; };
 		C9FFFF0EE051E053AD0F4F27 /* AudioPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFBE238D301064F720BAA /* AudioPlayer.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -152,18 +152,19 @@
 		C9FFF03538CD42ED89CD354D /* Options.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Options.h; sourceTree = "<group>"; };
 		C9FFF0789AD2038BA3DA38A5 /* Binasc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Binasc.cpp; sourceTree = "<group>"; };
 		C9FFF08E11535354E15CC819 /* MvxFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MvxFile.cpp; sourceTree = "<group>"; };
+		C9FFF093B6C66FAA20714200 /* MidiFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiFileReader.h; sourceTree = "<group>"; };
 		C9FFF0A71BF842FC6C348D0C /* AudioUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AudioUtils.cpp; path = PitchDetection/AudioUtils.cpp; sourceTree = "<group>"; };
 		C9FFF0A770C7C4A877771027 /* melody.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = melody.mid; sourceTree = "<group>"; };
 		C9FFF12A4E0AAAD8E783983E /* MvxPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MvxPlayer.cpp; sourceTree = "<group>"; };
 		C9FFF15878C9F431873450CF /* Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Strings.h; path = PitchDetection/CppUtils/Strings.h; sourceTree = "<group>"; };
 		C9FFF1E4F9CFE2324A18F83D /* MidiFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiFile.cpp; sourceTree = "<group>"; };
-		C9FFF28F2B5B96F80B0C1DE4 /* MidiNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiNote.h; sourceTree = "<group>"; };
-		C9FFF2C1458C26895482B3AD /* MidiTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiTrack.h; sourceTree = "<group>"; };
 		C9FFF2E6D7DC2EC87198D5C0 /* SynchronizedCallbacksQueue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SynchronizedCallbacksQueue.cpp; path = PitchDetection/CppUtils/SynchronizedCallbacksQueue.cpp; sourceTree = "<group>"; };
+		C9FFF2FB85C1641E890B086C /* MidiNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiNote.h; sourceTree = "<group>"; };
 		C9FFF3A0BB69C8E7F02351A6 /* tsf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tsf.h; sourceTree = "<group>"; };
 		C9FFF4438A5117D6C219CAAA /* Streams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Streams.h; path = PitchDetection/CppUtils/Streams.h; sourceTree = "<group>"; };
 		C9FFF460C4A9ADFB00392E76 /* MidiMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiMessage.h; sourceTree = "<group>"; };
 		C9FFF49EDE81D0B46952137F /* AlgorithmsTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlgorithmsTest.cpp; path = PitchDetection/CppUtils/tests/AlgorithmsTest.cpp; sourceTree = SOURCE_ROOT; };
+		C9FFF51CA94B2770B893C639 /* MidiFileReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiFileReader.cpp; sourceTree = "<group>"; };
 		C9FFF523E4CAB6655C922543 /* VxLyricsInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxLyricsInterval.h; sourceTree = "<group>"; };
 		C9FFF56C3AAB87110FBA08F2 /* VxPitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxPitch.h; sourceTree = "<group>"; };
 		C9FFF594ADB2309B5CA2334F /* MidiFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiFile.h; sourceTree = "<group>"; };
@@ -175,7 +176,7 @@
 		C9FFF970D73B55602129A70F /* MvxPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvxPlayer.h; sourceTree = "<group>"; };
 		C9FFF9C3A05CC2DBEF0526B6 /* MidiEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiEvent.cpp; sourceTree = "<group>"; };
 		C9FFF9D3C242FFC9A4D440C7 /* VxFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxFile.h; sourceTree = "<group>"; };
-		C9FFFA4AD1B24E2B29267701 /* MidiFileReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiFileReader.cpp; sourceTree = "<group>"; };
+		C9FFFA423EB35396AF0A6669 /* MidiTrack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiTrack.cpp; sourceTree = "<group>"; };
 		C9FFFA9518C7A5D30F693B87 /* Primitives.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Primitives.h; path = PitchDetection/CppUtils/Primitives.h; sourceTree = "<group>"; };
 		C9FFFAC7E81807A213548C10 /* MvxFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvxFile.h; sourceTree = "<group>"; };
 		C9FFFB1B7C3F160B173A4071 /* PitchDetectionSmoothingBufferTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PitchDetectionSmoothingBufferTest.cpp; path = PitchDetection/tests/PitchDetectionSmoothingBufferTest.cpp; sourceTree = SOURCE_ROOT; };
@@ -186,15 +187,14 @@
 		C9FFFBD710C1F3DE858A19B5 /* VxFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VxFile.cpp; sourceTree = "<group>"; };
 		C9FFFBE238D301064F720BAA /* AudioPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioPlayer.mm; sourceTree = "<group>"; };
 		C9FFFC6D53C891B61A3E964C /* Binasc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Binasc.h; sourceTree = "<group>"; };
-		C9FFFCB360CEFC7173BF1492 /* MidiTrack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiTrack.cpp; sourceTree = "<group>"; };
 		C9FFFCBC01CCBEA7B458BB66 /* VxFileTests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VxFileTests.cpp; sourceTree = "<group>"; };
-		C9FFFCD76FEB1522C118489D /* MidiFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiFileReader.h; sourceTree = "<group>"; };
 		C9FFFD475B0D84AA60E1A314 /* yo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = yo.mp3; sourceTree = "<group>"; };
 		C9FFFDD798D0EB7C53086DD3 /* 1.vx */ = {isa = PBXFileReference; lastKnownFileType = file.vx; path = 1.vx; sourceTree = "<group>"; };
 		C9FFFDF76019B54B1A20A866 /* AudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayer.h; sourceTree = "<group>"; };
 		C9FFFDFA5FE4750E603649E8 /* GetSf2FilePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetSf2FilePath.h; sourceTree = "<group>"; };
 		C9FFFE55AF6D32018F3AB842 /* GeometryUtilsTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GeometryUtilsTest.cpp; path = PitchDetection/CppUtils/tests/GeometryUtilsTest.cpp; sourceTree = SOURCE_ROOT; };
 		C9FFFE67C10A6A65023BE764 /* Algorithms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Algorithms.h; path = PitchDetection/CppUtils/Algorithms.h; sourceTree = "<group>"; };
+		C9FFFEBA9C7F7C116E07359E /* MidiTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiTrack.h; sourceTree = "<group>"; };
 		C9FFFEF6E23B96974A519665 /* a.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file.sf2; path = a.sf2; sourceTree = "<group>"; };
 		C9FFFF63DF93064D05413294 /* MidiEventList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiEventList.cpp; sourceTree = "<group>"; };
 		C9FFFFC2EAB3D64E9E8BCC71 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
@@ -392,18 +392,26 @@
 				C9FFF970D73B55602129A70F /* MvxPlayer.h */,
 				C9FFFBD710C1F3DE858A19B5 /* VxFile.cpp */,
 				C9FFF04FFE037E7ED6FE9CCC /* CraigsappMidifile */,
-				C9FFF2C1458C26895482B3AD /* MidiTrack.h */,
-				C9FFFCB360CEFC7173BF1492 /* MidiTrack.cpp */,
-				C9FFF28F2B5B96F80B0C1DE4 /* MidiNote.h */,
-				C9FFFCD76FEB1522C118489D /* MidiFileReader.h */,
-				C9FFFA4AD1B24E2B29267701 /* MidiFileReader.cpp */,
 				C9FFF523E4CAB6655C922543 /* VxLyricsInterval.h */,
 				C9FFFEF6E23B96974A519665 /* a.sf2 */,
 				C9FFF08E11535354E15CC819 /* MvxFile.cpp */,
 				C9FFFAC7E81807A213548C10 /* MvxFile.h */,
 				C9FFFD475B0D84AA60E1A314 /* yo.mp3 */,
+				C9FFF9A6D7A01E58DBEB6F57 /* Midi */,
 			);
 			path = VxPlayer;
+			sourceTree = "<group>";
+		};
+		C9FFF9A6D7A01E58DBEB6F57 /* Midi */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFFA423EB35396AF0A6669 /* MidiTrack.cpp */,
+				C9FFFEBA9C7F7C116E07359E /* MidiTrack.h */,
+				C9FFF093B6C66FAA20714200 /* MidiFileReader.h */,
+				C9FFF2FB85C1641E890B086C /* MidiNote.h */,
+				C9FFF51CA94B2770B893C639 /* MidiFileReader.cpp */,
+			);
+			path = Midi;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -539,9 +547,9 @@
 				C9FFF0408858AAFAB5542709 /* MidiEventList.cpp in Sources */,
 				C9FFF7AE7C2048B9BE210E7C /* MidiEvent.cpp in Sources */,
 				C9FFFBDE33761CD24C30F32D /* Binasc.cpp in Sources */,
-				C9FFF55D72509AEB32441277 /* MidiTrack.cpp in Sources */,
-				C9FFFD774C6820880CA2EF69 /* MidiFileReader.cpp in Sources */,
 				C9FFFE752940964F501E6446 /* MvxFile.cpp in Sources */,
+				C9FFFDB2CD9C369890BABFDC /* MidiTrack.cpp in Sources */,
+				C9FFF44E5CD2E1B12CBD365B /* MidiFileReader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,8 +569,6 @@
 				54CCB92D208551A2009639AD /* MidiEventList.cpp in Sources */,
 				54CCB92E208551A2009639AD /* MidiEvent.cpp in Sources */,
 				54CCB92F208551A2009639AD /* Binasc.cpp in Sources */,
-				54CCB930208551A2009639AD /* MidiTrack.cpp in Sources */,
-				54CCB931208551A2009639AD /* MidiFileReader.cpp in Sources */,
 				54CCB92720854CB3009639AD /* MidiFileTest.cpp in Sources */,
 				C9FFFCCC2A217925D1F6324B /* PitchTest.cpp in Sources */,
 				C9FFF29A2778D812DD86DAD9 /* PitchDetectionSmoothingBufferTest.cpp in Sources */,
@@ -570,6 +576,8 @@
 				C9FFFFA05630CAB959DB47F5 /* StringsTest.cpp in Sources */,
 				C9FFF428255BE42EB50BBBD7 /* GeometryUtilsTest.cpp in Sources */,
 				C9FFFB8AC795FE59874A01F4 /* VxFileTests.cpp in Sources */,
+				C9FFF045E64DA74C0FF7618C /* MidiTrack.cpp in Sources */,
+				C9FFF8BCB6895CF2BEF1C29D /* MidiFileReader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
