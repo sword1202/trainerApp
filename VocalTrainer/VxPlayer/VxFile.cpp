@@ -50,6 +50,7 @@ void VxFile::processLyrics(const std::string& lyricsData) {
         lyricsInterval.startTimestampInMilliseconds = split[0];
         lyricsInterval.endTimestampInMilliseconds = split[1];
 
+        lyricsInterval.lyrics.resize(0);
         utf8::utf8to16(lyricsData.begin() + lyricsAppendingBegin,
                 lyricsData.begin() + firstBracketIndex,
                 std::back_inserter(lyricsInterval.lyrics));

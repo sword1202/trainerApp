@@ -1,4 +1,5 @@
 #include <sstream>
+#include <iostream>
 #include "catch.hpp"
 #include "VxFile.h"
 #include "Primitives.h"
@@ -14,8 +15,10 @@ TEST_CASE("VxFile parse") {
     REQUIRE(lyrics.size() == 2);
     REQUIRE(lyrics[0].startTimestampInMilliseconds == 10);
     REQUIRE(lyrics[0].endTimestampInMilliseconds == 2900);
+    REQUIRE(lyrics[0].lyrics == L"Yesterday, all my troubles");
     REQUIRE(lyrics[1].startTimestampInMilliseconds == 3000);
     REQUIRE(lyrics[1].endTimestampInMilliseconds == 5925);
+    REQUIRE(lyrics[1].lyrics == L" seem so far away.");
     REQUIRE(vxFile.getTicksPerMinute() == 24000);
     REQUIRE(vxFile.getDistanceInTicksBetweenLastPitchEndAndTrackEnd() == 25);
     REQUIRE(vxFile.getDurationInTicks() == 2000 + 345 + 25);
