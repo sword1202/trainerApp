@@ -56,7 +56,10 @@ void VxFileAudioDataGenerator::renderNextPitch() {
 
     // render a beat more to avoid floating computation errors;
     int begin = vxFile->samplesCountFromTicks(pitch.startTickNumber, sampleRate) - 1;
-    int length = vxFile->samplesCountFromTicks(pitch.ticksCount, sampleRate) + 1;
+    int length = vxFile->samplesCountFromTicks(pitch.ticksCount, sampleRate) + 2;
+    if (begin + length > pcmData.size()) {
+        length = pcmData.size() - begin;
+    }
 
     std::vector<short> temp(length);
     renderer->render(pitch.pitch, temp.data(), length);
