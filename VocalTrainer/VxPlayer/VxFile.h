@@ -10,12 +10,12 @@
 #include "VxPitch.h"
 #include "AudioPlayer.h"
 #include <vector>
-#include "SynchronizedCallbacksQueue.h"
 #include "VxLyricsInterval.h"
+#include "PlaybackChunk.h"
 
 class VxFile {
     std::vector<VxPitch> pitches;
-    int ticksPerMinute = 0;
+    int ticksPerSecond = 0;
     int durationInTicks = 0;
     int distanceInTicksBetweenLastPitchEndAndTrackEnd = 0;
     std::vector<VxLyricsInterval> lyrics;
@@ -24,20 +24,20 @@ class VxFile {
     bool validateLyrics();
     void postInit();
     void processLyrics(const std::string& lyricsData);
+
 public:
     VxFile(const std::vector<VxPitch> &pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int bitsPerMinute);
     VxFile(std::istream& is);
     static VxFile fromFilePath(const char* filePath);
 
-    // volume - [0.0, 1.0]
-    std::vector<char> generateRawPcmAudioData(int sampleRate, float volume) const;
-    std::vector<char> generateWavAudioData(float volume) const;
-
     double getDurationInSeconds() const;
-    double getTickDuration() const;
+    double getTickDurationInSeconds() const;
+    double ticksToSeconds(int ticks) const;
+    int timeInSecondsToTicks(double timeInSeconds)const;
+    int samplesCountFromTicks(int ticks, int sampleRate) const;
 
     const std::vector<VxPitch> &getPitches() const;
-    int getTicksPerMinute() const;
+    int getTicksPerSecond() const;
     int getDurationInTicks() const;
     int getDistanceInTicksBetweenLastPitchEndAndTrackEnd() const;
 

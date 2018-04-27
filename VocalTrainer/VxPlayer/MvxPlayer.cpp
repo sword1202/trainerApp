@@ -24,7 +24,7 @@ void MvxPlayer::initFromInstrumentalFileAndVxFile(const char *instrumentalFilePa
 
 void MvxPlayer::initFromInstrumentalStreamAndVxFile(std::istream &instrumentalStream, const VxFile& vxFile) {
     audioData = Strings::StreamToString(instrumentalStream);
-    vxAudioData = vxFile.generateWavAudioData(MAX_PIANO_VOLUME);
+    //vxAudioData = vxFile.generateWavAudioData(MAX_PIANO_VOLUME);
 }
 
 void MvxPlayer::loadFromFile(const char *filePath) {

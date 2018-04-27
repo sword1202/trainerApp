@@ -11,6 +11,7 @@
 #import "MvxFile.h"
 #import "MvxPlayer.h"
 #include "TimeUtils.h"
+#import "PortAudio.h"
 
 using namespace CppUtils;
 
@@ -21,6 +22,8 @@ using namespace CppUtils;
 }
 
 - (void)prepareOpenGL {
+    PortAudio::init();
+
     [_window makeFirstResponder:self];
     glClearColor(0, 0, 0, 0);
 
@@ -53,9 +56,9 @@ using namespace CppUtils;
         std::cout << "\n";
     }
     const VxFile& vxFile = vxFiles[0];
-    std::vector<char> wavAudioData = vxFile.generateWavAudioData(0.5f);
-    _player = new AudioPlayer();
-    _player->play(wavAudioData.data(), wavAudioData.size(), 0);
+//    std::vector<char> wavAudioData = vxFile.generateWavAudioData(0.5f);
+//    _player = new AudioPlayer();
+//    _player->play(wavAudioData.data(), wavAudioData.size(), 0);
 
 //    const char* instrumentalPath = [[NSBundle mainBundle] pathForResource:@"yo" ofType:@"mp3"].cString;
 //    MvxFile::writeToFile(vxFile, instrumentalPath, "/Users/semyon/Desktop/yo.mvx");
@@ -96,6 +99,8 @@ using namespace CppUtils;
     if (_mvxPlayer) {
         delete _mvxPlayer;
     }
+
+    PortAudio::terminate();
 }
 
 

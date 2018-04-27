@@ -1,24 +1,27 @@
 #include <boost/assert.hpp>
 #include "VxFile.h"
-#define TSF_IMPLEMENTATION
-#include "tsf.h"
 #include "GetSf2FilePath.h"
 #include "WAVFile.h"
 #include "AudioUtils.h"
 #include "Strings.h"
 #include "Algorithms.h"
 #include <utf8.h>
+#include <boost/icl/interval_map.hpp>
+#include "../../PitchDetection/CppUtils/config.h"
 
 constexpr char SILENCE_MARK[] = "*";
 constexpr char LYRICS_START[] = "lyricsStart*";
 constexpr char LYRICS_END[] = " lyricsEnd*";
 constexpr char NO_LYRICS[] = "noLyrics*";
-constexpr double PITCH_AUDIO_FADE_PERCENTAGE = 0.2;
 
 using namespace CppUtils;
 
+int VxPitch::endTickNumber() const {
+    return startTickNumber + ticksCount;
+}
+
 VxFile::VxFile(const std::vector<VxPitch> &pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int ticksPerMinute)
-        : pitches(pitches), ticksPerMinute(ticksPerMinute),
+        : pitches(pitches), ticksPerSecond(ticksPerMinute),
           distanceInTicksBetweenLastPitchEndAndTrackEnd(distanceInTicksBetweenLastPitchEndAndTrackEnd) {
     postInit();
 }
@@ -73,7 +76,7 @@ VxFile::VxFile(std::istream &is) {
         throw std::runtime_error("Invalid vx file");
     }
 
-    is >> ticksPerMinute;
+    is >> ticksPerSecond;
 
     std::string pitchName;
     while (!is.eof()) {
@@ -105,80 +108,8 @@ static inline size_t addSilence(std::vector<char>& pcmData, double duration, int
     return size;
 }
 
-// make sure tsf is properly destroyed
-struct TsfHolder {
-    tsf* t;
-
-    TsfHolder(int sampleRate) {
-        t = tsf_load_filename(GetSf2FilePath().data());
-        tsf_set_output(t, TSF_MONO, sampleRate, 0);
-    }
-
-    ~TsfHolder() {
-        tsf_close(t);
-    }
-};
-
-std::vector<char> VxFile::generateRawPcmAudioData(int sampleRate, float volume) const {
-    double bitDuration = getTickDuration();
-
-    TsfHolder tsfHolder(sampleRate);
-    tsf* t = tsfHolder.t;
-
-    int size = static_cast<int>(getDurationInSeconds() * sampleRate);
-    
-    std::vector<char> pcmData;
-    // make sure there is no buffer overflow
-    pcmData.reserve(size + 10u);
-
-    auto iter = pitches.begin();
-    auto prevIter = iter;
-    auto end = pitches.end();
-    if (iter == end) {
-        return pcmData;
-    }
-
-    int silenceStart = 0;
-    while (iter != end) {
-        // add silence between pitches
-        addSilence(pcmData, (iter->startTickNumber - silenceStart) * bitDuration, sampleRate);
-        if (prevIter != iter) {
-            tsf_note_off(t, 0, prevIter->pitch.getSoundFont2Index());
-        }
-        tsf_note_on(t, 0, iter->pitch.getSoundFont2Index(), volume);
-        silenceStart = iter->startTickNumber + iter->ticksCount;
-
-        // add pitch itself
-        size_t currentSize = pcmData.size();
-        double duration = bitDuration * iter->ticksCount;
-        // resize pcmData to append pitch data
-        size_t sizeInBytes = addSilence(pcmData, duration, sampleRate);
-
-        short* arrayToRender = (short*)(pcmData.data() + currentSize);
-        int arrayToRenderSize = (int)sizeInBytes / 2;
-
-        tsf_render_short(t, arrayToRender, arrayToRenderSize, 0);
-        AudioUtils::MakeLinearFadeInAtBeginning(arrayToRender, arrayToRenderSize, PITCH_AUDIO_FADE_PERCENTAGE);
-        AudioUtils::MakeLinearFadeOutAtEnding(arrayToRender, arrayToRenderSize, PITCH_AUDIO_FADE_PERCENTAGE);
-
-        prevIter = iter;
-        iter++;
-    }
-
-    double endSilenceDuration = distanceInTicksBetweenLastPitchEndAndTrackEnd * bitDuration;
-    addSilence(pcmData, endSilenceDuration, sampleRate);
-
-    return pcmData;
-}
-
-std::vector<char> VxFile::generateWavAudioData(float volume) const {
-    WavConfig wavConfig;
-    std::vector<char> pcmData = generateRawPcmAudioData(wavConfig.sampleRate, volume);
-    return WAVFile::addWavHeaderToRawPcmData(pcmData.data(), (int)pcmData.size(), wavConfig);
-}
-
-double VxFile::getTickDuration() const {
-    return 60.0 / (double) ticksPerMinute;
+double VxFile::getTickDurationInSeconds() const {
+    return 1.0 / (double) ticksPerSecond;
 }
 
 bool VxFile::validatePitches() {
@@ -207,7 +138,7 @@ bool VxFile::validatePitches() {
 }
 
 void VxFile::postInit() {
-    SortByKey(pitches, [](const VxPitch& a) { return a.startTickNumber; });
+    //SortByKey(pitches.begin(), pitches.end(), [](const VxPitch& a) { return a.startTickNumber; });
 
     BOOST_ASSERT(distanceInTicksBetweenLastPitchEndAndTrackEnd >= 0);
     BOOST_ASSERT(validatePitches());
@@ -218,15 +149,15 @@ void VxFile::postInit() {
 }
 
 double VxFile::getDurationInSeconds() const {
-    return getTickDuration() * durationInTicks;
+    return getTickDurationInSeconds() * durationInTicks;
 }
 
 const std::vector<VxPitch> &VxFile::getPitches() const {
     return pitches;
 }
 
-int VxFile::getTicksPerMinute() const {
-    return ticksPerMinute;
+int VxFile::getTicksPerSecond() const {
+    return ticksPerSecond;
 }
 
 int VxFile::getDurationInTicks() const {
@@ -250,7 +181,7 @@ void VxFile::writeToStream(std::ostream &os) const {
         os<<LYRICS_END;
     }
 
-    os<<" "<<ticksPerMinute<<" ";
+    os<<" "<<ticksPerSecond<<" ";
 
     for (const VxPitch& vxPitch : pitches) {
         os<<vxPitch.pitch.getFullName()<<" "<<vxPitch.startTickNumber<<" "<<vxPitch.ticksCount<<" ";
@@ -312,4 +243,16 @@ bool VxFile::validateLyrics() {
 
 const std::vector<VxLyricsInterval> &VxFile::getLyrics() const {
     return lyrics;
+}
+
+int VxFile::timeInSecondsToTicks(double timeInSeconds)const {
+    return static_cast<int>(round(timeInSeconds / getTickDurationInSeconds()));
+}
+
+double VxFile::ticksToSeconds(int ticks) const {
+    return ticks * getTickDurationInSeconds();
+}
+
+int VxFile::samplesCountFromTicks(int ticks, int sampleRate) const {
+    return (int)ticksToSeconds(ticks) * sampleRate;
 }

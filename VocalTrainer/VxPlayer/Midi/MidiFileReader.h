@@ -15,12 +15,9 @@
 
 #include "MidiNote.h"
 #include "MidiTrack.h"
+#include "MidiFile.h"
 
-//#include "VxFile.h"
-
-class MidiEvent;
-class MidiFile;
-class VxFile;
+#include "VxFile.h"
 
 class MidiFileReader {
 
