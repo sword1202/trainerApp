@@ -93,7 +93,8 @@ int VxFileAudioDataGenerator::readNextSamplesBatch(short *intoBuffer) {
     }
 
     size_t size = std::min(pcmData.size() - seek, (size_t)outBufferSize);
-    std::copy(pcmData.begin() + seek, pcmData.begin() + seek + size, intoBuffer);
+    auto begin = pcmData.begin() + seek;
+    std::copy(begin, begin + size, intoBuffer);
     seek += size;
     return (int)size;
 }
