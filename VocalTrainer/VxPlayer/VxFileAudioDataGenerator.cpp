@@ -5,96 +5,133 @@
 
 #include <cmath>
 #include <boost/assert.hpp>
+#include <boost/algorithm/cxx11/all_of.hpp>
 #include "VxFileAudioDataGenerator.h"
-#include "GetSf2FilePath.h"
 #include "AudioUtils.h"
-#define TSF_IMPLEMENTATION
-#include "tsf.h"
+#include "Algorithms.h"
+#include "SoundFont2PitchRenderer.h"
 
-constexpr double PITCH_AUDIO_FADE_PERCENTAGE = 0.2;
+using namespace boost::algorithm;
+using namespace CppUtils;
 
-VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile *vxFile,
-        const VxFileAudioDataGeneratorConfig &config) {
+VxFileAudioDataGenerator::VxFileAudioDataGenerator(PitchRenderer *renderer, const VxFile *vxFile, const VxFileAudioDataGeneratorConfig &config)
+        : renderer(renderer) {
     sampleRate = config.sampleRate;
     outBufferSize = config.outBufferSize;
+    BOOST_ASSERT(sampleRate > 0 && outBufferSize > 0);
     this->vxFile = vxFile;
 
     double durationInSeconds = vxFile->getDurationInSeconds();
     int pcmDataSize = (int)ceil(durationInSeconds * sampleRate);
     pcmData.assign(pcmDataSize, 0);
-    initializedPcmDataFlags.resize(pcmDataSize, false);
+    pcmDataStateFlags.resize(pcmDataSize, NOT_INITIALIZED);
     bufferLengthInSeconds = AudioUtils::GetSampleTimeInSeconds(outBufferSize, sampleRate);
-
-    _tsf = tsf_load_filename(GetSf2FilePath().data());
-    tsf_set_output(_tsf, TSF_MONO, sampleRate, 0);
 }
 
-VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile *vxFile) :
-        VxFileAudioDataGenerator(vxFile, VxFileAudioDataGeneratorConfig()) {
+VxFileAudioDataGenerator::VxFileAudioDataGenerator(PitchRenderer *renderer, const VxFile *vxFile) :
+        VxFileAudioDataGenerator(renderer, vxFile, VxFileAudioDataGeneratorConfig()) {
     
+}
+
+VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile *vxFile, const VxFileAudioDataGeneratorConfig &config) :
+    VxFileAudioDataGenerator(new SoundFont2PitchRenderer(config.sampleRate), vxFile, config) {
+
+}
+
+VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile *vxFile)  :
+        VxFileAudioDataGenerator(vxFile, VxFileAudioDataGeneratorConfig()) {
 }
 
 void VxFileAudioDataGenerator::reset() {
     seek = 0;
     std::fill(pcmData.begin(), pcmData.end(), 0);
-    std::fill(initializedPcmDataFlags.begin(), initializedPcmDataFlags.end(), false);
+    std::fill(pcmDataStateFlags.begin(), pcmDataStateFlags.end(), NOT_INITIALIZED);
 }
 
 void VxFileAudioDataGenerator::renderNextPitch() {
     const std::vector<VxPitch> &pitches = vxFile->getPitches();
-    BOOST_ASSERT(renderedPitchesCount < pitches.size());
-    const VxPitch &pitch = pitches[renderedPitchesCount];
+    BOOST_ASSERT(canRenderNextPitch());
+    int nextPitchToRenderIndex = getNextPitchToRenderIndex();
+    const VxPitch &pitch = pitches[nextPitchToRenderIndex];
 
-    int begin = vxFile->samplesCountFromTicks(pitch.startTickNumber, sampleRate);
-    int length = vxFile->samplesCountFromTicks(pitch.ticksCount, sampleRate);
+    // render a beat more to avoid floating computation errors;
+    int begin = vxFile->samplesCountFromTicks(pitch.startTickNumber, sampleRate) - 1;
+    int length = vxFile->samplesCountFromTicks(pitch.ticksCount, sampleRate) + 1;
 
     std::vector<short> temp(length);
-    tsf_note_on(_tsf, 0, pitch.pitch.getSoundFont2Index(), 0.5);
-    tsf_render_short(_tsf, temp.data(), length, 0);
-    AudioUtils::MakeLinearFadeInAtBeginning(temp.data(), length, PITCH_AUDIO_FADE_PERCENTAGE);
-    AudioUtils::MakeLinearFadeOutAtEnding(temp.data(), length, PITCH_AUDIO_FADE_PERCENTAGE);
+    renderer->render(pitch.pitch, temp.data(), length);
 
     for (int i = 0; i < length; ++i) {
         short value = temp[i];
-        if (initializedPcmDataFlags[i + begin]) {
+        if (pcmDataStateFlags[i + begin] != NOT_INITIALIZED) {
             int pcmValue = pcmData[i + begin];
             pcmData[i + begin] = (short)((pcmValue + value) / 2);
         } else {
             pcmData[i + begin] = value;
-            initializedPcmDataFlags[i + begin] = true;
+            pcmDataStateFlags[i + begin] = PARTLY_INITIALIZED;
         }
     }
     
-    renderedDataSize = begin;
-    if (renderedPitchesCount >= pitches.size() - 1) {
-        renderedDataSize = pcmData.size();
+    int renderedDataSize = 0;
+    if (nextPitchToRenderIndex >= pitches.size() - 1) {
+        renderedDataSize = pcmData.size() - begin;
     } else {
-        const VxPitch &nextPitch = pitches[renderedPitchesCount + 1];
-        if (pitch.endTickNumber() > nextPitch.startTickNumber) {
-            renderedDataSize += vxFile->samplesCountFromTicks(nextPitch.startTickNumber, sampleRate);
-        } else {
-            renderedDataSize += length;
-        }
+        const VxPitch &nextPitch = pitches[nextPitchToRenderIndex + 1];
+        renderedDataSize = vxFile->samplesCountFromTicks(nextPitch.startTickNumber, sampleRate) - begin;
     }
 
-    renderedPitchesCount++;
+    renderedPitchesIndexes.insert(nextPitchToRenderIndex);
+    std::fill(pcmDataStateFlags.begin() + begin,
+            pcmDataStateFlags.begin() + begin + renderedDataSize,
+            FULLY_INITIALIZED);
 }
 
 VxFileAudioDataGenerator::~VxFileAudioDataGenerator() {
-    tsf_close(_tsf);
+    delete renderer;
 }
 
 bool VxFileAudioDataGenerator::canRenderNextPitch() const {
-    return renderedPitchesCount < vxFile->getPitches().size();
+    return vxFile->getPitches().back().endTickNumber();
 }
 
 int VxFileAudioDataGenerator::readNextSamplesBatch(short *intoBuffer) {
-    while (seek + outBufferSize < renderedDataSize && canRenderNextPitch()) {
+    while (!isFullyInitialized(seek, seek + outBufferSize) && canRenderNextPitch()) {
         renderNextPitch();
     }
 
-    int size = std::min(renderedDataSize - seek, outBufferSize);
+    size_t size = std::min(pcmData.size() - seek, (size_t)outBufferSize);
     std::copy(pcmData.begin() + seek, pcmData.begin() + seek + size, intoBuffer);
     seek += size;
-    return size;
+    return (int)size;
+}
+
+bool VxFileAudioDataGenerator::isFullyInitialized(int begin, int end) const {
+    auto iter = pcmDataStateFlags.begin();
+    return all_of_equal(iter + begin, iter + end, FULLY_INITIALIZED);
+}
+
+int VxFileAudioDataGenerator::getNextPitchToRenderIndex() const {
+    int seekInTicks = vxFile->ticksFromSamplesCount(seek, sampleRate);
+    VxPitch stub;
+    stub.startTickNumber = seekInTicks;
+    const std::vector<VxPitch> &pitches = vxFile->getPitches();
+    auto iter = UpperBoundByKey(pitches, stub, VxFile::startTickNumberKeyProvider) - 1;
+    if (iter == pitches.begin() - 1 || iter->endTickNumber() <= seekInTicks) {
+        iter++;
+    }
+
+    int index = iter - pitches.begin();
+    BOOST_ASSERT(index < pitches.size());
+
+    auto i = renderedPitchesIndexes.find(index);
+    if (i == renderedPitchesIndexes.end()) {
+        return index;
+    }
+    
+    do {
+        index++;
+        i++;
+    } while (i != renderedPitchesIndexes.end() && *i == index);
+
+    return index;
 }

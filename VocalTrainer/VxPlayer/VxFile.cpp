@@ -138,7 +138,7 @@ bool VxFile::validatePitches() {
 }
 
 void VxFile::postInit() {
-    //SortByKey(pitches.begin(), pitches.end(), [](const VxPitch& a) { return a.startTickNumber; });
+    SortByKey(pitches, startTickNumberKeyProvider);
 
     BOOST_ASSERT(distanceInTicksBetweenLastPitchEndAndTrackEnd >= 0);
     BOOST_ASSERT(validatePitches());
@@ -254,5 +254,13 @@ double VxFile::ticksToSeconds(int ticks) const {
 }
 
 int VxFile::samplesCountFromTicks(int ticks, int sampleRate) const {
-    return (int)ticksToSeconds(ticks) * sampleRate;
+    return (int) round(ticksToSeconds(ticks) * sampleRate);
+}
+
+int VxFile::ticksFromSamplesCount(int samplesCount, int sampleRate) const {
+    return timeInSecondsToTicks(AudioUtils::GetSampleTimeInSeconds(samplesCount, sampleRate));
+}
+
+int VxFile::startTickNumberKeyProvider(const VxPitch &pitch) {
+    return pitch.startTickNumber;
 }

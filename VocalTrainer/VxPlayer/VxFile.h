@@ -29,12 +29,14 @@ public:
     VxFile(const std::vector<VxPitch> &pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int bitsPerMinute);
     VxFile(std::istream& is);
     static VxFile fromFilePath(const char* filePath);
+    static int startTickNumberKeyProvider(const VxPitch &pitch);
 
     double getDurationInSeconds() const;
     double getTickDurationInSeconds() const;
     double ticksToSeconds(int ticks) const;
     int timeInSecondsToTicks(double timeInSeconds)const;
     int samplesCountFromTicks(int ticks, int sampleRate) const;
+    int ticksFromSamplesCount(int samplesCount, int sampleRate) const;
 
     const std::vector<VxPitch> &getPitches() const;
     int getTicksPerSecond() const;
@@ -42,10 +44,7 @@ public:
     int getDistanceInTicksBetweenLastPitchEndAndTrackEnd() const;
 
     const std::vector<VxLyricsInterval> &getLyrics() const;
-
-
     void setLyrics(const std::vector<VxLyricsInterval>& lyrics);
-
     void writeToStream(std::ostream& os) const;
 };
 
