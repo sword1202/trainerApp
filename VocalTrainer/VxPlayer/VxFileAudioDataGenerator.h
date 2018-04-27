@@ -36,18 +36,22 @@ class VxFileAudioDataGenerator {
 
     bool isFullyInitialized(int begin, int end) const;
     int getNextPitchToRenderIndex() const;
+    void renderPitch(const Pitch &pitch, int begin, int length);
 public:
     VxFileAudioDataGenerator(PitchRenderer *renderer, const VxFile *vxFile,
             const VxFileAudioDataGeneratorConfig &config);
     VxFileAudioDataGenerator(PitchRenderer *renderer, const VxFile *vxFile);
     VxFileAudioDataGenerator(const VxFile *vxFile, const VxFileAudioDataGeneratorConfig &config);
     VxFileAudioDataGenerator(const VxFile *vxFile);
-    ~VxFileAudioDataGenerator();
-    void reset();
 
-    void renderNextPitch();
-    bool canRenderNextPitch() const;
-    int readNextSamplesBatch(short* intoBuffer);
+    ~VxFileAudioDataGenerator();
+    void clearAllData();
+
+    bool renderNextPitchIfPossible();
+    int readNextSamplesBatch(short *intoBuffer);
+
+    const std::vector<short> &getPcmData() const;
+    void renderAllData();
 };
 
 

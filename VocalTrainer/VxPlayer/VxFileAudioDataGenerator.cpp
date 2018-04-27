@@ -42,16 +42,18 @@ VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile *vxFile)  :
         VxFileAudioDataGenerator(vxFile, VxFileAudioDataGeneratorConfig()) {
 }
 
-void VxFileAudioDataGenerator::reset() {
-    seek = 0;
+void VxFileAudioDataGenerator::clearAllData() {
     std::fill(pcmData.begin(), pcmData.end(), 0);
     std::fill(pcmDataStateFlags.begin(), pcmDataStateFlags.end(), NOT_INITIALIZED);
 }
 
-void VxFileAudioDataGenerator::renderNextPitch() {
+bool VxFileAudioDataGenerator::renderNextPitchIfPossible() {
     const std::vector<VxPitch> &pitches = vxFile->getPitches();
-    BOOST_ASSERT(canRenderNextPitch());
     int nextPitchToRenderIndex = getNextPitchToRenderIndex();
+    if (nextPitchToRenderIndex < 0) {
+        return false;
+    }
+
     const VxPitch &pitch = pitches[nextPitchToRenderIndex];
 
     // render a beat more to avoid floating computation errors;
@@ -61,19 +63,7 @@ void VxFileAudioDataGenerator::renderNextPitch() {
         length = pcmData.size() - begin;
     }
 
-    std::vector<short> temp(length);
-    renderer->render(pitch.pitch, temp.data(), length);
-
-    for (int i = 0; i < length; ++i) {
-        short value = temp[i];
-        if (pcmDataStateFlags[i + begin] != NOT_INITIALIZED) {
-            int pcmValue = pcmData[i + begin];
-            pcmData[i + begin] = (short)((pcmValue + value) / 2);
-        } else {
-            pcmData[i + begin] = value;
-            pcmDataStateFlags[i + begin] = PARTLY_INITIALIZED;
-        }
-    }
+    renderPitch(pitch.pitch, begin, length);
     
     int renderedDataSize = 0;
     if (nextPitchToRenderIndex >= pitches.size() - 1) {
@@ -87,19 +77,19 @@ void VxFileAudioDataGenerator::renderNextPitch() {
     std::fill(pcmDataStateFlags.begin() + begin,
             pcmDataStateFlags.begin() + begin + renderedDataSize,
             FULLY_INITIALIZED);
+
+    return true;
 }
 
 VxFileAudioDataGenerator::~VxFileAudioDataGenerator() {
     delete renderer;
 }
 
-bool VxFileAudioDataGenerator::canRenderNextPitch() const {
-    return vxFile->getPitches().back().endTickNumber();
-}
-
 int VxFileAudioDataGenerator::readNextSamplesBatch(short *intoBuffer) {
-    while (!isFullyInitialized(seek, seek + outBufferSize) && canRenderNextPitch()) {
-        renderNextPitch();
+    while (!isFullyInitialized(seek, seek + outBufferSize)) {
+        if (!renderNextPitchIfPossible()) {
+            break;
+        }
     }
 
     size_t size = std::min(pcmData.size() - seek, (size_t)outBufferSize);
@@ -124,17 +114,58 @@ int VxFileAudioDataGenerator::getNextPitchToRenderIndex() const {
     }
 
     int index = iter - pitches.begin();
-    BOOST_ASSERT(index < pitches.size());
 
     auto i = renderedPitchesIndexes.find(index);
-    if (i == renderedPitchesIndexes.end()) {
-        return index;
+    if (i != renderedPitchesIndexes.end()) {
+        do {
+            index++;
+            i++;
+        } while (i != renderedPitchesIndexes.end() && *i == index);
     }
-    
-    do {
-        index++;
-        i++;
-    } while (i != renderedPitchesIndexes.end() && *i == index);
+
+    if (index >= pitches.size()) {
+        return -1;
+    }
 
     return index;
 }
+
+const std::vector<short> &VxFileAudioDataGenerator::getPcmData() const {
+    return pcmData;
+}
+
+void VxFileAudioDataGenerator::renderAllData() {
+    std::fill(pcmData.begin(), pcmData.end(), 0);
+
+    const std::vector<VxPitch> &pitches = vxFile->getPitches();
+    int pitchesSize = pitches.size();
+    for (int i = 0; i < pitchesSize; ++i) {
+       renderedPitchesIndexes.insert(i);
+    }
+
+    for (const VxPitch& vxPitch : pitches) {
+        int begin = vxFile->samplesCountFromTicks(vxPitch.startTickNumber, sampleRate);
+        int length = vxFile->samplesCountFromTicks(vxPitch.ticksCount, sampleRate);
+
+        renderPitch(vxPitch.pitch, begin, length);
+    }
+
+    std::fill(pcmDataStateFlags.begin(), pcmDataStateFlags.end(), FULLY_INITIALIZED);
+}
+
+void VxFileAudioDataGenerator::renderPitch(const Pitch &pitch, int begin, int length) {
+    std::vector<short> temp(length);
+    renderer->render(pitch, temp.data(), length);
+
+    for (int i = 0; i < length; ++i) {
+        short value = temp[i];
+        if (pcmDataStateFlags[i + begin] != NOT_INITIALIZED) {
+            int pcmValue = pcmData[i + begin];
+            pcmData[i + begin] = (short)((pcmValue + value) / 2);
+        } else {
+            pcmData[i + begin] = value;
+            pcmDataStateFlags[i + begin] = PARTLY_INITIALIZED;
+        }
+    }
+}
+
