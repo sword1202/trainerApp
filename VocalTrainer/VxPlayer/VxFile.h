@@ -26,7 +26,7 @@ class VxFile {
     void processLyrics(const std::string& lyricsData);
 
 public:
-    VxFile(const std::vector<VxPitch> &pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int bitsPerMinute);
+    VxFile(const std::vector<VxPitch> &pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int ticksPerSecond);
     VxFile(std::istream& is);
     static VxFile fromFilePath(const char* filePath);
     static int startTickNumberKeyProvider(const VxPitch &pitch);

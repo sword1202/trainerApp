@@ -12,8 +12,8 @@
 class MvxPlayer {
     std::string audioData;
     std::vector<char> vxAudioData;
-    AudioPlayer instrumentalPlayer;
-    AudioPlayer vxPlayer;
+    AudioPlayer* instrumentalPlayer;
+    AudioPlayer* vxPlayer;
 public:
     MvxPlayer();
     void loadFromFile(const char* filePath);

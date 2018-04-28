@@ -20,8 +20,8 @@ int VxPitch::endTickNumber() const {
     return startTickNumber + ticksCount;
 }
 
-VxFile::VxFile(const std::vector<VxPitch> &pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int ticksPerMinute)
-        : pitches(pitches), ticksPerSecond(ticksPerMinute),
+VxFile::VxFile(const std::vector<VxPitch> &pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int ticksPerSecond)
+        : pitches(pitches), ticksPerSecond(ticksPerSecond),
           distanceInTicksBetweenLastPitchEndAndTrackEnd(distanceInTicksBetweenLastPitchEndAndTrackEnd) {
     postInit();
 }

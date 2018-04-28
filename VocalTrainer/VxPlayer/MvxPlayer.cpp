@@ -34,10 +34,10 @@ void MvxPlayer::loadFromFile(const char *filePath) {
 
 
 void MvxPlayer::play(float instrumentalVolume, float pianoVolume) {
-    vxPlayer.setVolume(pianoVolume);
-    instrumentalPlayer.setVolume(instrumentalVolume);
-    vxPlayer.play(vxAudioData.data(), vxAudioData.size(), 0);
-    instrumentalPlayer.play(audioData.data(), audioData.size(), 0);
+    vxPlayer->setVolume(pianoVolume);
+    instrumentalPlayer->setVolume(instrumentalVolume);
+//    vxPlayer->play(vxAudioData.data(), vxAudioData.size(), 0);
+//    instrumentalPlayer->play(audioData.data(), audioData.size(), 0);
 }
 
 MvxPlayer::MvxPlayer() {
@@ -45,8 +45,8 @@ MvxPlayer::MvxPlayer() {
 }
 
 void MvxPlayer::pause() {
-    instrumentalPlayer.pause();
-    vxPlayer.pause();
+//    instrumentalPlayer.pause();
+//    vxPlayer.pause();
 }
 
 void MvxPlayer::resume() {
@@ -54,14 +54,14 @@ void MvxPlayer::resume() {
 }
 
 void MvxPlayer::seek(double value) {
-    instrumentalPlayer.seek(value);
-    vxPlayer.seek(value);
+//    instrumentalPlayer.seek(value);
+//    vxPlayer.seek(value);
 }
 
 void MvxPlayer::setInstrumentalVolume(float instrumentalVolume) {
-    instrumentalPlayer.setVolume(instrumentalVolume);
+//    instrumentalPlayer.setVolume(instrumentalVolume);
 }
 
 void MvxPlayer::setPianoVolume(float pianoVolume) {
-    vxPlayer.setVolume(pianoVolume);
+//    vxPlayer.setVolume(pianoVolume);
 }

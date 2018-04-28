@@ -3,6 +3,7 @@
 // Copyright (c) 2016 Mac. All rights reserved.
 //
 
+#import "StlDebugUtils.h"
 #import "PitchGraphView.h"
 #include <GLKit/GLKit.h>
 #import "GLSceneDrawer.h"
@@ -12,6 +13,7 @@
 #import "MvxPlayer.h"
 #include "TimeUtils.h"
 #import "PortAudio.h"
+#include "VxFileAudioPlayer.h"
 
 using namespace CppUtils;
 
@@ -42,22 +44,26 @@ using namespace CppUtils;
 
 - (void)testReadFromMidi {
     const char* path = [[NSBundle mainBundle] pathForResource:@"1" ofType:@"vx"].cString;
-    //VxFile vxFile = VxFile::fromFilePath(path);
+    VxFile vxFile = VxFile::fromFilePath(path);
     MidiFileReader midiFileReader;
     std::vector<VxFile> vxFiles;
     double beatsPerMinute;
-    midiFileReader.read(
-            [NSBundle.mainBundle pathForResource:@"melody" ofType:@"mid"].UTF8String,
-            &vxFiles,
-            &beatsPerMinute);
-    for (const VxFile& a : vxFiles) {
-        std::cout << "Pitches from midi:\n";
-        a.writeToStream(std::cout);
-        std::cout << "\n";
-    }
-    const VxFile& vxFile = vxFiles[0];
+//    midiFileReader.read(
+//            [NSBundle.mainBundle pathForResource:@"melody" ofType:@"mid"].UTF8String,
+//            &vxFiles,
+//            &beatsPerMinute);
+//    for (const VxFile& a : vxFiles) {
+//        std::cout << "Pitches from midi:\n";
+//        a.writeToStream(std::cout);
+//        std::cout << "\n";
+//    }
+    //const VxFile& vxFile = vxFiles[0];
+
 //    std::vector<char> wavAudioData = vxFile.generateWavAudioData(0.5f);
-//    _player = new AudioPlayer();
+    _player = new VxFileAudioPlayer(new VxFile(vxFile.getPitches(),
+            vxFile.getDistanceInTicksBetweenLastPitchEndAndTrackEnd(), vxFile.getTicksPerSecond()));
+    _player->prepare();
+    _player->play();
 //    _player->play(wavAudioData.data(), wavAudioData.size(), 0);
 
 //    const char* instrumentalPath = [[NSBundle mainBundle] pathForResource:@"yo" ofType:@"mp3"].cString;
