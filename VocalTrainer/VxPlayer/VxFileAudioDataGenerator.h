@@ -31,6 +31,7 @@ class VxFileAudioDataGenerator {
     int outBufferSize;
     int seek = 0;
     int sampleRate;
+    int renderedPitchesCount = 0;
     mutable std::mutex bufferReadingMutex;
     mutable std::mutex seekMutex;
 
@@ -48,6 +49,7 @@ public:
     void clearAllData();
 
     bool renderNextPitchIfPossible();
+    // returns size = -1 if no data available and you should wait for some data rendered.
     int readNextSamplesBatch(short *intoBuffer);
 
     int getTotalSamplesCount() const;

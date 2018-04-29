@@ -27,7 +27,12 @@ int AudioPlayer::callback(
 {
     AudioPlayer* self = (AudioPlayer*)userData;
     int size = self->readNextSamplesBatch(outputBuffer, self->playbackData);
-    if (size == self->playbackData.framesPerBuffer) {
+    // not data available, return silence and wait
+    if (size < 0) {
+        const PaError sampleSize = Pa_GetSampleSize(self->playbackData.format);
+        memset(outputBuffer, 0, framesPerBuffer * sampleSize);
+        return paContinue;
+    } else if (size == self->playbackData.framesPerBuffer) {
         return paContinue;
     } else {
         self->onComplete();

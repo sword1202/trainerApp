@@ -42,6 +42,7 @@ public:
     int getTicksPerSecond() const;
     int getDurationInTicks() const;
     int getDistanceInTicksBetweenLastPitchEndAndTrackEnd() const;
+    const VxPitch& getShortestPitch() const;
 
     const std::vector<VxLyricsInterval> &getLyrics() const;
     void setLyrics(const std::vector<VxLyricsInterval>& lyrics);

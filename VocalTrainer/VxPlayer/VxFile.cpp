@@ -264,3 +264,9 @@ int VxFile::ticksFromSamplesCount(int samplesCount, int sampleRate) const {
 int VxFile::startTickNumberKeyProvider(const VxPitch &pitch) {
     return pitch.startTickNumber;
 }
+
+const VxPitch &VxFile::getShortestPitch() const {
+    return FindMinValueUsingKeyProvider(pitches, [](const VxPitch& pitch) {
+        return pitch.ticksCount;
+    });
+}

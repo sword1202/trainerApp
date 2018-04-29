@@ -9,6 +9,7 @@
 #include "AudioUtils.h"
 #include "Algorithms.h"
 #include "SoundFont2PitchRenderer.h"
+#include <iostream>
 
 #define BUFFER_LOCK std::lock_guard<std::mutex> _(bufferReadingMutex)
 #define SEEK_LOCK std::lock_guard<std::mutex> _(seekMutex)
@@ -16,6 +17,9 @@
 using namespace boost::icl;
 using namespace CppUtils;
 using namespace StlDebugUtils;
+using std::cout;
+
+constexpr double PITCH_EDGE_SMOOTH_FACTOR = 0.07 * 400;
 
 VxFileAudioDataGenerator::VxFileAudioDataGenerator(PitchRenderer *renderer, const VxFile *vxFile, const VxFileAudioDataGeneratorConfig &config)
         : renderer(renderer) {
@@ -37,8 +41,9 @@ VxFileAudioDataGenerator::VxFileAudioDataGenerator(PitchRenderer *renderer, cons
 }
 
 VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile *vxFile, const VxFileAudioDataGeneratorConfig &config) :
-    VxFileAudioDataGenerator(new SoundFont2PitchRenderer(config.sampleRate), vxFile, config) {
-
+    VxFileAudioDataGenerator(nullptr, vxFile, config) {
+    int ticksPerSecond = vxFile->getTicksPerSecond();
+    renderer = new SoundFont2PitchRenderer(config.sampleRate, PITCH_EDGE_SMOOTH_FACTOR / ticksPerSecond);
 }
 
 VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile *vxFile)  :
@@ -52,16 +57,17 @@ void VxFileAudioDataGenerator::clearAllData() {
     BUFFER_LOCK;
     fullyInitializedDataIntervals.clear();
     std::fill(begin(fullyInitializedPcmData), end(fullyInitializedPcmData), 0);
+    renderedPitchesCount = 0;
 }
 
 bool VxFileAudioDataGenerator::renderNextPitchIfPossible() {
     const std::vector<VxPitch> &pitches = vxFile->getPitches();
-    int nextPitchToRenderIndex = getNextPitchToRenderIndex();
-    if (nextPitchToRenderIndex < 0) {
+    int pitchToRenderIndex = getNextPitchToRenderIndex();
+    if (pitchToRenderIndex < 0) {
         return false;
     }
 
-    const VxPitch &pitch = pitches[nextPitchToRenderIndex];
+    const VxPitch &pitch = pitches[pitchToRenderIndex];
 
     int first = vxFile->samplesCountFromTicks(pitch.startTickNumber, sampleRate);
     int length = vxFile->samplesCountFromTicks(pitch.ticksCount, sampleRate);
@@ -72,16 +78,22 @@ bool VxFileAudioDataGenerator::renderNextPitchIfPossible() {
     renderPitch(pitch.pitch, first, length);
     
     int renderedDataSize = 0;
-    if (nextPitchToRenderIndex >= pitches.size() - 1) {
+    if (pitchToRenderIndex >= pitches.size() - 1) {
         renderedDataSize = pcmData.size() - first;
     } else {
-        const VxPitch &nextPitch = pitches[nextPitchToRenderIndex + 1];
+        const VxPitch &nextPitch = pitches[pitchToRenderIndex + 1];
         renderedDataSize = vxFile->samplesCountFromTicks(nextPitch.startTickNumber, sampleRate) - first;
     }
 
-    renderedPitchesIndexes.insert(nextPitchToRenderIndex);
+    renderedPitchesIndexes.insert(pitchToRenderIndex);
 
     BUFFER_LOCK;
+    // add silence at track start on the beginning
+    if (pitchToRenderIndex == 0) {
+        renderedDataSize += first;
+        first = 0;
+    }
+
     fullyInitializedDataIntervals.add(interval<int>::right_open(first, first + renderedDataSize));
     auto iter = begin(pcmData) + first;
     std::copy(iter, iter + renderedDataSize, begin(fullyInitializedPcmData) + first);
@@ -95,20 +107,13 @@ VxFileAudioDataGenerator::~VxFileAudioDataGenerator() {
 
 int VxFileAudioDataGenerator::readNextSamplesBatch(short *intoBuffer) {
     int seek;
+    {
+        SEEK_LOCK;
+        seek = this->seek;
+    }
 
-    while (true) {
-        {
-            SEEK_LOCK;
-            seek = this->seek;
-        }
-
-        if (isFullyInitialized(seek, seek + outBufferSize)) {
-            break;
-        }
-
-        if (!renderNextPitchIfPossible()) {
-            break;
-        }
+    if (!isFullyInitialized(seek, seek + outBufferSize)) {
+        return -1;
     }
 
     size_t size = std::min(pcmData.size() - seek, (size_t)outBufferSize);
@@ -196,7 +201,7 @@ void VxFileAudioDataGenerator::renderAllData() {
 }
 
 void VxFileAudioDataGenerator::renderPitch(const Pitch &pitch, int begin, int length) {
-    BOOST_ASSERT(begin >= 0 && length >= 0 && length - begin <= pcmData.size());
+    BOOST_ASSERT(begin >= 0 && length >= 0 && length + begin <= pcmData.size());
 
     std::vector<short> temp(length);
     renderer->render(pitch, temp.data(), length);
@@ -211,6 +216,9 @@ void VxFileAudioDataGenerator::renderPitch(const Pitch &pitch, int begin, int le
             pcmHasDataFlag[i + begin] = true;
         }
     }
+
+    renderedPitchesCount++;
+    BOOST_ASSERT(renderedPitchesCount <= vxFile->getPitches().size());
 }
 
 int VxFileAudioDataGenerator::getTotalSamplesCount() const {
