@@ -29,7 +29,7 @@ int AudioPlayer::callback(
     float volume = self->getVolume();
 
     int size = self->readNextSamplesBatch(outputBuffer, self->playbackData);
-    // not data available, return silence and wait
+    // no data available, return silence and wait
     if (size < 0) {
         const PaError sampleSize = Pa_GetSampleSize(self->playbackData.format);
         memset(outputBuffer, 0, framesPerBuffer * sampleSize);
