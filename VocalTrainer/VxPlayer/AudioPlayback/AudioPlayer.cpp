@@ -26,6 +26,8 @@ int AudioPlayer::callback(
         void *userData )
 {
     AudioPlayer* self = (AudioPlayer*)userData;
+    float volume = self->getVolume();
+
     int size = self->readNextSamplesBatch(outputBuffer, self->playbackData);
     // not data available, return silence and wait
     if (size < 0) {
@@ -33,6 +35,16 @@ int AudioPlayer::callback(
         memset(outputBuffer, 0, framesPerBuffer * sampleSize);
         return paContinue;
     } else if (size == self->playbackData.framesPerBuffer) {
+        if (volume == 0.0f) {
+            const PaError sampleSize = Pa_GetSampleSize(self->playbackData.format);
+            memset(outputBuffer, 0, framesPerBuffer * sampleSize);
+        } else if (volume != 1.0f) {
+            assert(self->playbackData.format == paInt16 && "only paInt16 is supported for now");
+            for (int i = 0; i < framesPerBuffer; ++i) {
+                static_cast<short*>(outputBuffer)[i] *= volume;
+            }
+        }
+
         return paContinue;
     } else {
         self->onComplete();
