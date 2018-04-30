@@ -6,8 +6,6 @@
 #ifndef VOCALTRAINER_MP3AUDIOPLAYER_H
 #define VOCALTRAINER_MP3AUDIOPLAYER_H
 
-static const int PCM_DATA_RESERVATION_FACTOR = 5;
-
 #include "StlDebugUtils.h"
 #include "AudioFilePlayer.h"
 #include "minimp3.h"
