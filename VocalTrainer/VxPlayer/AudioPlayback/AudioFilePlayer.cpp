@@ -7,6 +7,7 @@
 #include "Strings.h"
 #include "WAVFile.h"
 #include "WavAudioPlayer.h"
+#include "Mp3AudioPlayer.h"
 
 #define SEEK_LOCK std::lock_guard<std::mutex> _(seekMutex)
 
@@ -38,6 +39,6 @@ AudioFilePlayer *AudioFilePlayer::create(std::istream &is) {
      if (WAVFile::isWavFile(audioData.data(), audioData.size())) {
          return new WavAudioPlayer(std::move(audioData));
      } else {
-         return nullptr;
+         return new Mp3AudioPlayer(std::move(audioData));
      }
 }
