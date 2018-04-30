@@ -12,12 +12,11 @@ static const int PCM_DATA_RESERVATION_FACTOR = 5;
 #include "AudioFilePlayer.h"
 #include "minimp3.h"
 #include <boost/circular_buffer.hpp>
-#include <deque>
 
 class Mp3AudioPlayer : public AudioFilePlayer {
     short tempPcm[MINIMP3_MAX_SAMPLES_PER_FRAME];
     boost::circular_buffer<short> pcm;
-    std::deque<int> mp3frameBytesCountQueue;
+    boost::circular_buffer<int> mp3frameBytesCountQueue;
     mp3dec_t mp3d;
     mp3dec_frame_info_t info;
     int bitrate;

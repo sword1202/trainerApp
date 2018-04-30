@@ -10,7 +10,11 @@
 
 #define PCM_LOCK std::lock_guard<std::mutex> _(pcmMutex)
 
-Mp3AudioPlayer::Mp3AudioPlayer(std::string &&audioData) : AudioFilePlayer(std::move(audioData)), pcm(MINIMP3_MAX_SAMPLES_PER_FRAME * 3) {
+constexpr size_t QUEUE_SIZE = 3;
+
+Mp3AudioPlayer::Mp3AudioPlayer(std::string &&audioData) : AudioFilePlayer(std::move(audioData)),
+                                                          pcm(MINIMP3_MAX_SAMPLES_PER_FRAME * QUEUE_SIZE),
+                                                          mp3frameBytesCountQueue(QUEUE_SIZE) {
 
 }
 
