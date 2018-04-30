@@ -174,10 +174,6 @@ int VxFileAudioDataGenerator::getNextPitchToRenderIndex() const {
     return index;
 }
 
-const std::vector<short> &VxFileAudioDataGenerator::getPcmData() const {
-    return pcmData;
-}
-
 void VxFileAudioDataGenerator::renderAllData() {
     std::fill(begin(pcmData), end(pcmData), 0);
 
@@ -241,5 +237,9 @@ void VxFileAudioDataGenerator::setSeek(int seek) {
 int VxFileAudioDataGenerator::getSeek() const {
     SEEK_LOCK;
     return seek;
+}
+
+double VxFileAudioDataGenerator::getDurationInSeconds() const {
+    return vxFile->getDurationInSeconds();
 }
 

@@ -53,10 +53,10 @@ public:
     int readNextSamplesBatch(short *intoBuffer);
 
     int getTotalSamplesCount() const;
+    double getDurationInSeconds() const ;
     int getOutBufferSize() const;
     int getSampleRate() const;
 
-    const std::vector<short> &getPcmData() const;
     void renderAllData();
     void setSeek(int seek);
 

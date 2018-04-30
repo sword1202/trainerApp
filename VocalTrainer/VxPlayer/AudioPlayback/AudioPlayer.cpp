@@ -28,27 +28,42 @@ int AudioPlayer::callback(
     AudioPlayer* self = (AudioPlayer*)userData;
     float volume = self->getVolume();
 
-    int size = self->readNextSamplesBatch(outputBuffer, self->playbackData);
+    int readFramesCount = self->readNextSamplesBatch(outputBuffer, framesPerBuffer, self->playbackData);
+    assert(readFramesCount <= framesPerBuffer);
     // no data available, return silence and wait
-    if (size < 0) {
-        const PaError sampleSize = Pa_GetSampleSize(self->playbackData.format);
-        memset(outputBuffer, 0, framesPerBuffer * sampleSize);
+    const PaSampleFormat format = self->playbackData.format;
+    if (readFramesCount < 0) {
+        int sampleSize = self->getSampleSize();
+        memset(outputBuffer, 0, readFramesCount * sampleSize);
         return paContinue;
-    } else if (size == self->playbackData.framesPerBuffer) {
+    } else {
         if (volume == 0.0f) {
-            const PaError sampleSize = Pa_GetSampleSize(self->playbackData.format);
-            memset(outputBuffer, 0, framesPerBuffer * sampleSize);
+            auto sampleSize = Pa_GetSampleSize(format) * self->playbackData.numChannels;
+            memset(outputBuffer, 0, readFramesCount * sampleSize);
         } else if (volume != 1.0f) {
-            assert(self->playbackData.format == paInt16 && "only paInt16 is supported for now");
-            for (int i = 0; i < framesPerBuffer; ++i) {
-                static_cast<short*>(outputBuffer)[i] *= volume;
+            if (format == paInt16) {
+                for (int i = 0; i < readFramesCount; ++i) {
+                    static_cast<int16_t*>(outputBuffer)[i] *= volume;
+                }    
+            } else if (format == paInt32) {
+                for (int i = 0; i < readFramesCount; ++i) {
+                    static_cast<int32_t*>(outputBuffer)[i] *= volume;
+                }
+            } else if (format == paInt8) {
+                for (int i = 0; i < readFramesCount; ++i) {
+                    static_cast<int8_t*>(outputBuffer)[i] *= volume;
+                }
+            } else {
+                std::runtime_error("Unsupported self->playbackData.format " + std::to_string(format));
             }
         }
 
-        return paContinue;
-    } else {
-        self->onComplete();
-        return paComplete;
+        if (readFramesCount == framesPerBuffer) {
+            return paContinue;
+        } else {
+            self->onComplete();
+            return paComplete;
+        }
     }
 }
 
@@ -57,7 +72,7 @@ void AudioPlayer::prepare() {
     BOOST_ASSERT_MSG(playbackData.sampleRate > 0 &&
             playbackData.framesPerBuffer >= 0 &&
             playbackData.numChannels > 0 &&
-            playbackData.totalStreamSamplesCount > 0,
+            playbackData.totalDurationInSeconds > 0,
             "not all playback data provided");
 
     auto err = Pa_OpenDefaultStream( &stream,
@@ -105,11 +120,11 @@ void AudioPlayer::pause() {
 }
 
 void AudioPlayer::setSeek(double timeStamp) {
-    setSamplesCountSeek(secondsToSamplesCount(timeStamp));
+    setBufferSeek(secondsToSamplesCount(timeStamp));
 }
 
 double AudioPlayer::getTrackDurationInSeconds() {
-    return samplesCountToSeconds(playbackData.totalStreamSamplesCount);
+    return playbackData.totalDurationInSeconds;
 }
 
 AudioPlayer::AudioPlayer() {
@@ -130,7 +145,7 @@ void AudioPlayer::setVolume(float volume) {
 }
 
 double AudioPlayer::getSeek() const {
-    return samplesCountToSeconds(getSamplesCountSeek());
+    return samplesCountToSeconds(getBufferSeek());
 }
 
 int AudioPlayer::secondsToSamplesCount(double secondsSeek) const {
@@ -143,4 +158,8 @@ double AudioPlayer::samplesCountToSeconds(int samplesCount) const {
 
 void AudioPlayer::onComplete() {
     setSeek(0);
+}
+
+int AudioPlayer::getSampleSize() const {
+    return Pa_GetSampleSize(playbackData.format) * playbackData.numChannels;
 }

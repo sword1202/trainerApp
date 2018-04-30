@@ -19,14 +19,14 @@ class VxFileAudioPlayer : public AudioPlayer {
 
     void generatorThreadAction();
 protected:
-    int readNextSamplesBatch(void *intoBuffer, const PlaybackData &playbackData) override;
+    int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) override;
     void prepareAndProvidePlaybackData(PlaybackData *playbackData) override;
     void onComplete() override;
 private:
     void startGeneratorThread();
     void stopGeneratorThread();
-    int getSamplesCountSeek() const override;
-    void setSamplesCountSeek(int samplesCountSeek) override;
+    int getBufferSeek() const override;
+    void setBufferSeek(int samplesCountSeek) override;
 
 public:
     VxFileAudioPlayer(VxFile *vxFile);

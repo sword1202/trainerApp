@@ -6,14 +6,14 @@
 #include <thread>
 #include "VxFileAudioPlayer.h"
 
-int VxFileAudioPlayer::readNextSamplesBatch(void *intoBuffer, const PlaybackData &playbackData) {
+int VxFileAudioPlayer::readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) {
     return generator->readNextSamplesBatch((short*)intoBuffer);
 }
 
 void VxFileAudioPlayer::prepareAndProvidePlaybackData(PlaybackData *playbackData) {
     generator->renderNextPitchIfPossible();
     playbackData->format = paInt16;
-    playbackData->totalStreamSamplesCount = generator->getTotalSamplesCount();
+    playbackData->totalDurationInSeconds = generator->getDurationInSeconds();
     playbackData->framesPerBuffer = generator->getOutBufferSize();
     playbackData->sampleRate = generator->getSampleRate();
     playbackData->numChannels = 1;
@@ -41,11 +41,11 @@ void VxFileAudioPlayer::generatorThreadAction() {
     delete generator;
 }
 
-int VxFileAudioPlayer::getSamplesCountSeek() const {
+int VxFileAudioPlayer::getBufferSeek() const {
     return generator->getSeek();
 }
 
-void VxFileAudioPlayer::setSamplesCountSeek(int samplesCountSeek) {
+void VxFileAudioPlayer::setBufferSeek(int samplesCountSeek) {
     generator->setSeek(samplesCountSeek);
 }
 

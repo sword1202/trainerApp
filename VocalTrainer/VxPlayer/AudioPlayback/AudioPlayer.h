@@ -14,7 +14,7 @@ protected:
         int sampleRate = -1;
         int framesPerBuffer = -1;
         int numChannels = -1;
-        int totalStreamSamplesCount = -1;
+        double totalDurationInSeconds = -1;
         PaSampleFormat format = paInt16;
     };
 private:
@@ -30,15 +30,16 @@ private:
             PaStreamCallbackFlags statusFlags,
             void *userData);
 protected:
-    virtual int readNextSamplesBatch(void *intoBuffer, const PlaybackData& playbackData) = 0;
+    virtual int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData& playbackData) = 0;
 	virtual void prepareAndProvidePlaybackData(PlaybackData* playbackData) = 0;
-	virtual int getSamplesCountSeek() const = 0;
-	virtual void setSamplesCountSeek(int samplesCountSeek) = 0;
+	virtual int getBufferSeek() const = 0;
+	virtual void setBufferSeek(int bufferSeek) = 0;
 
 	virtual void onComplete();
 
 	int secondsToSamplesCount(double secondsSeek) const;
     double samplesCountToSeconds(int samplesCount) const;
+    int getSampleSize() const;
 public:
     AudioPlayer();
     virtual ~AudioPlayer();
@@ -52,8 +53,8 @@ public:
     float getVolume() const;
     void setVolume(float volume);
 
-    void setSeek(double timeStamp);
-    double getSeek() const;
+    virtual void setSeek(double timeStamp);
+    virtual double getSeek() const;
 
 
     double getTrackDurationInSeconds();
