@@ -29,7 +29,7 @@ int AudioPlayer::callback(
     float volume = self->getVolume();
 
     int readFramesCount = self->readNextSamplesBatch(outputBuffer, framesPerBuffer, self->playbackData);
-    assert(readFramesCount <= framesPerBuffer);
+    assert(readFramesCount <= (int)framesPerBuffer);
     // no data available, return silence and wait
     const PaSampleFormat format = self->playbackData.format;
     if (readFramesCount < 0) {

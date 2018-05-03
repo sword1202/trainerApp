@@ -14,6 +14,7 @@
 #include "TimeUtils.h"
 #import "PortAudio.h"
 #include "VxFileAudioPlayer.h"
+#include "AudioFilePlayer.h"
 
 using namespace CppUtils;
 
@@ -34,12 +35,15 @@ using namespace CppUtils;
                                    selector:@selector(onTimer:)
                                    userInfo:nil
                                     repeats:YES];
-    [self testReadFromMidi];
+   // [self testReadFromMidi];
 //    const char* path = "/Users/semyon/Desktop/yo.mvx";
 //    std::fstream ee;
 //    _mvxPlayer = new MvxPlayer();
 //    _mvxPlayer->loadFromFile(path);
 //    _mvxPlayer->play(1.0, 0.5);
+    _player = AudioFilePlayer::create("/Users/semyon/Downloads/yo.mp3");
+    _player->prepare();
+    _player->play();
 }
 
 - (void)testReadFromMidi {

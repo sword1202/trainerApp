@@ -8,6 +8,7 @@
 #include "WAVFile.h"
 #include "WavAudioPlayer.h"
 #include "Mp3AudioPlayer.h"
+#include "Streams.h"
 
 #define SEEK_LOCK std::lock_guard<std::mutex> _(seekMutex)
 
@@ -41,4 +42,9 @@ AudioFilePlayer *AudioFilePlayer::create(std::istream &is) {
      } else {
          return new Mp3AudioPlayer(std::move(audioData));
      }
+}
+
+AudioFilePlayer *AudioFilePlayer::create(const char *filePath) {
+    std::fstream is = Streams::OpenFile(filePath, std::ios::in | std::ios::binary);
+    return create(is);
 }

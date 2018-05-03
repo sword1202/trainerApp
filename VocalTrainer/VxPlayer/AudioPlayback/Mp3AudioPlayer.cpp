@@ -7,10 +7,14 @@
 #include "Mp3AudioPlayer.h"
 #define MINIMP3_IMPLEMENTATION
 #include "minimp3.h"
+#include "Primitives.h"
+#include <thread>
 
 #define PCM_LOCK std::lock_guard<std::mutex> _(pcmMutex)
 
 constexpr size_t QUEUE_SIZE = 3;
+
+using namespace CppUtils;
 
 Mp3AudioPlayer::Mp3AudioPlayer(std::string &&audioData) : AudioFilePlayer(std::move(audioData)),
                                                           pcm(MINIMP3_MAX_SAMPLES_PER_FRAME * QUEUE_SIZE),
@@ -39,13 +43,13 @@ int Mp3AudioPlayer::readNextSamplesBatch(void *intoBuffer, int framesCount,
         short* a = (short*)intoBuffer;
         std::copy(pcm.begin(), pcm.begin() + outBufferSize, a);
         pcm.erase_begin(outBufferSize);
-        newSeek = mp3frameBytesCountQueue.front();
+        newSeek = mp3frameBytesCountQueue.front() + seek;
         mp3frameBytesCountQueue.pop_front();
     }
 
     setBufferSeekIfNotModified(newSeek, seek);
 
-    return 0;
+    return framesCount;
 }
 
 void Mp3AudioPlayer::prepareAndProvidePlaybackData(AudioPlayer::PlaybackData *playbackData) {
@@ -78,7 +82,14 @@ void Mp3AudioPlayer::prepareAndProvidePlaybackData(AudioPlayer::PlaybackData *pl
     playbackData->totalDurationInSeconds = durationInSeconds;
 
     pcm.insert(pcm.end(), tempPcm, tempPcm + samplesCount * playbackData->numChannels);
-    setBufferSeek(seek - headerOffset);
+    mp3frameBytesCountQueue.push_back(info.frame_bytes);
+    setBufferSeek(0);
+
+    decodingThreadRunning = true;
+    std::thread thread([=]{
+        decodingThreadCallback(*playbackData);
+    });
+    thread.detach();
 }
 
 void Mp3AudioPlayer::decodingThreadCallback(const PlaybackData& playbackData) {
@@ -92,11 +103,12 @@ void Mp3AudioPlayer::decodingThreadCallback(const PlaybackData& playbackData) {
         }
 
         while (pcmSize < MINIMP3_MAX_SAMPLES_PER_FRAME * playbackData.numChannels) {
-            int seek;
-            if (!mp3frameBytesCountQueue.empty()) {
-                seek = mp3frameBytesCountQueue.back();
-            } else {
-                seek = getBufferSeek();
+            int seek = getBufferSeek();
+            {
+                PCM_LOCK;
+                for (int i : mp3frameBytesCountQueue) {
+                    seek += i;
+                }
             }
 
             seek += headerOffset;
@@ -127,6 +139,10 @@ void Mp3AudioPlayer::decodingThreadCallback(const PlaybackData& playbackData) {
 }
 
 void Mp3AudioPlayer::setSeek(double timeStamp) {
+    if (Primitives::CompareFloats(timeStamp, getSeek())) {
+        return;
+    }
+
     {
         PCM_LOCK;
         pcm.clear();

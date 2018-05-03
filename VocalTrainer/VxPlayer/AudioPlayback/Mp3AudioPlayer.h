@@ -9,6 +9,7 @@
 #include "StlDebugUtils.h"
 #include "AudioFilePlayer.h"
 #include "minimp3.h"
+#define BOOST_CB_ENABLE_DEBUG 1
 #include <boost/circular_buffer.hpp>
 
 class Mp3AudioPlayer : public AudioFilePlayer {

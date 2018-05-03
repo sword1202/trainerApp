@@ -24,6 +24,7 @@ public:
     AudioFilePlayer(std::string&& audioData);
     // mp3 and wav files are supported
     static AudioFilePlayer* create(std::istream& is);
+    static AudioFilePlayer* create(const char* filePath);
 };
 
 
