@@ -41,7 +41,7 @@ using namespace CppUtils;
 //    _mvxPlayer = new MvxPlayer();
 //    _mvxPlayer->loadFromFile(path);
 //    _mvxPlayer->play(1.0, 0.5);
-    _player = AudioFilePlayer::create("/Users/semyon/Downloads/yo.mp3");
+    _player = AudioFilePlayer::create("/Users/semyon/Downloads/yo.wav");
     _player->prepare();
     _player->play();
 }

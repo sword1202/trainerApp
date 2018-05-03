@@ -11,7 +11,7 @@
 #include <iostream>
 
 class AudioFilePlayer : public AudioPlayer {
-    int bufferSeek;
+    int bufferSeek = 0;
     mutable std::mutex seekMutex;
 protected:
     std::string audioData;

@@ -16,7 +16,7 @@ int WavAudioPlayer::readNextSamplesBatch(void *intoBuffer, int framesCount,
         setBufferSeekIfNotModified(newSeek, seek);
     }
     
-    return size;
+    return size / frameSize;
 }
 
 void WavAudioPlayer::prepareAndProvidePlaybackData(AudioPlayer::PlaybackData *playbackData) {
