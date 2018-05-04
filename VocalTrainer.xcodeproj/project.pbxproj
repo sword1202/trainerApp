@@ -226,6 +226,7 @@
 		C9FFFE55AF6D32018F3AB842 /* GeometryUtilsTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GeometryUtilsTest.cpp; path = PitchDetection/CppUtils/tests/GeometryUtilsTest.cpp; sourceTree = SOURCE_ROOT; };
 		C9FFFE67C10A6A65023BE764 /* Algorithms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Algorithms.h; path = PitchDetection/CppUtils/Algorithms.h; sourceTree = "<group>"; };
 		C9FFFEBA9C7F7C116E07359E /* MidiTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiTrack.h; sourceTree = "<group>"; };
+		C9FFFEEFD6FD398814656299 /* ListenersSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ListenersSet.h; path = PitchDetection/CppUtils/ListenersSet.h; sourceTree = "<group>"; };
 		C9FFFEF6E23B96974A519665 /* a.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file.sf2; path = a.sf2; sourceTree = "<group>"; };
 		C9FFFF2FA9D41704FC328906 /* WavAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WavAudioPlayer.h; sourceTree = "<group>"; };
 		C9FFFF63DF93064D05413294 /* MidiEventList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiEventList.cpp; sourceTree = "<group>"; };
@@ -268,6 +269,7 @@
 				C9FFF709A5A3DB8BE4B17B46 /* StlDebugUtils.h */,
 				C9FFF3E7CF6BBEA382E1BAD5 /* Executors.h */,
 				C9FFF3F33A6942DEFCDDF2C9 /* Executors.mm */,
+				C9FFFEEFD6FD398814656299 /* ListenersSet.h */,
 			);
 			name = CppUtils;
 			sourceTree = "<group>";

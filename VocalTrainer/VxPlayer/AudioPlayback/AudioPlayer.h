@@ -7,6 +7,7 @@
 #define VOCALTRAINER_AUDIOPLAYER_H
 
 #include <portaudio/portaudio.h>
+#include "ListenersSet.h"
 
 class AudioPlayer {
 protected:
@@ -22,6 +23,7 @@ private:
     PlaybackData playbackData;
     bool playing = false;
     float volume = 1.0f;
+    CppUtils::ListenersSet<> onCompleteListeners;
 
     static int callback(const void *inputBuffer,
             void *outputBuffer,
@@ -56,7 +58,12 @@ public:
     virtual void setSeek(double timeStamp);
     virtual double getSeek() const;
 
-
     double getTrackDurationInSeconds();
+
+    int addOnCompleteListener(const CppUtils::ListenersSet<>::function& listener);
+    int addOnCompleteOneShotListener(const CppUtils::ListenersSet<>::function& listener);
+    void removeOnCompleteListener(int key);
+
+    void playFromSeekToSeek(double a, double b);
 };
 #endif //VOCALTRAINER_AUDIOPLAYER_H

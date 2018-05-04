@@ -9,6 +9,7 @@
 #include "TimeUtils.h"
 #include "PortAudio.h"
 #include "AudioUtils.h"
+#include "Executors.h"
 
 #import <iostream>
 #include <boost/assert.hpp>
@@ -44,7 +45,7 @@ int AudioPlayer::callback(
             if (format == paInt16) {
                 for (int i = 0; i < readFramesCount; ++i) {
                     static_cast<int16_t*>(outputBuffer)[i] *= volume;
-                }    
+                }
             } else if (format == paInt32) {
                 for (int i = 0; i < readFramesCount; ++i) {
                     static_cast<int32_t*>(outputBuffer)[i] *= volume;
@@ -61,7 +62,7 @@ int AudioPlayer::callback(
         if (readFramesCount == framesPerBuffer) {
             return paContinue;
         } else {
-            self->onComplete();
+            Executors::ExecuteOnMainThread([self](){ self->onComplete(); });
             return paComplete;
         }
     }
@@ -159,8 +160,29 @@ double AudioPlayer::samplesCountToSeconds(int samplesCount) const {
 
 void AudioPlayer::onComplete() {
     setSeek(0);
+    onCompleteListeners.executeAll();
 }
 
 int AudioPlayer::getSampleSize() const {
     return Pa_GetSampleSize(playbackData.format) * playbackData.numChannels;
+}
+
+void AudioPlayer::playFromSeekToSeek(double a, double b) {
+    assert(a < b);
+    assert(a > 0 && b > 0);
+    assert(b <= getTrackDurationInSeconds());
+
+    play(a);
+}
+
+int AudioPlayer::addOnCompleteListener(const CppUtils::ListenersSet<>::function &listener) {
+    return onCompleteListeners.addListener(listener);
+}
+
+int AudioPlayer::addOnCompleteOneShotListener(const CppUtils::ListenersSet<>::function &listener) {
+    return onCompleteListeners.addOneShotListener(listener);
+}
+
+void AudioPlayer::removeOnCompleteListener(int key) {
+    onCompleteListeners.removeListener(key);
 }
