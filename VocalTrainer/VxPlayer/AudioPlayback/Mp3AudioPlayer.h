@@ -11,6 +11,7 @@
 #include "minimp3.h"
 #define BOOST_CB_ENABLE_DEBUG 1
 #include <boost/circular_buffer.hpp>
+#include <atomic>
 
 class Mp3AudioPlayer : public AudioFilePlayer {
     short tempPcm[MINIMP3_MAX_SAMPLES_PER_FRAME];
@@ -21,7 +22,7 @@ class Mp3AudioPlayer : public AudioFilePlayer {
     int bitrate;
     std::mutex pcmMutex;
     int headerOffset;
-    volatile bool decodingThreadRunning = false;
+    std::atomic_bool decodingThreadRunning;
 protected:
     int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) override;
     void prepareAndProvidePlaybackData(PlaybackData *playbackData) override;

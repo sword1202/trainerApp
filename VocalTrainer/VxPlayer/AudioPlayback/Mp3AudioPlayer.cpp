@@ -19,7 +19,7 @@ using namespace CppUtils;
 Mp3AudioPlayer::Mp3AudioPlayer(std::string &&audioData) : AudioFilePlayer(std::move(audioData)),
                                                           pcm(MINIMP3_MAX_SAMPLES_PER_FRAME * QUEUE_SIZE),
                                                           mp3frameBytesCountQueue(QUEUE_SIZE) {
-
+    decodingThreadRunning = false;
 }
 
 int Mp3AudioPlayer::readNextSamplesBatch(void *intoBuffer, int framesCount,

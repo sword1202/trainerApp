@@ -11,11 +11,12 @@
 #include "VxFile.h"
 #include "VxFileAudioDataGenerator.h"
 #include "SynchronizedCallbacksQueue.h"
+#include <atomic>
 
 class VxFileAudioPlayer : public AudioPlayer {
     const VxFile* vxFile;
     VxFileAudioDataGenerator* generator;
-    volatile bool generatorThreadRunning = false;
+    std::atomic_bool generatorThreadRunning;
 
     void generatorThreadAction();
 protected:

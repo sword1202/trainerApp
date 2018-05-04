@@ -30,6 +30,7 @@ void VxFileAudioPlayer::startGeneratorThread() {
 }
 
 VxFileAudioPlayer::VxFileAudioPlayer(const VxFile *vxFile) : vxFile(vxFile) {
+    generatorThreadRunning = false;
     generator = new VxFileAudioDataGenerator(vxFile);
 }
 
