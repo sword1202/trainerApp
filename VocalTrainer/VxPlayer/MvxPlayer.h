@@ -10,16 +10,20 @@
 #include "VxFile.h"
 
 class MvxPlayer {
-    std::string audioData;
-    std::vector<char> vxAudioData;
+    const VxFile* vxFile;
     AudioPlayer* instrumentalPlayer;
     AudioPlayer* vxPlayer;
+    bool destroyVxFileOnDestructor = false;
+
+    void init(std::istream& is);
+    void init(std::istream& instrumentalStream, const VxFile* vxFile);
 public:
-    MvxPlayer();
-    void loadFromFile(const char* filePath);
-    void loadFromStream(std::istream& is);
-    void initFromInstrumentalFileAndVxFile(const char* instrumentalFilePath, const VxFile& vxFile);
-    void initFromInstrumentalStreamAndVxFile(std::istream& instrumentalStream, const VxFile& vxFile);
+    ~MvxPlayer();
+    MvxPlayer(const char* filePath);
+    MvxPlayer(std::istream& is);
+    MvxPlayer(const char* instrumentalFilePath, const VxFile* vxFile);
+    MvxPlayer(std::istream& instrumentalStream, const VxFile* vxFile);
+    void prepare();
     void play(float instrumentalVolume, float pianoVolume);
     void setInstrumentalVolume(float instrumentalVolume);
     void setPianoVolume(float pianoVolume);

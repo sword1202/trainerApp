@@ -29,7 +29,7 @@ void VxFileAudioPlayer::startGeneratorThread() {
     thread.detach();
 }
 
-VxFileAudioPlayer::VxFileAudioPlayer(VxFile *vxFile) : vxFile(vxFile) {
+VxFileAudioPlayer::VxFileAudioPlayer(const VxFile *vxFile) : vxFile(vxFile) {
     generator = new VxFileAudioDataGenerator(vxFile);
 }
 

@@ -11,7 +11,6 @@
 
 class MvxFile {
 public:
-    static void readFromStream();
     static void writeToStream(const VxFile& vxFile, const char* instrumentalFilePath,
             double beatsPerMinute, std::ostream& os);
     static void writeToFile(const VxFile& vxFile, const char* instrumentalFilePath,

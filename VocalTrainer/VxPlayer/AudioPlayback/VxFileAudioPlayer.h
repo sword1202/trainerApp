@@ -13,7 +13,7 @@
 #include "SynchronizedCallbacksQueue.h"
 
 class VxFileAudioPlayer : public AudioPlayer {
-    VxFile* vxFile;
+    const VxFile* vxFile;
     VxFileAudioDataGenerator* generator;
     volatile bool generatorThreadRunning = false;
 
@@ -29,7 +29,7 @@ private:
     void setBufferSeek(int samplesCountSeek) override;
 
 public:
-    VxFileAudioPlayer(VxFile *vxFile);
+    VxFileAudioPlayer(const VxFile *vxFile);
     virtual ~VxFileAudioPlayer();
 };
 
