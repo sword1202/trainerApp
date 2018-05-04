@@ -15,6 +15,7 @@
 #import "PortAudio.h"
 #include "VxFileAudioPlayer.h"
 #include "AudioFilePlayer.h"
+#include "Executors.h"
 
 using namespace CppUtils;
 
@@ -43,7 +44,11 @@ using namespace CppUtils;
 //    _mvxPlayer->play(1.0, 0.5);
     _player = AudioFilePlayer::create("/Users/semyon/Downloads/yo.wav");
     _player->prepare();
+    _player->setSeek(_player->getTrackDurationInSeconds() / 2.0);
     _player->play();
+    Executors::ExecuteOnMainThreadAfterDelay([=] {
+        _player->setSeek(10.0);
+        }, 5000);
 }
 
 - (void)testReadFromMidi {

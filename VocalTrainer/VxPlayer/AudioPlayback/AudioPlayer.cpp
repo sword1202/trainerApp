@@ -120,6 +120,7 @@ void AudioPlayer::pause() {
 }
 
 void AudioPlayer::setSeek(double timeStamp) {
+    assert(timeStamp >= 0 && timeStamp <= getTrackDurationInSeconds());
     setBufferSeek(secondsToSamplesCount(timeStamp));
 }
 
