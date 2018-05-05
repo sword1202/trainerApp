@@ -19,7 +19,6 @@ using namespace CppUtils;
 Mp3AudioPlayer::Mp3AudioPlayer(std::string &&audioData) : AudioFilePlayer(std::move(audioData)),
                                                           pcm(MINIMP3_MAX_SAMPLES_PER_FRAME * QUEUE_SIZE),
                                                           mp3frameBytesCountQueue(QUEUE_SIZE) {
-    decodingThreadRunning = false;
 }
 
 int Mp3AudioPlayer::readNextSamplesBatch(void *intoBuffer, int framesCount,
@@ -85,56 +84,49 @@ void Mp3AudioPlayer::prepareAndProvidePlaybackData(AudioPlayer::PlaybackData *pl
     mp3frameBytesCountQueue.push_back(info.frame_bytes);
     setBufferSeek(0);
 
-    decodingThreadRunning = true;
-    std::thread thread([=]{
+    int64_t timeToSleepInMicroseconds = 1000000 * playbackData->framesPerBuffer / playbackData->sampleRate / 10;
+    decoderTask.runWithSleepingIntervalInMicroseconds([=]{
         decodingThreadCallback(*playbackData);
-    });
-    thread.detach();
+    }, timeToSleepInMicroseconds);
 }
 
 void Mp3AudioPlayer::decodingThreadCallback(const PlaybackData& playbackData) {
-    int64_t timeToSleepInMicroseconds = 1000000 * playbackData.framesPerBuffer / playbackData.sampleRate / 10;
+    int pcmSize;
+    {
+        PCM_LOCK;
+        pcmSize = pcm.size();
+    }
 
-    while (decodingThreadRunning) {
-        int pcmSize;
+    while (pcmSize < MINIMP3_MAX_SAMPLES_PER_FRAME * playbackData.numChannels) {
+        int seek = getBufferSeek();
+        {
+            PCM_LOCK;
+            for (int i : mp3frameBytesCountQueue) {
+                seek += i;
+            }
+        }
+
+        seek += headerOffset;
+
+        int samplesCount = mp3dec_decode_frame(&mp3d, (unsigned char*)audioData.data() + seek,
+                audioData.size() - seek, tempPcm, &info);
+
+        if (samplesCount == 0 && info.frame_bytes > 0) {
+            throw std::runtime_error("Corrupted mp3 file");
+        }
+
+        if (info.frame_bytes > 0) {
+            PCM_LOCK;
+            mp3frameBytesCountQueue.push_back(info.frame_bytes);
+            pcm.insert(pcm.end(), tempPcm, tempPcm + samplesCount * playbackData.numChannels);
+        } else {
+            break;
+        }
+
         {
             PCM_LOCK;
             pcmSize = pcm.size();
         }
-
-        while (pcmSize < MINIMP3_MAX_SAMPLES_PER_FRAME * playbackData.numChannels) {
-            int seek = getBufferSeek();
-            {
-                PCM_LOCK;
-                for (int i : mp3frameBytesCountQueue) {
-                    seek += i;
-                }
-            }
-
-            seek += headerOffset;
-
-            int samplesCount = mp3dec_decode_frame(&mp3d, (unsigned char*)audioData.data() + seek,
-                    audioData.size() - seek, tempPcm, &info);
-
-            if (samplesCount == 0 && info.frame_bytes > 0) {
-                throw std::runtime_error("Corrupted mp3 file");
-            }
-
-            if (info.frame_bytes > 0) {
-                PCM_LOCK;
-                mp3frameBytesCountQueue.push_back(info.frame_bytes);
-                pcm.insert(pcm.end(), tempPcm, tempPcm + samplesCount * playbackData.numChannels);
-            } else {
-                break;
-            }
-
-            {
-                PCM_LOCK;
-                pcmSize = pcm.size();
-            }
-        }
-
-        std::this_thread::sleep_for(std::chrono::microseconds(timeToSleepInMicroseconds));
     }
 }
 
@@ -148,15 +140,23 @@ void Mp3AudioPlayer::setSeek(double timeStamp) {
         pcm.clear();
         mp3frameBytesCountQueue.clear();
     }
-    // mp3 formula: durationInSeconds = Size * 8 / bitrate / 1000;
-    setBufferSeek(timeStamp * bitrate * 1000.0 / 8.0);
+
+    AudioPlayer::setSeek(timeStamp);
 }
 
-double Mp3AudioPlayer::getSeek() const {
+double Mp3AudioPlayer::bufferSeekToSecondsSeek(int bufferSeek) const {
     // mp3 formula: durationInSeconds = Size * 8 / bitrate / 1000;
-    return getBufferSeek() * 8.0 / bitrate / 1000.0;
+    return bufferSeek * 8.0 / bitrate / 1000.0;
 }
 
-Mp3AudioPlayer::~Mp3AudioPlayer() {
-    decodingThreadRunning = false;
+int Mp3AudioPlayer::secondsSeekToBufferSeek(double timestamp) const {
+    // mp3 formula: durationInSeconds = Size * 8 / bitrate / 1000;
+    return (int)round(timestamp * bitrate * 1000.0 / 8.0);
+}
+
+void Mp3AudioPlayer::destroy(const std::function<void()>& onDestroy) {
+    decoderTask.stop([=] {
+        delete this;
+        onDestroy();
+    });
 }

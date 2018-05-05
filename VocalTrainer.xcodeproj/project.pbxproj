@@ -72,6 +72,7 @@
 		C9FFFDB2CD9C369890BABFDC /* MidiTrack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA423EB35396AF0A6669 /* MidiTrack.cpp */; };
 		C9FFFDBFE08D6101CBAED612 /* Mp3AudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF91D5D66902FC1F9B613 /* Mp3AudioPlayer.cpp */; };
 		C9FFFE752940964F501E6446 /* MvxFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF08E11535354E15CC819 /* MvxFile.cpp */; };
+		C9FFFE88EA9A5FF905781F50 /* PeriodicallySleepingBackgroundTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8823954020C23E570B5 /* PeriodicallySleepingBackgroundTask.cpp */; };
 		C9FFFEB3BFD86EDFAD0BB4EA /* AudioUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF0A71BF842FC6C348D0C /* AudioUtils.cpp */; };
 		C9FFFF17382758D3A423FB58 /* melody.mid in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF0A770C7C4A877771027 /* melody.mid */; };
 		C9FFFF33F2E63ECD31A46D25 /* PitchRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE514220C10160A77F57 /* PitchRenderer.cpp */; };
@@ -193,6 +194,7 @@
 		C9FFF76A96FF6C68C2EF0CE4 /* minimp3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = minimp3.h; sourceTree = "<group>"; };
 		C9FFF8263643024E19C9E8FC /* MidiEventList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiEventList.h; sourceTree = "<group>"; };
 		C9FFF83763B781E75467D462 /* AudioFilePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFilePlayer.h; sourceTree = "<group>"; };
+		C9FFF8823954020C23E570B5 /* PeriodicallySleepingBackgroundTask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PeriodicallySleepingBackgroundTask.cpp; path = PitchDetection/CppUtils/PeriodicallySleepingBackgroundTask.cpp; sourceTree = "<group>"; };
 		C9FFF8DBACE12EE5DB6645A6 /* PortAudio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PortAudio.cpp; sourceTree = "<group>"; };
 		C9FFF8FE4DFBA5720805C7E3 /* PitchTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PitchTest.cpp; path = PitchDetection/tests/PitchTest.cpp; sourceTree = SOURCE_ROOT; };
 		C9FFF91D5D66902FC1F9B613 /* Mp3AudioPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mp3AudioPlayer.cpp; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 		C9FFFF2FA9D41704FC328906 /* WavAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WavAudioPlayer.h; sourceTree = "<group>"; };
 		C9FFFF63DF93064D05413294 /* MidiEventList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiEventList.cpp; sourceTree = "<group>"; };
 		C9FFFFC2EAB3D64E9E8BCC71 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		C9FFFFD89465AFA13405CCF7 /* PeriodicallySleepingBackgroundTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PeriodicallySleepingBackgroundTask.h; path = PitchDetection/CppUtils/PeriodicallySleepingBackgroundTask.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,6 +273,8 @@
 				C9FFF3E7CF6BBEA382E1BAD5 /* Executors.h */,
 				C9FFF3F33A6942DEFCDDF2C9 /* Executors.mm */,
 				C9FFFEEFD6FD398814656299 /* ListenersSet.h */,
+				C9FFF8823954020C23E570B5 /* PeriodicallySleepingBackgroundTask.cpp */,
+				C9FFFFD89465AFA13405CCF7 /* PeriodicallySleepingBackgroundTask.h */,
 			);
 			name = CppUtils;
 			sourceTree = "<group>";
@@ -624,6 +629,7 @@
 				C9FFF4A81A9F901FD58A6A48 /* WavAudioPlayer.cpp in Sources */,
 				C9FFFDBFE08D6101CBAED612 /* Mp3AudioPlayer.cpp in Sources */,
 				C9FFFB3D9CBDEE37A8696DB2 /* Executors.mm in Sources */,
+				C9FFFE88EA9A5FF905781F50 /* PeriodicallySleepingBackgroundTask.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

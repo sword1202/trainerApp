@@ -20,8 +20,11 @@ int AudioFilePlayer::getBufferSeek() const {
 }
 
 void AudioFilePlayer::setBufferSeek(int bufferSeek) {
-    SEEK_LOCK;
-    this->bufferSeek = bufferSeek;
+    {
+        SEEK_LOCK;
+        this->bufferSeek = bufferSeek;
+    }
+    AudioPlayer::setBufferSeek(bufferSeek);
 }
 
 AudioFilePlayer::AudioFilePlayer(std::string &&audioData) : audioData(std::move(audioData)) {

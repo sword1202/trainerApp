@@ -109,7 +109,7 @@ using namespace CppUtils;
 - (void)dealloc {
     delete _glSceneDrawer;
     if (_player) {
-        delete _player;
+        _player->destroy();
     }
     if (_mvxPlayer) {
         delete _mvxPlayer;

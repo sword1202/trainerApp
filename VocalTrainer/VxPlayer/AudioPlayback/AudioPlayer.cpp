@@ -122,7 +122,7 @@ void AudioPlayer::pause() {
 
 void AudioPlayer::setSeek(double timeStamp) {
     assert(timeStamp >= 0 && timeStamp <= getTrackDurationInSeconds());
-    setBufferSeek(secondsToSamplesCount(timeStamp));
+    setBufferSeek(secondsSeekToBufferSeek(timeStamp));
 }
 
 double AudioPlayer::getTrackDurationInSeconds() {
@@ -147,7 +147,7 @@ void AudioPlayer::setVolume(float volume) {
 }
 
 double AudioPlayer::getSeek() const {
-    return samplesCountToSeconds(getBufferSeek());
+    return bufferSeekToSecondsSeek(getBufferSeek());
 }
 
 int AudioPlayer::secondsToSamplesCount(double secondsSeek) const {
@@ -167,22 +167,69 @@ int AudioPlayer::getSampleSize() const {
     return Pa_GetSampleSize(playbackData.format) * playbackData.numChannels;
 }
 
-void AudioPlayer::playFromSeekToSeek(double a, double b) {
+void AudioPlayer::playFromSeekToSeek(double a, double b, const std::function<void()> onFinish) {
     assert(a < b);
     assert(a > 0 && b > 0);
     assert(b <= getTrackDurationInSeconds());
 
     play(a);
+    addSeekChangedListener([=] (double seek, double _) {
+        if (seek >= b) {
+            pause();
+            onFinish();
+            return DELETE_LISTENER;
+        }
+
+        return DONT_DELETE_LISTENER;
+    });
 }
 
-int AudioPlayer::addOnCompleteListener(const CppUtils::ListenersSet<>::function &listener) {
+int AudioPlayer::addOnCompleteListener(const OnCompleteListener &listener) {
     return onCompleteListeners.addListener(listener);
-}
-
-int AudioPlayer::addOnCompleteOneShotListener(const CppUtils::ListenersSet<>::function &listener) {
-    return onCompleteListeners.addOneShotListener(listener);
 }
 
 void AudioPlayer::removeOnCompleteListener(int key) {
     onCompleteListeners.removeListener(key);
+}
+
+int AudioPlayer::addSeekChangedListener(const AudioPlayer::SeekChangedListener &listener) {
+    return seekChangedListeners.addListener(listener);
+}
+
+void AudioPlayer::removeSeekChangedListener(int key) {
+    seekChangedListeners.removeListener(key);
+}
+
+double AudioPlayer::bufferSeekToSecondsSeek(int bufferSeek) const {
+    return samplesCountToSeconds(bufferSeek);
+}
+
+int AudioPlayer::secondsSeekToBufferSeek(double timestamp) const {
+    return secondsToSamplesCount(timestamp);
+}
+
+void AudioPlayer::setBufferSeek(int bufferSeek) {
+    Executors::ExecuteOnMainThread([=] {
+        double seek = bufferSeekToSecondsSeek(bufferSeek);
+        double total = getTrackDurationInSeconds();
+        seekChangedListeners.executeAll(seek, total);
+    });
+}
+
+void AudioPlayer::prepareAsync(std::function<void()> callback) {
+    Executors::ExecuteOnBackgroundThread([=] {
+        prepare();
+        Executors::ExecuteOnMainThread(callback);
+    });
+}
+
+void AudioPlayer::destroy(const std::function<void()>& onDestroyed) {
+    delete this;
+    if (onDestroyed) {
+        onDestroyed();
+    }
+}
+
+void AudioPlayer::destroy() {
+    destroy(nullptr);
 }

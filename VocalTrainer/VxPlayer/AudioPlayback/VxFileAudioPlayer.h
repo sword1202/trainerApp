@@ -10,28 +10,25 @@
 #include "AudioPlayer.h"
 #include "VxFile.h"
 #include "VxFileAudioDataGenerator.h"
-#include "SynchronizedCallbacksQueue.h"
+#include "PeriodicallySleepingBackgroundTask.h"
 #include <atomic>
 
 class VxFileAudioPlayer : public AudioPlayer {
     const VxFile* vxFile;
     VxFileAudioDataGenerator* generator;
-    std::atomic_bool generatorThreadRunning;
-
-    void generatorThreadAction();
+    CppUtils::PeriodicallySleepingBackgroundTask generatorTask;
 protected:
     int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) override;
     void prepareAndProvidePlaybackData(PlaybackData *playbackData) override;
     void onComplete() override;
+    virtual ~VxFileAudioPlayer();
 private:
-    void startGeneratorThread();
-    void stopGeneratorThread();
     int getBufferSeek() const override;
     void setBufferSeek(int samplesCountSeek) override;
 
 public:
     VxFileAudioPlayer(const VxFile *vxFile);
-    virtual ~VxFileAudioPlayer();
+    void destroy(const std::function<void()>& onDestroyed) override;
 };
 
 

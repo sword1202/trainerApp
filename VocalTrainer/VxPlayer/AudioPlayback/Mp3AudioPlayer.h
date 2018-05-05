@@ -12,6 +12,7 @@
 #define BOOST_CB_ENABLE_DEBUG 1
 #include <boost/circular_buffer.hpp>
 #include <atomic>
+#include "PeriodicallySleepingBackgroundTask.h"
 
 class Mp3AudioPlayer : public AudioFilePlayer {
     short tempPcm[MINIMP3_MAX_SAMPLES_PER_FRAME];
@@ -22,18 +23,20 @@ class Mp3AudioPlayer : public AudioFilePlayer {
     int bitrate;
     std::mutex pcmMutex;
     int headerOffset;
-    std::atomic_bool decodingThreadRunning;
+    CppUtils::PeriodicallySleepingBackgroundTask decoderTask;
 protected:
     int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) override;
     void prepareAndProvidePlaybackData(PlaybackData *playbackData) override;
     void decodingThreadCallback(const PlaybackData& playbackData);
 public:
     Mp3AudioPlayer(std::string &&audioData);
-    virtual ~Mp3AudioPlayer();
-
     virtual void setSeek(double timeStamp) override;
 
-    double getSeek() const override;
+    void destroy(const std::function<void()>& onDestroyed) override;
+
+protected:
+    double bufferSeekToSecondsSeek(int bufferSeek) const override;
+    int secondsSeekToBufferSeek(double timestamp) const override;
 };
 
 

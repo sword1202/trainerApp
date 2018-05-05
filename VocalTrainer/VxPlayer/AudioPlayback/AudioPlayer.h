@@ -24,6 +24,7 @@ private:
     bool playing = false;
     float volume = 1.0f;
     CppUtils::ListenersSet<> onCompleteListeners;
+    CppUtils::ListenersSet<double /*seek*/, double/*totalDuration*/> seekChangedListeners;
 
     static int callback(const void *inputBuffer,
             void *outputBuffer,
@@ -35,17 +36,26 @@ protected:
     virtual int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData& playbackData) = 0;
 	virtual void prepareAndProvidePlaybackData(PlaybackData* playbackData) = 0;
 	virtual int getBufferSeek() const = 0;
-	virtual void setBufferSeek(int bufferSeek) = 0;
+	virtual void setBufferSeek(int bufferSeek);
+	virtual double bufferSeekToSecondsSeek(int bufferSeek) const;
+    virtual int secondsSeekToBufferSeek(double timestamp) const;
 
 	virtual void onComplete();
 
 	int secondsToSamplesCount(double secondsSeek) const;
     double samplesCountToSeconds(int samplesCount) const;
     int getSampleSize() const;
+
+    // Audio Player can't be destroyed using delete operator, call destroy method instead;
+	virtual ~AudioPlayer();
 public:
+    
+    typedef CppUtils::ListenersSet<>::function OnCompleteListener;
+    typedef CppUtils::ListenersSet<double, double>::function SeekChangedListener;
+    
     AudioPlayer();
-    virtual ~AudioPlayer();
     void prepare();
+    void prepareAsync(std::function<void()> callback);
     void play(double seek);
     void play();
     bool isPlaying() const;
@@ -56,14 +66,18 @@ public:
     void setVolume(float volume);
 
     virtual void setSeek(double timeStamp);
-    virtual double getSeek() const;
+    double getSeek() const;
 
     double getTrackDurationInSeconds();
 
-    int addOnCompleteListener(const CppUtils::ListenersSet<>::function& listener);
-    int addOnCompleteOneShotListener(const CppUtils::ListenersSet<>::function& listener);
+    int addOnCompleteListener(const OnCompleteListener& listener);
     void removeOnCompleteListener(int key);
 
-    void playFromSeekToSeek(double a, double b);
+    int addSeekChangedListener(const SeekChangedListener& listener);
+    void removeSeekChangedListener(int key);
+
+    void playFromSeekToSeek(double a, double b, const std::function<void()> onFinish);
+    virtual void destroy(const std::function<void()>& onDestroyed);
+    void destroy();
 };
 #endif //VOCALTRAINER_AUDIOPLAYER_H

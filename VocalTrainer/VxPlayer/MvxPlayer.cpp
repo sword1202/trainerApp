@@ -74,11 +74,18 @@ void MvxPlayer::setPianoVolume(float pianoVolume) {
 }
 
 MvxPlayer::~MvxPlayer() {
-    delete vxPlayer;
-    delete instrumentalPlayer;
     if (destroyVxFileOnDestructor) {
-        delete vxFile;
+        VxFile* vxFile = (VxFile*)this->vxFile;
+        vxPlayer->destroy([=] {
+            delete vxFile;
+        });
+    } else {
+        vxPlayer->destroy();
     }
+
+    vxPlayer = nullptr;
+    instrumentalPlayer->destroy();
+    instrumentalPlayer = nullptr;
 }
 
 void MvxPlayer::prepare() {

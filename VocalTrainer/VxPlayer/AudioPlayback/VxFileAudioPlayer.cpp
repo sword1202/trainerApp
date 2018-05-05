@@ -6,6 +6,8 @@
 #include <thread>
 #include "VxFileAudioPlayer.h"
 
+static const int VX_FILE_GENERATOR_SLEEP_INTERVAL = 100;
+
 int VxFileAudioPlayer::readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) {
     return generator->readNextSamplesBatch((short*)intoBuffer);
 }
@@ -17,29 +19,14 @@ void VxFileAudioPlayer::prepareAndProvidePlaybackData(PlaybackData *playbackData
     playbackData->framesPerBuffer = generator->getOutBufferSize();
     playbackData->sampleRate = generator->getSampleRate();
     playbackData->numChannels = 1;
-    startGeneratorThread();
-}
 
-void VxFileAudioPlayer::startGeneratorThread() {
-    assert(!generatorThreadRunning);
-    generatorThreadRunning = true;
-    std::thread thread([this] {
-        generatorThreadAction();
-    });
-    thread.detach();
+    generatorTask.runWithSleepingIntervalInMicroseconds([=]{
+            while (generator->renderNextPitchIfPossible());
+        }, VX_FILE_GENERATOR_SLEEP_INTERVAL);
 }
 
 VxFileAudioPlayer::VxFileAudioPlayer(const VxFile *vxFile) : vxFile(vxFile) {
-    generatorThreadRunning = false;
     generator = new VxFileAudioDataGenerator(vxFile);
-}
-
-void VxFileAudioPlayer::generatorThreadAction() {
-    while (generatorThreadRunning) {
-        while (generator->renderNextPitchIfPossible());
-        std::this_thread::sleep_for(std::chrono::microseconds(100));
-    }
-    delete generator;
 }
 
 int VxFileAudioPlayer::getBufferSeek() const {
@@ -48,16 +35,20 @@ int VxFileAudioPlayer::getBufferSeek() const {
 
 void VxFileAudioPlayer::setBufferSeek(int samplesCountSeek) {
     generator->setSeek(samplesCountSeek);
+    AudioPlayer::setBufferSeek(samplesCountSeek);
 }
 
 VxFileAudioPlayer::~VxFileAudioPlayer() {
-    stopGeneratorThread();
+    delete generator;
 }
 
 void VxFileAudioPlayer::onComplete() {
     AudioPlayer::onComplete();
 }
 
-void VxFileAudioPlayer::stopGeneratorThread() {
-    generatorThreadRunning = false;
+void VxFileAudioPlayer::destroy(const std::function<void()>& onDestroyed) {
+    generatorTask.stop([=] {
+        delete this;
+        onDestroyed();
+    });
 }
