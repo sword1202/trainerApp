@@ -21,33 +21,40 @@ using std::cout;
 
 constexpr double PITCH_EDGE_SMOOTH_FACTOR = 0.07 * 400;
 
-VxFileAudioDataGenerator::VxFileAudioDataGenerator(PitchRenderer *renderer, const VxFile *vxFile, const VxFileAudioDataGeneratorConfig &config)
-        : renderer(renderer) {
+VxFileAudioDataGenerator::VxFileAudioDataGenerator(PitchRenderer *renderer, VxFile &&vxFile, const VxFileAudioDataGeneratorConfig &config)
+        : renderer(renderer), vxFile(std::move(vxFile)) {
     sampleRate = config.sampleRate;
     outBufferSize = config.outBufferSize;
     BOOST_ASSERT(sampleRate > 0 && outBufferSize > 0);
-    this->vxFile = vxFile;
 
-    double durationInSeconds = vxFile->getDurationInSeconds();
+    double durationInSeconds = vxFile.getDurationInSeconds();
     int pcmDataSize = (int)ceil(durationInSeconds * sampleRate);
     pcmData.assign(pcmDataSize, 0);
     fullyInitializedPcmData.assign(pcmDataSize, 0);
     pcmHasDataFlag.resize(pcmDataSize, false);
 }
 
-VxFileAudioDataGenerator::VxFileAudioDataGenerator(PitchRenderer *renderer, const VxFile *vxFile) :
-        VxFileAudioDataGenerator(renderer, vxFile, VxFileAudioDataGeneratorConfig()) {
-    
+
+VxFileAudioDataGenerator::VxFileAudioDataGenerator(PitchRenderer *renderer, VxFile &&vxFile)
+: VxFileAudioDataGenerator(renderer, (VxFile&&)vxFile, VxFileAudioDataGeneratorConfig())
+{
+
 }
 
-VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile *vxFile, const VxFileAudioDataGeneratorConfig &config) :
-    VxFileAudioDataGenerator(nullptr, vxFile, config) {
-    int ticksPerSecond = vxFile->getTicksPerSecond();
+VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile &vxFile)
+    : VxFileAudioDataGenerator(renderer, std::move(VxFile(vxFile)), VxFileAudioDataGeneratorConfig()) {
+
+}
+
+
+VxFileAudioDataGenerator::VxFileAudioDataGenerator(VxFile &&vxFile, const VxFileAudioDataGeneratorConfig &config) :
+    VxFileAudioDataGenerator(nullptr, (VxFile&&)vxFile, config) {
+    int ticksPerSecond = vxFile.getTicksPerSecond();
     renderer = new SoundFont2PitchRenderer(config.sampleRate, PITCH_EDGE_SMOOTH_FACTOR / ticksPerSecond);
 }
 
-VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile *vxFile)  :
-        VxFileAudioDataGenerator(vxFile, VxFileAudioDataGeneratorConfig()) {
+VxFileAudioDataGenerator::VxFileAudioDataGenerator(VxFile &&vxFile)  :
+        VxFileAudioDataGenerator(std::move(vxFile), VxFileAudioDataGeneratorConfig()) {
 }
 
 void VxFileAudioDataGenerator::clearAllData() {
@@ -61,7 +68,7 @@ void VxFileAudioDataGenerator::clearAllData() {
 }
 
 bool VxFileAudioDataGenerator::renderNextPitchIfPossible() {
-    const std::vector<VxPitch> &pitches = vxFile->getPitches();
+    const std::vector<VxPitch> &pitches = vxFile.getPitches();
     int pitchToRenderIndex = getNextPitchToRenderIndex();
     if (pitchToRenderIndex < 0) {
         return false;
@@ -69,8 +76,8 @@ bool VxFileAudioDataGenerator::renderNextPitchIfPossible() {
 
     const VxPitch &pitch = pitches[pitchToRenderIndex];
 
-    int first = vxFile->samplesCountFromTicks(pitch.startTickNumber, sampleRate);
-    int length = vxFile->samplesCountFromTicks(pitch.ticksCount, sampleRate);
+    int first = vxFile.samplesCountFromTicks(pitch.startTickNumber, sampleRate);
+    int length = vxFile.samplesCountFromTicks(pitch.ticksCount, sampleRate);
     if (first + length > pcmData.size()) {
         length = pcmData.size() - first;
     }
@@ -82,7 +89,7 @@ bool VxFileAudioDataGenerator::renderNextPitchIfPossible() {
         renderedDataSize = pcmData.size() - first;
     } else {
         const VxPitch &nextPitch = pitches[pitchToRenderIndex + 1];
-        renderedDataSize = vxFile->samplesCountFromTicks(nextPitch.startTickNumber, sampleRate) - first;
+        renderedDataSize = vxFile.samplesCountFromTicks(nextPitch.startTickNumber, sampleRate) - first;
     }
 
     renderedPitchesIndexes.insert(pitchToRenderIndex);
@@ -140,7 +147,7 @@ bool VxFileAudioDataGenerator::isFullyInitialized(int begin, int end) const {
 }
 
 int VxFileAudioDataGenerator::getNextPitchToRenderIndex() const {
-    const std::vector<VxPitch> &pitches = vxFile->getPitches();
+    const std::vector<VxPitch> &pitches = vxFile.getPitches();
     if (renderedPitchesIndexes.size() == pitches.size()) {
         return -1;
     }
@@ -148,7 +155,7 @@ int VxFileAudioDataGenerator::getNextPitchToRenderIndex() const {
     int seekInTicks;
     {
         SEEK_LOCK;
-        seekInTicks = vxFile->ticksFromSamplesCount(seek, sampleRate);
+        seekInTicks = vxFile.ticksFromSamplesCount(seek, sampleRate);
     }
     VxPitch stub;
     stub.startTickNumber = seekInTicks;
@@ -177,15 +184,15 @@ int VxFileAudioDataGenerator::getNextPitchToRenderIndex() const {
 void VxFileAudioDataGenerator::renderAllData() {
     std::fill(begin(pcmData), end(pcmData), 0);
 
-    const std::vector<VxPitch> &pitches = vxFile->getPitches();
+    const std::vector<VxPitch> &pitches = vxFile.getPitches();
     int pitchesSize = pitches.size();
     for (int i = 0; i < pitchesSize; ++i) {
        renderedPitchesIndexes.insert(i);
     }
 
     for (const VxPitch& vxPitch : pitches) {
-        int begin = vxFile->samplesCountFromTicks(vxPitch.startTickNumber, sampleRate);
-        int length = vxFile->samplesCountFromTicks(vxPitch.ticksCount, sampleRate);
+        int begin = vxFile.samplesCountFromTicks(vxPitch.startTickNumber, sampleRate);
+        int length = vxFile.samplesCountFromTicks(vxPitch.ticksCount, sampleRate);
 
         renderPitch(vxPitch.pitch, begin, length);
     }
@@ -214,7 +221,7 @@ void VxFileAudioDataGenerator::renderPitch(const Pitch &pitch, int begin, int le
     }
 
     renderedPitchesCount++;
-    BOOST_ASSERT(renderedPitchesCount <= vxFile->getPitches().size());
+    BOOST_ASSERT(renderedPitchesCount <= vxFile.getPitches().size());
 }
 
 int VxFileAudioDataGenerator::getTotalSamplesCount() const {
@@ -240,6 +247,5 @@ int VxFileAudioDataGenerator::getSeek() const {
 }
 
 double VxFileAudioDataGenerator::getDurationInSeconds() const {
-    return vxFile->getDurationInSeconds();
+    return vxFile.getDurationInSeconds();
 }
-

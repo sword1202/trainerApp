@@ -14,7 +14,6 @@
 #include <atomic>
 
 class VxFileAudioPlayer : public AudioPlayer {
-    const VxFile* vxFile;
     VxFileAudioDataGenerator* generator;
     CppUtils::PeriodicallySleepingBackgroundTask generatorTask;
 protected:
@@ -27,7 +26,8 @@ private:
     void setBufferSeek(int samplesCountSeek) override;
 
 public:
-    VxFileAudioPlayer(const VxFile *vxFile);
+    VxFileAudioPlayer(const VxFile &vxFile);
+    VxFileAudioPlayer(VxFile &&vxFile);
     void destroy(const std::function<void()>& onDestroyed) override;
 };
 

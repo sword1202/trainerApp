@@ -25,8 +25,12 @@ void VxFileAudioPlayer::prepareAndProvidePlaybackData(PlaybackData *playbackData
         }, VX_FILE_GENERATOR_SLEEP_INTERVAL);
 }
 
-VxFileAudioPlayer::VxFileAudioPlayer(const VxFile *vxFile) : vxFile(vxFile) {
+VxFileAudioPlayer::VxFileAudioPlayer(const VxFile &vxFile) {
     generator = new VxFileAudioDataGenerator(vxFile);
+}
+
+VxFileAudioPlayer::VxFileAudioPlayer(VxFile &&vxFile) {
+
 }
 
 int VxFileAudioPlayer::getBufferSeek() const {

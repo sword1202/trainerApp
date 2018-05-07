@@ -16,12 +16,12 @@
 
 struct VxFileAudioDataGeneratorConfig {
     int sampleRate = 44100;
-    int outBufferSize = 2048;
+    int outBufferSize = 512;
 };
 
 class VxFileAudioDataGenerator {
     PitchRenderer* renderer;
-    const VxFile* vxFile;
+    VxFile vxFile;
     std::vector<short> pcmData;
     std::vector<short> fullyInitializedPcmData;
     std::vector<char> pcmHasDataFlag;
@@ -39,11 +39,12 @@ class VxFileAudioDataGenerator {
     int getNextPitchToRenderIndex() const;
     void renderPitch(const Pitch &pitch, int begin, int length);
 public:
-    VxFileAudioDataGenerator(PitchRenderer *renderer, const VxFile *vxFile,
+    VxFileAudioDataGenerator(PitchRenderer *renderer, VxFile &&vxFile,
             const VxFileAudioDataGeneratorConfig &config);
-    VxFileAudioDataGenerator(PitchRenderer *renderer, const VxFile *vxFile);
-    VxFileAudioDataGenerator(const VxFile *vxFile, const VxFileAudioDataGeneratorConfig &config);
-    VxFileAudioDataGenerator(const VxFile *vxFile);
+    VxFileAudioDataGenerator(PitchRenderer *renderer, VxFile &&vxFile);
+    VxFileAudioDataGenerator(VxFile &&vxFile, const VxFileAudioDataGeneratorConfig &config);
+    VxFileAudioDataGenerator(VxFile &&vxFile);
+    VxFileAudioDataGenerator(const VxFile &vxFile);
 
     virtual ~VxFileAudioDataGenerator();
     void clearAllData();

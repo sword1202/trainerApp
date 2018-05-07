@@ -8,21 +8,18 @@
 
 #include <iostream>
 #include "VxFile.h"
+#include "MvxFile.h"
 
 class MvxPlayer {
-    const VxFile* vxFile;
     AudioPlayer* instrumentalPlayer;
     AudioPlayer* vxPlayer;
-    bool destroyVxFileOnDestructor = false;
 
     void init(std::istream& is);
-    void init(std::istream& instrumentalStream, const VxFile* vxFile);
 public:
     ~MvxPlayer();
     MvxPlayer(const char* filePath);
     MvxPlayer(std::istream& is);
-    MvxPlayer(const char* instrumentalFilePath, const VxFile* vxFile);
-    MvxPlayer(std::istream& instrumentalStream, const VxFile* vxFile);
+    MvxPlayer(MvxFile&& mvxFile);
     void prepare();
     void play(float instrumentalVolume, float pianoVolume);
     void setInstrumentalVolume(float instrumentalVolume);

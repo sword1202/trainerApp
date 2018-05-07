@@ -69,8 +69,7 @@ using namespace CppUtils;
     const VxFile& vxFile = vxFiles[0];
 
 //    std::vector<char> wavAudioData = vxFile.generateWavAudioData(0.5f);
-    _player = new VxFileAudioPlayer(new VxFile(vxFile.getPitches(),
-            vxFile.getDistanceInTicksBetweenLastPitchEndAndTrackEnd(), vxFile.getTicksPerSecond()));
+    _player = new VxFileAudioPlayer(vxFile);
     _player->prepare();
     _player->play();
 //    _player->play(wavAudioData.data(), wavAudioData.size(), 0);

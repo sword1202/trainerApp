@@ -10,11 +10,45 @@
 #include "VxFile.h"
 
 class MvxFile {
+    VxFile vxFile;
+    std::string instrumental;
+    double beatsPerMinute;
+
+    friend class boost::serialization::access;
+
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version)
+    {
+        ar & beatsPerMinute;
+        ar & vxFile;
+        ar & instrumental;
+    }
+
 public:
-    static void writeToStream(const VxFile& vxFile, const char* instrumentalFilePath,
-            double beatsPerMinute, std::ostream& os);
-    static void writeToFile(const VxFile& vxFile, const char* instrumentalFilePath,
-            double beatsPerMinute, const char* outFilePath);
+
+    MvxFile();
+    MvxFile(VxFile &&vxFile, std::string &&instrumental, double beatsPerMinute);
+
+    MvxFile(MvxFile&& mvxFile) = default;
+    // Preferably use move constructor instead
+    MvxFile(const MvxFile& mvxFile) = delete;
+
+    void writeToStream(std::ostream& os);
+    void writeToFile(const char* outFilePath);
+
+    static MvxFile readFromStream(std::istream& is);
+    static MvxFile readFromFile(const char* outFilePath);
+
+    const VxFile &getVxFile() const;
+    VxFile &getVxFile();
+
+    const std::string &getInstrumental() const;
+    std::string &getInstrumental();
+
+    double getBeatsPerMinute() const;
+    void setBeatsPerMinute(double beatsPerMinute);
+    void loadInstrumentalFromStream(std::istream& is);
+    void loadInstrumentalFromFile(const char* filePath);
 };
 
 

@@ -30,6 +30,7 @@
 		2EF1E9A21D592EC100E02C33 /* PitchInputReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1E99B1D592EC100E02C33 /* PitchInputReader.cpp */; };
 		2EF1E9A31D592EC100E02C33 /* tests in Resources */ = {isa = PBXBuildFile; fileRef = 2EF1E99D1D592EC100E02C33 /* tests */; };
 		2EF1E9A91D592F1600E02C33 /* AudoInputReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1E9941D592EC100E02C33 /* AudoInputReader.cpp */; };
+		5470EEC2209F5C6400D77B9C /* libboost_serialization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5470EEC1209F5C6400D77B9C /* libboost_serialization.a */; };
 		547378DD2092A519003B8748 /* libportaudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 547378DC2092A518003B8748 /* libportaudio.a */; };
 		549968082090DAF20082B354 /* AudioUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF0A71BF842FC6C348D0C /* AudioUtils.cpp */; };
 		54CCB92720854CB3009639AD /* MidiFileTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54CCB92620854CB3009639AD /* MidiFileTest.cpp */; };
@@ -155,6 +156,7 @@
 		2EF1E99B1D592EC100E02C33 /* PitchInputReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PitchInputReader.cpp; path = PitchDetection/PitchInputReader.cpp; sourceTree = "<group>"; };
 		2EF1E99C1D592EC100E02C33 /* PitchInputReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PitchInputReader.h; path = PitchDetection/PitchInputReader.h; sourceTree = "<group>"; };
 		2EF1E99D1D592EC100E02C33 /* tests */ = {isa = PBXFileReference; lastKnownFileType = folder; name = tests; path = PitchDetection/tests; sourceTree = "<group>"; };
+		5470EEC1209F5C6400D77B9C /* libboost_serialization.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_serialization.a; path = libs/Release/libboost_serialization.a; sourceTree = "<group>"; };
 		547378DA2092A3FC003B8748 /* libportaudio.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = libportaudio.la; path = libs/Debug/libportaudio.la; sourceTree = "<group>"; };
 		547378DC2092A518003B8748 /* libportaudio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libportaudio.a; path = libs/Release/libportaudio.a; sourceTree = "<group>"; };
 		5499680E209137AD0082B354 /* libportaudio.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = libportaudio.la; path = libs/Release/libportaudio.la; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 		C9FFF76A96FF6C68C2EF0CE4 /* minimp3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = minimp3.h; sourceTree = "<group>"; };
 		C9FFF8263643024E19C9E8FC /* MidiEventList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiEventList.h; sourceTree = "<group>"; };
 		C9FFF83763B781E75467D462 /* AudioFilePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFilePlayer.h; sourceTree = "<group>"; };
+		C9FFF851472080263029F894 /* VxLyricsLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxLyricsLine.h; sourceTree = "<group>"; };
 		C9FFF8823954020C23E570B5 /* PeriodicallySleepingBackgroundTask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PeriodicallySleepingBackgroundTask.cpp; path = PitchDetection/CppUtils/PeriodicallySleepingBackgroundTask.cpp; sourceTree = "<group>"; };
 		C9FFF8DBACE12EE5DB6645A6 /* PortAudio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PortAudio.cpp; sourceTree = "<group>"; };
 		C9FFF8FE4DFBA5720805C7E3 /* PitchTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PitchTest.cpp; path = PitchDetection/tests/PitchTest.cpp; sourceTree = SOURCE_ROOT; };
@@ -241,6 +244,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5470EEC2209F5C6400D77B9C /* libboost_serialization.a in Frameworks */,
 				547378DD2092A519003B8748 /* libportaudio.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -394,6 +398,7 @@
 		54F6743F20004BD1007A419D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5470EEC1209F5C6400D77B9C /* libboost_serialization.a */,
 				547378DC2092A518003B8748 /* libportaudio.a */,
 				547378DA2092A3FC003B8748 /* libportaudio.la */,
 				5499680E209137AD0082B354 /* libportaudio.la */,
@@ -448,6 +453,7 @@
 				C9FFF4F6CC990DF06B2BB1C7 /* PitchRenderer.h */,
 				C9FFFA934598DEB3A7ED2F90 /* SoundFont2PitchRenderer.cpp */,
 				C9FFFABBAF2D1B722ECDFA27 /* SoundFont2PitchRenderer.h */,
+				C9FFF851472080263029F894 /* VxLyricsLine.h */,
 			);
 			path = VxPlayer;
 			sourceTree = "<group>";

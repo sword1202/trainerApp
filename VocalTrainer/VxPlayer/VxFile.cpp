@@ -8,11 +8,8 @@
 #include <utf8.h>
 #include <boost/icl/interval_map.hpp>
 #include "../../PitchDetection/CppUtils/config.h"
-
-constexpr char SILENCE_MARK[] = "*";
-constexpr char LYRICS_START[] = "lyricsStart*";
-constexpr char LYRICS_END[] = " lyricsEnd*";
-constexpr char NO_LYRICS[] = "noLyrics*";
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
 
 using namespace CppUtils;
 
@@ -20,83 +17,25 @@ int VxPitch::endTickNumber() const {
     return startTickNumber + ticksCount;
 }
 
-VxFile::VxFile(const std::vector<VxPitch> &pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int ticksPerSecond)
-        : pitches(pitches), ticksPerSecond(ticksPerSecond),
+VxFile::VxFile(std::vector<VxPitch> &&pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int ticksPerSecond)
+        : pitches(std::move(pitches)),
+          ticksPerSecond(ticksPerSecond),
           distanceInTicksBetweenLastPitchEndAndTrackEnd(distanceInTicksBetweenLastPitchEndAndTrackEnd) {
     postInit();
 }
 
-void VxFile::processLyrics(const std::string& lyricsData) {
-    std::vector<int> bracketsPositions;
-    size_t size = lyricsData.size();
-    bracketsPositions.reserve(size);
-    for (int i = 0; i < size; ++i) {
-        char ch = lyricsData[i];
-        if (ch == '<' || ch == '>') {
-            bracketsPositions.push_back(i);
-        }
-    }
-
-    size_t bracketsPositionsSize = bracketsPositions.size();
-    int lyricsAppendingBegin = 0;
-    VxLyricsInterval lyricsInterval;
-    for (int i = 0; i < bracketsPositionsSize; i+=2) {
-        int firstBracketIndex = bracketsPositions[i];
-        int secondBracketIndex = bracketsPositions[i + 1];
-
-        bool success;
-        auto split = Strings::SplitIntegers(lyricsData, firstBracketIndex + 1, secondBracketIndex, ',', &success);
-        if (!success || split.size() != 2) {
-            throw new std::runtime_error("Invalid vxFile, unable to parse lyrics");
-        }
-
-        lyricsInterval.startTimestampInMilliseconds = split[0];
-        lyricsInterval.endTimestampInMilliseconds = split[1];
-
-        lyricsInterval.lyrics.resize(0);
-        utf8::utf8to16(lyricsData.begin() + lyricsAppendingBegin,
-                lyricsData.begin() + firstBracketIndex,
-                std::back_inserter(lyricsInterval.lyrics));
-
-        lyricsAppendingBegin = secondBracketIndex + 1;
-
-        lyrics.push_back(lyricsInterval);
-    }
+VxFile::VxFile(const std::vector<VxPitch> &pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int ticksPerSecond)
+        : pitches(pitches),
+          ticksPerSecond(ticksPerSecond),
+          distanceInTicksBetweenLastPitchEndAndTrackEnd(distanceInTicksBetweenLastPitchEndAndTrackEnd)
+{
+    postInit();
 }
 
+
 VxFile::VxFile(std::istream &is) {
-    std::string lyricsState;
-    is >> lyricsState;
-    // skip space
-    is.get();
-    if (lyricsState == LYRICS_START) {
-        std::string lyricsData = Strings::ReadUntilTokenOrEof(is, LYRICS_END);
-        processLyrics(lyricsData);
-    } else if(lyricsState != NO_LYRICS) {
-        throw std::runtime_error("Invalid vx file");
-    }
-
-    is >> ticksPerSecond;
-
-    std::string pitchName;
-    while (!is.eof()) {
-        is >> pitchName;
-        if (pitchName == SILENCE_MARK) {
-            is >> distanceInTicksBetweenLastPitchEndAndTrackEnd;
-            break;
-        }
-
-        VxPitch vxPitch;
-        vxPitch.pitch = Pitch(pitchName.data());
-        if (!vxPitch.pitch.hasPerfectFrequency()) {
-            throw std::runtime_error("Error while parsing pitch with " + pitchName + " name");
-        }
-
-        is >> vxPitch.startTickNumber;
-        is >> vxPitch.ticksCount;
-
-        pitches.push_back(vxPitch);
-    }
+    boost::archive::text_iarchive ar(is);
+    ar >> *this;
 
     postInit();
     BOOST_ASSERT(validateLyrics());
@@ -169,25 +108,8 @@ int VxFile::getDistanceInTicksBetweenLastPitchEndAndTrackEnd() const {
 }
 
 void VxFile::writeToStream(std::ostream &os) const {
-    if (lyrics.empty()) {
-        os<<NO_LYRICS;
-    } else {
-        os<<LYRICS_START<<" ";
-        for (const auto& interval : lyrics) {
-            std::string utf8lyrics;
-            utf8::utf16to8(interval.lyrics.begin(), interval.lyrics.end(), std::back_inserter(utf8lyrics));
-            os<<utf8lyrics<<'<'<<interval.startTimestampInMilliseconds<<','<<interval.endTimestampInMilliseconds<<'>';
-        }
-        os<<LYRICS_END;
-    }
-
-    os<<" "<<ticksPerSecond<<" ";
-
-    for (const VxPitch& vxPitch : pitches) {
-        os<<vxPitch.pitch.getFullName()<<" "<<vxPitch.startTickNumber<<" "<<vxPitch.ticksCount<<" ";
-    }
-
-    os<<"* "<<distanceInTicksBetweenLastPitchEndAndTrackEnd;
+    boost::archive::text_oarchive ar(os);
+    ar << *this;
 }
 
 VxFile VxFile::fromFilePath(const char *filePath) {
@@ -195,54 +117,56 @@ VxFile VxFile::fromFilePath(const char *filePath) {
     return VxFile(is);
 }
 
-void VxFile::setLyrics(const std::vector<VxLyricsInterval> &lyrics) {
-    this->lyrics = lyrics;
-    BOOST_ASSERT(validateLyrics());
-}
-
 bool VxFile::validateLyrics() {
     if (lyrics.empty()) {
         return true;
     }
 
-    if (lyrics[0].startTimestampInMilliseconds < 0) {
-        return false;
-    }
-
-    if (lyrics[0].endTimestampInMilliseconds < 1) {
-        return false;
-    }
-
-    if (lyrics[0].endTimestampInMilliseconds < lyrics[0].startTimestampInMilliseconds) {
-        return false;
-    }
-
-    for (int i = 1; i < lyrics.size(); ++i) {
-        const VxLyricsInterval &interval = lyrics[i];
-        const VxLyricsInterval &prev = lyrics[i - 1];
-
-        if (interval.startTimestampInMilliseconds < 0) {
+    for (const auto& line : lyrics) {
+        const std::vector<VxLyricsInterval> &intervals = line.intervals;
+        if (intervals[0].startTimestampInMilliseconds < 0) {
             return false;
         }
 
-        if (interval.endTimestampInMilliseconds <= interval.startTimestampInMilliseconds) {
+        if (intervals[0].endTimestampInMilliseconds < 1) {
             return false;
         }
 
-        if (interval.startTimestampInMilliseconds < prev.endTimestampInMilliseconds) {
+        if (intervals[0].endTimestampInMilliseconds < intervals[0].startTimestampInMilliseconds) {
             return false;
         }
-    }
 
-    if (lyrics.back().endTimestampInMilliseconds > getDurationInSeconds() * 1000) {
-        return false;
+        for (int i = 1; i < lyrics.size(); ++i) {
+            const VxLyricsInterval &interval = intervals[i];
+            const VxLyricsInterval &prev = intervals[i - 1];
+
+            if (interval.startTimestampInMilliseconds < 0) {
+                return false;
+            }
+
+            if (interval.endTimestampInMilliseconds <= interval.startTimestampInMilliseconds) {
+                return false;
+            }
+
+            if (interval.startTimestampInMilliseconds < prev.endTimestampInMilliseconds) {
+                return false;
+            }
+        }
+
+        if (intervals.back().endTimestampInMilliseconds > getDurationInSeconds() * 1000) {
+            return false;
+        }
     }
 
     return true;
 }
 
-const std::vector<VxLyricsInterval> &VxFile::getLyrics() const {
-    return lyrics;
+const VxLyricsLine &VxFile::getLyricsLine(int lineIndex) const {
+    return lyrics[lineIndex];
+}
+
+int VxFile::getLyricsLinesCount() const {
+    return (int)lyrics.size();
 }
 
 int VxFile::timeInSecondsToTicks(double timeInSeconds)const {
@@ -269,4 +193,17 @@ const VxPitch &VxFile::getShortestPitch() const {
     return FindMinValueUsingKeyProvider(pitches, [](const VxPitch& pitch) {
         return pitch.ticksCount;
     });
+}
+
+void VxFile::addLyricsLine(const VxLyricsLine &line) {
+    lyrics.push_back(line);
+}
+
+VxFile::VxFile() {
+
+}
+
+void VxFile::setPitches(const std::vector<VxPitch> &pitches) {
+    VxFile::pitches = pitches;
+    postInit();
 }

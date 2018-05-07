@@ -6,17 +6,36 @@
 #ifndef VOCALTRAINER_VXPITCHDEFENITION_H
 #define VOCALTRAINER_VXPITCHDEFENITION_H
 
-#ifdef __APPLE__
-#import "Pitch.h"
-#else
+#include <boost/serialization/serialization.hpp>
+#include <boost/serialization/split_member.hpp>
 #include "Pitch.h"
-#endif
+
 #include <vector>
 
 struct VxPitch {
     Pitch pitch;
     int startTickNumber;
     int ticksCount;
+
+    template<typename Archive>
+    void load(Archive & ar, const unsigned int version)
+    {
+        int pitchIndex = 0;
+        ar & pitchIndex;
+        pitch = Pitch::fromPerfectFrequencyIndex(pitchIndex);
+        ar & startTickNumber;
+        ar & ticksCount;
+    }
+
+    template<typename Archive>
+    void save(Archive & ar, const unsigned int version) const
+    {
+        ar & pitch.getPerfectFrequencyIndex();
+        ar & startTickNumber;
+        ar & ticksCount;
+    }
+
+    BOOST_SERIALIZATION_SPLIT_MEMBER()
 
     int endTickNumber() const;
 };

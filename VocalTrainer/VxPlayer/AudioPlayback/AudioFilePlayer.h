@@ -20,11 +20,12 @@ protected:
     void setBufferSeekIfNotModified(int bufferSeek, int lastBufferSeek);
     virtual void setBufferSeek(int bufferSeek) override;
 
-public:
     AudioFilePlayer(std::string&& audioData);
+public:
     // mp3 and wav files are supported
     static AudioFilePlayer* create(std::istream& is);
     static AudioFilePlayer* create(const char* filePath);
+    static AudioFilePlayer* create(std::string&& audioData);
 };
 
 

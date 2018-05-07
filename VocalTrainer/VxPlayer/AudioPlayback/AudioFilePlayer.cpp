@@ -39,15 +39,19 @@ void AudioFilePlayer::setBufferSeekIfNotModified(int bufferSeek, int lastBufferS
 }
 
 AudioFilePlayer *AudioFilePlayer::create(std::istream &is) {
-     std::string audioData = Strings::StreamToString(is);
-     if (WAVFile::isWavFile(audioData.data(), audioData.size())) {
-         return new WavAudioPlayer(std::move(audioData));
-     } else {
-         return new Mp3AudioPlayer(std::move(audioData));
-     }
+    std::string audioData = Strings::StreamToString(is);
+    return create(std::move(audioData));
 }
 
 AudioFilePlayer *AudioFilePlayer::create(const char *filePath) {
     std::fstream is = Streams::OpenFile(filePath, std::ios::in | std::ios::binary);
     return create(is);
+}
+
+AudioFilePlayer *AudioFilePlayer::create(std::string &&audioData) {
+    if (WAVFile::isWavFile(audioData.data(), audioData.size())) {
+        return new WavAudioPlayer(std::move(audioData));
+    } else {
+        return new Mp3AudioPlayer(std::move(audioData));
+    }
 }

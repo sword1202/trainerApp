@@ -5,23 +5,72 @@
 
 #include "MvxFile.h"
 #include <fstream>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
 #include "Strings.h"
 
 using namespace CppUtils;
 
-void MvxFile::writeToFile(const VxFile& vxFile, const char* instrumentalFilePath,
-        double beatsPerMinute, const char* outFilePath) {
-    std::fstream file = Streams::OpenFile(outFilePath, std::ios::binary | std::ios::out);
-    writeToStream(vxFile, instrumentalFilePath, beatsPerMinute, file);
+MvxFile::MvxFile() {
+
 }
 
-void MvxFile::writeToStream(const VxFile& vxFile, const char* instrumentalFilePath,
-        double beatsPerMinute, std::ostream& os) {
-    os << beatsPerMinute;
-    vxFile.writeToStream(os);
-    // add space between vxFile Data and instrumental data
-    os<<' ';
-    
-    std::string instrumental = Strings::ReadBinaryFileContent(instrumentalFilePath);
-    os.write(instrumental.data(), instrumental.size());
+MvxFile::MvxFile(VxFile &&vxFile, std::string &&instrumental, double beatsPerMinute) : vxFile(std::move(vxFile)),
+                                                                                       instrumental(std::move(instrumental)),
+                                                                                       beatsPerMinute(beatsPerMinute) {
+}
+
+void MvxFile::writeToStream(std::ostream &os) {
+    boost::archive::text_oarchive ar(os);
+    ar << *this;
+}
+
+void MvxFile::writeToFile(const char *outFilePath) {
+    std::fstream file = Streams::OpenFile(outFilePath, std::ios::binary | std::ios::out);
+    writeToStream(file);
+}
+
+MvxFile MvxFile::readFromStream(std::istream &is) {
+    MvxFile file;
+    boost::archive::text_iarchive ar(is);
+    ar >> file;
+    return file;
+}
+
+MvxFile MvxFile::readFromFile(const char *outFilePath) {
+    std::fstream file = Streams::OpenFile(outFilePath, std::ios::binary | std::ios::in);
+    return readFromStream(file);
+}
+
+const VxFile &MvxFile::getVxFile() const {
+    return vxFile;
+}
+
+VxFile &MvxFile::getVxFile() {
+    return vxFile;
+}
+
+double MvxFile::getBeatsPerMinute() const {
+    return beatsPerMinute;
+}
+
+void MvxFile::setBeatsPerMinute(double beatsPerMinute) {
+    this->beatsPerMinute = beatsPerMinute;
+}
+
+void MvxFile::loadInstrumentalFromStream(std::istream &is) {
+    instrumental = Strings::StreamToString(is);
+}
+
+void MvxFile::loadInstrumentalFromFile(const char *filePath) {
+    std::fstream file = Streams::OpenFile(filePath, std::ios::binary | std::ios::in);
+    loadInstrumentalFromStream(file);
+}
+
+const std::string &MvxFile::getInstrumental() const {
+    return instrumental;
+}
+
+std::string &MvxFile::getInstrumental() {
+    return instrumental;
 }

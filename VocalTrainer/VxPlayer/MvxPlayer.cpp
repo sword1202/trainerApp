@@ -7,6 +7,7 @@
 #include "Strings.h"
 #include "AudioFilePlayer.h"
 #include "VxFileAudioPlayer.h"
+#include "MvxFile.h"
 
 constexpr float MAX_PIANO_VOLUME = 1.0f;
 
@@ -17,30 +18,14 @@ MvxPlayer::MvxPlayer(std::istream &is) {
 }
 
 void MvxPlayer::init(std::istream &is) {
-    vxFile = new VxFile(is);
-    destroyVxFileOnDestructor = true;
-    // skip space;
-    is.get();
-    instrumentalPlayer = AudioFilePlayer::create(is);
-    vxPlayer = new VxFileAudioPlayer(vxFile);
+    MvxFile file = MvxFile::readFromStream(is);
+    instrumentalPlayer = AudioFilePlayer::create(std::move(file.getInstrumental()));
+    vxPlayer = new VxFileAudioPlayer(std::move(file.getVxFile()));
 }
 
 MvxPlayer::MvxPlayer(const char *filePath) {
     std::fstream is = Streams::OpenFile(filePath, std::ios::in | std::ios::binary);
     init(is);
-}
-
-MvxPlayer::MvxPlayer(const char *instrumentalFilePath, const VxFile *vxFile) {
-    std::fstream is = Streams::OpenFile(instrumentalFilePath, std::ios::in | std::ios::binary);
-    init(is, vxFile);
-}
-
-MvxPlayer::MvxPlayer(std::istream &instrumentalStream, const VxFile *vxFile) {
-    init(instrumentalStream, vxFile);
-}
-
-void MvxPlayer::init(std::istream &instrumentalStream, const VxFile* vxFile) {
-    this->vxFile = vxFile;
 }
 
 void MvxPlayer::play(float instrumentalVolume, float pianoVolume) {
@@ -74,15 +59,7 @@ void MvxPlayer::setPianoVolume(float pianoVolume) {
 }
 
 MvxPlayer::~MvxPlayer() {
-    if (destroyVxFileOnDestructor) {
-        VxFile* vxFile = (VxFile*)this->vxFile;
-        vxPlayer->destroy([=] {
-            delete vxFile;
-        });
-    } else {
-        vxPlayer->destroy();
-    }
-
+    vxPlayer->destroy();
     vxPlayer = nullptr;
     instrumentalPlayer->destroy();
     instrumentalPlayer = nullptr;
@@ -91,4 +68,9 @@ MvxPlayer::~MvxPlayer() {
 void MvxPlayer::prepare() {
     instrumentalPlayer->prepare();
     vxPlayer->prepare();
+}
+
+MvxPlayer::MvxPlayer(MvxFile &&mvxFile) {
+    instrumentalPlayer = AudioFilePlayer::create(std::move(mvxFile.getInstrumental()));
+    vxPlayer = new VxFileAudioPlayer(std::move(mvxFile.getVxFile()));
 }
