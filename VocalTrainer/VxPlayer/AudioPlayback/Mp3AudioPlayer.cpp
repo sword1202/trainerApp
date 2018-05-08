@@ -157,6 +157,8 @@ int Mp3AudioPlayer::secondsSeekToBufferSeek(double timestamp) const {
 void Mp3AudioPlayer::destroy(const std::function<void()>& onDestroy) {
     decoderTask.stop([=] {
         delete this;
-        onDestroy();
+        if (onDestroy) {
+            onDestroy();
+        }
     });
 }

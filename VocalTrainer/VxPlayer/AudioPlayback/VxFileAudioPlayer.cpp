@@ -53,6 +53,8 @@ void VxFileAudioPlayer::onComplete() {
 void VxFileAudioPlayer::destroy(const std::function<void()>& onDestroyed) {
     generatorTask.stop([=] {
         delete this;
-        onDestroyed();
+        if (onDestroyed) {
+            onDestroyed();
+        }
     });
 }
