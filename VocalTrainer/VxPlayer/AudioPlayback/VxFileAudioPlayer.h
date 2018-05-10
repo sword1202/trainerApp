@@ -31,8 +31,7 @@ public:
     void destroy(const std::function<void()>& onDestroyed) override;
 
     bool isPitchShiftingAvailable(int distance) const;
-
-    void setPitchShiftInSemiTones(int value) override;
+    virtual void setPitchShiftInSemiTones(int value) override;
 };
 
 
