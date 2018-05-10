@@ -3,7 +3,13 @@ import QtQuick.Window 2.11
 
 Rectangle {
     id: window
-    width: screenSize.width
-    height: 75
-    color: "#c5cef8"
+    width: cpp.windowWidth
+    height: cpp.windowHeight
+
+    Rectangle {
+        id: header
+        height: cpp.dpY(1.041)
+        width: parent.width
+        color: "#c5cef8"
+    }
 }

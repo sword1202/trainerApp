@@ -4,6 +4,7 @@
 #include "QmlCppBridge.h"
 #include <QScreen>
 #include <QQmlContext>
+#include <iostream>
 
 int main(int argc, char *argv[])
 {
@@ -13,15 +14,14 @@ int main(int argc, char *argv[])
 
     MainWindow viewer;
 
-    QScreen* screen = app.screens().at(0);
-    QSize screenSize = screen->size();
-
     QQmlContext* context = viewer.rootContext();
-    context->setContextProperty("screenSize", screenSize);
-    context->setContextProperty("cpp", new QmlCppBridge(screen));
-
+    context->setContextProperty("cpp", new QmlCppBridge(&viewer));
     viewer.setSource(QUrl("qrc:/main.qml"));
+
     viewer.showMaximized();
 
+    QSize size = viewer.size();
+    std::cout<<size.height();
+    
     return app.exec();
 }

@@ -61,8 +61,9 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QSize \
 		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/qsize.h \
-		../../../Qt/5.11.0/clang_64/lib/QtGui.framework/Headers/QScreen \
-		../../../Qt/5.11.0/clang_64/lib/QtGui.framework/Headers/qscreen.h \
+		../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers/QQuickView \
+		../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers/qquickview.h \
+		MainWindow.h \
 		QmlCppBridge.h \
 		moc_predefs.h \
 		../../../Qt/5.11.0/clang_64/bin/moc
