@@ -11,9 +11,3 @@ MainWindow::MainWindow() {
         [window setCollectionBehavior:NSWindowCollectionBehaviorDefault];
     });
 }
-
-
-void MainWindow::resizeEvent(QResizeEvent *event) {
-    QQuickView::resizeEvent(event);
-    emit resize();
-}

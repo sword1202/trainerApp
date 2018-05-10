@@ -15,7 +15,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     MainWindow.mm \
     main.cpp \
-    QmlCppBridge.cpp
+    QmlCppBridge.cpp \
+    MainWindow.cpp
 
 RESOURCES += qml.qrc
 
