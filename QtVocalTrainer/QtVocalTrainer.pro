@@ -16,7 +16,7 @@ SOURCES += \
     MainWindow.mm \
     main.cpp \
     QmlCppBridge.cpp \
-    MainWindow.cpp
+    MainWindowShared.cpp
 
 RESOURCES += qml.qrc
 

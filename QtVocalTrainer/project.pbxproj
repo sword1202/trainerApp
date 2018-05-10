@@ -13,7 +13,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			name = "Qt Qmake";
 			shellPath = "/bin/sh";
-			shellScript = "make -C /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/ -f QtVocalTrainer.xcodeproj/qt_makeqmake.mak";
+			shellScript = "make -C /Users/semyon/Projects/VocalTrainer/QtVocalTrainer -f qt_makeqmake.mak";
 			showEnvVarsInLog = "0";
 		};
 		924148628D538E80F4530F9B = {
@@ -61,15 +61,15 @@
 					);
 			};
 		};
-		4F3F093D90D78F85089F67BB = {
+		40C2DF4FAAAF01E0C763122B = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/MainWindowShared.cpp";
-			name = "MainWindowShared.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/MainWindow.cpp";
+			name = "MainWindow.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		83166E56ADE0AA9A6D0E58CC = {
-			fileRef = "4F3F093D90D78F85089F67BB";
+		21A418F536CCB78AB323A976 = {
+			fileRef = "40C2DF4FAAAF01E0C763122B";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
@@ -200,7 +200,7 @@
 				"924148628D538E80F4530F9B",
 				"3EE34C6C6255F234C94584F4",
 				"A3113B7523B0D9D3CF3161D7",
-				"4F3F093D90D78F85089F67BB",
+				"40C2DF4FAAAF01E0C763122B",
 				"AC275522DAB9C3A7B41FD27F",
 				"C613FE9ADA39556AD9540F1E");
 			name = "Sources";
@@ -229,7 +229,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			name = "Qt Preprocessors";
 			shellPath = "/bin/sh";
-			shellScript = "make -C /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/ -f QtVocalTrainer.xcodeproj/qt_preprocess.mak";
+			shellScript = "make -C /Users/semyon/Projects/VocalTrainer/QtVocalTrainer -f qt_preprocess.mak";
 			showEnvVarsInLog = "0";
 		};
 		F7E50F631C51CD5B5DC0BC43 = {
@@ -238,7 +238,7 @@
 				"E4A7DABEDB67A2ACC4376D83",
 				"6A0BEF1A99FE649866352C7C",
 				"9453F35B6EB65B36D2199931",
-				"83166E56ADE0AA9A6D0E58CC",
+				"21A418F536CCB78AB323A976",
 				"F3F0C5A9AE1D79D2A4930AEA",
 				"3D30F0B43D9EE5E9EF8F3145",
 				"AE6596E2227260CD02B22B61",
@@ -454,7 +454,7 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		65AD3EE5018C522580CE18A6 = {
+		B5B7F6790A267928C1400940 = {
 			isa = PBXFileReference;
 			includeInIndex = 0;
 			explicitFileType = "wrapper.application";
@@ -463,7 +463,7 @@
 		};
 		FE0A091FDBFB3E9C31B7A1BD = {
 			children = (
-				"65AD3EE5018C522580CE18A6");
+				"B5B7F6790A267928C1400940");
 			isa = PBXGroup;
 			name = "Products";
 			sourceTree = "<group>";
@@ -481,7 +481,7 @@
 			name = "QtVocalTrainer";
 			sourceTree = "<group>";
 		};
-		03115E2DE1AF743F39D33DFC = {
+		580B38810994E27A814D53D7 = {
 			buildPhases = (
 				"5E618435888B9D49F8540165",
 				"7EF0942E79C014DCEC8976BC");
@@ -494,19 +494,19 @@
 			productName = "Qt Preprocess";
 			name = "Qt Preprocess";
 		};
-		F6F7C8259BF4F27C7755E39C = {
+		C922156F0AC5C4B055BDE2AB = {
 			isa = PBXTargetDependency;
-			target = "03115E2DE1AF743F39D33DFC";
+			target = "580B38810994E27A814D53D7";
 		};
-		D3FD1F6CD9E8CD0B0ED24AA0 = {
+		729079A0D0E6F34A42681A38 = {
 			buildPhases = (
 				"F7E50F631C51CD5B5DC0BC43",
 				"D1C883685E82D5676953459A",
 				"30414803F31797EB689AE508",
 				"99542592E9780B9225F24AA8");
 			dependencies = (
-				"F6F7C8259BF4F27C7755E39C");
-			productReference = "65AD3EE5018C522580CE18A6";
+				"C922156F0AC5C4B055BDE2AB");
+			productReference = "B5B7F6790A267928C1400940";
 			buildConfigurationList = 6CC3B5D2136C7CD6A5CF5A59;
 			isa = PBXNativeTarget;
 			buildRules = (
@@ -534,7 +534,7 @@
 				CC = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang";
 				LDPLUSPLUS = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++";
 				INFOPLIST_FILE = "Info.plist";
-				SYMROOT = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/";
+				SYMROOT = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer";
 				DYLIB_CURRENT_VERSION = "1.0.0";
 				DYLIB_COMPATIBILITY_VERSION = "1.0";
 				MACOSX_DEPLOYMENT_TARGET = "10.11";
@@ -629,7 +629,7 @@
 				CC = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang";
 				LDPLUSPLUS = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++";
 				INFOPLIST_FILE = "Info.plist";
-				SYMROOT = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/";
+				SYMROOT = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer";
 				DYLIB_CURRENT_VERSION = "1.0.0";
 				DYLIB_COMPATIBILITY_VERSION = "1.0";
 				MACOSX_DEPLOYMENT_TARGET = "10.11";
@@ -731,8 +731,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				"D3FD1F6CD9E8CD0B0ED24AA0",
-				"03115E2DE1AF743F39D33DFC");
+				"729079A0D0E6F34A42681A38",
+				"580B38810994E27A814D53D7");
 			attributes = {
 				TargetAttributes = {
 				};
