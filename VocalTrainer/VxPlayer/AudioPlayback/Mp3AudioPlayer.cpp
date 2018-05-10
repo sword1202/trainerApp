@@ -8,7 +8,9 @@
 #define MINIMP3_IMPLEMENTATION
 #include "minimp3.h"
 #include "Primitives.h"
+#include "AudioUtils.h"
 #include <thread>
+#include <iostream>
 
 #define PCM_LOCK std::lock_guard<std::mutex> _(pcmMutex)
 
@@ -80,8 +82,12 @@ void Mp3AudioPlayer::prepareAndProvidePlaybackData(AudioPlayer::PlaybackData *pl
 
     playbackData->totalDurationInSeconds = durationInSeconds;
 
+    soundTouch.setChannels(playbackData->numChannels);
+    soundTouch.setSampleRate(playbackData->sampleRate);
+
     pcm.insert(pcm.end(), tempPcm, tempPcm + samplesCount * playbackData->numChannels);
     mp3frameBytesCountQueue.push_back(info.frame_bytes);
+
     setBufferSeek(0);
 
     int64_t timeToSleepInMicroseconds = 1000000 * playbackData->framesPerBuffer / playbackData->sampleRate / 10;
@@ -106,19 +112,53 @@ void Mp3AudioPlayer::decodingThreadCallback(const PlaybackData& playbackData) {
             }
         }
 
+        std::cout<<"seek = "<<seek<<"\n";
+
         seek += headerOffset;
 
         int samplesCount = mp3dec_decode_frame(&mp3d, (unsigned char*)audioData.data() + seek,
                 audioData.size() - seek, tempPcm, &info);
 
         if (samplesCount == 0 && info.frame_bytes > 0) {
-            throw std::runtime_error("Corrupted mp3 file");
+            bool empty;
+            {
+                PCM_LOCK;
+                empty = mp3frameBytesCountQueue.empty();
+            }
+            if (empty) {
+                setBufferSeekIfNotModified(seek + info.frame_bytes, seek - headerOffset);
+            } else {
+                PCM_LOCK;
+                mp3frameBytesCountQueue.front() += info.frame_bytes;
+            }
+            continue;
         }
 
         if (info.frame_bytes > 0) {
-            PCM_LOCK;
-            mp3frameBytesCountQueue.push_back(info.frame_bytes);
-            pcm.insert(pcm.end(), tempPcm, tempPcm + samplesCount * playbackData.numChannels);
+            int pitchShiftInSemiTones = getPitchShiftInSemiTones();
+            if (pitchShiftInSemiTones != 0) {
+                static int r = 0;
+                static int w = 0;
+                AudioUtils::Int16SamplesIntoFloatSamples(tempPcm, samplesCount, tempPcmFloat);
+                soundTouch.putSamples(tempPcmFloat, samplesCount);
+                w++;
+                uint samples = soundTouch.receiveSamples(tempPcmFloat, samplesCount);
+                if (samples == samplesCount) {
+                    r++;
+                    AudioUtils::FloatSamplesIntoInt16Samples(tempPcmFloat, samplesCount, tempPcm);
+                    PCM_LOCK;
+                    mp3frameBytesCountQueue.push_back(info.frame_bytes);
+                    pcm.insert(pcm.end(), tempPcm, tempPcm + samplesCount * playbackData.numChannels);
+                }
+
+                if (w % 100 == 0) {
+                    //std::cout << "r = " << r << " w = " << w <<"\n";
+                }
+            } else {
+                PCM_LOCK;
+                mp3frameBytesCountQueue.push_back(info.frame_bytes);
+                pcm.insert(pcm.end(), tempPcm, tempPcm + samplesCount * playbackData.numChannels);
+            }
         } else {
             break;
         }
@@ -161,4 +201,9 @@ void Mp3AudioPlayer::destroy(const std::function<void()>& onDestroy) {
             onDestroy();
         }
     });
+}
+
+void Mp3AudioPlayer::setPitchShiftInSemiTones(int value) {
+    AudioPlayer::setPitchShiftInSemiTones(value);
+    soundTouch.setPitchSemiTones(value);
 }

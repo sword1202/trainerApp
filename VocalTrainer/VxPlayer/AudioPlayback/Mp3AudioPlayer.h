@@ -13,9 +13,11 @@
 #include <boost/circular_buffer.hpp>
 #include <atomic>
 #include "PeriodicallySleepingBackgroundTask.h"
+#include <SoundTouch/SoundTouch.h>
 
 class Mp3AudioPlayer : public AudioFilePlayer {
     short tempPcm[MINIMP3_MAX_SAMPLES_PER_FRAME];
+    float tempPcmFloat[MINIMP3_MAX_SAMPLES_PER_FRAME];
     boost::circular_buffer<short> pcm;
     boost::circular_buffer<int> mp3frameBytesCountQueue;
     mp3dec_t mp3d;
@@ -23,6 +25,7 @@ class Mp3AudioPlayer : public AudioFilePlayer {
     int bitrate;
     std::mutex pcmMutex;
     int headerOffset;
+    soundtouch::SoundTouch soundTouch;
     CppUtils::PeriodicallySleepingBackgroundTask decoderTask;
 protected:
     int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) override;
@@ -37,6 +40,9 @@ public:
 protected:
     double bufferSeekToSecondsSeek(int bufferSeek) const override;
     int secondsSeekToBufferSeek(double timestamp) const override;
+
+public:
+    void setPitchShiftInSemiTones(int value) override;
 };
 
 

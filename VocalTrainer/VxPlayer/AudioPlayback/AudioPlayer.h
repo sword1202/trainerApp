@@ -25,7 +25,7 @@ private:
     float volume = 1.0f;
     CppUtils::ListenersSet<> onCompleteListeners;
     CppUtils::ListenersSet<double /*seek*/, double/*totalDuration*/> seekChangedListeners;
-    int pitchShift = 0;
+    std::atomic_int pitchShift = 0;
 
     static int callback(const void *inputBuffer,
             void *outputBuffer,
