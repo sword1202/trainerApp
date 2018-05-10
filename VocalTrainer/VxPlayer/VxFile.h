@@ -48,6 +48,7 @@ public:
     VxFile(const std::vector<VxPitch> &pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int ticksPerSecond);
     VxFile(VxFile&& vxFile) = default;
     VxFile(const VxFile& vxFile) = default;
+    VxFile& operator=(const VxFile& vxFile) = default;
 
     VxFile(std::istream& is);
     static VxFile fromFilePath(const char* filePath);
@@ -75,6 +76,7 @@ public:
     void writeToStream(std::ostream& os) const;
 
     void shift(int distance);
+    VxFile shifted(int distance);
     bool canBeShifted(int distance) const;
 };
 

@@ -19,6 +19,9 @@ struct VxFileAudioDataGeneratorConfig {
     int outBufferSize = 512;
 };
 
+
+// renderNextPitchIfPossible and readNextSamplesBatch should be called from 2 different threads, other methods except
+// setVxFile can be called from any thread
 class VxFileAudioDataGenerator {
     PitchRenderer* renderer;
     VxFile vxFile;
@@ -38,6 +41,8 @@ class VxFileAudioDataGenerator {
     bool isFullyInitialized(int begin, int end) const;
     int getNextPitchToRenderIndex() const;
     void renderPitch(const Pitch &pitch, int begin, int length);
+
+    void clearAllData();
 public:
     VxFileAudioDataGenerator(PitchRenderer *renderer, VxFile &&vxFile,
             const VxFileAudioDataGeneratorConfig &config);
@@ -47,7 +52,6 @@ public:
     VxFileAudioDataGenerator(const VxFile &vxFile);
 
     virtual ~VxFileAudioDataGenerator();
-    void clearAllData();
 
     bool renderNextPitchIfPossible();
     // returns size = -1 if no data available and you should wait for some data rendered.
@@ -62,6 +66,11 @@ public:
     void setSeek(int seek);
 
     int getSeek() const;
+
+    // should be called from renderNextPitchIfPossible thread
+    void setVxFile(const VxFile& vxFile);
+
+    const VxFile &getVxFile() const;
 };
 
 

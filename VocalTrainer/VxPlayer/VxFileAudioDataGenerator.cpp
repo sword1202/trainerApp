@@ -249,3 +249,12 @@ int VxFileAudioDataGenerator::getSeek() const {
 double VxFileAudioDataGenerator::getDurationInSeconds() const {
     return vxFile.getDurationInSeconds();
 }
+
+void VxFileAudioDataGenerator::setVxFile(const VxFile &vxFile) {
+    this->vxFile = vxFile;
+    clearAllData();
+}
+
+const VxFile &VxFileAudioDataGenerator::getVxFile() const {
+    return vxFile;
+}

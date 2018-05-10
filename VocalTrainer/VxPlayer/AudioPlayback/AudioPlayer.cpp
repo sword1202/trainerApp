@@ -233,3 +233,11 @@ void AudioPlayer::destroy(const std::function<void()>& onDestroyed) {
 void AudioPlayer::destroy() {
     destroy(nullptr);
 }
+
+int AudioPlayer::getPitchShiftInSemiTones() const {
+    return pitchShift;
+}
+
+void AudioPlayer::setPitchShiftInSemiTones(int value) {
+    pitchShift = value;
+}

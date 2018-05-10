@@ -15,7 +15,8 @@
 
 class VxFileAudioPlayer : public AudioPlayer {
     VxFileAudioDataGenerator* generator;
-    CppUtils::PeriodicallySleepingBackgroundTask generatorTask;
+    CppUtils::PeriodicallySleepingBackgroundTaskWithCallbacksQueue generatorTask;
+    VxFile originalVxFile;
 protected:
     int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) override;
     void prepareAndProvidePlaybackData(PlaybackData *playbackData) override;
@@ -27,8 +28,11 @@ private:
 
 public:
     VxFileAudioPlayer(const VxFile &vxFile);
-    VxFileAudioPlayer(VxFile &&vxFile);
     void destroy(const std::function<void()>& onDestroyed) override;
+
+    bool isPitchShiftingAvailable(int distance) const;
+
+    void setPitchShiftInSemiTones(int value) override;
 };
 
 

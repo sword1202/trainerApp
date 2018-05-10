@@ -225,3 +225,9 @@ void VxFile::shift(int distance) {
         pitch.pitch.shift(distance);
     }
 }
+
+VxFile VxFile::shifted(int distance) {
+    VxFile copy = VxFile(*this);
+    copy.shift(distance);
+    return copy;
+}

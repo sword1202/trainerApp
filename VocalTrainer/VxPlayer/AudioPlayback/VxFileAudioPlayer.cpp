@@ -21,16 +21,15 @@ void VxFileAudioPlayer::prepareAndProvidePlaybackData(PlaybackData *playbackData
     playbackData->numChannels = 1;
 
     generatorTask.runWithSleepingIntervalInMicroseconds([=]{
-            while (generator->renderNextPitchIfPossible());
+            while (generator->renderNextPitchIfPossible()) {
+                generatorTask.processQueue();
+            }
         }, VX_FILE_GENERATOR_SLEEP_INTERVAL);
 }
 
 VxFileAudioPlayer::VxFileAudioPlayer(const VxFile &vxFile) {
+    this->originalVxFile = vxFile;
     generator = new VxFileAudioDataGenerator(vxFile);
-}
-
-VxFileAudioPlayer::VxFileAudioPlayer(VxFile &&vxFile) {
-
 }
 
 int VxFileAudioPlayer::getBufferSeek() const {
@@ -56,5 +55,17 @@ void VxFileAudioPlayer::destroy(const std::function<void()>& onDestroyed) {
         if (onDestroyed) {
             onDestroyed();
         }
+    });
+}
+
+bool VxFileAudioPlayer::isPitchShiftingAvailable(int distance) const {
+    return originalVxFile.canBeShifted(distance);
+}
+
+void VxFileAudioPlayer::setPitchShiftInSemiTones(int value) {
+    AudioPlayer::setPitchShiftInSemiTones(value);
+    generatorTask.postCallback([=] {
+        VxFile vxFile = originalVxFile.shifted(value);
+        generator->setVxFile(vxFile);
     });
 }
