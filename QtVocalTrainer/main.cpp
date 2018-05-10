@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 
     QQmlContext* context = viewer.rootContext();
     context->setContextProperty("cpp", new QmlCppBridge(&viewer));
-    viewer.setSource(QUrl("qrc:/main.qml"));
+    viewer.setSource(QUrl("qrc:/qml/main.qml"));
 
     viewer.showMaximized();
 
