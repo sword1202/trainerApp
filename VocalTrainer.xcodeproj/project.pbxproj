@@ -66,7 +66,6 @@
 		C9FFF9E99BD59AA43EE09CE7 /* Options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFB62B47690E086FA2F2D /* Options.cpp */; };
 		C9FFFB3D9CBDEE37A8696DB2 /* Executors.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF3F33A6942DEFCDDF2C9 /* Executors.mm */; };
 		C9FFFB76B1C8AFAB7E17C1A8 /* VxFileAudioDataGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFDDD3D7C5E7D7082BBFC /* VxFileAudioDataGenerator.cpp */; };
-		C9FFFB8AC795FE59874A01F4 /* VxFileTests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFCBC01CCBEA7B458BB66 /* VxFileTests.cpp */; };
 		C9FFFBDE33761CD24C30F32D /* Binasc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF0789AD2038BA3DA38A5 /* Binasc.cpp */; };
 		C9FFFCCC2A217925D1F6324B /* PitchTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8FE4DFBA5720805C7E3 /* PitchTest.cpp */; };
 		C9FFFD0B153AE4CF499D8D66 /* SynchronizedCallbacksQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2E6D7DC2EC87198D5C0 /* SynchronizedCallbacksQueue.cpp */; };
@@ -79,7 +78,6 @@
 		C9FFFF33F2E63ECD31A46D25 /* PitchRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE514220C10160A77F57 /* PitchRenderer.cpp */; };
 		C9FFFF5741CE1495CCD635E8 /* SoundFont2PitchRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA934598DEB3A7ED2F90 /* SoundFont2PitchRenderer.cpp */; };
 		C9FFFF6EF20C43D77E8EC6EC /* MidiMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFB1C83043889B4C74223 /* MidiMessage.cpp */; };
-		C9FFFF997CA683A1DB6EBCC3 /* yo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFD475B0D84AA60E1A314 /* yo.mp3 */; };
 		C9FFFFA05630CAB959DB47F5 /* StringsTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6F024954CC62D511B38 /* StringsTest.cpp */; };
 		C9FFFFCA0E04F735054B4790 /* PortAudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8DBACE12EE5DB6645A6 /* PortAudio.cpp */; };
 		C9FFFFE84AD49ABE87D72F89 /* AudioFilePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF57E53002F22CFD51033 /* AudioFilePlayer.cpp */; };
@@ -219,8 +217,6 @@
 		C9FFFBD36E13C3F75EEDF67D /* PortAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PortAudio.h; sourceTree = "<group>"; };
 		C9FFFBD710C1F3DE858A19B5 /* VxFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VxFile.cpp; sourceTree = "<group>"; };
 		C9FFFC6D53C891B61A3E964C /* Binasc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Binasc.h; sourceTree = "<group>"; };
-		C9FFFCBC01CCBEA7B458BB66 /* VxFileTests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VxFileTests.cpp; sourceTree = "<group>"; };
-		C9FFFD475B0D84AA60E1A314 /* yo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = yo.mp3; sourceTree = "<group>"; };
 		C9FFFD4E04D0ED1BB3419507 /* VxFileAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxFileAudioPlayer.h; sourceTree = "<group>"; };
 		C9FFFD7029B485A5ED355739 /* VxFileAudioDataGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxFileAudioDataGenerator.h; sourceTree = "<group>"; };
 		C9FFFDD798D0EB7C53086DD3 /* 1.vx */ = {isa = PBXFileReference; lastKnownFileType = file.vx; path = 1.vx; sourceTree = "<group>"; };
@@ -390,7 +386,6 @@
 				C9FFF49EDE81D0B46952137F /* AlgorithmsTest.cpp */,
 				C9FFF6F024954CC62D511B38 /* StringsTest.cpp */,
 				C9FFFE55AF6D32018F3AB842 /* GeometryUtilsTest.cpp */,
-				C9FFFCBC01CCBEA7B458BB66 /* VxFileTests.cpp */,
 			);
 			path = VocalTrainerTests;
 			sourceTree = "<group>";
@@ -443,7 +438,6 @@
 				C9FFFEF6E23B96974A519665 /* a.sf2 */,
 				C9FFF08E11535354E15CC819 /* MvxFile.cpp */,
 				C9FFFAC7E81807A213548C10 /* MvxFile.h */,
-				C9FFFD475B0D84AA60E1A314 /* yo.mp3 */,
 				C9FFF9A6D7A01E58DBEB6F57 /* Midi */,
 				C9FFFB571B440415C4131766 /* AudioPlayback */,
 				C9FFF3ADAD0A03D2651727E9 /* PlaybackChunk.h */,
@@ -581,7 +575,6 @@
 				C9FFF1454B1B19FD66D82BE7 /* LICENSE.txt in Resources */,
 				C9FFFF17382758D3A423FB58 /* melody.mid in Resources */,
 				C9FFF09DC78A783FDD0F5A3B /* a.sf2 in Resources */,
-				C9FFFF997CA683A1DB6EBCC3 /* yo.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,7 +654,6 @@
 				C9FFF038BC9107AE07369791 /* AlgorithmsTest.cpp in Sources */,
 				C9FFFFA05630CAB959DB47F5 /* StringsTest.cpp in Sources */,
 				C9FFF428255BE42EB50BBBD7 /* GeometryUtilsTest.cpp in Sources */,
-				C9FFFB8AC795FE59874A01F4 /* VxFileTests.cpp in Sources */,
 				C9FFF045E64DA74C0FF7618C /* MidiTrack.cpp in Sources */,
 				C9FFF8BCB6895CF2BEF1C29D /* MidiFileReader.cpp in Sources */,
 			);
@@ -686,7 +678,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -743,7 +735,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -787,7 +779,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -835,7 +827,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -874,7 +866,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_COMMA = YES;
@@ -906,7 +898,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_COMMA = YES;

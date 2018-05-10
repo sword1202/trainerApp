@@ -55,7 +55,7 @@ public:
     
     AudioPlayer();
     void prepare();
-    void prepareAsync(std::function<void()> callback);
+    void prepareAsync(const std::function<void()>& callback);
     void play(double seek);
     void play();
     bool isPlaying() const;

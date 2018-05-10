@@ -216,7 +216,7 @@ void AudioPlayer::setBufferSeek(int bufferSeek) {
     });
 }
 
-void AudioPlayer::prepareAsync(std::function<void()> callback) {
+void AudioPlayer::prepareAsync(const std::function<void()>& callback) {
     Executors::ExecuteOnBackgroundThread([=] {
         prepare();
         Executors::ExecuteOnMainThread(callback);
