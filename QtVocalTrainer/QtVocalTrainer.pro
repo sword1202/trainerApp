@@ -13,8 +13,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    main.mm \
-    MainWindow.mm
+    MainWindow.mm \
+    main.cpp \
+    QmlCppBridge.cpp
 
 RESOURCES += qml.qrc
 
@@ -32,4 +33,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 LIBS += -framework Foundation -framework AppKit
 
 HEADERS += \
-    MainWindow.h
+    MainWindow.h \
+    QmlCppBridge.h

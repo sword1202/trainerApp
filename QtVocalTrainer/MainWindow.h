@@ -6,6 +6,7 @@
 
 class MainWindow : public QQuickView
 {
+    Q_OBJECT
 public:
     MainWindow();
 };

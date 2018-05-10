@@ -16,21 +16,6 @@
 			shellScript = "make -C /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/ -f QtVocalTrainer.xcodeproj/qt_makeqmake.mak";
 			showEnvVarsInLog = "0";
 		};
-		2500A8F8869252D34E1E5182 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/main.mm";
-			name = "main.mm";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.objcpp";
-		};
-		14325AC52052220CF05030C0 = {
-			fileRef = "2500A8F8869252D34E1E5182";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
 		924148628D538E80F4530F9B = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/MainWindow.mm";
@@ -40,6 +25,36 @@
 		};
 		E4A7DABEDB67A2ACC4376D83 = {
 			fileRef = "924148628D538E80F4530F9B";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		3EE34C6C6255F234C94584F4 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/main.cpp";
+			name = "main.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		6A0BEF1A99FE649866352C7C = {
+			fileRef = "3EE34C6C6255F234C94584F4";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		A3113B7523B0D9D3CF3161D7 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/QmlCppBridge.cpp";
+			name = "QmlCppBridge.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		9453F35B6EB65B36D2199931 = {
+			fileRef = "A3113B7523B0D9D3CF3161D7";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
@@ -61,10 +76,47 @@
 					);
 			};
 		};
+		9928608A8BBE0D3A5606468D = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_MainWindow.cpp";
+			name = "moc_MainWindow.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		3D30F0B43D9EE5E9EF8F3145 = {
+			fileRef = "9928608A8BBE0D3A5606468D";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		249023FFA514A04311BC2D5D = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_QmlCppBridge.cpp";
+			name = "moc_QmlCppBridge.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		AE6596E2227260CD02B22B61 = {
+			fileRef = "249023FFA514A04311BC2D5D";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
 		AC275522DAB9C3A7B41FD27F = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/MainWindow.h";
 			name = "MainWindow.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
+		C613FE9ADA39556AD9540F1E = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/QmlCppBridge.h";
+			name = "QmlCppBridge.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
@@ -114,7 +166,9 @@
 		25B08E2869634E9BCBA333A2 = {
 			isa = PBXGroup;
 			children = (
-				"F61C3E706670E1F71F3998D1");
+				"F61C3E706670E1F71F3998D1",
+				"9928608A8BBE0D3A5606468D",
+				"249023FFA514A04311BC2D5D");
 			name = "Generated Sources";
 			sourceTree = "<group>";
 		};
@@ -128,9 +182,11 @@
 		2EB56BE3C2D93CDAB0C52E67 = {
 			isa = PBXGroup;
 			children = (
-				"2500A8F8869252D34E1E5182",
 				"924148628D538E80F4530F9B",
-				"AC275522DAB9C3A7B41FD27F");
+				"3EE34C6C6255F234C94584F4",
+				"A3113B7523B0D9D3CF3161D7",
+				"AC275522DAB9C3A7B41FD27F",
+				"C613FE9ADA39556AD9540F1E");
 			name = "Sources";
 			sourceTree = "<group>";
 		};
@@ -163,9 +219,12 @@
 		F7E50F631C51CD5B5DC0BC43 = {
 			buildActionMask = 2147483647;
 			files = (
-				"14325AC52052220CF05030C0",
 				"E4A7DABEDB67A2ACC4376D83",
+				"6A0BEF1A99FE649866352C7C",
+				"9453F35B6EB65B36D2199931",
 				"F3F0C5A9AE1D79D2A4930AEA",
+				"3D30F0B43D9EE5E9EF8F3145",
+				"AE6596E2227260CD02B22B61",
 				"DE96A987995B398E25D392B5");
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
