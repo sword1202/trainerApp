@@ -381,6 +381,8 @@ void MidiFileReader::postProcess()
         if (track->noteCount > 0
                 && track->channelId != DRUMS_CHANNEL_ID
                 && track->polyphonicTracksCount <= MAX_SUPPORTED_POLYPHONIC_TRACKS_COUNT
+                && Pitch::isMidiPitchSupported(track->highestNote)
+                && Pitch::isMidiPitchSupported(track->lowestNote)
                 ) {
             availableTracks.emplace_back(track);
         }

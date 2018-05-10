@@ -78,6 +78,12 @@ bool VxFile::validatePitches() {
 
 void VxFile::postInit() {
     SortByKey(pitches, startTickNumberKeyProvider);
+    auto pair = FindMinMaxUsingKeyProvider(pitches, [](const VxPitch& vxPitch) {
+        return vxPitch.pitch.getPerfectFrequencyIndex();
+    });
+
+    lowestPitchIndex = pair.first - pitches.begin();
+    highestPitchIndex = pair.second - pitches.begin();
 
     BOOST_ASSERT(distanceInTicksBetweenLastPitchEndAndTrackEnd >= 0);
     BOOST_ASSERT(validatePitches());
@@ -206,4 +212,16 @@ VxFile::VxFile() {
 void VxFile::setPitches(const std::vector<VxPitch> &pitches) {
     VxFile::pitches = pitches;
     postInit();
+}
+
+bool VxFile::canBeShifted(int distance) const {
+    return pitches[lowestPitchIndex].pitch.canBeShifted(distance) &&
+            pitches[highestPitchIndex].pitch.canBeShifted(distance);
+}
+
+void VxFile::shift(int distance) {
+    assert(canBeShifted(distance));
+    for (auto& pitch : pitches) {
+        pitch.pitch.shift(distance);
+    }
 }

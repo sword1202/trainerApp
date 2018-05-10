@@ -14,12 +14,15 @@
 #include "PlaybackChunk.h"
 #include <boost/container/static_vector.hpp>
 #include <boost/serialization/vector.hpp>
+#include "StlDebugUtils.h"
 
 class VxFile {
     std::vector<VxPitch> pitches;
     int ticksPerSecond = 0;
     int durationInTicks = 0;
     int distanceInTicksBetweenLastPitchEndAndTrackEnd = 0;
+    int lowestPitchIndex;
+    int highestPitchIndex;
 
     boost::container::static_vector<VxLyricsLine, 2> lyrics;
 
@@ -70,6 +73,9 @@ public:
     int getLyricsLinesCount() const;
     void addLyricsLine(const VxLyricsLine& line);
     void writeToStream(std::ostream& os) const;
+
+    void shift(int distance);
+    bool canBeShifted(int distance) const;
 };
 
 #endif //VOCALTRAINER_VXFILE_H
