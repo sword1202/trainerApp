@@ -62,4 +62,19 @@ Rectangle {
             anchors.rightMargin: 23.25
         }
     }
+
+    Rectangle {
+        width: parent.width
+        anchors.bottom: parent.bottom
+        height: 53.25
+
+        Text {
+            anchors.centerIn: parent
+            font.pointSize: 18
+            font.bold: true
+            font.family: "LatoBold"
+            color: "#24232d"
+            text: "Yesterday  All my troubles seemed so far away   Now it looks as though they're here to stay   Oh, I believe in yesterday"
+        }
+    }
 }
