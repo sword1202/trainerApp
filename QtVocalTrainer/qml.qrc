@@ -10,7 +10,10 @@
         <file>qml/images/lyrics_show_button_off.svg</file>
         <file>qml/images/tracks_show_button_off.svg</file>
         <file>qml/images/metronome_off.svg</file>
+        <file>qml/images/player_background.svg</file>
+        <file>qml/images/player_background.png</file>
         <file>qml/SvgImage.qml</file>
         <file>qml/ToggleButton.qml</file>
+        <file>qml/Player.qml</file>
     </qresource>
 </RCC>

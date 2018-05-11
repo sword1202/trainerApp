@@ -37,6 +37,7 @@ compiler_rcc_clean:
 qrc_qml.cpp: qml.qrc \
 		../../../Qt/5.11.0/clang_64/bin/rcc \
 		qml/ToggleButton.qml \
+		qml/Player.qml \
 		qml/SvgImage.qml \
 		qml/main.qml \
 		qml/images/tracks_show_button_off.svg \
@@ -46,8 +47,10 @@ qrc_qml.cpp: qml.qrc \
 		qml/images/lyrics_show_button_on.svg \
 		qml/images/lyrics_show_button_off.svg \
 		qml/images/metronome_off.png \
+		qml/images/player_background.png \
 		qml/images/metronome_off.svg \
-		qml/images/tracks_show_button_off.png
+		qml/images/tracks_show_button_off.png \
+		qml/images/player_background.svg
 	/Users/semyon/Qt/5.11.0/clang_64/bin/rcc -name qml qml.qrc -o qrc_qml.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h

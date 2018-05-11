@@ -16,7 +16,7 @@ Rectangle {
         ToggleButton {
             id: lyricsHideButton
             onImage: "images/lyrics_show_button_on.svg"
-            offImage: "images/lyrics_show_button_off.png"
+            offImage: "images/lyrics_show_button_off.svg"
             anchors.verticalCenter: parent.verticalCenter
 
             x: 23
@@ -27,7 +27,7 @@ Rectangle {
         ToggleButton {
             id: tracksHideButton
             onImage: "images/tracks_show_button_on.svg"
-            offImage: "images/tracks_show_button_off.png"
+            offImage: "images/tracks_show_button_off.svg"
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: lyricsHideButton.right
             anchors.leftMargin: 4
@@ -45,6 +45,10 @@ Rectangle {
 
             width: 45
             height: 38
+        }
+
+        Player {
+            anchors.centerIn: parent
         }
     }
 }
