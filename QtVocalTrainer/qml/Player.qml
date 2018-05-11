@@ -5,7 +5,7 @@ Item {
     width: 265.5
     height: 45
 
-    Image {
+    SvgImage {
         id: bg
         anchors.fill: parent
         source: "images/player_background.svg"
