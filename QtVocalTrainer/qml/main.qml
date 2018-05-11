@@ -9,7 +9,14 @@ Rectangle {
 
     FontLoader {
         id: latoBold
+        name: "LatoBold"
         source: "fonts/Lato-Bold.ttf"
+    }
+
+    FontLoader {
+        id: latoRegular
+        name: "LatoRegular"
+        source: "fonts/Lato-Regular.ttf"
     }
 
     Rectangle {
@@ -25,7 +32,7 @@ Rectangle {
 
             anchors.left: parent.left
             anchors.verticalCenter: parent.verticalCenter
-            anchors.leftMargin: 23
+            anchors.leftMargin: 23.25
         }
 
         FeaturesToggleButton {
