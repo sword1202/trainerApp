@@ -27,8 +27,5 @@ int QmlCppBridge::dpX(qreal dp) {
 }
 
 int QmlCppBridge::dpY(qreal dp) {
-    qreal i = qRound(view->screen()->logicalDotsPerInchY() * dp);
-    std::cout<<i;
-
     return qRound(view->screen()->logicalDotsPerInchY() * dp);
 }
