@@ -1,5 +1,6 @@
 import QtQuick 2.11
 import QtQuick.Window 2.11
+import QtGraphicalEffects 1.0
 
 Rectangle {
     id: window
@@ -12,9 +13,10 @@ Rectangle {
         width: parent.width
         color: "#c5cef8"
 
-        SvgImage {
+        ToggleButton {
             id: lyricsHideButton
-            source: "images/lyrics_hide_button.svg"
+            onImage: "images/lyrics_show_button_on.svg"
+            offImage: "images/lyrics_show_button_off.png"
             anchors.verticalCenter: parent.verticalCenter
 
             x: 23
@@ -22,9 +24,10 @@ Rectangle {
             height: 38
         }
 
-        SvgImage {
+        ToggleButton {
             id: tracksHideButton
-            source: "images/tracks_hide_button.svg"
+            onImage: "images/tracks_show_button_on.svg"
+            offImage: "images/tracks_show_button_off.png"
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: lyricsHideButton.right
             anchors.leftMargin: 4
@@ -33,8 +36,9 @@ Rectangle {
             height: 38
         }
 
-        SvgImage {
-            source: "images/metronome.svg"
+        ToggleButton {
+            onImage: "images/metronome_on.svg"
+            offImage: "images/metronome_off.svg"
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: tracksHideButton.right
             anchors.leftMargin: 4

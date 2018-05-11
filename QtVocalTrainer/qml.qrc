@@ -1,9 +1,16 @@
 <RCC>
     <qresource prefix="/">
         <file>qml/main.qml</file>
-        <file>qml/images/lyrics_hide_button.svg</file>
-        <file>qml/images/tracks_hide_button.svg</file>
-        <file>qml/images/metronome.svg</file>
+        <file>qml/images/lyrics_show_button_on.svg</file>
+        <file>qml/images/tracks_show_button_on.svg</file>
+        <file>qml/images/metronome_on.svg</file>
+        <file>qml/images/lyrics_show_button_off.png</file>
+        <file>qml/images/tracks_show_button_off.png</file>
+        <file>qml/images/metronome_off.png</file>
+        <file>qml/images/lyrics_show_button_off.svg</file>
+        <file>qml/images/tracks_show_button_off.svg</file>
+        <file>qml/images/metronome_off.svg</file>
         <file>qml/SvgImage.qml</file>
+        <file>qml/ToggleButton.qml</file>
     </qresource>
 </RCC>
