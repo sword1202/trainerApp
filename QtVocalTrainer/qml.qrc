@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>qml/main.qml</file>
         <file>qml/images/lyrics_show_button_on.svg</file>
         <file>qml/images/tracks_show_button_on.svg</file>
         <file>qml/images/metronome_on.svg</file>
@@ -22,10 +21,15 @@
         <file>qml/images/to_the_begining_hover.svg</file>
         <file>qml/images/play_on.svg</file>
         <file>qml/images/play_off.svg</file>
+        <file>qml/images/tempo_background.svg</file>
+        <file>qml/fonts/Lato-Bold.ttf</file>
+        <file>qml/main.qml</file>
         <file>qml/SvgImage.qml</file>
         <file>qml/ToggleButton.qml</file>
         <file>qml/Player.qml</file>
         <file>qml/FeaturesToggleButton.qml</file>
         <file>qml/ImageButton.qml</file>
+        <file>qml/ButtonShadow.qml</file>
+        <file>qml/Tempo.qml</file>
     </qresource>
 </RCC>

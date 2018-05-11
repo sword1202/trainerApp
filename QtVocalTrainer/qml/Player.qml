@@ -11,14 +11,8 @@ Item {
         source: "images/player_background.svg"
     }
 
-    DropShadow {
-        anchors.fill: bg
-
-        horizontalOffset: 0
-        verticalOffset: 2
-        radius: 3.0
-        color: "#aa9da3dc"
-        source: bg
+    ButtonShadow {
+        target: bg
     }
 
     ToggleButton {

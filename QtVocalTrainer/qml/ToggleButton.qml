@@ -10,6 +10,8 @@ Item {
 
     MouseArea {
         anchors.fill: parent
+        acceptedButtons: Qt.LeftButton
+
         onClicked: {
             root.state = root.state === "on" ? "off" : "on"
         }

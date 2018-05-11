@@ -5,16 +5,10 @@ ToggleButton {
     id: root
 
     width: 45
-    height: 38
+    height: 37.5
 
-    DropShadow {
+    ButtonShadow {
         visible: root.state === "off"
-        anchors.fill: root.svg
-
-        horizontalOffset: 0
-        verticalOffset: 2
-        radius: 3.0
-        color: "#aa9da3dc"
-        source: root.svg
+        target: root.svg
     }
 }

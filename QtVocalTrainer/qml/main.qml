@@ -7,6 +7,11 @@ Rectangle {
     width: cpp.windowWidth
     height: cpp.windowHeight
 
+    FontLoader {
+        id: latoBold
+        source: "fonts/Lato-Bold.ttf"
+    }
+
     Rectangle {
         id: header
         height: 75
@@ -42,6 +47,12 @@ Rectangle {
 
         Player {
             anchors.centerIn: parent
+        }
+
+        Tempo {
+            anchors.right: parent.right
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.rightMargin: 23.25
         }
     }
 }

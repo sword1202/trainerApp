@@ -36,6 +36,8 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_qml.cpp
 qrc_qml.cpp: qml.qrc \
 		../../../Qt/5.11.0/clang_64/bin/rcc \
+		qml/Tempo.qml \
+		qml/ButtonShadow.qml \
 		qml/ToggleButton.qml \
 		qml/FeaturesToggleButton.qml \
 		qml/Player.qml \
@@ -60,9 +62,11 @@ qrc_qml.cpp: qml.qrc \
 		qml/images/go_forward.svg \
 		qml/images/go_back_hover.svg \
 		qml/images/tracks_show_button_on.svg \
+		qml/images/tempo_background.svg \
 		qml/images/go_back.svg \
 		qml/images/lyrics_show_button_off.svg \
-		qml/images/tracks_show_button_off.png
+		qml/images/tracks_show_button_off.png \
+		qml/fonts/Lato-Bold.ttf
 	/Users/semyon/Qt/5.11.0/clang_64/bin/rcc -name qml qml.qrc -o qrc_qml.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h
