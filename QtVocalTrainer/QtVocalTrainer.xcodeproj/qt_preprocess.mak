@@ -40,20 +40,29 @@ qrc_qml.cpp: qml.qrc \
 		qml/FeaturesToggleButton.qml \
 		qml/Player.qml \
 		qml/SvgImage.qml \
+		qml/ImageButton.qml \
 		qml/main.qml \
-		qml/images/tracks_show_button_off.svg \
-		qml/images/tracks_show_button_on.svg \
-		qml/images/metronome_on.svg \
+		qml/images/to_the_begining_hover.svg \
+		qml/images/metronome_off.svg \
+		qml/images/lyrics_show_button_on.svg \
+		qml/images/to_the_begining.svg \
+		qml/images/player_background.svg \
+		qml/images/loop_off.svg \
 		qml/images/lyrics_show_button_off.png \
 		qml/images/loop_on.svg \
-		qml/images/lyrics_show_button_on.svg \
-		qml/images/lyrics_show_button_off.svg \
-		qml/images/loop_off.svg \
+		qml/images/go_forward_hover.svg \
+		qml/images/metronome_on.svg \
+		qml/images/play_on.svg \
 		qml/images/metronome_off.png \
 		qml/images/player_background.png \
-		qml/images/metronome_off.svg \
-		qml/images/tracks_show_button_off.png \
-		qml/images/player_background.svg
+		qml/images/play_off.svg \
+		qml/images/tracks_show_button_off.svg \
+		qml/images/go_forward.svg \
+		qml/images/go_back_hover.svg \
+		qml/images/tracks_show_button_on.svg \
+		qml/images/go_back.svg \
+		qml/images/lyrics_show_button_off.svg \
+		qml/images/tracks_show_button_off.png
 	/Users/semyon/Qt/5.11.0/clang_64/bin/rcc -name qml qml.qrc -o qrc_qml.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h

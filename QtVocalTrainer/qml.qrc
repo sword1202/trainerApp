@@ -14,9 +14,18 @@
         <file>qml/images/player_background.png</file>
         <file>qml/images/loop_on.svg</file>
         <file>qml/images/loop_off.svg</file>
+        <file>qml/images/go_back.svg</file>
+        <file>qml/images/go_back_hover.svg</file>
+        <file>qml/images/go_forward.svg</file>
+        <file>qml/images/go_forward_hover.svg</file>
+        <file>qml/images/to_the_begining.svg</file>
+        <file>qml/images/to_the_begining_hover.svg</file>
+        <file>qml/images/play_on.svg</file>
+        <file>qml/images/play_off.svg</file>
         <file>qml/SvgImage.qml</file>
         <file>qml/ToggleButton.qml</file>
         <file>qml/Player.qml</file>
         <file>qml/FeaturesToggleButton.qml</file>
+        <file>qml/ImageButton.qml</file>
     </qresource>
 </RCC>

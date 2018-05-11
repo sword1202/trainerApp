@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="70px" height="60px" viewBox="0 0 70 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>Play Passive 4</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Controls-Play" transform="translate(-245.000000, -150.000000)">
+            <g id="Player" transform="translate(32.000000, 150.000000)">
+                <g id="Play-Passive-4" transform="translate(213.000000, 0.000000)">
+                    <rect id="Bg-player-Copy-5" fill="#FFFFFF" x="0" y="0" width="70" height="60"></rect>
+                    <path d="M44.4222912,32.2888544 L31.8944272,38.5527864 C30.9064702,39.0467649 29.7051241,38.6463162 29.2111456,37.6583592 C29.0722902,37.3806483 29,37.0744222 29,36.763932 L29,24.236068 C29,23.1314985 29.8954305,22.236068 31,22.236068 C31.3104902,22.236068 31.6167163,22.3083582 31.8944272,22.4472136 L44.4222912,28.7111456 C45.4102482,29.2051241 45.8106969,30.4064702 45.3167184,31.3944272 C45.123191,31.781482 44.809346,32.095327 44.4222912,32.2888544 Z" id="Play" fill="#615F97"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
