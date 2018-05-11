@@ -37,6 +37,7 @@ compiler_rcc_clean:
 qrc_qml.cpp: qml.qrc \
 		../../../Qt/5.11.0/clang_64/bin/rcc \
 		qml/ToggleButton.qml \
+		qml/FeaturesToggleButton.qml \
 		qml/Player.qml \
 		qml/SvgImage.qml \
 		qml/main.qml \
@@ -44,8 +45,10 @@ qrc_qml.cpp: qml.qrc \
 		qml/images/tracks_show_button_on.svg \
 		qml/images/metronome_on.svg \
 		qml/images/lyrics_show_button_off.png \
+		qml/images/loop_on.svg \
 		qml/images/lyrics_show_button_on.svg \
 		qml/images/lyrics_show_button_off.svg \
+		qml/images/loop_off.svg \
 		qml/images/metronome_off.png \
 		qml/images/player_background.png \
 		qml/images/metronome_off.svg \

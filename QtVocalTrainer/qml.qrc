@@ -12,8 +12,11 @@
         <file>qml/images/metronome_off.svg</file>
         <file>qml/images/player_background.svg</file>
         <file>qml/images/player_background.png</file>
+        <file>qml/images/loop_on.svg</file>
+        <file>qml/images/loop_off.svg</file>
         <file>qml/SvgImage.qml</file>
         <file>qml/ToggleButton.qml</file>
         <file>qml/Player.qml</file>
+        <file>qml/FeaturesToggleButton.qml</file>
     </qresource>
 </RCC>

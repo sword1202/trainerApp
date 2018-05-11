@@ -13,38 +13,31 @@ Rectangle {
         width: parent.width
         color: "#c5cef8"
 
-        ToggleButton {
+        FeaturesToggleButton {
             id: lyricsHideButton
             onImage: "images/lyrics_show_button_on.svg"
             offImage: "images/lyrics_show_button_off.svg"
-            anchors.verticalCenter: parent.verticalCenter
 
-            x: 23
-            width: 45
-            height: 38
+            anchors.left: parent.left
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.leftMargin: 23
         }
 
-        ToggleButton {
+        FeaturesToggleButton {
             id: tracksHideButton
             onImage: "images/tracks_show_button_on.svg"
             offImage: "images/tracks_show_button_off.svg"
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: lyricsHideButton.right
             anchors.leftMargin: 4
-
-            width: 45
-            height: 38
         }
 
-        ToggleButton {
+        FeaturesToggleButton {
             onImage: "images/metronome_on.svg"
             offImage: "images/metronome_off.svg"
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: tracksHideButton.right
             anchors.leftMargin: 4
-
-            width: 45
-            height: 38
         }
 
         Player {
