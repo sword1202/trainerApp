@@ -26,7 +26,7 @@ Rectangle {
         color: "#c5cef8"
 
         FeaturesToggleButton {
-            id: lyricsHideButton
+            id: lyricsShowButton
             onImage: "images/lyrics_show_button_on.svg"
             offImage: "images/lyrics_show_button_off.svg"
 
@@ -36,11 +36,11 @@ Rectangle {
         }
 
         FeaturesToggleButton {
-            id: tracksHideButton
+            id: tracksShowButton
             onImage: "images/tracks_show_button_on.svg"
             offImage: "images/tracks_show_button_off.svg"
             anchors.verticalCenter: parent.verticalCenter
-            anchors.left: lyricsHideButton.right
+            anchors.left: lyricsShowButton.right
             anchors.leftMargin: 4
         }
 
@@ -48,7 +48,7 @@ Rectangle {
             onImage: "images/metronome_on.svg"
             offImage: "images/metronome_off.svg"
             anchors.verticalCenter: parent.verticalCenter
-            anchors.left: tracksHideButton.right
+            anchors.left: tracksShowButton.right
             anchors.leftMargin: 4
         }
 
@@ -64,9 +64,29 @@ Rectangle {
     }
 
     Rectangle {
+        id: subheader
+        height: 59.25
+        color: "brown"
+        width: parent.width
+        anchors.left: parent.left
+        anchors.top: header.bottom
+    }
+
+    Rectangle {
+        id: piano
+        width: 63
+        anchors.top: subheader.bottom
+        anchors.left: parent.left
+        anchors.bottom: lyrics.top
+        color: "brown"
+    }
+
+    Rectangle {
+        id: lyrics
         width: parent.width
         anchors.bottom: parent.bottom
-        height: 53.25
+        height: lyricsShowButton.state === "on" ? 53.25 : 0
+        visible: lyricsShowButton.state === "on"
 
         Text {
             anchors.centerIn: parent
