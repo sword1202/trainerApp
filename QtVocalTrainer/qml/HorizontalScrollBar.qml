@@ -11,9 +11,8 @@ Item {
     property real position: 0
     property real pageSize
     property real padding: 2.25
-    property int orientation: Qt.Vertical
 
-    width: 11.25
+    height: 11.25
 
     // A light, semi-transparent background
     Rectangle {
@@ -24,12 +23,12 @@ Item {
 
     // Size the bar to the required size, depending upon the orientation.
     Rectangle {
-        height: pageSize * parent.height
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.leftMargin: padding
-        anchors.rightMargin: padding
-        radius: width / 2
+        width: pageSize * parent.width
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.topMargin: padding
+        anchors.bottomMargin: padding
+        radius: height / 2
 
         color: "#615F97"
     }

@@ -34,6 +34,7 @@
         <file>qml/ButtonShadow.qml</file>
         <file>qml/Tempo.qml</file>
         <file>qml/Workspace.qml</file>
-        <file>qml/ScrollBar.qml</file>
+        <file>qml/HorizontalScrollBar.qml</file>
+        <file>qml/VerticalScrollBar.qml</file>
     </qresource>
 </RCC>

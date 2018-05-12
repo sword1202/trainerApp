@@ -84,11 +84,11 @@ Rectangle {
         id: workspace
         anchors.top: subheader.bottom
         anchors.left: piano.right
-        anchors.bottom: lyrics.top
+        anchors.bottom: horizontalScroll.top
         anchors.right: verticalScroll.right
     }
 
-    ScrollBar {
+    VerticalScrollBar {
         id: verticalScroll
         height: workspace.height
         pageSize: 0.3
@@ -154,8 +154,16 @@ Rectangle {
     Rectangle {
         height: 1
         width: parent.width
-        anchors.bottom: lyrics.top
+        anchors.bottom: horizontalScroll.top
         color: "#cc8B89B6"
+    }
+
+    HorizontalScrollBar {
+        id: horizontalScroll
+        pageSize: 0.3
+        anchors.bottom: lyrics.top
+        anchors.left: piano.right
+        anchors.right: parent.right
     }
 
     Rectangle {
