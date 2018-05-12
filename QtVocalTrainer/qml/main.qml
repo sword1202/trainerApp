@@ -1,6 +1,7 @@
 import QtQuick 2.11
 import QtQuick.Window 2.11
 import QtGraphicalEffects 1.0
+import CppBridge 1.0
 
 Rectangle {
     id: window
@@ -70,6 +71,14 @@ Rectangle {
         width: parent.width
         anchors.left: parent.left
         anchors.top: header.bottom
+    }
+
+    WorkspaceDrawer {
+        id: workspace
+        anchors.top: subheader.bottom
+        anchors.left: piano.right
+        anchors.bottom: lyrics.bottom
+        anchors.right: parent.right
     }
 
     Rectangle {

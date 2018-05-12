@@ -1,5 +1,7 @@
 QT += quick
-CONFIG += c++11
+
+QMAKE_CXXFLAGS += -std=c++17
+QMAKE_CXXFLAGS_DEBUG += -O0
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -16,7 +18,9 @@ SOURCES += \
     MainWindow.mm \
     main.cpp \
     QmlCppBridge.cpp \
-    MainWindowShared.cpp
+    MainWindowShared.cpp \
+    qmlopenglitem.cpp \
+    workspacedrawer.cpp
 
 RESOURCES += qml.qrc
 
@@ -35,4 +39,8 @@ LIBS += -framework Foundation -framework AppKit
 
 HEADERS += \
     MainWindow.h \
-    QmlCppBridge.h
+    QmlCppBridge.h \
+    qmlopenglitem.h \
+    workspacedrawer.h
+
+DISTFILES +=

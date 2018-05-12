@@ -76,6 +76,36 @@
 					);
 			};
 		};
+		5B682C7941C28D6A601B9549 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qmlopenglitem.cpp";
+			name = "qmlopenglitem.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		5AC2E76E870D2A004CF8DCD2 = {
+			fileRef = "5B682C7941C28D6A601B9549";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		2B3DA3B80EB0BA9B4A580AA3 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/workspacedrawer.cpp";
+			name = "workspacedrawer.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		630D0B6B9D4BAFA56B479EDB = {
+			fileRef = "2B3DA3B80EB0BA9B4A580AA3";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
 		F61C3E706670E1F71F3998D1 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qrc_qml.cpp";
@@ -121,6 +151,36 @@
 					);
 			};
 		};
+		9BD80D57069FBF796EF30C33 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_qmlopenglitem.cpp";
+			name = "moc_qmlopenglitem.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		4D39E2B783FFDF3FB02ED09A = {
+			fileRef = "9BD80D57069FBF796EF30C33";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		7B1CFF71295BB63A25B57C83 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_workspacedrawer.cpp";
+			name = "moc_workspacedrawer.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		547F8C2C9E7062DF9349EFB6 = {
+			fileRef = "7B1CFF71295BB63A25B57C83";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
 		AC275522DAB9C3A7B41FD27F = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/MainWindow.h";
@@ -132,6 +192,20 @@
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/QmlCppBridge.h";
 			name = "QmlCppBridge.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
+		1091C7F2ACC81AEE9DF74E74 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qmlopenglitem.h";
+			name = "qmlopenglitem.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
+		8C8269EBC5C2C4734DA0409F = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/workspacedrawer.h";
+			name = "workspacedrawer.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
@@ -183,7 +257,9 @@
 			children = (
 				"F61C3E706670E1F71F3998D1",
 				"9928608A8BBE0D3A5606468D",
-				"249023FFA514A04311BC2D5D");
+				"249023FFA514A04311BC2D5D",
+				"9BD80D57069FBF796EF30C33",
+				"7B1CFF71295BB63A25B57C83");
 			name = "Generated Sources";
 			sourceTree = "<group>";
 		};
@@ -201,8 +277,12 @@
 				"3EE34C6C6255F234C94584F4",
 				"A3113B7523B0D9D3CF3161D7",
 				"4F3F093D90D78F85089F67BB",
+				"5B682C7941C28D6A601B9549",
+				"2B3DA3B80EB0BA9B4A580AA3",
 				"AC275522DAB9C3A7B41FD27F",
-				"C613FE9ADA39556AD9540F1E");
+				"C613FE9ADA39556AD9540F1E",
+				"1091C7F2ACC81AEE9DF74E74",
+				"8C8269EBC5C2C4734DA0409F");
 			name = "Sources";
 			sourceTree = "<group>";
 		};
@@ -239,9 +319,13 @@
 				"6A0BEF1A99FE649866352C7C",
 				"9453F35B6EB65B36D2199931",
 				"83166E56ADE0AA9A6D0E58CC",
+				"5AC2E76E870D2A004CF8DCD2",
+				"630D0B6B9D4BAFA56B479EDB",
 				"F3F0C5A9AE1D79D2A4930AEA",
 				"3D30F0B43D9EE5E9EF8F3145",
 				"AE6596E2227260CD02B22B61",
+				"4D39E2B783FFDF3FB02ED09A",
+				"547F8C2C9E7062DF9349EFB6",
 				"DE96A987995B398E25D392B5");
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -571,6 +655,7 @@
 				OTHER_CPLUSPLUSFLAGS = (
 					"-pipe",
 					"-stdlib=libc++",
+					"-std=c++17",
 					"-O2",
 					"-std=gnu++11",
 					"-Wall",
@@ -666,6 +751,7 @@
 				OTHER_CPLUSPLUSFLAGS = (
 					"-pipe",
 					"-stdlib=libc++",
+					"-std=c++17",
 					"-O2",
 					"-std=gnu++11",
 					"-Wall",
