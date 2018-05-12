@@ -39,7 +39,8 @@ QRect QmlOpenglItem::getViewPort(const QQuickWindow *win) const {
     qreal ypos = y();
     qreal deviceRatio = win->devicePixelRatio();
 
-    QPointF viewPortPosition(xpos, (qreal)win->height() - ypos - height());
+    qreal h = height();
+    QPointF viewPortPosition(xpos, (qreal)win->height() - ypos - h);
     QRectF viewPort(viewPortPosition * deviceRatio, size() * deviceRatio);
     return viewPort.toRect();
 }

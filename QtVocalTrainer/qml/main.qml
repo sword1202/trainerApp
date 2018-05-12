@@ -77,7 +77,7 @@ Rectangle {
         id: workspace
         anchors.top: subheader.bottom
         anchors.left: piano.right
-        anchors.bottom: lyrics.bottom
+        anchors.bottom: lyrics.top
         anchors.right: parent.right
     }
 
