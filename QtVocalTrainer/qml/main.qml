@@ -94,7 +94,31 @@ Rectangle {
         anchors.top: subheader.bottom
         anchors.left: parent.left
         anchors.bottom: lyrics.top
-        color: "brown"
+        color: "#eeeeee"
+    }
+
+    Rectangle {
+        height: 1
+        width: parent.width
+        anchors.bottom: tracksContainer.top
+        color: "#cc8B89B6"
+    }
+
+    Rectangle {
+        id: tracksContainer
+        visible: tracksShowButton.state === "on"
+        color: "#00000000"
+        height: tracksShowButton.state === "on" ? 111 : 0
+        width: parent.width
+        anchors.left: parent.left
+        anchors.bottom: piano.bottom
+
+        Rectangle {
+            color: "white"
+            height: parent.height
+            width: 65.25
+            anchors.left: parent.left
+        }
     }
 
     Rectangle {
@@ -117,6 +141,13 @@ Rectangle {
         anchors.horizontalCenter: playHead.horizontalCenter
 
         source: "images/play_head_triangle.svg"
+    }
+
+    Rectangle {
+        height: 1
+        width: parent.width
+        anchors.bottom: lyrics.top
+        color: "#cc8B89B6"
     }
 
     Rectangle {
