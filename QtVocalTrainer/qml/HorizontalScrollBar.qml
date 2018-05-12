@@ -30,6 +30,21 @@ Item {
         anchors.bottomMargin: padding
         radius: height / 2
 
+        MouseArea {
+            id: mouseArea
+            anchors.fill: parent
+            drag {
+                target: parent
+                minimumX: 0
+                maximumX: scrollBar.width - parent.width
+                axis: Drag.XAxis
+            }
+        }
+
+        onXChanged: {
+            scrollBar.position = x / mouseArea.drag.maximumX
+        }
+
         color: "#615F97"
     }
 }

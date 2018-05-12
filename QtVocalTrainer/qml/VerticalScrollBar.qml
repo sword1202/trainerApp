@@ -30,6 +30,21 @@ Item {
         anchors.rightMargin: padding
         radius: width / 2
 
+        MouseArea {
+            id: mouseArea
+            anchors.fill: parent
+            drag {
+                target: parent
+                minimumY: 0
+                maximumY: scrollBar.height - parent.height
+                axis: Drag.YAxis
+            }
+        }
+
+        onYChanged: {
+            scrollBar.position = y / mouseArea.drag.maximumY
+        }
+
         color: "#615F97"
     }
 }
