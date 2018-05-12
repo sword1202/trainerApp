@@ -4,6 +4,7 @@ Canvas {
     readonly property real baseWidth: 1374.0
     readonly property var zoomMap: [12*4, 10*4, 8*4, 6*4];
     readonly property string gridColor: "#338B89B6"
+    readonly property string tactGridColor: "#808B89B6"
     readonly property real verticalToHoriznotalGridIntervalRelation: 2.4117701323665077
 
     property int zoom: 0
@@ -13,12 +14,14 @@ Canvas {
         var baseIntervalsCount = linesCount + 1;
         var intervalWidth = baseWidth / baseIntervalsCount;
 
-        // draw beats
-        for (var x = intervalWidth; x < width; x += intervalWidth) {
+        // draw beats and tacts
+        for (var x = intervalWidth, index = 1; x < width; x += intervalWidth, index++) {
             ctx.beginPath();
             ctx.moveTo(x, 0);
             ctx.lineTo(x, height);
-            ctx.strokeStyle = gridColor;
+
+            ctx.strokeStyle = index % 4 != 0 ? gridColor : tactGridColor
+
             ctx.stroke();
         }
 
