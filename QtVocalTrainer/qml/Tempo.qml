@@ -1,8 +1,7 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
-
-
+import "js/strings.js" as Strings
 
 Item {
     height: 37.5
@@ -19,7 +18,7 @@ Item {
         target: svg
     }
 
-    TextEdit {
+    TextInput {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: tempoLabel.top
 
@@ -29,6 +28,14 @@ Item {
         font.bold: true
         font.family: "LatoBold"
         anchors.bottomMargin: 1
+        validator: IntValidator {
+            bottom: 1; top: 999;
+        }
+
+        onAccepted: {
+            focus = false
+            text = text.removeZerosFromBeginning();
+        }
     }
 
     Label {

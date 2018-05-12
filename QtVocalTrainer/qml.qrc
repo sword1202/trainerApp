@@ -36,5 +36,6 @@
         <file>qml/Workspace.qml</file>
         <file>qml/HorizontalScrollBar.qml</file>
         <file>qml/VerticalScrollBar.qml</file>
+        <file>qml/js/strings.js</file>
     </qresource>
 </RCC>
