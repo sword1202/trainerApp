@@ -7,10 +7,14 @@ Item {
 
     property int zoom: 0
 
-    function iterateIntervals(target,args) {
+    function getIntervalWidth() {
         var linesCount = zoomMap[zoom];
         var baseIntervalsCount = linesCount + 1;
-        var intervalWidth = baseWidth / baseIntervalsCount;
+        return baseWidth / baseIntervalsCount;
+    }
+
+    function iterateIntervals(target,args) {
+        var intervalWidth = getIntervalWidth();
 
         // draw beats and tacts
         for (var x = intervalWidth, index = 1; x < target.width; x += intervalWidth, index++) {

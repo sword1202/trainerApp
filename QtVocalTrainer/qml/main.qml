@@ -151,10 +151,18 @@ Rectangle {
         anchors.bottom: piano.bottom
 
         Rectangle {
+            id: leftRect
             color: "white"
             height: parent.height
             width: 65.25
             anchors.left: parent.left
+        }
+
+        Track {
+            anchors.left: leftRect.right
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: horizontalScroll.height + 14.25
+            anchors.right: parent.right
         }
     }
 

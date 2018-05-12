@@ -40,6 +40,7 @@ qrc_qml.cpp: qml.qrc \
 		qml/HorizontalScrollBar.qml \
 		qml/Zoom.qml \
 		qml/Tempo.qml \
+		qml/Track.qml \
 		qml/ButtonShadow.qml \
 		qml/ToggleButton.qml \
 		qml/FeaturesToggleButton.qml \
@@ -72,6 +73,7 @@ qrc_qml.cpp: qml.qrc \
 		qml/images/go_back.svg \
 		qml/images/lyrics_show_button_off.svg \
 		qml/images/tracks_show_button_off.png \
+		qml/images/track_piece.png \
 		qml/fonts/Lato-Regular.ttf \
 		qml/fonts/Lato-Bold.ttf \
 		qml/js/strings.js
