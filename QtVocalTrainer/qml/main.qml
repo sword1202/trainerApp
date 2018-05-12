@@ -86,6 +86,13 @@ Rectangle {
         anchors.left: piano.right
         anchors.bottom: horizontalScroll.top
         anchors.right: verticalScroll.right
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                playHead.leftOffset = mouse.x
+            }
+        }
     }
 
     VerticalScrollBar {
