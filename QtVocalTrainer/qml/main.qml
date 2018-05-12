@@ -19,6 +19,10 @@ Rectangle {
         source: "fonts/Lato-Regular.ttf"
     }
 
+    Zoom {
+        id: zoom
+    }
+
     Rectangle {
         id: header
         height: 75
@@ -80,17 +84,17 @@ Rectangle {
         }
     }
 
-    Rectangle {
+    Yardstick {
         id: yardstick
-        height: 13.5
+        zoom: zoom
         anchors.bottom: playHeadTriangle.top
         anchors.left: workspace.left
         anchors.right: parent.right
-        color: "#ccffdd"
     }
 
     Workspace {
         id: workspace
+        zoom: zoom
         anchors.top: subheader.bottom
         anchors.left: piano.right
         anchors.leftMargin: 1

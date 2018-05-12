@@ -37,5 +37,7 @@
         <file>qml/HorizontalScrollBar.qml</file>
         <file>qml/VerticalScrollBar.qml</file>
         <file>qml/js/strings.js</file>
+        <file>qml/Yardstick.qml</file>
+        <file>qml/Zoom.qml</file>
     </qresource>
 </RCC>

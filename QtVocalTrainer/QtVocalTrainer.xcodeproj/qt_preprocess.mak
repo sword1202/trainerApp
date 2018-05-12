@@ -38,6 +38,7 @@ qrc_qml.cpp: qml.qrc \
 		../../../Qt/5.11.0/clang_64/bin/rcc \
 		qml/Workspace.qml \
 		qml/HorizontalScrollBar.qml \
+		qml/Zoom.qml \
 		qml/Tempo.qml \
 		qml/ButtonShadow.qml \
 		qml/ToggleButton.qml \
@@ -45,6 +46,7 @@ qrc_qml.cpp: qml.qrc \
 		qml/Player.qml \
 		qml/SvgImage.qml \
 		qml/ImageButton.qml \
+		qml/Yardstick.qml \
 		qml/VerticalScrollBar.qml \
 		qml/main.qml \
 		qml/images/to_the_begining_hover.svg \
