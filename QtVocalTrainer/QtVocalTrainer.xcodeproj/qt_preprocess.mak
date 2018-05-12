@@ -30,13 +30,13 @@ check: first
 
 benchmark: first
 
-compilers: qrc_qml.cpp moc_predefs.h moc_MainWindow.cpp moc_QmlCppBridge.cpp moc_qmlopenglitem.cpp\
-	 moc_workspacedrawer.cpp
+compilers: qrc_qml.cpp moc_predefs.h moc_MainWindow.cpp moc_QmlCppBridge.cpp moc_qmlopenglitem.cpp
 compiler_rcc_make_all: qrc_qml.cpp
 compiler_rcc_clean:
 	-$(DEL_FILE) qrc_qml.cpp
 qrc_qml.cpp: qml.qrc \
 		../../../Qt/5.11.0/clang_64/bin/rcc \
+		qml/Workspace.qml \
 		qml/Tempo.qml \
 		qml/ButtonShadow.qml \
 		qml/ToggleButton.qml \
@@ -77,9 +77,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../../Qt/5.11.0/clang_64/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -std=c++17 -O2 -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h ../../../Qt/5.11.0/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_MainWindow.cpp moc_QmlCppBridge.cpp moc_qmlopenglitem.cpp moc_workspacedrawer.cpp
+compiler_moc_header_make_all: moc_MainWindow.cpp moc_QmlCppBridge.cpp moc_qmlopenglitem.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_MainWindow.cpp moc_QmlCppBridge.cpp moc_qmlopenglitem.cpp moc_workspacedrawer.cpp
+	-$(DEL_FILE) moc_MainWindow.cpp moc_QmlCppBridge.cpp moc_qmlopenglitem.cpp
 moc_MainWindow.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers/QQuickView \
 		MainWindow.h \
@@ -101,14 +101,6 @@ moc_qmlopenglitem.cpp: ../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers
 		moc_predefs.h \
 		../../../Qt/5.11.0/clang_64/bin/moc
 	/Users/semyon/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/semyon/Qt/5.11.0/clang_64/mkspecs/macx-clang -I/Users/semyon/Projects/VocalTrainer/QtVocalTrainer -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQml.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/semyon/Qt/5.11.0/clang_64/lib qmlopenglitem.h -o moc_qmlopenglitem.cpp
-
-moc_workspacedrawer.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QObject \
-		qmlopenglitem.h \
-		../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers/QQuickItem \
-		workspacedrawer.h \
-		moc_predefs.h \
-		../../../Qt/5.11.0/clang_64/bin/moc
-	/Users/semyon/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/semyon/Qt/5.11.0/clang_64/mkspecs/macx-clang -I/Users/semyon/Projects/VocalTrainer/QtVocalTrainer -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQml.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/semyon/Qt/5.11.0/clang_64/lib workspacedrawer.h -o moc_workspacedrawer.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:

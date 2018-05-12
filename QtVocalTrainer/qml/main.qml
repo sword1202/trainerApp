@@ -1,7 +1,6 @@
 import QtQuick 2.11
 import QtQuick.Window 2.11
 import QtGraphicalEffects 1.0
-import CppBridge 1.0
 
 Rectangle {
     id: window
@@ -73,7 +72,7 @@ Rectangle {
         anchors.top: header.bottom
     }
 
-    WorkspaceDrawer {
+    Workspace {
         id: workspace
         anchors.top: subheader.bottom
         anchors.left: piano.right

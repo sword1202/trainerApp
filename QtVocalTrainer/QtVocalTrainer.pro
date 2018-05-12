@@ -19,8 +19,7 @@ SOURCES += \
     main.cpp \
     QmlCppBridge.cpp \
     MainWindowShared.cpp \
-    qmlopenglitem.cpp \
-    workspacedrawer.cpp
+    qmlopenglitem.cpp
 
 RESOURCES += qml.qrc
 
@@ -40,7 +39,6 @@ LIBS += -framework Foundation -framework AppKit
 HEADERS += \
     MainWindow.h \
     QmlCppBridge.h \
-    qmlopenglitem.h \
-    workspacedrawer.h
+    qmlopenglitem.h
 
 DISTFILES +=

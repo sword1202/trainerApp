@@ -32,5 +32,6 @@
         <file>qml/ImageButton.qml</file>
         <file>qml/ButtonShadow.qml</file>
         <file>qml/Tempo.qml</file>
+        <file>qml/Workspace.qml</file>
     </qresource>
 </RCC>

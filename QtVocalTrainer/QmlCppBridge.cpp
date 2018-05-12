@@ -9,9 +9,7 @@ QmlCppBridge::QmlCppBridge(MainWindow* view) : view(view) {
 }
 
 int QmlCppBridge::windowWidth() {
-    int i = view->size().width();
-    std::cout<<i<<" ";
-    return i;
+    return view->size().width();
 }
 
 int QmlCppBridge::windowHeight() {
