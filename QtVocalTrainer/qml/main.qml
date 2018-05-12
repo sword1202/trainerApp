@@ -80,10 +80,20 @@ Rectangle {
         }
     }
 
+    Rectangle {
+        id: yardstick
+        height: 13.5
+        anchors.bottom: playHeadTriangle.top
+        anchors.left: workspace.left
+        anchors.right: parent.right
+        color: "#ccffdd"
+    }
+
     Workspace {
         id: workspace
         anchors.top: subheader.bottom
         anchors.left: piano.right
+        anchors.leftMargin: 1
         anchors.bottom: horizontalScroll.top
         anchors.right: verticalScroll.right
 
@@ -93,6 +103,14 @@ Rectangle {
                 playHead.leftOffset = mouse.x
             }
         }
+    }
+
+    Rectangle {
+        width: 1
+        anchors.right: workspace.left
+        anchors.bottom: tracksContainer.top
+        anchors.top: yardstick.top
+        color: "#cc8B89B6"
     }
 
     VerticalScrollBar {
@@ -150,6 +168,7 @@ Rectangle {
     }
 
     SvgImage {
+        id: playHeadTriangle
         width: 11.25
         height: 11.25
         anchors.verticalCenter: playHead.top
