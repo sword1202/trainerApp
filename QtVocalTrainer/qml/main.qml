@@ -75,12 +75,10 @@ Rectangle {
         anchors.left: parent.left
         anchors.top: header.bottom
 
-        Rectangle {
-            height: 1
+        HorizontalLine {
             width: parent.width
             anchors.bottom: parent.bottom
             anchors.left: parent.left
-            color: "#cc8B89B6"
         }
     }
 
@@ -110,14 +108,6 @@ Rectangle {
     }
 
     Rectangle {
-        width: 1
-        anchors.right: workspace.left
-        anchors.bottom: tracksContainer.top
-        anchors.top: yardstick.top
-        color: "#cc8B89B6"
-    }
-
-    Rectangle {
         id: piano
         width: 63
         anchors.top: subheader.bottom
@@ -126,11 +116,9 @@ Rectangle {
         color: "#eeeeee"
     }
 
-    Rectangle {
-        height: 1
+    HorizontalLine {
         width: parent.width
         anchors.bottom: tracksContainer.top
-        color: "#cc8B89B6"
     }
 
     Rectangle {
@@ -189,13 +177,6 @@ Rectangle {
         source: "images/play_head_triangle.svg"
     }
 
-    Rectangle {
-        height: 1
-        width: parent.width
-        anchors.bottom: horizontalScroll.top
-        color: "#cc8B89B6"
-    }
-
     HorizontalScrollBar {
         id: horizontalScroll
         pageSize: 0.3
@@ -204,12 +185,23 @@ Rectangle {
         anchors.right: parent.right
     }
 
+    VerticalLine {
+        anchors.right: horizontalScroll.left
+        anchors.bottom: lyrics.top
+        anchors.top: yardstick.top
+    }
+
     Rectangle {
         id: lyrics
         width: parent.width
         anchors.bottom: parent.bottom
         height: lyricsShowButton.state === "on" ? 53.25 : 0
         visible: lyricsShowButton.state === "on"
+
+        HorizontalLine {
+            width: parent.width
+            anchors.top: parent.top
+        }
 
         Text {
             anchors.centerIn: parent

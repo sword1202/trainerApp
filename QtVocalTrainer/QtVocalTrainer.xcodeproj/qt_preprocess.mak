@@ -36,20 +36,24 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_qml.cpp
 qrc_qml.cpp: qml.qrc \
 		../../../Qt/5.11.0/clang_64/bin/rcc \
-		qml/Workspace.qml \
+		qml/ButtonShadow.qml \
+		qml/SvgImage.qml \
+		qml/Yardstick.qml \
+		qml/ImageButton.qml \
+		qml/ToggleButton.qml \
+		qml/HorizontalLine.qml \
 		qml/HorizontalScrollBar.qml \
+		qml/VerticalLine.qml \
 		qml/Zoom.qml \
 		qml/Tempo.qml \
-		qml/Track.qml \
-		qml/ButtonShadow.qml \
-		qml/ToggleButton.qml \
-		qml/FeaturesToggleButton.qml \
-		qml/Player.qml \
-		qml/SvgImage.qml \
-		qml/ImageButton.qml \
-		qml/Yardstick.qml \
-		qml/VerticalScrollBar.qml \
 		qml/main.qml \
+		qml/Workspace.qml \
+		qml/FeaturesToggleButton.qml \
+		qml/Track.qml \
+		qml/Player.qml \
+		qml/VerticalScrollBar.qml \
+		qml/js/strings.js \
+		qml/js/uiutils.js \
 		qml/images/to_the_begining_hover.svg \
 		qml/images/play_head_triangle.svg \
 		qml/images/track_piece_small.png \
@@ -73,12 +77,11 @@ qrc_qml.cpp: qml.qrc \
 		qml/images/tempo_background.svg \
 		qml/images/go_back.svg \
 		qml/images/lyrics_show_button_off.svg \
+		qml/images/instrumental_track_button.svg \
 		qml/images/tracks_show_button_off.png \
 		qml/images/track_piece.png \
 		qml/fonts/Lato-Regular.ttf \
-		qml/fonts/Lato-Bold.ttf \
-		qml/js/strings.js \
-		qml/js/uiutils.js
+		qml/fonts/Lato-Bold.ttf
 	/Users/semyon/Qt/5.11.0/clang_64/bin/rcc -name qml qml.qrc -o qrc_qml.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h

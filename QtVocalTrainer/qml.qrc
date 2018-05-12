@@ -25,6 +25,7 @@
         <file>qml/images/play_head_triangle.svg</file>
         <file>qml/images/track_piece.png</file>
         <file>qml/images/track_piece_small.png</file>
+        <file>qml/images/instrumental_track_button.svg</file>
         <file>qml/fonts/Lato-Bold.ttf</file>
         <file>qml/fonts/Lato-Regular.ttf</file>
         <file>qml/main.qml</file>
@@ -43,5 +44,7 @@
         <file>qml/Zoom.qml</file>
         <file>qml/Track.qml</file>
         <file>qml/js/uiutils.js</file>
+        <file>qml/VerticalLine.qml</file>
+        <file>qml/HorizontalLine.qml</file>
     </qresource>
 </RCC>

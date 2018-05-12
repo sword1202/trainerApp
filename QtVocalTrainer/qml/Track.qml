@@ -13,30 +13,55 @@ Rectangle {
 
     height: imageHeight
 
-    Component {
-        id: factory
-        Image {
-            height: imageHeight
-            width: imageWidth
+    Rectangle {
+        color: "#00000000"
+        anchors.fill: parent
 
-            source: "images/track_piece.png"
+        Component {
+            id: factory
+            Image {
+                height: imageHeight
+                width: imageWidth
+
+                source: "images/track_piece.png"
+            }
+        }
+
+        onWidthChanged: {
+            UiUtils.destroyAllChildern(this)
+
+            var smallImage = factory.createObject(this, {
+                height: smallImageHeight,
+                width: smallImageWidth
+            })
+            smallImage.x = 0;
+            smallImage.y = (imageHeight - smallImageHeight) / 2
+
+            for (var x = smallImageWidth; x < width + imageWidth; x += imageWidth) {
+                var image = factory.createObject(this, {})
+                image.x = x
+                image.y = 0
+            }
         }
     }
 
-    onWidthChanged: {
-        UiUtils.destroyAllChildern(this)
+    Rectangle {
+        width: 96
+        height: 15
+        color: "white"
+        border.color: "#514E64"
+        border.width: 1
+        radius: 2.25
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
+        anchors.leftMargin: 19.5
 
-        var smallImage = factory.createObject(root, {
-            height: smallImageHeight,
-            width: smallImageWidth
-        })
-        smallImage.x = 0;
-        smallImage.y = (imageHeight - smallImageHeight) / 2
-
-        for (var x = smallImageWidth; x < width + imageWidth; x += imageWidth) {
-            var image = factory.createObject(root, {})
-            image.x = x
-            image.y = 0
+        Text {
+            anchors.centerIn: parent
+            text: "Instrumental track"
+            font.family: "LatoRegular"
+            font.pixelSize: 9
+            color: "#514E64"
         }
     }
 }
