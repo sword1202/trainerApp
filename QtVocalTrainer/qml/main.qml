@@ -66,10 +66,18 @@ Rectangle {
     Rectangle {
         id: subheader
         height: 59.25
-        color: "brown"
+        color: "white"
         width: parent.width
         anchors.left: parent.left
         anchors.top: header.bottom
+
+        Rectangle {
+            height: 1
+            width: parent.width
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            color: "#cc8B89B6"
+        }
     }
 
     Workspace {
@@ -87,6 +95,28 @@ Rectangle {
         anchors.left: parent.left
         anchors.bottom: lyrics.top
         color: "brown"
+    }
+
+    Rectangle {
+        property real leftOffset: 200
+
+        id: playHead
+        color: "#24232d"
+        width: 1
+        anchors.left: workspace.left
+        anchors.bottom: workspace.bottom
+        anchors.top: workspace.top
+        anchors.leftMargin: leftOffset
+        height: workspace.height
+    }
+
+    SvgImage {
+        width: 11.25
+        height: 11.25
+        anchors.verticalCenter: playHead.top
+        anchors.horizontalCenter: playHead.horizontalCenter
+
+        source: "images/play_head_triangle.svg"
     }
 
     Rectangle {
