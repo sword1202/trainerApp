@@ -52,6 +52,7 @@ qrc_qml.cpp: qml.qrc \
 		qml/main.qml \
 		qml/images/to_the_begining_hover.svg \
 		qml/images/play_head_triangle.svg \
+		qml/images/track_piece_small.png \
 		qml/images/metronome_off.svg \
 		qml/images/lyrics_show_button_on.svg \
 		qml/images/to_the_begining.svg \
@@ -76,7 +77,8 @@ qrc_qml.cpp: qml.qrc \
 		qml/images/track_piece.png \
 		qml/fonts/Lato-Regular.ttf \
 		qml/fonts/Lato-Bold.ttf \
-		qml/js/strings.js
+		qml/js/strings.js \
+		qml/js/uiutils.js
 	/Users/semyon/Qt/5.11.0/clang_64/bin/rcc -name qml qml.qrc -o qrc_qml.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h

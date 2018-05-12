@@ -117,14 +117,6 @@ Rectangle {
         color: "#cc8B89B6"
     }
 
-    VerticalScrollBar {
-        id: verticalScroll
-        height: workspace.height
-        pageSize: 0.3
-        anchors.top: workspace.top
-        anchors.right: parent.right
-    }
-
     Rectangle {
         id: piano
         width: 63
@@ -146,7 +138,7 @@ Rectangle {
         visible: tracksShowButton.state === "on"
         color: "#00000000"
         height: tracksShowButton.state === "on" ? 111 : 0
-        width: parent.width
+        anchors.right: verticalScroll.left
         anchors.left: parent.left
         anchors.bottom: piano.bottom
 
@@ -164,6 +156,14 @@ Rectangle {
             anchors.bottomMargin: horizontalScroll.height + 14.25
             anchors.right: parent.right
         }
+    }
+
+    VerticalScrollBar {
+        id: verticalScroll
+        height: workspace.height
+        pageSize: 0.3
+        anchors.top: workspace.top
+        anchors.right: parent.right
     }
 
     Rectangle {

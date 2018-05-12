@@ -1,12 +1,13 @@
 import QtQuick 2.0
+import "js/uiutils.js" as UiUtils
 
 Rectangle {
     id: root
 
     readonly property real imageWidth: 92.25
     readonly property real imageHeight: 27.8025
-
-    property var addedImages: []
+    readonly property real smallImageWidth: 90
+    readonly property real smallImageHeight: 13.905
 
     color: "#00000000"
 
@@ -23,16 +24,19 @@ Rectangle {
     }
 
     onWidthChanged: {
-        addedImages.forEach(function(img) {
-            img.destroy()
-        })
-        addedImages = []
+        UiUtils.destroyAllChildern(this)
 
-        for (var x = 0; x < width + imageWidth; x += imageWidth) {
-            var obj = factory.createObject(root, {})
-            obj.x = x
-            obj.y = 0
-            addedImages.push(obj)
+        var smallImage = factory.createObject(root, {
+            height: smallImageHeight,
+            width: smallImageWidth
+        })
+        smallImage.x = 0;
+        smallImage.y = (imageHeight - smallImageHeight) / 2
+
+        for (var x = smallImageWidth; x < width + imageWidth; x += imageWidth) {
+            var image = factory.createObject(root, {})
+            image.x = x
+            image.y = 0
         }
     }
 }

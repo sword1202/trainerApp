@@ -24,6 +24,7 @@
         <file>qml/images/tempo_background.svg</file>
         <file>qml/images/play_head_triangle.svg</file>
         <file>qml/images/track_piece.png</file>
+        <file>qml/images/track_piece_small.png</file>
         <file>qml/fonts/Lato-Bold.ttf</file>
         <file>qml/fonts/Lato-Regular.ttf</file>
         <file>qml/main.qml</file>
@@ -41,5 +42,6 @@
         <file>qml/Yardstick.qml</file>
         <file>qml/Zoom.qml</file>
         <file>qml/Track.qml</file>
+        <file>qml/js/uiutils.js</file>
     </qresource>
 </RCC>
