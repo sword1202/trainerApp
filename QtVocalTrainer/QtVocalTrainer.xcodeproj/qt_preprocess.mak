@@ -37,6 +37,7 @@ compiler_rcc_clean:
 qrc_qml.cpp: qml.qrc \
 		../../../Qt/5.11.0/clang_64/bin/rcc \
 		qml/ButtonShadow.qml \
+		qml/TrackButton.qml \
 		qml/SvgImage.qml \
 		qml/Yardstick.qml \
 		qml/ImageButton.qml \

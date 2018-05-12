@@ -95,7 +95,7 @@ Rectangle {
         zoom: zoom
         anchors.top: subheader.bottom
         anchors.left: piano.right
-        anchors.leftMargin: 1
+        anchors.leftMargin: 0
         anchors.bottom: horizontalScroll.top
         anchors.right: verticalScroll.right
 
@@ -134,11 +134,44 @@ Rectangle {
             id: leftRect
             color: "white"
             height: parent.height
-            width: 65.25
+            width: piano.width
             anchors.left: parent.left
         }
 
+        DropShadow {
+            anchors.fill: vocal
+
+            horizontalOffset: 0
+            verticalOffset: 0
+            radius: 30.0
+            color: "#DDDBEE"
+            source: vocal
+        }
+
+        Rectangle {
+            id: vocal
+            color: "#D2D0DD"
+            anchors.bottom: instrumental.top
+            anchors.bottomMargin: 12.75
+            height: 30
+            anchors.left: leftRect.right
+            anchors.right: parent.right
+
+            Rectangle {
+                color: "white"
+                height: parent.height
+                anchors.left: parent.left
+                width: 25.5
+            }
+
+            TrackButton {
+                width: 67.5
+                text: "Vocal track"
+            }
+        }
+
         Track {
+            id: instrumental
             anchors.left: leftRect.right
             anchors.bottom: parent.bottom
             anchors.bottomMargin: horizontalScroll.height + 14.25
@@ -155,7 +188,7 @@ Rectangle {
     }
 
     Rectangle {
-        property real leftOffset: 200
+        property real leftOffset: zoom.getIntervalWidth() * 4
 
         id: playHead
         color: "#24232d"

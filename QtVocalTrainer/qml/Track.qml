@@ -45,23 +45,8 @@ Rectangle {
         }
     }
 
-    Rectangle {
+    TrackButton {
         width: 96
-        height: 15
-        color: "white"
-        border.color: "#514E64"
-        border.width: 1
-        radius: 2.25
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent.left
-        anchors.leftMargin: 19.5
-
-        Text {
-            anchors.centerIn: parent
-            text: "Instrumental track"
-            font.family: "LatoRegular"
-            font.pixelSize: 9
-            color: "#514E64"
-        }
+        text: "Instrumental track"
     }
 }

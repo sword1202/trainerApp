@@ -46,5 +46,6 @@
         <file>qml/js/uiutils.js</file>
         <file>qml/VerticalLine.qml</file>
         <file>qml/HorizontalLine.qml</file>
+        <file>qml/TrackButton.qml</file>
     </qresource>
 </RCC>
