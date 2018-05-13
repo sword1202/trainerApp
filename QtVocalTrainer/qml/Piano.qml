@@ -3,7 +3,11 @@ import "js/canvasutils.js" as CanvasUtils
 import "js/uiutils.js" as UiUtils
 
 Canvas {
+    id: root
+
     width: 51
+
+    property var zoom
 
     readonly property real bigPitchHeight: 25.5
     readonly property real smallPitchHeight: 18.75
@@ -19,6 +23,13 @@ Canvas {
     readonly property string borderColor: "#9A98D0"
     readonly property string sharpPitchColor: "#9A98D0"
     readonly property var pitchNames: ["C", "D", "E", "F", "G", "A", "B"]
+    readonly property real intervalOctvaHeightToPianoOctaveHeightRelation: (function() {
+        // 12 pitches in octave
+        var intervalOctaveHeight = zoom.getIntervalHeight() * 12
+        // 4 small pitches and 3 big pitches from heightMap, 5: 7 pitches in octave
+        var pianoOctaveHeight = smallPitchHeight * 4 + bigPitchHeight * 3 + distanceBetweenPitches * 7
+        return intervalOctaveHeight / pianoOctaveHeight
+    })();
 
     property int startPitchIndex: 0
 
@@ -31,26 +42,27 @@ Canvas {
         var y = height
         var heightMapLength = heightMap.length
         while (y > -bigPitchHeight) {
-            var pitchHeight = heightMap[index % heightMapLength]
+            var pitchHeight = heightMap[index % heightMapLength] * intervalOctvaHeightToPianoOctaveHeightRelation
             CanvasUtils.roundRect(ctx, 0, y - pitchHeight, width - 1, pitchHeight, {
-                tr: pitchRadius,
-                br: pitchRadius
+                tr: pitchRadius * intervalOctvaHeightToPianoOctaveHeightRelation,
+                br: pitchRadius * intervalOctvaHeightToPianoOctaveHeightRelation
             })
 
             y -= pitchHeight
 
             // draw sharp pitch
+            pitchHeight = sharpPitchHeight * intervalOctvaHeightToPianoOctaveHeightRelation
             if (hasSharpMap[index % heightMapLength]) {
                 CanvasUtils.roundRect(ctx, 0,
-                                      y - sharpPitchHeight / 2 - distanceBetweenPitches,
-                                      sharpPitchWidth, sharpPitchHeight, {
-                    tr: sharpPitchRadius,
-                    br: sharpPitchRadius
+                                      y - pitchHeight / 2 - distanceBetweenPitches / 2 * intervalOctvaHeightToPianoOctaveHeightRelation,
+                                      sharpPitchWidth, pitchHeight, {
+                    tr: sharpPitchRadius * intervalOctvaHeightToPianoOctaveHeightRelation,
+                    br: sharpPitchRadius * intervalOctvaHeightToPianoOctaveHeightRelation
                 }, true, false)
 
             }
 
-            y -= distanceBetweenPitches
+            y -= distanceBetweenPitches * intervalOctvaHeightToPianoOctaveHeightRelation
             index++
         }
     }
@@ -69,20 +81,28 @@ Canvas {
         }
     }
 
-    onHeightChanged: {
-        UiUtils.destroyAllChildern(this)
+    function updatePitchNames() {
+        UiUtils.destroyAllChildern(root)
 
         var index = 0;
         var y = height
         var heightMapLength = heightMap.length
         while (y > -bigPitchHeight) {
             var indexInMap = index % heightMapLength
-            var pitchHeight = heightMap[indexInMap]
-            var text = pitchNameText.createObject(this, {})
+            var pitchHeight = heightMap[indexInMap] * intervalOctvaHeightToPianoOctaveHeightRelation
+            var text = pitchNameText.createObject(root, {})
             text.y =  y - pitchHeight / 2 - text.height / 2
             text.text = pitchNames[indexInMap] + Math.floor(index / heightMapLength)
             index++
-            y -= pitchHeight + distanceBetweenPitches
+            y -= pitchHeight + distanceBetweenPitches * intervalOctvaHeightToPianoOctaveHeightRelation
         }
+    }
+
+    onHeightChanged: {
+        updatePitchNames()
+    }
+
+    onIntervalOctvaHeightToPianoOctaveHeightRelationChanged: {
+        updatePitchNames()
     }
 }

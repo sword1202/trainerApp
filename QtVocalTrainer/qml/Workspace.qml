@@ -4,7 +4,7 @@ Canvas {
     id: root
 
     readonly property string gridColor: "#338B89B6"
-    readonly property string tactGridColor: "#808B89B6"
+    readonly property string accentGridColor: "#808B89B6"
 
     property var zoom: zoom
 
@@ -15,15 +15,15 @@ Canvas {
                 ctx.beginPath();
                 ctx.moveTo(x, 0);
                 ctx.lineTo(x, height);
-                ctx.strokeStyle = isBeat ? gridColor : tactGridColor
+                ctx.strokeStyle = isBeat ? gridColor : accentGridColor
                 ctx.stroke();
             },
-            verticalIterator: function(y) {
+            verticalIterator: function(y, isOctaveBegin) {
                 // draw pitch horizontal lines
                 ctx.beginPath();
                 ctx.moveTo(0, y);
                 ctx.lineTo(width, y);
-                ctx.strokeStyle = gridColor;
+                ctx.strokeStyle = isOctaveBegin ? accentGridColor : gridColor;
                 ctx.stroke();
             }
         });

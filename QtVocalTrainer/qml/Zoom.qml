@@ -13,6 +13,10 @@ Item {
         return baseWidth / baseIntervalsCount;
     }
 
+    function getIntervalHeight() {
+        return getIntervalWidth() / verticalToHoriznotalGridIntervalRelation
+    }
+
     function iterateIntervals(target,args) {
         var intervalWidth = getIntervalWidth();
 
@@ -23,8 +27,11 @@ Item {
 
         if (args.verticalIterator) {
             var intervalHeight = intervalWidth / verticalToHoriznotalGridIntervalRelation;
-            for (var y = intervalHeight; y < target.height; y += intervalHeight) {
-                args.verticalIterator(y);
+            index = 1;
+            for (var y = intervalHeight; y < target.height; y += intervalHeight, index++) {
+                console.log("index = " + index)
+                console.log("y = " + (target.height - y))
+                args.verticalIterator(target.height - y, index % 12 == 0);
             }
         }
     }

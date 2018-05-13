@@ -75,6 +75,7 @@ Rectangle {
         anchors.bottom: horizontalScroll.top
 
         Piano {
+            zoom: zoom
             anchors.left: parent.left
             anchors.bottom: parent.bottom
             anchors.top: parent.top
