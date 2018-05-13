@@ -9,6 +9,7 @@ DropShadow {
     horizontalOffset: 0
     verticalOffset: 2
     radius: 3.0
-    color: "#aa9da3dc"
+    color: "#9DA3DC"
     source: target
+    opacity: 0.8
 }

@@ -14,6 +14,7 @@ Canvas {
     readonly property var hasSharpMap: [true, true, false, true, true, true, false]
     readonly property real pitchRadius: 3
     readonly property real sharpPitchRadius: 1.5
+    readonly property real diestanceBetweenTextLeftAndPitchRight: 1062
     readonly property string borderColor: "#9A98D0"
     readonly property string sharpPitchColor: "#9A98D0"
 
@@ -49,6 +50,14 @@ Canvas {
 
             y -= distanceBetweenPitches
             index++
+        }
+    }
+
+    Component {
+        id: pitchNameText
+
+        Text {
+            opacity: 0.9
         }
     }
 }

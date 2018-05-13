@@ -7,15 +7,15 @@ Item {
     height: 37.5
     width: 52.5
 
+    ButtonShadow {
+        target: svg
+    }
+
     SvgImage {
         id: svg
         anchors.fill: parent
 
         source: "images/tempo_background.svg"
-    }
-
-    ButtonShadow {
-        target: svg
     }
 
     TextInput {
