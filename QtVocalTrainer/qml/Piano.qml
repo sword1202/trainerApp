@@ -36,6 +36,9 @@ Canvas {
     onPaint: {
         var ctx = getContext("2d")
 
+        ctx.fillStyle = "white";
+        ctx.fillRect(0, 0, width, height);
+
         ctx.strokeStyle = borderColor
         ctx.fillStyle = sharpPitchColor
         var index = 0;

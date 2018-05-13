@@ -8,6 +8,10 @@ Canvas {
 
     property var zoom: zoom
 
+    onZoomChanged: {
+        zoom.zoomChanged.connect(requestPaint)
+    }
+
     function drawGrid(ctx) {
         zoom.iterateIntervals(root, {
             beatsIterator: function(x, isBeat) {
@@ -31,6 +35,8 @@ Canvas {
 
     onPaint: {
         var ctx = getContext("2d")
+        ctx.fillStyle = "white"
+        ctx.fillRect(0, 0, width, height)
         drawGrid(ctx)
     }
 }

@@ -2,13 +2,14 @@ import QtQuick 2.0
 
 Item {
     readonly property real baseWidth: 1374.0
-    readonly property var zoomMap: [12*4, 10*4, 8*4, 6*4];
+    readonly property real zoomFactor: 12.0 * 4
+    property real zoom: 1.0
+    property real minZoom: 1.0
+    property real maxZoom: 2.0
     readonly property real verticalToHoriznotalGridIntervalRelation: 2.4117701323665077
 
-    property int zoom: 0
-
     function getIntervalWidth() {
-        var linesCount = zoomMap[zoom];
+        var linesCount = Math.round(zoomFactor / zoom);
         var baseIntervalsCount = linesCount + 1;
         return baseWidth / baseIntervalsCount;
     }
