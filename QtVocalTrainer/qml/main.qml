@@ -91,6 +91,14 @@ Rectangle {
         anchors.left: parent.left
         anchors.top: header.bottom
 
+        ZoomSlider {
+            zoom: zoom
+            anchors.top: parent.top
+            anchors.topMargin: 15
+            anchors.rightMargin: 23.25
+            anchors.right: parent.right
+        }
+
         HorizontalLine {
             width: parent.width
             anchors.bottom: parent.bottom

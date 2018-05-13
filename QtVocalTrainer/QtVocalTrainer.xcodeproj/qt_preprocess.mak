@@ -46,6 +46,7 @@ qrc_qml.cpp: qml.qrc \
 		qml/HorizontalScrollBar.qml \
 		qml/VerticalLine.qml \
 		qml/Zoom.qml \
+		qml/ZoomSlider.qml \
 		qml/Tempo.qml \
 		qml/main.qml \
 		qml/Piano.qml \
@@ -54,6 +55,7 @@ qrc_qml.cpp: qml.qrc \
 		qml/Track.qml \
 		qml/Player.qml \
 		qml/VerticalScrollBar.qml \
+		qml/Circle.qml \
 		qml/js/strings.js \
 		qml/js/uiutils.js \
 		qml/js/canvasutils.js \
@@ -81,6 +83,7 @@ qrc_qml.cpp: qml.qrc \
 		qml/images/go_back.svg \
 		qml/images/lyrics_show_button_off.svg \
 		qml/images/instrumental_track_button.svg \
+		qml/images/zoom_slider_triangle.svg \
 		qml/images/tracks_show_button_off.png \
 		qml/images/track_piece.png \
 		qml/fonts/Lato-Regular.ttf \

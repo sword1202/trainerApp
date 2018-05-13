@@ -29,8 +29,6 @@ Item {
             var intervalHeight = intervalWidth / verticalToHoriznotalGridIntervalRelation;
             index = 1;
             for (var y = intervalHeight; y < target.height; y += intervalHeight, index++) {
-                console.log("index = " + index)
-                console.log("y = " + (target.height - y))
                 args.verticalIterator(target.height - y, index % 12 == 0);
             }
         }

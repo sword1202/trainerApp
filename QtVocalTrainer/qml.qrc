@@ -26,6 +26,7 @@
         <file>qml/images/track_piece.png</file>
         <file>qml/images/track_piece_small.png</file>
         <file>qml/images/instrumental_track_button.svg</file>
+        <file>qml/images/zoom_slider_triangle.svg</file>
         <file>qml/fonts/Lato-Bold.ttf</file>
         <file>qml/fonts/Lato-Regular.ttf</file>
         <file>qml/main.qml</file>
@@ -49,5 +50,7 @@
         <file>qml/TrackButton.qml</file>
         <file>qml/Piano.qml</file>
         <file>qml/js/canvasutils.js</file>
+        <file>qml/ZoomSlider.qml</file>
+        <file>qml/Circle.qml</file>
     </qresource>
 </RCC>
