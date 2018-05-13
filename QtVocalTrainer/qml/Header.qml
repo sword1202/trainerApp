@@ -11,6 +11,7 @@ Rectangle {
 
     FeaturesToggleButton {
         id: lyricsShowButton
+        state: "on"
         onImage: "images/lyrics_show_button_on.svg"
         offImage: "images/lyrics_show_button_off.svg"
 
@@ -21,6 +22,7 @@ Rectangle {
 
     FeaturesToggleButton {
         id: tracksShowButton
+        state: "on"
         onImage: "images/tracks_show_button_on.svg"
         offImage: "images/tracks_show_button_off.svg"
         anchors.verticalCenter: parent.verticalCenter

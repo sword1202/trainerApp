@@ -26,12 +26,14 @@ Item {
 
     Circle {
         id: circle
+        y: 0
         circleRadius: parent.width / 2
         color: "white"
 
         MouseArea {
             anchors.fill: parent
             drag {
+                target: parent
                 maximumY: maxY
                 minimumY: 0
 
