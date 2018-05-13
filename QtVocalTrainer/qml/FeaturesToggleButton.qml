@@ -8,6 +8,7 @@ Rectangle {
 
     property alias onImage : button.onImage
     property alias offImage : button.offImage
+    property alias state: button.state
 
     ButtonShadow {
         anchors.fill: parent

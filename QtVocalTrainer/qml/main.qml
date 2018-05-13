@@ -68,6 +68,20 @@ Rectangle {
     }
 
     Rectangle {
+        id: pianoContainer
+        width: 63
+        anchors.top: subheader.bottom
+        anchors.left: parent.left
+        anchors.bottom: horizontalScroll.top
+
+        Piano {
+            anchors.left: parent.left
+            anchors.bottom: parent.bottom
+            anchors.top: parent.top
+        }
+    }
+
+    Rectangle {
         id: subheader
         height: 59.25
         color: "white"
@@ -104,20 +118,6 @@ Rectangle {
             onClicked: {
                 playHead.leftOffset = mouse.x
             }
-        }
-    }
-
-    Rectangle {
-        id: pianoContainer
-        width: 63
-        anchors.top: subheader.bottom
-        anchors.left: parent.left
-        anchors.bottom: lyrics.top
-
-        Piano {
-            anchors.left: parent.left
-            anchors.bottom: parent.bottom
-            anchors.top: parent.top
         }
     }
 
