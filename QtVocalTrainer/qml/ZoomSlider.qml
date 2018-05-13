@@ -95,11 +95,6 @@ Rectangle {
                 maximumX: line.width + parent.minimumX - 1.5
                 axis: Drag.XAxis
             }
-
-            drag.onMaximumXChanged: {
-                console.log("line.width = " + line.width)
-                console.log("maximumX = " + drag.maximumX)
-            }
         }
     }
 }

@@ -20,7 +20,7 @@ Canvas {
     readonly property real pitchRadius: 3
     readonly property real sharpPitchRadius: 1.5
     readonly property real distanceBetweenTextLeftAndPitchRight: 21.0
-    readonly property string borderColor: "#9A98D0"
+    readonly property string borderColor: "#7f9A98D0"
     readonly property string sharpPitchColor: "#9A98D0"
     readonly property var pitchNames: ["C", "D", "E", "F", "G", "A", "B"]
     readonly property real intervalOctvaHeightToPianoOctaveHeightRelation: (function() {
