@@ -53,5 +53,7 @@
         <file>qml/ZoomSlider.qml</file>
         <file>qml/Circle.qml</file>
         <file>qml/Header.qml</file>
+        <file>qml/TrackVolumeSlider.qml</file>
+        <file>qml/TracksContainer.qml</file>
     </qresource>
 </RCC>

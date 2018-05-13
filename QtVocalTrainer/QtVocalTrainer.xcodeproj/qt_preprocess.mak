@@ -48,6 +48,7 @@ qrc_qml.cpp: qml.qrc \
 		qml/VerticalLine.qml \
 		qml/Zoom.qml \
 		qml/ZoomSlider.qml \
+		qml/TrackVolumeSlider.qml \
 		qml/Tempo.qml \
 		qml/main.qml \
 		qml/Piano.qml \
@@ -57,6 +58,7 @@ qrc_qml.cpp: qml.qrc \
 		qml/Player.qml \
 		qml/VerticalScrollBar.qml \
 		qml/Circle.qml \
+		qml/TracksContainer.qml \
 		qml/js/strings.js \
 		qml/js/uiutils.js \
 		qml/js/canvasutils.js \

@@ -96,62 +96,14 @@ Rectangle {
         anchors.bottom: tracksContainer.top
     }
 
-    Rectangle {
+    TracksContainer {
         id: tracksContainer
+        volumeContainerWidth: pianoContainer.width
         visible: header.tracksShowButton.state === "on"
-        color: "#00000000"
-        height: header.tracksShowButton.state === "on" ? 111 : 0
+        height: header.tracksShowButton.state === "on" ? 100 : 0
         anchors.right: verticalScroll.left
         anchors.left: parent.left
         anchors.bottom: pianoContainer.bottom
-
-        Rectangle {
-            id: leftRect
-            color: "white"
-            height: parent.height
-            width: pianoContainer.width
-            anchors.left: parent.left
-        }
-
-        DropShadow {
-            anchors.fill: vocal
-
-            horizontalOffset: 0
-            verticalOffset: 0
-            radius: 30.0
-            color: "#DDDBEE"
-            source: vocal
-        }
-
-        Rectangle {
-            id: vocal
-            color: "#D2D0DD"
-            anchors.bottom: instrumental.top
-            anchors.bottomMargin: 12.75
-            height: 30
-            anchors.left: leftRect.right
-            anchors.right: parent.right
-
-            Rectangle {
-                color: "white"
-                height: parent.height
-                anchors.left: parent.left
-                width: 25.5
-            }
-
-            TrackButton {
-                width: 67.5
-                text: "Vocal track"
-            }
-        }
-
-        Track {
-            id: instrumental
-            anchors.left: leftRect.right
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: horizontalScroll.height + 14.25
-            anchors.right: parent.right
-        }
     }
 
     VerticalScrollBar {
@@ -209,6 +161,7 @@ Rectangle {
         HorizontalLine {
             width: parent.width
             anchors.top: parent.top
+            opacity: 0.6
         }
 
         Text {
