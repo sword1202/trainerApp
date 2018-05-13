@@ -78,6 +78,7 @@ Rectangle {
             zoom: zoom
             anchors.left: parent.left
             anchors.bottom: parent.bottom
+            anchors.bottomMargin: distanceBetweenPitches * intervalOctvaHeightToPianoOctaveHeightRelation
             anchors.top: parent.top
         }
     }
