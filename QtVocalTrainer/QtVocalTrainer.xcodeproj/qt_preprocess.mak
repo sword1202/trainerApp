@@ -42,6 +42,7 @@ qrc_qml.cpp: qml.qrc \
 		qml/Yardstick.qml \
 		qml/ImageButton.qml \
 		qml/ToggleButton.qml \
+		qml/Header.qml \
 		qml/HorizontalLine.qml \
 		qml/HorizontalScrollBar.qml \
 		qml/VerticalLine.qml \

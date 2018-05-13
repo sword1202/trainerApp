@@ -52,5 +52,6 @@
         <file>qml/js/canvasutils.js</file>
         <file>qml/ZoomSlider.qml</file>
         <file>qml/Circle.qml</file>
+        <file>qml/Header.qml</file>
     </qresource>
 </RCC>

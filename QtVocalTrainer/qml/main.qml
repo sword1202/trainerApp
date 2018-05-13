@@ -23,48 +23,8 @@ Rectangle {
         id: zoom
     }
 
-    Rectangle {
+    Header {
         id: header
-        height: 75
-        width: parent.width
-        color: "#c5cef8"
-
-        FeaturesToggleButton {
-            id: lyricsShowButton
-            onImage: "images/lyrics_show_button_on.svg"
-            offImage: "images/lyrics_show_button_off.svg"
-
-            anchors.left: parent.left
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.leftMargin: 23.25
-        }
-
-        FeaturesToggleButton {
-            id: tracksShowButton
-            onImage: "images/tracks_show_button_on.svg"
-            offImage: "images/tracks_show_button_off.svg"
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.left: lyricsShowButton.right
-            anchors.leftMargin: 4
-        }
-
-        FeaturesToggleButton {
-            onImage: "images/metronome_on.svg"
-            offImage: "images/metronome_off.svg"
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.left: tracksShowButton.right
-            anchors.leftMargin: 4
-        }
-
-        Player {
-            anchors.centerIn: parent
-        }
-
-        Tempo {
-            anchors.right: parent.right
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.rightMargin: 23.25
-        }
     }
 
     Rectangle {
@@ -138,9 +98,9 @@ Rectangle {
 
     Rectangle {
         id: tracksContainer
-        visible: tracksShowButton.state === "on"
+        visible: header.tracksShowButton.state === "on"
         color: "#00000000"
-        height: tracksShowButton.state === "on" ? 111 : 0
+        height: header.tracksShowButton.state === "on" ? 111 : 0
         anchors.right: verticalScroll.left
         anchors.left: parent.left
         anchors.bottom: pianoContainer.bottom
@@ -243,8 +203,8 @@ Rectangle {
         id: lyrics
         width: parent.width
         anchors.bottom: parent.bottom
-        height: lyricsShowButton.state === "on" ? 53.25 : 0
-        visible: lyricsShowButton.state === "on"
+        height: header.lyricsShowButton.state === "on" ? 53.25 : 0
+        visible: header.lyricsShowButton.state === "on"
 
         HorizontalLine {
             width: parent.width
