@@ -47,5 +47,7 @@
         <file>qml/VerticalLine.qml</file>
         <file>qml/HorizontalLine.qml</file>
         <file>qml/TrackButton.qml</file>
+        <file>qml/Piano.qml</file>
+        <file>qml/js/canvasutils.js</file>
     </qresource>
 </RCC>

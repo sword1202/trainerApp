@@ -94,7 +94,7 @@ Rectangle {
         id: workspace
         zoom: zoom
         anchors.top: subheader.bottom
-        anchors.left: piano.right
+        anchors.left: pianoContainer.right
         anchors.leftMargin: 0
         anchors.bottom: horizontalScroll.top
         anchors.right: verticalScroll.right
@@ -108,12 +108,17 @@ Rectangle {
     }
 
     Rectangle {
-        id: piano
+        id: pianoContainer
         width: 63
         anchors.top: subheader.bottom
         anchors.left: parent.left
         anchors.bottom: lyrics.top
-        color: "#eeeeee"
+
+        Piano {
+            anchors.left: parent.left
+            anchors.bottom: parent.bottom
+            anchors.top: parent.top
+        }
     }
 
     HorizontalLine {
@@ -128,13 +133,13 @@ Rectangle {
         height: tracksShowButton.state === "on" ? 111 : 0
         anchors.right: verticalScroll.left
         anchors.left: parent.left
-        anchors.bottom: piano.bottom
+        anchors.bottom: pianoContainer.bottom
 
         Rectangle {
             id: leftRect
             color: "white"
             height: parent.height
-            width: piano.width
+            width: pianoContainer.width
             anchors.left: parent.left
         }
 
@@ -214,7 +219,7 @@ Rectangle {
         id: horizontalScroll
         pageSize: 0.3
         anchors.bottom: lyrics.top
-        anchors.left: piano.right
+        anchors.left: pianoContainer.right
         anchors.right: parent.right
     }
 

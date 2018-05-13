@@ -48,6 +48,7 @@ qrc_qml.cpp: qml.qrc \
 		qml/Zoom.qml \
 		qml/Tempo.qml \
 		qml/main.qml \
+		qml/Piano.qml \
 		qml/Workspace.qml \
 		qml/FeaturesToggleButton.qml \
 		qml/Track.qml \
@@ -55,6 +56,7 @@ qrc_qml.cpp: qml.qrc \
 		qml/VerticalScrollBar.qml \
 		qml/js/strings.js \
 		qml/js/uiutils.js \
+		qml/js/canvasutils.js \
 		qml/images/to_the_begining_hover.svg \
 		qml/images/play_head_triangle.svg \
 		qml/images/track_piece_small.png \
