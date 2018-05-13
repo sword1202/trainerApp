@@ -17,6 +17,19 @@ Item {
         color: "#DBDCE5"
     }
 
+    MouseArea {
+        anchors.fill: parent
+
+        onClicked: {
+            var y = mouse.y
+            if (y > maxY) {
+                y = maxY
+            }
+
+            circle.y = y
+        }
+    }
+
     DropShadow {
         source: circle
         anchors.fill: circle
