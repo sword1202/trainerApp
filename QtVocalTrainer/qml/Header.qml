@@ -1,6 +1,8 @@
 import QtQuick 2.0
 
 Rectangle {
+    property alias playHead2: player.playHead2
+
     property alias tracksShowButton: tracksShowButton
     property alias lyricsShowButton: lyricsShowButton
 
@@ -39,6 +41,7 @@ Rectangle {
     }
 
     Player {
+        id: player
         anchors.centerIn: parent
     }
 

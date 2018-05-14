@@ -25,6 +25,7 @@ Rectangle {
 
     Header {
         id: header
+        playHead2: playHead2
     }
 
     Rectangle {
@@ -138,6 +139,56 @@ Rectangle {
         height: 11.25
         anchors.verticalCenter: playHead.top
         anchors.horizontalCenter: playHead.horizontalCenter
+
+        source: "images/play_head_triangle.svg"
+    }
+
+    Rectangle {
+        property real leftOffset: zoom.getIntervalWidth() * 8
+
+        id: playHead2
+        color: "#24232d"
+        width: 1
+        anchors.left: workspace.left
+        anchors.bottom: workspace.bottom
+        anchors.top: workspace.top
+        anchors.leftMargin: leftOffset
+        height: workspace.height
+
+        states: [
+            State {
+                name: "on"
+                PropertyChanges {
+                    target: playHead2
+                    visible: true
+                }
+
+                PropertyChanges {
+                    target: playHeadTriangle2
+                    visible: true
+                }
+            },
+            State {
+                name: "off"
+                PropertyChanges {
+                    target: playHead2
+                    visible: false
+                }
+
+                PropertyChanges {
+                    target: playHeadTriangle2
+                    visible: false
+                }
+            }
+        ]
+    }
+
+    SvgImage {
+        id: playHeadTriangle2
+        width: 11.25
+        height: 11.25
+        anchors.verticalCenter: playHead2.top
+        anchors.horizontalCenter: playHead2.horizontalCenter
 
         source: "images/play_head_triangle.svg"
     }

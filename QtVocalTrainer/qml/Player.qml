@@ -2,6 +2,8 @@ import QtQuick 2.0
 import QtGraphicalEffects 1.0
 
 Item {
+    property var playHead2
+
     width: 266.5
     height: 45
 
@@ -24,6 +26,10 @@ Item {
 
         onImage: "images/loop_on.svg"
         offImage: "images/loop_off.svg"
+
+        onStateChanged: {
+            playHead2.state = state
+        }
     }
 
     ImageButton {
