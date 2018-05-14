@@ -31,8 +31,18 @@ VxFileAudioDataGenerator::VxFileAudioDataGenerator(PitchRenderer *renderer, cons
     double durationInSeconds = vxFile.getDurationInSeconds();
     int pcmDataSize = (int)ceil(durationInSeconds * sampleRate);
     pcmData.assign(pcmDataSize, 0);
-    fullyInitializedPcmData.assign(pcmDataSize, 0);
-    pcmHasDataFlag.resize(pcmDataSize, false);
+    publishedPcmData.assign(pcmDataSize, 0);
+    summarizedPcmData.resize(pcmDataSize, 0);
+    divisionFactor.resize(pcmDataSize, 0);
+
+    resetPublishedDataIntervals();
+}
+
+void VxFileAudioDataGenerator::resetPublishedDataIntervals() {
+    publishedDataIntervals.add(interval<int>::right_open(0, vxFile.getDurationInTicks()));
+    for (const auto& pitch : vxFile.getPitches()) {
+        publishedDataIntervals.subtract(interval<int>::right_open(pitch.startTickNumber, pitch.endTickNumber()));
+    }
 }
 
 
@@ -55,12 +65,50 @@ VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile &vxFile, const V
 
 void VxFileAudioDataGenerator::clearAllData() {
     std::fill(begin(pcmData), end(pcmData), 0);
-    std::fill(begin(pcmHasDataFlag), end(pcmHasDataFlag), false);
+    std::fill(begin(summarizedPcmData), end(summarizedPcmData), 0);
+    std::fill(begin(divisionFactor), end(divisionFactor), 0);
     renderedPitchesIndexes.clear();
+    publishedPitchesIndexes.clear();
     BUFFER_LOCK;
-    fullyInitializedDataIntervals.clear();
-    std::fill(begin(fullyInitializedPcmData), end(fullyInitializedPcmData), 0);
-    renderedPitchesCount = 0;
+    publishedDataIntervals.clear();
+    resetPublishedDataIntervals();
+    std::fill(begin(publishedPcmData), end(publishedPcmData), 0);
+}
+
+
+void VxFileAudioDataGenerator::publishPitchIfFullyRendered(int index) {
+    const auto& pitches = vxFile.getPitches();
+    const VxPitch vxPitch = pitches[index];
+
+    std::vector<int> intersectedIndexes = FindIndexes(pitches, [&] (const VxPitch& pitch) {
+        return pitch.intersectsWith(vxPitch);
+    });
+
+    if (std::all_of(intersectedIndexes.begin(), intersectedIndexes.end(), [=] (int index) {
+        return renderedPitchesIndexes.count(index);
+    })) {
+        int first = vxFile.samplesCountFromTicks(vxPitch.startTickNumber, sampleRate);
+        int length = vxFile.samplesCountFromTicks(vxPitch.ticksCount, sampleRate);
+
+        auto iter = begin(pcmData) + first;
+        for (int i = first; i < first + length; ++i) {
+            pcmData[i] = (short)round((double)summarizedPcmData[i] / divisionFactor[i]);
+        }
+
+        {
+            BUFFER_LOCK;
+            publishedDataIntervals.add(interval<int>::right_open(first, first + length));
+            std::copy(iter, iter + length, begin(publishedPcmData) + first);
+        }
+
+        publishedPitchesIndexes.insert(index);
+
+        for (int intersectedIndex : intersectedIndexes) {
+            if (!publishedPitchesIndexes.count(intersectedIndex)) {
+                publishPitchIfFullyRendered(intersectedIndex);
+            }
+        }
+    }
 }
 
 bool VxFileAudioDataGenerator::renderNextPitchIfPossible() {
@@ -79,27 +127,9 @@ bool VxFileAudioDataGenerator::renderNextPitchIfPossible() {
     }
 
     renderPitch(pitch.pitch, first, length);
-    
-    int renderedDataSize = 0;
-    if (pitchToRenderIndex >= pitches.size() - 1) {
-        renderedDataSize = pcmData.size() - first;
-    } else {
-        const VxPitch &nextPitch = pitches[pitchToRenderIndex + 1];
-        renderedDataSize = vxFile.samplesCountFromTicks(nextPitch.startTickNumber, sampleRate) - first;
-    }
-
     renderedPitchesIndexes.insert(pitchToRenderIndex);
 
-    BUFFER_LOCK;
-    // add silence at track start on the beginning
-    if (pitchToRenderIndex == 0) {
-        renderedDataSize += first;
-        first = 0;
-    }
-
-    fullyInitializedDataIntervals.add(interval<int>::right_open(first, first + renderedDataSize));
-    auto iter = begin(pcmData) + first;
-    std::copy(iter, iter + renderedDataSize, begin(fullyInitializedPcmData) + first);
+    publishPitchIfFullyRendered(pitchToRenderIndex);
 
     return true;
 }
@@ -115,12 +145,12 @@ int VxFileAudioDataGenerator::readNextSamplesBatch(short *intoBuffer) {
         seek = this->seek;
     }
 
-    if (!isFullyInitialized(seek, seek + outBufferSize)) {
+    if (!isPublished(seek, seek + outBufferSize)) {
         return -1;
     }
 
     size_t size = std::min(pcmData.size() - seek, (size_t)outBufferSize);
-    auto first = begin(fullyInitializedPcmData) + seek;
+    auto first = begin(publishedPcmData) + seek;
 
     {
         BUFFER_LOCK;
@@ -138,8 +168,13 @@ int VxFileAudioDataGenerator::readNextSamplesBatch(short *intoBuffer) {
     return (int)size;
 }
 
-bool VxFileAudioDataGenerator::isFullyInitialized(int begin, int end) const {
-    return contains(fullyInitializedDataIntervals, interval<int>::right_open(begin, end));
+bool VxFileAudioDataGenerator::isPublished(int begin, int end) const {
+    if (end > pcmData.size()) {
+        end = pcmData.size();
+    }
+
+    BUFFER_LOCK;
+    return contains(publishedDataIntervals, interval<int>::right_open(begin, end));
 }
 
 int VxFileAudioDataGenerator::getNextPitchToRenderIndex() const {
@@ -153,14 +188,17 @@ int VxFileAudioDataGenerator::getNextPitchToRenderIndex() const {
         SEEK_LOCK;
         seekInTicks = vxFile.ticksFromSamplesCount(seek, sampleRate);
     }
-    VxPitch stub;
-    stub.startTickNumber = seekInTicks;
-    auto iter = UpperBoundByKey(pitches, stub, VxFile::startTickNumberKeyProvider) - 1;
-    if (iter == begin(pitches) - 1 || iter->endTickNumber() <= seekInTicks) {
-        iter++;
-    }
 
-    int index = iter - begin(pitches);
+    int index = FindIndex(pitches, [=] (const VxPitch& vxPitch) {
+        return vxPitch.containsTick(seekInTicks);
+    });
+
+    if (index < 0) {
+        VxPitch stub;
+        stub.startTickNumber = seekInTicks;
+        auto iter = UpperBoundByKey(pitches, stub, VxFile::startTickNumberKeyProvider);
+        index = iter - begin(pitches);
+    }
 
     auto i = renderedPitchesIndexes.find(index);
     if (i != renderedPitchesIndexes.end()) {
@@ -178,6 +216,7 @@ int VxFileAudioDataGenerator::getNextPitchToRenderIndex() const {
 }
 
 void VxFileAudioDataGenerator::renderAllData() {
+    assert("Doesn't work" && false);
     std::fill(begin(pcmData), end(pcmData), 0);
 
     const std::vector<VxPitch> &pitches = vxFile.getPitches();
@@ -193,10 +232,9 @@ void VxFileAudioDataGenerator::renderAllData() {
         renderPitch(vxPitch.pitch, begin, length);
     }
 
-    std::fill(begin(pcmHasDataFlag), end(pcmHasDataFlag), true);
     BUFFER_LOCK;
-    fullyInitializedDataIntervals.add(interval<int>::right_open(0, pcmData.size()));
-    fullyInitializedPcmData = pcmData;
+    publishedDataIntervals.add(interval<int>::right_open(0, pcmData.size()));
+    publishedPcmData = pcmData;
 }
 
 void VxFileAudioDataGenerator::renderPitch(const Pitch &pitch, int begin, int length) {
@@ -207,17 +245,9 @@ void VxFileAudioDataGenerator::renderPitch(const Pitch &pitch, int begin, int le
 
     for (int i = 0; i < length; ++i) {
         short value = temp[i];
-        if (pcmHasDataFlag[i + begin]) {
-            int pcmValue = pcmData[i + begin];
-            pcmData[i + begin] = (short)((pcmValue + value) / 2);
-        } else {
-            pcmData[i + begin] = value;
-            pcmHasDataFlag[i + begin] = true;
-        }
+        summarizedPcmData[i + begin] += value;
+        divisionFactor[i + begin]++;
     }
-
-    renderedPitchesCount++;
-    BOOST_ASSERT(renderedPitchesCount <= vxFile.getPitches().size());
 }
 
 int VxFileAudioDataGenerator::getTotalSamplesCount() const {

@@ -17,6 +17,18 @@ int VxPitch::endTickNumber() const {
     return startTickNumber + ticksCount;
 }
 
+bool VxPitch::containsTick(int tick) const {
+    return startTickNumber <= tick && endTickNumber() > tick;
+}
+
+bool VxPitch::intersectsWith(int begin, int end) const {
+    return containsTick(begin) || containsTick(end);
+}
+
+bool VxPitch::intersectsWith(const VxPitch &vxPitch) const {
+    return intersectsWith(vxPitch.startTickNumber, vxPitch.endTickNumber());
+}
+
 VxFile::VxFile(std::vector<VxPitch> &&pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int ticksPerSecond)
         : pitches(std::move(pitches)),
           ticksPerSecond(ticksPerSecond),
@@ -88,8 +100,10 @@ void VxFile::postInit() {
     BOOST_ASSERT(distanceInTicksBetweenLastPitchEndAndTrackEnd >= 0);
     BOOST_ASSERT(validatePitches());
     if (!pitches.empty()) {
-        const VxPitch &lastPitch = pitches.back();
-        durationInTicks = lastPitch.startTickNumber + lastPitch.ticksCount + distanceInTicksBetweenLastPitchEndAndTrackEnd;
+        auto lastPitchIter = MaxByKey(pitches, [] (const VxPitch& vxPitch) {
+            return vxPitch.endTickNumber();
+        });
+        durationInTicks = lastPitchIter->endTickNumber() + distanceInTicksBetweenLastPitchEndAndTrackEnd;
     }
 }
 

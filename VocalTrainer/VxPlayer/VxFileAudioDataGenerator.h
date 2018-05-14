@@ -13,6 +13,7 @@
 #include <set>
 #include <boost/icl/interval_set.hpp>
 #include <mutex>
+#include <unordered_set>
 
 struct VxFileAudioDataGeneratorConfig {
     int sampleRate = 44100;
@@ -26,23 +27,29 @@ class VxFileAudioDataGenerator {
     PitchRenderer* renderer;
     VxFile vxFile;
     std::vector<short> pcmData;
-    std::vector<short> fullyInitializedPcmData;
-    std::vector<char> pcmHasDataFlag;
-    boost::icl::interval_set<int> fullyInitializedDataIntervals;
+    std::vector<int> summarizedPcmData;
+    std::vector<short> divisionFactor;
+    std::vector<short> publishedPcmData;
+    boost::icl::interval_set<int> publishedDataIntervals;
 
     std::set<int> renderedPitchesIndexes;
+    std::unordered_set<int> publishedPitchesIndexes;
+
     int outBufferSize;
     int seek = 0;
     int sampleRate;
-    int renderedPitchesCount = 0;
     mutable std::mutex bufferReadingMutex;
     mutable std::mutex seekMutex;
 
-    bool isFullyInitialized(int begin, int end) const;
+    bool isPublished(int begin, int end) const;
     int getNextPitchToRenderIndex() const;
     void renderPitch(const Pitch &pitch, int begin, int length);
 
     void clearAllData();
+
+    void resetPublishedDataIntervals();
+
+    void publishPitchIfFullyRendered(int index);
 public:
     VxFileAudioDataGenerator(PitchRenderer *renderer, const VxFile &vxFile,
             const VxFileAudioDataGeneratorConfig &config);

@@ -38,6 +38,10 @@ struct VxPitch {
     BOOST_SERIALIZATION_SPLIT_MEMBER()
 
     int endTickNumber() const;
+
+    bool containsTick(int tick) const;
+    bool intersectsWith(int begin, int end) const;
+    bool intersectsWith(const VxPitch& vxPitch) const;
 };
 
 
