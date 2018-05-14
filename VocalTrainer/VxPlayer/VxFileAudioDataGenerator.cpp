@@ -21,7 +21,8 @@ using std::cout;
 
 constexpr double PITCH_EDGE_SMOOTH_FACTOR = 0.07 * 400;
 
-VxFileAudioDataGenerator::VxFileAudioDataGenerator(PitchRenderer *renderer, VxFile &&vxFile, const VxFileAudioDataGeneratorConfig &config)
+VxFileAudioDataGenerator::VxFileAudioDataGenerator(PitchRenderer *renderer, const VxFile &vxFile,
+        const VxFileAudioDataGeneratorConfig &config)
         : renderer(renderer), vxFile(std::move(vxFile)) {
     sampleRate = config.sampleRate;
     outBufferSize = config.outBufferSize;
@@ -35,26 +36,21 @@ VxFileAudioDataGenerator::VxFileAudioDataGenerator(PitchRenderer *renderer, VxFi
 }
 
 
-VxFileAudioDataGenerator::VxFileAudioDataGenerator(PitchRenderer *renderer, VxFile &&vxFile)
-: VxFileAudioDataGenerator(renderer, (VxFile&&)vxFile, VxFileAudioDataGeneratorConfig())
+VxFileAudioDataGenerator::VxFileAudioDataGenerator(PitchRenderer *renderer, const VxFile &vxFile)
+: VxFileAudioDataGenerator(renderer, vxFile, VxFileAudioDataGeneratorConfig())
 {
 
 }
 
 VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile &vxFile)
-    : VxFileAudioDataGenerator(renderer, std::move(VxFile(vxFile)), VxFileAudioDataGeneratorConfig()) {
-
+    : VxFileAudioDataGenerator(vxFile, VxFileAudioDataGeneratorConfig()) {
 }
 
 
-VxFileAudioDataGenerator::VxFileAudioDataGenerator(VxFile &&vxFile, const VxFileAudioDataGeneratorConfig &config) :
-    VxFileAudioDataGenerator(nullptr, (VxFile&&)vxFile, config) {
+VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile &vxFile, const VxFileAudioDataGeneratorConfig &config) :
+    VxFileAudioDataGenerator(nullptr, vxFile, config) {
     int ticksPerSecond = vxFile.getTicksPerSecond();
     renderer = new SoundFont2PitchRenderer(config.sampleRate, PITCH_EDGE_SMOOTH_FACTOR / ticksPerSecond);
-}
-
-VxFileAudioDataGenerator::VxFileAudioDataGenerator(VxFile &&vxFile)  :
-        VxFileAudioDataGenerator(std::move(vxFile), VxFileAudioDataGeneratorConfig()) {
 }
 
 void VxFileAudioDataGenerator::clearAllData() {

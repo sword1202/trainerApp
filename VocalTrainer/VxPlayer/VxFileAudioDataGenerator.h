@@ -44,11 +44,10 @@ class VxFileAudioDataGenerator {
 
     void clearAllData();
 public:
-    VxFileAudioDataGenerator(PitchRenderer *renderer, VxFile &&vxFile,
+    VxFileAudioDataGenerator(PitchRenderer *renderer, const VxFile &vxFile,
             const VxFileAudioDataGeneratorConfig &config);
-    VxFileAudioDataGenerator(PitchRenderer *renderer, VxFile &&vxFile);
-    VxFileAudioDataGenerator(VxFile &&vxFile, const VxFileAudioDataGeneratorConfig &config);
-    VxFileAudioDataGenerator(VxFile &&vxFile);
+    VxFileAudioDataGenerator(PitchRenderer *renderer, const VxFile &vxFile);
+    VxFileAudioDataGenerator(const VxFile &vxFile, const VxFileAudioDataGeneratorConfig &config);
     VxFileAudioDataGenerator(const VxFile &vxFile);
 
     virtual ~VxFileAudioDataGenerator();

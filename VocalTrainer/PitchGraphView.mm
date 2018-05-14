@@ -36,20 +36,20 @@ using namespace CppUtils;
                                    selector:@selector(onTimer:)
                                    userInfo:nil
                                     repeats:YES];
-   // [self testReadFromMidi];
+    [self testReadFromMidi];
 //    const char* path = "/Users/semyon/Desktop/yo.mvx";
 //    std::fstream ee;
 //    _mvxPlayer = new MvxPlayer();
 //    _mvxPlayer->loadFromFile(path);
 //    _mvxPlayer->play(1.0, 0.5);
-    _player = AudioFilePlayer::create("/Users/semyon/Downloads/yo.mp3");
-    _player->setPitchShiftInSemiTones(-1);
-    _player->prepare();
-    _player->setSeek(_player->getTrackDurationInSeconds() / 2.0);
-    _player->play();
-    Executors::ExecuteOnMainThreadAfterDelay([=] {
-        _player->setSeek(10.0);
-        }, 5000);
+//    _player = AudioFilePlayer::create("/Users/semyon/Downloads/yo.mp3");
+//    _player->setPitchShiftInSemiTones(-1);
+//    _player->prepare();
+//    _player->setSeek(_player->getTrackDurationInSeconds() / 2.0);
+//    _player->play();
+//    Executors::ExecuteOnMainThreadAfterDelay([=] {
+//        _player->setSeek(10.0);
+//        }, 5000);
 }
 
 - (void)testReadFromMidi {
