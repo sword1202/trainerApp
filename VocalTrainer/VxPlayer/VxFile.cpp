@@ -22,7 +22,7 @@ bool VxPitch::containsTick(int tick) const {
 }
 
 bool VxPitch::intersectsWith(int begin, int end) const {
-    return containsTick(begin) || containsTick(end);
+    return containsTick(begin) || (startTickNumber < end && endTickNumber() > end);
 }
 
 bool VxPitch::intersectsWith(const VxPitch &vxPitch) const {

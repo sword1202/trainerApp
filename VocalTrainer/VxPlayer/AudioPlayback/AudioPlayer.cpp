@@ -35,7 +35,6 @@ int AudioPlayer::callback(
     const PaSampleFormat format = self->playbackData.format;
     if (readFramesCount < 0) {
         int sampleSize = self->getSampleSize();
-        cout <<"bingo\n";
         memset(outputBuffer, 0, framesPerBuffer * sampleSize);
         return paContinue;
     } else {

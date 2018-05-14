@@ -82,3 +82,58 @@ TEST_CASE("VxFileGenerator test 1") {
     std::fill_n(std::back_inserter(expected), 5, 0);
     REQUIRE(buffer == expected);
 }
+
+TEST_CASE("VxPitch intersection test") {
+    VxPitch a;
+    a.startTickNumber = 0;
+    a.ticksCount = 100;
+    VxPitch b;
+    b.startTickNumber = 100;
+    b.ticksCount = 200;
+
+    REQUIRE(!a.intersectsWith(b));
+    REQUIRE(!b.intersectsWith(a));
+
+    a.startTickNumber = 0;
+    a.ticksCount = 100;
+    b.startTickNumber = 99;
+    b.ticksCount = 200;
+
+    REQUIRE(a.intersectsWith(b));
+    REQUIRE(b.intersectsWith(a));
+
+    a.startTickNumber = 0;
+    a.ticksCount = 100;
+    b.startTickNumber = 0;
+    b.ticksCount = 100;
+
+    REQUIRE(a.intersectsWith(b));
+    REQUIRE(b.intersectsWith(a));
+}
+
+TEST_CASE("VxFileGenerator test 2") {
+    VxFile vxFile(std::vector<VxPitch> {
+        {Pitch::fromPerfectFrequencyIndex(1), 0, 100}, {Pitch::fromPerfectFrequencyIndex(2), 100, 100},
+            {Pitch::fromPerfectFrequencyIndex(3), 200, 100}},
+            0, 100);
+    VxFileAudioDataGeneratorConfig config;
+    config.sampleRate = 100;
+    config.outBufferSize = 100;
+    VxFileAudioDataGenerator generator(new PitchRenderer1(config.sampleRate), vxFile, config);
+
+    std::vector<short> buffer(100);
+
+    REQUIRE(generator.renderNextPitchIfPossible());
+    generator.readNextSamplesBatch(buffer.data());
+    REQUIRE(buffer == std::vector<short>(100, 1));
+
+    REQUIRE(generator.renderNextPitchIfPossible());
+    generator.readNextSamplesBatch(buffer.data());
+    REQUIRE(buffer == std::vector<short>(100, 2));
+
+    REQUIRE(generator.renderNextPitchIfPossible());
+    generator.readNextSamplesBatch(buffer.data());
+    REQUIRE(buffer == std::vector<short>(100, 3));
+
+    REQUIRE(!generator.renderNextPitchIfPossible());
+}

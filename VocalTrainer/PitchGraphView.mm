@@ -67,7 +67,8 @@ using namespace CppUtils;
         a.writeToStream(std::cout);
         std::cout << "\n";
     }
-    const VxFile& vxFile = vxFiles[0];
+
+    VxFile vxFile(std::vector<VxPitch> {{Pitch("C4"), 0, 100}, {Pitch("E4"), 100, 100}, {Pitch("A4"), 200, 100}}, 0, 50);
 
 //    std::vector<char> wavAudioData = vxFile.generateWavAudioData(0.5f);
     _player = new VxFileAudioPlayer(vxFile);
