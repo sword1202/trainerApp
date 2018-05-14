@@ -28,6 +28,21 @@ Rectangle {
         anchors.leftMargin: 45
     }
 
+    Item {
+        anchors.top: vocalVolumeSlider.top
+        anchors.bottom: instrumentalVolumeSlider.bottom
+        anchors.left: parent.left
+        anchors.leftMargin: 16.5
+        width: 16.5
+
+        SvgImage {
+            height: 13.5
+            width: 16.5
+            source: "images/speaker.svg"
+            anchors.verticalCenter: parent.verticalCenter
+        }
+    }
+
     DropShadow {
         anchors.fill: vocal
 

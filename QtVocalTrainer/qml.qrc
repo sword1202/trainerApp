@@ -23,6 +23,7 @@
         <file>qml/images/play_off.svg</file>
         <file>qml/images/tempo_background.svg</file>
         <file>qml/images/play_head_triangle.svg</file>
+        <file>qml/images/speaker.svg</file>
         <file>qml/images/track_piece.png</file>
         <file>qml/images/track_piece_small.png</file>
         <file>qml/images/instrumental_track_button.svg</file>
