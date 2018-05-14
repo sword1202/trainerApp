@@ -56,5 +56,6 @@
         <file>qml/Header.qml</file>
         <file>qml/TrackVolumeSlider.qml</file>
         <file>qml/TracksContainer.qml</file>
+        <file>qml/PlayHeadTime.qml</file>
     </qresource>
 </RCC>

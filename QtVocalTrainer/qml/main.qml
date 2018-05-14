@@ -114,6 +114,11 @@ Rectangle {
         anchors.right: parent.right
     }
 
+    PlayHeadTime {
+        anchors.bottom: playHeadTriangle.top
+        anchors.horizontalCenter: playHeadTriangle.horizontalCenter
+    }
+
     Rectangle {
         property real leftOffset: zoom.getIntervalWidth() * 4
 
