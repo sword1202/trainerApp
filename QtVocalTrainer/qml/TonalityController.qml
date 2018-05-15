@@ -3,6 +3,10 @@ import QtGraphicalEffects 1.0
 import QtQuick.Controls 2.2
 
 Item {
+    property int baseTonality: 0
+    property string tonalityGroup: "maj"
+    readonly property var pitches: ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+
     width: 126.5
     height: 38.25
 
@@ -33,7 +37,20 @@ Item {
             anchors.centerIn: parent
             font.family: "LatoBold"
             font.bold: true
-            text: "C# maj"
+
+            Component.onCompleted: {
+                this.text = Qt.binding(function() {
+                    var index = (baseTonality + parseInt(tonality.text)) % pitches.length;
+                    console.log("index = " + index)
+
+                    if (index < 0) {
+                        index = pitches.length + index
+                    }
+
+                    return pitches[index] + " " + tonalityGroup
+                })
+            }
+
             color: "#615f97"
             font.pointSize: 10.0
             font.letterSpacing: 0
