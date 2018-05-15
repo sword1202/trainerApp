@@ -58,6 +58,12 @@ Item {
             font.bold: true
             font.family: "LatoBold"
             anchors.bottomMargin: 1
+
+            onTextChanged: {
+                if (parseInt(text) > 0 && text[0] !== "+") {
+                    tonality.text = "+" + text;
+                }
+            }
         }
 
         Label {
