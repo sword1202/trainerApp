@@ -2,13 +2,19 @@ import QtQuick 2.7
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import "js/strings.js" as Strings
+import QtGraphicalEffects 1.0
 
 Item {
-    height: 37.5
+    height: 38.25
     width: 52.5
 
-    ButtonShadow {
-        target: svg
+    DropShadow {
+        anchors.fill: svg
+        source: svg
+        color: "#9DA3DC"
+        opacity: 0.8
+        verticalOffset: 1.5
+        radius: 3
     }
 
     SvgImage {

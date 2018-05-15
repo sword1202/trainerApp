@@ -6,10 +6,9 @@ DropShadow {
 
     anchors.fill: target
 
-    horizontalOffset: 0
-    verticalOffset: 2
-    radius: 3.0
-    color: "#9DA3DC"
     source: target
+    color: "#9DA3DC"
     opacity: 0.8
+    verticalOffset: 1.5
+    radius: 3
 }

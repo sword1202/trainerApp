@@ -28,6 +28,9 @@
         <file>qml/images/track_piece_small.png</file>
         <file>qml/images/instrumental_track_button.svg</file>
         <file>qml/images/zoom_slider_triangle.svg</file>
+        <file>qml/images/tonality_controller_left.svg</file>
+        <file>qml/images/tonality_up.svg</file>
+        <file>qml/images/tonality_down.svg</file>
         <file>qml/fonts/Lato-Bold.ttf</file>
         <file>qml/fonts/Lato-Regular.ttf</file>
         <file>qml/main.qml</file>
@@ -57,5 +60,6 @@
         <file>qml/TrackVolumeSlider.qml</file>
         <file>qml/TracksContainer.qml</file>
         <file>qml/PlayHeadTime.qml</file>
+        <file>qml/TonalityController.qml</file>
     </qresource>
 </RCC>

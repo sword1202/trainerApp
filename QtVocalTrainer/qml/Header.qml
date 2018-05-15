@@ -46,8 +46,15 @@ Rectangle {
     }
 
     Tempo {
+        id: tempo
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
         anchors.rightMargin: 23.25
+    }
+
+    TonalityController {
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.right: tempo.left
+        anchors.rightMargin: 3.75
     }
 }
