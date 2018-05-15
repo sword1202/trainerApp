@@ -19,9 +19,9 @@ class QmlPitch : public Pitch
     // f0 - pitch lower bound frequency,
     // fn - pitch actual frequency
     // returns value (-1.0f, 1.0f). Where 0 - perfect frequency
-    Q_PROPERTY(QString distanceToPerfectFrequency READ getDistanceToPerfectFrequency())
+    Q_PROPERTY(float distanceToPerfectFrequency READ getDistanceToPerfectFrequency())
     // returns value (0.0f, 2.0f). Where 1.0 - perfect frequency
-    Q_PROPERTY(QString distanceFromLowerBound READ getDistanceFromLowerBound())
+    Q_PROPERTY(float distanceFromLowerBound READ getDistanceFromLowerBound())
 public:
     QmlPitch(const Pitch& pitch);
     QmlPitch(const QmlPitch& pitch) = default;
