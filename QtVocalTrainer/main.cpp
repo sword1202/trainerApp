@@ -5,6 +5,7 @@
 #include <QScreen>
 #include <QQmlContext>
 #include <iostream>
+#include "qmlpitchinputreader.h"
 
 int main(int argc, char *argv[])
 {
@@ -16,6 +17,10 @@ int main(int argc, char *argv[])
 
     QQmlContext* context = viewer.rootContext();
     context->setContextProperty("cpp", new QmlCppBridge(&viewer));
+
+    qRegisterMetaType<QmlPitch>("Pitch");
+    qmlRegisterType<QmlPitchInputReader>("PitchInputReader", 1, 0, "PitchInputReader");
+
     viewer.setSource(QUrl("qrc:/qml/main.qml"));
 
     viewer.showMaximized();

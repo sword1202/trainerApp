@@ -19,7 +19,14 @@ SOURCES += \
     main.cpp \
     QmlCppBridge.cpp \
     MainWindowShared.cpp \
-    qmlopenglitem.cpp
+    qmlopenglitem.cpp \
+    qmlpitch.cpp \
+    ../PitchDetection/Pitch.cpp \
+    ../PitchDetection/AudoInputReader.cpp \
+    ../PitchDetection/YinPitchDetector.cpp \
+    ../PitchDetection/PitchInputReader.cpp \
+    ../PitchDetection/PitchDetectionSmoothingAudioBuffer.cpp \
+    qmlpitchinputreader.cpp
 
 RESOURCES += qml.qrc
 
@@ -34,11 +41,18 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-LIBS += -framework Foundation -framework AppKit
+LIBS += -framework Foundation -framework AppKit -framework AudioToolbox -framework CoreFoundation
 
 HEADERS += \
     MainWindow.h \
     QmlCppBridge.h \
-    qmlopenglitem.h
+    qmlopenglitem.h \
+    qmlpitch.h \
+    ../PitchDetection/Pitch.h \
+    ../PitchDetection/PitchDetectionSmoothingAudioBuffer.h \
+    ../PitchDetection/YinPitchDetector.h \
+    ../PitchDetection/PitchInputReader.h \
+    ../PitchDetection/AudoInputReader.h \
+    qmlpitchinputreader.h
 
 DISTFILES +=

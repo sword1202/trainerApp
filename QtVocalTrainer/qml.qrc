@@ -63,5 +63,6 @@
         <file>qml/TracksContainer.qml</file>
         <file>qml/PlayHeadTime.qml</file>
         <file>qml/TonalityController.qml</file>
+        <file>qml/SingingProcessManager.qml</file>
     </qresource>
 </RCC>

@@ -1,6 +1,7 @@
 import QtQuick 2.11
 import QtQuick.Window 2.11
 import QtGraphicalEffects 1.0
+import PitchInputReader 1.0
 
 Rectangle {
     id: window
@@ -21,6 +22,18 @@ Rectangle {
 
     Zoom {
         id: zoom
+    }
+
+    PitchInputReader {
+        onPitchDetected: {
+            if (pitch.isValid) {
+                console.log(pitch.name)
+            }
+        }
+    }
+
+    SingingProcessManager {
+        id: singingProcessManager
     }
 
     Header {
