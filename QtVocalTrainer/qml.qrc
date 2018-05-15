@@ -31,6 +31,8 @@
         <file>qml/images/tonality_controller_left.svg</file>
         <file>qml/images/tonality_up.svg</file>
         <file>qml/images/tonality_down.svg</file>
+        <file>qml/images/tonality_up_pressed.svg</file>
+        <file>qml/images/tonality_down_pressed.svg</file>
         <file>qml/fonts/Lato-Bold.ttf</file>
         <file>qml/fonts/Lato-Regular.ttf</file>
         <file>qml/main.qml</file>

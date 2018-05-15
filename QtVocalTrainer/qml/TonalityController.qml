@@ -47,6 +47,8 @@ Item {
         height: parent.height
 
         Text {
+            id: tonality
+
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: tonalityLabel.top
 
@@ -71,19 +73,29 @@ Item {
         }
     }
 
-    SvgImage {
-        source: "images/tonality_up.svg"
+    ImageButton {
         width: 18.75
         height: 18.75
         anchors.right: parent.right
         anchors.top: parent.top
+        idleImage: "images/tonality_up.svg"
+        hoverImage: "images/tonality_up_pressed.svg"
+
+        onClicked: {
+            tonality.text = (parseInt(tonality.text) + 1).toString()
+        }
     }
 
-    SvgImage {
-        source: "images/tonality_down.svg"
+    ImageButton {
         width: 18.75
         height: 18.75
         anchors.right: parent.right
         anchors.bottom: parent.bottom
+        idleImage: "images/tonality_down.svg"
+        hoverImage: "images/tonality_down_pressed.svg"
+
+        onClicked: {
+            tonality.text = (parseInt(tonality.text) - 1).toString()
+        }
     }
 }
