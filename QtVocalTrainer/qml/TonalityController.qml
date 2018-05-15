@@ -41,7 +41,6 @@ Item {
             Component.onCompleted: {
                 this.text = Qt.binding(function() {
                     var index = (baseTonality + parseInt(tonality.text)) % pitches.length;
-                    console.log("index = " + index)
 
                     if (index < 0) {
                         index = pitches.length + index

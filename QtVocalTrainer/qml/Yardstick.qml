@@ -9,10 +9,15 @@ Rectangle {
     height: 13.5
 
     Canvas {
+        id: canvas
         anchors.fill: parent
 
         onPaint: {
             var ctx = getContext("2d")
+
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, 0, width, height);
+
             var dotY = height / 2
 
             var tact = 1;
@@ -34,5 +39,9 @@ Rectangle {
                 }
             })
         }
+    }
+
+    onZoomChanged: {
+        zoom.zoomChanged.connect(canvas.requestPaint)
     }
 }
