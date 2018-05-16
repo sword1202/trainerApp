@@ -5,8 +5,14 @@ import "js/strings.js" as Strings
 import QtGraphicalEffects 1.0
 
 Item {
+    property int tempo: parseInt(tempoText.text)
+
     height: 38.25
     width: 52.5
+
+    onTempoChanged: {
+        tempoText.text = tempo.toString()
+    }
 
     DropShadow {
         anchors.fill: svg
@@ -25,6 +31,8 @@ Item {
     }
 
     TextInput {
+        id: tempoText
+
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: tempoLabel.top
 

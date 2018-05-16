@@ -26,7 +26,9 @@ SOURCES += \
     ../PitchDetection/YinPitchDetector.cpp \
     ../PitchDetection/PitchInputReader.cpp \
     ../PitchDetection/PitchDetectionSmoothingAudioBuffer.cpp \
-    qmlpitchinputreader.cpp
+    qmlpitchinputreader.cpp \
+    ../PitchDetection/CppUtils/TimeUtils.cpp \
+    ../PitchDetection/CppUtils/Executors.mm
 
 RESOURCES += qml.qrc
 
@@ -53,6 +55,10 @@ HEADERS += \
     ../PitchDetection/YinPitchDetector.h \
     ../PitchDetection/PitchInputReader.h \
     ../PitchDetection/AudoInputReader.h \
-    qmlpitchinputreader.h
+    qmlpitchinputreader.h \
+    ../PitchDetection/CppUtils/TimeUtils.h \
+    ../PitchDetection/CppUtils/Executors.h
+
+INCLUDEPATH += ../include
 
 DISTFILES +=

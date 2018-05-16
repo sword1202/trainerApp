@@ -48,5 +48,36 @@ function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
   if (stroke) {
     ctx.stroke();
   }
+}
 
+function drawPitchGraph(ctx, points, color) {
+    var pointsCount = points.length
+    if (pointsCount <= 1) {
+        return;
+    }
+
+    ctx.beginPath()
+    ctx.strokeStyle = color
+    ctx.lineWidth = 1
+    ctx.moveTo(points[0].x, points[0].y)
+
+    for (var i = 1; i < pointsCount; i++) {
+        var point = points[i]
+
+        if (point) {
+            ctx.lineTo(point.x, point.y)
+        } else if(i < pointsCount - 1) {
+            do {
+                point = points[++i]
+            } while(!point && i < pointsCount)
+
+            if (i >= pointsCount) {
+                break
+            }
+
+            ctx.moveTo(point.x, point.y)
+        }
+    }
+
+    ctx.stroke()
 }

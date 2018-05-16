@@ -5,6 +5,7 @@ Rectangle {
 
     property alias tracksShowButton: tracksShowButton
     property alias lyricsShowButton: lyricsShowButton
+    property alias tempo: tempo
 
     id: header
     height: 75

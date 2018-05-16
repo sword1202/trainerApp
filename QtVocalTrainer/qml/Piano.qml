@@ -9,6 +9,11 @@ Canvas {
 
     property var zoom
 
+    property int firstPitchOctave: 2
+    property int firstWhitePitchInOctaveIndex: 1
+
+    property var firstPitch: cpp.whitePitch(firstWhitePitchInOctaveIndex, firstPitchOctave)
+
     readonly property real bigPitchHeight: 25.5
     readonly property real smallPitchHeight: 18.75
     readonly property real sharpPitchHeight: 9.75
@@ -41,7 +46,7 @@ Canvas {
 
         ctx.strokeStyle = borderColor
         ctx.fillStyle = sharpPitchColor
-        var index = 0;
+        var index = firstWhitePitchInOctaveIndex;
         var y = height
         var heightMapLength = heightMap.length
         while (y > -bigPitchHeight) {
@@ -87,7 +92,7 @@ Canvas {
     function updatePitchNames() {
         UiUtils.destroyAllChildern(root)
 
-        var index = 0;
+        var index = firstWhitePitchInOctaveIndex;
         var y = height
         var heightMapLength = heightMap.length
         while (y > -bigPitchHeight) {
@@ -95,7 +100,7 @@ Canvas {
             var pitchHeight = heightMap[indexInMap] * intervalOctvaHeightToPianoOctaveHeightRelation
             var text = pitchNameText.createObject(root, {})
             text.y =  y - pitchHeight / 2 - text.height / 2
-            text.text = pitchNames[indexInMap] + Math.floor(index / heightMapLength)
+            text.text = pitchNames[indexInMap] + (Math.floor(index / heightMapLength) + firstPitchOctave)
             index++
             y -= pitchHeight + distanceBetweenPitches * intervalOctvaHeightToPianoOctaveHeightRelation
         }
@@ -103,6 +108,16 @@ Canvas {
 
     onHeightChanged: {
         updatePitchNames()
+    }
+
+    onFirstPitchOctaveChanged: {
+        updatePitchNames()
+        requestPaint()
+    }
+
+    onFirstWhitePitchInOctaveIndexChanged: {
+        updatePitchNames()
+        requestPaint()
     }
 
     onIntervalOctvaHeightToPianoOctaveHeightRelationChanged: {

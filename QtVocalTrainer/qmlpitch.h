@@ -13,6 +13,7 @@ class QmlPitch : public Pitch
     Q_PROPERTY(int octave READ getOctave())
     Q_PROPERTY(float frequency READ getFrequency())
     Q_PROPERTY(bool isValid READ isValid())
+    Q_PROPERTY(double time READ getTimeInSeconds())
 
     // Calculated using formula: n = log(fn / f0, a), where
     // A = 2**(1/24),
@@ -22,11 +23,16 @@ class QmlPitch : public Pitch
     Q_PROPERTY(float distanceToPerfectFrequency READ getDistanceToPerfectFrequency())
     // returns value (0.0f, 2.0f). Where 1.0 - perfect frequency
     Q_PROPERTY(float distanceFromLowerBound READ getDistanceFromLowerBound())
+
+private:
+    double timeInSeconds;
 public:
-    QmlPitch(const Pitch& pitch);
+    QmlPitch(float frequency, double timeInSeconds);
+    QmlPitch(int perfectFrequencyIndex);
     QmlPitch(const QmlPitch& pitch) = default;
     QmlPitch() = default;
 
+    double getTimeInSeconds() const;
     QString getNameAsQString() const;
 };
 

@@ -196,6 +196,36 @@
 					);
 			};
 		};
+		170DD1A433357ECE918F023E = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils/TimeUtils.cpp";
+			name = "TimeUtils.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		327D328DC0E15513077CA217 = {
+			fileRef = "170DD1A433357ECE918F023E";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		034601E8CF0D0CA27F50C6FE = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils/Executors.mm";
+			name = "Executors.mm";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.objcpp";
+		};
+		181839F3C83B8302D7659F13 = {
+			fileRef = "034601E8CF0D0CA27F50C6FE";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
 		F61C3E706670E1F71F3998D1 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qrc_qml.cpp";
@@ -356,6 +386,20 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
+		76B664FAC83040BA76C57E7F = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils/TimeUtils.h";
+			name = "TimeUtils.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
+		A16C6F86DC56734CED99F476 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils/Executors.h";
+			name = "Executors.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
 		757C4D2CF043B21FE9CC0678 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qml.qrc";
@@ -433,6 +477,8 @@
 				"7E6C4EF13847B0CD0E129C35",
 				"E97D23E58376A80655A7AC0C",
 				"ECB125321253DBBE426CEE41",
+				"170DD1A433357ECE918F023E",
+				"034601E8CF0D0CA27F50C6FE",
 				"AC275522DAB9C3A7B41FD27F",
 				"C613FE9ADA39556AD9540F1E",
 				"1091C7F2ACC81AEE9DF74E74",
@@ -442,7 +488,9 @@
 				"F102E79157CF60B5A25F5F81",
 				"DD7DD3696B4047108034B91D",
 				"C50F8F4621EFDF9B66A93837",
-				"654D24DDBA565FDCA6A13AB9");
+				"654D24DDBA565FDCA6A13AB9",
+				"76B664FAC83040BA76C57E7F",
+				"A16C6F86DC56734CED99F476");
 			name = "Sources";
 			sourceTree = "<group>";
 		};
@@ -487,6 +535,8 @@
 				"EE26DC63E361862F515A9055",
 				"0CDFA05820DBB6123682992E",
 				"BDCD8246510D911A428E9488",
+				"327D328DC0E15513077CA217",
+				"181839F3C83B8302D7659F13",
 				"F3F0C5A9AE1D79D2A4930AEA",
 				"3D30F0B43D9EE5E9EF8F3145",
 				"AE6596E2227260CD02B22B61",
@@ -823,6 +873,7 @@
 				MACOSX_DEPLOYMENT_TARGET = "10.11";
 				HEADER_SEARCH_PATHS = (
 					".",
+					"../include",
 					"../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtGui.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtQml.framework/Headers",
@@ -919,6 +970,7 @@
 				MACOSX_DEPLOYMENT_TARGET = "10.11";
 				HEADER_SEARCH_PATHS = (
 					".",
+					"../include",
 					"../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtGui.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtQml.framework/Headers",

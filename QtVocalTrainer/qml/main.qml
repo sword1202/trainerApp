@@ -25,10 +25,14 @@ Rectangle {
     }
 
     PitchInputReader {
+        id: pitchInputReader
+
+        Component.onCompleted: {
+            start()
+        }
+
         onPitchDetected: {
-            if (pitch.isValid) {
-                console.log(pitch.name)
-            }
+
         }
     }
 
@@ -49,6 +53,7 @@ Rectangle {
         anchors.bottom: horizontalScroll.top
 
         Piano {
+            id: piano
             zoom: zoom
             anchors.left: parent.left
             anchors.bottom: parent.bottom
@@ -91,6 +96,9 @@ Rectangle {
     Workspace {
         id: workspace
         zoom: zoom
+        piano: piano
+        pitchInputReader: pitchInputReader
+        tempo: header.tempo
         anchors.top: subheader.bottom
         anchors.left: pianoContainer.right
         anchors.leftMargin: 0

@@ -1,9 +1,20 @@
 #include "qmlpitch.h"
+QString QmlPitch::getNameAsQString() const {
+    return QString(getFullName().data());
+}
 
-QmlPitch::QmlPitch(const Pitch &pitch) : Pitch(pitch) {
+QmlPitch::QmlPitch(float frequency, double timeInSeconds) : Pitch(frequency),
+                                                            timeInSeconds(timeInSeconds) {
 
 }
 
-QString QmlPitch::getNameAsQString() const {
-    return QString(getName());
+double QmlPitch::getTimeInSeconds() const {
+    return timeInSeconds;
+}
+
+QmlPitch::QmlPitch(int perfectFrequencyIndex) :
+        Pitch(Pitch::fromPerfectFrequencyIndex(perfectFrequencyIndex)),
+        timeInSeconds(-1)
+{
+
 }

@@ -76,10 +76,6 @@ Rectangle {
         anchors.fill: parent
 
         onClicked: {
-            console.log("x = " + this.x)
-            console.log("width = " + this.width)
-            console.log("parentWidth = " + parent.width)
-
             var x = mouse.x
 
             if (x < slider.minimumX) {
