@@ -9,7 +9,7 @@ Item {
     // of the height of the view.
     // orientation can be either Qt.Vertical or Qt.Horizontal
     property real position: 0
-    property real positionIncrement: 0.05
+    property real positionIncrement: 0.01
     property real pageSize
     property real padding: 2.25
     property alias leftScroller: leftScroller
