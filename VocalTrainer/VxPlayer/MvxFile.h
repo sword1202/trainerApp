@@ -28,6 +28,8 @@ public:
 
     MvxFile();
     MvxFile(VxFile &&vxFile, std::string &&instrumental, double beatsPerMinute);
+    MvxFile(const VxFile &vxFile, std::istream& instrumentalStream, double beatsPerMinute);
+    MvxFile(const VxFile &vxFile, const char* instrumentalFile, double beatsPerMinute);
 
     MvxFile(MvxFile&& mvxFile) = default;
     // Preferably use move constructor instead

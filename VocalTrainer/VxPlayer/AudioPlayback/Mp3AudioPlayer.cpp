@@ -112,8 +112,6 @@ void Mp3AudioPlayer::decodingThreadCallback(const PlaybackData& playbackData) {
             }
         }
 
-        std::cout<<"seek = "<<seek<<"\n";
-
         seek += headerOffset;
 
         int samplesCount = mp3dec_decode_frame(&mp3d, (unsigned char*)audioData.data() + seek,

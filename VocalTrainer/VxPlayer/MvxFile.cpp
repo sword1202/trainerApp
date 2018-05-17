@@ -74,3 +74,14 @@ const std::string &MvxFile::getInstrumental() const {
 std::string &MvxFile::getInstrumental() {
     return instrumental;
 }
+
+MvxFile::MvxFile(const VxFile &vxFile, std::istream &instrumentalStream, double beatsPerMinute) :
+        beatsPerMinute(beatsPerMinute), vxFile(vxFile) {
+    instrumental = Strings::StreamToString(instrumentalStream);
+}
+
+MvxFile::MvxFile(const VxFile &vxFile, const char *instrumentalFile, double beatsPerMinute) :
+        beatsPerMinute(beatsPerMinute), vxFile(vxFile) {
+    std::fstream file = Streams::OpenFile(instrumentalFile, std::ios::in | std::ios::binary);
+    instrumental = Strings::StreamToString(file);
+}

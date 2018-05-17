@@ -39,9 +39,11 @@ VxFileAudioDataGenerator::VxFileAudioDataGenerator(PitchRenderer *renderer, cons
 }
 
 void VxFileAudioDataGenerator::resetPublishedDataIntervals() {
-    publishedDataIntervals.add(interval<int>::right_open(0, vxFile.getDurationInTicks()));
+    publishedDataIntervals.add(interval<int>::right_open(0, getFullyFilledPcmDataSize()));
     for (const auto& pitch : vxFile.getPitches()) {
-        publishedDataIntervals.subtract(interval<int>::right_open(pitch.startTickNumber, pitch.endTickNumber()));
+        int start = vxFile.samplesCountFromTicks(pitch.startTickNumber, sampleRate);
+        int end = vxFile.samplesCountFromTicks(pitch.endTickNumber(), sampleRate);
+        publishedDataIntervals.subtract(interval<int>::right_open(start, end));
     }
 }
 
@@ -283,4 +285,8 @@ void VxFileAudioDataGenerator::setVxFile(const VxFile &vxFile) {
 
 const VxFile &VxFileAudioDataGenerator::getVxFile() const {
     return vxFile;
+}
+
+int VxFileAudioDataGenerator::getFullyFilledPcmDataSize() const {
+    return pcmData.size();
 }

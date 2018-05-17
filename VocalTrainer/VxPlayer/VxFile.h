@@ -78,6 +78,8 @@ public:
     void shift(int distance);
     VxFile shifted(int distance);
     bool canBeShifted(int distance) const;
+
+    void removeSilenceSpaceFromBeginning();
 };
 
 #endif //VOCALTRAINER_VXFILE_H

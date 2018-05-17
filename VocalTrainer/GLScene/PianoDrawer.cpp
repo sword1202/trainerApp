@@ -112,13 +112,13 @@ void PianoDrawer::setupPitchSelectorDrawing(const Pitch& pitch) {
     if (pitchInOctaveIndex >= 0) {
         if (Pitch::isWhite(pitchInOctaveIndex)) {
             selectedPitchX2 = -1.0f + PIANO_WIDTH;
-            int whitePitchIndex = Pitch::getWhitePitchInOctaveIndex(pitchInOctaveIndex);
+            int whitePitchIndex = Pitch::getWhitePitchIndexFromInOctaveIndex(pitchInOctaveIndex);
             selectedPitchY1 = whitePitchIndex * DIVIDER_OFFSET - 1.0f;
             selectedPitchY2 = selectedPitchY1 + DIVIDER_OFFSET;
             selectorDrawType = WHITE;
         } else {
             selectedPitchX2 = -1.0f + PIANO_WIDTH * BLACK_WHITE_PIANO_BUTTON_RELATION;
-            int blackPointIndex = Pitch::getBlackPitchInOctaveIndex(pitchInOctaveIndex);
+            int blackPointIndex = Pitch::getWhitePitchIndexFromInOctaveIndex(pitchInOctaveIndex);
 
             const float* blackPoint = BLACK_POINTS[blackPointIndex];
             selectedPitchY1 = blackPoint[0] - 1.0f;

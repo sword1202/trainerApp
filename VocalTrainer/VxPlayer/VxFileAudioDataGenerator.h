@@ -77,6 +77,8 @@ public:
     void setVxFile(const VxFile& vxFile);
 
     const VxFile &getVxFile() const;
+
+    int getFullyFilledPcmDataSize() const;
 };
 
 

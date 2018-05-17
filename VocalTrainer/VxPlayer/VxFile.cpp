@@ -245,3 +245,12 @@ VxFile VxFile::shifted(int distance) {
     copy.shift(distance);
     return copy;
 }
+
+void VxFile::removeSilenceSpaceFromBeginning() {
+    assert(!pitches.empty());
+
+    int firstPitchStartTickNumber = pitches[0].startTickNumber;
+    for (auto& pitch : pitches) {
+        pitch.startTickNumber -= firstPitchStartTickNumber;
+    }
+}

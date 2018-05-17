@@ -39,8 +39,8 @@ using namespace CppUtils;
     [self testReadFromMidi];
 //    const char* path = "/Users/semyon/Desktop/yo.mvx";
 //    std::fstream ee;
-//    _mvxPlayer = new MvxPlayer();
-//    _mvxPlayer->loadFromFile(path);
+//    _mvxPlayer = new MvxPlayer("/Users/semyon/Documents/torero.mvx");
+//    _mvxPlayer->prepare();
 //    _mvxPlayer->play(1.0, 0.5);
 //    _player = AudioFilePlayer::create("/Users/semyon/Downloads/yo.mp3");
 //    _player->setPitchShiftInSemiTones(-1);
@@ -62,15 +62,21 @@ using namespace CppUtils;
             [NSBundle.mainBundle pathForResource:@"melody" ofType:@"mid"].UTF8String,
             &vxFiles,
             &beatsPerMinute);
+    std::cout << "beatsPerMinute = "<<beatsPerMinute<<"\n";
     for (const VxFile& a : vxFiles) {
         std::cout << "Pitches from midi:\n";
         a.writeToStream(std::cout);
         std::cout << "\n";
     }
 
-    VxFile vxFile(std::vector<VxPitch> {{Pitch("C4"), 0, 100}, {Pitch("E4"), 100, 100}, {Pitch("A4"), 200, 100}}, 0, 50);
+//    MvxFile mvxFile(vxFiles[0], "/Users/semyon/Documents/toreromidi.mp3", beatsPerMinute);
+//    mvxFile.writeToFile("/Users/semyon/Documents/torero.mvx");
+
+//    VxFile vxFile(std::vector<VxPitch> {{Pitch("C4"), 0, 100}, {Pitch("E4"), 100, 100}, {Pitch("A4"), 200, 100}}, 0, 50);
 
 //    std::vector<char> wavAudioData = vxFile.generateWavAudioData(0.5f);
+    VxFile vxFile = vxFiles[0];
+    vxFile.removeSilenceSpaceFromBeginning();
     _player = new VxFileAudioPlayer(vxFile);
     _player->prepare();
     _player->play();
@@ -95,7 +101,7 @@ using namespace CppUtils;
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
-    _glSceneDrawer->draw(dirtyRect.size.width, dirtyRect.size.height);
+    //_glSceneDrawer->draw(dirtyRect.size.width, dirtyRect.size.height);
 }
 
 - (void)onWavFileSelected:(NSString *)path {
