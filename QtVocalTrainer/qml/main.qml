@@ -7,6 +7,35 @@ Rectangle {
     id: window
     width: cpp.windowWidth
     height: cpp.windowHeight
+    focus: true
+
+    Keys.onUpPressed: {
+        verticalScroll.upScroller.start()
+    }
+
+    Keys.onDownPressed: {
+        verticalScroll.downScroller.start()
+    }
+
+    Keys.onLeftPressed: {
+        horizontalScroll.leftScroller.start()
+    }
+
+    Keys.onRightPressed: {
+        horizontalScroll.rightScroller.start()
+    }
+
+    Keys.onReleased: {
+        if (event.key === Qt.Key_Up) {
+            verticalScroll.upScroller.stop()
+        } else if (event.key === Qt.Key_Down) {
+            verticalScroll.downScroller.stop()
+        } else if (event.key === Qt.Key_Left) {
+            horizontalScroll.leftScroller.stop()
+        } else if (event.key === Qt.Key_Right) {
+            horizontalScroll.rightScroller.stop()
+        }
+    }
 
     FontLoader {
         id: latoBold

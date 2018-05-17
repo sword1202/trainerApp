@@ -5,8 +5,11 @@ Item {
 
     // position and pageSize are in the range 0.0 - 1.0.  They are relative to the
     property real position: 0
+    property real positionIncrement: 0.01
     property real pageSize
     property real padding: 2.25
+    property alias upScroller: upScroller
+    property alias downScroller: downScroller
 
     width: 11.25
 
@@ -17,8 +20,13 @@ Item {
         color: "#E8E7F0"
     }
 
+    onPositionChanged: {
+        stripe.y = position * mouseArea.drag.maximumY
+    }
+
     // Size the bar to the required size, depending upon the orientation.
     Rectangle {
+        id: stripe
         height: pageSize * parent.height
         anchors.left: parent.left
         anchors.right: parent.right
@@ -42,5 +50,29 @@ Item {
         }
 
         color: "#615F97"
+    }
+
+    Timer {
+        interval: 30
+        id: upScroller
+        triggeredOnStart: true
+        repeat: true
+        onTriggered: {
+            if (position - positionIncrement >= 0) {
+                position -= positionIncrement
+            }
+        }
+    }
+
+    Timer {
+        interval: 30
+        id: downScroller
+        triggeredOnStart: true
+        repeat: true
+        onTriggered: {
+            if (position + positionIncrement <= 1.0) {
+                position += positionIncrement
+            }
+        }
     }
 }

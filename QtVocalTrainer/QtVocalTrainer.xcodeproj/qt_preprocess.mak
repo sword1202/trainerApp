@@ -66,6 +66,7 @@ qrc_qml.cpp: qml.qrc \
 		qml/js/strings.js \
 		qml/js/uiutils.js \
 		qml/js/canvasutils.js \
+		qml/js/mathutils.js \
 		qml/images/to_the_begining_hover.svg \
 		qml/images/play_head_triangle.svg \
 		qml/images/track_piece_small.png \
