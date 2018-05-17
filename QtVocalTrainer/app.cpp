@@ -5,7 +5,7 @@ static const QEvent::Type MainLoopEvent = (QEvent::Type)(QEvent::User + 1);
 class MainLoopCallbackEvent : public QEvent {
 public:
     std::function<void()> callback;
-    MainLoopCallbackEvent(std::function<void()> callback) : QEvent(MainLoopEvent), callback(callback) {
+    MainLoopCallbackEvent(const std::function<void()>& callback) : QEvent(MainLoopEvent), callback(callback) {
     }
 };
 
