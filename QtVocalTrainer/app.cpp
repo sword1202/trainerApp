@@ -1,4 +1,5 @@
 #include "app.h"
+#include "PortAudio.h"
 
 static const QEvent::Type MainLoopEvent = (QEvent::Type)(QEvent::User + 1);
 
@@ -10,7 +11,7 @@ public:
 };
 
 App::App(int argc, char *argv[]) : QGuiApplication(argc, argv) {
-
+    PortAudio::init();
 }
 
 bool App::event(QEvent *event) {
@@ -29,4 +30,8 @@ void App::executeOnMainThread(const std::function<void()> &function) {
 
 App *App::instance() {
     return static_cast<App*>(QCoreApplication::instance());
+}
+
+App::~App() {
+    PortAudio::terminate();
 }

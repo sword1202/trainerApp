@@ -226,6 +226,21 @@
 					);
 			};
 		};
+		E142624B202714FF4B71FF4C = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback/PortAudio.cpp";
+			name = "PortAudio.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		CC18BFD303E6C0458C16B20F = {
+			fileRef = "E142624B202714FF4B71FF4C";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
 		F61C3E706670E1F71F3998D1 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qrc_qml.cpp";
@@ -400,6 +415,13 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
+		A157F05FA8C24B78B605B57C = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback/PortAudio.h";
+			name = "PortAudio.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
 		757C4D2CF043B21FE9CC0678 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qml.qrc";
@@ -479,6 +501,7 @@
 				"ECB125321253DBBE426CEE41",
 				"170DD1A433357ECE918F023E",
 				"DE1588F866E2F8A362D4FA86",
+				"E142624B202714FF4B71FF4C",
 				"AC275522DAB9C3A7B41FD27F",
 				"C613FE9ADA39556AD9540F1E",
 				"1091C7F2ACC81AEE9DF74E74",
@@ -490,7 +513,8 @@
 				"C50F8F4621EFDF9B66A93837",
 				"654D24DDBA565FDCA6A13AB9",
 				"76B664FAC83040BA76C57E7F",
-				"9E78C40084B4C85FE9D0258A");
+				"9E78C40084B4C85FE9D0258A",
+				"A157F05FA8C24B78B605B57C");
 			name = "Sources";
 			sourceTree = "<group>";
 		};
@@ -537,6 +561,7 @@
 				"BDCD8246510D911A428E9488",
 				"327D328DC0E15513077CA217",
 				"42469CE418C42F99BFA4EECE",
+				"CC18BFD303E6C0458C16B20F",
 				"F3F0C5A9AE1D79D2A4930AEA",
 				"3D30F0B43D9EE5E9EF8F3145",
 				"AE6596E2227260CD02B22B61",
@@ -600,6 +625,89 @@
 		};
 		F8B465CE34D8DF87AAE95913 = {
 			fileRef = "4D765E1B1EA6C757220C63E7";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		21F907AB8D19BD779147A085 = {
+			isa = PBXFileReference;
+			name = "AVFoundation.framework";
+			path = "/System/Library/Frameworks/AVFoundation.framework";
+			refType = 0;
+			sourceTree = "<absolute>";
+			lastKnownFileType = "wrapper.framework";
+		};
+		CCA737EE379CDB10CC9A0F23 = {
+			fileRef = "21F907AB8D19BD779147A085";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		186D09F4CB713AD4B8BDD260 = {
+			isa = PBXFileReference;
+			name = "AudioUnit.framework";
+			path = "/System/Library/Frameworks/AudioUnit.framework";
+			refType = 0;
+			sourceTree = "<absolute>";
+			lastKnownFileType = "wrapper.framework";
+		};
+		DAD6F5593C3427F014531342 = {
+			fileRef = "186D09F4CB713AD4B8BDD260";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		9742F24EE18EA44D52824F1E = {
+			isa = PBXFileReference;
+			name = "CoreServices.framework";
+			path = "/System/Library/Frameworks/CoreServices.framework";
+			refType = 0;
+			sourceTree = "<absolute>";
+			lastKnownFileType = "wrapper.framework";
+		};
+		668DDDA0C55405E7FCFD6CA5 = {
+			fileRef = "9742F24EE18EA44D52824F1E";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		9DFF62A901D70814B8A323D4 = {
+			isa = PBXFileReference;
+			name = "Carbon.framework";
+			path = "/System/Library/Frameworks/Carbon.framework";
+			refType = 0;
+			sourceTree = "<absolute>";
+			lastKnownFileType = "wrapper.framework";
+		};
+		F8ED42CF8679BF83227DAFC4 = {
+			fileRef = "9DFF62A901D70814B8A323D4";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		BEF9DFDA6822604126A7E233 = {
+			isa = PBXFileReference;
+			name = "CoreAudio.framework";
+			path = "/System/Library/Frameworks/CoreAudio.framework";
+			refType = 0;
+			sourceTree = "<absolute>";
+			lastKnownFileType = "wrapper.framework";
+		};
+		35A1A39F8EAB37889EB3D397 = {
+			fileRef = "BEF9DFDA6822604126A7E233";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		D2C9E726732F383A23F3DF2A = {
+			isa = PBXFileReference;
+			name = "libportaudio.a";
+			path = "/Users/semyon/Projects/VocalTrainer/libs/Release/libportaudio.a";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		51702CADEF714F084FB14918 = {
+			fileRef = "D2C9E726732F383A23F3DF2A";
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -736,6 +844,12 @@
 				"723F90793B2C195E2CCB2233",
 				"3C44131FDCFEF4396B9EA2BA",
 				"4D765E1B1EA6C757220C63E7",
+				"21F907AB8D19BD779147A085",
+				"186D09F4CB713AD4B8BDD260",
+				"9742F24EE18EA44D52824F1E",
+				"9DFF62A901D70814B8A323D4",
+				"BEF9DFDA6822604126A7E233",
+				"D2C9E726732F383A23F3DF2A",
 				"F0871F9A6453756315FEE1CE",
 				"2B89D6D035434E8732B497FB",
 				"8040D46BE95BDB6D913516F6",
@@ -756,6 +870,12 @@
 				"F2A75ACAC9DF6A3F4E5711E7",
 				"4EB68D0C8182BCE33529C421",
 				"F8B465CE34D8DF87AAE95913",
+				"CCA737EE379CDB10CC9A0F23",
+				"DAD6F5593C3427F014531342",
+				"668DDDA0C55405E7FCFD6CA5",
+				"F8ED42CF8679BF83227DAFC4",
+				"35A1A39F8EAB37889EB3D397",
+				"51702CADEF714F084FB14918",
 				"1AB6D6DB17C494A863582E1F",
 				"82F3259B99B0A4F8603EECB6",
 				"7453F0059F8E88BB12427954",
@@ -874,6 +994,7 @@
 				HEADER_SEARCH_PATHS = (
 					".",
 					"../include",
+					"../VocalTrainer/VxPlayer/AudioPlayback",
 					"../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtGui.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtQml.framework/Headers",
@@ -885,6 +1006,7 @@
 					"../../../Qt/5.11.0/clang_64/mkspecs/macx-clang");
 				LIBRARY_SEARCH_PATHS = (
 					"/System/Library/Frameworks/",
+					"/Users/semyon/Projects/VocalTrainer/libs/Release",
 					"/Users/semyon/Qt/5.11.0/clang_64/lib");
 				FRAMEWORK_SEARCH_PATHS = (
 					"/Users/semyon/Qt/5.11.0/clang_64/lib",
@@ -971,6 +1093,7 @@
 				HEADER_SEARCH_PATHS = (
 					".",
 					"../include",
+					"../VocalTrainer/VxPlayer/AudioPlayback",
 					"../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtGui.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtQml.framework/Headers",
@@ -982,6 +1105,7 @@
 					"../../../Qt/5.11.0/clang_64/mkspecs/macx-clang");
 				LIBRARY_SEARCH_PATHS = (
 					"/System/Library/Frameworks/",
+					"/Users/semyon/Projects/VocalTrainer/libs/Release",
 					"/Users/semyon/Qt/5.11.0/clang_64/lib");
 				FRAMEWORK_SEARCH_PATHS = (
 					"/Users/semyon/Qt/5.11.0/clang_64/lib",

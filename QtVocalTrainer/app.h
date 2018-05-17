@@ -9,6 +9,7 @@ class App : public QGuiApplication
 public:
     App(int argc, char *argv[]);
     void executeOnMainThread(const std::function<void()>& callback);
+    ~App();
 
     static App* instance();
 

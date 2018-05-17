@@ -28,7 +28,8 @@ SOURCES += \
     ../PitchDetection/PitchDetectionSmoothingAudioBuffer.cpp \
     qmlpitchinputreader.cpp \
     ../PitchDetection/CppUtils/TimeUtils.cpp \
-    app.cpp
+    app.cpp \
+    ../VocalTrainer/VxPlayer/AudioPlayback/PortAudio.cpp
 
 RESOURCES += qml.qrc
 
@@ -43,7 +44,13 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-LIBS += -framework Foundation -framework AppKit -framework AudioToolbox -framework CoreFoundation
+
+macx {
+    LIBS += -framework Foundation -framework AppKit -framework AudioToolbox \
+        -framework CoreFoundation -framework AVFoundation -framework AudioUnit \
+        -framework CoreServices -framework Carbon -framework CoreAudio
+}
+LIBS += ../libs/Release/libportaudio.a
 
 HEADERS += \
     MainWindow.h \
@@ -57,8 +64,10 @@ HEADERS += \
     ../PitchDetection/AudoInputReader.h \
     qmlpitchinputreader.h \
     ../PitchDetection/CppUtils/TimeUtils.h \
-    app.h
+    app.h \
+    ../VocalTrainer/VxPlayer/AudioPlayback/PortAudio.h
 
-INCLUDEPATH += ../include
+INCLUDEPATH += ../include \
+    ../VocalTrainer/VxPlayer/AudioPlayback
 
 DISTFILES +=
