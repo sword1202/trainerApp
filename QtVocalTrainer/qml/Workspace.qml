@@ -6,6 +6,7 @@ Rectangle {
     id: root
     property var piano
     property var verticalScroll
+    property var horizontalScroll
 
     property var pitchInputReader
     property var tempo
@@ -21,10 +22,8 @@ Rectangle {
     }
 
     onVerticalScrollChanged: {
-        verticalScroll.positionChanged.connect(function() {
-            //console.log("position = " + verticalScroll.position)
-            grid.requestPaint()
-        })
+        verticalScroll.positionChanged.connect(grid.requestPaint)
+        horizontalScroll.positionChanged.connect(grid.requestPaint)
     }
 
     Canvas {
@@ -40,6 +39,7 @@ Rectangle {
             ctx.fillRect(0, 0, width, height)
 
             var verticalOffset = height - verticalScroll.position * height
+            var horizontalOffset = horizontalScroll.position * width
 
             zoom.iterateIntervals(root, {
                 beatsIterator: function(x, isBeat) {
@@ -58,7 +58,8 @@ Rectangle {
                     ctx.strokeStyle = isOctaveBegin ? accentGridColor : gridColor;
                     ctx.stroke();
                 },
-                verticalOffset: verticalOffset
+                verticalOffset: verticalOffset,
+                horizontalOffset: horizontalOffset
             });
         }
     }

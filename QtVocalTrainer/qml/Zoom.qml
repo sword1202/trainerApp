@@ -21,8 +21,10 @@ Item {
     function iterateIntervals(target,args) {
         var intervalWidth = getIntervalWidth();
 
+        var horizontalOffset = args.horizontalOffset || 0
+        console.log("horizontalOffset = " + horizontalOffset)
         // draw beats and tacts
-        for (var x = intervalWidth, index = 1; x < target.width; x += intervalWidth, index++) {
+        for (var x = intervalWidth - horizontalOffset, index = 1; x < target.width + horizontalOffset; x += intervalWidth, index++) {
             args.beatsIterator(x, index % 4 != 0);
         }
 
