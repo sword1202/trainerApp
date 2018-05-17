@@ -1,5 +1,5 @@
 #include "app.h"
-#include "PortAudio.h"
+#include "../PitchDetection/PortAudio.h"
 
 static const QEvent::Type MainLoopEvent = (QEvent::Type)(QEvent::User + 1);
 
