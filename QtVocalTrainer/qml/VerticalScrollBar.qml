@@ -58,6 +58,8 @@ Item {
         onTriggered: {
             if (position - positionIncrement >= 0) {
                 position -= positionIncrement
+            } else {
+                position = 0
             }
         }
     }
@@ -70,6 +72,8 @@ Item {
         onTriggered: {
             if (position + positionIncrement <= 1.0) {
                 position += positionIncrement
+            } else {
+                position = 1.0
             }
         }
     }
