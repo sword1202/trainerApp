@@ -13,7 +13,6 @@ Item {
 
     width: 11.25
 
-    // A light, semi-transparent background
     Rectangle {
         id: background
         anchors.fill: parent
@@ -24,7 +23,6 @@ Item {
         stripe.y = position * mouseArea.drag.maximumY
     }
 
-    // Size the bar to the required size, depending upon the orientation.
     Rectangle {
         id: stripe
         height: pageSize * parent.height
