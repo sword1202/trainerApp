@@ -6,12 +6,13 @@
 #include <QQmlContext>
 #include <iostream>
 #include "qmlpitchinputreader.h"
+#include "App.h"
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    App::setAttribute(Qt::AA_EnableHighDpiScaling);
 
-    QGuiApplication app(argc, argv);
+    App app(argc, argv);
 
     MainWindow viewer;
 
@@ -24,6 +25,6 @@ int main(int argc, char *argv[])
     viewer.setSource(QUrl("qrc:/qml/main.qml"));
 
     viewer.showMaximized();
-    
+
     return app.exec();
 }

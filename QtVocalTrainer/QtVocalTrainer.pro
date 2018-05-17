@@ -28,7 +28,7 @@ SOURCES += \
     ../PitchDetection/PitchDetectionSmoothingAudioBuffer.cpp \
     qmlpitchinputreader.cpp \
     ../PitchDetection/CppUtils/TimeUtils.cpp \
-    ../PitchDetection/CppUtils/Executors.mm
+    app.cpp
 
 RESOURCES += qml.qrc
 
@@ -57,7 +57,7 @@ HEADERS += \
     ../PitchDetection/AudoInputReader.h \
     qmlpitchinputreader.h \
     ../PitchDetection/CppUtils/TimeUtils.h \
-    ../PitchDetection/CppUtils/Executors.h
+    app.h
 
 INCLUDEPATH += ../include
 
