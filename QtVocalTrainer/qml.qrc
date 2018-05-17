@@ -64,5 +64,6 @@
         <file>qml/PlayHeadTime.qml</file>
         <file>qml/TonalityController.qml</file>
         <file>qml/SingingProcessManager.qml</file>
+        <file>qml/js/mathutils.js</file>
     </qresource>
 </RCC>

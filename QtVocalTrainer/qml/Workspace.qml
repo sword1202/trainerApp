@@ -1,9 +1,11 @@
 import QtQuick 2.0
 import "js/canvasutils.js" as CanvasUtils
+import "js/mathutils.js" as MathUtils
 
 Rectangle {
     id: root
     property var piano
+    property var verticalScroll
 
     property var pitchInputReader
     property var tempo
@@ -18,14 +20,26 @@ Rectangle {
         zoom.zoomChanged.connect(grid.requestPaint)
     }
 
+    onVerticalScrollChanged: {
+        verticalScroll.positionChanged.connect(function() {
+            //console.log("position = " + verticalScroll.position)
+            grid.requestPaint()
+        })
+    }
+
     Canvas {
         id: grid
-        anchors.fill: parent
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        height: parent.height
 
         onPaint: {
             var ctx = getContext("2d")
             ctx.fillStyle = "white"
             ctx.fillRect(0, 0, width, height)
+
+            var verticalOffset = height - verticalScroll.position * height
 
             zoom.iterateIntervals(root, {
                 beatsIterator: function(x, isBeat) {
@@ -43,7 +57,8 @@ Rectangle {
                     ctx.lineTo(width, y);
                     ctx.strokeStyle = isOctaveBegin ? accentGridColor : gridColor;
                     ctx.stroke();
-                }
+                },
+                verticalOffset: verticalOffset
             });
         }
     }

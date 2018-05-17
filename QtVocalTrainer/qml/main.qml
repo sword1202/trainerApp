@@ -99,6 +99,7 @@ Rectangle {
         piano: piano
         pitchInputReader: pitchInputReader
         tempo: header.tempo
+        verticalScroll: verticalScroll
         anchors.top: subheader.bottom
         anchors.left: pianoContainer.right
         anchors.leftMargin: 0

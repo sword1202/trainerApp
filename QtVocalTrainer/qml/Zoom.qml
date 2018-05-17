@@ -27,9 +27,10 @@ Item {
         }
 
         if (args.verticalIterator) {
+            var verticalOffset = args.verticalOffset || 0
             var intervalHeight = intervalWidth / verticalToHoriznotalGridIntervalRelation;
             index = 1;
-            for (var y = intervalHeight; y < target.height; y += intervalHeight, index++) {
+            for (var y = intervalHeight  - verticalOffset; y < target.height + verticalOffset; y += intervalHeight, index++) {
                 args.verticalIterator(target.height - y, index % 12 == 0);
             }
         }
