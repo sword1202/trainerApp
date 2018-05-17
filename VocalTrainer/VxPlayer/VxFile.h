@@ -33,14 +33,19 @@ class VxFile {
     friend class boost::serialization::access;
 
     template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
+    void save(Archive & ar, const unsigned int version) const {
         ar & ticksPerSecond;
         ar & pitches;
         ar & distanceInTicksBetweenLastPitchEndAndTrackEnd;
-
-        ar & boost::serialization::make_array(lyrics.data(), lyrics.size());
     }
+    template<class Archive>
+    void load(Archive & ar, const unsigned int version) {
+        ar & ticksPerSecond;
+        ar & pitches;
+        ar & distanceInTicksBetweenLastPitchEndAndTrackEnd;
+        postInit();
+    }
+    BOOST_SERIALIZATION_SPLIT_MEMBER()
 
 public:
     VxFile();
