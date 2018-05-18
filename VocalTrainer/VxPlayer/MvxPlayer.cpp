@@ -104,7 +104,7 @@ void MvxPlayer::setPianoVolume(float pianoVolume) {
 }
 
 MvxPlayer::~MvxPlayer() {
-    vxPlayer->destroy();
+    vxPlayer->destroy(nullptr);
     vxPlayer = nullptr;
     instrumentalPlayer->destroy();
     instrumentalPlayer = nullptr;

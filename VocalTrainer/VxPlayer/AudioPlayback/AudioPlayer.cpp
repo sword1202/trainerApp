@@ -62,7 +62,7 @@ int AudioPlayer::callback(
             }
         }
 
-        Executors::ExecuteOnMainThread([self]{
+        Executors::ExecuteOnMainThread([=]{
             self->onDataSentToOutputListeners.executeAll(outputBuffer, readFramesCount);
         });
 

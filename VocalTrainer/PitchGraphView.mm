@@ -41,7 +41,7 @@ using namespace CppUtils;
 //    std::fstream ee;
     _mvxPlayer = new MvxPlayer("/Users/semyon/Documents/torero.mvx");
     _mvxPlayer->prepare();
-    _mvxPlayer->play(1.0, 0.5);
+    _mvxPlayer->play();
 //    _player = AudioFilePlayer::create("/Users/semyon/Downloads/yo.mp3");
 //    _player->setPitchShiftInSemiTones(-1);
 //    _player->prepare();
