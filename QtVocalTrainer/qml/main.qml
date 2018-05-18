@@ -114,6 +114,24 @@ Rectangle {
         }
     }
 
+    Rectangle {
+        anchors.bottom: yardstick.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: header.bottom
+
+        Text {
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: parent.left
+            anchors.leftMargin: 22.5
+            text: "The Beatles - Yesterday"
+            color: "#24232D"
+            font.family: "LatoBold"
+            font.bold: true
+            font.pointSize: 13.5
+        }
+    }
+
     Yardstick {
         id: yardstick
         zoom: zoom
