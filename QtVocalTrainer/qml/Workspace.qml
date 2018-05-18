@@ -67,6 +67,7 @@ Rectangle {
     Canvas {
         id: pitchGraph
         renderStrategy: Canvas.Cooperative
+        renderTarget: Canvas.FramebufferObject
         height: parent.height
         width: zoom.getIntervalWidth() * 4;
 
