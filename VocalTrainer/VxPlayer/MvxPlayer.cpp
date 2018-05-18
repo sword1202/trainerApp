@@ -8,8 +8,7 @@
 #include "AudioFilePlayer.h"
 #include "VxFileAudioPlayer.h"
 #include "MvxFile.h"
-
-constexpr float MAX_PIANO_VOLUME = 1.0f;
+#include "Primitives.h"
 
 using namespace CppUtils;
 
@@ -21,6 +20,47 @@ void MvxPlayer::init(std::istream &is) {
     MvxFile file = MvxFile::readFromStream(is);
     instrumentalPlayer = AudioFilePlayer::create(std::move(file.getInstrumental()));
     vxPlayer = new VxFileAudioPlayer(std::move(file.getVxFile()));
+
+    // prevent desynchronization, when some of players have no data ready for playback
+    setupVxPlayerDesyncHandler();
+    setupInstrumentalPlayerDesyncHandler();
+
+    instrumentalPlayer->addSeekChangedListener([=](double seek, double) {
+        if (bounds) {
+            if (seek >= bounds->getEndSeek()) {
+                pause();
+                this->seek(seek);
+            }
+        }
+
+        return DONT_DELETE_LISTENER;
+    });
+}
+
+void MvxPlayer::setupInstrumentalPlayerDesyncHandler() const {
+    instrumentalPlayer->addOnNoDataAvailableListener([=] {
+        vxPlayer->pause();
+        instrumentalPlayer->addOnDataSentToOutputListener([=] (void*, int) {
+            vxPlayer->play(instrumentalPlayer->getSeek());
+            setupInstrumentalPlayerDesyncHandler();
+            return DELETE_LISTENER;
+        });
+
+        return DELETE_LISTENER;
+    });
+}
+
+void MvxPlayer::setupVxPlayerDesyncHandler() const {
+    vxPlayer->addOnNoDataAvailableListener([=] {
+        instrumentalPlayer->pause();
+        vxPlayer->addOnDataSentToOutputListener([=] (void*, int) {
+            instrumentalPlayer->play(vxPlayer->getSeek());
+            setupVxPlayerDesyncHandler();
+            return DELETE_LISTENER;
+        });
+
+        return DELETE_LISTENER;
+    });
 }
 
 MvxPlayer::MvxPlayer(const char *filePath) {
@@ -28,24 +68,29 @@ MvxPlayer::MvxPlayer(const char *filePath) {
     init(is);
 }
 
-void MvxPlayer::play(float instrumentalVolume, float pianoVolume) {
-    vxPlayer->setVolume(pianoVolume);
-    instrumentalPlayer->setVolume(instrumentalVolume);
-    vxPlayer->play();
-    instrumentalPlayer->play();
-}
-
 void MvxPlayer::pause() {
     instrumentalPlayer->pause();
     vxPlayer->pause();
 }
 
-void MvxPlayer::resume() {
+void MvxPlayer::play() {
+    if (bounds) {
+        double seekValue = instrumentalPlayer->getSeek();
+        if (!bounds->isInside(seekValue)) {
+            double startSeek = bounds->getStartSeek();
+            vxPlayer->setSeek(startSeek);
+            instrumentalPlayer->setSeek(startSeek);
+        }
+    }
+    
     vxPlayer->play();
     instrumentalPlayer->play();
 }
 
 void MvxPlayer::seek(double value) {
+    assert(!bounds || (bounds->getStartSeek() <= value &&
+            bounds->getEndSeek() <= value));
+    assert(value >= 0 && value <= instrumentalPlayer->getTrackDurationInSeconds());
     instrumentalPlayer->setSeek(value);
     vxPlayer->setSeek(value);
 }
@@ -68,9 +113,45 @@ MvxPlayer::~MvxPlayer() {
 void MvxPlayer::prepare() {
     instrumentalPlayer->prepare();
     vxPlayer->prepare();
+    assert(Primitives::CompareFloats(instrumentalPlayer->getTrackDurationInSeconds(), 
+            vxPlayer->getTrackDurationInSeconds()));
 }
 
-MvxPlayer::MvxPlayer(MvxFile &&mvxFile) {
-    instrumentalPlayer = AudioFilePlayer::create(std::move(mvxFile.getInstrumental()));
-    vxPlayer = new VxFileAudioPlayer(std::move(mvxFile.getVxFile()));
+const VxFile &MvxPlayer::getVxFile() const {
+    return vxPlayer->getVxFile();
+}
+
+const boost::optional<MvxPlayer::Bounds> &MvxPlayer::getBounds() const {
+    return bounds;
+}
+
+void MvxPlayer::setBounds(const boost::optional<MvxPlayer::Bounds> &bounds) {
+    assert(!instrumentalPlayer->isPlaying());
+    assert(!bounds || (bounds->getStartSeek() >= 0 &&
+            bounds->getEndSeek() <= instrumentalPlayer->getTrackDurationInSeconds()));
+    this->bounds = bounds;
+}
+
+bool MvxPlayer::isPlaying() const {
+    return instrumentalPlayer->isPlaying();
+}
+
+void MvxPlayer::stopAndMoveSeekToBeginning() {
+    pause();
+    seek(bounds ? bounds->getStartSeek() : 0);
+}
+
+MvxPlayer::Bounds::Bounds(double startSeek, double endSeek) : startSeek(startSeek), endSeek(endSeek) {
+}
+
+double MvxPlayer::Bounds::getStartSeek() const {
+    return startSeek;
+}
+
+double MvxPlayer::Bounds::getEndSeek() const {
+    return endSeek;
+}
+
+bool MvxPlayer::Bounds::isInside(double value) const {
+    return value >= startSeek && value <= endSeek;
 }

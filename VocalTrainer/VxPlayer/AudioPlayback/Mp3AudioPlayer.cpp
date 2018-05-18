@@ -168,6 +168,7 @@ void Mp3AudioPlayer::decodingThreadCallback(const PlaybackData& playbackData) {
     }
 }
 
+// TODO: don't clear buffer for small seek changes in some cases
 void Mp3AudioPlayer::setSeek(double timeStamp) {
     if (Primitives::CompareFloats(timeStamp, getSeek())) {
         return;

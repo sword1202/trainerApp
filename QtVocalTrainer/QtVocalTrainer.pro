@@ -1,7 +1,7 @@
 QT += quick
 
-QMAKE_CXXFLAGS += -std=c++17
-QMAKE_CXXFLAGS_DEBUG += -O0
+QMAKE_CXXFLAGS += -std=c++14
+#QMAKE_CXXFLAGS_DEBUG += -O0
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -24,12 +24,14 @@ SOURCES += \
     ../PitchDetection/Pitch.cpp \
     ../PitchDetection/YinPitchDetector.cpp \
     ../PitchDetection/PitchInputReader.cpp \
+    ../PitchDetection/PitchInputReaderCollector.cpp \
     ../PitchDetection/PitchDetectionSmoothingAudioBuffer.cpp \
     qmlpitchinputreader.cpp \
     ../PitchDetection/CppUtils/TimeUtils.cpp \
     app.cpp \
     ../PitchDetection/PortAudio.cpp \
-    ../PitchDetection/PortAudioInputReader.cpp
+    ../PitchDetection/PortAudioInputReader.cpp \
+    executors.cpp
 
 RESOURCES += qml.qrc
 
@@ -45,11 +47,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 macx {
-    LIBS += -framework Foundation -framework AppKit -framework AudioToolbox -framework CoreFoundation \
-            -framework AVFoundation -framework AudioUnit -framework CoreServices -framework Carbon -framework CoreAudio
+    LIBS += -framework Foundation -framework AppKit -framework AudioToolbox -framework CoreFoundation -framework AVFoundation -framework AudioUnit -framework CoreServices -framework Carbon -framework CoreAudio
+    LIBS += ../libs/Release/libportaudio.a
 }
-
-LIBS += ../libs/Release/libportaudio.a
 
 HEADERS += \
     MainWindow.h \
@@ -60,6 +60,7 @@ HEADERS += \
     ../PitchDetection/PitchDetectionSmoothingAudioBuffer.h \
     ../PitchDetection/YinPitchDetector.h \
     ../PitchDetection/PitchInputReader.h \
+    ../PitchDetection/PitchInputReaderCollector.h \
     ../PitchDetection/AudoInputReader.h \
     qmlpitchinputreader.h \
     ../PitchDetection/CppUtils/TimeUtils.h \
@@ -67,6 +68,7 @@ HEADERS += \
     ../PitchDetection/PortAudio.h
 
 INCLUDEPATH += ../include \
-    ../VocalTrainer/VxPlayer/AudioPlayback
+    ../VocalTrainer/VxPlayer/AudioPlayback \
+    ../PitchDetection/CppUtils
 
 DISTFILES +=

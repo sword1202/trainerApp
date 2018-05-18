@@ -84,14 +84,14 @@ Rectangle {
             var duration = 60.0 / tempo.tempo * 4
 
             var pitchIndex = pitchesCount - 1
-            while (pitchIndex >= 0 && !pitchInputReader.getPitchAt(pitchIndex).isValid) {
+            while (pitchIndex >= 0 && !pitchInputReader.pitchAt(pitchIndex).isValid) {
                 pitchIndex--;
             }
 
             var points = []
             var now = cpp.now()
             while(pitchIndex >= 0) {
-                var pitch = pitchInputReader.getPitchAt(pitchIndex)
+                var pitch = pitchInputReader.pitchAt(pitchIndex)
                 var x = (pitch.time - now + duration) / duration * width
                 var perfectFrequencyIndex = pitch.perfectFrequencyIndex
                 if (perfectFrequencyIndex >= 0) {

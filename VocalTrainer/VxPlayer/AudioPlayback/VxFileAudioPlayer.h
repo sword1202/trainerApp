@@ -32,6 +32,8 @@ public:
 
     bool isPitchShiftingAvailable(int distance) const;
     virtual void setPitchShiftInSemiTones(int value) override;
+
+    const VxFile& getVxFile() const;
 };
 
 

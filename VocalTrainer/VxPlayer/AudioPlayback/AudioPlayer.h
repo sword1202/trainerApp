@@ -22,8 +22,10 @@ private:
     PaStream* stream = nullptr;
     PlaybackData playbackData;
     bool playing = false;
-    float volume = 1.0f;
+    std::atomic<float> volume = 1.0f;
     CppUtils::ListenersSet<> onCompleteListeners;
+	CppUtils::ListenersSet<> onNoDataAvailableListeners;
+	CppUtils::ListenersSet<void*/*buffer*/, int/*framesCount*/> onDataSentToOutputListeners;
     CppUtils::ListenersSet<double /*seek*/, double/*totalDuration*/> seekChangedListeners;
     std::atomic_int pitchShift = 0;
 
@@ -52,6 +54,8 @@ protected:
 public:
     
     typedef CppUtils::ListenersSet<>::function OnCompleteListener;
+	typedef CppUtils::ListenersSet<>::function OnNoDataAvailableListener;
+	typedef CppUtils::ListenersSet<void*, int>::function OnDataSentToOutputListener;
     typedef CppUtils::ListenersSet<double, double>::function SeekChangedListener;
     
     AudioPlayer();
@@ -80,9 +84,17 @@ public:
     int addSeekChangedListener(const SeekChangedListener& listener);
     void removeSeekChangedListener(int key);
 
+	int addOnNoDataAvailableListener(const OnNoDataAvailableListener& listener);
+	void removeOnNoDataAvailableListener(int key);
+
+	int addOnDataSentToOutputListener(const OnDataSentToOutputListener& listener);
+	void removeOnDataSentToOutputListener(int key);
+
     void playFromSeekToSeek(double a, double b, const std::function<void()> onFinish);
 
     virtual void destroy(const std::function<void()>& onDestroyed);
     void destroy();
+
+	const PlaybackData &getPlaybackData() const;
 };
 #endif //VOCALTRAINER_AUDIOPLAYER_H

@@ -34,6 +34,9 @@ int AudioPlayer::callback(
     // no data available, return silence and wait
     const PaSampleFormat format = self->playbackData.format;
     if (readFramesCount < 0) {
+        Executors::ExecuteOnMainThread([self]{
+            self->onNoDataAvailableListeners.executeAll();
+        });
         int sampleSize = self->getSampleSize();
         memset(outputBuffer, 0, framesPerBuffer * sampleSize);
         return paContinue;
@@ -58,6 +61,10 @@ int AudioPlayer::callback(
                 std::runtime_error("Unsupported self->playbackData.format " + std::to_string(format));
             }
         }
+
+        Executors::ExecuteOnMainThread([self]{
+            self->onDataSentToOutputListeners.executeAll(outputBuffer, readFramesCount);
+        });
 
         if (readFramesCount == framesPerBuffer) {
             return paContinue;
@@ -240,4 +247,24 @@ int AudioPlayer::getPitchShiftInSemiTones() const {
 
 void AudioPlayer::setPitchShiftInSemiTones(int value) {
     pitchShift = value;
+}
+
+int AudioPlayer::addOnNoDataAvailableListener(const AudioPlayer::OnNoDataAvailableListener &listener) {
+    return onNoDataAvailableListeners.addListener(listener);
+}
+
+void AudioPlayer::removeOnNoDataAvailableListener(int key) {
+    onNoDataAvailableListeners.removeListener(key);
+}
+
+const AudioPlayer::PlaybackData &AudioPlayer::getPlaybackData() const {
+    return playbackData;
+}
+
+void AudioPlayer::removeOnDataSentToOutputListener(int key) {
+    onDataSentToOutputListeners.removeListener(key);
+}
+
+int AudioPlayer::addOnDataSentToOutputListener(const AudioPlayer::OnDataSentToOutputListener &listener) {
+    return onDataSentToOutputListeners.addListener(listener);
 }

@@ -69,3 +69,7 @@ void VxFileAudioPlayer::setPitchShiftInSemiTones(int value) {
         generator->setVxFile(vxFile);
     });
 }
+
+const VxFile &VxFileAudioPlayer::getVxFile() const {
+    return generator->getVxFile();
+}
