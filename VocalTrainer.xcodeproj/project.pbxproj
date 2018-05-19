@@ -28,7 +28,7 @@
 		2EF1E9A11D592EC100E02C33 /* Pitch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1E9991D592EC100E02C33 /* Pitch.cpp */; };
 		2EF1E9A21D592EC100E02C33 /* PitchInputReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1E99B1D592EC100E02C33 /* PitchInputReader.cpp */; };
 		2EF1E9A31D592EC100E02C33 /* tests in Resources */ = {isa = PBXBuildFile; fileRef = 2EF1E99D1D592EC100E02C33 /* tests */; };
-		2EF1E9A91D592F1600E02C33 /* AudoInputReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1E9941D592EC100E02C33 /* AudoInputReader.cpp */; };
+		2EF1E9A91D592F1600E02C33 /* AudioInputReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1E9941D592EC100E02C33 /* AudioInputReader.cpp */; };
 		542888C720A4DF6000376321 /* libSoundTouch.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 542888C620A4DF6000376321 /* libSoundTouch.1.dylib */; };
 		542888CB20A4E01800376321 /* libSoundTouch.1.dylib in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 542888C920A4DF7C00376321 /* libSoundTouch.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		544C7CB020A977C8002B24BD /* libboost_serialization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5470EEC1209F5C6400D77B9C /* libboost_serialization.a */; };
@@ -165,8 +165,8 @@
 		2EF1E8D21D57F95100E02C33 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EF1E8D51D57F95100E02C33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2EF1E8D71D57F95100E02C33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2EF1E9941D592EC100E02C33 /* AudoInputReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AudoInputReader.cpp; path = PitchDetection/AudoInputReader.cpp; sourceTree = "<group>"; };
-		2EF1E9951D592EC100E02C33 /* AudoInputReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudoInputReader.h; path = PitchDetection/AudoInputReader.h; sourceTree = "<group>"; };
+		2EF1E9941D592EC100E02C33 /* AudioInputReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AudioInputReader.cpp; path = PitchDetection/AudioInputReader.cpp; sourceTree = "<group>"; };
+		2EF1E9951D592EC100E02C33 /* AudioInputReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioInputReader.h; path = PitchDetection/AudioInputReader.h; sourceTree = "<group>"; };
 		2EF1E9971D592EC100E02C33 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CMakeLists.txt; path = PitchDetection/CMakeLists.txt; sourceTree = "<group>"; };
 		2EF1E9981D592EC100E02C33 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = PitchDetection/main.cpp; sourceTree = "<group>"; };
 		2EF1E9991D592EC100E02C33 /* Pitch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Pitch.cpp; path = PitchDetection/Pitch.cpp; sourceTree = "<group>"; };
@@ -393,8 +393,8 @@
 				2E7A67C11D8E57AE00DFAF8B /* WAVFile.h */,
 				2E7A67C21D8E57AE00DFAF8B /* WavFileAudioInputReader.cpp */,
 				2E7A67C31D8E57AE00DFAF8B /* WavFileAudioInputReader.h */,
-				2EF1E9941D592EC100E02C33 /* AudoInputReader.cpp */,
-				2EF1E9951D592EC100E02C33 /* AudoInputReader.h */,
+				2EF1E9941D592EC100E02C33 /* AudioInputReader.cpp */,
+				2EF1E9951D592EC100E02C33 /* AudioInputReader.h */,
 				2EF1E9971D592EC100E02C33 /* CMakeLists.txt */,
 				2EF1E9981D592EC100E02C33 /* main.cpp */,
 				2EF1E9991D592EC100E02C33 /* Pitch.cpp */,
@@ -633,7 +633,7 @@
 				2E7A67C41D8E57AE00DFAF8B /* WAVFile.cpp in Sources */,
 				2EF1E9A21D592EC100E02C33 /* PitchInputReader.cpp in Sources */,
 				2EDCC6BE1DB432E40086A6CE /* WavFilePitchesReader.cpp in Sources */,
-				2EF1E9A91D592F1600E02C33 /* AudoInputReader.cpp in Sources */,
+				2EF1E9A91D592F1600E02C33 /* AudioInputReader.cpp in Sources */,
 				2EDCC6BD1DB432E40086A6CE /* WavBufferReader.cpp in Sources */,
 				10628C29AFB8E691B41FCBA6 /* PitchGraphView.mm in Sources */,
 				2E7A67C51D8E57AE00DFAF8B /* WavFileAudioInputReader.cpp in Sources */,

@@ -5,1244 +5,659 @@
 	};
 	objectVersion = 46;
 	objects = {
-		5E618435888B9D49F8540165 = {
-			buildActionMask = 2147483647;
-			files = (
-				);
-			isa = PBXShellScriptBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-			name = "Qt Qmake";
-			shellPath = "/bin/sh";
-			shellScript = "make -C /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/ -f QtVocalTrainer.xcodeproj/qt_makeqmake.mak";
-			showEnvVarsInLog = "0";
-		};
-		924148628D538E80F4530F9B = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/MainWindow.mm";
-			name = "MainWindow.mm";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.objcpp";
-		};
-		E4A7DABEDB67A2ACC4376D83 = {
-			fileRef = "924148628D538E80F4530F9B";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		3EE34C6C6255F234C94584F4 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/main.cpp";
-			name = "main.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		6A0BEF1A99FE649866352C7C = {
-			fileRef = "3EE34C6C6255F234C94584F4";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		A3113B7523B0D9D3CF3161D7 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/QmlCppBridge.cpp";
-			name = "QmlCppBridge.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		9453F35B6EB65B36D2199931 = {
-			fileRef = "A3113B7523B0D9D3CF3161D7";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		4F3F093D90D78F85089F67BB = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/MainWindowShared.cpp";
-			name = "MainWindowShared.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		83166E56ADE0AA9A6D0E58CC = {
-			fileRef = "4F3F093D90D78F85089F67BB";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		5B682C7941C28D6A601B9549 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qmlopenglitem.cpp";
-			name = "qmlopenglitem.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		5AC2E76E870D2A004CF8DCD2 = {
-			fileRef = "5B682C7941C28D6A601B9549";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		AD6E0E76E19B42229889D1E2 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qmlpitch.cpp";
-			name = "qmlpitch.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		297624C7BCD6FA4C9B1993EF = {
-			fileRef = "AD6E0E76E19B42229889D1E2";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		93FD482EA9AA70B5F33A4E72 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/Pitch.cpp";
-			name = "Pitch.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		A8B38B4FE3D88FE4D6A9AEA5 = {
-			fileRef = "93FD482EA9AA70B5F33A4E72";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		92E054C665D5746C7E2EB6F5 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/YinPitchDetector.cpp";
-			name = "YinPitchDetector.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		8D85C37316F342B56FD3CCCE = {
-			fileRef = "92E054C665D5746C7E2EB6F5";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		7E6C4EF13847B0CD0E129C35 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/PitchInputReader.cpp";
-			name = "PitchInputReader.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		EE26DC63E361862F515A9055 = {
-			fileRef = "7E6C4EF13847B0CD0E129C35";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		99419A77EA2FEA0C2647668E = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/PitchInputReaderCollector.cpp";
-			name = "PitchInputReaderCollector.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		F4D962E38ABBE18B47A6EA22 = {
-			fileRef = "99419A77EA2FEA0C2647668E";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		E97D23E58376A80655A7AC0C = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/PitchDetectionSmoothingAudioBuffer.cpp";
-			name = "PitchDetectionSmoothingAudioBuffer.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		0CDFA05820DBB6123682992E = {
-			fileRef = "E97D23E58376A80655A7AC0C";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		ECB125321253DBBE426CEE41 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qmlpitchinputreader.cpp";
-			name = "qmlpitchinputreader.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		BDCD8246510D911A428E9488 = {
-			fileRef = "ECB125321253DBBE426CEE41";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		170DD1A433357ECE918F023E = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils/TimeUtils.cpp";
-			name = "TimeUtils.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		327D328DC0E15513077CA217 = {
-			fileRef = "170DD1A433357ECE918F023E";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		DE1588F866E2F8A362D4FA86 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/app.cpp";
-			name = "app.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		42469CE418C42F99BFA4EECE = {
-			fileRef = "DE1588F866E2F8A362D4FA86";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		61DAEAF44CFBFD0435D18633 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/PortAudio.cpp";
-			name = "PortAudio.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		C0A33B54AB4F43E113571EFD = {
-			fileRef = "61DAEAF44CFBFD0435D18633";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		42F5D95319E946AA4552EB19 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/PortAudioInputReader.cpp";
-			name = "PortAudioInputReader.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		EB92C9E299C61E72C0FFF4E4 = {
-			fileRef = "42F5D95319E946AA4552EB19";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		010F066C0C8FAFFCB00384DA = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/executors.cpp";
-			name = "executors.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		D7C5B34E745041BD55235BD0 = {
-			fileRef = "010F066C0C8FAFFCB00384DA";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		F61C3E706670E1F71F3998D1 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qrc_qml.cpp";
-			name = "qrc_qml.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		F3F0C5A9AE1D79D2A4930AEA = {
-			fileRef = "F61C3E706670E1F71F3998D1";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		9928608A8BBE0D3A5606468D = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_MainWindow.cpp";
-			name = "moc_MainWindow.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		3D30F0B43D9EE5E9EF8F3145 = {
-			fileRef = "9928608A8BBE0D3A5606468D";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		249023FFA514A04311BC2D5D = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_QmlCppBridge.cpp";
-			name = "moc_QmlCppBridge.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		AE6596E2227260CD02B22B61 = {
-			fileRef = "249023FFA514A04311BC2D5D";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		9BD80D57069FBF796EF30C33 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_qmlopenglitem.cpp";
-			name = "moc_qmlopenglitem.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		4D39E2B783FFDF3FB02ED09A = {
-			fileRef = "9BD80D57069FBF796EF30C33";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		A8DBB3B894A514ABE11FF772 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_qmlpitch.cpp";
-			name = "moc_qmlpitch.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		B453224DC7FC3E0971A15260 = {
-			fileRef = "A8DBB3B894A514ABE11FF772";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		F8CF2B73DF3F4DAD22A38E8C = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_qmlpitchinputreader.cpp";
-			name = "moc_qmlpitchinputreader.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		1C90DF67E8C2A478FBB7CE6D = {
-			fileRef = "F8CF2B73DF3F4DAD22A38E8C";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		AC275522DAB9C3A7B41FD27F = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/MainWindow.h";
-			name = "MainWindow.h";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.c.h";
-		};
-		C613FE9ADA39556AD9540F1E = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/QmlCppBridge.h";
-			name = "QmlCppBridge.h";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.c.h";
-		};
-		1091C7F2ACC81AEE9DF74E74 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qmlopenglitem.h";
-			name = "qmlopenglitem.h";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.c.h";
-		};
-		8D1AFD7B368D712618894EDF = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qmlpitch.h";
-			name = "qmlpitch.h";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.c.h";
-		};
-		3F3DAF4B91006B7F8ACE8C30 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/Pitch.h";
-			name = "Pitch.h";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.c.h";
-		};
-		DB8A8F0C78EA13DF9937910F = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/PitchDetectionSmoothingAudioBuffer.h";
-			name = "PitchDetectionSmoothingAudioBuffer.h";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.c.h";
-		};
-		F102E79157CF60B5A25F5F81 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/YinPitchDetector.h";
-			name = "YinPitchDetector.h";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.c.h";
-		};
-		DD7DD3696B4047108034B91D = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/PitchInputReader.h";
-			name = "PitchInputReader.h";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.c.h";
-		};
-		A294A169E80E441A81ED6C19 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/PitchInputReaderCollector.h";
-			name = "PitchInputReaderCollector.h";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.c.h";
-		};
-		C50F8F4621EFDF9B66A93837 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/AudoInputReader.h";
-			name = "AudoInputReader.h";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.c.h";
-		};
-		654D24DDBA565FDCA6A13AB9 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qmlpitchinputreader.h";
-			name = "qmlpitchinputreader.h";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.c.h";
-		};
-		76B664FAC83040BA76C57E7F = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils/TimeUtils.h";
-			name = "TimeUtils.h";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.c.h";
-		};
-		9E78C40084B4C85FE9D0258A = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/app.h";
-			name = "app.h";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.c.h";
-		};
-		9E65F65D73262AC07C018AEA = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/PortAudio.h";
-			name = "PortAudio.h";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.c.h";
-		};
-		757C4D2CF043B21FE9CC0678 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qml.qrc";
-			name = "qml.qrc";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "text";
-		};
-		04C437C6B2491D111524170C = {
-			fileRef = "757C4D2CF043B21FE9CC0678";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		E8AE1D04D7E6AFEA1A08732D = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Qt/5.11.0/clang_64/mkspecs/features/data/dummy.cpp";
-			name = "dummy.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		DE96A987995B398E25D392B5 = {
-			fileRef = "E8AE1D04D7E6AFEA1A08732D";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		4A1C2993E55C65255C1398FB = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/QtVocalTrainer.pro";
-			name = "QtVocalTrainer.pro";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "text";
-		};
-		4408CA09A25D27FBE37CDAAE = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/.qmake.stash";
-			name = ".qmake.stash";
-			sourceTree = "<absolute>";
-		};
-		25B08E2869634E9BCBA333A2 = {
-			isa = PBXGroup;
-			children = (
-				"F61C3E706670E1F71F3998D1",
-				"9928608A8BBE0D3A5606468D",
-				"249023FFA514A04311BC2D5D",
-				"9BD80D57069FBF796EF30C33",
-				"A8DBB3B894A514ABE11FF772",
-				"F8CF2B73DF3F4DAD22A38E8C");
-			name = "Generated Sources";
-			sourceTree = "<group>";
-		};
-		87DF60DE337FB58864343E39 = {
-			isa = PBXGroup;
-			children = (
-				"757C4D2CF043B21FE9CC0678");
-			name = "Resources";
-			sourceTree = "<group>";
-		};
-		2EB56BE3C2D93CDAB0C52E67 = {
-			isa = PBXGroup;
-			children = (
-				"924148628D538E80F4530F9B",
-				"3EE34C6C6255F234C94584F4",
-				"A3113B7523B0D9D3CF3161D7",
-				"4F3F093D90D78F85089F67BB",
-				"5B682C7941C28D6A601B9549",
-				"AD6E0E76E19B42229889D1E2",
-				"93FD482EA9AA70B5F33A4E72",
-				"92E054C665D5746C7E2EB6F5",
-				"7E6C4EF13847B0CD0E129C35",
-				"99419A77EA2FEA0C2647668E",
-				"E97D23E58376A80655A7AC0C",
-				"ECB125321253DBBE426CEE41",
-				"170DD1A433357ECE918F023E",
-				"DE1588F866E2F8A362D4FA86",
-				"61DAEAF44CFBFD0435D18633",
-				"42F5D95319E946AA4552EB19",
-				"010F066C0C8FAFFCB00384DA",
-				"AC275522DAB9C3A7B41FD27F",
-				"C613FE9ADA39556AD9540F1E",
-				"1091C7F2ACC81AEE9DF74E74",
-				"8D1AFD7B368D712618894EDF",
-				"3F3DAF4B91006B7F8ACE8C30",
-				"DB8A8F0C78EA13DF9937910F",
-				"F102E79157CF60B5A25F5F81",
-				"DD7DD3696B4047108034B91D",
-				"A294A169E80E441A81ED6C19",
-				"C50F8F4621EFDF9B66A93837",
-				"654D24DDBA565FDCA6A13AB9",
-				"76B664FAC83040BA76C57E7F",
-				"9E78C40084B4C85FE9D0258A",
-				"9E65F65D73262AC07C018AEA");
-			name = "Sources";
-			sourceTree = "<group>";
-		};
-		B8254625CFD509ED2A24A166 = {
-			isa = PBXGroup;
-			children = (
-				"E8AE1D04D7E6AFEA1A08732D");
-			name = "Sources [moc_predefs]";
-			sourceTree = "<group>";
-		};
-		74B182DB50CB5611B5C1C297 = {
-			isa = PBXGroup;
-			children = (
-				"4A1C2993E55C65255C1398FB",
-				"4408CA09A25D27FBE37CDAAE");
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		7EF0942E79C014DCEC8976BC = {
-			buildActionMask = 2147483647;
-			files = (
-				);
-			isa = PBXShellScriptBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-			name = "Qt Preprocessors";
-			shellPath = "/bin/sh";
-			shellScript = "make -C /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/ -f QtVocalTrainer.xcodeproj/qt_preprocess.mak";
-			showEnvVarsInLog = "0";
-		};
-		F7E50F631C51CD5B5DC0BC43 = {
-			buildActionMask = 2147483647;
-			files = (
-				"E4A7DABEDB67A2ACC4376D83",
-				"6A0BEF1A99FE649866352C7C",
-				"9453F35B6EB65B36D2199931",
-				"83166E56ADE0AA9A6D0E58CC",
-				"5AC2E76E870D2A004CF8DCD2",
-				"297624C7BCD6FA4C9B1993EF",
-				"A8B38B4FE3D88FE4D6A9AEA5",
-				"8D85C37316F342B56FD3CCCE",
-				"EE26DC63E361862F515A9055",
-				"F4D962E38ABBE18B47A6EA22",
-				"0CDFA05820DBB6123682992E",
-				"BDCD8246510D911A428E9488",
-				"327D328DC0E15513077CA217",
-				"42469CE418C42F99BFA4EECE",
-				"C0A33B54AB4F43E113571EFD",
-				"EB92C9E299C61E72C0FFF4E4",
-				"D7C5B34E745041BD55235BD0",
-				"F3F0C5A9AE1D79D2A4930AEA",
-				"3D30F0B43D9EE5E9EF8F3145",
-				"AE6596E2227260CD02B22B61",
-				"4D39E2B783FFDF3FB02ED09A",
-				"B453224DC7FC3E0971A15260",
-				"1C90DF67E8C2A478FBB7CE6D",
-				"DE96A987995B398E25D392B5");
-			isa = PBXSourcesBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-			name = "Compile Sources";
-		};
-		FCC237CA5AD60B9BA4447615 = {
-			isa = PBXFileReference;
-			name = "Foundation.framework";
-			path = "/System/Library/Frameworks/Foundation.framework";
-			refType = 0;
-			sourceTree = "<absolute>";
-			lastKnownFileType = "wrapper.framework";
-		};
-		F26454630C80841CBDCFE1CA = {
-			fileRef = "FCC237CA5AD60B9BA4447615";
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		723F90793B2C195E2CCB2233 = {
-			isa = PBXFileReference;
-			name = "AppKit.framework";
-			path = "/System/Library/Frameworks/AppKit.framework";
-			refType = 0;
-			sourceTree = "<absolute>";
-			lastKnownFileType = "wrapper.framework";
-		};
-		F2A75ACAC9DF6A3F4E5711E7 = {
-			fileRef = "723F90793B2C195E2CCB2233";
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		3C44131FDCFEF4396B9EA2BA = {
-			isa = PBXFileReference;
-			name = "AudioToolbox.framework";
-			path = "/System/Library/Frameworks/AudioToolbox.framework";
-			refType = 0;
-			sourceTree = "<absolute>";
-			lastKnownFileType = "wrapper.framework";
-		};
-		4EB68D0C8182BCE33529C421 = {
-			fileRef = "3C44131FDCFEF4396B9EA2BA";
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		4D765E1B1EA6C757220C63E7 = {
-			isa = PBXFileReference;
-			name = "CoreFoundation.framework";
-			path = "/System/Library/Frameworks/CoreFoundation.framework";
-			refType = 0;
-			sourceTree = "<absolute>";
-			lastKnownFileType = "wrapper.framework";
-		};
-		F8B465CE34D8DF87AAE95913 = {
-			fileRef = "4D765E1B1EA6C757220C63E7";
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		21F907AB8D19BD779147A085 = {
-			isa = PBXFileReference;
-			name = "AVFoundation.framework";
-			path = "/System/Library/Frameworks/AVFoundation.framework";
-			refType = 0;
-			sourceTree = "<absolute>";
-			lastKnownFileType = "wrapper.framework";
-		};
-		CCA737EE379CDB10CC9A0F23 = {
-			fileRef = "21F907AB8D19BD779147A085";
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		186D09F4CB713AD4B8BDD260 = {
-			isa = PBXFileReference;
-			name = "AudioUnit.framework";
-			path = "/System/Library/Frameworks/AudioUnit.framework";
-			refType = 0;
-			sourceTree = "<absolute>";
-			lastKnownFileType = "wrapper.framework";
-		};
-		DAD6F5593C3427F014531342 = {
-			fileRef = "186D09F4CB713AD4B8BDD260";
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		9742F24EE18EA44D52824F1E = {
-			isa = PBXFileReference;
-			name = "CoreServices.framework";
-			path = "/System/Library/Frameworks/CoreServices.framework";
-			refType = 0;
-			sourceTree = "<absolute>";
-			lastKnownFileType = "wrapper.framework";
-		};
-		668DDDA0C55405E7FCFD6CA5 = {
-			fileRef = "9742F24EE18EA44D52824F1E";
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		9DFF62A901D70814B8A323D4 = {
-			isa = PBXFileReference;
-			name = "Carbon.framework";
-			path = "/System/Library/Frameworks/Carbon.framework";
-			refType = 0;
-			sourceTree = "<absolute>";
-			lastKnownFileType = "wrapper.framework";
-		};
-		F8ED42CF8679BF83227DAFC4 = {
-			fileRef = "9DFF62A901D70814B8A323D4";
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		BEF9DFDA6822604126A7E233 = {
-			isa = PBXFileReference;
-			name = "CoreAudio.framework";
-			path = "/System/Library/Frameworks/CoreAudio.framework";
-			refType = 0;
-			sourceTree = "<absolute>";
-			lastKnownFileType = "wrapper.framework";
-		};
-		35A1A39F8EAB37889EB3D397 = {
-			fileRef = "BEF9DFDA6822604126A7E233";
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		D2C9E726732F383A23F3DF2A = {
-			isa = PBXFileReference;
-			name = "libportaudio.a";
-			path = "/Users/semyon/Projects/VocalTrainer/libs/Release/libportaudio.a";
-			refType = 0;
-			sourceTree = "<absolute>";
-		};
-		51702CADEF714F084FB14918 = {
-			fileRef = "D2C9E726732F383A23F3DF2A";
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		F0871F9A6453756315FEE1CE = {
-			isa = PBXFileReference;
-			name = "QtQuick.framework";
-			path = "/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuick.framework";
-			refType = 0;
-			sourceTree = "<absolute>";
-			lastKnownFileType = "wrapper.framework";
-		};
-		1AB6D6DB17C494A863582E1F = {
-			fileRef = "F0871F9A6453756315FEE1CE";
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		2B89D6D035434E8732B497FB = {
-			isa = PBXFileReference;
-			name = "QtQml.framework";
-			path = "/Users/semyon/Qt/5.11.0/clang_64/lib/QtQml.framework";
-			refType = 0;
-			sourceTree = "<absolute>";
-			lastKnownFileType = "wrapper.framework";
-		};
-		82F3259B99B0A4F8603EECB6 = {
-			fileRef = "2B89D6D035434E8732B497FB";
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		8040D46BE95BDB6D913516F6 = {
-			isa = PBXFileReference;
-			name = "QtNetwork.framework";
-			path = "/Users/semyon/Qt/5.11.0/clang_64/lib/QtNetwork.framework";
-			refType = 0;
-			sourceTree = "<absolute>";
-			lastKnownFileType = "wrapper.framework";
-		};
-		7453F0059F8E88BB12427954 = {
-			fileRef = "8040D46BE95BDB6D913516F6";
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		C9835F3C908A7EC8F080B4CE = {
-			isa = PBXFileReference;
-			name = "QtCore.framework";
-			path = "/Users/semyon/Qt/5.11.0/clang_64/lib/QtCore.framework";
-			refType = 0;
-			sourceTree = "<absolute>";
-			lastKnownFileType = "wrapper.framework";
-		};
-		FB5FC63AD500D3C6BDA38833 = {
-			fileRef = "C9835F3C908A7EC8F080B4CE";
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		2B774D8E4178765CE52EAAF5 = {
-			isa = PBXFileReference;
-			name = "DiskArbitration.framework";
-			path = "/System/Library/Frameworks/DiskArbitration.framework";
-			refType = 0;
-			sourceTree = "<absolute>";
-			lastKnownFileType = "wrapper.framework";
-		};
-		A99B2AA0F9CBBDD12BA126A4 = {
-			fileRef = "2B774D8E4178765CE52EAAF5";
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		A1A67BEAA744704B29168D39 = {
-			isa = PBXFileReference;
-			name = "IOKit.framework";
-			path = "/System/Library/Frameworks/IOKit.framework";
-			refType = 0;
-			sourceTree = "<absolute>";
-			lastKnownFileType = "wrapper.framework";
-		};
-		8D267F2E4776F0ECA2F49DC8 = {
-			fileRef = "A1A67BEAA744704B29168D39";
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		554C4EF638BE7C2288F34633 = {
-			isa = PBXFileReference;
-			name = "QtGui.framework";
-			path = "/Users/semyon/Qt/5.11.0/clang_64/lib/QtGui.framework";
-			refType = 0;
-			sourceTree = "<absolute>";
-			lastKnownFileType = "wrapper.framework";
-		};
-		7E6181E315EB3F51F58A7697 = {
-			fileRef = "554C4EF638BE7C2288F34633";
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		D4B32C2222F82AC56BADEB21 = {
-			isa = PBXFileReference;
-			name = "OpenGL.framework";
-			path = "/System/Library/Frameworks/OpenGL.framework";
-			refType = 0;
-			sourceTree = "<absolute>";
-			lastKnownFileType = "wrapper.framework";
-		};
-		8771A8C96E9C391044035D99 = {
-			fileRef = "D4B32C2222F82AC56BADEB21";
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		8D9815BDB5BD9F90D2BC05C5 = {
-			isa = PBXFileReference;
-			name = "AGL.framework";
-			path = "/System/Library/Frameworks/AGL.framework";
-			refType = 0;
-			sourceTree = "<absolute>";
-			lastKnownFileType = "wrapper.framework";
-		};
-		E45E51A644D5FC9F942ECE55 = {
-			fileRef = "8D9815BDB5BD9F90D2BC05C5";
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		AF39DD055C3EF8226FBE929D = {
-			children = (
-				"FCC237CA5AD60B9BA4447615",
-				"723F90793B2C195E2CCB2233",
-				"3C44131FDCFEF4396B9EA2BA",
-				"4D765E1B1EA6C757220C63E7",
-				"21F907AB8D19BD779147A085",
-				"186D09F4CB713AD4B8BDD260",
-				"9742F24EE18EA44D52824F1E",
-				"9DFF62A901D70814B8A323D4",
-				"BEF9DFDA6822604126A7E233",
-				"D2C9E726732F383A23F3DF2A",
-				"F0871F9A6453756315FEE1CE",
-				"2B89D6D035434E8732B497FB",
-				"8040D46BE95BDB6D913516F6",
-				"C9835F3C908A7EC8F080B4CE",
-				"2B774D8E4178765CE52EAAF5",
-				"A1A67BEAA744704B29168D39",
-				"554C4EF638BE7C2288F34633",
-				"D4B32C2222F82AC56BADEB21",
-				"8D9815BDB5BD9F90D2BC05C5");
-			isa = PBXGroup;
-			name = "Frameworks";
-			sourceTree = "<group>";
-		};
-		D1C883685E82D5676953459A = {
-			buildActionMask = 2147483647;
-			files = (
-				"F26454630C80841CBDCFE1CA",
-				"F2A75ACAC9DF6A3F4E5711E7",
-				"4EB68D0C8182BCE33529C421",
-				"F8B465CE34D8DF87AAE95913",
-				"CCA737EE379CDB10CC9A0F23",
-				"DAD6F5593C3427F014531342",
-				"668DDDA0C55405E7FCFD6CA5",
-				"F8ED42CF8679BF83227DAFC4",
-				"35A1A39F8EAB37889EB3D397",
-				"51702CADEF714F084FB14918",
-				"1AB6D6DB17C494A863582E1F",
-				"82F3259B99B0A4F8603EECB6",
-				"7453F0059F8E88BB12427954",
-				"FB5FC63AD500D3C6BDA38833",
-				"A99B2AA0F9CBBDD12BA126A4",
-				"8D267F2E4776F0ECA2F49DC8",
-				"7E6181E315EB3F51F58A7697",
-				"8771A8C96E9C391044035D99",
-				"E45E51A644D5FC9F942ECE55");
-			isa = PBXFrameworksBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-			name = "Link Binary With Libraries";
-		};
-		30414803F31797EB689AE508 = {
-			buildActionMask = 2147483647;
-			files = (
-				);
-			isa = PBXResourcesBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-			name = "Copy Bundle Resources";
-		};
-		99542592E9780B9225F24AA8 = {
+
+/* Begin PBXAggregateTarget section */
+		03115E2DE1AF743F39D33DFC /* Qt Preprocess */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 6CC3B5D2136C7CD6A5CF5A59 /* Build configuration list for PBXNativeTarget "QtVocalTrainer" */;
+			buildPhases = (
+				5E618435888B9D49F8540165 /* Qt Qmake */,
+				7EF0942E79C014DCEC8976BC /* Qt Preprocessors */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Qt Preprocess";
+			productName = "Qt Preprocess";
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		04C437C6B2491D111524170C /* PBXBuildFile */ = {isa = PBXBuildFile; fileRef = 757C4D2CF043B21FE9CC0678 /* qml.qrc */; settings = {ATTRIBUTES = (); }; };
+		0CDFA05820DBB6123682992E /* PitchDetectionSmoothingAudioBuffer.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = E97D23E58376A80655A7AC0C /* PitchDetectionSmoothingAudioBuffer.cpp */; settings = {ATTRIBUTES = (); }; };
+		1AB6D6DB17C494A863582E1F /* QtQuick.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = F0871F9A6453756315FEE1CE /* QtQuick.framework */; settings = {}; };
+		1C90DF67E8C2A478FBB7CE6D /* moc_qmlpitchinputreader.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = F8CF2B73DF3F4DAD22A38E8C /* moc_qmlpitchinputreader.cpp */; settings = {ATTRIBUTES = (); }; };
+		297624C7BCD6FA4C9B1993EF /* qmlpitch.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = AD6E0E76E19B42229889D1E2 /* qmlpitch.cpp */; settings = {ATTRIBUTES = (); }; };
+		327D328DC0E15513077CA217 /* TimeUtils.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 170DD1A433357ECE918F023E /* TimeUtils.cpp */; settings = {ATTRIBUTES = (); }; };
+		35A1A39F8EAB37889EB3D397 /* CoreAudio.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = BEF9DFDA6822604126A7E233 /* CoreAudio.framework */; settings = {}; };
+		3D30F0B43D9EE5E9EF8F3145 /* moc_MainWindow.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 9928608A8BBE0D3A5606468D /* moc_MainWindow.cpp */; settings = {ATTRIBUTES = (); }; };
+		42469CE418C42F99BFA4EECE /* app.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = DE1588F866E2F8A362D4FA86 /* app.cpp */; settings = {ATTRIBUTES = (); }; };
+		4D39E2B783FFDF3FB02ED09A /* moc_qmlopenglitem.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 9BD80D57069FBF796EF30C33 /* moc_qmlopenglitem.cpp */; settings = {ATTRIBUTES = (); }; };
+		4EB68D0C8182BCE33529C421 /* AudioToolbox.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 3C44131FDCFEF4396B9EA2BA /* AudioToolbox.framework */; settings = {}; };
+		51702CADEF714F084FB14918 /* libportaudio.a in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = D2C9E726732F383A23F3DF2A /* libportaudio.a */; settings = {}; };
+		5AC2E76E870D2A004CF8DCD2 /* qmlopenglitem.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 5B682C7941C28D6A601B9549 /* qmlopenglitem.cpp */; settings = {ATTRIBUTES = (); }; };
+		668DDDA0C55405E7FCFD6CA5 /* CoreServices.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 9742F24EE18EA44D52824F1E /* CoreServices.framework */; settings = {}; };
+		6A0BEF1A99FE649866352C7C /* main.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 3EE34C6C6255F234C94584F4 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
+		7453F0059F8E88BB12427954 /* QtNetwork.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 8040D46BE95BDB6D913516F6 /* QtNetwork.framework */; settings = {}; };
+		7E6181E315EB3F51F58A7697 /* QtGui.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 554C4EF638BE7C2288F34633 /* QtGui.framework */; settings = {}; };
+		82F3259B99B0A4F8603EECB6 /* QtQml.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 2B89D6D035434E8732B497FB /* QtQml.framework */; settings = {}; };
+		83166E56ADE0AA9A6D0E58CC /* MainWindowShared.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 4F3F093D90D78F85089F67BB /* MainWindowShared.cpp */; settings = {ATTRIBUTES = (); }; };
+		8771A8C96E9C391044035D99 /* OpenGL.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = D4B32C2222F82AC56BADEB21 /* OpenGL.framework */; settings = {}; };
+		8D267F2E4776F0ECA2F49DC8 /* IOKit.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = A1A67BEAA744704B29168D39 /* IOKit.framework */; settings = {}; };
+		8D85C37316F342B56FD3CCCE /* YinPitchDetector.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 92E054C665D5746C7E2EB6F5 /* YinPitchDetector.cpp */; settings = {ATTRIBUTES = (); }; };
+		9453F35B6EB65B36D2199931 /* QmlCppBridge.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A3113B7523B0D9D3CF3161D7 /* QmlCppBridge.cpp */; settings = {ATTRIBUTES = (); }; };
+		A8B38B4FE3D88FE4D6A9AEA5 /* Pitch.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 93FD482EA9AA70B5F33A4E72 /* Pitch.cpp */; settings = {ATTRIBUTES = (); }; };
+		A99B2AA0F9CBBDD12BA126A4 /* DiskArbitration.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 2B774D8E4178765CE52EAAF5 /* DiskArbitration.framework */; settings = {}; };
+		AE6596E2227260CD02B22B61 /* moc_QmlCppBridge.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 249023FFA514A04311BC2D5D /* moc_QmlCppBridge.cpp */; settings = {ATTRIBUTES = (); }; };
+		B453224DC7FC3E0971A15260 /* moc_qmlpitch.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A8DBB3B894A514ABE11FF772 /* moc_qmlpitch.cpp */; settings = {ATTRIBUTES = (); }; };
+		BDCD8246510D911A428E9488 /* qmlpitchinputreader.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = ECB125321253DBBE426CEE41 /* qmlpitchinputreader.cpp */; settings = {ATTRIBUTES = (); }; };
+		C0A33B54AB4F43E113571EFD /* PortAudio.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 61DAEAF44CFBFD0435D18633 /* PortAudio.cpp */; settings = {ATTRIBUTES = (); }; };
+		CCA737EE379CDB10CC9A0F23 /* AVFoundation.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 21F907AB8D19BD779147A085 /* AVFoundation.framework */; settings = {}; };
+		D7C5B34E745041BD55235BD0 /* executors.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 010F066C0C8FAFFCB00384DA /* executors.cpp */; settings = {ATTRIBUTES = (); }; };
+		DAD6F5593C3427F014531342 /* AudioUnit.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 186D09F4CB713AD4B8BDD260 /* AudioUnit.framework */; settings = {}; };
+		DE96A987995B398E25D392B5 /* dummy.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = E8AE1D04D7E6AFEA1A08732D /* dummy.cpp */; settings = {ATTRIBUTES = (); }; };
+		E45E51A644D5FC9F942ECE55 /* AGL.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 8D9815BDB5BD9F90D2BC05C5 /* AGL.framework */; settings = {}; };
+		E4A7DABEDB67A2ACC4376D83 /* MainWindow.mm in Compile Sources */ = {isa = PBXBuildFile; fileRef = 924148628D538E80F4530F9B /* MainWindow.mm */; settings = {ATTRIBUTES = (); }; };
+		EB92C9E299C61E72C0FFF4E4 /* PortAudioInputReader.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 42F5D95319E946AA4552EB19 /* PortAudioInputReader.cpp */; settings = {ATTRIBUTES = (); }; };
+		EE26DC63E361862F515A9055 /* PitchInputReader.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 7E6C4EF13847B0CD0E129C35 /* PitchInputReader.cpp */; settings = {ATTRIBUTES = (); }; };
+		F26454630C80841CBDCFE1CA /* Foundation.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = FCC237CA5AD60B9BA4447615 /* Foundation.framework */; settings = {}; };
+		F2A75ACAC9DF6A3F4E5711E7 /* AppKit.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 723F90793B2C195E2CCB2233 /* AppKit.framework */; settings = {}; };
+		F3F0C5A9AE1D79D2A4930AEA /* qrc_qml.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = F61C3E706670E1F71F3998D1 /* qrc_qml.cpp */; settings = {ATTRIBUTES = (); }; };
+		F4D962E38ABBE18B47A6EA22 /* PitchInputReaderCollector.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 99419A77EA2FEA0C2647668E /* PitchInputReaderCollector.cpp */; settings = {ATTRIBUTES = (); }; };
+		F8B465CE34D8DF87AAE95913 /* CoreFoundation.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 4D765E1B1EA6C757220C63E7 /* CoreFoundation.framework */; settings = {}; };
+		F8ED42CF8679BF83227DAFC4 /* Carbon.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 9DFF62A901D70814B8A323D4 /* Carbon.framework */; settings = {}; };
+		FB5FC63AD500D3C6BDA38833 /* QtCore.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = C9835F3C908A7EC8F080B4CE /* QtCore.framework */; settings = {}; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		99542592E9780B9225F24AA8 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				);
+			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		65AD3EE5018C522580CE18A6 = {
-			isa = PBXFileReference;
-			includeInIndex = 0;
-			explicitFileType = "wrapper.application";
-			path = "QtVocalTrainer.app";
-			sourceTree = BUILT_PRODUCTS_DIR;
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		010F066C0C8FAFFCB00384DA /* executors.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = executors.cpp; path = /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/executors.cpp; sourceTree = "<absolute>"; };
+		1091C7F2ACC81AEE9DF74E74 /* qmlopenglitem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qmlopenglitem.h; path = /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qmlopenglitem.h; sourceTree = "<absolute>"; };
+		170DD1A433357ECE918F023E /* TimeUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TimeUtils.cpp; path = /Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils/TimeUtils.cpp; sourceTree = "<absolute>"; };
+		186D09F4CB713AD4B8BDD260 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = /System/Library/Frameworks/AudioUnit.framework; refType = 0; sourceTree = "<absolute>"; };
+		21F907AB8D19BD779147A085 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = /System/Library/Frameworks/AVFoundation.framework; refType = 0; sourceTree = "<absolute>"; };
+		249023FFA514A04311BC2D5D /* moc_QmlCppBridge.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_QmlCppBridge.cpp; path = /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_QmlCppBridge.cpp; sourceTree = "<absolute>"; };
+		2B774D8E4178765CE52EAAF5 /* DiskArbitration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DiskArbitration.framework; path = /System/Library/Frameworks/DiskArbitration.framework; refType = 0; sourceTree = "<absolute>"; };
+		2B89D6D035434E8732B497FB /* QtQml.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtQml.framework; path = /Users/semyon/Qt/5.11.0/clang_64/lib/QtQml.framework; refType = 0; sourceTree = "<absolute>"; };
+		3C44131FDCFEF4396B9EA2BA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = /System/Library/Frameworks/AudioToolbox.framework; refType = 0; sourceTree = "<absolute>"; };
+		3EE34C6C6255F234C94584F4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/main.cpp; sourceTree = "<absolute>"; };
+		3F3DAF4B91006B7F8ACE8C30 /* Pitch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Pitch.h; path = /Users/semyon/Projects/VocalTrainer/PitchDetection/Pitch.h; sourceTree = "<absolute>"; };
+		42F5D95319E946AA4552EB19 /* PortAudioInputReader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PortAudioInputReader.cpp; path = /Users/semyon/Projects/VocalTrainer/PitchDetection/PortAudioInputReader.cpp; sourceTree = "<absolute>"; };
+		4408CA09A25D27FBE37CDAAE /* .qmake.stash */ = {isa = PBXFileReference; name = .qmake.stash; path = /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/.qmake.stash; sourceTree = "<absolute>"; };
+		4A1C2993E55C65255C1398FB /* QtVocalTrainer.pro */ = {isa = PBXFileReference; lastKnownFileType = text; name = QtVocalTrainer.pro; path = /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/QtVocalTrainer.pro; sourceTree = "<absolute>"; };
+		4D765E1B1EA6C757220C63E7 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; refType = 0; sourceTree = "<absolute>"; };
+		4F3F093D90D78F85089F67BB /* MainWindowShared.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MainWindowShared.cpp; path = /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/MainWindowShared.cpp; sourceTree = "<absolute>"; };
+		554C4EF638BE7C2288F34633 /* QtGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtGui.framework; path = /Users/semyon/Qt/5.11.0/clang_64/lib/QtGui.framework; refType = 0; sourceTree = "<absolute>"; };
+		5B682C7941C28D6A601B9549 /* qmlopenglitem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qmlopenglitem.cpp; path = /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qmlopenglitem.cpp; sourceTree = "<absolute>"; };
+		61DAEAF44CFBFD0435D18633 /* PortAudio.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PortAudio.cpp; path = /Users/semyon/Projects/VocalTrainer/PitchDetection/PortAudio.cpp; sourceTree = "<absolute>"; };
+		654D24DDBA565FDCA6A13AB9 /* qmlpitchinputreader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qmlpitchinputreader.h; path = /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qmlpitchinputreader.h; sourceTree = "<absolute>"; };
+		65AD3EE5018C522580CE18A6 /* QtVocalTrainer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QtVocalTrainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		723F90793B2C195E2CCB2233 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; refType = 0; sourceTree = "<absolute>"; };
+		757C4D2CF043B21FE9CC0678 /* qml.qrc */ = {isa = PBXFileReference; lastKnownFileType = text; name = qml.qrc; path = /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qml.qrc; sourceTree = "<absolute>"; };
+		76B664FAC83040BA76C57E7F /* TimeUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TimeUtils.h; path = /Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils/TimeUtils.h; sourceTree = "<absolute>"; };
+		7E6C4EF13847B0CD0E129C35 /* PitchInputReader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PitchInputReader.cpp; path = /Users/semyon/Projects/VocalTrainer/PitchDetection/PitchInputReader.cpp; sourceTree = "<absolute>"; };
+		8040D46BE95BDB6D913516F6 /* QtNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtNetwork.framework; path = /Users/semyon/Qt/5.11.0/clang_64/lib/QtNetwork.framework; refType = 0; sourceTree = "<absolute>"; };
+		8D1AFD7B368D712618894EDF /* qmlpitch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qmlpitch.h; path = /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qmlpitch.h; sourceTree = "<absolute>"; };
+		8D9815BDB5BD9F90D2BC05C5 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; refType = 0; sourceTree = "<absolute>"; };
+		924148628D538E80F4530F9B /* MainWindow.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = MainWindow.mm; path = /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/MainWindow.mm; sourceTree = "<absolute>"; };
+		92E054C665D5746C7E2EB6F5 /* YinPitchDetector.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = YinPitchDetector.cpp; path = /Users/semyon/Projects/VocalTrainer/PitchDetection/YinPitchDetector.cpp; sourceTree = "<absolute>"; };
+		93FD482EA9AA70B5F33A4E72 /* Pitch.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Pitch.cpp; path = /Users/semyon/Projects/VocalTrainer/PitchDetection/Pitch.cpp; sourceTree = "<absolute>"; };
+		9742F24EE18EA44D52824F1E /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; refType = 0; sourceTree = "<absolute>"; };
+		9928608A8BBE0D3A5606468D /* moc_MainWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_MainWindow.cpp; path = /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_MainWindow.cpp; sourceTree = "<absolute>"; };
+		99419A77EA2FEA0C2647668E /* PitchInputReaderCollector.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PitchInputReaderCollector.cpp; path = /Users/semyon/Projects/VocalTrainer/PitchDetection/PitchInputReaderCollector.cpp; sourceTree = "<absolute>"; };
+		9BD80D57069FBF796EF30C33 /* moc_qmlopenglitem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qmlopenglitem.cpp; path = /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_qmlopenglitem.cpp; sourceTree = "<absolute>"; };
+		9DFF62A901D70814B8A323D4 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; refType = 0; sourceTree = "<absolute>"; };
+		9E65F65D73262AC07C018AEA /* PortAudio.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PortAudio.h; path = /Users/semyon/Projects/VocalTrainer/PitchDetection/PortAudio.h; sourceTree = "<absolute>"; };
+		9E78C40084B4C85FE9D0258A /* app.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = app.h; path = /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/app.h; sourceTree = "<absolute>"; };
+		A1A67BEAA744704B29168D39 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; refType = 0; sourceTree = "<absolute>"; };
+		A294A169E80E441A81ED6C19 /* PitchInputReaderCollector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PitchInputReaderCollector.h; path = /Users/semyon/Projects/VocalTrainer/PitchDetection/PitchInputReaderCollector.h; sourceTree = "<absolute>"; };
+		A3113B7523B0D9D3CF3161D7 /* QmlCppBridge.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = QmlCppBridge.cpp; path = /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/QmlCppBridge.cpp; sourceTree = "<absolute>"; };
+		A8DBB3B894A514ABE11FF772 /* moc_qmlpitch.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qmlpitch.cpp; path = /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_qmlpitch.cpp; sourceTree = "<absolute>"; };
+		AC275522DAB9C3A7B41FD27F /* MainWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MainWindow.h; path = /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/MainWindow.h; sourceTree = "<absolute>"; };
+		AD6E0E76E19B42229889D1E2 /* qmlpitch.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qmlpitch.cpp; path = /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qmlpitch.cpp; sourceTree = "<absolute>"; };
+		BEF9DFDA6822604126A7E233 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = /System/Library/Frameworks/CoreAudio.framework; refType = 0; sourceTree = "<absolute>"; };
+		C50F8F4621EFDF9B66A93837 /* AudioInputReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AudioInputReader.h; path = /Users/semyon/Projects/VocalTrainer/PitchDetection/AudioInputReader.h; sourceTree = "<absolute>"; };
+		C613FE9ADA39556AD9540F1E /* QmlCppBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = QmlCppBridge.h; path = /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/QmlCppBridge.h; sourceTree = "<absolute>"; };
+		C9835F3C908A7EC8F080B4CE /* QtCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtCore.framework; path = /Users/semyon/Qt/5.11.0/clang_64/lib/QtCore.framework; refType = 0; sourceTree = "<absolute>"; };
+		D2C9E726732F383A23F3DF2A /* libportaudio.a */ = {isa = PBXFileReference; name = libportaudio.a; path = /Users/semyon/Projects/VocalTrainer/libs/Release/libportaudio.a; refType = 0; sourceTree = "<absolute>"; };
+		D4B32C2222F82AC56BADEB21 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; refType = 0; sourceTree = "<absolute>"; };
+		DB8A8F0C78EA13DF9937910F /* PitchDetectionSmoothingAudioBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PitchDetectionSmoothingAudioBuffer.h; path = /Users/semyon/Projects/VocalTrainer/PitchDetection/PitchDetectionSmoothingAudioBuffer.h; sourceTree = "<absolute>"; };
+		DD7DD3696B4047108034B91D /* PitchInputReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PitchInputReader.h; path = /Users/semyon/Projects/VocalTrainer/PitchDetection/PitchInputReader.h; sourceTree = "<absolute>"; };
+		DE1588F866E2F8A362D4FA86 /* app.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = app.cpp; path = /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/app.cpp; sourceTree = "<absolute>"; };
+		E8AE1D04D7E6AFEA1A08732D /* dummy.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = dummy.cpp; path = /Users/semyon/Qt/5.11.0/clang_64/mkspecs/features/data/dummy.cpp; sourceTree = "<absolute>"; };
+		E97D23E58376A80655A7AC0C /* PitchDetectionSmoothingAudioBuffer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PitchDetectionSmoothingAudioBuffer.cpp; path = /Users/semyon/Projects/VocalTrainer/PitchDetection/PitchDetectionSmoothingAudioBuffer.cpp; sourceTree = "<absolute>"; };
+		ECB125321253DBBE426CEE41 /* qmlpitchinputreader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qmlpitchinputreader.cpp; path = /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qmlpitchinputreader.cpp; sourceTree = "<absolute>"; };
+		F0871F9A6453756315FEE1CE /* QtQuick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtQuick.framework; path = /Users/semyon/Qt/5.11.0/clang_64/lib/QtQuick.framework; refType = 0; sourceTree = "<absolute>"; };
+		F102E79157CF60B5A25F5F81 /* YinPitchDetector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YinPitchDetector.h; path = /Users/semyon/Projects/VocalTrainer/PitchDetection/YinPitchDetector.h; sourceTree = "<absolute>"; };
+		F61C3E706670E1F71F3998D1 /* qrc_qml.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qrc_qml.cpp; path = /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qrc_qml.cpp; sourceTree = "<absolute>"; };
+		F8CF2B73DF3F4DAD22A38E8C /* moc_qmlpitchinputreader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qmlpitchinputreader.cpp; path = /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_qmlpitchinputreader.cpp; sourceTree = "<absolute>"; };
+		FCC237CA5AD60B9BA4447615 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; refType = 0; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D1C883685E82D5676953459A /* Link Binary With Libraries */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F26454630C80841CBDCFE1CA /* Foundation.framework in Link Binary With Libraries */,
+				F2A75ACAC9DF6A3F4E5711E7 /* AppKit.framework in Link Binary With Libraries */,
+				4EB68D0C8182BCE33529C421 /* AudioToolbox.framework in Link Binary With Libraries */,
+				F8B465CE34D8DF87AAE95913 /* CoreFoundation.framework in Link Binary With Libraries */,
+				CCA737EE379CDB10CC9A0F23 /* AVFoundation.framework in Link Binary With Libraries */,
+				DAD6F5593C3427F014531342 /* AudioUnit.framework in Link Binary With Libraries */,
+				668DDDA0C55405E7FCFD6CA5 /* CoreServices.framework in Link Binary With Libraries */,
+				F8ED42CF8679BF83227DAFC4 /* Carbon.framework in Link Binary With Libraries */,
+				35A1A39F8EAB37889EB3D397 /* CoreAudio.framework in Link Binary With Libraries */,
+				51702CADEF714F084FB14918 /* libportaudio.a in Link Binary With Libraries */,
+				1AB6D6DB17C494A863582E1F /* QtQuick.framework in Link Binary With Libraries */,
+				82F3259B99B0A4F8603EECB6 /* QtQml.framework in Link Binary With Libraries */,
+				7453F0059F8E88BB12427954 /* QtNetwork.framework in Link Binary With Libraries */,
+				FB5FC63AD500D3C6BDA38833 /* QtCore.framework in Link Binary With Libraries */,
+				A99B2AA0F9CBBDD12BA126A4 /* DiskArbitration.framework in Link Binary With Libraries */,
+				8D267F2E4776F0ECA2F49DC8 /* IOKit.framework in Link Binary With Libraries */,
+				7E6181E315EB3F51F58A7697 /* QtGui.framework in Link Binary With Libraries */,
+				8771A8C96E9C391044035D99 /* OpenGL.framework in Link Binary With Libraries */,
+				E45E51A644D5FC9F942ECE55 /* AGL.framework in Link Binary With Libraries */,
+			);
+			name = "Link Binary With Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FE0A091FDBFB3E9C31B7A1BD = {
-			children = (
-				"65AD3EE5018C522580CE18A6");
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		25B08E2869634E9BCBA333A2 /* Generated Sources */ = {
 			isa = PBXGroup;
-			name = "Products";
+			children = (
+				F61C3E706670E1F71F3998D1 /* qrc_qml.cpp */,
+				9928608A8BBE0D3A5606468D /* moc_MainWindow.cpp */,
+				249023FFA514A04311BC2D5D /* moc_QmlCppBridge.cpp */,
+				9BD80D57069FBF796EF30C33 /* moc_qmlopenglitem.cpp */,
+				A8DBB3B894A514ABE11FF772 /* moc_qmlpitch.cpp */,
+				F8CF2B73DF3F4DAD22A38E8C /* moc_qmlpitchinputreader.cpp */,
+			);
+			name = "Generated Sources";
 			sourceTree = "<group>";
 		};
-		E8C543AB96796ECAA2E65C57 = {
-			children = (
-				"2EB56BE3C2D93CDAB0C52E67",
-				"25B08E2869634E9BCBA333A2",
-				"87DF60DE337FB58864343E39",
-				"B8254625CFD509ED2A24A166",
-				"74B182DB50CB5611B5C1C297",
-				"AF39DD055C3EF8226FBE929D",
-				"FE0A091FDBFB3E9C31B7A1BD");
+		2EB56BE3C2D93CDAB0C52E67 /* Sources */ = {
 			isa = PBXGroup;
-			name = "QtVocalTrainer";
+			children = (
+				924148628D538E80F4530F9B /* MainWindow.mm */,
+				3EE34C6C6255F234C94584F4 /* main.cpp */,
+				A3113B7523B0D9D3CF3161D7 /* QmlCppBridge.cpp */,
+				4F3F093D90D78F85089F67BB /* MainWindowShared.cpp */,
+				5B682C7941C28D6A601B9549 /* qmlopenglitem.cpp */,
+				AD6E0E76E19B42229889D1E2 /* qmlpitch.cpp */,
+				93FD482EA9AA70B5F33A4E72 /* Pitch.cpp */,
+				92E054C665D5746C7E2EB6F5 /* YinPitchDetector.cpp */,
+				7E6C4EF13847B0CD0E129C35 /* PitchInputReader.cpp */,
+				99419A77EA2FEA0C2647668E /* PitchInputReaderCollector.cpp */,
+				E97D23E58376A80655A7AC0C /* PitchDetectionSmoothingAudioBuffer.cpp */,
+				ECB125321253DBBE426CEE41 /* qmlpitchinputreader.cpp */,
+				170DD1A433357ECE918F023E /* TimeUtils.cpp */,
+				DE1588F866E2F8A362D4FA86 /* app.cpp */,
+				61DAEAF44CFBFD0435D18633 /* PortAudio.cpp */,
+				42F5D95319E946AA4552EB19 /* PortAudioInputReader.cpp */,
+				010F066C0C8FAFFCB00384DA /* executors.cpp */,
+				AC275522DAB9C3A7B41FD27F /* MainWindow.h */,
+				C613FE9ADA39556AD9540F1E /* QmlCppBridge.h */,
+				1091C7F2ACC81AEE9DF74E74 /* qmlopenglitem.h */,
+				8D1AFD7B368D712618894EDF /* qmlpitch.h */,
+				3F3DAF4B91006B7F8ACE8C30 /* Pitch.h */,
+				DB8A8F0C78EA13DF9937910F /* PitchDetectionSmoothingAudioBuffer.h */,
+				F102E79157CF60B5A25F5F81 /* YinPitchDetector.h */,
+				DD7DD3696B4047108034B91D /* PitchInputReader.h */,
+				A294A169E80E441A81ED6C19 /* PitchInputReaderCollector.h */,
+				C50F8F4621EFDF9B66A93837 /* AudioInputReader.h */,
+				654D24DDBA565FDCA6A13AB9 /* qmlpitchinputreader.h */,
+				76B664FAC83040BA76C57E7F /* TimeUtils.h */,
+				9E78C40084B4C85FE9D0258A /* app.h */,
+				9E65F65D73262AC07C018AEA /* PortAudio.h */,
+			);
+			name = Sources;
 			sourceTree = "<group>";
 		};
-		03115E2DE1AF743F39D33DFC = {
-			buildPhases = (
-				"5E618435888B9D49F8540165",
-				"7EF0942E79C014DCEC8976BC");
-			dependencies = (
-				);
-			buildConfigurationList = 6CC3B5D2136C7CD6A5CF5A59;
-			isa = PBXAggregateTarget;
-			buildRules = (
-);
-			productName = "Qt Preprocess";
-			name = "Qt Preprocess";
+		74B182DB50CB5611B5C1C297 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4A1C2993E55C65255C1398FB /* QtVocalTrainer.pro */,
+				4408CA09A25D27FBE37CDAAE /* .qmake.stash */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
 		};
-		F6F7C8259BF4F27C7755E39C = {
-			isa = PBXTargetDependency;
-			target = "03115E2DE1AF743F39D33DFC";
+		87DF60DE337FB58864343E39 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				757C4D2CF043B21FE9CC0678 /* qml.qrc */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
 		};
-		D3FD1F6CD9E8CD0B0ED24AA0 = {
-			buildPhases = (
-				"F7E50F631C51CD5B5DC0BC43",
-				"D1C883685E82D5676953459A",
-				"30414803F31797EB689AE508",
-				"99542592E9780B9225F24AA8");
-			dependencies = (
-				"F6F7C8259BF4F27C7755E39C");
-			productReference = "65AD3EE5018C522580CE18A6";
-			buildConfigurationList = 6CC3B5D2136C7CD6A5CF5A59;
+		AF39DD055C3EF8226FBE929D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FCC237CA5AD60B9BA4447615 /* Foundation.framework */,
+				723F90793B2C195E2CCB2233 /* AppKit.framework */,
+				3C44131FDCFEF4396B9EA2BA /* AudioToolbox.framework */,
+				4D765E1B1EA6C757220C63E7 /* CoreFoundation.framework */,
+				21F907AB8D19BD779147A085 /* AVFoundation.framework */,
+				186D09F4CB713AD4B8BDD260 /* AudioUnit.framework */,
+				9742F24EE18EA44D52824F1E /* CoreServices.framework */,
+				9DFF62A901D70814B8A323D4 /* Carbon.framework */,
+				BEF9DFDA6822604126A7E233 /* CoreAudio.framework */,
+				D2C9E726732F383A23F3DF2A /* libportaudio.a */,
+				F0871F9A6453756315FEE1CE /* QtQuick.framework */,
+				2B89D6D035434E8732B497FB /* QtQml.framework */,
+				8040D46BE95BDB6D913516F6 /* QtNetwork.framework */,
+				C9835F3C908A7EC8F080B4CE /* QtCore.framework */,
+				2B774D8E4178765CE52EAAF5 /* DiskArbitration.framework */,
+				A1A67BEAA744704B29168D39 /* IOKit.framework */,
+				554C4EF638BE7C2288F34633 /* QtGui.framework */,
+				D4B32C2222F82AC56BADEB21 /* OpenGL.framework */,
+				8D9815BDB5BD9F90D2BC05C5 /* AGL.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B8254625CFD509ED2A24A166 /* Sources [moc_predefs] */ = {
+			isa = PBXGroup;
+			children = (
+				E8AE1D04D7E6AFEA1A08732D /* dummy.cpp */,
+			);
+			name = "Sources [moc_predefs]";
+			sourceTree = "<group>";
+		};
+		E8C543AB96796ECAA2E65C57 /* QtVocalTrainer */ = {
+			isa = PBXGroup;
+			children = (
+				2EB56BE3C2D93CDAB0C52E67 /* Sources */,
+				25B08E2869634E9BCBA333A2 /* Generated Sources */,
+				87DF60DE337FB58864343E39 /* Resources */,
+				B8254625CFD509ED2A24A166 /* Sources [moc_predefs] */,
+				74B182DB50CB5611B5C1C297 /* Supporting Files */,
+				AF39DD055C3EF8226FBE929D /* Frameworks */,
+				FE0A091FDBFB3E9C31B7A1BD /* Products */,
+			);
+			name = QtVocalTrainer;
+			sourceTree = "<group>";
+		};
+		FE0A091FDBFB3E9C31B7A1BD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				65AD3EE5018C522580CE18A6 /* QtVocalTrainer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D3FD1F6CD9E8CD0B0ED24AA0 /* QtVocalTrainer */ = {
 			isa = PBXNativeTarget;
+			buildConfigurationList = 6CC3B5D2136C7CD6A5CF5A59 /* Build configuration list for PBXNativeTarget "QtVocalTrainer" */;
+			buildPhases = (
+				F7E50F631C51CD5B5DC0BC43 /* Compile Sources */,
+				D1C883685E82D5676953459A /* Link Binary With Libraries */,
+				30414803F31797EB689AE508 /* Copy Bundle Resources */,
+				99542592E9780B9225F24AA8 /* Embed Frameworks */,
+			);
 			buildRules = (
-);
+			);
+			dependencies = (
+				F6F7C8259BF4F27C7755E39C /* PBXTargetDependency */,
+			);
+			name = QtVocalTrainer;
+			productName = QtVocalTrainer;
+			productReference = 65AD3EE5018C522580CE18A6 /* QtVocalTrainer.app */;
 			productType = "com.apple.product-type.application";
-			name = "QtVocalTrainer";
-			productName = "QtVocalTrainer";
 		};
-		3AA6C32AC930069E80220CF1 = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = "NO";
-				"ARCHS[sdk=macosx*]" = "x86_64";
-				COPY_PHASE_STRIP = "NO";
-				DEVELOPMENT_TEAM = "R2YYPH8323";
-				ENABLE_BITCODE = "NO";
-				GCC_OPTIMIZATION_LEVEL = "0";
-				ONLY_ACTIVE_ARCH = "YES";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.neborosoft.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "QtVocalTrainer";
-				QMAKE_PKGINFO_TYPEINFO = "????";
-				QT_LIBRARY_SUFFIX = "_debug";
-				SDKROOT = "macosx";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				CC = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang";
-				LDPLUSPLUS = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++";
-				INFOPLIST_FILE = "Info.plist";
-				SYMROOT = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/";
-				DYLIB_CURRENT_VERSION = "1.0.0";
-				DYLIB_COMPATIBILITY_VERSION = "1.0";
-				MACOSX_DEPLOYMENT_TARGET = "10.11";
-				HEADER_SEARCH_PATHS = (
-					".",
-					"../include",
-					"../VocalTrainer/VxPlayer/AudioPlayback",
-					"../PitchDetection/CppUtils",
-					"../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers",
-					"../../../Qt/5.11.0/clang_64/lib/QtGui.framework/Headers",
-					"../../../Qt/5.11.0/clang_64/lib/QtQml.framework/Headers",
-					"../../../Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers",
-					"../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers",
-					".",
-					"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/OpenGL.framework/Headers",
-					"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/AGL.framework/Headers",
-					"../../../Qt/5.11.0/clang_64/mkspecs/macx-clang");
-				LIBRARY_SEARCH_PATHS = (
-					"/System/Library/Frameworks/",
-					"/Users/semyon/Projects/VocalTrainer/libs/Release",
-					"/Users/semyon/Qt/5.11.0/clang_64/lib");
-				FRAMEWORK_SEARCH_PATHS = (
-					"/Users/semyon/Qt/5.11.0/clang_64/lib",
-					"/Users/semyon/Qt/5.11.0/clang_64/lib");
-				OTHER_CFLAGS = (
-					"-pipe",
-					"-O2",
-					"-Wall",
-					"-W",
-					"-fPIC",
-					"-DQT_DEPRECATED_WARNINGS",
-					"-DQT_NO_DEBUG",
-					"-DQT_QUICK_LIB",
-					"-DQT_GUI_LIB",
-					"-DQT_QML_LIB",
-					"-DQT_NETWORK_LIB",
-					"-DQT_CORE_LIB");
-				OTHER_CPLUSPLUSFLAGS = (
-					"-pipe",
-					"-stdlib=libc++",
-					"-std=c++17",
-					"-O2",
-					"-std=gnu++11",
-					"-Wall",
-					"-W",
-					"-fPIC",
-					"-DQT_DEPRECATED_WARNINGS",
-					"-DQT_NO_DEBUG",
-					"-DQT_QUICK_LIB",
-					"-DQT_GUI_LIB",
-					"-DQT_QML_LIB",
-					"-DQT_NETWORK_LIB",
-					"-DQT_CORE_LIB");
-				OTHER_LDFLAGS = (
-						"-stdlib=libc++",
-						"-headerpad_max_install_names",
-						"-Wl,-rpath,@executable_path/Frameworks",
-						"-Wl,-rpath,/Users/semyon/Qt/5.11.0/clang_64/lib",
-						"-F/Users/semyon/Qt/5.11.0/clang_64/lib");
-				ARCHS = "x86_64";
-			};
-			name = "Debug";
-		};
-		77418F46922677BB04ED38DD = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = "NO";
-				"ARCHS[sdk=macosx*]" = "x86_64";
-				COPY_PHASE_STRIP = "NO";
-				DEVELOPMENT_TEAM = "R2YYPH8323";
-				ENABLE_BITCODE = "NO";
-				GCC_OPTIMIZATION_LEVEL = "0";
-				ONLY_ACTIVE_ARCH = "YES";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.neborosoft.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "QtVocalTrainer";
-				QMAKE_PKGINFO_TYPEINFO = "????";
-				QT_LIBRARY_SUFFIX = "_debug";
-				SDKROOT = "macosx";
-				PRODUCT_NAME = "QtVocalTrainer";
-			};
-			name = "Debug";
-		};
-		339EE1B2CC4FC24589A0EA95 = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = "NO";
-				"ARCHS[sdk=macosx*]" = "x86_64";
-				COPY_PHASE_STRIP = "NO";
-				DEVELOPMENT_TEAM = "R2YYPH8323";
-				ENABLE_BITCODE = "NO";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.neborosoft.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "QtVocalTrainer";
-				QMAKE_PKGINFO_TYPEINFO = "????";
-				QT_LIBRARY_SUFFIX = "";
-				SDKROOT = "macosx";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				CC = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang";
-				LDPLUSPLUS = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++";
-				INFOPLIST_FILE = "Info.plist";
-				SYMROOT = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/";
-				DYLIB_CURRENT_VERSION = "1.0.0";
-				DYLIB_COMPATIBILITY_VERSION = "1.0";
-				MACOSX_DEPLOYMENT_TARGET = "10.11";
-				HEADER_SEARCH_PATHS = (
-					".",
-					"../include",
-					"../VocalTrainer/VxPlayer/AudioPlayback",
-					"../PitchDetection/CppUtils",
-					"../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers",
-					"../../../Qt/5.11.0/clang_64/lib/QtGui.framework/Headers",
-					"../../../Qt/5.11.0/clang_64/lib/QtQml.framework/Headers",
-					"../../../Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers",
-					"../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers",
-					".",
-					"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/OpenGL.framework/Headers",
-					"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/AGL.framework/Headers",
-					"../../../Qt/5.11.0/clang_64/mkspecs/macx-clang");
-				LIBRARY_SEARCH_PATHS = (
-					"/System/Library/Frameworks/",
-					"/Users/semyon/Projects/VocalTrainer/libs/Release",
-					"/Users/semyon/Qt/5.11.0/clang_64/lib");
-				FRAMEWORK_SEARCH_PATHS = (
-					"/Users/semyon/Qt/5.11.0/clang_64/lib",
-					"/Users/semyon/Qt/5.11.0/clang_64/lib");
-				OTHER_CFLAGS = (
-					"-pipe",
-					"-O2",
-					"-Wall",
-					"-W",
-					"-fPIC",
-					"-DQT_DEPRECATED_WARNINGS",
-					"-DQT_NO_DEBUG",
-					"-DQT_QUICK_LIB",
-					"-DQT_GUI_LIB",
-					"-DQT_QML_LIB",
-					"-DQT_NETWORK_LIB",
-					"-DQT_CORE_LIB");
-				OTHER_CPLUSPLUSFLAGS = (
-					"-pipe",
-					"-stdlib=libc++",
-					"-std=c++17",
-					"-O2",
-					"-std=gnu++11",
-					"-Wall",
-					"-W",
-					"-fPIC",
-					"-DQT_DEPRECATED_WARNINGS",
-					"-DQT_NO_DEBUG",
-					"-DQT_QUICK_LIB",
-					"-DQT_GUI_LIB",
-					"-DQT_QML_LIB",
-					"-DQT_NETWORK_LIB",
-					"-DQT_CORE_LIB");
-				OTHER_LDFLAGS = (
-						"-stdlib=libc++",
-						"-headerpad_max_install_names",
-						"-Wl,-rpath,@executable_path/Frameworks",
-						"-Wl,-rpath,/Users/semyon/Qt/5.11.0/clang_64/lib",
-						"-F/Users/semyon/Qt/5.11.0/clang_64/lib");
-				ARCHS = "x86_64";
-			};
-			name = "Release";
-		};
-		6666AA5E688052234F6758D8 = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = "NO";
-				"ARCHS[sdk=macosx*]" = "x86_64";
-				COPY_PHASE_STRIP = "NO";
-				DEVELOPMENT_TEAM = "R2YYPH8323";
-				ENABLE_BITCODE = "NO";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.neborosoft.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "QtVocalTrainer";
-				QMAKE_PKGINFO_TYPEINFO = "????";
-				QT_LIBRARY_SUFFIX = "";
-				SDKROOT = "macosx";
-				PRODUCT_NAME = "QtVocalTrainer";
-			};
-			name = "Release";
-		};
-		DAC4C1AA5EDEA1C85E9CA5E6 = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				"3AA6C32AC930069E80220CF1",
-				"339EE1B2CC4FC24589A0EA95");
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release";
-		};
-		6CC3B5D2136C7CD6A5CF5A59 = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				"77418F46922677BB04ED38DD",
-				"6666AA5E688052234F6758D8");
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release";
-		};
-		6DB9C3763D02B1415CD9D565 = {
-			hasScannedForEncodings = 1;
-			compatibilityVersion = "Xcode 3.2";
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6DB9C3763D02B1415CD9D565 /* Project object */ = {
 			isa = PBXProject;
-			mainGroup = "E8C543AB96796ECAA2E65C57";
-			productRefGroup = "FE0A091FDBFB3E9C31B7A1BD";
-			buildConfigurationList = "DAC4C1AA5EDEA1C85E9CA5E6";
-			projectDirPath = "";
-			projectRoot = "";
-			targets = (
-				"D3FD1F6CD9E8CD0B0ED24AA0",
-				"03115E2DE1AF743F39D33DFC");
 			attributes = {
 				TargetAttributes = {
 				};
 			};
+			buildConfigurationList = DAC4C1AA5EDEA1C85E9CA5E6 /* Build configuration list for PBXProject "QtVocalTrainer" */;
+			compatibilityVersion = "Xcode 3.2";
+			hasScannedForEncodings = 1;
+			mainGroup = E8C543AB96796ECAA2E65C57 /* QtVocalTrainer */;
+			productRefGroup = FE0A091FDBFB3E9C31B7A1BD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D3FD1F6CD9E8CD0B0ED24AA0 /* QtVocalTrainer */,
+				03115E2DE1AF743F39D33DFC /* Qt Preprocess */,
+			);
 		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		30414803F31797EB689AE508 /* Copy Bundle Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "Copy Bundle Resources";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5E618435888B9D49F8540165 /* Qt Qmake */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "Qt Qmake";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/ -f QtVocalTrainer.xcodeproj/qt_makeqmake.mak";
+			showEnvVarsInLog = 0;
+		};
+		7EF0942E79C014DCEC8976BC /* Qt Preprocessors */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "Qt Preprocessors";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/ -f QtVocalTrainer.xcodeproj/qt_preprocess.mak";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F7E50F631C51CD5B5DC0BC43 /* Compile Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4A7DABEDB67A2ACC4376D83 /* MainWindow.mm in Compile Sources */,
+				6A0BEF1A99FE649866352C7C /* main.cpp in Compile Sources */,
+				9453F35B6EB65B36D2199931 /* QmlCppBridge.cpp in Compile Sources */,
+				83166E56ADE0AA9A6D0E58CC /* MainWindowShared.cpp in Compile Sources */,
+				5AC2E76E870D2A004CF8DCD2 /* qmlopenglitem.cpp in Compile Sources */,
+				297624C7BCD6FA4C9B1993EF /* qmlpitch.cpp in Compile Sources */,
+				A8B38B4FE3D88FE4D6A9AEA5 /* Pitch.cpp in Compile Sources */,
+				8D85C37316F342B56FD3CCCE /* YinPitchDetector.cpp in Compile Sources */,
+				EE26DC63E361862F515A9055 /* PitchInputReader.cpp in Compile Sources */,
+				F4D962E38ABBE18B47A6EA22 /* PitchInputReaderCollector.cpp in Compile Sources */,
+				0CDFA05820DBB6123682992E /* PitchDetectionSmoothingAudioBuffer.cpp in Compile Sources */,
+				BDCD8246510D911A428E9488 /* qmlpitchinputreader.cpp in Compile Sources */,
+				327D328DC0E15513077CA217 /* TimeUtils.cpp in Compile Sources */,
+				42469CE418C42F99BFA4EECE /* app.cpp in Compile Sources */,
+				C0A33B54AB4F43E113571EFD /* PortAudio.cpp in Compile Sources */,
+				EB92C9E299C61E72C0FFF4E4 /* PortAudioInputReader.cpp in Compile Sources */,
+				D7C5B34E745041BD55235BD0 /* executors.cpp in Compile Sources */,
+				F3F0C5A9AE1D79D2A4930AEA /* qrc_qml.cpp in Compile Sources */,
+				3D30F0B43D9EE5E9EF8F3145 /* moc_MainWindow.cpp in Compile Sources */,
+				AE6596E2227260CD02B22B61 /* moc_QmlCppBridge.cpp in Compile Sources */,
+				4D39E2B783FFDF3FB02ED09A /* moc_qmlopenglitem.cpp in Compile Sources */,
+				B453224DC7FC3E0971A15260 /* moc_qmlpitch.cpp in Compile Sources */,
+				1C90DF67E8C2A478FBB7CE6D /* moc_qmlpitchinputreader.cpp in Compile Sources */,
+				DE96A987995B398E25D392B5 /* dummy.cpp in Compile Sources */,
+			);
+			name = "Compile Sources";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F6F7C8259BF4F27C7755E39C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 03115E2DE1AF743F39D33DFC /* Qt Preprocess */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		339EE1B2CC4FC24589A0EA95 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				ARCHS = x86_64;
+				"ARCHS[sdk=macosx*]" = x86_64;
+				CC = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang;
+				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = R2YYPH8323;
+				DYLIB_COMPATIBILITY_VERSION = 1.0;
+				DYLIB_CURRENT_VERSION = 1.0.0;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					/Users/semyon/Qt/5.11.0/clang_64/lib,
+					/Users/semyon/Qt/5.11.0/clang_64/lib,
+				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					.,
+					../include,
+					../VocalTrainer/VxPlayer/AudioPlayback,
+					../PitchDetection/CppUtils,
+					../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers,
+					../../../Qt/5.11.0/clang_64/lib/QtGui.framework/Headers,
+					../../../Qt/5.11.0/clang_64/lib/QtQml.framework/Headers,
+					../../../Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers,
+					../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers,
+					.,
+					/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/OpenGL.framework/Headers,
+					/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/AGL.framework/Headers,
+					"../../../Qt/5.11.0/clang_64/mkspecs/macx-clang",
+				);
+				INFOPLIST_FILE = Info.plist;
+				LDPLUSPLUS = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++";
+				LIBRARY_SEARCH_PATHS = (
+					/System/Library/Frameworks/,
+					/Users/semyon/Projects/VocalTrainer/libs/Release,
+					/Users/semyon/Qt/5.11.0/clang_64/lib,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				OTHER_CFLAGS = (
+					"-pipe",
+					"-O2",
+					"-Wall",
+					"-W",
+					"-fPIC",
+					"-DQT_DEPRECATED_WARNINGS",
+					"-DQT_NO_DEBUG",
+					"-DQT_QUICK_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_QML_LIB",
+					"-DQT_NETWORK_LIB",
+					"-DQT_CORE_LIB",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-pipe",
+					"-stdlib=libc++",
+					"-std=c++14",
+					"-O2",
+					"-std=gnu++11",
+					"-Wall",
+					"-W",
+					"-fPIC",
+					"-DQT_DEPRECATED_WARNINGS",
+					"-DQT_NO_DEBUG",
+					"-DQT_QUICK_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_QML_LIB",
+					"-DQT_NETWORK_LIB",
+					"-DQT_CORE_LIB",
+				);
+				OTHER_LDFLAGS = (
+					"-stdlib=libc++",
+					"-headerpad_max_install_names",
+					"-Wl,-rpath,@executable_path/Frameworks",
+					"-Wl,-rpath,/Users/semyon/Qt/5.11.0/clang_64/lib",
+					"-F/Users/semyon/Qt/5.11.0/clang_64/lib",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.neborosoft.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = QtVocalTrainer;
+				QMAKE_PKGINFO_TYPEINFO = "????";
+				QT_LIBRARY_SUFFIX = "";
+				SDKROOT = macosx;
+				SYMROOT = /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/;
+			};
+			name = Release;
+		};
+		3AA6C32AC930069E80220CF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				ARCHS = x86_64;
+				"ARCHS[sdk=macosx*]" = x86_64;
+				CC = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang;
+				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = R2YYPH8323;
+				DYLIB_COMPATIBILITY_VERSION = 1.0;
+				DYLIB_CURRENT_VERSION = 1.0.0;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					/Users/semyon/Qt/5.11.0/clang_64/lib,
+					/Users/semyon/Qt/5.11.0/clang_64/lib,
+				);
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					.,
+					../include,
+					../VocalTrainer/VxPlayer/AudioPlayback,
+					../PitchDetection/CppUtils,
+					../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers,
+					../../../Qt/5.11.0/clang_64/lib/QtGui.framework/Headers,
+					../../../Qt/5.11.0/clang_64/lib/QtQml.framework/Headers,
+					../../../Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers,
+					../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers,
+					.,
+					/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/OpenGL.framework/Headers,
+					/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/AGL.framework/Headers,
+					"../../../Qt/5.11.0/clang_64/mkspecs/macx-clang",
+				);
+				INFOPLIST_FILE = Info.plist;
+				LDPLUSPLUS = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++";
+				LIBRARY_SEARCH_PATHS = (
+					/System/Library/Frameworks/,
+					/Users/semyon/Projects/VocalTrainer/libs/Release,
+					/Users/semyon/Qt/5.11.0/clang_64/lib,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-pipe",
+					"-O2",
+					"-Wall",
+					"-W",
+					"-fPIC",
+					"-DQT_DEPRECATED_WARNINGS",
+					"-DQT_NO_DEBUG",
+					"-DQT_QUICK_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_QML_LIB",
+					"-DQT_NETWORK_LIB",
+					"-DQT_CORE_LIB",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-pipe",
+					"-stdlib=libc++",
+					"-std=c++14",
+					"-O2",
+					"-std=gnu++11",
+					"-Wall",
+					"-W",
+					"-fPIC",
+					"-DQT_DEPRECATED_WARNINGS",
+					"-DQT_NO_DEBUG",
+					"-DQT_QUICK_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_QML_LIB",
+					"-DQT_NETWORK_LIB",
+					"-DQT_CORE_LIB",
+				);
+				OTHER_LDFLAGS = (
+					"-stdlib=libc++",
+					"-headerpad_max_install_names",
+					"-Wl,-rpath,@executable_path/Frameworks",
+					"-Wl,-rpath,/Users/semyon/Qt/5.11.0/clang_64/lib",
+					"-F/Users/semyon/Qt/5.11.0/clang_64/lib",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.neborosoft.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = QtVocalTrainer;
+				QMAKE_PKGINFO_TYPEINFO = "????";
+				QT_LIBRARY_SUFFIX = _debug;
+				SDKROOT = macosx;
+				SYMROOT = /Users/semyon/Projects/VocalTrainer/QtVocalTrainer/;
+			};
+			name = Debug;
+		};
+		6666AA5E688052234F6758D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				"ARCHS[sdk=macosx*]" = x86_64;
+				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = R2YYPH8323;
+				ENABLE_BITCODE = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.neborosoft.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = QtVocalTrainer;
+				QMAKE_PKGINFO_TYPEINFO = "????";
+				QT_LIBRARY_SUFFIX = "";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		77418F46922677BB04ED38DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				"ARCHS[sdk=macosx*]" = x86_64;
+				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = R2YYPH8323;
+				ENABLE_BITCODE = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.neborosoft.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = QtVocalTrainer;
+				QMAKE_PKGINFO_TYPEINFO = "????";
+				QT_LIBRARY_SUFFIX = _debug;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6CC3B5D2136C7CD6A5CF5A59 /* Build configuration list for PBXNativeTarget "QtVocalTrainer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				77418F46922677BB04ED38DD /* Debug */,
+				6666AA5E688052234F6758D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DAC4C1AA5EDEA1C85E9CA5E6 /* Build configuration list for PBXProject "QtVocalTrainer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3AA6C32AC930069E80220CF1 /* Debug */,
+				339EE1B2CC4FC24589A0EA95 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
 	};
-	rootObject = "6DB9C3763D02B1415CD9D565";
+	rootObject = 6DB9C3763D02B1415CD9D565 /* Project object */;
 }

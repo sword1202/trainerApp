@@ -47,7 +47,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 macx {
-    LIBS += -framework Foundation -framework AppKit -framework AudioToolbox -framework CoreFoundation -framework AVFoundation -framework AudioUnit -framework CoreServices -framework Carbon -framework CoreAudio
+    LIBS += -framework Foundation -framework AppKit -framework AudioToolbox -framework \
+CoreFoundation -framework AVFoundation -framework CoreServices -framework CoreAudio
     LIBS += ../libs/Release/libportaudio.a
 }
 
@@ -61,7 +62,7 @@ HEADERS += \
     ../PitchDetection/YinPitchDetector.h \
     ../PitchDetection/PitchInputReader.h \
     ../PitchDetection/PitchInputReaderCollector.h \
-    ../PitchDetection/AudoInputReader.h \
+    ../PitchDetection/AudioInputReader.h \
     qmlpitchinputreader.h \
     ../PitchDetection/CppUtils/TimeUtils.h \
     app.h \
