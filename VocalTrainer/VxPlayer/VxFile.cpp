@@ -1,6 +1,5 @@
 #include <boost/assert.hpp>
 #include "VxFile.h"
-#include "GetSf2FilePath.h"
 #include "WAVFile.h"
 #include "AudioUtils.h"
 #include "Strings.h"

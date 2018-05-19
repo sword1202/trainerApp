@@ -6,15 +6,8 @@
 #ifndef VOCALTRAINER_GETSF2FILEPATH_H
 #define VOCALTRAINER_GETSF2FILEPATH_H
 
-#ifdef __APPLE__
-#import <string>
-std::string GetSf2FilePath();
-#else
 #include <string>
+#import "tsf.h"
 
-std::string GetSf2FilePath();
-#endif
-
-
-
+tsf* LoadTsf();
 #endif //VOCALTRAINER_GETSF2FILEPATH_H

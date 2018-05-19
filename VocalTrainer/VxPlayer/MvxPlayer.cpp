@@ -12,14 +12,10 @@
 
 using namespace CppUtils;
 
-MvxPlayer::MvxPlayer(std::istream &is) {
-    init(is);
-}
-
 void MvxPlayer::init(std::istream &is) {
     MvxFile file = MvxFile::readFromStream(is);
-    instrumentalPlayer = AudioFilePlayer::create(std::move(file.getInstrumental()));
-    vxPlayer = new VxFileAudioPlayer(std::move(file.getVxFile()));
+    instrumentalPlayer.reset(AudioFilePlayer::create(std::move(file.getInstrumental())));
+    vxPlayer.reset(new VxFileAudioPlayer(std::move(file.getVxFile())));
 
     // prevent desynchronization, when some of players have no data ready for playback
     setupVxPlayerDesyncHandler();
@@ -28,13 +24,28 @@ void MvxPlayer::init(std::istream &is) {
     instrumentalPlayer->addSeekChangedListener([=](double seek, double) {
         if (bounds) {
             if (seek >= bounds->getEndSeek()) {
-                pause();
-                this->seek(seek);
+                onComplete();
             }
         }
 
+        onSeekChanged(getSeek());
+
         return DONT_DELETE_LISTENER;
     });
+
+    instrumentalPlayer->addOnCompleteListener([=] {
+        onComplete();
+        return DONT_DELETE_LISTENER;
+    });
+}
+
+void MvxPlayer::init(const char *filePath) {
+    std::fstream is = Streams::OpenFile(filePath, std::ios::in | std::ios::binary);
+    init(is);
+}
+
+void MvxPlayer::onComplete() {
+    stopAndMoveSeekToBeginning();
 }
 
 void MvxPlayer::setupInstrumentalPlayerDesyncHandler() const {
@@ -63,11 +74,6 @@ void MvxPlayer::setupVxPlayerDesyncHandler() const {
     });
 }
 
-MvxPlayer::MvxPlayer(const char *filePath) {
-    std::fstream is = Streams::OpenFile(filePath, std::ios::in | std::ios::binary);
-    init(is);
-}
-
 void MvxPlayer::pause() {
     instrumentalPlayer->pause();
     vxPlayer->pause();
@@ -87,7 +93,7 @@ void MvxPlayer::play() {
     instrumentalPlayer->play();
 }
 
-void MvxPlayer::seek(double value) {
+void MvxPlayer::setSeek(double value) {
     assert(!bounds || (bounds->getStartSeek() <= value &&
             bounds->getEndSeek() <= value));
     assert(value >= 0 && value <= instrumentalPlayer->getTrackDurationInSeconds());
@@ -137,7 +143,15 @@ bool MvxPlayer::isPlaying() const {
 
 void MvxPlayer::stopAndMoveSeekToBeginning() {
     pause();
-    seek(bounds ? bounds->getStartSeek() : 0);
+    setSeek(bounds ? bounds->getStartSeek() : 0);
+}
+
+double MvxPlayer::getSeek() const {
+    return instrumentalPlayer->getSeek();
+}
+
+void MvxPlayer::onSeekChanged(double seek) {
+
 }
 
 MvxPlayer::Bounds::Bounds(double startSeek, double endSeek) : startSeek(startSeek), endSeek(endSeek) {

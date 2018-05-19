@@ -1,6 +1,6 @@
 QT += quick
 
-QMAKE_CXXFLAGS += -std=c++14
+CONFIG += c++14
 #QMAKE_CXXFLAGS_DEBUG += -O0
 
 # The following define makes your compiler emit warnings if you use
@@ -31,7 +31,32 @@ SOURCES += \
     app.cpp \
     ../PitchDetection/PortAudio.cpp \
     ../PitchDetection/PortAudioInputReader.cpp \
-    executors.cpp
+    executors.cpp \
+    qmlplayer.cpp \
+    ../VocalTrainer/VxPlayer/MvxPlayer.cpp \
+    ../VocalTrainer/VxPlayer/VxFileAudioDataGenerator.cpp \
+    ../VocalTrainer/VxPlayer/VxFile.cpp \
+    ../VocalTrainer/VxPlayer/MvxFile.cpp \
+    ../VocalTrainer/VxPlayer/SoundFont2PitchRenderer.cpp \
+    ../VocalTrainer/VxPlayer/PitchRenderer.cpp \
+    ../VocalTrainer/VxPlayer/AudioPlayback/VxFileAudioPlayer.cpp \
+    ../VocalTrainer/VxPlayer/AudioPlayback/Mp3AudioPlayer.cpp \
+    ../VocalTrainer/VxPlayer/AudioPlayback/AudioPlayer.cpp \
+    ../VocalTrainer/VxPlayer/AudioPlayback/AudioFilePlayer.cpp \
+    ../VocalTrainer/VxPlayer/AudioPlayback/WavAudioPlayer.cpp \
+    ../VocalTrainer/VxPlayer/Midi/MidiFileReader.cpp \
+    ../VocalTrainer/VxPlayer/Midi/MidiTrack.cpp \
+    ../VocalTrainer/VxPlayer/CraigsappMidifile/Options.cpp \
+    ../VocalTrainer/VxPlayer/CraigsappMidifile/MidiMessage.cpp \
+    ../VocalTrainer/VxPlayer/CraigsappMidifile/MidiFile.cpp \
+    ../VocalTrainer/VxPlayer/CraigsappMidifile/MidiEventList.cpp \
+    ../VocalTrainer/VxPlayer/CraigsappMidifile/MidiEvent.cpp \
+    ../VocalTrainer/VxPlayer/CraigsappMidifile/Binasc.cpp \
+    ../PitchDetection/WAVFile.cpp \
+    ../PitchDetection/AudioUtils.cpp \
+    ../PitchDetection/CppUtils/PeriodicallySleepingBackgroundTask.cpp \
+    ../PitchDetection/CppUtils/SynchronizedCallbacksQueue.cpp \
+    loadtsf.cpp
 
 RESOURCES += qml.qrc
 
@@ -50,6 +75,8 @@ macx {
     LIBS += -framework Foundation -framework AppKit -framework AudioToolbox -framework \
 CoreFoundation -framework AVFoundation -framework CoreServices -framework CoreAudio
     LIBS += ../libs/Release/libportaudio.a
+    LIBS += ../libs/Release/libboost_serialization.a
+    LIBS += ../libs/Release/libSoundTouch.1.dylib
 }
 
 HEADERS += \
@@ -66,10 +93,46 @@ HEADERS += \
     qmlpitchinputreader.h \
     ../PitchDetection/CppUtils/TimeUtils.h \
     app.h \
-    ../PitchDetection/PortAudio.h
+    ../PitchDetection/PortAudio.h \
+    qmlplayer.h \
+    ../VocalTrainer/VxPlayer/MvxPlayer.h \
+    ../VocalTrainer/VxPlayer/VxFile.h \
+    ../VocalTrainer/VxPlayer/VxFileAudioDataGenerator.h \
+    ../VocalTrainer/VxPlayer/MvxFile.h \
+    ../VocalTrainer/VxPlayer/VxPitch.h \
+    ../VocalTrainer/VxPlayer/VxLyricsLine.h \
+    ../VocalTrainer/VxPlayer/VxLyricsInterval.h \
+    ../VocalTrainer/VxPlayer/SoundFont2PitchRenderer.h \
+    ../VocalTrainer/VxPlayer/PitchRenderer.h \
+    ../VocalTrainer/VxPlayer/LoadTsf.h \
+    ../VocalTrainer/VxPlayer/tsf.h \
+    ../VocalTrainer/VxPlayer/AudioPlayback/VxFileAudioPlayer.h \
+    ../VocalTrainer/VxPlayer/AudioPlayback/AudioPlayer.h \
+    ../VocalTrainer/VxPlayer/AudioPlayback/Mp3AudioPlayer.h \
+    ../VocalTrainer/VxPlayer/AudioPlayback/AudioFilePlayer.h \
+    ../VocalTrainer/VxPlayer/AudioPlayback/minimp3.h \
+    ../VocalTrainer/VxPlayer/AudioPlayback/WavAudioPlayer.h \
+    ../VocalTrainer/VxPlayer/Midi/MidiFileReader.h \
+    ../VocalTrainer/VxPlayer/Midi/MidiNote.h \
+    ../VocalTrainer/VxPlayer/Midi/MidiTrack.h \
+    ../VocalTrainer/VxPlayer/CraigsappMidifile/MidiFile.h \
+    ../VocalTrainer/VxPlayer/CraigsappMidifile/Options.h \
+    ../VocalTrainer/VxPlayer/CraigsappMidifile/MidiMessage.h \
+    ../VocalTrainer/VxPlayer/CraigsappMidifile/MidiEventList.h \
+    ../VocalTrainer/VxPlayer/CraigsappMidifile/MidiEvent.h \
+    ../VocalTrainer/VxPlayer/CraigsappMidifile/Binasc.h \
+    ../PitchDetection/WAVFile.h \
+    ../PitchDetection/AudioUtils.h \
+    ../PitchDetection/CppUtils/PeriodicallySleepingBackgroundTask.h \
+    ../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h
 
 INCLUDEPATH += ../include \
     ../VocalTrainer/VxPlayer/AudioPlayback \
-    ../PitchDetection/CppUtils
+    ../VocalTrainer/VxPlayer \
+    ../VocalTrainer/VxPlayer/CraigsappMidifile \
+    ../PitchDetection/CppUtils \
+    ../PitchDetection
 
-DISTFILES +=
+DISTFILES += \
+    ../VocalTrainer/VxPlayer/CraigsappMidifile/LICENSE.txt \
+    ../VocalTrainer/VxPlayer/a.sf2

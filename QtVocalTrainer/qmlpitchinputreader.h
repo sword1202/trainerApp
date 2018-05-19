@@ -21,6 +21,8 @@ public:
 
     void pitchDetected(float frequency, double time) override;
 
+    void setThreshold(float threshold) override;
+
 signals:
     void pitchDetected(const QmlPitch& pitch);
     void thresholdChanged(float threshold);

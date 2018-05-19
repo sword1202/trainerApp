@@ -12,7 +12,7 @@ namespace CppUtils {
             }
 
             void run() override {
-
+                function();
             }
         };
 

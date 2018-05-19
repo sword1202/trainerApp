@@ -11,6 +11,7 @@
 #include "MvxFile.h"
 #include "VxFileAudioPlayer.h"
 #include <boost/optional.hpp>
+#include <memory>
 
 class MvxPlayer {
 public:
@@ -24,31 +25,35 @@ public:
         bool isInside(double value) const;
     };
 private:
-    AudioPlayer* instrumentalPlayer;
-    VxFileAudioPlayer* vxPlayer;
-    boost::optional<Bounds> bounds;
 
-    void init(std::istream& is);
+
+    std::unique_ptr<AudioPlayer, AudioPlayer::Deleter> instrumentalPlayer;
+    std::unique_ptr<VxFileAudioPlayer, AudioPlayer::Deleter> vxPlayer;
+    boost::optional<Bounds> bounds;
 
     void setupVxPlayerDesyncHandler() const;
     void setupInstrumentalPlayerDesyncHandler() const;
 public:
 
-    ~MvxPlayer();
-    MvxPlayer(const char* filePath);
-    MvxPlayer(std::istream& is);
+    virtual ~MvxPlayer();
+    void init(std::istream& is);
+    void init(const char* filePath);
     void prepare();
     void setInstrumentalVolume(float instrumentalVolume);
     void setPianoVolume(float pianoVolume);
-    void pause();
-    void stopAndMoveSeekToBeginning();
-    void play();
+    virtual void pause();
+    virtual void stopAndMoveSeekToBeginning();
+    virtual void play();
     bool isPlaying() const;
-    void seek(double value);
+    void setSeek(double value);
+    double getSeek() const;
     const VxFile& getVxFile() const;
 
     const boost::optional<Bounds> &getBounds() const;
     void setBounds(const boost::optional<Bounds> &bounds);
+
+    virtual void onComplete();
+    virtual void onSeekChanged(double seek);
 };
 
 

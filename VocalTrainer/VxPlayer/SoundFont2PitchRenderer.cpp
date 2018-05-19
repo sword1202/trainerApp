@@ -7,7 +7,7 @@
 #define TSF_IMPLEMENTATION
 #include "tsf.h"
 #include "AudioUtils.h"
-#include "GetSf2FilePath.h"
+#include "LoadTsf.h"
 
 constexpr float VOLUME = 0.5;
 
@@ -21,7 +21,7 @@ void SoundFont2PitchRenderer::render(const Pitch &pitch, short *buffer, int leng
 SoundFont2PitchRenderer::SoundFont2PitchRenderer(int sampleRate, double smoothingRangeInSeconds) :
         PitchRenderer(sampleRate) {
     smoothingSize = (int)round(sampleRate * smoothingRangeInSeconds);
-    _tsf = tsf_load_filename(GetSf2FilePath().data());
+    _tsf = LoadTsf();
     tsf_set_output(_tsf, TSF_MONO, sampleRate, 0);
 }
 

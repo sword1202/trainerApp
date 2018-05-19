@@ -6,7 +6,8 @@
 #include <QQmlContext>
 #include <iostream>
 #include "qmlpitchinputreader.h"
-#include "App.h"
+#include "app.h"
+#include "qmlplayer.h"
 
 int main(int argc, char *argv[])
 {
@@ -21,6 +22,7 @@ int main(int argc, char *argv[])
 
     qRegisterMetaType<QmlPitch>("Pitch");
     qmlRegisterType<QmlPitchInputReader>("PitchInputReader", 1, 0, "PitchInputReader");
+    qmlRegisterType<QmlPlayer>("Player", 1, 0, "Player");
 
     viewer.setSource(QUrl("qrc:/qml/main.qml"));
 

@@ -21,6 +21,8 @@ public:
     }
 };
 
+boost::fast_pool_allocator<MainLoopCallbackEvent> MainLoopCallbackEvent::allocator;
+
 App::App(int argc, char *argv[]) : QGuiApplication(argc, argv) {
     PortAudio::init();
 }

@@ -3,11 +3,11 @@
 // Copyright (c) 2018 Mac. All rights reserved.
 //
 
-#include "GetSf2FilePath.h"
+#include "LoadTsf.h"
 #import <Foundation/Foundation.h>
 
-std::string GetSf2FilePath() {
+tsf * LoadTsf() {
     NSBundle *myBundle = [NSBundle mainBundle];
     NSString *absPath = [myBundle pathForResource:@"a" ofType:@"sf2"];
-    return absPath.cString;
+    return tsf_load_filename(absPath.cString);
 }

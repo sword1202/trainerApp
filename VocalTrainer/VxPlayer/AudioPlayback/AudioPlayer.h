@@ -22,12 +22,12 @@ private:
     PaStream* stream = nullptr;
     PlaybackData playbackData;
     bool playing = false;
-    std::atomic<float> volume = 1.0f;
+    std::atomic<float> volume;
     CppUtils::ListenersSet<> onCompleteListeners;
 	CppUtils::ListenersSet<> onNoDataAvailableListeners;
 	CppUtils::ListenersSet<void*/*buffer*/, int/*framesCount*/> onDataSentToOutputListeners;
     CppUtils::ListenersSet<double /*seek*/, double/*totalDuration*/> seekChangedListeners;
-    std::atomic_int pitchShift = 0;
+    std::atomic_int pitchShift;
 
     static int callback(const void *inputBuffer,
             void *outputBuffer,
@@ -52,7 +52,12 @@ protected:
     // Audio Player can't be destroyed using delete operator, call destroy method instead;
 	virtual ~AudioPlayer();
 public:
-    
+
+	class Deleter {
+	public:
+		void operator()(AudioPlayer* player) const;
+	};
+
     typedef CppUtils::ListenersSet<>::function OnCompleteListener;
 	typedef CppUtils::ListenersSet<>::function OnNoDataAvailableListener;
 	typedef CppUtils::ListenersSet<void*, int>::function OnDataSentToOutputListener;

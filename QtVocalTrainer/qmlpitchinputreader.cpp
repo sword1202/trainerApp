@@ -26,3 +26,8 @@ QmlPitch QmlPitchInputReader::pitchAt(int index) {
 void QmlPitchInputReader::pitchDetected(float frequency, double time) {
     emit pitchDetected(QmlPitch(frequency, time));
 }
+
+void QmlPitchInputReader::setThreshold(float threshold) {
+    PitchInputReaderCollector::setThreshold(threshold);
+    emit thresholdChanged(threshold);
+}

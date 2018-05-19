@@ -137,7 +137,8 @@ double AudioPlayer::getTrackDurationInSeconds() {
 }
 
 AudioPlayer::AudioPlayer() {
-
+    volume = 1.0f;
+    pitchShift = 0;
 }
 
 void AudioPlayer::play() {
@@ -267,4 +268,8 @@ void AudioPlayer::removeOnDataSentToOutputListener(int key) {
 
 int AudioPlayer::addOnDataSentToOutputListener(const AudioPlayer::OnDataSentToOutputListener &listener) {
     return onDataSentToOutputListeners.addListener(listener);
+}
+
+void AudioPlayer::Deleter::operator()(AudioPlayer *player) const {
+    player->destroy();
 }

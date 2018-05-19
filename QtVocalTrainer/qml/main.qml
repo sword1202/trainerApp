@@ -2,6 +2,7 @@ import QtQuick 2.11
 import QtQuick.Window 2.11
 import QtGraphicalEffects 1.0
 import PitchInputReader 1.0
+import Player 1.0
 
 Rectangle {
     id: window
@@ -63,6 +64,10 @@ Rectangle {
         onPitchDetected: {
 
         }
+    }
+
+    Player {
+        source: "/Users/semyon/Documents/torero.mvx"
     }
 
     SingingProcessManager {
