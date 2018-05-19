@@ -1747,12 +1747,12 @@
 					"/Users/semyon/Qt/5.11.0/clang_64/lib");
 				OTHER_CFLAGS = (
 					"-pipe",
-					"-O2",
+					"-g",
 					"-Wall",
 					"-W",
 					"-fPIC",
 					"-DQT_DEPRECATED_WARNINGS",
-					"-DQT_NO_DEBUG",
+					"-DQT_QML_DEBUG",
 					"-DQT_QUICK_LIB",
 					"-DQT_GUI_LIB",
 					"-DQT_QML_LIB",
@@ -1761,13 +1761,13 @@
 				OTHER_CPLUSPLUSFLAGS = (
 					"-pipe",
 					"-stdlib=libc++",
-					"-O2",
+					"-g",
 					"-std=gnu++1y",
 					"-Wall",
 					"-W",
 					"-fPIC",
 					"-DQT_DEPRECATED_WARNINGS",
-					"-DQT_NO_DEBUG",
+					"-DQT_QML_DEBUG",
 					"-DQT_QUICK_LIB",
 					"-DQT_GUI_LIB",
 					"-DQT_QML_LIB",
@@ -1849,12 +1849,12 @@
 					"/Users/semyon/Qt/5.11.0/clang_64/lib");
 				OTHER_CFLAGS = (
 					"-pipe",
-					"-O2",
+					"-g",
 					"-Wall",
 					"-W",
 					"-fPIC",
 					"-DQT_DEPRECATED_WARNINGS",
-					"-DQT_NO_DEBUG",
+					"-DQT_QML_DEBUG",
 					"-DQT_QUICK_LIB",
 					"-DQT_GUI_LIB",
 					"-DQT_QML_LIB",
@@ -1863,13 +1863,13 @@
 				OTHER_CPLUSPLUSFLAGS = (
 					"-pipe",
 					"-stdlib=libc++",
-					"-O2",
+					"-g",
 					"-std=gnu++1y",
 					"-Wall",
 					"-W",
 					"-fPIC",
 					"-DQT_DEPRECATED_WARNINGS",
-					"-DQT_NO_DEBUG",
+					"-DQT_QML_DEBUG",
 					"-DQT_QUICK_LIB",
 					"-DQT_GUI_LIB",
 					"-DQT_QML_LIB",
@@ -1908,7 +1908,7 @@
 				"3AA6C32AC930069E80220CF1",
 				"339EE1B2CC4FC24589A0EA95");
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release";
+			defaultConfigurationName = "Debug";
 		};
 		6CC3B5D2136C7CD6A5CF5A59 = {
 			isa = XCConfigurationList;
@@ -1916,7 +1916,7 @@
 				"77418F46922677BB04ED38DD",
 				"6666AA5E688052234F6758D8");
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release";
+			defaultConfigurationName = "Debug";
 		};
 		6DB9C3763D02B1415CD9D565 = {
 			hasScannedForEncodings = 1;

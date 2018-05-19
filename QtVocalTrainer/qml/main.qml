@@ -68,6 +68,10 @@ Rectangle {
 
     Player {
         source: "/Users/semyon/Documents/torero.mvx"
+
+        Component.onCompleted: {
+            play()
+        }
     }
 
     SingingProcessManager {
