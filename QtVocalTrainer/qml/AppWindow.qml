@@ -14,10 +14,7 @@ ApplicationWindow {
         selectMultiple: false
         nameFilters: [ "Mvx files (*.mvx)", "All files (*)" ]
         onAccepted: {
-            console.log("You chose: " + fileDialog.fileUrl)
-        }
-        onRejected: {
-            console.log("Canceled")
+            main.openFile(fileUrl)
         }
     }
 
@@ -39,6 +36,7 @@ ApplicationWindow {
     }
 
     Main {
+        id: main
         anchors.fill: parent
     }
 }

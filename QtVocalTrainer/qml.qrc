@@ -39,7 +39,7 @@
         <file>qml/Main.qml</file>
         <file>qml/SvgImage.qml</file>
         <file>qml/ToggleButton.qml</file>
-        <file>qml/Player.qml</file>
+        <file>qml/PlayerController.qml</file>
         <file>qml/FeaturesToggleButton.qml</file>
         <file>qml/ImageButton.qml</file>
         <file>qml/ButtonShadow.qml</file>

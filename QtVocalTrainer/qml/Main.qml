@@ -10,6 +10,10 @@ Rectangle {
     height: cpp.windowHeight
     focus: true
 
+    function openFile(filePath) {
+        player.source = filePath
+    }
+
     Keys.onUpPressed: {
         verticalScroll.upScroller.start()
     }
@@ -67,10 +71,10 @@ Rectangle {
     }
 
     Player {
-        source: "/Users/semyon/Documents/torero.mvx"
+        id:player
 
         Component.onCompleted: {
-            //play()
+
         }
     }
 
@@ -80,6 +84,7 @@ Rectangle {
 
     Header {
         id: header
+        player: player
         playHead2: playHead2
     }
 

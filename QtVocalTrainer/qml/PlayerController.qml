@@ -3,6 +3,7 @@ import QtGraphicalEffects 1.0
 
 Item {
     property var playHead2
+    property var player
 
     width: 266.5
     height: 45
@@ -77,5 +78,13 @@ Item {
 
         onImage: "images/play_on.svg"
         offImage: "images/play_off.svg"
+
+        onStateChanged: {
+            if (state === "on") {
+                player.play();
+            } else {
+                player.pause();
+            }
+        }
     }
 }

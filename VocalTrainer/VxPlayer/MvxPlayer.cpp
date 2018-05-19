@@ -84,11 +84,11 @@ void MvxPlayer::play() {
         double seekValue = instrumentalPlayer->getSeek();
         if (!bounds->isInside(seekValue)) {
             double startSeek = bounds->getStartSeek();
-            vxPlayer->setSeek(startSeek);
             instrumentalPlayer->setSeek(startSeek);
         }
     }
-    
+
+    vxPlayer->setSeek(instrumentalPlayer->getSeek());
     vxPlayer->play();
     instrumentalPlayer->play();
 }

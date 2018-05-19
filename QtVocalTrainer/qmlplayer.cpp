@@ -1,5 +1,8 @@
 #include "qmlplayer.h"
 
+constexpr char FILE_URL_PREFIX[] = "file://";
+constexpr int FILE_URL_PREFIX_LENGTH = 7;
+
 QmlPlayer::QmlPlayer(QObject *parent) : QObject(parent) {
 
 }
@@ -15,7 +18,12 @@ const QString &QmlPlayer::getSource() const {
 
 void QmlPlayer::setSource(const QString &source) {
     this->source = source;
-    init(source.toLocal8Bit().data());
+    QByteArray local8Bit = source.toLocal8Bit();
+    if (local8Bit.startsWith(FILE_URL_PREFIX)) {
+        local8Bit.remove(0, FILE_URL_PREFIX_LENGTH);
+    }
+
+    init(local8Bit.data());
     prepare();
     emit sourceChanged(source);
 }
@@ -26,6 +34,10 @@ void QmlPlayer::play() {
 }
 
 void QmlPlayer::pause() {
+    if (source.isNull()) {
+        return;
+    }
+
     MvxPlayer::pause();
     emit isPlayingChanged(isPlaying());
 }

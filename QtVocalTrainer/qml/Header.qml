@@ -1,11 +1,13 @@
 import QtQuick 2.0
 
 Rectangle {
-    property alias playHead2: player.playHead2
+    property alias playHead2: playerController.playHead2
 
     property alias tracksShowButton: tracksShowButton
     property alias lyricsShowButton: lyricsShowButton
     property alias tempo: tempo
+
+    property alias player: playerController.player
 
     id: header
     height: 75
@@ -41,8 +43,8 @@ Rectangle {
         anchors.leftMargin: 4
     }
 
-    Player {
-        id: player
+    PlayerController {
+        id: playerController
         anchors.centerIn: parent
     }
 

@@ -48,6 +48,7 @@ qrc_qml.cpp: qml.qrc \
 		qml/AppWindow.qml \
 		qml/Header.qml \
 		qml/TonalityController.qml \
+		qml/PlayerController.qml \
 		qml/HorizontalLine.qml \
 		qml/HorizontalScrollBar.qml \
 		qml/VerticalLine.qml \
@@ -58,7 +59,6 @@ qrc_qml.cpp: qml.qrc \
 		qml/Piano.qml \
 		qml/Workspace.qml \
 		qml/FeaturesToggleButton.qml \
-		qml/Player.qml \
 		qml/Track.qml \
 		qml/VerticalScrollBar.qml \
 		qml/Circle.qml \
