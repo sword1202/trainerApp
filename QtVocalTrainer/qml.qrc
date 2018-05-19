@@ -36,7 +36,7 @@
         <file>qml/sounds/sounds.sf2</file>
         <file>qml/fonts/Lato-Bold.ttf</file>
         <file>qml/fonts/Lato-Regular.ttf</file>
-        <file>qml/main.qml</file>
+        <file>qml/Main.qml</file>
         <file>qml/SvgImage.qml</file>
         <file>qml/ToggleButton.qml</file>
         <file>qml/Player.qml</file>
@@ -66,5 +66,6 @@
         <file>qml/TonalityController.qml</file>
         <file>qml/SingingProcessManager.qml</file>
         <file>qml/js/mathutils.js</file>
+        <file>qml/AppWindow.qml</file>
     </qresource>
 </RCC>

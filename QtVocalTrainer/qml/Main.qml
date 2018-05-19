@@ -58,7 +58,7 @@ Rectangle {
         id: pitchInputReader
 
         Component.onCompleted: {
-            start()
+            //start()
         }
 
         onPitchDetected: {

@@ -15,7 +15,7 @@
 
 class VxFileAudioPlayer : public AudioPlayer {
     VxFileAudioDataGenerator* generator;
-    CppUtils::PeriodicallySleepingBackgroundTaskWithCallbacksQueue generatorTask;
+    CppUtils::PeriodicallySleepingBackgroundTaskWithCallbacksQueue* generatorTask;
     VxFile originalVxFile;
 protected:
     int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) override;

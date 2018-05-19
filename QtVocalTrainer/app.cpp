@@ -1,6 +1,8 @@
 #include "app.h"
 #include "../PitchDetection/PortAudio.h"
+#include "QmlCppBridge.h"
 #include <boost/pool/pool_alloc.hpp>
+#include <QQmlContext>
 
 static const QEvent::Type MainLoopEvent = (QEvent::Type)(QEvent::User + 1);
 
@@ -25,6 +27,16 @@ boost::fast_pool_allocator<MainLoopCallbackEvent> MainLoopCallbackEvent::allocat
 
 App::App(int argc, char *argv[]) : QGuiApplication(argc, argv) {
     PortAudio::init();
+
+    engine = new QQmlApplicationEngine();
+    QQmlContext* context = engine->rootContext();
+    context->setContextProperty("cpp", new QmlCppBridge());
+    engine->load(QUrl("qrc:/qml/AppWindow.qml"));
+    assert(!engine->rootObjects().isEmpty());
+
+#ifdef __APPLE__
+    doMacOsPlatformStaff();
+#endif
 }
 
 bool App::event(QEvent *event) {
@@ -46,5 +58,6 @@ App *App::instance() {
 }
 
 App::~App() {
+    delete engine;
     PortAudio::terminate();
 }

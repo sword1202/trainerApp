@@ -87,3 +87,5 @@ target_wrapper.*
 
 # QtCreator CMake
 CMakeLists.txt.user
+
+QVocalTrainer/QtVocalTrainer.build

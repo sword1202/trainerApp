@@ -26,7 +26,7 @@ class Mp3AudioPlayer : public AudioFilePlayer {
     std::mutex pcmMutex;
     int headerOffset;
     soundtouch::SoundTouch soundTouch;
-    CppUtils::PeriodicallySleepingBackgroundTask decoderTask;
+    CppUtils::PeriodicallySleepingBackgroundTask* decoderTask;
 protected:
     int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) override;
     void prepareAndProvidePlaybackData(PlaybackData *playbackData) override;

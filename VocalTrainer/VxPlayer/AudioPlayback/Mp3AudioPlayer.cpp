@@ -91,7 +91,8 @@ void Mp3AudioPlayer::prepareAndProvidePlaybackData(AudioPlayer::PlaybackData *pl
     setBufferSeek(0);
 
     int64_t timeToSleepInMicroseconds = 1000000 * playbackData->framesPerBuffer / playbackData->sampleRate / 10;
-    decoderTask.runWithSleepingIntervalInMicroseconds([=]{
+    decoderTask = new PeriodicallySleepingBackgroundTask();
+    decoderTask->runWithSleepingIntervalInMicroseconds([=]{
         decodingThreadCallback(*playbackData);
     }, timeToSleepInMicroseconds);
 }
@@ -194,7 +195,7 @@ int Mp3AudioPlayer::secondsSeekToBufferSeek(double timestamp) const {
 }
 
 void Mp3AudioPlayer::destroy(const std::function<void()>& onDestroy) {
-    decoderTask.stop([=] {
+    decoderTask->stop([=] {
         delete this;
         if (onDestroy) {
             onDestroy();

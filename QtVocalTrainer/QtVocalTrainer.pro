@@ -15,10 +15,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    MainWindow.mm \
     main.cpp \
     QmlCppBridge.cpp \
-    MainWindowShared.cpp \
     qmlopenglitem.cpp \
     qmlpitch.cpp \
     ../PitchDetection/Pitch.cpp \
@@ -56,7 +54,8 @@ SOURCES += \
     ../PitchDetection/AudioUtils.cpp \
     ../PitchDetection/CppUtils/PeriodicallySleepingBackgroundTask.cpp \
     ../PitchDetection/CppUtils/SynchronizedCallbacksQueue.cpp \
-    loadtsf.cpp
+    loadtsf.cpp \
+    appmacos.mm
 
 RESOURCES += qml.qrc
 
@@ -80,7 +79,6 @@ CoreFoundation -framework AVFoundation -framework CoreServices -framework CoreAu
 }
 
 HEADERS += \
-    MainWindow.h \
     QmlCppBridge.h \
     qmlopenglitem.h \
     qmlpitch.h \

@@ -98,7 +98,7 @@ public:
     void playFromSeekToSeek(double a, double b, const std::function<void()> onFinish);
 
     virtual void destroy(const std::function<void()>& onDestroyed);
-    void destroy();
+    virtual void destroy();
 
 	const PlaybackData &getPlaybackData() const;
 };
