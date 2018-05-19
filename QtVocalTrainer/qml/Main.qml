@@ -70,7 +70,7 @@ Rectangle {
         source: "/Users/semyon/Documents/torero.mvx"
 
         Component.onCompleted: {
-            play()
+            //play()
         }
     }
 
