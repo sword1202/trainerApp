@@ -113,8 +113,7 @@ MvxPlayer::~MvxPlayer() {
 void MvxPlayer::prepare() {
     instrumentalPlayer->prepare();
     vxPlayer->prepare();
-    assert(Primitives::CompareFloats(instrumentalPlayer->getTrackDurationInSeconds(), 
-            vxPlayer->getTrackDurationInSeconds()));
+    assert(fabs(instrumentalPlayer->getTrackDurationInSeconds() - vxPlayer->getTrackDurationInSeconds()) < 0.1);
 }
 
 const VxFile &MvxPlayer::getVxFile() const {

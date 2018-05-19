@@ -69,7 +69,7 @@ using namespace CppUtils;
         std::cout << "\n";
     }
 
-//    MvxFile mvxFile(vxFiles[0], "/Users/semyon/Documents/toreromidi.mp3", beatsPerMinute);
+//    MvxFile mvxFile(vxFiles[0], "/Users/semyon/Downloads/melody (1).mp3", beatsPerMinute);
 //    mvxFile.writeToFile("/Users/semyon/Documents/torero.mvx");
 
 //    VxFile vxFile(std::vector<VxPitch> {{Pitch("C4"), 0, 100}, {Pitch("E4"), 100, 100}, {Pitch("A4"), 200, 100}}, 0, 50);
