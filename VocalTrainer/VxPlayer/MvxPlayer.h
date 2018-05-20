@@ -29,12 +29,12 @@ public:
     };
 private:
 
-
     std::unique_ptr<AudioPlayer, AudioPlayer::Deleter> instrumentalPlayer;
     std::unique_ptr<VxFileAudioPlayer, AudioPlayer::Deleter> vxPlayer;
     boost::optional<Bounds> bounds;
     double playStartedSeek;
     double playStartedTime;
+    double beatsPerMinute;
 
     void setupVxPlayerDesyncHandler() const;
     void setupInstrumentalPlayerDesyncHandler() const;
@@ -54,10 +54,6 @@ public:
     double getSeek() const;
     const VxFile& getVxFile() const;
 
-    const std::vector<VxPitch> getPitchesInTimeRange() {
-
-    }
-
     const boost::optional<Bounds> &getBounds() const;
     void setBounds(const boost::optional<Bounds> &bounds);
 
@@ -66,6 +62,9 @@ public:
 
     double getPlayStartedSeek() const;
     double getPlayStartedTime() const;
+    double getDuration() const;
+
+    double getBeatsPerMinute() const;
 };
 
 

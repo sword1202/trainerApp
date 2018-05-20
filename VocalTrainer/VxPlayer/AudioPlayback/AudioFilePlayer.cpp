@@ -35,6 +35,7 @@ void AudioFilePlayer::setBufferSeekIfNotModified(int bufferSeek, int lastBufferS
     SEEK_LOCK;
     if (lastBufferSeek == this->bufferSeek) {
         this->bufferSeek = bufferSeek;
+        AudioPlayer::setBufferSeek(bufferSeek);
     }
 }
 

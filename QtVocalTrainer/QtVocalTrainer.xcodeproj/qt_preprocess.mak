@@ -182,6 +182,7 @@ moc_qmlplayer.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QObj
 		../include/boost/optional.hpp \
 		qmlvxpitch.h \
 		qmlpitch.h \
+		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QJsonValue \
 		qmlplayer.h \
 		moc_predefs.h \
 		../../../Qt/5.11.0/clang_64/bin/moc

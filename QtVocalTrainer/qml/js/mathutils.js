@@ -1,6 +1,8 @@
 function floatModulo(x, divider) {
-    console.log("floatModule")
     var division = x / divider
-    console.log("division = " + division)
+    if (division < divider) {
+        return x
+    }
+
     return division - Math.floor(division)
 }

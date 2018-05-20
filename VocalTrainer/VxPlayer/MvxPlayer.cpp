@@ -18,6 +18,8 @@ void MvxPlayer::init(std::istream &is) {
     instrumentalPlayer.reset(AudioFilePlayer::create(std::move(file.getInstrumental())));
     vxPlayer.reset(new VxFileAudioPlayer(std::move(file.getVxFile())));
 
+    beatsPerMinute = file.getBeatsPerMinute();
+
     // prevent desynchronization, when some of players have no data ready for playback
     setupVxPlayerDesyncHandler();
     setupInstrumentalPlayerDesyncHandler();
@@ -160,6 +162,14 @@ double MvxPlayer::getPlayStartedSeek() const {
 
 double MvxPlayer::getPlayStartedTime() const {
     return playStartedTime;
+}
+
+double MvxPlayer::getDuration() const {
+    return instrumentalPlayer->getTrackDurationInSeconds();
+}
+
+double MvxPlayer::getBeatsPerMinute() const {
+    return beatsPerMinute;
 }
 
 MvxPlayer::Bounds::Bounds(double startSeek, double endSeek) : startSeek(startSeek), endSeek(endSeek) {

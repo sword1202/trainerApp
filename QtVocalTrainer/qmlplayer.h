@@ -39,6 +39,8 @@ public:
     Q_PROPERTY(QJsonValue bounds READ getQmlBounds() WRITE setQmlBounds() NOTIFY boundsChanged())
     Q_PROPERTY(double playStartedTime READ getPlayStartedTime())
     Q_PROPERTY(double playStartedSeek READ getPlayStartedSeek())
+    Q_PROPERTY(double duration READ getDuration())
+    Q_PROPERTY(double beatsPerMinute READ getBeatsPerMinute())
 
     Q_INVOKABLE void play() override;
     Q_INVOKABLE void pause() override;

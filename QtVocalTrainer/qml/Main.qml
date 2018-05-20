@@ -56,6 +56,10 @@ Rectangle {
 
     Zoom {
         id: zoom
+
+        onZoomChanged: {
+            validateHorizontalPageSize()
+        }
     }
 
     PitchInputReader {
@@ -70,11 +74,31 @@ Rectangle {
         }
     }
 
+    function validateHorizontalPageSize() {
+        if (!player.source) {
+            horizontalScroll.pageSize = 1.0
+            return
+        }
+
+        var beatsNumberInPage = workspace.width / zoom.getIntervalWidth()
+        var beatDuration = 60.0 / player.beatsPerMinute
+        var durationInBeats = player.duration / beatDuration
+        horizontalScroll.pageSize = beatsNumberInPage / durationInBeats
+    }
+
     Player {
         id:player
 
         Component.onCompleted: {
+            validateHorizontalPageSize()
+        }
 
+        onSourceChanged: {
+            validateHorizontalPageSize()
+        }
+
+        onSeekChanged: {
+            horizontalScroll.position = seek / duration
         }
     }
 

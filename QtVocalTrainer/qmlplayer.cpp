@@ -62,8 +62,7 @@ QmlVxPitchArray QmlPlayer::getPitchesInTimeRange(double startTime, double endTim
     cachedVxPitches.clear();
     const VxFile &vxFile = getVxFile();
     vxFile.iteratePitchesInTimeRange(startTime, endTime, [&] (const VxPitch& vxPitch) {
-        double pitchStartTime = vxFile.ticksToSeconds(vxPitch.startTickNumber)
-                + getPlayStartedTime() - getPlayStartedSeek();
+        double pitchStartTime = vxFile.ticksToSeconds(vxPitch.startTickNumber);
         double pitchDuration = vxFile.ticksToSeconds(vxPitch.ticksCount);
         cachedVxPitches.push_back(QmlVxPitch(vxPitch.pitch, pitchStartTime, pitchDuration));
     });

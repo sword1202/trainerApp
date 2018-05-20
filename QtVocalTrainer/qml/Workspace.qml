@@ -10,6 +10,7 @@ Rectangle {
 
     property var pitchInputReader
     property var tempo
+    property var player
 
     readonly property string gridColor: "#338B89B6"
     readonly property string accentGridColor: "#808B89B6"
@@ -18,12 +19,20 @@ Rectangle {
     property var zoom: zoom
 
     onZoomChanged: {
-        zoom.zoomChanged.connect(grid.requestPaint)
+//        zoom.zoomChanged.connect(grid.requestPaint)
     }
 
     onVerticalScrollChanged: {
-        verticalScroll.positionChanged.connect(grid.requestPaint)
-        horizontalScroll.positionChanged.connect(grid.requestPaint)
+//        verticalScroll.positionChanged.connect(grid.requestPaint)
+//        horizontalScroll.positionChanged.connect(grid.requestPaint)
+    }
+
+    function getVerticalOffset() {
+        return height - verticalScroll.position * height
+    }
+
+    function getHorizontalOffset() {
+        return MathUtils.floatModulo(width * horizontalScroll.position / horizontalScroll.pageSize, width)
     }
 
     Canvas {
@@ -32,14 +41,16 @@ Rectangle {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         height: parent.height
+        renderStrategy: Canvas.Cooperative
+        renderTarget: Canvas.FramebufferObject
 
         onPaint: {
             var ctx = getContext("2d")
             ctx.fillStyle = "white"
             ctx.fillRect(0, 0, width, height)
 
-            var verticalOffset = height - verticalScroll.position * height
-            var horizontalOffset = horizontalScroll.position * width
+            var verticalOffset = getVerticalOffset()
+            var horizontalOffset = getHorizontalOffset()
 
             zoom.iterateIntervals(root, {
                 beatsIterator: function(x, isBeat) {
@@ -74,6 +85,10 @@ Rectangle {
         onPaint: {
             var ctx = getContext("2d")
             ctx.clearRect(0, 0, width, height)
+
+//            var duration = player.duration
+//            var begin = duration * horizontalScroll.position
+//            var end = begin + duration * horizontalScroll.pageSize
         }
     }
 
@@ -133,6 +148,7 @@ Rectangle {
 
         onTriggered: {
             pitchGraph.requestPaint()
+            grid.requestPaint()
         }
     }
 }
