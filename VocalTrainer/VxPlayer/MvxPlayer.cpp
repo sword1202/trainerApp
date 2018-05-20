@@ -9,6 +9,7 @@
 #include "VxFileAudioPlayer.h"
 #include "MvxFile.h"
 #include "Primitives.h"
+#include "TimeUtils.h"
 
 using namespace CppUtils;
 
@@ -88,9 +89,11 @@ void MvxPlayer::play() {
         }
     }
 
-    vxPlayer->setSeek(instrumentalPlayer->getSeek());
+    playStartedSeek = instrumentalPlayer->getSeek();
+    vxPlayer->setSeek(playStartedSeek);
     vxPlayer->play();
     instrumentalPlayer->play();
+    playStartedTime = TimeUtils::NowInSeconds();
 }
 
 void MvxPlayer::setSeek(double value) {
@@ -151,6 +154,14 @@ void MvxPlayer::onSeekChanged(double seek) {
 
 }
 
+double MvxPlayer::getPlayStartedSeek() const {
+    return playStartedSeek;
+}
+
+double MvxPlayer::getPlayStartedTime() const {
+    return playStartedTime;
+}
+
 MvxPlayer::Bounds::Bounds(double startSeek, double endSeek) : startSeek(startSeek), endSeek(endSeek) {
 }
 
@@ -164,4 +175,13 @@ double MvxPlayer::Bounds::getEndSeek() const {
 
 bool MvxPlayer::Bounds::isInside(double value) const {
     return value >= startSeek && value <= endSeek;
+}
+
+bool MvxPlayer::Bounds::operator==(const MvxPlayer::Bounds &rhs) const {
+    return startSeek == rhs.startSeek &&
+            endSeek == rhs.endSeek;
+}
+
+bool MvxPlayer::Bounds::operator!=(const MvxPlayer::Bounds &rhs) const {
+    return !(rhs == *this);
 }

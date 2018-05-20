@@ -23,6 +23,9 @@ public:
         double getStartSeek() const;
         double getEndSeek() const;
         bool isInside(double value) const;
+
+        bool operator==(const Bounds &rhs) const;
+        bool operator!=(const Bounds &rhs) const;
     };
 private:
 
@@ -30,6 +33,8 @@ private:
     std::unique_ptr<AudioPlayer, AudioPlayer::Deleter> instrumentalPlayer;
     std::unique_ptr<VxFileAudioPlayer, AudioPlayer::Deleter> vxPlayer;
     boost::optional<Bounds> bounds;
+    double playStartedSeek;
+    double playStartedTime;
 
     void setupVxPlayerDesyncHandler() const;
     void setupInstrumentalPlayerDesyncHandler() const;
@@ -49,11 +54,18 @@ public:
     double getSeek() const;
     const VxFile& getVxFile() const;
 
+    const std::vector<VxPitch> getPitchesInTimeRange() {
+
+    }
+
     const boost::optional<Bounds> &getBounds() const;
     void setBounds(const boost::optional<Bounds> &bounds);
 
     virtual void onComplete();
     virtual void onSeekChanged(double seek);
+
+    double getPlayStartedSeek() const;
+    double getPlayStartedTime() const;
 };
 
 

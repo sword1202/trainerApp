@@ -3,18 +3,12 @@ QString QmlPitch::getNameAsQString() const {
     return QString(getFullName().data());
 }
 
-QmlPitch::QmlPitch(float frequency, double timeInSeconds) : Pitch(frequency),
-                                                            timeInSeconds(timeInSeconds) {
+QmlPitch::QmlPitch(float frequency) : Pitch(frequency) {
 
-}
-
-double QmlPitch::getTimeInSeconds() const {
-    return timeInSeconds;
 }
 
 QmlPitch::QmlPitch(int perfectFrequencyIndex) :
-        Pitch(Pitch::fromPerfectFrequencyIndex(perfectFrequencyIndex)),
-        timeInSeconds(-1)
+        Pitch(Pitch::fromPerfectFrequencyIndex(perfectFrequencyIndex))
 {
 
 }

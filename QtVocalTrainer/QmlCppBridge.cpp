@@ -10,7 +10,7 @@ qreal QmlCppBridge::now() {
 }
 
 QmlPitch QmlCppBridge::pitchWithFrequency(float frequency) {
-    return QmlPitch(frequency, -1);
+    return QmlPitch(frequency);
 }
 
 QmlPitch QmlCppBridge::pitchFromPerfectFrequencyIndex(int perfectFrequencyIndex) {

@@ -85,6 +85,22 @@ public:
     bool canBeShifted(int distance) const;
 
     void removeSilenceSpaceFromBeginning();
+
+    template<typename Function>
+    void iteratePitchesInTickRange(int startTick, int endTick, const Function& function) const {
+        for (const auto& pitch : pitches) {
+            if (pitch.intersectsWith(startTick, endTick)) {
+                function(pitch);
+            }
+        }
+    }
+
+    template<typename Function>
+    void iteratePitchesInTimeRange(double startTime, double endTime, const Function& function) const {
+        int startTick = timeInSecondsToTicks(startTime);
+        int endTick = timeInSecondsToTicks(endTime);
+        iteratePitchesInTickRange(startTick, endTick, function);
+    }
 };
 
 #endif //VOCALTRAINER_VXFILE_H

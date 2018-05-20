@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include "../PitchDetection/PitchInputReaderCollector.h"
-#include "qmlpitch.h"
+#include "qmltimedpitch.h"
 #include <deque>
 
 class QmlPitchInputReader : public QObject, public PitchInputReaderCollector
@@ -13,7 +13,7 @@ public:
     explicit QmlPitchInputReader(QObject *parent = nullptr);
     Q_INVOKABLE void start() override;
     Q_INVOKABLE void stop() override;
-    Q_INVOKABLE QmlPitch pitchAt(int index);
+    Q_INVOKABLE QmlTimedPitch pitchAt(int index);
 
     Q_PROPERTY(int pitchesCount READ getPitchesCount())
     Q_PROPERTY(bool running READ isRunning())
@@ -24,7 +24,7 @@ public:
     void setThreshold(float threshold) override;
 
 signals:
-    void pitchDetected(const QmlPitch& pitch);
+    void pitchDetected(const QmlTimedPitch& pitch);
     void thresholdChanged(float threshold);
     void savedPitchesTimeLimitChanged();
 };

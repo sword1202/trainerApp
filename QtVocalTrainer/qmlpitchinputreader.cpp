@@ -19,12 +19,12 @@ void QmlPitchInputReader::stop() {
     PitchInputReaderCollector::stop();
 }
 
-QmlPitch QmlPitchInputReader::pitchAt(int index) {
-    return QmlPitch(getFrequencyAt(index), getTimeAt(index));
+QmlTimedPitch QmlPitchInputReader::pitchAt(int index) {
+    return QmlTimedPitch(getFrequencyAt(index), getTimeAt(index));
 }
 
 void QmlPitchInputReader::pitchDetected(float frequency, double time) {
-    emit pitchDetected(QmlPitch(frequency, time));
+    emit pitchDetected(QmlTimedPitch(frequency, time));
 }
 
 void QmlPitchInputReader::setThreshold(float threshold) {

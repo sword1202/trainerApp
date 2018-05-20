@@ -55,7 +55,9 @@ SOURCES += \
     ../PitchDetection/CppUtils/PeriodicallySleepingBackgroundTask.cpp \
     ../PitchDetection/CppUtils/SynchronizedCallbacksQueue.cpp \
     loadtsf.cpp \
-    appmacos.mm
+    appmacos.mm \
+    qmlvxpitch.cpp \
+    qmltimedpitch.cpp
 
 RESOURCES += qml.qrc
 
@@ -122,7 +124,9 @@ HEADERS += \
     ../PitchDetection/WAVFile.h \
     ../PitchDetection/AudioUtils.h \
     ../PitchDetection/CppUtils/PeriodicallySleepingBackgroundTask.h \
-    ../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h
+    ../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h \
+    qmlvxpitch.h \
+    qmltimedpitch.h
 
 INCLUDEPATH += ../include \
     ../VocalTrainer/VxPlayer/AudioPlayback \

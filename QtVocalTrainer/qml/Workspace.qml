@@ -65,6 +65,19 @@ Rectangle {
     }
 
     Canvas {
+        id: pitches
+        renderStrategy: Canvas.Cooperative
+        renderTarget: Canvas.FramebufferObject
+        height: parent.height
+        width: parent.width
+
+        onPaint: {
+            var ctx = getContext("2d")
+            ctx.clearRect(0, 0, width, height)
+        }
+    }
+
+    Canvas {
         id: pitchGraph
         renderStrategy: Canvas.Cooperative
         renderTarget: Canvas.FramebufferObject
