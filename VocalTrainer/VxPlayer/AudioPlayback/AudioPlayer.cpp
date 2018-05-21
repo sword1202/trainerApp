@@ -99,6 +99,12 @@ void AudioPlayer::prepare() {
             this); /*This is a pointer that will be passed to your callback*/
 
     PortAudio::checkErrors(err);
+
+    onNoDataAvailableListeners.addListener([=] {
+        onPlaybackStoppedListeners.executeAll();
+
+        return DONT_DELETE_LISTENER;
+    });
 }
 
 void AudioPlayer::play(double seek) {
@@ -106,8 +112,8 @@ void AudioPlayer::play(double seek) {
     BOOST_ASSERT(seek >= 0);
 
     setSeek(seek);
-    playing = true;
 
+    setupPlaybackStartedListener();
     auto err = Pa_StartStream(stream);
     PortAudio::checkErrors(err);
 }
@@ -125,6 +131,8 @@ void AudioPlayer::pause() {
     playing = false;
     auto err = Pa_AbortStream(stream);
     PortAudio::checkErrors(err);
+    onDataSentToOutputListeners.removeListener(dataSentToOutputListenerKey);
+    onPlaybackStoppedListeners.executeAll();
 }
 
 void AudioPlayer::setSeek(double timeStamp) {
@@ -168,6 +176,7 @@ double AudioPlayer::samplesCountToSeconds(int samplesCount) const {
 
 void AudioPlayer::onComplete() {
     setSeek(0);
+    onPlaybackStoppedListeners.executeAll();
     onCompleteListeners.executeAll();
 }
 
@@ -268,6 +277,32 @@ void AudioPlayer::removeOnDataSentToOutputListener(int key) {
 
 int AudioPlayer::addOnDataSentToOutputListener(const AudioPlayer::OnDataSentToOutputListener &listener) {
     return onDataSentToOutputListeners.addListener(listener);
+}
+
+void AudioPlayer::setupPlaybackStartedListener() {
+    assert(dataSentToOutputListenerKey == NullKey);
+    dataSentToOutputListenerKey = onDataSentToOutputListeners.addListener([=] (void*, int) {
+        playing = true;
+        onPlaybackStartedListeners.executeAll();
+        dataSentToOutputListenerKey = NullKey;
+        return DELETE_LISTENER;
+    });
+}
+
+int AudioPlayer::addPlaybackStoppedListener(const AudioPlayer::OnPlaybackStoppedListener &listener) {
+    return onPlaybackStoppedListeners.addListener(listener);
+}
+
+int AudioPlayer::addPlaybackStartedListener(const AudioPlayer::OnPlaybackStartedListener &listener) {
+    return onPlaybackStartedListeners.addListener(listener);
+}
+
+void AudioPlayer::removePlaybackStartedListener(int key) {
+    onPlaybackStartedListeners.removeListener(key);
+}
+
+void AudioPlayer::removePlaybackStoppedListener(int key) {
+    onPlaybackStoppedListeners.removeListener(key);
 }
 
 void AudioPlayer::Deleter::operator()(AudioPlayer *player) const {

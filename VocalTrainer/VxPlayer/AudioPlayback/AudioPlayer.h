@@ -25,9 +25,14 @@ private:
     std::atomic<float> volume;
     CppUtils::ListenersSet<> onCompleteListeners;
 	CppUtils::ListenersSet<> onNoDataAvailableListeners;
+    CppUtils::ListenersSet<> onPlaybackStartedListeners;
+    CppUtils::ListenersSet<> onPlaybackStoppedListeners;
 	CppUtils::ListenersSet<void*/*buffer*/, int/*framesCount*/> onDataSentToOutputListeners;
     CppUtils::ListenersSet<double /*seek*/, double/*totalDuration*/> seekChangedListeners;
     std::atomic_int pitchShift;
+    int dataSentToOutputListenerKey = CppUtils::NullKey;
+
+    void setupPlaybackStartedListener();
 
     static int callback(const void *inputBuffer,
             void *outputBuffer,
@@ -60,6 +65,8 @@ public:
 
     typedef CppUtils::ListenersSet<>::function OnCompleteListener;
 	typedef CppUtils::ListenersSet<>::function OnNoDataAvailableListener;
+    typedef CppUtils::ListenersSet<>::function OnPlaybackStartedListener;
+    typedef CppUtils::ListenersSet<>::function OnPlaybackStoppedListener;
 	typedef CppUtils::ListenersSet<void*, int>::function OnDataSentToOutputListener;
     typedef CppUtils::ListenersSet<double, double>::function SeekChangedListener;
     
@@ -94,6 +101,12 @@ public:
 
 	int addOnDataSentToOutputListener(const OnDataSentToOutputListener& listener);
 	void removeOnDataSentToOutputListener(int key);
+
+    int addPlaybackStartedListener(const OnPlaybackStartedListener &listener);
+    void removePlaybackStartedListener(int key);
+
+    int addPlaybackStoppedListener(const OnPlaybackStoppedListener &listener);
+    void removePlaybackStoppedListener(int key);
 
     void playFromSeekToSeek(double a, double b, const std::function<void()> onFinish);
 

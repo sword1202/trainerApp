@@ -41,7 +41,6 @@ class VxFileAudioDataGenerator {
     mutable std::mutex bufferReadingMutex;
     mutable std::mutex seekMutex;
 
-    bool isPublished(int begin, int end) const;
     int getNextPitchToRenderIndex() const;
     void renderPitch(const Pitch &pitch, int begin, int length);
 
@@ -79,6 +78,8 @@ public:
     const VxFile &getVxFile() const;
 
     int getFullyFilledPcmDataSize() const;
+
+    bool isPublished(int begin, int end) const;
 };
 
 

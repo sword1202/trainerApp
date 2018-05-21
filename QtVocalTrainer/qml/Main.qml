@@ -98,7 +98,17 @@ Rectangle {
         }
 
         onSeekChanged: {
-            horizontalScroll.position = seek / duration
+            //horizontalScroll.position = seek / duration
+        }
+    }
+
+    Timer {
+        interval: 1
+        running: player.isPlaying
+        repeat: true
+
+        onTriggered: {
+            horizontalScroll.position = (cpp.now() - player.playStartedTime) / player.duration
         }
     }
 
@@ -183,6 +193,7 @@ Rectangle {
         zoom: zoom
         piano: piano
         pitchInputReader: pitchInputReader
+        player: player
         tempo: header.tempo
         verticalScroll: verticalScroll
         horizontalScroll: horizontalScroll

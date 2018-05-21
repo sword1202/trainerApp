@@ -59,6 +59,8 @@ public:
 
     virtual void onComplete();
     virtual void onSeekChanged(double seek);
+    virtual void onPlaybackStarted();
+    virtual void onPlaybackStopped();
 
     double getPlayStartedSeek() const;
     double getPlayStartedTime() const;

@@ -46,8 +46,12 @@ public:
     Q_INVOKABLE void pause() override;
     Q_INVOKABLE void stop();
 
+    void onPlaybackStopped() override;
+
     void onComplete() override;
     void onSeekChanged(double seek) override;
+
+    void onPlaybackStarted() override;
 
     Q_INVOKABLE QmlVxPitchArray getPitchesInTimeRange(double startTime, double endTime) const;
 

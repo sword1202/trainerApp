@@ -32,7 +32,7 @@ Rectangle {
     }
 
     function getHorizontalOffset() {
-        return MathUtils.floatModulo(width * horizontalScroll.position / horizontalScroll.pageSize, width)
+        return width * horizontalScroll.position / horizontalScroll.pageSize
     }
 
     Canvas {
@@ -41,16 +41,37 @@ Rectangle {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         height: parent.height
-        renderStrategy: Canvas.Cooperative
+        renderStrategy: Canvas.Threaded
         renderTarget: Canvas.FramebufferObject
 
+        property real frameTime: 0
+
+        property real horizontalOffset
+
+        Timer {
+            interval: 1
+            running: player.isPlaying
+            repeat: true
+
+            onTriggered: {
+                grid.horizontalOffset = grid.width * (cpp.now() - player.playStartedTime) / player.duration / horizontalScroll.pageSize
+                console.log("grid.horizontalOffset = " + grid.horizontalOffset)
+            }
+        }
+
         onPaint: {
+            var now = cpp.now()
+            if (frameTime) {
+                var fps = 1.0 / (now - frameTime)
+                //console.log("fps = " + fps)
+            }
+            frameTime = now
+
             var ctx = getContext("2d")
             ctx.fillStyle = "white"
             ctx.fillRect(0, 0, width, height)
 
             var verticalOffset = getVerticalOffset()
-            var horizontalOffset = getHorizontalOffset()
 
             zoom.iterateIntervals(root, {
                 beatsIterator: function(x, isBeat) {

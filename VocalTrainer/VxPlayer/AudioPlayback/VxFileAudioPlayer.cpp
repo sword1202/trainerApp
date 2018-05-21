@@ -20,6 +20,11 @@ void VxFileAudioPlayer::prepareAndProvidePlaybackData(PlaybackData *playbackData
     playbackData->sampleRate = generator->getSampleRate();
     playbackData->numChannels = 1;
 
+    // pre-render data for first playback
+    while (!generator->isPublished(0, generator->getOutBufferSize())) {
+        assert(generator->renderNextPitchIfPossible());
+    }
+
     generatorTask = new CppUtils::PeriodicallySleepingBackgroundTaskWithCallbacksQueue();
     generatorTask->runWithSleepingIntervalInMicroseconds([=]{
             while (generator->renderNextPitchIfPossible()) {

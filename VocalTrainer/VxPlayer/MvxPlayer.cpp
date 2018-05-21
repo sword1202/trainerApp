@@ -40,6 +40,16 @@ void MvxPlayer::init(std::istream &is) {
         onComplete();
         return DONT_DELETE_LISTENER;
     });
+
+    instrumentalPlayer->addPlaybackStartedListener([=] {
+        onPlaybackStarted();
+        return DONT_DELETE_LISTENER;
+    });
+
+    instrumentalPlayer->addPlaybackStoppedListener([=] {
+        onPlaybackStopped();
+        return DONT_DELETE_LISTENER;
+    });
 }
 
 void MvxPlayer::init(const char *filePath) {
@@ -91,11 +101,10 @@ void MvxPlayer::play() {
         }
     }
 
-    playStartedSeek = instrumentalPlayer->getSeek();
-    vxPlayer->setSeek(playStartedSeek);
+    double seek = instrumentalPlayer->getSeek();
+    vxPlayer->setSeek(seek);
     vxPlayer->play();
     instrumentalPlayer->play();
-    playStartedTime = TimeUtils::NowInSeconds();
 }
 
 void MvxPlayer::setSeek(double value) {
@@ -140,6 +149,10 @@ void MvxPlayer::setBounds(const boost::optional<MvxPlayer::Bounds> &bounds) {
 }
 
 bool MvxPlayer::isPlaying() const {
+    if (!instrumentalPlayer) {
+        return false;
+    }
+
     return instrumentalPlayer->isPlaying();
 }
 
@@ -170,6 +183,15 @@ double MvxPlayer::getDuration() const {
 
 double MvxPlayer::getBeatsPerMinute() const {
     return beatsPerMinute;
+}
+
+void MvxPlayer::onPlaybackStarted() {
+    playStartedTime = TimeUtils::NowInSeconds();
+    playStartedSeek = getSeek();
+}
+
+void MvxPlayer::onPlaybackStopped() {
+
 }
 
 MvxPlayer::Bounds::Bounds(double startSeek, double endSeek) : startSeek(startSeek), endSeek(endSeek) {

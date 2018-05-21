@@ -14,12 +14,28 @@ void QmlPlayer::onComplete() {
     emit complete();
 }
 
+void QmlPlayer::onPlaybackStarted() {
+    MvxPlayer::onPlaybackStarted();
+    assert(isPlaying());
+    emit isPlayingChanged(true);
+}
+
+void QmlPlayer::onPlaybackStopped() {
+    MvxPlayer::onPlaybackStopped();
+    assert(!isPlaying());
+    emit isPlayingChanged(false);
+}
+
 const QString &QmlPlayer::getSource() const {
     return source;
 }
 
 void QmlPlayer::setSource(const QString &source) {
     QString prevSource = this->source;
+    if (source == prevSource) {
+        return;
+    }
+
     this->source = source;
     QByteArray local8Bit = source.toLocal8Bit();
     if (local8Bit.startsWith(FILE_URL_PREFIX)) {
@@ -31,14 +47,11 @@ void QmlPlayer::setSource(const QString &source) {
 
     cachedVxPitches.reserve(getVxFile().getPitches().size());
 
-    if (prevSource != source) {
-        emit sourceChanged(source);
-    }
+    emit sourceChanged(source);
 }
 
 void QmlPlayer::play() {
     MvxPlayer::play();
-    emit isPlayingChanged(isPlaying());
 }
 
 void QmlPlayer::pause() {
@@ -47,7 +60,6 @@ void QmlPlayer::pause() {
     }
 
     MvxPlayer::pause();
-    emit isPlayingChanged(isPlaying());
 }
 
 void QmlPlayer::stop() {
