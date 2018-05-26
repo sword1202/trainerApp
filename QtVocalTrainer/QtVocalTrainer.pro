@@ -59,7 +59,8 @@ SOURCES += \
     qmlvxpitch.cpp \
     qmltimedpitch.cpp \
     qmlworkspace.cpp \
-    ../VocalTrainer/nanovg/nanovg.c
+    ../VocalTrainer/nanovg/nanovg.c \
+    ../VocalTrainer/GLScene/WorkspaceDrawer.cpp
 
 RESOURCES += qml.qrc
 
@@ -129,7 +130,8 @@ HEADERS += \
     ../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h \
     qmlvxpitch.h \
     qmltimedpitch.h \
-    qmlworkspace.h
+    qmlworkspace.h \
+    ../VocalTrainer/GLScene/WorkspaceDrawer.h
 
 INCLUDEPATH += ../include \
     ../VocalTrainer/VxPlayer/AudioPlayback \

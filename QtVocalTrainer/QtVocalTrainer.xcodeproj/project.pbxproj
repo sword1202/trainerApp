@@ -691,6 +691,21 @@
 					);
 			};
 		};
+		7B8DC05446533BAB00033283 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/GLScene/WorkspaceDrawer.cpp";
+			name = "WorkspaceDrawer.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		7CF22A53CBCB3B801E6F3DF3 = {
+			fileRef = "7B8DC05446533BAB00033283";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
 		F61C3E706670E1F71F3998D1 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qrc_qml.cpp";
@@ -1140,6 +1155,13 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
+		1F7C01C19C2E45E4BB543437 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/GLScene/WorkspaceDrawer.h";
+			name = "WorkspaceDrawer.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
 		757C4D2CF043B21FE9CC0678 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qml.qrc";
@@ -1252,6 +1274,7 @@
 				"2E66651EDA87F4F68C0C9DCC",
 				"0332E7313E63268A746DBC5A",
 				"AD9EDD68A024163B048FDE37",
+				"7B8DC05446533BAB00033283",
 				"C613FE9ADA39556AD9540F1E",
 				"1091C7F2ACC81AEE9DF74E74",
 				"8D1AFD7B368D712618894EDF",
@@ -1298,7 +1321,8 @@
 				"3CF03BDC1456754CC01D032C",
 				"AF511BA9F3FB82C40E8899B1",
 				"99A24269B13302C70B70A17D",
-				"62BB511BC5D877E16073D1E6");
+				"62BB511BC5D877E16073D1E6",
+				"1F7C01C19C2E45E4BB543437");
 			name = "Sources";
 			sourceTree = "<group>";
 		};
@@ -1376,6 +1400,7 @@
 				"D1F6A12137D2C00B4618DB91",
 				"2D0BC67C5FA24DE594C1B6CB",
 				"0140214243BBE25ACBBFF4A1",
+				"7CF22A53CBCB3B801E6F3DF3",
 				"F3F0C5A9AE1D79D2A4930AEA",
 				"AE6596E2227260CD02B22B61",
 				"4D39E2B783FFDF3FB02ED09A",

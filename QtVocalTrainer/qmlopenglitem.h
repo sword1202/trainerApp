@@ -19,8 +19,8 @@ protected slots:
     virtual void handleWindowChanged(QQuickWindow *win);
 
 protected:
-    virtual void renderBefore(const QRect& viewPort, qreal devicePixelRation);
-    virtual void renderAfter(const QRect& viewPort, qreal devicePixelRation);
+    virtual void renderBefore(const QRect& viewPort, qreal devicePixelRatio);
+    virtual void renderAfter(const QRect& viewPort, qreal devicePixelRatio);
     virtual void onSync(const QQuickWindow *win);
 
     QRect getViewPort(const QQuickWindow *win) const;

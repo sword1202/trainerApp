@@ -6,7 +6,6 @@
 #import "StlDebugUtils.h"
 #import "PitchGraphView.h"
 #include <GLKit/GLKit.h>
-#import "GLSceneDrawer.h"
 #import "VxFile.h"
 #import "MidiFileReader.h"
 #import "MvxFile.h"
@@ -20,7 +19,6 @@
 using namespace CppUtils;
 
 @implementation PitchGraphView {
-    GLSceneDrawer* _glSceneDrawer;
     AudioPlayer* _player;
     MvxPlayer* _mvxPlayer;
 }
@@ -90,8 +88,7 @@ using namespace CppUtils;
 - (id)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
-        _glSceneDrawer = new GLSceneDrawer();
-        _glSceneDrawer->setMoveBetweenOctaves(true);
+
     }
 
     return self;
@@ -106,16 +103,15 @@ using namespace CppUtils;
 }
 
 - (void)onWavFileSelected:(NSString *)path {
-    _glSceneDrawer->readPitchesFromWav(path.UTF8String);
+
 }
 
 - (void)moveBetweenOctavesFlagDidChange:(BOOL)value {
-    _glSceneDrawer->setMoveBetweenOctaves(value);
+
 }
 
 
 - (void)dealloc {
-    delete _glSceneDrawer;
     if (_player) {
         _player->destroy();
     }

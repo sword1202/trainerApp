@@ -47,10 +47,10 @@ QRect QmlOpenglItem::getViewPort(const QQuickWindow *win) const {
     return viewPort.toRect();
 }
 
-void QmlOpenglItem::renderBefore(const QRect& viewPort, qreal devicePixelRation) {
+void QmlOpenglItem::renderBefore(const QRect& viewPort, qreal devicePixelRatio) {
     glViewport(viewPort.x(), viewPort.y(), viewPort.width(), viewPort.height());
 }
 
-void QmlOpenglItem::renderAfter(const QRect& viewPort, qreal devicePixelRation) {
+void QmlOpenglItem::renderAfter(const QRect& viewPort, qreal devicePixelRatio) {
     glViewport(viewPort.x(), viewPort.y(), viewPort.width(), viewPort.height());
 }
