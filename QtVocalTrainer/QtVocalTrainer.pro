@@ -57,7 +57,9 @@ SOURCES += \
     loadtsf.cpp \
     appmacos.mm \
     qmlvxpitch.cpp \
-    qmltimedpitch.cpp
+    qmltimedpitch.cpp \
+    qmlworkspace.cpp \
+    ../VocalTrainer/nanovg/nanovg.c
 
 RESOURCES += qml.qrc
 
@@ -126,14 +128,16 @@ HEADERS += \
     ../PitchDetection/CppUtils/PeriodicallySleepingBackgroundTask.h \
     ../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h \
     qmlvxpitch.h \
-    qmltimedpitch.h
+    qmltimedpitch.h \
+    qmlworkspace.h
 
 INCLUDEPATH += ../include \
     ../VocalTrainer/VxPlayer/AudioPlayback \
     ../VocalTrainer/VxPlayer \
     ../VocalTrainer/VxPlayer/CraigsappMidifile \
     ../PitchDetection/CppUtils \
-    ../PitchDetection
+    ../PitchDetection \
+    ../include/nanovg
 
 DISTFILES += \
     ../VocalTrainer/VxPlayer/CraigsappMidifile/LICENSE.txt \

@@ -7,6 +7,7 @@
 #include "app.h"
 #include "qmlplayer.h"
 #include "qmlvxpitch.h"
+#include "qmlworkspace.h"
 
 int main(int argc, char *argv[])
 {
@@ -18,6 +19,7 @@ int main(int argc, char *argv[])
     qRegisterMetaType<QmlVxPitchArray>("VxPitchArray");
     qmlRegisterType<QmlPitchInputReader>("PitchInputReader", 1, 0, "PitchInputReader");
     qmlRegisterType<QmlPlayer>("Player", 1, 0, "Player");
+    qmlRegisterType<QmlWorkspace>("Workspace", 1, 0, "Workspace");
 
     App app(argc, argv);
 

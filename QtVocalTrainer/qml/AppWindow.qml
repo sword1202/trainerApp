@@ -5,6 +5,7 @@ import QtQuick.Dialogs 1.0
 
 ApplicationWindow {
     id: window
+    color: "#00000000"
 
     FileDialog {
         id: fileDialog

@@ -4,7 +4,7 @@
 #include <QQuickItem>
 #include <QtGui/QOpenGLFunctions>
 
-class QmlOpenglItem : public QQuickItem
+class QmlOpenglItem : public QQuickItem, protected QOpenGLFunctions
 {
     Q_OBJECT
 

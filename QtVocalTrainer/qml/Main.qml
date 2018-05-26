@@ -3,8 +3,9 @@ import QtQuick.Window 2.11
 import QtGraphicalEffects 1.0
 import PitchInputReader 1.0
 import Player 1.0
+import Workspace 1.0
 
-Rectangle {
+Item {
     id: window
     width: cpp.windowWidth
     height: cpp.windowHeight
@@ -190,18 +191,20 @@ Rectangle {
 
     Workspace {
         id: workspace
-        zoom: zoom
-        piano: piano
-        pitchInputReader: pitchInputReader
-        player: player
-        tempo: header.tempo
-        verticalScroll: verticalScroll
-        horizontalScroll: horizontalScroll
+//        zoom: zoom
+//        piano: piano
+//        pitchInputReader: pitchInputReader
+//        player: player
+//        tempo: header.tempo
+//        verticalScroll: verticalScroll
+//        horizontalScroll: horizontalScroll
         anchors.top: subheader.bottom
         anchors.left: pianoContainer.right
         anchors.leftMargin: 0
         anchors.bottom: horizontalScroll.top
         anchors.right: verticalScroll.right
+
+//        anchors.fill: parent
 
         MouseArea {
             anchors.fill: parent

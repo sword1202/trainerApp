@@ -44,7 +44,7 @@
         <file>qml/ImageButton.qml</file>
         <file>qml/ButtonShadow.qml</file>
         <file>qml/Tempo.qml</file>
-        <file>qml/Workspace.qml</file>
+        <file>qml/WorkspaceOld.qml</file>
         <file>qml/HorizontalScrollBar.qml</file>
         <file>qml/VerticalScrollBar.qml</file>
         <file>qml/js/strings.js</file>
