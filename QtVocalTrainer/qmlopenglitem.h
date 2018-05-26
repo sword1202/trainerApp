@@ -4,11 +4,12 @@
 #include <QQuickItem>
 #include <QtGui/QOpenGLFunctions>
 
-class QmlOpenglItem : public QQuickItem, protected QOpenGLFunctions
+class QmlOpenglItem : public QQuickItem
 {
     Q_OBJECT
 
     QRect viewPort;
+    qreal devicePixelRation;
 public:
     explicit QmlOpenglItem(QQuickItem *parent = nullptr);
 
@@ -18,8 +19,8 @@ protected slots:
     virtual void handleWindowChanged(QQuickWindow *win);
 
 protected:
-    virtual void renderBefore(const QRect& viewPort);
-    virtual void renderAfter(const QRect& viewPort);
+    virtual void renderBefore(const QRect& viewPort, qreal devicePixelRation);
+    virtual void renderAfter(const QRect& viewPort, qreal devicePixelRation);
     virtual void onSync(const QQuickWindow *win);
 
     QRect getViewPort(const QQuickWindow *win) const;

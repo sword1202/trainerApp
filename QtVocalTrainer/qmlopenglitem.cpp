@@ -20,18 +20,20 @@ void QmlOpenglItem::handleWindowChanged(QQuickWindow *win) {
         }, Qt::DirectConnection);
 
     connect(win, &QQuickWindow::beforeRendering, this, [=] {
-            renderBefore(viewPort);
+            renderBefore(viewPort, devicePixelRation);
             win->resetOpenGLState();
         }, Qt::DirectConnection);
 
     connect(win, &QQuickWindow::afterRendering, this, [=] {
-            renderAfter(viewPort);
+            renderAfter(viewPort, devicePixelRation);
             win->resetOpenGLState();
         }, Qt::DirectConnection);
 }
 
 void QmlOpenglItem::onSync(const QQuickWindow *win) {
     this->viewPort = getViewPort(win);
+    this->devicePixelRation = win->devicePixelRatio();
+    win->devicePixelRatio();
 }
 
 QRect QmlOpenglItem::getViewPort(const QQuickWindow *win) const {
@@ -45,14 +47,10 @@ QRect QmlOpenglItem::getViewPort(const QQuickWindow *win) const {
     return viewPort.toRect();
 }
 
-void QmlOpenglItem::renderBefore(const QRect& viewPort) {
-    if (!QOpenGLFunctions::isInitialized(QOpenGLFunctions::d_ptr)) {
-        initializeOpenGLFunctions();
-    }
-
-    //glViewport(viewPort.x(), viewPort.y(), viewPort.width(), viewPort.height());
+void QmlOpenglItem::renderBefore(const QRect& viewPort, qreal devicePixelRation) {
+    glViewport(viewPort.x(), viewPort.y(), viewPort.width(), viewPort.height());
 }
 
-void QmlOpenglItem::renderAfter(const QRect& viewPort) {
+void QmlOpenglItem::renderAfter(const QRect& viewPort, qreal devicePixelRation) {
     glViewport(viewPort.x(), viewPort.y(), viewPort.width(), viewPort.height());
 }

@@ -11,12 +11,8 @@ public:
     QmlWorkspace();
 
 protected:
-    virtual void renderBefore(const QRect &viewPort) override;
-
-    void renderAfter(const QRect &viewPort) override;
-
+    virtual void renderBefore(const QRect &viewPort, qreal devicePixelRation) override;
 private:
-    QOpenGLShaderProgram *m_program = nullptr;
 };
 
 #endif // QMLWORKSPACE_H
