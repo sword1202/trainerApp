@@ -39,7 +39,7 @@ void QmlOpenglItem::handleWindowChanged(QQuickWindow *win) {
     // 60 fps
     timer->setInterval(1000 / 60);
     connect(timer, &QTimer::timeout, [=] {
-        win->update();
+        update();
     });
     timer->start();
 }

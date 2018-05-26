@@ -13,6 +13,7 @@
 #include "WorkspaceDrawer.h"
 #include <assert.h>
 #include "CountAssert.h"
+#include "Pitch.h"
 
 constexpr int BEATS_IN_TACT = 4;
 
@@ -31,6 +32,7 @@ void WorkspaceDrawer::draw(float width, float height, float devicePixelRatio) {
     ctx = nvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES);
     nvgBeginFrame(ctx, width, height, devicePixelRatio);
     drawVerticalGrid();
+    drawHorizontalGrid();
     nvgEndFrame(ctx);
 }
 
@@ -75,6 +77,18 @@ void WorkspaceDrawer::drawVerticalGrid() {
         nvgLineTo(ctx, x * devicePixelRatio, height * devicePixelRatio);
         bool isBeat = index % BEATS_IN_TACT != 0;
         nvgStrokeColor(ctx, isBeat ? gridColor : accentGridColor);
+        nvgStroke(ctx);
+    }
+}
+
+void WorkspaceDrawer::drawHorizontalGrid() {
+    int index = 1;
+    for (float y = intervalHeight - verticalOffset; y < height + verticalOffset; y += intervalHeight, index++) {
+        nvgBeginPath(ctx);
+        nvgMoveTo(ctx, 0, y * devicePixelRatio);
+        nvgLineTo(ctx, width * devicePixelRatio, y * devicePixelRatio);
+        bool isOctaveBegin = index % Pitch::PITCHES_IN_OCTAVE == 0;
+        nvgStrokeColor(ctx, isOctaveBegin ? accentGridColor : gridColor);
         nvgStroke(ctx);
     }
 }

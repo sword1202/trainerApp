@@ -15,6 +15,9 @@ class WorkspaceDrawer {
     std::atomic<float> verticalOffset;
     std::atomic<float> horizontalOffset;
 
+    NVGcolor gridColor;
+    NVGcolor accentGridColor;
+
     float width = -1;
     float height = -1;
     float devicePixelRatio = -1;
@@ -22,9 +25,7 @@ class WorkspaceDrawer {
     NVGcontext* ctx;
 
     void drawVerticalGrid();
-
-    NVGcolor gridColor;
-    NVGcolor accentGridColor;
+    void drawHorizontalGrid();
 public:
     WorkspaceDrawer();
     void draw(float width, float height, float devicePixelRatio);
