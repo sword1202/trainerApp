@@ -826,6 +826,21 @@
 					);
 			};
 		};
+		3BE1800213F27148741998CC = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_qmlworkspace.cpp";
+			name = "moc_qmlworkspace.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		9FE97ED45FCE63BFC16DCC3C = {
+			fileRef = "3BE1800213F27148741998CC";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
 		C613FE9ADA39556AD9540F1E = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/QmlCppBridge.h";
@@ -1215,7 +1230,8 @@
 				"F8CF2B73DF3F4DAD22A38E8C",
 				"6AEB677C582D38E041FB0B42",
 				"897F0A33031A31C419A9EDCF",
-				"31B14BB9CC2E640CFEB7CBC6");
+				"31B14BB9CC2E640CFEB7CBC6",
+				"3BE1800213F27148741998CC");
 			name = "Generated Sources";
 			sourceTree = "<group>";
 		};
@@ -1409,6 +1425,7 @@
 				"AF390E3E333C2C8F9D8BCA74",
 				"B39FEAC046886E2A8CAD6451",
 				"A40AA65A4364E4B559FCE389",
+				"9FE97ED45FCE63BFC16DCC3C",
 				"DE96A987995B398E25D392B5");
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1833,6 +1850,7 @@
 				HEADER_SEARCH_PATHS = (
 					".",
 					"../include",
+					"../VocalTrainer/GLScene",
 					"../VocalTrainer/VxPlayer/AudioPlayback",
 					"../VocalTrainer/VxPlayer",
 					"../VocalTrainer/VxPlayer/CraigsappMidifile",
@@ -1936,6 +1954,7 @@
 				HEADER_SEARCH_PATHS = (
 					".",
 					"../include",
+					"../VocalTrainer/GLScene",
 					"../VocalTrainer/VxPlayer/AudioPlayback",
 					"../VocalTrainer/VxPlayer",
 					"../VocalTrainer/VxPlayer/CraigsappMidifile",

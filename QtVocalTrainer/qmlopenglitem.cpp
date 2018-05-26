@@ -1,6 +1,7 @@
 #include <qquickwindow.h>
 #include "qmlopenglitem.h"
 #include <iostream>
+#include <QTimer>
 
 using namespace std;
 
@@ -13,6 +14,7 @@ void QmlOpenglItem::handleWindowChanged(QQuickWindow *win) {
         return;
     }
 
+    this->devicePixelRation = win->devicePixelRatio();
     win->setClearBeforeRendering(false);
 
     connect(win, &QQuickWindow::beforeSynchronizing, this, [=] {
@@ -28,11 +30,22 @@ void QmlOpenglItem::handleWindowChanged(QQuickWindow *win) {
             renderAfter(viewPort, devicePixelRation);
             win->resetOpenGLState();
         }, Qt::DirectConnection);
+
+    if (timer) {
+        delete timer;
+    }
+
+    timer = new QTimer();
+    // 60 fps
+    timer->setInterval(1000 / 60);
+    connect(timer, &QTimer::timeout, [=] {
+        win->update();
+    });
+    timer->start();
 }
 
 void QmlOpenglItem::onSync(const QQuickWindow *win) {
     this->viewPort = getViewPort(win);
-    this->devicePixelRation = win->devicePixelRatio();
     win->devicePixelRatio();
 }
 

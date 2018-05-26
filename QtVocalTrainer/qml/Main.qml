@@ -198,6 +198,13 @@ Item {
 //        tempo: header.tempo
 //        verticalScroll: verticalScroll
 //        horizontalScroll: horizontalScroll
+        gridColor: "#338B89B6"
+        accentGridColor: "#808B89B6"
+        intervalWidth: zoom.getIntervalWidth()
+        intervalHeight: zoom.getIntervalHeight()
+        verticalOffset: 0
+        horizontalOffset: 0
+
         anchors.top: subheader.bottom
         anchors.left: pianoContainer.right
         anchors.leftMargin: 0

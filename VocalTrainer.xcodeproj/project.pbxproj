@@ -70,6 +70,7 @@
 		C9FFF97C113AF5171AC7FE41 /* VxFileAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE25C60D3EAE8633BC72 /* VxFileAudioPlayer.cpp */; };
 		C9FFF9E99BD59AA43EE09CE7 /* Options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFB62B47690E086FA2F2D /* Options.cpp */; };
 		C9FFFA9ABAF4CE1CBA8AC864 /* PortAudioInputReader.cpp in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF5F49E1D646C17912323 /* PortAudioInputReader.cpp */; };
+		C9FFFAEDB817B9AF82141B5F /* PitchesCollector.cpp in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF519F5A10D60A8B1F899 /* PitchesCollector.cpp */; };
 		C9FFFB3D9CBDEE37A8696DB2 /* Executors.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF3F33A6942DEFCDDF2C9 /* Executors.mm */; };
 		C9FFFB76B1C8AFAB7E17C1A8 /* VxFileAudioDataGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFDDD3D7C5E7D7082BBFC /* VxFileAudioDataGenerator.cpp */; };
 		C9FFFBDE33761CD24C30F32D /* Binasc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF0789AD2038BA3DA38A5 /* Binasc.cpp */; };
@@ -79,6 +80,7 @@
 		C9FFFD17242496CF18BA58D5 /* PortAudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD7CA2EC6DC9F15DE9D1 /* PortAudio.cpp */; };
 		C9FFFD4E730EE4CCEBA3551D /* PitchInputReaderCollector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8C160107CFE52362C4C /* PitchInputReaderCollector.cpp */; };
 		C9FFFDB2CD9C369890BABFDC /* MidiTrack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA423EB35396AF0A6669 /* MidiTrack.cpp */; };
+		C9FFFDBBD9CEB966139D805A /* CountAssert.h in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF00A355F4925E53CADCF /* CountAssert.h */; };
 		C9FFFDBFE08D6101CBAED612 /* Mp3AudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF91D5D66902FC1F9B613 /* Mp3AudioPlayer.cpp */; };
 		C9FFFE752940964F501E6446 /* MvxFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF08E11535354E15CC819 /* MvxFile.cpp */; };
 		C9FFFE88EA9A5FF905781F50 /* PeriodicallySleepingBackgroundTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8823954020C23E570B5 /* PeriodicallySleepingBackgroundTask.cpp */; };
@@ -174,6 +176,7 @@
 		54CCB91E20854C96009639AD /* VocalTrainerTests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = VocalTrainerTests; sourceTree = BUILT_PRODUCTS_DIR; };
 		54CCB92520854CB3009639AD /* catch.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = catch.hpp; sourceTree = "<group>"; };
 		54CCB92620854CB3009639AD /* MidiFileTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiFileTest.cpp; sourceTree = "<group>"; };
+		C9FFF00A355F4925E53CADCF /* CountAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CountAssert.h; path = PitchDetection/CppUtils/CountAssert.h; sourceTree = "<group>"; };
 		C9FFF016E94440F9F9F27A58 /* BoostAssert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BoostAssert.cpp; sourceTree = "<group>"; };
 		C9FFF03538CD42ED89CD354D /* Options.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Options.h; sourceTree = "<group>"; };
 		C9FFF0789AD2038BA3DA38A5 /* Binasc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Binasc.cpp; sourceTree = "<group>"; };
@@ -198,6 +201,7 @@
 		C9FFF460C4A9ADFB00392E76 /* MidiMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiMessage.h; sourceTree = "<group>"; };
 		C9FFF49EDE81D0B46952137F /* AlgorithmsTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlgorithmsTest.cpp; path = PitchDetection/CppUtils/tests/AlgorithmsTest.cpp; sourceTree = SOURCE_ROOT; };
 		C9FFF4F6CC990DF06B2BB1C7 /* PitchRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchRenderer.h; sourceTree = "<group>"; };
+		C9FFF519F5A10D60A8B1F899 /* PitchesCollector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PitchesCollector.cpp; path = PitchDetection/PitchesCollector.cpp; sourceTree = "<group>"; };
 		C9FFF51CA94B2770B893C639 /* MidiFileReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiFileReader.cpp; sourceTree = "<group>"; };
 		C9FFF523E4CAB6655C922543 /* VxLyricsInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxLyricsInterval.h; sourceTree = "<group>"; };
 		C9FFF525423FCEE4AC6A3916 /* PitchInputReaderCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PitchInputReaderCollector.h; path = PitchDetection/PitchInputReaderCollector.h; sourceTree = "<group>"; };
@@ -210,6 +214,7 @@
 		C9FFF6F024954CC62D511B38 /* StringsTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StringsTest.cpp; path = PitchDetection/CppUtils/tests/StringsTest.cpp; sourceTree = SOURCE_ROOT; };
 		C9FFF709A5A3DB8BE4B17B46 /* StlDebugUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StlDebugUtils.h; path = PitchDetection/CppUtils/StlDebugUtils.h; sourceTree = "<group>"; };
 		C9FFF76A96FF6C68C2EF0CE4 /* minimp3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = minimp3.h; sourceTree = "<group>"; };
+		C9FFF7F31EF9E363ADB456EF /* PitchesCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PitchesCollector.h; path = PitchDetection/PitchesCollector.h; sourceTree = "<group>"; };
 		C9FFF8263643024E19C9E8FC /* MidiEventList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiEventList.h; sourceTree = "<group>"; };
 		C9FFF83763B781E75467D462 /* AudioFilePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFilePlayer.h; sourceTree = "<group>"; };
 		C9FFF851472080263029F894 /* VxLyricsLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxLyricsLine.h; sourceTree = "<group>"; };
@@ -297,6 +302,7 @@
 				C9FFFEEFD6FD398814656299 /* ListenersSet.h */,
 				C9FFF8823954020C23E570B5 /* PeriodicallySleepingBackgroundTask.cpp */,
 				C9FFFFD89465AFA13405CCF7 /* PeriodicallySleepingBackgroundTask.h */,
+				C9FFF00A355F4925E53CADCF /* CountAssert.h */,
 			);
 			name = CppUtils;
 			sourceTree = "<group>";
@@ -395,6 +401,8 @@
 				C9FFF3CE9E53F11F0B8875D5 /* PortAudio.h */,
 				C9FFF8C160107CFE52362C4C /* PitchInputReaderCollector.cpp */,
 				C9FFF525423FCEE4AC6A3916 /* PitchInputReaderCollector.h */,
+				C9FFF7F31EF9E363ADB456EF /* PitchesCollector.h */,
+				C9FFF519F5A10D60A8B1F899 /* PitchesCollector.cpp */,
 			);
 			name = PitchDetection;
 			sourceTree = "<group>";
@@ -601,6 +609,8 @@
 				C9FFFF17382758D3A423FB58 /* melody.mid in Resources */,
 				C9FFF09DC78A783FDD0F5A3B /* a.sf2 in Resources */,
 				C9FFFA9ABAF4CE1CBA8AC864 /* PortAudioInputReader.cpp in Resources */,
+				C9FFFDBBD9CEB966139D805A /* CountAssert.h in Resources */,
+				C9FFFAEDB817B9AF82141B5F /* PitchesCollector.cpp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

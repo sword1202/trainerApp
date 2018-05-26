@@ -134,6 +134,7 @@ HEADERS += \
     ../VocalTrainer/GLScene/WorkspaceDrawer.h
 
 INCLUDEPATH += ../include \
+    ../VocalTrainer/GLScene \
     ../VocalTrainer/VxPlayer/AudioPlayback \
     ../VocalTrainer/VxPlayer \
     ../VocalTrainer/VxPlayer/CraigsappMidifile \
