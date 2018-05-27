@@ -1,8 +1,11 @@
 #include "qmlworkspace.h"
 #include "WorkspaceDrawer.h"
+#include "Primitives.h"
+
+using namespace CppUtils;
 
 QmlWorkspace::QmlWorkspace() {
-    setFlag(ItemHasContents, true);
+
 }
 
 void QmlWorkspace::renderBefore(const QRect &viewPort, qreal devicePixelRatio) {
@@ -21,7 +24,12 @@ float QmlWorkspace::getIntervalWidth() const {
 }
 
 void QmlWorkspace::setIntervalWidth(float intervalWidth) {
+    if (Primitives::CompareFloats(workspaceDrawer.getIntervalWidth(), intervalWidth)) {
+        return;
+    }
+
     workspaceDrawer.setIntervalWidth(intervalWidth);
+    update();
     emit intervalWidthChanged();
 }
 
@@ -30,7 +38,12 @@ float QmlWorkspace::getIntervalHeight() const {
 }
 
 void QmlWorkspace::setIntervalHeight(float intervalHeight) {
+    if (Primitives::CompareFloats(workspaceDrawer.getIntervalHeight(), intervalHeight)) {
+        return;
+    }
+
     workspaceDrawer.setIntervalHeight(intervalHeight);
+    update();
     emit intervalHeightChanged();
 }
 
@@ -39,7 +52,12 @@ float QmlWorkspace::getVerticalOffset() const {
 }
 
 void QmlWorkspace::setVerticalOffset(float verticalOffset) {
+    if (Primitives::CompareFloats(workspaceDrawer.getVerticalOffset(), verticalOffset)) {
+        return;
+    }
+
     workspaceDrawer.setVerticalOffset(verticalOffset);
+    update();
     emit verticalOffsetChanged();
 }
 
@@ -48,7 +66,12 @@ float QmlWorkspace::getHorizontalOffset() const {
 }
 
 void QmlWorkspace::setHorizontalOffset(float horizontalOffset) {
+    if (Primitives::CompareFloats(workspaceDrawer.getHorizontalOffset(), horizontalOffset)) {
+        return;
+    }
+
     workspaceDrawer.setHorizontalOffset(horizontalOffset);
+    update();
     emit horizontalOffsetChanged();
 }
 

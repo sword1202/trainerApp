@@ -40,7 +40,7 @@ public:
     Q_PROPERTY(double playStartedTime READ getPlayStartedTime() NOTIFY playStartedTimeChanged())
     Q_PROPERTY(double playStartedSeek READ getPlayStartedSeek()  NOTIFY playStartedSeekChanged())
     Q_PROPERTY(double duration READ getDuration() NOTIFY durationChanged())
-    Q_PROPERTY(double beatsPerMinute READ getBeatsPerMinute())
+    Q_PROPERTY(double beatsPerMinute READ getBeatsPerMinute() NOTIFY beatsPerMinuteChanged())
 
     Q_INVOKABLE void play() override;
     Q_INVOKABLE void pause() override;
@@ -64,6 +64,7 @@ signals:
     void durationChanged();
     void playStartedTimeChanged();
     void playStartedSeekChanged();
+    void beatsPerMinuteChanged();
 };
 
 #endif // QMLPLAYER_H

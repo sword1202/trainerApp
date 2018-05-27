@@ -51,6 +51,7 @@ void QmlPlayer::setSource(const QString &source) {
 
     emit sourceChanged(source);
     emit durationChanged();
+    emit beatsPerMinuteChanged();
 }
 
 void QmlPlayer::play() {

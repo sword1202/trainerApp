@@ -10,7 +10,6 @@ class QmlOpenglItem : public QQuickItem
 
     QRect viewPort;
     qreal devicePixelRation;
-    QTimer* timer = nullptr;
 public:
     explicit QmlOpenglItem(QQuickItem *parent = nullptr);
 signals:

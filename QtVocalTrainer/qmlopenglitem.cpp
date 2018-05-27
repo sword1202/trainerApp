@@ -6,6 +6,7 @@
 using namespace std;
 
 QmlOpenglItem::QmlOpenglItem(QQuickItem *parent) : QQuickItem(parent) {
+    setFlag(ItemHasContents, true);
     connect(this, &QQuickItem::windowChanged, this, &QmlOpenglItem::handleWindowChanged);
 }
 
@@ -23,25 +24,13 @@ void QmlOpenglItem::handleWindowChanged(QQuickWindow *win) {
 
     connect(win, &QQuickWindow::beforeRendering, this, [=] {
             renderBefore(viewPort, devicePixelRation);
-            //win->resetOpenGLState();
+            win->resetOpenGLState();
         }, Qt::DirectConnection);
 
     connect(win, &QQuickWindow::afterRendering, this, [=] {
-            //renderAfter(viewPort, devicePixelRation);
-            //win->resetOpenGLState();
+            renderAfter(viewPort, devicePixelRation);
+            win->resetOpenGLState();
         }, Qt::DirectConnection);
-
-    if (timer) {
-        delete timer;
-    }
-
-    timer = new QTimer();
-    // 60 fps
-    timer->setInterval(1000 / 60);
-    connect(timer, &QTimer::timeout, [=] {
-        //update();
-    });
-    timer->start();
 }
 
 void QmlOpenglItem::onSync(const QQuickWindow *win) {

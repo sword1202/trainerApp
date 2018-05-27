@@ -75,15 +75,27 @@ Item {
         }
     }
 
+    function getBeatDuration() {
+        return 60.0 / player.beatsPerMinute
+    }
+
+    function getDurationInBeats() {
+        var beatDuration = getBeatDuration()
+        return player.duration / beatDuration
+    }
+
+    function getBeatsNumberInPage() {
+        return workspace.width / zoom.getIntervalWidth();
+    }
+
     function validateHorizontalPageSize() {
         if (!player.source) {
             horizontalScroll.pageSize = 1.0
             return
         }
 
-        var beatsNumberInPage = workspace.width / zoom.getIntervalWidth()
-        var beatDuration = 60.0 / player.beatsPerMinute
-        var durationInBeats = player.duration / beatDuration
+        var beatsNumberInPage = getBeatsNumberInPage();
+        var durationInBeats = getDurationInBeats()
         horizontalScroll.pageSize = beatsNumberInPage / durationInBeats
     }
 
@@ -181,13 +193,7 @@ Item {
 
     Workspace {
         id: workspace
-//        zoom: zoom
-//        piano: piano
-//        pitchInputReader: pitchInputReader
-//        player: player
-//        tempo: header.tempo
-//        verticalScroll: verticalScroll
-//        horizontalScroll: horizontalScroll
+
         gridColor: "#338B89B6"
         accentGridColor: "#808B89B6"
         intervalWidth: zoom.getIntervalWidth()
@@ -195,13 +201,30 @@ Item {
         verticalOffset: 0
         horizontalOffset: 0
 
+        onHorizontalOffsetChanged: {
+            console.log("horizontalOffset = " + horizontalOffset)
+        }
+
         anchors.top: subheader.bottom
         anchors.left: pianoContainer.right
         anchors.leftMargin: 0
         anchors.bottom: horizontalScroll.top
         anchors.right: verticalScroll.right
 
-//        anchors.fill: parent
+        function getPageWidth() {
+            return intervalWidth * getBeatsNumberInPage()
+        }
+
+        function getPageDuration() {
+            return getBeatsNumberInPage() * getBeatDuration()
+        }
+
+        NumberAnimation on horizontalOffset {
+            to: duration / 1000 / getBeatDuration() * workspace.intervalWidth
+            running: player.isPlaying
+            duration: (player.duration - player.playStartedSeek) * 1000 - workspace.getPageDuration()
+            easing.type: Easing.Linear
+        }
 
         MouseArea {
             anchors.fill: parent
@@ -318,7 +341,6 @@ Item {
         anchors.bottom: lyrics.top
         anchors.left: pianoContainer.right
         anchors.right: parent.right
-
 
         NumberAnimation on position {
             to: 1.0
