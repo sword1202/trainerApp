@@ -1,9 +1,8 @@
 #include "qmlworkspace.h"
 #include "WorkspaceDrawer.h"
 
-QmlWorkspace::QmlWorkspace()
-{
-
+QmlWorkspace::QmlWorkspace() {
+    setFlag(ItemHasContents, true);
 }
 
 void QmlWorkspace::renderBefore(const QRect &viewPort, qreal devicePixelRatio) {

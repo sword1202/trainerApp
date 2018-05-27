@@ -34,6 +34,7 @@ void WorkspaceDrawer::draw(float width, float height, float devicePixelRatio) {
     drawVerticalGrid();
     drawHorizontalGrid();
     nvgEndFrame(ctx);
+    nvgDeleteGL2(ctx);
 }
 
 float WorkspaceDrawer::getIntervalWidth() const {
@@ -117,5 +118,10 @@ WorkspaceDrawer::WorkspaceDrawer() : intervalWidth(-1),
         intervalHeight(-1),
         verticalOffset(-1),
         horizontalOffset(-1) {
+}
 
+WorkspaceDrawer::~WorkspaceDrawer() {
+    if (ctx) {
+        //nvgDeleteGL2(ctx);
+    }
 }

@@ -23,12 +23,12 @@ void QmlOpenglItem::handleWindowChanged(QQuickWindow *win) {
 
     connect(win, &QQuickWindow::beforeRendering, this, [=] {
             renderBefore(viewPort, devicePixelRation);
-            win->resetOpenGLState();
+            //win->resetOpenGLState();
         }, Qt::DirectConnection);
 
     connect(win, &QQuickWindow::afterRendering, this, [=] {
-            renderAfter(viewPort, devicePixelRation);
-            win->resetOpenGLState();
+            //renderAfter(viewPort, devicePixelRation);
+            //win->resetOpenGLState();
         }, Qt::DirectConnection);
 
     if (timer) {
@@ -39,7 +39,7 @@ void QmlOpenglItem::handleWindowChanged(QQuickWindow *win) {
     // 60 fps
     timer->setInterval(1000 / 60);
     connect(timer, &QTimer::timeout, [=] {
-        update();
+        //update();
     });
     timer->start();
 }

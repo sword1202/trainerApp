@@ -17,6 +17,8 @@ void QmlPlayer::onComplete() {
 void QmlPlayer::onPlaybackStarted() {
     MvxPlayer::onPlaybackStarted();
     assert(isPlaying());
+    emit playStartedTimeChanged();
+    emit playStartedSeekChanged();
     emit isPlayingChanged(true);
 }
 
@@ -48,6 +50,7 @@ void QmlPlayer::setSource(const QString &source) {
     cachedVxPitches.reserve(getVxFile().getPitches().size());
 
     emit sourceChanged(source);
+    emit durationChanged();
 }
 
 void QmlPlayer::play() {

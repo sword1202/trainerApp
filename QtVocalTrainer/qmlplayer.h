@@ -37,9 +37,9 @@ public:
     Q_PROPERTY(bool isPlaying READ isPlaying() NOTIFY isPlayingChanged())
     Q_PROPERTY(double seek READ getSeek() WRITE setSeek() NOTIFY seekChanged())
     Q_PROPERTY(QJsonValue bounds READ getQmlBounds() WRITE setQmlBounds() NOTIFY boundsChanged())
-    Q_PROPERTY(double playStartedTime READ getPlayStartedTime())
-    Q_PROPERTY(double playStartedSeek READ getPlayStartedSeek())
-    Q_PROPERTY(double duration READ getDuration())
+    Q_PROPERTY(double playStartedTime READ getPlayStartedTime() NOTIFY playStartedTimeChanged())
+    Q_PROPERTY(double playStartedSeek READ getPlayStartedSeek()  NOTIFY playStartedSeekChanged())
+    Q_PROPERTY(double duration READ getDuration() NOTIFY durationChanged())
     Q_PROPERTY(double beatsPerMinute READ getBeatsPerMinute())
 
     Q_INVOKABLE void play() override;
@@ -61,6 +61,9 @@ signals:
     void isPlayingChanged(bool isPlaying);
     void seekChanged(double seek);
     void boundsChanged();
+    void durationChanged();
+    void playStartedTimeChanged();
+    void playStartedSeekChanged();
 };
 
 #endif // QMLPLAYER_H

@@ -178,6 +178,10 @@ double MvxPlayer::getPlayStartedTime() const {
 }
 
 double MvxPlayer::getDuration() const {
+    if (!instrumentalPlayer) {
+        return -1;
+    }
+
     return instrumentalPlayer->getTrackDurationInSeconds();
 }
 

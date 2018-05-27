@@ -32,8 +32,8 @@ private:
     std::unique_ptr<AudioPlayer, AudioPlayer::Deleter> instrumentalPlayer;
     std::unique_ptr<VxFileAudioPlayer, AudioPlayer::Deleter> vxPlayer;
     boost::optional<Bounds> bounds;
-    double playStartedSeek;
-    double playStartedTime;
+    double playStartedSeek = -1;
+    double playStartedTime = -1;
     double beatsPerMinute;
 
     void setupVxPlayerDesyncHandler() const;

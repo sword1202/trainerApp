@@ -7,8 +7,8 @@ Item {
     property real positionIncrement: 0.01
     property real pageSize
     property real padding: 2.25
-    property alias leftScroller: leftScroller
-    property alias rightScroller: rightScroller
+//    property alias leftScroller: leftScroller
+//    property alias rightScroller: rightScroller
 
     height: 11.25
 

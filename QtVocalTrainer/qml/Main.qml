@@ -103,16 +103,6 @@ Item {
         }
     }
 
-    Timer {
-        interval: 1
-        running: player.isPlaying
-        repeat: true
-
-        onTriggered: {
-            horizontalScroll.position = (cpp.now() - player.playStartedTime) / player.duration
-        }
-    }
-
     SingingProcessManager {
         id: singingProcessManager
     }
@@ -328,6 +318,14 @@ Item {
         anchors.bottom: lyrics.top
         anchors.left: pianoContainer.right
         anchors.right: parent.right
+
+
+        NumberAnimation on position {
+            to: 1.0
+            running: player.isPlaying
+            duration: (player.duration - player.playStartedSeek) * 1000
+            easing.type: Easing.Linear
+        }
     }
 
     VerticalLine {

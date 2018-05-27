@@ -22,12 +22,13 @@ class WorkspaceDrawer {
     float height = -1;
     float devicePixelRatio = -1;
 
-    NVGcontext* ctx;
+    NVGcontext* ctx = nullptr;
 
     void drawVerticalGrid();
     void drawHorizontalGrid();
 public:
     WorkspaceDrawer();
+    ~WorkspaceDrawer();
     void draw(float width, float height, float devicePixelRatio);
 
     float getIntervalWidth() const;
