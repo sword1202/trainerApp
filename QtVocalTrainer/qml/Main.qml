@@ -202,7 +202,7 @@ Item {
         horizontalOffset: 0
 
         onHorizontalOffsetChanged: {
-            console.log("horizontalOffset = " + horizontalOffset)
+
         }
 
         anchors.top: subheader.bottom

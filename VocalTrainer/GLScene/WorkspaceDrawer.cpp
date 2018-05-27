@@ -14,10 +14,20 @@
 #include <assert.h>
 #include "CountAssert.h"
 #include "Pitch.h"
+#include "TimeUtils.h"
+#include <iostream>
+
+using namespace CppUtils;
 
 constexpr int BEATS_IN_TACT = 4;
 
 void WorkspaceDrawer::draw(float width, float height, float devicePixelRatio) {
+    static double time = TimeUtils::NowInSeconds();
+    double now = TimeUtils::NowInSeconds();
+    double fps = 1.0 / (now - time);
+    time = now;
+    std::cout<<"fps = "<<fps<<"\n";
+
     assert(devicePixelRatio > 0);
     assert(width >= 0 && height >= 0);
     assert(intervalWidth >= 0);
@@ -29,12 +39,14 @@ void WorkspaceDrawer::draw(float width, float height, float devicePixelRatio) {
     this->height = height;
     this->devicePixelRatio = devicePixelRatio;
 
-    ctx = nvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES);
+    if (!ctx) {
+        ctx = nvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES);
+    }
     nvgBeginFrame(ctx, width, height, devicePixelRatio);
     drawVerticalGrid();
     drawHorizontalGrid();
     nvgEndFrame(ctx);
-    nvgDeleteGL2(ctx);
+    //nvgDeleteGL2(ctx);
 }
 
 float WorkspaceDrawer::getIntervalWidth() const {
@@ -71,7 +83,8 @@ void WorkspaceDrawer::setHorizontalOffset(float horizontalOffset) {
 
 void WorkspaceDrawer::drawVerticalGrid() {
     int index = 1;
-    for (float x = intervalWidth - horizontalOffset; x < width + horizontalOffset; x += intervalWidth, index++) {
+    float offset = fmod(horizontalOffset, intervalWidth * BEATS_IN_TACT);
+    for (float x = intervalWidth - offset; x < width + offset; x += intervalWidth, index++) {
         nvgBeginPath(ctx);
         nvgMoveTo(ctx, x * devicePixelRatio, 0);
         nvgStrokeWidth(ctx, devicePixelRatio);
@@ -84,7 +97,8 @@ void WorkspaceDrawer::drawVerticalGrid() {
 
 void WorkspaceDrawer::drawHorizontalGrid() {
     int index = 1;
-    for (float y = intervalHeight - verticalOffset; y < height + verticalOffset; y += intervalHeight, index++) {
+    float offset = fmod(verticalOffset, intervalHeight * Pitch::PITCHES_IN_OCTAVE);
+    for (float y = intervalHeight - offset; y < height + offset; y += intervalHeight, index++) {
         nvgBeginPath(ctx);
         nvgMoveTo(ctx, 0, y * devicePixelRatio);
         nvgLineTo(ctx, width * devicePixelRatio, y * devicePixelRatio);
@@ -122,6 +136,6 @@ WorkspaceDrawer::WorkspaceDrawer() : intervalWidth(-1),
 
 WorkspaceDrawer::~WorkspaceDrawer() {
     if (ctx) {
-        //nvgDeleteGL2(ctx);
+        nvgDeleteGL2(ctx);
     }
 }
