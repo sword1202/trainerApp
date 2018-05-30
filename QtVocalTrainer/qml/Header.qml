@@ -11,7 +11,6 @@ Rectangle {
 
     id: header
     height: 75
-    width: parent.width
     color: "#c5cef8"
 
     FeaturesToggleButton {

@@ -14,8 +14,8 @@ void Workspace::initializeGL() {
     QOpenGLWidget::initializeGL();
     workspaceDrawer.setIntervalWidth(25);
     workspaceDrawer.setIntervalHeight(10);
-    workspaceDrawer.setGridColor(nvgRGB(128, 11, 16));
-    workspaceDrawer.setAccentGridColor(nvgRGB(255, 11, 16));
+    workspaceDrawer.setGridColor(nvgRGBA(0x8B, 0x89, 0xB6, 0x33));
+    workspaceDrawer.setAccentGridColor(nvgRGBA(0x8B, 0x89, 0xB6, 0x80));
     workspaceDrawer.setSpeed(200);
     glDisable(GL_DEPTH_TEST);
 }

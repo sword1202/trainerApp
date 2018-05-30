@@ -29,7 +29,7 @@ Item {
         offImage: "images/loop_off.svg"
 
         onStateChanged: {
-            playHead2.state = state
+            //playHead2.state = state
         }
     }
 
@@ -81,9 +81,9 @@ Item {
 
         onStateChanged: {
             if (state === "on") {
-                player.play();
+                //player.play();
             } else {
-                player.pause();
+                //player.pause();
             }
         }
     }

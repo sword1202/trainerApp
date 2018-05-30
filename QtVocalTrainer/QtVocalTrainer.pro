@@ -1,4 +1,4 @@
-QT += quick gui core widgets
+QT += quick gui core widgets quickwidgets
 
 CONFIG += c++14
 #QMAKE_CXXFLAGS_DEBUG += -O0

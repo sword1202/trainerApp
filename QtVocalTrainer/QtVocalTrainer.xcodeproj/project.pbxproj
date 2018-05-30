@@ -1610,6 +1610,20 @@
 			settings = {
 			};
 		};
+		5E6ACDEA4FA9B05AFC3542E9 = {
+			isa = PBXFileReference;
+			name = "QtQuickWidgets.framework";
+			path = "/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework";
+			refType = 0;
+			sourceTree = "<absolute>";
+			lastKnownFileType = "wrapper.framework";
+		};
+		3B7F6DD5CE7211ABC9BE37EA = {
+			fileRef = "5E6ACDEA4FA9B05AFC3542E9";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		F0871F9A6453756315FEE1CE = {
 			isa = PBXFileReference;
 			name = "QtQuick.framework";
@@ -1762,6 +1776,7 @@
 				"D2C9E726732F383A23F3DF2A",
 				"C8554E1F379A03573960D083",
 				"5DBD121510CD90CA7DBEACF3",
+				"5E6ACDEA4FA9B05AFC3542E9",
 				"F0871F9A6453756315FEE1CE",
 				"2B89D6D035434E8732B497FB",
 				"8040D46BE95BDB6D913516F6",
@@ -1789,6 +1804,7 @@
 				"51702CADEF714F084FB14918",
 				"FA049899FBB187FE5D2B2C65",
 				"8CAD63C807609C5848C2B37A",
+				"3B7F6DD5CE7211ABC9BE37EA",
 				"1AB6D6DB17C494A863582E1F",
 				"82F3259B99B0A4F8603EECB6",
 				"7453F0059F8E88BB12427954",
@@ -1915,6 +1931,7 @@
 					"../PitchDetection/CppUtils",
 					"../PitchDetection",
 					"../include/nanovg",
+					"../../../Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtGui.framework/Headers",
@@ -1940,6 +1957,7 @@
 					"-fPIC",
 					"-DQT_DEPRECATED_WARNINGS",
 					"-DQT_QML_DEBUG",
+					"-DQT_QUICKWIDGETS_LIB",
 					"-DQT_QUICK_LIB",
 					"-DQT_WIDGETS_LIB",
 					"-DQT_GUI_LIB",
@@ -1956,6 +1974,7 @@
 					"-fPIC",
 					"-DQT_DEPRECATED_WARNINGS",
 					"-DQT_QML_DEBUG",
+					"-DQT_QUICKWIDGETS_LIB",
 					"-DQT_QUICK_LIB",
 					"-DQT_WIDGETS_LIB",
 					"-DQT_GUI_LIB",
@@ -2022,6 +2041,7 @@
 					"../PitchDetection/CppUtils",
 					"../PitchDetection",
 					"../include/nanovg",
+					"../../../Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtGui.framework/Headers",
@@ -2047,6 +2067,7 @@
 					"-fPIC",
 					"-DQT_DEPRECATED_WARNINGS",
 					"-DQT_QML_DEBUG",
+					"-DQT_QUICKWIDGETS_LIB",
 					"-DQT_QUICK_LIB",
 					"-DQT_WIDGETS_LIB",
 					"-DQT_GUI_LIB",
@@ -2063,6 +2084,7 @@
 					"-fPIC",
 					"-DQT_DEPRECATED_WARNINGS",
 					"-DQT_QML_DEBUG",
+					"-DQT_QUICKWIDGETS_LIB",
 					"-DQT_QUICK_LIB",
 					"-DQT_WIDGETS_LIB",
 					"-DQT_GUI_LIB",

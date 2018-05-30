@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QOpenGLWidget>
+#include <QQuickWidget>
 #include "workspace.h"
 
 class MainWindow : public QMainWindow
@@ -17,6 +18,7 @@ protected:
 public:
     ~MainWindow();
     Workspace *workspace;
+    QQuickItem *header;
 };
 
 #endif // MAINWINDOW_H
