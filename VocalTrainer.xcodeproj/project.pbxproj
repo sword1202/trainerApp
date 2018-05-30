@@ -85,6 +85,7 @@
 		C9FFFE752940964F501E6446 /* MvxFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF08E11535354E15CC819 /* MvxFile.cpp */; };
 		C9FFFE88EA9A5FF905781F50 /* PeriodicallySleepingBackgroundTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8823954020C23E570B5 /* PeriodicallySleepingBackgroundTask.cpp */; };
 		C9FFFEB3BFD86EDFAD0BB4EA /* AudioUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF0A71BF842FC6C348D0C /* AudioUtils.cpp */; };
+		C9FFFEFABEED878714C44CDA /* nanovg.c in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6D62E8E53216F7D2AE8 /* nanovg.c */; };
 		C9FFFF17382758D3A423FB58 /* melody.mid in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF0A770C7C4A877771027 /* melody.mid */; };
 		C9FFFF33F2E63ECD31A46D25 /* PitchRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE514220C10160A77F57 /* PitchRenderer.cpp */; };
 		C9FFFF5741CE1495CCD635E8 /* SoundFont2PitchRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA934598DEB3A7ED2F90 /* SoundFont2PitchRenderer.cpp */; };
@@ -211,6 +212,7 @@
 		C9FFF59B5C1B330E3F016AFF /* Mp3AudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mp3AudioPlayer.h; sourceTree = "<group>"; };
 		C9FFF5D6CB0CEACB514B6CCE /* LoadTsfDefault.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LoadTsfDefault.mm; sourceTree = "<group>"; };
 		C9FFF5F49E1D646C17912323 /* PortAudioInputReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PortAudioInputReader.cpp; path = PitchDetection/PortAudioInputReader.cpp; sourceTree = "<group>"; };
+		C9FFF6D62E8E53216F7D2AE8 /* nanovg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = nanovg.c; sourceTree = "<group>"; };
 		C9FFF6F024954CC62D511B38 /* StringsTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StringsTest.cpp; path = PitchDetection/CppUtils/tests/StringsTest.cpp; sourceTree = SOURCE_ROOT; };
 		C9FFF709A5A3DB8BE4B17B46 /* StlDebugUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StlDebugUtils.h; path = PitchDetection/CppUtils/StlDebugUtils.h; sourceTree = "<group>"; };
 		C9FFF76A96FF6C68C2EF0CE4 /* minimp3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = minimp3.h; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 				544C7CB220A980CB002B24BD /* AppDelegate.h */,
 				544C7CB320A980CB002B24BD /* AppDelegate.m */,
 				544C7CE320A98235002B24BD /* main.m */,
+				C9FFF8A3E1BD0832FF93CB64 /* nanovg */,
 			);
 			path = VocalTrainer;
 			sourceTree = "<group>";
@@ -484,6 +487,14 @@
 				C9FFF851472080263029F894 /* VxLyricsLine.h */,
 			);
 			path = VxPlayer;
+			sourceTree = "<group>";
+		};
+		C9FFF8A3E1BD0832FF93CB64 /* nanovg */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFF6D62E8E53216F7D2AE8 /* nanovg.c */,
+			);
+			path = nanovg;
 			sourceTree = "<group>";
 		};
 		C9FFF9A6D7A01E58DBEB6F57 /* Midi */ = {
@@ -664,6 +675,7 @@
 				C9FFFD17242496CF18BA58D5 /* PortAudio.cpp in Sources */,
 				C9FFFD4E730EE4CCEBA3551D /* PitchInputReaderCollector.cpp in Sources */,
 				C9FFFCBDBF28C2FC43AA78B6 /* WorkspaceDrawer.cpp in Sources */,
+				C9FFFEFABEED878714C44CDA /* nanovg.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -831,6 +843,10 @@
 					"DEBUG=1",
 					"_LIBCPP_DEBUG2=1",
 				);
+				"HEADER_SEARCH_PATHS[arch=*]" = (
+					include,
+					include/nanovg,
+				);
 				INFOPLIST_FILE = VocalTrainer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -871,6 +887,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				"HEADER_SEARCH_PATHS[arch=*]" = (
+					include,
+					include/nanovg,
+				);
 				INFOPLIST_FILE = VocalTrainer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (

@@ -49,9 +49,9 @@ void QmlPlayer::setSource(const QString &source) {
 
     cachedVxPitches.reserve(getVxFile().getPitches().size());
 
-    emit sourceChanged(source);
     emit durationChanged();
     emit beatsPerMinuteChanged();
+    emit sourceChanged(source);
 }
 
 void QmlPlayer::play() {

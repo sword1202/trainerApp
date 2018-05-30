@@ -7,13 +7,15 @@
 #define VOCALTRAINER_WORKSPACEDRAWER_H
 
 #include <atomic>
-#include <nanovg.h>
+#include <nanovg/nanovg.h>
 
 class WorkspaceDrawer {
     std::atomic<float> intervalWidth;
     std::atomic<float> intervalHeight;
     std::atomic<float> verticalOffset;
     std::atomic<float> horizontalOffset;
+    std::atomic<float> sizeMultiplier;
+    std::atomic<double> speed;
 
     NVGcolor gridColor;
     NVGcolor accentGridColor;
@@ -24,12 +26,13 @@ class WorkspaceDrawer {
 
     NVGcontext* ctx = nullptr;
 
-    void drawVerticalGrid();
-    void drawHorizontalGrid();
+    void drawVerticalGrid() const;
+    void drawHorizontalGrid() const;
 public:
     WorkspaceDrawer();
     ~WorkspaceDrawer();
-    void draw(float width, float height, float devicePixelRatio);
+    void resize(float width, float height, float devicePixelRatio);
+    void draw();
 
     float getIntervalWidth() const;
     void setIntervalWidth(float intervalWidth);
@@ -39,6 +42,14 @@ public:
     void setVerticalOffset(float verticalOffset);
     float getHorizontalOffset() const;
     void setHorizontalOffset(float horizontalOffset);
+
+    double getSpeed() const;
+
+    void setSpeed(double speed);
+
+    float getSizeMultiplier() const;
+
+    void setSizeMultiplier(float sizeMultiplier);
 
     const NVGcolor &getGridColor() const;
     void setGridColor(const NVGcolor &gridColor);

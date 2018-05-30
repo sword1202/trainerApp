@@ -1,27 +1,12 @@
-#include <QGuiApplication>
-#include "QmlCppBridge.h"
-#include <QQmlContext>
-#include <iostream>
-#include <QQmlApplicationEngine>
-#include "qmlpitchinputreader.h"
+#include "mainwindow.h"
 #include "app.h"
-#include "qmlplayer.h"
-#include "qmlvxpitch.h"
-#include "qmlworkspace.h"
+#include <QApplication>
 
 int main(int argc, char *argv[])
 {
-    App::setAttribute(Qt::AA_EnableHighDpiScaling);
+    App a(argc, argv);
+    MainWindow w;
+    w.showMaximized();
 
-    qRegisterMetaType<QmlPitch>("Pitch");
-    qRegisterMetaType<QmlVxPitch>("VxPitch");
-    qRegisterMetaType<QmlTimedPitch>("TimedPitch");
-    qRegisterMetaType<QmlVxPitchArray>("VxPitchArray");
-    qmlRegisterType<QmlPitchInputReader>("PitchInputReader", 1, 0, "PitchInputReader");
-    qmlRegisterType<QmlPlayer>("Player", 1, 0, "Player");
-    qmlRegisterType<QmlWorkspace>("Workspace", 1, 0, "Workspace");
-
-    App app(argc, argv);
-
-    return app.exec();
+    return a.exec();
 }

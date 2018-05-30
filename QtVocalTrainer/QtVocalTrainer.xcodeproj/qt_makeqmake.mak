@@ -165,6 +165,7 @@ QtVocalTrainer.xcodeproj/project.pbxproj: QtVocalTrainer.pro ../../../Qt/5.11.0/
 		../../../Qt/5.11.0/clang_64/mkspecs/features/resources.prf \
 		../../../Qt/5.11.0/clang_64/mkspecs/features/moc.prf \
 		../../../Qt/5.11.0/clang_64/mkspecs/features/unix/opengl.prf \
+		../../../Qt/5.11.0/clang_64/mkspecs/features/uic.prf \
 		../../../Qt/5.11.0/clang_64/mkspecs/features/unix/thread.prf \
 		../../../Qt/5.11.0/clang_64/mkspecs/features/qmake_use.prf \
 		../../../Qt/5.11.0/clang_64/mkspecs/features/file_copies.prf \
@@ -177,6 +178,7 @@ QtVocalTrainer.xcodeproj/project.pbxproj: QtVocalTrainer.pro ../../../Qt/5.11.0/
 		QtVocalTrainer.pro \
 		qml.qrc \
 		../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/QtQuick.prl \
+		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/QtWidgets.prl \
 		../../../Qt/5.11.0/clang_64/lib/QtGui.framework/QtGui.prl \
 		../../../Qt/5.11.0/clang_64/lib/QtQml.framework/QtQml.prl \
 		../../../Qt/5.11.0/clang_64/lib/QtNetwork.framework/QtNetwork.prl \
@@ -338,6 +340,7 @@ QtVocalTrainer.xcodeproj/project.pbxproj: QtVocalTrainer.pro ../../../Qt/5.11.0/
 ../../../Qt/5.11.0/clang_64/mkspecs/features/resources.prf:
 ../../../Qt/5.11.0/clang_64/mkspecs/features/moc.prf:
 ../../../Qt/5.11.0/clang_64/mkspecs/features/unix/opengl.prf:
+../../../Qt/5.11.0/clang_64/mkspecs/features/uic.prf:
 ../../../Qt/5.11.0/clang_64/mkspecs/features/unix/thread.prf:
 ../../../Qt/5.11.0/clang_64/mkspecs/features/qmake_use.prf:
 ../../../Qt/5.11.0/clang_64/mkspecs/features/file_copies.prf:
@@ -350,6 +353,7 @@ QtVocalTrainer.xcodeproj/project.pbxproj: QtVocalTrainer.pro ../../../Qt/5.11.0/
 QtVocalTrainer.pro:
 qml.qrc:
 ../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/QtQuick.prl:
+../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/QtWidgets.prl:
 ../../../Qt/5.11.0/clang_64/lib/QtGui.framework/QtGui.prl:
 ../../../Qt/5.11.0/clang_64/lib/QtQml.framework/QtQml.prl:
 ../../../Qt/5.11.0/clang_64/lib/QtNetwork.framework/QtNetwork.prl:

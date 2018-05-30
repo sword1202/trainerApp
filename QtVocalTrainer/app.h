@@ -1,10 +1,10 @@
 #ifndef APP_H
 #define APP_H
 
-#import <QGuiApplication>
+#import <QApplication>
 #include <QQmlApplicationEngine>
 
-class App : public QGuiApplication
+class App : public QApplication
 {
     QQmlApplicationEngine* engine;
 

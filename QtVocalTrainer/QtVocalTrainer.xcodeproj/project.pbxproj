@@ -661,21 +661,6 @@
 					);
 			};
 		};
-		0332E7313E63268A746DBC5A = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qmlworkspace.cpp";
-			name = "qmlworkspace.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		2D0BC67C5FA24DE594C1B6CB = {
-			fileRef = "0332E7313E63268A746DBC5A";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
 		AD9EDD68A024163B048FDE37 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/nanovg/nanovg.c";
@@ -700,6 +685,36 @@
 		};
 		7CF22A53CBCB3B801E6F3DF3 = {
 			fileRef = "7B8DC05446533BAB00033283";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		B144390631BBB9A2FCF13236 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/workspace.cpp";
+			name = "workspace.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		B57796D5057FCE929E75A6BB = {
+			fileRef = "B144390631BBB9A2FCF13236";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		40C55C7C707DB75EDC106073 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/mainwindow.cpp";
+			name = "mainwindow.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		4CC97745AFB71151D81FB93A = {
+			fileRef = "40C55C7C707DB75EDC106073";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
@@ -826,15 +841,30 @@
 					);
 			};
 		};
-		3BE1800213F27148741998CC = {
+		E44CDCEF64E7EA3D076B88E4 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_qmlworkspace.cpp";
-			name = "moc_qmlworkspace.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_workspace.cpp";
+			name = "moc_workspace.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		9FE97ED45FCE63BFC16DCC3C = {
-			fileRef = "3BE1800213F27148741998CC";
+		265C57E000A0E1481C6EF9DE = {
+			fileRef = "E44CDCEF64E7EA3D076B88E4";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		55CB1CDB84726A897310386F = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_mainwindow.cpp";
+			name = "moc_mainwindow.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		CA195AB77327EA9E7D649333 = {
+			fileRef = "55CB1CDB84726A897310386F";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
@@ -1163,17 +1193,24 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		62BB511BC5D877E16073D1E6 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qmlworkspace.h";
-			name = "qmlworkspace.h";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.c.h";
-		};
 		1F7C01C19C2E45E4BB543437 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/GLScene/WorkspaceDrawer.h";
 			name = "WorkspaceDrawer.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
+		7F94540F60053FC9A62CD4B2 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/workspace.h";
+			name = "workspace.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
+		1239FA6A37479866DE677F5F = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/mainwindow.h";
+			name = "mainwindow.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
@@ -1231,7 +1268,8 @@
 				"6AEB677C582D38E041FB0B42",
 				"897F0A33031A31C419A9EDCF",
 				"31B14BB9CC2E640CFEB7CBC6",
-				"3BE1800213F27148741998CC");
+				"E44CDCEF64E7EA3D076B88E4",
+				"55CB1CDB84726A897310386F");
 			name = "Generated Sources";
 			sourceTree = "<group>";
 		};
@@ -1288,9 +1326,10 @@
 				"BC415B473FEB85492D4E8674",
 				"E66BECCEBC074FBDB27FC872",
 				"2E66651EDA87F4F68C0C9DCC",
-				"0332E7313E63268A746DBC5A",
 				"AD9EDD68A024163B048FDE37",
 				"7B8DC05446533BAB00033283",
+				"B144390631BBB9A2FCF13236",
+				"40C55C7C707DB75EDC106073",
 				"C613FE9ADA39556AD9540F1E",
 				"1091C7F2ACC81AEE9DF74E74",
 				"8D1AFD7B368D712618894EDF",
@@ -1337,8 +1376,9 @@
 				"3CF03BDC1456754CC01D032C",
 				"AF511BA9F3FB82C40E8899B1",
 				"99A24269B13302C70B70A17D",
-				"62BB511BC5D877E16073D1E6",
-				"1F7C01C19C2E45E4BB543437");
+				"1F7C01C19C2E45E4BB543437",
+				"7F94540F60053FC9A62CD4B2",
+				"1239FA6A37479866DE677F5F");
 			name = "Sources";
 			sourceTree = "<group>";
 		};
@@ -1414,9 +1454,10 @@
 				"F512D0DE937285A2596D4954",
 				"3FF76E10AF30D48487AD569B",
 				"D1F6A12137D2C00B4618DB91",
-				"2D0BC67C5FA24DE594C1B6CB",
 				"0140214243BBE25ACBBFF4A1",
 				"7CF22A53CBCB3B801E6F3DF3",
+				"B57796D5057FCE929E75A6BB",
+				"4CC97745AFB71151D81FB93A",
 				"F3F0C5A9AE1D79D2A4930AEA",
 				"AE6596E2227260CD02B22B61",
 				"4D39E2B783FFDF3FB02ED09A",
@@ -1425,7 +1466,8 @@
 				"AF390E3E333C2C8F9D8BCA74",
 				"B39FEAC046886E2A8CAD6451",
 				"A40AA65A4364E4B559FCE389",
-				"9FE97ED45FCE63BFC16DCC3C",
+				"265C57E000A0E1481C6EF9DE",
+				"CA195AB77327EA9E7D649333",
 				"DE96A987995B398E25D392B5");
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1666,6 +1708,20 @@
 			settings = {
 			};
 		};
+		999AF243E484560AA468035D = {
+			isa = PBXFileReference;
+			name = "QtWidgets.framework";
+			path = "/Users/semyon/Qt/5.11.0/clang_64/lib/QtWidgets.framework";
+			refType = 0;
+			sourceTree = "<absolute>";
+			lastKnownFileType = "wrapper.framework";
+		};
+		1AC3E204B2624A57E690285B = {
+			fileRef = "999AF243E484560AA468035D";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		D4B32C2222F82AC56BADEB21 = {
 			isa = PBXFileReference;
 			name = "OpenGL.framework";
@@ -1713,6 +1769,7 @@
 				"2B774D8E4178765CE52EAAF5",
 				"A1A67BEAA744704B29168D39",
 				"554C4EF638BE7C2288F34633",
+				"999AF243E484560AA468035D",
 				"D4B32C2222F82AC56BADEB21",
 				"8D9815BDB5BD9F90D2BC05C5");
 			isa = PBXGroup;
@@ -1739,6 +1796,7 @@
 				"A99B2AA0F9CBBDD12BA126A4",
 				"8D267F2E4776F0ECA2F49DC8",
 				"7E6181E315EB3F51F58A7697",
+				"1AC3E204B2624A57E690285B",
 				"8771A8C96E9C391044035D99",
 				"E45E51A644D5FC9F942ECE55");
 			isa = PBXFrameworksBuildPhase;
@@ -1858,6 +1916,7 @@
 					"../PitchDetection",
 					"../include/nanovg",
 					"../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers",
+					"../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtGui.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtQml.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers",
@@ -1882,6 +1941,7 @@
 					"-DQT_DEPRECATED_WARNINGS",
 					"-DQT_QML_DEBUG",
 					"-DQT_QUICK_LIB",
+					"-DQT_WIDGETS_LIB",
 					"-DQT_GUI_LIB",
 					"-DQT_QML_LIB",
 					"-DQT_NETWORK_LIB",
@@ -1897,6 +1957,7 @@
 					"-DQT_DEPRECATED_WARNINGS",
 					"-DQT_QML_DEBUG",
 					"-DQT_QUICK_LIB",
+					"-DQT_WIDGETS_LIB",
 					"-DQT_GUI_LIB",
 					"-DQT_QML_LIB",
 					"-DQT_NETWORK_LIB",
@@ -1962,6 +2023,7 @@
 					"../PitchDetection",
 					"../include/nanovg",
 					"../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers",
+					"../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtGui.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtQml.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers",
@@ -1986,6 +2048,7 @@
 					"-DQT_DEPRECATED_WARNINGS",
 					"-DQT_QML_DEBUG",
 					"-DQT_QUICK_LIB",
+					"-DQT_WIDGETS_LIB",
 					"-DQT_GUI_LIB",
 					"-DQT_QML_LIB",
 					"-DQT_NETWORK_LIB",
@@ -2001,6 +2064,7 @@
 					"-DQT_DEPRECATED_WARNINGS",
 					"-DQT_QML_DEBUG",
 					"-DQT_QUICK_LIB",
+					"-DQT_WIDGETS_LIB",
 					"-DQT_GUI_LIB",
 					"-DQT_QML_LIB",
 					"-DQT_NETWORK_LIB",

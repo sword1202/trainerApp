@@ -25,15 +25,8 @@ public:
 
 boost::fast_pool_allocator<MainLoopCallbackEvent> MainLoopCallbackEvent::allocator;
 
-App::App(int argc, char *argv[]) : QGuiApplication(argc, argv) {
+App::App(int argc, char *argv[]) : QApplication(argc, argv) {
     PortAudio::init();
-
-    engine = new QQmlApplicationEngine();
-    QQmlContext* context = engine->rootContext();
-    context->setContextProperty("cpp", new QmlCppBridge());
-    engine->load(QUrl("qrc:/qml/AppWindow.qml"));
-    assert(!engine->rootObjects().isEmpty());
-
 #ifdef __APPLE__
     doMacOsPlatformStaff();
 #endif

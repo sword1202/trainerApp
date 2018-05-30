@@ -1,4 +1,4 @@
-QT += quick
+QT += quick gui core widgets
 
 CONFIG += c++14
 #QMAKE_CXXFLAGS_DEBUG += -O0
@@ -58,9 +58,10 @@ SOURCES += \
     appmacos.mm \
     qmlvxpitch.cpp \
     qmltimedpitch.cpp \
-    qmlworkspace.cpp \
     ../VocalTrainer/nanovg/nanovg.c \
-    ../VocalTrainer/GLScene/WorkspaceDrawer.cpp
+    ../VocalTrainer/GLScene/WorkspaceDrawer.cpp \
+    workspace.cpp \
+    mainwindow.cpp
 
 RESOURCES += qml.qrc
 
@@ -130,8 +131,9 @@ HEADERS += \
     ../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h \
     qmlvxpitch.h \
     qmltimedpitch.h \
-    qmlworkspace.h \
-    ../VocalTrainer/GLScene/WorkspaceDrawer.h
+    ../VocalTrainer/GLScene/WorkspaceDrawer.h \
+    workspace.h \
+    mainwindow.h
 
 INCLUDEPATH += ../include \
     ../VocalTrainer/GLScene \
