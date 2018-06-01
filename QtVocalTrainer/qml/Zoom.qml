@@ -1,6 +1,6 @@
 import QtQuick 2.0
 
-Item {
+QtObject {
     readonly property real baseWidth: 1374.0
     readonly property real zoomFactor: 12.0 * 4
     property real zoom: 1.0

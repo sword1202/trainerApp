@@ -1,8 +1,7 @@
 import QtQuick 2.0
+import "js/zoom.js" as Zoom
 
 Rectangle {
-    property var zoom
-
     readonly property real dotRadius: 1.5
     readonly property string dotColor: "#24232D"
 
@@ -21,7 +20,7 @@ Rectangle {
             var dotY = height / 2
 
             var tact = 1;
-            zoom.iterateIntervals(this, {
+            Zoom.iterateIntervals(this, {
                 beatsIterator: function(x, isBeat) {
                     if (isBeat) {
                         ctx.fillStyle = dotColor;
@@ -41,7 +40,7 @@ Rectangle {
         }
     }
 
-    onZoomChanged: {
-        zoom.zoomChanged.connect(canvas.requestPaint)
+    Component.onCompleted: {
+        cpp.zoomController.zoomChanged.connect(canvas.requestPaint)
     }
 }

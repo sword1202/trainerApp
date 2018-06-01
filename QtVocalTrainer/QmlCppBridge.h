@@ -6,12 +6,14 @@
 #include <QQuickView>
 #include "qmlpitch.h"
 #include "mainwindow.h"
+#include "zoomcontroller.h"
 
 class QmlCppBridge : public QObject
 {
     Q_OBJECT
 
     MainWindow* mainWindow;
+
 public:
     QmlCppBridge(MainWindow* mainWindow);
 
@@ -21,7 +23,9 @@ public:
     Q_INVOKABLE QmlPitch pitchFromPerfectFrequencyIndex(int perfectFrequencyIndex);
     Q_INVOKABLE QmlPitch whitePitch(int whitePitchIndex, int octaveIndex);
 
-    Q_INVOKABLE void updateHeader();
+    Q_PROPERTY(ZoomController* zoomController READ getZoom() CONSTANT)
+
+    ZoomController* getZoom() const;
 
 signals:
     void resize();

@@ -2,125 +2,131 @@ import QtQuick 2.0
 import "js/canvasutils.js" as CanvasUtils
 import "js/uiutils.js" as UiUtils
 
-Canvas {
-    id: root
+Rectangle {
+    color: "white"
 
-    width: 51
+    Canvas {
+        id: root
 
-    property var zoom
+        width: 51
 
-    property int firstPitchOctave: 2
-    property int firstWhitePitchInOctaveIndex: 1
+        anchors.left: parent.left
+        anchors.top: parent.top
+        height: parent.height
 
-    property var firstPitch: cpp.whitePitch(firstWhitePitchInOctaveIndex, firstPitchOctave)
+        property int firstPitchOctave: 2
+        property int firstWhitePitchInOctaveIndex: 1
 
-    readonly property real bigPitchHeight: 25.5
-    readonly property real smallPitchHeight: 18.75
-    readonly property real sharpPitchHeight: 9.75
-    readonly property real sharpPitchWidth: 22.5
-    readonly property real distanceBetweenPitches: 2
-    readonly property var heightMap: [smallPitchHeight, bigPitchHeight,
-        smallPitchHeight, smallPitchHeight, bigPitchHeight, bigPitchHeight, smallPitchHeight]
-    readonly property var hasSharpMap: [true, true, false, true, true, true, false]
-    readonly property real pitchRadius: 3
-    readonly property real sharpPitchRadius: 1.5
-    readonly property real distanceBetweenTextLeftAndPitchRight: 21.0
-    readonly property string borderColor: "#7f9A98D0"
-    readonly property string sharpPitchColor: "#9A98D0"
-    readonly property var pitchNames: ["C", "D", "E", "F", "G", "A", "B"]
-    readonly property real intervalOctvaHeightToPianoOctaveHeightRelation: (function() {
-        // 12 pitches in octave
-        var intervalOctaveHeight = zoom.getIntervalHeight() * 12
-        // 4 small pitches and 3 big pitches from heightMap, 5: 7 pitches in octave
-        var pianoOctaveHeight = smallPitchHeight * 4 + bigPitchHeight * 3 + distanceBetweenPitches * 7
-        return intervalOctaveHeight / pianoOctaveHeight
-    })();
+        property var firstPitch: cpp.whitePitch(firstWhitePitchInOctaveIndex, firstPitchOctave)
 
-    property int startPitchIndex: 0
+        readonly property real bigPitchHeight: 25.5
+        readonly property real smallPitchHeight: 18.75
+        readonly property real sharpPitchHeight: 9.75
+        readonly property real sharpPitchWidth: 22.5
+        readonly property real distanceBetweenPitches: 2
+        readonly property var heightMap: [smallPitchHeight, bigPitchHeight,
+            smallPitchHeight, smallPitchHeight, bigPitchHeight, bigPitchHeight, smallPitchHeight]
+        readonly property var hasSharpMap: [true, true, false, true, true, true, false]
+        readonly property real pitchRadius: 3
+        readonly property real sharpPitchRadius: 1.5
+        readonly property real distanceBetweenTextLeftAndPitchRight: 21.0
+        readonly property string borderColor: "#7f9A98D0"
+        readonly property string sharpPitchColor: "#9A98D0"
+        readonly property var pitchNames: ["C", "D", "E", "F", "G", "A", "B"]
+        readonly property real intervalOctvaHeightToPianoOctaveHeightRelation: (function() {
+            // 12 pitches in octave
+            var intervalOctaveHeight = cpp.zoomController.intervalHeight * 12
+            // 4 small pitches and 3 big pitches from heightMap, 5: 7 pitches in octave
+            var pianoOctaveHeight = smallPitchHeight * 4 + bigPitchHeight * 3 + distanceBetweenPitches * 7
+            return intervalOctaveHeight / pianoOctaveHeight
+        })();
 
-    onPaint: {
-        var ctx = getContext("2d")
+        property int startPitchIndex: 0
 
-        ctx.fillStyle = "white";
-        ctx.fillRect(0, 0, width, height);
+        onPaint: {
+            var ctx = getContext("2d")
 
-        ctx.strokeStyle = borderColor
-        ctx.fillStyle = sharpPitchColor
-        var index = firstWhitePitchInOctaveIndex;
-        var y = height
-        var heightMapLength = heightMap.length
-        while (y > -bigPitchHeight) {
-            var pitchHeight = heightMap[index % heightMapLength] * intervalOctvaHeightToPianoOctaveHeightRelation
-            CanvasUtils.roundRect(ctx, 0, y - pitchHeight, width - 1, pitchHeight, {
-                tr: pitchRadius * intervalOctvaHeightToPianoOctaveHeightRelation,
-                br: pitchRadius * intervalOctvaHeightToPianoOctaveHeightRelation
-            })
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, 0, width, height);
 
-            y -= pitchHeight
+            ctx.strokeStyle = borderColor
+            ctx.fillStyle = sharpPitchColor
+            var index = firstWhitePitchInOctaveIndex;
+            var y = height
+            var heightMapLength = heightMap.length
+            while (y > -bigPitchHeight) {
+                var pitchHeight = heightMap[index % heightMapLength] * intervalOctvaHeightToPianoOctaveHeightRelation
+                CanvasUtils.roundRect(ctx, 0, y - pitchHeight, width - 1, pitchHeight, {
+                    tr: pitchRadius * intervalOctvaHeightToPianoOctaveHeightRelation,
+                    br: pitchRadius * intervalOctvaHeightToPianoOctaveHeightRelation
+                })
 
-            // draw sharp pitch
-            pitchHeight = sharpPitchHeight * intervalOctvaHeightToPianoOctaveHeightRelation
-            if (hasSharpMap[index % heightMapLength]) {
-                CanvasUtils.roundRect(ctx, 0,
-                                      y - pitchHeight / 2 - distanceBetweenPitches / 2 * intervalOctvaHeightToPianoOctaveHeightRelation,
-                                      sharpPitchWidth, pitchHeight, {
-                    tr: sharpPitchRadius * intervalOctvaHeightToPianoOctaveHeightRelation,
-                    br: sharpPitchRadius * intervalOctvaHeightToPianoOctaveHeightRelation
-                }, true, false)
+                y -= pitchHeight
 
+                // draw sharp pitch
+                pitchHeight = sharpPitchHeight * intervalOctvaHeightToPianoOctaveHeightRelation
+                if (hasSharpMap[index % heightMapLength]) {
+                    CanvasUtils.roundRect(ctx, 0,
+                                          y - pitchHeight / 2 - distanceBetweenPitches / 2 * intervalOctvaHeightToPianoOctaveHeightRelation,
+                                          sharpPitchWidth, pitchHeight, {
+                        tr: sharpPitchRadius * intervalOctvaHeightToPianoOctaveHeightRelation,
+                        br: sharpPitchRadius * intervalOctvaHeightToPianoOctaveHeightRelation
+                    }, true, false)
+
+                }
+
+                y -= distanceBetweenPitches * intervalOctvaHeightToPianoOctaveHeightRelation
+                index++
             }
-
-            y -= distanceBetweenPitches * intervalOctvaHeightToPianoOctaveHeightRelation
-            index++
         }
-    }
 
-    Component {
-        id: pitchNameText
+        Component {
+            id: pitchNameText
 
-        Text {
-            opacity: 0.9
-            anchors.left: parent.right
-            anchors.leftMargin: -distanceBetweenTextLeftAndPitchRight
-            color: "#24232D"
-            font.family: "LatoBold"
-            font.bold: true
-            font.pixelSize: 9
+            Text {
+                opacity: 0.9
+                anchors.left: parent.right
+                anchors.leftMargin: -root.distanceBetweenTextLeftAndPitchRight
+                color: "#24232D"
+                font.family: "LatoBold"
+                font.bold: true
+                font.pixelSize: 9
+            }
         }
-    }
 
-    function updatePitchNames() {
-        UiUtils.destroyAllChildern(root)
+        function updatePitchNames() {
+            UiUtils.destroyAllChildern(root)
 
-        var index = firstWhitePitchInOctaveIndex;
-        var y = height
-        var heightMapLength = heightMap.length
-        while (y > -bigPitchHeight) {
-            var indexInMap = index % heightMapLength
-            var pitchHeight = heightMap[indexInMap] * intervalOctvaHeightToPianoOctaveHeightRelation
-            var text = pitchNameText.createObject(root, {})
-            text.y =  y - pitchHeight / 2 - text.height / 2
-            text.text = pitchNames[indexInMap] + (Math.floor(index / heightMapLength) + firstPitchOctave)
-            index++
-            y -= pitchHeight + distanceBetweenPitches * intervalOctvaHeightToPianoOctaveHeightRelation
+            var index = firstWhitePitchInOctaveIndex;
+            var y = height
+            var heightMapLength = heightMap.length
+            while (y > -bigPitchHeight) {
+                var indexInMap = index % heightMapLength
+                var pitchHeight = heightMap[indexInMap] * intervalOctvaHeightToPianoOctaveHeightRelation
+                var text = pitchNameText.createObject(root, {})
+                text.y =  y - pitchHeight / 2 - text.height / 2
+                text.text = pitchNames[indexInMap] + (Math.floor(index / heightMapLength) + firstPitchOctave)
+                index++
+                y -= pitchHeight + distanceBetweenPitches * intervalOctvaHeightToPianoOctaveHeightRelation
+            }
         }
-    }
 
-    onHeightChanged: {
-        updatePitchNames()
-    }
+        onHeightChanged: {
+            updatePitchNames()
+        }
 
-    onFirstPitchOctaveChanged: {
-        updatePitchNames()
-        requestPaint()
-    }
+        onFirstPitchOctaveChanged: {
+            updatePitchNames()
+            requestPaint()
+        }
 
-    onFirstWhitePitchInOctaveIndexChanged: {
-        updatePitchNames()
-        requestPaint()
-    }
+        onFirstWhitePitchInOctaveIndexChanged: {
+            updatePitchNames()
+            requestPaint()
+        }
 
-    onIntervalOctvaHeightToPianoOctaveHeightRelationChanged: {
-        updatePitchNames()
+        onIntervalOctvaHeightToPianoOctaveHeightRelationChanged: {
+            updatePitchNames()
+        }
     }
 }

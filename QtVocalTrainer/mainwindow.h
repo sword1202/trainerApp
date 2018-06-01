@@ -6,24 +6,27 @@
 #include <QQuickWidget>
 #include "workspace.h"
 
+class QmlCppBridge;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+    Workspace *workspace;
+    QQuickItem *header;
+    QQuickItem *piano;
+    QmlCppBridge *cpp;
+
+    QQuickWidget *createQQuickWidget(const QString& qmlFile);
 public:
     explicit MainWindow(QWidget *parent = 0);
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
-
     void mousePressEvent(QMouseEvent *event) override;
 
 public:
     ~MainWindow();
-    Workspace *workspace;
-    QQuickItem *header;
-
-    void updateHeader();
 };
 
 #endif // MAINWINDOW_H

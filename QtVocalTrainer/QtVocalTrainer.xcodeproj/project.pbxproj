@@ -736,6 +736,21 @@
 					);
 			};
 		};
+		7F3F1B193768567697BA8B37 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/zoomcontroller.cpp";
+			name = "zoomcontroller.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		C91434CEEF9FEB3E3F73CE21 = {
+			fileRef = "7F3F1B193768567697BA8B37";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
 		F61C3E706670E1F71F3998D1 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qrc_qml.cpp";
@@ -880,6 +895,21 @@
 		};
 		CA195AB77327EA9E7D649333 = {
 			fileRef = "55CB1CDB84726A897310386F";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		142892AE0739A0F686F35041 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_zoomcontroller.cpp";
+			name = "moc_zoomcontroller.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		FC88B784A1146E42E9B07601 = {
+			fileRef = "142892AE0739A0F686F35041";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
@@ -1236,6 +1266,13 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
+		872AADB84245AB0712A99F11 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/zoomcontroller.h";
+			name = "zoomcontroller.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
 		757C4D2CF043B21FE9CC0678 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qml.qrc";
@@ -1291,7 +1328,8 @@
 				"897F0A33031A31C419A9EDCF",
 				"31B14BB9CC2E640CFEB7CBC6",
 				"E44CDCEF64E7EA3D076B88E4",
-				"55CB1CDB84726A897310386F");
+				"55CB1CDB84726A897310386F",
+				"142892AE0739A0F686F35041");
 			name = "Generated Sources";
 			sourceTree = "<group>";
 		};
@@ -1361,6 +1399,7 @@
 				"B144390631BBB9A2FCF13236",
 				"40C55C7C707DB75EDC106073",
 				"27AB59B83B50AAE8527B3E16",
+				"7F3F1B193768567697BA8B37",
 				"C613FE9ADA39556AD9540F1E",
 				"1091C7F2ACC81AEE9DF74E74",
 				"8D1AFD7B368D712618894EDF",
@@ -1409,7 +1448,8 @@
 				"99A24269B13302C70B70A17D",
 				"1F7C01C19C2E45E4BB543437",
 				"7F94540F60053FC9A62CD4B2",
-				"1239FA6A37479866DE677F5F");
+				"1239FA6A37479866DE677F5F",
+				"872AADB84245AB0712A99F11");
 			name = "Sources";
 			sourceTree = "<group>";
 		};
@@ -1490,6 +1530,7 @@
 				"B57796D5057FCE929E75A6BB",
 				"4CC97745AFB71151D81FB93A",
 				"455FD040EBB74ECE5B70535B",
+				"C91434CEEF9FEB3E3F73CE21",
 				"F3F0C5A9AE1D79D2A4930AEA",
 				"AE6596E2227260CD02B22B61",
 				"4D39E2B783FFDF3FB02ED09A",
@@ -1500,6 +1541,7 @@
 				"A40AA65A4364E4B559FCE389",
 				"265C57E000A0E1481C6EF9DE",
 				"CA195AB77327EA9E7D649333",
+				"FC88B784A1146E42E9B07601",
 				"DE96A987995B398E25D392B5");
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;

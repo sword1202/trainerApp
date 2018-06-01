@@ -26,6 +26,6 @@ QmlPitch QmlCppBridge::whitePitch(int whitePitchIndex, int octaveIndex) {
     return QmlPitch(Pitch::whitePitch(whitePitchIndex, octaveIndex).getPerfectFrequencyIndex());
 }
 
-void QmlCppBridge::updateHeader() {
-    mainWindow->updateHeader();
+ZoomController *QmlCppBridge::getZoom() const {
+    return ZoomController::instance();
 }

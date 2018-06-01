@@ -1,7 +1,7 @@
 #include "workspace.h"
 #include "TimeUtils.h"
 #include <iostream>
-#include "qtutils.h"
+#include "QtUtils/qtutils.h"
 
 using namespace CppUtils;
 using namespace std;
@@ -12,7 +12,7 @@ Workspace::Workspace(QWidget *parent) : QOpenGLWidget(parent) {
     QtUtils::startRepeatedTimer(this, [=] {
             update();
             return true;
-        }, 1000 / 60); // 60fps
+        }, 1000 / 75); // 75fps
 }
 
 
@@ -34,5 +34,4 @@ void Workspace::resizeGL(int w, int h) {
 void Workspace::paintGL() {
     QOpenGLWidget::paintGL();
     workspaceDrawer.draw();
-    update();
 }
