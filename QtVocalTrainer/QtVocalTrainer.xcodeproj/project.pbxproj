@@ -721,6 +721,21 @@
 					);
 			};
 		};
+		4D5C3817C5D5E29021C15F70 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/QtUtils/qtutils.cpp";
+			name = "qtutils.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		455FD040EBB74ECE5B70535B = {
+			fileRef = "4D5C3817C5D5E29021C15F70";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
 		F61C3E706670E1F71F3998D1 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qrc_qml.cpp";
@@ -1214,6 +1229,13 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
+		413FA82A26C38CBE2E284D94 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/QtUtils/qtutils.h";
+			name = "qtutils.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
 		757C4D2CF043B21FE9CC0678 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qml.qrc";
@@ -1273,6 +1295,14 @@
 			name = "Generated Sources";
 			sourceTree = "<group>";
 		};
+		27AB59B83B50AAE8527B3E16 = {
+			isa = PBXGroup;
+			children = (
+				"4D5C3817C5D5E29021C15F70",
+				"413FA82A26C38CBE2E284D94");
+			name = "QtUtils";
+			sourceTree = "<group>";
+		};
 		87DF60DE337FB58864343E39 = {
 			isa = PBXGroup;
 			children = (
@@ -1330,6 +1360,7 @@
 				"7B8DC05446533BAB00033283",
 				"B144390631BBB9A2FCF13236",
 				"40C55C7C707DB75EDC106073",
+				"27AB59B83B50AAE8527B3E16",
 				"C613FE9ADA39556AD9540F1E",
 				"1091C7F2ACC81AEE9DF74E74",
 				"8D1AFD7B368D712618894EDF",
@@ -1458,6 +1489,7 @@
 				"7CF22A53CBCB3B801E6F3DF3",
 				"B57796D5057FCE929E75A6BB",
 				"4CC97745AFB71151D81FB93A",
+				"455FD040EBB74ECE5B70535B",
 				"F3F0C5A9AE1D79D2A4930AEA",
 				"AE6596E2227260CD02B22B61",
 				"4D39E2B783FFDF3FB02ED09A",

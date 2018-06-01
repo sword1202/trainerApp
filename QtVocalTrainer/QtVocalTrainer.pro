@@ -61,7 +61,8 @@ SOURCES += \
     ../VocalTrainer/nanovg/nanovg.c \
     ../VocalTrainer/GLScene/WorkspaceDrawer.cpp \
     workspace.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    QtUtils/qtutils.cpp
 
 RESOURCES += qml.qrc
 
@@ -133,7 +134,8 @@ HEADERS += \
     qmltimedpitch.h \
     ../VocalTrainer/GLScene/WorkspaceDrawer.h \
     workspace.h \
-    mainwindow.h
+    mainwindow.h \
+    QtUtils/qtutils.h
 
 INCLUDEPATH += ../include \
     ../VocalTrainer/GLScene \

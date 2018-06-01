@@ -5,6 +5,10 @@
 
 using namespace CppUtils;
 
+QmlCppBridge::QmlCppBridge(MainWindow *mainWindow) : mainWindow(mainWindow) {
+
+}
+
 qreal QmlCppBridge::now() {
     return TimeUtils::NowInSeconds();
 }
@@ -20,4 +24,8 @@ QmlPitch QmlCppBridge::pitchFromPerfectFrequencyIndex(int perfectFrequencyIndex)
 
 QmlPitch QmlCppBridge::whitePitch(int whitePitchIndex, int octaveIndex) {
     return QmlPitch(Pitch::whitePitch(whitePitchIndex, octaveIndex).getPerfectFrequencyIndex());
+}
+
+void QmlCppBridge::updateHeader() {
+    mainWindow->updateHeader();
 }

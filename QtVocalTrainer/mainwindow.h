@@ -15,10 +15,15 @@ public:
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
+
+    void mousePressEvent(QMouseEvent *event) override;
+
 public:
     ~MainWindow();
     Workspace *workspace;
     QQuickItem *header;
+
+    void updateHeader();
 };
 
 #endif // MAINWINDOW_H

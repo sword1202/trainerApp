@@ -1,12 +1,18 @@
 #include "workspace.h"
 #include "TimeUtils.h"
 #include <iostream>
+#include "qtutils.h"
 
 using namespace CppUtils;
 using namespace std;
 
 Workspace::Workspace(QWidget *parent) : QOpenGLWidget(parent) {
     devicePixelRatio_ = devicePixelRatio();
+
+    QtUtils::startRepeatedTimer(this, [=] {
+            update();
+            return true;
+        }, 1000 / 60); // 60fps
 }
 
 
