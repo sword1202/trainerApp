@@ -36,6 +36,10 @@ public:
 
 public slots:
     void onFileOpen();
+
+#ifdef __APPLE__
+    void doMacOsPlatformStaff();
+#endif
 };
 
 #endif // MAINWINDOW_H

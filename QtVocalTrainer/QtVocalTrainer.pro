@@ -64,7 +64,8 @@ SOURCES += \
     QtUtils/qtutils.cpp \
     zoomcontroller.cpp \
     ../VocalTrainer/GLScene/NvgOpenGLDrawer.cpp \
-    player.cpp
+    player.cpp \
+    mainwindow.mm
 
 RESOURCES += qml.qrc
 

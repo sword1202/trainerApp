@@ -16,6 +16,10 @@ constexpr int BEATS_IN_TACT = 4;
 MainWindow::MainWindow(QWidget *parent) :
         QMainWindow(parent)
 {
+#ifdef __APPLE__
+    doMacOsPlatformStaff();
+#endif
+
     // setup workspace
     workspace = new Workspace(this);
     workspace->move(PIANO_WIDTH, HEADER_HEIGHT);
