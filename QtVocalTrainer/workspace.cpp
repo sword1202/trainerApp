@@ -3,6 +3,7 @@
 #include <iostream>
 #include "QtUtils/qtutils.h"
 #include "zoomcontroller.h"
+#include "player.h"
 
 using namespace CppUtils;
 using namespace std;
@@ -12,13 +13,22 @@ Workspace::Workspace(QWidget *parent) : QOpenGLWidget(parent) {
 
     // 75 fps
     QtUtils::startRepeatedTimer(this, [=] {
-        if (workspaceDrawer.getSpeed() > 0) {
+        if (workspaceDrawer.getIntervalsPerSecond() > 0) {
             update();
         }
         return true;
     }, 1000 / 75);
 
-    connect(ZoomController::instance(), SIGNAL(zoomChanged()), this, SLOT(zoomChanged()));
+    connect(ZoomController::instance(), &ZoomController::zoomChanged, this, &Workspace::zoomChanged);
+    connect(Player::instance(), &Player::isPlayingChanged, this, &Workspace::isPlayingChanged);
+}
+
+void Workspace::isPlayingChanged(bool isPlaying) {
+    if (isPlaying) {
+        workspaceDrawer.setIntervalsPerSecond(Player::instance()->getBeatsPerMinute() / 60.0);
+    } else {
+        workspaceDrawer.setIntervalsPerSecond(0);
+    }
 }
 
 void Workspace::zoomChanged() {
@@ -32,7 +42,6 @@ void Workspace::initializeGL() {
     zoomChanged();
     workspaceDrawer.setGridColor({0x8B, 0x89, 0xB6, 0x33});
     workspaceDrawer.setAccentGridColor({0x8B, 0x89, 0xB6, 0x80});
-    workspaceDrawer.setSpeed(200);
     glDisable(GL_DEPTH_TEST);
 }
 

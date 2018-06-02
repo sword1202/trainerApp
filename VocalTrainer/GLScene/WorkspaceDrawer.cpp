@@ -39,8 +39,8 @@ void WorkspaceDrawer::draw() {
     double now = TimeUtils::NowInSeconds();
     if (frameTime != 0) {
         double frameDuration = now - frameTime;
-        if (speed != 0) {
-            horizontalOffset = horizontalOffset + frameDuration * speed;
+        if (instervalsPerSecond != 0) {
+            horizontalOffset = horizontalOffset + frameDuration * instervalsPerSecond * intervalWidth;
         }
     }
     frameTime = now;
@@ -143,7 +143,7 @@ WorkspaceDrawer::WorkspaceDrawer() :
         verticalOffset(0),
         horizontalOffset(0),
         sizeMultiplier(1),
-        speed(0)
+        instervalsPerSecond(0)
 {
 
 }
@@ -163,10 +163,10 @@ void WorkspaceDrawer::setSizeMultiplier(float sizeMultiplier) {
     this->sizeMultiplier = sizeMultiplier;
 }
 
-double WorkspaceDrawer::getSpeed() const {
-    return speed;
+double WorkspaceDrawer::getIntervalsPerSecond() const {
+    return instervalsPerSecond;
 }
 
-void WorkspaceDrawer::setSpeed(double speed) {
-    this->speed = speed;
+void WorkspaceDrawer::setIntervalsPerSecond(double intervalsPerSecond) {
+    this->instervalsPerSecond = intervalsPerSecond;
 }

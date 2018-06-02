@@ -3,7 +3,6 @@ import QtGraphicalEffects 1.0
 
 Item {
     property var playHead2
-    property var player
 
     width: 266.5
     height: 45
@@ -81,9 +80,9 @@ Item {
 
         onStateChanged: {
             if (state === "on") {
-                //player.play();
+                cpp.player.play();
             } else {
-                //player.pause();
+                cpp.player.pause();
             }
         }
     }

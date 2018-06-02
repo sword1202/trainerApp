@@ -19,7 +19,7 @@ class WorkspaceDrawer {
     std::atomic<float> verticalOffset;
     std::atomic<float> horizontalOffset;
     std::atomic<float> sizeMultiplier;
-    std::atomic<double> speed;
+    std::atomic<double> instervalsPerSecond;
 
     Color gridColor;
     Color accentGridColor;
@@ -48,8 +48,8 @@ public:
     float getHorizontalOffset() const;
     void setHorizontalOffset(float horizontalOffset);
 
-    double getSpeed() const;
-    void setSpeed(double speed);
+    double getIntervalsPerSecond() const;
+    void setIntervalsPerSecond(double intervalsPerSecond);
 
     float getSizeMultiplier() const;
     void setSizeMultiplier(float sizeMultiplier);

@@ -7,8 +7,6 @@ Rectangle {
     property alias lyricsShowButton: lyricsShowButton
     property alias tempo: tempo
 
-    property alias player: playerController.player
-
     id: header
     height: 75
     color: "#c5cef8"
