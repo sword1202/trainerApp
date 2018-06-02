@@ -241,21 +241,6 @@
 					);
 			};
 		};
-		E40EEDB945F5FCACFBC1DE6F = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qmlplayer.cpp";
-			name = "qmlplayer.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		9AC167E88355C4390A24F04B = {
-			fileRef = "E40EEDB945F5FCACFBC1DE6F";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
 		5820983D5AF61CFB18BDD732 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/MvxPlayer.cpp";
@@ -766,6 +751,21 @@
 					);
 			};
 		};
+		427036DAC85631AB4C48B610 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/player.cpp";
+			name = "player.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		67B74B41DD891F047CEBC851 = {
+			fileRef = "427036DAC85631AB4C48B610";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
 		F61C3E706670E1F71F3998D1 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qrc_qml.cpp";
@@ -841,21 +841,6 @@
 					);
 			};
 		};
-		6AEB677C582D38E041FB0B42 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_qmlplayer.cpp";
-			name = "moc_qmlplayer.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		AF390E3E333C2C8F9D8BCA74 = {
-			fileRef = "6AEB677C582D38E041FB0B42";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
 		897F0A33031A31C419A9EDCF = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_qmlvxpitch.cpp";
@@ -925,6 +910,21 @@
 		};
 		FC88B784A1146E42E9B07601 = {
 			fileRef = "142892AE0739A0F686F35041";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		47F1B0DF5A87C30EB44F4368 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_player.cpp";
+			name = "moc_player.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		B7AF3FDDDED05F6225F0A3CC = {
+			fileRef = "47F1B0DF5A87C30EB44F4368";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
@@ -1019,13 +1019,6 @@
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/PortAudio.h";
 			name = "PortAudio.h";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.c.h";
-		};
-		11386118C01EE3AD86B93A94 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qmlplayer.h";
-			name = "qmlplayer.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
@@ -1302,6 +1295,13 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
+		E60254EB4D07AA900A6941B1 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/player.h";
+			name = "player.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
 		757C4D2CF043B21FE9CC0678 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qml.qrc";
@@ -1353,12 +1353,12 @@
 				"9BD80D57069FBF796EF30C33",
 				"A8DBB3B894A514ABE11FF772",
 				"F8CF2B73DF3F4DAD22A38E8C",
-				"6AEB677C582D38E041FB0B42",
 				"897F0A33031A31C419A9EDCF",
 				"31B14BB9CC2E640CFEB7CBC6",
 				"E44CDCEF64E7EA3D076B88E4",
 				"55CB1CDB84726A897310386F",
-				"142892AE0739A0F686F35041");
+				"142892AE0739A0F686F35041",
+				"47F1B0DF5A87C30EB44F4368");
 			name = "Generated Sources";
 			sourceTree = "<group>";
 		};
@@ -1395,7 +1395,6 @@
 				"61DAEAF44CFBFD0435D18633",
 				"42F5D95319E946AA4552EB19",
 				"010F066C0C8FAFFCB00384DA",
-				"E40EEDB945F5FCACFBC1DE6F",
 				"5820983D5AF61CFB18BDD732",
 				"AB1BB2102FE32CBC9904F361",
 				"1312A85053AA8148E2F73686",
@@ -1430,6 +1429,7 @@
 				"27AB59B83B50AAE8527B3E16",
 				"7F3F1B193768567697BA8B37",
 				"BD9CBF70C3DE9630262C65AA",
+				"427036DAC85631AB4C48B610",
 				"C613FE9ADA39556AD9540F1E",
 				"1091C7F2ACC81AEE9DF74E74",
 				"8D1AFD7B368D712618894EDF",
@@ -1443,7 +1443,6 @@
 				"76B664FAC83040BA76C57E7F",
 				"9E78C40084B4C85FE9D0258A",
 				"9E65F65D73262AC07C018AEA",
-				"11386118C01EE3AD86B93A94",
 				"DE4D6A90DF4619CFB7E35D11",
 				"D427C2C1B1E642DC604E5433",
 				"982893B6BBE598D35A1BBDBD",
@@ -1481,7 +1480,8 @@
 				"1239FA6A37479866DE677F5F",
 				"872AADB84245AB0712A99F11",
 				"308B9F0C589F62599414118C",
-				"90811E948B3126EA0E55864E");
+				"90811E948B3126EA0E55864E",
+				"E60254EB4D07AA900A6941B1");
 			name = "Sources";
 			sourceTree = "<group>";
 		};
@@ -1529,7 +1529,6 @@
 				"C0A33B54AB4F43E113571EFD",
 				"EB92C9E299C61E72C0FFF4E4",
 				"D7C5B34E745041BD55235BD0",
-				"9AC167E88355C4390A24F04B",
 				"0C079B48635759D4B90150B5",
 				"C4852C2D0119858544266918",
 				"8E6ED27FD5FB5AE22B294181",
@@ -1564,17 +1563,18 @@
 				"455FD040EBB74ECE5B70535B",
 				"C91434CEEF9FEB3E3F73CE21",
 				"75010CA4C63B5ACB35276CDD",
+				"67B74B41DD891F047CEBC851",
 				"F3F0C5A9AE1D79D2A4930AEA",
 				"AE6596E2227260CD02B22B61",
 				"4D39E2B783FFDF3FB02ED09A",
 				"B453224DC7FC3E0971A15260",
 				"1C90DF67E8C2A478FBB7CE6D",
-				"AF390E3E333C2C8F9D8BCA74",
 				"B39FEAC046886E2A8CAD6451",
 				"A40AA65A4364E4B559FCE389",
 				"265C57E000A0E1481C6EF9DE",
 				"CA195AB77327EA9E7D649333",
 				"FC88B784A1146E42E9B07601",
+				"B7AF3FDDDED05F6225F0A3CC",
 				"DE96A987995B398E25D392B5");
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;

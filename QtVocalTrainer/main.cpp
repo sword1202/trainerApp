@@ -3,7 +3,7 @@
 #include "qmlpitch.h"
 #include "qmlvxpitch.h"
 #include "qmltimedpitch.h"
-#include "qmlplayer.h"
+#include "player.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
@@ -13,7 +13,6 @@ int main(int argc, char *argv[])
     qRegisterMetaType<QmlPitch>("Pitch");
     qRegisterMetaType<QmlVxPitch>("VxPitch");
     qRegisterMetaType<QmlTimedPitch>("TimedPitch");
-    qRegisterMetaType<QmlVxPitchArray>("VxPitchArray");
 
     App a(argc, argv);
 

@@ -29,3 +29,7 @@ QmlPitch QmlCppBridge::whitePitch(int whitePitchIndex, int octaveIndex) {
 ZoomController *QmlCppBridge::getZoom() const {
     return ZoomController::instance();
 }
+
+Player *QmlCppBridge::getPlayer() const {
+    return Player::instance();
+}

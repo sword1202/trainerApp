@@ -7,6 +7,7 @@
 #include "qmlpitch.h"
 #include "mainwindow.h"
 #include "zoomcontroller.h"
+#include "player.h"
 
 class QmlCppBridge : public QObject
 {
@@ -24,8 +25,10 @@ public:
     Q_INVOKABLE QmlPitch whitePitch(int whitePitchIndex, int octaveIndex);
 
     Q_PROPERTY(ZoomController* zoomController READ getZoom() CONSTANT)
+    Q_PROPERTY(Player* player READ getPlayer() CONSTANT)
 
     ZoomController* getZoom() const;
+    Player* getPlayer() const;
 
 signals:
     void resize();

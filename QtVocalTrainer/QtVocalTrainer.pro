@@ -30,7 +30,6 @@ SOURCES += \
     ../PitchDetection/PortAudio.cpp \
     ../PitchDetection/PortAudioInputReader.cpp \
     executors.cpp \
-    qmlplayer.cpp \
     ../VocalTrainer/VxPlayer/MvxPlayer.cpp \
     ../VocalTrainer/VxPlayer/VxFileAudioDataGenerator.cpp \
     ../VocalTrainer/VxPlayer/VxFile.cpp \
@@ -64,7 +63,8 @@ SOURCES += \
     mainwindow.cpp \
     QtUtils/qtutils.cpp \
     zoomcontroller.cpp \
-    ../VocalTrainer/GLScene/NvgOpenGLDrawer.cpp
+    ../VocalTrainer/GLScene/NvgOpenGLDrawer.cpp \
+    player.cpp
 
 RESOURCES += qml.qrc
 
@@ -101,7 +101,6 @@ HEADERS += \
     ../PitchDetection/CppUtils/TimeUtils.h \
     app.h \
     ../PitchDetection/PortAudio.h \
-    qmlplayer.h \
     ../VocalTrainer/VxPlayer/MvxPlayer.h \
     ../VocalTrainer/VxPlayer/VxFile.h \
     ../VocalTrainer/VxPlayer/VxFileAudioDataGenerator.h \
@@ -140,7 +139,8 @@ HEADERS += \
     QtUtils/qtutils.h \
     zoomcontroller.h \
     ../VocalTrainer/GLScene/Drawer.h \
-    ../VocalTrainer/GLScene/NvgOpenGLDrawer.h
+    ../VocalTrainer/GLScene/NvgOpenGLDrawer.h \
+    player.h
 
 INCLUDEPATH += ../include \
     ../VocalTrainer/GLScene \

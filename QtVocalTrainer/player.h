@@ -7,26 +7,12 @@
 #include "qmlvxpitch.h"
 #include <QJsonValue>
 
-class QmlVxPitchArray {
-    Q_GADGET
-    const std::vector<QmlVxPitch>* cachedVxPitches = nullptr;
-public:
-    Q_PROPERTY(int count READ getPitchesCount())
-    Q_INVOKABLE const QmlVxPitch& at(int index) const;
-
-    QmlVxPitchArray() = default;
-    QmlVxPitchArray(const std::vector<QmlVxPitch> *cachedVxPitches);
-
-    int getPitchesCount() const;
-};
-
-class QmlPlayer : public QObject, public MvxPlayer
+class Player : public QObject, public MvxPlayer
 {
     Q_OBJECT
     QString source;
-    mutable std::vector<QmlVxPitch> cachedVxPitches;
 public:
-    explicit QmlPlayer(QObject *parent = nullptr);
+    explicit Player(QObject *parent = nullptr);
 
     const QString &getSource() const;
     void setSource(const QString &source);
@@ -50,10 +36,9 @@ public:
 
     void onComplete() override;
     void onSeekChanged(double seek) override;
-
     void onPlaybackStarted() override;
 
-    Q_INVOKABLE QmlVxPitchArray getPitchesInTimeRange(double startTime, double endTime) const;
+    static Player* instance();
 
 signals:
     void complete();

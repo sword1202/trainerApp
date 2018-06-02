@@ -101,6 +101,15 @@ public:
         int endTick = timeInSecondsToTicks(endTime);
         iteratePitchesInTickRange(startTick, endTick, function);
     }
+
+    template<typename OutputIterator>
+    void getPitchesInTimeRange(double startTime, double endTime, OutputIterator iterator) const {
+        iteratePitchesInTimeRange(startTime, endTime, [&] (const VxPitch& vxPitch) {
+            double pitchStartTime = ticksToSeconds(vxPitch.startTickNumber);
+            double pitchDuration = ticksToSeconds(vxPitch.ticksCount);
+            *iterator++ = vxPitch;
+        });
+    }
 };
 
 #endif //VOCALTRAINER_VXFILE_H

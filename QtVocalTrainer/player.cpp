@@ -1,20 +1,25 @@
-#include "qmlplayer.h"
+#include "player.h"
 #include <QVariant>
 #include <QJsonObject>
 
 constexpr char FILE_URL_PREFIX[] = "file://";
 constexpr int FILE_URL_PREFIX_LENGTH = 7;
 
-QmlPlayer::QmlPlayer(QObject *parent) : QObject(parent) {
+Player *Player::instance() {
+    static Player* player = new Player();
+    return player;
+}
+
+Player::Player(QObject *parent) : QObject(parent) {
 
 }
 
-void QmlPlayer::onComplete() {
+void Player::onComplete() {
     MvxPlayer::onComplete();
     emit complete();
 }
 
-void QmlPlayer::onPlaybackStarted() {
+void Player::onPlaybackStarted() {
     MvxPlayer::onPlaybackStarted();
     assert(isPlaying());
     emit playStartedTimeChanged();
@@ -22,17 +27,17 @@ void QmlPlayer::onPlaybackStarted() {
     emit isPlayingChanged(true);
 }
 
-void QmlPlayer::onPlaybackStopped() {
+void Player::onPlaybackStopped() {
     MvxPlayer::onPlaybackStopped();
     assert(!isPlaying());
     emit isPlayingChanged(false);
 }
 
-const QString &QmlPlayer::getSource() const {
+const QString &Player::getSource() const {
     return source;
 }
 
-void QmlPlayer::setSource(const QString &source) {
+void Player::setSource(const QString &source) {
     QString prevSource = this->source;
     if (source == prevSource) {
         return;
@@ -47,18 +52,16 @@ void QmlPlayer::setSource(const QString &source) {
     init(local8Bit.data());
     prepare();
 
-    cachedVxPitches.reserve(getVxFile().getPitches().size());
-
     emit durationChanged();
     emit beatsPerMinuteChanged();
     emit sourceChanged(source);
 }
 
-void QmlPlayer::play() {
+void Player::play() {
     MvxPlayer::play();
 }
 
-void QmlPlayer::pause() {
+void Player::pause() {
     if (source.isNull()) {
         return;
     }
@@ -66,28 +69,15 @@ void QmlPlayer::pause() {
     MvxPlayer::pause();
 }
 
-void QmlPlayer::stop() {
+void Player::stop() {
     stopAndMoveSeekToBeginning();
 }
 
-void QmlPlayer::onSeekChanged(double seek) {
+void Player::onSeekChanged(double seek) {
     emit seekChanged(seek);
 }
 
-QmlVxPitchArray QmlPlayer::getPitchesInTimeRange(double startTime, double endTime) const {
-    cachedVxPitches.clear();
-    const VxFile &vxFile = getVxFile();
-    vxFile.iteratePitchesInTimeRange(startTime, endTime, [&] (const VxPitch& vxPitch) {
-        double pitchStartTime = vxFile.ticksToSeconds(vxPitch.startTickNumber);
-        double pitchDuration = vxFile.ticksToSeconds(vxPitch.ticksCount);
-        cachedVxPitches.push_back(QmlVxPitch(vxPitch.pitch, pitchStartTime, pitchDuration));
-    });
-
-    return QmlVxPitchArray(&cachedVxPitches);
-}
-
-
-void QmlPlayer::setQmlBounds(const QJsonValue &bounds) {
+void Player::setQmlBounds(const QJsonValue &bounds) {
     boost::optional<Bounds> prevBounds = getBounds();
     if (bounds.isUndefined()) {
         setBounds(boost::optional<Bounds>());
@@ -99,7 +89,7 @@ void QmlPlayer::setQmlBounds(const QJsonValue &bounds) {
     }
 }
 
-QJsonValue QmlPlayer::getQmlBounds() const {
+QJsonValue Player::getQmlBounds() const {
     const boost::optional<Bounds> &bounds = getBounds();
     if (!bounds) {
         return QJsonValue::Undefined;
@@ -110,19 +100,4 @@ QJsonValue QmlPlayer::getQmlBounds() const {
         {"startSeek", bounds->getStartSeek()},
         {"endSeek", bounds->getEndSeek()}
     };
-}
-
-int QmlVxPitchArray::getPitchesCount() const {
-    if (cachedVxPitches == nullptr) {
-        return 0;
-    }
-
-    return cachedVxPitches->size();
-}
-
-const QmlVxPitch &QmlVxPitchArray::at(int index) const {
-    return (*cachedVxPitches)[index];
-}
-
-QmlVxPitchArray::QmlVxPitchArray(const std::vector<QmlVxPitch> *cachedVxPitches) : cachedVxPitches(cachedVxPitches) {
 }

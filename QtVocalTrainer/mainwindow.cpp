@@ -5,6 +5,8 @@
 #include <QQuickItem>
 #include <QQmlContext>
 #include "QmlCppBridge.h"
+#include <QMenuBar>
+#include <QFileDialog>
 
 constexpr int HEADER_HEIGHT = 75 + 61;
 constexpr int PIANO_WIDTH = 67;
@@ -35,6 +37,8 @@ MainWindow::MainWindow(QWidget *parent) :
     playHeadLine->setStyleSheet(QString("background-color: #24232D;"));
 
     setPlayHeadPosition(qRound(ZoomController::instance()->getIntervalWidth() * BEATS_IN_TACT));
+
+    setupMenus();
 }
 
 void MainWindow::setPlayHeadPosition(int position) const {
@@ -72,6 +76,21 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
 void MainWindow::mousePressEvent(QMouseEvent *event) {
     QWidget::mousePressEvent(event);
     //header->update();
+}
+
+void MainWindow::setupMenus() {
+    QMenu* fileMenu = menuBar()->addMenu("File");
+    QAction* openAction = fileMenu->addAction("Open...");
+    openAction->setShortcut(QKeySequence::Open);
+    connect(openAction, &QAction::triggered, this, &MainWindow::onFileOpen);
+}
+
+void MainWindow::onFileOpen() {
+    QString fileName = QFileDialog::getOpenFileName(
+            this, "Select .mvx file for signing", "", "Mvx files(*.mvx);; All files(*)");
+    if (!fileName.isNull()) {
+        Player::instance()->setSource(fileName);
+    }
 }
 
 MainWindow::~MainWindow()

@@ -31,8 +31,11 @@ protected:
 
 public:
     ~MainWindow();
-
     void setPlayHeadPosition(int position) const;
+    void setupMenus();
+
+public slots:
+    void onFileOpen();
 };
 
 #endif // MAINWINDOW_H
