@@ -4,7 +4,7 @@ Rectangle {
     width: 121.75 + 8.07
     height: 13
 
-    property var zoom
+    property var zoom: cpp.zoomController
     property int zoomIndex: zoom.zoom
 
     readonly property string circleColor: "#8790D0"
@@ -103,7 +103,7 @@ Rectangle {
         onXChanged: {
             var z = x - minimumX
             z *= (zoom.maxZoom - zoom.minZoom) / (maximumX - minimumX)
-            zoom.zoom = z + zoom.minZoom
+            cpp.zoomController.zoom = z + zoom.minZoom
         }
 
         MouseArea {

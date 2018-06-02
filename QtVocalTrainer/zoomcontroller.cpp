@@ -25,7 +25,7 @@ qreal ZoomController::getZoom() const {
 }
 
 void ZoomController::setZoom(qreal zoom) {
-    ZoomController::zoom = zoom;
+    this->zoom = zoom;
     emit zoomChanged();
     emit intervalWidthChanged();
     emit intervalHeightChanged();

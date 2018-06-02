@@ -133,6 +133,7 @@ Rectangle {
 
         onIntervalOctvaHeightToPianoOctaveHeightRelationChanged: {
             updatePitchNames()
+            requestPaint()
         }
     }
 }

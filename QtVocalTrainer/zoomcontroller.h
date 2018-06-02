@@ -11,7 +11,6 @@ public:
     static ZoomController* instance();
 
     Q_PROPERTY(qreal zoom READ getZoom() WRITE setZoom() NOTIFY zoomChanged())
-    Q_PROPERTY(qreal zoom READ getZoom() WRITE setZoom() NOTIFY zoomChanged())
     Q_PROPERTY(qreal intervalWidth READ getIntervalWidth() NOTIFY intervalWidthChanged())
     Q_PROPERTY(qreal intervalHeight READ getIntervalHeight() NOTIFY intervalHeightChanged())
     Q_PROPERTY(qreal minZoom READ getMinZoom() CONSTANT)

@@ -133,6 +133,8 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		../include/nanovg/nanovg.h \
 		../VocalTrainer/GLScene/Drawer.h \
 		../../../Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers/QSvgWidget \
+		QtUtils/qtutils.h \
+		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QFrame \
 		zoomcontroller.h \
 		QmlCppBridge.h \
 		moc_predefs.h \
@@ -238,6 +240,9 @@ moc_mainwindow.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/
 		../include/nanovg/nanovg.h \
 		../VocalTrainer/GLScene/Drawer.h \
 		../../../Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers/QSvgWidget \
+		QtUtils/qtutils.h \
+		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QFrame \
 		mainwindow.h \
 		moc_predefs.h \
 		../../../Qt/5.11.0/clang_64/bin/moc
