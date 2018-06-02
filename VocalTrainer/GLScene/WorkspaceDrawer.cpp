@@ -3,20 +3,15 @@
 // Copyright (c) 2018 Mac. All rights reserved.
 //
 
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
-
-#include <nanovg/nanovg.h>
-#define NANOVG_GL2_IMPLEMENTATION
-#include <nanovg/nanovg_gl.h>
-
 #include "WorkspaceDrawer.h"
 #include <assert.h>
 #include "CountAssert.h"
 #include "Pitch.h"
 #include "TimeUtils.h"
 #include <iostream>
-#include <qglobal.h>
+#include <cmath>
+
+#include "NvgOpenGLDrawer.h"
 
 using namespace CppUtils;
 
@@ -29,13 +24,13 @@ void WorkspaceDrawer::resize(float width, float height, float devicePixelRatio) 
     this->width = width;
     this->height = height;
 
-    if (!ctx) {
-        ctx = nvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES);
+    if (!drawer) {
+        drawer = new NvgOpenGLDrawer();
     }
 }
 
 void WorkspaceDrawer::draw() {
-    assert(ctx && "call resize before draw");
+    assert(drawer && "call resize before draw");
 
     assert(intervalWidth >= 0);
     assert(intervalHeight >= 0);
@@ -50,13 +45,12 @@ void WorkspaceDrawer::draw() {
     }
     frameTime = now;
 
-    glClearColor(1, 1, 1, 1);
-    glClear(GL_COLOR_BUFFER_BIT);
+    drawer->clear();
 
-    nvgBeginFrame(ctx, width, height, devicePixelRatio);
+    drawer->beginFrame(width, height, devicePixelRatio);
     drawVerticalGrid();
     drawHorizontalGrid();
-    nvgEndFrame(ctx);
+    drawer->endFrame();
 }
 
 float WorkspaceDrawer::getIntervalWidth() const {
@@ -95,13 +89,13 @@ void WorkspaceDrawer::drawVerticalGrid() const {
     int index = 1;
     float offset = fmod(horizontalOffset, intervalWidth * BEATS_IN_TACT);
     for (float x = intervalWidth - offset; x < width + offset; x += intervalWidth, index++) {
-        nvgBeginPath(ctx);
-        nvgMoveTo(ctx, x * sizeMultiplier, 0);
-        nvgStrokeWidth(ctx, sizeMultiplier);
-        nvgLineTo(ctx, x * sizeMultiplier, height * sizeMultiplier);
+        drawer->beginPath();
+        drawer->moveTo(x * sizeMultiplier, 0);
+        drawer->setStrokeWidth(sizeMultiplier);
+        drawer->lineTo(x * sizeMultiplier, height * sizeMultiplier);
         bool isBeat = index % BEATS_IN_TACT != 0;
-        nvgStrokeColor(ctx, isBeat ? gridColor : accentGridColor);
-        nvgStroke(ctx);
+        drawer->setStrokeColor(isBeat ? gridColor : accentGridColor);
+        drawer->stroke();
     }
 }
 
@@ -109,33 +103,33 @@ void WorkspaceDrawer::drawHorizontalGrid() const {
     int index = 1;
     float offset = fmod(verticalOffset, intervalHeight * Pitch::PITCHES_IN_OCTAVE);
     for (float y = height - intervalHeight + offset; y > -offset; y -= intervalHeight, index++) {
-        nvgBeginPath(ctx);
-        nvgMoveTo(ctx, 0, y * sizeMultiplier);
-        nvgLineTo(ctx, width * sizeMultiplier, y * sizeMultiplier);
+        drawer->beginPath();
+        drawer->moveTo(0, y * sizeMultiplier);
+        drawer->lineTo(width * sizeMultiplier, y * sizeMultiplier);
         bool isOctaveBegin = index % Pitch::PITCHES_IN_OCTAVE == 0;
-        nvgStrokeColor(ctx, isOctaveBegin ? accentGridColor : gridColor);
-        nvgStroke(ctx);
+        drawer->setStrokeColor(isOctaveBegin ? accentGridColor : gridColor);
+        drawer->stroke();
     }
 }
 
-const NVGcolor &WorkspaceDrawer::getGridColor() const {
+const WorkspaceDrawer::Color & WorkspaceDrawer::getGridColor() const {
     return gridColor;
 }
 
-void WorkspaceDrawer::setGridColor(const NVGcolor &gridColor) {
+void WorkspaceDrawer::setGridColor(const Color& color) {
     // Should be called only once before rendering to avoid synchronization issues
     CountAssert(1);
-    this->gridColor = gridColor;
+    this->gridColor = color;
 }
 
-const NVGcolor &WorkspaceDrawer::getAccentGridColor() const {
+const WorkspaceDrawer::Color & WorkspaceDrawer::getAccentGridColor() const {
     return accentGridColor;
 }
 
-void WorkspaceDrawer::setAccentGridColor(const NVGcolor &accentGridColor) {
+void WorkspaceDrawer::setAccentGridColor(const Color& color) {
     // Should be called only once before rendering to avoid synchronization issues
     CountAssert(1);
-    this->accentGridColor = accentGridColor;
+    this->accentGridColor = color;
 }
 
 WorkspaceDrawer::WorkspaceDrawer() :
@@ -150,8 +144,8 @@ WorkspaceDrawer::WorkspaceDrawer() :
 }
 
 WorkspaceDrawer::~WorkspaceDrawer() {
-    if (ctx) {
-        nvgDeleteGL2(ctx);
+    if (drawer) {
+        delete drawer;
     }
 }
 

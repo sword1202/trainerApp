@@ -8,8 +8,12 @@
 
 #include <atomic>
 #include <nanovg/nanovg.h>
+#include "Drawer.h"
+#include <array>
 
 class WorkspaceDrawer {
+    typedef Drawer::Color Color;
+
     std::atomic<float> intervalWidth;
     std::atomic<float> intervalHeight;
     std::atomic<float> verticalOffset;
@@ -17,14 +21,14 @@ class WorkspaceDrawer {
     std::atomic<float> sizeMultiplier;
     std::atomic<double> speed;
 
-    NVGcolor gridColor;
-    NVGcolor accentGridColor;
+    Color gridColor;
+    Color accentGridColor;
 
     float width = -1;
     float height = -1;
     float devicePixelRatio = -1;
 
-    NVGcontext* ctx = nullptr;
+    Drawer* drawer = nullptr;
 
     void drawVerticalGrid() const;
     void drawHorizontalGrid() const;
@@ -51,10 +55,10 @@ public:
 
     void setSizeMultiplier(float sizeMultiplier);
 
-    const NVGcolor &getGridColor() const;
-    void setGridColor(const NVGcolor &gridColor);
-    const NVGcolor &getAccentGridColor() const;
-    void setAccentGridColor(const NVGcolor &accentGridColor);
+    const Color &getGridColor() const;
+    void setGridColor(const Color& color);
+    const Color &getAccentGridColor() const;
+    void setAccentGridColor(const Color& color);
 };
 
 

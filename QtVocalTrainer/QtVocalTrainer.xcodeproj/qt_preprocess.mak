@@ -131,6 +131,7 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		workspace.h \
 		../VocalTrainer/GLScene/WorkspaceDrawer.h \
 		../include/nanovg/nanovg.h \
+		../VocalTrainer/GLScene/Drawer.h \
 		zoomcontroller.h \
 		QmlCppBridge.h \
 		moc_predefs.h \
@@ -222,6 +223,7 @@ moc_qmltimedpitch.cpp: qmlpitch.h \
 moc_workspace.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QOpenGLWidget \
 		../VocalTrainer/GLScene/WorkspaceDrawer.h \
 		../include/nanovg/nanovg.h \
+		../VocalTrainer/GLScene/Drawer.h \
 		workspace.h \
 		moc_predefs.h \
 		../../../Qt/5.11.0/clang_64/bin/moc
@@ -233,6 +235,7 @@ moc_mainwindow.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/
 		workspace.h \
 		../VocalTrainer/GLScene/WorkspaceDrawer.h \
 		../include/nanovg/nanovg.h \
+		../VocalTrainer/GLScene/Drawer.h \
 		mainwindow.h \
 		moc_predefs.h \
 		../../../Qt/5.11.0/clang_64/bin/moc

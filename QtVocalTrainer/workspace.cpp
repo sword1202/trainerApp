@@ -30,8 +30,8 @@ void Workspace::zoomChanged() {
 void Workspace::initializeGL() {
     QOpenGLWidget::initializeGL();
     zoomChanged();
-    workspaceDrawer.setGridColor(nvgRGBA(0x8B, 0x89, 0xB6, 0x33));
-    workspaceDrawer.setAccentGridColor(nvgRGBA(0x8B, 0x89, 0xB6, 0x80));
+    workspaceDrawer.setGridColor({0x8B, 0x89, 0xB6, 0x33});
+    workspaceDrawer.setAccentGridColor({0x8B, 0x89, 0xB6, 0x80});
     workspaceDrawer.setSpeed(200);
     glDisable(GL_DEPTH_TEST);
 }

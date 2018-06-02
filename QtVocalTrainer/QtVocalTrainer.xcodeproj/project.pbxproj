@@ -751,6 +751,21 @@
 					);
 			};
 		};
+		BD9CBF70C3DE9630262C65AA = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/GLScene/NvgOpenGLDrawer.cpp";
+			name = "NvgOpenGLDrawer.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		75010CA4C63B5ACB35276CDD = {
+			fileRef = "BD9CBF70C3DE9630262C65AA";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
 		F61C3E706670E1F71F3998D1 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qrc_qml.cpp";
@@ -1273,6 +1288,20 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
+		308B9F0C589F62599414118C = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/GLScene/Drawer.h";
+			name = "Drawer.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
+		90811E948B3126EA0E55864E = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/GLScene/NvgOpenGLDrawer.h";
+			name = "NvgOpenGLDrawer.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
 		757C4D2CF043B21FE9CC0678 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qml.qrc";
@@ -1400,6 +1429,7 @@
 				"40C55C7C707DB75EDC106073",
 				"27AB59B83B50AAE8527B3E16",
 				"7F3F1B193768567697BA8B37",
+				"BD9CBF70C3DE9630262C65AA",
 				"C613FE9ADA39556AD9540F1E",
 				"1091C7F2ACC81AEE9DF74E74",
 				"8D1AFD7B368D712618894EDF",
@@ -1449,7 +1479,9 @@
 				"1F7C01C19C2E45E4BB543437",
 				"7F94540F60053FC9A62CD4B2",
 				"1239FA6A37479866DE677F5F",
-				"872AADB84245AB0712A99F11");
+				"872AADB84245AB0712A99F11",
+				"308B9F0C589F62599414118C",
+				"90811E948B3126EA0E55864E");
 			name = "Sources";
 			sourceTree = "<group>";
 		};
@@ -1531,6 +1563,7 @@
 				"4CC97745AFB71151D81FB93A",
 				"455FD040EBB74ECE5B70535B",
 				"C91434CEEF9FEB3E3F73CE21",
+				"75010CA4C63B5ACB35276CDD",
 				"F3F0C5A9AE1D79D2A4930AEA",
 				"AE6596E2227260CD02B22B61",
 				"4D39E2B783FFDF3FB02ED09A",

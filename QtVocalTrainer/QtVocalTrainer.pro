@@ -63,7 +63,8 @@ SOURCES += \
     workspace.cpp \
     mainwindow.cpp \
     QtUtils/qtutils.cpp \
-    zoomcontroller.cpp
+    zoomcontroller.cpp \
+    ../VocalTrainer/GLScene/NvgOpenGLDrawer.cpp
 
 RESOURCES += qml.qrc
 
@@ -137,7 +138,9 @@ HEADERS += \
     workspace.h \
     mainwindow.h \
     QtUtils/qtutils.h \
-    zoomcontroller.h
+    zoomcontroller.h \
+    ../VocalTrainer/GLScene/Drawer.h \
+    ../VocalTrainer/GLScene/NvgOpenGLDrawer.h
 
 INCLUDEPATH += ../include \
     ../VocalTrainer/GLScene \
