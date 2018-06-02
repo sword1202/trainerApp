@@ -13,20 +13,29 @@ Item {
     }
 
     Rectangle {
-        id: subheader
-        height: 59.25
-        color: "white"
+        anchors.bottom: yardstick.top
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: header.bottom
 
-        ZoomSlider {
-            zoom: zoom
-            anchors.top: parent.top
-            anchors.topMargin: 15
-            anchors.rightMargin: 23.25
-            anchors.right: parent.right
+        Text {
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: parent.left
+            anchors.leftMargin: 22.5
+            text: "The Beatles - Yesterday"
+            color: "#24232D"
+            font.family: "LatoBold"
+            font.bold: true
+            font.pointSize: 13.5
         }
+    }
+
+    ZoomSlider {
+        zoom: zoom
+        anchors.top: header.bottom
+        anchors.topMargin: 15
+        anchors.rightMargin: 23.25
+        anchors.right: parent.right
     }
 
     Yardstick {
@@ -40,7 +49,7 @@ Item {
 
     VerticalLine {
         anchors.right: yardstick.left
-        height: yardstick.height
+        height: 15.75
         anchors.bottom: parent.bottom
     }
 
