@@ -30,6 +30,7 @@ class WorkspaceDrawer {
 
     Drawer* drawer = nullptr;
 
+    void drawHorizontalLine(float y, const Color& color) const;
     void drawVerticalGrid() const;
     void drawHorizontalGrid() const;
 public:

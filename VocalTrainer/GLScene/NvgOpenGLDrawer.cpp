@@ -22,6 +22,8 @@ NvgOpenGLDrawer::~NvgOpenGLDrawer() {
 }
 
 void NvgOpenGLDrawer::beginFrame(float width, float height, float devicePixelRatio) {
+    brushX = 0;
+    brushY = 0;
     nvgBeginFrame(ctx, width, height, devicePixelRatio);
 }
 
@@ -30,11 +32,11 @@ void NvgOpenGLDrawer::endFrame() {
 }
 
 void NvgOpenGLDrawer::moveTo(float x, float y) {
-    nvgMoveTo(ctx, x, y);
+    nvgMoveTo(ctx, x + brushX, y + brushY);
 }
 
 void NvgOpenGLDrawer::lineTo(float x, float y) {
-    nvgLineTo(ctx, x, y);
+    nvgLineTo(ctx, x + brushX, y + brushY);
 }
 
 void NvgOpenGLDrawer::setStrokeColor(const Color& color) {
@@ -57,4 +59,25 @@ void NvgOpenGLDrawer::beginPath() {
 void NvgOpenGLDrawer::clear() {
     glClearColor(1, 1, 1, 1);
     glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void NvgOpenGLDrawer::moveBrush(float x, float y) {
+    brushX += x;
+    brushY += y;
+}
+
+void NvgOpenGLDrawer::setBrushX(float x) {
+    brushX = x;
+}
+
+void NvgOpenGLDrawer::setBrushY(float y) {
+    brushY = y;
+}
+
+float NvgOpenGLDrawer::getBrushX() {
+    return brushX;
+}
+
+float NvgOpenGLDrawer::getBrushY() {
+    return brushY;
 }

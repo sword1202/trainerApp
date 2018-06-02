@@ -48,6 +48,8 @@ void WorkspaceDrawer::draw() {
     drawer->clear();
 
     drawer->beginFrame(width, height, devicePixelRatio);
+    drawHorizontalLine(sizeMultiplier, accentGridColor);
+    drawer->moveBrush(0, sizeMultiplier);
     drawVerticalGrid();
     drawHorizontalGrid();
     drawer->endFrame();
@@ -99,16 +101,21 @@ void WorkspaceDrawer::drawVerticalGrid() const {
     }
 }
 
+void WorkspaceDrawer::drawHorizontalLine(float y, const Color& color) const {
+    drawer->beginPath();
+    drawer->moveTo(0, y * sizeMultiplier);
+    drawer->lineTo(width * sizeMultiplier, y * sizeMultiplier);
+    drawer->setStrokeWidth(sizeMultiplier);
+    drawer->setStrokeColor(color);
+    drawer->stroke();
+}
+
 void WorkspaceDrawer::drawHorizontalGrid() const {
     int index = 1;
     float offset = fmod(verticalOffset, intervalHeight * Pitch::PITCHES_IN_OCTAVE);
-    for (float y = height - intervalHeight + offset; y > -offset; y -= intervalHeight, index++) {
-        drawer->beginPath();
-        drawer->moveTo(0, y * sizeMultiplier);
-        drawer->lineTo(width * sizeMultiplier, y * sizeMultiplier);
+    for (float y = height - drawer->getBrushY() - intervalHeight + offset; y > -offset; y -= intervalHeight, index++) {
         bool isOctaveBegin = index % Pitch::PITCHES_IN_OCTAVE == 0;
-        drawer->setStrokeColor(isOctaveBegin ? accentGridColor : gridColor);
-        drawer->stroke();
+        drawHorizontalLine(y, isOctaveBegin ? accentGridColor : gridColor);
     }
 }
 

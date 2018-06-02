@@ -12,6 +12,12 @@ class Drawer {
 public:
     typedef std::array<float, 4> Color;
 
+    virtual void moveBrush(float x, float y) = 0;
+    virtual void setBrushX(float x) = 0;
+    virtual void setBrushY(float y) = 0;
+    virtual float getBrushX() = 0;
+    virtual float getBrushY() = 0;
+
     virtual void clear() = 0;
     virtual void beginFrame(float width, float height, float devicePixelRatio) = 0;
     virtual void endFrame() = 0;
