@@ -1,8 +1,6 @@
 function iterateIntervals(target, args) {
     var intervalWidth = cpp.zoomController.intervalWidth;
 
-    console.log("intervalWidth = " + intervalWidth)
-
     var horizontalOffset = args.horizontalOffset || 0
     // draw beats and tacts
     for (var x = intervalWidth - horizontalOffset, index = 1; x < target.width + horizontalOffset; x += intervalWidth, index++) {
