@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     // setup workspace
     workspace = new Workspace(this);
-    workspace->move(0, HEADER_HEIGHT);
+    workspace->move(PIANO_WIDTH, HEADER_HEIGHT);
 
     cpp = new QmlCppBridge(this);
 
@@ -37,10 +37,10 @@ QQuickWidget *MainWindow::createQQuickWidget(const QString& qmlFile) {
 void MainWindow::resizeEvent(QResizeEvent *event) {
     QWidget::resizeEvent(event);
 
-    workspace->resize(event->size());
-
     int width = event->size().width();
     int height = event->size().height();
+
+    workspace->resize(width - PIANO_WIDTH, height - HEADER_HEIGHT);
 
     header->setWidth(width);
     header->setHeight(HEADER_HEIGHT);
