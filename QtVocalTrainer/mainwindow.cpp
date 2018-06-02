@@ -8,6 +8,7 @@
 
 constexpr int HEADER_HEIGHT = 75 + 59;
 constexpr int PIANO_WIDTH = 63;
+constexpr int PLAY_HEAD_SIZE = 11;
 
 MainWindow::MainWindow(QWidget *parent) :
         QMainWindow(parent)
@@ -25,6 +26,22 @@ MainWindow::MainWindow(QWidget *parent) :
     QQuickWidget* pianoWidget = createQQuickWidget("qrc:/qml/Piano.qml");
     pianoWidget->move(0, HEADER_HEIGHT);
     piano = pianoWidget->rootObject();
+
+    playHeadTriangle = new QSvgWidget(":/qml/images/play_head_triangle.svg", this);
+    playHeadTriangle->resize(PLAY_HEAD_SIZE, PLAY_HEAD_SIZE);
+
+    playHeadLine = QtUtils::createVerticalLine(1, this);
+    playHeadLine->setStyleSheet(QString("background-color: #24232D;"));
+
+    movePlayHead(0);
+}
+
+void MainWindow::movePlayHead(int position) const {
+    QRect geometry = playHeadTriangle->geometry();
+    QPoint move(PIANO_WIDTH + position, HEADER_HEIGHT + position);
+    geometry.moveCenter(move);
+    playHeadTriangle->setGeometry(geometry);
+    playHeadLine->move(move);
 }
 
 QQuickWidget *MainWindow::createQQuickWidget(const QString& qmlFile) {
@@ -47,11 +64,13 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
 
     piano->setWidth(PIANO_WIDTH);
     piano->setHeight(height - HEADER_HEIGHT);
+
+    playHeadLine->resize(playHeadLine->width(), workspace->height());
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event) {
     QWidget::mousePressEvent(event);
-    header->update();
+    //header->update();
 }
 
 MainWindow::~MainWindow()

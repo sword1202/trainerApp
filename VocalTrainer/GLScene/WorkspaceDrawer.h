@@ -49,11 +49,9 @@ public:
     void setHorizontalOffset(float horizontalOffset);
 
     double getSpeed() const;
-
     void setSpeed(double speed);
 
     float getSizeMultiplier() const;
-
     void setSizeMultiplier(float sizeMultiplier);
 
     const Color &getGridColor() const;

@@ -12,8 +12,8 @@
 class NvgOpenGLDrawer : public Drawer {
     NVGcontext* ctx = nullptr;
 
-    float brushX = 0;
-    float brushY = 0;
+    float translateX = 0;
+    float translateY = 0;
 public:
     NvgOpenGLDrawer();
     virtual ~NvgOpenGLDrawer();
@@ -23,20 +23,24 @@ public:
     void moveTo(float x, float y) override;
     void lineTo(float x, float y) override;
     void setStrokeColor(const Color& color) override;
+    void setFillColor(const Color& color) override;
     void setStrokeWidth(float strokeWidth) override;
     void stroke() override;
+    void fill() override;
+    void lineJoin(LineJoin type) override;
+
+    void bezierCurveTo(float c1x, float c1y, float c2x, float c2y, float x, float y) override;
     void beginPath() override;
+    void closePath() override;
+    void rotate(float angle) override;
+    void scale(float x, float y) override;
+
     void clear() override;
 
-    void moveBrush(float x, float y) override;
-
-    void setBrushX(float x) override;
-
-    void setBrushY(float y) override;
-
-    float getBrushX() override;
-
-    float getBrushY() override;
+    void translate(float x, float y) override;
+    float getTranslateX() override;
+    float getTranslateY() override;
+    void translateTo(float x, float y) override;
 };
 
 

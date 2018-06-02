@@ -49,7 +49,7 @@ void WorkspaceDrawer::draw() {
 
     drawer->beginFrame(width, height, devicePixelRatio);
     drawHorizontalLine(sizeMultiplier, accentGridColor);
-    drawer->moveBrush(0, sizeMultiplier);
+    drawer->translate(0, sizeMultiplier);
     drawVerticalGrid();
     drawHorizontalGrid();
     drawer->endFrame();
@@ -113,7 +113,7 @@ void WorkspaceDrawer::drawHorizontalLine(float y, const Color& color) const {
 void WorkspaceDrawer::drawHorizontalGrid() const {
     int index = 1;
     float offset = fmod(verticalOffset, intervalHeight * Pitch::PITCHES_IN_OCTAVE);
-    for (float y = height - drawer->getBrushY() - intervalHeight + offset; y > -offset; y -= intervalHeight, index++) {
+    for (float y = height - drawer->getTranslateY() - intervalHeight + offset; y > -offset; y -= intervalHeight, index++) {
         bool isOctaveBegin = index % Pitch::PITCHES_IN_OCTAVE == 0;
         drawHorizontalLine(y, isOctaveBegin ? accentGridColor : gridColor);
     }

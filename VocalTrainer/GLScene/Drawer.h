@@ -7,16 +7,20 @@
 #define VOCALTRAINER_DRAWER_H
 
 #include <array>
+#include <vector>
 
 class Drawer {
 public:
-    typedef std::array<float, 4> Color;
+    enum LineJoin {
+        BEVEL, ROUND, MITER
+    };
 
-    virtual void moveBrush(float x, float y) = 0;
-    virtual void setBrushX(float x) = 0;
-    virtual void setBrushY(float y) = 0;
-    virtual float getBrushX() = 0;
-    virtual float getBrushY() = 0;
+    typedef std::array<unsigned char, 4> Color;
+
+    virtual void translate(float x, float y) = 0;
+    virtual float getTranslateX() = 0;
+    virtual float getTranslateY() = 0;
+    virtual void translateTo(float x, float y) = 0;
 
     virtual void clear() = 0;
     virtual void beginFrame(float width, float height, float devicePixelRatio) = 0;
@@ -24,9 +28,16 @@ public:
     virtual void moveTo(float x, float y) = 0;
     virtual void lineTo(float x, float y) = 0;
     virtual void setStrokeColor(const Color& color) = 0;
+    virtual void setFillColor(const Color& color) = 0;
     virtual void setStrokeWidth(float strokeWidth) = 0;
     virtual void stroke() = 0;
+    virtual void fill() = 0;
     virtual void beginPath() = 0;
+    virtual void closePath() = 0;
+    virtual void bezierCurveTo(float c1x, float c1y, float c2x, float c2y, float x, float y) = 0;
+    virtual void lineJoin(LineJoin type) = 0;
+    virtual void rotate(float angle) = 0;
+    virtual void scale(float x, float y) = 0;
 
     virtual ~Drawer() = default;
 };

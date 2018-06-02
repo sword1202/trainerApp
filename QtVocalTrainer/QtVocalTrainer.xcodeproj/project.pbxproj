@@ -1843,6 +1843,20 @@
 			settings = {
 			};
 		};
+		20608C2F010033B597A7F286 = {
+			isa = PBXFileReference;
+			name = "QtSvg.framework";
+			path = "/Users/semyon/Qt/5.11.0/clang_64/lib/QtSvg.framework";
+			refType = 0;
+			sourceTree = "<absolute>";
+			lastKnownFileType = "wrapper.framework";
+		};
+		193CCD0A915CDB34C7345D81 = {
+			fileRef = "20608C2F010033B597A7F286";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		D4B32C2222F82AC56BADEB21 = {
 			isa = PBXFileReference;
 			name = "OpenGL.framework";
@@ -1892,6 +1906,7 @@
 				"A1A67BEAA744704B29168D39",
 				"554C4EF638BE7C2288F34633",
 				"999AF243E484560AA468035D",
+				"20608C2F010033B597A7F286",
 				"D4B32C2222F82AC56BADEB21",
 				"8D9815BDB5BD9F90D2BC05C5");
 			isa = PBXGroup;
@@ -1920,6 +1935,7 @@
 				"8D267F2E4776F0ECA2F49DC8",
 				"7E6181E315EB3F51F58A7697",
 				"1AC3E204B2624A57E690285B",
+				"193CCD0A915CDB34C7345D81",
 				"8771A8C96E9C391044035D99",
 				"E45E51A644D5FC9F942ECE55");
 			isa = PBXFrameworksBuildPhase;
@@ -2040,6 +2056,7 @@
 					"../include/nanovg",
 					"../../../Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers",
+					"../../../Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtGui.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtQml.framework/Headers",
@@ -2066,6 +2083,7 @@
 					"-DQT_QML_DEBUG",
 					"-DQT_QUICKWIDGETS_LIB",
 					"-DQT_QUICK_LIB",
+					"-DQT_SVG_LIB",
 					"-DQT_WIDGETS_LIB",
 					"-DQT_GUI_LIB",
 					"-DQT_QML_LIB",
@@ -2083,6 +2101,7 @@
 					"-DQT_QML_DEBUG",
 					"-DQT_QUICKWIDGETS_LIB",
 					"-DQT_QUICK_LIB",
+					"-DQT_SVG_LIB",
 					"-DQT_WIDGETS_LIB",
 					"-DQT_GUI_LIB",
 					"-DQT_QML_LIB",
@@ -2150,6 +2169,7 @@
 					"../include/nanovg",
 					"../../../Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers",
+					"../../../Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtGui.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtQml.framework/Headers",
@@ -2176,6 +2196,7 @@
 					"-DQT_QML_DEBUG",
 					"-DQT_QUICKWIDGETS_LIB",
 					"-DQT_QUICK_LIB",
+					"-DQT_SVG_LIB",
 					"-DQT_WIDGETS_LIB",
 					"-DQT_GUI_LIB",
 					"-DQT_QML_LIB",
@@ -2193,6 +2214,7 @@
 					"-DQT_QML_DEBUG",
 					"-DQT_QUICKWIDGETS_LIB",
 					"-DQT_QUICK_LIB",
+					"-DQT_SVG_LIB",
 					"-DQT_WIDGETS_LIB",
 					"-DQT_GUI_LIB",
 					"-DQT_QML_LIB",

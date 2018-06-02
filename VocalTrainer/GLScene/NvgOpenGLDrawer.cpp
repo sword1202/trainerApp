@@ -13,6 +13,10 @@
 #include <nanovg/nanovg_gl.h>
 #include <assert.h>
 
+static NVGcolor toNvgColor(const Drawer::Color& color) {
+    return nvgRGBA(color[0], color[1], color[2], color[3]);
+}
+
 NvgOpenGLDrawer::NvgOpenGLDrawer() {
     ctx = nvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES);
 }
@@ -22,8 +26,8 @@ NvgOpenGLDrawer::~NvgOpenGLDrawer() {
 }
 
 void NvgOpenGLDrawer::beginFrame(float width, float height, float devicePixelRatio) {
-    brushX = 0;
-    brushY = 0;
+    translateX = 0;
+    translateY = 0;
     nvgBeginFrame(ctx, width, height, devicePixelRatio);
 }
 
@@ -32,15 +36,15 @@ void NvgOpenGLDrawer::endFrame() {
 }
 
 void NvgOpenGLDrawer::moveTo(float x, float y) {
-    nvgMoveTo(ctx, x + brushX, y + brushY);
+    nvgMoveTo(ctx, x, y);
 }
 
 void NvgOpenGLDrawer::lineTo(float x, float y) {
-    nvgLineTo(ctx, x + brushX, y + brushY);
+    nvgLineTo(ctx, x, y);
 }
 
 void NvgOpenGLDrawer::setStrokeColor(const Color& color) {
-    nvgStrokeColor(ctx, nvgRGBA(color[0], color[1], color[2], color[3]));
+    nvgStrokeColor(ctx, toNvgColor(color));
 }
 
 void NvgOpenGLDrawer::setStrokeWidth(float strokeWidth) {
@@ -61,23 +65,63 @@ void NvgOpenGLDrawer::clear() {
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void NvgOpenGLDrawer::moveBrush(float x, float y) {
-    brushX += x;
-    brushY += y;
+void NvgOpenGLDrawer::bezierCurveTo(float c1x, float c1y, float c2x, float c2y, float x, float y) {
+    nvgBezierTo(ctx, c1x, c1y, c2x, c2y, x, y);
 }
 
-void NvgOpenGLDrawer::setBrushX(float x) {
-    brushX = x;
+void NvgOpenGLDrawer::closePath() {
+    nvgClosePath(ctx);
 }
 
-void NvgOpenGLDrawer::setBrushY(float y) {
-    brushY = y;
+void NvgOpenGLDrawer::fill() {
+    nvgFill(ctx);
 }
 
-float NvgOpenGLDrawer::getBrushX() {
-    return brushX;
+void NvgOpenGLDrawer::setFillColor(const Drawer::Color &color) {
+    nvgFillColor(ctx, toNvgColor(color));
 }
 
-float NvgOpenGLDrawer::getBrushY() {
-    return brushY;
+void NvgOpenGLDrawer::lineJoin(Drawer::LineJoin type) {
+    int nvgValue;
+    switch (type) {
+        case BEVEL:
+            nvgValue = NVG_BEVEL;
+            break;
+        case ROUND:
+            nvgValue = NVG_ROUND;
+            break;
+        case MITER:
+            nvgValue = NVG_MITER;
+            break;
+    }
+
+    nvgLineJoin(ctx, nvgValue);
+}
+
+void NvgOpenGLDrawer::rotate(float angle) {
+    nvgRotate(ctx, angle);
+}
+
+void NvgOpenGLDrawer::scale(float x, float y) {
+    nvgScale(ctx, x, y);
+}
+
+void NvgOpenGLDrawer::translate(float x, float y) {
+    nvgTranslate(ctx, x, y);
+    translateX += x;
+    translateY += y;
+}
+
+float NvgOpenGLDrawer::getTranslateX() {
+    return translateX;
+}
+
+float NvgOpenGLDrawer::getTranslateY() {
+    return translateY;
+}
+
+void NvgOpenGLDrawer::translateTo(float x, float y) {
+    nvgTranslate(ctx, -translateX + x, -translateY + y);
+    translateX = x;
+    translateY = y;
 }

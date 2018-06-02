@@ -14,4 +14,12 @@ namespace QtUtils {
         });
         timer->start(intervalInMilliseconds);
     }
+
+    QFrame* createVerticalLine(int width, QWidget* parent) {
+        QFrame* frame = new QFrame(parent);
+        frame->setFrameShape(QFrame::VLine);
+        frame->setLineWidth(width);
+        frame->setFixedWidth(width);
+        return frame;
+    }
 }

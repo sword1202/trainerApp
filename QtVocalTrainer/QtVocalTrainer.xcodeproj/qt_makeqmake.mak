@@ -179,6 +179,7 @@ QtVocalTrainer.xcodeproj/project.pbxproj: QtVocalTrainer.pro ../../../Qt/5.11.0/
 		qml.qrc \
 		../../../Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/QtQuickWidgets.prl \
 		../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/QtQuick.prl \
+		../../../Qt/5.11.0/clang_64/lib/QtSvg.framework/QtSvg.prl \
 		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/QtWidgets.prl \
 		../../../Qt/5.11.0/clang_64/lib/QtGui.framework/QtGui.prl \
 		../../../Qt/5.11.0/clang_64/lib/QtQml.framework/QtQml.prl \
@@ -355,6 +356,7 @@ QtVocalTrainer.pro:
 qml.qrc:
 ../../../Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/QtQuickWidgets.prl:
 ../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/QtQuick.prl:
+../../../Qt/5.11.0/clang_64/lib/QtSvg.framework/QtSvg.prl:
 ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/QtWidgets.prl:
 ../../../Qt/5.11.0/clang_64/lib/QtGui.framework/QtGui.prl:
 ../../../Qt/5.11.0/clang_64/lib/QtQml.framework/QtQml.prl:
