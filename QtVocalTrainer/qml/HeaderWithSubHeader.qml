@@ -27,18 +27,26 @@ Item {
             anchors.rightMargin: 23.25
             anchors.right: parent.right
         }
-
-        HorizontalLine {
-            width: parent.width
-            anchors.bottom: parent.bottom
-            anchors.left: parent.left
-        }
     }
 
     Yardstick {
         id: yardstick
         anchors.bottom: parent.bottom
+        anchors.bottomMargin: 4.75
+        anchors.leftMargin: 67
         anchors.left: parent.left
         anchors.right: parent.right
+    }
+
+    VerticalLine {
+        anchors.right: yardstick.left
+        height: yardstick.height
+        anchors.bottom: parent.bottom
+    }
+
+    HorizontalLine {
+        width: parent.width
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
     }
 }

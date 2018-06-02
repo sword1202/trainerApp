@@ -32,7 +32,7 @@ protected:
 public:
     ~MainWindow();
 
-    void movePlayHead(int position) const;
+    void setPlayHeadPosition(int position) const;
 };
 
 #endif // MAINWINDOW_H

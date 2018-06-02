@@ -48,8 +48,6 @@ void WorkspaceDrawer::draw() {
     drawer->clear();
 
     drawer->beginFrame(width, height, devicePixelRatio);
-    drawHorizontalLine(sizeMultiplier, accentGridColor);
-    drawer->translate(0, sizeMultiplier);
     drawVerticalGrid();
     drawHorizontalGrid();
     drawer->endFrame();

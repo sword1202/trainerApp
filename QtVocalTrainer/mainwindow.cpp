@@ -6,9 +6,10 @@
 #include <QQmlContext>
 #include "QmlCppBridge.h"
 
-constexpr int HEADER_HEIGHT = 75 + 59;
-constexpr int PIANO_WIDTH = 63;
+constexpr int HEADER_HEIGHT = 75 + 61;
+constexpr int PIANO_WIDTH = 67;
 constexpr int PLAY_HEAD_SIZE = 11;
+constexpr int BEATS_IN_TACT = 4;
 
 MainWindow::MainWindow(QWidget *parent) :
         QMainWindow(parent)
@@ -19,13 +20,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     cpp = new QmlCppBridge(this);
 
-    // setup header
-    QQuickWidget *headerWidget = createQQuickWidget("qrc:/qml/HeaderWithSubHeader.qml");
-    header = headerWidget->rootObject();
-
     QQuickWidget* pianoWidget = createQQuickWidget("qrc:/qml/Piano.qml");
     pianoWidget->move(0, HEADER_HEIGHT);
     piano = pianoWidget->rootObject();
+
+    // setup header
+    QQuickWidget *headerWidget = createQQuickWidget("qrc:/qml/HeaderWithSubHeader.qml");
+    header = headerWidget->rootObject();
 
     playHeadTriangle = new QSvgWidget(":/qml/images/play_head_triangle.svg", this);
     playHeadTriangle->resize(PLAY_HEAD_SIZE, PLAY_HEAD_SIZE);
@@ -33,12 +34,12 @@ MainWindow::MainWindow(QWidget *parent) :
     playHeadLine = QtUtils::createVerticalLine(1, this);
     playHeadLine->setStyleSheet(QString("background-color: #24232D;"));
 
-    movePlayHead(0);
+    setPlayHeadPosition(qRound(ZoomController::instance()->getIntervalWidth() * BEATS_IN_TACT));
 }
 
-void MainWindow::movePlayHead(int position) const {
+void MainWindow::setPlayHeadPosition(int position) const {
     QRect geometry = playHeadTriangle->geometry();
-    QPoint move(PIANO_WIDTH + position, HEADER_HEIGHT + position);
+    QPoint move(PIANO_WIDTH + position, HEADER_HEIGHT);
     geometry.moveCenter(move);
     playHeadTriangle->setGeometry(geometry);
     playHeadLine->move(move);
