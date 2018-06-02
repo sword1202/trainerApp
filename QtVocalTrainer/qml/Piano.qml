@@ -15,7 +15,7 @@ Rectangle {
         height: parent.height
 
         property int firstPitchOctave: 2
-        property int firstWhitePitchInOctaveIndex: 1
+        property int firstWhitePitchInOctaveIndex: 0
 
         property var firstPitch: cpp.whitePitch(firstWhitePitchInOctaveIndex, firstPitchOctave)
 

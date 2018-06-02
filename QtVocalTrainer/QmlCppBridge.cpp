@@ -23,7 +23,7 @@ QmlPitch QmlCppBridge::pitchFromPerfectFrequencyIndex(int perfectFrequencyIndex)
 
 
 QmlPitch QmlCppBridge::whitePitch(int whitePitchIndex, int octaveIndex) {
-    return QmlPitch(Pitch::whitePitch(whitePitchIndex, octaveIndex).getPerfectFrequencyIndex());
+    return QmlPitch(Pitch::whitePitchPerfectFrequencyIndex(whitePitchIndex, octaveIndex));
 }
 
 ZoomController *QmlCppBridge::getZoom() const {

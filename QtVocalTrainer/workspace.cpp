@@ -2,6 +2,7 @@
 #include "TimeUtils.h"
 #include <iostream>
 #include "QtUtils/qtutils.h"
+#include "zoomcontroller.h"
 
 using namespace CppUtils;
 using namespace std;
@@ -9,17 +10,26 @@ using namespace std;
 Workspace::Workspace(QWidget *parent) : QOpenGLWidget(parent) {
     devicePixelRatio_ = devicePixelRatio();
 
+    // 75 fps
     QtUtils::startRepeatedTimer(this, [=] {
+        if (workspaceDrawer.getSpeed() > 0) {
             update();
-            return true;
-        }, 1000 / 75); // 75fps
+        }
+        return true;
+    }, 1000 / 75);
+
+    connect(ZoomController::instance(), SIGNAL(zoomChanged()), this, SLOT(zoomChanged()));
 }
 
+void Workspace::zoomChanged() {
+    auto* zoom = ZoomController::instance();
+    workspaceDrawer.setIntervalWidth((float)zoom->getIntervalWidth());
+    workspaceDrawer.setIntervalHeight((float)zoom->getIntervalHeight());
+}
 
 void Workspace::initializeGL() {
     QOpenGLWidget::initializeGL();
-    workspaceDrawer.setIntervalWidth(25);
-    workspaceDrawer.setIntervalHeight(10);
+    zoomChanged();
     workspaceDrawer.setGridColor(nvgRGBA(0x8B, 0x89, 0xB6, 0x33));
     workspaceDrawer.setAccentGridColor(nvgRGBA(0x8B, 0x89, 0xB6, 0x80));
     workspaceDrawer.setSpeed(200);

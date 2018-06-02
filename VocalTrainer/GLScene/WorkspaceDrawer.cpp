@@ -107,7 +107,7 @@ void WorkspaceDrawer::drawVerticalGrid() const {
 void WorkspaceDrawer::drawHorizontalGrid() const {
     int index = 1;
     float offset = fmod(verticalOffset, intervalHeight * Pitch::PITCHES_IN_OCTAVE);
-    for (float y = intervalHeight - offset; y < height + offset; y += intervalHeight, index++) {
+    for (float y = height + intervalHeight + offset; y > -offset; y -= intervalHeight, index++) {
         nvgBeginPath(ctx);
         nvgMoveTo(ctx, 0, y * sizeMultiplier);
         nvgLineTo(ctx, width * sizeMultiplier, y * sizeMultiplier);

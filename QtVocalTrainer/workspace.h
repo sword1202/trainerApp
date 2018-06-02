@@ -18,6 +18,9 @@ protected:
 private:
     WorkspaceDrawer workspaceDrawer;
     float devicePixelRatio_;
+
+private slots:
+    void zoomChanged();
 };
 
 #endif // WORKSPACE_H
