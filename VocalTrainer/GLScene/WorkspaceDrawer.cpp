@@ -144,7 +144,6 @@ void WorkspaceDrawer::drawPitches() const {
     double timeBegin = (horizontalOffset / intervalWidth) / intervalsPerSecond;
     double timeEnd = timeBegin + workspaceDuration;
 
-    cout<<"iteratePitchesInTimeRange begin timeBegin = "<<timeBegin<<" timeEnd = "<<timeEnd<<endl;
     vxFile->iteratePitchesInTimeRange(timeBegin, timeEnd, [&] (const VxPitch& vxPitch) {
         static int counter = 0;
         counter++;
@@ -155,11 +154,7 @@ void WorkspaceDrawer::drawPitches() const {
         double pitchWidth = pitchDuration / workspaceDuration * width;
         float y = (getDistanceFromFirstPitch(vxPitch.pitch) - 1) * intervalHeight;
         drawPitch((float)x, y, (float)pitchWidth);
-        cout<<"pitchTimeBegin = "<<pitchTimeBegin<<" pitchDuration = "<<pitchDuration<<" x = "<<x<<endl;
     });
-    cout<<"iteratePitchesInTimeRange end\n";
-    
-    assert(pitchColor[3] > 0 && "pitchColor not initialized or is completely transparent");
 
     ConcurrentModificationAssertEnd(vxFile);
 }
