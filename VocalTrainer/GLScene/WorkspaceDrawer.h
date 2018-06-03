@@ -21,6 +21,7 @@ class WorkspaceDrawer {
     std::atomic<float> verticalOffset;
     std::atomic<float> horizontalOffset;
     std::atomic<double> intervalsPerSecond;
+    std::atomic<double> frameTime;
     int firstPitchPerfectFrequencyIndex;
 
     float sizeMultiplier;

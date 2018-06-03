@@ -42,7 +42,6 @@ void WorkspaceDrawer::draw() {
     assert(gridColor[3] > 0 && "gridColor not initialized or is completely transparent");
     assert(accentGridColor[3] > 0 && "accentGridColor not initialized or is completely transparent");
 
-    static double frameTime = 0;
     double now = TimeUtils::NowInSeconds();
     if (frameTime != 0) {
         double frameDuration = now - frameTime;
@@ -141,12 +140,11 @@ void WorkspaceDrawer::drawPitches() const {
     drawer->setFillColor(pitchColor);
 
     double workspaceDuration = width / intervalWidth / intervalsPerSecond;
-    double timeBegin = (horizontalOffset / intervalWidth) / intervalsPerSecond;
+    double timeBegin = (horizontalOffset / intervalWidth) / intervalsPerSecond - getPitchGraphDuration();
+    cout<<"timeBegin = "<<timeBegin + getPitchGraphDuration()<<endl;
     double timeEnd = timeBegin + workspaceDuration;
 
     vxFile->iteratePitchesInTimeRange(timeBegin, timeEnd, [&] (const VxPitch& vxPitch) {
-        static int counter = 0;
-        counter++;
         double pitchTimeBegin = vxFile->ticksToSeconds(vxPitch.startTickNumber);
         double pitchDuration = vxFile->ticksToSeconds(vxPitch.ticksCount);
 
@@ -270,6 +268,7 @@ WorkspaceDrawer::WorkspaceDrawer() :
         verticalOffset(0),
         horizontalOffset(0),
         sizeMultiplier(1),
+        frameTime(0),
         intervalsPerSecond(0),
         firstPitchPerfectFrequencyIndex(-1)
 {
@@ -301,6 +300,7 @@ double WorkspaceDrawer::getIntervalsPerSecond() const {
 }
 
 void WorkspaceDrawer::setIntervalsPerSecond(double intervalsPerSecond) {
+    frameTime = TimeUtils::NowInSeconds();
     this->intervalsPerSecond = intervalsPerSecond;
 }
 

@@ -1,6 +1,9 @@
 #include "player.h"
 #include <QVariant>
 #include <QJsonObject>
+#include <iostream>
+
+using namespace std;
 
 constexpr char FILE_URL_PREFIX[] = "file://";
 constexpr int FILE_URL_PREFIX_LENGTH = 7;
@@ -74,6 +77,7 @@ void Player::stop() {
 }
 
 void Player::onSeekChanged(double seek) {
+    cout<<"seek = "<<seek<<endl;
     emit seekChanged(seek);
 }
 
