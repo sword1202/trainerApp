@@ -26,6 +26,7 @@ Workspace::Workspace(QWidget *parent) : QOpenGLWidget(parent) {
     connect(ZoomController::instance(), &ZoomController::zoomChanged, this, &Workspace::zoomChanged);
     connect(Player::instance(), &Player::isPlayingChanged, this, &Workspace::isPlayingChanged);
     connect(Player::instance(), &Player::sourceChanged, this, &Workspace::playerSourceChanged);
+    connect(Player::instance(), &Player::seekChanged, this, &Workspace::seekChanged);
 
     connect(ZoomController::instance(), &ZoomController::firstPitchChanged, this, &Workspace::firstPitchChanged);
 
@@ -62,6 +63,11 @@ void Workspace::zoomChanged() {
     auto* zoom = ZoomController::instance();
     workspaceDrawer.setIntervalWidth((float)zoom->getIntervalWidth());
     workspaceDrawer.setIntervalHeight((float)zoom->getIntervalHeight());
+}
+
+void Workspace::seekChanged(double seek) {
+    workspaceDrawer.setHorizontalOffset(seek * workspaceDrawer.getIntervalWidth() *
+            workspaceDrawer.getIntervalsPerSecond());
 }
 
 void Workspace::initializeGL() {

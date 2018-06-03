@@ -29,6 +29,7 @@ private slots:
     void isPlayingChanged(bool isPlaying);
     void playerSourceChanged();
     void firstPitchChanged();
+    void seekChanged(double seek);
 };
 
 #endif // WORKSPACE_H
