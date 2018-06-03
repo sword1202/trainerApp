@@ -2,7 +2,8 @@ import QtQuick 2.0
 
 Item {
     id: root
-    state: "off"
+
+    property bool on: false
 
     property string onImage
     property string offImage
@@ -13,29 +14,13 @@ Item {
         acceptedButtons: Qt.LeftButton
 
         onClicked: {
-            root.state = root.state === "on" ? "off" : "on"
+            root.on = !root.on
         }
     }
 
-    states: [
-        State {
-            name: "on"
-            PropertyChanges {
-                target: svg
-                source: onImage
-            }
-        },
-        State {
-            name: "off"
-            PropertyChanges {
-                target: svg
-                source: offImage
-            }
-        }
-    ]
-
     SvgImage {
         anchors.fill: parent
+        source: parent.on ? parent.onImage : parent.offImage
         id: svg
     }
 }

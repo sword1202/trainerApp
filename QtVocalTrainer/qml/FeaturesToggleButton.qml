@@ -8,11 +8,11 @@ Rectangle {
 
     property alias onImage : button.onImage
     property alias offImage : button.offImage
-    property alias state: button.state
+    property alias on: button.on
 
     ButtonShadow {
         anchors.fill: parent
-        visible: button.state === "off"
+        visible: !parent.on
         target: button.svg
     }
 
