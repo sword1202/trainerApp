@@ -33,3 +33,7 @@ ZoomController *QmlCppBridge::getZoom() const {
 Player *QmlCppBridge::getPlayer() const {
     return Player::instance();
 }
+
+qreal QmlCppBridge::getDevicePixelRatio() const {
+    return mainWindow->devicePixelRatio();
+}

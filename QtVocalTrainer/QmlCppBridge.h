@@ -26,9 +26,11 @@ public:
 
     Q_PROPERTY(ZoomController* zoomController READ getZoom() CONSTANT)
     Q_PROPERTY(Player* player READ getPlayer() CONSTANT)
+    Q_PROPERTY(qreal devicePixelRatio READ getDevicePixelRatio() CONSTANT)
 
     ZoomController* getZoom() const;
     Player* getPlayer() const;
+    qreal getDevicePixelRatio() const;
 
 signals:
     void resize();
