@@ -15,6 +15,7 @@
 #include <boost/container/static_vector.hpp>
 #include <boost/serialization/vector.hpp>
 #include "StlDebugUtils.h"
+#include <iostream>
 
 class VxFile {
     std::vector<VxPitch> pitches;
@@ -86,6 +87,7 @@ public:
 
     void removeSilenceSpaceFromBeginning();
 
+    //iteratePitchesInTimeRange begin timeBegin = 47.619 timeEnd = 62.3083
     template<typename Function>
     void iteratePitchesInTickRange(int startTick, int endTick, const Function& function) const {
         for (const auto& pitch : pitches) {
@@ -95,10 +97,13 @@ public:
         }
     }
 
+    // startTick = 15165 endTick = 21041
     template<typename Function>
     void iteratePitchesInTimeRange(double startTime, double endTime, const Function& function) const {
         int startTick = timeInSecondsToTicks(startTime);
         int endTick = timeInSecondsToTicks(endTime);
+        std::cout<<"startTick = "<<startTick<<" endTick = "<<endTick<<"\n";
+
         iteratePitchesInTickRange(startTick, endTick, function);
     }
 

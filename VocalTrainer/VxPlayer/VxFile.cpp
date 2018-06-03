@@ -12,20 +12,28 @@
 
 using namespace CppUtils;
 
-int VxPitch::endTickNumber() const {
+int Interval::endTickNumber() const {
     return startTickNumber + ticksCount;
 }
 
-bool VxPitch::containsTick(int tick) const {
+bool Interval::containsTick(int tick) const {
     return startTickNumber <= tick && endTickNumber() > tick;
 }
 
-bool VxPitch::intersectsWith(int begin, int end) const {
-    return containsTick(begin) || (startTickNumber < end && endTickNumber() > end);
+bool Interval::intersectsWith(int begin, int end) const {
+    return intersectsWith(Interval(begin, end));
 }
 
-bool VxPitch::intersectsWith(const VxPitch &vxPitch) const {
-    return intersectsWith(vxPitch.startTickNumber, vxPitch.endTickNumber());
+bool Interval::intersectsWith(const Interval &interval) const {
+    return containsTick(interval.startTickNumber) || containsTick(interval.endTickNumber() - 1) ||
+            interval.containsTick(startTickNumber) || interval.containsTick(endTickNumber() - 1);
+}
+
+Interval::Interval(int startTickNumber, int ticksCount) : startTickNumber(startTickNumber), ticksCount(ticksCount) {
+}
+
+VxPitch::VxPitch(const Pitch &pitch, int startTickNumber, int ticksCount)
+        : Interval(startTickNumber, ticksCount), pitch(pitch) {
 }
 
 VxFile::VxFile(std::vector<VxPitch> &&pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int ticksPerSecond)

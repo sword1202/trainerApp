@@ -15,6 +15,8 @@
 #include "ConcurrentModificationAssert.h"
 
 using namespace CppUtils;
+using std::cout;
+using std::endl;
 
 constexpr int BEATS_IN_TACT = 4;
 
@@ -55,6 +57,7 @@ void WorkspaceDrawer::draw() {
     drawer->beginFrame(width, height, devicePixelRatio);
     drawVerticalGrid();
     drawHorizontalGrid();
+    drawPitches();
     drawPitchesGraph();
     drawer->endFrame();
 }
@@ -135,11 +138,16 @@ void WorkspaceDrawer::drawPitches() const {
         return;
     }
 
+    drawer->setFillColor(pitchColor);
+
     double workspaceDuration = width / intervalWidth / intervalsPerSecond;
     double timeBegin = (horizontalOffset / intervalWidth) / intervalsPerSecond;
     double timeEnd = timeBegin + workspaceDuration;
 
+    cout<<"iteratePitchesInTimeRange begin timeBegin = "<<timeBegin<<" timeEnd = "<<timeEnd<<endl;
     vxFile->iteratePitchesInTimeRange(timeBegin, timeEnd, [&] (const VxPitch& vxPitch) {
+        static int counter = 0;
+        counter++;
         double pitchTimeBegin = vxFile->ticksToSeconds(vxPitch.startTickNumber);
         double pitchDuration = vxFile->ticksToSeconds(vxPitch.ticksCount);
 
@@ -147,10 +155,11 @@ void WorkspaceDrawer::drawPitches() const {
         double pitchWidth = pitchDuration / workspaceDuration * width;
         float y = (getDistanceFromFirstPitch(vxPitch.pitch) - 1) * intervalHeight;
         drawPitch((float)x, y, (float)pitchWidth);
+        cout<<"pitchTimeBegin = "<<pitchTimeBegin<<" pitchDuration = "<<pitchDuration<<" x = "<<x<<endl;
     });
+    cout<<"iteratePitchesInTimeRange end\n";
     
     assert(pitchColor[3] > 0 && "pitchColor not initialized or is completely transparent");
-    drawer->setFillColor(pitchColor);
 
     ConcurrentModificationAssertEnd(vxFile);
 }

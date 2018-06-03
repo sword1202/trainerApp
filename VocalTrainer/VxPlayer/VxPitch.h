@@ -12,10 +12,25 @@
 
 #include <vector>
 
-struct VxPitch {
-    Pitch pitch;
+struct Interval {
     int startTickNumber;
     int ticksCount;
+
+    Interval(int startTickNumber, int ticksCount);
+    Interval() = default;
+
+    int endTickNumber() const;
+
+    bool containsTick(int tick) const;
+    bool intersectsWith(int begin, int end) const;
+    bool intersectsWith(const Interval& interval) const;
+};
+
+struct VxPitch : Interval {
+    Pitch pitch;
+
+    VxPitch() = default;
+    VxPitch(const Pitch &pitch, int startTickNumber, int ticksCount);
 
     template<typename Archive>
     void load(Archive & ar, const unsigned int version)
@@ -36,12 +51,6 @@ struct VxPitch {
     }
 
     BOOST_SERIALIZATION_SPLIT_MEMBER()
-
-    int endTickNumber() const;
-
-    bool containsTick(int tick) const;
-    bool intersectsWith(int begin, int end) const;
-    bool intersectsWith(const VxPitch& vxPitch) const;
 };
 
 

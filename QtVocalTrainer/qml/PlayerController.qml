@@ -78,8 +78,8 @@ Item {
         onImage: "images/play_on.svg"
         offImage: "images/play_off.svg"
 
-        onStateChanged: {
-            if (state === "on") {
+        onOnChanged: {
+            if (on) {
                 cpp.player.play();
             } else {
                 cpp.player.pause();
