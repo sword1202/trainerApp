@@ -12,12 +12,13 @@
 #include <cmath>
 
 #include "NvgOpenGLDrawer.h"
+#include "zoomcontroller.h"
 
 using namespace CppUtils;
 
 constexpr int BEATS_IN_TACT = 4;
 
-constexpr float PITCHES_GRAPH_WITDH_IN_INTERVALS = 4.0f;
+constexpr float PITCHES_GRAPH_WIDTH_IN_INTERVALS = 4.0f;
 
 void WorkspaceDrawer::resize(float width, float height, float devicePixelRatio) {
     assert(devicePixelRatio > 0);
@@ -36,13 +37,15 @@ void WorkspaceDrawer::draw() {
 
     assert(intervalWidth >= 0);
     assert(intervalHeight >= 0);
+    assert(gridColor[3] > 0 && "gridColor not initialized or is completely transparent");
+    assert(accentGridColor[3] > 0 && "accentGridColor not initialized or is completely transparent");
 
     static double frameTime = 0;
     double now = TimeUtils::NowInSeconds();
     if (frameTime != 0) {
         double frameDuration = now - frameTime;
-        if (instervalsPerSecond != 0) {
-            horizontalOffset = horizontalOffset + frameDuration * instervalsPerSecond * intervalWidth;
+        if (intervalsPerSecond != 0) {
+            horizontalOffset = horizontalOffset + frameDuration * intervalsPerSecond * intervalWidth;
         }
     }
     frameTime = now;
@@ -122,16 +125,67 @@ void WorkspaceDrawer::drawHorizontalGrid() const {
 
 void WorkspaceDrawer::drawPitchesGraph() const {
     assert(pitchesCollector);
+    assert(pitchGraphColor[3] > 0 && "pitchGraphColor not initialized or is completely transparent");
 
     int pitchesCount = pitchesCollector->getPitchesCount();
-    if (pitchesCount <= 1) {
-        return;
+    int i = 0;
+
+    while (i < pitchesCount && !pitchesCollector->getPitchAt(i).isValid()) {
+        i++;
     }
 
-    for (int i = 0; i < pitchesCount; ++i) {
-        double time = pitchesCollector->getTimeAt(i);
+    drawer->beginPath();
+    drawer->setStrokeWidth(sizeMultiplier);
+    drawer->setStrokeColor(pitchGraphColor);
+
+    float width = intervalWidth * PITCHES_GRAPH_WIDTH_IN_INTERVALS;
+    double duration = 1.0 / intervalsPerSecond * PITCHES_GRAPH_WIDTH_IN_INTERVALS;
+    double now = TimeUtils::NowInSeconds();
+
+    double x;
+    double y;
+
+    auto getXY = [&](double time, const Pitch& pitch) {
+        x = (time - now + duration) / duration * width;
+        float distanceFromFirstPitch = pitch.getPerfectFrequencyIndex() -
+                ZoomController::instance()->getFirstPitchPerfectFrequencyIndex();
+        y = height - (distanceFromFirstPitch + pitch.getDistanceFromLowerBound() / 2.0)
+                * ZoomController::instance()->getIntervalHeight();
+    };
+
+    while (i < pitchesCount) {
         Pitch pitch = pitchesCollector->getPitchAt(i);
+        if (!pitch.isValid()) {
+            i++;
+            continue;
+        }
+
+        double time = pitchesCollector->getTimeAt(i);
+        getXY(time, pitch);
+        drawer->moveTo((float)x, (float)y);
+
+        i++;
+        if (i >= pitchesCount) {
+            break;
+        }
+
+        if (!pitchesCollector->getPitchAt(i).isValid()) {
+            drawer->lineTo((float)x, (float)y);
+            continue;
+        }
+
+        for (; i < pitchesCount; i++) {
+            Pitch pitch = pitchesCollector->getPitchAt(i);
+            if (!pitch.isValid()) {
+                break;
+            }
+
+            double time = pitchesCollector->getTimeAt(i);
+            getXY(time, pitch);
+            drawer->lineTo((float)x, (float)y);
+        }
     }
+    drawer->stroke();
 }
 
 const WorkspaceDrawer::Color & WorkspaceDrawer::getGridColor() const {
@@ -160,7 +214,7 @@ WorkspaceDrawer::WorkspaceDrawer() :
         verticalOffset(0),
         horizontalOffset(0),
         sizeMultiplier(1),
-        instervalsPerSecond(0)
+        intervalsPerSecond(0)
 {
 
 }
@@ -181,11 +235,11 @@ void WorkspaceDrawer::setSizeMultiplier(float sizeMultiplier) {
 }
 
 double WorkspaceDrawer::getIntervalsPerSecond() const {
-    return instervalsPerSecond;
+    return intervalsPerSecond;
 }
 
 void WorkspaceDrawer::setIntervalsPerSecond(double intervalsPerSecond) {
-    this->instervalsPerSecond = intervalsPerSecond;
+    this->intervalsPerSecond = intervalsPerSecond;
 }
 
 PitchesCollector *WorkspaceDrawer::getPitchesCollector() const {
@@ -195,4 +249,13 @@ PitchesCollector *WorkspaceDrawer::getPitchesCollector() const {
 void WorkspaceDrawer::setPitchesCollector(PitchesCollector *pitchesCollector) {
     CountAssert(1);
     this->pitchesCollector = pitchesCollector;
+}
+
+const WorkspaceDrawer::Color &WorkspaceDrawer::getPitchGraphColor() const {
+    return pitchGraphColor;
+}
+
+void WorkspaceDrawer::setPitchGraphColor(const WorkspaceDrawer::Color &pitchGraphColor) {
+    CountAssert(1);
+    this->pitchGraphColor = pitchGraphColor;
 }

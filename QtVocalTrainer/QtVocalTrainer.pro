@@ -29,7 +29,7 @@ SOURCES += \
     ../PitchDetection/CppUtils/TimeUtils.cpp \
     app.cpp \
     ../PitchDetection/PortAudio.cpp \
-    ../PitchDetection/PortAudioInputReader.cpp \
+    ../PitchDetection/AudioInputReader.cpp \
     executors.cpp \
     ../VocalTrainer/VxPlayer/MvxPlayer.cpp \
     ../VocalTrainer/VxPlayer/VxFileAudioDataGenerator.cpp \

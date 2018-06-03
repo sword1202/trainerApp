@@ -30,6 +30,7 @@ Workspace::Workspace(QWidget *parent) : QOpenGLWidget(parent) {
     });
     pitchesReader.init(CreateDefaultAudioInputReader(PITCH_DETECTION_BUFFER_SIZE), PITCH_SMOOTH_LEVEL);
     workspaceDrawer.setPitchesCollector(&pitchesReader);
+    pitchesReader.start();
 }
 
 void Workspace::isPlayingChanged(bool isPlaying) {
@@ -51,6 +52,8 @@ void Workspace::initializeGL() {
     zoomChanged();
     workspaceDrawer.setGridColor({0x8B, 0x89, 0xB6, 0x33});
     workspaceDrawer.setAccentGridColor({0x8B, 0x89, 0xB6, 0x80});
+    workspaceDrawer.setPitchGraphColor({0xFF, 0x5E, 0x85, 0xFF});
+    workspaceDrawer.setIntervalsPerSecond(3);
     glDisable(GL_DEPTH_TEST);
 }
 

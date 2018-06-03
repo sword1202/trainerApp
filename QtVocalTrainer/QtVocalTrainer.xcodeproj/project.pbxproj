@@ -226,15 +226,15 @@
 					);
 			};
 		};
-		42F5D95319E946AA4552EB19 = {
+		D4BA943F97BC257AF95314F3 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/PortAudioInputReader.cpp";
-			name = "PortAudioInputReader.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/AudioInputReader.cpp";
+			name = "AudioInputReader.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		EB92C9E299C61E72C0FFF4E4 = {
-			fileRef = "42F5D95319E946AA4552EB19";
+		2093B786A38C5C17D4BFCB3C = {
+			fileRef = "D4BA943F97BC257AF95314F3";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
@@ -1424,7 +1424,7 @@
 				"170DD1A433357ECE918F023E",
 				"DE1588F866E2F8A362D4FA86",
 				"61DAEAF44CFBFD0435D18633",
-				"42F5D95319E946AA4552EB19",
+				"D4BA943F97BC257AF95314F3",
 				"010F066C0C8FAFFCB00384DA",
 				"5820983D5AF61CFB18BDD732",
 				"AB1BB2102FE32CBC9904F361",
@@ -1560,7 +1560,7 @@
 				"327D328DC0E15513077CA217",
 				"42469CE418C42F99BFA4EECE",
 				"C0A33B54AB4F43E113571EFD",
-				"EB92C9E299C61E72C0FFF4E4",
+				"2093B786A38C5C17D4BFCB3C",
 				"D7C5B34E745041BD55235BD0",
 				"0C079B48635759D4B90150B5",
 				"C4852C2D0119858544266918",

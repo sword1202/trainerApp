@@ -20,10 +20,11 @@ class WorkspaceDrawer {
     std::atomic<float> verticalOffset;
     std::atomic<float> horizontalOffset;
     std::atomic<float> sizeMultiplier;
-    std::atomic<double> instervalsPerSecond;
+    std::atomic<double> intervalsPerSecond;
 
     Color gridColor;
     Color accentGridColor;
+    Color pitchGraphColor;
 
     float width = -1;
     float height = -1;
@@ -61,6 +62,8 @@ public:
     void setGridColor(const Color& color);
     const Color &getAccentGridColor() const;
     void setAccentGridColor(const Color& color);
+    const Color &getPitchGraphColor() const;
+    void setPitchGraphColor(const Color &pitchGraphColor);
 
     PitchesCollector *getPitchesCollector() const;
     void setPitchesCollector(PitchesCollector *pitchesCollector);
