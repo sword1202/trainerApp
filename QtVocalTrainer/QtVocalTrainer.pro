@@ -65,6 +65,7 @@ SOURCES += \
     QtUtils/qtutils.cpp \
     zoomcontroller.cpp \
     ../VocalTrainer/GLScene/NvgOpenGLDrawer.cpp \
+    ../VocalTrainer/GLScene/Drawer.cpp \
     player.cpp \
     mainwindow.mm
 

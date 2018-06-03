@@ -18,8 +18,8 @@ public:
     Q_PROPERTY(qreal minZoom READ getMinZoom() CONSTANT)
     Q_PROPERTY(qreal maxZoom READ getMaxZoom() CONSTANT)
     Q_PROPERTY(qreal firstPitchPerfectFrequencyIndex READ getFirstPitchPerfectFrequencyIndex() WRITE
-            setFirstPitchPerfectFrequencyIndex() NOTIFY firstPitchPerfectFrequencyIndexChanged())
-    Q_PROPERTY(Pitch firstPitch READ getFirstPitch() NOTIFY firstPitchPerfectFrequencyIndexChanged())
+            setFirstPitchPerfectFrequencyIndex() NOTIFY firstPitchChanged())
+    Q_PROPERTY(Pitch firstPitch READ getFirstPitch() NOTIFY firstPitchChanged())
 
     ZoomController();
     qreal getIntervalWidth() const;
@@ -39,7 +39,7 @@ signals:
     void zoomChanged();
     void intervalWidthChanged();
     void intervalHeightChanged();
-    void firstPitchPerfectFrequencyIndexChanged();
+    void firstPitchChanged();
 };
 
 #endif // ZOOM_H

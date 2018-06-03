@@ -766,6 +766,21 @@
 					);
 			};
 		};
+		0DE7C67DF7E3DF48D2CDE878 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/GLScene/Drawer.cpp";
+			name = "Drawer.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		EC440AC9941FC2B52F1AD2EC = {
+			fileRef = "0DE7C67DF7E3DF48D2CDE878";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
 		427036DAC85631AB4C48B610 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/player.cpp";
@@ -1460,6 +1475,7 @@
 				"27AB59B83B50AAE8527B3E16",
 				"7F3F1B193768567697BA8B37",
 				"BD9CBF70C3DE9630262C65AA",
+				"0DE7C67DF7E3DF48D2CDE878",
 				"427036DAC85631AB4C48B610",
 				"2A9193B52E540764CA5351C1",
 				"C613FE9ADA39556AD9540F1E",
@@ -1596,6 +1612,7 @@
 				"455FD040EBB74ECE5B70535B",
 				"C91434CEEF9FEB3E3F73CE21",
 				"75010CA4C63B5ACB35276CDD",
+				"EC440AC9941FC2B52F1AD2EC",
 				"67B74B41DD891F047CEBC851",
 				"83C95DF40A7399DB82D78DF7",
 				"F3F0C5A9AE1D79D2A4930AEA",

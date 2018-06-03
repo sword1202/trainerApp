@@ -125,3 +125,12 @@ void NvgOpenGLDrawer::translateTo(float x, float y) {
     translateX = x;
     translateY = y;
 }
+
+void NvgOpenGLDrawer::arcTo(float x1, float y1, float x2, float y2, float radius) {
+    assert(radius >= 0);
+    nvgArcTo(ctx, x1, y1, x2, y2, radius);
+}
+
+void NvgOpenGLDrawer::rect(float x, float y, float w, float h) {
+    nvgRect(ctx, x, y, w, h);
+}

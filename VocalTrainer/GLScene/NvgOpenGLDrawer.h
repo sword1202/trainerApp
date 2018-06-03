@@ -22,6 +22,7 @@ public:
     void endFrame() override;
     void moveTo(float x, float y) override;
     void lineTo(float x, float y) override;
+    void arcTo(float x1, float y1, float x2, float y2, float radius) override;
     void setStrokeColor(const Color& color) override;
     void setFillColor(const Color& color) override;
     void setStrokeWidth(float strokeWidth) override;
@@ -34,6 +35,7 @@ public:
     void closePath() override;
     void rotate(float angle) override;
     void scale(float x, float y) override;
+    void rect(float x, float y, float w, float h) override;
 
     void clear() override;
 

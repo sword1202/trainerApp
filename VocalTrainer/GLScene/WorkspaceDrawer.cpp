@@ -12,7 +12,7 @@
 #include <cmath>
 
 #include "NvgOpenGLDrawer.h"
-#include "zoomcontroller.h"
+#include "ConcurrentModificationAssert.h"
 
 using namespace CppUtils;
 
@@ -123,7 +123,48 @@ void WorkspaceDrawer::drawHorizontalGrid() const {
     }
 }
 
+void WorkspaceDrawer::drawPitch(float x, float y, float width) const {
+    drawer->roundedRect(x, y, width, intervalHeight, pitchRadius);
+    drawer->fill();
+}
+
+void WorkspaceDrawer::drawPitches() const {
+    ConcurrentModificationAssertBegin(vxFile);
+    assert(firstPitchPerfectFrequencyIndex >= 0);
+    if (!vxFile) {
+        return;
+    }
+
+    double workspaceDuration = width / intervalWidth / intervalsPerSecond;
+    double timeBegin = (horizontalOffset / intervalWidth) / intervalsPerSecond;
+    double timeEnd = timeBegin + workspaceDuration;
+
+    vxFile->iteratePitchesInTimeRange(timeBegin, timeEnd, [&] (const VxPitch& vxPitch) {
+        double pitchTimeBegin = vxFile->ticksToSeconds(vxPitch.startTickNumber);
+        double pitchDuration = vxFile->ticksToSeconds(vxPitch.ticksCount);
+
+        double x = (pitchTimeBegin - timeBegin) / workspaceDuration * width;
+        double pitchWidth = pitchDuration / workspaceDuration * width;
+        float y = (getDistanceFromFirstPitch(vxPitch.pitch) - 1) * intervalHeight;
+        drawPitch((float)x, y, (float)pitchWidth);
+    });
+    
+    assert(pitchColor[3] > 0 && "pitchColor not initialized or is completely transparent");
+    drawer->setFillColor(pitchColor);
+
+    ConcurrentModificationAssertEnd(vxFile);
+}
+
+void WorkspaceDrawer::setVxFile(const VxFile* vxFile) {
+    if (this->vxFile) {
+        delete this->vxFile;
+    }
+
+    this->vxFile = vxFile;
+}
+
 void WorkspaceDrawer::drawPitchesGraph() const {
+    assert(firstPitchPerfectFrequencyIndex >= 0);
     assert(pitchesCollector);
     assert(pitchGraphColor[3] > 0 && "pitchGraphColor not initialized or is completely transparent");
 
@@ -138,19 +179,17 @@ void WorkspaceDrawer::drawPitchesGraph() const {
     drawer->setStrokeWidth(sizeMultiplier);
     drawer->setStrokeColor(pitchGraphColor);
 
-    float width = intervalWidth * PITCHES_GRAPH_WIDTH_IN_INTERVALS;
-    double duration = 1.0 / intervalsPerSecond * PITCHES_GRAPH_WIDTH_IN_INTERVALS;
+    float pitchGraphWidth = intervalWidth * PITCHES_GRAPH_WIDTH_IN_INTERVALS;
+    double duration = getPitchGraphDuration();
     double now = TimeUtils::NowInSeconds();
 
     double x;
     double y;
 
     auto getXY = [&](double time, const Pitch& pitch) {
-        x = (time - now + duration) / duration * width;
-        float distanceFromFirstPitch = pitch.getPerfectFrequencyIndex() -
-                ZoomController::instance()->getFirstPitchPerfectFrequencyIndex();
-        y = height - (distanceFromFirstPitch + pitch.getDistanceFromLowerBound() / 2.0)
-                * ZoomController::instance()->getIntervalHeight();
+        x = (time - now + duration) / duration * pitchGraphWidth;
+        float distanceFromFirstPitch = getDistanceFromFirstPitch(pitch);
+        y = height - (distanceFromFirstPitch + pitch.getDistanceFromLowerBound() / 2.0) * intervalHeight;
     };
 
     while (i < pitchesCount) {
@@ -188,6 +227,18 @@ void WorkspaceDrawer::drawPitchesGraph() const {
     drawer->stroke();
 }
 
+int WorkspaceDrawer::getDistanceFromFirstPitch(const Pitch &pitch) const {
+    return pitch.getPerfectFrequencyIndex() - firstPitchPerfectFrequencyIndex;
+}
+
+double WorkspaceDrawer::getPitchGraphDuration() const {
+    return getIntervalDuration() * PITCHES_GRAPH_WIDTH_IN_INTERVALS;
+}
+
+double WorkspaceDrawer::getIntervalDuration() const {
+    return 1.0 / intervalsPerSecond;
+}
+
 const WorkspaceDrawer::Color & WorkspaceDrawer::getGridColor() const {
     return gridColor;
 }
@@ -214,7 +265,8 @@ WorkspaceDrawer::WorkspaceDrawer() :
         verticalOffset(0),
         horizontalOffset(0),
         sizeMultiplier(1),
-        intervalsPerSecond(0)
+        intervalsPerSecond(0),
+        firstPitchPerfectFrequencyIndex(-1)
 {
 
 }
@@ -222,6 +274,10 @@ WorkspaceDrawer::WorkspaceDrawer() :
 WorkspaceDrawer::~WorkspaceDrawer() {
     if (drawer) {
         delete drawer;
+    }
+
+    if (vxFile) {
+        delete vxFile;
     }
 }
 
@@ -231,6 +287,7 @@ float WorkspaceDrawer::getSizeMultiplier() const {
 
 void WorkspaceDrawer::setSizeMultiplier(float sizeMultiplier) {
     assert(sizeMultiplier > 0);
+    CountAssert(1);
     this->sizeMultiplier = sizeMultiplier;
 }
 
@@ -258,4 +315,32 @@ const WorkspaceDrawer::Color &WorkspaceDrawer::getPitchGraphColor() const {
 void WorkspaceDrawer::setPitchGraphColor(const WorkspaceDrawer::Color &pitchGraphColor) {
     CountAssert(1);
     this->pitchGraphColor = pitchGraphColor;
+}
+
+const WorkspaceDrawer::Color &WorkspaceDrawer::getPitchColor() const {
+    return pitchColor;
+}
+
+void WorkspaceDrawer::setPitchColor(const WorkspaceDrawer::Color &pitchColor) {
+    CountAssert(1);
+    this->pitchColor = pitchColor;
+}
+
+float WorkspaceDrawer::getPitchRadius() const {
+    return pitchRadius;
+}
+
+void WorkspaceDrawer::setPitchRadius(float pitchRadius) {
+    assert(pitchRadius >= 0);
+    CountAssert(1);
+    this->pitchRadius = pitchRadius;
+}
+
+int WorkspaceDrawer::getFirstPitchPerfectFrequencyIndex() const {
+    return firstPitchPerfectFrequencyIndex;
+}
+
+void WorkspaceDrawer::setFirstPitchPerfectFrequencyIndex(int firstPitchPerfectFrequencyIndex) {
+    assert(firstPitchPerfectFrequencyIndex >= 0);
+    this->firstPitchPerfectFrequencyIndex = firstPitchPerfectFrequencyIndex;
 }

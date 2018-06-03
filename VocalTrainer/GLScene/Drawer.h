@@ -27,6 +27,7 @@ public:
     virtual void endFrame() = 0;
     virtual void moveTo(float x, float y) = 0;
     virtual void lineTo(float x, float y) = 0;
+    virtual void arcTo(float x1, float y1, float x2, float y2, float radius) = 0;
     virtual void setStrokeColor(const Color& color) = 0;
     virtual void setFillColor(const Color& color) = 0;
     virtual void setStrokeWidth(float strokeWidth) = 0;
@@ -38,6 +39,9 @@ public:
     virtual void lineJoin(LineJoin type) = 0;
     virtual void rotate(float angle) = 0;
     virtual void scale(float x, float y) = 0;
+    virtual void rect(float x, float y, float w, float h) = 0;
+
+    void roundedRect(float x, float y, float w, float h, float r);
 
     virtual ~Drawer() = default;
 };

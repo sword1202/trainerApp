@@ -47,6 +47,7 @@ int ZoomController::getFirstPitchPerfectFrequencyIndex() const {
 void ZoomController::setFirstPitchPerfectFrequencyIndex(int firstPitchPerfectFrequencyIndex) {
     assert(Pitch(firstPitchPerfectFrequencyIndex).isWhite());
     this->firstPitchPerfectFrequencyIndex = firstPitchPerfectFrequencyIndex;
+    emit firstPitchChanged();
 }
 
 ZoomController *ZoomController::instance() {

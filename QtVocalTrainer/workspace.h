@@ -27,6 +27,8 @@ private:
 private slots:
     void zoomChanged();
     void isPlayingChanged(bool isPlaying);
+    void playerSourceChanged();
+    void firstPitchChanged();
 };
 
 #endif // WORKSPACE_H

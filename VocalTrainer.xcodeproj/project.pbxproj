@@ -56,6 +56,7 @@
 		C9FFF09DC78A783FDD0F5A3B /* a.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFEF6E23B96974A519665 /* a.sf2 */; };
 		C9FFF0C3BC65E9F88000F019 /* MvxPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF12A4E0AAAD8E783983E /* MvxPlayer.cpp */; };
 		C9FFF1454B1B19FD66D82BE7 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFFC2EAB3D64E9E8BCC71 /* LICENSE.txt */; };
+		C9FFF18D200A38C7637733F3 /* Drawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2953483ADAF6F321D49 /* Drawer.cpp */; };
 		C9FFF29A2778D812DD86DAD9 /* PitchDetectionSmoothingBufferTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFB1B7C3F160B173A4071 /* PitchDetectionSmoothingBufferTest.cpp */; };
 		C9FFF3994C66634963735E68 /* LoadTsfDefault.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF5D6CB0CEACB514B6CCE /* LoadTsfDefault.mm */; };
 		C9FFF428255BE42EB50BBBD7 /* GeometryUtilsTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE55AF6D32018F3AB842 /* GeometryUtilsTest.cpp */; };
@@ -191,6 +192,7 @@
 		C9FFF15878C9F431873450CF /* Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Strings.h; path = PitchDetection/CppUtils/Strings.h; sourceTree = "<group>"; };
 		C9FFF1E4F9CFE2324A18F83D /* MidiFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiFile.cpp; sourceTree = "<group>"; };
 		C9FFF2289BBA67C21CE88EE9 /* WavAudioPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WavAudioPlayer.cpp; sourceTree = "<group>"; };
+		C9FFF2953483ADAF6F321D49 /* Drawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Drawer.cpp; sourceTree = "<group>"; };
 		C9FFF2E6D7DC2EC87198D5C0 /* SynchronizedCallbacksQueue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SynchronizedCallbacksQueue.cpp; path = PitchDetection/CppUtils/SynchronizedCallbacksQueue.cpp; sourceTree = "<group>"; };
 		C9FFF2FB85C1641E890B086C /* MidiNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiNote.h; sourceTree = "<group>"; };
 		C9FFF3A0BB69C8E7F02351A6 /* tsf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tsf.h; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 		C9FFF8263643024E19C9E8FC /* MidiEventList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiEventList.h; sourceTree = "<group>"; };
 		C9FFF83763B781E75467D462 /* AudioFilePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFilePlayer.h; sourceTree = "<group>"; };
 		C9FFF851472080263029F894 /* VxLyricsLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxLyricsLine.h; sourceTree = "<group>"; };
+		C9FFF85DF0B393E6363253C2 /* ConcurrentModificationAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConcurrentModificationAssert.h; path = PitchDetection/CppUtils/ConcurrentModificationAssert.h; sourceTree = "<group>"; };
 		C9FFF8823954020C23E570B5 /* PeriodicallySleepingBackgroundTask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PeriodicallySleepingBackgroundTask.cpp; path = PitchDetection/CppUtils/PeriodicallySleepingBackgroundTask.cpp; sourceTree = "<group>"; };
 		C9FFF8C160107CFE52362C4C /* PitchInputReaderCollector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PitchInputReaderCollector.cpp; path = PitchDetection/PitchInputReaderCollector.cpp; sourceTree = "<group>"; };
 		C9FFF8FE4DFBA5720805C7E3 /* PitchTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PitchTest.cpp; path = PitchDetection/tests/PitchTest.cpp; sourceTree = SOURCE_ROOT; };
@@ -309,6 +312,7 @@
 				C9FFF8823954020C23E570B5 /* PeriodicallySleepingBackgroundTask.cpp */,
 				C9FFFFD89465AFA13405CCF7 /* PeriodicallySleepingBackgroundTask.h */,
 				C9FFF00A355F4925E53CADCF /* CountAssert.h */,
+				C9FFF85DF0B393E6363253C2 /* ConcurrentModificationAssert.h */,
 			);
 			name = CppUtils;
 			sourceTree = "<group>";
@@ -332,6 +336,7 @@
 				C9FFFDAC2C11510CFEF77088 /* Drawer.h */,
 				C9FFFA19D2FF27D204752D91 /* NvgOpenGLDrawer.cpp */,
 				C9FFF5CD494EE6A25A8FF722 /* NvgOpenGLDrawer.h */,
+				C9FFF2953483ADAF6F321D49 /* Drawer.cpp */,
 			);
 			path = GLScene;
 			sourceTree = "<group>";
@@ -684,6 +689,7 @@
 				C9FFFCBDBF28C2FC43AA78B6 /* WorkspaceDrawer.cpp in Sources */,
 				C9FFFEFABEED878714C44CDA /* nanovg.c in Sources */,
 				C9FFFF1FF80885BC9D48618F /* NvgOpenGLDrawer.cpp in Sources */,
+				C9FFF18D200A38C7637733F3 /* Drawer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

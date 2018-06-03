@@ -11,6 +11,7 @@
 #include "Drawer.h"
 #include <array>
 #include "PitchesCollector.h"
+#include "VxFile.h"
 
 class WorkspaceDrawer {
     typedef Drawer::Color Color;
@@ -19,12 +20,16 @@ class WorkspaceDrawer {
     std::atomic<float> intervalHeight;
     std::atomic<float> verticalOffset;
     std::atomic<float> horizontalOffset;
-    std::atomic<float> sizeMultiplier;
     std::atomic<double> intervalsPerSecond;
+    int firstPitchPerfectFrequencyIndex;
+
+    float sizeMultiplier;
+    float pitchRadius = 0;
 
     Color gridColor;
     Color accentGridColor;
     Color pitchGraphColor;
+    Color pitchColor;
 
     float width = -1;
     float height = -1;
@@ -32,11 +37,17 @@ class WorkspaceDrawer {
 
     Drawer* drawer = nullptr;
     PitchesCollector* pitchesCollector = nullptr;
+    const VxFile* vxFile = nullptr;
 
     void drawHorizontalLine(float y, const Color& color) const;
     void drawVerticalGrid() const;
     void drawHorizontalGrid() const;
+    void drawPitch(float x, float y, float width) const;
+    void drawPitches() const;
     void drawPitchesGraph() const;
+
+    double getPitchGraphDuration() const;
+    double getIntervalDuration() const;
 public:
     WorkspaceDrawer();
     ~WorkspaceDrawer();
@@ -54,9 +65,14 @@ public:
 
     double getIntervalsPerSecond() const;
     void setIntervalsPerSecond(double intervalsPerSecond);
+    int getFirstPitchPerfectFrequencyIndex() const;
+    void setFirstPitchPerfectFrequencyIndex(int firstPitchPerfectFrequencyIndex);
 
     float getSizeMultiplier() const;
     void setSizeMultiplier(float sizeMultiplier);
+
+    float getPitchRadius() const;
+    void setPitchRadius(float pitchRadius);
 
     const Color &getGridColor() const;
     void setGridColor(const Color& color);
@@ -64,9 +80,17 @@ public:
     void setAccentGridColor(const Color& color);
     const Color &getPitchGraphColor() const;
     void setPitchGraphColor(const Color &pitchGraphColor);
+    const Color &getPitchColor() const;
+    void setPitchColor(const Color &pitchColor);
 
     PitchesCollector *getPitchesCollector() const;
     void setPitchesCollector(PitchesCollector *pitchesCollector);
+
+    // Should be called on a render thread only, WorkspaceDrawer takes ownership,
+    // usually you should make a copy before assigning
+    void setVxFile(const VxFile* vxFile);
+
+    int getDistanceFromFirstPitch(const Pitch &pitch) const;
 };
 
 
