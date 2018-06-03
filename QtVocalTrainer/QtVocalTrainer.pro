@@ -23,6 +23,7 @@ SOURCES += \
     ../PitchDetection/YinPitchDetector.cpp \
     ../PitchDetection/PitchInputReader.cpp \
     ../PitchDetection/PitchInputReaderCollector.cpp \
+    ../PitchDetection/PitchesCollector.cpp \
     ../PitchDetection/PitchDetectionSmoothingAudioBuffer.cpp \
     qmlpitchinputreader.cpp \
     ../PitchDetection/CppUtils/TimeUtils.cpp \

@@ -17,6 +17,8 @@ using namespace CppUtils;
 
 constexpr int BEATS_IN_TACT = 4;
 
+constexpr float PITCHES_GRAPH_WITDH_IN_INTERVALS = 4.0f;
+
 void WorkspaceDrawer::resize(float width, float height, float devicePixelRatio) {
     assert(devicePixelRatio > 0);
     assert(width >= 0 && height >= 0);
@@ -50,6 +52,7 @@ void WorkspaceDrawer::draw() {
     drawer->beginFrame(width, height, devicePixelRatio);
     drawVerticalGrid();
     drawHorizontalGrid();
+    drawPitchesGraph();
     drawer->endFrame();
 }
 
@@ -117,6 +120,20 @@ void WorkspaceDrawer::drawHorizontalGrid() const {
     }
 }
 
+void WorkspaceDrawer::drawPitchesGraph() const {
+    assert(pitchesCollector);
+
+    int pitchesCount = pitchesCollector->getPitchesCount();
+    if (pitchesCount <= 1) {
+        return;
+    }
+
+    for (int i = 0; i < pitchesCount; ++i) {
+        double time = pitchesCollector->getTimeAt(i);
+        Pitch pitch = pitchesCollector->getPitchAt(i);
+    }
+}
+
 const WorkspaceDrawer::Color & WorkspaceDrawer::getGridColor() const {
     return gridColor;
 }
@@ -169,4 +186,13 @@ double WorkspaceDrawer::getIntervalsPerSecond() const {
 
 void WorkspaceDrawer::setIntervalsPerSecond(double intervalsPerSecond) {
     this->instervalsPerSecond = intervalsPerSecond;
+}
+
+PitchesCollector *WorkspaceDrawer::getPitchesCollector() const {
+    return pitchesCollector;
+}
+
+void WorkspaceDrawer::setPitchesCollector(PitchesCollector *pitchesCollector) {
+    CountAssert(1);
+    this->pitchesCollector = pitchesCollector;
 }

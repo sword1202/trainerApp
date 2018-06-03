@@ -20,10 +20,7 @@ Rectangle {
         anchors.top: parent.top
         height: parent.height
 
-        property int firstPitchOctave: 2
-        property int firstWhitePitchInOctaveIndex: 0
-
-        property var firstPitch: cpp.whitePitch(firstWhitePitchInOctaveIndex, firstPitchOctave)
+        property var firstPitch: cpp.zoomController.firstPitch
 
         readonly property real bigPitchHeight: 25.5
         readonly property real smallPitchHeight: 18.75
@@ -57,7 +54,7 @@ Rectangle {
 
             ctx.strokeStyle = borderColor
             ctx.fillStyle = sharpPitchColor
-            var index = firstWhitePitchInOctaveIndex;
+            var index = firstPitch.whiteIndex;
             var y = height
             var heightMapLength = heightMap.length
             while (y > -bigPitchHeight) {
@@ -101,9 +98,9 @@ Rectangle {
         }
 
         function updatePitchNames() {
-            UiUtils.destroyAllChildern(root)
+            UiUtils.destroyAllChildren(root)
 
-            var index = firstWhitePitchInOctaveIndex;
+            var index = firstPitch.whiteIndex
             var y = height
             var heightMapLength = heightMap.length
             while (y > -bigPitchHeight) {
@@ -111,7 +108,7 @@ Rectangle {
                 var pitchHeight = heightMap[indexInMap] * intervalOctvaHeightToPianoOctaveHeightRelation
                 var text = pitchNameText.createObject(root, {})
                 text.y =  y - pitchHeight / 2 - text.height / 2
-                text.text = pitchNames[indexInMap] + (Math.floor(index / heightMapLength) + firstPitchOctave)
+                text.text = pitchNames[indexInMap] + (Math.floor(index / heightMapLength) + firstPitch.octave)
                 index++
                 y -= pitchHeight + distanceBetweenPitches * intervalOctvaHeightToPianoOctaveHeightRelation
             }
@@ -121,12 +118,7 @@ Rectangle {
             updatePitchNames()
         }
 
-        onFirstPitchOctaveChanged: {
-            updatePitchNames()
-            requestPaint()
-        }
-
-        onFirstWhitePitchInOctaveIndexChanged: {
+        onFirstPitchChanged: {
             updatePitchNames()
             requestPaint()
         }

@@ -1,4 +1,4 @@
-function destroyAllChildern(parent) {
+function destroyAllChildren(parent) {
     var children = parent.children
     var length = children.length
     for (var i = 0; i < length; i++) {

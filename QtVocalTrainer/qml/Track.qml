@@ -28,7 +28,7 @@ Rectangle {
         }
 
         onWidthChanged: {
-            UiUtils.destroyAllChildern(this)
+            UiUtils.destroyAllChildren(this)
 
             var smallImage = factory.createObject(this, {
                 height: smallImageHeight,

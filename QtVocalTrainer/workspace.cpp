@@ -8,6 +8,9 @@
 using namespace CppUtils;
 using namespace std;
 
+static const int PITCH_DETECTION_BUFFER_SIZE = 1200;
+static const int PITCH_SMOOTH_LEVEL = 4;
+
 Workspace::Workspace(QWidget *parent) : QOpenGLWidget(parent) {
     devicePixelRatio_ = devicePixelRatio();
 
@@ -21,6 +24,12 @@ Workspace::Workspace(QWidget *parent) : QOpenGLWidget(parent) {
 
     connect(ZoomController::instance(), &ZoomController::zoomChanged, this, &Workspace::zoomChanged);
     connect(Player::instance(), &Player::isPlayingChanged, this, &Workspace::isPlayingChanged);
+
+    pitchesReader.setExecutor([=] (const std::function<void()>& action) {
+        renderingQueue.post(action);
+    });
+    pitchesReader.init(CreateDefaultAudioInputReader(PITCH_DETECTION_BUFFER_SIZE), PITCH_SMOOTH_LEVEL);
+    workspaceDrawer.setPitchesCollector(&pitchesReader);
 }
 
 void Workspace::isPlayingChanged(bool isPlaying) {
@@ -52,5 +61,6 @@ void Workspace::resizeGL(int w, int h) {
 
 void Workspace::paintGL() {
     QOpenGLWidget::paintGL();
+    renderingQueue.process();
     workspaceDrawer.draw();
 }

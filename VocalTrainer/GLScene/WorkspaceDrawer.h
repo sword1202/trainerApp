@@ -10,6 +10,7 @@
 #include <nanovg/nanovg.h>
 #include "Drawer.h"
 #include <array>
+#include "PitchesCollector.h"
 
 class WorkspaceDrawer {
     typedef Drawer::Color Color;
@@ -29,10 +30,12 @@ class WorkspaceDrawer {
     float devicePixelRatio = -1;
 
     Drawer* drawer = nullptr;
+    PitchesCollector* pitchesCollector = nullptr;
 
     void drawHorizontalLine(float y, const Color& color) const;
     void drawVerticalGrid() const;
     void drawHorizontalGrid() const;
+    void drawPitchesGraph() const;
 public:
     WorkspaceDrawer();
     ~WorkspaceDrawer();
@@ -58,6 +61,9 @@ public:
     void setGridColor(const Color& color);
     const Color &getAccentGridColor() const;
     void setAccentGridColor(const Color& color);
+
+    PitchesCollector *getPitchesCollector() const;
+    void setPitchesCollector(PitchesCollector *pitchesCollector);
 };
 
 

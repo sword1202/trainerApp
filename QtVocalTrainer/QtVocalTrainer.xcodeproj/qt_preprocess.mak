@@ -132,6 +132,15 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		../VocalTrainer/GLScene/WorkspaceDrawer.h \
 		../include/nanovg/nanovg.h \
 		../VocalTrainer/GLScene/Drawer.h \
+		../PitchDetection/PitchesCollector.h \
+		../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h \
+		../PitchDetection/PitchInputReaderCollector.h \
+		../PitchDetection/PitchInputReader.h \
+		../PitchDetection/AudioInputReader.h \
+		../PitchDetection/YinPitchDetector.h \
+		../PitchDetection/PitchDetectionSmoothingAudioBuffer.h \
+		../PitchDetection/CppUtils/stlassert.h \
+		../PitchDetection/CppUtils/CircularBuffer.h \
 		../../../Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers/QSvgWidget \
 		QtUtils/qtutils.h \
 		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QFrame \
@@ -158,7 +167,6 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		../VocalTrainer/VxPlayer/PitchRenderer.h \
 		../include/boost/icl/interval_set.hpp \
 		../PitchDetection/CppUtils/PeriodicallySleepingBackgroundTask.h \
-		../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h \
 		../include/boost/optional.hpp \
 		qmlvxpitch.h \
 		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QJsonValue \
@@ -220,6 +228,16 @@ moc_workspace.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/Q
 		../VocalTrainer/GLScene/WorkspaceDrawer.h \
 		../include/nanovg/nanovg.h \
 		../VocalTrainer/GLScene/Drawer.h \
+		../PitchDetection/PitchesCollector.h \
+		../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h \
+		../PitchDetection/PitchInputReaderCollector.h \
+		../PitchDetection/Pitch.h \
+		../PitchDetection/PitchInputReader.h \
+		../PitchDetection/AudioInputReader.h \
+		../PitchDetection/YinPitchDetector.h \
+		../PitchDetection/PitchDetectionSmoothingAudioBuffer.h \
+		../PitchDetection/CppUtils/stlassert.h \
+		../PitchDetection/CppUtils/CircularBuffer.h \
 		workspace.h \
 		moc_predefs.h \
 		../../../Qt/5.11.0/clang_64/bin/moc
@@ -232,6 +250,16 @@ moc_mainwindow.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/
 		../VocalTrainer/GLScene/WorkspaceDrawer.h \
 		../include/nanovg/nanovg.h \
 		../VocalTrainer/GLScene/Drawer.h \
+		../PitchDetection/PitchesCollector.h \
+		../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h \
+		../PitchDetection/PitchInputReaderCollector.h \
+		../PitchDetection/Pitch.h \
+		../PitchDetection/PitchInputReader.h \
+		../PitchDetection/AudioInputReader.h \
+		../PitchDetection/YinPitchDetector.h \
+		../PitchDetection/PitchDetectionSmoothingAudioBuffer.h \
+		../PitchDetection/CppUtils/stlassert.h \
+		../PitchDetection/CppUtils/CircularBuffer.h \
 		../../../Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers/QSvgWidget \
 		QtUtils/qtutils.h \
 		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QObject \
@@ -242,6 +270,8 @@ moc_mainwindow.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/
 	/Users/semyon/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/semyon/Qt/5.11.0/clang_64/mkspecs/macx-clang -I/Users/semyon/Projects/VocalTrainer/QtVocalTrainer -I/Users/semyon/Projects/VocalTrainer/include -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/GLScene -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/CraigsappMidifile -I/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils -I/Users/semyon/Projects/VocalTrainer/PitchDetection -I/Users/semyon/Projects/VocalTrainer/include/nanovg -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQml.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/semyon/Qt/5.11.0/clang_64/lib mainwindow.h -o moc_mainwindow.cpp
 
 moc_zoomcontroller.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QObject \
+		qmlpitch.h \
+		../PitchDetection/Pitch.h \
 		zoomcontroller.h \
 		moc_predefs.h \
 		../../../Qt/5.11.0/clang_64/bin/moc

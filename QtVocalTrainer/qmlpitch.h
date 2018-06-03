@@ -15,6 +15,7 @@ public:
     Q_PROPERTY(int octave READ getOctave())
     Q_PROPERTY(float frequency READ getFrequency())
     Q_PROPERTY(bool isValid READ isValid())
+    Q_PROPERTY(int whiteIndex READ getWhiteIndex())
 
     // Calculated using formula: n = log(fn / f0, a), where
     // A = 2**(1/24),

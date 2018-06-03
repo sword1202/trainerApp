@@ -136,6 +136,21 @@
 					);
 			};
 		};
+		86F3EA123C28F8DAC88485F7 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/PitchesCollector.cpp";
+			name = "PitchesCollector.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		35666E2EBC7E32A7221F134A = {
+			fileRef = "86F3EA123C28F8DAC88485F7";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
 		E97D23E58376A80655A7AC0C = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/PitchDetectionSmoothingAudioBuffer.cpp";
@@ -1403,6 +1418,7 @@
 				"92E054C665D5746C7E2EB6F5",
 				"7E6C4EF13847B0CD0E129C35",
 				"99419A77EA2FEA0C2647668E",
+				"86F3EA123C28F8DAC88485F7",
 				"E97D23E58376A80655A7AC0C",
 				"ECB125321253DBBE426CEE41",
 				"170DD1A433357ECE918F023E",
@@ -1538,6 +1554,7 @@
 				"8D85C37316F342B56FD3CCCE",
 				"EE26DC63E361862F515A9055",
 				"F4D962E38ABBE18B47A6EA22",
+				"35666E2EBC7E32A7221F134A",
 				"0CDFA05820DBB6123682992E",
 				"BDCD8246510D911A428E9488",
 				"327D328DC0E15513077CA217",

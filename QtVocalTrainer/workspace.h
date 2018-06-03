@@ -3,10 +3,14 @@
 
 #include <QOpenGLWidget>
 #include "WorkspaceDrawer.h"
+#include "SynchronizedCallbacksQueue.h"
+#include "PitchInputReaderCollector.h"
 
 class Workspace : public QOpenGLWidget
 {
     Q_OBJECT
+
+    CppUtils::SynchronizedCallbacksQueue renderingQueue;
 public:
     Workspace(QWidget* parent = nullptr);
 
@@ -18,6 +22,7 @@ protected:
 private:
     WorkspaceDrawer workspaceDrawer;
     float devicePixelRatio_;
+    PitchInputReaderCollector pitchesReader;
 
 private slots:
     void zoomChanged();

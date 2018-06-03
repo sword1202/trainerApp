@@ -8,6 +8,7 @@ constexpr qreal HORIZONTAL_TO_VERTICAL_INTERVAL_WIDTH_RELATION = 2.4117701323665
 
 ZoomController::ZoomController() {
     zoom = MIN_ZOOM;
+    firstPitchPerfectFrequencyIndex = Pitch("C2").getPerfectFrequencyIndex();
 }
 
 qreal ZoomController::getIntervalWidth() const {
@@ -39,7 +40,20 @@ qreal ZoomController::getMaxZoom() const {
     return MAX_ZOOM;
 }
 
+int ZoomController::getFirstPitchPerfectFrequencyIndex() const {
+    return firstPitchPerfectFrequencyIndex;
+}
+
+void ZoomController::setFirstPitchPerfectFrequencyIndex(int firstPitchPerfectFrequencyIndex) {
+    assert(Pitch(firstPitchPerfectFrequencyIndex).isWhite());
+    this->firstPitchPerfectFrequencyIndex = firstPitchPerfectFrequencyIndex;
+}
+
 ZoomController *ZoomController::instance() {
     static ZoomController* inst = new ZoomController();
     return inst;
+}
+
+QmlPitch ZoomController::getFirstPitch() const {
+    return QmlPitch(firstPitchPerfectFrequencyIndex);
 }
