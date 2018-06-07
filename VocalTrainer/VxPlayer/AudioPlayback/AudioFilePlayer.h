@@ -15,7 +15,6 @@ public:
 protected:
     int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) override;
     void prepareAndProvidePlaybackData(PlaybackData *playbackData) override;
-    int getBufferSeek() const override;
     ~AudioFilePlayer();
 private:
     AudioDecoder* audioDecoder = nullptr;

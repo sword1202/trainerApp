@@ -66,12 +66,3 @@ WavAudioPlayer::~WavAudioPlayer() {
         delete wavFile;
     }
 }
-
-int WavAudioPlayer::getBufferSeek() const {
-    return bufferSeek;
-}
-
-void WavAudioPlayer::setBufferSeek(int bufferSeek) {
-    AudioPlayer::setBufferSeek(bufferSeek);
-    this->bufferSeek = bufferSeek;
-}

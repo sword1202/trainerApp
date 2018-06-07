@@ -6,7 +6,13 @@
 #include "AudioFilePlayer.h"
 
 int AudioFilePlayer::readNextSamplesBatch(void *intoBuffer, int framesCount, const AudioPlayer::PlaybackData &playbackData) {
-    return audioDecoder->read(framesCount * playbackData.numChannels, (SAMPLE*)intoBuffer) / playbackData.numChannels;
+    int readFramesCount = audioDecoder->read(framesCount * playbackData.numChannels, (SAMPLE*)intoBuffer)
+            / playbackData.numChannels;
+    if (readFramesCount > 0) {
+        setBufferSeek(getBufferSeek() + readFramesCount);
+    }
+
+    return readFramesCount;
 }
 
 void AudioFilePlayer::prepareAndProvidePlaybackData(AudioPlayer::PlaybackData *playbackData) {
@@ -21,10 +27,6 @@ void AudioFilePlayer::prepareAndProvidePlaybackData(AudioPlayer::PlaybackData *p
     playbackData->sampleRate = audioDecoder->sampleRate();
     playbackData->framesPerBuffer = paFramesPerBufferUnspecified;
     playbackData->totalDurationInSeconds = audioDecoder->duration();
-}
-
-int AudioFilePlayer::getBufferSeek() const {
-    return 0;
 }
 
 AudioFilePlayer::~AudioFilePlayer() {

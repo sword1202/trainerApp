@@ -231,6 +231,7 @@ void AudioPlayer::setBufferSeek(int bufferSeek) {
         double total = getTrackDurationInSeconds();
         seekChangedListeners.executeAll(seek, total);
     });
+    this->bufferSeek = bufferSeek;
 }
 
 void AudioPlayer::prepareAsync(const std::function<void()>& callback) {
@@ -303,6 +304,10 @@ void AudioPlayer::removePlaybackStartedListener(int key) {
 
 void AudioPlayer::removePlaybackStoppedListener(int key) {
     onPlaybackStoppedListeners.removeListener(key);
+}
+
+int AudioPlayer::getBufferSeek() const {
+    return bufferSeek;
 }
 
 void AudioPlayer::Deleter::operator()(AudioPlayer *player) const {

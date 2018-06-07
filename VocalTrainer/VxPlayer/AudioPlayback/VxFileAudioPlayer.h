@@ -22,8 +22,8 @@ protected:
     void prepareAndProvidePlaybackData(PlaybackData *playbackData) override;
     void onComplete() override;
     virtual ~VxFileAudioPlayer();
-private:
     int getBufferSeek() const override;
+private:
     void setBufferSeek(int samplesCountSeek) override;
 
 public:

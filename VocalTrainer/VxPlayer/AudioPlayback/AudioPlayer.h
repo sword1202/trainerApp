@@ -19,6 +19,7 @@ protected:
         PaSampleFormat format = paInt16;
     };
 private:
+	int bufferSeek = 0;
     PaStream* stream = nullptr;
     PlaybackData playbackData;
     bool playing = false;
@@ -43,7 +44,7 @@ private:
 protected:
     virtual int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData& playbackData) = 0;
 	virtual void prepareAndProvidePlaybackData(PlaybackData* playbackData) = 0;
-	virtual int getBufferSeek() const = 0;
+	virtual int getBufferSeek() const;
 	virtual void setBufferSeek(int bufferSeek);
 	virtual double bufferSeekToSecondsSeek(int bufferSeek) const;
     virtual int secondsSeekToBufferSeek(double timestamp) const;
