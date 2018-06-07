@@ -112,10 +112,6 @@ void VxFile::postInit() {
         });
         durationInTicks = lastPitchIter->endTickNumber() + distanceInTicksBetweenLastPitchEndAndTrackEnd;
     }
-
-    for (auto pitch : pitches) {
-        std::cout<<pitch.pitch.getFullName()<<" ";
-    }
 }
 
 double VxFile::getDurationInSeconds() const {
