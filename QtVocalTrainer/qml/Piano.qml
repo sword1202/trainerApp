@@ -64,7 +64,6 @@ Rectangle {
 
             var detectedPitch = cpp.pitchInputReader.lastDetectedPitch
             var detectedPitchIndex = detectedPitch.perfectFrequencyIndex
-            console.log("detectedPitch = " + cpp.pitchFromPerfectFrequencyIndex(detectedPitchIndex).name)
 
             while (y > -bigPitchHeight) {
 
