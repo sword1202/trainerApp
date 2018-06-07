@@ -70,6 +70,30 @@ Rectangle {
                 var stroke = true
                 var fill = false
 
+                function getFillColor(perfectFrequencyIndex) {
+                    if (detectedPitchIndex === perfectFrequencyIndex) {
+                        if (cpp.player.hasPitchNow(detectedPitchIndex)) {
+                            return reachedPitchColor
+                        } else {
+                            return selectedPitchColor
+                        }
+                    } else {
+                        if (cpp.player.hasPitchNow(perfectFrequencyIndex) &&
+                                !cpp.player.hasPitchNow(detectedPitchIndex)) {
+                            return missedPitchColor
+                        } else {
+                            return sharpPitchColor
+                        }
+                    }
+                }
+
+                var fillColor = getFillColor(perfectFrequencyIndex)
+                if (fillColor !== sharpPitchColor) {
+                    stroke = false
+                    fill = true
+                    ctx.fillStyle = fillColor
+                }
+
                 var pitchHeight = heightMap[index % heightMapLength] * intervalOctvaHeightToPianoOctaveHeightRelation
                 CanvasUtils.roundRect(ctx, 0, y - pitchHeight, width - 1, pitchHeight, {
                     tr: pitchRadius * intervalOctvaHeightToPianoOctaveHeightRelation,
@@ -82,20 +106,7 @@ Rectangle {
                 pitchHeight = sharpPitchHeight * intervalOctvaHeightToPianoOctaveHeightRelation
                 if (hasSharpMap[index % heightMapLength]) {
                     perfectFrequencyIndex++
-                    if (detectedPitchIndex === perfectFrequencyIndex) {
-                        if (cpp.player.hasPitchNow(detectedPitchIndex)) {
-                            ctx.fillStyle = reachedPitchColor
-                        } else {
-                            ctx.fillStyle = selectedPitchColor
-                        }
-                    } else {
-                        if (cpp.player.hasPitchNow(perfectFrequencyIndex) &&
-                                !cpp.player.hasPitchNow(detectedPitchIndex)) {
-                            ctx.fillStyle = missedPitchColor
-                        } else {
-                            ctx.fillStyle = sharpPitchColor
-                        }
-                    }
+                    ctx.fillStyle = getFillColor(perfectFrequencyIndex)
 
                     CanvasUtils.roundRect(ctx, 0,
                                           y - pitchHeight / 2 - distanceBetweenPitches / 2 * intervalOctvaHeightToPianoOctaveHeightRelation,
