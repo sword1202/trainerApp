@@ -57,6 +57,7 @@ Rectangle {
 
             ctx.strokeStyle = borderColor
             ctx.fillStyle = sharpPitchColor
+            console.log("onPaint = " + firstPitch.name)
             var index = firstPitch.whiteIndex
             var perfectFrequencyIndex = firstPitch.perfectFrequencyIndex
             var y = height
@@ -64,6 +65,9 @@ Rectangle {
 
             var detectedPitch = cpp.pitchInputReader.lastDetectedPitch
             var detectedPitchIndex = detectedPitch.perfectFrequencyIndex
+
+            var drawSharpPitchesY = []
+            var drawSharpPitchesFillColor = []
 
             while (y > -bigPitchHeight) {
 
@@ -102,23 +106,32 @@ Rectangle {
 
                 y -= pitchHeight
 
-                // draw sharp pitch
-                pitchHeight = sharpPitchHeight * intervalOctvaHeightToPianoOctaveHeightRelation
+                // post draw sharp pitch command
                 if (hasSharpMap[index % heightMapLength]) {
                     perfectFrequencyIndex++
-                    ctx.fillStyle = getFillColor(perfectFrequencyIndex)
-
-                    CanvasUtils.roundRect(ctx, 0,
-                                          y - pitchHeight / 2 - distanceBetweenPitches / 2 * intervalOctvaHeightToPianoOctaveHeightRelation,
-                                          sharpPitchWidth, pitchHeight, {
-                        tr: sharpPitchRadius * intervalOctvaHeightToPianoOctaveHeightRelation,
-                        br: sharpPitchRadius * intervalOctvaHeightToPianoOctaveHeightRelation
-                    }, true, false)
+                    fillColor = getFillColor(perfectFrequencyIndex)
+                    drawSharpPitchesFillColor.push(fillColor)
+                    drawSharpPitchesY.push(y)
                 }
 
                 y -= distanceBetweenPitches * intervalOctvaHeightToPianoOctaveHeightRelation
                 index++
                 perfectFrequencyIndex++
+            }
+
+            function drawSharpPitch(y, fillColor) {
+                ctx.fillStyle = fillColor
+                var pitchHeight = sharpPitchHeight * intervalOctvaHeightToPianoOctaveHeightRelation
+                CanvasUtils.roundRect(ctx, 0,
+                                      y - pitchHeight / 2 - distanceBetweenPitches / 2 * intervalOctvaHeightToPianoOctaveHeightRelation,
+                                      sharpPitchWidth, pitchHeight, {
+                    tr: sharpPitchRadius * intervalOctvaHeightToPianoOctaveHeightRelation,
+                    br: sharpPitchRadius * intervalOctvaHeightToPianoOctaveHeightRelation
+                }, true, false)
+            }
+
+            for (var i = 0; i < drawSharpPitchesY.length; i++) {
+                drawSharpPitch(drawSharpPitchesY[i], drawSharpPitchesFillColor[i])
             }
         }
 
@@ -139,6 +152,7 @@ Rectangle {
         function updatePitchNames() {
             UiUtils.destroyAllChildren(root)
 
+            console.log("updatePitchNames = " + firstPitch.name)
             var index = firstPitch.whiteIndex
             var y = height
             var heightMapLength = heightMap.length
