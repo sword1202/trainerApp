@@ -35,6 +35,9 @@ Rectangle {
         readonly property real distanceBetweenTextLeftAndPitchRight: 21.0
         readonly property string borderColor: "#7f9A98D0"
         readonly property string sharpPitchColor: "#9A98D0"
+        readonly property string reachedPitchColor: "#31DD6C"
+        readonly property string missedPitchColor: "#FF5E85"
+        readonly property string selectedPitchColor: "#615F97"
         readonly property var pitchNames: ["C", "D", "E", "F", "G", "A", "B"]
         readonly property real intervalOctvaHeightToPianoOctaveHeightRelation: (function() {
             // 12 pitches in octave
@@ -54,32 +57,58 @@ Rectangle {
 
             ctx.strokeStyle = borderColor
             ctx.fillStyle = sharpPitchColor
-            var index = firstPitch.whiteIndex;
+            var index = firstPitch.whiteIndex
+            var perfectFrequencyIndex = firstPitch.perfectFrequencyIndex
             var y = height
             var heightMapLength = heightMap.length
+
+            var detectedPitch = cpp.pitchInputReader.lastDetectedPitch
+            var detectedPitchIndex = detectedPitch.perfectFrequencyIndex
+            console.log("detectedPitch = " + cpp.pitchFromPerfectFrequencyIndex(detectedPitchIndex).name)
+
             while (y > -bigPitchHeight) {
+
+                var stroke = true
+                var fill = false
+
                 var pitchHeight = heightMap[index % heightMapLength] * intervalOctvaHeightToPianoOctaveHeightRelation
                 CanvasUtils.roundRect(ctx, 0, y - pitchHeight, width - 1, pitchHeight, {
                     tr: pitchRadius * intervalOctvaHeightToPianoOctaveHeightRelation,
                     br: pitchRadius * intervalOctvaHeightToPianoOctaveHeightRelation
-                })
+                }, fill, stroke)
 
                 y -= pitchHeight
 
                 // draw sharp pitch
                 pitchHeight = sharpPitchHeight * intervalOctvaHeightToPianoOctaveHeightRelation
                 if (hasSharpMap[index % heightMapLength]) {
+                    perfectFrequencyIndex++
+                    if (detectedPitchIndex === perfectFrequencyIndex) {
+                        if (cpp.player.hasPitchNow(detectedPitchIndex)) {
+                            ctx.fillStyle = reachedPitchColor
+                        } else {
+                            ctx.fillStyle = selectedPitchColor
+                        }
+                    } else {
+                        if (cpp.player.hasPitchNow(perfectFrequencyIndex) &&
+                                !cpp.player.hasPitchNow(detectedPitchIndex)) {
+                            ctx.fillStyle = missedPitchColor
+                        } else {
+                            ctx.fillStyle = sharpPitchColor
+                        }
+                    }
+
                     CanvasUtils.roundRect(ctx, 0,
                                           y - pitchHeight / 2 - distanceBetweenPitches / 2 * intervalOctvaHeightToPianoOctaveHeightRelation,
                                           sharpPitchWidth, pitchHeight, {
                         tr: sharpPitchRadius * intervalOctvaHeightToPianoOctaveHeightRelation,
                         br: sharpPitchRadius * intervalOctvaHeightToPianoOctaveHeightRelation
                     }, true, false)
-
                 }
 
                 y -= distanceBetweenPitches * intervalOctvaHeightToPianoOctaveHeightRelation
                 index++
+                perfectFrequencyIndex++
             }
         }
 
@@ -112,6 +141,10 @@ Rectangle {
                 index++
                 y -= pitchHeight + distanceBetweenPitches * intervalOctvaHeightToPianoOctaveHeightRelation
             }
+        }
+
+        Component.onCompleted: {
+            cpp.pitchInputReader.pitchDetected.connect(requestPaint)
         }
 
         onHeightChanged: {

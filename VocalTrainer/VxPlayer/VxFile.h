@@ -87,6 +87,9 @@ public:
 
     void removeSilenceSpaceFromBeginning();
 
+    bool hasPitchesInMoment(double time) const;
+    bool hasPitchInMoment(double time, const Pitch& pitch) const;
+
     template<typename Function>
     void iteratePitchesInTickRange(int startTick, int endTick, const Function& function) const {
         for (const auto& pitch : pitches) {

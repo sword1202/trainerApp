@@ -28,6 +28,9 @@ public:
     Q_PROPERTY(double duration READ getDuration() NOTIFY durationChanged())
     Q_PROPERTY(double beatsPerMinute READ getBeatsPerMinute() NOTIFY beatsPerMinuteChanged())
 
+    Q_INVOKABLE bool hasPitchNow(int perfectFrequencyIndex) const;
+    Q_INVOKABLE bool hasAnyPitchNow() const;
+
     Q_INVOKABLE void play() override;
     Q_INVOKABLE void pause() override;
     Q_INVOKABLE void stop();

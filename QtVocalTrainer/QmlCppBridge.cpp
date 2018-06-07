@@ -37,3 +37,7 @@ Player *QmlCppBridge::getPlayer() const {
 qreal QmlCppBridge::getDevicePixelRatio() const {
     return mainWindow->devicePixelRatio();
 }
+
+QmlPitchInputReader* QmlCppBridge::getPitchInputReader() const {
+    return QmlPitchInputReader::instance();
+}

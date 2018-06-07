@@ -22,7 +22,6 @@ protected:
 private:
     WorkspaceDrawer workspaceDrawer;
     float devicePixelRatio_;
-    PitchInputReaderCollector pitchesReader;
 
 private slots:
     void zoomChanged();

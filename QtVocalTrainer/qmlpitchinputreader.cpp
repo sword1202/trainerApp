@@ -31,3 +31,12 @@ void QmlPitchInputReader::setThreshold(float threshold) {
     PitchInputReaderCollector::setThreshold(threshold);
     emit thresholdChanged(threshold);
 }
+
+QmlPitchInputReader* QmlPitchInputReader::instance() {
+    static QmlPitchInputReader reader;
+    return &reader;
+}
+
+QmlTimedPitch QmlPitchInputReader::getLastDetectedPitch() {
+    return QmlTimedPitch(getLastDetectedFrequency(), getLastDetectedTime());
+}

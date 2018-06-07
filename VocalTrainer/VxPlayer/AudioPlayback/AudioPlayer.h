@@ -77,6 +77,7 @@ public:
     void play(double seek);
     void play();
     bool isPlaying() const;
+    bool isPrepared() const;
     void pause();
 
 	// volume - [0.0, 1.0]

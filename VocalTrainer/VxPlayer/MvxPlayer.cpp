@@ -198,6 +198,22 @@ void MvxPlayer::onPlaybackStopped() {
 
 }
 
+bool MvxPlayer::hasPitchNow(const Pitch &pitch) const {
+    if (!vxPlayer) {
+        return false;
+    }
+
+    return getVxFile().hasPitchInMoment(TimeUtils::NowInSeconds(), pitch);
+}
+
+bool MvxPlayer::hasAnyPitchNow() const {
+    if (!vxPlayer) {
+        return false;
+    }
+
+    return getVxFile().hasPitchesInMoment(TimeUtils::NowInSeconds());
+}
+
 MvxPlayer::Bounds::Bounds(double startSeek, double endSeek) : startSeek(startSeek), endSeek(endSeek) {
 }
 

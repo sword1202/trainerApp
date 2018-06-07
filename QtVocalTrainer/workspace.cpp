@@ -4,12 +4,11 @@
 #include "QtUtils/qtutils.h"
 #include "zoomcontroller.h"
 #include "player.h"
+#include "qmlpitchinputreader.h"
 
 using namespace CppUtils;
 using namespace std;
 
-static const int PITCH_DETECTION_BUFFER_SIZE = 1200;
-static const int PITCH_SMOOTH_LEVEL = 4;
 static const int PITCH_RADIUS = 3;
 
 Workspace::Workspace(QWidget *parent) : QOpenGLWidget(parent) {
@@ -30,11 +29,8 @@ Workspace::Workspace(QWidget *parent) : QOpenGLWidget(parent) {
 
     connect(ZoomController::instance(), &ZoomController::firstPitchChanged, this, &Workspace::firstPitchChanged);
 
-    pitchesReader.setExecutor([=] (const std::function<void()>& action) {
-        renderingQueue.post(action);
-    });
-    pitchesReader.init(CreateDefaultAudioInputReader(PITCH_DETECTION_BUFFER_SIZE), PITCH_SMOOTH_LEVEL);
-    workspaceDrawer.setPitchesCollector(&pitchesReader);
+    QmlPitchInputReader* pitchInputReader = QmlPitchInputReader::instance();
+    workspaceDrawer.setPitchesCollector(pitchInputReader);
 }
 
 void Workspace::firstPitchChanged() {
@@ -44,11 +40,9 @@ void Workspace::firstPitchChanged() {
 
 void Workspace::isPlayingChanged(bool isPlaying) {
     if (isPlaying) {
-        pitchesReader.start();
         workspaceDrawer.setIntervalsPerSecond(Player::instance()->getBeatsPerMinute() / 60.0);
     } else {
         workspaceDrawer.setIntervalsPerSecond(0);
-        pitchesReader.stop();
     }
 }
 

@@ -4,6 +4,7 @@
 #include "qmlvxpitch.h"
 #include "qmltimedpitch.h"
 #include "player.h"
+#include "qmlpitchinputreader.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
@@ -13,6 +14,8 @@ int main(int argc, char *argv[])
     qRegisterMetaType<QmlPitch>("Pitch");
     qRegisterMetaType<QmlVxPitch>("VxPitch");
     qRegisterMetaType<QmlTimedPitch>("TimedPitch");
+    qmlRegisterType<Player>();
+    qmlRegisterType<QmlPitchInputReader>();
 
     App a(argc, argv);
 

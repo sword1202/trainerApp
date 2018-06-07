@@ -2,6 +2,7 @@
 #include <QVariant>
 #include <QJsonObject>
 #include <iostream>
+#include "TimeUtils.h"
 
 using namespace std;
 
@@ -103,4 +104,12 @@ QJsonValue Player::getQmlBounds() const {
         {"startSeek", bounds->getStartSeek()},
         {"endSeek", bounds->getEndSeek()}
     };
+}
+
+bool Player::hasPitchNow(int perfectFrequencyIndex) const {
+    return MvxPlayer::hasPitchNow(Pitch::fromPerfectFrequencyIndex(perfectFrequencyIndex));
+}
+
+bool Player::hasAnyPitchNow() const {
+    return MvxPlayer::hasAnyPitchNow();
 }

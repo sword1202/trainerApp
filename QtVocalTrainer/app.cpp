@@ -1,6 +1,7 @@
 #include "app.h"
 #include "../PitchDetection/PortAudio.h"
 #include "QmlCppBridge.h"
+#include "qmlpitchinputreader.h"
 #include <boost/pool/pool_alloc.hpp>
 #include <QQmlContext>
 
@@ -30,6 +31,15 @@ App::App(int argc, char *argv[]) : QApplication(argc, argv) {
 #ifdef __APPLE__
     doMacOsPlatformStaff();
 #endif
+
+    QObject::connect(Player::instance(), &Player::isPlayingChanged, QmlPitchInputReader::instance(), [] (bool playing) {
+        QmlPitchInputReader *instance = QmlPitchInputReader::instance();
+        if (playing) {
+            instance->start();
+        } else {
+            instance->stop();
+        }
+    });
 }
 
 bool App::event(QEvent *event) {

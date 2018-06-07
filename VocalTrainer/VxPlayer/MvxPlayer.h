@@ -67,6 +67,9 @@ public:
     double getDuration() const;
 
     double getBeatsPerMinute() const;
+
+    bool hasPitchNow(const Pitch& pitch) const;
+    bool hasAnyPitchNow() const;
 };
 
 

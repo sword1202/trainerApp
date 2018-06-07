@@ -310,6 +310,10 @@ int AudioPlayer::getBufferSeek() const {
     return bufferSeek;
 }
 
+bool AudioPlayer::isPrepared() const {
+    return playbackData.sampleRate > 0;
+}
+
 void AudioPlayer::Deleter::operator()(AudioPlayer *player) const {
     player->destroy();
 }

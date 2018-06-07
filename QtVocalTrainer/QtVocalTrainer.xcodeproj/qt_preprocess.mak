@@ -147,6 +147,7 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		../include/boost/serialization/vector.hpp \
 		../PitchDetection/CppUtils/StlDebugUtils.h \
 		../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h \
+		../include/boost/lockfree/queue.hpp \
 		../PitchDetection/PitchInputReaderCollector.h \
 		../PitchDetection/PitchInputReader.h \
 		../PitchDetection/AudioInputReader.h \
@@ -170,6 +171,8 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		../include/boost/optional.hpp \
 		qmlvxpitch.h \
 		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QJsonValue \
+		qmlpitchinputreader.h \
+		qmltimedpitch.h \
 		QmlCppBridge.h \
 		moc_predefs.h \
 		../../../Qt/5.11.0/clang_64/bin/moc
@@ -244,6 +247,7 @@ moc_workspace.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/Q
 		../include/boost/serialization/vector.hpp \
 		../PitchDetection/CppUtils/StlDebugUtils.h \
 		../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h \
+		../include/boost/lockfree/queue.hpp \
 		../PitchDetection/PitchInputReaderCollector.h \
 		../PitchDetection/PitchInputReader.h \
 		../PitchDetection/AudioInputReader.h \
@@ -279,6 +283,7 @@ moc_mainwindow.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/
 		../include/boost/serialization/vector.hpp \
 		../PitchDetection/CppUtils/StlDebugUtils.h \
 		../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h \
+		../include/boost/lockfree/queue.hpp \
 		../PitchDetection/PitchInputReaderCollector.h \
 		../PitchDetection/PitchInputReader.h \
 		../PitchDetection/AudioInputReader.h \
@@ -327,6 +332,7 @@ moc_player.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QObject
 		../include/boost/icl/interval_set.hpp \
 		../PitchDetection/CppUtils/PeriodicallySleepingBackgroundTask.h \
 		../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h \
+		../include/boost/lockfree/queue.hpp \
 		../include/boost/optional.hpp \
 		qmlvxpitch.h \
 		qmlpitch.h \

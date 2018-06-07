@@ -261,3 +261,17 @@ void VxFile::removeSilenceSpaceFromBeginning() {
         pitch.startTickNumber -= firstPitchStartTickNumber;
     }
 }
+
+bool VxFile::hasPitchesInMoment(double time) const {
+    int tick = timeInSecondsToTicks(time);
+    return Contains(pitches, [=] (const VxPitch& pitch) {
+        return pitch.containsTick(tick);
+    });
+}
+
+bool VxFile::hasPitchInMoment(double time, const Pitch &pitch) const {
+    int tick = timeInSecondsToTicks(time);
+    return Contains(pitches, [=] (const VxPitch& vxPitch) {
+        return vxPitch.containsTick(tick) && vxPitch.pitch.getPerfectFrequencyIndex() == pitch.getPerfectFrequencyIndex();
+    });
+}
