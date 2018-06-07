@@ -203,7 +203,7 @@ bool MvxPlayer::hasPitchNow(const Pitch &pitch) const {
         return false;
     }
 
-    return getVxFile().hasPitchInMoment(TimeUtils::NowInSeconds(), pitch);
+    return getVxFile().hasPitchInMoment(getSeek(), pitch);
 }
 
 bool MvxPlayer::hasAnyPitchNow() const {
@@ -211,7 +211,7 @@ bool MvxPlayer::hasAnyPitchNow() const {
         return false;
     }
 
-    return getVxFile().hasPitchesInMoment(TimeUtils::NowInSeconds());
+    return getVxFile().hasPitchesInMoment(getSeek());
 }
 
 MvxPlayer::Bounds::Bounds(double startSeek, double endSeek) : startSeek(startSeek), endSeek(endSeek) {
