@@ -38,7 +38,6 @@ SOURCES += \
     ../VocalTrainer/VxPlayer/SoundFont2PitchRenderer.cpp \
     ../VocalTrainer/VxPlayer/PitchRenderer.cpp \
     ../VocalTrainer/VxPlayer/AudioPlayback/VxFileAudioPlayer.cpp \
-    ../VocalTrainer/VxPlayer/AudioPlayback/Mp3AudioPlayer.cpp \
     ../VocalTrainer/VxPlayer/AudioPlayback/AudioPlayer.cpp \
     ../VocalTrainer/VxPlayer/AudioPlayback/AudioFilePlayer.cpp \
     ../VocalTrainer/VxPlayer/AudioPlayback/WavAudioPlayer.cpp \
@@ -67,7 +66,9 @@ SOURCES += \
     ../VocalTrainer/GLScene/NvgOpenGLDrawer.cpp \
     ../VocalTrainer/GLScene/Drawer.cpp \
     player.cpp \
-    mainwindow.mm
+    mainwindow.mm \
+    ../VocalTrainer/VxPlayer/AudioPlayback/Decoder/audiodecoder.cpp \
+    ../VocalTrainer/VxPlayer/AudioPlayback/Decoder/audiodecodercoreaudio.cpp
 
 RESOURCES += qml.qrc
 
@@ -117,9 +118,7 @@ HEADERS += \
     ../VocalTrainer/VxPlayer/tsf.h \
     ../VocalTrainer/VxPlayer/AudioPlayback/VxFileAudioPlayer.h \
     ../VocalTrainer/VxPlayer/AudioPlayback/AudioPlayer.h \
-    ../VocalTrainer/VxPlayer/AudioPlayback/Mp3AudioPlayer.h \
     ../VocalTrainer/VxPlayer/AudioPlayback/AudioFilePlayer.h \
-    ../VocalTrainer/VxPlayer/AudioPlayback/minimp3.h \
     ../VocalTrainer/VxPlayer/AudioPlayback/WavAudioPlayer.h \
     ../VocalTrainer/VxPlayer/Midi/MidiFileReader.h \
     ../VocalTrainer/VxPlayer/Midi/MidiNote.h \
@@ -143,7 +142,11 @@ HEADERS += \
     zoomcontroller.h \
     ../VocalTrainer/GLScene/Drawer.h \
     ../VocalTrainer/GLScene/NvgOpenGLDrawer.h \
-    player.h
+    player.h \
+    ../VocalTrainer/VxPlayer/AudioPlayback/Decoder/audiodecoder.h \
+    ../VocalTrainer/VxPlayer/AudioPlayback/Decoder/audiodecodercoreaudio.h \
+    ../VocalTrainer/VxPlayer/AudioPlayback/Decoder/apple/CADebugMacros.h \
+    ../VocalTrainer/VxPlayer/AudioPlayback/Decoder/apple/CAStreamBasicDescription.h
 
 INCLUDEPATH += ../include \
     ../VocalTrainer/GLScene \

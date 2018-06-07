@@ -15,7 +15,7 @@ using namespace CppUtils;
 
 void MvxPlayer::init(std::istream &is) {
     MvxFile file = MvxFile::readFromStream(is);
-    instrumentalPlayer.reset(AudioFilePlayer::create(std::move(file.getInstrumental())));
+    instrumentalPlayer.reset(new AudioFilePlayer(std::move(file.getInstrumental())));
     vxPlayer.reset(new VxFileAudioPlayer(std::move(file.getVxFile())));
 
     beatsPerMinute = file.getBeatsPerMinute();

@@ -13,7 +13,7 @@ int WavAudioPlayer::readNextSamplesBatch(void *intoBuffer, int framesCount,
     int size = wavFile->readData(intoBuffer, framesCount * frameSize, seek * frameSize);
     if (size > 0) {
         int newSeek = size / frameSize + seek;
-        setBufferSeekIfNotModified(newSeek, seek);
+        setBufferSeek(newSeek);
     }
     
     return size / frameSize;
@@ -57,7 +57,7 @@ void WavAudioPlayer::prepareAndProvidePlaybackData(AudioPlayer::PlaybackData *pl
     playbackData->framesPerBuffer = paFramesPerBufferUnspecified;
 }
 
-WavAudioPlayer::WavAudioPlayer(std::string &&audioData) : AudioFilePlayer(std::move(audioData)) {
+WavAudioPlayer::WavAudioPlayer(std::string &&audioData) : audioData(std::move(audioData)) {
 
 }
 
@@ -65,4 +65,13 @@ WavAudioPlayer::~WavAudioPlayer() {
     if (wavFile) {
         delete wavFile;
     }
+}
+
+int WavAudioPlayer::getBufferSeek() const {
+    return bufferSeek;
+}
+
+void WavAudioPlayer::setBufferSeek(int bufferSeek) {
+    AudioPlayer::setBufferSeek(bufferSeek);
+    this->bufferSeek = bufferSeek;
 }

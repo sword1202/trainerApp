@@ -1,58 +1,38 @@
 //
-// Created by Semyon Tikhonenko on 4/29/18.
+// Created by Semyon Tikhonenko on 6/7/18.
 // Copyright (c) 2018 Mac. All rights reserved.
 //
 
 #include "AudioFilePlayer.h"
-#include "Strings.h"
-#include "WAVFile.h"
-#include "WavAudioPlayer.h"
-#include "Mp3AudioPlayer.h"
-#include "Streams.h"
 
-#define SEEK_LOCK std::lock_guard<std::mutex> _(seekMutex)
-
-using namespace CppUtils;
-
-int AudioFilePlayer::getBufferSeek() const {
-    SEEK_LOCK;
-    return bufferSeek;
+int AudioFilePlayer::readNextSamplesBatch(void *intoBuffer, int framesCount, const AudioPlayer::PlaybackData &playbackData) {
+    return audioDecoder->read(framesCount * playbackData.numChannels, (SAMPLE*)intoBuffer) / playbackData.numChannels;
 }
 
-void AudioFilePlayer::setBufferSeek(int bufferSeek) {
-    {
-        SEEK_LOCK;
-        this->bufferSeek = bufferSeek;
+void AudioFilePlayer::prepareAndProvidePlaybackData(AudioPlayer::PlaybackData *playbackData) {
+    if (audioDecoder) {
+        delete audioDecoder;
     }
-    AudioPlayer::setBufferSeek(bufferSeek);
+
+    audioDecoder = AudioDecoder::create();
+    audioDecoder->open(std::move(audioData));
+    playbackData->numChannels = audioDecoder->channels();
+    playbackData->format = paInt16;
+    playbackData->sampleRate = audioDecoder->sampleRate();
+    playbackData->framesPerBuffer = paFramesPerBufferUnspecified;
+    playbackData->totalDurationInSeconds = audioDecoder->duration();
+}
+
+int AudioFilePlayer::getBufferSeek() const {
+    return 0;
+}
+
+AudioFilePlayer::~AudioFilePlayer() {
+    if (audioDecoder) {
+        delete audioDecoder;
+    }
 }
 
 AudioFilePlayer::AudioFilePlayer(std::string &&audioData) : audioData(std::move(audioData)) {
 
-}
-
-void AudioFilePlayer::setBufferSeekIfNotModified(int bufferSeek, int lastBufferSeek) {
-    SEEK_LOCK;
-    if (lastBufferSeek == this->bufferSeek) {
-        this->bufferSeek = bufferSeek;
-        AudioPlayer::setBufferSeek(bufferSeek);
-    }
-}
-
-AudioFilePlayer *AudioFilePlayer::create(std::istream &is) {
-    std::string audioData = Strings::StreamToString(is);
-    return create(std::move(audioData));
-}
-
-AudioFilePlayer *AudioFilePlayer::create(const char *filePath) {
-    std::fstream is = Streams::OpenFile(filePath, std::ios::in | std::ios::binary);
-    return create(is);
-}
-
-AudioFilePlayer *AudioFilePlayer::create(std::string &&audioData) {
-    if (WAVFile::isWavFile(audioData.data(), audioData.size())) {
-        return new WavAudioPlayer(std::move(audioData));
-    } else {
-        return new Mp3AudioPlayer(std::move(audioData));
-    }
 }
