@@ -47,7 +47,9 @@ Rectangle {
             return intervalOctaveHeight / pianoOctaveHeight
         })();
 
+
         property int startPitchIndex: 0
+        property var selectedWhitePitchIndexes: []
 
         onPaint: {
             var ctx = getContext("2d")
@@ -57,7 +59,6 @@ Rectangle {
 
             ctx.strokeStyle = borderColor
             ctx.fillStyle = sharpPitchColor
-            console.log("onPaint = " + firstPitch.name)
             var index = firstPitch.whiteIndex
             var perfectFrequencyIndex = firstPitch.perfectFrequencyIndex
             var y = height
@@ -68,6 +69,7 @@ Rectangle {
 
             var drawSharpPitchesY = []
             var drawSharpPitchesFillColor = []
+            selectedWhitePitchIndexes = []
 
             while (y > -bigPitchHeight) {
 
@@ -96,6 +98,7 @@ Rectangle {
                     stroke = false
                     fill = true
                     ctx.fillStyle = fillColor
+                    selectedWhitePitchIndexes.push(index)
                 }
 
                 var pitchHeight = heightMap[index % heightMapLength] * intervalOctvaHeightToPianoOctaveHeightRelation
@@ -135,6 +138,10 @@ Rectangle {
             }
         }
 
+        onPainted: {
+            updatePitchNames()
+        }
+
         Component {
             id: pitchNameText
 
@@ -152,16 +159,21 @@ Rectangle {
         function updatePitchNames() {
             UiUtils.destroyAllChildren(root)
 
-            console.log("updatePitchNames = " + firstPitch.name)
             var index = firstPitch.whiteIndex
             var y = height
             var heightMapLength = heightMap.length
+
             while (y > -bigPitchHeight) {
                 var indexInMap = index % heightMapLength
                 var pitchHeight = heightMap[indexInMap] * intervalOctvaHeightToPianoOctaveHeightRelation
                 var text = pitchNameText.createObject(root, {})
                 text.y =  y - pitchHeight / 2 - text.height / 2
                 text.text = pitchNames[indexInMap] + (Math.floor(index / heightMapLength) + firstPitch.octave)
+
+                if (selectedWhitePitchIndexes.indexOf(index) >= 0) {
+                    text.color = "white"
+                }
+
                 index++
                 y -= pitchHeight + distanceBetweenPitches * intervalOctvaHeightToPianoOctaveHeightRelation
             }
@@ -172,16 +184,14 @@ Rectangle {
         }
 
         onHeightChanged: {
-            updatePitchNames()
+            requestPaint()
         }
 
         onFirstPitchChanged: {
-            updatePitchNames()
             requestPaint()
         }
 
         onIntervalOctvaHeightToPianoOctaveHeightRelationChanged: {
-            updatePitchNames()
             requestPaint()
         }
     }
