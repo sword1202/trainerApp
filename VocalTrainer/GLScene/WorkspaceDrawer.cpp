@@ -141,7 +141,8 @@ void WorkspaceDrawer::drawPitches() const {
         double x = (pitchTimeBegin - timeBegin) / workspaceDuration * width;
         double pitchWidth = pitchDuration / workspaceDuration * width;
         int distanceFromFirstPitch = getDistanceFromFirstPitch(vxPitch.pitch);
-        float y = height - (distanceFromFirstPitch - 1) * intervalHeight;
+        cout<<"pitch = "<<vxPitch.pitch<<" distanceFromFirstPitch = "<<distanceFromFirstPitch<<"\n";
+        float y = height - (distanceFromFirstPitch + 1) * intervalHeight;
         drawPitch((float)x, y, (float)pitchWidth);
     });
 

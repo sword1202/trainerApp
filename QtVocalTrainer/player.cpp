@@ -77,7 +77,6 @@ void Player::stop() {
 }
 
 void Player::onSeekChanged(double seek) {
-    cout<<"seek = "<<seek<<endl;
     emit seekChanged(seek);
 }
 

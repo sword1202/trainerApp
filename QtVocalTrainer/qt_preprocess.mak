@@ -133,6 +133,19 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		../include/nanovg/nanovg.h \
 		../VocalTrainer/GLScene/Drawer.h \
 		../PitchDetection/PitchesCollector.h \
+		../VocalTrainer/VxPlayer/VxFile.h \
+		../VocalTrainer/VxPlayer/VxPitch.h \
+		../include/boost/serialization/serialization.hpp \
+		../include/boost/serialization/split_member.hpp \
+		../VocalTrainer/VxPlayer/AudioPlayback/AudioPlayer.h \
+		../include/portaudio/portaudio.h \
+		../PitchDetection/CppUtils/ListenersSet.h \
+		../VocalTrainer/VxPlayer/VxLyricsLine.h \
+		../VocalTrainer/VxPlayer/VxLyricsInterval.h \
+		../VocalTrainer/VxPlayer/PlaybackChunk.h \
+		../include/boost/container/static_vector.hpp \
+		../include/boost/serialization/vector.hpp \
+		../PitchDetection/CppUtils/StlDebugUtils.h \
 		../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h \
 		../PitchDetection/PitchInputReaderCollector.h \
 		../PitchDetection/PitchInputReader.h \
@@ -147,19 +160,6 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		zoomcontroller.h \
 		player.h \
 		../VocalTrainer/VxPlayer/MvxPlayer.h \
-		../VocalTrainer/VxPlayer/VxFile.h \
-		../VocalTrainer/VxPlayer/VxPitch.h \
-		../include/boost/serialization/serialization.hpp \
-		../include/boost/serialization/split_member.hpp \
-		../VocalTrainer/VxPlayer/AudioPlayback/AudioPlayer.h \
-		../include/portaudio/portaudio.h \
-		../PitchDetection/CppUtils/ListenersSet.h \
-		../VocalTrainer/VxPlayer/VxLyricsLine.h \
-		../VocalTrainer/VxPlayer/VxLyricsInterval.h \
-		../VocalTrainer/VxPlayer/PlaybackChunk.h \
-		../include/boost/container/static_vector.hpp \
-		../include/boost/serialization/vector.hpp \
-		../PitchDetection/CppUtils/StlDebugUtils.h \
 		../VocalTrainer/VxPlayer/MvxFile.h \
 		../VocalTrainer/VxPlayer/AudioPlayback/VxFileAudioPlayer.h \
 		../VocalTrainer/VxPlayer/VxFileAudioDataGenerator.h \
@@ -229,9 +229,22 @@ moc_workspace.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/Q
 		../include/nanovg/nanovg.h \
 		../VocalTrainer/GLScene/Drawer.h \
 		../PitchDetection/PitchesCollector.h \
+		../VocalTrainer/VxPlayer/VxFile.h \
+		../VocalTrainer/VxPlayer/VxPitch.h \
+		../include/boost/serialization/serialization.hpp \
+		../include/boost/serialization/split_member.hpp \
+		../PitchDetection/Pitch.h \
+		../VocalTrainer/VxPlayer/AudioPlayback/AudioPlayer.h \
+		../include/portaudio/portaudio.h \
+		../PitchDetection/CppUtils/ListenersSet.h \
+		../VocalTrainer/VxPlayer/VxLyricsLine.h \
+		../VocalTrainer/VxPlayer/VxLyricsInterval.h \
+		../VocalTrainer/VxPlayer/PlaybackChunk.h \
+		../include/boost/container/static_vector.hpp \
+		../include/boost/serialization/vector.hpp \
+		../PitchDetection/CppUtils/StlDebugUtils.h \
 		../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h \
 		../PitchDetection/PitchInputReaderCollector.h \
-		../PitchDetection/Pitch.h \
 		../PitchDetection/PitchInputReader.h \
 		../PitchDetection/AudioInputReader.h \
 		../PitchDetection/YinPitchDetector.h \
@@ -251,9 +264,22 @@ moc_mainwindow.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/
 		../include/nanovg/nanovg.h \
 		../VocalTrainer/GLScene/Drawer.h \
 		../PitchDetection/PitchesCollector.h \
+		../VocalTrainer/VxPlayer/VxFile.h \
+		../VocalTrainer/VxPlayer/VxPitch.h \
+		../include/boost/serialization/serialization.hpp \
+		../include/boost/serialization/split_member.hpp \
+		../PitchDetection/Pitch.h \
+		../VocalTrainer/VxPlayer/AudioPlayback/AudioPlayer.h \
+		../include/portaudio/portaudio.h \
+		../PitchDetection/CppUtils/ListenersSet.h \
+		../VocalTrainer/VxPlayer/VxLyricsLine.h \
+		../VocalTrainer/VxPlayer/VxLyricsInterval.h \
+		../VocalTrainer/VxPlayer/PlaybackChunk.h \
+		../include/boost/container/static_vector.hpp \
+		../include/boost/serialization/vector.hpp \
+		../PitchDetection/CppUtils/StlDebugUtils.h \
 		../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h \
 		../PitchDetection/PitchInputReaderCollector.h \
-		../PitchDetection/Pitch.h \
 		../PitchDetection/PitchInputReader.h \
 		../PitchDetection/AudioInputReader.h \
 		../PitchDetection/YinPitchDetector.h \

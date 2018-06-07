@@ -30,16 +30,16 @@ protected:
     void mousePressEvent(QMouseEvent *event) override;
 
 public:
-    ~MainWindow();
+    virtual ~MainWindow();
     void setPlayHeadPosition(int position) const;
     void setupMenus();
-
-public slots:
-    void onFileOpen();
 
 #ifdef __APPLE__
     void doMacOsPlatformStaff();
 #endif
+
+public slots:
+    void onFileOpen();
 };
 
 #endif // MAINWINDOW_H

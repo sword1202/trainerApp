@@ -37,10 +37,10 @@ using namespace CppUtils;
     [self testReadFromMidi];
 //    const char* path = "/Users/semyon/Desktop/yo.mvx";
 //    std::fstream ee;
-    _mvxPlayer = new MvxPlayer();
-    _mvxPlayer->init("/Users/semyon/Documents/torero.mvx");
-    _mvxPlayer->prepare();
-    _mvxPlayer->play();
+//    _mvxPlayer = new MvxPlayer();
+//    _mvxPlayer->init("/Users/semyon/Documents/torero.mvx");
+//    _mvxPlayer->prepare();
+//    _mvxPlayer->play();
 //    _player = AudioFilePlayer::create("/Users/semyon/Downloads/yo.mp3");
 //    _player->setPitchShiftInSemiTones(-1);
 //    _player->prepare();
@@ -68,8 +68,8 @@ using namespace CppUtils;
         std::cout << "\n";
     }
 
-//    MvxFile mvxFile(vxFiles[0], "/Users/semyon/Downloads/melody (1).mp3", beatsPerMinute);
-//    mvxFile.writeToFile("/Users/semyon/Documents/torero.mvx");
+    MvxFile mvxFile(vxFiles[0], "/Users/semyon/Downloads/melody (1).mp3", beatsPerMinute);
+    mvxFile.writeToFile("/Users/semyon/Documents/torero.mvx");
 
 //    VxFile vxFile(std::vector<VxPitch> {{Pitch("C4"), 0, 100}, {Pitch("E4"), 100, 100}, {Pitch("A4"), 200, 100}}, 0, 50);
 

@@ -34,6 +34,8 @@
 		544C7CE620A99779002B24BD /* VxFileAudioDataGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFDDD3D7C5E7D7082BBFC /* VxFileAudioDataGenerator.cpp */; };
 		544C7CE720A99779002B24BD /* PitchRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE514220C10160A77F57 /* PitchRenderer.cpp */; };
 		544C7CE820A9978C002B24BD /* SoundFont2PitchRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA934598DEB3A7ED2F90 /* SoundFont2PitchRenderer.cpp */; };
+		544C7E9A20C9717B0070D638 /* PitchesCollector.h in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF7F31EF9E363ADB456EF /* PitchesCollector.h */; };
+		544C7E9B20C9717B0070D638 /* PitchesCollector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF519F5A10D60A8B1F899 /* PitchesCollector.cpp */; };
 		5470EEC2209F5C6400D77B9C /* libboost_serialization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5470EEC1209F5C6400D77B9C /* libboost_serialization.a */; };
 		547378DD2092A519003B8748 /* libportaudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 547378DC2092A518003B8748 /* libportaudio.a */; };
 		549968082090DAF20082B354 /* AudioUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF0A71BF842FC6C348D0C /* AudioUtils.cpp */; };
@@ -670,6 +672,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				544C7E9A20C9717B0070D638 /* PitchesCollector.h in Sources */,
+				544C7E9B20C9717B0070D638 /* PitchesCollector.cpp in Sources */,
 				2EF1E9A11D592EC100E02C33 /* Pitch.cpp in Sources */,
 				2EDCC6BF1DB432E40086A6CE /* YinPitchDetector.cpp in Sources */,
 				2E7A67C41D8E57AE00DFAF8B /* WAVFile.cpp in Sources */,

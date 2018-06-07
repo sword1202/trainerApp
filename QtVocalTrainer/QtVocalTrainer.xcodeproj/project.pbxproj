@@ -781,21 +781,6 @@
 					);
 			};
 		};
-		2A9193B52E540764CA5351C1 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/mainwindow.mm";
-			name = "mainwindow.mm";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.objcpp";
-		};
-		83C95DF40A7399DB82D78DF7 = {
-			fileRef = "2A9193B52E540764CA5351C1";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
 		5EFA0791FAFAF24F213C372F = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback/Decoder/audiodecoder.cpp";
@@ -820,6 +805,21 @@
 		};
 		C4C2BC31FDA4AC0469364914 = {
 			fileRef = "8A85804D769148D3DF2DC1A0";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		DF4BED6495ED318D0BFE2018 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/mainwindowosx.mm";
+			name = "mainwindowosx.mm";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.objcpp";
+		};
+		3A9D3D3CE7067FBCEA4D8FFF = {
+			fileRef = "DF4BED6495ED318D0BFE2018";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
@@ -1505,9 +1505,9 @@
 				"BD9CBF70C3DE9630262C65AA",
 				"0DE7C67DF7E3DF48D2CDE878",
 				"427036DAC85631AB4C48B610",
-				"2A9193B52E540764CA5351C1",
 				"5EFA0791FAFAF24F213C372F",
 				"8A85804D769148D3DF2DC1A0",
+				"DF4BED6495ED318D0BFE2018",
 				"C613FE9ADA39556AD9540F1E",
 				"1091C7F2ACC81AEE9DF74E74",
 				"8D1AFD7B368D712618894EDF",
@@ -1645,9 +1645,9 @@
 				"75010CA4C63B5ACB35276CDD",
 				"EC440AC9941FC2B52F1AD2EC",
 				"67B74B41DD891F047CEBC851",
-				"83C95DF40A7399DB82D78DF7",
 				"2606BB28C6DD44ACCCA27FF0",
 				"C4C2BC31FDA4AC0469364914",
+				"3A9D3D3CE7067FBCEA4D8FFF",
 				"F3F0C5A9AE1D79D2A4930AEA",
 				"AE6596E2227260CD02B22B61",
 				"4D39E2B783FFDF3FB02ED09A",

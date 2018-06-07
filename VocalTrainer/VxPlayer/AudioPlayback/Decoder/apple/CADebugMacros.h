@@ -80,73 +80,11 @@
 	#define BusError()		(*(long *)0 = 0)
 	
 	//	basic debugging print routines
-	#if	TARGET_OS_MAC && !TARGET_API_MAC_CARBON
-		extern pascal void DebugStr(const unsigned char* debuggerMsg);
-		#define	DebugMessage(msg)	DebugStr("\p"msg)
-		#define DebugMessageN1(msg, N1)
-		#define DebugMessageN2(msg, N1, N2)
-		#define DebugMessageN3(msg, N1, N2, N3)
-	#else
-		#include "CADebugPrintf.h"
-		
-		#if	(CoreAudio_FlushDebugMessages && !CoreAudio_UseSysLog) || defined(CoreAudio_UseSideFile)
-			#define	FlushRtn	;fflush(DebugPrintfFile)
-		#else
-			#define	FlushRtn
-		#endif
-		
-		#if		CoreAudio_ThreadStampMessages
-			#include <pthread.h>
-			#include "CAHostTimeBase.h"
-			#define	DebugMessage(msg)										DebugPrintfRtn(DebugPrintfFileComma "%p %.4f: %s"DebugPrintfLineEnding, pthread_self(), ((Float64)(CAHostTimeBase::GetCurrentTimeInNanos()) / 1000000.0), msg) FlushRtn
-			#define DebugMessageN1(msg, N1)									DebugPrintfRtn(DebugPrintfFileComma "%p %.4f: "msg"\n", pthread_self(), ((Float64)(CAHostTimeBase::GetCurrentTimeInNanos()) / 1000000.0), N1) FlushRtn
-			#define DebugMessageN2(msg, N1, N2)								DebugPrintfRtn(DebugPrintfFileComma "%p %.4f: "msg"\n", pthread_self(), ((Float64)(CAHostTimeBase::GetCurrentTimeInNanos()) / 1000000.0), N1, N2) FlushRtn
-			#define DebugMessageN3(msg, N1, N2, N3)							DebugPrintfRtn(DebugPrintfFileComma "%p %.4f: "msg"\n", pthread_self(), ((Float64)(CAHostTimeBase::GetCurrentTimeInNanos()) / 1000000.0), N1, N2, N3) FlushRtn
-			#define DebugMessageN4(msg, N1, N2, N3, N4)						DebugPrintfRtn(DebugPrintfFileComma "%p %.4f: "msg"\n", pthread_self(), ((Float64)(CAHostTimeBase::GetCurrentTimeInNanos()) / 1000000.0), N1, N2, N3, N4) FlushRtn
-			#define DebugMessageN5(msg, N1, N2, N3, N4, N5)					DebugPrintfRtn(DebugPrintfFileComma "%p %.4f: "msg"\n", pthread_self(), ((Float64)(CAHostTimeBase::GetCurrentTimeInNanos()) / 1000000.0), N1, N2, N3, N4, N5) FlushRtn
-			#define DebugMessageN6(msg, N1, N2, N3, N4, N5, N6)				DebugPrintfRtn(DebugPrintfFileComma "%p %.4f: "msg"\n", pthread_self(), ((Float64)(CAHostTimeBase::GetCurrentTimeInNanos()) / 1000000.0), N1, N2, N3, N4, N5, N6) FlushRtn
-			#define DebugMessageN7(msg, N1, N2, N3, N4, N5, N6, N7)			DebugPrintfRtn(DebugPrintfFileComma "%p %.4f: "msg"\n", pthread_self(), ((Float64)(CAHostTimeBase::GetCurrentTimeInNanos()) / 1000000.0), N1, N2, N3, N4, N5, N6, N7) FlushRtn
-			#define DebugMessageN8(msg, N1, N2, N3, N4, N5, N6, N7, N8)		DebugPrintfRtn(DebugPrintfFileComma "%p %.4f: "msg"\n", pthread_self(), ((Float64)(CAHostTimeBase::GetCurrentTimeInNanos()) / 1000000.0), N1, N2, N3, N4, N5, N6, N7, N8) FlushRtn
-			#define DebugMessageN9(msg, N1, N2, N3, N4, N5, N6, N7, N8, N9)	DebugPrintfRtn(DebugPrintfFileComma "%p %.4f: "msg"\n", pthread_self(), ((Float64)(CAHostTimeBase::GetCurrentTimeInNanos()) / 1000000.0), N1, N2, N3, N4, N5, N6, N7, N8, N9) FlushRtn
-		#elif	CoreAudio_TimeStampMessages
-			#include "CAHostTimeBase.h"
-			#define	DebugMessage(msg)										DebugPrintfRtn(DebugPrintfFileComma "%.4f: %s"DebugPrintfLineEnding, pthread_self(), ((Float64)(CAHostTimeBase::GetCurrentTimeInNanos()) / 1000000.0), msg) FlushRtn
-			#define DebugMessageN1(msg, N1)									DebugPrintfRtn(DebugPrintfFileComma "%.4f: "msg DebugPrintfLineEnding, ((Float64)(CAHostTimeBase::GetCurrentTimeInNanos()) / 1000000.0), N1) FlushRtn
-			#define DebugMessageN2(msg, N1, N2)								DebugPrintfRtn(DebugPrintfFileComma "%.4f: "msg DebugPrintfLineEnding, ((Float64)(CAHostTimeBase::GetCurrentTimeInNanos()) / 1000000.0), N1, N2) FlushRtn
-			#define DebugMessageN3(msg, N1, N2, N3)							DebugPrintfRtn(DebugPrintfFileComma "%.4f: "msg DebugPrintfLineEnding, ((Float64)(CAHostTimeBase::GetCurrentTimeInNanos()) / 1000000.0), N1, N2, N3) FlushRtn
-			#define DebugMessageN4(msg, N1, N2, N3, N4)						DebugPrintfRtn(DebugPrintfFileComma "%.4f: "msg DebugPrintfLineEnding, ((Float64)(CAHostTimeBase::GetCurrentTimeInNanos()) / 1000000.0), N1, N2, N3, N4) FlushRtn
-			#define DebugMessageN5(msg, N1, N2, N3, N4, N5)					DebugPrintfRtn(DebugPrintfFileComma "%.4f: "msg DebugPrintfLineEnding, ((Float64)(CAHostTimeBase::GetCurrentTimeInNanos()) / 1000000.0), N1, N2, N3, N4, N5) FlushRtn
-			#define DebugMessageN6(msg, N1, N2, N3, N4, N5, N6)				DebugPrintfRtn(DebugPrintfFileComma "%.4f: "msg DebugPrintfLineEnding, ((Float64)(CAHostTimeBase::GetCurrentTimeInNanos()) / 1000000.0), N1, N2, N3, N4, N5, N6) FlushRtn
-			#define DebugMessageN7(msg, N1, N2, N3, N4, N5, N6, N7)			DebugPrintfRtn(DebugPrintfFileComma "%.4f: "msg DebugPrintfLineEnding, ((Float64)(CAHostTimeBase::GetCurrentTimeInNanos()) / 1000000.0), N1, N2, N3, N4, N5, N6, N7) FlushRtn
-			#define DebugMessageN8(msg, N1, N2, N3, N4, N5, N6, N7, N8)		DebugPrintfRtn(DebugPrintfFileComma "%.4f: "msg DebugPrintfLineEnding, ((Float64)(CAHostTimeBase::GetCurrentTimeInNanos()) / 1000000.0), N1, N2, N3, N4, N5, N6, N7, N8) FlushRtn
-			#define DebugMessageN9(msg, N1, N2, N3, N4, N5, N6, N7, N8, N9)	DebugPrintfRtn(DebugPrintfFileComma "%.4f: "msg DebugPrintfLineEnding, ((Float64)(CAHostTimeBase::GetCurrentTimeInNanos()) / 1000000.0), N1, N2, N3, N4, N5, N6, N7, N8, N9) FlushRtn
-		#else
-			#define	DebugMessage(msg)										DebugPrintfRtn(DebugPrintfFileComma "%s"DebugPrintfLineEnding, msg) FlushRtn
-			#define DebugMessageN1(msg, N1)									DebugPrintfRtn(DebugPrintfFileComma msg DebugPrintfLineEnding, N1) FlushRtn
-			#define DebugMessageN2(msg, N1, N2)								DebugPrintfRtn(DebugPrintfFileComma msg DebugPrintfLineEnding, N1, N2) FlushRtn
-			#define DebugMessageN3(msg, N1, N2, N3)							DebugPrintfRtn(DebugPrintfFileComma msg DebugPrintfLineEnding, N1, N2, N3) FlushRtn
-			#define DebugMessageN4(msg, N1, N2, N3, N4)						DebugPrintfRtn(DebugPrintfFileComma msg DebugPrintfLineEnding, N1, N2, N3, N4) FlushRtn
-			#define DebugMessageN5(msg, N1, N2, N3, N4, N5)					DebugPrintfRtn(DebugPrintfFileComma msg DebugPrintfLineEnding, N1, N2, N3, N4, N5) FlushRtn
-			#define DebugMessageN6(msg, N1, N2, N3, N4, N5, N6)				DebugPrintfRtn(DebugPrintfFileComma msg DebugPrintfLineEnding, N1, N2, N3, N4, N5, N6) FlushRtn
-			#define DebugMessageN7(msg, N1, N2, N3, N4, N5, N6, N7)			DebugPrintfRtn(DebugPrintfFileComma msg DebugPrintfLineEnding, N1, N2, N3, N4, N5, N6, N7) FlushRtn
-			#define DebugMessageN8(msg, N1, N2, N3, N4, N5, N6, N7, N8)		DebugPrintfRtn(DebugPrintfFileComma msg DebugPrintfLineEnding, N1, N2, N3, N4, N5, N6, N7, N8) FlushRtn
-			#define DebugMessageN9(msg, N1, N2, N3, N4, N5, N6, N7, N8, N9)	DebugPrintfRtn(DebugPrintfFileComma msg DebugPrintfLineEnding, N1, N2, N3, N4, N5, N6, N7, N8, N9) FlushRtn
-		#endif
-	#endif
-	void	DebugPrint(const char *fmt, ...);	// can be used like printf
-	#define DEBUGPRINT(msg) DebugPrint msg		// have to double-parenthesize arglist (see Debugging.h)
-	#if VERBOSE
-		#define vprint(msg) DEBUGPRINT(msg)
-	#else
-		#define vprint(msg)
-	#endif
-	
-	#if	CoreAudio_StopOnFailure
-		#include "CADebugger.h"
-		#define STOP	CADebuggerStop()
-	#else
-		#define	STOP
-	#endif
+extern pascal void DebugStr(const unsigned char* debuggerMsg);
+#define	DebugMessage(msg)	DebugStr("\p"msg)
+#define DebugMessageN1(msg, N1)
+#define DebugMessageN2(msg, N1, N2)
+#define DebugMessageN3(msg, N1, N2, N3)
 
 #else
 	#define	DebugMessage(msg)

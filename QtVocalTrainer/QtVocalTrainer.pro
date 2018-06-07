@@ -66,9 +66,9 @@ SOURCES += \
     ../VocalTrainer/GLScene/NvgOpenGLDrawer.cpp \
     ../VocalTrainer/GLScene/Drawer.cpp \
     player.cpp \
-    mainwindow.mm \
     ../VocalTrainer/VxPlayer/AudioPlayback/Decoder/audiodecoder.cpp \
-    ../VocalTrainer/VxPlayer/AudioPlayback/Decoder/audiodecodercoreaudio.cpp
+    ../VocalTrainer/VxPlayer/AudioPlayback/Decoder/audiodecodercoreaudio.cpp \
+    mainwindowosx.mm
 
 RESOURCES += qml.qrc
 
