@@ -8,6 +8,7 @@
 namespace QtUtils {
     void startRepeatedTimer(QObject *parent, const std::function<bool()> &action, int intervalInMilliseconds);
     QFrame* createVerticalLine(int width, QWidget* parent);
+    QByteArray readAllFromFile(const char* fileName);
 }
 
 #endif

@@ -1,5 +1,6 @@
 #include "qtutils.h"
 #include <QTimer>
+#include <qfile.h>
 
 namespace QtUtils {
     void startRepeatedTimer(QObject *parent, const std::function<bool()> &action, int intervalInMilliseconds) {
@@ -21,5 +22,11 @@ namespace QtUtils {
         frame->setLineWidth(width);
         frame->setFixedWidth(width);
         return frame;
+    }
+
+    QByteArray readAllFromFile(const char* fileName) {
+        QFile file(fileName);
+        file.open(QFile::ReadOnly);
+        return file.readAll();
     }
 }

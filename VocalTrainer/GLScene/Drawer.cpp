@@ -1,5 +1,7 @@
 #include "Drawer.h"
 
+using namespace CppUtils;
+
 void Drawer::roundedRect(float x, float y, float w, float h, float r) {
     assert(r >= 0);
     if (r == 0) {
@@ -21,4 +23,16 @@ void Drawer::roundedRect(float x, float y, float w, float h, float r) {
     arcTo(x,   y+h, x,   y,   r);
     arcTo(x,   y,   x+w, y,   r);
     closePath();
+}
+
+void Drawer::roundedRect(const RoundedRectF &rect) {
+    roundedRect(rect.A.x, rect.A.x, rect.width, rect.height, rect.getRadius());
+}
+
+void Drawer::lineTo(const CppUtils::PointF &point) {
+    lineTo(point.x, point.y);
+}
+
+void Drawer::moveTo(const CppUtils::PointF &point) {
+    moveTo(point.x, point.y);
 }

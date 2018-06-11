@@ -8,6 +8,8 @@
 
 #include <array>
 #include <vector>
+#include "RoundedRect.h"
+#include "Point.h"
 
 class Drawer {
 public:
@@ -42,6 +44,9 @@ public:
     virtual void rect(float x, float y, float w, float h) = 0;
 
     void roundedRect(float x, float y, float w, float h, float r);
+    void roundedRect(const CppUtils::RoundedRectF& roundedRect);
+    virtual void lineTo(const CppUtils::PointF& point);
+    virtual void moveTo(const CppUtils::PointF& point);
 
     virtual ~Drawer() = default;
 };

@@ -1,10 +1,9 @@
 #include <qfile.h>
 #include "LoadTsf.h"
+#include "QtUtils/qtutils.h"
 
 tsf* LoadTsf() {
-    QFile file(":qml/sounds/sounds.sf2");
-    file.open(QFile::ReadOnly);
-    QByteArray byteArray = file.readAll();
+    QByteArray byteArray = QtUtils::readAllFromFile(":qml/sounds/sounds.sf2");
     return tsf_load_memory(byteArray.data(), byteArray.size());
 }
 
