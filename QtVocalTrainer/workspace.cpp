@@ -71,7 +71,6 @@ void Workspace::initializeGL() {
     workspaceDrawer.setGridColor({0x8B, 0x89, 0xB6, 0x33});
     workspaceDrawer.setAccentGridColor({0x8B, 0x89, 0xB6, 0x80});
     workspaceDrawer.setPitchGraphColor({0xFF, 0x5E, 0x85, 0xFF});
-    workspaceDrawer.setPitchPositiveGraphColor({0x61, 0x5F, 0x97, 0xFF});
     workspaceDrawer.setPitchColor({0x6E, 0x7E, 0xC5, 0xFF});
     workspaceDrawer.setPitchRadius(PITCH_RADIUS);
     //workspaceDrawer.setIntervalsPerSecond(3);
