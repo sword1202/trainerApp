@@ -15,7 +15,7 @@
 - (instancetype)initWithCoder:(nonnull NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
-        _workspaceDrawer = nullptr;
+
     }
 
     return self;
@@ -24,20 +24,27 @@
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     if (!_workspaceDrawer) {
-        [self initDrawer];
+        Drawer* drawer = new QuartzDrawer();
+        _workspaceDrawer = std::make_unique<WorkspaceDrawer>(drawer);
+        _workspaceDrawer->setIntervalWidth(30);
+        _workspaceDrawer->setIntervalHeight(15);
+        [self resizeDrawer];
     }
 
     _workspaceDrawer->draw();
 }
 
-- (void)initDrawer {
-    Drawer* drawer = new QuartzDrawer();
-    _workspaceDrawer = std::make_unique<WorkspaceDrawer>(drawer);
+- (void)resizeWithOldSuperviewSize:(NSSize)oldSize {
+    [super resizeWithOldSuperviewSize:oldSize];
+    [self resizeDrawer];
+    [self display];
+}
+
+
+- (void)resizeDrawer {
     CGFloat width = self.frame.size.width;
     CGFloat height = self.frame.size.height;
     _workspaceDrawer->resize(width, height, 2);
-    _workspaceDrawer->setIntervalWidth(30);
-    _workspaceDrawer->setIntervalHeight(15);
 }
 
 @end
