@@ -70,6 +70,7 @@
 		C9FFF4B18FE6B96EF2809623 /* VxFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFBD710C1F3DE858A19B5 /* VxFile.cpp */; };
 		C9FFF52677955A96CA2CF85C /* AudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF3F1E0ED03499C30CD3D /* AudioPlayer.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C9FFF5D95B14517981993411 /* AudioFilePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFB85AD13A0DC254A5BFC /* AudioFilePlayer.cpp */; };
+		C9FFF5E2A8BA61635830E09A /* MainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF70CC6AEF28E5E662A4C /* MainWindowController.m */; };
 		C9FFF64CA7878CC014CCED77 /* WavAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF4B352C76A7F89AF317E /* WavAudioPlayer.cpp */; };
 		C9FFF7AE7C2048B9BE210E7C /* MidiEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF9C3A05CC2DBEF0526B6 /* MidiEvent.cpp */; };
 		C9FFF7F10BC2BF153F5D35DA /* VxFileGeneratorTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFCEEF86F468AC8AE82F0 /* VxFileGeneratorTest.cpp */; };
@@ -240,6 +241,7 @@
 		C9FFF6F024954CC62D511B38 /* StringsTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StringsTest.cpp; path = PitchDetection/CppUtils/tests/StringsTest.cpp; sourceTree = SOURCE_ROOT; };
 		C9FFF709A5A3DB8BE4B17B46 /* StlDebugUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StlDebugUtils.h; path = PitchDetection/CppUtils/StlDebugUtils.h; sourceTree = "<group>"; };
 		C9FFF709E60D6232BAF0C4CD /* VxFileTests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VxFileTests.cpp; sourceTree = "<group>"; };
+		C9FFF70CC6AEF28E5E662A4C /* MainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainWindowController.m; sourceTree = "<group>"; };
 		C9FFF77AC431EAF0ACD903B5 /* Memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Memory.h; path = PitchDetection/CppUtils/Memory.h; sourceTree = "<group>"; };
 		C9FFF7DA2A7B0A4772FADB27 /* Point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Point.h; path = PitchDetection/CppUtils/Point.h; sourceTree = "<group>"; };
 		C9FFF7E457FED8A685600F59 /* nanovg_mtl_shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = nanovg_mtl_shaders.metal; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 		C9FFFB85AD13A0DC254A5BFC /* AudioFilePlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioFilePlayer.cpp; sourceTree = "<group>"; };
 		C9FFFBCE6261AC60FFBF3B9F /* MidiEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiEvent.h; sourceTree = "<group>"; };
 		C9FFFBD710C1F3DE858A19B5 /* VxFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VxFile.cpp; sourceTree = "<group>"; };
+		C9FFFC3CB6AB307D4D39CFDE /* MainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainWindowController.h; sourceTree = "<group>"; };
 		C9FFFC6D53C891B61A3E964C /* Binasc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Binasc.h; sourceTree = "<group>"; };
 		C9FFFCDC2C92CB6FCC4D85E5 /* Drawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drawer.h; sourceTree = "<group>"; };
 		C9FFFCEEF86F468AC8AE82F0 /* VxFileGeneratorTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VxFileGeneratorTest.cpp; sourceTree = "<group>"; };
@@ -428,6 +431,8 @@
 				C9FFF8A3E1BD0832FF93CB64 /* nanovg */,
 				C9FFFE2F7B84AA3EF12315D3 /* UI */,
 				C9FFF70B6A25AE6405E03164 /* Drawers */,
+				C9FFF70CC6AEF28E5E662A4C /* MainWindowController.m */,
+				C9FFFC3CB6AB307D4D39CFDE /* MainWindowController.h */,
 			);
 			path = VocalTrainer;
 			sourceTree = "<group>";
@@ -821,6 +826,7 @@
 				C9FFF135182C1CD2F799102D /* NvgDrawerMetalPlatformStuff.mm in Sources */,
 				C9FFF125C3233F691A61B851 /* Drawer.cpp in Sources */,
 				C9FFF8928C4A9BA0FB4CE956 /* QuartzDrawer.mm in Sources */,
+				C9FFF5E2A8BA61635830E09A /* MainWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

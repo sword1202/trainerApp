@@ -262,7 +262,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer) :
         horizontalOffset(0),
         sizeMultiplier(1),
         intervalsPerSecond(0),
-        firstPitchPerfectFrequencyIndex(-1),
+        firstPitchPerfectFrequencyIndex(0),
         frameTime(0), drawer(drawer) {
     setGridColor({0x8B, 0x89, 0xB6, 0x33});
     setAccentGridColor({0x8B, 0x89, 0xB6, 0x80});

@@ -40,8 +40,18 @@
     [self display];
 }
 
+- (void)viewDidEndLiveResize {
+    [super viewDidEndLiveResize];
+    [self resizeDrawer];
+    [self display];
+}
+
 
 - (void)resizeDrawer {
+    if (!_workspaceDrawer) {
+        return;
+    }
+
     CGFloat width = self.frame.size.width;
     CGFloat height = self.frame.size.height;
     _workspaceDrawer->resize(width, height, 2);

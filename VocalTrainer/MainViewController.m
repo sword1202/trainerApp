@@ -15,6 +15,8 @@
     [super viewDidLoad];
 }
 
+
+
 -(IBAction) openDocument:(id)sender {
     NSOpenPanel *panel = [NSOpenPanel openPanel];
     NSArray* fileTypes = @[@"wav", @"WAV"];
