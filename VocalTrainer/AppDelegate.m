@@ -1,14 +1,16 @@
 //
-//  AppDelegate.h
-//  bla
-//
-//  Created by Semyon Tikhonenko on 5/14/18.
-//  Copyright © 2018 Neborosoft. All rights reserved.
+// Created by Semyon Tikhonenko on 7/2/18.
+// Copyright (c) 2018 Mac. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import "AppDelegate.h"
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
 
+@implementation AppDelegate {
+
+}
+- (void)applicationDidFinishLaunching:(NSNotification *)notification {
+
+}
 
 @end

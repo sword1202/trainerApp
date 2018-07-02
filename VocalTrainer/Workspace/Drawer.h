@@ -42,6 +42,7 @@ public:
     virtual void rotate(float angle) = 0;
     virtual void scale(float x, float y) = 0;
     virtual void rect(float x, float y, float w, float h) = 0;
+    virtual void fillRect(float x, float y, float w, float h) = 0;
 
     void roundedRect(float x, float y, float w, float h, float r);
     void roundedRect(const CppUtils::RoundedRectF& roundedRect);

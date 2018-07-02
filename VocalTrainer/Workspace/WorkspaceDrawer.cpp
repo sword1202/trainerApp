@@ -11,7 +11,7 @@
 #include <iostream>
 #include <cmath>
 
-#include "NvgOpenGLDrawer.h"
+#include "NvgDrawer.h"
 #include "ConcurrentModificationAssert.h"
 
 using namespace CppUtils;
@@ -30,7 +30,7 @@ void WorkspaceDrawer::resize(float width, float height, float devicePixelRatio) 
     this->height = height;
 
     if (!drawer) {
-        drawer = new NvgOpenGLDrawer();
+        //drawer = new NvgDrawer();
     }
 }
 
@@ -42,6 +42,13 @@ void WorkspaceDrawer::draw() {
     assert(gridColor[3] > 0 && "gridColor not initialized or is completely transparent");
     assert(accentGridColor[3] > 0 && "accentGridColor not initialized or is completely transparent");
 
+    double now = TimeUtils::NowInSeconds();
+    float frameDuration = now - frameTime;
+    horizontalOffset = horizontalOffset + intervalsPerSecond * intervalWidth * frameDuration;
+    frameTime = now;
+    cout<<"fps = "<<1.0 / frameDuration<<"\n";
+
+
     drawer->clear();
 
     drawer->beginFrame(width, height, devicePixelRatio);
@@ -50,6 +57,8 @@ void WorkspaceDrawer::draw() {
     drawPitches();
     drawPitchesGraph();
     drawer->endFrame();
+
+    //cout<<"drawFps = "<<1.0 / (TimeUtils::NowInSeconds() - now)<<"\n";
 }
 
 float WorkspaceDrawer::getIntervalWidth() const {
@@ -259,7 +268,8 @@ WorkspaceDrawer::WorkspaceDrawer() :
         horizontalOffset(0),
         sizeMultiplier(1),
         intervalsPerSecond(0),
-        firstPitchPerfectFrequencyIndex(-1)
+        firstPitchPerfectFrequencyIndex(-1),
+        frameTime(0)
 {
 
 }
@@ -289,6 +299,7 @@ double WorkspaceDrawer::getIntervalsPerSecond() const {
 }
 
 void WorkspaceDrawer::setIntervalsPerSecond(double intervalsPerSecond) {
+    frameTime = TimeUtils::NowInSeconds();
     this->intervalsPerSecond = intervalsPerSecond;
 }
 

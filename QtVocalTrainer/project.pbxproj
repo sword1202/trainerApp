@@ -1413,6 +1413,12 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "text";
 		};
+		4408CA09A25D27FBE37CDAAE = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/.qmake.stash";
+			name = ".qmake.stash";
+			sourceTree = "<absolute>";
+		};
 		25B08E2869634E9BCBA333A2 = {
 			isa = PBXGroup;
 			children = (
@@ -1569,7 +1575,8 @@
 		74B182DB50CB5611B5C1C297 = {
 			isa = PBXGroup;
 			children = (
-				"4A1C2993E55C65255C1398FB");
+				"4A1C2993E55C65255C1398FB",
+				"4408CA09A25D27FBE37CDAAE");
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -642,7 +643,7 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="VocalTrainer" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
@@ -653,9 +654,11 @@
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                        <rect key="contentRect" x="597" y="428" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <connections>
+                            <outlet property="delegate" destination="B8D-0N-5wS" id="b0e-xR-3ta"/>
+                        </connections>
                     </window>
                     <connections>
                         <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
@@ -673,38 +676,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="uID-Be-fzm" customClass="PitchGraphView">
-                                <rect key="frame" x="0.0" y="-33" width="480" height="270"/>
-                            </customView>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="mC1-oo-Cai" userLabel="Top Panel">
-                                <rect key="frame" x="0.0" y="237" width="480" height="33"/>
-                                <subviews>
-                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="xiU-wG-YfV">
-                                        <rect key="frame" x="18" y="8" width="161" height="18"/>
-                                        <buttonCell key="cell" type="check" title="Move between octaves" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="fwV-hp-w58">
-                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="moveBetweenOctavesDidPress:" target="XfG-lQ-9wD" id="ihE-70-dFM"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="xiU-wG-YfV" firstAttribute="centerY" secondItem="mC1-oo-Cai" secondAttribute="centerY" id="DaY-MF-9we"/>
-                                    <constraint firstAttribute="height" constant="33" id="fQY-JG-DN4"/>
-                                    <constraint firstItem="xiU-wG-YfV" firstAttribute="leading" secondItem="mC1-oo-Cai" secondAttribute="leading" constant="20" id="rcL-zf-DMO"/>
-                                </constraints>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="uID-Be-fzm" userLabel="WorkspaceView" customClass="WorkspaceView">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                             </customView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="uID-Be-fzm" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="1tD-gP-xW0"/>
-                            <constraint firstItem="mC1-oo-Cai" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="35Q-zV-Ggd"/>
-                            <constraint firstItem="mC1-oo-Cai" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="I3R-Ia-1K5"/>
-                            <constraint firstItem="uID-Be-fzm" firstAttribute="top" secondItem="mC1-oo-Cai" secondAttribute="bottom" id="bmf-2s-wHu"/>
-                            <constraint firstItem="uID-Be-fzm" firstAttribute="height" secondItem="m2S-Jp-Qdl" secondAttribute="height" id="h1Z-r0-YMs"/>
-                            <constraint firstItem="uID-Be-fzm" firstAttribute="width" secondItem="m2S-Jp-Qdl" secondAttribute="width" id="nni-hG-aie"/>
-                            <constraint firstAttribute="trailing" secondItem="mC1-oo-Cai" secondAttribute="trailing" id="p1Y-LQ-X1z"/>
+                            <constraint firstItem="uID-Be-fzm" firstAttribute="height" secondItem="m2S-Jp-Qdl" secondAttribute="height" id="Glm-Xm-Rig"/>
+                            <constraint firstItem="uID-Be-fzm" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="Mp3-3M-n6n"/>
+                            <constraint firstItem="uID-Be-fzm" firstAttribute="width" secondItem="m2S-Jp-Qdl" secondAttribute="width" id="l6p-8L-IN7"/>
+                            <constraint firstItem="uID-Be-fzm" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="mbR-ic-Iwa"/>
                         </constraints>
                     </view>
                     <connections>

@@ -132,6 +132,8 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		../VocalTrainer/GLScene/WorkspaceDrawer.h \
 		../include/nanovg/nanovg.h \
 		../VocalTrainer/GLScene/Drawer.h \
+		../PitchDetection/CppUtils/RoundedRect.h \
+		../PitchDetection/CppUtils/Point.h \
 		../PitchDetection/PitchesCollector.h \
 		../VocalTrainer/VxPlayer/VxFile.h \
 		../VocalTrainer/VxPlayer/VxPitch.h \
@@ -231,6 +233,8 @@ moc_workspace.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/Q
 		../VocalTrainer/GLScene/WorkspaceDrawer.h \
 		../include/nanovg/nanovg.h \
 		../VocalTrainer/GLScene/Drawer.h \
+		../PitchDetection/CppUtils/RoundedRect.h \
+		../PitchDetection/CppUtils/Point.h \
 		../PitchDetection/PitchesCollector.h \
 		../VocalTrainer/VxPlayer/VxFile.h \
 		../VocalTrainer/VxPlayer/VxPitch.h \
@@ -267,6 +271,8 @@ moc_mainwindow.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/
 		../VocalTrainer/GLScene/WorkspaceDrawer.h \
 		../include/nanovg/nanovg.h \
 		../VocalTrainer/GLScene/Drawer.h \
+		../PitchDetection/CppUtils/RoundedRect.h \
+		../PitchDetection/CppUtils/Point.h \
 		../PitchDetection/PitchesCollector.h \
 		../VocalTrainer/VxPlayer/VxFile.h \
 		../VocalTrainer/VxPlayer/VxPitch.h \

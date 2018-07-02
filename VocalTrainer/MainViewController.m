@@ -4,22 +4,16 @@
 //
 
 #import "MainViewController.h"
-#import "PitchGraphView.h"
 #import "NSString+StringUtils.h"
 #import "NSAlert+AlertUtils.h"
 
 @implementation MainViewController {
-    __weak IBOutlet PitchGraphView *pitchGraphView;
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
-
-- (IBAction)moveBetweenOctavesDidPress:(NSButton*)sender {
-    [pitchGraphView moveBetweenOctavesFlagDidChange:sender.state == NSOnState];
-}
-
 
 -(IBAction) openDocument:(id)sender {
     NSOpenPanel *panel = [NSOpenPanel openPanel];
@@ -32,11 +26,7 @@
     NSInteger i = [panel runModal];
     if(i == NSModalResponseOK){
         NSURL *url = panel.URL;
-        if (![url.pathExtension isEqualToStringIgnoreCase:@"wav"]) {
-            [NSAlert error:@"Only .wav files are supported"];
-        } else {
-            [pitchGraphView onWavFileSelected:url.path];
-        }
+        NSLog(@"file opened = %@", url);
     }
 }
 

@@ -29,6 +29,7 @@ void VxFileAudioPlayer::prepareAndProvidePlaybackData(PlaybackData *playbackData
     generatorTask->runWithSleepingIntervalInMicroseconds([=]{
             while (generator->renderNextPitchIfPossible()) {
                 generatorTask->processQueue();
+                std::this_thread::sleep_for(std::chrono::microseconds(100000));
             }
         }, VX_FILE_GENERATOR_SLEEP_INTERVAL);
 }

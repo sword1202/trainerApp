@@ -12,6 +12,7 @@
 #include "VxFileAudioPlayer.h"
 #include <boost/optional.hpp>
 #include <memory>
+#include <functional>
 
 class MvxPlayer {
 public:
@@ -35,9 +36,11 @@ private:
     double playStartedSeek = -1;
     double playStartedTime = -1;
     double beatsPerMinute;
+    std::vector<std::function<void()>> onInitialisedQueue;
 
     void setupVxPlayerDesyncHandler() const;
     void setupInstrumentalPlayerDesyncHandler() const;
+    void executeWhenInitialized(const std::function<void()>& func);
 public:
 
     virtual ~MvxPlayer();

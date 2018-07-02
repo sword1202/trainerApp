@@ -5,10 +5,8 @@
 
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
+#import <MetalKit/MetalKit.h>
 
-
-@interface AppDelegate : NSObject<NSApplicationDelegate>
-
-
+@interface WorkspaceView : MTKView<MTKViewDelegate>
 
 @end

@@ -39,6 +39,8 @@ class WorkspaceDrawer {
     PitchesCollector* pitchesCollector = nullptr;
     const VxFile* vxFile = nullptr;
 
+    std::atomic<double> frameTime;
+
     void drawHorizontalLine(float y, const Color& color) const;
     void drawVerticalGrid() const;
     void drawHorizontalGrid() const;
@@ -89,7 +91,6 @@ public:
     // Should be called on a render thread only, WorkspaceDrawer takes ownership,
     // usually you should make a copy before assigning
     void setVxFile(const VxFile* vxFile);
-
     int getDistanceFromFirstPitch(const Pitch &pitch) const;
 };
 

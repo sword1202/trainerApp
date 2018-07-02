@@ -9,14 +9,18 @@
 #include "Drawer.h"
 #include <nanovg/nanovg.h>
 
-class NvgOpenGLDrawer : public Drawer {
+class NvgDrawer : public Drawer {
     NVGcontext* ctx = nullptr;
 
     float translateX = 0;
     float translateY = 0;
 public:
-    NvgOpenGLDrawer();
-    virtual ~NvgOpenGLDrawer();
+#ifndef __APPLE__
+    NvgDrawer();
+#else
+    NvgDrawer(void* layer);
+#endif
+    virtual ~NvgDrawer();
 
     void beginFrame(float width, float height, float devicePixelRatio) override;
     void endFrame() override;
@@ -36,6 +40,7 @@ public:
     void rotate(float angle) override;
     void scale(float x, float y) override;
     void rect(float x, float y, float w, float h) override;
+    void fillRect(float x, float y, float w, float h) override;
 
     void clear() override;
 

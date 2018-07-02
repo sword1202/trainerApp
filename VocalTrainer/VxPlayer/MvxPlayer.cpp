@@ -10,6 +10,7 @@
 #include "MvxFile.h"
 #include "Primitives.h"
 #include "TimeUtils.h"
+#include "Functions.h"
 
 using namespace CppUtils;
 
@@ -50,6 +51,8 @@ void MvxPlayer::init(std::istream &is) {
         onPlaybackStopped();
         return DONT_DELETE_LISTENER;
     });
+
+    Functions::executeAllAndClear(onInitialisedQueue);
 }
 
 void MvxPlayer::init(const char *filePath) {
@@ -116,11 +119,15 @@ void MvxPlayer::setSeek(double value) {
 }
 
 void MvxPlayer::setInstrumentalVolume(float instrumentalVolume) {
-    instrumentalPlayer->setVolume(instrumentalVolume);
+    executeWhenInitialized([=] {
+        instrumentalPlayer->setVolume(instrumentalVolume);
+    });
 }
 
 void MvxPlayer::setPianoVolume(float pianoVolume) {
-    vxPlayer->setVolume(pianoVolume);
+    executeWhenInitialized([=] {
+        vxPlayer->setVolume(pianoVolume);
+    });
 }
 
 MvxPlayer::~MvxPlayer() {
@@ -212,6 +219,14 @@ bool MvxPlayer::hasAnyPitchNow() const {
     }
 
     return getVxFile().hasPitchesInMoment(getSeek());
+}
+
+void MvxPlayer::executeWhenInitialized(const std::function<void()> &func) {
+    if (instrumentalPlayer) {
+        func();
+    } else {
+        onInitialisedQueue.push_back(func);
+    }
 }
 
 MvxPlayer::Bounds::Bounds(double startSeek, double endSeek) : startSeek(startSeek), endSeek(endSeek) {

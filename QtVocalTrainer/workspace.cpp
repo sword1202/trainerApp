@@ -14,13 +14,13 @@ static const int PITCH_RADIUS = 3;
 Workspace::Workspace(QWidget *parent) : QOpenGLWidget(parent) {
     devicePixelRatio_ = devicePixelRatio();
 
-    // 75 fps
+    // 100 fps
     QtUtils::startRepeatedTimer(this, [=] {
         if (workspaceDrawer.getIntervalsPerSecond() > 0) {
             update();
         }
         return true;
-    }, 1000 / 75);
+    }, 1000 / 100);
 
     connect(ZoomController::instance(), &ZoomController::zoomChanged, this, &Workspace::zoomChanged);
     connect(Player::instance(), &Player::isPlayingChanged, this, &Workspace::isPlayingChanged);
@@ -31,6 +31,10 @@ Workspace::Workspace(QWidget *parent) : QOpenGLWidget(parent) {
 
     QmlPitchInputReader* pitchInputReader = QmlPitchInputReader::instance();
     workspaceDrawer.setPitchesCollector(pitchInputReader);
+
+    QSurfaceFormat format = QSurfaceFormat::defaultFormat();
+    //format.setSwapInterval(0);
+    QSurfaceFormat::setDefaultFormat(format);
 }
 
 void Workspace::firstPitchChanged() {
@@ -60,8 +64,8 @@ void Workspace::zoomChanged() {
 }
 
 void Workspace::seekChanged(double seek) {
-    workspaceDrawer.setHorizontalOffset(seek * workspaceDrawer.getIntervalWidth() *
-            workspaceDrawer.getIntervalsPerSecond());
+//    workspaceDrawer.setHorizontalOffset(seek * workspaceDrawer.getIntervalWidth() *
+//            workspaceDrawer.getIntervalsPerSecond());
 }
 
 void Workspace::initializeGL() {

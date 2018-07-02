@@ -40,6 +40,9 @@ App::App(int argc, char *argv[]) : QApplication(argc, argv) {
             instance->stop();
         }
     });
+
+    Player::instance()->setInstrumentalVolume(0);
+    Player::instance()->setPianoVolume(0);
 }
 
 bool App::event(QEvent *event) {
