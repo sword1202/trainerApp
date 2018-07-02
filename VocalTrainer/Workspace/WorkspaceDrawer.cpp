@@ -19,8 +19,8 @@ using std::cout;
 using std::endl;
 
 constexpr int BEATS_IN_TACT = 4;
-
 constexpr float PITCHES_GRAPH_WIDTH_IN_INTERVALS = 4.0f;
+static const int PITCH_RADIUS = 3;
 
 void WorkspaceDrawer::resize(float width, float height, float devicePixelRatio) {
     assert(devicePixelRatio > 0);
@@ -28,10 +28,6 @@ void WorkspaceDrawer::resize(float width, float height, float devicePixelRatio) 
     this->devicePixelRatio = devicePixelRatio;
     this->width = width;
     this->height = height;
-
-    if (!drawer) {
-        //drawer = new NvgDrawer();
-    }
 }
 
 void WorkspaceDrawer::draw() {
@@ -46,19 +42,17 @@ void WorkspaceDrawer::draw() {
     float frameDuration = now - frameTime;
     horizontalOffset = horizontalOffset + intervalsPerSecond * intervalWidth * frameDuration;
     frameTime = now;
-    cout<<"fps = "<<1.0 / frameDuration<<"\n";
-
-
-    drawer->clear();
 
     drawer->beginFrame(width, height, devicePixelRatio);
+    drawer->setFillColor({255, 255, 255, 255});
+    drawer->fillRect(0, 0, width, height);
+
     drawVerticalGrid();
     drawHorizontalGrid();
     drawPitches();
     drawPitchesGraph();
-    drawer->endFrame();
 
-    //cout<<"drawFps = "<<1.0 / (TimeUtils::NowInSeconds() - now)<<"\n";
+    drawer->endFrame();
 }
 
 float WorkspaceDrawer::getIntervalWidth() const {
@@ -261,7 +255,7 @@ void WorkspaceDrawer::setAccentGridColor(const Color& color) {
     this->accentGridColor = color;
 }
 
-WorkspaceDrawer::WorkspaceDrawer() :
+WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer) :
         intervalWidth(-1),
         intervalHeight(-1),
         verticalOffset(0),
@@ -269,9 +263,12 @@ WorkspaceDrawer::WorkspaceDrawer() :
         sizeMultiplier(1),
         intervalsPerSecond(0),
         firstPitchPerfectFrequencyIndex(-1),
-        frameTime(0)
-{
-
+        frameTime(0), drawer(drawer) {
+    setGridColor({0x8B, 0x89, 0xB6, 0x33});
+    setAccentGridColor({0x8B, 0x89, 0xB6, 0x80});
+    setPitchGraphColor({0xFF, 0x5E, 0x85, 0xFF});
+    setPitchColor({0x6E, 0x7E, 0xC5, 0xFF});
+    setPitchRadius(PITCH_RADIUS);
 }
 
 WorkspaceDrawer::~WorkspaceDrawer() {

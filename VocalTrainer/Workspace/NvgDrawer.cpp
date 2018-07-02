@@ -4,10 +4,6 @@
 //
 
 #include "NvgDrawer.h"
-
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
-
 #include <nanovg/nanovg.h>
 
 #include <assert.h>
@@ -49,11 +45,6 @@ void NvgDrawer::stroke() {
 
 void NvgDrawer::beginPath() {
     nvgBeginPath(ctx);
-}
-
-void NvgDrawer::clear() {
-    glClearColor(1, 1, 1, 1);
-    glClear(GL_COLOR_BUFFER_BIT);
 }
 
 void NvgDrawer::bezierCurveTo(float c1x, float c1y, float c2x, float c2y, float x, float y) {

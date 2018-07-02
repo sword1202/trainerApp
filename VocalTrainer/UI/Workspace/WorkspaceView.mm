@@ -4,17 +4,18 @@
 //
 
 #import "WorkspaceView.h"
-#include "NvgDrawer.h"
+#include "WorkspaceDrawer.h"
+#import "NvgDrawer.h"
 
 
 @implementation WorkspaceView {
-    std::unique_ptr<NvgDrawer> _drawer;
+    std::unique_ptr<WorkspaceDrawer> _workspaceDrawer;
 }
 
 - (instancetype)initWithCoder:(nonnull NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
-        _drawer = nullptr;
+        _workspaceDrawer = nullptr;
         self.delegate = self;
         self.device = MTLCreateSystemDefaultDevice();
     }
@@ -24,20 +25,25 @@
 
 
 - (void)mtkView:(MTKView *)view drawableSizeWillChange:(CGSize)size {
-    _drawer = std::make_unique<NvgDrawer>((__bridge_retained void *)view.currentDrawable.layer);
+    [self initDrawer:view];
+}
+
+- (void)initDrawer:(MTKView *)view {
+    Drawer* drawer = new NvgDrawer((__bridge void *)view.currentDrawable.layer);
+    _workspaceDrawer = std::make_unique<WorkspaceDrawer>(drawer);
+    CGFloat width = view.frame.size.width;
+    CGFloat height = view.frame.size.height;
+    _workspaceDrawer->resize(width, height, 2);
+    _workspaceDrawer->setIntervalWidth(30);
+    _workspaceDrawer->setIntervalHeight(15);
 }
 
 - (void)drawInMTKView:(MTKView *)view {
-    if (!_drawer) {
-        _drawer = std::make_unique<NvgDrawer>((__bridge_retained void *)view.currentDrawable.layer);
+    if (!_workspaceDrawer) {
+        [self initDrawer:view];
     }
 
-    CGFloat width = view.frame.size.width;
-    CGFloat height = view.frame.size.height;
-    _drawer->beginFrame(width, height, 2);
-    _drawer->setFillColor({0, 0, 255, 255});
-    _drawer->fillRect(0, 0, width, height);
-    _drawer->endFrame();
+    _workspaceDrawer->draw();
 }
 
 @end

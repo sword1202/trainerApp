@@ -24,7 +24,6 @@ public:
     virtual float getTranslateY() = 0;
     virtual void translateTo(float x, float y) = 0;
 
-    virtual void clear() = 0;
     virtual void beginFrame(float width, float height, float devicePixelRatio) = 0;
     virtual void endFrame() = 0;
     virtual void moveTo(float x, float y) = 0;

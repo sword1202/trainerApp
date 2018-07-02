@@ -42,8 +42,6 @@ public:
     void rect(float x, float y, float w, float h) override;
     void fillRect(float x, float y, float w, float h) override;
 
-    void clear() override;
-
     void translate(float x, float y) override;
     float getTranslateX() override;
     float getTranslateY() override;

@@ -51,7 +51,7 @@ class WorkspaceDrawer {
     double getPitchGraphDuration() const;
     double getIntervalDuration() const;
 public:
-    WorkspaceDrawer();
+    WorkspaceDrawer(Drawer *drawer);
     ~WorkspaceDrawer();
     void resize(float width, float height, float devicePixelRatio);
     void draw();
