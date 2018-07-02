@@ -5,7 +5,7 @@
 
 #import "WorkspaceView.h"
 #include "WorkspaceDrawer.h"
-#import "NvgDrawer.h"
+#include "QuartzDrawer.h"
 
 
 @implementation WorkspaceView {
@@ -16,34 +16,28 @@
     self = [super initWithCoder:coder];
     if (self) {
         _workspaceDrawer = nullptr;
-        self.delegate = self;
-        self.device = MTLCreateSystemDefaultDevice();
     }
 
     return self;
 }
 
-
-- (void)mtkView:(MTKView *)view drawableSizeWillChange:(CGSize)size {
-    [self initDrawer:view];
-}
-
-- (void)initDrawer:(MTKView *)view {
-    Drawer* drawer = new NvgDrawer((__bridge void *)view.currentDrawable.layer);
-    _workspaceDrawer = std::make_unique<WorkspaceDrawer>(drawer);
-    CGFloat width = view.frame.size.width;
-    CGFloat height = view.frame.size.height;
-    _workspaceDrawer->resize(width, height, 2);
-    _workspaceDrawer->setIntervalWidth(30);
-    _workspaceDrawer->setIntervalHeight(15);
-}
-
-- (void)drawInMTKView:(MTKView *)view {
+- (void)drawRect:(NSRect)dirtyRect {
+    [super drawRect:dirtyRect];
     if (!_workspaceDrawer) {
-        [self initDrawer:view];
+        [self initDrawer];
     }
 
     _workspaceDrawer->draw();
+}
+
+- (void)initDrawer {
+    Drawer* drawer = new QuartzDrawer();
+    _workspaceDrawer = std::make_unique<WorkspaceDrawer>(drawer);
+    CGFloat width = self.frame.size.width;
+    CGFloat height = self.frame.size.height;
+    _workspaceDrawer->resize(width, height, 2);
+    _workspaceDrawer->setIntervalWidth(30);
+    _workspaceDrawer->setIntervalHeight(15);
 }
 
 @end

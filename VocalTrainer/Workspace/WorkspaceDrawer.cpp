@@ -49,8 +49,8 @@ void WorkspaceDrawer::draw() {
 
     drawVerticalGrid();
     drawHorizontalGrid();
-    drawPitches();
-    drawPitchesGraph();
+//    drawPitches();
+//    drawPitchesGraph();
 
     drawer->endFrame();
 }

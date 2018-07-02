@@ -7,6 +7,6 @@
 #import <AppKit/AppKit.h>
 #import <MetalKit/MetalKit.h>
 
-@interface WorkspaceView : MTKView<MTKViewDelegate>
+@interface WorkspaceView : NSView
 
 @end
