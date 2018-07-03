@@ -6,6 +6,7 @@
 #import "WorkspaceView.h"
 #include "WorkspaceDrawer.h"
 #include "QuartzDrawer.h"
+#import "UiUtils.h"
 
 
 @implementation WorkspaceView {
@@ -15,19 +16,13 @@
 - (instancetype)initWithCoder:(nonnull NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
-        [self setPostsFrameChangedNotifications:YES];
-
-        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-        [center addObserver:self
-                   selector:@selector(boundsChanged:)
-                       name:NSViewFrameDidChangeNotification
-                     object:self];
+        [UiUtils setupFrameEventOfView:self];
     }
 
     return self;
 }
 
-- (void)boundsChanged:(id)boundsChanged {
+- (void)frameChanged:(id)boundsChanged {
     [self resizeDrawer];
     [self display];
 }

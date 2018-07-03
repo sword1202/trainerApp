@@ -98,6 +98,7 @@
 		C9FFFDBBD9CEB966139D805A /* CountAssert.h in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF00A355F4925E53CADCF /* CountAssert.h */; };
 		C9FFFE752940964F501E6446 /* MvxFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF08E11535354E15CC819 /* MvxFile.cpp */; };
 		C9FFFE88EA9A5FF905781F50 /* PeriodicallySleepingBackgroundTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8823954020C23E570B5 /* PeriodicallySleepingBackgroundTask.cpp */; };
+		C9FFFE99C5A6977026507401 /* UiUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF80541E481384B58C3B0 /* UiUtils.m */; };
 		C9FFFEB3BFD86EDFAD0BB4EA /* AudioUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF0A71BF842FC6C348D0C /* AudioUtils.cpp */; };
 		C9FFFF17382758D3A423FB58 /* melody.mid in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF0A770C7C4A877771027 /* melody.mid */; };
 		C9FFFF2FAD5D028D8B0E979A /* VxFileTests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF709E60D6232BAF0C4CD /* VxFileTests.cpp */; };
@@ -243,6 +244,7 @@
 		C9FFF7DA2A7B0A4772FADB27 /* Point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Point.h; path = PitchDetection/CppUtils/Point.h; sourceTree = "<group>"; };
 		C9FFF7E457FED8A685600F59 /* nanovg_mtl_shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = nanovg_mtl_shaders.metal; sourceTree = "<group>"; };
 		C9FFF7F31EF9E363ADB456EF /* PitchesCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PitchesCollector.h; path = PitchDetection/PitchesCollector.h; sourceTree = "<group>"; };
+		C9FFF80541E481384B58C3B0 /* UiUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UiUtils.m; sourceTree = "<group>"; };
 		C9FFF8263643024E19C9E8FC /* MidiEventList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiEventList.h; sourceTree = "<group>"; };
 		C9FFF851472080263029F894 /* VxLyricsLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxLyricsLine.h; sourceTree = "<group>"; };
 		C9FFF85DF0B393E6363253C2 /* ConcurrentModificationAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConcurrentModificationAssert.h; path = PitchDetection/CppUtils/ConcurrentModificationAssert.h; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 		C9FFF8E7BA2D6A027BB66320 /* AubioPitchDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AubioPitchDetector.cpp; path = PitchDetection/AubioPitchDetector.cpp; sourceTree = "<group>"; };
 		C9FFF8FE4DFBA5720805C7E3 /* PitchTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PitchTest.cpp; path = PitchDetection/tests/PitchTest.cpp; sourceTree = SOURCE_ROOT; };
 		C9FFF94FF4FECA6F67FA006D /* AudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayer.h; sourceTree = "<group>"; };
+		C9FFF950EAF6552D100DE9E0 /* UiUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UiUtils.h; sourceTree = "<group>"; };
 		C9FFF95D62D0CA594FD3D8BB /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		C9FFF96387DAC07E60D1628B /* AudioUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioUtils.h; path = PitchDetection/AudioUtils.h; sourceTree = "<group>"; };
 		C9FFF970D73B55602129A70F /* MvxPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvxPlayer.h; sourceTree = "<group>"; };
@@ -660,8 +663,18 @@
 				C9FFFAE4B887B8187C24D459 /* MainWindowController.m */,
 				C9FFF95D62D0CA594FD3D8BB /* MainViewController.h */,
 				C9FFF7675058DC550707C05B /* MainWindowController.h */,
+				C9FFFE2DF867741F09718B9B /* Utils */,
 			);
 			path = MacOS;
+			sourceTree = "<group>";
+		};
+		C9FFFE2DF867741F09718B9B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFF80541E481384B58C3B0 /* UiUtils.m */,
+				C9FFF950EAF6552D100DE9E0 /* UiUtils.h */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		C9FFFE2F7B84AA3EF12315D3 /* UI */ = {
@@ -833,6 +846,7 @@
 				C9FFF45EAAACDFD1AF2C8CFE /* AppDelegate.m in Sources */,
 				C9FFF5673D02E39A6BCCC6E6 /* MainViewController.m in Sources */,
 				C9FFFDB0FA79CA2585573D4A /* MainWindowController.m in Sources */,
+				C9FFFE99C5A6977026507401 /* UiUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
