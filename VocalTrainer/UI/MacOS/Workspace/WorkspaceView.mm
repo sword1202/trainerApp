@@ -24,7 +24,7 @@
 
 - (void)frameChanged:(id)boundsChanged {
     [self resizeDrawer];
-    [self display];
+    [self setNeedsDisplay:YES];
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
