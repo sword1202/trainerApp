@@ -15,10 +15,21 @@
 - (instancetype)initWithCoder:(nonnull NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
+        [self setPostsFrameChangedNotifications:YES];
 
+        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+        [center addObserver:self
+                   selector:@selector(boundsChanged:)
+                       name:NSViewFrameDidChangeNotification
+                     object:self];
     }
 
     return self;
+}
+
+- (void)boundsChanged:(id)boundsChanged {
+    [self resizeDrawer];
+    [self display];
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
@@ -33,19 +44,6 @@
 
     _workspaceDrawer->draw();
 }
-
-- (void)resizeWithOldSuperviewSize:(NSSize)oldSize {
-    [super resizeWithOldSuperviewSize:oldSize];
-    [self resizeDrawer];
-    [self display];
-}
-
-- (void)viewDidEndLiveResize {
-    [super viewDidEndLiveResize];
-    [self resizeDrawer];
-    [self display];
-}
-
 
 - (void)resizeDrawer {
     if (!_workspaceDrawer) {

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		106281681E5563B2FED83F72 /* PitchDetectionSmoothingAudioBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10628B2FFD73C634F03CC7B0 /* PitchDetectionSmoothingAudioBuffer.cpp */; };
-		10628786DBDC38E7524C3C23 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10628FA6CAC3BA12D337D093 /* MainViewController.m */; };
 		1062887678542AB36F11CAFB /* TimeUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10628AEB8EFAA83D2F4564EA /* TimeUtils.cpp */; };
 		10628AB2C6E402BC9F64184D /* NSAlert+AlertUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 10628BD21361CCE663757D1C /* NSAlert+AlertUtils.m */; };
 		10628FD4F0C13D5F84BF3D13 /* NSString+StringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1062895A4CC981402519305B /* NSString+StringUtils.m */; };
@@ -28,8 +27,6 @@
 		5448632420EA64A500B6E046 /* libboost_serialization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5448631D20EA647500B6E046 /* libboost_serialization.a */; };
 		5448632520EA64A500B6E046 /* libportaudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5448631E20EA647500B6E046 /* libportaudio.a */; };
 		5448632620EA64A500B6E046 /* libSoundTouch.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 542888C620A4DF6000376321 /* libSoundTouch.1.dylib */; };
-		5448632920EA67D900B6E046 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5448632820EA67D900B6E046 /* AppDelegate.m */; };
-		5448632A20EA6CE200B6E046 /* AppDelegate.h in Sources */ = {isa = PBXBuildFile; fileRef = 5448632720EA67D900B6E046 /* AppDelegate.h */; };
 		544C7CB020A977C8002B24BD /* libboost_serialization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5470EEC1209F5C6400D77B9C /* libboost_serialization.a */; };
 		544C7CB120A98021002B24BD /* BoostAssert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF016E94440F9F9F27A58 /* BoostAssert.cpp */; };
 		544C7CE420A98235002B24BD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 544C7CE320A98235002B24BD /* main.m */; };
@@ -63,15 +60,16 @@
 		C9FFF1454B1B19FD66D82BE7 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFFC2EAB3D64E9E8BCC71 /* LICENSE.txt */; };
 		C9FFF1F56D256A76020F979B /* nanovg_mtl.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF01FA5C083316C2F410B /* nanovg_mtl.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C9FFF29A2778D812DD86DAD9 /* PitchDetectionSmoothingBufferTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFB1B7C3F160B173A4071 /* PitchDetectionSmoothingBufferTest.cpp */; };
-		C9FFF339A65BF4B2E2B7A5A5 /* WorkspaceView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF4B351B54D5A20B3511A /* WorkspaceView.mm */; };
 		C9FFF3994C66634963735E68 /* LoadTsfDefault.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF5D6CB0CEACB514B6CCE /* LoadTsfDefault.mm */; };
 		C9FFF428255BE42EB50BBBD7 /* GeometryUtilsTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE55AF6D32018F3AB842 /* GeometryUtilsTest.cpp */; };
 		C9FFF44E5CD2E1B12CBD365B /* MidiFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF51CA94B2770B893C639 /* MidiFileReader.cpp */; };
+		C9FFF45EAAACDFD1AF2C8CFE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF064080D9900526ED532 /* AppDelegate.m */; };
 		C9FFF4B18FE6B96EF2809623 /* VxFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFBD710C1F3DE858A19B5 /* VxFile.cpp */; };
 		C9FFF52677955A96CA2CF85C /* AudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF3F1E0ED03499C30CD3D /* AudioPlayer.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C9FFF5673D02E39A6BCCC6E6 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8E57A889ECDE8949D82 /* MainViewController.m */; };
 		C9FFF5D95B14517981993411 /* AudioFilePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFB85AD13A0DC254A5BFC /* AudioFilePlayer.cpp */; };
-		C9FFF5E2A8BA61635830E09A /* MainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF70CC6AEF28E5E662A4C /* MainWindowController.m */; };
 		C9FFF64CA7878CC014CCED77 /* WavAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF4B352C76A7F89AF317E /* WavAudioPlayer.cpp */; };
+		C9FFF75EC0D59527C32087FD /* WorkspaceView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF5DEFBA57126792FF7CD /* WorkspaceView.mm */; };
 		C9FFF7AE7C2048B9BE210E7C /* MidiEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF9C3A05CC2DBEF0526B6 /* MidiEvent.cpp */; };
 		C9FFF7F10BC2BF153F5D35DA /* VxFileGeneratorTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFCEEF86F468AC8AE82F0 /* VxFileGeneratorTest.cpp */; };
 		C9FFF872E56D467F24FAEC7B /* MidiFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF1E4F9CFE2324A18F83D /* MidiFile.cpp */; };
@@ -95,6 +93,7 @@
 		C9FFFD0B153AE4CF499D8D66 /* SynchronizedCallbacksQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2E6D7DC2EC87198D5C0 /* SynchronizedCallbacksQueue.cpp */; };
 		C9FFFD17242496CF18BA58D5 /* PortAudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD7CA2EC6DC9F15DE9D1 /* PortAudio.cpp */; };
 		C9FFFD4E730EE4CCEBA3551D /* PitchInputReaderCollector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8C160107CFE52362C4C /* PitchInputReaderCollector.cpp */; };
+		C9FFFDB0FA79CA2585573D4A /* MainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFAE4B887B8187C24D459 /* MainWindowController.m */; };
 		C9FFFDB2CD9C369890BABFDC /* MidiTrack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA423EB35396AF0A6669 /* MidiTrack.cpp */; };
 		C9FFFDBBD9CEB966139D805A /* CountAssert.h in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF00A355F4925E53CADCF /* CountAssert.h */; };
 		C9FFFE752940964F501E6446 /* MvxFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF08E11535354E15CC819 /* MvxFile.cpp */; };
@@ -150,9 +149,7 @@
 		10628CD8AFBF8E3AC1A10E6A /* NSAlert+AlertUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAlert+AlertUtils.h"; sourceTree = "<group>"; };
 		10628E2960377E84F59F41F0 /* stlassert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stlassert.h; path = PitchDetection/CppUtils/stlassert.h; sourceTree = "<group>"; };
 		10628F00AB8135BF2B435BAC /* NSString+StringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+StringUtils.h"; sourceTree = "<group>"; };
-		10628FA6CAC3BA12D337D093 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		10628FE3AEE2CC419D4F59CD /* TimeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimeUtils.h; path = PitchDetection/CppUtils/TimeUtils.h; sourceTree = "<group>"; };
-		10628FEE388BA8402590A69F /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		2E7A67C01D8E57AE00DFAF8B /* WAVFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WAVFile.cpp; path = PitchDetection/WAVFile.cpp; sourceTree = "<group>"; };
 		2E7A67C11D8E57AE00DFAF8B /* WAVFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAVFile.h; path = PitchDetection/WAVFile.h; sourceTree = "<group>"; };
 		2E7A67C21D8E57AE00DFAF8B /* WavFileAudioInputReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WavFileAudioInputReader.cpp; path = PitchDetection/WavFileAudioInputReader.cpp; sourceTree = "<group>"; };
@@ -183,8 +180,6 @@
 		5448631C20EA647500B6E046 /* libaubio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libaubio.a; path = libs/Release/libaubio.a; sourceTree = "<group>"; };
 		5448631D20EA647500B6E046 /* libboost_serialization.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_serialization.a; path = libs/Release/libboost_serialization.a; sourceTree = "<group>"; };
 		5448631E20EA647500B6E046 /* libportaudio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libportaudio.a; path = libs/Release/libportaudio.a; sourceTree = "<group>"; };
-		5448632720EA67D900B6E046 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		5448632820EA67D900B6E046 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		544C7CE320A98235002B24BD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5470EEC1209F5C6400D77B9C /* libboost_serialization.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_serialization.a; path = libs/Release/libboost_serialization.a; sourceTree = "<group>"; };
 		547378DA2092A3FC003B8748 /* libportaudio.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = libportaudio.la; path = libs/Debug/libportaudio.la; sourceTree = "<group>"; };
@@ -197,6 +192,7 @@
 		C9FFF016E94440F9F9F27A58 /* BoostAssert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BoostAssert.cpp; sourceTree = "<group>"; };
 		C9FFF01FA5C083316C2F410B /* nanovg_mtl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nanovg_mtl.m; sourceTree = "<group>"; };
 		C9FFF03538CD42ED89CD354D /* Options.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Options.h; sourceTree = "<group>"; };
+		C9FFF064080D9900526ED532 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		C9FFF0789AD2038BA3DA38A5 /* Binasc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Binasc.cpp; sourceTree = "<group>"; };
 		C9FFF08B2D6B8FA88F0959E4 /* WorkspaceDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WorkspaceDrawer.cpp; sourceTree = "<group>"; };
 		C9FFF08E11535354E15CC819 /* MvxFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MvxFile.cpp; sourceTree = "<group>"; };
@@ -209,6 +205,7 @@
 		C9FFF1408771C0A3B64A2551 /* NvgDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NvgDrawer.cpp; sourceTree = "<group>"; };
 		C9FFF15878C9F431873450CF /* Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Strings.h; path = PitchDetection/CppUtils/Strings.h; sourceTree = "<group>"; };
 		C9FFF1E4F9CFE2324A18F83D /* MidiFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiFile.cpp; sourceTree = "<group>"; };
+		C9FFF269AAB9646A9EA0A9BC /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C9FFF2E6D7DC2EC87198D5C0 /* SynchronizedCallbacksQueue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SynchronizedCallbacksQueue.cpp; path = PitchDetection/CppUtils/SynchronizedCallbacksQueue.cpp; sourceTree = "<group>"; };
 		C9FFF2FB85C1641E890B086C /* MidiNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiNote.h; sourceTree = "<group>"; };
 		C9FFF3A0BB69C8E7F02351A6 /* tsf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tsf.h; sourceTree = "<group>"; };
@@ -224,7 +221,6 @@
 		C9FFF460C4A9ADFB00392E76 /* MidiMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiMessage.h; sourceTree = "<group>"; };
 		C9FFF49EDE81D0B46952137F /* AlgorithmsTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlgorithmsTest.cpp; path = PitchDetection/CppUtils/tests/AlgorithmsTest.cpp; sourceTree = SOURCE_ROOT; };
 		C9FFF4AF99CFAEC81D8A838A /* audiodecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = audiodecoder.cpp; sourceTree = "<group>"; };
-		C9FFF4B351B54D5A20B3511A /* WorkspaceView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WorkspaceView.mm; sourceTree = "<group>"; };
 		C9FFF4B352C76A7F89AF317E /* WavAudioPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WavAudioPlayer.cpp; sourceTree = "<group>"; };
 		C9FFF4F6CC990DF06B2BB1C7 /* PitchRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchRenderer.h; sourceTree = "<group>"; };
 		C9FFF519F5A10D60A8B1F899 /* PitchesCollector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PitchesCollector.cpp; path = PitchDetection/PitchesCollector.cpp; sourceTree = "<group>"; };
@@ -235,13 +231,14 @@
 		C9FFF594ADB2309B5CA2334F /* MidiFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiFile.h; sourceTree = "<group>"; };
 		C9FFF596B4F2B5CFB35BC50B /* nanovg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = nanovg.c; sourceTree = "<group>"; };
 		C9FFF5D6CB0CEACB514B6CCE /* LoadTsfDefault.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LoadTsfDefault.mm; sourceTree = "<group>"; };
+		C9FFF5DEFBA57126792FF7CD /* WorkspaceView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WorkspaceView.mm; sourceTree = "<group>"; };
 		C9FFF5F49E1D646C17912323 /* PortAudioInputReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PortAudioInputReader.cpp; path = PitchDetection/PortAudioInputReader.cpp; sourceTree = "<group>"; };
 		C9FFF68ABCE9167ECF0AF1C8 /* WavAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WavAudioPlayer.h; sourceTree = "<group>"; };
 		C9FFF69D299A08138F6DE00C /* CAStreamBasicDescription.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = CAStreamBasicDescription.h; sourceTree = "<group>"; };
 		C9FFF6F024954CC62D511B38 /* StringsTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StringsTest.cpp; path = PitchDetection/CppUtils/tests/StringsTest.cpp; sourceTree = SOURCE_ROOT; };
 		C9FFF709A5A3DB8BE4B17B46 /* StlDebugUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StlDebugUtils.h; path = PitchDetection/CppUtils/StlDebugUtils.h; sourceTree = "<group>"; };
 		C9FFF709E60D6232BAF0C4CD /* VxFileTests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VxFileTests.cpp; sourceTree = "<group>"; };
-		C9FFF70CC6AEF28E5E662A4C /* MainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainWindowController.m; sourceTree = "<group>"; };
+		C9FFF7675058DC550707C05B /* MainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainWindowController.h; sourceTree = "<group>"; };
 		C9FFF77AC431EAF0ACD903B5 /* Memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Memory.h; path = PitchDetection/CppUtils/Memory.h; sourceTree = "<group>"; };
 		C9FFF7DA2A7B0A4772FADB27 /* Point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Point.h; path = PitchDetection/CppUtils/Point.h; sourceTree = "<group>"; };
 		C9FFF7E457FED8A685600F59 /* nanovg_mtl_shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = nanovg_mtl_shaders.metal; sourceTree = "<group>"; };
@@ -252,14 +249,15 @@
 		C9FFF8823954020C23E570B5 /* PeriodicallySleepingBackgroundTask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PeriodicallySleepingBackgroundTask.cpp; path = PitchDetection/CppUtils/PeriodicallySleepingBackgroundTask.cpp; sourceTree = "<group>"; };
 		C9FFF8C160107CFE52362C4C /* PitchInputReaderCollector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PitchInputReaderCollector.cpp; path = PitchDetection/PitchInputReaderCollector.cpp; sourceTree = "<group>"; };
 		C9FFF8DF99628FC6B2C1E3C3 /* Rect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Rect.h; path = PitchDetection/CppUtils/Rect.h; sourceTree = "<group>"; };
+		C9FFF8E57A889ECDE8949D82 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		C9FFF8E7BA2D6A027BB66320 /* AubioPitchDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AubioPitchDetector.cpp; path = PitchDetection/AubioPitchDetector.cpp; sourceTree = "<group>"; };
 		C9FFF8FE4DFBA5720805C7E3 /* PitchTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PitchTest.cpp; path = PitchDetection/tests/PitchTest.cpp; sourceTree = SOURCE_ROOT; };
 		C9FFF94FF4FECA6F67FA006D /* AudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayer.h; sourceTree = "<group>"; };
+		C9FFF95D62D0CA594FD3D8BB /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		C9FFF96387DAC07E60D1628B /* AudioUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioUtils.h; path = PitchDetection/AudioUtils.h; sourceTree = "<group>"; };
 		C9FFF970D73B55602129A70F /* MvxPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvxPlayer.h; sourceTree = "<group>"; };
 		C9FFF97D42B64E1E050CADB4 /* Functions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Functions.h; path = PitchDetection/CppUtils/Functions.h; sourceTree = "<group>"; };
 		C9FFF9C3A05CC2DBEF0526B6 /* MidiEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiEvent.cpp; sourceTree = "<group>"; };
-		C9FFF9CB4E132B5B4F815B0D /* WorkspaceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceView.h; sourceTree = "<group>"; };
 		C9FFF9D3C242FFC9A4D440C7 /* VxFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxFile.h; sourceTree = "<group>"; };
 		C9FFF9F61583D3A7E3FB2459 /* RoundedRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RoundedRect.h; path = PitchDetection/CppUtils/RoundedRect.h; sourceTree = "<group>"; };
 		C9FFFA034B7CE992C07C19B4 /* Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Circle.h; path = PitchDetection/CppUtils/Circle.h; sourceTree = "<group>"; };
@@ -272,6 +270,7 @@
 		C9FFFAB5D43F0E5C5D47D0A8 /* NvgDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvgDrawer.h; sourceTree = "<group>"; };
 		C9FFFABBAF2D1B722ECDFA27 /* SoundFont2PitchRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundFont2PitchRenderer.h; sourceTree = "<group>"; };
 		C9FFFAC7E81807A213548C10 /* MvxFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvxFile.h; sourceTree = "<group>"; };
+		C9FFFAE4B887B8187C24D459 /* MainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainWindowController.m; sourceTree = "<group>"; };
 		C9FFFB1B7C3F160B173A4071 /* PitchDetectionSmoothingBufferTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PitchDetectionSmoothingBufferTest.cpp; path = PitchDetection/tests/PitchDetectionSmoothingBufferTest.cpp; sourceTree = SOURCE_ROOT; };
 		C9FFFB1C83043889B4C74223 /* MidiMessage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiMessage.cpp; sourceTree = "<group>"; };
 		C9FFFB224720956787585588 /* HashUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HashUtils.h; path = PitchDetection/CppUtils/HashUtils.h; sourceTree = "<group>"; };
@@ -280,8 +279,8 @@
 		C9FFFB85AD13A0DC254A5BFC /* AudioFilePlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioFilePlayer.cpp; sourceTree = "<group>"; };
 		C9FFFBCE6261AC60FFBF3B9F /* MidiEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiEvent.h; sourceTree = "<group>"; };
 		C9FFFBD710C1F3DE858A19B5 /* VxFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VxFile.cpp; sourceTree = "<group>"; };
-		C9FFFC3CB6AB307D4D39CFDE /* MainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainWindowController.h; sourceTree = "<group>"; };
 		C9FFFC6D53C891B61A3E964C /* Binasc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Binasc.h; sourceTree = "<group>"; };
+		C9FFFC9C0E3866376B7B822B /* WorkspaceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceView.h; sourceTree = "<group>"; };
 		C9FFFCDC2C92CB6FCC4D85E5 /* Drawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drawer.h; sourceTree = "<group>"; };
 		C9FFFCEEF86F468AC8AE82F0 /* VxFileGeneratorTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VxFileGeneratorTest.cpp; sourceTree = "<group>"; };
 		C9FFFD36037E3FEEA67DF037 /* OpenGLUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGLUtils.h; path = PitchDetection/CppUtils/OpenGLUtils.h; sourceTree = "<group>"; };
@@ -416,13 +415,9 @@
 		2EF1E8CD1D57F95100E02C33 /* VocalTrainer */ = {
 			isa = PBXGroup;
 			children = (
-				5448632720EA67D900B6E046 /* AppDelegate.h */,
-				5448632820EA67D900B6E046 /* AppDelegate.m */,
 				2EF1E8D21D57F95100E02C33 /* Assets.xcassets */,
 				2EF1E8D41D57F95100E02C33 /* Main.storyboard */,
 				2EF1E8D71D57F95100E02C33 /* Info.plist */,
-				10628FA6CAC3BA12D337D093 /* MainViewController.m */,
-				10628FEE388BA8402590A69F /* MainViewController.h */,
 				106289779E14B72C075BE323 /* Utils */,
 				10628F99ACFB6F50A805A23B /* Workspace */,
 				C9FFF1536A6FDAC558B00F51 /* VxPlayer */,
@@ -431,8 +426,6 @@
 				C9FFF8A3E1BD0832FF93CB64 /* nanovg */,
 				C9FFFE2F7B84AA3EF12315D3 /* UI */,
 				C9FFF70B6A25AE6405E03164 /* Drawers */,
-				C9FFF70CC6AEF28E5E662A4C /* MainWindowController.m */,
-				C9FFFC3CB6AB307D4D39CFDE /* MainWindowController.h */,
 			);
 			path = VocalTrainer;
 			sourceTree = "<group>";
@@ -576,11 +569,11 @@
 			path = opengl;
 			sourceTree = "<group>";
 		};
-		C9FFF5FE86904C069C5869A0 /* Workspace */ = {
+		C9FFF64A262243550B35BB89 /* Workspace */ = {
 			isa = PBXGroup;
 			children = (
-				C9FFF4B351B54D5A20B3511A /* WorkspaceView.mm */,
-				C9FFF9CB4E132B5B4F815B0D /* WorkspaceView.h */,
+				C9FFF5DEFBA57126792FF7CD /* WorkspaceView.mm */,
+				C9FFFC9C0E3866376B7B822B /* WorkspaceView.h */,
 			);
 			path = Workspace;
 			sourceTree = "<group>";
@@ -657,10 +650,24 @@
 			path = Decoder;
 			sourceTree = "<group>";
 		};
+		C9FFFCB0EE9033A01C1EC538 /* MacOS */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFF64A262243550B35BB89 /* Workspace */,
+				C9FFF269AAB9646A9EA0A9BC /* AppDelegate.h */,
+				C9FFF064080D9900526ED532 /* AppDelegate.m */,
+				C9FFF8E57A889ECDE8949D82 /* MainViewController.m */,
+				C9FFFAE4B887B8187C24D459 /* MainWindowController.m */,
+				C9FFF95D62D0CA594FD3D8BB /* MainViewController.h */,
+				C9FFF7675058DC550707C05B /* MainWindowController.h */,
+			);
+			path = MacOS;
+			sourceTree = "<group>";
+		};
 		C9FFFE2F7B84AA3EF12315D3 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				C9FFF5FE86904C069C5869A0 /* Workspace */,
+				C9FFFCB0EE9033A01C1EC538 /* MacOS */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -770,7 +777,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5448632A20EA6CE200B6E046 /* AppDelegate.h in Sources */,
 				544C7E9A20C9717B0070D638 /* PitchesCollector.h in Sources */,
 				544C7E9B20C9717B0070D638 /* PitchesCollector.cpp in Sources */,
 				2EF1E9A11D592EC100E02C33 /* Pitch.cpp in Sources */,
@@ -781,7 +787,6 @@
 				2EF1E9A91D592F1600E02C33 /* AudioInputReader.cpp in Sources */,
 				2EDCC6BD1DB432E40086A6CE /* WavBufferReader.cpp in Sources */,
 				2E7A67C51D8E57AE00DFAF8B /* WavFileAudioInputReader.cpp in Sources */,
-				10628786DBDC38E7524C3C23 /* MainViewController.m in Sources */,
 				10628FD4F0C13D5F84BF3D13 /* NSString+StringUtils.m in Sources */,
 				10628AB2C6E402BC9F64184D /* NSAlert+AlertUtils.m in Sources */,
 				106281681E5563B2FED83F72 /* PitchDetectionSmoothingAudioBuffer.cpp in Sources */,
@@ -790,7 +795,6 @@
 				C9FFF3994C66634963735E68 /* LoadTsfDefault.mm in Sources */,
 				C9FFF0C3BC65E9F88000F019 /* MvxPlayer.cpp in Sources */,
 				C9FFFD0B153AE4CF499D8D66 /* SynchronizedCallbacksQueue.cpp in Sources */,
-				5448632920EA67D900B6E046 /* AppDelegate.m in Sources */,
 				C9FFF4B18FE6B96EF2809623 /* VxFile.cpp in Sources */,
 				C9FFF9E99BD59AA43EE09CE7 /* Options.cpp in Sources */,
 				C9FFFF6EF20C43D77E8EC6EC /* MidiMessage.cpp in Sources */,
@@ -821,12 +825,14 @@
 				C9FFFC9DEF6575AF2C852ECA /* nanovg.c in Sources */,
 				C9FFF9A98FE6194C4185CA07 /* nanovg_mtl_shaders.metal in Sources */,
 				C9FFF1F56D256A76020F979B /* nanovg_mtl.m in Sources */,
-				C9FFF339A65BF4B2E2B7A5A5 /* WorkspaceView.mm in Sources */,
 				C9FFFCE45205D3175363FF68 /* NvgDrawer.cpp in Sources */,
 				C9FFF135182C1CD2F799102D /* NvgDrawerMetalPlatformStuff.mm in Sources */,
 				C9FFF125C3233F691A61B851 /* Drawer.cpp in Sources */,
 				C9FFF8928C4A9BA0FB4CE956 /* QuartzDrawer.mm in Sources */,
-				C9FFF5E2A8BA61635830E09A /* MainWindowController.m in Sources */,
+				C9FFF75EC0D59527C32087FD /* WorkspaceView.mm in Sources */,
+				C9FFF45EAAACDFD1AF2C8CFE /* AppDelegate.m in Sources */,
+				C9FFF5673D02E39A6BCCC6E6 /* MainViewController.m in Sources */,
+				C9FFFDB0FA79CA2585573D4A /* MainWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
