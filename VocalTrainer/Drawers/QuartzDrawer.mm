@@ -4,7 +4,6 @@
 //
 
 #include "QuartzDrawer.h"
-#include <iostream>
 
 using namespace std;
 
