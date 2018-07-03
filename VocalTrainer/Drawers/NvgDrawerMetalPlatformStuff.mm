@@ -1,3 +1,5 @@
+#ifdef USE_METAL
+
 #include "NvgDrawer.h"
 
 #include <nanovg/nanovg_mtl.h>
@@ -9,3 +11,5 @@ NvgDrawer::NvgDrawer(void* layer) {
 NvgDrawer::~NvgDrawer() {
     nvgDeleteMTL(ctx);
 }
+
+#endif

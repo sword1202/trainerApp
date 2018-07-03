@@ -15,7 +15,7 @@ class NvgDrawer : public Drawer {
     float translateX = 0;
     float translateY = 0;
 public:
-#ifndef __APPLE__
+#ifndef USE_METAL
     NvgDrawer();
 #else
     NvgDrawer(void* layer);

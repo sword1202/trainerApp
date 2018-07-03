@@ -180,6 +180,10 @@ void WorkspaceDrawer::drawPitchesGraph() const {
     assert(pitchGraphColor[3] > 0 && "pitchGraphColor not initialized or is completely transparent");
 
     int pitchesCount = pitchesCollector->getPitchesCount();
+    if (pitchesCount <= 0) {
+        return;
+    }
+
     int i = 0;
 
     while (i < pitchesCount && !pitchesCollector->getPitchAt(i).isValid()) {

@@ -81,6 +81,7 @@
 		C9FFF9A98FE6194C4185CA07 /* nanovg_mtl_shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF7E457FED8A685600F59 /* nanovg_mtl_shaders.metal */; };
 		C9FFF9E99BD59AA43EE09CE7 /* Options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFB62B47690E086FA2F2D /* Options.cpp */; };
 		C9FFF9F1559644E1C1072C8E /* audiodecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF4AF99CFAEC81D8A838A /* audiodecoder.cpp */; };
+		C9FFFA5DC28858B87590CD97 /* OpenGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFF1FEC299BE4F713B765 /* OpenGLView.m */; };
 		C9FFFA9ABAF4CE1CBA8AC864 /* PortAudioInputReader.cpp in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF5F49E1D646C17912323 /* PortAudioInputReader.cpp */; };
 		C9FFFAEDB817B9AF82141B5F /* PitchesCollector.cpp in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF519F5A10D60A8B1F899 /* PitchesCollector.cpp */; };
 		C9FFFB3D9CBDEE37A8696DB2 /* Executors.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF3F33A6942DEFCDDF2C9 /* Executors.mm */; };
@@ -229,6 +230,7 @@
 		C9FFF51CA94B2770B893C639 /* MidiFileReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiFileReader.cpp; sourceTree = "<group>"; };
 		C9FFF523E4CAB6655C922543 /* VxLyricsInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxLyricsInterval.h; sourceTree = "<group>"; };
 		C9FFF525423FCEE4AC6A3916 /* PitchInputReaderCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PitchInputReaderCollector.h; path = PitchDetection/PitchInputReaderCollector.h; sourceTree = "<group>"; };
+		C9FFF55EBE6AF4C806858750 /* OpenGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLView.h; sourceTree = "<group>"; };
 		C9FFF56C3AAB87110FBA08F2 /* VxPitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxPitch.h; sourceTree = "<group>"; };
 		C9FFF594ADB2309B5CA2334F /* MidiFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiFile.h; sourceTree = "<group>"; };
 		C9FFF596B4F2B5CFB35BC50B /* nanovg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = nanovg.c; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 		C9FFFEEFD6FD398814656299 /* ListenersSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ListenersSet.h; path = PitchDetection/CppUtils/ListenersSet.h; sourceTree = "<group>"; };
 		C9FFFEF6E23B96974A519665 /* a.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file.sf2; path = a.sf2; sourceTree = "<group>"; };
 		C9FFFF06ECE0B4B1FAF683DB /* audiodecodercoreaudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = audiodecodercoreaudio.h; sourceTree = "<group>"; };
+		C9FFFF1FEC299BE4F713B765 /* OpenGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenGLView.m; sourceTree = "<group>"; };
 		C9FFFF2EAA52A9AE6986A278 /* audiodecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = audiodecoder.h; sourceTree = "<group>"; };
 		C9FFFF2F348E4948EC1CF743 /* OpenGLUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OpenGLUtils.cpp; path = PitchDetection/CppUtils/OpenGLUtils.cpp; sourceTree = "<group>"; };
 		C9FFFF4ED051A3062C124566 /* Line.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Line.h; path = PitchDetection/CppUtils/Line.h; sourceTree = "<group>"; };
@@ -581,6 +584,8 @@
 			children = (
 				C9FFF5DEFBA57126792FF7CD /* WorkspaceView.mm */,
 				C9FFFC9C0E3866376B7B822B /* WorkspaceView.h */,
+				C9FFFF1FEC299BE4F713B765 /* OpenGLView.m */,
+				C9FFF55EBE6AF4C806858750 /* OpenGLView.h */,
 			);
 			path = Workspace;
 			sourceTree = "<group>";
@@ -861,6 +866,7 @@
 				C9FFFDB0FA79CA2585573D4A /* MainWindowController.m in Sources */,
 				C9FFFE99C5A6977026507401 /* UiUtils.m in Sources */,
 				C9FFF22CECA9CBB91C046074 /* Manager.cpp in Sources */,
+				C9FFFA5DC28858B87590CD97 /* OpenGLView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
