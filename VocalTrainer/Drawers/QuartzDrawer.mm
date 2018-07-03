@@ -4,6 +4,9 @@
 //
 
 #include "QuartzDrawer.h"
+#include <iostream>
+
+using namespace std;
 
 void QuartzDrawer::translate(float x, float y) {
     CGContextTranslateCTM(ctx, x, height - y);
@@ -93,11 +96,11 @@ void QuartzDrawer::scale(float x, float y) {
 }
 
 void QuartzDrawer::rect(float x, float y, float w, float h) {
-    CGContextAddRect(ctx, CGRectMake(x, y, w, h));
+    CGContextAddRect(ctx, CGRectMake(x, height - y, w, -h));
 }
 
 void QuartzDrawer::fillRect(float x, float y, float w, float h) {
-    CGContextFillRect(ctx, CGRectMake(x, y, w, h));
+    CGContextFillRect(ctx, CGRectMake(x, height - y, w, -h));
 }
 
 QuartzDrawer::QuartzDrawer() {

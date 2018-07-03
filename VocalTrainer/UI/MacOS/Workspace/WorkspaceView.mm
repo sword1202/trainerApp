@@ -7,6 +7,7 @@
 #include "WorkspaceDrawer.h"
 #include "QuartzDrawer.h"
 #import "UiUtils.h"
+#import "Manager.h"
 
 
 @implementation WorkspaceView {
@@ -17,14 +18,22 @@
     self = [super initWithCoder:coder];
     if (self) {
         [UiUtils setupFrameEventOfView:self];
+
+        [NSTimer scheduledTimerWithTimeInterval:1.0/60.0 target:self
+                                       selector:@selector(redraw)
+                                       userInfo:nil repeats:YES];
     }
 
     return self;
 }
 
+- (void)redraw {
+    [self setNeedsDisplay:YES];
+}
+
 - (void)frameChanged:(id)boundsChanged {
     [self resizeDrawer];
-    [self setNeedsDisplay:YES];
+    [self redraw];
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
@@ -32,6 +41,9 @@
     if (!_workspaceDrawer) {
         Drawer* drawer = new QuartzDrawer();
         _workspaceDrawer = std::make_unique<WorkspaceDrawer>(drawer);
+        _workspaceDrawer->setFirstPitchPerfectFrequencyIndex(Pitch("C4").getPerfectFrequencyIndex());
+        _workspaceDrawer->setPitchesCollector(Manager::instance()->getPitchInputReader());
+        _workspaceDrawer->setIntervalsPerSecond(3);
         _workspaceDrawer->setIntervalWidth(30);
         _workspaceDrawer->setIntervalHeight(15);
         [self resizeDrawer];

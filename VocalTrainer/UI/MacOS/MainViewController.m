@@ -19,7 +19,7 @@
 
 -(IBAction) openDocument:(id)sender {
     NSOpenPanel *panel = [NSOpenPanel openPanel];
-    NSArray* fileTypes = @[@"wav", @"WAV"];
+    NSArray* fileTypes = @[@"mvx", @"MVX"];
     [panel setFloatingPanel:YES];
     [panel setCanChooseDirectories:NO];
     [panel setCanChooseFiles:YES];
