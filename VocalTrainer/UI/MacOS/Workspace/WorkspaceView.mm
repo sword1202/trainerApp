@@ -6,6 +6,7 @@
 #import "WorkspaceView.h"
 #include "WorkspaceDrawer.h"
 #import "NvgDrawer.h"
+#import "Manager.h"
 
 
 @implementation WorkspaceView {
@@ -36,6 +37,7 @@
     _workspaceDrawer->resize(width, height, 2);
     _workspaceDrawer->setIntervalWidth(30);
     _workspaceDrawer->setIntervalHeight(15);
+    _workspaceDrawer->setPitchesCollector(Manager::instance()->getPitchInputReader());
 }
 
 - (void)drawInMTKView:(MTKView *)view {

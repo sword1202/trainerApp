@@ -52,7 +52,7 @@ void MvxPlayer::init(std::istream &is) {
         return DONT_DELETE_LISTENER;
     });
 
-    Functions::executeAllAndClear(onInitialisedQueue);
+    Functions::ExecuteAllAndClear(onInitialisedQueue);
 }
 
 void MvxPlayer::init(const char *filePath) {

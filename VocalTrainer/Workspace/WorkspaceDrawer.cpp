@@ -49,7 +49,7 @@ void WorkspaceDrawer::draw() {
     drawVerticalGrid();
     drawHorizontalGrid();
 //    drawPitches();
-//    drawPitchesGraph();
+    drawPitchesGraph();
 
     drawer->endFrame();
 }
@@ -201,7 +201,6 @@ void WorkspaceDrawer::drawPitchesGraph() const {
         double time = pitchesCollector->getTimeAt(i);
         getXY(time, pitch);
         drawer->moveTo((float)x, (float)y);
-        cout<<"moveTo("<<x<<","<<y<<")\n";
 
         i++;
         if (i >= pitchesCount) {
@@ -210,7 +209,6 @@ void WorkspaceDrawer::drawPitchesGraph() const {
 
         if (!pitchesCollector->getPitchAt(i).isValid()) {
             drawer->lineTo((float)x, (float)y);
-            cout<<"lineTo("<<x<<","<<y<<")\n";
             continue;
         }
 
@@ -223,7 +221,6 @@ void WorkspaceDrawer::drawPitchesGraph() const {
             double time = pitchesCollector->getTimeAt(i);
             getXY(time, pitch);
             drawer->lineTo((float)x, (float)y);
-            cout<<"lineTo("<<x<<","<<y<<")\n";
         }
     }
     drawer->stroke();
@@ -274,6 +271,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer) :
     setPitchGraphColor({0xFF, 0x5E, 0x85, 0xFF});
     setPitchColor({0x6E, 0x7E, 0xC5, 0xFF});
     setPitchRadius(PITCH_RADIUS);
+    setIntervalsPerSecond(3);
 }
 
 WorkspaceDrawer::~WorkspaceDrawer() {

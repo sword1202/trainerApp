@@ -15,7 +15,7 @@
     self = [super init];
     if (self) {
         Manager::init();
-        //Manager::instance()->getPitchInputReader()->start();
+        Manager::instance()->getPitchInputReader()->start();
     }
 
     return self;

@@ -4,6 +4,7 @@
 //
 
 #include "Manager.h"
+#include "AubioPitchDetector.h"
 
 Manager* Manager::_instance = nullptr;
 
@@ -17,7 +18,9 @@ void Manager::init() {
 
 Manager::Manager() {
     pitchInputReader = new PitchInputReaderCollector();
-    pitchInputReader->init(CreateDefaultAudioInputReader(2048), 1, true);
+    AubioPitchDetector* pitchDetector = new AubioPitchDetector();
+    pitchDetector->setThreshold(0.1);
+    pitchInputReader->init(CreateDefaultAudioInputReader(1024), 4, pitchDetector, true);
 }
 
 PitchInputReaderCollector *Manager::getPitchInputReader() const {
