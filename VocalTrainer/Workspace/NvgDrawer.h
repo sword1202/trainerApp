@@ -22,6 +22,8 @@ public:
 #endif
     virtual ~NvgDrawer();
 
+    void clear() override;
+
     void beginFrame(float width, float height, float devicePixelRatio) override;
     void endFrame() override;
     void moveTo(float x, float y) override;

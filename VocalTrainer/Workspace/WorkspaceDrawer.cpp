@@ -44,13 +44,12 @@ void WorkspaceDrawer::draw() {
     frameTime = now;
 
     drawer->beginFrame(width, height, devicePixelRatio);
-    drawer->setFillColor({255, 255, 255, 255});
-    drawer->fillRect(0, 0, width, height);
+    drawer->clear();
 
     drawVerticalGrid();
     drawHorizontalGrid();
-    drawPitches();
-    drawPitchesGraph();
+//    drawPitches();
+//    drawPitchesGraph();
 
     drawer->endFrame();
 }
@@ -241,7 +240,6 @@ const WorkspaceDrawer::Color & WorkspaceDrawer::getGridColor() const {
 
 void WorkspaceDrawer::setGridColor(const Color& color) {
     // Should be called only once before rendering to avoid synchronization issues
-    CountAssert(1);
     this->gridColor = color;
 }
 
@@ -251,7 +249,6 @@ const WorkspaceDrawer::Color & WorkspaceDrawer::getAccentGridColor() const {
 
 void WorkspaceDrawer::setAccentGridColor(const Color& color) {
     // Should be called only once before rendering to avoid synchronization issues
-    CountAssert(1);
     this->accentGridColor = color;
 }
 
@@ -287,7 +284,6 @@ float WorkspaceDrawer::getSizeMultiplier() const {
 
 void WorkspaceDrawer::setSizeMultiplier(float sizeMultiplier) {
     assert(sizeMultiplier > 0);
-    CountAssert(1);
     this->sizeMultiplier = sizeMultiplier;
 }
 
@@ -305,7 +301,6 @@ PitchesCollector *WorkspaceDrawer::getPitchesCollector() const {
 }
 
 void WorkspaceDrawer::setPitchesCollector(PitchesCollector *pitchesCollector) {
-    CountAssert(1);
     this->pitchesCollector = pitchesCollector;
 }
 
@@ -314,7 +309,6 @@ const WorkspaceDrawer::Color &WorkspaceDrawer::getPitchGraphColor() const {
 }
 
 void WorkspaceDrawer::setPitchGraphColor(const WorkspaceDrawer::Color &pitchGraphColor) {
-    CountAssert(1);
     this->pitchGraphColor = pitchGraphColor;
 }
 
@@ -323,7 +317,6 @@ const WorkspaceDrawer::Color &WorkspaceDrawer::getPitchColor() const {
 }
 
 void WorkspaceDrawer::setPitchColor(const WorkspaceDrawer::Color &pitchColor) {
-    CountAssert(1);
     this->pitchColor = pitchColor;
 }
 
@@ -333,7 +326,6 @@ float WorkspaceDrawer::getPitchRadius() const {
 
 void WorkspaceDrawer::setPitchRadius(float pitchRadius) {
     assert(pitchRadius >= 0);
-    CountAssert(1);
     this->pitchRadius = pitchRadius;
 }
 

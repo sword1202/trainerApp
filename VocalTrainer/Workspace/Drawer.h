@@ -19,6 +19,8 @@ public:
 
     typedef std::array<unsigned char, 4> Color;
 
+    virtual void clear() = 0;
+
     virtual void translate(float x, float y) = 0;
     virtual float getTranslateX() = 0;
     virtual float getTranslateY() = 0;

@@ -6,6 +6,8 @@
 #include "NvgDrawer.h"
 #include <nanovg/nanovg.h>
 
+#include <nanovg/nanovg_mtl.h>
+
 #include <assert.h>
 
 static NVGcolor toNvgColor(const Drawer::Color& color) {
@@ -121,3 +123,19 @@ void NvgDrawer::fillRect(float x, float y, float w, float h) {
     nvgRect(ctx, x, y, w, h);
     nvgFill(ctx);
 }
+
+#ifdef __APPLE__
+
+void NvgDrawer::clear() {
+    mnvgClearWithColor(ctx, nvgRGBA(255, 255, 255, 255));
+}
+
+NvgDrawer::NvgDrawer(void* layer) {
+    ctx = nvgCreateMTL(layer, NVG_ANTIALIAS);
+}
+
+NvgDrawer::~NvgDrawer() {
+    nvgDeleteMTL(ctx);
+}
+
+#endif
