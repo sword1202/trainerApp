@@ -14,23 +14,7 @@ static NVGcolor toNvgColor(const Drawer::Color& color) {
     return nvgRGBA(color[0], color[1], color[2], color[3]);
 }
 
-#ifndef __APPLE__
-
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
-
-#define NANOVG_GL2_IMPLEMENTATION
-#include <nanovg/nanovg_gl.h>
-
-NvgDrawer::NvgDrawer() {
-    ctx = nvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES);
-}
-
-NvgDrawer::~NvgDrawer() {
-    nvgDeleteGL2(ctx);
-}
-
-#else
+#ifdef __APPLE__
 
 void NvgDrawer::clear() {
     mnvgClearWithColor(ctx, nvgRGBA(255, 255, 255, 255));
@@ -44,6 +28,26 @@ NvgDrawer::~NvgDrawer() {
     nvgDeleteMTL(ctx);
 }
 
+#else
+
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+
+#define NANOVG_GL2_IMPLEMENTATION
+#include <nanovg/nanovg_gl.h>
+
+void NvgDrawer::clear() {
+    glClearColor(1, 1, 1, 1);
+    glClear(GL_COLOR_BUFFER_BIT);
+}
+
+NvgDrawer::NvgDrawer() {
+    ctx = nvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES);
+}
+
+NvgDrawer::~NvgDrawer() {
+    nvgDeleteGL2(ctx);
+}
 #endif
 
 void NvgDrawer::beginFrame(float width, float height, float devicePixelRatio) {
