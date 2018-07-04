@@ -6,7 +6,8 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 #import <MetalKit/MetalKit.h>
+#import "OpenGLView.h"
 
-@interface WorkspaceView : MTKView<MTKViewDelegate>
+@interface WorkspaceView : NSOpenGLView
 
 @end

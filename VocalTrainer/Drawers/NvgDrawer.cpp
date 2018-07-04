@@ -14,6 +14,24 @@ static NVGcolor toNvgColor(const Drawer::Color& color) {
     return nvgRGBA(color[0], color[1], color[2], color[3]);
 }
 
+#ifndef USE_METAL
+
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+
+#define NANOVG_GL2_IMPLEMENTATION
+#include <nanovg/nanovg_gl.h>
+
+NvgDrawer::NvgDrawer() {
+    ctx = nvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES);
+}
+
+NvgDrawer::~NvgDrawer() {
+    nvgDeleteGL2(ctx);
+}
+
+#endif
+
 void NvgDrawer::beginFrame(float width, float height, float devicePixelRatio) {
     translateX = 0;
     translateY = 0;

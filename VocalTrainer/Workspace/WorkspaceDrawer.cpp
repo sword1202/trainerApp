@@ -164,6 +164,10 @@ void WorkspaceDrawer::drawPitchesGraph() const {
     assert(pitchGraphColor[3] > 0 && "pitchGraphColor not initialized or is completely transparent");
 
     int pitchesCount = pitchesCollector->getPitchesCount();
+    if (pitchesCount <= 0) {
+        return;
+    }
+
     int i = 0;
 
     while (i < pitchesCount && !pitchesCollector->getPitchAt(i).isValid()) {
@@ -197,6 +201,7 @@ void WorkspaceDrawer::drawPitchesGraph() const {
         double time = pitchesCollector->getTimeAt(i);
         getXY(time, pitch);
         drawer->moveTo((float)x, (float)y);
+        cout<<"moveTo("<<x<<","<<y<<")\n";
 
         i++;
         if (i >= pitchesCount) {
@@ -205,6 +210,7 @@ void WorkspaceDrawer::drawPitchesGraph() const {
 
         if (!pitchesCollector->getPitchAt(i).isValid()) {
             drawer->lineTo((float)x, (float)y);
+            cout<<"lineTo("<<x<<","<<y<<")\n";
             continue;
         }
 
@@ -217,6 +223,7 @@ void WorkspaceDrawer::drawPitchesGraph() const {
             double time = pitchesCollector->getTimeAt(i);
             getXY(time, pitch);
             drawer->lineTo((float)x, (float)y);
+            cout<<"lineTo("<<x<<","<<y<<")\n";
         }
     }
     drawer->stroke();
@@ -231,6 +238,7 @@ double WorkspaceDrawer::getPitchGraphDuration() const {
 }
 
 double WorkspaceDrawer::getIntervalDuration() const {
+    assert(intervalsPerSecond > 0);
     return 1.0 / intervalsPerSecond;
 }
 
@@ -259,7 +267,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer) :
         horizontalOffset(0),
         sizeMultiplier(1),
         intervalsPerSecond(0),
-        firstPitchPerfectFrequencyIndex(-1),
+        firstPitchPerfectFrequencyIndex(0),
         frameTime(0), drawer(drawer) {
     setGridColor({0x8B, 0x89, 0xB6, 0x33});
     setAccentGridColor({0x8B, 0x89, 0xB6, 0x80});

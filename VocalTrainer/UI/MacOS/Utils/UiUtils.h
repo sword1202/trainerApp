@@ -1,5 +1,5 @@
 //
-// Created by Semyon Tikhonenko on 7/2/18.
+// Created by Semyon Tikhonenko on 7/3/18.
 // Copyright (c) 2018 Mac. All rights reserved.
 //
 
@@ -7,8 +7,6 @@
 #import <AppKit/AppKit.h>
 
 
-@interface AppDelegate : NSObject<NSApplicationDelegate>
-
-
-
+@interface UiUtils : NSObject
++ (void)setupFrameEventOfView:(NSView*)view;
 @end

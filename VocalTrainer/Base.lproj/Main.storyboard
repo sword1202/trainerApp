@@ -651,7 +651,7 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
+                <windowController id="B8D-0N-5wS" customClass="MainWindowController" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <rect key="contentRect" x="597" y="428" width="480" height="270"/>
@@ -687,9 +687,6 @@
                             <constraint firstItem="uID-Be-fzm" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="mbR-ic-Iwa"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="pitchGraphView" destination="uID-Be-fzm" id="gVv-lw-1Q3"/>
-                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
