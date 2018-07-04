@@ -14,7 +14,7 @@ static NVGcolor toNvgColor(const Drawer::Color& color) {
     return nvgRGBA(color[0], color[1], color[2], color[3]);
 }
 
-#ifndef USE_METAL
+#ifndef __APPLE__
 
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
@@ -28,6 +28,20 @@ NvgDrawer::NvgDrawer() {
 
 NvgDrawer::~NvgDrawer() {
     nvgDeleteGL2(ctx);
+}
+
+#else
+
+void NvgDrawer::clear() {
+    mnvgClearWithColor(ctx, nvgRGBA(255, 255, 255, 255));
+}
+
+NvgDrawer::NvgDrawer(void* layer) {
+    ctx = nvgCreateMTL(layer, NVG_ANTIALIAS);
+}
+
+NvgDrawer::~NvgDrawer() {
+    nvgDeleteMTL(ctx);
 }
 
 #endif
@@ -141,19 +155,3 @@ void NvgDrawer::fillRect(float x, float y, float w, float h) {
     nvgRect(ctx, x, y, w, h);
     nvgFill(ctx);
 }
-
-#ifdef __APPLE__
-
-void NvgDrawer::clear() {
-    mnvgClearWithColor(ctx, nvgRGBA(255, 255, 255, 255));
-}
-
-NvgDrawer::NvgDrawer(void* layer) {
-    ctx = nvgCreateMTL(layer, NVG_ANTIALIAS);
-}
-
-NvgDrawer::~NvgDrawer() {
-    nvgDeleteMTL(ctx);
-}
-
-#endif
