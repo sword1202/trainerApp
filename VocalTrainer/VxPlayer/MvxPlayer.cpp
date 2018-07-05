@@ -4,7 +4,7 @@
 //
 
 #include "MvxPlayer.h"
-#include "Strings.h"
+#include "StringUtils.h"
 #include "AudioFilePlayer.h"
 #include "VxFileAudioPlayer.h"
 #include "MvxFile.h"
@@ -138,10 +138,16 @@ void MvxPlayer::prepare() {
     instrumentalPlayer->prepare();
     vxPlayer->prepare();
     assert(fabs(instrumentalPlayer->getTrackDurationInSeconds() - vxPlayer->getTrackDurationInSeconds()) < 0.1);
+    prepareFinishedListeners.executeAll();
+    vxFileChangedListeners.executeAll(&vxPlayer->getVxFile());
 }
 
-const VxFile &MvxPlayer::getVxFile() const {
-    return vxPlayer->getVxFile();
+const VxFile * MvxPlayer::getVxFile() const {
+    if (!vxPlayer) {
+        return nullptr;
+    }
+
+    return &vxPlayer->getVxFile();
 }
 
 const boost::optional<MvxPlayer::Bounds> &MvxPlayer::getBounds() const {
@@ -199,10 +205,11 @@ double MvxPlayer::getBeatsPerMinute() const {
 void MvxPlayer::onPlaybackStarted() {
     playStartedTime = TimeUtils::NowInSeconds();
     playStartedSeek = getSeek();
+    isPlayingChangedListeners.executeAll(true);
 }
 
 void MvxPlayer::onPlaybackStopped() {
-
+    isPlayingChangedListeners.executeAll(false);
 }
 
 bool MvxPlayer::hasPitchNow(const Pitch &pitch) const {
@@ -210,7 +217,7 @@ bool MvxPlayer::hasPitchNow(const Pitch &pitch) const {
         return false;
     }
 
-    return getVxFile().hasPitchInMoment(getSeek(), pitch);
+    return getVxFile()->hasPitchInMoment(getSeek(), pitch);
 }
 
 bool MvxPlayer::hasAnyPitchNow() const {
@@ -218,7 +225,7 @@ bool MvxPlayer::hasAnyPitchNow() const {
         return false;
     }
 
-    return getVxFile().hasPitchesInMoment(getSeek());
+    return getVxFile()->hasPitchesInMoment(getSeek());
 }
 
 void MvxPlayer::executeWhenInitialized(const std::function<void()> &func) {
@@ -227,6 +234,30 @@ void MvxPlayer::executeWhenInitialized(const std::function<void()> &func) {
     } else {
         onInitialisedQueue.push_back(func);
     }
+}
+
+int MvxPlayer::addIsPlayingChangedListener(const MvxPlayer::IsPlayingChangedListener &listener) {
+    return isPlayingChangedListeners.addListener(listener);
+}
+
+void MvxPlayer::removeIsPlayingChangedListener(int id) {
+    isPlayingChangedListeners.removeListener(id);
+}
+
+int MvxPlayer::addPrepareFinishedListener(const MvxPlayer::PrepareFinishedListener &listener) {
+    return prepareFinishedListeners.addListener(listener);
+}
+
+void MvxPlayer::removePrepareFinishedListener(int id) {
+    prepareFinishedListeners.removeListener(id);
+}
+
+int MvxPlayer::addVxFileChangedListener(const MvxPlayer::VxFileChangedListener &listener) {
+    return vxFileChangedListeners.addListener(listener);
+}
+
+void MvxPlayer::removeVxFileChangedListener(int id) {
+    vxFileChangedListeners.removeListener(id);
 }
 
 MvxPlayer::Bounds::Bounds(double startSeek, double endSeek) : startSeek(startSeek), endSeek(endSeek) {

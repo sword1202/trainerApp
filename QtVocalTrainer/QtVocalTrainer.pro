@@ -14,6 +14,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+OBJECTIVE_SOURCES = ../VocalTrainer/nanovg/metal/nanovg_mtl.m
+
 SOURCES += \
     main.cpp \
     QmlCppBridge.cpp \
@@ -58,17 +60,21 @@ SOURCES += \
     qmlvxpitch.cpp \
     qmltimedpitch.cpp \
     ../VocalTrainer/nanovg/nanovg.c \
-    ../VocalTrainer/GLScene/WorkspaceDrawer.cpp \
-    workspace.cpp \
+    ../VocalTrainer/Workspace/WorkspaceDrawer.cpp \
     mainwindow.cpp \
     QtUtils/qtutils.cpp \
     zoomcontroller.cpp \
-    ../VocalTrainer/GLScene/NvgOpenGLDrawer.cpp \
-    ../VocalTrainer/GLScene/Drawer.cpp \
+    ../VocalTrainer/Drawers/NvgDrawer.cpp \
+    ../VocalTrainer/Drawers/Drawer.cpp \
     player.cpp \
     ../VocalTrainer/VxPlayer/AudioPlayback/Decoder/audiodecoder.cpp \
     ../VocalTrainer/VxPlayer/AudioPlayback/Decoder/audiodecodercoreaudio.cpp \
-    mainwindowosx.mm
+    mainwindowosx.mm \
+    ../VocalTrainer/Manager/VxPitchInputReader.cpp \
+    ../VocalTrainer/Manager/VxApp.cpp \
+    ../PitchDetection/AubioPitchDetector.cpp \
+    MacOS/qmetalwidget.mm \
+    MacOS/workspaceview.mm
 
 RESOURCES += qml.qrc
 
@@ -85,8 +91,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 macx {
     LIBS += -framework Foundation -framework AppKit -framework AudioToolbox -framework \
-CoreFoundation -framework AVFoundation -framework CoreServices -framework CoreAudio
+CoreFoundation -framework AVFoundation -framework CoreServices -framework CoreAudio -framework Metal -framework MetalKit -framework Quartz -framework Accelerate
     LIBS += ../libs/Release/libportaudio.a
+    LIBS += ../libs/Release/libaubio.a
     LIBS += ../libs/Release/libboost_serialization.a
     LIBS += ../libs/Release/libSoundTouch.1.dylib
 }
@@ -135,24 +142,31 @@ HEADERS += \
     ../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h \
     qmlvxpitch.h \
     qmltimedpitch.h \
-    ../VocalTrainer/GLScene/WorkspaceDrawer.h \
-    workspace.h \
+    ../VocalTrainer/Workspace/WorkspaceDrawer.h \
     mainwindow.h \
     QtUtils/qtutils.h \
     zoomcontroller.h \
-    ../VocalTrainer/GLScene/Drawer.h \
-    ../VocalTrainer/GLScene/NvgOpenGLDrawer.h \
+    ../VocalTrainer/Drawers/Drawer.h \
+    ../VocalTrainer/Drawers/NvgDrawer.h \
     player.h \
     ../VocalTrainer/VxPlayer/AudioPlayback/Decoder/audiodecoder.h \
     ../VocalTrainer/VxPlayer/AudioPlayback/Decoder/audiodecodercoreaudio.h \
     ../VocalTrainer/VxPlayer/AudioPlayback/Decoder/apple/CADebugMacros.h \
-    ../VocalTrainer/VxPlayer/AudioPlayback/Decoder/apple/CAStreamBasicDescription.h
+    ../VocalTrainer/VxPlayer/AudioPlayback/Decoder/apple/CAStreamBasicDescription.h \
+    ../VocalTrainer/Manager/VxPitchInputReader.h \
+    ../PitchDetection/AubioPitchDetector.h \
+    ../VocalTrainer/nanovg/metal/nanovg_mtl_shaders.metal \
+    MacOS/qmetalwidget.h \
+    MacOS/workspaceview.h
 
 INCLUDEPATH += ../include \
-    ../VocalTrainer/GLScene \
+    ../VocalTrainer/Drawers \
+    ../VocalTrainer/Manager \
+    ../VocalTrainer/Workspace \
     ../VocalTrainer/VxPlayer/AudioPlayback \
     ../VocalTrainer/VxPlayer \
     ../VocalTrainer/VxPlayer/CraigsappMidifile \
+    ../VocalTrainer/ \
     ../PitchDetection/CppUtils \
     ../PitchDetection \
     ../include/nanovg
@@ -160,3 +174,4 @@ INCLUDEPATH += ../include \
 DISTFILES += \
     ../VocalTrainer/VxPlayer/CraigsappMidifile/LICENSE.txt \
     ../VocalTrainer/VxPlayer/a.sf2
+

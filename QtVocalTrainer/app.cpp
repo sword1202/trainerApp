@@ -26,7 +26,7 @@ public:
 
 boost::fast_pool_allocator<MainLoopCallbackEvent> MainLoopCallbackEvent::allocator;
 
-App::App(int argc, char *argv[]) : QApplication(argc, argv) {
+QtVxApp::QtVxApp(int argc, char *argv[]) : QApplication(argc, argv), VxApp(new QmlPitchInputReader(), new Player()) {
     PortAudio::init();
 #ifdef __APPLE__
     doMacOsPlatformStaff();
@@ -41,29 +41,27 @@ App::App(int argc, char *argv[]) : QApplication(argc, argv) {
         }
     });
 
-    Player::instance()->setInstrumentalVolume(0);
-    Player::instance()->setPianoVolume(0);
+    initInstance(this);
 }
 
-bool App::event(QEvent *event) {
+bool QtVxApp::event(QEvent *event) {
     if (event->type() == MainLoopEvent) {
         static_cast<MainLoopCallbackEvent*>(event)->callback();
         return true;
     }
 
-    return QGuiApplication::event(event);
-}
+ }
 
-void App::executeOnMainThread(const std::function<void()> &function) {
+void QtVxApp::executeOnMainThread(const std::function<void()> &function) {
     MainLoopCallbackEvent* event = new MainLoopCallbackEvent(function);
     postEvent(this, event);
 }
 
-App *App::instance() {
-    return static_cast<App*>(QCoreApplication::instance());
+QtVxApp *QtVxApp::instance() {
+    return static_cast<QtVxApp*>(QCoreApplication::instance());
 }
 
-App::~App() {
+QtVxApp::~QtVxApp() {
     delete engine;
     PortAudio::terminate();
 }

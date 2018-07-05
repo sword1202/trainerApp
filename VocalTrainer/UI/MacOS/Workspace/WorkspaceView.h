@@ -8,5 +8,5 @@
 #import <MetalKit/MetalKit.h>
 
 @interface WorkspaceView : MTKView<MTKViewDelegate>
-
+- (instancetype)initWithFrame:(CGRect)frameRect;
 @end

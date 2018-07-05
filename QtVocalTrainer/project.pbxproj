@@ -661,30 +661,15 @@
 					);
 			};
 		};
-		7B8DC05446533BAB00033283 = {
+		EAB767392B85B6C7C7CAB613 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/GLScene/WorkspaceDrawer.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Workspace/WorkspaceDrawer.cpp";
 			name = "WorkspaceDrawer.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		7CF22A53CBCB3B801E6F3DF3 = {
-			fileRef = "7B8DC05446533BAB00033283";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		B144390631BBB9A2FCF13236 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/workspace.cpp";
-			name = "workspace.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		B57796D5057FCE929E75A6BB = {
-			fileRef = "B144390631BBB9A2FCF13236";
+		D177C7E59DE12436E573A454 = {
+			fileRef = "EAB767392B85B6C7C7CAB613";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
@@ -736,30 +721,30 @@
 					);
 			};
 		};
-		BD9CBF70C3DE9630262C65AA = {
+		3DA91AE5EF3B07885DB5BD00 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/GLScene/NvgOpenGLDrawer.cpp";
-			name = "NvgOpenGLDrawer.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Drawers/NvgDrawer.cpp";
+			name = "NvgDrawer.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		75010CA4C63B5ACB35276CDD = {
-			fileRef = "BD9CBF70C3DE9630262C65AA";
+		A52EEB92FE7FC165E27133F1 = {
+			fileRef = "3DA91AE5EF3B07885DB5BD00";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
 					);
 			};
 		};
-		0DE7C67DF7E3DF48D2CDE878 = {
+		2155F1DA05346BF2187EACC8 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/GLScene/Drawer.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Drawers/Drawer.cpp";
 			name = "Drawer.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		EC440AC9941FC2B52F1AD2EC = {
-			fileRef = "0DE7C67DF7E3DF48D2CDE878";
+		592D5E81E7518B72FC97D877 = {
+			fileRef = "2155F1DA05346BF2187EACC8";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
@@ -820,6 +805,96 @@
 		};
 		3A9D3D3CE7067FBCEA4D8FFF = {
 			fileRef = "DF4BED6495ED318D0BFE2018";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		B73294AB1C891B9B5C32CC4C = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager/VxPitchInputReader.cpp";
+			name = "VxPitchInputReader.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		E14C5436684B95B9CCB8C65B = {
+			fileRef = "B73294AB1C891B9B5C32CC4C";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		44E9B6F5DDDB1745EC9B661E = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager/VxApp.cpp";
+			name = "VxApp.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		1C85E986F4ECCF2CB526F7DE = {
+			fileRef = "44E9B6F5DDDB1745EC9B661E";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		CB345E90E6084238A84B6F3F = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/AubioPitchDetector.cpp";
+			name = "AubioPitchDetector.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		75A2415D73BB1998F92CD2FF = {
+			fileRef = "CB345E90E6084238A84B6F3F";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		97D454B771CB30AB3E880905 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/MacOS/qmetalwidget.mm";
+			name = "qmetalwidget.mm";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.objcpp";
+		};
+		0BC33E14B9BD15DE3C3D53CD = {
+			fileRef = "97D454B771CB30AB3E880905";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		E443E25A726C641A5DF39D70 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/MacOS/workspaceview.mm";
+			name = "workspaceview.mm";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.objcpp";
+		};
+		99077092507AFE4B98590930 = {
+			fileRef = "E443E25A726C641A5DF39D70";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		1157FF7E9C28CC4BCBFDCC5F = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/nanovg/metal/nanovg_mtl.m";
+			name = "nanovg_mtl.m";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.objc";
+		};
+		0259F18B58DCB3EB6C5B3577 = {
+			fileRef = "1157FF7E9C28CC4BCBFDCC5F";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
@@ -931,21 +1006,6 @@
 					);
 			};
 		};
-		E44CDCEF64E7EA3D076B88E4 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_workspace.cpp";
-			name = "moc_workspace.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		265C57E000A0E1481C6EF9DE = {
-			fileRef = "E44CDCEF64E7EA3D076B88E4";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
 		55CB1CDB84726A897310386F = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_mainwindow.cpp";
@@ -985,6 +1045,21 @@
 		};
 		B7AF3FDDDED05F6225F0A3CC = {
 			fileRef = "47F1B0DF5A87C30EB44F4368";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		B01C111BC9D549671A490509 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_qmetalwidget.cpp";
+			name = "moc_qmetalwidget.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		BE403B7AEBF279DEFA0C37B5 = {
+			fileRef = "B01C111BC9D549671A490509";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
@@ -1292,17 +1367,10 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		1F7C01C19C2E45E4BB543437 = {
+		83E9B52D46CD71ED929CC23E = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/GLScene/WorkspaceDrawer.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Workspace/WorkspaceDrawer.h";
 			name = "WorkspaceDrawer.h";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.c.h";
-		};
-		7F94540F60053FC9A62CD4B2 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/workspace.h";
-			name = "workspace.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
@@ -1327,17 +1395,17 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		308B9F0C589F62599414118C = {
+		12FDD5FCD882819F27E2B4A0 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/GLScene/Drawer.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Drawers/Drawer.h";
 			name = "Drawer.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		90811E948B3126EA0E55864E = {
+		5F51D60ABC95786F35309567 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/GLScene/NvgOpenGLDrawer.h";
-			name = "NvgOpenGLDrawer.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Drawers/NvgDrawer.h";
+			name = "NvgDrawer.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
@@ -1373,6 +1441,40 @@
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback/Decoder/apple/CAStreamBasicDescription.h";
 			name = "CAStreamBasicDescription.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
+		8E5BB2E92A648CC2706A3F15 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager/VxPitchInputReader.h";
+			name = "VxPitchInputReader.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
+		8603BA8F9AA24E0A306CF09D = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/AubioPitchDetector.h";
+			name = "AubioPitchDetector.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
+		36FB9BA52D23A8CA74499832 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/nanovg/metal/nanovg_mtl_shaders.metal";
+			name = "nanovg_mtl_shaders.metal";
+			sourceTree = "<absolute>";
+		};
+		9E158F8BA5AC659B48EA5F3D = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/MacOS/qmetalwidget.h";
+			name = "qmetalwidget.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
+		3446ACB7EEFBC0A4E8B1740B = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/MacOS/workspaceview.h";
+			name = "workspaceview.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
@@ -1429,11 +1531,21 @@
 				"F8CF2B73DF3F4DAD22A38E8C",
 				"897F0A33031A31C419A9EDCF",
 				"31B14BB9CC2E640CFEB7CBC6",
-				"E44CDCEF64E7EA3D076B88E4",
 				"55CB1CDB84726A897310386F",
 				"142892AE0739A0F686F35041",
-				"47F1B0DF5A87C30EB44F4368");
+				"47F1B0DF5A87C30EB44F4368",
+				"B01C111BC9D549671A490509");
 			name = "Generated Sources";
+			sourceTree = "<group>";
+		};
+		94D21756F30A612FA8EE667B = {
+			isa = PBXGroup;
+			children = (
+				"97D454B771CB30AB3E880905",
+				"E443E25A726C641A5DF39D70",
+				"9E158F8BA5AC659B48EA5F3D",
+				"3446ACB7EEFBC0A4E8B1740B");
+			name = "MacOS";
 			sourceTree = "<group>";
 		};
 		27AB59B83B50AAE8527B3E16 = {
@@ -1497,17 +1609,21 @@
 				"E66BECCEBC074FBDB27FC872",
 				"2E66651EDA87F4F68C0C9DCC",
 				"AD9EDD68A024163B048FDE37",
-				"7B8DC05446533BAB00033283",
-				"B144390631BBB9A2FCF13236",
+				"EAB767392B85B6C7C7CAB613",
 				"40C55C7C707DB75EDC106073",
 				"27AB59B83B50AAE8527B3E16",
 				"7F3F1B193768567697BA8B37",
-				"BD9CBF70C3DE9630262C65AA",
-				"0DE7C67DF7E3DF48D2CDE878",
+				"3DA91AE5EF3B07885DB5BD00",
+				"2155F1DA05346BF2187EACC8",
 				"427036DAC85631AB4C48B610",
 				"5EFA0791FAFAF24F213C372F",
 				"8A85804D769148D3DF2DC1A0",
 				"DF4BED6495ED318D0BFE2018",
+				"B73294AB1C891B9B5C32CC4C",
+				"44E9B6F5DDDB1745EC9B661E",
+				"CB345E90E6084238A84B6F3F",
+				"94D21756F30A612FA8EE667B",
+				"1157FF7E9C28CC4BCBFDCC5F",
 				"C613FE9ADA39556AD9540F1E",
 				"1091C7F2ACC81AEE9DF74E74",
 				"8D1AFD7B368D712618894EDF",
@@ -1551,17 +1667,19 @@
 				"3CF03BDC1456754CC01D032C",
 				"AF511BA9F3FB82C40E8899B1",
 				"99A24269B13302C70B70A17D",
-				"1F7C01C19C2E45E4BB543437",
-				"7F94540F60053FC9A62CD4B2",
+				"83E9B52D46CD71ED929CC23E",
 				"1239FA6A37479866DE677F5F",
 				"872AADB84245AB0712A99F11",
-				"308B9F0C589F62599414118C",
-				"90811E948B3126EA0E55864E",
+				"12FDD5FCD882819F27E2B4A0",
+				"5F51D60ABC95786F35309567",
 				"E60254EB4D07AA900A6941B1",
 				"A9C6507592E44F5EBDFCCB2D",
 				"278C2C7438E18F5A0ED54989",
 				"E84B3895D1F6084A1F9F595F",
-				"B1AB1A53715FBDC252001C16");
+				"B1AB1A53715FBDC252001C16",
+				"8E5BB2E92A648CC2706A3F15",
+				"8603BA8F9AA24E0A306CF09D",
+				"36FB9BA52D23A8CA74499832");
 			name = "Sources";
 			sourceTree = "<group>";
 		};
@@ -1637,17 +1755,22 @@
 				"3FF76E10AF30D48487AD569B",
 				"D1F6A12137D2C00B4618DB91",
 				"0140214243BBE25ACBBFF4A1",
-				"7CF22A53CBCB3B801E6F3DF3",
-				"B57796D5057FCE929E75A6BB",
+				"D177C7E59DE12436E573A454",
 				"4CC97745AFB71151D81FB93A",
 				"455FD040EBB74ECE5B70535B",
 				"C91434CEEF9FEB3E3F73CE21",
-				"75010CA4C63B5ACB35276CDD",
-				"EC440AC9941FC2B52F1AD2EC",
+				"A52EEB92FE7FC165E27133F1",
+				"592D5E81E7518B72FC97D877",
 				"67B74B41DD891F047CEBC851",
 				"2606BB28C6DD44ACCCA27FF0",
 				"C4C2BC31FDA4AC0469364914",
 				"3A9D3D3CE7067FBCEA4D8FFF",
+				"E14C5436684B95B9CCB8C65B",
+				"1C85E986F4ECCF2CB526F7DE",
+				"75A2415D73BB1998F92CD2FF",
+				"0BC33E14B9BD15DE3C3D53CD",
+				"99077092507AFE4B98590930",
+				"0259F18B58DCB3EB6C5B3577",
 				"F3F0C5A9AE1D79D2A4930AEA",
 				"AE6596E2227260CD02B22B61",
 				"4D39E2B783FFDF3FB02ED09A",
@@ -1655,10 +1778,10 @@
 				"1C90DF67E8C2A478FBB7CE6D",
 				"B39FEAC046886E2A8CAD6451",
 				"A40AA65A4364E4B559FCE389",
-				"265C57E000A0E1481C6EF9DE",
 				"CA195AB77327EA9E7D649333",
 				"FC88B784A1146E42E9B07601",
 				"B7AF3FDDDED05F6225F0A3CC",
+				"BE403B7AEBF279DEFA0C37B5",
 				"DE96A987995B398E25D392B5");
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1762,6 +1885,62 @@
 			settings = {
 			};
 		};
+		1B2543FCC48E9436F21C4F63 = {
+			isa = PBXFileReference;
+			name = "Metal.framework";
+			path = "/System/Library/Frameworks/Metal.framework";
+			refType = 0;
+			sourceTree = "<absolute>";
+			lastKnownFileType = "wrapper.framework";
+		};
+		B3FE8FAC746D3D5BB24FA398 = {
+			fileRef = "1B2543FCC48E9436F21C4F63";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		00DF9E93B318B061DBCB385A = {
+			isa = PBXFileReference;
+			name = "MetalKit.framework";
+			path = "/System/Library/Frameworks/MetalKit.framework";
+			refType = 0;
+			sourceTree = "<absolute>";
+			lastKnownFileType = "wrapper.framework";
+		};
+		6E8506336C88B83D8A1D2EC1 = {
+			fileRef = "00DF9E93B318B061DBCB385A";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		EB8C6121E71B2440B0FE0EEF = {
+			isa = PBXFileReference;
+			name = "Quartz.framework";
+			path = "/System/Library/Frameworks/Quartz.framework";
+			refType = 0;
+			sourceTree = "<absolute>";
+			lastKnownFileType = "wrapper.framework";
+		};
+		3C335F44B7FC8062F19438BF = {
+			fileRef = "EB8C6121E71B2440B0FE0EEF";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		FFC9C467F19192C5577BBD50 = {
+			isa = PBXFileReference;
+			name = "Accelerate.framework";
+			path = "/System/Library/Frameworks/Accelerate.framework";
+			refType = 0;
+			sourceTree = "<absolute>";
+			lastKnownFileType = "wrapper.framework";
+		};
+		151EB1A36F8667A0479653ED = {
+			fileRef = "FFC9C467F19192C5577BBD50";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		D2C9E726732F383A23F3DF2A = {
 			isa = PBXFileReference;
 			name = "libportaudio.a";
@@ -1771,6 +1950,19 @@
 		};
 		51702CADEF714F084FB14918 = {
 			fileRef = "D2C9E726732F383A23F3DF2A";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		866E7BC47D5834101CFC79C4 = {
+			isa = PBXFileReference;
+			name = "libaubio.a";
+			path = "/Users/semyon/Projects/VocalTrainer/libs/Release/libaubio.a";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		018FB5F649F3A63D2891C13C = {
+			fileRef = "866E7BC47D5834101CFC79C4";
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -1978,7 +2170,12 @@
 				"21F907AB8D19BD779147A085",
 				"9742F24EE18EA44D52824F1E",
 				"BEF9DFDA6822604126A7E233",
+				"1B2543FCC48E9436F21C4F63",
+				"00DF9E93B318B061DBCB385A",
+				"EB8C6121E71B2440B0FE0EEF",
+				"FFC9C467F19192C5577BBD50",
 				"D2C9E726732F383A23F3DF2A",
+				"866E7BC47D5834101CFC79C4",
 				"C8554E1F379A03573960D083",
 				"5DBD121510CD90CA7DBEACF3",
 				"5E6ACDEA4FA9B05AFC3542E9",
@@ -2007,7 +2204,12 @@
 				"CCA737EE379CDB10CC9A0F23",
 				"668DDDA0C55405E7FCFD6CA5",
 				"35A1A39F8EAB37889EB3D397",
+				"B3FE8FAC746D3D5BB24FA398",
+				"6E8506336C88B83D8A1D2EC1",
+				"3C335F44B7FC8062F19438BF",
+				"151EB1A36F8667A0479653ED",
 				"51702CADEF714F084FB14918",
+				"018FB5F649F3A63D2891C13C",
 				"FA049899FBB187FE5D2B2C65",
 				"8CAD63C807609C5848C2B37A",
 				"3B7F6DD5CE7211ABC9BE37EA",
@@ -2131,10 +2333,13 @@
 				HEADER_SEARCH_PATHS = (
 					".",
 					"../include",
-					"../VocalTrainer/GLScene",
+					"../VocalTrainer/Drawers",
+					"../VocalTrainer/Manager",
+					"../VocalTrainer/Workspace",
 					"../VocalTrainer/VxPlayer/AudioPlayback",
 					"../VocalTrainer/VxPlayer",
 					"../VocalTrainer/VxPlayer/CraigsappMidifile",
+					"../VocalTrainer",
 					"../PitchDetection/CppUtils",
 					"../PitchDetection",
 					"../include/nanovg",
@@ -2244,10 +2449,13 @@
 				HEADER_SEARCH_PATHS = (
 					".",
 					"../include",
-					"../VocalTrainer/GLScene",
+					"../VocalTrainer/Drawers",
+					"../VocalTrainer/Manager",
+					"../VocalTrainer/Workspace",
 					"../VocalTrainer/VxPlayer/AudioPlayback",
 					"../VocalTrainer/VxPlayer",
 					"../VocalTrainer/VxPlayer/CraigsappMidifile",
+					"../VocalTrainer",
 					"../PitchDetection/CppUtils",
 					"../PitchDetection",
 					"../include/nanovg",

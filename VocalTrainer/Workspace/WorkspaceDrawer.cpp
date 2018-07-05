@@ -48,7 +48,7 @@ void WorkspaceDrawer::draw() {
 
     drawVerticalGrid();
     drawHorizontalGrid();
-//    drawPitches();
+    drawPitches();
     drawPitchesGraph();
 
     drawer->endFrame();
@@ -124,9 +124,13 @@ void WorkspaceDrawer::drawPitch(float x, float y, float width) const {
 }
 
 void WorkspaceDrawer::drawPitches() const {
-    ConcurrentModificationAssertBegin(vxFile);
     assert(firstPitchPerfectFrequencyIndex >= 0);
+    const VxFile* vxFile = this->vxFile;
     if (!vxFile) {
+        return;
+    }
+
+    if (intervalsPerSecond <= 0) {
         return;
     }
 
@@ -146,15 +150,9 @@ void WorkspaceDrawer::drawPitches() const {
         float y = height - (distanceFromFirstPitch + 1) * intervalHeight;
         drawPitch((float)x, y, (float)pitchWidth);
     });
-
-    ConcurrentModificationAssertEnd(vxFile);
 }
 
 void WorkspaceDrawer::setVxFile(const VxFile* vxFile) {
-    if (this->vxFile) {
-        delete this->vxFile;
-    }
-
     this->vxFile = vxFile;
 }
 
@@ -271,16 +269,11 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer) :
     setPitchGraphColor({0xFF, 0x5E, 0x85, 0xFF});
     setPitchColor({0x6E, 0x7E, 0xC5, 0xFF});
     setPitchRadius(PITCH_RADIUS);
-    setIntervalsPerSecond(3);
 }
 
 WorkspaceDrawer::~WorkspaceDrawer() {
     if (drawer) {
         delete drawer;
-    }
-
-    if (vxFile) {
-        delete vxFile;
     }
 }
 

@@ -7,7 +7,7 @@
 #include <fstream>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
-#include "Strings.h"
+#include "StringUtils.h"
 
 using namespace CppUtils;
 

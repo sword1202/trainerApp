@@ -3,8 +3,9 @@
 
 #import <QApplication>
 #include <QQmlApplicationEngine>
+#include "VxApp.h"
 
-class App : public QApplication
+class QtVxApp : public QApplication, public VxApp
 {
     QQmlApplicationEngine* engine;
 
@@ -12,11 +13,11 @@ class App : public QApplication
     void doMacOsPlatformStaff();
 #endif
 public:
-    App(int argc, char *argv[]);
+    QtVxApp(int argc, char *argv[]);
     void executeOnMainThread(const std::function<void()>& callback);
-    ~App();
+    ~QtVxApp();
 
-    static App* instance();
+    static QtVxApp* instance();
 
 protected:
     virtual bool event(QEvent *event) override;

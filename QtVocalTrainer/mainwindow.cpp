@@ -7,6 +7,7 @@
 #include "QmlCppBridge.h"
 #include <QMenuBar>
 #include <QFileDialog>
+#include <QMacCocoaViewContainer>
 
 constexpr int HEADER_HEIGHT = 75 + 61;
 constexpr int PIANO_WIDTH = 67;
@@ -19,10 +20,9 @@ MainWindow::MainWindow(QWidget *parent) :
 #ifdef __APPLE__
     doMacOsPlatformStaff();
 #endif
-
-    // setup workspace
-    workspace = new Workspace(this);
-    workspace->move(PIANO_WIDTH, HEADER_HEIGHT);
+    setupWorkspaceView();
+    workspaceView->move(PIANO_WIDTH, HEADER_HEIGHT);
+    workspaceView->resize(1024, 768);
 
     cpp = new QmlCppBridge(this);
 
@@ -66,7 +66,7 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
     int width = event->size().width();
     int height = event->size().height();
 
-    workspace->resize(width - PIANO_WIDTH, height - HEADER_HEIGHT);
+    workspaceView->resize(width - PIANO_WIDTH, height - HEADER_HEIGHT);
 
     header->setWidth(width);
     header->setHeight(HEADER_HEIGHT);
@@ -74,7 +74,7 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
     piano->setWidth(PIANO_WIDTH);
     piano->setHeight(height - HEADER_HEIGHT);
 
-    playHeadLine->resize(playHeadLine->width(), workspace->height());
+    playHeadLine->resize(playHeadLine->width(), workspaceView->height());
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event) {

@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include <QOpenGLWidget>
 #include <QQuickWidget>
-#include "workspace.h"
 #include <QSvgWidget>
 #include "QtUtils/qtutils.h"
 
@@ -14,7 +13,7 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-    Workspace *workspace;
+    QWidget *workspaceView;
     QSvgWidget* playHeadTriangle;
     QFrame* playHeadLine;
     QQuickItem *header;
@@ -37,6 +36,7 @@ public:
 #ifdef __APPLE__
     void doMacOsPlatformStaff();
 #endif
+    void setupWorkspaceView();
 
 public slots:
     void onFileOpen();

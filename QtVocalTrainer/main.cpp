@@ -4,12 +4,13 @@
 #include "qmlvxpitch.h"
 #include "qmltimedpitch.h"
 #include "player.h"
+#include "MacOS/workspaceview.h"
 #include "qmlpitchinputreader.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
-    App::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QtVxApp::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     qRegisterMetaType<QmlPitch>("Pitch");
     qRegisterMetaType<QmlVxPitch>("VxPitch");
@@ -17,10 +18,10 @@ int main(int argc, char *argv[])
     qmlRegisterType<Player>();
     qmlRegisterType<QmlPitchInputReader>();
 
-    App a(argc, argv);
+    QtVxApp a(argc, argv);
+    a.setAttribute(Qt::AA_DontCreateNativeWidgetSiblings);
 
     MainWindow w;
-
     w.showMaximized();
 
     return a.exec();

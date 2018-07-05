@@ -6,6 +6,7 @@
 #import "MainViewController.h"
 #import "NSString+StringUtils.h"
 #import "NSAlert+AlertUtils.h"
+#import "VxApp.h"
 
 @implementation MainViewController {
     
@@ -19,16 +20,20 @@
 
 -(IBAction) openDocument:(id)sender {
     NSOpenPanel *panel = [NSOpenPanel openPanel];
-    NSArray* fileTypes = @[@"mvx", @"MVX"];
+    NSArray* fileTypes = @[@"mvx"];
     [panel setFloatingPanel:YES];
     [panel setCanChooseDirectories:NO];
     [panel setCanChooseFiles:YES];
-    [panel setAllowsMultipleSelection:YES];
+    [panel setAllowsMultipleSelection:NO];
     [panel setAllowedFileTypes:fileTypes];
     NSInteger i = [panel runModal];
     if(i == NSModalResponseOK){
         NSURL *url = panel.URL;
-        NSLog(@"file opened = %@", url);
+        NSString* path = [url.absoluteString stringByReplacingOccurrencesOfString:@"file://" withString:@""];
+        MvxPlayer *mvxPlayer = VxApp::instance()->getMvxPlayer();
+        mvxPlayer->init(path.cString);
+        mvxPlayer->prepare();
+        mvxPlayer->play();
     }
 }
 

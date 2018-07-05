@@ -12,8 +12,10 @@
 #include <array>
 #include "PitchesCollector.h"
 #include "VxFile.h"
+#include "WorkspaceController.h"
+#include <memory>
 
-class WorkspaceDrawer {
+class WorkspaceDrawer : public WorkspaceController {
     typedef Drawer::Color Color;
 
     std::atomic<float> intervalWidth;
@@ -37,7 +39,7 @@ class WorkspaceDrawer {
 
     Drawer* drawer = nullptr;
     PitchesCollector* pitchesCollector = nullptr;
-    const VxFile* vxFile = nullptr;
+    std::atomic<const VxFile*> vxFile;
 
     std::atomic<double> frameTime;
 
@@ -88,8 +90,7 @@ public:
     PitchesCollector *getPitchesCollector() const;
     void setPitchesCollector(PitchesCollector *pitchesCollector);
 
-    // Should be called on a render thread only, WorkspaceDrawer takes ownership,
-    // usually you should make a copy before assigning
+    // Warning: VxFile should not be changed from outside
     void setVxFile(const VxFile* vxFile);
     int getDistanceFromFirstPitch(const Pitch &pitch) const;
 };

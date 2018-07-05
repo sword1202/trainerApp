@@ -64,12 +64,12 @@ public:
 		void operator()(AudioPlayer* player) const;
 	};
 
-    typedef CppUtils::ListenersSet<>::function OnCompleteListener;
-	typedef CppUtils::ListenersSet<>::function OnNoDataAvailableListener;
-    typedef CppUtils::ListenersSet<>::function OnPlaybackStartedListener;
-    typedef CppUtils::ListenersSet<>::function OnPlaybackStoppedListener;
-	typedef CppUtils::ListenersSet<void*, int>::function OnDataSentToOutputListener;
-    typedef CppUtils::ListenersSet<double, double>::function SeekChangedListener;
+    typedef CppUtils::ListenersSet<>::Listener OnCompleteListener;
+	typedef CppUtils::ListenersSet<>::Listener OnNoDataAvailableListener;
+    typedef CppUtils::ListenersSet<>::Listener OnPlaybackStartedListener;
+    typedef CppUtils::ListenersSet<>::Listener OnPlaybackStoppedListener;
+	typedef CppUtils::ListenersSet<void*, int>::Listener OnDataSentToOutputListener;
+    typedef CppUtils::ListenersSet<double, double>::Listener SeekChangedListener;
     
     AudioPlayer();
     void prepare();

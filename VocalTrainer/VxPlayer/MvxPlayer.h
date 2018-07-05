@@ -13,6 +13,7 @@
 #include <boost/optional.hpp>
 #include <memory>
 #include <functional>
+#include "ListenersSet.h"
 
 class MvxPlayer {
 public:
@@ -28,6 +29,11 @@ public:
         bool operator==(const Bounds &rhs) const;
         bool operator!=(const Bounds &rhs) const;
     };
+
+    typedef typename CppUtils::ListenersSet<bool>::Listener IsPlayingChangedListener;
+    typedef typename CppUtils::ListenersSet<>::Listener PrepareFinishedListener;
+    typedef typename CppUtils::ListenersSet<const VxFile*>::Listener VxFileChangedListener;
+
 private:
 
     std::unique_ptr<AudioPlayer, AudioPlayer::Deleter> instrumentalPlayer;
@@ -38,11 +44,14 @@ private:
     double beatsPerMinute;
     std::vector<std::function<void()>> onInitialisedQueue;
 
+    CppUtils::ListenersSet<bool> isPlayingChangedListeners;
+    CppUtils::ListenersSet<> prepareFinishedListeners;
+    CppUtils::ListenersSet<const VxFile*> vxFileChangedListeners;
+
     void setupVxPlayerDesyncHandler() const;
     void setupInstrumentalPlayerDesyncHandler() const;
     void executeWhenInitialized(const std::function<void()>& func);
 public:
-
     virtual ~MvxPlayer();
     void init(std::istream& is);
     void init(const char* filePath);
@@ -55,7 +64,7 @@ public:
     bool isPlaying() const;
     void setSeek(double value);
     double getSeek() const;
-    const VxFile& getVxFile() const;
+    const VxFile* getVxFile() const;
 
     const boost::optional<Bounds> &getBounds() const;
     void setBounds(const boost::optional<Bounds> &bounds);
@@ -73,6 +82,15 @@ public:
 
     bool hasPitchNow(const Pitch& pitch) const;
     bool hasAnyPitchNow() const;
+
+    int addIsPlayingChangedListener(const IsPlayingChangedListener& listener);
+    void removeIsPlayingChangedListener(int id);
+
+    int addPrepareFinishedListener(const PrepareFinishedListener& listener);
+    void removePrepareFinishedListener(int id);
+
+    int addVxFileChangedListener(const VxFileChangedListener& listener);
+    void removeVxFileChangedListener(int id);
 };
 
 

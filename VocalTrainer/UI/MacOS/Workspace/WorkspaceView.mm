@@ -6,7 +6,7 @@
 #import "WorkspaceView.h"
 #include "WorkspaceDrawer.h"
 #import "NvgDrawer.h"
-#import "Manager.h"
+#import "VxApp.h"
 
 
 @implementation WorkspaceView {
@@ -16,33 +16,45 @@
 - (instancetype)initWithCoder:(nonnull NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
-        _workspaceDrawer = nullptr;
-        self.delegate = self;
-        self.device = MTLCreateSystemDefaultDevice();
+        [self onInit];
+    }
+
+    return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frameRect {
+    self = [super initWithFrame:frameRect device:nil];
+    if (self) {
+        [self onInit];
     }
 
     return self;
 }
 
 
-- (void)mtkView:(MTKView *)view drawableSizeWillChange:(CGSize)size {
-    [self initDrawer:view];
+- (void)onInit {
+    _workspaceDrawer = nullptr;
+    self.delegate = self;
+    self.device = MTLCreateSystemDefaultDevice();
 }
 
-- (void)initDrawer:(MTKView *)view {
-    Drawer* drawer = new NvgDrawer((__bridge void *)view.currentDrawable.layer);
+
+- (void)mtkView:(MTKView *)view drawableSizeWillChange:(CGSize)size {
+    [self initDrawer];
+}
+
+- (void)initDrawer {
+    Drawer* drawer = new NvgDrawer((__bridge void *)self.currentDrawable.layer);
     _workspaceDrawer = std::make_unique<WorkspaceDrawer>(drawer);
-    CGFloat width = view.frame.size.width;
-    CGFloat height = view.frame.size.height;
+    VxApp::instance()->setWorkspaceController(_workspaceDrawer.get());
+    CGFloat width = self.frame.size.width;
+    CGFloat height = self.frame.size.height;
     _workspaceDrawer->resize(width, height, 2);
-    _workspaceDrawer->setIntervalWidth(30);
-    _workspaceDrawer->setIntervalHeight(15);
-    _workspaceDrawer->setPitchesCollector(Manager::instance()->getPitchInputReader());
 }
 
 - (void)drawInMTKView:(MTKView *)view {
     if (!_workspaceDrawer) {
-        [self initDrawer:view];
+        [self initDrawer];
     }
 
     _workspaceDrawer->draw();

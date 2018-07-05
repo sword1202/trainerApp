@@ -2,7 +2,7 @@
 #include "VxFile.h"
 #include "WAVFile.h"
 #include "AudioUtils.h"
-#include "Strings.h"
+#include "StringUtils.h"
 #include "Algorithms.h"
 #include <utf8.h>
 #include <boost/icl/interval_map.hpp>
