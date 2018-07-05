@@ -85,6 +85,7 @@
 		C9FFF9F1559644E1C1072C8E /* audiodecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF4AF99CFAEC81D8A838A /* audiodecoder.cpp */; };
 		C9FFFA9ABAF4CE1CBA8AC864 /* PortAudioInputReader.cpp in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF5F49E1D646C17912323 /* PortAudioInputReader.cpp */; };
 		C9FFFAEDB817B9AF82141B5F /* PitchesCollector.cpp in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF519F5A10D60A8B1F899 /* PitchesCollector.cpp */; };
+		C9FFFAF2DEEFD4574C487FB1 /* ZoomController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC295B181CD47AA7CEBC /* ZoomController.cpp */; };
 		C9FFFB3D9CBDEE37A8696DB2 /* Executors.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF3F33A6942DEFCDDF2C9 /* Executors.mm */; };
 		C9FFFB76B1C8AFAB7E17C1A8 /* VxFileAudioDataGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFDDD3D7C5E7D7082BBFC /* VxFileAudioDataGenerator.cpp */; };
 		C9FFFBDE33761CD24C30F32D /* Binasc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF0789AD2038BA3DA38A5 /* Binasc.cpp */; };
@@ -264,6 +265,7 @@
 		C9FFF96387DAC07E60D1628B /* AudioUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioUtils.h; path = PitchDetection/AudioUtils.h; sourceTree = "<group>"; };
 		C9FFF970D73B55602129A70F /* MvxPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvxPlayer.h; sourceTree = "<group>"; };
 		C9FFF97D42B64E1E050CADB4 /* Functions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Functions.h; path = PitchDetection/CppUtils/Functions.h; sourceTree = "<group>"; };
+		C9FFF981FFAA6BEAAC30DFA6 /* ZoomController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZoomController.h; sourceTree = "<group>"; };
 		C9FFF9C3A05CC2DBEF0526B6 /* MidiEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiEvent.cpp; sourceTree = "<group>"; };
 		C9FFF9D3C242FFC9A4D440C7 /* VxFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxFile.h; sourceTree = "<group>"; };
 		C9FFF9F61583D3A7E3FB2459 /* RoundedRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RoundedRect.h; path = PitchDetection/CppUtils/RoundedRect.h; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 		C9FFFB85AD13A0DC254A5BFC /* AudioFilePlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioFilePlayer.cpp; sourceTree = "<group>"; };
 		C9FFFBCE6261AC60FFBF3B9F /* MidiEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiEvent.h; sourceTree = "<group>"; };
 		C9FFFBD710C1F3DE858A19B5 /* VxFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VxFile.cpp; sourceTree = "<group>"; };
+		C9FFFC295B181CD47AA7CEBC /* ZoomController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ZoomController.cpp; sourceTree = "<group>"; };
 		C9FFFC4F6D0CD722A992F5E0 /* Drawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drawer.h; sourceTree = "<group>"; };
 		C9FFFC6A9C1BC0D6396DD265 /* Drawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Drawer.cpp; sourceTree = "<group>"; };
 		C9FFFC6D53C891B61A3E964C /* Binasc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Binasc.h; sourceTree = "<group>"; };
@@ -693,6 +696,8 @@
 				C9FFF8A2E8E33F0F28A3D8B2 /* VxApp.cpp */,
 				C9FFF05245C89823C2B9926A /* VxPitchInputReader.cpp */,
 				C9FFF8A31C6F0BFCB55F72A1 /* VxPitchInputReader.h */,
+				C9FFFC295B181CD47AA7CEBC /* ZoomController.cpp */,
+				C9FFF981FFAA6BEAAC30DFA6 /* ZoomController.h */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -861,6 +866,7 @@
 				C9FFFD45BB5974C87D48B29F /* VxApp.cpp in Sources */,
 				C9FFF07E02FFCE9F94958569 /* VxPitchInputReader.cpp in Sources */,
 				C9FFF39D7D8E9E68D78ADBFA /* nanovg.c in Sources */,
+				C9FFFAF2DEEFD4574C487FB1 /* ZoomController.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

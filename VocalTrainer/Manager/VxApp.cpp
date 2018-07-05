@@ -8,16 +8,16 @@
 
 using namespace CppUtils;
 
-VxApp* VxApp::_instance = nullptr;
-
 VxApp *VxApp::instance() {
-    return _instance;
+    static VxApp inst;
+    return &inst;
 }
 
-VxApp::VxApp(VxPitchInputReader* pitchInputReader, MvxPlayer* mvxPlayer) {
+VxApp::VxApp() {
     workspaceController = nullptr;
-    this->pitchInputReader = pitchInputReader;
-    this->mvxPlayer = mvxPlayer;
+    this->pitchInputReader = new VxPitchInputReader();
+    this->mvxPlayer = new MvxPlayer();
+    this->zoomController = new ZoomController();
 
     mvxPlayer->addIsPlayingChangedListener([this] (bool playing) {
         if (playing) {
@@ -36,6 +36,16 @@ VxApp::VxApp(VxPitchInputReader* pitchInputReader, MvxPlayer* mvxPlayer) {
         controller->setVxFile(vxFile);
         return DONT_DELETE_LISTENER;
     });
+
+    zoomController->addZoomChangedListener([this] (float zoom) {
+        updateZoom();
+        return DONT_DELETE_LISTENER;
+    });
+
+    zoomController->addFirstPitchPerfectFrequencyIndexChangedListener([this] (int) {
+        updateFirstPerfectFrequencyIndex();
+        return DONT_DELETE_LISTENER;
+    });
 }
 
 void VxApp::updateWorkspaceIsPlayingChanged(bool playing) {
@@ -51,6 +61,10 @@ VxPitchInputReader *VxApp::getPitchInputReader() const {
     return pitchInputReader;
 }
 
+ZoomController *VxApp::getZoomController() const {
+    return zoomController;
+}
+
 VxApp::~VxApp() {
     delete mvxPlayer;
     delete pitchInputReader;
@@ -60,15 +74,25 @@ MvxPlayer *VxApp::getMvxPlayer() const {
     return mvxPlayer;
 }
 
-void VxApp::initInstance(VxApp *app) {
-    assert(!_instance);
-    _instance = app;
-}
-
 void VxApp::setWorkspaceController(WorkspaceController *workspaceController) {
     this->workspaceController = workspaceController;
     workspaceController->setPitchesCollector(pitchInputReader);
-    workspaceController->setIntervalWidth(30);
-    workspaceController->setIntervalHeight(15);
+    updateZoom();
+    updateFirstPerfectFrequencyIndex();
     workspaceController->setVxFile(mvxPlayer->getVxFile());
+}
+
+void VxApp::updateZoom() {
+    if (!workspaceController) {
+        return;
+    }
+
+    WorkspaceController* controller = workspaceController;
+    controller->setIntervalWidth(zoomController->getIntervalWidth());
+    controller->setIntervalHeight(zoomController->getIntervalHeight());
+}
+
+void VxApp::updateFirstPerfectFrequencyIndex() {
+    WorkspaceController* controller = workspaceController;
+    controller->setFirstPitchPerfectFrequencyIndex(zoomController->getFirstPitchPerfectFrequencyIndex());
 }

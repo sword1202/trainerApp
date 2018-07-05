@@ -16,7 +16,7 @@
     self = [super init];
     if (self) {
         PortAudio::init();
-        VxApp::initInstance(new VxApp(new VxPitchInputReader(), new MvxPlayer()));
+        VxApp::instance();
     }
 
     return self;

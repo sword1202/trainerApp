@@ -11,25 +11,27 @@
 #include "VxPitchInputReader.h"
 #include "MvxPlayer.h"
 #include "WorkspaceController.h"
+#include "ZoomController.h"
 
 class VxApp {
-    static VxApp* _instance;
     VxPitchInputReader* pitchInputReader;
     MvxPlayer* mvxPlayer;
+    ZoomController* zoomController;
     std::atomic<WorkspaceController*> workspaceController;
 
+    void updateZoom();
+    void updateFirstPerfectFrequencyIndex();
 public:
-    VxApp(VxPitchInputReader* pitchInputReader, MvxPlayer* mvxPlayer);
+    VxApp();
 
     VxPitchInputReader *getPitchInputReader() const;
     MvxPlayer *getMvxPlayer() const;
+    ZoomController *getZoomController() const;
 
     // Should be executed on a render thread, the same thread as workspace->draw is executed
     void setWorkspaceController(WorkspaceController* workspaceController);
-
     void updateWorkspaceIsPlayingChanged(bool playing);
 
-    static void initInstance(VxApp* app);
     static VxApp* instance();
 
     virtual ~VxApp();
