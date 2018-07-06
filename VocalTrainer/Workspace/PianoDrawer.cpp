@@ -122,8 +122,17 @@ void PianoDrawer::draw(float width, float height, float devicePixelRation) {
         perfectFrequencyIndex++;
     }
 
-    auto drawSharpPitch = [&] (float y, const Drawer::Color& fillColor) {
-        drawer->setFillColor(fillColor);
+    drawSharpPitches();
+    drawPitchNames(height);
+    drawer->endFrame();
+}
+
+void PianoDrawer::drawSharpPitches() const {
+    float intervalOctaveHeightToPianoOctaveHeightRelation = getIntervalOctaveHeightToPianoOctaveHeightRelation();
+
+    for (int i = 0; i < drawSharpPitchesY.size(); i++) {
+        float y = drawSharpPitchesY[i];
+        drawer->setFillColor(drawSharpPitchesFillColor[i]);
         float pitchHeight = sharpPitchHeight * intervalOctaveHeightToPianoOctaveHeightRelation;
         float radius = sharpPitchRadius * intervalOctaveHeightToPianoOctaveHeightRelation;
 
@@ -132,21 +141,21 @@ void PianoDrawer::draw(float width, float height, float devicePixelRation) {
                 sharpPitchWidth,
                 pitchHeight, 0, radius, radius, 0);
         drawer->fill();
-    };
-
-    for (int i = 0; i < drawSharpPitchesY.size(); i++) {
-        drawSharpPitch(drawSharpPitchesY[i], drawSharpPitchesFillColor[i]);
     }
+}
 
-    y = height;
+void PianoDrawer::drawPitchNames(float height) const {
+    float y = height;
     Pitch pitch = firstPitch;
 
     drawer->setTextAlign(Drawer::LEFT);
     drawer->setTextBaseline(Drawer::MIDDLE);
     drawer->setTextFont("", 10);
 
+    float intervalOctaveHeightToPianoOctaveHeightRelation = getIntervalOctaveHeightToPianoOctaveHeightRelation();
+
     while (y > -bigPitchHeight) {
-        index = pitch.getWhiteIndex();
+        int index = pitch.getWhiteIndex();
         int indexInMap = index % heightMapLength;
         float pitchHeight = heightMap[indexInMap] * intervalOctaveHeightToPianoOctaveHeightRelation;
 
@@ -172,8 +181,6 @@ void PianoDrawer::draw(float width, float height, float devicePixelRation) {
         y -= pitchHeight + distanceBetweenPitches * intervalOctaveHeightToPianoOctaveHeightRelation;
         pitch = pitch.getNextWhitePitch();
     }
-
-    drawer->endFrame();
 }
 
 void PianoDrawer::setFirstPitch(const Pitch &firstPitch) {

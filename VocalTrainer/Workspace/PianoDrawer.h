@@ -31,6 +31,10 @@ public:
     void setIntervalHeight(float intervalHeight);
     void setFirstPitch(const Pitch &firstPitch);
     void setDetectedPitch(const Pitch &detectedPitch);
+
+    void drawPitchNames(float height) const;
+
+    void drawSharpPitches() const;
 };
 
 
