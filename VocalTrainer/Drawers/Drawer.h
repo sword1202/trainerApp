@@ -10,11 +10,20 @@
 #include <vector>
 #include "RoundedRect.h"
 #include "Point.h"
+#include <string>
 
 class Drawer {
 public:
     enum LineJoin {
         BEVEL, ROUND, MITER
+    };
+
+    enum TextAlign {
+        CENTER, LEFT, RIGHT
+    };
+
+    enum TextBaseline {
+        TOP, BOTTOM, MIDDLE
     };
 
     typedef std::array<unsigned char, 4> Color;
@@ -54,7 +63,18 @@ public:
     virtual void lineTo(const CppUtils::PointF& point);
     virtual void moveTo(const CppUtils::PointF& point);
 
+    virtual void setTextFont(const std::string& fontFamily, int fontSize);
+    virtual void setTextAlign(TextAlign align);
+    virtual void setTextBaseline(TextBaseline baseline);
+    virtual void fillText(const std::string &text, float x, float y) = 0;
+
     virtual ~Drawer() = default;
+
+protected:
+    std::string fontFamily;
+    int fontSize = 14;
+    TextBaseline textBaseline = MIDDLE;
+    TextAlign textAlign = LEFT;
 };
 
 

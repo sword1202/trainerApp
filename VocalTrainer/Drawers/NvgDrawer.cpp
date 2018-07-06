@@ -173,3 +173,7 @@ void NvgDrawer::roundedRect(float x, float y, float w, float h, float r) {
 void NvgDrawer::quadraticCurveTo(float cpx, float cpy, float x, float y) {
     nvgQuadTo(ctx, cpx, cpy, x, y);
 }
+
+void NvgDrawer::fillText(const std::string &text, float x, float y) {
+    assert(false && "Not implemented");
+}

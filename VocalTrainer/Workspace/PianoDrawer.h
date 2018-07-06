@@ -11,6 +11,7 @@
 #include "Pitch.h"
 #include "PlayingPitchSequence.h"
 #include "PianoController.h"
+#include <unordered_set>
 
 class PianoDrawer : public PianoController {
     float intervalHeight = 0;
@@ -21,7 +22,7 @@ class PianoDrawer : public PianoController {
     Pitch detectedPitch;
     std::vector<Drawer::Color> drawSharpPitchesFillColor;
     std::vector<float> drawSharpPitchesY;
-    std::vector<int> selectedWhitePitchIndexes;
+    std::unordered_set<int> selectedWhitePitchIndexes;
 
     float getIntervalOctaveHeightToPianoOctaveHeightRelation() const;
 public:

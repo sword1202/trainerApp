@@ -16,17 +16,19 @@ constexpr float pianoWidth = 51;
 
 constexpr float pitchRadius = 3;
 constexpr float sharpPitchRadius = 1.5;
-constexpr float distanceBetweenTextLeftAndPitchRight = 21.0;
+constexpr float distanceBetweenTextLeftAndPitchRight = 20.0;
 
 constexpr float heightMap[] = {smallPitchHeight, bigPitchHeight,
 smallPitchHeight, smallPitchHeight, bigPitchHeight, bigPitchHeight, smallPitchHeight};
 constexpr int heightMapLength = 7;
 constexpr bool hasSharpMap[] = {true, true, false, true, true, true, false};
-static const Drawer::Color borderColor = {0x9A, 0x98, 0xD0, 0xff};
+static const Drawer::Color borderColor = {0x9A, 0x98, 0xD0, 0x7f};
 static const Drawer::Color sharpPitchColor = {0x9A, 0x98, 0xD0, 0xff};
 static const Drawer::Color reachedPitchColor = {0x31, 0xDD, 0x6C, 0xff};
 static const Drawer::Color missedPitchColor = {0xFF, 0x5E, 0x85, 0xff};
 static const Drawer::Color selectedPitchColor = {0x61, 0x5F, 0x97, 0xff};
+static const Drawer::Color pitchTextColor = {0x24, 0x23, 0x2D, 0xe6};
+static const Drawer::Color selectedPitchTextColor = {0xff, 0xff, 0xff, 0xff};
 
 float PianoDrawer::getIntervalOctaveHeightToPianoOctaveHeightRelation() const {
     // 12 pitches in octave
@@ -44,7 +46,6 @@ PianoDrawer::PianoDrawer(Drawer *drawer, PlayingPitchSequence *pitchSequence)
         : drawer(drawer), pitchSequence(pitchSequence) {
     drawSharpPitchesFillColor.reserve(100);
     drawSharpPitchesY.reserve(100);
-    selectedWhitePitchIndexes.reserve(2);
 }
 
 void PianoDrawer::draw(float width, float height, float devicePixelRation) {
@@ -93,7 +94,7 @@ void PianoDrawer::draw(float width, float height, float devicePixelRation) {
         if (fillColor != sharpPitchColor) {
             fill = true;
             drawer->setFillColor(fillColor);
-            selectedWhitePitchIndexes.push_back(index);
+            selectedWhitePitchIndexes.insert(index);
         }
 
         float pitchHeight = heightMap[index % heightMapLength] * intervalOctaveHeightToPianoOctaveHeightRelation;
@@ -135,6 +136,41 @@ void PianoDrawer::draw(float width, float height, float devicePixelRation) {
 
     for (int i = 0; i < drawSharpPitchesY.size(); i++) {
         drawSharpPitch(drawSharpPitchesY[i], drawSharpPitchesFillColor[i]);
+    }
+
+    y = height;
+    Pitch pitch = firstPitch;
+
+    drawer->setTextAlign(Drawer::LEFT);
+    drawer->setTextBaseline(Drawer::MIDDLE);
+    drawer->setTextFont("", 10);
+
+    while (y > -bigPitchHeight) {
+        index = pitch.getWhiteIndex();
+        int indexInMap = index % heightMapLength;
+        float pitchHeight = heightMap[indexInMap] * intervalOctaveHeightToPianoOctaveHeightRelation;
+
+        float textY = y - pitchHeight / 2;
+        std::string text;
+        if (pitch.getPerfectFrequencyIndex() == firstPitch.getPerfectFrequencyIndex()) {
+            text = pitch.getFullName();
+        } else if(pitch.getPitchInOctaveIndex() == Pitch::C_INDEX) {
+            text = pitch.getFullName();
+        } else {
+            text = pitch.getName();
+        }
+
+        if (selectedWhitePitchIndexes.count(index)) {
+            drawer->setFillColor(selectedPitchTextColor);
+        } else {
+            drawer->setFillColor(pitchTextColor);
+        }
+
+        float textX = pianoWidth - distanceBetweenTextLeftAndPitchRight;
+        drawer->fillText(text, textX, textY);
+
+        y -= pitchHeight + distanceBetweenPitches * intervalOctaveHeightToPianoOctaveHeightRelation;
+        pitch = pitch.getNextWhitePitch();
     }
 
     drawer->endFrame();

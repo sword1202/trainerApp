@@ -4,8 +4,10 @@
 //
 
 #include "QuartzDrawer.h"
+#include "StringUtils.h"
 
 using namespace std;
+using namespace CppUtils;
 
 void QuartzDrawer::translate(float x, float y) {
     CGContextTranslateCTM(ctx, x, height - y);
@@ -55,6 +57,7 @@ void QuartzDrawer::setStrokeColor(const Drawer::Color &color) {
 }
 
 void QuartzDrawer::setFillColor(const Drawer::Color &color) {
+    fillColor = color;
     CGContextSetRGBFillColor(ctx, color[0] / 255.0f, color[1] / 255.0f, color[2] / 255.0f, color[3] / 255.0f);
 }
 
@@ -113,4 +116,51 @@ void QuartzDrawer::quadraticCurveTo(float cpx, float cpy, float x, float y) {
 void QuartzDrawer::clear() {
     setFillColor({255, 255, 255, 255});
     fillRect(0, 0, width, height);
+}
+
+void QuartzDrawer::fillText(const string &text, float x, float y) {
+    y = height - y;
+
+    NSFont* font;
+    if (fontFamily.empty()) {
+        font = [NSFont systemFontOfSize:fontSize];
+    } else {
+        font = [NSFont fontWithName:Strings::ToNSString(fontFamily) size:fontSize];
+    }
+
+    NSString* textAsNSString = Strings::ToNSString(text);
+    NSDictionary* attrs = @{
+            NSAccessibilityForegroundColorTextAttribute: [NSColor colorWithRed:fillColor[0]
+                                                                         green:fillColor[1]
+                                                                          blue:fillColor[2]
+                                                                         alpha:fillColor[3]],
+            NSFontAttributeName: font
+    };
+    CGRect rect;
+    rect.size = [textAsNSString sizeWithAttributes:attrs];
+    switch (textAlign) {
+        case CENTER:
+            rect.origin.x = x - rect.size.width / 2;
+            break;
+        case LEFT:
+            rect.origin.x = x;
+            break;
+        case RIGHT:
+            rect.origin.x = x - rect.size.width;
+            break;
+    }
+
+    switch (textBaseline) {
+        case TOP:
+            rect.origin.y = y;
+            break;
+        case BOTTOM:
+            rect.origin.y = y - rect.size.height;
+            break;
+        case MIDDLE:
+            rect.origin.y = y - rect.size.height / 2;
+            break;
+    }
+
+    [textAsNSString drawInRect:rect withAttributes:attrs];
 }

@@ -54,6 +54,8 @@ public:
             float radiusBottomRight, float radiusBottomLeft) override;
 
     void roundedRect(float x, float y, float w, float h, float r) override;
+
+    void fillText(const std::string &text, float x, float y) override;
 };
 
 

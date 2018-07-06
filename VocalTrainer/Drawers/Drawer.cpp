@@ -48,3 +48,16 @@ void Drawer::roundedRectDifferentCorners(float x, float y, float w,
     arcTo(x,   y,   x+w, y,   radiusLeftTop);
     closePath();
 }
+
+void Drawer::setTextFont(const std::string &fontFamily, int fontSize) {
+    this->fontFamily = fontFamily;
+    this->fontSize = fontSize;
+}
+
+void Drawer::setTextAlign(Drawer::TextAlign align) {
+    textAlign = align;
+}
+
+void Drawer::setTextBaseline(Drawer::TextBaseline baseline) {
+    textBaseline = baseline;
+}

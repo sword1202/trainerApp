@@ -16,6 +16,8 @@ class QuartzDrawer : public Drawer {
 
     float translateX = 0;
     float translateY = 0;
+
+    Color fillColor;
 public:
     QuartzDrawer();
 
@@ -42,6 +44,8 @@ public:
     void scale(float x, float y) override;
     void rect(float x, float y, float w, float h) override;
     void fillRect(float x, float y, float w, float h) override;
+
+    void fillText(const std::string &text, float x, float y) override;
 
     void clear() override;
 };
