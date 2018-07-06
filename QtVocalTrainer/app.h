@@ -3,7 +3,7 @@
 
 #import <QApplication>
 #include <QQmlApplicationEngine>
-#include "VxApp.h"
+#include "MainController.h"
 
 class QtVxApp : public QApplication, public VxApp
 {

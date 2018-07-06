@@ -15,7 +15,7 @@ constexpr float HORIZONTAL_TO_VERTICAL_INTERVAL_WIDTH_RELATION = 2.4117701323665
 
 ZoomController::ZoomController() {
     zoom = MIN_ZOOM;
-    firstPitchPerfectFrequencyIndex = Pitch("C2").getPerfectFrequencyIndex();
+    firstPitch = Pitch("C2");
 }
 
 float ZoomController::getIntervalWidth() const {
@@ -46,22 +46,22 @@ float ZoomController::getMaxZoom() const {
     return MAX_ZOOM;
 }
 
-int ZoomController::getFirstPitchPerfectFrequencyIndex() const {
-    return firstPitchPerfectFrequencyIndex;
+Pitch ZoomController::getFirstPitch() const {
+    return firstPitch;
 }
 
-void ZoomController::setFirstPitchPerfectFrequencyIndex(int firstPitchPerfectFrequencyIndex) {
-    assert(Pitch(firstPitchPerfectFrequencyIndex).isWhite());
-    this->firstPitchPerfectFrequencyIndex = firstPitchPerfectFrequencyIndex;
-    firstPitchPerfectFrequencyIndexChangedListeners.executeAll(firstPitchPerfectFrequencyIndex);
+void ZoomController::setFirstPitch(const Pitch& pitch) {
+    assert(pitch.isWhite());
+    firstPitch = pitch;
+    firstPitchChangedListeners.executeAll(pitch);
 }
 
-int ZoomController::addFirstPitchPerfectFrequencyIndexChangedListener(const CppUtils::ListenersSet<int>::Listener& listener) {
-    return firstPitchPerfectFrequencyIndexChangedListeners.addListener(listener);
+int ZoomController::addFirstPitchChangedListener(const CppUtils::ListenersSet<Pitch>::Listener &listener) {
+    return firstPitchChangedListeners.addListener(listener);
 }
 
-void ZoomController::removeFirstPitchPerfectFrequencyIndexChangedListener(int key) {
-    firstPitchPerfectFrequencyIndexChangedListeners.removeListener(key);
+void ZoomController::removeFirstPitchChangedListener(int key) {
+    firstPitchChangedListeners.removeListener(key);
 }
 
 int ZoomController::addZoomChangedListener(const CppUtils::ListenersSet<float>::Listener &listener) {

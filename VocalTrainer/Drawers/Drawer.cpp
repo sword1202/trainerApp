@@ -36,3 +36,15 @@ void Drawer::lineTo(const CppUtils::PointF &point) {
 void Drawer::moveTo(const CppUtils::PointF &point) {
     moveTo(point.x, point.y);
 }
+
+void Drawer::roundedRectDifferentCorners(float x, float y, float w,
+        float h, float radiusLeftTop,
+        float radiusRightTop, float radiusBottomRight, float radiusBottomLeft) {
+    beginPath();
+    moveTo(x+radiusRightTop, y);
+    arcTo(x+w, y,   x+w, y+h, radiusRightTop);
+    arcTo(x+w, y+h, x,   y+h, radiusBottomRight);
+    arcTo(x,   y+h, x,   y,   radiusBottomLeft);
+    arcTo(x,   y,   x+w, y,   radiusLeftTop);
+    closePath();
+}

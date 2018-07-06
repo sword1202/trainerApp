@@ -23,7 +23,7 @@ class WorkspaceDrawer : public WorkspaceController {
     std::atomic<float> verticalOffset;
     std::atomic<float> horizontalOffset;
     std::atomic<double> intervalsPerSecond;
-    int firstPitchPerfectFrequencyIndex;
+    Pitch firstPitch;
 
     float sizeMultiplier;
     float pitchRadius = 0;
@@ -69,8 +69,7 @@ public:
 
     double getIntervalsPerSecond() const;
     void setIntervalsPerSecond(double intervalsPerSecond);
-    int getFirstPitchPerfectFrequencyIndex() const;
-    void setFirstPitchPerfectFrequencyIndex(int firstPitchPerfectFrequencyIndex);
+    void setFirstVisiblePitch(const Pitch &firstPitch);
 
     float getSizeMultiplier() const;
     void setSizeMultiplier(float sizeMultiplier);

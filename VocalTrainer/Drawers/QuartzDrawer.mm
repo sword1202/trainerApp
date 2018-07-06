@@ -105,3 +105,12 @@ void QuartzDrawer::fillRect(float x, float y, float w, float h) {
 QuartzDrawer::QuartzDrawer() {
     ctx = static_cast<CGContextRef>([[NSGraphicsContext currentContext] graphicsPort]);
 }
+
+void QuartzDrawer::quadraticCurveTo(float cpx, float cpy, float x, float y) {
+    CGContextAddQuadCurveToPoint(ctx, cpx, cpy, x, y);
+}
+
+void QuartzDrawer::clear() {
+    setFillColor({255, 255, 255, 255});
+    fillRect(0, 0, width, height);
+}

@@ -14,8 +14,9 @@
 #include <memory>
 #include <functional>
 #include "ListenersSet.h"
+#include "PlayingPitchSequence.h"
 
-class MvxPlayer {
+class MvxPlayer : public PlayingPitchSequence {
 public:
     class Bounds {
         double startSeek;

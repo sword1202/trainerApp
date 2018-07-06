@@ -11,6 +11,8 @@
 class VxPitchInputReader : public PitchInputReaderCollector {
 public:
     VxPitchInputReader();
+
+    void pitchDetected(float frequency, double time) override;
 };
 
 

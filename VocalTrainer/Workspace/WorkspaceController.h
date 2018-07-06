@@ -18,7 +18,7 @@ public:
     virtual void setVerticalOffset(float verticalOffset) = 0;
     virtual void setHorizontalOffset(float horizontalOffset) = 0;
     virtual void setVxFile(const VxFile* vxFile) = 0;
-    virtual void setFirstPitchPerfectFrequencyIndex(int firstPitchPerfectFrequencyIndex) = 0;
+    virtual void setFirstVisiblePitch(const Pitch &firstPitch) = 0;
     virtual ~WorkspaceController() = default;
 };
 

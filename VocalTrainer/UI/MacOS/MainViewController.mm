@@ -6,7 +6,7 @@
 #import "MainViewController.h"
 #import "NSString+StringUtils.h"
 #import "NSAlert+AlertUtils.h"
-#import "VxApp.h"
+#import "MainController.h"
 
 @implementation MainViewController {
     
@@ -30,7 +30,7 @@
     if(i == NSModalResponseOK){
         NSURL *url = panel.URL;
         NSString* path = [url.absoluteString stringByReplacingOccurrencesOfString:@"file://" withString:@""];
-        MvxPlayer *mvxPlayer = VxApp::instance()->getMvxPlayer();
+        MvxPlayer *mvxPlayer = MainController::instance()->getMvxPlayer();
         mvxPlayer->init(path.cString);
         mvxPlayer->prepare();
         mvxPlayer->play();

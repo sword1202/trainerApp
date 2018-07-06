@@ -36,12 +36,14 @@ public:
     void beginPath() override;
     void closePath() override;
     void bezierCurveTo(float c1x, float c1y, float c2x, float c2y, float x, float y) override;
+    void quadraticCurveTo(float cpx, float cpy, float x, float y) override;
     void lineJoin(LineJoin type) override;
     void rotate(float angle) override;
     void scale(float x, float y) override;
     void rect(float x, float y, float w, float h) override;
     void fillRect(float x, float y, float w, float h) override;
 
+    void clear() override;
 };
 
 

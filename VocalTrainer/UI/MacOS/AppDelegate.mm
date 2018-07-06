@@ -4,7 +4,7 @@
 //
 
 #import "AppDelegate.h"
-#include "VxApp.h"
+#include "MainController.h"
 #import "PortAudio.h"
 
 
@@ -16,7 +16,7 @@
     self = [super init];
     if (self) {
         PortAudio::init();
-        VxApp::instance();
+        MainController::instance();
     }
 
     return self;

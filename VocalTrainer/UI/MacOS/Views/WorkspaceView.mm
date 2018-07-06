@@ -6,7 +6,7 @@
 #import "WorkspaceView.h"
 #include "WorkspaceDrawer.h"
 #import "NvgDrawer.h"
-#import "VxApp.h"
+#import "MainController.h"
 
 
 @implementation WorkspaceView {
@@ -46,7 +46,7 @@
 - (void)initDrawer {
     Drawer* drawer = new NvgDrawer((__bridge void *)self.currentDrawable.layer);
     _workspaceDrawer = std::make_unique<WorkspaceDrawer>(drawer);
-    VxApp::instance()->setWorkspaceController(_workspaceDrawer.get());
+    MainController::instance()->setWorkspaceController(_workspaceDrawer.get());
     CGFloat width = self.frame.size.width;
     CGFloat height = self.frame.size.height;
     _workspaceDrawer->resize(width, height, 2);

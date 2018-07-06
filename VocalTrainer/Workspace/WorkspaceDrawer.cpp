@@ -124,7 +124,7 @@ void WorkspaceDrawer::drawPitch(float x, float y, float width) const {
 }
 
 void WorkspaceDrawer::drawPitches() const {
-    assert(firstPitchPerfectFrequencyIndex >= 0);
+    assert(firstPitch.isValid());
     const VxFile* vxFile = this->vxFile;
     if (!vxFile) {
         return;
@@ -157,7 +157,7 @@ void WorkspaceDrawer::setVxFile(const VxFile* vxFile) {
 }
 
 void WorkspaceDrawer::drawPitchesGraph() const {
-    assert(firstPitchPerfectFrequencyIndex >= 0);
+    assert(firstPitch.isValid());
     assert(pitchesCollector);
     assert(pitchGraphColor[3] > 0 && "pitchGraphColor not initialized or is completely transparent");
 
@@ -225,7 +225,7 @@ void WorkspaceDrawer::drawPitchesGraph() const {
 }
 
 int WorkspaceDrawer::getDistanceFromFirstPitch(const Pitch &pitch) const {
-    return pitch.getPerfectFrequencyIndex() - firstPitchPerfectFrequencyIndex;
+    return pitch.getPerfectFrequencyIndex() - firstPitch.getPerfectFrequencyIndex();
 }
 
 double WorkspaceDrawer::getPitchGraphDuration() const {
@@ -262,7 +262,6 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer) :
         horizontalOffset(0),
         sizeMultiplier(1),
         intervalsPerSecond(0),
-        firstPitchPerfectFrequencyIndex(0),
         frameTime(0), drawer(drawer) {
     setGridColor({0x8B, 0x89, 0xB6, 0x33});
     setAccentGridColor({0x8B, 0x89, 0xB6, 0x80});
@@ -328,11 +327,7 @@ void WorkspaceDrawer::setPitchRadius(float pitchRadius) {
     this->pitchRadius = pitchRadius;
 }
 
-int WorkspaceDrawer::getFirstPitchPerfectFrequencyIndex() const {
-    return firstPitchPerfectFrequencyIndex;
-}
-
-void WorkspaceDrawer::setFirstPitchPerfectFrequencyIndex(int firstPitchPerfectFrequencyIndex) {
-    assert(firstPitchPerfectFrequencyIndex >= 0);
-    this->firstPitchPerfectFrequencyIndex = firstPitchPerfectFrequencyIndex;
+void WorkspaceDrawer::setFirstVisiblePitch(const Pitch &firstPitch) {
+    assert(firstPitch.isValid());
+    this->firstPitch = firstPitch;
 }

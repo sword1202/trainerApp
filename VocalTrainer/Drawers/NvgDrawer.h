@@ -37,6 +37,7 @@ public:
     void lineJoin(LineJoin type) override;
 
     void bezierCurveTo(float c1x, float c1y, float c2x, float c2y, float x, float y) override;
+    void quadraticCurveTo(float cpx, float cpy, float x, float y) override;
     void beginPath() override;
     void closePath() override;
     void rotate(float angle) override;
@@ -48,6 +49,11 @@ public:
     float getTranslateX() override;
     float getTranslateY() override;
     void translateTo(float x, float y) override;
+
+    void roundedRectDifferentCorners(float x, float y, float w, float h, float radiusLeftTop, float radiusRightTop,
+            float radiusBottomRight, float radiusBottomLeft) override;
+
+    void roundedRect(float x, float y, float w, float h, float r) override;
 };
 
 

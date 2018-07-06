@@ -12,17 +12,20 @@
 #include "MvxPlayer.h"
 #include "WorkspaceController.h"
 #include "ZoomController.h"
+#include "PianoController.h"
 
-class VxApp {
+class MainController {
     VxPitchInputReader* pitchInputReader;
     MvxPlayer* mvxPlayer;
     ZoomController* zoomController;
     std::atomic<WorkspaceController*> workspaceController;
+    PianoController* pianoController = nullptr;
+    std::function<void()> onPianoUpdateRequested;
 
     void updateZoom();
-    void updateFirstPerfectFrequencyIndex();
+    void updateWorkspaceFirstPitch();
 public:
-    VxApp();
+    MainController();
 
     VxPitchInputReader *getPitchInputReader() const;
     MvxPlayer *getMvxPlayer() const;
@@ -32,9 +35,11 @@ public:
     void setWorkspaceController(WorkspaceController* workspaceController);
     void updateWorkspaceIsPlayingChanged(bool playing);
 
-    static VxApp* instance();
+    void setPianoController(PianoController *pianoController, const std::function<void()>& onUpdateRequested);
 
-    virtual ~VxApp();
+    static MainController* instance();
+
+    virtual ~MainController();
 };
 
 

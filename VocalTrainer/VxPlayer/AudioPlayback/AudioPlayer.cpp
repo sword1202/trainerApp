@@ -281,11 +281,11 @@ int AudioPlayer::addOnDataSentToOutputListener(const AudioPlayer::OnDataSentToOu
 }
 
 void AudioPlayer::setupPlaybackStartedListener() {
-    assert(dataSentToOutputListenerKey == NullKey);
+    assert(dataSentToOutputListenerKey == 0);
     dataSentToOutputListenerKey = onDataSentToOutputListeners.addListener([=] (void*, int) {
         playing = true;
         onPlaybackStartedListeners.executeAll();
-        dataSentToOutputListenerKey = NullKey;
+        dataSentToOutputListenerKey = 0;
         return DELETE_LISTENER;
     });
 }

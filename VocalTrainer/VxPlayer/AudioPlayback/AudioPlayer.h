@@ -31,7 +31,7 @@ private:
 	CppUtils::ListenersSet<void*/*buffer*/, int/*framesCount*/> onDataSentToOutputListeners;
     CppUtils::ListenersSet<double /*seek*/, double/*totalDuration*/> seekChangedListeners;
     std::atomic_int pitchShift;
-    int dataSentToOutputListenerKey = CppUtils::NullKey;
+    int dataSentToOutputListenerKey = 0;
 
     void setupPlaybackStartedListener();
 

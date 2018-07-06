@@ -159,3 +159,17 @@ void NvgDrawer::fillRect(float x, float y, float w, float h) {
     nvgRect(ctx, x, y, w, h);
     nvgFill(ctx);
 }
+
+void NvgDrawer::roundedRectDifferentCorners(float x, float y, float w, float h, float radiusLeftTop,
+        float radiusRightTop,
+        float radiusBottomRight, float radiusBottomLeft) {
+    nvgRoundedRectVarying(ctx, x, y, w, h, radiusLeftTop, radiusRightTop, radiusBottomRight, radiusBottomLeft);
+}
+
+void NvgDrawer::roundedRect(float x, float y, float w, float h, float r) {
+    Drawer::roundedRect(x, y, w, h, r);
+}
+
+void NvgDrawer::quadraticCurveTo(float cpx, float cpy, float x, float y) {
+    nvgQuadTo(ctx, cpx, cpy, x, y);
+}

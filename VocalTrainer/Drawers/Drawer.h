@@ -39,13 +39,17 @@ public:
     virtual void beginPath() = 0;
     virtual void closePath() = 0;
     virtual void bezierCurveTo(float c1x, float c1y, float c2x, float c2y, float x, float y) = 0;
+    virtual void quadraticCurveTo(float cpx, float cpy, float x, float y) = 0;
     virtual void lineJoin(LineJoin type) = 0;
     virtual void rotate(float angle) = 0;
     virtual void scale(float x, float y) = 0;
     virtual void rect(float x, float y, float w, float h) = 0;
     virtual void fillRect(float x, float y, float w, float h) = 0;
 
-    void roundedRect(float x, float y, float w, float h, float r);
+    virtual void roundedRect(float x, float y, float w, float h, float r);
+    virtual void roundedRectDifferentCorners(float x, float y, float w,
+            float h, float radiusLeftTop,
+            float radiusRightTop, float radiusBottomRight, float radiusBottomLeft);
     void roundedRect(const CppUtils::RoundedRectF& roundedRect);
     virtual void lineTo(const CppUtils::PointF& point);
     virtual void moveTo(const CppUtils::PointF& point);

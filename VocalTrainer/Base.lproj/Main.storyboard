@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -676,15 +675,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="Yhc-fs-ZHp" customClass="PianoView">
+                                <rect key="frame" x="0.0" y="0.0" width="67" height="270"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="67" id="fFO-6M-RHN"/>
+                                </constraints>
+                            </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="uID-Be-fzm" userLabel="WorkspaceView" customClass="WorkspaceView">
-                                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                                <rect key="frame" x="67" y="0.0" width="413" height="270"/>
                             </customView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="uID-Be-fzm" firstAttribute="height" secondItem="m2S-Jp-Qdl" secondAttribute="height" id="Glm-Xm-Rig"/>
-                            <constraint firstItem="uID-Be-fzm" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="Mp3-3M-n6n"/>
-                            <constraint firstItem="uID-Be-fzm" firstAttribute="width" secondItem="m2S-Jp-Qdl" secondAttribute="width" id="l6p-8L-IN7"/>
-                            <constraint firstItem="uID-Be-fzm" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="mbR-ic-Iwa"/>
+                            <constraint firstItem="uID-Be-fzm" firstAttribute="leading" secondItem="Yhc-fs-ZHp" secondAttribute="trailing" id="APU-zF-0HF"/>
+                            <constraint firstItem="Yhc-fs-ZHp" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="DPW-wB-eIO"/>
+                            <constraint firstAttribute="bottom" secondItem="Yhc-fs-ZHp" secondAttribute="bottom" id="Jvt-zu-ke1"/>
+                            <constraint firstItem="uID-Be-fzm" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="QZ7-bP-e9L"/>
+                            <constraint firstAttribute="bottom" secondItem="uID-Be-fzm" secondAttribute="bottom" id="Qmi-JG-JjC"/>
+                            <constraint firstAttribute="trailing" secondItem="uID-Be-fzm" secondAttribute="trailing" id="ivU-7X-wYY"/>
+                            <constraint firstItem="Yhc-fs-ZHp" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="kSw-RU-lZU"/>
                         </constraints>
                     </view>
                 </viewController>

@@ -7,13 +7,14 @@
 #define VOCALTRAINER_ZOOMCONTROLLER_H
 
 #include "ListenersSet.h"
+#include "Pitch.h"
 
 class ZoomController {
     float zoom;
-    int firstPitchPerfectFrequencyIndex;
+    Pitch firstPitch;
 
     CppUtils::ListenersSet<float> zoomChangedListeners;
-    CppUtils::ListenersSet<int> firstPitchPerfectFrequencyIndexChangedListeners;
+    CppUtils::ListenersSet<Pitch> firstPitchChangedListeners;
 public:
     ZoomController();
 
@@ -26,11 +27,11 @@ public:
     float getMinZoom() const;
     float getMaxZoom() const;
 
-    int getFirstPitchPerfectFrequencyIndex() const;
-    void setFirstPitchPerfectFrequencyIndex(int firstPitchPerfectFrequencyIndex);
+    Pitch getFirstPitch() const;
+    void setFirstPitch(const Pitch& pitch);
 
-    int addFirstPitchPerfectFrequencyIndexChangedListener(const CppUtils::ListenersSet<int>::Listener& listener);
-    void removeFirstPitchPerfectFrequencyIndexChangedListener(int key);
+    int addFirstPitchChangedListener(const CppUtils::ListenersSet<Pitch>::Listener &listener);
+    void removeFirstPitchChangedListener(int key);
     int addZoomChangedListener(const CppUtils::ListenersSet<float>::Listener& listener);
     void removeZoomChangedListener(int key);
 };

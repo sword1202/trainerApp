@@ -1,0 +1,121 @@
+//
+// Created by Semyon Tikhonenko on 7/3/18.
+// Copyright (c) 2018 Mac. All rights reserved.
+//
+
+#include "MainController.h"
+#include "VxPitchInputReader.h"
+
+using namespace CppUtils;
+
+MainController *MainController::instance() {
+    static MainController inst;
+    return &inst;
+}
+
+MainController::MainController() {
+    workspaceController = nullptr;
+    this->pitchInputReader = new VxPitchInputReader();
+    this->mvxPlayer = new MvxPlayer();
+    this->zoomController = new ZoomController();
+
+    mvxPlayer->addIsPlayingChangedListener([this] (bool playing) {
+        if (playing) {
+            this->pitchInputReader->start();
+        } else {
+            this->pitchInputReader->stop();
+        }
+
+        updateWorkspaceIsPlayingChanged(playing);
+
+        return DONT_DELETE_LISTENER;
+    });
+
+    mvxPlayer->addVxFileChangedListener([this] (const VxFile* vxFile) {
+        WorkspaceController* controller = workspaceController;
+        controller->setVxFile(vxFile);
+        return DONT_DELETE_LISTENER;
+    });
+
+    zoomController->addZoomChangedListener([this] (float zoom) {
+        updateZoom();
+        return DONT_DELETE_LISTENER;
+    });
+
+    zoomController->addFirstPitchChangedListener([this](Pitch) {
+        updateWorkspaceFirstPitch();
+        pianoController->setFirstPitch(zoomController->getFirstPitch());
+        onPianoUpdateRequested();
+        return DONT_DELETE_LISTENER;
+    });
+
+    pitchInputReader->addPitchDetectedListener([=] (const Pitch& pitch, double) {
+        if (pianoController) {
+            pianoController->setDetectedPitch(pitch);
+            onPianoUpdateRequested();
+        }
+        return DONT_DELETE_LISTENER;
+    });
+}
+
+void MainController::updateWorkspaceIsPlayingChanged(bool playing) {
+    WorkspaceController* controller = this->workspaceController;
+    if (playing) {
+        controller->setIntervalsPerSecond(this->mvxPlayer->getBeatsPerMinute() / 60.0);
+    } else {
+        controller->setIntervalsPerSecond(0);
+    }
+}
+
+VxPitchInputReader *MainController::getPitchInputReader() const {
+    return pitchInputReader;
+}
+
+ZoomController *MainController::getZoomController() const {
+    return zoomController;
+}
+
+MainController::~MainController() {
+    delete mvxPlayer;
+    delete pitchInputReader;
+}
+
+MvxPlayer *MainController::getMvxPlayer() const {
+    return mvxPlayer;
+}
+
+void MainController::setWorkspaceController(WorkspaceController *workspaceController) {
+    this->workspaceController = workspaceController;
+    workspaceController->setPitchesCollector(pitchInputReader);
+    updateZoom();
+    updateWorkspaceFirstPitch();
+    workspaceController->setVxFile(mvxPlayer->getVxFile());
+}
+
+void MainController::updateZoom() {
+    if (workspaceController) {
+        WorkspaceController* controller = workspaceController;
+        controller->setIntervalWidth(zoomController->getIntervalWidth());
+        controller->setIntervalHeight(zoomController->getIntervalHeight());
+    }
+
+    if (pianoController) {
+        pianoController->setIntervalHeight(zoomController->getIntervalHeight());
+        onPianoUpdateRequested();
+    }
+}
+
+void MainController::updateWorkspaceFirstPitch() {
+    WorkspaceController* controller = workspaceController;
+    controller->setFirstVisiblePitch(zoomController->getFirstPitch());
+}
+
+void MainController::setPianoController(PianoController *pianoController,
+        const std::function<void()>& onUpdateRequested) {
+    assert(pianoController);
+    onPianoUpdateRequested = onUpdateRequested;
+    this->pianoController = pianoController;
+    pianoController->setDetectedPitch(pitchInputReader->getLastDetectedPitch());
+    pianoController->setFirstPitch(zoomController->getFirstPitch());
+    pianoController->setIntervalHeight(zoomController->getIntervalHeight());
+}
