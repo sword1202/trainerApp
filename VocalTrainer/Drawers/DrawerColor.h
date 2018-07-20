@@ -27,6 +27,10 @@ public:
     uchar& g();
     uchar& b();
     uchar& a();
+
+    bool operator==(const DrawerColor &rhs) const;
+
+    bool operator!=(const DrawerColor &rhs) const;
 };
 
 #endif // DRAWERCOLOR_H

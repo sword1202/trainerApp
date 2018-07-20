@@ -28,7 +28,7 @@
     
     if (!_pianoDrawer) {
         MainController *mainController = MainController::instance();
-        _pianoDrawer = new PianoDrawer(new QuartzDrawer(), mainController->getMvxPlayer());
+        _pianoDrawer = new PianoDrawer(new QuartzDrawer(), mainController->getPlayer());
 
         __weak PianoView* weakSelf = self;
         mainController->setPianoController(_pianoDrawer, [=] {

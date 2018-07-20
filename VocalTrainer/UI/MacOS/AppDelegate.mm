@@ -16,7 +16,8 @@
     self = [super init];
     if (self) {
         PortAudio::init();
-        MainController::instance();
+        MainController::initInstance(new MainController(new VxPitchInputReader(),
+                new MvxPlayer(), new ZoomController()));
     }
 
     return self;

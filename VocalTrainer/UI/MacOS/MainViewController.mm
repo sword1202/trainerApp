@@ -5,7 +5,7 @@
 
 #import "MainViewController.h"
 #import "MainController.h"
-#import "PlayHeadView.h"
+#import "MvxPlayer.h"
 
 @implementation MainViewController {
     
@@ -13,9 +13,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    PlayHeadView *playHeadView = [[PlayHeadView alloc] initWithHeight:self.view.frame.size.height];
-    playHeadView.position = 100;
-    [self.view addSubview:playHeadView];
 }
 
 -(IBAction) openDocument:(id)sender {
@@ -30,7 +27,7 @@
     if(i == NSModalResponseOK){
         NSURL *url = panel.URL;
         NSString* path = [url.absoluteString stringByReplacingOccurrencesOfString:@"file://" withString:@""];
-        MvxPlayer *mvxPlayer = MainController::instance()->getMvxPlayer();
+        MvxPlayer *mvxPlayer = MainController::instance()->getPlayer();
         mvxPlayer->init(path.cString);
         mvxPlayer->prepare();
         mvxPlayer->play();
