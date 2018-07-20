@@ -52,6 +52,7 @@
 		54CCB9342085531F009639AD /* WAVFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E7A67C01D8E57AE00DFAF8B /* WAVFile.cpp */; };
 		C9FFF032688C695403C7C94F /* OpenGLUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFF2F348E4948EC1CF743 /* OpenGLUtils.cpp */; };
 		C9FFF038BC9107AE07369791 /* AlgorithmsTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF49EDE81D0B46952137F /* AlgorithmsTest.cpp */; };
+		C9FFF03F1589CC49667FD571 /* VxFileAudioDataGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF7423F75316473827230 /* VxFileAudioDataGenerator.cpp */; };
 		C9FFF0408858AAFAB5542709 /* MidiEventList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFF63DF93064D05413294 /* MidiEventList.cpp */; };
 		C9FFF045E64DA74C0FF7618C /* MidiTrack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA423EB35396AF0A6669 /* MidiTrack.cpp */; };
 		C9FFF051780243EF07304B84 /* 1.vx in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFDD798D0EB7C53086DD3 /* 1.vx */; };
@@ -226,6 +227,7 @@
 		C9FFF08B2D6B8FA88F0959E4 /* WorkspaceDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WorkspaceDrawer.cpp; sourceTree = "<group>"; };
 		C9FFF08E11535354E15CC819 /* MvxFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MvxFile.cpp; sourceTree = "<group>"; };
 		C9FFF093B6C66FAA20714200 /* MidiFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiFileReader.h; sourceTree = "<group>"; };
+		C9FFF0A0867AAEAF3C36F59F /* VxFileAudioDataGeneratorConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxFileAudioDataGeneratorConfig.h; sourceTree = "<group>"; };
 		C9FFF0A71BF842FC6C348D0C /* AudioUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AudioUtils.cpp; path = PitchDetection/AudioUtils.cpp; sourceTree = "<group>"; };
 		C9FFF0A770C7C4A877771027 /* melody.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = melody.mid; sourceTree = "<group>"; };
 		C9FFF0FCCE357D9E6F7F7D4B /* DrawerColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawerColor.h; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 		C9FFF6F024954CC62D511B38 /* StringsTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StringsTest.cpp; path = PitchDetection/CppUtils/tests/StringsTest.cpp; sourceTree = SOURCE_ROOT; };
 		C9FFF709A5A3DB8BE4B17B46 /* StlDebugUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StlDebugUtils.h; path = PitchDetection/CppUtils/StlDebugUtils.h; sourceTree = "<group>"; };
 		C9FFF709E60D6232BAF0C4CD /* VxFileTests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VxFileTests.cpp; sourceTree = "<group>"; };
+		C9FFF7423F75316473827230 /* VxFileAudioDataGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VxFileAudioDataGenerator.cpp; sourceTree = "<group>"; };
 		C9FFF74CC139D132BEC7B59A /* PianoDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PianoDrawer.cpp; sourceTree = "<group>"; };
 		C9FFF77AC431EAF0ACD903B5 /* MemoryUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MemoryUtils.h; path = PitchDetection/CppUtils/MemoryUtils.h; sourceTree = "<group>"; };
 		C9FFF7DA2A7B0A4772FADB27 /* Point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Point.h; path = PitchDetection/CppUtils/Point.h; sourceTree = "<group>"; };
@@ -334,6 +337,7 @@
 		C9FFFDDD3D7C5E7D7082BBFC /* ParallelVxFileAudioDataGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParallelVxFileAudioDataGenerator.cpp; sourceTree = "<group>"; };
 		C9FFFDFB607BEA78975AA221 /* WorkspaceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceView.h; sourceTree = "<group>"; };
 		C9FFFE25C60D3EAE8633BC72 /* VxFileAudioPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VxFileAudioPlayer.cpp; sourceTree = "<group>"; };
+		C9FFFE30CEA0B3403F9F90BB /* VxFileAudioDataGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxFileAudioDataGenerator.h; sourceTree = "<group>"; };
 		C9FFFE409343741439E4626A /* WorkspaceDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceDrawer.h; sourceTree = "<group>"; };
 		C9FFFE514220C10160A77F57 /* PitchRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PitchRenderer.cpp; sourceTree = "<group>"; };
 		C9FFFE55AF6D32018F3AB842 /* GeometryUtilsTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GeometryUtilsTest.cpp; path = PitchDetection/CppUtils/tests/GeometryUtilsTest.cpp; sourceTree = SOURCE_ROOT; };
@@ -610,6 +614,9 @@
 				C9FFFABBAF2D1B722ECDFA27 /* SoundFont2PitchRenderer.h */,
 				C9FFF851472080263029F894 /* VxLyricsLine.h */,
 				C9FFF38E03A20F33D84A0D04 /* PlayingPitchSequence.h */,
+				C9FFF7423F75316473827230 /* VxFileAudioDataGenerator.cpp */,
+				C9FFFE30CEA0B3403F9F90BB /* VxFileAudioDataGenerator.h */,
+				C9FFF0A0867AAEAF3C36F59F /* VxFileAudioDataGeneratorConfig.h */,
 			);
 			path = VxPlayer;
 			sourceTree = "<group>";
@@ -946,6 +953,7 @@
 				C9FFF2F31C154F4C0C73C11E /* PianoView.mm in Sources */,
 				C9FFFBB89F971E3E4CDE5D64 /* SVGImageView.m in Sources */,
 				C9FFF1A1BC182C76AE488B29 /* DrawerColor.cpp in Sources */,
+				C9FFF03F1589CC49667FD571 /* VxFileAudioDataGenerator.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
