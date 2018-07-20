@@ -12,3 +12,7 @@ QmlPitch::QmlPitch(int perfectFrequencyIndex) :
 {
 
 }
+
+QmlPitch::QmlPitch(const Pitch &pitch) : Pitch(pitch) {
+
+}

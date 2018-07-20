@@ -45,6 +45,7 @@ public:
     void rect(float x, float y, float w, float h) override;
     void fillRect(float x, float y, float w, float h) override;
 
+
     void fillText(const std::string &text, float x, float y) override;
 
     void clear() override;

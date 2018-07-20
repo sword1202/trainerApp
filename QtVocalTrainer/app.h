@@ -4,8 +4,9 @@
 #import <QApplication>
 #include <QQmlApplicationEngine>
 #include "MainController.h"
+#include "player.h"
 
-class QtVxApp : public QApplication, public VxApp
+class VxApp : public QApplication, public MainController
 {
     QQmlApplicationEngine* engine;
 
@@ -13,11 +14,12 @@ class QtVxApp : public QApplication, public VxApp
     void doMacOsPlatformStaff();
 #endif
 public:
-    QtVxApp(int argc, char *argv[]);
+    VxApp(int argc, char *argv[]);
+    Player* getPlayer() const;
     void executeOnMainThread(const std::function<void()>& callback);
-    ~QtVxApp();
+    ~VxApp();
 
-    static QtVxApp* instance();
+    static VxApp* instance();
 
 protected:
     virtual bool event(QEvent *event) override;

@@ -2,6 +2,7 @@
 #include <iostream>
 #include <QScreen>
 #include "../PitchDetection/CppUtils/TimeUtils.h"
+#include "app.h"
 
 using namespace CppUtils;
 
@@ -26,12 +27,12 @@ QmlPitch QmlCppBridge::whitePitch(int whitePitchIndex, int octaveIndex) {
     return QmlPitch(Pitch::whitePitchPerfectFrequencyIndex(whitePitchIndex, octaveIndex));
 }
 
-ZoomController *QmlCppBridge::getZoom() const {
-    return ZoomController::instance();
+QmlZoomController *QmlCppBridge::getZoomController() const {
+    return static_cast<QmlZoomController*>(VxApp::instance()->getZoomController());
 }
 
 Player *QmlCppBridge::getPlayer() const {
-    return Player::instance();
+    return static_cast<Player*>(VxApp::instance()->getPlayer());
 }
 
 qreal QmlCppBridge::getDevicePixelRatio() const {

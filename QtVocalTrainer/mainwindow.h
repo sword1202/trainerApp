@@ -40,6 +40,8 @@ public:
 
 public slots:
     void onFileOpen();
+
+    void updatePlayheadPosition() const;
 };
 
 #endif // MAINWINDOW_H

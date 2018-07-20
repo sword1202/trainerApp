@@ -29,6 +29,7 @@ public:
 public:
     QmlPitch(int perfectFrequencyIndex);
     QmlPitch(float frequency);
+    QmlPitch(const Pitch& pitch);
     QmlPitch(const QmlPitch& pitch) = default;
     QmlPitch() = default;
 

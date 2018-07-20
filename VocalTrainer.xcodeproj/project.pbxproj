@@ -35,6 +35,8 @@
 		544C7CE820A9978C002B24BD /* SoundFont2PitchRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA934598DEB3A7ED2F90 /* SoundFont2PitchRenderer.cpp */; };
 		544C7E9A20C9717B0070D638 /* PitchesCollector.h in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF7F31EF9E363ADB456EF /* PitchesCollector.h */; };
 		544C7E9B20C9717B0070D638 /* PitchesCollector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF519F5A10D60A8B1F899 /* PitchesCollector.cpp */; };
+		546C34F120F0BC0D00017D73 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 546C34F020F0BC0D00017D73 /* Images */; };
+		546C35F120F0C52B00017D73 /* SvgLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 546C351C20F0C3EF00017D73 /* SvgLibrary.framework */; };
 		549968082090DAF20082B354 /* AudioUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF0A71BF842FC6C348D0C /* AudioUtils.cpp */; };
 		54CCB92720854CB3009639AD /* MidiFileTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54CCB92620854CB3009639AD /* MidiFileTest.cpp */; };
 		54CCB928208551A2009639AD /* Pitch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1E9991D592EC100E02C33 /* Pitch.cpp */; };
@@ -73,6 +75,7 @@
 		C9FFF5D95B14517981993411 /* AudioFilePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFB85AD13A0DC254A5BFC /* AudioFilePlayer.cpp */; };
 		C9FFF64CA7878CC014CCED77 /* WavAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF4B352C76A7F89AF317E /* WavAudioPlayer.cpp */; };
 		C9FFF7AE7C2048B9BE210E7C /* MidiEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF9C3A05CC2DBEF0526B6 /* MidiEvent.cpp */; };
+		C9FFF7B1313129EB8CFF2571 /* PlayHeadView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF9F7EA41AADE912229F8 /* PlayHeadView.mm */; };
 		C9FFF7F10BC2BF153F5D35DA /* VxFileGeneratorTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFCEEF86F468AC8AE82F0 /* VxFileGeneratorTest.cpp */; };
 		C9FFF83B36D53E4917661B17 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF12322F34C99321F4F18 /* AppDelegate.mm */; };
 		C9FFF872E56D467F24FAEC7B /* MidiFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF1E4F9CFE2324A18F83D /* MidiFile.cpp */; };
@@ -88,6 +91,7 @@
 		C9FFFAF2DEEFD4574C487FB1 /* ZoomController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC295B181CD47AA7CEBC /* ZoomController.cpp */; };
 		C9FFFB3D9CBDEE37A8696DB2 /* Executors.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF3F33A6942DEFCDDF2C9 /* Executors.mm */; };
 		C9FFFB76B1C8AFAB7E17C1A8 /* VxFileAudioDataGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFDDD3D7C5E7D7082BBFC /* VxFileAudioDataGenerator.cpp */; };
+		C9FFFBB89F971E3E4CDE5D64 /* SVGImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF10C7E9FF13A43C5E76B /* SVGImageView.m */; };
 		C9FFFBDE33761CD24C30F32D /* Binasc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF0789AD2038BA3DA38A5 /* Binasc.cpp */; };
 		C9FFFC266F60499D5C530766 /* UiUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF278E14B7F7278955980 /* UiUtils.m */; };
 		C9FFFC6118EFC9DA8A40B6EF /* AubioPitchDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8E7BA2D6A027BB66320 /* AubioPitchDetector.cpp */; };
@@ -111,6 +115,23 @@
 		C9FFFFA05630CAB959DB47F5 /* StringsTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6F024954CC62D511B38 /* StringsTest.cpp */; };
 		C9FFFFE592ADED592DF68BF4 /* PianoDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF74CC139D132BEC7B59A /* PianoDrawer.cpp */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		546C351B20F0C3EF00017D73 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 546C351620F0C3ED00017D73 /* SvgLibrary.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 546C34FC20F0C3ED00017D73;
+			remoteInfo = SvgLibrary;
+		};
+		546C351D20F0C3EF00017D73 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 546C351620F0C3ED00017D73 /* SvgLibrary.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 546C350520F0C3ED00017D73;
+			remoteInfo = SvgLibraryTests;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		2EF1E96D1D580BB200E02C33 /* Embed Frameworks */ = {
@@ -186,6 +207,8 @@
 		5448631D20EA647500B6E046 /* libboost_serialization.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_serialization.a; path = libs/Release/libboost_serialization.a; sourceTree = "<group>"; };
 		5448631E20EA647500B6E046 /* libportaudio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libportaudio.a; path = libs/Release/libportaudio.a; sourceTree = "<group>"; };
 		544C7CE320A98235002B24BD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		546C34F020F0BC0D00017D73 /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
+		546C351620F0C3ED00017D73 /* SvgLibrary.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SvgLibrary.xcodeproj; path = SvgLibrary/SvgLibrary.xcodeproj; sourceTree = "<group>"; };
 		5470EEC1209F5C6400D77B9C /* libboost_serialization.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_serialization.a; path = libs/Release/libboost_serialization.a; sourceTree = "<group>"; };
 		547378DA2092A3FC003B8748 /* libportaudio.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = libportaudio.la; path = libs/Debug/libportaudio.la; sourceTree = "<group>"; };
 		547378DC2092A518003B8748 /* libportaudio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libportaudio.a; path = libs/Release/libportaudio.a; sourceTree = "<group>"; };
@@ -205,6 +228,7 @@
 		C9FFF093B6C66FAA20714200 /* MidiFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiFileReader.h; sourceTree = "<group>"; };
 		C9FFF0A71BF842FC6C348D0C /* AudioUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AudioUtils.cpp; path = PitchDetection/AudioUtils.cpp; sourceTree = "<group>"; };
 		C9FFF0A770C7C4A877771027 /* melody.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = melody.mid; sourceTree = "<group>"; };
+		C9FFF10C7E9FF13A43C5E76B /* SVGImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVGImageView.m; sourceTree = "<group>"; };
 		C9FFF12322F34C99321F4F18 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		C9FFF12A4E0AAAD8E783983E /* MvxPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MvxPlayer.cpp; sourceTree = "<group>"; };
 		C9FFF15878C9F431873450CF /* StringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringUtils.h; path = PitchDetection/CppUtils/StringUtils.h; sourceTree = "<group>"; };
@@ -230,6 +254,7 @@
 		C9FFF447BDF1DC02794881E2 /* CADebugMacros.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = CADebugMacros.h; sourceTree = "<group>"; };
 		C9FFF460C4A9ADFB00392E76 /* MidiMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiMessage.h; sourceTree = "<group>"; };
 		C9FFF46CB7E53ED0A36C78E9 /* MainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainController.h; sourceTree = "<group>"; };
+		C9FFF4884CFB60F6266EB793 /* SVGImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGImageView.h; sourceTree = "<group>"; };
 		C9FFF49EDE81D0B46952137F /* AlgorithmsTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlgorithmsTest.cpp; path = PitchDetection/CppUtils/tests/AlgorithmsTest.cpp; sourceTree = SOURCE_ROOT; };
 		C9FFF4AF99CFAEC81D8A838A /* audiodecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = audiodecoder.cpp; sourceTree = "<group>"; };
 		C9FFF4B352C76A7F89AF317E /* WavAudioPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WavAudioPlayer.cpp; sourceTree = "<group>"; };
@@ -253,6 +278,7 @@
 		C9FFF7DA2A7B0A4772FADB27 /* Point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Point.h; path = PitchDetection/CppUtils/Point.h; sourceTree = "<group>"; };
 		C9FFF7E457FED8A685600F59 /* nanovg_mtl_shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = nanovg_mtl_shaders.metal; sourceTree = "<group>"; };
 		C9FFF7F31EF9E363ADB456EF /* PitchesCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PitchesCollector.h; path = PitchDetection/PitchesCollector.h; sourceTree = "<group>"; };
+		C9FFF7F9E8C6ADAF088829C1 /* PlayHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayHeadView.h; sourceTree = "<group>"; };
 		C9FFF8263643024E19C9E8FC /* MidiEventList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiEventList.h; sourceTree = "<group>"; };
 		C9FFF851472080263029F894 /* VxLyricsLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxLyricsLine.h; sourceTree = "<group>"; };
 		C9FFF85DF0B393E6363253C2 /* ConcurrentModificationAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConcurrentModificationAssert.h; path = PitchDetection/CppUtils/ConcurrentModificationAssert.h; sourceTree = "<group>"; };
@@ -272,6 +298,7 @@
 		C9FFF9C3A05CC2DBEF0526B6 /* MidiEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiEvent.cpp; sourceTree = "<group>"; };
 		C9FFF9D3C242FFC9A4D440C7 /* VxFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxFile.h; sourceTree = "<group>"; };
 		C9FFF9F61583D3A7E3FB2459 /* RoundedRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RoundedRect.h; path = PitchDetection/CppUtils/RoundedRect.h; sourceTree = "<group>"; };
+		C9FFF9F7EA41AADE912229F8 /* PlayHeadView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayHeadView.mm; sourceTree = "<group>"; };
 		C9FFFA034B7CE992C07C19B4 /* Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Circle.h; path = PitchDetection/CppUtils/Circle.h; sourceTree = "<group>"; };
 		C9FFFA10D5579C70B88DA4D6 /* AubioPitchDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AubioPitchDetector.h; path = PitchDetection/AubioPitchDetector.h; sourceTree = "<group>"; };
 		C9FFFA10EDA5C043F0ABD81E /* PianoDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PianoDrawer.h; sourceTree = "<group>"; };
@@ -331,6 +358,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				546C35F120F0C52B00017D73 /* SvgLibrary.framework in Frameworks */,
 				5448632320EA64A500B6E046 /* libaubio.a in Frameworks */,
 				5448632420EA64A500B6E046 /* libboost_serialization.a in Frameworks */,
 				5448632520EA64A500B6E046 /* libportaudio.a in Frameworks */,
@@ -413,6 +441,7 @@
 		2EF1E8C21D57F95100E02C33 = {
 			isa = PBXGroup;
 			children = (
+				546C351620F0C3ED00017D73 /* SvgLibrary.xcodeproj */,
 				5448631C20EA647500B6E046 /* libaubio.a */,
 				5448631D20EA647500B6E046 /* libboost_serialization.a */,
 				5448631E20EA647500B6E046 /* libportaudio.a */,
@@ -437,6 +466,7 @@
 		2EF1E8CD1D57F95100E02C33 /* VocalTrainer */ = {
 			isa = PBXGroup;
 			children = (
+				546C34F020F0BC0D00017D73 /* Images */,
 				2EF1E8D21D57F95100E02C33 /* Assets.xcassets */,
 				2EF1E8D41D57F95100E02C33 /* Main.storyboard */,
 				2EF1E8D71D57F95100E02C33 /* Info.plist */,
@@ -491,6 +521,15 @@
 				C9FFFA10D5579C70B88DA4D6 /* AubioPitchDetector.h */,
 			);
 			name = PitchDetection;
+			sourceTree = "<group>";
+		};
+		546C351720F0C3ED00017D73 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				546C351C20F0C3EF00017D73 /* SvgLibrary.framework */,
+				546C351E20F0C3EF00017D73 /* SvgLibraryTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		54CCB91F20854C96009639AD /* VocalTrainerTests */ = {
@@ -582,6 +621,8 @@
 				C9FFFB8154FE77206330DE46 /* WorkspaceView.mm */,
 				C9FFF963F888F18FECD1886A /* PianoView.mm */,
 				C9FFF022E1BA8C340B4914BB /* PianoView.h */,
+				C9FFF9F7EA41AADE912229F8 /* PlayHeadView.mm */,
+				C9FFF7F9E8C6ADAF088829C1 /* PlayHeadView.h */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -619,6 +660,8 @@
 				C9FFFF2396A3AAA662803D5A /* MainViewController.mm */,
 				C9FFF4CA7D0D30885678F3D6 /* MainWindowController.h */,
 				C9FFF2CC989B2655538D2732 /* MainWindowController.m */,
+				C9FFF10C7E9FF13A43C5E76B /* SVGImageView.m */,
+				C9FFF4884CFB60F6266EB793 /* SVGImageView.h */,
 			);
 			path = MacOS;
 			sourceTree = "<group>";
@@ -782,6 +825,12 @@
 			mainGroup = 2EF1E8C21D57F95100E02C33;
 			productRefGroup = 2EF1E8CC1D57F95100E02C33 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 546C351720F0C3ED00017D73 /* Products */;
+					ProjectRef = 546C351620F0C3ED00017D73 /* SvgLibrary.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				2EF1E8CA1D57F95100E02C33 /* VocalTrainer */,
@@ -789,6 +838,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		546C351C20F0C3EF00017D73 /* SvgLibrary.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SvgLibrary.framework;
+			remoteRef = 546C351B20F0C3EF00017D73 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		546C351E20F0C3EF00017D73 /* SvgLibraryTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SvgLibraryTests.xctest;
+			remoteRef = 546C351D20F0C3EF00017D73 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		2EF1E8C91D57F95100E02C33 /* Resources */ = {
@@ -799,6 +865,7 @@
 				2EF1E8D31D57F95100E02C33 /* Assets.xcassets in Resources */,
 				2EF1E8D61D57F95100E02C33 /* Main.storyboard in Resources */,
 				2EF1E99F1D592EC100E02C33 /* CMakeLists.txt in Resources */,
+				546C34F120F0BC0D00017D73 /* Images in Resources */,
 				C9FFF051780243EF07304B84 /* 1.vx in Resources */,
 				C9FFF1454B1B19FD66D82BE7 /* LICENSE.txt in Resources */,
 				C9FFFF17382758D3A423FB58 /* melody.mid in Resources */,
@@ -877,6 +944,8 @@
 				C9FFFAF2DEEFD4574C487FB1 /* ZoomController.cpp in Sources */,
 				C9FFFFE592ADED592DF68BF4 /* PianoDrawer.cpp in Sources */,
 				C9FFF2F31C154F4C0C73C11E /* PianoView.mm in Sources */,
+				C9FFFBB89F971E3E4CDE5D64 /* SVGImageView.m in Sources */,
+				C9FFF7B1313129EB8CFF2571 /* PlayHeadView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1048,6 +1117,7 @@
 				"HEADER_SEARCH_PATHS[arch=*]" = (
 					include,
 					include/nanovg,
+					SvgLibrary/SvgLibrary,
 				);
 				INFOPLIST_FILE = VocalTrainer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -1086,6 +1156,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
@@ -1100,6 +1171,7 @@
 				"HEADER_SEARCH_PATHS[arch=*]" = (
 					include,
 					include/nanovg,
+					SvgLibrary/SvgLibrary,
 				);
 				INFOPLIST_FILE = VocalTrainer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -1137,6 +1209,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};

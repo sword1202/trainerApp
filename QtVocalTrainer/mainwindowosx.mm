@@ -11,6 +11,10 @@ void MainWindow::doMacOsPlatformStaff() {
     [window setCollectionBehavior:NSWindowCollectionBehaviorDefault];
 }
 
+#ifdef USE_METAL
+
 void MainWindow::setupWorkspaceView() {
     workspaceView = new WorkspaceView(this);
 }
+
+#endif

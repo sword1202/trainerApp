@@ -61,3 +61,22 @@ void Drawer::setTextAlign(Drawer::TextAlign align) {
 void Drawer::setTextBaseline(Drawer::TextBaseline baseline) {
     textBaseline = baseline;
 }
+
+void Drawer::drawLine(float x1, float y1, float x2, float y2) {
+    beginPath();
+    moveTo(x1, y1);
+    lineTo(x2, y2);
+    stroke();
+}
+
+void Drawer::drawVerticalLine(float x, float y, float height) {
+    drawLine(x, y, x, y + height);
+}
+
+void Drawer::setStrokeColor(int color) {
+    setStrokeColor(DrawerColor::fromHex(color));
+}
+
+void Drawer::setFillColor(int color) {
+    setFillColor(DrawerColor::fromHex(color));
+}

@@ -8,16 +8,20 @@
 
 using namespace CppUtils;
 
+static MainController* _instance = nullptr;
+
 MainController *MainController::instance() {
-    static MainController inst;
-    return &inst;
+    return _instance;
 }
 
-MainController::MainController() {
+void MainController::initInstance(MainController* inst) {
+    assert(!_instance);
+    _instance = inst;
+}
+
+MainController::MainController(VxPitchInputReader *pitchInputReader, MvxPlayer *mvxPlayer, ZoomController *zoomController)
+        : pitchInputReader(pitchInputReader), mvxPlayer(mvxPlayer), zoomController(zoomController) {
     workspaceController = nullptr;
-    this->pitchInputReader = new VxPitchInputReader();
-    this->mvxPlayer = new MvxPlayer();
-    this->zoomController = new ZoomController();
 
     mvxPlayer->addIsPlayingChangedListener([this] (bool playing) {
         if (playing) {
@@ -44,7 +48,7 @@ MainController::MainController() {
 
     zoomController->addFirstPitchChangedListener([this](Pitch) {
         updateWorkspaceFirstPitch();
-        pianoController->setFirstPitch(zoomController->getFirstPitch());
+        pianoController->setFirstPitch(this->zoomController->getFirstPitch());
         onPianoUpdateRequested();
         return DONT_DELETE_LISTENER;
     });
@@ -80,7 +84,7 @@ MainController::~MainController() {
     delete pitchInputReader;
 }
 
-MvxPlayer *MainController::getMvxPlayer() const {
+MvxPlayer *MainController::getPlayer() const {
     return mvxPlayer;
 }
 

@@ -10,6 +10,7 @@
 #include <vector>
 #include "RoundedRect.h"
 #include "Point.h"
+#include "DrawerColor.h"
 #include <string>
 
 class Drawer {
@@ -26,7 +27,7 @@ public:
         TOP, BOTTOM, MIDDLE
     };
 
-    typedef std::array<unsigned char, 4> Color;
+    typedef DrawerColor Color;
 
     virtual void clear() = 0;
 
@@ -40,6 +41,8 @@ public:
     virtual void moveTo(float x, float y) = 0;
     virtual void lineTo(float x, float y) = 0;
     virtual void arcTo(float x1, float y1, float x2, float y2, float radius) = 0;
+    virtual void setStrokeColor(int color);
+    virtual void setFillColor(int color);
     virtual void setStrokeColor(const Color& color) = 0;
     virtual void setFillColor(const Color& color) = 0;
     virtual void setStrokeWidth(float strokeWidth) = 0;
@@ -54,6 +57,8 @@ public:
     virtual void scale(float x, float y) = 0;
     virtual void rect(float x, float y, float w, float h) = 0;
     virtual void fillRect(float x, float y, float w, float h) = 0;
+    virtual void drawLine(float x1, float y1, float x2, float y2);
+    virtual void drawVerticalLine(float x, float y, float height);
 
     virtual void roundedRect(float x, float y, float w, float h, float r);
     virtual void roundedRectDifferentCorners(float x, float y, float w,

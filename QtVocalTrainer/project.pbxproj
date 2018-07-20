@@ -826,15 +826,15 @@
 					);
 			};
 		};
-		44E9B6F5DDDB1745EC9B661E = {
+		8B1185F540CBCBDC52AE6A9F = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager/VxApp.cpp";
-			name = "VxApp.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager/MainController.cpp";
+			name = "MainController.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		1C85E986F4ECCF2CB526F7DE = {
-			fileRef = "44E9B6F5DDDB1745EC9B661E";
+		9BB166EC807E398A4171A798 = {
+			fileRef = "8B1185F540CBCBDC52AE6A9F";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
@@ -880,6 +880,21 @@
 		};
 		99077092507AFE4B98590930 = {
 			fileRef = "E443E25A726C641A5DF39D70";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		6AAB6F7EBB3DBDC544CF59A5 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager/ZoomController.cpp";
+			name = "ZoomController.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		4D1A33080FE9B21CEB159160 = {
+			fileRef = "6AAB6F7EBB3DBDC544CF59A5";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
@@ -1478,6 +1493,20 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
+		7AF78472B730597C0478BF4E = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager/MainController.h";
+			name = "MainController.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
+		20AC95C55D46F47619EBFA27 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager/ZoomController.h";
+			name = "ZoomController.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
 		757C4D2CF043B21FE9CC0678 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qml.qrc";
@@ -1620,9 +1649,10 @@
 				"8A85804D769148D3DF2DC1A0",
 				"DF4BED6495ED318D0BFE2018",
 				"B73294AB1C891B9B5C32CC4C",
-				"44E9B6F5DDDB1745EC9B661E",
+				"8B1185F540CBCBDC52AE6A9F",
 				"CB345E90E6084238A84B6F3F",
 				"94D21756F30A612FA8EE667B",
+				"6AAB6F7EBB3DBDC544CF59A5",
 				"1157FF7E9C28CC4BCBFDCC5F",
 				"C613FE9ADA39556AD9540F1E",
 				"1091C7F2ACC81AEE9DF74E74",
@@ -1679,7 +1709,9 @@
 				"B1AB1A53715FBDC252001C16",
 				"8E5BB2E92A648CC2706A3F15",
 				"8603BA8F9AA24E0A306CF09D",
-				"36FB9BA52D23A8CA74499832");
+				"36FB9BA52D23A8CA74499832",
+				"7AF78472B730597C0478BF4E",
+				"20AC95C55D46F47619EBFA27");
 			name = "Sources";
 			sourceTree = "<group>";
 		};
@@ -1766,10 +1798,11 @@
 				"C4C2BC31FDA4AC0469364914",
 				"3A9D3D3CE7067FBCEA4D8FFF",
 				"E14C5436684B95B9CCB8C65B",
-				"1C85E986F4ECCF2CB526F7DE",
+				"9BB166EC807E398A4171A798",
 				"75A2415D73BB1998F92CD2FF",
 				"0BC33E14B9BD15DE3C3D53CD",
 				"99077092507AFE4B98590930",
+				"4D1A33080FE9B21CEB159160",
 				"0259F18B58DCB3EB6C5B3577",
 				"F3F0C5A9AE1D79D2A4930AEA",
 				"AE6596E2227260CD02B22B61",

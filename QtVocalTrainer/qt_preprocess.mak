@@ -157,6 +157,7 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h \
 		../include/boost/lockfree/queue.hpp \
 		../include/boost/optional.hpp \
+		../VocalTrainer/VxPlayer/PlayingPitchSequence.h \
 		qmlvxpitch.h \
 		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QJsonValue \
 		qmlpitchinputreader.h \
@@ -200,6 +201,7 @@ moc_qmlpitchinputreader.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/He
 		../PitchDetection/CppUtils/stlassert.h \
 		../PitchDetection/CppUtils/CircularBuffer.h \
 		../PitchDetection/PitchesCollector.h \
+		../PitchDetection/CppUtils/ListenersSet.h \
 		../VocalTrainer/Manager/VxPitchInputReader.h \
 		qmltimedpitch.h \
 		qmlpitch.h \
@@ -273,6 +275,7 @@ moc_player.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QObject
 		../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h \
 		../include/boost/lockfree/queue.hpp \
 		../include/boost/optional.hpp \
+		../VocalTrainer/VxPlayer/PlayingPitchSequence.h \
 		qmlvxpitch.h \
 		qmlpitch.h \
 		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QJsonValue \

@@ -9,11 +9,6 @@ using namespace std;
 constexpr char FILE_URL_PREFIX[] = "file://";
 constexpr int FILE_URL_PREFIX_LENGTH = 7;
 
-Player *Player::instance() {
-    static Player* player = new Player();
-    return player;
-}
-
 Player::Player(QObject *parent) : QObject(parent) {
 
 }

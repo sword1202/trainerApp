@@ -17,7 +17,7 @@ namespace CppUtils {
         };
 
         void ExecuteOnMainThread(std::function<void()> function) {
-            QtVxApp::instance()->executeOnMainThread(function);
+            VxApp::instance()->executeOnMainThread(function);
         }
 
         void ExecuteOnBackgroundThread(std::function<void()> function) {

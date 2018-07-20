@@ -25,10 +25,11 @@ class MainController {
     void updateZoom();
     void updateWorkspaceFirstPitch();
 public:
-    MainController();
+    MainController(VxPitchInputReader *pitchInputReader, MvxPlayer *mvxPlayer, ZoomController *zoomController);
 
     VxPitchInputReader *getPitchInputReader() const;
-    MvxPlayer *getMvxPlayer() const;
+
+    MvxPlayer *getPlayer() const;
     ZoomController *getZoomController() const;
 
     // Should be executed on a render thread, the same thread as workspace->draw is executed
@@ -38,6 +39,8 @@ public:
     void setPianoController(PianoController *pianoController, const std::function<void()>& onUpdateRequested);
 
     static MainController* instance();
+
+    static void initInstance(MainController* inst);
 
     virtual ~MainController();
 };

@@ -5,14 +5,18 @@
 #include <QQuickItem>
 #include <QQmlContext>
 #include "QmlCppBridge.h"
+#include "app.h"
 #include <QMenuBar>
 #include <QFileDialog>
 #include <QMacCocoaViewContainer>
+#include "qopenglworkspacewidget.h"
 
 constexpr int HEADER_HEIGHT = 75 + 61;
 constexpr int PIANO_WIDTH = 67;
 constexpr int PLAY_HEAD_SIZE = 11;
 constexpr int BEATS_IN_TACT = 4;
+
+using namespace CppUtils;
 
 MainWindow::MainWindow(QWidget *parent) :
         QMainWindow(parent)
@@ -40,9 +44,18 @@ MainWindow::MainWindow(QWidget *parent) :
     playHeadLine = QtUtils::createVerticalLine(1, this);
     playHeadLine->setStyleSheet(QString("background-color: #24232D;"));
 
-    setPlayHeadPosition(qRound(ZoomController::instance()->getIntervalWidth() * BEATS_IN_TACT));
+    VxApp::instance()->getZoomController()->addZoomChangedListener([=] (float zoom) {
+        updatePlayheadPosition();
+        return DONT_DELETE_LISTENER;
+    });
+
+    updatePlayheadPosition();
 
     setupMenus();
+}
+
+void MainWindow::updatePlayheadPosition() const {
+    setPlayHeadPosition(qRound(VxApp::instance()->getZoomController()->getIntervalWidth() * BEATS_IN_TACT));
 }
 
 void MainWindow::setPlayHeadPosition(int position) const {
@@ -77,6 +90,10 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
     playHeadLine->resize(playHeadLine->width(), workspaceView->height());
 }
 
+void MainWindow::setupWorkspaceView() {
+    workspaceView = new QOpenGLWorkspaceWidget(this);
+}
+
 void MainWindow::mousePressEvent(QMouseEvent *event) {
     QWidget::mousePressEvent(event);
     //header->update();
@@ -93,7 +110,7 @@ void MainWindow::onFileOpen() {
     QString fileName = QFileDialog::getOpenFileName(
             this, "Select .mvx file for signing", "", "Mvx files(*.mvx);; All files(*)");
     if (!fileName.isNull()) {
-        Player::instance()->setSource(fileName);
+        VxApp::instance()->getPlayer()->setSource(fileName);
     }
 }
 

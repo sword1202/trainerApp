@@ -10,7 +10,7 @@
 
 int main(int argc, char *argv[])
 {
-    QtVxApp::setAttribute(Qt::AA_EnableHighDpiScaling);
+    VxApp::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     qRegisterMetaType<QmlPitch>("Pitch");
     qRegisterMetaType<QmlVxPitch>("VxPitch");
@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<Player>();
     qmlRegisterType<QmlPitchInputReader>();
 
-    QtVxApp a(argc, argv);
+    VxApp a(argc, argv);
     a.setAttribute(Qt::AA_DontCreateNativeWidgetSiblings);
 
     MainWindow w;

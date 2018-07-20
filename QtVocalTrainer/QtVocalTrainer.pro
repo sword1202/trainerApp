@@ -63,7 +63,7 @@ SOURCES += \
     ../VocalTrainer/Workspace/WorkspaceDrawer.cpp \
     mainwindow.cpp \
     QtUtils/qtutils.cpp \
-    zoomcontroller.cpp \
+    qmlzoomcontroller.cpp \
     ../VocalTrainer/Drawers/NvgDrawer.cpp \
     ../VocalTrainer/Drawers/Drawer.cpp \
     player.cpp \
@@ -71,10 +71,12 @@ SOURCES += \
     ../VocalTrainer/VxPlayer/AudioPlayback/Decoder/audiodecodercoreaudio.cpp \
     mainwindowosx.mm \
     ../VocalTrainer/Manager/VxPitchInputReader.cpp \
-    ../VocalTrainer/Manager/VxApp.cpp \
+    ../VocalTrainer/Manager/MainController.cpp \
     ../PitchDetection/AubioPitchDetector.cpp \
-    MacOS/qmetalwidget.mm \
-    MacOS/workspaceview.mm
+    ../VocalTrainer/Manager/ZoomController.cpp \
+    ../VocalTrainer/Drawers/QDrawer.cpp \
+    ../VocalTrainer/Drawers/DrawerColor.cpp \
+    qopenglworkspacewidget.cpp
 
 RESOURCES += qml.qrc
 
@@ -145,7 +147,7 @@ HEADERS += \
     ../VocalTrainer/Workspace/WorkspaceDrawer.h \
     mainwindow.h \
     QtUtils/qtutils.h \
-    zoomcontroller.h \
+    qmlzoomcontroller.h \
     ../VocalTrainer/Drawers/Drawer.h \
     ../VocalTrainer/Drawers/NvgDrawer.h \
     player.h \
@@ -156,8 +158,12 @@ HEADERS += \
     ../VocalTrainer/Manager/VxPitchInputReader.h \
     ../PitchDetection/AubioPitchDetector.h \
     ../VocalTrainer/nanovg/metal/nanovg_mtl_shaders.metal \
-    MacOS/qmetalwidget.h \
-    MacOS/workspaceview.h
+    ../VocalTrainer/Manager/MainController.h \
+    ../VocalTrainer/Manager/VxPitchInputReader.h \
+    ../VocalTrainer/Manager/ZoomController.h \
+    ../VocalTrainer/Drawers/QDrawer.h \
+    ../VocalTrainer/Drawers/DrawerColor.h \
+    qopenglworkspacewidget.h
 
 INCLUDEPATH += ../include \
     ../VocalTrainer/Drawers \

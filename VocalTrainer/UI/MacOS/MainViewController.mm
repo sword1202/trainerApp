@@ -4,9 +4,8 @@
 //
 
 #import "MainViewController.h"
-#import "NSString+StringUtils.h"
-#import "NSAlert+AlertUtils.h"
 #import "MainController.h"
+#import "PlayHeadView.h"
 
 @implementation MainViewController {
     
@@ -14,9 +13,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    PlayHeadView *playHeadView = [[PlayHeadView alloc] initWithHeight:self.view.frame.size.height];
+    playHeadView.position = 100;
+    [self.view addSubview:playHeadView];
 }
-
-
 
 -(IBAction) openDocument:(id)sender {
     NSOpenPanel *panel = [NSOpenPanel openPanel];

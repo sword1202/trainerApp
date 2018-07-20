@@ -41,8 +41,6 @@ public:
     void onSeekChanged(double seek) override;
     void onPlaybackStarted() override;
 
-    static Player* instance();
-
 signals:
     void complete();
     void sourceChanged(const QString& newSource);

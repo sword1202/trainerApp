@@ -5,16 +5,15 @@
 
 #include "NvgDrawer.h"
 #include <nanovg/nanovg.h>
-
-#include <nanovg/nanovg_mtl.h>
-
 #include <assert.h>
 
 static NVGcolor toNvgColor(const Drawer::Color& color) {
     return nvgRGBA(color[0], color[1], color[2], color[3]);
 }
 
-#ifdef __APPLE__
+#ifdef USE_METAL
+
+#include <nanovg/nanovg_mtl.h>
 
 void NvgDrawer::clear() {
     mnvgClearWithColor(ctx, nvgRGBA(255, 255, 255, 255));
