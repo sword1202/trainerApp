@@ -150,7 +150,7 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		../PitchDetection/CppUtils/StlDebugUtils.h \
 		../VocalTrainer/VxPlayer/MvxFile.h \
 		../VocalTrainer/VxPlayer/AudioPlayback/VxFileAudioPlayer.h \
-		../VocalTrainer/VxPlayer/VxFileAudioDataGenerator.h \
+		../VocalTrainer/VxPlayer/ParallelVxFileAudioDataGenerator.h \
 		../VocalTrainer/VxPlayer/tsf.h \
 		../VocalTrainer/VxPlayer/PitchRenderer.h \
 		../include/boost/icl/interval_set.hpp \
@@ -270,7 +270,7 @@ moc_player.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QObject
 		../PitchDetection/CppUtils/StlDebugUtils.h \
 		../VocalTrainer/VxPlayer/MvxFile.h \
 		../VocalTrainer/VxPlayer/AudioPlayback/VxFileAudioPlayer.h \
-		../VocalTrainer/VxPlayer/VxFileAudioDataGenerator.h \
+		../VocalTrainer/VxPlayer/ParallelVxFileAudioDataGenerator.h \
 		../VocalTrainer/VxPlayer/tsf.h \
 		../VocalTrainer/VxPlayer/PitchRenderer.h \
 		../include/boost/icl/interval_set.hpp \

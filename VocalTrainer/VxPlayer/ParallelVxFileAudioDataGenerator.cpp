@@ -5,7 +5,7 @@
 
 #include <cmath>
 #include <boost/assert.hpp>
-#include "VxFileAudioDataGenerator.h"
+#include "ParallelVxFileAudioDataGenerator.h"
 #include "AudioUtils.h"
 #include "Algorithms.h"
 #include "SoundFont2PitchRenderer.h"
@@ -21,7 +21,7 @@ using std::cout;
 
 constexpr double PITCH_EDGE_SMOOTH_FACTOR = 0.07 * 400;
 
-VxFileAudioDataGenerator::VxFileAudioDataGenerator(PitchRenderer *renderer, const VxFile &vxFile,
+ParallelVxFileAudioDataGenerator::ParallelVxFileAudioDataGenerator(PitchRenderer *renderer, const VxFile &vxFile,
         const VxFileAudioDataGeneratorConfig &config)
         : renderer(renderer), vxFile(std::move(vxFile)) {
     sampleRate = config.sampleRate;
@@ -38,7 +38,7 @@ VxFileAudioDataGenerator::VxFileAudioDataGenerator(PitchRenderer *renderer, cons
     resetPublishedDataIntervals();
 }
 
-void VxFileAudioDataGenerator::resetPublishedDataIntervals() {
+void ParallelVxFileAudioDataGenerator::resetPublishedDataIntervals() {
     publishedDataIntervals.add(interval<int>::right_open(0, getFullyFilledPcmDataSize()));
     for (const auto& pitch : vxFile.getPitches()) {
         int start = vxFile.samplesCountFromTicks(pitch.startTickNumber, sampleRate);
@@ -48,24 +48,24 @@ void VxFileAudioDataGenerator::resetPublishedDataIntervals() {
 }
 
 
-VxFileAudioDataGenerator::VxFileAudioDataGenerator(PitchRenderer *renderer, const VxFile &vxFile)
-: VxFileAudioDataGenerator(renderer, vxFile, VxFileAudioDataGeneratorConfig())
+ParallelVxFileAudioDataGenerator::ParallelVxFileAudioDataGenerator(PitchRenderer *renderer, const VxFile &vxFile)
+: ParallelVxFileAudioDataGenerator(renderer, vxFile, VxFileAudioDataGeneratorConfig())
 {
 
 }
 
-VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile &vxFile)
-    : VxFileAudioDataGenerator(vxFile, VxFileAudioDataGeneratorConfig()) {
+ParallelVxFileAudioDataGenerator::ParallelVxFileAudioDataGenerator(const VxFile &vxFile)
+    : ParallelVxFileAudioDataGenerator(vxFile, VxFileAudioDataGeneratorConfig()) {
 }
 
 
-VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile &vxFile, const VxFileAudioDataGeneratorConfig &config) :
-    VxFileAudioDataGenerator(nullptr, vxFile, config) {
+ParallelVxFileAudioDataGenerator::ParallelVxFileAudioDataGenerator(const VxFile &vxFile, const VxFileAudioDataGeneratorConfig &config) :
+    ParallelVxFileAudioDataGenerator(nullptr, vxFile, config) {
     int ticksPerSecond = vxFile.getTicksPerSecond();
     renderer = new SoundFont2PitchRenderer(config.sampleRate, PITCH_EDGE_SMOOTH_FACTOR / ticksPerSecond);
 }
 
-void VxFileAudioDataGenerator::clearAllData() {
+void ParallelVxFileAudioDataGenerator::clearAllData() {
     std::fill(begin(pcmData), end(pcmData), 0);
     std::fill(begin(summarizedPcmData), end(summarizedPcmData), 0);
     std::fill(begin(divisionFactor), end(divisionFactor), 0);
@@ -78,7 +78,7 @@ void VxFileAudioDataGenerator::clearAllData() {
 }
 
 
-void VxFileAudioDataGenerator::publishPitchIfFullyRendered(int index) {
+void ParallelVxFileAudioDataGenerator::publishPitchIfFullyRendered(int index) {
     const auto& pitches = vxFile.getPitches();
     const VxPitch vxPitch = pitches[index];
 
@@ -113,7 +113,7 @@ void VxFileAudioDataGenerator::publishPitchIfFullyRendered(int index) {
     }
 }
 
-bool VxFileAudioDataGenerator::renderNextPitchIfPossible() {
+bool ParallelVxFileAudioDataGenerator::renderNextPitchIfPossible() {
     const std::vector<VxPitch> &pitches = vxFile.getPitches();
     int pitchToRenderIndex = getNextPitchToRenderIndex();
     if (pitchToRenderIndex < 0) {
@@ -136,11 +136,11 @@ bool VxFileAudioDataGenerator::renderNextPitchIfPossible() {
     return true;
 }
 
-VxFileAudioDataGenerator::~VxFileAudioDataGenerator() {
+ParallelVxFileAudioDataGenerator::~ParallelVxFileAudioDataGenerator() {
     delete renderer;
 }
 
-int VxFileAudioDataGenerator::readNextSamplesBatch(short *intoBuffer) {
+int ParallelVxFileAudioDataGenerator::readNextSamplesBatch(short *intoBuffer) {
     int seek;
     {
         SEEK_LOCK;
@@ -170,7 +170,7 @@ int VxFileAudioDataGenerator::readNextSamplesBatch(short *intoBuffer) {
     return (int)size;
 }
 
-bool VxFileAudioDataGenerator::isPublished(int begin, int end) const {
+bool ParallelVxFileAudioDataGenerator::isPublished(int begin, int end) const {
     if (end > pcmData.size()) {
         end = pcmData.size();
     }
@@ -179,7 +179,7 @@ bool VxFileAudioDataGenerator::isPublished(int begin, int end) const {
     return contains(publishedDataIntervals, interval<int>::right_open(begin, end));
 }
 
-int VxFileAudioDataGenerator::getNextPitchToRenderIndex() const {
+int ParallelVxFileAudioDataGenerator::getNextPitchToRenderIndex() const {
     const std::vector<VxPitch> &pitches = vxFile.getPitches();
     if (renderedPitchesIndexes.size() == pitches.size()) {
         return -1;
@@ -217,7 +217,7 @@ int VxFileAudioDataGenerator::getNextPitchToRenderIndex() const {
     return index;
 }
 
-void VxFileAudioDataGenerator::renderAllData() {
+void ParallelVxFileAudioDataGenerator::renderAllData() {
     assert("Doesn't work" && false);
     std::fill(begin(pcmData), end(pcmData), 0);
 
@@ -239,7 +239,7 @@ void VxFileAudioDataGenerator::renderAllData() {
     publishedPcmData = pcmData;
 }
 
-void VxFileAudioDataGenerator::renderPitch(const Pitch &pitch, int begin, int length) {
+void ParallelVxFileAudioDataGenerator::renderPitch(const Pitch &pitch, int begin, int length) {
     BOOST_ASSERT(begin >= 0 && length >= 0 && length + begin <= pcmData.size());
 
     std::vector<short> temp(length);
@@ -252,41 +252,41 @@ void VxFileAudioDataGenerator::renderPitch(const Pitch &pitch, int begin, int le
     }
 }
 
-int VxFileAudioDataGenerator::getTotalSamplesCount() const {
+int ParallelVxFileAudioDataGenerator::getTotalSamplesCount() const {
     return pcmData.size();
 }
 
-int VxFileAudioDataGenerator::getOutBufferSize() const {
+int ParallelVxFileAudioDataGenerator::getOutBufferSize() const {
     return outBufferSize;
 }
 
-int VxFileAudioDataGenerator::getSampleRate() const {
+int ParallelVxFileAudioDataGenerator::getSampleRate() const {
     return sampleRate;
 }
 
-void VxFileAudioDataGenerator::setSeek(int seek) {
+void ParallelVxFileAudioDataGenerator::setSeek(int seek) {
     SEEK_LOCK;
     this->seek = seek;
 }
 
-int VxFileAudioDataGenerator::getSeek() const {
+int ParallelVxFileAudioDataGenerator::getSeek() const {
     SEEK_LOCK;
     return seek;
 }
 
-double VxFileAudioDataGenerator::getDurationInSeconds() const {
+double ParallelVxFileAudioDataGenerator::getDurationInSeconds() const {
     return vxFile.getDurationInSeconds();
 }
 
-void VxFileAudioDataGenerator::setVxFile(const VxFile &vxFile) {
+void ParallelVxFileAudioDataGenerator::setVxFile(const VxFile &vxFile) {
     this->vxFile = vxFile;
     clearAllData();
 }
 
-const VxFile &VxFileAudioDataGenerator::getVxFile() const {
+const VxFile &ParallelVxFileAudioDataGenerator::getVxFile() const {
     return vxFile;
 }
 
-int VxFileAudioDataGenerator::getFullyFilledPcmDataSize() const {
+int ParallelVxFileAudioDataGenerator::getFullyFilledPcmDataSize() const {
     return pcmData.size();
 }

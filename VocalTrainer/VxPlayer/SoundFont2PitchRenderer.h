@@ -13,7 +13,7 @@ class SoundFont2PitchRenderer : public PitchRenderer {
     tsf* _tsf;
     int smoothingSize;
 public:
-    SoundFont2PitchRenderer(int sampleRate, double smoothingRangeInSeconds);
+    SoundFont2PitchRenderer(int sampleRate, double smoothingRangeInSeconds = 0);
     ~SoundFont2PitchRenderer();
     void render(const Pitch &pitch, short *buffer, int length) override;
 };

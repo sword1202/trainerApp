@@ -34,7 +34,7 @@ SOURCES += \
     ../PitchDetection/AudioInputReader.cpp \
     executors.cpp \
     ../VocalTrainer/VxPlayer/MvxPlayer.cpp \
-    ../VocalTrainer/VxPlayer/VxFileAudioDataGenerator.cpp \
+    ../VocalTrainer/VxPlayer/ParallelVxFileAudioDataGenerator.cpp \
     ../VocalTrainer/VxPlayer/VxFile.cpp \
     ../VocalTrainer/VxPlayer/MvxFile.cpp \
     ../VocalTrainer/VxPlayer/SoundFont2PitchRenderer.cpp \
@@ -116,7 +116,7 @@ HEADERS += \
     ../PitchDetection/PortAudio.h \
     ../VocalTrainer/VxPlayer/MvxPlayer.h \
     ../VocalTrainer/VxPlayer/VxFile.h \
-    ../VocalTrainer/VxPlayer/VxFileAudioDataGenerator.h \
+    ../VocalTrainer/VxPlayer/ParallelVxFileAudioDataGenerator.h \
     ../VocalTrainer/VxPlayer/MvxFile.h \
     ../VocalTrainer/VxPlayer/VxPitch.h \
     ../VocalTrainer/VxPlayer/VxLyricsLine.h \

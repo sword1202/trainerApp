@@ -9,12 +9,12 @@
 #include "StlDebugUtils.h"
 #include "AudioPlayer.h"
 #include "VxFile.h"
-#include "VxFileAudioDataGenerator.h"
+#include "ParallelVxFileAudioDataGenerator.h"
 #include "PeriodicallySleepingBackgroundTask.h"
 #include <atomic>
 
 class VxFileAudioPlayer : public AudioPlayer {
-    VxFileAudioDataGenerator* generator;
+    ParallelVxFileAudioDataGenerator* generator;
     CppUtils::PeriodicallySleepingBackgroundTaskWithCallbacksQueue* generatorTask;
     VxFile originalVxFile;
 protected:

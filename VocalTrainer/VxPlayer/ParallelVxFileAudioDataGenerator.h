@@ -23,7 +23,7 @@ struct VxFileAudioDataGeneratorConfig {
 
 // renderNextPitchIfPossible and readNextSamplesBatch should be called from 2 different threads, other methods except
 // setVxFile can be called from any thread
-class VxFileAudioDataGenerator {
+class ParallelVxFileAudioDataGenerator {
     PitchRenderer* renderer;
     VxFile vxFile;
     std::vector<short> pcmData;
@@ -50,13 +50,13 @@ class VxFileAudioDataGenerator {
 
     void publishPitchIfFullyRendered(int index);
 public:
-    VxFileAudioDataGenerator(PitchRenderer *renderer, const VxFile &vxFile,
+    ParallelVxFileAudioDataGenerator(PitchRenderer *renderer, const VxFile &vxFile,
             const VxFileAudioDataGeneratorConfig &config);
-    VxFileAudioDataGenerator(PitchRenderer *renderer, const VxFile &vxFile);
-    VxFileAudioDataGenerator(const VxFile &vxFile, const VxFileAudioDataGeneratorConfig &config);
-    VxFileAudioDataGenerator(const VxFile &vxFile);
+    ParallelVxFileAudioDataGenerator(PitchRenderer *renderer, const VxFile &vxFile);
+    ParallelVxFileAudioDataGenerator(const VxFile &vxFile, const VxFileAudioDataGeneratorConfig &config);
+    ParallelVxFileAudioDataGenerator(const VxFile &vxFile);
 
-    virtual ~VxFileAudioDataGenerator();
+    virtual ~ParallelVxFileAudioDataGenerator();
 
     bool renderNextPitchIfPossible();
     // returns size = -1 if no data available and you should wait for some data rendered.

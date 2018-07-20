@@ -30,7 +30,7 @@
 		544C7CB020A977C8002B24BD /* libboost_serialization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5470EEC1209F5C6400D77B9C /* libboost_serialization.a */; };
 		544C7CB120A98021002B24BD /* BoostAssert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF016E94440F9F9F27A58 /* BoostAssert.cpp */; };
 		544C7CE420A98235002B24BD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 544C7CE320A98235002B24BD /* main.m */; };
-		544C7CE620A99779002B24BD /* VxFileAudioDataGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFDDD3D7C5E7D7082BBFC /* VxFileAudioDataGenerator.cpp */; };
+		544C7CE620A99779002B24BD /* ParallelVxFileAudioDataGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFDDD3D7C5E7D7082BBFC /* ParallelVxFileAudioDataGenerator.cpp */; };
 		544C7CE720A99779002B24BD /* PitchRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE514220C10160A77F57 /* PitchRenderer.cpp */; };
 		544C7CE820A9978C002B24BD /* SoundFont2PitchRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA934598DEB3A7ED2F90 /* SoundFont2PitchRenderer.cpp */; };
 		544C7E9A20C9717B0070D638 /* PitchesCollector.h in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF7F31EF9E363ADB456EF /* PitchesCollector.h */; };
@@ -90,7 +90,7 @@
 		C9FFFAEDB817B9AF82141B5F /* PitchesCollector.cpp in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF519F5A10D60A8B1F899 /* PitchesCollector.cpp */; };
 		C9FFFAF2DEEFD4574C487FB1 /* ZoomController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC295B181CD47AA7CEBC /* ZoomController.cpp */; };
 		C9FFFB3D9CBDEE37A8696DB2 /* Executors.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF3F33A6942DEFCDDF2C9 /* Executors.mm */; };
-		C9FFFB76B1C8AFAB7E17C1A8 /* VxFileAudioDataGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFDDD3D7C5E7D7082BBFC /* VxFileAudioDataGenerator.cpp */; };
+		C9FFFB76B1C8AFAB7E17C1A8 /* ParallelVxFileAudioDataGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFDDD3D7C5E7D7082BBFC /* ParallelVxFileAudioDataGenerator.cpp */; };
 		C9FFFBB89F971E3E4CDE5D64 /* SVGImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF10C7E9FF13A43C5E76B /* SVGImageView.m */; };
 		C9FFFBDE33761CD24C30F32D /* Binasc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF0789AD2038BA3DA38A5 /* Binasc.cpp */; };
 		C9FFFC266F60499D5C530766 /* UiUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF278E14B7F7278955980 /* UiUtils.m */; };
@@ -328,10 +328,10 @@
 		C9FFFD36037E3FEEA67DF037 /* OpenGLUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGLUtils.h; path = PitchDetection/CppUtils/OpenGLUtils.h; sourceTree = "<group>"; };
 		C9FFFD4E04D0ED1BB3419507 /* VxFileAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxFileAudioPlayer.h; sourceTree = "<group>"; };
 		C9FFFD5FB4A64EC592F0C03A /* NvgDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NvgDrawer.cpp; sourceTree = "<group>"; };
-		C9FFFD7029B485A5ED355739 /* VxFileAudioDataGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxFileAudioDataGenerator.h; sourceTree = "<group>"; };
+		C9FFFD7029B485A5ED355739 /* ParallelVxFileAudioDataGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallelVxFileAudioDataGenerator.h; sourceTree = "<group>"; };
 		C9FFFD7CA2EC6DC9F15DE9D1 /* PortAudio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PortAudio.cpp; path = PitchDetection/PortAudio.cpp; sourceTree = "<group>"; };
 		C9FFFDD798D0EB7C53086DD3 /* 1.vx */ = {isa = PBXFileReference; lastKnownFileType = file.vx; path = 1.vx; sourceTree = "<group>"; };
-		C9FFFDDD3D7C5E7D7082BBFC /* VxFileAudioDataGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VxFileAudioDataGenerator.cpp; sourceTree = "<group>"; };
+		C9FFFDDD3D7C5E7D7082BBFC /* ParallelVxFileAudioDataGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParallelVxFileAudioDataGenerator.cpp; sourceTree = "<group>"; };
 		C9FFFDFB607BEA78975AA221 /* WorkspaceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceView.h; sourceTree = "<group>"; };
 		C9FFFE25C60D3EAE8633BC72 /* VxFileAudioPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VxFileAudioPlayer.cpp; sourceTree = "<group>"; };
 		C9FFFE409343741439E4626A /* WorkspaceDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceDrawer.h; sourceTree = "<group>"; };
@@ -602,8 +602,8 @@
 				C9FFF9A6D7A01E58DBEB6F57 /* Midi */,
 				C9FFFB571B440415C4131766 /* AudioPlayback */,
 				C9FFF3ADAD0A03D2651727E9 /* PlaybackChunk.h */,
-				C9FFFDDD3D7C5E7D7082BBFC /* VxFileAudioDataGenerator.cpp */,
-				C9FFFD7029B485A5ED355739 /* VxFileAudioDataGenerator.h */,
+				C9FFFDDD3D7C5E7D7082BBFC /* ParallelVxFileAudioDataGenerator.cpp */,
+				C9FFFD7029B485A5ED355739 /* ParallelVxFileAudioDataGenerator.h */,
 				C9FFFE514220C10160A77F57 /* PitchRenderer.cpp */,
 				C9FFF4F6CC990DF06B2BB1C7 /* PitchRenderer.h */,
 				C9FFFA934598DEB3A7ED2F90 /* SoundFont2PitchRenderer.cpp */,
@@ -913,7 +913,7 @@
 				C9FFFDB2CD9C369890BABFDC /* MidiTrack.cpp in Sources */,
 				C9FFF44E5CD2E1B12CBD365B /* MidiFileReader.cpp in Sources */,
 				C9FFF52677955A96CA2CF85C /* AudioPlayer.cpp in Sources */,
-				C9FFFB76B1C8AFAB7E17C1A8 /* VxFileAudioDataGenerator.cpp in Sources */,
+				C9FFFB76B1C8AFAB7E17C1A8 /* ParallelVxFileAudioDataGenerator.cpp in Sources */,
 				C9FFFF33F2E63ECD31A46D25 /* PitchRenderer.cpp in Sources */,
 				C9FFFF5741CE1495CCD635E8 /* SoundFont2PitchRenderer.cpp in Sources */,
 				C9FFF97C113AF5171AC7FE41 /* VxFileAudioPlayer.cpp in Sources */,
@@ -954,7 +954,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				544C7CE820A9978C002B24BD /* SoundFont2PitchRenderer.cpp in Sources */,
-				544C7CE620A99779002B24BD /* VxFileAudioDataGenerator.cpp in Sources */,
+				544C7CE620A99779002B24BD /* ParallelVxFileAudioDataGenerator.cpp in Sources */,
 				544C7CE720A99779002B24BD /* PitchRenderer.cpp in Sources */,
 				544C7CB120A98021002B24BD /* BoostAssert.cpp in Sources */,
 				549968082090DAF20082B354 /* AudioUtils.cpp in Sources */,

@@ -42,7 +42,6 @@ Rectangle {
         readonly property real intervalOctvaHeightToPianoOctaveHeightRelation: (function() {
             // 12 pitches in octave
             var intervalOctaveHeight = cpp.zoomController.intervalHeight * 12
-            console.log("intervalOctaveHeight = " + intervalOctaveHeight)
             // 4 small pitches and 3 big pitches from heightMap, 5: 7 pitches in octave
             var pianoOctaveHeight = smallPitchHeight * 4 + bigPitchHeight * 3 + distanceBetweenPitches * 7
             return intervalOctaveHeight / pianoOctaveHeight

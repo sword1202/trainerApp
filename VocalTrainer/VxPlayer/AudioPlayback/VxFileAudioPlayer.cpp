@@ -36,7 +36,7 @@ void VxFileAudioPlayer::prepareAndProvidePlaybackData(PlaybackData *playbackData
 
 VxFileAudioPlayer::VxFileAudioPlayer(const VxFile &vxFile) {
     this->originalVxFile = vxFile;
-    generator = new VxFileAudioDataGenerator(vxFile);
+    generator = new ParallelVxFileAudioDataGenerator(vxFile);
 }
 
 int VxFileAudioPlayer::getBufferSeek() const {

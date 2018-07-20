@@ -271,15 +271,15 @@
 					);
 			};
 		};
-		AB1BB2102FE32CBC9904F361 = {
+		97EBCC129030B7B241FFAB9D = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/VxFileAudioDataGenerator.cpp";
-			name = "VxFileAudioDataGenerator.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/ParallelVxFileAudioDataGenerator.cpp";
+			name = "ParallelVxFileAudioDataGenerator.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		C4852C2D0119858544266918 = {
-			fileRef = "AB1BB2102FE32CBC9904F361";
+		685471BD76F65A43D2C3ACA4 = {
+			fileRef = "97EBCC129030B7B241FFAB9D";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
@@ -1201,10 +1201,10 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		982893B6BBE598D35A1BBDBD = {
+		7330B9E7430076C564F4667C = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/VxFileAudioDataGenerator.h";
-			name = "VxFileAudioDataGenerator.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/ParallelVxFileAudioDataGenerator.h";
+			name = "ParallelVxFileAudioDataGenerator.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
@@ -1624,7 +1624,7 @@
 				"D4BA943F97BC257AF95314F3",
 				"010F066C0C8FAFFCB00384DA",
 				"5820983D5AF61CFB18BDD732",
-				"AB1BB2102FE32CBC9904F361",
+				"97EBCC129030B7B241FFAB9D",
 				"1312A85053AA8148E2F73686",
 				"F1A509567270EF1E75247A53",
 				"43FCE66921EB37370E961A8E",
@@ -1683,7 +1683,7 @@
 				"9E65F65D73262AC07C018AEA",
 				"DE4D6A90DF4619CFB7E35D11",
 				"D427C2C1B1E642DC604E5433",
-				"982893B6BBE598D35A1BBDBD",
+				"7330B9E7430076C564F4667C",
 				"9B6CEBB4436DC45A765F6745",
 				"431ED7206D8951A6E004B0A5",
 				"A7DDB090A9DC8726D0B81E69",
@@ -1778,7 +1778,7 @@
 				"2093B786A38C5C17D4BFCB3C",
 				"D7C5B34E745041BD55235BD0",
 				"0C079B48635759D4B90150B5",
-				"C4852C2D0119858544266918",
+				"685471BD76F65A43D2C3ACA4",
 				"8E6ED27FD5FB5AE22B294181",
 				"C5D661D2FF68911A97484C54",
 				"7DE36C6845CF4444A92C0237",
