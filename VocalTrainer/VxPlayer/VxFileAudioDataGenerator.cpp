@@ -112,9 +112,10 @@ void VxFileAudioDataGenerator::setVxFile(const VxFile &vxFile) {
 }
 
 void VxFileAudioDataGenerator::resetVxFile(const VxFile &vxFile) {
-    this->seek = 0;
+    setSeek(0);
     double durationInSeconds = vxFile.getDurationInSeconds();
     pcmDataSize = (int)ceil(durationInSeconds * sampleRate);
+    VXFILE_LOCK;
     this->vxFile = vxFile;
 }
 
