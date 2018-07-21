@@ -28,13 +28,6 @@ int VxFileAudioDataGenerator::readNextSamplesBatch(short *intoBuffer) {
 
     tempPitchIndexes.clear();
     vxFile.getPitchesIndexesInTimeRange(startTime, endTime, std::back_inserter(tempPitchIndexes));
-    if (!tempPitchIndexes.empty()) {
-        cout<<"pitches: \n";
-        Strings::JoinToStream(cout, tempPitchIndexes, "\n", [=] (std::ostream& os, int index) {
-            os << vxFile.getPitches()[index];
-        });
-        cout<<endl;
-    }
 
     difference.clear();
     Sets::Difference(pitchesIndexes, tempPitchIndexes, std::back_inserter(difference));
