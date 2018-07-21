@@ -8,6 +8,7 @@
 
 #include "AudioPlayer.h"
 #include "Decoder/audiodecoder.h"
+#include "SoundTouch/SoundTouch.h"
 
 class AudioFilePlayer : public AudioPlayer {
 public:
@@ -24,6 +25,8 @@ protected:
 
 private:
     AudioDecoder* audioDecoder = nullptr;
+    soundtouch::SoundTouch soundTouch;
+    std::vector<float> tempFloatBuffer;
     std::string audioData;
     int bufferSeek = 0;
     mutable std::mutex bufferSeekMutex;
