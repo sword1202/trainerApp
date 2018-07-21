@@ -27,6 +27,8 @@ public:
     Q_PROPERTY(double playStartedSeek READ getPlayStartedSeek()  NOTIFY playStartedSeekChanged())
     Q_PROPERTY(double duration READ getDuration() NOTIFY durationChanged())
     Q_PROPERTY(double beatsPerMinute READ getBeatsPerMinute() NOTIFY beatsPerMinuteChanged())
+    Q_PROPERTY(int pitchShift READ getPitchShiftInSemiTones() WRITE
+            setPitchShiftInSemiTones() NOTIFY pitchShiftChanged())
 
     Q_INVOKABLE bool hasPitchNow(int perfectFrequencyIndex) const;
     Q_INVOKABLE bool hasAnyPitchNow() const;
@@ -35,11 +37,15 @@ public:
     Q_INVOKABLE void pause() override;
     Q_INVOKABLE void stop();
 
+    Q_INVOKABLE bool canBeShifted(int distance) const override;
+
     void onPlaybackStopped() override;
 
     void onComplete() override;
     void onSeekChanged(double seek) override;
     void onPlaybackStarted() override;
+
+    void setPitchShiftInSemiTones(int value) override;
 
 signals:
     void complete();
@@ -51,6 +57,7 @@ signals:
     void playStartedTimeChanged();
     void playStartedSeekChanged();
     void beatsPerMinuteChanged();
+    void pitchShiftChanged();
 };
 
 #endif // QMLPLAYER_H

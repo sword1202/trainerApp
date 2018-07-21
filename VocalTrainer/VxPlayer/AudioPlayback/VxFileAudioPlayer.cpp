@@ -44,6 +44,10 @@ bool VxFileAudioPlayer::isPitchShiftingAvailable(int distance) const {
 }
 
 void VxFileAudioPlayer::setPitchShiftInSemiTones(int value) {
+    if (value == getPitchShiftInSemiTones()) {
+        return;
+    }
+
     AudioPlayer::setPitchShiftInSemiTones(value);
     VxFile vxFile = originalVxFile.shifted(value);
     generator->setVxFile(vxFile);

@@ -150,13 +150,15 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		../PitchDetection/CppUtils/StlDebugUtils.h \
 		../VocalTrainer/VxPlayer/MvxFile.h \
 		../VocalTrainer/VxPlayer/AudioPlayback/VxFileAudioPlayer.h \
-		../VocalTrainer/VxPlayer/ParallelVxFileAudioDataGenerator.h \
-		../VocalTrainer/VxPlayer/tsf.h \
+		../VocalTrainer/VxPlayer/VxFileAudioDataGenerator.h \
+		../VocalTrainer/VxPlayer/VxFileAudioDataGeneratorConfig.h \
 		../VocalTrainer/VxPlayer/PitchRenderer.h \
-		../include/boost/icl/interval_set.hpp \
+		../VocalTrainer/VxPlayer/tsf.h \
 		../PitchDetection/CppUtils/PeriodicallySleepingBackgroundTask.h \
 		../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h \
 		../include/boost/lockfree/queue.hpp \
+		../VocalTrainer/VxPlayer/AudioPlayback/AudioFilePlayer.h \
+		../VocalTrainer/VxPlayer/AudioPlayback/Decoder/audiodecoder.h \
 		../include/boost/optional.hpp \
 		../VocalTrainer/VxPlayer/PlayingPitchSequence.h \
 		qmlvxpitch.h \
@@ -270,13 +272,15 @@ moc_player.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QObject
 		../PitchDetection/CppUtils/StlDebugUtils.h \
 		../VocalTrainer/VxPlayer/MvxFile.h \
 		../VocalTrainer/VxPlayer/AudioPlayback/VxFileAudioPlayer.h \
-		../VocalTrainer/VxPlayer/ParallelVxFileAudioDataGenerator.h \
-		../VocalTrainer/VxPlayer/tsf.h \
+		../VocalTrainer/VxPlayer/VxFileAudioDataGenerator.h \
+		../VocalTrainer/VxPlayer/VxFileAudioDataGeneratorConfig.h \
 		../VocalTrainer/VxPlayer/PitchRenderer.h \
-		../include/boost/icl/interval_set.hpp \
+		../VocalTrainer/VxPlayer/tsf.h \
 		../PitchDetection/CppUtils/PeriodicallySleepingBackgroundTask.h \
 		../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h \
 		../include/boost/lockfree/queue.hpp \
+		../VocalTrainer/VxPlayer/AudioPlayback/AudioFilePlayer.h \
+		../VocalTrainer/VxPlayer/AudioPlayback/Decoder/audiodecoder.h \
 		../include/boost/optional.hpp \
 		../VocalTrainer/VxPlayer/PlayingPitchSequence.h \
 		qmlvxpitch.h \

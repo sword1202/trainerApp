@@ -108,3 +108,12 @@ bool Player::hasPitchNow(int perfectFrequencyIndex) const {
 bool Player::hasAnyPitchNow() const {
     return MvxPlayer::hasAnyPitchNow();
 }
+
+void Player::setPitchShiftInSemiTones(int value) {
+    MvxPlayer::setPitchShiftInSemiTones(value);
+    emit pitchShiftChanged();
+}
+
+bool Player::canBeShifted(int distance) const {
+    return MvxPlayer::canBeShifted(distance);
+}

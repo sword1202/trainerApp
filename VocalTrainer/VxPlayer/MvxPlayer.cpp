@@ -224,6 +224,19 @@ void MvxPlayer::removeSeekChangedListener(int id) {
     seekChangedListeners.removeListener(id);
 }
 
+int MvxPlayer::getPitchShiftInSemiTones() const {
+    return vxPlayer.getPitchShiftInSemiTones();
+}
+
+void MvxPlayer::setPitchShiftInSemiTones(int value) {
+    vxPlayer.setPitchShiftInSemiTones(value);
+    instrumentalPlayer.setPitchShiftInSemiTones(value);
+}
+
+bool MvxPlayer::canBeShifted(int distance) const {
+    return vxPlayer.isPitchShiftingAvailable(distance);
+}
+
 MvxPlayer::Bounds::Bounds(double startSeek, double endSeek) : startSeek(startSeek), endSeek(endSeek) {
 }
 

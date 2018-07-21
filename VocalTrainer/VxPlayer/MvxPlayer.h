@@ -61,6 +61,9 @@ public:
     virtual void pause();
     virtual void stopAndMoveSeekToBeginning();
     virtual void play();
+    virtual bool canBeShifted(int distance) const;
+    virtual int getPitchShiftInSemiTones() const;
+    virtual void setPitchShiftInSemiTones(int value);
     bool isPlaying() const;
     void setSeek(double value);
     double getSeek() const;
