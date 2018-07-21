@@ -26,10 +26,7 @@ int AudioFilePlayer::readNextSamplesBatch(void *intoBuffer, int framesCount, con
 }
 
 void AudioFilePlayer::prepareAndProvidePlaybackData(AudioPlayer::PlaybackData *playbackData) {
-    if (audioDecoder) {
-        delete audioDecoder;
-    }
-
+    assert(!audioDecoder);
     audioDecoder = AudioDecoder::create();
     audioDecoder->open(std::move(audioData));
     playbackData->numChannels = audioDecoder->channels();
@@ -44,20 +41,27 @@ int AudioFilePlayer::getBufferSeek() const {
     return bufferSeek;
 }
 
-AudioFilePlayer::~AudioFilePlayer() {
-    if (audioDecoder) {
-        delete audioDecoder;
-    }
-}
-
-AudioFilePlayer::AudioFilePlayer(std::string &&audioData) : audioData(std::move(audioData)) {
-
-}
-
 void AudioFilePlayer::setBufferSeek(int bufferSeek) {
     {
         SEEK_LOCK;
         this->bufferSeek = bufferSeek;
     }
     AudioPlayer::setBufferSeek(bufferSeek);
+}
+
+AudioFilePlayer::AudioFilePlayer() {
+
+}
+
+void AudioFilePlayer::setAudioData(std::string &&audioData) {
+    destroy();
+    this->audioData.swap(audioData);
+    setBufferSeek(0);
+}
+
+void AudioFilePlayer::destroy() {
+    AudioPlayer::destroy();
+    if (audioDecoder) {
+        delete audioDecoder;
+    }
 }

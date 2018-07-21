@@ -10,6 +10,7 @@
 #include "VxFile.h"
 #include "MvxFile.h"
 #include "VxFileAudioPlayer.h"
+#include "AudioFilePlayer.h"
 #include <boost/optional.hpp>
 #include <memory>
 #include <functional>
@@ -38,21 +39,19 @@ public:
 
 private:
 
-    std::unique_ptr<AudioPlayer, AudioPlayer::Deleter> instrumentalPlayer;
-    std::unique_ptr<VxFileAudioPlayer, AudioPlayer::Deleter> vxPlayer;
+    AudioFilePlayer instrumentalPlayer;
+    VxFileAudioPlayer vxPlayer;
     boost::optional<Bounds> bounds;
     double playStartedSeek = -1;
     double playStartedTime = -1;
     double beatsPerMinute;
-    std::vector<std::function<void()>> onInitialisedQueue;
 
     CppUtils::ListenersSet<bool> isPlayingChangedListeners;
     CppUtils::ListenersSet<> prepareFinishedListeners;
     CppUtils::ListenersSet<const VxFile*> vxFileChangedListeners;
     CppUtils::ListenersSet<double> seekChangedListeners;
-
-    void executeWhenInitialized(const std::function<void()>& func);
 public:
+    MvxPlayer();
     virtual ~MvxPlayer();
     void init(std::istream& is);
     void init(const char* filePath);

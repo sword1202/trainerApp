@@ -105,7 +105,7 @@ void AudioPlayer::prepare() {
 }
 
 void AudioPlayer::play(double seek) {
-    BOOST_ASSERT_MSG(playbackData.sampleRate > 0, "call prepare before play");
+    BOOST_ASSERT_MSG(isPrepared(), "call prepare before play");
     BOOST_ASSERT(seek >= 0);
 
     setSeek(seek);
@@ -120,11 +120,23 @@ bool AudioPlayer::isPlaying() const {
 }
 
 AudioPlayer::~AudioPlayer() {
+    destroy();
+}
+
+void AudioPlayer::destroy() {
+    if (!stream) {
+        return;
+    }
+
+    playing = false;
+    playbackData = PlaybackData();
     auto err = Pa_CloseStream(stream);
     PortAudio::checkErrors(err);
+    stream = nullptr;
 }
 
 void AudioPlayer::pause() {
+    assert(isPrepared());
     playing = false;
     auto err = Pa_AbortStream(stream);
     PortAudio::checkErrors(err);
@@ -137,7 +149,7 @@ void AudioPlayer::setSeek(double timeStamp) {
     setBufferSeek(secondsSeekToBufferSeek(timeStamp));
 }
 
-double AudioPlayer::getTrackDurationInSeconds() {
+double AudioPlayer::getTrackDurationInSeconds() const {
     return playbackData.totalDurationInSeconds;
 }
 
@@ -236,17 +248,6 @@ void AudioPlayer::prepareAsync(const std::function<void()>& callback) {
     });
 }
 
-void AudioPlayer::destroy(const std::function<void()>& onDestroyed) {
-    delete this;
-    if (onDestroyed) {
-        onDestroyed();
-    }
-}
-
-void AudioPlayer::destroy() {
-    destroy(nullptr);
-}
-
 int AudioPlayer::getPitchShiftInSemiTones() const {
     return pitchShift;
 }
@@ -302,9 +303,5 @@ void AudioPlayer::removePlaybackStoppedListener(int key) {
 }
 
 bool AudioPlayer::isPrepared() const {
-    return playbackData.sampleRate > 0;
-}
-
-void AudioPlayer::Deleter::operator()(AudioPlayer *player) const {
-    player->destroy();
+    return stream != nullptr;
 }

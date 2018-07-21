@@ -15,6 +15,7 @@
 
 class VxFileAudioDataGenerator {
     VxFile vxFile;
+    mutable std::mutex vxFileMutex;
 
     int outBufferSize;
     int seek = 0;
@@ -29,8 +30,8 @@ class VxFileAudioDataGenerator {
 
     tsf* _tsf;
 public:
-    VxFileAudioDataGenerator(const VxFile& vxFile, const VxFileAudioDataGeneratorConfig &config);
-    VxFileAudioDataGenerator(const VxFile &file);
+    VxFileAudioDataGenerator(const VxFileAudioDataGeneratorConfig &config);
+    VxFileAudioDataGenerator();
     ~VxFileAudioDataGenerator();
 
     int readNextSamplesBatch(short *intoBuffer);
@@ -44,6 +45,8 @@ public:
     const VxFile &getVxFile() const;
 
     void setVxFile(const VxFile &vxFile);
+    // setVxFile and set seek to 0
+    void resetVxFile(const VxFile &vxFile);
 };
 
 

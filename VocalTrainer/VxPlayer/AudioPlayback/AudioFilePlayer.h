@@ -11,7 +11,8 @@
 
 class AudioFilePlayer : public AudioPlayer {
 public:
-    AudioFilePlayer(std::string&& audioData);
+    AudioFilePlayer();
+    void setAudioData(std::string&& audioData);
 protected:
     int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) override;
     void prepareAndProvidePlaybackData(PlaybackData *playbackData) override;
@@ -19,9 +20,8 @@ protected:
 protected:
     int getBufferSeek() const override;
     void setBufferSeek(int bufferSeek) override;
+    void destroy() override;
 
-protected:
-    ~AudioFilePlayer();
 private:
     AudioDecoder* audioDecoder = nullptr;
     std::string audioData;

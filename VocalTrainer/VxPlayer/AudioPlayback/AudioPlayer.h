@@ -55,14 +55,8 @@ protected:
     double samplesCountToSeconds(int samplesCount) const;
     int getSampleSize() const;
 
-    // Audio Player can't be destroyed using delete operator, call destroy method instead;
-	virtual ~AudioPlayer();
+    virtual void destroy();
 public:
-
-	class Deleter {
-	public:
-		void operator()(AudioPlayer* player) const;
-	};
 
     typedef CppUtils::ListenersSet<>::Listener OnCompleteListener;
 	typedef CppUtils::ListenersSet<>::Listener OnNoDataAvailableListener;
@@ -72,6 +66,7 @@ public:
     typedef CppUtils::ListenersSet<double, double>::Listener SeekChangedListener;
     
     AudioPlayer();
+    virtual ~AudioPlayer();
     void prepare();
     void prepareAsync(const std::function<void()>& callback);
     void play(double seek);
@@ -90,7 +85,7 @@ public:
     virtual int getPitchShiftInSemiTones() const;
     virtual void setPitchShiftInSemiTones(int value);
 
-    double getTrackDurationInSeconds();
+    double getTrackDurationInSeconds() const;
 
     int addOnCompleteListener(const OnCompleteListener& listener);
     void removeOnCompleteListener(int key);
@@ -111,9 +106,6 @@ public:
     void removePlaybackStoppedListener(int key);
 
     void playFromSeekToSeek(double a, double b, const std::function<void()> onFinish);
-
-    virtual void destroy(const std::function<void()>& onDestroyed);
-    virtual void destroy();
 
 	const PlaybackData &getPlaybackData() const;
 };

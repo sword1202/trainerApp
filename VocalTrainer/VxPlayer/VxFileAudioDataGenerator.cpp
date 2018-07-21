@@ -21,6 +21,7 @@ using std::cout;
 using std::endl;
 
 #define SEEK_LOCK std::lock_guard<std::mutex> _(seekMutex)
+#define VXFILE_LOCK std::lock_guard<std::mutex> _(vxFileMutex)
 
 int VxFileAudioDataGenerator::readNextSamplesBatch(short *intoBuffer) {
     int seek = getSeek();
@@ -28,6 +29,8 @@ int VxFileAudioDataGenerator::readNextSamplesBatch(short *intoBuffer) {
 
     double startTime = GetSampleTimeInSeconds(seek, sampleRate);
     double endTime = GetSampleTimeInSeconds(seek + size, sampleRate);
+
+    VxFile vxFile = getVxFile();
 
     tempPitchIndexes.clear();
     vxFile.getPitchesIndexesInTimeRange(startTime, endTime, std::back_inserter(tempPitchIndexes));
@@ -60,10 +63,8 @@ int VxFileAudioDataGenerator::readNextSamplesBatch(short *intoBuffer) {
     return size;
 }
 
-VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile& vxFile, const VxFileAudioDataGeneratorConfig &config)
-        : vxFile(vxFile), outBufferSize(config.outBufferSize), sampleRate(config.sampleRate) {
-    double durationInSeconds = vxFile.getDurationInSeconds();
-    pcmDataSize = (int)ceil(durationInSeconds * sampleRate);
+VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFileAudioDataGeneratorConfig &config)
+        : outBufferSize(config.outBufferSize), sampleRate(config.sampleRate) {
     pitchesIndexes.reserve(10);
     tempPitchIndexes.reserve(10);
     difference.reserve(10);
@@ -72,8 +73,7 @@ VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile& vxFile, const V
     tsf_set_output(_tsf, TSF_MONO, sampleRate, 0);
 }
 
-VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile &vxFile) : VxFileAudioDataGenerator(vxFile,
-        VxFileAudioDataGeneratorConfig()) {
+VxFileAudioDataGenerator::VxFileAudioDataGenerator() : VxFileAudioDataGenerator(VxFileAudioDataGeneratorConfig()) {
 
 }
 
@@ -100,10 +100,22 @@ double VxFileAudioDataGenerator::getDurationInSeconds() const {
 }
 
 const VxFile &VxFileAudioDataGenerator::getVxFile() const {
+    VXFILE_LOCK;
     return vxFile;
 }
 
 void VxFileAudioDataGenerator::setVxFile(const VxFile &vxFile) {
+    VXFILE_LOCK;
+    assert(this->vxFile.getDurationInTicks() == vxFile.getDurationInTicks() &&
+            this->vxFile.getTicksPerSecond() == vxFile.getTicksPerSecond());
+    this->vxFile = vxFile;
+}
+
+void VxFileAudioDataGenerator::resetVxFile(const VxFile &vxFile) {
+    this->seek = 0;
+    double durationInSeconds = vxFile.getDurationInSeconds();
+    pcmDataSize = (int)ceil(durationInSeconds * sampleRate);
+    VXFILE_LOCK;
     this->vxFile = vxFile;
 }
 

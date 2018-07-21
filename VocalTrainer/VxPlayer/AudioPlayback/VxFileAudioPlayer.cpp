@@ -18,9 +18,8 @@ void VxFileAudioPlayer::prepareAndProvidePlaybackData(PlaybackData *playbackData
     playbackData->numChannels = 1;
 }
 
-VxFileAudioPlayer::VxFileAudioPlayer(const VxFile &vxFile) {
-    this->originalVxFile = vxFile;
-    generator = new VxFileAudioDataGenerator(vxFile);
+VxFileAudioPlayer::VxFileAudioPlayer() {
+    generator = new VxFileAudioDataGenerator();
 }
 
 int VxFileAudioPlayer::getBufferSeek() const {
@@ -40,11 +39,6 @@ void VxFileAudioPlayer::onComplete() {
     AudioPlayer::onComplete();
 }
 
-void VxFileAudioPlayer::destroy(const std::function<void()>& onDestroyed) {
-    delete this;
-    onDestroyed();
-}
-
 bool VxFileAudioPlayer::isPitchShiftingAvailable(int distance) const {
     return originalVxFile.canBeShifted(distance);
 }
@@ -57,4 +51,10 @@ void VxFileAudioPlayer::setPitchShiftInSemiTones(int value) {
 
 const VxFile &VxFileAudioPlayer::getVxFile() const {
     return generator->getVxFile();
+}
+
+void VxFileAudioPlayer::setVxFile(const VxFile& vxFile) {
+    destroy();
+    originalVxFile = vxFile;
+    generator->resetVxFile(vxFile);
 }

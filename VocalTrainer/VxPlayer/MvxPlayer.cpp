@@ -16,14 +16,8 @@
 
 using namespace CppUtils;
 
-void MvxPlayer::init(std::istream &is) {
-    MvxFile file = MvxFile::readFromStream(is);
-    instrumentalPlayer.reset(new AudioFilePlayer(std::move(file.getInstrumental())));
-    vxPlayer.reset(new VxFileAudioPlayer(std::move(file.getVxFile())));
-
-    beatsPerMinute = file.getBeatsPerMinute();
-
-    instrumentalPlayer->addSeekChangedListener([=](double seek, double) {
+MvxPlayer::MvxPlayer() {
+    instrumentalPlayer.addSeekChangedListener([=](double seek, double) {
         seekChangedListeners.executeAll(seek);
 
         if (bounds) {
@@ -39,22 +33,28 @@ void MvxPlayer::init(std::istream &is) {
         return DONT_DELETE_LISTENER;
     });
 
-    instrumentalPlayer->addOnCompleteListener([=] {
+    instrumentalPlayer.addOnCompleteListener([=] {
         Executors::ExecuteOnMainThread([this] {this->onComplete();});
         return DONT_DELETE_LISTENER;
     });
 
-    instrumentalPlayer->addPlaybackStartedListener([=] {
+    instrumentalPlayer.addPlaybackStartedListener([=] {
         Executors::ExecuteOnMainThread([this] {this->onPlaybackStarted();});
         return DONT_DELETE_LISTENER;
     });
 
-    instrumentalPlayer->addPlaybackStoppedListener([=] {
+    instrumentalPlayer.addPlaybackStoppedListener([=] {
         Executors::ExecuteOnMainThread([this] {this->onPlaybackStopped();});
         return DONT_DELETE_LISTENER;
     });
+}
 
-    Functions::ExecuteAllAndClear(onInitialisedQueue);
+void MvxPlayer::init(std::istream &is) {
+    MvxFile file = MvxFile::readFromStream(is);
+    instrumentalPlayer.setAudioData(std::move(file.getInstrumental()));
+    vxPlayer.setVxFile(file.getVxFile());
+
+    beatsPerMinute = file.getBeatsPerMinute();
 }
 
 void MvxPlayer::init(const char *filePath) {
@@ -67,43 +67,39 @@ void MvxPlayer::onComplete() {
 }
 
 void MvxPlayer::pause() {
-    instrumentalPlayer->pause();
-    vxPlayer->pause();
+    instrumentalPlayer.pause();
+    vxPlayer.pause();
 }
 
 void MvxPlayer::play() {
     if (bounds) {
-        double seekValue = instrumentalPlayer->getSeek();
+        double seekValue = instrumentalPlayer.getSeek();
         if (!bounds->isInside(seekValue)) {
             double startSeek = bounds->getStartSeek();
-            instrumentalPlayer->setSeek(startSeek);
+            instrumentalPlayer.setSeek(startSeek);
         }
     }
 
-    double seek = instrumentalPlayer->getSeek();
-    vxPlayer->setSeek(seek);
-    vxPlayer->play();
-    instrumentalPlayer->play();
+    double seek = instrumentalPlayer.getSeek();
+    vxPlayer.setSeek(seek);
+    vxPlayer.play();
+    instrumentalPlayer.play();
 }
 
 void MvxPlayer::setSeek(double value) {
     assert(!bounds || (bounds->getStartSeek() <= value &&
             bounds->getEndSeek() <= value));
-    assert(value >= 0 && value <= instrumentalPlayer->getTrackDurationInSeconds());
-    instrumentalPlayer->setSeek(value);
-    vxPlayer->setSeek(value);
+    assert(value >= 0 && value <= instrumentalPlayer.getTrackDurationInSeconds());
+    instrumentalPlayer.setSeek(value);
+    vxPlayer.setSeek(value);
 }
 
 void MvxPlayer::setInstrumentalVolume(float instrumentalVolume) {
-    executeWhenInitialized([=] {
-        instrumentalPlayer->setVolume(instrumentalVolume);
-    });
+    instrumentalPlayer.setVolume(instrumentalVolume);
 }
 
 void MvxPlayer::setPianoVolume(float pianoVolume) {
-    executeWhenInitialized([=] {
-        vxPlayer->setVolume(pianoVolume);
-    });
+    vxPlayer.setVolume(pianoVolume);
 }
 
 MvxPlayer::~MvxPlayer() {
@@ -111,19 +107,19 @@ MvxPlayer::~MvxPlayer() {
 }
 
 void MvxPlayer::prepare() {
-    instrumentalPlayer->prepare();
-    vxPlayer->prepare();
-    assert(fabs(instrumentalPlayer->getTrackDurationInSeconds() - vxPlayer->getTrackDurationInSeconds()) < 0.1);
+    instrumentalPlayer.prepare();
+    vxPlayer.prepare();
+    assert(fabs(instrumentalPlayer.getTrackDurationInSeconds() - vxPlayer.getTrackDurationInSeconds()) < 0.1);
     prepareFinishedListeners.executeAll();
-    vxFileChangedListeners.executeAll(&vxPlayer->getVxFile());
+    vxFileChangedListeners.executeAll(&vxPlayer.getVxFile());
 }
 
 const VxFile * MvxPlayer::getVxFile() const {
-    if (!vxPlayer) {
+    if (vxPlayer.isPrepared()) {
         return nullptr;
     }
 
-    return &vxPlayer->getVxFile();
+    return &vxPlayer.getVxFile();
 }
 
 const boost::optional<MvxPlayer::Bounds> &MvxPlayer::getBounds() const {
@@ -131,18 +127,14 @@ const boost::optional<MvxPlayer::Bounds> &MvxPlayer::getBounds() const {
 }
 
 void MvxPlayer::setBounds(const boost::optional<MvxPlayer::Bounds> &bounds) {
-    assert(!instrumentalPlayer->isPlaying());
+    assert(!instrumentalPlayer.isPlaying());
     assert(!bounds || (bounds->getStartSeek() >= 0 &&
-            bounds->getEndSeek() <= instrumentalPlayer->getTrackDurationInSeconds()));
+            bounds->getEndSeek() <= instrumentalPlayer.getTrackDurationInSeconds()));
     this->bounds = bounds;
 }
 
 bool MvxPlayer::isPlaying() const {
-    if (!instrumentalPlayer) {
-        return false;
-    }
-
-    return instrumentalPlayer->isPlaying();
+    return instrumentalPlayer.isPlaying();
 }
 
 void MvxPlayer::stopAndMoveSeekToBeginning() {
@@ -151,7 +143,7 @@ void MvxPlayer::stopAndMoveSeekToBeginning() {
 }
 
 double MvxPlayer::getSeek() const {
-    return instrumentalPlayer ? instrumentalPlayer->getSeek() : 0;
+    return instrumentalPlayer.getSeek();
 }
 
 void MvxPlayer::onSeekChanged(double seek) {
@@ -167,11 +159,7 @@ double MvxPlayer::getPlayStartedTime() const {
 }
 
 double MvxPlayer::getDuration() const {
-    if (!instrumentalPlayer) {
-        return -1;
-    }
-
-    return instrumentalPlayer->getTrackDurationInSeconds();
+    return instrumentalPlayer.getTrackDurationInSeconds();
 }
 
 double MvxPlayer::getBeatsPerMinute() const {
@@ -189,7 +177,7 @@ void MvxPlayer::onPlaybackStopped() {
 }
 
 bool MvxPlayer::hasPitchNow(const Pitch &pitch) const {
-    if (!vxPlayer) {
+    if (!vxPlayer.isPrepared()) {
         return false;
     }
 
@@ -197,19 +185,11 @@ bool MvxPlayer::hasPitchNow(const Pitch &pitch) const {
 }
 
 bool MvxPlayer::hasAnyPitchNow() const {
-    if (!vxPlayer) {
+    if (!vxPlayer.isPrepared()) {
         return false;
     }
 
     return getVxFile()->hasPitchesInMoment(getSeek());
-}
-
-void MvxPlayer::executeWhenInitialized(const std::function<void()> &func) {
-    if (instrumentalPlayer) {
-        func();
-    } else {
-        onInitialisedQueue.push_back(func);
-    }
 }
 
 int MvxPlayer::addIsPlayingChangedListener(const MvxPlayer::IsPlayingChangedListener &listener) {
