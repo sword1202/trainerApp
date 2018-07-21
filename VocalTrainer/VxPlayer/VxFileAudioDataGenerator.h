@@ -11,24 +11,24 @@
 #include "VxFileAudioDataGeneratorConfig.h"
 #include "VxFile.h"
 #include "PitchRenderer.h"
+#include "tsf.h"
 
 class VxFileAudioDataGenerator {
-    PitchRenderer* renderer;
     VxFile vxFile;
 
     int outBufferSize;
     int seek = 0;
     int sampleRate;
 
-    std::vector<short> temp;
-    std::vector<int> renderedPitchesSummary;
-    std::vector<int> overlappingCountMap;
-    std::vector<VxPitch> tempPitches;
+    std::vector<int> pitchesIndexes;
+    std::vector<int> tempPitchIndexes;
+    std::vector<int> difference;
+
     int pcmDataSize;
+
+    tsf* _tsf;
 public:
-    VxFileAudioDataGenerator(const VxFile& vxFile, PitchRenderer *renderer);
-    VxFileAudioDataGenerator(const VxFile& vxFile, PitchRenderer *renderer,
-            const VxFileAudioDataGeneratorConfig &config);
+    VxFileAudioDataGenerator(const VxFile& vxFile, const VxFileAudioDataGeneratorConfig &config);
     VxFileAudioDataGenerator(const VxFile &file);
     ~VxFileAudioDataGenerator();
 

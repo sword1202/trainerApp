@@ -3,8 +3,8 @@
 // Copyright (c) 2018 Mac. All rights reserved.
 //
 
-#ifndef VOCALTRAINER_VXFILEAUDIODATAGENERATOR_H
-#define VOCALTRAINER_VXFILEAUDIODATAGENERATOR_H
+#ifndef PARALLEL_VOCALTRAINER_VXFILEAUDIODATAGENERATOR_H
+#define PARALLEL_VOCALTRAINER_VXFILEAUDIODATAGENERATOR_H
 
 #include "StlDebugUtils.h"
 #include "VxFile.h"
@@ -14,12 +14,7 @@
 #include <boost/icl/interval_set.hpp>
 #include <mutex>
 #include <unordered_set>
-
-struct VxFileAudioDataGeneratorConfig {
-    int sampleRate = 44100;
-    int outBufferSize = 512;
-};
-
+#include "VxFileAudioDataGeneratorConfig.h"
 
 // renderNextPitchIfPossible and readNextSamplesBatch should be called from 2 different threads, other methods except
 // setVxFile can be called from any thread
@@ -83,4 +78,4 @@ public:
 };
 
 
-#endif //VOCALTRAINER_VXFILEAUDIODATAGENERATOR_H
+#endif //PARALLEL_VOCALTRAINER_VXFILEAUDIODATAGENERATOR_H

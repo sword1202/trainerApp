@@ -8,74 +8,72 @@
 #include "AudioUtils.h"
 #include "SoundFont2PitchRenderer.h"
 #include <iostream>
+#include "MemoryUtils.h"
+#include "LoadTsf.h"
+#include "Sets.h"
+#include "StringUtils.h"
+#include <iostream>
 
 using namespace CppUtils;
 using namespace AudioUtils;
 
-int VxFileAudioDataGenerator::readNextSamplesBatch(short *intoBuffer) {
-    double startTime = GetSampleTimeInSeconds(seek, sampleRate);
-    double endTime = GetSampleTimeInSeconds(seek + outBufferSize, sampleRate);
-    tempPitches.clear();
-    vxFile.getPitchesInTimeRange(startTime, endTime, std::back_inserter(tempPitches));
+using std::cout;
+using std::endl;
 
+int VxFileAudioDataGenerator::readNextSamplesBatch(short *intoBuffer) {
     int size = std::min(pcmDataSize - seek, outBufferSize);
 
-    if (tempPitches.empty()) {
-        return size;
+    double startTime = GetSampleTimeInSeconds(seek, sampleRate);
+    double endTime = GetSampleTimeInSeconds(seek + size, sampleRate);
+
+    tempPitchIndexes.clear();
+    vxFile.getPitchesIndexesInTimeRange(startTime, endTime, std::back_inserter(tempPitchIndexes));
+    if (!tempPitchIndexes.empty()) {
+        cout<<"pitches: \n";
+        Strings::JoinToStream(cout, tempPitchIndexes, "\n", [=] (std::ostream& os, int index) {
+            os << vxFile.getPitches()[index];
+        });
+        cout<<endl;
     }
 
-    std::fill(renderedPitchesSummary.begin(), renderedPitchesSummary.end(), 0);
-    std::fill(overlappingCountMap.begin(), overlappingCountMap.end(), 0);
-
-    int bufferStartTick = vxFile.ticksFromSamplesCount(seek, sampleRate);
-    int bufferEndTick = vxFile.ticksFromSamplesCount(seek + size, sampleRate);
-
-    for (const VxPitch& vxPitch : tempPitches) {
-        int startTick = std::max(bufferStartTick, vxPitch.startTickNumber);
-        int endTick = std::min(bufferEndTick, vxPitch.endTickNumber());
-
-        int start = vxFile.samplesCountFromTicks(startTick, sampleRate) - seek;
-        assert(start >= 0);
-        int end = vxFile.samplesCountFromTicks(endTick, sampleRate) - seek;
-        assert(end <= size);
-
-        renderer->render(vxPitch.pitch, temp.data() + start, end - start);
-
-        for (int i = start; i < end; ++i) {
-            ++overlappingCountMap[i];
-            renderedPitchesSummary[i] += temp[i];
-        }
+    difference.clear();
+    Sets::Difference(pitchesIndexes, tempPitchIndexes, std::back_inserter(difference));
+    for (int pitchIndex : difference) {
+        const Pitch& pitch = vxFile.getPitches()[pitchIndex].pitch;
+        tsf_note_off(_tsf, 0, pitch.getSoundFont2Index());
     }
 
-    for (int i = 0; i < size; ++i) {
-        int overlappingCount = overlappingCountMap[i];
-        if (overlappingCount == 0) {
-            intoBuffer[i] = 0;
-        } else {
-            intoBuffer[i] = (short)round((double)renderedPitchesSummary[i] / overlappingCount);
-        }
+    difference.clear();
+    Sets::Difference(tempPitchIndexes, pitchesIndexes, std::back_inserter(difference));
+    for (int pitchIndex : difference) {
+        const Pitch& pitch = vxFile.getPitches()[pitchIndex].pitch;
+        tsf_note_on(_tsf, 0, pitch.getSoundFont2Index(), 1.0f);
     }
+
+    tsf_render_short(_tsf, intoBuffer, size, 0);
+
+    tempPitchIndexes.swap(pitchesIndexes);
+
+    seek += size;
 
     return size;
 }
 
-VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile& vxFile, PitchRenderer *renderer, const VxFileAudioDataGeneratorConfig &config)
-        : outBufferSize(config.outBufferSize), sampleRate(config.sampleRate), renderer(renderer), vxFile(vxFile) {
-    renderedPitchesSummary.resize((size_t)outBufferSize);
-    temp.resize((size_t)outBufferSize);
-    tempPitches.reserve(10);
-
+VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile& vxFile, const VxFileAudioDataGeneratorConfig &config)
+        : vxFile(vxFile), outBufferSize(config.outBufferSize), sampleRate(config.sampleRate) {
     double durationInSeconds = vxFile.getDurationInSeconds();
     pcmDataSize = (int)ceil(durationInSeconds * sampleRate);
+    pitchesIndexes.reserve(10);
+    tempPitchIndexes.reserve(10);
+    difference.reserve(10);
+
+    _tsf = LoadTsf();
+    tsf_set_output(_tsf, TSF_MONO, sampleRate, 0);
 }
 
-VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile& vxFile, PitchRenderer *renderer) :
-        VxFileAudioDataGenerator(vxFile, renderer, VxFileAudioDataGeneratorConfig()) {
+VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile &vxFile) : VxFileAudioDataGenerator(vxFile,
+        VxFileAudioDataGeneratorConfig()) {
 
-}
-
-VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile &vxFile) : VxFileAudioDataGenerator(vxFile, nullptr) {
-    renderer = new SoundFont2PitchRenderer(sampleRate);
 }
 
 int VxFileAudioDataGenerator::getSeek() const {
@@ -107,5 +105,5 @@ void VxFileAudioDataGenerator::setVxFile(const VxFile &vxFile) {
 }
 
 VxFileAudioDataGenerator::~VxFileAudioDataGenerator() {
-    delete renderer;
+    tsf_close(_tsf);
 }

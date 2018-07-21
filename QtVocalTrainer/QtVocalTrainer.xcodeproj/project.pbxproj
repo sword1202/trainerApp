@@ -916,6 +916,21 @@
 					);
 			};
 		};
+		AB1BB2102FE32CBC9904F361 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/VxFileAudioDataGenerator.cpp";
+			name = "VxFileAudioDataGenerator.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		C4852C2D0119858544266918 = {
+			fileRef = "AB1BB2102FE32CBC9904F361";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
 		1157FF7E9C28CC4BCBFDCC5F = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/nanovg/metal/nanovg_mtl.m";
@@ -1529,6 +1544,13 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
+		982893B6BBE598D35A1BBDBD = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/VxFileAudioDataGenerator.h";
+			name = "VxFileAudioDataGenerator.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
 		757C4D2CF043B21FE9CC0678 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qml.qrc";
@@ -1667,6 +1689,7 @@
 				"17B9E14F4608B814E602C9AD",
 				"A72873228B4A3DDFB289A10F",
 				"0D39E49872D4A8DA481556DA",
+				"AB1BB2102FE32CBC9904F361",
 				"1157FF7E9C28CC4BCBFDCC5F",
 				"C613FE9ADA39556AD9540F1E",
 				"1091C7F2ACC81AEE9DF74E74",
@@ -1728,7 +1751,8 @@
 				"20AC95C55D46F47619EBFA27",
 				"890EBA9C11A6494559F9D564",
 				"09077407CF7F204254DB49E0",
-				"55BDDAC1C620A6CBE96510C6");
+				"55BDDAC1C620A6CBE96510C6",
+				"982893B6BBE598D35A1BBDBD");
 			name = "Sources";
 			sourceTree = "<group>";
 		};
@@ -1821,6 +1845,7 @@
 				"5BE3B32AE495487CF0F6F07C",
 				"25E7091503A6E0488B649979",
 				"B68DFB2CEF3B0AAB75F1D6DA",
+				"C4852C2D0119858544266918",
 				"0259F18B58DCB3EB6C5B3577",
 				"F3F0C5A9AE1D79D2A4930AEA",
 				"AE6596E2227260CD02B22B61",

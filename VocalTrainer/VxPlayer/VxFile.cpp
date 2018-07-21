@@ -21,7 +21,7 @@ bool Interval::containsTick(int tick) const {
 }
 
 bool Interval::intersectsWith(int begin, int end) const {
-    return intersectsWith(Interval(begin, end));
+    return intersectsWith(Interval(begin, end - begin));
 }
 
 bool Interval::intersectsWith(const Interval &interval) const {
@@ -34,6 +34,11 @@ Interval::Interval(int startTickNumber, int ticksCount) : startTickNumber(startT
 
 VxPitch::VxPitch(const Pitch &pitch, int startTickNumber, int ticksCount)
         : Interval(startTickNumber, ticksCount), pitch(pitch) {
+}
+
+std::ostream& operator<<(std::ostream& os, const VxPitch& pitch) {
+    os<<pitch.pitch<<"["<<pitch.startTickNumber<<","<<pitch.endTickNumber()<<"]";
+    return os;
 }
 
 VxFile::VxFile(std::vector<VxPitch> &&pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int ticksPerSecond)
@@ -274,4 +279,8 @@ bool VxFile::hasPitchInMoment(double time, const Pitch &pitch) const {
     return Contains(pitches, [=] (const VxPitch& vxPitch) {
         return vxPitch.containsTick(tick) && vxPitch.pitch.getPerfectFrequencyIndex() == pitch.getPerfectFrequencyIndex();
     });
+}
+
+double VxFile::getFirstPitchStartTime() const {
+    return ticksToSeconds(pitches.front().startTickNumber);
 }

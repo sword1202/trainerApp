@@ -42,19 +42,20 @@ int AudioPlayer::callback(
         return paContinue;
     } else {
         if (volume == 0.0f) {
-            auto sampleSize = Pa_GetSampleSize(format) * self->playbackData.numChannels;
-            memset(outputBuffer, 0, readFramesCount * sampleSize);
+            auto sampleSize = self->getSampleSize();
+            memset(outputBuffer, 0, sampleSize * readFramesCount);
         } else if (volume != 1.0f) {
+            int bufferSize = readFramesCount * self->playbackData.numChannels;
             if (format == paInt16) {
-                for (int i = 0; i < readFramesCount; ++i) {
+                for (int i = 0; i < bufferSize; ++i) {
                     static_cast<int16_t*>(outputBuffer)[i] *= volume;
                 }
             } else if (format == paInt32) {
-                for (int i = 0; i < readFramesCount; ++i) {
+                for (int i = 0; i < bufferSize; ++i) {
                     static_cast<int32_t*>(outputBuffer)[i] *= volume;
                 }
             } else if (format == paInt8) {
-                for (int i = 0; i < readFramesCount; ++i) {
+                for (int i = 0; i < bufferSize; ++i) {
                     static_cast<int8_t*>(outputBuffer)[i] *= volume;
                 }
             } else {

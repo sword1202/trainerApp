@@ -77,7 +77,6 @@
 		C9FFF5D95B14517981993411 /* AudioFilePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFB85AD13A0DC254A5BFC /* AudioFilePlayer.cpp */; };
 		C9FFF64CA7878CC014CCED77 /* WavAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF4B352C76A7F89AF317E /* WavAudioPlayer.cpp */; };
 		C9FFF7AE7C2048B9BE210E7C /* MidiEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF9C3A05CC2DBEF0526B6 /* MidiEvent.cpp */; };
-		C9FFF7F10BC2BF153F5D35DA /* VxFileGeneratorTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFCEEF86F468AC8AE82F0 /* VxFileGeneratorTest.cpp */; };
 		C9FFF83B36D53E4917661B17 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF12322F34C99321F4F18 /* AppDelegate.mm */; };
 		C9FFF872E56D467F24FAEC7B /* MidiFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF1E4F9CFE2324A18F83D /* MidiFile.cpp */; };
 		C9FFF8BCB6895CF2BEF1C29D /* MidiFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF51CA94B2770B893C639 /* MidiFileReader.cpp */; };
@@ -326,7 +325,6 @@
 		C9FFFC4F6D0CD722A992F5E0 /* Drawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drawer.h; sourceTree = "<group>"; };
 		C9FFFC6A9C1BC0D6396DD265 /* Drawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Drawer.cpp; sourceTree = "<group>"; };
 		C9FFFC6D53C891B61A3E964C /* Binasc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Binasc.h; sourceTree = "<group>"; };
-		C9FFFCEEF86F468AC8AE82F0 /* VxFileGeneratorTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VxFileGeneratorTest.cpp; sourceTree = "<group>"; };
 		C9FFFCF41A95435C1A7DD821 /* QuartzDrawer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = QuartzDrawer.mm; sourceTree = "<group>"; };
 		C9FFFD36037E3FEEA67DF037 /* OpenGLUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGLUtils.h; path = PitchDetection/CppUtils/OpenGLUtils.h; sourceTree = "<group>"; };
 		C9FFFD4E04D0ED1BB3419507 /* VxFileAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxFileAudioPlayer.h; sourceTree = "<group>"; };
@@ -342,6 +340,7 @@
 		C9FFFE514220C10160A77F57 /* PitchRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PitchRenderer.cpp; sourceTree = "<group>"; };
 		C9FFFE55AF6D32018F3AB842 /* GeometryUtilsTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GeometryUtilsTest.cpp; path = PitchDetection/CppUtils/tests/GeometryUtilsTest.cpp; sourceTree = SOURCE_ROOT; };
 		C9FFFE67C10A6A65023BE764 /* Algorithms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Algorithms.h; path = PitchDetection/CppUtils/Algorithms.h; sourceTree = "<group>"; };
+		C9FFFE95C2E876E4EC19EBBD /* Sets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sets.h; path = PitchDetection/CppUtils/Sets.h; sourceTree = "<group>"; };
 		C9FFFEBA9C7F7C116E07359E /* MidiTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiTrack.h; sourceTree = "<group>"; };
 		C9FFFED63E74BC206FBE1AB2 /* PianoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PianoController.h; sourceTree = "<group>"; };
 		C9FFFEEFD6FD398814656299 /* ListenersSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ListenersSet.h; path = PitchDetection/CppUtils/ListenersSet.h; sourceTree = "<group>"; };
@@ -414,6 +413,7 @@
 				C9FFF8DF99628FC6B2C1E3C3 /* Rect.h */,
 				C9FFF97D42B64E1E050CADB4 /* Functions.h */,
 				C9FFF77AC431EAF0ACD903B5 /* MemoryUtils.h */,
+				C9FFFE95C2E876E4EC19EBBD /* Sets.h */,
 			);
 			name = CppUtils;
 			sourceTree = "<group>";
@@ -547,7 +547,6 @@
 				C9FFF6F024954CC62D511B38 /* StringsTest.cpp */,
 				C9FFFE55AF6D32018F3AB842 /* GeometryUtilsTest.cpp */,
 				C9FFF016E94440F9F9F27A58 /* BoostAssert.cpp */,
-				C9FFFCEEF86F468AC8AE82F0 /* VxFileGeneratorTest.cpp */,
 				C9FFF709E60D6232BAF0C4CD /* VxFileTests.cpp */,
 			);
 			path = VocalTrainerTests;
@@ -985,7 +984,6 @@
 				C9FFF428255BE42EB50BBBD7 /* GeometryUtilsTest.cpp in Sources */,
 				C9FFF045E64DA74C0FF7618C /* MidiTrack.cpp in Sources */,
 				C9FFF8BCB6895CF2BEF1C29D /* MidiFileReader.cpp in Sources */,
-				C9FFF7F10BC2BF153F5D35DA /* VxFileGeneratorTest.cpp in Sources */,
 				C9FFFF2FAD5D028D8B0E979A /* VxFileTests.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -90,6 +90,8 @@ public:
     bool hasPitchesInMoment(double time) const;
     bool hasPitchInMoment(double time, const Pitch& pitch) const;
 
+    double getFirstPitchStartTime() const;
+
     template<typename Function>
     void iteratePitchesInTickRange(int startTick, int endTick, const Function& function) const {
         for (const auto& pitch : pitches) {
@@ -98,7 +100,24 @@ public:
             }
         }
     }
-    
+
+    template<typename Function>
+    void iteratePitchesIndexesInTickRange(int startTick, int endTick, const Function& function) const {
+        for (int i = 0; i < pitches.size(); ++i) {
+            const VxPitch& pitch = pitches[i];
+            if (pitch.intersectsWith(startTick, endTick)) {
+                function(i);
+            }
+        }
+    }
+
+    template<typename Function>
+    void iteratePitchesIndexesInTimeRange(double startTime, double endTime, const Function& function) const {
+        int startTick = timeInSecondsToTicks(startTime);
+        int endTick = timeInSecondsToTicks(endTime);
+        iteratePitchesIndexesInTickRange(startTick, endTick, function);
+    }
+
     template<typename Function>
     void iteratePitchesInTimeRange(double startTime, double endTime, const Function& function) const {
         int startTick = timeInSecondsToTicks(startTime);
@@ -109,9 +128,14 @@ public:
     template<typename OutputIterator>
     void getPitchesInTimeRange(double startTime, double endTime, OutputIterator iterator) const {
         iteratePitchesInTimeRange(startTime, endTime, [&] (const VxPitch& vxPitch) {
-            double pitchStartTime = ticksToSeconds(vxPitch.startTickNumber);
-            double pitchDuration = ticksToSeconds(vxPitch.ticksCount);
             *iterator++ = vxPitch;
+        });
+    }
+
+    template<typename OutputIterator>
+    void getPitchesIndexesInTimeRange(double startTime, double endTime, OutputIterator iterator) const {
+        iteratePitchesIndexesInTimeRange(startTime, endTime, [&] (int index) {
+            *iterator++ = index;
         });
     }
 };

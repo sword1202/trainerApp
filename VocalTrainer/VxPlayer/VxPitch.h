@@ -53,5 +53,7 @@ struct VxPitch : Interval {
     BOOST_SERIALIZATION_SPLIT_MEMBER()
 };
 
+std::ostream& operator<<(std::ostream& os, const VxPitch& pitch);
+
 
 #endif //VOCALTRAINER_VXPITCHDEFENITION_H

@@ -76,7 +76,8 @@ SOURCES += \
     ../VocalTrainer/Manager/ZoomController.cpp \
     ../VocalTrainer/Drawers/QDrawer.cpp \
     ../VocalTrainer/Drawers/DrawerColor.cpp \
-    qopenglworkspacewidget.cpp
+    qopenglworkspacewidget.cpp \
+    ../VocalTrainer/VxPlayer/VxFileAudioDataGenerator.cpp
 
 RESOURCES += qml.qrc
 
@@ -163,7 +164,8 @@ HEADERS += \
     ../VocalTrainer/Manager/ZoomController.h \
     ../VocalTrainer/Drawers/QDrawer.h \
     ../VocalTrainer/Drawers/DrawerColor.h \
-    qopenglworkspacewidget.h
+    qopenglworkspacewidget.h \
+    ../VocalTrainer/VxPlayer/VxFileAudioDataGenerator.h
 
 INCLUDEPATH += ../include \
     ../VocalTrainer/Drawers \
