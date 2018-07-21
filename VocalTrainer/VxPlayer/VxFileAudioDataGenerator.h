@@ -18,6 +18,7 @@ class VxFileAudioDataGenerator {
 
     int outBufferSize;
     int seek = 0;
+    mutable std::mutex seekMutex;
     int sampleRate;
 
     std::vector<int> pitchesIndexes;

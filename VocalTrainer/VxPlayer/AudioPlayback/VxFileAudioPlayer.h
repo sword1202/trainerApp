@@ -30,6 +30,7 @@ public:
     VxFileAudioPlayer(const VxFile &vxFile);
     void destroy(const std::function<void()>& onDestroyed) override;
 
+    // TODO: implement synchronization
     bool isPitchShiftingAvailable(int distance) const;
     virtual void setPitchShiftInSemiTones(int value) override;
 

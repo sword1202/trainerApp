@@ -15,10 +15,18 @@ public:
 protected:
     int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) override;
     void prepareAndProvidePlaybackData(PlaybackData *playbackData) override;
+
+protected:
+    int getBufferSeek() const override;
+    void setBufferSeek(int bufferSeek) override;
+
+protected:
     ~AudioFilePlayer();
 private:
     AudioDecoder* audioDecoder = nullptr;
     std::string audioData;
+    int bufferSeek = 0;
+    mutable std::mutex bufferSeekMutex;
 };
 
 

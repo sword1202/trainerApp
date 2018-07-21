@@ -20,7 +20,10 @@ using namespace AudioUtils;
 using std::cout;
 using std::endl;
 
+#define SEEK_LOCK std::lock_guard<std::mutex> _(seekMutex)
+
 int VxFileAudioDataGenerator::readNextSamplesBatch(short *intoBuffer) {
+    int seek = getSeek();
     int size = std::min(pcmDataSize - seek, outBufferSize);
 
     double startTime = GetSampleTimeInSeconds(seek, sampleRate);
@@ -47,7 +50,12 @@ int VxFileAudioDataGenerator::readNextSamplesBatch(short *intoBuffer) {
 
     tempPitchIndexes.swap(pitchesIndexes);
 
-    seek += size;
+    {
+        SEEK_LOCK;
+        if (seek == this->seek) {
+            this->seek += size;
+        }
+    }
 
     return size;
 }
@@ -70,10 +78,12 @@ VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile &vxFile) : VxFil
 }
 
 int VxFileAudioDataGenerator::getSeek() const {
+    SEEK_LOCK;
     return seek;
 }
 
 void VxFileAudioDataGenerator::setSeek(int seek) {
+    SEEK_LOCK;
     this->seek = seek;
 }
 

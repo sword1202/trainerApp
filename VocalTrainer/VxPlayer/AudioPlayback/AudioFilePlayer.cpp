@@ -5,11 +5,21 @@
 
 #include "AudioFilePlayer.h"
 
+#define SEEK_LOCK std::lock_guard<std::mutex> _(bufferSeekMutex)
+
 int AudioFilePlayer::readNextSamplesBatch(void *intoBuffer, int framesCount, const AudioPlayer::PlaybackData &playbackData) {
+    int bufferSeekBefore = getBufferSeek();
+    audioDecoder->seek(bufferSeekBefore * playbackData.numChannels);
+    assert(audioDecoder->positionInSamples() == bufferSeekBefore * playbackData.numChannels);
     int readFramesCount = audioDecoder->read(framesCount * playbackData.numChannels, (SAMPLE*)intoBuffer)
             / playbackData.numChannels;
     if (readFramesCount > 0) {
-        setBufferSeek(getBufferSeek() + readFramesCount);
+        // handle a case, when seek is set from outside while audioDecoder is reading the data
+        SEEK_LOCK;
+        if (bufferSeekBefore == this->bufferSeek) {
+            this->bufferSeek = bufferSeek + readFramesCount;
+            AudioPlayer::setBufferSeek(bufferSeek);
+        }
     }
 
     return readFramesCount;
@@ -29,6 +39,11 @@ void AudioFilePlayer::prepareAndProvidePlaybackData(AudioPlayer::PlaybackData *p
     playbackData->totalDurationInSeconds = audioDecoder->duration();
 }
 
+int AudioFilePlayer::getBufferSeek() const {
+    SEEK_LOCK;
+    return bufferSeek;
+}
+
 AudioFilePlayer::~AudioFilePlayer() {
     if (audioDecoder) {
         delete audioDecoder;
@@ -37,4 +52,12 @@ AudioFilePlayer::~AudioFilePlayer() {
 
 AudioFilePlayer::AudioFilePlayer(std::string &&audioData) : audioData(std::move(audioData)) {
 
+}
+
+void AudioFilePlayer::setBufferSeek(int bufferSeek) {
+    {
+        SEEK_LOCK;
+        this->bufferSeek = bufferSeek;
+    }
+    AudioPlayer::setBufferSeek(bufferSeek);
 }
