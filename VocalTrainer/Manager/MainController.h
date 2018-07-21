@@ -43,6 +43,8 @@ public:
     static void initInstance(MainController* inst);
 
     virtual ~MainController();
+
+    void updateSeek(double seek);
 };
 
 

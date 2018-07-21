@@ -13,7 +13,9 @@ void QOpenGLWorkspaceWidget::initializeGL() {
     MainController::instance()->setWorkspaceController(workspaceDrawer);
 
     QtUtils::startRepeatedTimer(this, [=] {
-        update();
+        if (MainController::instance()->getPlayer()->isPlaying()) {
+            update();
+        }
         return true;
     }, 1000 / 75); // 75fps
 }

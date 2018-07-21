@@ -67,7 +67,7 @@ public:
     float getHorizontalOffset() const;
     void setHorizontalOffset(float horizontalOffset);
 
-    double getIntervalsPerSecond() const;
+    double getIntervalsPerSecond() const override;
     void setIntervalsPerSecond(double intervalsPerSecond);
     void setFirstVisiblePitch(const Pitch &firstPitch);
 

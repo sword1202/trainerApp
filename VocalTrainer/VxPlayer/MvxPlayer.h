@@ -34,6 +34,7 @@ public:
     typedef typename CppUtils::ListenersSet<bool>::Listener IsPlayingChangedListener;
     typedef typename CppUtils::ListenersSet<>::Listener PrepareFinishedListener;
     typedef typename CppUtils::ListenersSet<const VxFile*>::Listener VxFileChangedListener;
+    typedef typename CppUtils::ListenersSet<double>::Listener SeekChangedListener;
 
 private:
 
@@ -48,9 +49,8 @@ private:
     CppUtils::ListenersSet<bool> isPlayingChangedListeners;
     CppUtils::ListenersSet<> prepareFinishedListeners;
     CppUtils::ListenersSet<const VxFile*> vxFileChangedListeners;
+    CppUtils::ListenersSet<double> seekChangedListeners;
 
-    void setupVxPlayerDesyncHandler() const;
-    void setupInstrumentalPlayerDesyncHandler() const;
     void executeWhenInitialized(const std::function<void()>& func);
 public:
     virtual ~MvxPlayer();
@@ -84,14 +84,21 @@ public:
     bool hasPitchNow(const Pitch& pitch) const;
     bool hasAnyPitchNow() const;
 
+    // The listener is executed on Main thread
     int addIsPlayingChangedListener(const IsPlayingChangedListener& listener);
     void removeIsPlayingChangedListener(int id);
 
+    // The listener is executed on Main thread
     int addPrepareFinishedListener(const PrepareFinishedListener& listener);
     void removePrepareFinishedListener(int id);
 
+    // The listener is executed on Main thread
     int addVxFileChangedListener(const VxFileChangedListener& listener);
     void removeVxFileChangedListener(int id);
+
+    // The listener is executed on Audio callback thread
+    int addSeekChangedListener(const SeekChangedListener& listener);
+    void removeSeekChangedListener(int id);
 };
 
 

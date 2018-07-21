@@ -57,7 +57,6 @@ void Player::setSource(const QString &source) {
 }
 
 void Player::play() {
-    setSeek(getVxFile()->getFirstPitchStartTime());
     MvxPlayer::play();
 }
 

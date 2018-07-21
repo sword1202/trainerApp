@@ -97,6 +97,19 @@ void MainController::setWorkspaceController(WorkspaceController *workspaceContro
     updateZoom();
     updateWorkspaceFirstPitch();
     workspaceController->setVxFile(mvxPlayer->getVxFile());
+    
+    mvxPlayer->addSeekChangedListener([=] (double seek) {
+        updateSeek(seek);
+        return DONT_DELETE_LISTENER;
+    });
+}
+
+void MainController::updateSeek(double seek) {
+    WorkspaceController* workspaceController = this->workspaceController;
+    double intervalsPerSecond = workspaceController->getIntervalsPerSecond();
+    float intervalWidth = zoomController->getIntervalWidth();
+    double horizontalOffset = intervalsPerSecond * seek * intervalWidth;
+    workspaceController->setHorizontalOffset((float)horizontalOffset);
 }
 
 void MainController::updateZoom() {
@@ -104,6 +117,7 @@ void MainController::updateZoom() {
         WorkspaceController* controller = workspaceController;
         controller->setIntervalWidth(zoomController->getIntervalWidth());
         controller->setIntervalHeight(zoomController->getIntervalHeight());
+        updateSeek(mvxPlayer->getSeek());
     }
 
     if (pianoController) {

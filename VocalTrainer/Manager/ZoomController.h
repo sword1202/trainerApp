@@ -10,7 +10,7 @@
 #include "Pitch.h"
 
 class ZoomController {
-    float zoom;
+    std::atomic<float> zoom;
     Pitch firstPitch;
 
     CppUtils::ListenersSet<float> zoomChangedListeners;

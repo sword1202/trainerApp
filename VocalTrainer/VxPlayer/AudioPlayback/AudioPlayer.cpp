@@ -34,9 +34,7 @@ int AudioPlayer::callback(
     // no data available, return silence and wait
     const PaSampleFormat format = self->playbackData.format;
     if (readFramesCount < 0) {
-        Executors::ExecuteOnMainThread([self]{
-            self->onNoDataAvailableListeners.executeAll();
-        });
+        self->onNoDataAvailableListeners.executeAll();
         int sampleSize = self->getSampleSize();
         memset(outputBuffer, 0, framesPerBuffer * sampleSize);
         return paContinue;
@@ -63,14 +61,12 @@ int AudioPlayer::callback(
             }
         }
 
-        Executors::ExecuteOnMainThread([=]{
-            self->onDataSentToOutputListeners.executeAll(outputBuffer, readFramesCount);
-        });
+        self->onDataSentToOutputListeners.executeAll(outputBuffer, readFramesCount);
 
         if (readFramesCount == framesPerBuffer) {
             return paContinue;
         } else {
-            Executors::ExecuteOnMainThread([self](){ self->onComplete(); });
+            self->onComplete();
             return paComplete;
         }
     }
@@ -146,6 +142,7 @@ double AudioPlayer::getTrackDurationInSeconds() {
 }
 
 AudioPlayer::AudioPlayer() {
+    playing = false;
     volume = 1.0f;
     pitchShift = 0;
 }
@@ -227,11 +224,9 @@ int AudioPlayer::secondsSeekToBufferSeek(double timestamp) const {
 }
 
 void AudioPlayer::setBufferSeek(int bufferSeek) {
-    Executors::ExecuteOnMainThread([=] {
-        double seek = bufferSeekToSecondsSeek(bufferSeek);
-        double total = getTrackDurationInSeconds();
-        seekChangedListeners.executeAll(seek, total);
-    });
+    double seek = bufferSeekToSecondsSeek(bufferSeek);
+    double total = getTrackDurationInSeconds();
+    seekChangedListeners.executeAll(seek, total);
 }
 
 void AudioPlayer::prepareAsync(const std::function<void()>& callback) {

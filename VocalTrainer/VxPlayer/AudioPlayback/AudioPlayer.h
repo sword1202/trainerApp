@@ -22,7 +22,7 @@ protected:
 private:
     PaStream* stream = nullptr;
     PlaybackData playbackData;
-    bool playing = false;
+    std::atomic_bool playing;
     std::atomic<float> volume;
     CppUtils::ListenersSet<> onCompleteListeners;
 	CppUtils::ListenersSet<> onNoDataAvailableListeners;

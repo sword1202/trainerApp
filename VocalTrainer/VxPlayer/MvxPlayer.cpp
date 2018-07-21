@@ -3,6 +3,7 @@
 // Copyright (c) 2018 Mac. All rights reserved.
 //
 
+#include <Executors.h>
 #include "MvxPlayer.h"
 #include "StringUtils.h"
 #include "AudioFilePlayer.h"
@@ -11,6 +12,7 @@
 #include "Primitives.h"
 #include "TimeUtils.h"
 #include "Functions.h"
+#include "Executors.h"
 
 using namespace CppUtils;
 
@@ -21,34 +23,34 @@ void MvxPlayer::init(std::istream &is) {
 
     beatsPerMinute = file.getBeatsPerMinute();
 
-    // prevent desynchronization, when some of players have no data ready for playback
-    setupVxPlayerDesyncHandler();
-    setupInstrumentalPlayerDesyncHandler();
-
     instrumentalPlayer->addSeekChangedListener([=](double seek, double) {
+        seekChangedListeners.executeAll(seek);
+
         if (bounds) {
             if (seek >= bounds->getEndSeek()) {
-                onComplete();
+                Executors::ExecuteOnMainThread([this] {this->onComplete();});
             }
         }
 
-        onSeekChanged(getSeek());
+        Executors::ExecuteOnMainThread([this, seek] {
+            this->onSeekChanged(seek);
+        });
 
         return DONT_DELETE_LISTENER;
     });
 
     instrumentalPlayer->addOnCompleteListener([=] {
-        onComplete();
+        Executors::ExecuteOnMainThread([this] {this->onComplete();});
         return DONT_DELETE_LISTENER;
     });
 
     instrumentalPlayer->addPlaybackStartedListener([=] {
-        onPlaybackStarted();
+        Executors::ExecuteOnMainThread([this] {this->onPlaybackStarted();});
         return DONT_DELETE_LISTENER;
     });
 
     instrumentalPlayer->addPlaybackStoppedListener([=] {
-        onPlaybackStopped();
+        Executors::ExecuteOnMainThread([this] {this->onPlaybackStopped();});
         return DONT_DELETE_LISTENER;
     });
 
@@ -62,32 +64,6 @@ void MvxPlayer::init(const char *filePath) {
 
 void MvxPlayer::onComplete() {
     stopAndMoveSeekToBeginning();
-}
-
-void MvxPlayer::setupInstrumentalPlayerDesyncHandler() const {
-    instrumentalPlayer->addOnNoDataAvailableListener([=] {
-        vxPlayer->pause();
-        instrumentalPlayer->addOnDataSentToOutputListener([=] (void*, int) {
-            vxPlayer->play(instrumentalPlayer->getSeek());
-            setupInstrumentalPlayerDesyncHandler();
-            return DELETE_LISTENER;
-        });
-
-        return DELETE_LISTENER;
-    });
-}
-
-void MvxPlayer::setupVxPlayerDesyncHandler() const {
-    vxPlayer->addOnNoDataAvailableListener([=] {
-        instrumentalPlayer->pause();
-        vxPlayer->addOnDataSentToOutputListener([=] (void*, int) {
-            instrumentalPlayer->play(vxPlayer->getSeek());
-            setupVxPlayerDesyncHandler();
-            return DELETE_LISTENER;
-        });
-
-        return DELETE_LISTENER;
-    });
 }
 
 void MvxPlayer::pause() {
@@ -175,7 +151,7 @@ void MvxPlayer::stopAndMoveSeekToBeginning() {
 }
 
 double MvxPlayer::getSeek() const {
-    return instrumentalPlayer->getSeek();
+    return instrumentalPlayer ? instrumentalPlayer->getSeek() : 0;
 }
 
 void MvxPlayer::onSeekChanged(double seek) {
@@ -258,6 +234,14 @@ int MvxPlayer::addVxFileChangedListener(const MvxPlayer::VxFileChangedListener &
 
 void MvxPlayer::removeVxFileChangedListener(int id) {
     vxFileChangedListeners.removeListener(id);
+}
+
+int MvxPlayer::addSeekChangedListener(const SeekChangedListener& listener) {
+    return seekChangedListeners.addListener(listener);
+}
+
+void MvxPlayer::removeSeekChangedListener(int id) {
+    seekChangedListeners.removeListener(id);
 }
 
 MvxPlayer::Bounds::Bounds(double startSeek, double endSeek) : startSeek(startSeek), endSeek(endSeek) {

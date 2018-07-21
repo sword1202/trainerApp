@@ -40,7 +40,8 @@ void WorkspaceDrawer::draw() {
 
     double now = TimeUtils::NowInSeconds();
     float frameDuration = now - frameTime;
-    horizontalOffset = horizontalOffset + intervalsPerSecond * intervalWidth * frameDuration;
+    // old logic
+    //horizontalOffset = horizontalOffset + intervalsPerSecond * intervalWidth * frameDuration;
     frameTime = now;
 
     drawer->beginFrame(width, height, devicePixelRatio);
