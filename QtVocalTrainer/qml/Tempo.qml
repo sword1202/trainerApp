@@ -5,10 +5,17 @@ import "js/strings.js" as Strings
 import QtGraphicalEffects 1.0
 
 Item {
+    id: root
     property int tempo: parseInt(tempoText.text)
 
     height: 38.25
     width: 52.5
+
+    Component.onCompleted: {
+        cpp.player.sourceChanged.connect(function() {
+            root.tempo = cpp.player.beatsPerMinute
+        })
+    }
 
     onTempoChanged: {
         tempoText.text = tempo.toString()
