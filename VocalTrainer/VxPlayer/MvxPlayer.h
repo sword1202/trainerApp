@@ -83,6 +83,10 @@ public:
 
     double getBeatsPerMinute() const;
 
+    double getTempoFactor() const;
+
+    void setTempoFactor(double tempoFactor);
+
     bool hasPitchNow(const Pitch& pitch) const;
     bool hasAnyPitchNow() const;
 

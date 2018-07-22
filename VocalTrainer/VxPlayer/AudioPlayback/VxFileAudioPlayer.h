@@ -29,9 +29,10 @@ public:
     VxFileAudioPlayer();
     virtual ~VxFileAudioPlayer();
 
-    // TODO: implement synchronization
     bool isPitchShiftingAvailable(int distance) const;
     virtual void setPitchShiftInSemiTones(int value) override;
+
+    void setTempoFactor(double tempoFactor) override;
 
     const VxFile& getVxFile() const;
     void setVxFile(const VxFile& vxFile);

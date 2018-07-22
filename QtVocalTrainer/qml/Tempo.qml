@@ -6,15 +6,13 @@ import QtGraphicalEffects 1.0
 
 Item {
     id: root
-    property int tempo: parseInt(tempoText.text)
+    property int tempo: cpp.player.beatsPerMinute
 
     height: 38.25
     width: 52.5
 
     Component.onCompleted: {
-        cpp.player.sourceChanged.connect(function() {
-            root.tempo = cpp.player.beatsPerMinute
-        })
+
     }
 
     onTempoChanged: {
@@ -43,7 +41,7 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: tempoLabel.top
 
-        text: "150"
+        text: "---"
         font.pointSize: 15
         color: "#615f97"
         font.bold: true
@@ -56,6 +54,8 @@ Item {
         onAccepted: {
             focus = false
             text = text.removeZerosFromBeginning();
+            tempo = parseInt(text)
+            cpp.player.beatsPerMinute = tempo
         }
     }
 

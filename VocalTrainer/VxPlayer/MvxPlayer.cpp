@@ -237,6 +237,15 @@ bool MvxPlayer::canBeShifted(int distance) const {
     return vxPlayer.isPitchShiftingAvailable(distance);
 }
 
+double MvxPlayer::getTempoFactor() const {
+    return instrumentalPlayer.getTempoFactor();
+}
+
+void MvxPlayer::setTempoFactor(double tempoFactor) {
+    vxPlayer.setTempoFactor(tempoFactor);
+    instrumentalPlayer.setTempoFactor(tempoFactor);
+}
+
 MvxPlayer::Bounds::Bounds(double startSeek, double endSeek) : startSeek(startSeek), endSeek(endSeek) {
 }
 

@@ -62,3 +62,13 @@ void VxFileAudioPlayer::setVxFile(const VxFile& vxFile) {
     originalVxFile = vxFile;
     generator->resetVxFile(vxFile);
 }
+
+void VxFileAudioPlayer::setTempoFactor(double tempoFactor) {
+    if (getTempoFactor() == tempoFactor) {
+        return;
+    }
+
+    AudioPlayer::setTempoFactor(tempoFactor);
+    VxFile vxFile = originalVxFile.withChangedTempo(tempoFactor);
+    generator->setVxFile(vxFile);
+}

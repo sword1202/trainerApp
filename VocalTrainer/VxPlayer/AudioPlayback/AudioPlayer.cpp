@@ -157,6 +157,7 @@ AudioPlayer::AudioPlayer() {
     playing = false;
     volume = 1.0f;
     pitchShift = 0;
+    tempoFactor = 1;
 }
 
 void AudioPlayer::play() {
@@ -304,4 +305,12 @@ void AudioPlayer::removePlaybackStoppedListener(int key) {
 
 bool AudioPlayer::isPrepared() const {
     return stream != nullptr;
+}
+
+double AudioPlayer::getTempoFactor() const {
+    return tempoFactor;
+}
+
+void AudioPlayer::setTempoFactor(double tempoFactor) {
+    this->tempoFactor = tempoFactor;
 }

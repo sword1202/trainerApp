@@ -85,6 +85,8 @@ public:
     VxFile shifted(int distance);
     bool canBeShifted(int distance) const;
 
+    VxFile withChangedTempo(double tempoFactor) const;
+
     void removeSilenceSpaceFromBeginning();
 
     bool hasPitchesInMoment(double time) const;

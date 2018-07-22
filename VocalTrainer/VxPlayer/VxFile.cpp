@@ -284,3 +284,7 @@ bool VxFile::hasPitchInMoment(double time, const Pitch &pitch) const {
 double VxFile::getFirstPitchStartTime() const {
     return ticksToSeconds(pitches.front().startTickNumber);
 }
+
+VxFile VxFile::withChangedTempo(double tempoFactor) const {
+    return VxFile(pitches, distanceInTicksBetweenLastPitchEndAndTrackEnd, (int)round(ticksPerSecond * tempoFactor));
+}
