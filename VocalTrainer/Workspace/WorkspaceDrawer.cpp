@@ -40,7 +40,7 @@ void WorkspaceDrawer::draw() {
 
     double now = TimeUtils::NowInSeconds();
     float frameDuration = now - frameTime;
-    cout<<"fps = "<<(1.0 / frameDuration)<<"\n";
+    // cout<<"fps = "<<(1.0 / frameDuration)<<"\n";
     // old logic
     if (running) {
         horizontalOffset = horizontalOffset + intervalsPerSecond * intervalWidth * frameDuration;

@@ -10,8 +10,10 @@ int WavAudioPlayer::readNextSamplesBatch(void *intoBuffer, int framesCount,
         const AudioPlayer::PlaybackData &playbackData) {
     int frameSize = getSampleSize();
     int seek = getBufferSeek();
-    int size = wavFile->readData(intoBuffer, framesCount * frameSize, seek * frameSize);
+    int offset = WAVFile::DATA_POSITION + seek * frameSize;
+    int size = std::min(framesCount * frameSize, (int)audioData.size() - offset);
     if (size > 0) {
+        memcpy(intoBuffer, audioData.data() + offset, size);
         int newSeek = size / frameSize + seek;
         setBufferSeek(newSeek);
     }
@@ -21,15 +23,15 @@ int WavAudioPlayer::readNextSamplesBatch(void *intoBuffer, int framesCount,
 
 void WavAudioPlayer::prepareAndProvidePlaybackData(AudioPlayer::PlaybackData *playbackData) {
     auto* stream =  new boost::iostreams::stream<boost::iostreams::array_source>(audioData.data(), audioData.size());
-    wavFile = new WAVFile(stream);
-    wavFile->setDeleteStreamOnDestructor(true);
-    playbackData->sampleRate = wavFile->getSampleRate();
-    if (wavFile->getAudioFormat() != WAVFile::PCM_AUDIO_FORMAT) {
+    WAVFile wavFile(stream);
+    wavFile.setDeleteStreamOnDestructor(true);
+    playbackData->sampleRate = wavFile.getSampleRate();
+    if (wavFile.getAudioFormat() != WAVFile::PCM_AUDIO_FORMAT) {
         throw std::runtime_error("Unsupported wav audio format");
     }
     
-    playbackData->numChannels = wavFile->getNumberOfChannels();
-    int bytesPerChannel = wavFile->getBytesPerChannel();
+    playbackData->numChannels = wavFile.getNumberOfChannels();
+    int bytesPerChannel = wavFile.getBytesPerChannel();
     switch (bytesPerChannel) {
         case 1:
             playbackData->format = paInt8;
@@ -54,15 +56,26 @@ void WavAudioPlayer::prepareAndProvidePlaybackData(AudioPlayer::PlaybackData *pl
     }
 
     playbackData->totalDurationInSeconds = samplesCountToSeconds(pcmDataBytesCount / (bytesPerChannel * playbackData->numChannels));
-    playbackData->framesPerBuffer = paFramesPerBufferUnspecified;
-}
-
-WavAudioPlayer::WavAudioPlayer(std::string &&audioData) : audioData(std::move(audioData)) {
-
+    playbackData->framesPerBuffer = 256;
 }
 
 WavAudioPlayer::~WavAudioPlayer() {
-    if (wavFile) {
-        delete wavFile;
-    }
+
+}
+
+int WavAudioPlayer::getBufferSeek() const {
+    return bufferSeek;
+}
+
+void WavAudioPlayer::setBufferSeek(int bufferSeek) {
+    AudioPlayer::setBufferSeek(bufferSeek);
+    this->bufferSeek = bufferSeek;
+}
+
+void WavAudioPlayer::setAudioData(std::string &&audioData) {
+    this->audioData = std::move(audioData);
+}
+
+WavAudioPlayer::WavAudioPlayer() {
+    bufferSeek = 0;
 }

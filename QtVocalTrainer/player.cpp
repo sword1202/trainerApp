@@ -3,6 +3,7 @@
 #include <QJsonObject>
 #include <iostream>
 #include "TimeUtils.h"
+#include "QtUtils/qtutils.h"
 
 using namespace std;
 
@@ -51,6 +52,11 @@ void Player::setSource(const QString &source) {
     init(local8Bit.data());
     prepare();
 
+    if (!isMetronomeSoundDataSet()) {
+        std::string metronomeData = QtUtils::readAllFromFile(":qml/sounds/metronome.wav").toStdString();
+        setMetronomeSoundData(std::move(metronomeData));
+    }
+
     emit durationChanged();
     emit beatsPerMinuteChanged();
     emit sourceChanged(source);
@@ -73,6 +79,7 @@ void Player::stop() {
 }
 
 void Player::onSeekChanged(double seek) {
+    MvxPlayer::onSeekChanged(seek);
     emit seekChanged(seek);
 }
 
@@ -116,4 +123,9 @@ void Player::setPitchShiftInSemiTones(int value) {
 
 bool Player::canBeShifted(int distance) const {
     return MvxPlayer::canBeShifted(distance);
+}
+
+void Player::setMetronomeEnabled(bool metronomeEnabled) {
+    MvxPlayer::setMetronomeEnabled(metronomeEnabled);
+    emit metronomeEnabledChanged();
 }

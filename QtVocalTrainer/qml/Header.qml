@@ -38,6 +38,10 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: tracksShowButton.right
         anchors.leftMargin: 4
+
+        onOnChanged: {
+            cpp.player.metronomeEnabled = on
+        }
     }
 
     PlayerController {

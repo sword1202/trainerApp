@@ -106,6 +106,7 @@ qrc_qml.cpp: qml.qrc \
 		qml/images/tracks_show_button_off.png \
 		qml/images/track_piece.png \
 		qml/sounds/sounds.sf2 \
+		qml/sounds/metronome.wav \
 		qml/fonts/Lato-Regular.ttf \
 		qml/fonts/Lato-Bold.ttf
 	/Users/semyon/Qt/5.11.0/clang_64/bin/rcc -name qml qml.qrc -o qrc_qml.cpp

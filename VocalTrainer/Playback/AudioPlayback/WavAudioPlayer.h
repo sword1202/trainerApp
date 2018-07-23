@@ -10,13 +10,18 @@
 #include "WAVFile.h"
 
 class WavAudioPlayer : public AudioPlayer {
-    WAVFile* wavFile;
     std::string audioData;
+    std::atomic_int bufferSeek;
 protected:
     int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) override;
     void prepareAndProvidePlaybackData(PlaybackData *playbackData) override;
+
+    int getBufferSeek() const override;
+    void setBufferSeek(int bufferSeek) override;
 public:
-    WavAudioPlayer(std::string &&audioData);
+    void setAudioData(std::string&& audioData);
+
+    WavAudioPlayer();
     ~WavAudioPlayer();
 };
 

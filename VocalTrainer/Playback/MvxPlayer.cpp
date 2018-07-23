@@ -3,7 +3,7 @@
 // Copyright (c) 2018 Mac. All rights reserved.
 //
 
-#include <Executors.h>
+#include "Executors.h"
 #include "MvxPlayer.h"
 #include "StringUtils.h"
 #include "AudioFilePlayer.h"
@@ -13,13 +13,14 @@
 #include "TimeUtils.h"
 #include "Functions.h"
 #include "Executors.h"
+#include <iostream>
 
 using namespace CppUtils;
+using std::cout;
+using std::endl;
 
-MvxPlayer::MvxPlayer() {
+MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
     instrumentalPlayer.addSeekChangedListener([=](double seek, double) {
-        seekChangedListeners.executeAll(seek);
-
         if (bounds) {
             if (seek >= bounds->getEndSeek()) {
                 Executors::ExecuteOnMainThread([this] {this->onComplete();});
@@ -29,6 +30,8 @@ MvxPlayer::MvxPlayer() {
         Executors::ExecuteOnMainThread([this, seek] {
             this->onSeekChanged(seek);
         });
+
+        playMetronomeSoundIfNeed(seek);
 
         return DONT_DELETE_LISTENER;
     });
@@ -147,7 +150,7 @@ double MvxPlayer::getSeek() const {
 }
 
 void MvxPlayer::onSeekChanged(double seek) {
-
+    seekChangedListeners.executeAll(seek);
 }
 
 double MvxPlayer::getPlayStartedSeek() const {
@@ -253,6 +256,42 @@ int MvxPlayer::addTonalityChangedListener(const MvxPlayer::TonalityChangedListen
 
 void MvxPlayer::removeTonalityChangedListener(int id) {
     tonalityChangedListeners.removeListener(id);
+}
+
+void MvxPlayer::setMetronomeSoundData(std::string &&data) {
+    metronomePlayer.setAudioData(std::move(data));
+    metronomePlayer.prepare();
+}
+
+bool MvxPlayer::isMetronomeEnabled() const {
+    return metronomeEnabled;
+}
+
+void MvxPlayer::setMetronomeEnabled(bool metronomeEnabled) {
+    this->metronomeEnabled = metronomeEnabled;
+}
+
+double MvxPlayer::getBeatDuration() const {
+    return 60.0 / beatsPerMinute;
+}
+
+void MvxPlayer::playMetronomeSoundIfNeed(double seek) {
+    if (metronomeEnabled) {
+        assert(metronomePlayer.isPrepared());
+
+        double beatDuration = getBeatDuration();
+        double distanceAfterBeat = fmod(seek, beatDuration);
+        double delta = instrumentalPlayer.getCallbackBufferDurationInSeconds();
+
+        if (distanceAfterBeat <= delta) {
+            cout<<"metronomePlayer.play\n";
+            metronomePlayer.play();
+        }
+    }
+}
+
+bool MvxPlayer::isMetronomeSoundDataSet() const {
+    return metronomePlayer.isPrepared();
 }
 
 MvxPlayer::Bounds::Bounds(double startSeek, double endSeek) : startSeek(startSeek), endSeek(endSeek) {

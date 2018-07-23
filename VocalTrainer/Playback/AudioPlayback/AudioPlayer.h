@@ -112,5 +112,6 @@ public:
     void playFromSeekToSeek(double a, double b, const std::function<void()> onFinish);
 
 	const PlaybackData &getPlaybackData() const;
+	double getCallbackBufferDurationInSeconds() const;
 };
 #endif //VOCALTRAINER_AUDIOPLAYER_H

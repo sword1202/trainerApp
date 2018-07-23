@@ -16,6 +16,7 @@
 #include <functional>
 #include "ListenersSet.h"
 #include "PlayingPitchSequence.h"
+#include "WavAudioPlayer.h"
 
 class MvxPlayer : public PlayingPitchSequence {
 public:
@@ -42,6 +43,9 @@ private:
 
     AudioFilePlayer instrumentalPlayer;
     VxFileAudioPlayer vxPlayer;
+    WavAudioPlayer metronomePlayer;
+    std::atomic_bool metronomeEnabled;
+
     boost::optional<Bounds> bounds;
     double playStartedSeek = -1;
     double playStartedTime = -1;
@@ -52,6 +56,8 @@ private:
     CppUtils::ListenersSet<const VxFile*> vxFileChangedListeners;
     CppUtils::ListenersSet<double> seekChangedListeners;
     CppUtils::ListenersSet<> tonalityChangedListeners;
+
+    void playMetronomeSoundIfNeed(double seek);
 public:
     MvxPlayer();
     virtual ~MvxPlayer();
@@ -91,6 +97,14 @@ public:
 
     bool hasPitchNow(const Pitch& pitch) const;
     bool hasAnyPitchNow() const;
+
+    void setMetronomeSoundData(std::string&& data);
+    bool isMetronomeSoundDataSet() const;
+
+    bool isMetronomeEnabled() const;
+    virtual void setMetronomeEnabled(bool metronomeEnabled);
+
+    double getBeatDuration() const;
 
     // The listener is executed on Main thread
     int addIsPlayingChangedListener(const IsPlayingChangedListener& listener);

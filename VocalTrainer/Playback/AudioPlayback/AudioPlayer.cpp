@@ -108,10 +108,20 @@ void AudioPlayer::play(double seek) {
     BOOST_ASSERT_MSG(isPrepared(), "call prepare before play");
     BOOST_ASSERT(seek >= 0);
 
+    if (playing || dataSentToOutputListenerKey != 0) {
+        cout<<"playing = "<<playing<<" dataSentToOutputListenerKey = "<<dataSentToOutputListenerKey<<"\n";
+        return;
+    }
+
     setSeek(seek);
 
     setupPlaybackStartedListener();
-    auto err = Pa_StartStream(stream);
+    auto err=0;
+    if (!Pa_IsStreamStopped(stream)) {
+        err = Pa_StopStream(stream);
+        PortAudio::checkErrors(err);
+    }
+    err = Pa_StartStream(stream);
     PortAudio::checkErrors(err);
 }
 
@@ -186,7 +196,9 @@ double AudioPlayer::samplesCountToSeconds(int samplesCount) const {
 }
 
 void AudioPlayer::onComplete() {
+    playing = false;
     setSeek(0);
+
     onPlaybackStoppedListeners.executeAll();
     onCompleteListeners.executeAll();
 }
@@ -279,8 +291,10 @@ int AudioPlayer::addOnDataSentToOutputListener(const AudioPlayer::OnDataSentToOu
 
 void AudioPlayer::setupPlaybackStartedListener() {
     assert(dataSentToOutputListenerKey == 0);
+    cout<<"onDataSentToOutputListeners.set\n";
     dataSentToOutputListenerKey = onDataSentToOutputListeners.addListener([=] (void*, int) {
         playing = true;
+        cout<<"onDataSentToOutputListeners.executed\n";
         onPlaybackStartedListeners.executeAll();
         dataSentToOutputListenerKey = 0;
         return DELETE_LISTENER;
@@ -313,4 +327,8 @@ double AudioPlayer::getTempoFactor() const {
 
 void AudioPlayer::setTempoFactor(double tempoFactor) {
     this->tempoFactor = tempoFactor;
+}
+
+double AudioPlayer::getCallbackBufferDurationInSeconds() const {
+    return AudioUtils::GetSampleTimeInSeconds(playbackData.framesPerBuffer, playbackData.sampleRate);
 }

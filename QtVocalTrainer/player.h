@@ -29,6 +29,8 @@ public:
     Q_PROPERTY(double beatsPerMinute READ getBeatsPerMinute() NOTIFY beatsPerMinuteChanged())
     Q_PROPERTY(int pitchShift READ getPitchShiftInSemiTones() WRITE
             setPitchShiftInSemiTones() NOTIFY pitchShiftChanged())
+    Q_PROPERTY(int metronomeEnabled READ isMetronomeEnabled() WRITE
+            setMetronomeEnabled() NOTIFY metronomeEnabledChanged())
 
     Q_INVOKABLE bool hasPitchNow(int perfectFrequencyIndex) const;
     Q_INVOKABLE bool hasAnyPitchNow() const;
@@ -47,6 +49,8 @@ public:
 
     void setPitchShiftInSemiTones(int value) override;
 
+    void setMetronomeEnabled(bool metronomeEnabled) override;
+
 signals:
     void complete();
     void sourceChanged(const QString& newSource);
@@ -58,6 +62,7 @@ signals:
     void playStartedSeekChanged();
     void beatsPerMinuteChanged();
     void pitchShiftChanged();
+    void metronomeEnabledChanged();
 };
 
 #endif // QMLPLAYER_H
