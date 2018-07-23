@@ -14,8 +14,7 @@ int WavAudioPlayer::readNextSamplesBatch(void *intoBuffer, int framesCount,
     int size = std::min(framesCount * frameSize, (int)audioData.size() - offset);
     if (size > 0) {
         memcpy(intoBuffer, audioData.data() + offset, size);
-        int newSeek = size / frameSize + seek;
-        setBufferSeek(newSeek);
+        moveBufferSeekIfNotChangedBefore(size / frameSize, seek);
     }
     
     return size / frameSize;

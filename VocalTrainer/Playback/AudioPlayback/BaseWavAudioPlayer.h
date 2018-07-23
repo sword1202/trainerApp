@@ -7,14 +7,11 @@
 #define VOCALTRAINER_BASEWAVAUDIOPLAYER_H
 
 #include "AudioPlayer.h"
+#include "AudioPlayerWithDefaultSeekHandler.h"
 
-class BaseWavAudioPlayer : public AudioPlayer {
-    std::atomic_int bufferSeek;
+class BaseWavAudioPlayer : public AudioPlayerWithDefaultSeekHandler {
 protected:
     void prepareAndProvidePlaybackData(PlaybackData *playbackData) override;
-
-    int getBufferSeek() const override;
-    void setBufferSeek(int bufferSeek) override;
 
     struct WavSetupData {
         const char* wavHeaderData;

@@ -50,17 +50,7 @@ BaseWavAudioPlayer::~BaseWavAudioPlayer() {
 
 }
 
-int BaseWavAudioPlayer::getBufferSeek() const {
-    return bufferSeek;
-}
-
-void BaseWavAudioPlayer::setBufferSeek(int bufferSeek) {
-    AudioPlayer::setBufferSeek(bufferSeek);
-    this->bufferSeek = bufferSeek;
-}
-
 BaseWavAudioPlayer::BaseWavAudioPlayer() {
-    bufferSeek = 0;
 }
 
 double BaseWavAudioPlayer::calculateTotalDurationInSeconds(int size, int bytesPerChannel, const AudioPlayer::PlaybackData &playbackData) {

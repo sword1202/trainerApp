@@ -6,8 +6,6 @@
 #include "AudioFilePlayer.h"
 #include "AudioUtils.h"
 
-#define SEEK_LOCK std::lock_guard<std::mutex> _(bufferSeekMutex)
-
 int AudioFilePlayer::readNextSamplesBatch(void *intoBuffer, int framesCount, const AudioPlayer::PlaybackData &playbackData) {
     int bufferSeekBefore = getBufferSeek();
     audioDecoder->seek(bufferSeekBefore * playbackData.numChannels);
@@ -16,12 +14,7 @@ int AudioFilePlayer::readNextSamplesBatch(void *intoBuffer, int framesCount, con
     int readFramesCount = audioDecoder->read(samplesCount, (short*)intoBuffer)
             / playbackData.numChannels;
     if (readFramesCount > 0) {
-        // handle a case, when seek is set from outside while audioDecoder is reading the data
-        SEEK_LOCK;
-        if (bufferSeekBefore == this->bufferSeek) {
-            this->bufferSeek = bufferSeek + readFramesCount;
-            AudioPlayer::setBufferSeek(bufferSeek);
-        }
+        moveBufferSeekIfNotChangedBefore(readFramesCount, bufferSeekBefore);
     }
 
     int shiftInSemiTones = getPitchShiftInSemiTones();
@@ -49,19 +42,6 @@ void AudioFilePlayer::prepareAndProvidePlaybackData(AudioPlayer::PlaybackData *p
     soundTouch.setChannels((uint)playbackData->numChannels);
     soundTouch.setSampleRate((uint)playbackData->sampleRate);
     tempFloatBuffer.resize(playbackData->framesPerBuffer * playbackData->numChannels);
-}
-
-int AudioFilePlayer::getBufferSeek() const {
-    SEEK_LOCK;
-    return bufferSeek;
-}
-
-void AudioFilePlayer::setBufferSeek(int bufferSeek) {
-    {
-        SEEK_LOCK;
-        this->bufferSeek = bufferSeek;
-    }
-    AudioPlayer::setBufferSeek(bufferSeek);
 }
 
 AudioFilePlayer::AudioFilePlayer() {

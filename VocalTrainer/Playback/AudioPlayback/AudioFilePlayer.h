@@ -6,11 +6,11 @@
 #ifndef VOCALTRAINER_AUDIOFILEPLAYER_H
 #define VOCALTRAINER_AUDIOFILEPLAYER_H
 
-#include "AudioPlayer.h"
+#include "AudioPlayerWithDefaultSeekHandler.h"
 #include "Decoder/audiodecoder.h"
 #include "SoundTouch/SoundTouch.h"
 
-class AudioFilePlayer : public AudioPlayer {
+class AudioFilePlayer : public AudioPlayerWithDefaultSeekHandler {
 public:
     AudioFilePlayer();
     void setAudioData(std::string&& audioData);
@@ -19,8 +19,6 @@ protected:
     void prepareAndProvidePlaybackData(PlaybackData *playbackData) override;
 
 protected:
-    int getBufferSeek() const override;
-    void setBufferSeek(int bufferSeek) override;
     void destroy() override;
 
 private:
@@ -28,8 +26,6 @@ private:
     soundtouch::SoundTouch soundTouch;
     std::vector<float> tempFloatBuffer;
     std::string audioData;
-    int bufferSeek = 0;
-    mutable std::mutex bufferSeekMutex;
 };
 
 

@@ -6,6 +6,10 @@
 #include <cmath>
 #include "MetronomeAudioPlayer.h"
 #include "WAVFile.h"
+#include <iostream>
+
+using std::cout;
+using std::endl;
 
 int MetronomeAudioPlayer::readNextSamplesBatch(void *intoBuffer, int framesCount,
         const AudioPlayer::PlaybackData &playbackData) {
@@ -15,36 +19,36 @@ int MetronomeAudioPlayer::readNextSamplesBatch(void *intoBuffer, int framesCount
     int result = std::min(framesCount, totalSamplesCount - seek);
     if (getVolume() <= 0.00001f) {
         memset(intoBuffer, 0, (size_t)result * sampleSize);
-        return result;
-    }
-
-    double beatDuration = 60.0 / beatsPerMinute;
-    double timeSeek = getSeek();
-    double mod = fmod(timeSeek, beatDuration);
-    double halfMetronomeAudioDataDuration = secondsToSamplesCount(metronomeAudioData.size() / 2);
-    double wavSeek = -1;
-    double distanceToNextBeatBorder = beatDuration - mod - halfMetronomeAudioDataDuration;
-    if (distanceToNextBeatBorder <= 0) {
-        wavSeek = -distanceToNextBeatBorder;
     } else {
-        double distanceToPrevBeatBorder = mod - halfMetronomeAudioDataDuration;
-        if (distanceToPrevBeatBorder < 0) {
-            wavSeek = halfMetronomeAudioDataDuration * 2 + distanceToPrevBeatBorder;
+        double beatDuration = 60.0 / beatsPerMinute;
+        double timeSeek = getSeek();
+        double mod = fmod(timeSeek, beatDuration);
+        double halfMetronomeAudioDataDuration = samplesCountToSeconds(metronomeAudioData.size() / 2);
+        double wavSeek = -1;
+        double distanceToNextBeatBorder = beatDuration - mod - halfMetronomeAudioDataDuration;
+        if (distanceToNextBeatBorder <= 0) {
+            wavSeek = -distanceToNextBeatBorder;
+        } else {
+            double distanceToPrevBeatBorder = mod - halfMetronomeAudioDataDuration;
+            if (distanceToPrevBeatBorder < 0) {
+                wavSeek = halfMetronomeAudioDataDuration * 2 + distanceToPrevBeatBorder;
+            }
         }
-    }
 
-    if (wavSeek < 0) {
-        memset(intoBuffer, 0, (size_t)result * sampleSize);
-    } else {
-        int wavBufferSeek = secondsToSamplesCount(wavSeek);
-        if ((metronomeAudioData.size() - WAVFile::DATA_POSITION) / sampleSize - wavBufferSeek - result < 0) {
+        if (wavSeek < 0) {
             memset(intoBuffer, 0, (size_t)result * sampleSize);
         } else {
-            const char* begin = metronomeAudioData.data() + WAVFile::DATA_POSITION + wavBufferSeek * sampleSize;
-            memcpy(intoBuffer, begin, (size_t)result * sampleSize);
+            int wavBufferSeek = secondsToSamplesCount(wavSeek);
+            if ((metronomeAudioData.size() - WAVFile::DATA_POSITION) / sampleSize - wavBufferSeek - result < 0) {
+                memset(intoBuffer, 0, (size_t)result * sampleSize);
+            } else {
+                const char* begin = metronomeAudioData.data() + WAVFile::DATA_POSITION + wavBufferSeek * sampleSize;
+                memcpy(intoBuffer, begin, (size_t)result * sampleSize);
+            }
         }
     }
 
+    moveBufferSeekIfNotChangedBefore(result, seek);
     return result;
 }
 

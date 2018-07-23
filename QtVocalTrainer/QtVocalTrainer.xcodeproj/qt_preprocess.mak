@@ -159,6 +159,7 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h \
 		../include/boost/lockfree/queue.hpp \
 		../VocalTrainer/Playback/AudioPlayback/AudioFilePlayer.h \
+		../VocalTrainer/Playback/AudioPlayback/AudioPlayerWithDefaultSeekHandler.h \
 		../VocalTrainer/Playback/AudioPlayback/Decoder/audiodecoder.h \
 		../include/SoundTouch/SoundTouch.h \
 		../include/boost/optional.hpp \
@@ -255,6 +256,7 @@ moc_app.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QApplic
 		../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h \
 		../include/boost/lockfree/queue.hpp \
 		../VocalTrainer/Playback/AudioPlayback/AudioFilePlayer.h \
+		../VocalTrainer/Playback/AudioPlayback/AudioPlayerWithDefaultSeekHandler.h \
 		../VocalTrainer/Playback/AudioPlayback/Decoder/audiodecoder.h \
 		../include/SoundTouch/SoundTouch.h \
 		../include/boost/optional.hpp \
@@ -341,6 +343,7 @@ moc_player.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QObject
 		../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h \
 		../include/boost/lockfree/queue.hpp \
 		../VocalTrainer/Playback/AudioPlayback/AudioFilePlayer.h \
+		../VocalTrainer/Playback/AudioPlayback/AudioPlayerWithDefaultSeekHandler.h \
 		../VocalTrainer/Playback/AudioPlayback/Decoder/audiodecoder.h \
 		../include/SoundTouch/SoundTouch.h \
 		../include/boost/optional.hpp \
