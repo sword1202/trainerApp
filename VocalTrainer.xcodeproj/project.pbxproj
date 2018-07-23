@@ -476,7 +476,7 @@
 				2EF1E8D71D57F95100E02C33 /* Info.plist */,
 				106289779E14B72C075BE323 /* Utils */,
 				10628F99ACFB6F50A805A23B /* Workspace */,
-				C9FFF1536A6FDAC558B00F51 /* VxPlayer */,
+				C9FFF1536A6FDAC558B00F51 /* Playback */,
 				C9FFF0A770C7C4A877771027 /* melody.mid */,
 				544C7CE320A98235002B24BD /* main.m */,
 				C9FFF8A3E1BD0832FF93CB64 /* nanovg */,
@@ -586,7 +586,7 @@
 			path = CraigsappMidifile;
 			sourceTree = "<group>";
 		};
-		C9FFF1536A6FDAC558B00F51 /* VxPlayer */ = {
+		C9FFF1536A6FDAC558B00F51 /* Playback */ = {
 			isa = PBXGroup;
 			children = (
 				C9FFF3A0BB69C8E7F02351A6 /* tsf.h */,
@@ -617,7 +617,7 @@
 				C9FFFE30CEA0B3403F9F90BB /* VxFileAudioDataGenerator.h */,
 				C9FFF0A0867AAEAF3C36F59F /* VxFileAudioDataGeneratorConfig.h */,
 			);
-			path = VxPlayer;
+			path = Playback;
 			sourceTree = "<group>";
 		};
 		C9FFF1A958682AD939ED1A96 /* Views */ = {

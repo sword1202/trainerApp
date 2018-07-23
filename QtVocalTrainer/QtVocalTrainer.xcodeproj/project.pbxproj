@@ -256,270 +256,270 @@
 					);
 			};
 		};
-		5820983D5AF61CFB18BDD732 = {
+		7A7D4D8184A62A1AA417F348 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/MvxPlayer.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/MvxPlayer.cpp";
 			name = "MvxPlayer.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		0C079B48635759D4B90150B5 = {
-			fileRef = "5820983D5AF61CFB18BDD732";
+		060A72EF9BBCE60E2AC85833 = {
+			fileRef = "7A7D4D8184A62A1AA417F348";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
 					);
 			};
 		};
-		97EBCC129030B7B241FFAB9D = {
+		B27FF6E041B2735F4DC44989 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/ParallelVxFileAudioDataGenerator.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/ParallelVxFileAudioDataGenerator.cpp";
 			name = "ParallelVxFileAudioDataGenerator.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		685471BD76F65A43D2C3ACA4 = {
-			fileRef = "97EBCC129030B7B241FFAB9D";
+		FA0A66141505318E9B0DC458 = {
+			fileRef = "B27FF6E041B2735F4DC44989";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
 					);
 			};
 		};
-		1312A85053AA8148E2F73686 = {
+		597D7A9DB67E7298B034CFBD = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/VxFile.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/VxFile.cpp";
 			name = "VxFile.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		8E6ED27FD5FB5AE22B294181 = {
-			fileRef = "1312A85053AA8148E2F73686";
+		830603BE8C68BA60EA42E087 = {
+			fileRef = "597D7A9DB67E7298B034CFBD";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
 					);
 			};
 		};
-		F1A509567270EF1E75247A53 = {
+		2102942B40C1255F6AAD7B0C = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/MvxFile.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/MvxFile.cpp";
 			name = "MvxFile.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		C5D661D2FF68911A97484C54 = {
-			fileRef = "F1A509567270EF1E75247A53";
+		C92CACBB7D36558E56E193CC = {
+			fileRef = "2102942B40C1255F6AAD7B0C";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
 					);
 			};
 		};
-		43FCE66921EB37370E961A8E = {
+		033143782A7AC487B5E77CCD = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/SoundFont2PitchRenderer.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/SoundFont2PitchRenderer.cpp";
 			name = "SoundFont2PitchRenderer.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		7DE36C6845CF4444A92C0237 = {
-			fileRef = "43FCE66921EB37370E961A8E";
+		BFEE235A26B6559858CAF27F = {
+			fileRef = "033143782A7AC487B5E77CCD";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
 					);
 			};
 		};
-		7A84FB38D1022BFA9F46BF73 = {
+		00BB8EF330C407D19FE10F61 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/PitchRenderer.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/PitchRenderer.cpp";
 			name = "PitchRenderer.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		9F42C9150AC85C7F9CAA6C96 = {
-			fileRef = "7A84FB38D1022BFA9F46BF73";
+		EDF834F3522D100A87A05A0D = {
+			fileRef = "00BB8EF330C407D19FE10F61";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
 					);
 			};
 		};
-		01C9C16D84BB71ADA4B0221D = {
+		2CA919B66F5D4079C4B91B49 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback/VxFileAudioPlayer.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback/VxFileAudioPlayer.cpp";
 			name = "VxFileAudioPlayer.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		15CB6BA241E01D5C13FAF147 = {
-			fileRef = "01C9C16D84BB71ADA4B0221D";
+		90923F2EC944CC61F85FE20C = {
+			fileRef = "2CA919B66F5D4079C4B91B49";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
 					);
 			};
 		};
-		BA5C64D91A7EE73CA8C933BC = {
+		FFA999E3592B840232247765 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback/AudioPlayer.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback/AudioPlayer.cpp";
 			name = "AudioPlayer.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		9203C281DFD8C90CEDFC8466 = {
-			fileRef = "BA5C64D91A7EE73CA8C933BC";
+		26579EF0F704FE2098191C42 = {
+			fileRef = "FFA999E3592B840232247765";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
 					);
 			};
 		};
-		2C83BE0B5A186FAD51585C9B = {
+		8EA52E6A6615DCD3FFE4AF06 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback/AudioFilePlayer.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback/AudioFilePlayer.cpp";
 			name = "AudioFilePlayer.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		55A4928F1291F4C9FA8D76D7 = {
-			fileRef = "2C83BE0B5A186FAD51585C9B";
+		FEDA63FC1B571CB1CB8E73A2 = {
+			fileRef = "8EA52E6A6615DCD3FFE4AF06";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
 					);
 			};
 		};
-		3A1326A251F503B6603C7C63 = {
+		AACC4F796E4A36125AC5EFF7 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback/WavAudioPlayer.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback/WavAudioPlayer.cpp";
 			name = "WavAudioPlayer.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		702FCC789CE8452A260DE4FD = {
-			fileRef = "3A1326A251F503B6603C7C63";
+		1014F6192D2846758E60071D = {
+			fileRef = "AACC4F796E4A36125AC5EFF7";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
 					);
 			};
 		};
-		DE0D78C7447094EF5AC68E85 = {
+		DEBDBFBF320D2A8E44F00B72 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/Midi/MidiFileReader.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/Midi/MidiFileReader.cpp";
 			name = "MidiFileReader.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		7594A74EB79C67E529B22E84 = {
-			fileRef = "DE0D78C7447094EF5AC68E85";
+		E0A924DA1FBC01F85F3EE650 = {
+			fileRef = "DEBDBFBF320D2A8E44F00B72";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
 					);
 			};
 		};
-		FC728C866D54AE0FA49F1050 = {
+		114DF586D6CEC1DEAF28C5E1 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/Midi/MidiTrack.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/Midi/MidiTrack.cpp";
 			name = "MidiTrack.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		83CA1BA7F3C4D3D51FCC975C = {
-			fileRef = "FC728C866D54AE0FA49F1050";
+		1182AF7780D8217A8B23C967 = {
+			fileRef = "114DF586D6CEC1DEAF28C5E1";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
 					);
 			};
 		};
-		BA8FF8B447D348669B69EC19 = {
+		22BD66DA83C49EDA2ECA78EE = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/CraigsappMidifile/Options.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/CraigsappMidifile/Options.cpp";
 			name = "Options.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		78CBA02EB8FA81FC98A99BFC = {
-			fileRef = "BA8FF8B447D348669B69EC19";
+		23B543B70DF2FB63063036F4 = {
+			fileRef = "22BD66DA83C49EDA2ECA78EE";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
 					);
 			};
 		};
-		BAE01667FEF0DCCF09898D1B = {
+		86B6D39B672E1C03418651B0 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/CraigsappMidifile/MidiMessage.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/CraigsappMidifile/MidiMessage.cpp";
 			name = "MidiMessage.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		F0EC559E8355308A8DB49ACD = {
-			fileRef = "BAE01667FEF0DCCF09898D1B";
+		3BFB5327C25F8880C5EC0954 = {
+			fileRef = "86B6D39B672E1C03418651B0";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
 					);
 			};
 		};
-		56830C1E339DBDC7AB8F64D9 = {
+		CE92E22C29F13C343DD2C5D3 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/CraigsappMidifile/MidiFile.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/CraigsappMidifile/MidiFile.cpp";
 			name = "MidiFile.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		B53E45BFD2B29F1BF0EB613B = {
-			fileRef = "56830C1E339DBDC7AB8F64D9";
+		2709C35D4CC1BF2F9309FF0C = {
+			fileRef = "CE92E22C29F13C343DD2C5D3";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
 					);
 			};
 		};
-		D03631D520F251151439E9FC = {
+		A96F8BA23895E79F46DEA323 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/CraigsappMidifile/MidiEventList.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/CraigsappMidifile/MidiEventList.cpp";
 			name = "MidiEventList.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		6E409FEEEB54905F77885FDF = {
-			fileRef = "D03631D520F251151439E9FC";
+		740817520B0ECA4DE3311ED9 = {
+			fileRef = "A96F8BA23895E79F46DEA323";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
 					);
 			};
 		};
-		A3BFB5D59C2F66F9845607A2 = {
+		EEDBF310DD66840C32693D43 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/CraigsappMidifile/MidiEvent.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/CraigsappMidifile/MidiEvent.cpp";
 			name = "MidiEvent.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		214FF18317A5C88BAD32723A = {
-			fileRef = "A3BFB5D59C2F66F9845607A2";
+		8BA26AB85E32560019F21C6C = {
+			fileRef = "EEDBF310DD66840C32693D43";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
 					);
 			};
 		};
-		15B58FFF56CBF2E15D404A4B = {
+		F66EE30CC1F57A21F49F8764 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/CraigsappMidifile/Binasc.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/CraigsappMidifile/Binasc.cpp";
 			name = "Binasc.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		A168B1726CF50D9D9B6694AA = {
-			fileRef = "15B58FFF56CBF2E15D404A4B";
+		DF6D7876FF9D600ADC4B0E86 = {
+			fileRef = "F66EE30CC1F57A21F49F8764";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
@@ -766,30 +766,30 @@
 					);
 			};
 		};
-		5EFA0791FAFAF24F213C372F = {
+		9D79C641677ED8C4B9D321A6 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback/Decoder/audiodecoder.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback/Decoder/audiodecoder.cpp";
 			name = "audiodecoder.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		2606BB28C6DD44ACCCA27FF0 = {
-			fileRef = "5EFA0791FAFAF24F213C372F";
+		060901A7C35F0EEB8023B51C = {
+			fileRef = "9D79C641677ED8C4B9D321A6";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
 					);
 			};
 		};
-		8A85804D769148D3DF2DC1A0 = {
+		831D67E308AF57C3511A29E5 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback/Decoder/audiodecodercoreaudio.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback/Decoder/audiodecodercoreaudio.cpp";
 			name = "audiodecodercoreaudio.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		C4C2BC31FDA4AC0469364914 = {
-			fileRef = "8A85804D769148D3DF2DC1A0";
+		0F8E21723AFC4B5296238A89 = {
+			fileRef = "831D67E308AF57C3511A29E5";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
@@ -916,15 +916,15 @@
 					);
 			};
 		};
-		AB1BB2102FE32CBC9904F361 = {
+		9F6E23071596326655A20AE1 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/VxFileAudioDataGenerator.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/VxFileAudioDataGenerator.cpp";
 			name = "VxFileAudioDataGenerator.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		C4852C2D0119858544266918 = {
-			fileRef = "AB1BB2102FE32CBC9904F361";
+		ECC07FE3A7AAE2AA8EBB182C = {
+			fileRef = "9F6E23071596326655A20AE1";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
@@ -1217,170 +1217,170 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		DE4D6A90DF4619CFB7E35D11 = {
+		EF9FADA6B14F6AB3193F8D0D = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/MvxPlayer.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/MvxPlayer.h";
 			name = "MvxPlayer.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		D427C2C1B1E642DC604E5433 = {
+		786FD0E541908EAFA65E4733 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/VxFile.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/VxFile.h";
 			name = "VxFile.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		7330B9E7430076C564F4667C = {
+		A175D95F7DBAE64F62C175FB = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/ParallelVxFileAudioDataGenerator.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/ParallelVxFileAudioDataGenerator.h";
 			name = "ParallelVxFileAudioDataGenerator.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		9B6CEBB4436DC45A765F6745 = {
+		F983D1E4A437CEE73041368E = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/MvxFile.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/MvxFile.h";
 			name = "MvxFile.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		431ED7206D8951A6E004B0A5 = {
+		B4DF9E9B9D40CDD2C97B5126 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/VxPitch.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/VxPitch.h";
 			name = "VxPitch.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		A7DDB090A9DC8726D0B81E69 = {
+		0FC1B88128381FE142997B11 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/VxLyricsLine.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/VxLyricsLine.h";
 			name = "VxLyricsLine.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		D8641F5CD6E7B28EB5674326 = {
+		721C035DDB51E4CCCF8DB07F = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/VxLyricsInterval.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/VxLyricsInterval.h";
 			name = "VxLyricsInterval.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		D85E481AA937975520648AED = {
+		F0FB72B34439586DB2EE7131 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/SoundFont2PitchRenderer.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/SoundFont2PitchRenderer.h";
 			name = "SoundFont2PitchRenderer.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		EA6469A96E3562D657554498 = {
+		CCE0178CEF5C7C1E5698F132 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/PitchRenderer.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/PitchRenderer.h";
 			name = "PitchRenderer.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		5C330810B0A7B773B3810E8A = {
+		18057FBBE78D7DF4CDC55EAC = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/LoadTsf.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/LoadTsf.h";
 			name = "LoadTsf.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		78B0A4F60608094EFE2CB2CE = {
+		B127ECE56AB0536D882298EE = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/tsf.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/tsf.h";
 			name = "tsf.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		B288C9451C93E977B41F24AD = {
+		6369CA83B3AB2AE98D302FEB = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback/VxFileAudioPlayer.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback/VxFileAudioPlayer.h";
 			name = "VxFileAudioPlayer.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		B779D57E54864E549439D734 = {
+		33F05F1DDC93B794BB88DBBA = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback/AudioPlayer.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback/AudioPlayer.h";
 			name = "AudioPlayer.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		C991039C739A2FDFC43FD16C = {
+		3C4811B3CD3633A7D95F9C0A = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback/AudioFilePlayer.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback/AudioFilePlayer.h";
 			name = "AudioFilePlayer.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		8AFBBAA7C3A116EA916B1819 = {
+		00BC3C9F6687899FD4CAED55 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback/WavAudioPlayer.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback/WavAudioPlayer.h";
 			name = "WavAudioPlayer.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		3FBB7F4A70E0F9A8CD3EC03A = {
+		9C86BF02157B204415252450 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/Midi/MidiFileReader.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/Midi/MidiFileReader.h";
 			name = "MidiFileReader.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		919F3C5C5C48FBE138B3B551 = {
+		216DC4EEBB055023A5AA522B = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/Midi/MidiNote.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/Midi/MidiNote.h";
 			name = "MidiNote.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		6F1312F52BDFFD8E57B48193 = {
+		2FC05F320CA7683E325A968E = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/Midi/MidiTrack.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/Midi/MidiTrack.h";
 			name = "MidiTrack.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		C85150F5D74CC3E1F8691046 = {
+		43FD2BBDF297ACAA9D4BC967 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/CraigsappMidifile/MidiFile.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/CraigsappMidifile/MidiFile.h";
 			name = "MidiFile.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		5BEBDBDAEF24A14A143165CD = {
+		8D2E8DFB26C4AEBD0BA6217B = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/CraigsappMidifile/Options.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/CraigsappMidifile/Options.h";
 			name = "Options.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		2B8C125CD009DB1B5C2679BC = {
+		FE63E97080898D432E68D50F = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/CraigsappMidifile/MidiMessage.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/CraigsappMidifile/MidiMessage.h";
 			name = "MidiMessage.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		9CD29A127B90B5CA35B8507E = {
+		8DB0DDE9198C9DA2B0E653C8 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/CraigsappMidifile/MidiEventList.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/CraigsappMidifile/MidiEventList.h";
 			name = "MidiEventList.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		B709CE891C02190C76CEE24F = {
+		1492AA67B10316A101E69FEE = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/CraigsappMidifile/MidiEvent.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/CraigsappMidifile/MidiEvent.h";
 			name = "MidiEvent.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		58455D7E37269337F613CBF1 = {
+		DDF0E37AF3F29F4155176AB2 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/CraigsappMidifile/Binasc.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/CraigsappMidifile/Binasc.h";
 			name = "Binasc.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
@@ -1476,30 +1476,30 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		A9C6507592E44F5EBDFCCB2D = {
+		AB6A6766DCCDF7A3E84977FD = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback/Decoder/audiodecoder.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback/Decoder/audiodecoder.h";
 			name = "audiodecoder.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		278C2C7438E18F5A0ED54989 = {
+		E99207344F98575303BFDE05 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback/Decoder/audiodecodercoreaudio.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback/Decoder/audiodecodercoreaudio.h";
 			name = "audiodecodercoreaudio.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		E84B3895D1F6084A1F9F595F = {
+		D49181650FDF5C643015F9A1 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback/Decoder/apple/CADebugMacros.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback/Decoder/apple/CADebugMacros.h";
 			name = "CADebugMacros.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		B1AB1A53715FBDC252001C16 = {
+		6A25F9096E486445CD85C0C9 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback/Decoder/apple/CAStreamBasicDescription.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback/Decoder/apple/CAStreamBasicDescription.h";
 			name = "CAStreamBasicDescription.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
@@ -1559,9 +1559,9 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		982893B6BBE598D35A1BBDBD = {
+		D527FD6497B0F317376FFAE8 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/VxFileAudioDataGenerator.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/VxFileAudioDataGenerator.h";
 			name = "VxFileAudioDataGenerator.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
@@ -1661,24 +1661,24 @@
 				"61DAEAF44CFBFD0435D18633",
 				"D4BA943F97BC257AF95314F3",
 				"010F066C0C8FAFFCB00384DA",
-				"5820983D5AF61CFB18BDD732",
-				"97EBCC129030B7B241FFAB9D",
-				"1312A85053AA8148E2F73686",
-				"F1A509567270EF1E75247A53",
-				"43FCE66921EB37370E961A8E",
-				"7A84FB38D1022BFA9F46BF73",
-				"01C9C16D84BB71ADA4B0221D",
-				"BA5C64D91A7EE73CA8C933BC",
-				"2C83BE0B5A186FAD51585C9B",
-				"3A1326A251F503B6603C7C63",
-				"DE0D78C7447094EF5AC68E85",
-				"FC728C866D54AE0FA49F1050",
-				"BA8FF8B447D348669B69EC19",
-				"BAE01667FEF0DCCF09898D1B",
-				"56830C1E339DBDC7AB8F64D9",
-				"D03631D520F251151439E9FC",
-				"A3BFB5D59C2F66F9845607A2",
-				"15B58FFF56CBF2E15D404A4B",
+				"7A7D4D8184A62A1AA417F348",
+				"B27FF6E041B2735F4DC44989",
+				"597D7A9DB67E7298B034CFBD",
+				"2102942B40C1255F6AAD7B0C",
+				"033143782A7AC487B5E77CCD",
+				"00BB8EF330C407D19FE10F61",
+				"2CA919B66F5D4079C4B91B49",
+				"FFA999E3592B840232247765",
+				"8EA52E6A6615DCD3FFE4AF06",
+				"AACC4F796E4A36125AC5EFF7",
+				"DEBDBFBF320D2A8E44F00B72",
+				"114DF586D6CEC1DEAF28C5E1",
+				"22BD66DA83C49EDA2ECA78EE",
+				"86B6D39B672E1C03418651B0",
+				"CE92E22C29F13C343DD2C5D3",
+				"A96F8BA23895E79F46DEA323",
+				"EEDBF310DD66840C32693D43",
+				"F66EE30CC1F57A21F49F8764",
 				"7F35D2F85587C5EB5AD8253E",
 				"00B59D42B7C3603E290A53EC",
 				"5CC7B888F908C9E014B2327A",
@@ -1695,8 +1695,8 @@
 				"3DA91AE5EF3B07885DB5BD00",
 				"2155F1DA05346BF2187EACC8",
 				"427036DAC85631AB4C48B610",
-				"5EFA0791FAFAF24F213C372F",
-				"8A85804D769148D3DF2DC1A0",
+				"9D79C641677ED8C4B9D321A6",
+				"831D67E308AF57C3511A29E5",
 				"DF4BED6495ED318D0BFE2018",
 				"B73294AB1C891B9B5C32CC4C",
 				"8B1185F540CBCBDC52AE6A9F",
@@ -1705,7 +1705,7 @@
 				"17B9E14F4608B814E602C9AD",
 				"A72873228B4A3DDFB289A10F",
 				"0D39E49872D4A8DA481556DA",
-				"AB1BB2102FE32CBC9904F361",
+				"9F6E23071596326655A20AE1",
 				"1157FF7E9C28CC4BCBFDCC5F",
 				"C613FE9ADA39556AD9540F1E",
 				"1091C7F2ACC81AEE9DF74E74",
@@ -1720,30 +1720,30 @@
 				"76B664FAC83040BA76C57E7F",
 				"9E78C40084B4C85FE9D0258A",
 				"9E65F65D73262AC07C018AEA",
-				"DE4D6A90DF4619CFB7E35D11",
-				"D427C2C1B1E642DC604E5433",
-				"7330B9E7430076C564F4667C",
-				"9B6CEBB4436DC45A765F6745",
-				"431ED7206D8951A6E004B0A5",
-				"A7DDB090A9DC8726D0B81E69",
-				"D8641F5CD6E7B28EB5674326",
-				"D85E481AA937975520648AED",
-				"EA6469A96E3562D657554498",
-				"5C330810B0A7B773B3810E8A",
-				"78B0A4F60608094EFE2CB2CE",
-				"B288C9451C93E977B41F24AD",
-				"B779D57E54864E549439D734",
-				"C991039C739A2FDFC43FD16C",
-				"8AFBBAA7C3A116EA916B1819",
-				"3FBB7F4A70E0F9A8CD3EC03A",
-				"919F3C5C5C48FBE138B3B551",
-				"6F1312F52BDFFD8E57B48193",
-				"C85150F5D74CC3E1F8691046",
-				"5BEBDBDAEF24A14A143165CD",
-				"2B8C125CD009DB1B5C2679BC",
-				"9CD29A127B90B5CA35B8507E",
-				"B709CE891C02190C76CEE24F",
-				"58455D7E37269337F613CBF1",
+				"EF9FADA6B14F6AB3193F8D0D",
+				"786FD0E541908EAFA65E4733",
+				"A175D95F7DBAE64F62C175FB",
+				"F983D1E4A437CEE73041368E",
+				"B4DF9E9B9D40CDD2C97B5126",
+				"0FC1B88128381FE142997B11",
+				"721C035DDB51E4CCCF8DB07F",
+				"F0FB72B34439586DB2EE7131",
+				"CCE0178CEF5C7C1E5698F132",
+				"18057FBBE78D7DF4CDC55EAC",
+				"B127ECE56AB0536D882298EE",
+				"6369CA83B3AB2AE98D302FEB",
+				"33F05F1DDC93B794BB88DBBA",
+				"3C4811B3CD3633A7D95F9C0A",
+				"00BC3C9F6687899FD4CAED55",
+				"9C86BF02157B204415252450",
+				"216DC4EEBB055023A5AA522B",
+				"2FC05F320CA7683E325A968E",
+				"43FD2BBDF297ACAA9D4BC967",
+				"8D2E8DFB26C4AEBD0BA6217B",
+				"FE63E97080898D432E68D50F",
+				"8DB0DDE9198C9DA2B0E653C8",
+				"1492AA67B10316A101E69FEE",
+				"DDF0E37AF3F29F4155176AB2",
 				"51FE397C924AF983C8F13E1F",
 				"8C6A9F1A6D4662A3B19E9D87",
 				"F19AB727AC78A3F20E90522B",
@@ -1756,10 +1756,10 @@
 				"12FDD5FCD882819F27E2B4A0",
 				"5F51D60ABC95786F35309567",
 				"E60254EB4D07AA900A6941B1",
-				"A9C6507592E44F5EBDFCCB2D",
-				"278C2C7438E18F5A0ED54989",
-				"E84B3895D1F6084A1F9F595F",
-				"B1AB1A53715FBDC252001C16",
+				"AB6A6766DCCDF7A3E84977FD",
+				"E99207344F98575303BFDE05",
+				"D49181650FDF5C643015F9A1",
+				"6A25F9096E486445CD85C0C9",
 				"8E5BB2E92A648CC2706A3F15",
 				"8603BA8F9AA24E0A306CF09D",
 				"36FB9BA52D23A8CA74499832",
@@ -1768,7 +1768,7 @@
 				"890EBA9C11A6494559F9D564",
 				"09077407CF7F204254DB49E0",
 				"55BDDAC1C620A6CBE96510C6",
-				"982893B6BBE598D35A1BBDBD");
+				"D527FD6497B0F317376FFAE8");
 			name = "Sources";
 			sourceTree = "<group>";
 		};
@@ -1817,24 +1817,24 @@
 				"C0A33B54AB4F43E113571EFD",
 				"2093B786A38C5C17D4BFCB3C",
 				"D7C5B34E745041BD55235BD0",
-				"0C079B48635759D4B90150B5",
-				"685471BD76F65A43D2C3ACA4",
-				"8E6ED27FD5FB5AE22B294181",
-				"C5D661D2FF68911A97484C54",
-				"7DE36C6845CF4444A92C0237",
-				"9F42C9150AC85C7F9CAA6C96",
-				"15CB6BA241E01D5C13FAF147",
-				"9203C281DFD8C90CEDFC8466",
-				"55A4928F1291F4C9FA8D76D7",
-				"702FCC789CE8452A260DE4FD",
-				"7594A74EB79C67E529B22E84",
-				"83CA1BA7F3C4D3D51FCC975C",
-				"78CBA02EB8FA81FC98A99BFC",
-				"F0EC559E8355308A8DB49ACD",
-				"B53E45BFD2B29F1BF0EB613B",
-				"6E409FEEEB54905F77885FDF",
-				"214FF18317A5C88BAD32723A",
-				"A168B1726CF50D9D9B6694AA",
+				"060A72EF9BBCE60E2AC85833",
+				"FA0A66141505318E9B0DC458",
+				"830603BE8C68BA60EA42E087",
+				"C92CACBB7D36558E56E193CC",
+				"BFEE235A26B6559858CAF27F",
+				"EDF834F3522D100A87A05A0D",
+				"90923F2EC944CC61F85FE20C",
+				"26579EF0F704FE2098191C42",
+				"FEDA63FC1B571CB1CB8E73A2",
+				"1014F6192D2846758E60071D",
+				"E0A924DA1FBC01F85F3EE650",
+				"1182AF7780D8217A8B23C967",
+				"23B543B70DF2FB63063036F4",
+				"3BFB5327C25F8880C5EC0954",
+				"2709C35D4CC1BF2F9309FF0C",
+				"740817520B0ECA4DE3311ED9",
+				"8BA26AB85E32560019F21C6C",
+				"DF6D7876FF9D600ADC4B0E86",
 				"03FDB4560CC6439530AB776D",
 				"47249980FC051C0C07D0B9FE",
 				"F6C321E171FCC5BACAE75F6D",
@@ -1851,8 +1851,8 @@
 				"A52EEB92FE7FC165E27133F1",
 				"592D5E81E7518B72FC97D877",
 				"67B74B41DD891F047CEBC851",
-				"2606BB28C6DD44ACCCA27FF0",
-				"C4C2BC31FDA4AC0469364914",
+				"060901A7C35F0EEB8023B51C",
+				"0F8E21723AFC4B5296238A89",
 				"3A9D3D3CE7067FBCEA4D8FFF",
 				"E14C5436684B95B9CCB8C65B",
 				"9BB166EC807E398A4171A798",
@@ -1861,7 +1861,7 @@
 				"5BE3B32AE495487CF0F6F07C",
 				"25E7091503A6E0488B649979",
 				"B68DFB2CEF3B0AAB75F1D6DA",
-				"C4852C2D0119858544266918",
+				"ECC07FE3A7AAE2AA8EBB182C",
 				"0259F18B58DCB3EB6C5B3577",
 				"F3F0C5A9AE1D79D2A4930AEA",
 				"AE6596E2227260CD02B22B61",
@@ -2429,9 +2429,9 @@
 					"../VocalTrainer/Drawers",
 					"../VocalTrainer/Manager",
 					"../VocalTrainer/Workspace",
-					"../VocalTrainer/VxPlayer/AudioPlayback",
-					"../VocalTrainer/VxPlayer",
-					"../VocalTrainer/VxPlayer/CraigsappMidifile",
+					"../VocalTrainer/Playback/AudioPlayback",
+					"../VocalTrainer/Playback",
+					"../VocalTrainer/Playback/CraigsappMidifile",
 					"../VocalTrainer",
 					"../PitchDetection/CppUtils",
 					"../PitchDetection",
@@ -2545,9 +2545,9 @@
 					"../VocalTrainer/Drawers",
 					"../VocalTrainer/Manager",
 					"../VocalTrainer/Workspace",
-					"../VocalTrainer/VxPlayer/AudioPlayback",
-					"../VocalTrainer/VxPlayer",
-					"../VocalTrainer/VxPlayer/CraigsappMidifile",
+					"../VocalTrainer/Playback/AudioPlayback",
+					"../VocalTrainer/Playback",
+					"../VocalTrainer/Playback/CraigsappMidifile",
 					"../VocalTrainer",
 					"../PitchDetection/CppUtils",
 					"../PitchDetection",

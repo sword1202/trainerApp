@@ -33,24 +33,24 @@ SOURCES += \
     ../PitchDetection/PortAudio.cpp \
     ../PitchDetection/AudioInputReader.cpp \
     executors.cpp \
-    ../VocalTrainer/VxPlayer/MvxPlayer.cpp \
-    ../VocalTrainer/VxPlayer/ParallelVxFileAudioDataGenerator.cpp \
-    ../VocalTrainer/VxPlayer/VxFile.cpp \
-    ../VocalTrainer/VxPlayer/MvxFile.cpp \
-    ../VocalTrainer/VxPlayer/SoundFont2PitchRenderer.cpp \
-    ../VocalTrainer/VxPlayer/PitchRenderer.cpp \
-    ../VocalTrainer/VxPlayer/AudioPlayback/VxFileAudioPlayer.cpp \
-    ../VocalTrainer/VxPlayer/AudioPlayback/AudioPlayer.cpp \
-    ../VocalTrainer/VxPlayer/AudioPlayback/AudioFilePlayer.cpp \
-    ../VocalTrainer/VxPlayer/AudioPlayback/WavAudioPlayer.cpp \
-    ../VocalTrainer/VxPlayer/Midi/MidiFileReader.cpp \
-    ../VocalTrainer/VxPlayer/Midi/MidiTrack.cpp \
-    ../VocalTrainer/VxPlayer/CraigsappMidifile/Options.cpp \
-    ../VocalTrainer/VxPlayer/CraigsappMidifile/MidiMessage.cpp \
-    ../VocalTrainer/VxPlayer/CraigsappMidifile/MidiFile.cpp \
-    ../VocalTrainer/VxPlayer/CraigsappMidifile/MidiEventList.cpp \
-    ../VocalTrainer/VxPlayer/CraigsappMidifile/MidiEvent.cpp \
-    ../VocalTrainer/VxPlayer/CraigsappMidifile/Binasc.cpp \
+    ../VocalTrainer/Playback/MvxPlayer.cpp \
+    ../VocalTrainer/Playback/ParallelVxFileAudioDataGenerator.cpp \
+    ../VocalTrainer/Playback/VxFile.cpp \
+    ../VocalTrainer/Playback/MvxFile.cpp \
+    ../VocalTrainer/Playback/SoundFont2PitchRenderer.cpp \
+    ../VocalTrainer/Playback/PitchRenderer.cpp \
+    ../VocalTrainer/Playback/AudioPlayback/VxFileAudioPlayer.cpp \
+    ../VocalTrainer/Playback/AudioPlayback/AudioPlayer.cpp \
+    ../VocalTrainer/Playback/AudioPlayback/AudioFilePlayer.cpp \
+    ../VocalTrainer/Playback/AudioPlayback/WavAudioPlayer.cpp \
+    ../VocalTrainer/Playback/Midi/MidiFileReader.cpp \
+    ../VocalTrainer/Playback/Midi/MidiTrack.cpp \
+    ../VocalTrainer/Playback/CraigsappMidifile/Options.cpp \
+    ../VocalTrainer/Playback/CraigsappMidifile/MidiMessage.cpp \
+    ../VocalTrainer/Playback/CraigsappMidifile/MidiFile.cpp \
+    ../VocalTrainer/Playback/CraigsappMidifile/MidiEventList.cpp \
+    ../VocalTrainer/Playback/CraigsappMidifile/MidiEvent.cpp \
+    ../VocalTrainer/Playback/CraigsappMidifile/Binasc.cpp \
     ../PitchDetection/WAVFile.cpp \
     ../PitchDetection/AudioUtils.cpp \
     ../PitchDetection/CppUtils/PeriodicallySleepingBackgroundTask.cpp \
@@ -67,8 +67,8 @@ SOURCES += \
     ../VocalTrainer/Drawers/NvgDrawer.cpp \
     ../VocalTrainer/Drawers/Drawer.cpp \
     player.cpp \
-    ../VocalTrainer/VxPlayer/AudioPlayback/Decoder/audiodecoder.cpp \
-    ../VocalTrainer/VxPlayer/AudioPlayback/Decoder/audiodecodercoreaudio.cpp \
+    ../VocalTrainer/Playback/AudioPlayback/Decoder/audiodecoder.cpp \
+    ../VocalTrainer/Playback/AudioPlayback/Decoder/audiodecodercoreaudio.cpp \
     mainwindowosx.mm \
     ../VocalTrainer/Manager/VxPitchInputReader.cpp \
     ../VocalTrainer/Manager/MainController.cpp \
@@ -77,7 +77,7 @@ SOURCES += \
     ../VocalTrainer/Drawers/QDrawer.cpp \
     ../VocalTrainer/Drawers/DrawerColor.cpp \
     qopenglworkspacewidget.cpp \
-    ../VocalTrainer/VxPlayer/VxFileAudioDataGenerator.cpp
+    ../VocalTrainer/Playback/VxFileAudioDataGenerator.cpp
 
 RESOURCES += qml.qrc
 
@@ -115,30 +115,30 @@ HEADERS += \
     ../PitchDetection/CppUtils/TimeUtils.h \
     app.h \
     ../PitchDetection/PortAudio.h \
-    ../VocalTrainer/VxPlayer/MvxPlayer.h \
-    ../VocalTrainer/VxPlayer/VxFile.h \
-    ../VocalTrainer/VxPlayer/ParallelVxFileAudioDataGenerator.h \
-    ../VocalTrainer/VxPlayer/MvxFile.h \
-    ../VocalTrainer/VxPlayer/VxPitch.h \
-    ../VocalTrainer/VxPlayer/VxLyricsLine.h \
-    ../VocalTrainer/VxPlayer/VxLyricsInterval.h \
-    ../VocalTrainer/VxPlayer/SoundFont2PitchRenderer.h \
-    ../VocalTrainer/VxPlayer/PitchRenderer.h \
-    ../VocalTrainer/VxPlayer/LoadTsf.h \
-    ../VocalTrainer/VxPlayer/tsf.h \
-    ../VocalTrainer/VxPlayer/AudioPlayback/VxFileAudioPlayer.h \
-    ../VocalTrainer/VxPlayer/AudioPlayback/AudioPlayer.h \
-    ../VocalTrainer/VxPlayer/AudioPlayback/AudioFilePlayer.h \
-    ../VocalTrainer/VxPlayer/AudioPlayback/WavAudioPlayer.h \
-    ../VocalTrainer/VxPlayer/Midi/MidiFileReader.h \
-    ../VocalTrainer/VxPlayer/Midi/MidiNote.h \
-    ../VocalTrainer/VxPlayer/Midi/MidiTrack.h \
-    ../VocalTrainer/VxPlayer/CraigsappMidifile/MidiFile.h \
-    ../VocalTrainer/VxPlayer/CraigsappMidifile/Options.h \
-    ../VocalTrainer/VxPlayer/CraigsappMidifile/MidiMessage.h \
-    ../VocalTrainer/VxPlayer/CraigsappMidifile/MidiEventList.h \
-    ../VocalTrainer/VxPlayer/CraigsappMidifile/MidiEvent.h \
-    ../VocalTrainer/VxPlayer/CraigsappMidifile/Binasc.h \
+    ../VocalTrainer/Playback/MvxPlayer.h \
+    ../VocalTrainer/Playback/VxFile.h \
+    ../VocalTrainer/Playback/ParallelVxFileAudioDataGenerator.h \
+    ../VocalTrainer/Playback/MvxFile.h \
+    ../VocalTrainer/Playback/VxPitch.h \
+    ../VocalTrainer/Playback/VxLyricsLine.h \
+    ../VocalTrainer/Playback/VxLyricsInterval.h \
+    ../VocalTrainer/Playback/SoundFont2PitchRenderer.h \
+    ../VocalTrainer/Playback/PitchRenderer.h \
+    ../VocalTrainer/Playback/LoadTsf.h \
+    ../VocalTrainer/Playback/tsf.h \
+    ../VocalTrainer/Playback/AudioPlayback/VxFileAudioPlayer.h \
+    ../VocalTrainer/Playback/AudioPlayback/AudioPlayer.h \
+    ../VocalTrainer/Playback/AudioPlayback/AudioFilePlayer.h \
+    ../VocalTrainer/Playback/AudioPlayback/WavAudioPlayer.h \
+    ../VocalTrainer/Playback/Midi/MidiFileReader.h \
+    ../VocalTrainer/Playback/Midi/MidiNote.h \
+    ../VocalTrainer/Playback/Midi/MidiTrack.h \
+    ../VocalTrainer/Playback/CraigsappMidifile/MidiFile.h \
+    ../VocalTrainer/Playback/CraigsappMidifile/Options.h \
+    ../VocalTrainer/Playback/CraigsappMidifile/MidiMessage.h \
+    ../VocalTrainer/Playback/CraigsappMidifile/MidiEventList.h \
+    ../VocalTrainer/Playback/CraigsappMidifile/MidiEvent.h \
+    ../VocalTrainer/Playback/CraigsappMidifile/Binasc.h \
     ../PitchDetection/WAVFile.h \
     ../PitchDetection/AudioUtils.h \
     ../PitchDetection/CppUtils/PeriodicallySleepingBackgroundTask.h \
@@ -152,10 +152,10 @@ HEADERS += \
     ../VocalTrainer/Drawers/Drawer.h \
     ../VocalTrainer/Drawers/NvgDrawer.h \
     player.h \
-    ../VocalTrainer/VxPlayer/AudioPlayback/Decoder/audiodecoder.h \
-    ../VocalTrainer/VxPlayer/AudioPlayback/Decoder/audiodecodercoreaudio.h \
-    ../VocalTrainer/VxPlayer/AudioPlayback/Decoder/apple/CADebugMacros.h \
-    ../VocalTrainer/VxPlayer/AudioPlayback/Decoder/apple/CAStreamBasicDescription.h \
+    ../VocalTrainer/Playback/AudioPlayback/Decoder/audiodecoder.h \
+    ../VocalTrainer/Playback/AudioPlayback/Decoder/audiodecodercoreaudio.h \
+    ../VocalTrainer/Playback/AudioPlayback/Decoder/apple/CADebugMacros.h \
+    ../VocalTrainer/Playback/AudioPlayback/Decoder/apple/CAStreamBasicDescription.h \
     ../VocalTrainer/Manager/VxPitchInputReader.h \
     ../PitchDetection/AubioPitchDetector.h \
     ../VocalTrainer/nanovg/metal/nanovg_mtl_shaders.metal \
@@ -165,21 +165,21 @@ HEADERS += \
     ../VocalTrainer/Drawers/QDrawer.h \
     ../VocalTrainer/Drawers/DrawerColor.h \
     qopenglworkspacewidget.h \
-    ../VocalTrainer/VxPlayer/VxFileAudioDataGenerator.h
+    ../VocalTrainer/Playback/VxFileAudioDataGenerator.h
 
 INCLUDEPATH += ../include \
     ../VocalTrainer/Drawers \
     ../VocalTrainer/Manager \
     ../VocalTrainer/Workspace \
-    ../VocalTrainer/VxPlayer/AudioPlayback \
-    ../VocalTrainer/VxPlayer \
-    ../VocalTrainer/VxPlayer/CraigsappMidifile \
+    ../VocalTrainer/Playback/AudioPlayback \
+    ../VocalTrainer/Playback \
+    ../VocalTrainer/Playback/CraigsappMidifile \
     ../VocalTrainer/ \
     ../PitchDetection/CppUtils \
     ../PitchDetection \
     ../include/nanovg
 
 DISTFILES += \
-    ../VocalTrainer/VxPlayer/CraigsappMidifile/LICENSE.txt \
-    ../VocalTrainer/VxPlayer/a.sf2
+    ../VocalTrainer/Playback/CraigsappMidifile/LICENSE.txt \
+    ../VocalTrainer/Playback/a.sf2
 
