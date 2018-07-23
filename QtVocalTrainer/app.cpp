@@ -4,6 +4,7 @@
 #include "qmlpitchinputreader.h"
 #include <boost/pool/pool_alloc.hpp>
 #include <QQmlContext>
+#include <iostream>
 
 static const QEvent::Type MainLoopEvent = (QEvent::Type)(QEvent::User + 1);
 

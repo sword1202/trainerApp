@@ -17,7 +17,7 @@ void QOpenGLWorkspaceWidget::initializeGL() {
             update();
         }
         return true;
-    }, 1000 / 75); // 75fps
+    }, 1000 / 150); // 150fps
 }
 
 void QOpenGLWorkspaceWidget::resizeGL(int w, int h) {

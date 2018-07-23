@@ -5,8 +5,11 @@
 
 #include "MainController.h"
 #include "VxPitchInputReader.h"
+#include <iostream>
 
 using namespace CppUtils;
+using std::cout;
+using std::endl;
 
 static MainController* _instance = nullptr;
 
@@ -68,6 +71,7 @@ MainController::MainController(VxPitchInputReader *pitchInputReader, MvxPlayer *
 void MainController::updateWorkspaceIsPlayingChanged(bool playing) {
     WorkspaceController* controller = this->workspaceController;
     if (playing) {
+        updateSeek(mvxPlayer->getSeek());
         controller->setIntervalsPerSecond(this->mvxPlayer->getBeatsPerMinute() / 60.0);
     } else {
         controller->setIntervalsPerSecond(0);
@@ -99,7 +103,7 @@ void MainController::setWorkspaceController(WorkspaceController *workspaceContro
     workspaceController->setVxFile(mvxPlayer->getVxFile());
     
     mvxPlayer->addSeekChangedListener([=] (double seek) {
-        updateSeek(seek);
+        //updateSeek(seek);
         return DONT_DELETE_LISTENER;
     });
 }

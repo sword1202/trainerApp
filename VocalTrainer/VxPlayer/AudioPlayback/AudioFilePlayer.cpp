@@ -43,7 +43,7 @@ void AudioFilePlayer::prepareAndProvidePlaybackData(AudioPlayer::PlaybackData *p
     playbackData->numChannels = audioDecoder->channels();
     playbackData->format = paInt16;
     playbackData->sampleRate = audioDecoder->sampleRate();
-    playbackData->framesPerBuffer = 256;
+    playbackData->framesPerBuffer = 128;
     playbackData->totalDurationInSeconds = audioDecoder->duration();
     
     soundTouch.setChannels((uint)playbackData->numChannels);
