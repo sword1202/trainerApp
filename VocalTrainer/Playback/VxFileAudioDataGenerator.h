@@ -34,7 +34,7 @@ public:
     VxFileAudioDataGenerator();
     ~VxFileAudioDataGenerator();
 
-    int readNextSamplesBatch(short *intoBuffer);
+    int readNextSamplesBatch(short *intoBuffer, bool moveSeekAndFillWithZero);
     int getSeek() const;
     void setSeek(int seek);
 

@@ -78,6 +78,7 @@
 		C9FFF5D95B14517981993411 /* AudioFilePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFB85AD13A0DC254A5BFC /* AudioFilePlayer.cpp */; };
 		C9FFF64CA7878CC014CCED77 /* WavAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF4B352C76A7F89AF317E /* WavAudioPlayer.cpp */; };
 		C9FFF7AE7C2048B9BE210E7C /* MidiEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF9C3A05CC2DBEF0526B6 /* MidiEvent.cpp */; };
+		C9FFF8057649F5C2F293FCFF /* MetronomeAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFF5451C1C110F019F87C /* MetronomeAudioPlayer.cpp */; };
 		C9FFF83B36D53E4917661B17 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF12322F34C99321F4F18 /* AppDelegate.mm */; };
 		C9FFF872E56D467F24FAEC7B /* MidiFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF1E4F9CFE2324A18F83D /* MidiFile.cpp */; };
 		C9FFF8BCB6895CF2BEF1C29D /* MidiFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF51CA94B2770B893C639 /* MidiFileReader.cpp */; };
@@ -288,6 +289,7 @@
 		C9FFF851472080263029F894 /* VxLyricsLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxLyricsLine.h; sourceTree = "<group>"; };
 		C9FFF85DF0B393E6363253C2 /* ConcurrentModificationAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConcurrentModificationAssert.h; path = PitchDetection/CppUtils/ConcurrentModificationAssert.h; sourceTree = "<group>"; };
 		C9FFF8823954020C23E570B5 /* PeriodicallySleepingBackgroundTask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PeriodicallySleepingBackgroundTask.cpp; path = PitchDetection/CppUtils/PeriodicallySleepingBackgroundTask.cpp; sourceTree = "<group>"; };
+		C9FFF88D5019CE243BE89443 /* MetronomeAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetronomeAudioPlayer.h; sourceTree = "<group>"; };
 		C9FFF8A2E8E33F0F28A3D8B2 /* MainController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainController.cpp; sourceTree = "<group>"; };
 		C9FFF8A31C6F0BFCB55F72A1 /* VxPitchInputReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxPitchInputReader.h; sourceTree = "<group>"; };
 		C9FFF8C160107CFE52362C4C /* PitchInputReaderCollector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PitchInputReaderCollector.cpp; path = PitchDetection/PitchInputReaderCollector.cpp; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 		C9FFFF2EAA52A9AE6986A278 /* audiodecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = audiodecoder.h; sourceTree = "<group>"; };
 		C9FFFF2F348E4948EC1CF743 /* OpenGLUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OpenGLUtils.cpp; path = PitchDetection/CppUtils/OpenGLUtils.cpp; sourceTree = "<group>"; };
 		C9FFFF4ED051A3062C124566 /* Line.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Line.h; path = PitchDetection/CppUtils/Line.h; sourceTree = "<group>"; };
+		C9FFFF5451C1C110F019F87C /* MetronomeAudioPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MetronomeAudioPlayer.cpp; sourceTree = "<group>"; };
 		C9FFFF63DF93064D05413294 /* MidiEventList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiEventList.cpp; sourceTree = "<group>"; };
 		C9FFFFC2EAB3D64E9E8BCC71 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		C9FFFFD89465AFA13405CCF7 /* PeriodicallySleepingBackgroundTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PeriodicallySleepingBackgroundTask.h; path = PitchDetection/CppUtils/PeriodicallySleepingBackgroundTask.h; sourceTree = "<group>"; };
@@ -728,6 +731,8 @@
 				C9FFF68ABCE9167ECF0AF1C8 /* WavAudioPlayer.h */,
 				C9FFF3B8398CF09ED3B98FE1 /* BaseWavAudioPlayer.cpp */,
 				C9FFF178B2D4096904FE1347 /* BaseWavAudioPlayer.h */,
+				C9FFFF5451C1C110F019F87C /* MetronomeAudioPlayer.cpp */,
+				C9FFF88D5019CE243BE89443 /* MetronomeAudioPlayer.h */,
 			);
 			path = AudioPlayback;
 			sourceTree = "<group>";
@@ -959,6 +964,7 @@
 				C9FFF1A1BC182C76AE488B29 /* DrawerColor.cpp in Sources */,
 				C9FFF03F1589CC49667FD571 /* VxFileAudioDataGenerator.cpp in Sources */,
 				C9FFF279C357116897E348CE /* BaseWavAudioPlayer.cpp in Sources */,
+				C9FFF8057649F5C2F293FCFF /* MetronomeAudioPlayer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

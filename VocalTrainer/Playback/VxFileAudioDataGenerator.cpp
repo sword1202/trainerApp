@@ -23,35 +23,39 @@ using std::endl;
 #define SEEK_LOCK std::lock_guard<std::mutex> _(seekMutex)
 #define VXFILE_LOCK std::lock_guard<std::mutex> _(vxFileMutex)
 
-int VxFileAudioDataGenerator::readNextSamplesBatch(short *intoBuffer) {
+int VxFileAudioDataGenerator::readNextSamplesBatch(short *intoBuffer, bool moveSeekAndFillWithZero) {
     int seek = getSeek();
     int size = std::min(pcmDataSize - seek, outBufferSize);
 
-    double startTime = GetSampleTimeInSeconds(seek, sampleRate);
-    double endTime = GetSampleTimeInSeconds(seek + size, sampleRate);
+    if (!moveSeekAndFillWithZero) {
+        double startTime = GetSampleTimeInSeconds(seek, sampleRate);
+        double endTime = GetSampleTimeInSeconds(seek + size, sampleRate);
 
-    VxFile vxFile = getVxFile();
+        VxFile vxFile = getVxFile();
 
-    tempPitchIndexes.clear();
-    vxFile.getPitchesIndexesInTimeRange(startTime, endTime, std::back_inserter(tempPitchIndexes));
+        tempPitchIndexes.clear();
+        vxFile.getPitchesIndexesInTimeRange(startTime, endTime, std::back_inserter(tempPitchIndexes));
 
-    difference.clear();
-    Sets::Difference(pitchesIndexes, tempPitchIndexes, std::back_inserter(difference));
-    for (int pitchIndex : difference) {
-        const Pitch& pitch = vxFile.getPitches()[pitchIndex].pitch;
-        tsf_note_off(_tsf, 0, pitch.getSoundFont2Index());
+        difference.clear();
+        Sets::Difference(pitchesIndexes, tempPitchIndexes, std::back_inserter(difference));
+        for (int pitchIndex : difference) {
+            const Pitch& pitch = vxFile.getPitches()[pitchIndex].pitch;
+            tsf_note_off(_tsf, 0, pitch.getSoundFont2Index());
+        }
+
+        difference.clear();
+        Sets::Difference(tempPitchIndexes, pitchesIndexes, std::back_inserter(difference));
+        for (int pitchIndex : difference) {
+            const Pitch& pitch = vxFile.getPitches()[pitchIndex].pitch;
+            tsf_note_on(_tsf, 0, pitch.getSoundFont2Index(), 1.0f);
+        }
+
+        tsf_render_short(_tsf, intoBuffer, size, 0);
+
+        pitchesIndexes = std::move(tempPitchIndexes);
+    } else {
+        Memory::FillZero(intoBuffer, size);
     }
-
-    difference.clear();
-    Sets::Difference(tempPitchIndexes, pitchesIndexes, std::back_inserter(difference));
-    for (int pitchIndex : difference) {
-        const Pitch& pitch = vxFile.getPitches()[pitchIndex].pitch;
-        tsf_note_on(_tsf, 0, pitch.getSoundFont2Index(), 1.0f);
-    }
-
-    tsf_render_short(_tsf, intoBuffer, size, 0);
-
-    tempPitchIndexes.swap(pitchesIndexes);
 
     {
         SEEK_LOCK;

@@ -109,7 +109,6 @@ void AudioPlayer::play(double seek) {
     BOOST_ASSERT(seek >= 0);
 
     if (playing || dataSentToOutputListenerKey != 0) {
-        cout<<"playing = "<<playing<<" dataSentToOutputListenerKey = "<<dataSentToOutputListenerKey<<"\n";
         return;
     }
 
@@ -291,10 +290,8 @@ int AudioPlayer::addOnDataSentToOutputListener(const AudioPlayer::OnDataSentToOu
 
 void AudioPlayer::setupPlaybackStartedListener() {
     assert(dataSentToOutputListenerKey == 0);
-    cout<<"onDataSentToOutputListeners.set\n";
     dataSentToOutputListenerKey = onDataSentToOutputListeners.addListener([=] (void*, int) {
         playing = true;
-        cout<<"onDataSentToOutputListeners.executed\n";
         onPlaybackStartedListeners.executeAll();
         dataSentToOutputListenerKey = 0;
         return DELETE_LISTENER;

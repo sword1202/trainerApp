@@ -22,7 +22,6 @@ void WorkspaceView::initDrawer(int width, int height) {
     workspaceDrawer = std::make_unique<WorkspaceDrawer>(drawer);
     VxApp::instance()->setWorkspaceController(workspaceDrawer.get());
 
-    cout<<"width = "<<width<<" height = "<<height<<"\n";
     workspaceDrawer->resize(width, height, devicePixelRatio());
 }
 

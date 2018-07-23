@@ -9,7 +9,7 @@
 
 void BaseWavAudioPlayer::prepareAndProvidePlaybackData(AudioPlayer::PlaybackData *playbackData) {
     WavSetupData wavHeaderData = provideWavSetupData();
-    if (wavHeaderData.totalSize < WAVFile::DATA_POSITION) {
+    if (wavHeaderData.size < WAVFile::DATA_POSITION) {
         throw std::runtime_error("Corrupted wav file");
     }
 
@@ -35,13 +35,14 @@ void BaseWavAudioPlayer::prepareAndProvidePlaybackData(AudioPlayer::PlaybackData
             throw std::runtime_error("Unsupported wav bytes per channel " + std::to_string(bytesPerChannel));
     }
 
-    long pcmDataBytesCount = wavHeaderData.totalSize - WAVFile::DATA_POSITION;
+    long pcmDataBytesCount = wavHeaderData.size - WAVFile::DATA_POSITION;
 
     if (pcmDataBytesCount % (bytesPerChannel * playbackData->numChannels) != 0) {
         throw std::runtime_error("Corrupted wav file");
     }
 
-    playbackData->totalDurationInSeconds = samplesCountToSeconds(pcmDataBytesCount / (bytesPerChannel * playbackData->numChannels));
+    playbackData->totalDurationInSeconds = calculateTotalDurationInSeconds(
+            wavHeaderData.size, bytesPerChannel, *playbackData);
     playbackData->framesPerBuffer = 256;
 }
 
@@ -62,5 +63,9 @@ BaseWavAudioPlayer::BaseWavAudioPlayer() {
     bufferSeek = 0;
 }
 
-BaseWavAudioPlayer::WavSetupData::WavSetupData(const char *data, int totalSize) : wavHeaderData(data), totalSize(totalSize) {
+double BaseWavAudioPlayer::calculateTotalDurationInSeconds(int size, int bytesPerChannel, const AudioPlayer::PlaybackData &playbackData) {
+    return samplesCountToSeconds(size - WAVFile::DATA_POSITION / (bytesPerChannel * playbackData.numChannels));
+}
+
+BaseWavAudioPlayer::WavSetupData::WavSetupData(const char *data, int size) : wavHeaderData(data), size(size) {
 }

@@ -7,7 +7,7 @@
 #include "VxFileAudioPlayer.h"
 
 int VxFileAudioPlayer::readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) {
-    return generator->readNextSamplesBatch((short*)intoBuffer);
+    return generator->readNextSamplesBatch((short*)intoBuffer, getVolume() <= 0.00001f);
 }
 
 void VxFileAudioPlayer::prepareAndProvidePlaybackData(PlaybackData *playbackData) {

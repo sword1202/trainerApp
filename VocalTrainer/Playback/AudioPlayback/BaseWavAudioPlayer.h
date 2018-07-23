@@ -18,12 +18,13 @@ protected:
 
     struct WavSetupData {
         const char* wavHeaderData;
-        int totalSize;
+        int size;
 
         WavSetupData(const char *data, int size);
     };
 
     virtual WavSetupData provideWavSetupData() = 0;
+    virtual double calculateTotalDurationInSeconds(int size, int bytesPerChannel, const PlaybackData& playbackData);
 public:
     BaseWavAudioPlayer();
     ~BaseWavAudioPlayer();

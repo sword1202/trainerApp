@@ -31,8 +31,6 @@ MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
             this->onSeekChanged(seek);
         });
 
-        playMetronomeSoundIfNeed(seek);
-
         return DONT_DELETE_LISTENER;
     });
 
@@ -72,9 +70,12 @@ void MvxPlayer::onComplete() {
 void MvxPlayer::pause() {
     instrumentalPlayer.pause();
     vxPlayer.pause();
+    metronomePlayer.pause();
 }
 
 void MvxPlayer::play() {
+    updateMetronomeVolume();
+
     if (bounds) {
         double seekValue = instrumentalPlayer.getSeek();
         if (!bounds->isInside(seekValue)) {
@@ -85,8 +86,10 @@ void MvxPlayer::play() {
 
     double seek = instrumentalPlayer.getSeek();
     vxPlayer.setSeek(seek);
+    metronomePlayer.setSeek(seek);
     vxPlayer.play();
     instrumentalPlayer.play();
+    metronomePlayer.play();
 }
 
 void MvxPlayer::setSeek(double value) {
@@ -95,14 +98,17 @@ void MvxPlayer::setSeek(double value) {
     assert(value >= 0 && value <= instrumentalPlayer.getTrackDurationInSeconds());
     instrumentalPlayer.setSeek(value);
     vxPlayer.setSeek(value);
+    metronomePlayer.setSeek(value);
 }
 
 void MvxPlayer::setInstrumentalVolume(float instrumentalVolume) {
     instrumentalPlayer.setVolume(instrumentalVolume);
+    updateMetronomeVolume();
 }
 
 void MvxPlayer::setPianoVolume(float pianoVolume) {
     vxPlayer.setVolume(pianoVolume);
+    updateMetronomeVolume();
 }
 
 MvxPlayer::~MvxPlayer() {
@@ -112,6 +118,7 @@ MvxPlayer::~MvxPlayer() {
 void MvxPlayer::prepare() {
     instrumentalPlayer.prepare();
     vxPlayer.prepare();
+    metronomePlayer.setAudioDataInfo(beatsPerMinute, instrumentalPlayer.getTrackDurationInSeconds());
     assert(fabs(instrumentalPlayer.getTrackDurationInSeconds() - vxPlayer.getTrackDurationInSeconds()) < 0.1);
     prepareFinishedListeners.executeAll();
     vxFileChangedListeners.executeAll(&vxPlayer.getVxFile());
@@ -259,7 +266,7 @@ void MvxPlayer::removeTonalityChangedListener(int id) {
 }
 
 void MvxPlayer::setMetronomeSoundData(std::string &&data) {
-    metronomePlayer.setAudioData(std::move(data));
+    metronomePlayer.setMetronomeAudioData(std::move(data));
     metronomePlayer.prepare();
 }
 
@@ -269,29 +276,23 @@ bool MvxPlayer::isMetronomeEnabled() const {
 
 void MvxPlayer::setMetronomeEnabled(bool metronomeEnabled) {
     this->metronomeEnabled = metronomeEnabled;
+    updateMetronomeVolume();
 }
 
 double MvxPlayer::getBeatDuration() const {
     return 60.0 / beatsPerMinute;
 }
 
-void MvxPlayer::playMetronomeSoundIfNeed(double seek) {
-    if (metronomeEnabled) {
-        assert(metronomePlayer.isPrepared());
-
-        double beatDuration = getBeatDuration();
-        double distanceAfterBeat = fmod(seek, beatDuration);
-        double delta = instrumentalPlayer.getCallbackBufferDurationInSeconds();
-
-        if (distanceAfterBeat <= delta) {
-            cout<<"metronomePlayer.play\n";
-            metronomePlayer.play();
-        }
-    }
-}
-
 bool MvxPlayer::isMetronomeSoundDataSet() const {
     return metronomePlayer.isPrepared();
+}
+
+void MvxPlayer::updateMetronomeVolume() {
+    if (metronomeEnabled) {
+        metronomePlayer.setVolume(std::max(instrumentalPlayer.getVolume(), vxPlayer.getVolume()) / 2.0f);
+    } else {
+        metronomePlayer.setVolume(0.0f);
+    }
 }
 
 MvxPlayer::Bounds::Bounds(double startSeek, double endSeek) : startSeek(startSeek), endSeek(endSeek) {

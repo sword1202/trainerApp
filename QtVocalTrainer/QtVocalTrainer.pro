@@ -78,7 +78,8 @@ SOURCES += \
     ../VocalTrainer/Drawers/DrawerColor.cpp \
     qopenglworkspacewidget.cpp \
     ../VocalTrainer/Playback/VxFileAudioDataGenerator.cpp \
-    ../VocalTrainer/Playback/AudioPlayback/BaseWavAudioPlayer.cpp
+    ../VocalTrainer/Playback/AudioPlayback/BaseWavAudioPlayer.cpp \
+    ../VocalTrainer/Playback/AudioPlayback/MetronomeAudioPlayer.cpp
 
 RESOURCES += qml.qrc
 
@@ -167,7 +168,8 @@ HEADERS += \
     ../VocalTrainer/Drawers/DrawerColor.h \
     qopenglworkspacewidget.h \
     ../VocalTrainer/Playback/VxFileAudioDataGenerator.h \
-    ../VocalTrainer/Playback/AudioPlayback/BaseWavAudioPlayer.h
+    ../VocalTrainer/Playback/AudioPlayback/BaseWavAudioPlayer.h \
+    ../VocalTrainer/Playback/AudioPlayback/MetronomeAudioPlayer.h
 
 INCLUDEPATH += ../include \
     ../VocalTrainer/Drawers \
