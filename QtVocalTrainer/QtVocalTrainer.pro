@@ -77,7 +77,8 @@ SOURCES += \
     ../VocalTrainer/Drawers/QDrawer.cpp \
     ../VocalTrainer/Drawers/DrawerColor.cpp \
     qopenglworkspacewidget.cpp \
-    ../VocalTrainer/Playback/VxFileAudioDataGenerator.cpp
+    ../VocalTrainer/Playback/VxFileAudioDataGenerator.cpp \
+    ../VocalTrainer/Playback/AudioPlayback/BaseWavAudioPlayer.cpp
 
 RESOURCES += qml.qrc
 
@@ -165,7 +166,8 @@ HEADERS += \
     ../VocalTrainer/Drawers/QDrawer.h \
     ../VocalTrainer/Drawers/DrawerColor.h \
     qopenglworkspacewidget.h \
-    ../VocalTrainer/Playback/VxFileAudioDataGenerator.h
+    ../VocalTrainer/Playback/VxFileAudioDataGenerator.h \
+    ../VocalTrainer/Playback/AudioPlayback/BaseWavAudioPlayer.h
 
 INCLUDEPATH += ../include \
     ../VocalTrainer/Drawers \

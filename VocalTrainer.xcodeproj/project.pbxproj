@@ -65,6 +65,7 @@
 		C9FFF1A1BC182C76AE488B29 /* DrawerColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA0D37274162A4440493 /* DrawerColor.cpp */; };
 		C9FFF1F56D256A76020F979B /* nanovg_mtl.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF01FA5C083316C2F410B /* nanovg_mtl.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C9FFF22D8C24A8F0E7E19F6A /* QuartzDrawer.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFCF41A95435C1A7DD821 /* QuartzDrawer.mm */; };
+		C9FFF279C357116897E348CE /* BaseWavAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF3B8398CF09ED3B98FE1 /* BaseWavAudioPlayer.cpp */; };
 		C9FFF29A2778D812DD86DAD9 /* PitchDetectionSmoothingBufferTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFB1B7C3F160B173A4071 /* PitchDetectionSmoothingBufferTest.cpp */; };
 		C9FFF2F31C154F4C0C73C11E /* PianoView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF963F888F18FECD1886A /* PianoView.mm */; };
 		C9FFF3994C66634963735E68 /* LoadTsfDefault.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF5D6CB0CEACB514B6CCE /* LoadTsfDefault.mm */; };
@@ -234,6 +235,7 @@
 		C9FFF12322F34C99321F4F18 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		C9FFF12A4E0AAAD8E783983E /* MvxPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MvxPlayer.cpp; sourceTree = "<group>"; };
 		C9FFF15878C9F431873450CF /* StringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringUtils.h; path = PitchDetection/CppUtils/StringUtils.h; sourceTree = "<group>"; };
+		C9FFF178B2D4096904FE1347 /* BaseWavAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseWavAudioPlayer.h; sourceTree = "<group>"; };
 		C9FFF1E4F9CFE2324A18F83D /* MidiFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiFile.cpp; sourceTree = "<group>"; };
 		C9FFF247E3AA11DD453DF318 /* NvgDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvgDrawer.h; sourceTree = "<group>"; };
 		C9FFF278E14B7F7278955980 /* UiUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UiUtils.m; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 		C9FFF38E03A20F33D84A0D04 /* PlayingPitchSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayingPitchSequence.h; sourceTree = "<group>"; };
 		C9FFF3A0BB69C8E7F02351A6 /* tsf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tsf.h; sourceTree = "<group>"; };
 		C9FFF3ADAD0A03D2651727E9 /* PlaybackChunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackChunk.h; sourceTree = "<group>"; };
+		C9FFF3B8398CF09ED3B98FE1 /* BaseWavAudioPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseWavAudioPlayer.cpp; sourceTree = "<group>"; };
 		C9FFF3C10742682FA7383057 /* audiodecodercoreaudio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = audiodecodercoreaudio.cpp; sourceTree = "<group>"; };
 		C9FFF3CE9E53F11F0B8875D5 /* PortAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PortAudio.h; path = PitchDetection/PortAudio.h; sourceTree = "<group>"; };
 		C9FFF3E7CF6BBEA382E1BAD5 /* Executors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Executors.h; path = PitchDetection/CppUtils/Executors.h; sourceTree = "<group>"; };
@@ -723,6 +726,8 @@
 				C9FFFC15246CCC23D3C89459 /* Decoder */,
 				C9FFF4B352C76A7F89AF317E /* WavAudioPlayer.cpp */,
 				C9FFF68ABCE9167ECF0AF1C8 /* WavAudioPlayer.h */,
+				C9FFF3B8398CF09ED3B98FE1 /* BaseWavAudioPlayer.cpp */,
+				C9FFF178B2D4096904FE1347 /* BaseWavAudioPlayer.h */,
 			);
 			path = AudioPlayback;
 			sourceTree = "<group>";
@@ -953,6 +958,7 @@
 				C9FFFBB89F971E3E4CDE5D64 /* SVGImageView.m in Sources */,
 				C9FFF1A1BC182C76AE488B29 /* DrawerColor.cpp in Sources */,
 				C9FFF03F1589CC49667FD571 /* VxFileAudioDataGenerator.cpp in Sources */,
+				C9FFF279C357116897E348CE /* BaseWavAudioPlayer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

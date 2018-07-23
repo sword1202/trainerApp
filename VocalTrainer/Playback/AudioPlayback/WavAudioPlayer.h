@@ -6,23 +6,18 @@
 #ifndef VOCALTRAINER_WAVAUDIOPLAYER_H
 #define VOCALTRAINER_WAVAUDIOPLAYER_H
 
-#include "AudioFilePlayer.h"
-#include "WAVFile.h"
+#include "BaseWavAudioPlayer.h"
+#include <string>
 
-class WavAudioPlayer : public AudioPlayer {
+class WavAudioPlayer : public BaseWavAudioPlayer {
     std::string audioData;
-    std::atomic_int bufferSeek;
 protected:
     int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) override;
-    void prepareAndProvidePlaybackData(PlaybackData *playbackData) override;
 
-    int getBufferSeek() const override;
-    void setBufferSeek(int bufferSeek) override;
+    WavSetupData provideWavSetupData() override;
+
 public:
     void setAudioData(std::string&& audioData);
-
-    WavAudioPlayer();
-    ~WavAudioPlayer();
 };
 
 

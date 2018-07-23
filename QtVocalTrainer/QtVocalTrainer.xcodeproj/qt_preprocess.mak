@@ -163,6 +163,8 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		../include/SoundTouch/SoundTouch.h \
 		../include/boost/optional.hpp \
 		../VocalTrainer/Playback/PlayingPitchSequence.h \
+		../VocalTrainer/Playback/AudioPlayback/WavAudioPlayer.h \
+		../VocalTrainer/Playback/AudioPlayback/BaseWavAudioPlayer.h \
 		qmlvxpitch.h \
 		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QJsonValue \
 		qmlpitchinputreader.h \
@@ -257,6 +259,8 @@ moc_app.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QApplic
 		../include/SoundTouch/SoundTouch.h \
 		../include/boost/optional.hpp \
 		../VocalTrainer/Playback/PlayingPitchSequence.h \
+		../VocalTrainer/Playback/AudioPlayback/WavAudioPlayer.h \
+		../VocalTrainer/Playback/AudioPlayback/BaseWavAudioPlayer.h \
 		../VocalTrainer/Workspace/WorkspaceController.h \
 		../VocalTrainer/Manager/ZoomController.h \
 		../VocalTrainer/Workspace/PianoController.h \
@@ -341,6 +345,8 @@ moc_player.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QObject
 		../include/SoundTouch/SoundTouch.h \
 		../include/boost/optional.hpp \
 		../VocalTrainer/Playback/PlayingPitchSequence.h \
+		../VocalTrainer/Playback/AudioPlayback/WavAudioPlayer.h \
+		../VocalTrainer/Playback/AudioPlayback/BaseWavAudioPlayer.h \
 		qmlvxpitch.h \
 		qmlpitch.h \
 		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QJsonValue \
