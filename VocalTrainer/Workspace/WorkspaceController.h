@@ -15,6 +15,8 @@ public:
     virtual void setIntervalHeight(float intervalHeight) = 0;
     virtual void setPitchesCollector(PitchesCollector *pitchesCollector) = 0;
     virtual void setIntervalsPerSecond(double intervalsPerSecond) = 0;
+    virtual bool isRunning() const = 0;
+    virtual void setRunning(bool value) = 0;
     virtual double getIntervalsPerSecond() const = 0;
     virtual void setVerticalOffset(float verticalOffset) = 0;
     virtual void setHorizontalOffset(float horizontalOffset) = 0;

@@ -42,7 +42,9 @@ void WorkspaceDrawer::draw() {
     float frameDuration = now - frameTime;
     cout<<"fps = "<<(1.0 / frameDuration)<<"\n";
     // old logic
-    horizontalOffset = horizontalOffset + intervalsPerSecond * intervalWidth * frameDuration;
+    if (running) {
+        horizontalOffset = horizontalOffset + intervalsPerSecond * intervalWidth * frameDuration;
+    }
     frameTime = now;
 
     drawer->beginFrame(width, height, devicePixelRatio);
@@ -264,6 +266,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer) :
         horizontalOffset(0),
         sizeMultiplier(1),
         intervalsPerSecond(0),
+        running(false),
         frameTime(0), drawer(drawer) {
     setGridColor({0x8B, 0x89, 0xB6, 0x33});
     setAccentGridColor({0x8B, 0x89, 0xB6, 0x80});
@@ -292,7 +295,6 @@ double WorkspaceDrawer::getIntervalsPerSecond() const {
 }
 
 void WorkspaceDrawer::setIntervalsPerSecond(double intervalsPerSecond) {
-    frameTime = TimeUtils::NowInSeconds();
     this->intervalsPerSecond = intervalsPerSecond;
 }
 
@@ -332,4 +334,13 @@ void WorkspaceDrawer::setPitchRadius(float pitchRadius) {
 void WorkspaceDrawer::setFirstVisiblePitch(const Pitch &firstPitch) {
     assert(firstPitch.isValid());
     this->firstPitch = firstPitch;
+}
+
+bool WorkspaceDrawer::isRunning() const {
+    return running;
+}
+
+void WorkspaceDrawer::setRunning(bool value) {
+    frameTime = TimeUtils::NowInSeconds();
+    running = value;
 }

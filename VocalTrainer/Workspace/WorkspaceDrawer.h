@@ -23,6 +23,7 @@ class WorkspaceDrawer : public WorkspaceController {
     std::atomic<float> verticalOffset;
     std::atomic<float> horizontalOffset;
     std::atomic<double> intervalsPerSecond;
+    std::atomic_bool running;
     Pitch firstPitch;
 
     float sizeMultiplier;
@@ -59,17 +60,21 @@ public:
     void draw();
 
     float getIntervalWidth() const;
-    void setIntervalWidth(float intervalWidth);
+    void setIntervalWidth(float intervalWidth) override;
     float getIntervalHeight() const;
-    void setIntervalHeight(float intervalHeight);
+    void setIntervalHeight(float intervalHeight) override;
     float getVerticalOffset() const;
-    void setVerticalOffset(float verticalOffset);
+    void setVerticalOffset(float verticalOffset) override;
     float getHorizontalOffset() const;
-    void setHorizontalOffset(float horizontalOffset);
+    void setHorizontalOffset(float horizontalOffset) override;
 
     double getIntervalsPerSecond() const override;
-    void setIntervalsPerSecond(double intervalsPerSecond);
-    void setFirstVisiblePitch(const Pitch &firstPitch);
+    void setIntervalsPerSecond(double intervalsPerSecond) override;
+
+    bool isRunning() const override;
+    void setRunning(bool value) override;
+
+    void setFirstVisiblePitch(const Pitch &firstPitch) override;
 
     float getSizeMultiplier() const;
     void setSizeMultiplier(float sizeMultiplier);
@@ -87,10 +92,10 @@ public:
     void setPitchColor(const Color &pitchColor);
 
     PitchesCollector *getPitchesCollector() const;
-    void setPitchesCollector(PitchesCollector *pitchesCollector);
+    void setPitchesCollector(PitchesCollector *pitchesCollector) override;
 
     // Warning: VxFile should not be changed from outside
-    void setVxFile(const VxFile* vxFile);
+    void setVxFile(const VxFile* vxFile) override;
     int getDistanceFromFirstPitch(const Pitch &pitch) const;
 };
 

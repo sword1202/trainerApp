@@ -13,7 +13,7 @@ void QOpenGLWorkspaceWidget::initializeGL() {
     MainController::instance()->setWorkspaceController(workspaceDrawer);
 
     QtUtils::startRepeatedTimer(this, [=] {
-        if (MainController::instance()->getPlayer()->isPlaying()) {
+        if (workspaceDrawer->isRunning()) {
             update();
         }
         return true;

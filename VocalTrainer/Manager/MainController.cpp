@@ -44,6 +44,12 @@ MainController::MainController(VxPitchInputReader *pitchInputReader, MvxPlayer *
         return DONT_DELETE_LISTENER;
     });
 
+    mvxPlayer->addPrepareFinishedListener([=] {
+        WorkspaceController* controller = workspaceController;
+        controller->setIntervalsPerSecond(this->mvxPlayer->getBeatsPerMinute() / 60.0);
+        return DONT_DELETE_LISTENER;
+    });
+
     mvxPlayer->setInstrumentalVolume(1.0);
     mvxPlayer->setPianoVolume(0.5);
 
@@ -72,10 +78,8 @@ void MainController::updateWorkspaceIsPlayingChanged(bool playing) {
     WorkspaceController* controller = this->workspaceController;
     if (playing) {
         updateSeek(mvxPlayer->getSeek());
-        controller->setIntervalsPerSecond(this->mvxPlayer->getBeatsPerMinute() / 60.0);
-    } else {
-        controller->setIntervalsPerSecond(0);
     }
+    controller->setRunning(playing);
 }
 
 VxPitchInputReader *MainController::getPitchInputReader() const {
