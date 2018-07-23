@@ -76,7 +76,7 @@ MidiFileReader::~MidiFileReader()
 
 }
 
-void MidiFileReader::read(const string &filename, std::vector<VxFile> *outResult, double *outBeatsPerMinute)
+void MidiFileReader::read(const std::string &filename, std::vector<VxFile> *outResult, double *outBeatsPerMinute)
 {
     reset();
     MidiFile midifile;
@@ -85,7 +85,7 @@ void MidiFileReader::read(const string &filename, std::vector<VxFile> *outResult
     }
 }
 
-void MidiFileReader::read(istream &is, std::vector<VxFile> *outResult, double *outBeatsPerMinute)
+void MidiFileReader::read(std::istream &is, std::vector<VxFile> *outResult, double *outBeatsPerMinute)
 {
     reset();
     MidiFile midifile;
@@ -338,14 +338,14 @@ std::shared_ptr<MidiTrack> MidiFileReader::getTrack(const int trackID, const int
 
 /*!
  * \brief MidiFileReader::eventText
- * Transformates n bytes from start to ASCII-string
+ * Transformates n bytes from start to ASCII-std::string
  *
  * \param event
  * \param start
  * \param n
  * \return
  */
-string MidiFileReader::eventText(const MidiEvent &event, const int start, const int n)
+std::string MidiFileReader::eventText(const MidiEvent &event, const int start, const int n)
 {
     size_t fin = start + n;
     if (fin > event.size()) {
@@ -456,11 +456,11 @@ double MidiFileReader::getSummaryWeight(const std::shared_ptr<MidiTrack> &value)
 /*!
  * \brief MidiFileReader::containsTrackName
  *
- * Returns if name contains some of widely-used vocal trackname substring
+ * Returns if name contains some of widely-used vocal trackname substd::string
  * \param name
  * \return
  */
-bool MidiFileReader::containsTrackName(const string &name)
+bool MidiFileReader::containsTrackName(const std::string &name)
 {
     std::string s = name;
     std::transform(s.begin(), s.end(), s.begin(), ::tolower);

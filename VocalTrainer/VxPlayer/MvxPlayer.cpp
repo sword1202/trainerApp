@@ -231,6 +231,7 @@ int MvxPlayer::getPitchShiftInSemiTones() const {
 void MvxPlayer::setPitchShiftInSemiTones(int value) {
     vxPlayer.setPitchShiftInSemiTones(value);
     instrumentalPlayer.setPitchShiftInSemiTones(value);
+    tonalityChangedListeners.executeAll();
 }
 
 bool MvxPlayer::canBeShifted(int distance) const {
@@ -244,6 +245,14 @@ double MvxPlayer::getTempoFactor() const {
 void MvxPlayer::setTempoFactor(double tempoFactor) {
     vxPlayer.setTempoFactor(tempoFactor);
     instrumentalPlayer.setTempoFactor(tempoFactor);
+}
+
+int MvxPlayer::addTonalityChangedListener(const MvxPlayer::TonalityChangedListener &listener) {
+    return tonalityChangedListeners.addListener(listener);
+}
+
+void MvxPlayer::removeTonalityChangedListener(int id) {
+    tonalityChangedListeners.removeListener(id);
 }
 
 MvxPlayer::Bounds::Bounds(double startSeek, double endSeek) : startSeek(startSeek), endSeek(endSeek) {

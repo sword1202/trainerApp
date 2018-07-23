@@ -12,11 +12,14 @@
 #include "Binasc.h"
 #include <sstream>
 #include <string.h>
+#include <string>
 
 //////////////////////////////
 //
 // Binasc::Binasc -- Constructor: set the default option values.
 //
+
+using namespace std;
 
 Binasc::Binasc(void) {
    bytesQ    = 1; // option for printing HEX bytes when converting to ASCII

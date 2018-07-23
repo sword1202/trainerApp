@@ -36,6 +36,7 @@ public:
     typedef typename CppUtils::ListenersSet<>::Listener PrepareFinishedListener;
     typedef typename CppUtils::ListenersSet<const VxFile*>::Listener VxFileChangedListener;
     typedef typename CppUtils::ListenersSet<double>::Listener SeekChangedListener;
+    typedef typename CppUtils::ListenersSet<>::Listener TonalityChangedListener;
 
 private:
 
@@ -50,6 +51,7 @@ private:
     CppUtils::ListenersSet<> prepareFinishedListeners;
     CppUtils::ListenersSet<const VxFile*> vxFileChangedListeners;
     CppUtils::ListenersSet<double> seekChangedListeners;
+    CppUtils::ListenersSet<> tonalityChangedListeners;
 public:
     MvxPlayer();
     virtual ~MvxPlayer();
@@ -105,6 +107,10 @@ public:
     // The listener is executed on Audio callback thread
     int addSeekChangedListener(const SeekChangedListener& listener);
     void removeSeekChangedListener(int id);
+
+    // The listener is executed on Audio callback thread
+    int addTonalityChangedListener(const TonalityChangedListener& listener);
+    void removeTonalityChangedListener(int id);
 };
 
 

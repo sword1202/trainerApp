@@ -259,7 +259,7 @@ void WorkspaceDrawer::setAccentGridColor(const Color& color) {
     this->accentGridColor = color;
 }
 
-WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer) :
+WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, const std::function<void()>& onUpdateRequested) :
         intervalWidth(-1),
         intervalHeight(-1),
         verticalOffset(0),
@@ -267,7 +267,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer) :
         sizeMultiplier(1),
         intervalsPerSecond(0),
         running(false),
-        frameTime(0), drawer(drawer) {
+        frameTime(0), drawer(drawer), onUpdateRequested(onUpdateRequested) {
     setGridColor({0x8B, 0x89, 0xB6, 0x33});
     setAccentGridColor({0x8B, 0x89, 0xB6, 0x80});
     setPitchGraphColor({0xFF, 0x5E, 0x85, 0xFF});
@@ -343,4 +343,12 @@ bool WorkspaceDrawer::isRunning() const {
 void WorkspaceDrawer::setRunning(bool value) {
     frameTime = TimeUtils::NowInSeconds();
     running = value;
+}
+
+void WorkspaceDrawer::update() {
+    onUpdateRequested();
+}
+
+void WorkspaceDrawer::setOnUpdateRequested(const std::function<void()> &onUpdateRequested) {
+    this->onUpdateRequested = onUpdateRequested;
 }

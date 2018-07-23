@@ -9,7 +9,9 @@ QOpenGLWorkspaceWidget::QOpenGLWorkspaceWidget(QWidget* parent) : QOpenGLWidget(
 }
 
 void QOpenGLWorkspaceWidget::initializeGL() {
-    workspaceDrawer = new WorkspaceDrawer(new NvgDrawer());
+    workspaceDrawer = new WorkspaceDrawer(new NvgDrawer(), [=] {
+        update();
+    });
     MainController::instance()->setWorkspaceController(workspaceDrawer);
 
     QtUtils::startRepeatedTimer(this, [=] {

@@ -53,9 +53,14 @@ class WorkspaceDrawer : public WorkspaceController {
 
     double getPitchGraphDuration() const;
     double getIntervalDuration() const;
+
+    std::function<void()> onUpdateRequested;
 public:
-    WorkspaceDrawer(Drawer *drawer);
+    WorkspaceDrawer(Drawer *drawer, const std::function<void()>& onUpdateRequested);
     ~WorkspaceDrawer();
+
+    void setOnUpdateRequested(const std::function<void()> &onUpdateRequested);
+
     void resize(float width, float height, float devicePixelRatio);
     void draw();
 
@@ -97,6 +102,8 @@ public:
     // Warning: VxFile should not be changed from outside
     void setVxFile(const VxFile* vxFile) override;
     int getDistanceFromFirstPitch(const Pitch &pitch) const;
+
+    void update() override;
 };
 
 

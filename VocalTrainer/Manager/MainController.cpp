@@ -50,6 +50,12 @@ MainController::MainController(VxPitchInputReader *pitchInputReader, MvxPlayer *
         return DONT_DELETE_LISTENER;
     });
 
+    mvxPlayer->addTonalityChangedListener([=] {
+        WorkspaceController* controller = workspaceController;
+        controller->update();
+        return DONT_DELETE_LISTENER;
+    });
+
     mvxPlayer->setInstrumentalVolume(1.0);
     mvxPlayer->setPianoVolume(0.5);
 
