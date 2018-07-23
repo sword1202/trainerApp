@@ -1021,6 +1021,21 @@
 					);
 			};
 		};
+		3EF0CA7E88300BA30E115785 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_app.cpp";
+			name = "moc_app.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		3B6D31A35E21A602A07D5C71 = {
+			fileRef = "3EF0CA7E88300BA30E115785";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
 		897F0A33031A31C419A9EDCF = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_qmlvxpitch.cpp";
@@ -1602,6 +1617,7 @@
 				"9BD80D57069FBF796EF30C33",
 				"A8DBB3B894A514ABE11FF772",
 				"F8CF2B73DF3F4DAD22A38E8C",
+				"3EF0CA7E88300BA30E115785",
 				"897F0A33031A31C419A9EDCF",
 				"31B14BB9CC2E640CFEB7CBC6",
 				"55CB1CDB84726A897310386F",
@@ -1852,6 +1868,7 @@
 				"4D39E2B783FFDF3FB02ED09A",
 				"B453224DC7FC3E0971A15260",
 				"1C90DF67E8C2A478FBB7CE6D",
+				"3B6D31A35E21A602A07D5C71",
 				"B39FEAC046886E2A8CAD6451",
 				"A40AA65A4364E4B559FCE389",
 				"CA195AB77327EA9E7D649333",

@@ -8,22 +8,21 @@
 
 class VxApp : public QApplication, public MainController
 {
+    Q_OBJECT
     QQmlApplicationEngine* engine;
-
 #ifdef __APPLE__
     void doMacOsPlatformStaff();
 #endif
 public:
     VxApp(int argc, char *argv[]);
     Player* getPlayer() const;
-    void executeOnMainThread(const std::function<void()>& callback);
+    void executeOnMainThread(std::function<void()> callback);
     ~VxApp();
 
     static VxApp* instance();
 
-protected:
-    virtual bool event(QEvent *event) override;
-
+signals:
+    void mainThreadCallbackPosted(std::function<void()> callback);
 };
 
 #endif // APP_H

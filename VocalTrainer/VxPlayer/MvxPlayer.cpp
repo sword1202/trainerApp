@@ -39,7 +39,7 @@ MvxPlayer::MvxPlayer() {
     });
 
     instrumentalPlayer.addPlaybackStartedListener([=] {
-        this->onPlaybackStarted();
+        Executors::ExecuteOnMainThread([=] {this->onPlaybackStarted();});
         return DONT_DELETE_LISTENER;
     });
 
