@@ -291,7 +291,7 @@ bool MvxPlayer::isMetronomeSoundDataSet() const {
 
 void MvxPlayer::updateMetronomeVolume() {
     if (metronomeEnabled) {
-        metronomePlayer.setVolume(std::max(instrumentalPlayer.getVolume(), vxPlayer.getVolume()) / 2.0f);
+        metronomePlayer.setVolume(std::max(instrumentalPlayer.getVolume(), vxPlayer.getVolume()) * 0.2f);
     } else {
         metronomePlayer.setVolume(0.0f);
     }
