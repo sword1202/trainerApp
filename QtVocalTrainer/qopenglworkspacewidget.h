@@ -10,10 +10,14 @@ class QOpenGLWorkspaceWidget : public QOpenGLWidget
 public:
     QOpenGLWorkspaceWidget(QWidget* parent);
     ~QOpenGLWorkspaceWidget();
+
+    std::function<void(QMouseEvent*)> onClick;
 protected:
     void initializeGL() override;
     void resizeGL(int w, int h) override;
     void paintGL() override;
+
+    void mousePressEvent(QMouseEvent *event) override;
 
 private:
     WorkspaceDrawer* workspaceDrawer = nullptr;

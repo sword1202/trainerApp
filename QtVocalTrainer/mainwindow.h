@@ -6,6 +6,7 @@
 #include <QQuickWidget>
 #include <QSvgWidget>
 #include "QtUtils/qtutils.h"
+#include "qopenglworkspacewidget.h"
 
 class QmlCppBridge;
 
@@ -13,12 +14,16 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-    QWidget *workspaceView;
+    QOpenGLWorkspaceWidget *workspaceView;
     QSvgWidget* playHeadTriangle;
     QFrame* playHeadLine;
+    QSvgWidget* playHeadTriangle2;
+    QFrame* playHeadLine2;
     QQuickItem *header;
     QQuickItem *piano;
     QmlCppBridge *cpp;
+
+    double playHeadOffsetFactor = 1.0;
 
     QQuickWidget *createQQuickWidget(const QString& qmlFile);
 public:
@@ -42,6 +47,8 @@ public slots:
     void onFileOpen();
 
     void updatePlayheadPosition() const;
+
+    int getMinimumPlayHeadOffset() const;
 };
 
 #endif // MAINWINDOW_H

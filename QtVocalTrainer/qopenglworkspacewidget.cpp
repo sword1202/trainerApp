@@ -20,6 +20,8 @@ void QOpenGLWorkspaceWidget::initializeGL() {
         }
         return true;
     }, 1000 / 150); // 150fps
+
+    setMouseTracking(true);
 }
 
 void QOpenGLWorkspaceWidget::resizeGL(int w, int h) {
@@ -28,6 +30,13 @@ void QOpenGLWorkspaceWidget::resizeGL(int w, int h) {
 
 void QOpenGLWorkspaceWidget::paintGL() {
     workspaceDrawer->draw();
+}
+
+void QOpenGLWorkspaceWidget::mousePressEvent(QMouseEvent *event) {
+    if (onClick) {
+        onClick(event);
+    }
+    QWidget::mousePressEvent(event);
 }
 
 QOpenGLWorkspaceWidget::~QOpenGLWorkspaceWidget() {

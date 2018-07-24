@@ -50,12 +50,35 @@ MainWindow::MainWindow(QWidget *parent) :
     });
 
     updatePlayheadPosition();
-
     setupMenus();
+
+    workspaceView->onClick = [=] (QMouseEvent* event) {
+        MainController* instance = MainController::instance();
+        if (instance->getPlayer()->isPlaying()) {
+            return;
+        }
+
+        int minimumOffset = getMinimumPlayHeadOffset();
+
+        if (event->button() == Qt::LeftButton) {
+            int position = std::max(minimumOffset, event->x());
+            playHeadOffsetFactor = (double)position / minimumOffset;
+            setPlayHeadPosition(position);
+        }
+    };
 }
 
 void MainWindow::updatePlayheadPosition() const {
-    setPlayHeadPosition(qRound(VxApp::instance()->getZoomController()->getIntervalWidth() * BEATS_IN_TACT));
+    MainController* instance = MainController::instance();
+    if (instance->getPlayer()->isPlaying()) {
+        setPlayHeadPosition(getMinimumPlayHeadOffset());
+    } else {
+        setPlayHeadPosition(qRound(getMinimumPlayHeadOffset() * playHeadOffsetFactor));
+    }
+}
+
+int MainWindow::getMinimumPlayHeadOffset() const {
+    return qRound(MainController::instance()->getZoomController()->getIntervalWidth() * BEATS_IN_TACT);
 }
 
 void MainWindow::setPlayHeadPosition(int position) const {
