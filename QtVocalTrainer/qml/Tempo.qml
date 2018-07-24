@@ -6,7 +6,7 @@ import QtGraphicalEffects 1.0
 
 Item {
     id: root
-    property int tempo: cpp.player.beatsPerMinute
+    property int tempo: cpp.player.source ? cpp.player.beatsPerMinute : -1
 
     height: 38.25
     width: 52.5
@@ -16,7 +16,7 @@ Item {
     }
 
     onTempoChanged: {
-        tempoText.text = tempo.toString()
+        tempoText.text = tempo > 0 ? tempo.toString() : "---"
     }
 
     DropShadow {
