@@ -13,7 +13,7 @@ Item {
     }
 
     Rectangle {
-        anchors.bottom: yardstick.top
+        anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: header.bottom
@@ -38,24 +38,24 @@ Item {
         anchors.right: parent.right
     }
 
-    Yardstick {
-        id: yardstick
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 4.75
-        anchors.leftMargin: 67
-        anchors.left: parent.left
-        anchors.right: parent.right
-    }
+//    Yardstick {
+//        id: yardstick
+//        anchors.bottom: parent.bottom
+//        anchors.bottomMargin: 4.75
+//        anchors.leftMargin: 67
+//        anchors.left: parent.left
+//        anchors.right: parent.right
+//    }
 
-    VerticalLine {
-        anchors.right: yardstick.left
-        height: 15.75
-        anchors.bottom: parent.bottom
-    }
+//    VerticalLine {
+//        anchors.right: yardstick.left
+//        height: 15.75
+//        anchors.bottom: parent.bottom
+//    }
 
-    HorizontalLine {
-        width: parent.width
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-    }
+//    HorizontalLine {
+//        width: parent.width
+//        anchors.bottom: parent.bottom
+//        anchors.left: parent.left
+//    }
 }

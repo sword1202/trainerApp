@@ -21,7 +21,7 @@ class MainWindow : public QMainWindow
     QSvgWidget* playHeadTriangle2;
     QFrame* playHeadLine2;
     QQuickItem *header;
-    QQuickItem *piano;
+    QQuickItem *leftSideBar;
     QmlCppBridge *cpp;
 
     double playHeadOffsetFactor = 1.0;

@@ -5,12 +5,6 @@ import "js/uiutils.js" as UiUtils
 Rectangle {
     color: "white"
 
-    VerticalLine {
-        anchors.right: parent.right
-        height: parent.height
-        anchors.top: parent.top
-    }
-
     Canvas {
         id: root
 

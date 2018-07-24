@@ -33,6 +33,7 @@ class WorkspaceDrawer : public WorkspaceController {
     Color accentGridColor;
     Color pitchGraphColor;
     Color pitchColor;
+    Color borderLineColor;
 
     float width = -1;
     float height = -1;
@@ -52,6 +53,7 @@ class WorkspaceDrawer : public WorkspaceController {
     void drawPitch(float x, float y, float width) const;
     void drawPitches() const;
     void drawPitchesGraph() const;
+    void drawYardStick() const;
 
     double getPitchGraphDuration() const;
     double getIntervalDuration() const;
@@ -59,6 +61,8 @@ class WorkspaceDrawer : public WorkspaceController {
     std::function<void()> onUpdateRequested;
     std::function<void(float)> onHorizontalOffsetChanged;
 public:
+    static constexpr float YARD_STICK_HEIGHT = 22;
+
     WorkspaceDrawer(Drawer *drawer, const std::function<void()>& onUpdateRequested);
     ~WorkspaceDrawer();
 

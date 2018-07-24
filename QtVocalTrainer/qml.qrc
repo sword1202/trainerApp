@@ -70,5 +70,6 @@
         <file>qml/AppWindow.qml</file>
         <file>qml/HeaderWithSubHeader.qml</file>
         <file>qml/js/zoom.js</file>
+        <file>qml/LeftSideBar.qml</file>
     </qresource>
 </RCC>

@@ -53,6 +53,10 @@ void WorkspaceDrawer::draw() {
     drawer->beginFrame(width, height, devicePixelRatio);
     drawer->clear();
 
+    drawYardStick();
+    drawer->translate(0, YARD_STICK_HEIGHT);
+    drawHorizontalLine(0, borderLineColor);
+    drawer->translate(0, 0.5);
     drawVerticalGrid();
     drawHorizontalGrid();
     drawPitches();
@@ -241,6 +245,10 @@ void WorkspaceDrawer::drawPitchesGraph() const {
     drawer->stroke();
 }
 
+void WorkspaceDrawer::drawYardStick() const {
+
+}
+
 int WorkspaceDrawer::getDistanceFromFirstPitch(const Pitch &pitch) const {
     return pitch.getPerfectFrequencyIndex() - firstPitch.getPerfectFrequencyIndex();
 }
@@ -286,6 +294,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, const std::function<void()>& on
     setPitchGraphColor({0xFF, 0x5E, 0x85, 0xFF});
     setPitchColor({0x6E, 0x7E, 0xC5, 0xFF});
     setPitchRadius(PITCH_RADIUS);
+    borderLineColor = {0x8B, 0x89, 0xB6, 0xCC};
 }
 
 WorkspaceDrawer::~WorkspaceDrawer() {

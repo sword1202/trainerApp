@@ -12,7 +12,7 @@
 #include <QThread>
 #include "qopenglworkspacewidget.h"
 
-constexpr int HEADER_HEIGHT = 75 + 61;
+constexpr int HEADER_HEIGHT = 75 + 61 - (int)WorkspaceDrawer::YARD_STICK_HEIGHT;
 constexpr int PIANO_WIDTH = 67;
 constexpr int PLAY_HEAD_SIZE = 11;
 constexpr int BEATS_IN_TACT = 4;
@@ -31,9 +31,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     cpp = new QmlCppBridge(this);
 
-    QQuickWidget* pianoWidget = createQQuickWidget("qrc:/qml/Piano.qml");
+    QQuickWidget* pianoWidget = createQQuickWidget("qrc:/qml/LeftSideBar.qml");
     pianoWidget->move(0, HEADER_HEIGHT);
-    piano = pianoWidget->rootObject();
+    leftSideBar = pianoWidget->rootObject();
 
     // setup header
     QQuickWidget *headerWidget = createQQuickWidget("qrc:/qml/HeaderWithSubHeader.qml");
@@ -104,7 +104,7 @@ float MainWindow::getMinimumPlatHeadOffsetF() const {
 
 void MainWindow::setPlayHeadPosition(int position) const {
     QRect geometry = playHeadTriangle->geometry();
-    QPoint move(PIANO_WIDTH + position, HEADER_HEIGHT);
+    QPoint move(PIANO_WIDTH + position, HEADER_HEIGHT + (int)WorkspaceDrawer::YARD_STICK_HEIGHT);
     geometry.moveCenter(move);
     playHeadTriangle->setGeometry(geometry);
     playHeadLine->move(move);
@@ -128,10 +128,10 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
     header->setWidth(width);
     header->setHeight(HEADER_HEIGHT);
 
-    piano->setWidth(PIANO_WIDTH);
-    piano->setHeight(height - HEADER_HEIGHT);
+    leftSideBar->setWidth(PIANO_WIDTH);
+    leftSideBar->setHeight(height - HEADER_HEIGHT);
 
-    playHeadLine->resize(playHeadLine->width(), workspaceView->height());
+    playHeadLine->resize(playHeadLine->width(), workspaceView->height() - (int)WorkspaceDrawer::YARD_STICK_HEIGHT);
 }
 
 void MainWindow::setupWorkspaceView() {
