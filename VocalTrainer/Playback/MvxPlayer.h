@@ -17,6 +17,7 @@
 #include "ListenersSet.h"
 #include "PlayingPitchSequence.h"
 #include "MetronomeAudioPlayer.h"
+#include <array>
 
 class MvxPlayer : public PlayingPitchSequence {
 public:
@@ -45,8 +46,11 @@ private:
     AudioFilePlayer instrumentalPlayer;
     VxFileAudioPlayer vxPlayer;
     MetronomeAudioPlayer metronomePlayer;
+
+    std::array<AudioPlayer*, 3> players;
+
     std::atomic_bool metronomeEnabled;
-    bool pauseRequested = false;
+    int pauseRequestedCounter = 0;
 
     boost::optional<Bounds> bounds;
     double playStartedSeek = -1;
@@ -62,6 +66,7 @@ private:
     CppUtils::ListenersSet<> tonalityChangedListeners;
 
     void updateMetronomeVolume();
+    void pausePlayer(AudioPlayer* player);
 public:
     MvxPlayer();
     virtual ~MvxPlayer();

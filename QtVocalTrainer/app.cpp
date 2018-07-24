@@ -6,6 +6,14 @@
 #include <iostream>
 #include <QThread>
 
+class __MainThreadCallback : public QObject {
+public:
+    std::function<void()> func;
+
+    __MainThreadCallback(const std::function<void()> &func) : QObject(nullptr), func(func) {
+    }
+};
+
 VxApp::VxApp(int argc, char *argv[]) : QApplication(argc, argv), MainController(new QmlPitchInputReader(), new Player(), new QmlZoomController()) {
     PortAudio::init();
 #ifdef __APPLE__
@@ -15,14 +23,13 @@ VxApp::VxApp(int argc, char *argv[]) : QApplication(argc, argv), MainController(
 
     connect(this, &VxApp::mainThreadCallbackPosted, this, [] (QObject* object) {
         assert(QApplication::instance()->thread() == QThread::currentThread());
-        static_cast<MainThreadCallback*>(object)->func();
+        static_cast<__MainThreadCallback*>(object)->func();
         delete object;
     }, Qt::QueuedConnection);
 }
 
-void VxApp::executeOnMainThread(std::function<void()> callback) {
-    MainThreadCallback* holder = new MainThreadCallback();
-    holder->func = callback;
+void VxApp::executeOnMainThread(const std::function<void()>& callback) {
+    __MainThreadCallback* holder = new __MainThreadCallback(callback);
     emit mainThreadCallbackPosted(holder);
 }
 

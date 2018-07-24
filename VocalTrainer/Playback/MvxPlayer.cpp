@@ -14,6 +14,7 @@
 #include "Functions.h"
 #include "Executors.h"
 #include <iostream>
+#include <memory>
 
 using namespace CppUtils;
 using std::cout;
@@ -22,6 +23,8 @@ using std::endl;
 constexpr int BEATS_IN_TACT = 4;
 
 MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
+    players = {{&instrumentalPlayer, &vxPlayer, &metronomePlayer}};
+
     instrumentalPlayer.addSeekChangedListener([=](double seek, double) {
         if (bounds) {
             if (seek >= bounds->getEndSeek()) {
@@ -62,21 +65,28 @@ void MvxPlayer::onComplete() {
     stopAndMoveSeekToBeginning();
 }
 
+void MvxPlayer::pausePlayer(AudioPlayer *player) {
+    Executors::ExecuteOnBackgroundThread([=] {
+        player->pauseSync();
+        Executors::ExecuteOnMainThread([=] {
+            if (--pauseRequestedCounter == 0) {
+                onPlaybackStopped();
+            }
+        });
+    });
+}
+
 void MvxPlayer::pause() {
-    if (!isPlaying() || pauseRequested) {
+    if (!isPlaying() || pauseRequestedCounter != 0) {
         return;
     }
 
-    pauseRequested = true;
     stopRequestedListeners.executeAll();
-    Executors::ExecuteOnBackgroundThread([=] {
-        instrumentalPlayer.pauseSync();
-        metronomePlayer.pauseSync();
-        vxPlayer.pauseSync();
-        Executors::ExecuteOnMainThread([=] {
-            onPlaybackStopped();
-        });
-    });
+
+    pauseRequestedCounter = players.size();
+    for (auto* player : players) {
+        pausePlayer(player);
+    }
 }
 
 void MvxPlayer::play() {
@@ -104,9 +114,9 @@ void MvxPlayer::setSeek(double value) {
     assert(!bounds || (bounds->getStartSeek() <= value &&
             bounds->getEndSeek() <= value));
     assert(value >= 0 && value <= instrumentalPlayer.getTrackDurationInSeconds());
-    instrumentalPlayer.setSeek(value);
-    vxPlayer.setSeek(value);
-    metronomePlayer.setSeek(value);
+    for (auto* player : players) {
+        player->setSeek(value);
+    }
     seekChangedFromUserListeners.executeAll(value);
 }
 
@@ -192,7 +202,7 @@ void MvxPlayer::onPlaybackStarted() {
 }
 
 void MvxPlayer::onPlaybackStopped() {
-    pauseRequested = false;
+    pauseRequestedCounter = false;
     isPlayingChangedListeners.executeAll(false);
 }
 
