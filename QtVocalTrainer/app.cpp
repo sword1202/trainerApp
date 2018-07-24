@@ -4,6 +4,7 @@
 #include "qmlpitchinputreader.h"
 #include <QQmlContext>
 #include <iostream>
+#include <QThread>
 
 VxApp::VxApp(int argc, char *argv[]) : QApplication(argc, argv), MainController(new QmlPitchInputReader(), new Player(), new QmlZoomController()) {
     PortAudio::init();
@@ -12,13 +13,17 @@ VxApp::VxApp(int argc, char *argv[]) : QApplication(argc, argv), MainController(
 #endif
     initInstance(this);
 
-    connect(this, &VxApp::mainThreadCallbackPosted, [] (std::function<void()> callback) {
-        callback();
-    });
+    connect(this, &VxApp::mainThreadCallbackPosted, this, [] (QObject* object) {
+        assert(QApplication::instance()->thread() == QThread::currentThread());
+        static_cast<MainThreadCallback*>(object)->func();
+        delete object;
+    }, Qt::QueuedConnection);
 }
 
-void VxApp::executeOnMainThread(std::function<void()> function) {
-    emit mainThreadCallbackPosted(function);
+void VxApp::executeOnMainThread(std::function<void()> callback) {
+    MainThreadCallback* holder = new MainThreadCallback();
+    holder->func = callback;
+    emit mainThreadCallbackPosted(holder);
 }
 
 Player *VxApp::getPlayer() const {

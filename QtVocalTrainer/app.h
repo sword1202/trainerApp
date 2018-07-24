@@ -13,6 +13,11 @@ class VxApp : public QApplication, public MainController
 #ifdef __APPLE__
     void doMacOsPlatformStaff();
 #endif
+
+    class MainThreadCallback : public QObject {
+    public:
+        std::function<void()> func;
+    };
 public:
     VxApp(int argc, char *argv[]);
     Player* getPlayer() const;
@@ -22,7 +27,7 @@ public:
     static VxApp* instance();
 
 signals:
-    void mainThreadCallbackPosted(std::function<void()> callback);
+    void mainThreadCallbackPosted(MainThreadCallback* callback);
 };
 
 #endif // APP_H

@@ -9,6 +9,7 @@
 #include <QMenuBar>
 #include <QFileDialog>
 #include <QMacCocoaViewContainer>
+#include <QThread>
 #include "qopenglworkspacewidget.h"
 
 constexpr int HEADER_HEIGHT = 75 + 61;
