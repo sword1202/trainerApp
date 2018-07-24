@@ -82,9 +82,7 @@ MainController::MainController(VxPitchInputReader *pitchInputReader, MvxPlayer *
 
 void MainController::updateWorkspaceIsPlayingChanged(bool playing) {
     WorkspaceController* controller = this->workspaceController;
-    if (playing) {
-        updateSeek(mvxPlayer->getSeek());
-    }
+    updateSeek(mvxPlayer->getSeek());
     controller->setRunning(playing);
 }
 

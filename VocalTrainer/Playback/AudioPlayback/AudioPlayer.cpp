@@ -152,6 +152,10 @@ void AudioPlayer::destroy() {
 
 void AudioPlayer::pause() {
     assert(isPrepared());
+    if (!playing) {
+        return;
+    }
+
     playing = false;
     auto err = Pa_AbortStream(stream);
     PortAudio::checkErrors(err);
