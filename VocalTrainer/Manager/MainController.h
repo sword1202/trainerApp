@@ -22,12 +22,16 @@ class MainController {
     PianoController* pianoController = nullptr;
     std::function<void()> onPianoUpdateRequested;
 
+    CppUtils::ListenersSet<float> workspaceHorizontalOffsetChangedListeners;
+
     void updateZoom();
     void updateWorkspaceFirstPitch();
 
     void onStopPlaybackRequested();
     void updateSeek(double seek);
 public:
+    typedef typename CppUtils::ListenersSet<float>::Listener WorkspaceHorizontalOffsetChangedListener;
+
     MainController(VxPitchInputReader *pitchInputReader, MvxPlayer *mvxPlayer, ZoomController *zoomController);
 
     VxPitchInputReader *getPitchInputReader() const;
@@ -37,12 +41,15 @@ public:
 
     // Should be executed on a render thread, the same thread as workspace->draw is executed
     void setWorkspaceController(WorkspaceController* workspaceController);
-
     void setPianoController(PianoController *pianoController, const std::function<void()>& onUpdateRequested);
 
     static MainController* instance();
-
     static void initInstance(MainController* inst);
+
+    int addWorkspaceHorizontalOffsetChangedListener(const WorkspaceHorizontalOffsetChangedListener& listener);
+    void removeWorkspaceHorizontalOffsetChangedListener(int id);
+
+    float getWorkspaceHorizontalOffset() const;
 
     virtual ~MainController();
 };

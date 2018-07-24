@@ -156,9 +156,6 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		../include/boost/serialization/vector.hpp \
 		../PitchDetection/CppUtils/StlDebugUtils.h \
 		../VocalTrainer/Workspace/WorkspaceController.h \
-		qmlzoomcontroller.h \
-		../VocalTrainer/Manager/ZoomController.h \
-		player.h \
 		../VocalTrainer/Playback/MvxPlayer.h \
 		../VocalTrainer/Playback/MvxFile.h \
 		../VocalTrainer/Playback/AudioPlayback/VxFileAudioPlayer.h \
@@ -178,6 +175,9 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		../VocalTrainer/Playback/AudioPlayback/MetronomeAudioPlayer.h \
 		../VocalTrainer/Playback/AudioPlayback/WavAudioPlayer.h \
 		../VocalTrainer/Playback/AudioPlayback/BaseWavAudioPlayer.h \
+		qmlzoomcontroller.h \
+		../VocalTrainer/Manager/ZoomController.h \
+		player.h \
 		qmlvxpitch.h \
 		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QJsonValue \
 		qmlpitchinputreader.h \
@@ -339,6 +339,25 @@ moc_mainwindow.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/
 		../include/boost/serialization/vector.hpp \
 		../PitchDetection/CppUtils/StlDebugUtils.h \
 		../VocalTrainer/Workspace/WorkspaceController.h \
+		../VocalTrainer/Playback/MvxPlayer.h \
+		../VocalTrainer/Playback/MvxFile.h \
+		../VocalTrainer/Playback/AudioPlayback/VxFileAudioPlayer.h \
+		../VocalTrainer/Playback/VxFileAudioDataGenerator.h \
+		../VocalTrainer/Playback/VxFileAudioDataGeneratorConfig.h \
+		../VocalTrainer/Playback/PitchRenderer.h \
+		../VocalTrainer/Playback/tsf.h \
+		../PitchDetection/CppUtils/PeriodicallySleepingBackgroundTask.h \
+		../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h \
+		../include/boost/lockfree/queue.hpp \
+		../VocalTrainer/Playback/AudioPlayback/AudioFilePlayer.h \
+		../VocalTrainer/Playback/AudioPlayback/AudioPlayerWithDefaultSeekHandler.h \
+		../VocalTrainer/Playback/AudioPlayback/Decoder/audiodecoder.h \
+		../include/SoundTouch/SoundTouch.h \
+		../include/boost/optional.hpp \
+		../VocalTrainer/Playback/PlayingPitchSequence.h \
+		../VocalTrainer/Playback/AudioPlayback/MetronomeAudioPlayer.h \
+		../VocalTrainer/Playback/AudioPlayback/WavAudioPlayer.h \
+		../VocalTrainer/Playback/AudioPlayback/BaseWavAudioPlayer.h \
 		mainwindow.h \
 		moc_predefs.h \
 		../../../Qt/5.11.0/clang_64/bin/moc

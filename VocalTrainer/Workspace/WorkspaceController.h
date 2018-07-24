@@ -20,6 +20,8 @@ public:
     virtual double getIntervalsPerSecond() const = 0;
     virtual void setVerticalOffset(float verticalOffset) = 0;
     virtual void setHorizontalOffset(float horizontalOffset) = 0;
+    virtual float getHorizontalOffset() const = 0;
+    virtual void setHorizontalOffsetChangedListener(const std::function<void(float)>&) = 0;
     virtual void setVxFile(const VxFile* vxFile) = 0;
     virtual void setFirstVisiblePitch(const Pitch &firstPitch) = 0;
     virtual void update() = 0;

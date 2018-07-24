@@ -35,12 +35,14 @@ Rectangle {
                         ctx.fillText((tact - 1).toString(), x, dotY);
                         tact++;
                     }
-                }
+                },
+                horizontalOffset: cpp.workspaceHorizontalOffset
             })
         }
     }
 
     Component.onCompleted: {
         cpp.zoomController.zoomChanged.connect(canvas.requestPaint)
+        cpp.workspaceHorizontalOffsetChanged.connect(canvas.requestPaint)
     }
 }

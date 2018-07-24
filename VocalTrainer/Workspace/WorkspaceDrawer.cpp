@@ -44,6 +44,9 @@ void WorkspaceDrawer::draw() {
     // old logic
     if (running) {
         horizontalOffset = horizontalOffset + intervalsPerSecond * intervalWidth * frameDuration;
+        if (onHorizontalOffsetChanged) {
+            onHorizontalOffsetChanged(horizontalOffset);
+        }
     }
     frameTime = now;
 
@@ -88,6 +91,9 @@ float WorkspaceDrawer::getHorizontalOffset() const {
 
 void WorkspaceDrawer::setHorizontalOffset(float horizontalOffset) {
     this->horizontalOffset = horizontalOffset;
+    if (onHorizontalOffsetChanged) {
+        onHorizontalOffsetChanged(horizontalOffset);
+    }
 }
 
 void WorkspaceDrawer::drawVerticalGrid() const {
@@ -352,4 +358,8 @@ void WorkspaceDrawer::update() {
 
 void WorkspaceDrawer::setOnUpdateRequested(const std::function<void()> &onUpdateRequested) {
     this->onUpdateRequested = onUpdateRequested;
+}
+
+void WorkspaceDrawer::setHorizontalOffsetChangedListener(const std::function<void(float)>& listener) {
+    onHorizontalOffsetChanged = listener;
 }

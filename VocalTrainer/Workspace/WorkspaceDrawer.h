@@ -55,6 +55,7 @@ class WorkspaceDrawer : public WorkspaceController {
     double getIntervalDuration() const;
 
     std::function<void()> onUpdateRequested;
+    std::function<void(float)> onHorizontalOffsetChanged;
 public:
     WorkspaceDrawer(Drawer *drawer, const std::function<void()>& onUpdateRequested);
     ~WorkspaceDrawer();
@@ -70,7 +71,7 @@ public:
     void setIntervalHeight(float intervalHeight) override;
     float getVerticalOffset() const;
     void setVerticalOffset(float verticalOffset) override;
-    float getHorizontalOffset() const;
+    float getHorizontalOffset() const override;
     void setHorizontalOffset(float horizontalOffset) override;
 
     double getIntervalsPerSecond() const override;
@@ -104,6 +105,8 @@ public:
     int getDistanceFromFirstPitch(const Pitch &pitch) const;
 
     void update() override;
+
+    void setHorizontalOffsetChangedListener(const std::function<void(float)> &listener) override;
 };
 
 

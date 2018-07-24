@@ -121,6 +121,19 @@ void MainController::setWorkspaceController(WorkspaceController *workspaceContro
         updateSeek(seek);
         return DONT_DELETE_LISTENER;
     });
+
+    workspaceController->setHorizontalOffsetChangedListener([=] (float value) {
+        workspaceHorizontalOffsetChangedListeners.executeAll(value);
+    });
+}
+
+float MainController::getWorkspaceHorizontalOffset() const {
+    WorkspaceController* controller = workspaceController;
+    if (!controller) {
+        return 0;
+    }
+
+    return controller->getHorizontalOffset();
 }
 
 void MainController::updateSeek(double seek) {
@@ -159,4 +172,13 @@ void MainController::setPianoController(PianoController *pianoController,
     pianoController->setDetectedPitch(pitchInputReader->getLastDetectedPitch());
     pianoController->setFirstPitch(zoomController->getFirstPitch());
     pianoController->setIntervalHeight(zoomController->getIntervalHeight());
+}
+
+int MainController::addWorkspaceHorizontalOffsetChangedListener(
+        const MainController::WorkspaceHorizontalOffsetChangedListener &listener) {
+    return workspaceHorizontalOffsetChangedListeners.addListener(listener);
+}
+
+void MainController::removeWorkspaceHorizontalOffsetChangedListener(int id) {
+    workspaceHorizontalOffsetChangedListeners.removeListener(id);
 }

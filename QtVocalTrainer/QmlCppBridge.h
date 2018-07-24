@@ -31,13 +31,17 @@ public:
     Q_PROPERTY(QmlPitchInputReader* pitchInputReader READ getPitchInputReader() CONSTANT)
     Q_PROPERTY(qreal devicePixelRatio READ getDevicePixelRatio() CONSTANT)
 
+    Q_PROPERTY(qreal workspaceHorizontalOffset READ getWorkspaceHorizontalOffset() NOTIFY workspaceHorizontalOffsetChanged())
+
     QmlZoomController* getZoomController() const;
     Player* getPlayer() const;
     QmlPitchInputReader* getPitchInputReader() const;
     qreal getDevicePixelRatio() const;
+    qreal getWorkspaceHorizontalOffset() const;
 
 signals:
     void resize();
+    void workspaceHorizontalOffsetChanged();
 };
 
 #endif // QMLCPPBRIDGE_H
