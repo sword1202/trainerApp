@@ -248,16 +248,28 @@ void WorkspaceDrawer::drawPitchesGraph() const {
 }
 
 void WorkspaceDrawer::drawYardStick() const {
-    iterateHorizontalIntervals([=] (float x, bool isBeat) {
-        this->drawYardStickDot(x, YARD_STICK_DOT_Y_OFFSET);
+    drawer->setFillColor(yardStickDotAndTextColor);
+    int startTactIndex = (int)(getHorizontalOffset() / getIntervalWidth());
+    iterateHorizontalIntervals([&](float x, bool isBeat) {
+        if (isBeat) {
+            this->drawYardStickDot(x, YARD_STICK_DOT_Y_OFFSET);
+        } else {
+            this->darYardStickTact(x, YARD_STICK_DOT_Y_OFFSET, startTactIndex++);
+        }
     });
 }
 
 void WorkspaceDrawer::drawYardStickDot(float x, float y) const {
-    drawer->setFillColor(yardStickDotColor);
     drawer->beginPath();
     drawer->arc(x, y, YARD_STICK_DOT_RADIUS, 0, 2 * M_PI);
     drawer->fill();
+}
+
+void WorkspaceDrawer::darYardStickTact(float x, float y, int index) const {
+    drawer->setTextFont("Arial", 12);
+    drawer->setTextAlign(Drawer::TextAlign::CENTER);
+    drawer->setTextBaseline(Drawer::TextBaseline::MIDDLE);
+    drawer->fillText(std::to_string(index), x, y);
 }
 
 int WorkspaceDrawer::getDistanceFromFirstPitch(const Pitch &pitch) const {
@@ -306,7 +318,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, const std::function<void()>& on
     setPitchColor({0x6E, 0x7E, 0xC5, 0xFF});
     setPitchRadius(PITCH_RADIUS);
     borderLineColor = {0x8B, 0x89, 0xB6, 0xCC};
-    yardStickDotColor = {0x24, 0x23, 0x2D, 0xFF};
+    yardStickDotAndTextColor = {0x24, 0x23, 0x2D, 0xFF};
 }
 
 WorkspaceDrawer::~WorkspaceDrawer() {

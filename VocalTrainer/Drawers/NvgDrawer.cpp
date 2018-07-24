@@ -34,6 +34,7 @@ NvgDrawer::~NvgDrawer() {
 
 #define NANOVG_GL2_IMPLEMENTATION
 #include <nanovg/nanovg_gl.h>
+#include <nanovg/fontstash.h>
 
 void NvgDrawer::clear() {
     glClearColor(1, 1, 1, 1);
@@ -176,6 +177,7 @@ void NvgDrawer::quadraticCurveTo(float cpx, float cpy, float x, float y) {
 }
 
 void NvgDrawer::fillText(const std::string &text, float x, float y) {
+    assert(nvgFindFont(ctx, fontFamily.data()) != FONS_INVALID);
     nvgText(ctx, x, y, text.data(), text.data() + text.size());
     fill();
 }
