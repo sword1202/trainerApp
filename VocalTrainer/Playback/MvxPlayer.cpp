@@ -130,7 +130,7 @@ void MvxPlayer::prepare() {
 }
 
 const VxFile * MvxPlayer::getVxFile() const {
-    if (vxPlayer.isPrepared()) {
+    if (!vxPlayer.isPrepared()) {
         return nullptr;
     }
 
