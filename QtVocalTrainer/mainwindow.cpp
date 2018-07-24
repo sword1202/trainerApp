@@ -59,25 +59,29 @@ MainWindow::MainWindow(QWidget *parent) :
 
     MvxPlayer *player = MainController::instance()->getPlayer();
     player->addPlayRequestedListener([=] {
-        player->setSeek(player->getSeek() + player->getTactDuration() * (playHeadOffsetFactor - 1.0));
-        playHeadOffsetFactor = 1.0;
-        updatePlayheadPosition();
+        movePlayHeadToPlaybackStart();
         return DONT_DELETE_LISTENER;
     });
 }
 
-void MainWindow::onWorkspaceClick(QMouseEvent *event) {
-    MainController* instance = MainController::instance();
-    if (instance->getPlayer()->isPlaying()) {
-        return;
-    }
+void MainWindow::movePlayHeadToPlaybackStart() {
+    MvxPlayer* player = MainController::instance()->getPlayer();
+    player->setSeek(player->getSeek() + player->getTactDuration() * (playHeadOffsetFactor - 1.0));
+    playHeadOffsetFactor = 1.0;
+    updatePlayheadPosition();
+}
 
+void MainWindow::onWorkspaceClick(QMouseEvent *event) {
     int minimumOffset = getMinimumPlayHeadOffset();
 
     if (event->button() == Qt::LeftButton) {
         int position = std::max(minimumOffset, event->x());
         playHeadOffsetFactor = (double)position / minimumOffset;
-        setPlayHeadPosition(position);
+        if (MainController::instance()->getPlayer()->isPlaying()) {
+            movePlayHeadToPlaybackStart();
+        } else {
+            setPlayHeadPosition(position);
+        }
     }
 }
 

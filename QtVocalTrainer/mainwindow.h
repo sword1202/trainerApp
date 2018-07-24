@@ -7,6 +7,7 @@
 #include <QSvgWidget>
 #include "QtUtils/qtutils.h"
 #include "qopenglworkspacewidget.h"
+#include "MvxPlayer.h"
 
 class QmlCppBridge;
 
@@ -26,6 +27,11 @@ class MainWindow : public QMainWindow
     double playHeadOffsetFactor = 1.0;
 
     QQuickWidget *createQQuickWidget(const QString& qmlFile);
+    void movePlayHeadToPlaybackStart();
+    void updatePlayheadPosition() const;
+    int getMinimumPlayHeadOffset() const;
+    void onWorkspaceClick(QMouseEvent *event);
+    float getMinimumPlatHeadOffsetF() const;
 public:
     explicit MainWindow(QWidget *parent = 0);
 
@@ -45,14 +51,6 @@ public:
 
 public slots:
     void onFileOpen();
-
-    void updatePlayheadPosition() const;
-
-    int getMinimumPlayHeadOffset() const;
-
-    void onWorkspaceClick(QMouseEvent *event);
-
-    float getMinimumPlatHeadOffsetF() const;
 };
 
 #endif // MAINWINDOW_H
