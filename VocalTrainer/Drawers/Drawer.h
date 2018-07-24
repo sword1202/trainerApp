@@ -41,6 +41,7 @@ public:
     virtual void moveTo(float x, float y) = 0;
     virtual void lineTo(float x, float y) = 0;
     virtual void arcTo(float x1, float y1, float x2, float y2, float radius) = 0;
+    virtual void arc(float x, float y, float r, float sAngle, float eAngle) = 0;
     virtual void setStrokeColor(int color);
     virtual void setFillColor(int color);
     virtual void setStrokeColor(const Color& color) = 0;

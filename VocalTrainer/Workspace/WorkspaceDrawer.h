@@ -34,6 +34,7 @@ class WorkspaceDrawer : public WorkspaceController {
     Color pitchGraphColor;
     Color pitchColor;
     Color borderLineColor;
+    Color yardStickDotColor;
 
     float width = -1;
     float height = -1;
@@ -54,6 +55,7 @@ class WorkspaceDrawer : public WorkspaceController {
     void drawPitches() const;
     void drawPitchesGraph() const;
     void drawYardStick() const;
+    void drawYardStickDot(float x, float y) const;
 
     double getPitchGraphDuration() const;
     double getIntervalDuration() const;

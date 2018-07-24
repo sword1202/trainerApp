@@ -20,6 +20,8 @@ using std::endl;
 
 constexpr int BEATS_IN_TACT = 4;
 constexpr float PITCHES_GRAPH_WIDTH_IN_INTERVALS = 4.0f;
+constexpr float YARD_STICK_DOT_Y_OFFSET = 9.75f + 1.5f;
+constexpr float YARD_STICK_DOT_RADIUS = 1.5f;
 static const int PITCH_RADIUS = 3;
 
 void WorkspaceDrawer::resize(float width, float height, float devicePixelRatio) {
@@ -246,7 +248,16 @@ void WorkspaceDrawer::drawPitchesGraph() const {
 }
 
 void WorkspaceDrawer::drawYardStick() const {
+    iterateHorizontalIntervals([=] (float x, bool isBeat) {
+        this->drawYardStickDot(x, YARD_STICK_DOT_Y_OFFSET);
+    });
+}
 
+void WorkspaceDrawer::drawYardStickDot(float x, float y) const {
+    drawer->setFillColor(yardStickDotColor);
+    drawer->beginPath();
+    drawer->arc(x, y, YARD_STICK_DOT_RADIUS, 0, 2 * M_PI);
+    drawer->fill();
 }
 
 int WorkspaceDrawer::getDistanceFromFirstPitch(const Pitch &pitch) const {
@@ -295,6 +306,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, const std::function<void()>& on
     setPitchColor({0x6E, 0x7E, 0xC5, 0xFF});
     setPitchRadius(PITCH_RADIUS);
     borderLineColor = {0x8B, 0x89, 0xB6, 0xCC};
+    yardStickDotColor = {0x24, 0x23, 0x2D, 0xFF};
 }
 
 WorkspaceDrawer::~WorkspaceDrawer() {

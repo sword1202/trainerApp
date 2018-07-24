@@ -29,6 +29,9 @@ public:
     void moveTo(float x, float y) override;
     void lineTo(float x, float y) override;
     void arcTo(float x1, float y1, float x2, float y2, float radius) override;
+
+    void arc(float x, float y, float r, float sAngle, float eAngle) override;
+
     void setStrokeColor(const Color& color) override;
     void setFillColor(const Color& color) override;
     void setStrokeWidth(float strokeWidth) override;

@@ -227,3 +227,7 @@ void NvgDrawer::setTextBaseline(Drawer::TextBaseline baseline) {
 void NvgDrawer::registerFont(const char *name, const char *data, int dataSize) {
     nvgCreateFontMem(ctx, name, (unsigned char *) data, dataSize, 0);
 }
+
+void NvgDrawer::arc(float x, float y, float r, float sAngle, float eAngle) {
+    nvgArc(ctx, x, y, r, sAngle, eAngle, NVG_CW);
+}
