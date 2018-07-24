@@ -42,6 +42,9 @@ public:
 
     Q_INVOKABLE bool canBeShifted(int distance) const override;
 
+    Q_INVOKABLE void seekToNextTact() override;
+    Q_INVOKABLE void seekToPrevTact() override;
+
     void onPlaybackStopped() override;
 
     void onComplete() override;

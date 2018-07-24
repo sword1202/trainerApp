@@ -41,6 +41,10 @@ Item {
 
         hoverImage: "images/go_back_hover.svg"
         idleImage: "images/go_back.svg"
+
+        onClicked: {
+            cpp.player.seekToPrevTact()
+        }
     }
 
     ImageButton {
@@ -53,6 +57,10 @@ Item {
 
         hoverImage: "images/go_forward_hover.svg"
         idleImage: "images/go_forward.svg"
+
+        onClicked: {
+            cpp.player.seekToNextTact()
+        }
     }
 
     ImageButton {

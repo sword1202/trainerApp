@@ -55,6 +55,7 @@ private:
     CppUtils::ListenersSet<> prepareFinishedListeners;
     CppUtils::ListenersSet<const VxFile*> vxFileChangedListeners;
     CppUtils::ListenersSet<double> seekChangedListeners;
+    CppUtils::ListenersSet<double> seekChangedFromUserListeners;
     CppUtils::ListenersSet<> tonalityChangedListeners;
 
     void updateMetronomeVolume();
@@ -75,6 +76,8 @@ public:
     bool isPlaying() const;
     void setSeek(double value);
     double getSeek() const;
+    virtual void seekToNextTact();
+    virtual void seekToPrevTact();
     const VxFile* getVxFile() const;
 
     const boost::optional<Bounds> &getBounds() const;
@@ -105,6 +108,7 @@ public:
     virtual void setMetronomeEnabled(bool metronomeEnabled);
 
     double getBeatDuration() const;
+    double getTactDuration() const;
 
     // The listener is executed on Main thread
     int addIsPlayingChangedListener(const IsPlayingChangedListener& listener);
@@ -118,9 +122,11 @@ public:
     int addVxFileChangedListener(const VxFileChangedListener& listener);
     void removeVxFileChangedListener(int id);
 
-    // The listener is executed on Audio callback thread
     int addSeekChangedListener(const SeekChangedListener& listener);
     void removeSeekChangedListener(int id);
+
+    int addSeekChangedFromUserListener(const SeekChangedListener& listener);
+    void removeSeekChangedFromUserListener(int id);
 
     // The listener is executed on Audio callback thread
     int addTonalityChangedListener(const TonalityChangedListener& listener);

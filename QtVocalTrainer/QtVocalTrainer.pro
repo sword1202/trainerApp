@@ -80,7 +80,6 @@ SOURCES += \
     ../VocalTrainer/Playback/VxFileAudioDataGenerator.cpp \
     ../VocalTrainer/Playback/AudioPlayback/BaseWavAudioPlayer.cpp \
     ../VocalTrainer/Playback/AudioPlayback/MetronomeAudioPlayer.cpp \
-    ../VocalTrainer/Playback/AudioPlayback/MetronomeAudioPlayer.cpp \
     ../VocalTrainer/Playback/AudioPlayback/AudioPlayerWithDefaultSeekHandler.cpp
 
 RESOURCES += qml.qrc
@@ -171,7 +170,6 @@ HEADERS += \
     qopenglworkspacewidget.h \
     ../VocalTrainer/Playback/VxFileAudioDataGenerator.h \
     ../VocalTrainer/Playback/AudioPlayback/BaseWavAudioPlayer.h \
-    ../VocalTrainer/Playback/AudioPlayback/MetronomeAudioPlayer.h \
     ../VocalTrainer/Playback/AudioPlayback/MetronomeAudioPlayer.h \
     ../VocalTrainer/Playback/AudioPlayback/AudioPlayerWithDefaultSeekHandler.h
 

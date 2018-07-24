@@ -15,7 +15,7 @@ LEXFLAGS  =
 YACC      = yacc
 YACCFLAGS = -d
 DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_QUICKWIDGETS_LIB -DQT_QUICK_LIB -DQT_SVG_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
-INCPATH       = -I. -I../include -I../VocalTrainer/Drawers -I../VocalTrainer/Manager -I../VocalTrainer/Workspace -I../VocalTrainer/VxPlayer/AudioPlayback -I../VocalTrainer/VxPlayer -I../VocalTrainer/VxPlayer/CraigsappMidifile -I../VocalTrainer -I../PitchDetection/CppUtils -I../PitchDetection -I../include/nanovg -I../../../Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers -I../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers -I../../../Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers -I../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I../../../Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I../../../Qt/5.11.0/clang_64/lib/QtQml.framework/Headers -I../../../Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers -I../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/AGL.framework/Headers -I../../../Qt/5.11.0/clang_64/mkspecs/macx-clang -F/Users/semyon/Qt/5.11.0/clang_64/lib
+INCPATH       = -I. -I../include -I../VocalTrainer/Drawers -I../VocalTrainer/Manager -I../VocalTrainer/Workspace -I../VocalTrainer/Playback/AudioPlayback -I../VocalTrainer/Playback -I../VocalTrainer/Playback/CraigsappMidifile -I../VocalTrainer -I../PitchDetection/CppUtils -I../PitchDetection -I../include/nanovg -I../../../Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers -I../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers -I../../../Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers -I../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I../../../Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I../../../Qt/5.11.0/clang_64/lib/QtQml.framework/Headers -I../../../Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers -I../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/AGL.framework/Headers -I../../../Qt/5.11.0/clang_64/mkspecs/macx-clang -F/Users/semyon/Qt/5.11.0/clang_64/lib
 DEL_FILE  = rm -f
 MOVE      = mv -f
 
@@ -31,9 +31,9 @@ check: first
 benchmark: first
 
 compilers: qrc_qml.cpp moc_predefs.h moc_QmlCppBridge.cpp moc_qmlopenglitem.cpp moc_qmlpitch.cpp\
-	 moc_qmlpitchinputreader.cpp moc_qmlvxpitch.cpp moc_qmltimedpitch.cpp\
-	 moc_mainwindow.cpp moc_zoomcontroller.cpp moc_player.cpp\
-	 moc_qmetalwidget.cpp
+	 moc_qmlpitchinputreader.cpp moc_app.cpp moc_qmlvxpitch.cpp\
+	 moc_qmltimedpitch.cpp moc_mainwindow.cpp moc_qmlzoomcontroller.cpp\
+	 moc_player.cpp moc_qopenglworkspacewidget.cpp
 compiler_rcc_make_all: qrc_qml.cpp
 compiler_rcc_clean:
 	-$(DEL_FILE) qrc_qml.cpp
@@ -106,6 +106,7 @@ qrc_qml.cpp: qml.qrc \
 		qml/images/tracks_show_button_off.png \
 		qml/images/track_piece.png \
 		qml/sounds/sounds.sf2 \
+		qml/sounds/metronome.wav \
 		qml/fonts/Lato-Regular.ttf \
 		qml/fonts/Lato-Bold.ttf
 	/Users/semyon/Qt/5.11.0/clang_64/bin/rcc -name qml qml.qrc -o qrc_qml.cpp
@@ -116,9 +117,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../../Qt/5.11.0/clang_64/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++1y -Wall -W -dM -E -o moc_predefs.h ../../../Qt/5.11.0/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_QmlCppBridge.cpp moc_qmlopenglitem.cpp moc_qmlpitch.cpp moc_qmlpitchinputreader.cpp moc_qmlvxpitch.cpp moc_qmltimedpitch.cpp moc_mainwindow.cpp moc_zoomcontroller.cpp moc_player.cpp moc_qmetalwidget.cpp
+compiler_moc_header_make_all: moc_QmlCppBridge.cpp moc_qmlopenglitem.cpp moc_qmlpitch.cpp moc_qmlpitchinputreader.cpp moc_app.cpp moc_qmlvxpitch.cpp moc_qmltimedpitch.cpp moc_mainwindow.cpp moc_qmlzoomcontroller.cpp moc_player.cpp moc_qopenglworkspacewidget.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_QmlCppBridge.cpp moc_qmlopenglitem.cpp moc_qmlpitch.cpp moc_qmlpitchinputreader.cpp moc_qmlvxpitch.cpp moc_qmltimedpitch.cpp moc_mainwindow.cpp moc_zoomcontroller.cpp moc_player.cpp moc_qmetalwidget.cpp
+	-$(DEL_FILE) moc_QmlCppBridge.cpp moc_qmlopenglitem.cpp moc_qmlpitch.cpp moc_qmlpitchinputreader.cpp moc_app.cpp moc_qmlvxpitch.cpp moc_qmltimedpitch.cpp moc_mainwindow.cpp moc_qmlzoomcontroller.cpp moc_player.cpp moc_qopenglworkspacewidget.cpp
 moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QSize \
 		../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers/QQuickView \
@@ -131,33 +132,41 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		../../../Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers/QSvgWidget \
 		QtUtils/qtutils.h \
 		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QFrame \
-		zoomcontroller.h \
+		qmlzoomcontroller.h \
+		../VocalTrainer/Manager/ZoomController.h \
+		../PitchDetection/CppUtils/ListenersSet.h \
 		player.h \
-		../VocalTrainer/VxPlayer/MvxPlayer.h \
-		../VocalTrainer/VxPlayer/VxFile.h \
-		../VocalTrainer/VxPlayer/VxPitch.h \
+		../VocalTrainer/Playback/MvxPlayer.h \
+		../VocalTrainer/Playback/VxFile.h \
+		../VocalTrainer/Playback/VxPitch.h \
 		../include/boost/serialization/serialization.hpp \
 		../include/boost/serialization/split_member.hpp \
-		../VocalTrainer/VxPlayer/AudioPlayback/AudioPlayer.h \
+		../VocalTrainer/Playback/AudioPlayback/AudioPlayer.h \
 		../include/portaudio/portaudio.h \
-		../PitchDetection/CppUtils/ListenersSet.h \
-		../VocalTrainer/VxPlayer/VxLyricsLine.h \
-		../VocalTrainer/VxPlayer/VxLyricsInterval.h \
-		../VocalTrainer/VxPlayer/PlaybackChunk.h \
+		../VocalTrainer/Playback/VxLyricsLine.h \
+		../VocalTrainer/Playback/VxLyricsInterval.h \
+		../VocalTrainer/Playback/PlaybackChunk.h \
 		../include/boost/container/static_vector.hpp \
 		../include/boost/serialization/vector.hpp \
 		../PitchDetection/CppUtils/StlDebugUtils.h \
-		../VocalTrainer/VxPlayer/MvxFile.h \
-		../VocalTrainer/VxPlayer/AudioPlayback/VxFileAudioPlayer.h \
-		../VocalTrainer/VxPlayer/VxFileAudioDataGenerator.h \
-		../VocalTrainer/VxPlayer/tsf.h \
-		../VocalTrainer/VxPlayer/PitchRenderer.h \
-		../include/boost/icl/interval_set.hpp \
+		../VocalTrainer/Playback/MvxFile.h \
+		../VocalTrainer/Playback/AudioPlayback/VxFileAudioPlayer.h \
+		../VocalTrainer/Playback/VxFileAudioDataGenerator.h \
+		../VocalTrainer/Playback/VxFileAudioDataGeneratorConfig.h \
+		../VocalTrainer/Playback/PitchRenderer.h \
+		../VocalTrainer/Playback/tsf.h \
 		../PitchDetection/CppUtils/PeriodicallySleepingBackgroundTask.h \
 		../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h \
 		../include/boost/lockfree/queue.hpp \
+		../VocalTrainer/Playback/AudioPlayback/AudioFilePlayer.h \
+		../VocalTrainer/Playback/AudioPlayback/AudioPlayerWithDefaultSeekHandler.h \
+		../VocalTrainer/Playback/AudioPlayback/Decoder/audiodecoder.h \
+		../include/SoundTouch/SoundTouch.h \
 		../include/boost/optional.hpp \
-		../VocalTrainer/VxPlayer/PlayingPitchSequence.h \
+		../VocalTrainer/Playback/PlayingPitchSequence.h \
+		../VocalTrainer/Playback/AudioPlayback/MetronomeAudioPlayer.h \
+		../VocalTrainer/Playback/AudioPlayback/WavAudioPlayer.h \
+		../VocalTrainer/Playback/AudioPlayback/BaseWavAudioPlayer.h \
 		qmlvxpitch.h \
 		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QJsonValue \
 		qmlpitchinputreader.h \
@@ -175,20 +184,20 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		QmlCppBridge.h \
 		moc_predefs.h \
 		../../../Qt/5.11.0/clang_64/bin/moc
-	/Users/semyon/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/semyon/Qt/5.11.0/clang_64/mkspecs/macx-clang -I/Users/semyon/Projects/VocalTrainer/QtVocalTrainer -I/Users/semyon/Projects/VocalTrainer/include -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Drawers -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Workspace -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/CraigsappMidifile -I/Users/semyon/Projects/VocalTrainer/VocalTrainer -I/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils -I/Users/semyon/Projects/VocalTrainer/PitchDetection -I/Users/semyon/Projects/VocalTrainer/include/nanovg -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQml.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/semyon/Qt/5.11.0/clang_64/lib QmlCppBridge.h -o moc_QmlCppBridge.cpp
+	/Users/semyon/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/semyon/Qt/5.11.0/clang_64/mkspecs/macx-clang -I/Users/semyon/Projects/VocalTrainer/QtVocalTrainer -I/Users/semyon/Projects/VocalTrainer/include -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Drawers -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Workspace -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/CraigsappMidifile -I/Users/semyon/Projects/VocalTrainer/VocalTrainer -I/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils -I/Users/semyon/Projects/VocalTrainer/PitchDetection -I/Users/semyon/Projects/VocalTrainer/include/nanovg -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQml.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/semyon/Qt/5.11.0/clang_64/lib QmlCppBridge.h -o moc_QmlCppBridge.cpp
 
 moc_qmlopenglitem.cpp: ../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers/QQuickItem \
 		qmlopenglitem.h \
 		moc_predefs.h \
 		../../../Qt/5.11.0/clang_64/bin/moc
-	/Users/semyon/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/semyon/Qt/5.11.0/clang_64/mkspecs/macx-clang -I/Users/semyon/Projects/VocalTrainer/QtVocalTrainer -I/Users/semyon/Projects/VocalTrainer/include -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Drawers -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Workspace -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/CraigsappMidifile -I/Users/semyon/Projects/VocalTrainer/VocalTrainer -I/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils -I/Users/semyon/Projects/VocalTrainer/PitchDetection -I/Users/semyon/Projects/VocalTrainer/include/nanovg -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQml.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/semyon/Qt/5.11.0/clang_64/lib qmlopenglitem.h -o moc_qmlopenglitem.cpp
+	/Users/semyon/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/semyon/Qt/5.11.0/clang_64/mkspecs/macx-clang -I/Users/semyon/Projects/VocalTrainer/QtVocalTrainer -I/Users/semyon/Projects/VocalTrainer/include -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Drawers -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Workspace -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/CraigsappMidifile -I/Users/semyon/Projects/VocalTrainer/VocalTrainer -I/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils -I/Users/semyon/Projects/VocalTrainer/PitchDetection -I/Users/semyon/Projects/VocalTrainer/include/nanovg -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQml.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/semyon/Qt/5.11.0/clang_64/lib qmlopenglitem.h -o moc_qmlopenglitem.cpp
 
 moc_qmlpitch.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QObject \
 		../PitchDetection/Pitch.h \
 		qmlpitch.h \
 		moc_predefs.h \
 		../../../Qt/5.11.0/clang_64/bin/moc
-	/Users/semyon/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/semyon/Qt/5.11.0/clang_64/mkspecs/macx-clang -I/Users/semyon/Projects/VocalTrainer/QtVocalTrainer -I/Users/semyon/Projects/VocalTrainer/include -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Drawers -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Workspace -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/CraigsappMidifile -I/Users/semyon/Projects/VocalTrainer/VocalTrainer -I/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils -I/Users/semyon/Projects/VocalTrainer/PitchDetection -I/Users/semyon/Projects/VocalTrainer/include/nanovg -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQml.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/semyon/Qt/5.11.0/clang_64/lib qmlpitch.h -o moc_qmlpitch.cpp
+	/Users/semyon/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/semyon/Qt/5.11.0/clang_64/mkspecs/macx-clang -I/Users/semyon/Projects/VocalTrainer/QtVocalTrainer -I/Users/semyon/Projects/VocalTrainer/include -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Drawers -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Workspace -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/CraigsappMidifile -I/Users/semyon/Projects/VocalTrainer/VocalTrainer -I/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils -I/Users/semyon/Projects/VocalTrainer/PitchDetection -I/Users/semyon/Projects/VocalTrainer/include/nanovg -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQml.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/semyon/Qt/5.11.0/clang_64/lib qmlpitch.h -o moc_qmlpitch.cpp
 
 moc_qmlpitchinputreader.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QObject \
 		../PitchDetection/PitchInputReaderCollector.h \
@@ -208,18 +217,77 @@ moc_qmlpitchinputreader.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/He
 		qmlpitchinputreader.h \
 		moc_predefs.h \
 		../../../Qt/5.11.0/clang_64/bin/moc
-	/Users/semyon/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/semyon/Qt/5.11.0/clang_64/mkspecs/macx-clang -I/Users/semyon/Projects/VocalTrainer/QtVocalTrainer -I/Users/semyon/Projects/VocalTrainer/include -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Drawers -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Workspace -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/CraigsappMidifile -I/Users/semyon/Projects/VocalTrainer/VocalTrainer -I/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils -I/Users/semyon/Projects/VocalTrainer/PitchDetection -I/Users/semyon/Projects/VocalTrainer/include/nanovg -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQml.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/semyon/Qt/5.11.0/clang_64/lib qmlpitchinputreader.h -o moc_qmlpitchinputreader.cpp
+	/Users/semyon/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/semyon/Qt/5.11.0/clang_64/mkspecs/macx-clang -I/Users/semyon/Projects/VocalTrainer/QtVocalTrainer -I/Users/semyon/Projects/VocalTrainer/include -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Drawers -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Workspace -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/CraigsappMidifile -I/Users/semyon/Projects/VocalTrainer/VocalTrainer -I/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils -I/Users/semyon/Projects/VocalTrainer/PitchDetection -I/Users/semyon/Projects/VocalTrainer/include/nanovg -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQml.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/semyon/Qt/5.11.0/clang_64/lib qmlpitchinputreader.h -o moc_qmlpitchinputreader.cpp
+
+moc_app.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QApplication \
+		../../../Qt/5.11.0/clang_64/lib/QtQml.framework/Headers/QQmlApplicationEngine \
+		../VocalTrainer/Manager/MainController.h \
+		../PitchDetection/PitchInputReaderCollector.h \
+		../PitchDetection/Pitch.h \
+		../PitchDetection/PitchInputReader.h \
+		../PitchDetection/AudioInputReader.h \
+		../PitchDetection/YinPitchDetector.h \
+		../PitchDetection/PitchDetector.h \
+		../PitchDetection/PitchDetectionSmoothingAudioBuffer.h \
+		../PitchDetection/CppUtils/stlassert.h \
+		../PitchDetection/CppUtils/CircularBuffer.h \
+		../PitchDetection/PitchesCollector.h \
+		../PitchDetection/CppUtils/ListenersSet.h \
+		../VocalTrainer/Manager/VxPitchInputReader.h \
+		../VocalTrainer/Playback/MvxPlayer.h \
+		../VocalTrainer/Playback/VxFile.h \
+		../VocalTrainer/Playback/VxPitch.h \
+		../include/boost/serialization/serialization.hpp \
+		../include/boost/serialization/split_member.hpp \
+		../VocalTrainer/Playback/AudioPlayback/AudioPlayer.h \
+		../include/portaudio/portaudio.h \
+		../VocalTrainer/Playback/VxLyricsLine.h \
+		../VocalTrainer/Playback/VxLyricsInterval.h \
+		../VocalTrainer/Playback/PlaybackChunk.h \
+		../include/boost/container/static_vector.hpp \
+		../include/boost/serialization/vector.hpp \
+		../PitchDetection/CppUtils/StlDebugUtils.h \
+		../VocalTrainer/Playback/MvxFile.h \
+		../VocalTrainer/Playback/AudioPlayback/VxFileAudioPlayer.h \
+		../VocalTrainer/Playback/VxFileAudioDataGenerator.h \
+		../VocalTrainer/Playback/VxFileAudioDataGeneratorConfig.h \
+		../VocalTrainer/Playback/PitchRenderer.h \
+		../VocalTrainer/Playback/tsf.h \
+		../PitchDetection/CppUtils/PeriodicallySleepingBackgroundTask.h \
+		../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h \
+		../include/boost/lockfree/queue.hpp \
+		../VocalTrainer/Playback/AudioPlayback/AudioFilePlayer.h \
+		../VocalTrainer/Playback/AudioPlayback/AudioPlayerWithDefaultSeekHandler.h \
+		../VocalTrainer/Playback/AudioPlayback/Decoder/audiodecoder.h \
+		../include/SoundTouch/SoundTouch.h \
+		../include/boost/optional.hpp \
+		../VocalTrainer/Playback/PlayingPitchSequence.h \
+		../VocalTrainer/Playback/AudioPlayback/MetronomeAudioPlayer.h \
+		../VocalTrainer/Playback/AudioPlayback/WavAudioPlayer.h \
+		../VocalTrainer/Playback/AudioPlayback/BaseWavAudioPlayer.h \
+		../VocalTrainer/Workspace/WorkspaceController.h \
+		../VocalTrainer/Manager/ZoomController.h \
+		../VocalTrainer/Workspace/PianoController.h \
+		player.h \
+		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QObject \
+		qmlvxpitch.h \
+		qmlpitch.h \
+		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QJsonValue \
+		app.h \
+		moc_predefs.h \
+		../../../Qt/5.11.0/clang_64/bin/moc
+	/Users/semyon/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/semyon/Qt/5.11.0/clang_64/mkspecs/macx-clang -I/Users/semyon/Projects/VocalTrainer/QtVocalTrainer -I/Users/semyon/Projects/VocalTrainer/include -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Drawers -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Workspace -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/CraigsappMidifile -I/Users/semyon/Projects/VocalTrainer/VocalTrainer -I/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils -I/Users/semyon/Projects/VocalTrainer/PitchDetection -I/Users/semyon/Projects/VocalTrainer/include/nanovg -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQml.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/semyon/Qt/5.11.0/clang_64/lib app.h -o moc_app.cpp
 
 moc_qmlvxpitch.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QObject \
 		qmlpitch.h \
 		../PitchDetection/Pitch.h \
-		../VocalTrainer/VxPlayer/VxPitch.h \
+		../VocalTrainer/Playback/VxPitch.h \
 		../include/boost/serialization/serialization.hpp \
 		../include/boost/serialization/split_member.hpp \
 		qmlvxpitch.h \
 		moc_predefs.h \
 		../../../Qt/5.11.0/clang_64/bin/moc
-	/Users/semyon/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/semyon/Qt/5.11.0/clang_64/mkspecs/macx-clang -I/Users/semyon/Projects/VocalTrainer/QtVocalTrainer -I/Users/semyon/Projects/VocalTrainer/include -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Drawers -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Workspace -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/CraigsappMidifile -I/Users/semyon/Projects/VocalTrainer/VocalTrainer -I/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils -I/Users/semyon/Projects/VocalTrainer/PitchDetection -I/Users/semyon/Projects/VocalTrainer/include/nanovg -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQml.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/semyon/Qt/5.11.0/clang_64/lib qmlvxpitch.h -o moc_qmlvxpitch.cpp
+	/Users/semyon/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/semyon/Qt/5.11.0/clang_64/mkspecs/macx-clang -I/Users/semyon/Projects/VocalTrainer/QtVocalTrainer -I/Users/semyon/Projects/VocalTrainer/include -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Drawers -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Workspace -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/CraigsappMidifile -I/Users/semyon/Projects/VocalTrainer/VocalTrainer -I/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils -I/Users/semyon/Projects/VocalTrainer/PitchDetection -I/Users/semyon/Projects/VocalTrainer/include/nanovg -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQml.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/semyon/Qt/5.11.0/clang_64/lib qmlvxpitch.h -o moc_qmlvxpitch.cpp
 
 moc_qmltimedpitch.cpp: qmlpitch.h \
 		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QObject \
@@ -227,7 +295,7 @@ moc_qmltimedpitch.cpp: qmlpitch.h \
 		qmltimedpitch.h \
 		moc_predefs.h \
 		../../../Qt/5.11.0/clang_64/bin/moc
-	/Users/semyon/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/semyon/Qt/5.11.0/clang_64/mkspecs/macx-clang -I/Users/semyon/Projects/VocalTrainer/QtVocalTrainer -I/Users/semyon/Projects/VocalTrainer/include -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Drawers -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Workspace -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/CraigsappMidifile -I/Users/semyon/Projects/VocalTrainer/VocalTrainer -I/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils -I/Users/semyon/Projects/VocalTrainer/PitchDetection -I/Users/semyon/Projects/VocalTrainer/include/nanovg -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQml.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/semyon/Qt/5.11.0/clang_64/lib qmltimedpitch.h -o moc_qmltimedpitch.cpp
+	/Users/semyon/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/semyon/Qt/5.11.0/clang_64/mkspecs/macx-clang -I/Users/semyon/Projects/VocalTrainer/QtVocalTrainer -I/Users/semyon/Projects/VocalTrainer/include -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Drawers -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Workspace -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/CraigsappMidifile -I/Users/semyon/Projects/VocalTrainer/VocalTrainer -I/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils -I/Users/semyon/Projects/VocalTrainer/PitchDetection -I/Users/semyon/Projects/VocalTrainer/include/nanovg -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQml.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/semyon/Qt/5.11.0/clang_64/lib qmltimedpitch.h -o moc_qmltimedpitch.cpp
 
 moc_mainwindow.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QOpenGLWidget \
@@ -239,56 +307,89 @@ moc_mainwindow.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/
 		mainwindow.h \
 		moc_predefs.h \
 		../../../Qt/5.11.0/clang_64/bin/moc
-	/Users/semyon/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/semyon/Qt/5.11.0/clang_64/mkspecs/macx-clang -I/Users/semyon/Projects/VocalTrainer/QtVocalTrainer -I/Users/semyon/Projects/VocalTrainer/include -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Drawers -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Workspace -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/CraigsappMidifile -I/Users/semyon/Projects/VocalTrainer/VocalTrainer -I/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils -I/Users/semyon/Projects/VocalTrainer/PitchDetection -I/Users/semyon/Projects/VocalTrainer/include/nanovg -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQml.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/semyon/Qt/5.11.0/clang_64/lib mainwindow.h -o moc_mainwindow.cpp
+	/Users/semyon/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/semyon/Qt/5.11.0/clang_64/mkspecs/macx-clang -I/Users/semyon/Projects/VocalTrainer/QtVocalTrainer -I/Users/semyon/Projects/VocalTrainer/include -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Drawers -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Workspace -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/CraigsappMidifile -I/Users/semyon/Projects/VocalTrainer/VocalTrainer -I/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils -I/Users/semyon/Projects/VocalTrainer/PitchDetection -I/Users/semyon/Projects/VocalTrainer/include/nanovg -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQml.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/semyon/Qt/5.11.0/clang_64/lib mainwindow.h -o moc_mainwindow.cpp
 
-moc_zoomcontroller.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QObject \
+moc_qmlzoomcontroller.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QObject \
 		qmlpitch.h \
 		../PitchDetection/Pitch.h \
-		zoomcontroller.h \
+		../VocalTrainer/Manager/ZoomController.h \
+		../PitchDetection/CppUtils/ListenersSet.h \
+		qmlzoomcontroller.h \
 		moc_predefs.h \
 		../../../Qt/5.11.0/clang_64/bin/moc
-	/Users/semyon/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/semyon/Qt/5.11.0/clang_64/mkspecs/macx-clang -I/Users/semyon/Projects/VocalTrainer/QtVocalTrainer -I/Users/semyon/Projects/VocalTrainer/include -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Drawers -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Workspace -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/CraigsappMidifile -I/Users/semyon/Projects/VocalTrainer/VocalTrainer -I/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils -I/Users/semyon/Projects/VocalTrainer/PitchDetection -I/Users/semyon/Projects/VocalTrainer/include/nanovg -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQml.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/semyon/Qt/5.11.0/clang_64/lib zoomcontroller.h -o moc_zoomcontroller.cpp
+	/Users/semyon/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/semyon/Qt/5.11.0/clang_64/mkspecs/macx-clang -I/Users/semyon/Projects/VocalTrainer/QtVocalTrainer -I/Users/semyon/Projects/VocalTrainer/include -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Drawers -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Workspace -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/CraigsappMidifile -I/Users/semyon/Projects/VocalTrainer/VocalTrainer -I/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils -I/Users/semyon/Projects/VocalTrainer/PitchDetection -I/Users/semyon/Projects/VocalTrainer/include/nanovg -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQml.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/semyon/Qt/5.11.0/clang_64/lib qmlzoomcontroller.h -o moc_qmlzoomcontroller.cpp
 
 moc_player.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QObject \
-		../VocalTrainer/VxPlayer/MvxPlayer.h \
-		../VocalTrainer/VxPlayer/VxFile.h \
-		../VocalTrainer/VxPlayer/VxPitch.h \
+		../VocalTrainer/Playback/MvxPlayer.h \
+		../VocalTrainer/Playback/VxFile.h \
+		../VocalTrainer/Playback/VxPitch.h \
 		../include/boost/serialization/serialization.hpp \
 		../include/boost/serialization/split_member.hpp \
 		../PitchDetection/Pitch.h \
-		../VocalTrainer/VxPlayer/AudioPlayback/AudioPlayer.h \
+		../VocalTrainer/Playback/AudioPlayback/AudioPlayer.h \
 		../include/portaudio/portaudio.h \
 		../PitchDetection/CppUtils/ListenersSet.h \
-		../VocalTrainer/VxPlayer/VxLyricsLine.h \
-		../VocalTrainer/VxPlayer/VxLyricsInterval.h \
-		../VocalTrainer/VxPlayer/PlaybackChunk.h \
+		../VocalTrainer/Playback/VxLyricsLine.h \
+		../VocalTrainer/Playback/VxLyricsInterval.h \
+		../VocalTrainer/Playback/PlaybackChunk.h \
 		../include/boost/container/static_vector.hpp \
 		../include/boost/serialization/vector.hpp \
 		../PitchDetection/CppUtils/StlDebugUtils.h \
-		../VocalTrainer/VxPlayer/MvxFile.h \
-		../VocalTrainer/VxPlayer/AudioPlayback/VxFileAudioPlayer.h \
-		../VocalTrainer/VxPlayer/VxFileAudioDataGenerator.h \
-		../VocalTrainer/VxPlayer/tsf.h \
-		../VocalTrainer/VxPlayer/PitchRenderer.h \
-		../include/boost/icl/interval_set.hpp \
+		../VocalTrainer/Playback/MvxFile.h \
+		../VocalTrainer/Playback/AudioPlayback/VxFileAudioPlayer.h \
+		../VocalTrainer/Playback/VxFileAudioDataGenerator.h \
+		../VocalTrainer/Playback/VxFileAudioDataGeneratorConfig.h \
+		../VocalTrainer/Playback/PitchRenderer.h \
+		../VocalTrainer/Playback/tsf.h \
 		../PitchDetection/CppUtils/PeriodicallySleepingBackgroundTask.h \
 		../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h \
 		../include/boost/lockfree/queue.hpp \
+		../VocalTrainer/Playback/AudioPlayback/AudioFilePlayer.h \
+		../VocalTrainer/Playback/AudioPlayback/AudioPlayerWithDefaultSeekHandler.h \
+		../VocalTrainer/Playback/AudioPlayback/Decoder/audiodecoder.h \
+		../include/SoundTouch/SoundTouch.h \
 		../include/boost/optional.hpp \
-		../VocalTrainer/VxPlayer/PlayingPitchSequence.h \
+		../VocalTrainer/Playback/PlayingPitchSequence.h \
+		../VocalTrainer/Playback/AudioPlayback/MetronomeAudioPlayer.h \
+		../VocalTrainer/Playback/AudioPlayback/WavAudioPlayer.h \
+		../VocalTrainer/Playback/AudioPlayback/BaseWavAudioPlayer.h \
 		qmlvxpitch.h \
 		qmlpitch.h \
 		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QJsonValue \
 		player.h \
 		moc_predefs.h \
 		../../../Qt/5.11.0/clang_64/bin/moc
-	/Users/semyon/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/semyon/Qt/5.11.0/clang_64/mkspecs/macx-clang -I/Users/semyon/Projects/VocalTrainer/QtVocalTrainer -I/Users/semyon/Projects/VocalTrainer/include -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Drawers -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Workspace -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/CraigsappMidifile -I/Users/semyon/Projects/VocalTrainer/VocalTrainer -I/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils -I/Users/semyon/Projects/VocalTrainer/PitchDetection -I/Users/semyon/Projects/VocalTrainer/include/nanovg -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQml.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/semyon/Qt/5.11.0/clang_64/lib player.h -o moc_player.cpp
+	/Users/semyon/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/semyon/Qt/5.11.0/clang_64/mkspecs/macx-clang -I/Users/semyon/Projects/VocalTrainer/QtVocalTrainer -I/Users/semyon/Projects/VocalTrainer/include -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Drawers -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Workspace -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/CraigsappMidifile -I/Users/semyon/Projects/VocalTrainer/VocalTrainer -I/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils -I/Users/semyon/Projects/VocalTrainer/PitchDetection -I/Users/semyon/Projects/VocalTrainer/include/nanovg -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQml.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/semyon/Qt/5.11.0/clang_64/lib player.h -o moc_player.cpp
 
-moc_qmetalwidget.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QWidget \
-		MacOS/qmetalwidget.h \
+moc_qopenglworkspacewidget.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QOpenGLWidget \
+		../VocalTrainer/Workspace/WorkspaceDrawer.h \
+		../include/nanovg/nanovg.h \
+		../VocalTrainer/Drawers/Drawer.h \
+		../PitchDetection/CppUtils/RoundedRect.h \
+		../PitchDetection/CppUtils/Point.h \
+		../VocalTrainer/Drawers/DrawerColor.h \
+		../VocalTrainer/Playback/CraigsappMidifile/MidiEvent.h \
+		../VocalTrainer/Playback/CraigsappMidifile/MidiMessage.h \
+		../PitchDetection/PitchesCollector.h \
+		../VocalTrainer/Playback/VxFile.h \
+		../VocalTrainer/Playback/VxPitch.h \
+		../include/boost/serialization/serialization.hpp \
+		../include/boost/serialization/split_member.hpp \
+		../PitchDetection/Pitch.h \
+		../VocalTrainer/Playback/AudioPlayback/AudioPlayer.h \
+		../include/portaudio/portaudio.h \
+		../PitchDetection/CppUtils/ListenersSet.h \
+		../VocalTrainer/Playback/VxLyricsLine.h \
+		../VocalTrainer/Playback/VxLyricsInterval.h \
+		../VocalTrainer/Playback/PlaybackChunk.h \
+		../include/boost/container/static_vector.hpp \
+		../include/boost/serialization/vector.hpp \
+		../PitchDetection/CppUtils/StlDebugUtils.h \
+		../VocalTrainer/Workspace/WorkspaceController.h \
+		qopenglworkspacewidget.h \
 		moc_predefs.h \
 		../../../Qt/5.11.0/clang_64/bin/moc
-	/Users/semyon/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/semyon/Qt/5.11.0/clang_64/mkspecs/macx-clang -I/Users/semyon/Projects/VocalTrainer/QtVocalTrainer -I/Users/semyon/Projects/VocalTrainer/include -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Drawers -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Workspace -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/AudioPlayback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/VxPlayer/CraigsappMidifile -I/Users/semyon/Projects/VocalTrainer/VocalTrainer -I/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils -I/Users/semyon/Projects/VocalTrainer/PitchDetection -I/Users/semyon/Projects/VocalTrainer/include/nanovg -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQml.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/semyon/Qt/5.11.0/clang_64/lib MacOS/qmetalwidget.h -o moc_qmetalwidget.cpp
+	/Users/semyon/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/semyon/Qt/5.11.0/clang_64/mkspecs/macx-clang -I/Users/semyon/Projects/VocalTrainer/QtVocalTrainer -I/Users/semyon/Projects/VocalTrainer/include -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Drawers -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Workspace -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/CraigsappMidifile -I/Users/semyon/Projects/VocalTrainer/VocalTrainer -I/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils -I/Users/semyon/Projects/VocalTrainer/PitchDetection -I/Users/semyon/Projects/VocalTrainer/include/nanovg -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQml.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/semyon/Qt/5.11.0/clang_64/lib qopenglworkspacewidget.h -o moc_qopenglworkspacewidget.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:

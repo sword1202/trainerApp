@@ -131,3 +131,11 @@ void Player::setMetronomeEnabled(bool metronomeEnabled) {
     MvxPlayer::setMetronomeEnabled(metronomeEnabled);
     emit metronomeEnabledChanged();
 }
+
+void Player::seekToNextTact() {
+    MvxPlayer::seekToNextTact();
+}
+
+void Player::seekToPrevTact() {
+    MvxPlayer::seekToPrevTact();
+}

@@ -19,6 +19,8 @@ using namespace CppUtils;
 using std::cout;
 using std::endl;
 
+constexpr int BEATS_IN_TACT = 4;
+
 MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
     instrumentalPlayer.addSeekChangedListener([=](double seek, double) {
         if (bounds) {
@@ -101,6 +103,7 @@ void MvxPlayer::setSeek(double value) {
     instrumentalPlayer.setSeek(value);
     vxPlayer.setSeek(value);
     metronomePlayer.setSeek(value);
+    seekChangedFromUserListeners.executeAll(value);
 }
 
 void MvxPlayer::setInstrumentalVolume(float instrumentalVolume) {
@@ -295,6 +298,32 @@ void MvxPlayer::updateMetronomeVolume() {
     } else {
         metronomePlayer.setVolume(0.0f);
     }
+}
+
+void MvxPlayer::seekToNextTact() {
+    double tactDuration = getTactDuration();
+    double seek = getSeek() + tactDuration;
+    double mod = fmod(seek, tactDuration);
+    setSeek(seek - mod);
+}
+
+void MvxPlayer::seekToPrevTact() {
+    double tactDuration = getTactDuration();
+    double seek = getSeek();
+    double mod = fmod(seek, tactDuration);
+    setSeek(seek - mod);
+}
+
+double MvxPlayer::getTactDuration() const {
+    return getBeatDuration() * BEATS_IN_TACT;
+}
+
+int MvxPlayer::addSeekChangedFromUserListener(const MvxPlayer::SeekChangedListener &listener) {
+    return seekChangedFromUserListeners.addListener(listener);
+}
+
+void MvxPlayer::removeSeekChangedFromUserListener(int id) {
+    seekChangedFromUserListeners.removeListener(id);
 }
 
 MvxPlayer::Bounds::Bounds(double startSeek, double endSeek) : startSeek(startSeek), endSeek(endSeek) {

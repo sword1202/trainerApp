@@ -112,8 +112,8 @@ void MainController::setWorkspaceController(WorkspaceController *workspaceContro
     updateWorkspaceFirstPitch();
     workspaceController->setVxFile(mvxPlayer->getVxFile());
     
-    mvxPlayer->addSeekChangedListener([=] (double seek) {
-        //updateSeek(seek);
+    mvxPlayer->addSeekChangedFromUserListener([=] (double seek) {
+        updateSeek(seek);
         return DONT_DELETE_LISTENER;
     });
 }
