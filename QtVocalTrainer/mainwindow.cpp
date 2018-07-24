@@ -58,12 +58,10 @@ MainWindow::MainWindow(QWidget *parent) :
     };
 
     MvxPlayer *player = MainController::instance()->getPlayer();
-    player->addIsPlayingChangedListener([=] (bool playing) {
-        if (playing) {
-            //player->setSeek(player->getTactDuration() * (playHeadOffsetFactor - 1.0));
-            playHeadOffsetFactor = 1.0;
-            updatePlayheadPosition();
-        }
+    player->addPlayRequestedListener([=] {
+        player->setSeek(player->getSeek() + player->getTactDuration() * (playHeadOffsetFactor - 1.0));
+        playHeadOffsetFactor = 1.0;
+        updatePlayheadPosition();
         return DONT_DELETE_LISTENER;
     });
 }

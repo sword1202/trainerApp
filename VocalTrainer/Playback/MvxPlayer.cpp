@@ -90,6 +90,7 @@ void MvxPlayer::pause() {
 }
 
 void MvxPlayer::play() {
+    playRequestedListeners.executeAll();
     updateMetronomeVolume();
 
     if (bounds) {
@@ -347,6 +348,14 @@ int MvxPlayer::addStopRequestedListener(const MvxPlayer::StopRequestedListener &
 
 void MvxPlayer::removeStopRequestedListener(int id) {
     stopRequestedListeners.removeListener(id);
+}
+
+int MvxPlayer::addPlayRequestedListener(const MvxPlayer::StopRequestedListener &listener) {
+    return playRequestedListeners.addListener(listener);
+}
+
+void MvxPlayer::removePlayRequestedListener(int id) {
+    playRequestedListeners.removeListener(id);
 }
 
 MvxPlayer::Bounds::Bounds(double startSeek, double endSeek) : startSeek(startSeek), endSeek(endSeek) {

@@ -59,6 +59,7 @@ private:
 
     CppUtils::ListenersSet<bool> isPlayingChangedListeners;
     CppUtils::ListenersSet<> stopRequestedListeners;
+    CppUtils::ListenersSet<> playRequestedListeners;
     CppUtils::ListenersSet<> prepareFinishedListeners;
     CppUtils::ListenersSet<const VxFile*> vxFileChangedListeners;
     CppUtils::ListenersSet<double> seekChangedListeners;
@@ -123,6 +124,9 @@ public:
 
     int addStopRequestedListener(const StopRequestedListener& listener);
     void removeStopRequestedListener(int id);
+
+    int addPlayRequestedListener(const StopRequestedListener& listener);
+    void removePlayRequestedListener(int id);
 
     int addPrepareFinishedListener(const PrepareFinishedListener& listener);
     void removePrepareFinishedListener(int id);
