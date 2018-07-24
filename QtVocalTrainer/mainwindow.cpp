@@ -53,19 +53,33 @@ MainWindow::MainWindow(QWidget *parent) :
     setupMenus();
 
     workspaceView->onClick = [=] (QMouseEvent* event) {
-        MainController* instance = MainController::instance();
-        if (instance->getPlayer()->isPlaying()) {
-            return;
-        }
-
-        int minimumOffset = getMinimumPlayHeadOffset();
-
-        if (event->button() == Qt::LeftButton) {
-            int position = std::max(minimumOffset, event->x());
-            playHeadOffsetFactor = (double)position / minimumOffset;
-            setPlayHeadPosition(position);
-        }
+        onWorkspaceClick(event);
     };
+
+    MvxPlayer *player = MainController::instance()->getPlayer();
+    player->addIsPlayingChangedListener([=] (bool playing) {
+        if (playing) {
+            //player->setSeek(player->getTactDuration() * (playHeadOffsetFactor - 1.0));
+            playHeadOffsetFactor = 1.0;
+            updatePlayheadPosition();
+        }
+        return DONT_DELETE_LISTENER;
+    });
+}
+
+void MainWindow::onWorkspaceClick(QMouseEvent *event) {
+    MainController* instance = MainController::instance();
+    if (instance->getPlayer()->isPlaying()) {
+        return;
+    }
+
+    int minimumOffset = getMinimumPlayHeadOffset();
+
+    if (event->button() == Qt::LeftButton) {
+        int position = std::max(minimumOffset, event->x());
+        playHeadOffsetFactor = (double)position / minimumOffset;
+        setPlayHeadPosition(position);
+    }
 }
 
 void MainWindow::updatePlayheadPosition() const {
@@ -73,12 +87,16 @@ void MainWindow::updatePlayheadPosition() const {
     if (instance->getPlayer()->isPlaying()) {
         setPlayHeadPosition(getMinimumPlayHeadOffset());
     } else {
-        setPlayHeadPosition(qRound(getMinimumPlayHeadOffset() * playHeadOffsetFactor));
+        setPlayHeadPosition(qRound(getMinimumPlatHeadOffsetF() * playHeadOffsetFactor));
     }
 }
 
 int MainWindow::getMinimumPlayHeadOffset() const {
-    return qRound(MainController::instance()->getZoomController()->getIntervalWidth() * BEATS_IN_TACT);
+    return qRound(getMinimumPlatHeadOffsetF());
+}
+
+float MainWindow::getMinimumPlatHeadOffsetF() const {
+    return MainController::instance()->getZoomController()->getIntervalWidth() * BEATS_IN_TACT;
 }
 
 void MainWindow::setPlayHeadPosition(int position) const {

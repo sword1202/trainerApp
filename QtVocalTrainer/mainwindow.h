@@ -49,6 +49,10 @@ public slots:
     void updatePlayheadPosition() const;
 
     int getMinimumPlayHeadOffset() const;
+
+    void onWorkspaceClick(QMouseEvent *event);
+
+    float getMinimumPlatHeadOffsetF() const;
 };
 
 #endif // MAINWINDOW_H
