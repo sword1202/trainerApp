@@ -32,7 +32,7 @@ Rectangle {
                         ctx.fillStyle = dotColor
                         ctx.textAlign = "center"
                         ctx.textBaseline="middle"
-                        ctx.fillText(tact.toString(), x, dotY);
+                        ctx.fillText((tact - 1).toString(), x, dotY);
                         tact++;
                     }
                 }
