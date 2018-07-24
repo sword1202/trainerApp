@@ -124,6 +124,7 @@ void MainController::updateSeek(double seek) {
     float intervalWidth = zoomController->getIntervalWidth();
     double horizontalOffset = intervalsPerSecond * seek * intervalWidth;
     workspaceController->setHorizontalOffset((float)horizontalOffset);
+    workspaceController->update();
 }
 
 void MainController::updateZoom() {
