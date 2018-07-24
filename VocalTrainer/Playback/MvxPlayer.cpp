@@ -86,10 +86,12 @@ void MvxPlayer::play() {
 
     double seek = instrumentalPlayer.getSeek();
     vxPlayer.setSeek(seek);
-    metronomePlayer.setSeek(seek);
+    if (metronomePlayer.isPrepared()) {
+        metronomePlayer.setSeek(seek);
+        metronomePlayer.play();
+    }
     vxPlayer.play();
     instrumentalPlayer.play();
-    metronomePlayer.play();
 }
 
 void MvxPlayer::setSeek(double value) {
@@ -118,7 +120,7 @@ MvxPlayer::~MvxPlayer() {
 void MvxPlayer::prepare() {
     instrumentalPlayer.prepare();
     vxPlayer.prepare();
-    metronomePlayer.setAudioDataInfo(beatsPerMinute, instrumentalPlayer.getTrackDurationInSeconds());
+    metronomePlayer.setAudioDataInfo(beatsPerMinute / 4, instrumentalPlayer.getTrackDurationInSeconds());
     assert(fabs(instrumentalPlayer.getTrackDurationInSeconds() - vxPlayer.getTrackDurationInSeconds()) < 0.1);
     prepareFinishedListeners.executeAll();
     vxFileChangedListeners.executeAll(&vxPlayer.getVxFile());

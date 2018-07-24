@@ -33,6 +33,7 @@ private:
     std::atomic_int pitchShift;
     double tempoFactor;
     int dataSentToOutputListenerKey = 0;
+    std::atomic_bool looping;
 
     void setupPlaybackStartedListener();
 
@@ -113,5 +114,8 @@ public:
 
 	const PlaybackData &getPlaybackData() const;
 	double getCallbackBufferDurationInSeconds() const;
+
+    bool isLooping() const;
+    void setLooping(bool looping);
 };
 #endif //VOCALTRAINER_AUDIOPLAYER_H

@@ -66,8 +66,13 @@ int AudioPlayer::callback(
         if (readFramesCount == framesPerBuffer) {
             return paContinue;
         } else {
-            self->onComplete();
-            return paComplete;
+            if (!self->looping) {
+                self->onComplete();
+                return paComplete;
+            } else {
+                self->setBufferSeek(0);
+                return paContinue;
+            }
         }
     }
 }
@@ -167,6 +172,7 @@ AudioPlayer::AudioPlayer() {
     volume = 1.0f;
     pitchShift = 0;
     tempoFactor = 1;
+    looping = false;
 }
 
 void AudioPlayer::play() {
@@ -328,4 +334,12 @@ void AudioPlayer::setTempoFactor(double tempoFactor) {
 
 double AudioPlayer::getCallbackBufferDurationInSeconds() const {
     return AudioUtils::GetSampleTimeInSeconds(playbackData.framesPerBuffer, playbackData.sampleRate);
+}
+
+bool AudioPlayer::isLooping() const {
+    return looping;
+}
+
+void AudioPlayer::setLooping(bool looping) {
+    this->looping = looping;
 }

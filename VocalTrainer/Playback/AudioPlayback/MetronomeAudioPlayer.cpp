@@ -42,7 +42,8 @@ int MetronomeAudioPlayer::readNextSamplesBatch(void *intoBuffer, int framesCount
             if ((metronomeAudioData.size() - WAVFile::DATA_POSITION) / sampleSize - wavBufferSeek - result < 0) {
                 memset(intoBuffer, 0, (size_t)result * sampleSize);
             } else {
-                const char* begin = metronomeAudioData.data() + WAVFile::DATA_POSITION + wavBufferSeek * sampleSize;
+                int wavOffset = wavBufferSeek * sampleSize;
+                const char* begin = metronomeAudioData.data() + WAVFile::DATA_POSITION + wavOffset;
                 memcpy(intoBuffer, begin, (size_t)result * sampleSize);
             }
         }

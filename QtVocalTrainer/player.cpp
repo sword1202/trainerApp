@@ -4,6 +4,7 @@
 #include <iostream>
 #include "TimeUtils.h"
 #include "QtUtils/qtutils.h"
+#include "WAVFile.h"
 
 using namespace std;
 
