@@ -73,6 +73,11 @@ Item {
 
         hoverImage: "images/to_the_begining_hover.svg"
         idleImage: "images/to_the_begining.svg"
+
+        onClicked: {
+            cpp.player.stop()
+            play.on = false
+        }
     }
 
     ToggleButton {

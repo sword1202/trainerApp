@@ -47,6 +47,7 @@ Item {
         font.bold: true
         font.family: "LatoBold"
         anchors.bottomMargin: 1
+        enabled: false
         validator: IntValidator {
             bottom: 1; top: 999;
         }
