@@ -2,6 +2,10 @@
 #include "NvgDrawer.h"
 #include "MainController.h"
 #include "QtUtils/qtutils.h"
+#include <iostream>
+
+using std::cout;
+using std::endl;
 
 QOpenGLWorkspaceWidget::QOpenGLWorkspaceWidget(QWidget* parent) : QOpenGLWidget(parent)
 {

@@ -35,6 +35,7 @@ public:
 
     typedef typename CppUtils::ListenersSet<bool>::Listener IsPlayingChangedListener;
     typedef typename CppUtils::ListenersSet<>::Listener PrepareFinishedListener;
+    typedef typename CppUtils::ListenersSet<>::Listener StopRequestedListener;
     typedef typename CppUtils::ListenersSet<const VxFile*>::Listener VxFileChangedListener;
     typedef typename CppUtils::ListenersSet<double>::Listener SeekChangedListener;
     typedef typename CppUtils::ListenersSet<>::Listener TonalityChangedListener;
@@ -45,6 +46,7 @@ private:
     VxFileAudioPlayer vxPlayer;
     MetronomeAudioPlayer metronomePlayer;
     std::atomic_bool metronomeEnabled;
+    bool pauseRequested = false;
 
     boost::optional<Bounds> bounds;
     double playStartedSeek = -1;
@@ -52,6 +54,7 @@ private:
     double beatsPerMinute;
 
     CppUtils::ListenersSet<bool> isPlayingChangedListeners;
+    CppUtils::ListenersSet<> stopRequestedListeners;
     CppUtils::ListenersSet<> prepareFinishedListeners;
     CppUtils::ListenersSet<const VxFile*> vxFileChangedListeners;
     CppUtils::ListenersSet<double> seekChangedListeners;
@@ -110,15 +113,15 @@ public:
     double getBeatDuration() const;
     double getTactDuration() const;
 
-    // The listener is executed on Main thread
     int addIsPlayingChangedListener(const IsPlayingChangedListener& listener);
     void removeIsPlayingChangedListener(int id);
 
-    // The listener is executed on Main thread
+    int addStopRequestedListener(const StopRequestedListener& listener);
+    void removeStopRequestedListener(int id);
+
     int addPrepareFinishedListener(const PrepareFinishedListener& listener);
     void removePrepareFinishedListener(int id);
 
-    // The listener is executed on Main thread
     int addVxFileChangedListener(const VxFileChangedListener& listener);
     void removeVxFileChangedListener(int id);
 

@@ -25,29 +25,22 @@ MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
     instrumentalPlayer.addSeekChangedListener([=](double seek, double) {
         if (bounds) {
             if (seek >= bounds->getEndSeek()) {
-                Executors::ExecuteOnMainThread([this] {this->onComplete();});
+                this->onComplete();
             }
         }
 
-        Executors::ExecuteOnMainThread([this, seek] {
-            this->onSeekChanged(seek);
-        });
+        this->onSeekChanged(seek);
 
         return DONT_DELETE_LISTENER;
     });
 
     instrumentalPlayer.addOnCompleteListener([=] {
-        Executors::ExecuteOnMainThread([this] {this->onComplete();});
+        this->onComplete();
         return DONT_DELETE_LISTENER;
     });
 
     instrumentalPlayer.addPlaybackStartedListener([=] {
-        Executors::ExecuteOnMainThread([=] {this->onPlaybackStarted();});
-        return DONT_DELETE_LISTENER;
-    });
-
-    instrumentalPlayer.addPlaybackStoppedListener([=] {
-        Executors::ExecuteOnMainThread([this] {this->onPlaybackStopped();});
+        this->onPlaybackStarted();
         return DONT_DELETE_LISTENER;
     });
 }
@@ -70,9 +63,20 @@ void MvxPlayer::onComplete() {
 }
 
 void MvxPlayer::pause() {
-    instrumentalPlayer.pause();
-    vxPlayer.pause();
-    metronomePlayer.pause();
+    if (!isPlaying() || pauseRequested) {
+        return;
+    }
+
+    pauseRequested = true;
+    stopRequestedListeners.executeAll();
+    Executors::ExecuteOnBackgroundThread([=] {
+        instrumentalPlayer.pauseSync();
+        metronomePlayer.pauseSync();
+        vxPlayer.pauseSync();
+        Executors::ExecuteOnMainThread([=] {
+            onPlaybackStopped();
+        });
+    });
 }
 
 void MvxPlayer::play() {
@@ -188,6 +192,7 @@ void MvxPlayer::onPlaybackStarted() {
 }
 
 void MvxPlayer::onPlaybackStopped() {
+    pauseRequested = false;
     isPlayingChangedListeners.executeAll(false);
 }
 
@@ -324,6 +329,14 @@ int MvxPlayer::addSeekChangedFromUserListener(const MvxPlayer::SeekChangedListen
 
 void MvxPlayer::removeSeekChangedFromUserListener(int id) {
     seekChangedFromUserListeners.removeListener(id);
+}
+
+int MvxPlayer::addStopRequestedListener(const MvxPlayer::StopRequestedListener &listener) {
+    return stopRequestedListeners.addListener(listener);
+}
+
+void MvxPlayer::removeStopRequestedListener(int id) {
+    stopRequestedListeners.removeListener(id);
 }
 
 MvxPlayer::Bounds::Bounds(double startSeek, double endSeek) : startSeek(startSeek), endSeek(endSeek) {

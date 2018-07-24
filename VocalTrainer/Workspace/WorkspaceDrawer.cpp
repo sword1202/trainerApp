@@ -40,7 +40,7 @@ void WorkspaceDrawer::draw() {
 
     double now = TimeUtils::NowInSeconds();
     float frameDuration = now - frameTime;
-    // cout<<"fps = "<<(1.0 / frameDuration)<<"\n";
+//    cout<<"fps = "<<(1.0 / frameDuration)<<"\n";
     // old logic
     if (running) {
         horizontalOffset = horizontalOffset + intervalsPerSecond * intervalWidth * frameDuration;
@@ -141,7 +141,8 @@ void WorkspaceDrawer::drawPitches() const {
     drawer->setFillColor(pitchColor);
 
     double workspaceDuration = width / intervalWidth / intervalsPerSecond;
-    double timeBegin = (horizontalOffset / intervalWidth) / intervalsPerSecond - getPitchGraphDuration();
+    double workspaceSeek = (horizontalOffset / intervalWidth) / intervalsPerSecond;
+    double timeBegin = workspaceSeek - getPitchGraphDuration();
     double timeEnd = timeBegin + workspaceDuration;
 
     vxFile->iteratePitchesInTimeRange(timeBegin, timeEnd, [&] (const VxPitch& vxPitch) {

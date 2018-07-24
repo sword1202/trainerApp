@@ -17,6 +17,7 @@
 
 using namespace CppUtils;
 using std::cout;
+using std::endl;
 
 int AudioPlayer::callback(
         const void *inputBuffer,
@@ -34,7 +35,9 @@ int AudioPlayer::callback(
     // no data available, return silence and wait
     const PaSampleFormat format = self->playbackData.format;
     if (readFramesCount < 0) {
-        self->onNoDataAvailableListeners.executeAll();
+        Executors::ExecuteOnMainThread([=] {
+            self->onNoDataAvailableListeners.executeAll();
+        });
         int sampleSize = self->getSampleSize();
         memset(outputBuffer, 0, framesPerBuffer * sampleSize);
         return paContinue;
@@ -61,7 +64,9 @@ int AudioPlayer::callback(
             }
         }
 
-        self->onDataSentToOutputListeners.executeAll(outputBuffer, readFramesCount);
+        Executors::ExecuteOnMainThread([=] {
+            self->onDataSentToOutputListeners.executeAll(outputBuffer, readFramesCount);
+        });
 
         if (readFramesCount == framesPerBuffer) {
             return paContinue;
@@ -156,11 +161,28 @@ void AudioPlayer::pause() {
         return;
     }
 
-    playing = false;
+    Executors::ExecuteOnBackgroundThread([=] {
+        pauseStream();
+    });
+}
+
+void AudioPlayer::pauseStream() {
     auto err = Pa_AbortStream(stream);
     PortAudio::checkErrors(err);
-    onDataSentToOutputListeners.removeListener(dataSentToOutputListenerKey);
-    onPlaybackStoppedListeners.executeAll();
+    Executors::ExecuteOnMainThread([=] {
+        playing = false;
+        onDataSentToOutputListeners.removeListener(dataSentToOutputListenerKey);
+        onPlaybackStoppedListeners.executeAll();
+    });
+}
+
+void AudioPlayer::pauseSync() {
+    assert(isPrepared());
+    if (!playing) {
+        return;
+    }
+
+    pauseStream();
 }
 
 void AudioPlayer::setSeek(double timeStamp) {
@@ -209,8 +231,10 @@ void AudioPlayer::onComplete() {
     playing = false;
     setSeek(0);
 
-    onPlaybackStoppedListeners.executeAll();
-    onCompleteListeners.executeAll();
+    Executors::ExecuteOnMainThread([=] {
+        onPlaybackStoppedListeners.executeAll();
+        onCompleteListeners.executeAll();
+    });
 }
 
 int AudioPlayer::getSampleSize() const {
@@ -261,7 +285,9 @@ int AudioPlayer::secondsSeekToBufferSeek(double timestamp) const {
 void AudioPlayer::setBufferSeek(int bufferSeek) {
     double seek = bufferSeekToSecondsSeek(bufferSeek);
     double total = getTrackDurationInSeconds();
-    seekChangedListeners.executeAll(seek, total);
+    Executors::ExecuteOnMainThread([=] {
+        seekChangedListeners.executeAll(seek, total);
+    });
 }
 
 void AudioPlayer::prepareAsync(const std::function<void()>& callback) {

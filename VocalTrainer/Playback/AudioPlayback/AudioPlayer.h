@@ -36,6 +36,7 @@ private:
     std::atomic_bool looping;
 
     void setupPlaybackStartedListener();
+	void pauseStream();
 
     static int callback(const void *inputBuffer,
             void *outputBuffer,
@@ -79,6 +80,8 @@ public:
     bool isPlaying() const;
     bool isPrepared() const;
     void pause();
+    // pause and wait for operation to be finished on the calling thread
+    void pauseSync();
 
 	// volume - [0.0, 1.0]
     float getVolume() const;

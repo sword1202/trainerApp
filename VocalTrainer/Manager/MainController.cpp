@@ -26,6 +26,11 @@ MainController::MainController(VxPitchInputReader *pitchInputReader, MvxPlayer *
         : pitchInputReader(pitchInputReader), mvxPlayer(mvxPlayer), zoomController(zoomController) {
     workspaceController = nullptr;
 
+    mvxPlayer->addStopRequestedListener([=] {
+        onStopPlaybackRequested();
+        return DONT_DELETE_LISTENER;
+    });
+
     mvxPlayer->addIsPlayingChangedListener([this] (bool playing) {
         if (playing) {
             this->pitchInputReader->start();
@@ -33,7 +38,9 @@ MainController::MainController(VxPitchInputReader *pitchInputReader, MvxPlayer *
             this->pitchInputReader->stop();
         }
 
-        updateWorkspaceIsPlayingChanged(playing);
+        WorkspaceController* controller = workspaceController;
+        controller->setRunning(playing);
+        updateSeek(this->mvxPlayer->getSeek());
 
         return DONT_DELETE_LISTENER;
     });
@@ -80,10 +87,10 @@ MainController::MainController(VxPitchInputReader *pitchInputReader, MvxPlayer *
     });
 }
 
-void MainController::updateWorkspaceIsPlayingChanged(bool playing) {
+void MainController::onStopPlaybackRequested() {
     WorkspaceController* controller = this->workspaceController;
+    controller->setRunning(false);
     updateSeek(mvxPlayer->getSeek());
-    controller->setRunning(playing);
 }
 
 VxPitchInputReader *MainController::getPitchInputReader() const {

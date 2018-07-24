@@ -7,6 +7,7 @@
 #include "WAVFile.h"
 
 using namespace std;
+using namespace CppUtils;
 
 constexpr char FILE_URL_PREFIX[] = "file://";
 constexpr int FILE_URL_PREFIX_LENGTH = 7;
