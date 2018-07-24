@@ -42,6 +42,8 @@ void NvgDrawer::clear() {
 
 NvgDrawer::NvgDrawer() {
     ctx = nvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES);
+    setTextAlign(textAlign);
+    setTextBaseline(textBaseline);
 }
 
 NvgDrawer::~NvgDrawer() {
@@ -174,5 +176,54 @@ void NvgDrawer::quadraticCurveTo(float cpx, float cpy, float x, float y) {
 }
 
 void NvgDrawer::fillText(const std::string &text, float x, float y) {
-    assert(false && "Not implemented");
+    nvgText(ctx, x, y, text.data(), text.data() + text.size());
+    fill();
+}
+
+void NvgDrawer::setTextFont(const std::string &fontFamily, float fontSize) {
+    Drawer::setTextFont(fontFamily, fontSize);
+    nvgFontFace(ctx, fontFamily.data());
+    nvgFontSize(ctx, fontSize);
+}
+
+static NVGalign toNVGAlign(Drawer::TextAlign align) {
+    switch (align) {
+        case Drawer::CENTER:
+            return NVG_ALIGN_CENTER;
+        case Drawer::LEFT:
+            return NVG_ALIGN_LEFT;
+        case Drawer::RIGHT:
+            return NVG_ALIGN_RIGHT;
+    }
+
+    assert(false);
+    return NVG_ALIGN_CENTER;
+}
+
+static NVGalign toNVGAlign(Drawer::TextBaseline align) {
+    switch (align) {
+        case Drawer::TOP:
+            return NVG_ALIGN_TOP;
+        case Drawer::BOTTOM:
+            return NVG_ALIGN_BOTTOM;
+        case Drawer::MIDDLE:
+            return NVG_ALIGN_MIDDLE;
+    }
+
+    assert(false);
+    return NVG_ALIGN_MIDDLE;
+}
+
+void NvgDrawer::setTextAlign(Drawer::TextAlign align) {
+    Drawer::setTextAlign(align);
+    nvgTextAlign(ctx, toNVGAlign(align) | toNVGAlign(textBaseline));
+}
+
+void NvgDrawer::setTextBaseline(Drawer::TextBaseline baseline) {
+    Drawer::setTextBaseline(baseline);
+    nvgTextAlign(ctx, toNVGAlign(baseline) | toNVGAlign(textAlign));
+}
+
+void NvgDrawer::registerFont(const char *name, const char *data, int dataSize) {
+    nvgCreateFontMem(ctx, name, (unsigned char *) data, dataSize, 0);
 }

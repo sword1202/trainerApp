@@ -44,6 +44,8 @@ class WorkspaceDrawer : public WorkspaceController {
 
     std::atomic<double> frameTime;
 
+    void iterateHorizontalIntervals(const std::function<void(float x, bool isBeat)>& func) const;
+
     void drawHorizontalLine(float y, const Color& color) const;
     void drawVerticalGrid() const;
     void drawHorizontalGrid() const;

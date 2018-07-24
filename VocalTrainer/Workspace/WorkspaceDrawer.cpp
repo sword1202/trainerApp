@@ -96,18 +96,24 @@ void WorkspaceDrawer::setHorizontalOffset(float horizontalOffset) {
     }
 }
 
-void WorkspaceDrawer::drawVerticalGrid() const {
+void WorkspaceDrawer::iterateHorizontalIntervals(const std::function<void(float x, bool isBeat)> &func) const {
     int index = 1;
     float offset = fmod(horizontalOffset, intervalWidth * BEATS_IN_TACT);
     for (float x = intervalWidth - offset; x < width + offset; x += intervalWidth, index++) {
+        bool isBeat = index % BEATS_IN_TACT != 0;
+        func(x, isBeat);
+    }
+}
+
+void WorkspaceDrawer::drawVerticalGrid() const {
+    iterateHorizontalIntervals([=] (float x, bool isBeat) {
         drawer->beginPath();
         drawer->moveTo(x * sizeMultiplier, 0);
         drawer->setStrokeWidth(sizeMultiplier);
         drawer->lineTo(x * sizeMultiplier, height * sizeMultiplier);
-        bool isBeat = index % BEATS_IN_TACT != 0;
         drawer->setStrokeColor(isBeat ? gridColor : accentGridColor);
         drawer->stroke();
-    }
+    });
 }
 
 void WorkspaceDrawer::drawHorizontalLine(float y, const Color& color) const {

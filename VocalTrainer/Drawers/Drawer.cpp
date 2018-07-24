@@ -49,7 +49,7 @@ void Drawer::roundedRectDifferentCorners(float x, float y, float w,
     closePath();
 }
 
-void Drawer::setTextFont(const std::string &fontFamily, int fontSize) {
+void Drawer::setTextFont(const std::string &fontFamily, float fontSize) {
     this->fontFamily = fontFamily;
     this->fontSize = fontSize;
 }

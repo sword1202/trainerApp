@@ -56,6 +56,12 @@ public:
     void roundedRect(float x, float y, float w, float h, float r) override;
 
     void fillText(const std::string &text, float x, float y) override;
+
+    void setTextFont(const std::string &fontFamily, float fontSize) override;
+    void setTextAlign(TextAlign align) override;
+    void setTextBaseline(TextBaseline baseline) override;
+
+    void registerFont(const char *name, const char *data, int dataSize) override;
 };
 
 
