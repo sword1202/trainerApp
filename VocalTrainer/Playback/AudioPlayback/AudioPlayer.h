@@ -58,6 +58,9 @@ protected:
     int getSampleSize() const;
 
     virtual void destroy();
+
+    // Used for players, where totalDurationInSeconds can be changed after prepare
+    void setTotalDurationInSeconds(double totalDurationInSeconds);
 public:
 
     typedef CppUtils::ListenersSet<>::Listener OnCompleteListener;

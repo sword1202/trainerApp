@@ -51,12 +51,13 @@ void Player::setSource(const QString &source) {
     }
 
     init(local8Bit.data());
-    prepare();
 
     if (!isMetronomeSoundDataSet()) {
         std::string metronomeData = QtUtils::readAllFromFile(":qml/sounds/metronome.wav").toStdString();
         setMetronomeSoundData(std::move(metronomeData));
     }
+
+    prepare();
 
     emit durationChanged();
     emit beatsPerMinuteChanged();

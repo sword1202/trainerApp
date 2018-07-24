@@ -120,7 +120,7 @@ MvxPlayer::~MvxPlayer() {
 void MvxPlayer::prepare() {
     instrumentalPlayer.prepare();
     vxPlayer.prepare();
-    metronomePlayer.setAudioDataInfo(beatsPerMinute / 4, instrumentalPlayer.getTrackDurationInSeconds());
+    metronomePlayer.setAudioDataInfo(beatsPerMinute, instrumentalPlayer.getTrackDurationInSeconds());
     assert(fabs(instrumentalPlayer.getTrackDurationInSeconds() - vxPlayer.getTrackDurationInSeconds()) < 0.1);
     prepareFinishedListeners.executeAll();
     vxFileChangedListeners.executeAll(&vxPlayer.getVxFile());

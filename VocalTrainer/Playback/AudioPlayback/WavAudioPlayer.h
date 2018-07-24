@@ -12,8 +12,8 @@
 class WavAudioPlayer : public BaseWavAudioPlayer {
     std::string audioData;
 protected:
-    int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) override;
-    WavSetupData provideWavSetupData() override;
+    virtual int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) override;
+    virtual WavSetupData provideWavSetupData() override;
 
 public:
     void setAudioData(std::string&& audioData);

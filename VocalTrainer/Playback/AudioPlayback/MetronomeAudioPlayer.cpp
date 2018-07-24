@@ -11,48 +11,6 @@
 using std::cout;
 using std::endl;
 
-int MetronomeAudioPlayer::readNextSamplesBatch(void *intoBuffer, int framesCount,
-        const AudioPlayer::PlaybackData &playbackData) {
-    assert(beatsPerMinute > 0);
-    int sampleSize = getSampleSize();
-    int seek = getBufferSeek();
-    int result = std::min(framesCount, totalSamplesCount - seek);
-    if (getVolume() <= 0.00001f) {
-        memset(intoBuffer, 0, (size_t)result * sampleSize);
-    } else {
-        double beatDuration = 60.0 / beatsPerMinute;
-        double timeSeek = getSeek();
-        double mod = fmod(timeSeek, beatDuration);
-        double halfMetronomeAudioDataDuration = samplesCountToSeconds(metronomeAudioData.size() / 2);
-        double wavSeek = -1;
-        double distanceToNextBeatBorder = beatDuration - mod - halfMetronomeAudioDataDuration;
-        if (distanceToNextBeatBorder <= 0) {
-            wavSeek = -distanceToNextBeatBorder;
-        } else {
-            double distanceToPrevBeatBorder = mod - halfMetronomeAudioDataDuration;
-            if (distanceToPrevBeatBorder < 0) {
-                wavSeek = halfMetronomeAudioDataDuration * 2 + distanceToPrevBeatBorder;
-            }
-        }
-
-        if (wavSeek < 0) {
-            memset(intoBuffer, 0, (size_t)result * sampleSize);
-        } else {
-            int wavBufferSeek = secondsToSamplesCount(wavSeek);
-            if ((metronomeAudioData.size() - WAVFile::DATA_POSITION) / sampleSize - wavBufferSeek - result < 0) {
-                memset(intoBuffer, 0, (size_t)result * sampleSize);
-            } else {
-                int wavOffset = wavBufferSeek * sampleSize;
-                const char* begin = metronomeAudioData.data() + WAVFile::DATA_POSITION + wavOffset;
-                memcpy(intoBuffer, begin, (size_t)result * sampleSize);
-            }
-        }
-    }
-
-    moveBufferSeekIfNotChangedBefore(result, seek);
-    return result;
-}
-
 void MetronomeAudioPlayer::setMetronomeAudioData(std::string&& metronomeAudioData) {
     this->metronomeAudioData = std::move(metronomeAudioData);
 }
@@ -63,7 +21,31 @@ double MetronomeAudioPlayer::getBeatsPerMinute() const {
 
 void MetronomeAudioPlayer::setAudioDataInfo(double beatsPerMinute, double totalDurationInSeconds) {
     this->beatsPerMinute = beatsPerMinute;
-    this->totalDurationInSeconds = totalDurationInSeconds;
+    setTotalDurationInSeconds(totalDurationInSeconds);
+
+    int sampleSize = getSampleSize();
+    double beatDuration = 60.0 / beatsPerMinute;
+    int beatBufferSize = secondsToSamplesCount(beatDuration) * sampleSize;
+    int metronomeBufferSize = (int)metronomeAudioData.size() - WAVFile::DATA_POSITION;
+
+    assert(beatBufferSize - metronomeBufferSize >= 0);
+
+    int totalBufferSize = secondsToSamplesCount(totalDurationInSeconds) * sampleSize;
+
+    std::string audioData;
+    audioData.reserve((size_t)totalBufferSize);
+    audioData.assign(beatBufferSize - metronomeBufferSize / 2, '\0');
+
+    while (audioData.size() < totalBufferSize) {
+        audioData.append(metronomeAudioData.data() + WAVFile::DATA_POSITION, (size_t)metronomeBufferSize);
+        audioData.append(beatBufferSize - metronomeBufferSize, '\0');
+    }
+
+    while (audioData.size() != totalBufferSize) {
+        audioData.pop_back();
+    }
+
+    setAudioData(std::move(audioData));
 }
 
 BaseWavAudioPlayer::WavSetupData MetronomeAudioPlayer::provideWavSetupData() {
@@ -73,6 +55,5 @@ BaseWavAudioPlayer::WavSetupData MetronomeAudioPlayer::provideWavSetupData() {
 
 double MetronomeAudioPlayer::calculateTotalDurationInSeconds(int size, int bytesPerChannel,
         const AudioPlayer::PlaybackData &playbackData) {
-    this->totalSamplesCount = secondsToSamplesCount(totalDurationInSeconds);
-    return totalDurationInSeconds;
+    return 0;
 }

@@ -78,11 +78,12 @@ int AudioPlayer::callback(
 }
 
 void AudioPlayer::prepare() {
+    assert(!isPrepared());
     prepareAndProvidePlaybackData(&playbackData);
     BOOST_ASSERT_MSG(playbackData.sampleRate > 0 &&
             playbackData.framesPerBuffer >= 0 &&
             playbackData.numChannels > 0 &&
-            playbackData.totalDurationInSeconds > 0,
+            playbackData.totalDurationInSeconds >= 0,
             "not all playback data provided");
 
     auto err = Pa_OpenDefaultStream( &stream,
@@ -342,4 +343,8 @@ bool AudioPlayer::isLooping() const {
 
 void AudioPlayer::setLooping(bool looping) {
     this->looping = looping;
+}
+
+void AudioPlayer::setTotalDurationInSeconds(double totalDurationInSeconds) {
+    playbackData.totalDurationInSeconds = totalDurationInSeconds;
 }
