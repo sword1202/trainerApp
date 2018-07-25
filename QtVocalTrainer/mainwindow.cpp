@@ -45,11 +45,14 @@ MainWindow::MainWindow(QWidget *parent) :
     });
 
     updatePlayHeadPosition();
-    setPlayHeadPosition(300, 1);
     setupMenus();
 
     workspaceView->onClick = [=] (QMouseEvent* event) {
         onWorkspaceClick(event);
+    };
+
+    workspaceView->onMouseMove = [=] (QMouseEvent* event) {
+        onWorkspaceMouseMove(event);
     };
 
     MvxPlayer *player = MainController::instance()->getPlayer();
@@ -78,7 +81,7 @@ void MainWindow::onWorkspaceClick(QMouseEvent *event) {
     int minimumOffset = getMinimumPlayHeadOffset();
 
     if (event->button() == Qt::LeftButton) {
-        int position = std::max(minimumOffset, event->x());
+        int position = std::max(minimumOffset, event->x() - PIANO_WIDTH);
         playHeadOffsetFactor = (double)position / minimumOffset;
         if (MainController::instance()->getPlayer()->isPlaying()) {
             movePlayHeadToPlaybackStart();
@@ -86,6 +89,11 @@ void MainWindow::onWorkspaceClick(QMouseEvent *event) {
             setPlayHeadPosition(position, 0);
         }
     }
+}
+
+void MainWindow::onWorkspaceMouseMove(QMouseEvent *event) {
+    int position = std::max(getPlayHeadPosition(0) + getMinimumPlayHeadOffset(), event->x() - PIANO_WIDTH);
+    setPlayHeadPosition(position, 1);
 }
 
 void MainWindow::updatePlayHeadPosition() {
@@ -174,6 +182,7 @@ void MainWindow::onFileOpen() {
 }
 
 void MainWindow::setBoundsSelectionEnabled(bool enabled) {
+    setPlayHeadPosition(getPlayHeadPosition(0) + getMinimumPlayHeadOffset(), 1);
     playHeadLine2->setVisible(enabled);
     playHeadTriangle2->setVisible(enabled);
 }

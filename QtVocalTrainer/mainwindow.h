@@ -30,6 +30,7 @@ class MainWindow : public QMainWindow
     void updatePlayHeadPosition();
     int getMinimumPlayHeadOffset() const;
     void onWorkspaceClick(QMouseEvent *event);
+    void onWorkspaceMouseMove(QMouseEvent *event);
     float getMinimumPlayHeadOffsetF() const;
 
     void setupPlayHeadWidgets(QSvgWidget** playHeadTriangle, QFrame** playHeadLine);

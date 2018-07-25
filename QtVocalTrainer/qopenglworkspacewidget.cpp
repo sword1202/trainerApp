@@ -54,6 +54,13 @@ void QOpenGLWorkspaceWidget::mousePressEvent(QMouseEvent *event) {
     QWidget::mousePressEvent(event);
 }
 
+void QOpenGLWorkspaceWidget::mouseMoveEvent(QMouseEvent *event) {
+    if (onMouseMove) {
+        onMouseMove(event);
+    }
+    QWidget::mouseMoveEvent(event);
+}
+
 QOpenGLWorkspaceWidget::~QOpenGLWorkspaceWidget() {
     if (workspaceDrawer) {
         delete workspaceDrawer;
