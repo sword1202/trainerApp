@@ -27,21 +27,23 @@ class MainWindow : public QMainWindow
 
     QQuickWidget *createQQuickWidget(const QString& qmlFile);
     void movePlayHeadToPlaybackStart();
-    void updatePlayheadPosition() const;
+    void updatePlayHeadPosition();
     int getMinimumPlayHeadOffset() const;
     void onWorkspaceClick(QMouseEvent *event);
-    float getMinimumPlatHeadOffsetF() const;
-public:
-    explicit MainWindow(QWidget *parent = 0);
+    float getMinimumPlayHeadOffsetF() const;
 
+    void setupPlayHeadWidgets(QSvgWidget** playHeadTriangle, QFrame** playHeadLine);
 protected:
     void resizeEvent(QResizeEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
 
 public:
+    explicit MainWindow(QWidget *parent = 0);
     virtual ~MainWindow();
-    void setPlayHeadPosition(int position) const;
+    void setPlayHeadPosition(int position, int index);
+    int getPlayHeadPosition(int index) const;
     void setupMenus();
+    Q_INVOKABLE void setBoundsSelectionEnabled(bool enabled);
 
 #ifdef __APPLE__
     void doMacOsPlatformStaff();
@@ -50,6 +52,8 @@ public:
 
 public slots:
     void onFileOpen();
+
+    void resizePlayHeadLine(int index);
 };
 
 #endif // MAINWINDOW_H

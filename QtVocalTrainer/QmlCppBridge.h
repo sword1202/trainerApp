@@ -14,7 +14,7 @@ class QmlCppBridge : public QObject
 {
     Q_OBJECT
 
-    MainWindow* mainWindow;
+    MainWindow* _mainWindow;
 
 public:
     QmlCppBridge(MainWindow* mainWindow);
@@ -30,11 +30,13 @@ public:
     Q_PROPERTY(Player* player READ getPlayer() CONSTANT)
     Q_PROPERTY(QmlPitchInputReader* pitchInputReader READ getPitchInputReader() CONSTANT)
     Q_PROPERTY(qreal devicePixelRatio READ getDevicePixelRatio() CONSTANT)
+    Q_PROPERTY(MainWindow* mainWindow READ getMainWindow() CONSTANT)
 
     QmlZoomController* getZoomController() const;
     Player* getPlayer() const;
     QmlPitchInputReader* getPitchInputReader() const;
     qreal getDevicePixelRatio() const;
+    MainWindow* getMainWindow() const;
 
 signals:
     void resize();

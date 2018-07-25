@@ -42,6 +42,7 @@ qrc_qml.cpp: qml.qrc \
 		qml/ButtonShadow.qml \
 		qml/TrackButton.qml \
 		qml/LeftSideBar.qml \
+		qml/VerticalScrollBarContainer.qml \
 		qml/SvgImage.qml \
 		qml/Yardstick.qml \
 		qml/ImageButton.qml \
@@ -158,6 +159,8 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		../include/boost/serialization/vector.hpp \
 		../PitchDetection/CppUtils/StlDebugUtils.h \
 		../VocalTrainer/Workspace/WorkspaceController.h \
+		../VocalTrainer/Workspace/PianoDrawer.h \
+		../VocalTrainer/Playback/PlayingPitchSequence.h \
 		../VocalTrainer/Playback/MvxPlayer.h \
 		../VocalTrainer/Playback/MvxFile.h \
 		../VocalTrainer/Playback/AudioPlayback/VxFileAudioPlayer.h \
@@ -173,7 +176,6 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		../VocalTrainer/Playback/AudioPlayback/Decoder/audiodecoder.h \
 		../include/SoundTouch/SoundTouch.h \
 		../include/boost/optional.hpp \
-		../VocalTrainer/Playback/PlayingPitchSequence.h \
 		../VocalTrainer/Playback/AudioPlayback/MetronomeAudioPlayer.h \
 		../VocalTrainer/Playback/AudioPlayback/WavAudioPlayer.h \
 		../VocalTrainer/Playback/AudioPlayback/BaseWavAudioPlayer.h \
@@ -340,6 +342,8 @@ moc_mainwindow.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/
 		../include/boost/serialization/vector.hpp \
 		../PitchDetection/CppUtils/StlDebugUtils.h \
 		../VocalTrainer/Workspace/WorkspaceController.h \
+		../VocalTrainer/Workspace/PianoDrawer.h \
+		../VocalTrainer/Playback/PlayingPitchSequence.h \
 		../VocalTrainer/Playback/MvxPlayer.h \
 		../VocalTrainer/Playback/MvxFile.h \
 		../VocalTrainer/Playback/AudioPlayback/VxFileAudioPlayer.h \
@@ -355,7 +359,6 @@ moc_mainwindow.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/
 		../VocalTrainer/Playback/AudioPlayback/Decoder/audiodecoder.h \
 		../include/SoundTouch/SoundTouch.h \
 		../include/boost/optional.hpp \
-		../VocalTrainer/Playback/PlayingPitchSequence.h \
 		../VocalTrainer/Playback/AudioPlayback/MetronomeAudioPlayer.h \
 		../VocalTrainer/Playback/AudioPlayback/WavAudioPlayer.h \
 		../VocalTrainer/Playback/AudioPlayback/BaseWavAudioPlayer.h \
@@ -441,6 +444,8 @@ moc_qopenglworkspacewidget.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framew
 		../include/boost/serialization/vector.hpp \
 		../PitchDetection/CppUtils/StlDebugUtils.h \
 		../VocalTrainer/Workspace/WorkspaceController.h \
+		../VocalTrainer/Workspace/PianoDrawer.h \
+		../VocalTrainer/Playback/PlayingPitchSequence.h \
 		qopenglworkspacewidget.h \
 		moc_predefs.h \
 		../../../Qt/5.11.0/clang_64/bin/moc

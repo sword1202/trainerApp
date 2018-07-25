@@ -6,7 +6,7 @@
 
 using namespace CppUtils;
 
-QmlCppBridge::QmlCppBridge(MainWindow *mainWindow) : mainWindow(mainWindow) {
+QmlCppBridge::QmlCppBridge(MainWindow *mainWindow) : _mainWindow(mainWindow) {
 
 }
 
@@ -36,7 +36,11 @@ Player *QmlCppBridge::getPlayer() const {
 }
 
 qreal QmlCppBridge::getDevicePixelRatio() const {
-    return mainWindow->devicePixelRatio();
+    return _mainWindow->devicePixelRatio();
+}
+
+MainWindow *QmlCppBridge::getMainWindow() const {
+    return _mainWindow;
 }
 
 QmlPitchInputReader* QmlCppBridge::getPitchInputReader() const {

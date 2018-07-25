@@ -72,5 +72,6 @@
         <file>qml/HeaderWithSubHeader.qml</file>
         <file>qml/js/zoom.js</file>
         <file>qml/LeftSideBar.qml</file>
+        <file>qml/VerticalScrollBarContainer.qml</file>
     </qresource>
 </RCC>

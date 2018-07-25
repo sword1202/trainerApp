@@ -35,18 +35,17 @@ MainWindow::MainWindow(QWidget *parent) :
     QQuickWidget *headerWidget = createQQuickWidget("qrc:/qml/HeaderWithSubHeader.qml");
     header = headerWidget->rootObject();
 
-    playHeadTriangle = new QSvgWidget(":/qml/images/play_head_triangle.svg", this);
-    playHeadTriangle->resize(PLAY_HEAD_SIZE, PLAY_HEAD_SIZE);
-
-    playHeadLine = QtUtils::createVerticalLine(1, this);
-    playHeadLine->setStyleSheet(QString("background-color: #24232D;"));
+    setupPlayHeadWidgets(&playHeadTriangle, &playHeadLine);
+    setupPlayHeadWidgets(&playHeadTriangle2, &playHeadLine2);
+    setBoundsSelectionEnabled(false);
 
     VxApp::instance()->getZoomController()->addZoomChangedListener([=] (float zoom) {
-        updatePlayheadPosition();
+        updatePlayHeadPosition();
         return DONT_DELETE_LISTENER;
     });
 
-    updatePlayheadPosition();
+    updatePlayHeadPosition();
+    setPlayHeadPosition(300, 1);
     setupMenus();
 
     workspaceView->onClick = [=] (QMouseEvent* event) {
@@ -60,11 +59,19 @@ MainWindow::MainWindow(QWidget *parent) :
     });
 }
 
+void MainWindow::setupPlayHeadWidgets(QSvgWidget** playHeadTriangle, QFrame** playHeadLine) {
+    *playHeadTriangle = new QSvgWidget(":/qml/images/play_head_triangle.svg", this);
+    (*playHeadTriangle)->resize(PLAY_HEAD_SIZE, PLAY_HEAD_SIZE);
+
+    *playHeadLine = QtUtils::createVerticalLine(1, this);
+    (*playHeadLine)->setStyleSheet(QString("background-color: #24232D;"));
+}
+
 void MainWindow::movePlayHeadToPlaybackStart() {
     MvxPlayer* player = MainController::instance()->getPlayer();
     player->setSeek(player->getSeek() + player->getTactDuration() * (playHeadOffsetFactor - 1.0));
     playHeadOffsetFactor = 1.0;
-    updatePlayheadPosition();
+    updatePlayHeadPosition();
 }
 
 void MainWindow::onWorkspaceClick(QMouseEvent *event) {
@@ -76,35 +83,44 @@ void MainWindow::onWorkspaceClick(QMouseEvent *event) {
         if (MainController::instance()->getPlayer()->isPlaying()) {
             movePlayHeadToPlaybackStart();
         } else {
-            setPlayHeadPosition(position);
+            setPlayHeadPosition(position, 0);
         }
     }
 }
 
-void MainWindow::updatePlayheadPosition() const {
+void MainWindow::updatePlayHeadPosition() {
     MainController* instance = MainController::instance();
     if (instance->getPlayer()->isPlaying()) {
-        setPlayHeadPosition(getMinimumPlayHeadOffset());
+        setPlayHeadPosition(getMinimumPlayHeadOffset(), 0);
     } else {
-        setPlayHeadPosition(qRound(getMinimumPlatHeadOffsetF() * playHeadOffsetFactor));
+        setPlayHeadPosition(qRound(getMinimumPlayHeadOffsetF() * playHeadOffsetFactor), 0);
     }
 }
 
 int MainWindow::getMinimumPlayHeadOffset() const {
-    return qRound(getMinimumPlatHeadOffsetF());
+    return qRound(getMinimumPlayHeadOffsetF());
 }
 
-float MainWindow::getMinimumPlatHeadOffsetF() const {
+float MainWindow::getMinimumPlayHeadOffsetF() const {
     return MainController::instance()->getZoomController()->getIntervalWidth() * BEATS_IN_TACT;
 }
 
-void MainWindow::setPlayHeadPosition(int position) const {
+void MainWindow::setPlayHeadPosition(int position, int index) {
+    QWidget* playHeadTriangle = index == 0 ? this->playHeadTriangle : playHeadTriangle2;
+    QWidget* playHeadLine = index == 0 ? this->playHeadLine : playHeadLine2;
+
     QRect geometry = playHeadTriangle->geometry();
     QPoint move(PIANO_WIDTH + position, HEADER_HEIGHT + (int)WorkspaceDrawer::YARD_STICK_HEIGHT);
     geometry.moveCenter(move);
     playHeadTriangle->setGeometry(geometry);
     playHeadLine->move(move);
 }
+
+int MainWindow::getPlayHeadPosition(int index) const {
+    QWidget* playHeadLine = index == 0 ? this->playHeadLine : playHeadLine2;
+    return playHeadLine->x() - PIANO_WIDTH;
+}
+
 
 QQuickWidget *MainWindow::createQQuickWidget(const QString& qmlFile) {
     QQuickWidget* qmlWidget = new QQuickWidget(this);
@@ -124,7 +140,13 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
     header->setWidth(width);
     header->setHeight(HEADER_HEIGHT);
 
-    playHeadLine->resize(playHeadLine->width(), workspaceView->height() - (int)WorkspaceDrawer::YARD_STICK_HEIGHT);
+    resizePlayHeadLine(0);
+    resizePlayHeadLine(1);
+}
+
+void MainWindow::resizePlayHeadLine(int index) {
+    QWidget* playHeadLine = index == 0 ? this->playHeadLine : playHeadLine2;
+    playHeadLine->resize(playHeadLine->width(), workspaceView->height() - (int) WorkspaceDrawer::YARD_STICK_HEIGHT);
 }
 
 void MainWindow::setupWorkspaceView() {
@@ -149,6 +171,11 @@ void MainWindow::onFileOpen() {
     if (!fileName.isNull()) {
         VxApp::instance()->getPlayer()->setSource(fileName);
     }
+}
+
+void MainWindow::setBoundsSelectionEnabled(bool enabled) {
+    playHeadLine2->setVisible(enabled);
+    playHeadTriangle2->setVisible(enabled);
 }
 
 MainWindow::~MainWindow()

@@ -18,7 +18,7 @@ Item {
     }
 
     ToggleButton {
-        id: loop
+        id: bounds_selector
 
         anchors.right: parent.right
         height: parent.height
@@ -27,8 +27,8 @@ Item {
         onImage: "images/loop_on.svg"
         offImage: "images/loop_off.svg"
 
-        onStateChanged: {
-            //playHead2.state = state
+        onOnChanged: {
+            cpp.mainWindow.setBoundsSelectionEnabled(on)
         }
     }
 
