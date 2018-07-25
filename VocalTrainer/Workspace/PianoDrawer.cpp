@@ -16,7 +16,7 @@ constexpr float pianoWidth = 51;
 
 constexpr float pitchRadius = 3;
 constexpr float sharpPitchRadius = 1.5;
-constexpr float distanceBetweenTextLeftAndPitchRight = 20.0;
+constexpr float distanceBetweenTextLeftAndPitchRight = 18.0;
 
 constexpr float heightMap[] = {smallPitchHeight, bigPitchHeight,
 smallPitchHeight, smallPitchHeight, bigPitchHeight, bigPitchHeight, smallPitchHeight};

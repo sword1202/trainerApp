@@ -22,6 +22,7 @@ using std::endl;
 constexpr int BEATS_IN_TACT = 4;
 constexpr float PITCHES_GRAPH_WIDTH_IN_INTERVALS = 4.0f;
 constexpr float YARD_STICK_DOT_Y_OFFSET = 9.75f + 1.5f;
+constexpr float PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN = 6;
 constexpr float YARD_STICK_DOT_RADIUS = 1.5f;
 static const int PITCH_RADIUS = 3;
 
@@ -56,6 +57,10 @@ void WorkspaceDrawer::draw() {
     pianoDrawer->draw(PIANO_WIDTH, height, devicePixelRatio);
     drawer->setFillColor(Color::white());
     drawer->fillRect(0, 0, PIANO_WIDTH, YARD_STICK_HEIGHT);
+
+    drawer->translate(0, PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN);
+    drawVerticalLine(PIANO_WIDTH, borderLineColor);
+    drawer->translate(0, -PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN);
 
     drawer->translate(PIANO_WIDTH, 0);
     drawYardStick();
