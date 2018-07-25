@@ -42,7 +42,7 @@ void NvgDrawer::clear() {
 }
 
 NvgDrawer::NvgDrawer() {
-    ctx = nvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES);
+    ctx = nvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DEBUG);
     setTextAlign(textAlign);
     setTextBaseline(textBaseline);
 }
@@ -177,9 +177,11 @@ void NvgDrawer::quadraticCurveTo(float cpx, float cpy, float x, float y) {
 }
 
 void NvgDrawer::fillText(const std::string &text, float x, float y) {
-    assert(nvgFindFont(ctx, fontFamily.data()) != FONS_INVALID);
+    if (nvgFindFont(ctx, fontFamily.data()) == FONS_INVALID){
+        throw std::runtime_error("Font " + fontFamily + " was not registered, call drawer->registerFont before fillText call");
+    }
+
     nvgText(ctx, x, y, text.data(), text.data() + text.size());
-    fill();
 }
 
 void NvgDrawer::setTextFont(const std::string &fontFamily, float fontSize) {

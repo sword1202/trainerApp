@@ -2,6 +2,7 @@
 #include "NvgDrawer.h"
 #include "MainController.h"
 #include "QtUtils/qtutils.h"
+#include "fonts.h"
 #include <iostream>
 
 using std::cout;
@@ -13,7 +14,11 @@ QOpenGLWorkspaceWidget::QOpenGLWorkspaceWidget(QWidget* parent) : QOpenGLWidget(
 }
 
 void QOpenGLWorkspaceWidget::initializeGL() {
-    workspaceDrawer = new WorkspaceDrawer(new NvgDrawer(), [=] {
+    NvgDrawer* drawer = new NvgDrawer();
+
+    QByteArray latoRegularFontData = Fonts::latoRegular();
+    drawer->registerFont("Lato-Regular", latoRegularFontData.data(), latoRegularFontData.size());
+    workspaceDrawer = new WorkspaceDrawer(drawer, [=] {
         update();
     });
     MainController::instance()->setWorkspaceController(workspaceDrawer);
