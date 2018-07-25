@@ -11,8 +11,6 @@ class QmlPitchInputReader : public QObject, public VxPitchInputReader
 {
     Q_OBJECT
 public:
-    static QmlPitchInputReader* instance();
-
     explicit QmlPitchInputReader(QObject *parent = nullptr);
     Q_INVOKABLE void start() override;
     Q_INVOKABLE void stop() override;

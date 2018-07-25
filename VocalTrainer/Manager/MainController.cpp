@@ -63,8 +63,8 @@ MainController::MainController(VxPitchInputReader *pitchInputReader, MvxPlayer *
         return DONT_DELETE_LISTENER;
     });
 
-    mvxPlayer->setInstrumentalVolume(1.0);
-    mvxPlayer->setPianoVolume(0.5);
+    mvxPlayer->setInstrumentalVolume(0.0);
+    mvxPlayer->setPianoVolume(0.0);
 
     zoomController->addZoomChangedListener([this] (float zoom) {
         updateZoom();

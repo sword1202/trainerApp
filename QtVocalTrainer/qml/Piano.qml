@@ -45,6 +45,8 @@ Rectangle {
         property int startPitchIndex: 0
         property var selectedWhitePitchIndexes: []
 
+        renderStrategy: Canvas.Threaded
+
         onPaint: {
             var ctx = getContext("2d")
 
@@ -173,8 +175,12 @@ Rectangle {
             }
         }
 
-        Component.onCompleted: {
-            cpp.pitchInputReader.pitchDetected.connect(requestPaint)
+        Connections {
+            target: cpp.pitchInputReader
+
+            onPitchDetected: {
+                root.requestPaint()
+            }
         }
 
         onHeightChanged: {
