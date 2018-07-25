@@ -213,7 +213,7 @@ void WorkspaceDrawer::drawPitchesGraph() const {
     auto getXY = [&](double time, const Pitch& pitch) {
         x = (time - now + duration) / duration * pitchGraphWidth;
         float distanceFromFirstPitch = getDistanceFromFirstPitch(pitch);
-        y = height - (distanceFromFirstPitch + pitch.getDistanceFromLowerBound() / 2.0) * intervalHeight;
+        y = getGridHeight() - (distanceFromFirstPitch + pitch.getDistanceFromLowerBound() / 2.0) * intervalHeight;
     };
 
     while (i < pitchesCount) {
