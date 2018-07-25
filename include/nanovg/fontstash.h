@@ -279,9 +279,14 @@ void fons__tt_getFontVMetrics(FONSttFontImpl *font, int *ascent, int *descent, i
 	stbtt_GetFontVMetrics(&font->font, ascent, descent, lineGap);
 }
 
-float fons__tt_getPixelHeightScale(FONSttFontImpl *font, float size)
+//float fons__tt_getPixelHeightScale(FONSttFontImpl *font, float size)
+//{
+//	return stbtt_ScaleForPixelHeight(&font->font, size);
+//}
+
+float fons__tt_getPixelHeightScale(FONSttFontImpl *font, float size, const char* fontName)
 {
-	return stbtt_ScaleForPixelHeight(&font->font, size);
+    return stbtt_ScaleForPixelHeight(&font->font, size, fontName);
 }
 
 int fons__tt_getGlyphIndex(FONSttFontImpl *font, int codepoint)
@@ -1086,7 +1091,7 @@ static FONSglyph* fons__getGlyph(FONScontext* stash, FONSfont* font, unsigned in
 		// It is possible that we did not find a fallback glyph.
 		// In that case the glyph index 'g' is 0, and we'll proceed below and cache empty glyph.
 	}
-	scale = fons__tt_getPixelHeightScale(&renderFont->font, size);
+	scale = fons__tt_getPixelHeightScale(&renderFont->font, size, 0);
 	fons__tt_buildGlyphBitmap(&renderFont->font, g, size, scale, &advance, &lsb, &x0, &y0, &x1, &y1);
 	gw = x1-x0 + pad*2;
 	gh = y1-y0 + pad*2;
@@ -1302,7 +1307,7 @@ float fonsDrawText(FONScontext* stash,
 	font = stash->fonts[state->font];
 	if (font->data == NULL) return x;
 
-	scale = fons__tt_getPixelHeightScale(&font->font, (float)isize/10.0f);
+	scale = fons__tt_getPixelHeightScale(&font->font, (float)isize/10.0f, font->name);
 
 	if (end == NULL)
 		end = str + strlen(str);
@@ -1360,7 +1365,7 @@ int fonsTextIterInit(FONScontext* stash, FONStextIter* iter,
 
 	iter->isize = (short)(state->size*10.0f);
 	iter->iblur = (short)state->blur;
-	iter->scale = fons__tt_getPixelHeightScale(&iter->font->font, (float)iter->isize/10.0f);
+	iter->scale = fons__tt_getPixelHeightScale(&iter->font->font, (float)iter->isize/10.0f, iter->font->name);
 
 	// Align horizontally
 	if (state->align & FONS_ALIGN_LEFT) {
@@ -1490,7 +1495,7 @@ float fonsTextBounds(FONScontext* stash,
 	font = stash->fonts[state->font];
 	if (font->data == NULL) return 0;
 
-	scale = fons__tt_getPixelHeightScale(&font->font, (float)isize/10.0f);
+	scale = fons__tt_getPixelHeightScale(&font->font, (float)isize/10.0f, font->name);
 
 	// Align vertically.
 	y += fons__getVertAlign(stash, font, state->align, isize);

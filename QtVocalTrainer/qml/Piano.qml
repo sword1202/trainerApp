@@ -179,7 +179,7 @@ Rectangle {
             target: cpp.pitchInputReader
 
             onPitchDetected: {
-                root.requestPaint()
+                //root.requestPaint()
             }
         }
 
