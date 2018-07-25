@@ -115,6 +115,8 @@ public:
     void update() override;
 
     void setHorizontalOffsetChangedListener(const std::function<void(float)> &listener) override;
+
+    float getGridHeight() const;
 };
 
 

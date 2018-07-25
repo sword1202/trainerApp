@@ -170,9 +170,13 @@ void WorkspaceDrawer::drawPitches() const {
         double x = (pitchTimeBegin - timeBegin) / workspaceDuration * width;
         double pitchWidth = pitchDuration / workspaceDuration * width;
         int distanceFromFirstPitch = getDistanceFromFirstPitch(vxPitch.pitch);
-        float y = height - (distanceFromFirstPitch + 1) * intervalHeight;
+        float y = getGridHeight() - (distanceFromFirstPitch + 1) * intervalHeight;
         drawPitch((float)x, y, (float)pitchWidth);
     });
+}
+
+float WorkspaceDrawer::getGridHeight() const {
+    return height - YARD_STICK_HEIGHT - 1;
 }
 
 void WorkspaceDrawer::setVxFile(const VxFile* vxFile) {
