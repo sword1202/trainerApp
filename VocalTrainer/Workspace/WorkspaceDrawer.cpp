@@ -54,19 +54,10 @@ void WorkspaceDrawer::draw() {
     drawer->beginFrame(width, height, devicePixelRatio);
     drawer->clear();
 
-    pianoDrawer->draw(PIANO_WIDTH, height, devicePixelRatio);
-    drawer->setFillColor(Color::white());
-    drawer->fillRect(0, 0, PIANO_WIDTH, YARD_STICK_HEIGHT);
-
-    drawer->translate(0, PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN);
-    drawVerticalLine(PIANO_WIDTH, borderLineColor);
-    drawer->translate(0, -PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN);
-
     drawer->translate(PIANO_WIDTH, 0);
     drawYardStick();
     drawer->translate(0, YARD_STICK_HEIGHT);
     drawer->translate(-PIANO_WIDTH, 0);
-    drawHorizontalLine(0, borderLineColor);
     drawVerticalLine(PIANO_WIDTH, borderLineColor);
     drawer->translate(PIANO_WIDTH, 0);
 
@@ -75,6 +66,18 @@ void WorkspaceDrawer::draw() {
     drawHorizontalGrid();
     drawPitches();
     drawPitchesGraph();
+
+    drawer->translateTo(0, 0);
+    drawer->setFillColor(Color::white());
+    drawer->fillRect(0, 0, PIANO_WIDTH, height);
+    pianoDrawer->draw(PIANO_WIDTH, height, devicePixelRatio);
+    drawer->setFillColor(Color::white());
+    drawer->fillRect(0, 0, PIANO_WIDTH, YARD_STICK_HEIGHT);
+    drawHorizontalLine(YARD_STICK_HEIGHT, borderLineColor);
+
+    drawer->translate(0, PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN);
+    drawVerticalLine(PIANO_WIDTH, borderLineColor);
+    drawer->translate(0, -PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN);
 
     drawer->endFrame();
 }
