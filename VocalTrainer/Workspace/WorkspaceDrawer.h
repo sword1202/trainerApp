@@ -61,7 +61,6 @@ class WorkspaceDrawer : public WorkspaceController {
     double getIntervalDuration() const;
 
     std::function<void()> onUpdateRequested;
-    std::function<void(float)> onHorizontalOffsetChanged;
 public:
     static constexpr float YARD_STICK_HEIGHT = 22;
 
@@ -113,8 +112,6 @@ public:
     int getDistanceFromFirstPitch(const Pitch &pitch) const;
 
     void update() override;
-
-    void setHorizontalOffsetChangedListener(const std::function<void(float)> &listener) override;
 
     float getGridHeight() const;
 };

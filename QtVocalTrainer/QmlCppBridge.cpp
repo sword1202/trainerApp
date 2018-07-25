@@ -7,10 +7,7 @@
 using namespace CppUtils;
 
 QmlCppBridge::QmlCppBridge(MainWindow *mainWindow) : mainWindow(mainWindow) {
-    MainController::instance()->addWorkspaceHorizontalOffsetChangedListener([=] (float value) {
-        emit workspaceHorizontalOffsetChanged();
-        return DONT_DELETE_LISTENER;
-    });
+
 }
 
 qreal QmlCppBridge::now() {
@@ -44,8 +41,4 @@ qreal QmlCppBridge::getDevicePixelRatio() const {
 
 QmlPitchInputReader* QmlCppBridge::getPitchInputReader() const {
     return QmlPitchInputReader::instance();
-}
-
-qreal QmlCppBridge::getWorkspaceHorizontalOffset() const {
-    return MainController::instance()->getWorkspaceHorizontalOffset();
 }

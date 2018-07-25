@@ -22,8 +22,6 @@ class MainController {
     PianoController* pianoController = nullptr;
     std::function<void()> onPianoUpdateRequested;
 
-    CppUtils::ListenersSet<float> workspaceHorizontalOffsetChangedListeners;
-
     void updateZoom();
     void updateWorkspaceFirstPitch();
 
@@ -45,11 +43,6 @@ public:
 
     static MainController* instance();
     static void initInstance(MainController* inst);
-
-    int addWorkspaceHorizontalOffsetChangedListener(const WorkspaceHorizontalOffsetChangedListener& listener);
-    void removeWorkspaceHorizontalOffsetChangedListener(int id);
-
-    float getWorkspaceHorizontalOffset() const;
 
     virtual ~MainController();
 };
