@@ -56,7 +56,7 @@ void ZoomController::setFirstPitch(const Pitch& pitch) {
     firstPitchChangedListeners.executeAll(pitch);
 }
 
-int ZoomController::addFirstPitchChangedListener(const CppUtils::ListenersSet<Pitch>::Listener &listener) {
+int ZoomController::addFirstPitchChangedListener(const CppUtils::ListenersSet<const Pitch&>::Listener &listener) {
     return firstPitchChangedListeners.addListener(listener);
 }
 

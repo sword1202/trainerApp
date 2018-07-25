@@ -154,18 +154,13 @@ void NvgDrawer::arcTo(float x1, float y1, float x2, float y2, float radius) {
 }
 
 void NvgDrawer::rect(float x, float y, float w, float h) {
-    nvgRect(ctx, x, y, w, h);
+    // nvgRect doesn't work for some reasons
+    roundedRect(x, y, w, h, 0);
 }
 
 void NvgDrawer::fillRect(float x, float y, float w, float h) {
-    nvgRect(ctx, x, y, w, h);
-    nvgFill(ctx);
-}
-
-void NvgDrawer::roundedRectDifferentCorners(float x, float y, float w, float h, float radiusLeftTop,
-        float radiusRightTop,
-        float radiusBottomRight, float radiusBottomLeft) {
-    nvgRoundedRectVarying(ctx, x, y, w, h, radiusLeftTop, radiusRightTop, radiusBottomRight, radiusBottomLeft);
+    rect(x, y, w, h);
+    fill();
 }
 
 void NvgDrawer::roundedRect(float x, float y, float w, float h, float r) {

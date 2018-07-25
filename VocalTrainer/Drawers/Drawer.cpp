@@ -4,10 +4,6 @@ using namespace CppUtils;
 
 void Drawer::roundedRect(float x, float y, float w, float h, float r) {
     assert(r >= 0);
-    if (r == 0) {
-        rect(x, y, w, h);
-        return;
-    }
 
     if (w < 2 * r) {
         r = w / 2;

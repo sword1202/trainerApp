@@ -42,16 +42,16 @@ void PianoDrawer::setIntervalHeight(float intervalHeight) {
     this->intervalHeight = intervalHeight;
 }
 
-PianoDrawer::PianoDrawer(Drawer *drawer, PlayingPitchSequence *pitchSequence)
-        : drawer(drawer), pitchSequence(pitchSequence) {
+PianoDrawer::PianoDrawer(Drawer *drawer)
+        : drawer(drawer){
     drawSharpPitchesFillColor.reserve(100);
     drawSharpPitchesY.reserve(100);
+    intervalHeight = 0;
 }
 
 void PianoDrawer::draw(float width, float height, float devicePixelRation) {
     assert(intervalHeight > 0);
 
-    drawer->beginFrame(width, height, devicePixelRation);
     drawer->clear();
 
     drawer->setStrokeColor(borderColor);
@@ -124,7 +124,6 @@ void PianoDrawer::draw(float width, float height, float devicePixelRation) {
 
     drawSharpPitches();
     drawPitchNames(height);
-    drawer->endFrame();
 }
 
 void PianoDrawer::drawSharpPitches() const {
@@ -150,7 +149,7 @@ void PianoDrawer::drawPitchNames(float height) const {
 
     drawer->setTextAlign(Drawer::LEFT);
     drawer->setTextBaseline(Drawer::MIDDLE);
-    drawer->setTextFont("", 10);
+    drawer->setTextFont("Lato-Bold", 10);
 
     float intervalOctaveHeightToPianoOctaveHeightRelation = getIntervalOctaveHeightToPianoOctaveHeightRelation();
 
@@ -189,4 +188,8 @@ void PianoDrawer::setFirstPitch(const Pitch &firstPitch) {
 
 void PianoDrawer::setDetectedPitch(const Pitch &detectedPitch) {
     this->detectedPitch = detectedPitch;
+}
+
+void PianoDrawer::setPitchSequence(PlayingPitchSequence *pitchSequence) {
+    this->pitchSequence = pitchSequence;
 }

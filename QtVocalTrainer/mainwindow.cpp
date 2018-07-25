@@ -13,7 +13,7 @@
 #include "qopenglworkspacewidget.h"
 
 constexpr int HEADER_HEIGHT = 75 + 61 - (int)WorkspaceDrawer::YARD_STICK_HEIGHT;
-constexpr int PIANO_WIDTH = 67;
+constexpr int PIANO_WIDTH = WorkspaceDrawer::PIANO_WIDTH;
 constexpr int PLAY_HEAD_SIZE = 11;
 constexpr int BEATS_IN_TACT = 4;
 
@@ -26,14 +26,10 @@ MainWindow::MainWindow(QWidget *parent) :
     doMacOsPlatformStaff();
 #endif
     setupWorkspaceView();
-    workspaceView->move(PIANO_WIDTH, HEADER_HEIGHT);
+    workspaceView->move(0, HEADER_HEIGHT);
     workspaceView->resize(1024, 768);
 
     cpp = new QmlCppBridge(this);
-
-    QQuickWidget* pianoWidget = createQQuickWidget("qrc:/qml/LeftSideBar.qml");
-    pianoWidget->move(0, HEADER_HEIGHT);
-    leftSideBar = pianoWidget->rootObject();
 
     // setup header
     QQuickWidget *headerWidget = createQQuickWidget("qrc:/qml/HeaderWithSubHeader.qml");
@@ -123,13 +119,10 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
     int width = event->size().width();
     int height = event->size().height();
 
-    workspaceView->resize(width - PIANO_WIDTH, height - HEADER_HEIGHT);
+    workspaceView->resize(width, height - HEADER_HEIGHT);
 
     header->setWidth(width);
     header->setHeight(HEADER_HEIGHT);
-
-    leftSideBar->setWidth(PIANO_WIDTH);
-    leftSideBar->setHeight(height - HEADER_HEIGHT);
 
     playHeadLine->resize(playHeadLine->width(), workspaceView->height() - (int)WorkspaceDrawer::YARD_STICK_HEIGHT);
 }

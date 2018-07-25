@@ -81,7 +81,8 @@ SOURCES += \
     ../VocalTrainer/Playback/AudioPlayback/BaseWavAudioPlayer.cpp \
     ../VocalTrainer/Playback/AudioPlayback/MetronomeAudioPlayer.cpp \
     ../VocalTrainer/Playback/AudioPlayback/AudioPlayerWithDefaultSeekHandler.cpp \
-    fonts.cpp
+    fonts.cpp \
+    ../VocalTrainer/Workspace/PianoDrawer.cpp
 
 RESOURCES += qml.qrc
 
@@ -173,7 +174,8 @@ HEADERS += \
     ../VocalTrainer/Playback/AudioPlayback/BaseWavAudioPlayer.h \
     ../VocalTrainer/Playback/AudioPlayback/MetronomeAudioPlayer.h \
     ../VocalTrainer/Playback/AudioPlayback/AudioPlayerWithDefaultSeekHandler.h \
-    fonts.h
+    fonts.h \
+    ../VocalTrainer/Workspace/PianoDrawer.h
 
 INCLUDEPATH += ../include \
     ../VocalTrainer/Drawers \

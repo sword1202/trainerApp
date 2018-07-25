@@ -22,8 +22,6 @@ public:
     Q_PROPERTY(float threshold READ getThreshold WRITE setThreshold NOTIFY thresholdChanged)
     Q_PROPERTY(QmlTimedPitch lastDetectedPitch READ getLastDetectedPitch NOTIFY pitchDetected)
 
-    void pitchDetected(float frequency, double time) override;
-
     void setThreshold(float threshold) override;
 
 signals:

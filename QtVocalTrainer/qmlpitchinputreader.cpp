@@ -1,7 +1,12 @@
 #include "qmlpitchinputreader.h"
 
-QmlPitchInputReader::QmlPitchInputReader(QObject *parent) : QObject(parent) {
+using namespace CppUtils;
 
+QmlPitchInputReader::QmlPitchInputReader(QObject *parent) : QObject(parent) {
+    addPitchDetectedListener([=] (const Pitch& pitch, double time) {
+        emit pitchDetected(QmlTimedPitch(pitch, time));
+        return DONT_DELETE_LISTENER;
+    });
 }
 
 void QmlPitchInputReader::start() {
@@ -14,10 +19,6 @@ void QmlPitchInputReader::stop() {
 
 QmlTimedPitch QmlPitchInputReader::pitchAt(int index) {
     return QmlTimedPitch(getFrequencyAt(index), getTimeAt(index));
-}
-
-void QmlPitchInputReader::pitchDetected(float frequency, double time) {
-    emit pitchDetected(QmlTimedPitch(frequency, time));
 }
 
 void QmlPitchInputReader::setThreshold(float threshold) {

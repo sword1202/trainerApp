@@ -13,7 +13,9 @@
 #include "PitchesCollector.h"
 #include "VxFile.h"
 #include "WorkspaceController.h"
+#include "PianoDrawer.h"
 #include <memory>
+#include <PlayingPitchSequence.h>
 
 class WorkspaceDrawer : public WorkspaceController {
     typedef Drawer::Color Color;
@@ -44,6 +46,8 @@ class WorkspaceDrawer : public WorkspaceController {
 
     Drawer* drawer = nullptr;
     PitchesCollector* pitchesCollector = nullptr;
+    PianoDrawer* pianoDrawer = nullptr;
+
     std::atomic<const VxFile*> vxFile;
 
     std::atomic<double> frameTime;
@@ -51,6 +55,7 @@ class WorkspaceDrawer : public WorkspaceController {
     void iterateHorizontalIntervals(const std::function<void(float x, bool isBeat)>& func) const;
 
     void drawHorizontalLine(float y, const Color& color) const;
+    void drawVerticalLine(float x, const Color& color) const;
     void drawVerticalGrid() const;
     void drawHorizontalGrid() const;
     void drawPitch(float x, float y, float width) const;
@@ -65,6 +70,7 @@ class WorkspaceDrawer : public WorkspaceController {
     std::function<void()> onUpdateRequested;
 public:
     static constexpr float YARD_STICK_HEIGHT = 22;
+    static constexpr int PIANO_WIDTH = 67;
 
     WorkspaceDrawer(Drawer *drawer, const std::function<void()>& onUpdateRequested);
     ~WorkspaceDrawer();
@@ -118,6 +124,10 @@ public:
     void update() override;
 
     float getGridHeight() const;
+
+    void setDetectedPitch(const Pitch &detectedPitch) override;
+
+    void setPitchSequence(PlayingPitchSequence *pitchSequence) override;
 };
 
 

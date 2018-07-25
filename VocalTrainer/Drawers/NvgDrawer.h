@@ -53,9 +53,6 @@ public:
     float getTranslateY() override;
     void translateTo(float x, float y) override;
 
-    void roundedRectDifferentCorners(float x, float y, float w, float h, float radiusLeftTop, float radiusRightTop,
-            float radiusBottomRight, float radiusBottomLeft) override;
-
     void roundedRect(float x, float y, float w, float h, float r) override;
 
     void fillText(const std::string &text, float x, float y) override;

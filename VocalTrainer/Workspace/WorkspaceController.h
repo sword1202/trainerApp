@@ -8,6 +8,7 @@
 
 
 #import "PitchesCollector.h"
+#include "PlayingPitchSequence.h"
 
 class WorkspaceController {
 public:
@@ -24,6 +25,8 @@ public:
     virtual void setVxFile(const VxFile* vxFile) = 0;
     virtual void setFirstVisiblePitch(const Pitch &firstPitch) = 0;
     virtual void update() = 0;
+    virtual void setDetectedPitch(const Pitch &detectedPitch) = 0;
+    virtual void setPitchSequence(PlayingPitchSequence *pitchSequence) = 0;
     virtual ~WorkspaceController() = default;
 };
 

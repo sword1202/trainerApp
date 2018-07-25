@@ -4,9 +4,11 @@
 #include "QtUtils/qtutils.h"
 #include "fonts.h"
 #include <iostream>
+#include "Executors.h"
 
 using std::cout;
 using std::endl;
+using namespace CppUtils;
 
 QOpenGLWorkspaceWidget::QOpenGLWorkspaceWidget(QWidget* parent) : QOpenGLWidget(parent)
 {
@@ -18,10 +20,13 @@ void QOpenGLWorkspaceWidget::initializeGL() {
 
     QByteArray latoRegular = Fonts::latoRegular();
     drawer->registerFont("Lato-Regular", latoRegular.data(), latoRegular.size());
+    QByteArray latoBold = Fonts::latoBold();
+    drawer->registerFont("Lato-Bold", latoRegular.data(), latoRegular.size());
     workspaceDrawer = new WorkspaceDrawer(drawer, [=] {
         update();
     });
     workspaceDrawer->setTactNumbersFontFamily("Lato-Regular");
+
     MainController::instance()->setWorkspaceController(workspaceDrawer);
 
     QtUtils::startRepeatedTimer(this, [=] {

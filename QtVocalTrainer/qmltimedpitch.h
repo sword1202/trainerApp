@@ -12,6 +12,7 @@ public:
 
     QmlTimedPitch();
     QmlTimedPitch(float frequency, double timeInSeconds);
+    QmlTimedPitch(const Pitch& pitch, double timeInSeconds);
 
     double getTimeInSeconds() const;
 };

@@ -10,6 +10,7 @@
 #include "TimeUtils.h"
 #include <iostream>
 #include <cmath>
+#include <PlayingPitchSequence.h>
 
 #include "NvgDrawer.h"
 #include "ConcurrentModificationAssert.h"
@@ -52,9 +53,18 @@ void WorkspaceDrawer::draw() {
     drawer->beginFrame(width, height, devicePixelRatio);
     drawer->clear();
 
+    pianoDrawer->draw(PIANO_WIDTH, height, devicePixelRatio);
+    drawer->setFillColor(Color::white());
+    drawer->fillRect(0, 0, PIANO_WIDTH, YARD_STICK_HEIGHT);
+
+    drawer->translate(PIANO_WIDTH, 0);
     drawYardStick();
     drawer->translate(0, YARD_STICK_HEIGHT);
+    drawer->translate(-PIANO_WIDTH, 0);
     drawHorizontalLine(0, borderLineColor);
+    drawVerticalLine(PIANO_WIDTH, borderLineColor);
+    drawer->translate(PIANO_WIDTH, 0);
+
     drawer->translate(0, 0.5);
     drawVerticalGrid();
     drawHorizontalGrid();
@@ -78,6 +88,7 @@ float WorkspaceDrawer::getIntervalHeight() const {
 
 void WorkspaceDrawer::setIntervalHeight(float intervalHeight) {
     this->intervalHeight = intervalHeight;
+    pianoDrawer->setIntervalHeight(intervalHeight);
 }
 
 float WorkspaceDrawer::getVerticalOffset() const {
@@ -107,12 +118,7 @@ void WorkspaceDrawer::iterateHorizontalIntervals(const std::function<void(float 
 
 void WorkspaceDrawer::drawVerticalGrid() const {
     iterateHorizontalIntervals([=] (float x, bool isBeat) {
-        drawer->beginPath();
-        drawer->moveTo(x * sizeMultiplier, 0);
-        drawer->setStrokeWidth(sizeMultiplier);
-        drawer->lineTo(x * sizeMultiplier, height * sizeMultiplier);
-        drawer->setStrokeColor(isBeat ? gridColor : accentGridColor);
-        drawer->stroke();
+        drawVerticalLine(x, isBeat ? gridColor : accentGridColor);
     });
 }
 
@@ -121,6 +127,15 @@ void WorkspaceDrawer::drawHorizontalLine(float y, const Color& color) const {
     drawer->moveTo(0, y * sizeMultiplier);
     drawer->lineTo(width * sizeMultiplier, y * sizeMultiplier);
     drawer->setStrokeWidth(sizeMultiplier);
+    drawer->setStrokeColor(color);
+    drawer->stroke();
+}
+
+void WorkspaceDrawer::drawVerticalLine(float x, const WorkspaceDrawer::Color &color) const {
+    drawer->beginPath();
+    drawer->moveTo(x * sizeMultiplier, 0);
+    drawer->setStrokeWidth(sizeMultiplier);
+    drawer->lineTo(x * sizeMultiplier, height * sizeMultiplier);
     drawer->setStrokeColor(color);
     drawer->stroke();
 }
@@ -318,6 +333,8 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, const std::function<void()>& on
     setPitchRadius(PITCH_RADIUS);
     borderLineColor = {0x8B, 0x89, 0xB6, 0xCC};
     yardStickDotAndTextColor = {0x24, 0x23, 0x2D, 0xFF};
+
+    pianoDrawer = new PianoDrawer(drawer);
 }
 
 WorkspaceDrawer::~WorkspaceDrawer() {
@@ -379,6 +396,7 @@ void WorkspaceDrawer::setPitchRadius(float pitchRadius) {
 void WorkspaceDrawer::setFirstVisiblePitch(const Pitch &firstPitch) {
     assert(firstPitch.isValid());
     this->firstPitch = firstPitch;
+    pianoDrawer->setFirstPitch(firstPitch);
 }
 
 bool WorkspaceDrawer::isRunning() const {
@@ -400,4 +418,12 @@ void WorkspaceDrawer::setOnUpdateRequested(const std::function<void()> &onUpdate
 
 void WorkspaceDrawer::setTactNumbersFontFamily(const std::string &tactNumbersFontFamily) {
     this->tactNumbersFontFamily = tactNumbersFontFamily;
+}
+
+void WorkspaceDrawer::setDetectedPitch(const Pitch &detectedPitch) {
+    pianoDrawer->setDetectedPitch(detectedPitch);
+}
+
+void WorkspaceDrawer::setPitchSequence(PlayingPitchSequence *pitchSequence) {
+    pianoDrawer->setPitchSequence(pitchSequence);
 }

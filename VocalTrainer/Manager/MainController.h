@@ -12,15 +12,12 @@
 #include "MvxPlayer.h"
 #include "WorkspaceController.h"
 #include "ZoomController.h"
-#include "PianoController.h"
 
 class MainController {
     VxPitchInputReader* pitchInputReader;
     MvxPlayer* mvxPlayer;
     ZoomController* zoomController;
-    std::atomic<WorkspaceController*> workspaceController;
-    PianoController* pianoController = nullptr;
-    std::function<void()> onPianoUpdateRequested;
+    WorkspaceController* workspaceController;
 
     void updateZoom();
     void updateWorkspaceFirstPitch();
@@ -39,7 +36,6 @@ public:
 
     // Should be executed on a render thread, the same thread as workspace->draw is executed
     void setWorkspaceController(WorkspaceController* workspaceController);
-    void setPianoController(PianoController *pianoController, const std::function<void()>& onUpdateRequested);
 
     static MainController* instance();
     static void initInstance(MainController* inst);

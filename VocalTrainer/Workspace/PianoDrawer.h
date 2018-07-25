@@ -10,13 +10,12 @@
 #include "Drawer.h"
 #include "Pitch.h"
 #include "PlayingPitchSequence.h"
-#include "PianoController.h"
 #include <unordered_set>
 
-class PianoDrawer : public PianoController {
-    float intervalHeight = 0;
+class PianoDrawer {
+    std::atomic<float> intervalHeight;
     Drawer* drawer;
-    PlayingPitchSequence* pitchSequence;
+    PlayingPitchSequence* pitchSequence = nullptr;
 
     Pitch firstPitch;
     Pitch detectedPitch;
@@ -26,14 +25,14 @@ class PianoDrawer : public PianoController {
 
     float getIntervalOctaveHeightToPianoOctaveHeightRelation() const;
 public:
-    PianoDrawer(Drawer *drawer, PlayingPitchSequence *pitchSequence);
+    PianoDrawer(Drawer *drawer);
+
+    void setPitchSequence(PlayingPitchSequence *pitchSequence);
     void draw(float pianoWidth, float height, float devicePixelRation);
     void setIntervalHeight(float intervalHeight);
     void setFirstPitch(const Pitch &firstPitch);
     void setDetectedPitch(const Pitch &detectedPitch);
-
     void drawPitchNames(float height) const;
-
     void drawSharpPitches() const;
 };
 

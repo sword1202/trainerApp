@@ -37,29 +37,25 @@ MainController::MainController(VxPitchInputReader *pitchInputReader, MvxPlayer *
         } else {
             this->pitchInputReader->stop();
         }
-
-        WorkspaceController* controller = workspaceController;
-        controller->setRunning(playing);
+        
+        workspaceController->setRunning(playing);
         updateSeek(this->mvxPlayer->getSeek());
 
         return DONT_DELETE_LISTENER;
     });
 
     mvxPlayer->addVxFileChangedListener([this] (const VxFile* vxFile) {
-        WorkspaceController* controller = workspaceController;
-        controller->setVxFile(vxFile);
+        workspaceController->setVxFile(vxFile);
         return DONT_DELETE_LISTENER;
     });
 
     mvxPlayer->addPrepareFinishedListener([=] {
-        WorkspaceController* controller = workspaceController;
-        controller->setIntervalsPerSecond(this->mvxPlayer->getBeatsPerMinute() / 60.0);
+        workspaceController->setIntervalsPerSecond(this->mvxPlayer->getBeatsPerMinute() / 60.0);
         return DONT_DELETE_LISTENER;
     });
 
     mvxPlayer->addTonalityChangedListener([=] {
-        WorkspaceController* controller = workspaceController;
-        controller->update();
+        workspaceController->update();
         return DONT_DELETE_LISTENER;
     });
 
@@ -71,25 +67,19 @@ MainController::MainController(VxPitchInputReader *pitchInputReader, MvxPlayer *
         return DONT_DELETE_LISTENER;
     });
 
-    zoomController->addFirstPitchChangedListener([this](Pitch) {
+    zoomController->addFirstPitchChangedListener([this](const Pitch&) {
         updateWorkspaceFirstPitch();
-        pianoController->setFirstPitch(this->zoomController->getFirstPitch());
-        onPianoUpdateRequested();
         return DONT_DELETE_LISTENER;
     });
 
     pitchInputReader->addPitchDetectedListener([=] (const Pitch& pitch, double) {
-        if (pianoController) {
-            pianoController->setDetectedPitch(pitch);
-            onPianoUpdateRequested();
-        }
+        workspaceController->setDetectedPitch(pitch);
         return DONT_DELETE_LISTENER;
     });
 }
 
 void MainController::onStopPlaybackRequested() {
-    WorkspaceController* controller = this->workspaceController;
-    controller->setRunning(false);
+    workspaceController->setRunning(false);
     updateSeek(mvxPlayer->getSeek());
 }
 
@@ -116,6 +106,7 @@ void MainController::setWorkspaceController(WorkspaceController *workspaceContro
     updateZoom();
     updateWorkspaceFirstPitch();
     workspaceController->setVxFile(mvxPlayer->getVxFile());
+    workspaceController->setPitchSequence(mvxPlayer);
     
     mvxPlayer->addSeekChangedFromUserListener([=] (double seek) {
         updateSeek(seek);
@@ -134,29 +125,13 @@ void MainController::updateSeek(double seek) {
 
 void MainController::updateZoom() {
     if (workspaceController) {
-        WorkspaceController* controller = workspaceController;
-        controller->setIntervalWidth(zoomController->getIntervalWidth());
-        controller->setIntervalHeight(zoomController->getIntervalHeight());
+        workspaceController->setIntervalWidth(zoomController->getIntervalWidth());
+        workspaceController->setIntervalHeight(zoomController->getIntervalHeight());
         updateSeek(mvxPlayer->getSeek());
-    }
-
-    if (pianoController) {
-        pianoController->setIntervalHeight(zoomController->getIntervalHeight());
-        onPianoUpdateRequested();
     }
 }
 
 void MainController::updateWorkspaceFirstPitch() {
-    WorkspaceController* controller = workspaceController;
-    controller->setFirstVisiblePitch(zoomController->getFirstPitch());
-}
+    workspaceController->setFirstVisiblePitch(zoomController->getFirstPitch());
 
-void MainController::setPianoController(PianoController *pianoController,
-        const std::function<void()>& onUpdateRequested) {
-    assert(pianoController);
-    onPianoUpdateRequested = onUpdateRequested;
-    this->pianoController = pianoController;
-    pianoController->setDetectedPitch(pitchInputReader->getLastDetectedPitch());
-    pianoController->setFirstPitch(zoomController->getFirstPitch());
-    pianoController->setIntervalHeight(zoomController->getIntervalHeight());
 }

@@ -279,7 +279,6 @@ moc_app.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QApplic
 		../VocalTrainer/Playback/AudioPlayback/BaseWavAudioPlayer.h \
 		../VocalTrainer/Workspace/WorkspaceController.h \
 		../VocalTrainer/Manager/ZoomController.h \
-		../VocalTrainer/Workspace/PianoController.h \
 		player.h \
 		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QObject \
 		qmlvxpitch.h \

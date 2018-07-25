@@ -14,7 +14,7 @@ class ZoomController {
     Pitch firstPitch;
 
     CppUtils::ListenersSet<float> zoomChangedListeners;
-    CppUtils::ListenersSet<Pitch> firstPitchChangedListeners;
+    CppUtils::ListenersSet<const Pitch&> firstPitchChangedListeners;
 public:
     ZoomController();
 
@@ -30,7 +30,7 @@ public:
     Pitch getFirstPitch() const;
     void setFirstPitch(const Pitch& pitch);
 
-    int addFirstPitchChangedListener(const CppUtils::ListenersSet<Pitch>::Listener &listener);
+    int addFirstPitchChangedListener(const CppUtils::ListenersSet<const Pitch&>::Listener &listener);
     void removeFirstPitchChangedListener(int key);
     int addZoomChangedListener(const CppUtils::ListenersSet<float>::Listener& listener);
     void removeZoomChangedListener(int key);
