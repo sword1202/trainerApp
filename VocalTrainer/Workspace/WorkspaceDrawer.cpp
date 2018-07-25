@@ -55,17 +55,17 @@ void WorkspaceDrawer::draw() {
     drawer->clear();
 
     drawer->translate(PIANO_WIDTH, 0);
+    drawer->translate(0, YARD_STICK_HEIGHT);
+    drawVerticalGrid();
+    drawHorizontalGrid();
+    drawPitches();
+    drawPitchesGraph();
+    drawer->translate(0, -YARD_STICK_HEIGHT);
     drawYardStick();
     drawer->translate(0, YARD_STICK_HEIGHT);
     drawer->translate(-PIANO_WIDTH, 0);
     drawVerticalLine(PIANO_WIDTH, borderLineColor);
     drawer->translate(PIANO_WIDTH, 0);
-
-    drawer->translate(0, 0.5);
-    drawVerticalGrid();
-    drawHorizontalGrid();
-    drawPitches();
-    drawPitchesGraph();
 
     drawer->translateTo(0, 0);
     drawer->setFillColor(Color::white());
