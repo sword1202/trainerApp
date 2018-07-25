@@ -24,6 +24,7 @@ class MainWindow : public QMainWindow
     QmlCppBridge *cpp;
 
     double playHeadOffsetFactor = 1.0;
+    bool boundsSelectionRunning = false;
 
     QQuickWidget *createQQuickWidget(const QString& qmlFile);
     void movePlayHeadToPlaybackStart();

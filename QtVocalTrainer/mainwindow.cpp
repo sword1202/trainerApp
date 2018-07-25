@@ -11,6 +11,7 @@
 #include <QMacCocoaViewContainer>
 #include <QThread>
 #include "qopenglworkspacewidget.h"
+#include <iostream>
 
 constexpr int HEADER_HEIGHT = 75 + 61 - (int)WorkspaceDrawer::YARD_STICK_HEIGHT;
 constexpr int PIANO_WIDTH = WorkspaceDrawer::PIANO_WIDTH;
@@ -18,6 +19,8 @@ constexpr int PLAY_HEAD_SIZE = 11;
 constexpr int BEATS_IN_TACT = 4;
 
 using namespace CppUtils;
+using std::cout;
+using std::endl;
 
 MainWindow::MainWindow(QWidget *parent) :
         QMainWindow(parent)
@@ -38,6 +41,9 @@ MainWindow::MainWindow(QWidget *parent) :
     setupPlayHeadWidgets(&playHeadTriangle, &playHeadLine);
     setupPlayHeadWidgets(&playHeadTriangle2, &playHeadLine2);
     setBoundsSelectionEnabled(false);
+
+    playHeadTriangle2->setAttribute(Qt::WA_TransparentForMouseEvents);
+    playHeadLine2->setAttribute(Qt::WA_TransparentForMouseEvents);
 
     VxApp::instance()->getZoomController()->addZoomChangedListener([=] (float zoom) {
         updatePlayHeadPosition();
@@ -81,17 +87,25 @@ void MainWindow::onWorkspaceClick(QMouseEvent *event) {
     int minimumOffset = getMinimumPlayHeadOffset();
 
     if (event->button() == Qt::LeftButton) {
-        int position = std::max(minimumOffset, event->x() - PIANO_WIDTH);
-        playHeadOffsetFactor = (double)position / minimumOffset;
-        if (MainController::instance()->getPlayer()->isPlaying()) {
-            movePlayHeadToPlaybackStart();
+        if (!boundsSelectionRunning) {
+            int position = std::max(minimumOffset, event->x() - PIANO_WIDTH);
+            playHeadOffsetFactor = (double)position / minimumOffset;
+            if (MainController::instance()->getPlayer()->isPlaying()) {
+                movePlayHeadToPlaybackStart();
+            } else {
+                setPlayHeadPosition(position, 0);
+            }
         } else {
-            setPlayHeadPosition(position, 0);
+            boundsSelectionRunning = false;
         }
     }
 }
 
 void MainWindow::onWorkspaceMouseMove(QMouseEvent *event) {
+    if (!boundsSelectionRunning) {
+        return;
+    }
+
     int position = std::max(getPlayHeadPosition(0) + getMinimumPlayHeadOffset(), event->x() - PIANO_WIDTH);
     setPlayHeadPosition(position, 1);
 }
@@ -182,6 +196,7 @@ void MainWindow::onFileOpen() {
 }
 
 void MainWindow::setBoundsSelectionEnabled(bool enabled) {
+    boundsSelectionRunning = enabled;
     setPlayHeadPosition(getPlayHeadPosition(0) + getMinimumPlayHeadOffset(), 1);
     playHeadLine2->setVisible(enabled);
     playHeadTriangle2->setVisible(enabled);
