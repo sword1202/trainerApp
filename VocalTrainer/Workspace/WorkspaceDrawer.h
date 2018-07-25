@@ -36,6 +36,8 @@ class WorkspaceDrawer : public WorkspaceController {
     Color borderLineColor;
     Color yardStickDotAndTextColor;
 
+    std::string tactNumbersFontFamily;
+
     float width = -1;
     float height = -1;
     float devicePixelRatio = -1;
@@ -103,6 +105,8 @@ public:
     void setPitchGraphColor(const Color &pitchGraphColor);
     const Color &getPitchColor() const;
     void setPitchColor(const Color &pitchColor);
+
+    void setTactNumbersFontFamily(const std::string &tactNumbersFontFamily);
 
     PitchesCollector *getPitchesCollector() const;
     void setPitchesCollector(PitchesCollector *pitchesCollector) override;

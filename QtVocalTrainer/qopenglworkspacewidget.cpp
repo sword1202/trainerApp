@@ -16,11 +16,12 @@ QOpenGLWorkspaceWidget::QOpenGLWorkspaceWidget(QWidget* parent) : QOpenGLWidget(
 void QOpenGLWorkspaceWidget::initializeGL() {
     NvgDrawer* drawer = new NvgDrawer();
 
-    QByteArray arial = Fonts::arial();
-    drawer->registerFont("Arial", arial.data(), arial.size());
+    QByteArray latoRegular = Fonts::latoRegular();
+    drawer->registerFont("Lato-Regular", latoRegular.data(), latoRegular.size());
     workspaceDrawer = new WorkspaceDrawer(drawer, [=] {
         update();
     });
+    workspaceDrawer->setTactNumbersFontFamily("Lato-Regular");
     MainController::instance()->setWorkspaceController(workspaceDrawer);
 
     QtUtils::startRepeatedTimer(this, [=] {

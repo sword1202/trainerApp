@@ -6,7 +6,7 @@
 
 namespace Fonts
 {
-    QByteArray arial();
+    QByteArray latoRegular();
 };
 
 #endif // FONTS_H

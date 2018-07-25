@@ -3,8 +3,8 @@
 
 namespace Fonts
 {
-    QByteArray arial() {
-        static QByteArray data = QtUtils::readAllFromFile(":qml/fonts/arial.ttf");
+    QByteArray latoRegular() {
+        static QByteArray data = QtUtils::readAllFromFile(":qml/fonts/Lato-Regular.ttf");
         return data;
     }
 }

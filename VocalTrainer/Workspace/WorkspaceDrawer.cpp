@@ -249,7 +249,7 @@ void WorkspaceDrawer::drawYardStick() const {
     drawer->setFillColor(yardStickDotAndTextColor);
     int startTactIndex = (int)(getHorizontalOffset() / (getIntervalWidth() * BEATS_IN_TACT));
 
-    drawer->setTextFont("Arial", 12);
+    drawer->setTextFont(tactNumbersFontFamily, 14);
     drawer->setTextAlign(Drawer::TextAlign::CENTER);
     drawer->setTextBaseline(Drawer::TextBaseline::MIDDLE);
 
@@ -396,4 +396,8 @@ void WorkspaceDrawer::update() {
 
 void WorkspaceDrawer::setOnUpdateRequested(const std::function<void()> &onUpdateRequested) {
     this->onUpdateRequested = onUpdateRequested;
+}
+
+void WorkspaceDrawer::setTactNumbersFontFamily(const std::string &tactNumbersFontFamily) {
+    this->tactNumbersFontFamily = tactNumbersFontFamily;
 }
