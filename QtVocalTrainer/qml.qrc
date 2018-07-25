@@ -37,6 +37,7 @@
         <file>qml/sounds/metronome.wav</file>
         <file>qml/fonts/Lato-Bold.ttf</file>
         <file>qml/fonts/Lato-Regular.ttf</file>
+        <file>qml/fonts/arial.ttf</file>
         <file>qml/Main.qml</file>
         <file>qml/SvgImage.qml</file>
         <file>qml/ToggleButton.qml</file>

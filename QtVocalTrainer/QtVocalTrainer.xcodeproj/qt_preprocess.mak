@@ -109,7 +109,8 @@ qrc_qml.cpp: qml.qrc \
 		qml/sounds/sounds.sf2 \
 		qml/sounds/metronome.wav \
 		qml/fonts/Lato-Regular.ttf \
-		qml/fonts/Lato-Bold.ttf
+		qml/fonts/Lato-Bold.ttf \
+		qml/fonts/arial.ttf
 	/Users/semyon/Qt/5.11.0/clang_64/bin/rcc -name qml qml.qrc -o qrc_qml.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h

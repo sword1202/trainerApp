@@ -59,7 +59,7 @@ SOURCES += \
     appmacos.mm \
     qmlvxpitch.cpp \
     qmltimedpitch.cpp \
-    ../VocalTrainer/nanovg/nanovg.c \
+    ../VocalTrainer/nanovg/nanovg.cpp \
     ../VocalTrainer/Workspace/WorkspaceDrawer.cpp \
     mainwindow.cpp \
     QtUtils/qtutils.cpp \

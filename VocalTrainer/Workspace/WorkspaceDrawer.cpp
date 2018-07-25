@@ -249,9 +249,9 @@ void WorkspaceDrawer::drawPitchesGraph() const {
 
 void WorkspaceDrawer::drawYardStick() const {
     drawer->setFillColor(yardStickDotAndTextColor);
-    int startTactIndex = (int)(getHorizontalOffset() / getIntervalWidth());
+    int startTactIndex = (int)(getHorizontalOffset() / (getIntervalWidth() * BEATS_IN_TACT));
 
-    drawer->setTextFont("Lato-Regular", 12);
+    drawer->setTextFont("Arial", 12);
     drawer->setTextAlign(Drawer::TextAlign::CENTER);
     drawer->setTextBaseline(Drawer::TextBaseline::MIDDLE);
 
@@ -259,7 +259,10 @@ void WorkspaceDrawer::drawYardStick() const {
         if (isBeat) {
             this->drawYardStickDot(x, YARD_STICK_DOT_Y_OFFSET);
         } else {
-            drawer->fillText(std::to_string(startTactIndex++), x, YARD_STICK_DOT_Y_OFFSET);
+            if (startTactIndex > 0) {
+                drawer->fillText(std::to_string(startTactIndex), x, YARD_STICK_DOT_Y_OFFSET);
+            }
+            startTactIndex++;
         }
     });
 }

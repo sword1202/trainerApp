@@ -16,8 +16,8 @@ QOpenGLWorkspaceWidget::QOpenGLWorkspaceWidget(QWidget* parent) : QOpenGLWidget(
 void QOpenGLWorkspaceWidget::initializeGL() {
     NvgDrawer* drawer = new NvgDrawer();
 
-    QByteArray latoRegularFontData = Fonts::latoRegular();
-    drawer->registerFont("Lato-Regular", latoRegularFontData.data(), latoRegularFontData.size());
+    QByteArray arial = Fonts::arial();
+    drawer->registerFont("Arial", arial.data(), arial.size());
     workspaceDrawer = new WorkspaceDrawer(drawer, [=] {
         update();
     });
