@@ -17,8 +17,8 @@ class PianoDrawer {
     Drawer* drawer;
     PlayingPitchSequence* pitchSequence = nullptr;
 
-    Pitch firstPitch;
-    Pitch detectedPitch;
+    std::atomic<Pitch> firstPitch;
+    std::atomic<Pitch> detectedPitch;
     std::vector<Drawer::Color> drawSharpPitchesFillColor;
     std::vector<float> drawSharpPitchesY;
     std::unordered_set<int> selectedWhitePitchIndexes;

@@ -26,7 +26,7 @@ class WorkspaceDrawer : public WorkspaceController {
     std::atomic<float> horizontalOffset;
     std::atomic<double> intervalsPerSecond;
     std::atomic_bool running;
-    Pitch firstPitch;
+    std::atomic<Pitch> firstPitch;
 
     float sizeMultiplier;
     float pitchRadius = 0;

@@ -160,6 +160,7 @@ void PianoDrawer::drawPitchNames(float height) const {
 
         float textY = y - pitchHeight / 2;
         std::string text;
+        Pitch firstPitch = this->firstPitch;
         if (pitch.getPerfectFrequencyIndex() == firstPitch.getPerfectFrequencyIndex()) {
             text = pitch.getFullName();
         } else if(pitch.getPitchInOctaveIndex() == Pitch::C_INDEX) {

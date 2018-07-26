@@ -163,7 +163,7 @@ void WorkspaceDrawer::drawPitch(float x, float y, float width) const {
 }
 
 void WorkspaceDrawer::drawPitches() const {
-    assert(firstPitch.isValid());
+    assert(Pitch(firstPitch).isValid());
     const VxFile* vxFile = this->vxFile;
     if (!vxFile) {
         return;
@@ -201,7 +201,7 @@ void WorkspaceDrawer::setVxFile(const VxFile* vxFile) {
 }
 
 void WorkspaceDrawer::drawPitchesGraph() const {
-    assert(firstPitch.isValid());
+    assert(Pitch(firstPitch).isValid());
     assert(pitchesCollector);
     assert(pitchGraphColor[3] > 0 && "pitchGraphColor not initialized or is completely transparent");
 
@@ -295,6 +295,7 @@ void WorkspaceDrawer::drawYardStickDot(float x, float y) const {
 }
 
 int WorkspaceDrawer::getDistanceFromFirstPitch(const Pitch &pitch) const {
+    Pitch firstPitch = this->firstPitch;
     return pitch.getPerfectFrequencyIndex() - firstPitch.getPerfectFrequencyIndex();
 }
 

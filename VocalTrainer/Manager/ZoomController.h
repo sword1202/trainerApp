@@ -10,12 +10,19 @@
 #include "Pitch.h"
 
 class ZoomController {
-    std::atomic<float> zoom;
+    float zoom;
     Pitch firstPitch;
+    Pitch lastPitch;
+    float verticalScrollPosition;
 
     CppUtils::ListenersSet<float> zoomChangedListeners;
     CppUtils::ListenersSet<const Pitch&> firstPitchChangedListeners;
+    CppUtils::ListenersSet<const Pitch&> lastPitchChangedListeners;
+    CppUtils::ListenersSet<float> verticalScrollPositionChangedListeners;
+    CppUtils::ListenersSet<> summarizedWorkspaceGridHeightChangedListeners;
 public:
+    typedef CppUtils::ListenersSet<const Pitch&>::Listener PitchChangedListener;
+
     ZoomController();
 
     float getIntervalWidth() const;
@@ -30,10 +37,23 @@ public:
     Pitch getFirstPitch() const;
     void setFirstPitch(const Pitch& pitch);
 
-    int addFirstPitchChangedListener(const CppUtils::ListenersSet<const Pitch&>::Listener &listener);
+    const Pitch &getLastPitch() const;
+    void setLastPitch(const Pitch &lastPitch);
+    float getSummarizedWorkspaceGridHeight() const;
+
+    float getVerticalScrollPosition() const;
+    void setVerticalScrollPosition(float verticalScrollPosition);
+
+    int addFirstPitchChangedListener(const PitchChangedListener &listener);
     void removeFirstPitchChangedListener(int key);
+    int addLastPitchChangedListener(const PitchChangedListener &listener);
+    void removeLastPitchChangedListener(int key);
     int addZoomChangedListener(const CppUtils::ListenersSet<float>::Listener& listener);
     void removeZoomChangedListener(int key);
+    int addVerticalScrollPositionChangedListener(const CppUtils::ListenersSet<float>::Listener &listener);
+    void removeVerticalScrollPositionChangedListener(int key);
+    int addSummarizedWorkspaceGridHeightChangedListener(const CppUtils::ListenersSet<>::Listener &listener);
+    void removeSummarizedWorkspaceGridHeightChangedListener(int key);
 };
 
 
