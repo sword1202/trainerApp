@@ -13,9 +13,11 @@
 #include "qopenglworkspacewidget.h"
 #include <iostream>
 
-constexpr int HEADER_HEIGHT = 75 + 61 - (int)WorkspaceDrawer::YARD_STICK_HEIGHT;
+constexpr int YARD_STICK_HEIGHT = (int)WorkspaceDrawer::YARD_STICK_HEIGHT;
+constexpr int HEADER_HEIGHT = 75 + 61 - YARD_STICK_HEIGHT;
 constexpr int PIANO_WIDTH = WorkspaceDrawer::PIANO_WIDTH;
 constexpr int PLAY_HEAD_SIZE = 11;
+constexpr int VERTICAL_SCROLL_WIDTH = 11;
 constexpr int BEATS_IN_TACT = 4;
 
 using namespace CppUtils;
@@ -37,6 +39,9 @@ MainWindow::MainWindow(QWidget *parent) :
     // setup header
     QQuickWidget *headerWidget = createQQuickWidget("qrc:/qml/HeaderWithSubHeader.qml");
     header = headerWidget->rootObject();
+
+    verticalScrollWidget = createQQuickWidget("qrc:/qml/VerticalScrollBarContainer.qml");
+    verticalScroll = verticalScrollWidget->rootObject();
 
     setupPlayHeadWidgets(&playHeadTriangle, &playHeadLine);
     setupPlayHeadWidgets(&playHeadTriangle2, &playHeadLine2);
@@ -162,13 +167,17 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
     header->setWidth(width);
     header->setHeight(HEADER_HEIGHT);
 
+    verticalScroll->setWidth(VERTICAL_SCROLL_WIDTH);
+    verticalScroll->setHeight(height - HEADER_HEIGHT - YARD_STICK_HEIGHT);
+    verticalScrollWidget->move(width - VERTICAL_SCROLL_WIDTH, HEADER_HEIGHT + YARD_STICK_HEIGHT + 1);
+
     resizePlayHeadLine(0);
     resizePlayHeadLine(1);
 }
 
 void MainWindow::resizePlayHeadLine(int index) {
     QWidget* playHeadLine = index == 0 ? this->playHeadLine : playHeadLine2;
-    playHeadLine->resize(playHeadLine->width(), workspaceView->height() - (int) WorkspaceDrawer::YARD_STICK_HEIGHT);
+    playHeadLine->resize(playHeadLine->width(), workspaceView->height() - YARD_STICK_HEIGHT);
 }
 
 void MainWindow::setupWorkspaceView() {

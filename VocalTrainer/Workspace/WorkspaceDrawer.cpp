@@ -73,7 +73,7 @@ void WorkspaceDrawer::draw() {
     pianoDrawer->draw(PIANO_WIDTH, height, devicePixelRatio);
     drawer->setFillColor(Color::white());
     drawer->fillRect(0, 0, PIANO_WIDTH, YARD_STICK_HEIGHT);
-    drawHorizontalLine(YARD_STICK_HEIGHT, borderLineColor);
+    drawHorizontalLine(YARD_STICK_HEIGHT + 0.5f, borderLineColor);
 
     drawer->translate(0, PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN);
     drawVerticalLine(PIANO_WIDTH, borderLineColor);

@@ -21,6 +21,8 @@ class MainWindow : public QMainWindow
     QSvgWidget* playHeadTriangle2;
     QFrame* playHeadLine2;
     QQuickItem *header;
+    QQuickWidget *verticalScrollWidget;
+    QQuickItem *verticalScroll;
     QmlCppBridge *cpp;
 
     double playHeadOffsetFactor = 1.0;

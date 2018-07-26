@@ -1,6 +1,6 @@
 import QtQuick 2.0
 
-Item {
+Rectangle {
     id: scrollBar
 
     // position and pageSize are in the range 0.0 - 1.0.  They are relative to the
@@ -11,43 +11,47 @@ Item {
     property alias upScroller: upScroller
     property alias downScroller: downScroller
 
-    width: 11.25
+    color: "#E8E7F0"
 
-    Rectangle {
-        id: background
-        anchors.fill: parent
-        color: "#E8E7F0"
-    }
+    width: 11.25
 
     onPositionChanged: {
         stripe.y = position * mouseArea.drag.maximumY
     }
 
     Rectangle {
-        id: stripe
-        height: pageSize * parent.height
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.leftMargin: padding
-        anchors.rightMargin: padding
-        radius: width / 2
+        color: parent.color
+        anchors.fill: parent
+        anchors.topMargin: padding
+        anchors.bottomMargin: padding
 
-        MouseArea {
-            id: mouseArea
-            anchors.fill: parent
-            drag {
-                target: parent
-                minimumY: 0
-                maximumY: scrollBar.height - parent.height
-                axis: Drag.YAxis
+        Rectangle {
+            id: stripe
+            height: pageSize * parent.height
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.leftMargin: padding
+            anchors.rightMargin: padding
+
+            radius: width / 2
+
+            MouseArea {
+                id: mouseArea
+                anchors.fill: parent
+                drag {
+                    target: parent
+                    minimumY: 0
+                    maximumY: scrollBar.height - parent.height - padding * 2
+                    axis: Drag.YAxis
+                }
             }
-        }
 
-        onYChanged: {
-            scrollBar.position = y / mouseArea.drag.maximumY
-        }
+            onYChanged: {
+                scrollBar.position = y / mouseArea.drag.maximumY
+            }
 
-        color: "#615F97"
+            color: "#615F97"
+        }
     }
 
     Timer {
