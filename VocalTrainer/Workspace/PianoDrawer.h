@@ -11,19 +11,23 @@
 #include "Pitch.h"
 #include "PlayingPitchSequence.h"
 #include <unordered_set>
+#include <boost/thread/shared_mutex.hpp>
 
 class PianoDrawer {
     std::atomic<float> intervalHeight;
     Drawer* drawer;
     PlayingPitchSequence* pitchSequence = nullptr;
 
-    std::atomic<Pitch> firstPitch;
-    std::atomic<Pitch> detectedPitch;
+    Pitch firstPitch;
+    Pitch detectedPitch;
+    mutable boost::shared_mutex firstPitchMutex;
+    mutable boost::shared_mutex detectedPitchMutex;
     std::vector<Drawer::Color> drawSharpPitchesFillColor;
     std::vector<float> drawSharpPitchesY;
     std::unordered_set<int> selectedWhitePitchIndexes;
 
     float getIntervalOctaveHeightToPianoOctaveHeightRelation() const;
+
 public:
     PianoDrawer(Drawer *drawer);
 

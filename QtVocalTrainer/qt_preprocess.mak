@@ -42,6 +42,7 @@ qrc_qml.cpp: qml.qrc \
 		qml/ButtonShadow.qml \
 		qml/TrackButton.qml \
 		qml/LeftSideBar.qml \
+		qml/VerticalScrollBarContainer.qml \
 		qml/SvgImage.qml \
 		qml/Yardstick.qml \
 		qml/ImageButton.qml \
@@ -109,14 +110,15 @@ qrc_qml.cpp: qml.qrc \
 		qml/sounds/sounds.sf2 \
 		qml/sounds/metronome.wav \
 		qml/fonts/Lato-Regular.ttf \
-		qml/fonts/Lato-Bold.ttf
+		qml/fonts/Lato-Bold.ttf \
+		qml/fonts/arial.ttf
 	/Users/semyon/Qt/5.11.0/clang_64/bin/rcc -name qml qml.qrc -o qrc_qml.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
 moc_predefs.h: ../../../Qt/5.11.0/clang_64/mkspecs/features/data/dummy.cpp
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++1y -Wall -W -dM -E -o moc_predefs.h ../../../Qt/5.11.0/clang_64/mkspecs/features/data/dummy.cpp
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -std=c++1z -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h ../../../Qt/5.11.0/clang_64/mkspecs/features/data/dummy.cpp
 
 compiler_moc_header_make_all: moc_QmlCppBridge.cpp moc_qmlopenglitem.cpp moc_qmlpitch.cpp moc_qmlpitchinputreader.cpp moc_app.cpp moc_qmlvxpitch.cpp moc_qmltimedpitch.cpp moc_mainwindow.cpp moc_qmlzoomcontroller.cpp moc_player.cpp moc_qopenglworkspacewidget.cpp
 compiler_moc_header_clean:
@@ -157,6 +159,9 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		../include/boost/serialization/vector.hpp \
 		../PitchDetection/CppUtils/StlDebugUtils.h \
 		../VocalTrainer/Workspace/WorkspaceController.h \
+		../VocalTrainer/Workspace/PianoDrawer.h \
+		../VocalTrainer/Playback/PlayingPitchSequence.h \
+		../include/boost/thread/shared_mutex.hpp \
 		../VocalTrainer/Playback/MvxPlayer.h \
 		../VocalTrainer/Playback/MvxFile.h \
 		../VocalTrainer/Playback/AudioPlayback/VxFileAudioPlayer.h \
@@ -172,7 +177,6 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		../VocalTrainer/Playback/AudioPlayback/Decoder/audiodecoder.h \
 		../include/SoundTouch/SoundTouch.h \
 		../include/boost/optional.hpp \
-		../VocalTrainer/Playback/PlayingPitchSequence.h \
 		../VocalTrainer/Playback/AudioPlayback/MetronomeAudioPlayer.h \
 		../VocalTrainer/Playback/AudioPlayback/WavAudioPlayer.h \
 		../VocalTrainer/Playback/AudioPlayback/BaseWavAudioPlayer.h \
@@ -278,7 +282,6 @@ moc_app.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QApplic
 		../VocalTrainer/Playback/AudioPlayback/BaseWavAudioPlayer.h \
 		../VocalTrainer/Workspace/WorkspaceController.h \
 		../VocalTrainer/Manager/ZoomController.h \
-		../VocalTrainer/Workspace/PianoController.h \
 		player.h \
 		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QObject \
 		qmlvxpitch.h \
@@ -340,6 +343,9 @@ moc_mainwindow.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/
 		../include/boost/serialization/vector.hpp \
 		../PitchDetection/CppUtils/StlDebugUtils.h \
 		../VocalTrainer/Workspace/WorkspaceController.h \
+		../VocalTrainer/Workspace/PianoDrawer.h \
+		../VocalTrainer/Playback/PlayingPitchSequence.h \
+		../include/boost/thread/shared_mutex.hpp \
 		../VocalTrainer/Playback/MvxPlayer.h \
 		../VocalTrainer/Playback/MvxFile.h \
 		../VocalTrainer/Playback/AudioPlayback/VxFileAudioPlayer.h \
@@ -355,7 +361,6 @@ moc_mainwindow.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/
 		../VocalTrainer/Playback/AudioPlayback/Decoder/audiodecoder.h \
 		../include/SoundTouch/SoundTouch.h \
 		../include/boost/optional.hpp \
-		../VocalTrainer/Playback/PlayingPitchSequence.h \
 		../VocalTrainer/Playback/AudioPlayback/MetronomeAudioPlayer.h \
 		../VocalTrainer/Playback/AudioPlayback/WavAudioPlayer.h \
 		../VocalTrainer/Playback/AudioPlayback/BaseWavAudioPlayer.h \
@@ -441,6 +446,9 @@ moc_qopenglworkspacewidget.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framew
 		../include/boost/serialization/vector.hpp \
 		../PitchDetection/CppUtils/StlDebugUtils.h \
 		../VocalTrainer/Workspace/WorkspaceController.h \
+		../VocalTrainer/Workspace/PianoDrawer.h \
+		../VocalTrainer/Playback/PlayingPitchSequence.h \
+		../include/boost/thread/shared_mutex.hpp \
 		qopenglworkspacewidget.h \
 		moc_predefs.h \
 		../../../Qt/5.11.0/clang_64/bin/moc

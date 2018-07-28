@@ -34,7 +34,6 @@ SOURCES += \
     ../PitchDetection/AudioInputReader.cpp \
     executors.cpp \
     ../VocalTrainer/Playback/MvxPlayer.cpp \
-    ../VocalTrainer/Playback/ParallelVxFileAudioDataGenerator.cpp \
     ../VocalTrainer/Playback/VxFile.cpp \
     ../VocalTrainer/Playback/MvxFile.cpp \
     ../VocalTrainer/Playback/SoundFont2PitchRenderer.cpp \
@@ -103,6 +102,8 @@ CoreFoundation -framework AVFoundation -framework CoreServices -framework CoreAu
     LIBS += ../libs/Release/libportaudio.a
     LIBS += ../libs/Release/libaubio.a
     LIBS += ../libs/Release/libboost_serialization.a
+    LIBS += ../libs/Release/libboost_system.a
+    LIBS += ../libs/Release/libboost_thread.a
     LIBS += ../libs/Release/libSoundTouch.1.dylib
 }
 
@@ -122,7 +123,6 @@ HEADERS += \
     ../PitchDetection/PortAudio.h \
     ../VocalTrainer/Playback/MvxPlayer.h \
     ../VocalTrainer/Playback/VxFile.h \
-    ../VocalTrainer/Playback/ParallelVxFileAudioDataGenerator.h \
     ../VocalTrainer/Playback/MvxFile.h \
     ../VocalTrainer/Playback/VxPitch.h \
     ../VocalTrainer/Playback/VxLyricsLine.h \
@@ -175,7 +175,8 @@ HEADERS += \
     ../VocalTrainer/Playback/AudioPlayback/MetronomeAudioPlayer.h \
     ../VocalTrainer/Playback/AudioPlayback/AudioPlayerWithDefaultSeekHandler.h \
     fonts.h \
-    ../VocalTrainer/Workspace/PianoDrawer.h
+    ../VocalTrainer/Workspace/PianoDrawer.h \
+    ../PitchDetection/CppUtils/SynchronizedObject.h
 
 INCLUDEPATH += ../include \
     ../VocalTrainer/Drawers \

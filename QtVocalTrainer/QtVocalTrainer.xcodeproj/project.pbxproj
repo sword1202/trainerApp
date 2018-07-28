@@ -271,21 +271,6 @@
 					);
 			};
 		};
-		B27FF6E041B2735F4DC44989 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/ParallelVxFileAudioDataGenerator.cpp";
-			name = "ParallelVxFileAudioDataGenerator.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		FA0A66141505318E9B0DC458 = {
-			fileRef = "B27FF6E041B2735F4DC44989";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
 		597D7A9DB67E7298B034CFBD = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/VxFile.cpp";
@@ -1306,13 +1291,6 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		A175D95F7DBAE64F62C175FB = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/ParallelVxFileAudioDataGenerator.h";
-			name = "ParallelVxFileAudioDataGenerator.h";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.c.h";
-		};
 		F983D1E4A437CEE73041368E = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/MvxFile.h";
@@ -1676,6 +1654,13 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
+		1CCF5857065B232FE2130532 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils/SynchronizedObject.h";
+			name = "SynchronizedObject.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
 		757C4D2CF043B21FE9CC0678 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qml.qrc";
@@ -1772,7 +1757,6 @@
 				"D4BA943F97BC257AF95314F3",
 				"010F066C0C8FAFFCB00384DA",
 				"7A7D4D8184A62A1AA417F348",
-				"B27FF6E041B2735F4DC44989",
 				"597D7A9DB67E7298B034CFBD",
 				"2102942B40C1255F6AAD7B0C",
 				"033143782A7AC487B5E77CCD",
@@ -1837,7 +1821,6 @@
 				"9E65F65D73262AC07C018AEA",
 				"EF9FADA6B14F6AB3193F8D0D",
 				"786FD0E541908EAFA65E4733",
-				"A175D95F7DBAE64F62C175FB",
 				"F983D1E4A437CEE73041368E",
 				"B4DF9E9B9D40CDD2C97B5126",
 				"0FC1B88128381FE142997B11",
@@ -1888,7 +1871,8 @@
 				"A151947E8E9D0844C1BB6FAB",
 				"17D76D01F51164F1E2E366F9",
 				"C2A1ABDFCE16C74629AD3E53",
-				"E330EE51C1E578B98FEF08A1");
+				"E330EE51C1E578B98FEF08A1",
+				"1CCF5857065B232FE2130532");
 			name = "Sources";
 			sourceTree = "<group>";
 		};
@@ -1938,7 +1922,6 @@
 				"2093B786A38C5C17D4BFCB3C",
 				"D7C5B34E745041BD55235BD0",
 				"060A72EF9BBCE60E2AC85833",
-				"FA0A66141505318E9B0DC458",
 				"830603BE8C68BA60EA42E087",
 				"C92CACBB7D36558E56E193CC",
 				"BFEE235A26B6559858CAF27F",
@@ -2198,6 +2181,32 @@
 			settings = {
 			};
 		};
+		1B3C8687098736C1FC5DEA92 = {
+			isa = PBXFileReference;
+			name = "libboost_system.a";
+			path = "/Users/semyon/Projects/VocalTrainer/libs/Release/libboost_system.a";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		71AC84B0B1B1689699CF74DE = {
+			fileRef = "1B3C8687098736C1FC5DEA92";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		1CD538B1776932FC08814870 = {
+			isa = PBXFileReference;
+			name = "libboost_thread.a";
+			path = "/Users/semyon/Projects/VocalTrainer/libs/Release/libboost_thread.a";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		2975154B4C1BBFB6C51763A5 = {
+			fileRef = "1CD538B1776932FC08814870";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		5DBD121510CD90CA7DBEACF3 = {
 			isa = PBXFileReference;
 			name = "libSoundTouch.1.dylib";
@@ -2395,6 +2404,8 @@
 				"D2C9E726732F383A23F3DF2A",
 				"866E7BC47D5834101CFC79C4",
 				"C8554E1F379A03573960D083",
+				"1B3C8687098736C1FC5DEA92",
+				"1CD538B1776932FC08814870",
 				"5DBD121510CD90CA7DBEACF3",
 				"5E6ACDEA4FA9B05AFC3542E9",
 				"F0871F9A6453756315FEE1CE",
@@ -2429,6 +2440,8 @@
 				"51702CADEF714F084FB14918",
 				"018FB5F649F3A63D2891C13C",
 				"FA049899FBB187FE5D2B2C65",
+				"71AC84B0B1B1689699CF74DE",
+				"2975154B4C1BBFB6C51763A5",
 				"8CAD63C807609C5848C2B37A",
 				"3B7F6DD5CE7211ABC9BE37EA",
 				"1AB6D6DB17C494A863582E1F",

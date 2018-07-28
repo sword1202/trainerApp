@@ -15,6 +15,8 @@
 #include "NvgDrawer.h"
 #include "ConcurrentModificationAssert.h"
 
+#define FIRST_PITCH_LOCK boost::shared_lock<boost::shared_mutex> _(firstPitchMutex)
+
 using namespace CppUtils;
 using std::cout;
 using std::endl;
@@ -295,8 +297,12 @@ void WorkspaceDrawer::drawYardStickDot(float x, float y) const {
 }
 
 int WorkspaceDrawer::getDistanceFromFirstPitch(const Pitch &pitch) const {
-    Pitch firstPitch = this->firstPitch;
-    return pitch.getPerfectFrequencyIndex() - firstPitch.getPerfectFrequencyIndex();
+    int index;
+    {
+        FIRST_PITCH_LOCK;
+        index = firstPitch.getPerfectFrequencyIndex();
+    }
+    return pitch.getPerfectFrequencyIndex() - index;
 }
 
 double WorkspaceDrawer::getPitchGraphDuration() const {
@@ -404,7 +410,10 @@ void WorkspaceDrawer::setPitchRadius(float pitchRadius) {
 
 void WorkspaceDrawer::setFirstVisiblePitch(const Pitch &firstPitch) {
     assert(firstPitch.isValid());
-    this->firstPitch = firstPitch;
+    {
+        boost::unique_lock<boost::shared_mutex> _(firstPitchMutex);
+        this->firstPitch = firstPitch;
+    }
     pianoDrawer->setFirstPitch(firstPitch);
 }
 

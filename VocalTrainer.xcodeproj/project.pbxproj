@@ -279,6 +279,7 @@
 		C9FFF68ABCE9167ECF0AF1C8 /* WavAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WavAudioPlayer.h; sourceTree = "<group>"; };
 		C9FFF69D299A08138F6DE00C /* CAStreamBasicDescription.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = CAStreamBasicDescription.h; sourceTree = "<group>"; };
 		C9FFF6F024954CC62D511B38 /* StringsTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StringsTest.cpp; path = PitchDetection/CppUtils/tests/StringsTest.cpp; sourceTree = SOURCE_ROOT; };
+		C9FFF70679C193BB976DEF6D /* SynchronizedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SynchronizedObject.h; path = PitchDetection/CppUtils/SynchronizedObject.h; sourceTree = "<group>"; };
 		C9FFF709A5A3DB8BE4B17B46 /* StlDebugUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StlDebugUtils.h; path = PitchDetection/CppUtils/StlDebugUtils.h; sourceTree = "<group>"; };
 		C9FFF709E60D6232BAF0C4CD /* VxFileTests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VxFileTests.cpp; sourceTree = "<group>"; };
 		C9FFF7423F75316473827230 /* VxFileAudioDataGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VxFileAudioDataGenerator.cpp; sourceTree = "<group>"; };
@@ -423,6 +424,7 @@
 				C9FFF97D42B64E1E050CADB4 /* Functions.h */,
 				C9FFF77AC431EAF0ACD903B5 /* MemoryUtils.h */,
 				C9FFFE95C2E876E4EC19EBBD /* Sets.h */,
+				C9FFF70679C193BB976DEF6D /* SynchronizedObject.h */,
 			);
 			name = CppUtils;
 			sourceTree = "<group>";
