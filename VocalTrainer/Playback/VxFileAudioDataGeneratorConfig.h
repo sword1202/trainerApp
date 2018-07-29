@@ -8,7 +8,7 @@
 
 struct VxFileAudioDataGeneratorConfig {
     int sampleRate = 44100;
-    int outBufferSize = 128;
+    int outBufferSize = 256;
 };
 
 #endif //VOCALTRAINER_VXFILEAUDIODATAGENERATORCONFIG_H
