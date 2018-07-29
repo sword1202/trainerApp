@@ -15,13 +15,12 @@ class ZoomController {
     Pitch lastPitch;
     float verticalScrollPosition;
 
+public:
     CppUtils::ListenersSet<float> zoomChangedListeners;
     CppUtils::ListenersSet<const Pitch&> firstPitchChangedListeners;
     CppUtils::ListenersSet<const Pitch&> lastPitchChangedListeners;
     CppUtils::ListenersSet<float> verticalScrollPositionChangedListeners;
     CppUtils::ListenersSet<> summarizedWorkspaceGridHeightChangedListeners;
-public:
-    typedef CppUtils::ListenersSet<const Pitch&>::Listener PitchChangedListener;
 
     ZoomController();
 
@@ -43,17 +42,6 @@ public:
 
     float getVerticalScrollPosition() const;
     void setVerticalScrollPosition(float verticalScrollPosition);
-
-    int addFirstPitchChangedListener(const PitchChangedListener &listener);
-    void removeFirstPitchChangedListener(int key);
-    int addLastPitchChangedListener(const PitchChangedListener &listener);
-    void removeLastPitchChangedListener(int key);
-    int addZoomChangedListener(const CppUtils::ListenersSet<float>::Listener& listener);
-    void removeZoomChangedListener(int key);
-    int addVerticalScrollPositionChangedListener(const CppUtils::ListenersSet<float>::Listener &listener);
-    void removeVerticalScrollPositionChangedListener(int key);
-    int addSummarizedWorkspaceGridHeightChangedListener(const CppUtils::ListenersSet<>::Listener &listener);
-    void removeSummarizedWorkspaceGridHeightChangedListener(int key);
 };
 
 

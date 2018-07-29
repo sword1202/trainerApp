@@ -72,22 +72,6 @@ float ZoomController::getSummarizedWorkspaceGridHeight() const {
     return (lastPitch.getPerfectFrequencyIndex() - firstPitch.getPerfectFrequencyIndex() + 1) * getIntervalHeight();
 }
 
-int ZoomController::addFirstPitchChangedListener(const CppUtils::ListenersSet<const Pitch&>::Listener &listener) {
-    return firstPitchChangedListeners.addListener(listener);
-}
-
-void ZoomController::removeFirstPitchChangedListener(int key) {
-    firstPitchChangedListeners.removeListener(key);
-}
-
-int ZoomController::addZoomChangedListener(const CppUtils::ListenersSet<float>::Listener &listener) {
-    return zoomChangedListeners.addListener(listener);
-}
-
-void ZoomController::removeZoomChangedListener(int key) {
-    zoomChangedListeners.removeListener(key);
-}
-
 float ZoomController::getVerticalScrollPosition() const {
     return verticalScrollPosition;
 }
@@ -96,29 +80,4 @@ void ZoomController::setVerticalScrollPosition(float verticalScrollPosition) {
     assert(verticalScrollPosition >= 0 && verticalScrollPosition <= 1);
     this->verticalScrollPosition = verticalScrollPosition;
     verticalScrollPositionChangedListeners.executeAll(verticalScrollPosition);
-}
-
-int ZoomController::addVerticalScrollPositionChangedListener(const CppUtils::ListenersSet<float>::Listener &listener) {
-    return verticalScrollPositionChangedListeners.addListener(listener);
-}
-
-void ZoomController::removeVerticalScrollPositionChangedListener(int key) {
-    verticalScrollPositionChangedListeners.removeListener(key);
-}
-
-int ZoomController::addLastPitchChangedListener(const ZoomController::PitchChangedListener &listener) {
-    return lastPitchChangedListeners.addListener(listener);
-}
-
-void ZoomController::removeLastPitchChangedListener(int key) {
-    lastPitchChangedListeners.removeListener(key);
-}
-
-int ZoomController::addSummarizedWorkspaceGridHeightChangedListener(
-        const CppUtils::ListenersSet<>::Listener &listener) {
-    return summarizedWorkspaceGridHeightChangedListeners.addListener(listener);
-}
-
-void ZoomController::removeSummarizedWorkspaceGridHeightChangedListener(int key) {
-    summarizedWorkspaceGridHeightChangedListeners.removeListener(key);
 }
