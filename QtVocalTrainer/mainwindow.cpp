@@ -50,7 +50,7 @@ MainWindow::MainWindow(QWidget *parent) :
     playHeadTriangle2->setAttribute(Qt::WA_TransparentForMouseEvents);
     playHeadLine2->setAttribute(Qt::WA_TransparentForMouseEvents);
 
-    VxApp::instance()->getZoomController()->addZoomChangedListener([=] (float zoom) {
+    VxApp::instance()->getZoomController()->zoomChangedListeners.addListener([=] (float zoom) {
         updatePlayHeadPosition();
         return DONT_DELETE_LISTENER;
     });
@@ -67,7 +67,7 @@ MainWindow::MainWindow(QWidget *parent) :
     };
 
     MvxPlayer *player = MainController::instance()->getPlayer();
-    player->addPlayRequestedListener([=] {
+    player->playRequestedListeners.addListener([=] {
         movePlayHeadToPlaybackStart();
         return DONT_DELETE_LISTENER;
     });

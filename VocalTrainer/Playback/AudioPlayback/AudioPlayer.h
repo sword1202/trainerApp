@@ -24,12 +24,7 @@ private:
     PlaybackData playbackData;
     std::atomic_bool playing;
     std::atomic<float> volume;
-    CppUtils::ListenersSet<> onCompleteListeners;
-	CppUtils::ListenersSet<> onNoDataAvailableListeners;
-    CppUtils::ListenersSet<> onPlaybackStartedListeners;
-    CppUtils::ListenersSet<> onPlaybackStoppedListeners;
-	CppUtils::ListenersSet<void*/*buffer*/, int/*framesCount*/> onDataSentToOutputListeners;
-    CppUtils::ListenersSet<double /*seek*/, double/*totalDuration*/> seekChangedListeners;
+
     std::atomic_int pitchShift;
     double tempoFactor;
     int dataSentToOutputListenerKey = 0;
@@ -64,12 +59,12 @@ protected:
     void setTotalDurationInSeconds(double totalDurationInSeconds);
 public:
 
-    typedef CppUtils::ListenersSet<>::Listener OnCompleteListener;
-	typedef CppUtils::ListenersSet<>::Listener OnNoDataAvailableListener;
-    typedef CppUtils::ListenersSet<>::Listener OnPlaybackStartedListener;
-    typedef CppUtils::ListenersSet<>::Listener OnPlaybackStoppedListener;
-	typedef CppUtils::ListenersSet<void*, int>::Listener OnDataSentToOutputListener;
-    typedef CppUtils::ListenersSet<double, double>::Listener SeekChangedListener;
+	CppUtils::ListenersSet<> onCompleteListeners;
+	CppUtils::ListenersSet<> onNoDataAvailableListeners;
+	CppUtils::ListenersSet<> onPlaybackStartedListeners;
+	CppUtils::ListenersSet<> onPlaybackStoppedListeners;
+	CppUtils::ListenersSet<void*/*buffer*/, int/*framesCount*/> onDataSentToOutputListeners;
+	CppUtils::ListenersSet<double /*seek*/, double/*totalDuration*/> seekChangedListeners;
     
     AudioPlayer();
     virtual ~AudioPlayer();
@@ -97,24 +92,6 @@ public:
     virtual void setTempoFactor(double tempoFactor);
 
     double getTrackDurationInSeconds() const;
-
-    int addOnCompleteListener(const OnCompleteListener& listener);
-    void removeOnCompleteListener(int key);
-
-    int addSeekChangedListener(const SeekChangedListener& listener);
-    void removeSeekChangedListener(int key);
-
-	int addOnNoDataAvailableListener(const OnNoDataAvailableListener& listener);
-	void removeOnNoDataAvailableListener(int key);
-
-	int addOnDataSentToOutputListener(const OnDataSentToOutputListener& listener);
-	void removeOnDataSentToOutputListener(int key);
-
-    int addPlaybackStartedListener(const OnPlaybackStartedListener &listener);
-    void removePlaybackStartedListener(int key);
-
-    int addPlaybackStoppedListener(const OnPlaybackStoppedListener &listener);
-    void removePlaybackStoppedListener(int key);
 
     void playFromSeekToSeek(double a, double b, const std::function<void()> onFinish);
 

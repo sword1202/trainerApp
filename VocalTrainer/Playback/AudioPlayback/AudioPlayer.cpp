@@ -247,7 +247,7 @@ void AudioPlayer::playFromSeekToSeek(double a, double b, const std::function<voi
     assert(b <= getTrackDurationInSeconds());
 
     play(a);
-    addSeekChangedListener([=] (double seek, double _) {
+    seekChangedListeners.addListener([=] (double seek, double _) {
         if (seek >= b) {
             pause();
             onFinish();
@@ -256,22 +256,6 @@ void AudioPlayer::playFromSeekToSeek(double a, double b, const std::function<voi
 
         return DONT_DELETE_LISTENER;
     });
-}
-
-int AudioPlayer::addOnCompleteListener(const OnCompleteListener &listener) {
-    return onCompleteListeners.addListener(listener);
-}
-
-void AudioPlayer::removeOnCompleteListener(int key) {
-    onCompleteListeners.removeListener(key);
-}
-
-int AudioPlayer::addSeekChangedListener(const AudioPlayer::SeekChangedListener &listener) {
-    return seekChangedListeners.addListener(listener);
-}
-
-void AudioPlayer::removeSeekChangedListener(int key) {
-    seekChangedListeners.removeListener(key);
 }
 
 double AudioPlayer::bufferSeekToSecondsSeek(int bufferSeek) const {
@@ -305,24 +289,8 @@ void AudioPlayer::setPitchShiftInSemiTones(int value) {
     pitchShift = value;
 }
 
-int AudioPlayer::addOnNoDataAvailableListener(const AudioPlayer::OnNoDataAvailableListener &listener) {
-    return onNoDataAvailableListeners.addListener(listener);
-}
-
-void AudioPlayer::removeOnNoDataAvailableListener(int key) {
-    onNoDataAvailableListeners.removeListener(key);
-}
-
 const AudioPlayer::PlaybackData &AudioPlayer::getPlaybackData() const {
     return playbackData;
-}
-
-void AudioPlayer::removeOnDataSentToOutputListener(int key) {
-    onDataSentToOutputListeners.removeListener(key);
-}
-
-int AudioPlayer::addOnDataSentToOutputListener(const AudioPlayer::OnDataSentToOutputListener &listener) {
-    return onDataSentToOutputListeners.addListener(listener);
 }
 
 void AudioPlayer::setupPlaybackStartedListener() {
@@ -333,22 +301,6 @@ void AudioPlayer::setupPlaybackStartedListener() {
         dataSentToOutputListenerKey = 0;
         return DELETE_LISTENER;
     });
-}
-
-int AudioPlayer::addPlaybackStoppedListener(const AudioPlayer::OnPlaybackStoppedListener &listener) {
-    return onPlaybackStoppedListeners.addListener(listener);
-}
-
-int AudioPlayer::addPlaybackStartedListener(const AudioPlayer::OnPlaybackStartedListener &listener) {
-    return onPlaybackStartedListeners.addListener(listener);
-}
-
-void AudioPlayer::removePlaybackStartedListener(int key) {
-    onPlaybackStartedListeners.removeListener(key);
-}
-
-void AudioPlayer::removePlaybackStoppedListener(int key) {
-    onPlaybackStoppedListeners.removeListener(key);
 }
 
 bool AudioPlayer::isPrepared() const {

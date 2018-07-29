@@ -26,12 +26,12 @@ MainController::MainController(VxPitchInputReader *pitchInputReader, MvxPlayer *
         : pitchInputReader(pitchInputReader), mvxPlayer(mvxPlayer), zoomController(zoomController) {
     workspaceController = nullptr;
 
-    mvxPlayer->addStopRequestedListener([=] {
+    mvxPlayer->stopRequestedListeners.addListener([=] {
         onStopPlaybackRequested();
         return DONT_DELETE_LISTENER;
     });
 
-    mvxPlayer->addIsPlayingChangedListener([this] (bool playing) {
+    mvxPlayer->isPlayingChangedListeners.addListener([this] (bool playing) {
         if (playing) {
             this->pitchInputReader->start();
         } else {
@@ -44,17 +44,17 @@ MainController::MainController(VxPitchInputReader *pitchInputReader, MvxPlayer *
         return DONT_DELETE_LISTENER;
     });
 
-    mvxPlayer->addVxFileChangedListener([this] (const VxFile* vxFile) {
+    mvxPlayer->vxFileChangedListeners.addListener([this] (const VxFile* vxFile) {
         workspaceController->setVxFile(vxFile);
         return DONT_DELETE_LISTENER;
     });
 
-    mvxPlayer->addPrepareFinishedListener([=] {
+    mvxPlayer->prepareFinishedListeners.addListener([=] {
         workspaceController->setIntervalsPerSecond(this->mvxPlayer->getBeatsPerMinute() / 60.0);
         return DONT_DELETE_LISTENER;
     });
 
-    mvxPlayer->addTonalityChangedListener([=] {
+    mvxPlayer->tonalityChangedListeners.addListener([=] {
         workspaceController->update();
         return DONT_DELETE_LISTENER;
     });
@@ -62,12 +62,12 @@ MainController::MainController(VxPitchInputReader *pitchInputReader, MvxPlayer *
     mvxPlayer->setInstrumentalVolume(1.0);
     mvxPlayer->setPianoVolume(0.5);
 
-    zoomController->addZoomChangedListener([this] (float zoom) {
+    zoomController->zoomChangedListeners.addListener([this] (float zoom) {
         updateZoom();
         return DONT_DELETE_LISTENER;
     });
 
-    zoomController->addFirstPitchChangedListener([this](const Pitch&) {
+    zoomController->firstPitchChangedListeners.addListener([this](const Pitch&) {
         updateWorkspaceFirstPitch();
         return DONT_DELETE_LISTENER;
     });
@@ -108,7 +108,7 @@ void MainController::setWorkspaceController(WorkspaceController *workspaceContro
     workspaceController->setVxFile(mvxPlayer->getVxFile());
     workspaceController->setPitchSequence(mvxPlayer);
     
-    mvxPlayer->addSeekChangedFromUserListener([=] (double seek) {
+    mvxPlayer->seekChangedFromUserListeners.addListener([=] (double seek) {
         updateSeek(seek);
         return DONT_DELETE_LISTENER;
     });

@@ -3,12 +3,12 @@
 using namespace CppUtils;
 
 QmlZoomController::QmlZoomController() {
-    addZoomChangedListener([=] (float zoom) {
+    zoomChangedListeners.addListener([=] (float zoom) {
         emit zoomChanged();
         return DONT_DELETE_LISTENER;
     });
 
-    addFirstPitchChangedListener([=] (Pitch) {
+    firstPitchChangedListeners.addListener([=] (Pitch) {
         emit firstPitchChanged();
         return DONT_DELETE_LISTENER;
     });

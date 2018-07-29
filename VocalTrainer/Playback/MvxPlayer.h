@@ -34,13 +34,6 @@ public:
         bool operator!=(const Bounds &rhs) const;
     };
 
-    typedef typename CppUtils::ListenersSet<bool>::Listener IsPlayingChangedListener;
-    typedef typename CppUtils::ListenersSet<>::Listener PrepareFinishedListener;
-    typedef typename CppUtils::ListenersSet<>::Listener StopRequestedListener;
-    typedef typename CppUtils::ListenersSet<const VxFile*>::Listener VxFileChangedListener;
-    typedef typename CppUtils::ListenersSet<double>::Listener SeekChangedListener;
-    typedef typename CppUtils::ListenersSet<>::Listener TonalityChangedListener;
-
 private:
 
     AudioFilePlayer instrumentalPlayer;
@@ -57,6 +50,9 @@ private:
     double playStartedTime = -1;
     double beatsPerMinute;
 
+    void updateMetronomeVolume();
+    void pausePlayer(AudioPlayer* player);
+public:
     CppUtils::ListenersSet<bool> isPlayingChangedListeners;
     CppUtils::ListenersSet<> stopRequestedListeners;
     CppUtils::ListenersSet<> playRequestedListeners;
@@ -66,9 +62,6 @@ private:
     CppUtils::ListenersSet<double> seekChangedFromUserListeners;
     CppUtils::ListenersSet<> tonalityChangedListeners;
 
-    void updateMetronomeVolume();
-    void pausePlayer(AudioPlayer* player);
-public:
     MvxPlayer();
     virtual ~MvxPlayer();
     void init(std::istream& is);
@@ -118,31 +111,6 @@ public:
 
     double getBeatDuration() const;
     double getTactDuration() const;
-
-    int addIsPlayingChangedListener(const IsPlayingChangedListener& listener);
-    void removeIsPlayingChangedListener(int id);
-
-    int addStopRequestedListener(const StopRequestedListener& listener);
-    void removeStopRequestedListener(int id);
-
-    int addPlayRequestedListener(const StopRequestedListener& listener);
-    void removePlayRequestedListener(int id);
-
-    int addPrepareFinishedListener(const PrepareFinishedListener& listener);
-    void removePrepareFinishedListener(int id);
-
-    int addVxFileChangedListener(const VxFileChangedListener& listener);
-    void removeVxFileChangedListener(int id);
-
-    int addSeekChangedListener(const SeekChangedListener& listener);
-    void removeSeekChangedListener(int id);
-
-    int addSeekChangedFromUserListener(const SeekChangedListener& listener);
-    void removeSeekChangedFromUserListener(int id);
-
-    // The listener is executed on Audio callback thread
-    int addTonalityChangedListener(const TonalityChangedListener& listener);
-    void removeTonalityChangedListener(int id);
 };
 
 

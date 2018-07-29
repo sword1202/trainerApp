@@ -25,7 +25,7 @@ constexpr int BEATS_IN_TACT = 4;
 MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
     players = {{&instrumentalPlayer, &vxPlayer, &metronomePlayer}};
 
-    instrumentalPlayer.addSeekChangedListener([=](double seek, double) {
+    instrumentalPlayer.seekChangedListeners.addListener([=](double seek, double) {
         if (bounds) {
             if (seek >= bounds->getEndSeek()) {
                 this->onComplete();
@@ -37,12 +37,12 @@ MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
         return DONT_DELETE_LISTENER;
     });
 
-    instrumentalPlayer.addOnCompleteListener([=] {
+    instrumentalPlayer.onCompleteListeners.addListener([=] {
         this->onComplete();
         return DONT_DELETE_LISTENER;
     });
 
-    instrumentalPlayer.addPlaybackStartedListener([=] {
+    instrumentalPlayer.onPlaybackStartedListeners.addListener([=] {
         this->onPlaybackStarted();
         return DONT_DELETE_LISTENER;
     });
@@ -223,38 +223,6 @@ bool MvxPlayer::hasAnyPitchNow() const {
     return getVxFile()->hasPitchesInMoment(getSeek());
 }
 
-int MvxPlayer::addIsPlayingChangedListener(const MvxPlayer::IsPlayingChangedListener &listener) {
-    return isPlayingChangedListeners.addListener(listener);
-}
-
-void MvxPlayer::removeIsPlayingChangedListener(int id) {
-    isPlayingChangedListeners.removeListener(id);
-}
-
-int MvxPlayer::addPrepareFinishedListener(const MvxPlayer::PrepareFinishedListener &listener) {
-    return prepareFinishedListeners.addListener(listener);
-}
-
-void MvxPlayer::removePrepareFinishedListener(int id) {
-    prepareFinishedListeners.removeListener(id);
-}
-
-int MvxPlayer::addVxFileChangedListener(const MvxPlayer::VxFileChangedListener &listener) {
-    return vxFileChangedListeners.addListener(listener);
-}
-
-void MvxPlayer::removeVxFileChangedListener(int id) {
-    vxFileChangedListeners.removeListener(id);
-}
-
-int MvxPlayer::addSeekChangedListener(const SeekChangedListener& listener) {
-    return seekChangedListeners.addListener(listener);
-}
-
-void MvxPlayer::removeSeekChangedListener(int id) {
-    seekChangedListeners.removeListener(id);
-}
-
 int MvxPlayer::getPitchShiftInSemiTones() const {
     return vxPlayer.getPitchShiftInSemiTones();
 }
@@ -276,14 +244,6 @@ double MvxPlayer::getTempoFactor() const {
 void MvxPlayer::setTempoFactor(double tempoFactor) {
     vxPlayer.setTempoFactor(tempoFactor);
     instrumentalPlayer.setTempoFactor(tempoFactor);
-}
-
-int MvxPlayer::addTonalityChangedListener(const MvxPlayer::TonalityChangedListener &listener) {
-    return tonalityChangedListeners.addListener(listener);
-}
-
-void MvxPlayer::removeTonalityChangedListener(int id) {
-    tonalityChangedListeners.removeListener(id);
 }
 
 void MvxPlayer::setMetronomeSoundData(std::string &&data) {
@@ -332,30 +292,6 @@ void MvxPlayer::seekToPrevTact() {
 
 double MvxPlayer::getTactDuration() const {
     return getBeatDuration() * BEATS_IN_TACT;
-}
-
-int MvxPlayer::addSeekChangedFromUserListener(const MvxPlayer::SeekChangedListener &listener) {
-    return seekChangedFromUserListeners.addListener(listener);
-}
-
-void MvxPlayer::removeSeekChangedFromUserListener(int id) {
-    seekChangedFromUserListeners.removeListener(id);
-}
-
-int MvxPlayer::addStopRequestedListener(const MvxPlayer::StopRequestedListener &listener) {
-    return stopRequestedListeners.addListener(listener);
-}
-
-void MvxPlayer::removeStopRequestedListener(int id) {
-    stopRequestedListeners.removeListener(id);
-}
-
-int MvxPlayer::addPlayRequestedListener(const MvxPlayer::StopRequestedListener &listener) {
-    return playRequestedListeners.addListener(listener);
-}
-
-void MvxPlayer::removePlayRequestedListener(int id) {
-    playRequestedListeners.removeListener(id);
 }
 
 MvxPlayer::Bounds::Bounds(double startSeek, double endSeek) : startSeek(startSeek), endSeek(endSeek) {
