@@ -15,8 +15,6 @@
 #include "NvgDrawer.h"
 #include "ConcurrentModificationAssert.h"
 
-#define FIRST_PITCH_LOCK boost::shared_lock<boost::shared_mutex> _(firstPitchMutex)
-
 using namespace CppUtils;
 using std::cout;
 using std::endl;
@@ -165,7 +163,7 @@ void WorkspaceDrawer::drawPitch(float x, float y, float width) const {
 }
 
 void WorkspaceDrawer::drawPitches() const {
-    assert(Pitch(firstPitch).isValid());
+    assert(getFirstPitch().isValid());
     const VxFile* vxFile = this->vxFile;
     if (!vxFile) {
         return;
@@ -203,7 +201,7 @@ void WorkspaceDrawer::setVxFile(const VxFile* vxFile) {
 }
 
 void WorkspaceDrawer::drawPitchesGraph() const {
-    assert(Pitch(firstPitch).isValid());
+    assert(getFirstPitch().isValid());
     assert(pitchesCollector);
     assert(pitchGraphColor[3] > 0 && "pitchGraphColor not initialized or is completely transparent");
 
@@ -297,12 +295,7 @@ void WorkspaceDrawer::drawYardStickDot(float x, float y) const {
 }
 
 int WorkspaceDrawer::getDistanceFromFirstPitch(const Pitch &pitch) const {
-    int index;
-    {
-        FIRST_PITCH_LOCK;
-        index = firstPitch.getPerfectFrequencyIndex();
-    }
-    return pitch.getPerfectFrequencyIndex() - index;
+    return pitch.getPerfectFrequencyIndex() - firstPitchIndex;
 }
 
 double WorkspaceDrawer::getPitchGraphDuration() const {
@@ -409,11 +402,8 @@ void WorkspaceDrawer::setPitchRadius(float pitchRadius) {
 }
 
 void WorkspaceDrawer::setFirstVisiblePitch(const Pitch &firstPitch) {
-    assert(firstPitch.isValid());
-    {
-        boost::unique_lock<boost::shared_mutex> _(firstPitchMutex);
-        this->firstPitch = firstPitch;
-    }
+    assert(getFirstPitch().isValid());
+    this->firstPitchIndex = firstPitch.getPerfectFrequencyIndex();
     pianoDrawer->setFirstPitch(firstPitch);
 }
 
@@ -444,4 +434,8 @@ void WorkspaceDrawer::setDetectedPitch(const Pitch &detectedPitch) {
 
 void WorkspaceDrawer::setPitchSequence(PlayingPitchSequence *pitchSequence) {
     pianoDrawer->setPitchSequence(pitchSequence);
+}
+
+Pitch WorkspaceDrawer::getFirstPitch() const {
+    return Pitch::fromPerfectFrequencyIndex(firstPitchIndex);
 }

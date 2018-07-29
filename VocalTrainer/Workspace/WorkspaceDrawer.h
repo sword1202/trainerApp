@@ -26,8 +26,7 @@ class WorkspaceDrawer : public WorkspaceController {
     std::atomic<float> horizontalOffset;
     std::atomic<double> intervalsPerSecond;
     std::atomic_bool running;
-    Pitch firstPitch;
-    mutable boost::shared_mutex firstPitchMutex;
+    std::atomic_int firstPitchIndex;
 
     float sizeMultiplier;
     float pitchRadius = 0;
@@ -68,9 +67,9 @@ class WorkspaceDrawer : public WorkspaceController {
     double getPitchGraphDuration() const;
     double getIntervalDuration() const;
 
-private:
-
     std::function<void()> onUpdateRequested;
+
+    Pitch getFirstPitch() const;
 public:
     static constexpr float YARD_STICK_HEIGHT = 22;
     static constexpr int PIANO_WIDTH = 67;

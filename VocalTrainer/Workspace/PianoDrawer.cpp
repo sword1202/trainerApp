@@ -30,9 +30,6 @@ static const Drawer::Color selectedPitchColor = {0x61, 0x5F, 0x97, 0xff};
 static const Drawer::Color pitchTextColor = {0x24, 0x23, 0x2D, 0xe6};
 static const Drawer::Color selectedPitchTextColor = {0xff, 0xff, 0xff, 0xff};
 
-#define FIRST_PITCH_LOCK boost::shared_lock<boost::shared_mutex> _(firstPitchMutex)
-#define DETECTED_PITCH_LOCK boost::shared_lock<boost::shared_mutex> _(detectedPitchMutex)
-
 float PianoDrawer::getIntervalOctaveHeightToPianoOctaveHeightRelation() const {
     // 12 pitches in octave
     float intervalOctaveHeight = intervalHeight * 12;
@@ -60,20 +57,9 @@ void PianoDrawer::draw(float width, float height, float devicePixelRation) {
     drawer->setStrokeColor(borderColor);
     drawer->setFillColor(sharpPitchColor);
 
-    int index;
-    int perfectFrequencyIndex;
-    {
-        FIRST_PITCH_LOCK;
-        index = firstPitch.getWhiteIndex();
-        perfectFrequencyIndex = firstPitch.getPerfectFrequencyIndex();
-    }
+    int index = getFirstPitch().getWhiteIndex();
+    int perfectFrequencyIndex = firstPitchIndex;
     float y = height;
-
-    int detectedPitchIndex;
-    {
-        DETECTED_PITCH_LOCK;
-        detectedPitchIndex = detectedPitch.getPerfectFrequencyIndex();
-    }
 
     drawSharpPitchesY.clear();
     drawSharpPitchesFillColor.clear();
@@ -158,11 +144,7 @@ void PianoDrawer::drawSharpPitches() const {
 
 void PianoDrawer::drawPitchNames(float height) const {
     float y = height;
-    Pitch pitch;
-    {
-        FIRST_PITCH_LOCK;
-        pitch = firstPitch;
-    }
+    Pitch pitch = getFirstPitch();
 
     drawer->setTextAlign(Drawer::LEFT);
     drawer->setTextBaseline(Drawer::MIDDLE);
@@ -178,12 +160,7 @@ void PianoDrawer::drawPitchNames(float height) const {
         float textY = y - pitchHeight / 2;
         std::string text;
 
-        int firstPitchPerfectFrequencyIndex;
-        {
-            FIRST_PITCH_LOCK;
-            firstPitchPerfectFrequencyIndex = firstPitch.getPerfectFrequencyIndex();
-        }
-        if (pitch.getPerfectFrequencyIndex() == firstPitchPerfectFrequencyIndex) {
+        if (pitch.getPerfectFrequencyIndex() == firstPitchIndex) {
             text = pitch.getFullName();
         } else if(pitch.getPitchInOctaveIndex() == Pitch::C_INDEX) {
             text = pitch.getFullName();
@@ -206,15 +183,17 @@ void PianoDrawer::drawPitchNames(float height) const {
 }
 
 void PianoDrawer::setFirstPitch(const Pitch &firstPitch) {
-    boost::unique_lock<boost::shared_mutex> _(firstPitchMutex);
-    this->firstPitch = firstPitch;
+    this->firstPitchIndex = firstPitch.getPerfectFrequencyIndex();
 }
 
 void PianoDrawer::setDetectedPitch(const Pitch &detectedPitch) {
-    boost::unique_lock<boost::shared_mutex> _(detectedPitchMutex);
-    this->detectedPitch = detectedPitch;
+    this->detectedPitchIndex = detectedPitch.getPerfectFrequencyIndex();
 }
 
 void PianoDrawer::setPitchSequence(PlayingPitchSequence *pitchSequence) {
     this->pitchSequence = pitchSequence;
+}
+
+Pitch PianoDrawer::getFirstPitch() const {
+    return Pitch::fromPerfectFrequencyIndex(firstPitchIndex);
 }
