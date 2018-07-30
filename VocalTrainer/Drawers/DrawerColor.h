@@ -1,8 +1,7 @@
 #ifndef DRAWERCOLOR_H
 #define DRAWERCOLOR_H
 
-
-#import "MidiEvent.h"
+typedef unsigned char uchar;
 
 class DrawerColor
 {

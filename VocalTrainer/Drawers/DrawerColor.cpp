@@ -1,3 +1,5 @@
+#include <cstdint>
+#include <assert.h>
 #include "DrawerColor.h"
 
 DrawerColor::DrawerColor() {
