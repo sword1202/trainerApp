@@ -6,6 +6,8 @@
 #include "ZoomController.h"
 #include "Pitch.h"
 #include <cmath>
+#include "assert.h"
+
 
 constexpr float BASE_WIDTH = 1374.0;
 constexpr float ZOOM_FACTOR = 12.0f * 4; // number of beats in screen of BASE_WIDTH for zoom = 1.0

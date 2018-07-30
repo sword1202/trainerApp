@@ -1,4 +1,5 @@
 #include "DrawerColor.h"
+#include "assert.h"
 
 DrawerColor::DrawerColor() {
     rgba[3] = 255;
