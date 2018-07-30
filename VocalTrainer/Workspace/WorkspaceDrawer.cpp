@@ -162,7 +162,9 @@ void WorkspaceDrawer::drawVerticalLine(float x, const WorkspaceDrawer::Color &co
 void WorkspaceDrawer::drawHorizontalGrid() const {
     int index = 1;
     float offset = fmod(verticalOffset, intervalHeight * Pitch::PITCHES_IN_OCTAVE);
-    for (float y = summarizedGridHeight - drawer->getTranslateY() - intervalHeight + offset; y > -offset; y -= intervalHeight, index++) {
+    float baseHeight = getMaximumGridTranslation() - getGridTranslation() + getGridHeight();
+    for (float y = baseHeight - intervalHeight + offset;
+            y > -offset; y -= intervalHeight, index++) {
         bool isOctaveBegin = index % Pitch::PITCHES_IN_OCTAVE == 0;
         drawHorizontalLine(y, isOctaveBegin ? accentGridColor : gridColor);
     }
