@@ -57,13 +57,13 @@ void WorkspaceDrawer::draw() {
     summarizedGridHeight = std::max((float)summarizedGridHeight, getGridHeight());
 
     drawer->translate(PIANO_WIDTH, 0);
-    drawer->translate(0, YARD_STICK_HEIGHT);
+    drawer->translate(0, YARD_STICK_HEIGHT + 1);
     drawer->translate(0, getGridTranslation());
     drawVerticalGrid();
     drawHorizontalGrid();
     drawPitches();
     drawPitchesGraph();
-    drawer->translate(0, -YARD_STICK_HEIGHT);
+    drawer->translate(0, -YARD_STICK_HEIGHT - 1);
     drawYardStick();
     drawer->translate(0, YARD_STICK_HEIGHT);
     drawer->translate(-PIANO_WIDTH, 0);
