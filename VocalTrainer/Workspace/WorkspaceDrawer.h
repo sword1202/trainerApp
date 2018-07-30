@@ -27,6 +27,8 @@ class WorkspaceDrawer : public WorkspaceController {
     std::atomic<double> intervalsPerSecond;
     std::atomic_bool running;
     std::atomic_int firstPitchIndex;
+    std::atomic<float> summarizedGridHeight;
+    std::atomic<float> verticalScrollPosition;
 
     float sizeMultiplier;
     float pitchRadius = 0;
@@ -94,6 +96,12 @@ public:
     double getIntervalsPerSecond() const override;
     void setIntervalsPerSecond(double intervalsPerSecond) override;
 
+    float getSummarizedGridHeight() const;
+    void setSummarizedGridHeight(float summarizedGridHeight) override;
+
+    float getVerticalScrollPosition() const;
+    void setVerticalScrollPosition(float verticalScrollPosition) override;
+
     bool isRunning() const override;
     void setRunning(bool value) override;
 
@@ -126,6 +134,7 @@ public:
     void update() override;
 
     float getGridHeight() const;
+    static float getGridHeight(float workspaceHeight);
 
     void setDetectedPitch(const Pitch &detectedPitch) override;
 

@@ -54,8 +54,11 @@ void WorkspaceDrawer::draw() {
     drawer->beginFrame(width, height, devicePixelRatio);
     drawer->clear();
 
+    summarizedGridHeight = std::max((float)summarizedGridHeight, getGridHeight());
+
     drawer->translate(PIANO_WIDTH, 0);
     drawer->translate(0, YARD_STICK_HEIGHT);
+    drawer->translate(0, (summarizedGridHeight - getGridHeight()) * verticalScrollPosition);
     drawVerticalGrid();
     drawHorizontalGrid();
     drawPitches();
@@ -151,7 +154,7 @@ void WorkspaceDrawer::drawVerticalLine(float x, const WorkspaceDrawer::Color &co
 void WorkspaceDrawer::drawHorizontalGrid() const {
     int index = 1;
     float offset = fmod(verticalOffset, intervalHeight * Pitch::PITCHES_IN_OCTAVE);
-    for (float y = height - drawer->getTranslateY() - intervalHeight + offset; y > -offset; y -= intervalHeight, index++) {
+    for (float y = summarizedGridHeight - drawer->getTranslateY() - intervalHeight + offset; y > -offset; y -= intervalHeight, index++) {
         bool isOctaveBegin = index % Pitch::PITCHES_IN_OCTAVE == 0;
         drawHorizontalLine(y, isOctaveBegin ? accentGridColor : gridColor);
     }
@@ -187,13 +190,13 @@ void WorkspaceDrawer::drawPitches() const {
         double x = (pitchTimeBegin - timeBegin) / workspaceDuration * width;
         double pitchWidth = pitchDuration / workspaceDuration * width;
         int distanceFromFirstPitch = getDistanceFromFirstPitch(vxPitch.pitch);
-        float y = getGridHeight() - (distanceFromFirstPitch + 1) * intervalHeight;
+        float y = summarizedGridHeight - (distanceFromFirstPitch + 1) * intervalHeight;
         drawPitch((float)x, y, (float)pitchWidth);
     });
 }
 
 float WorkspaceDrawer::getGridHeight() const {
-    return height - YARD_STICK_HEIGHT - 1;
+    return getGridHeight(height);
 }
 
 void WorkspaceDrawer::setVxFile(const VxFile* vxFile) {
@@ -230,7 +233,7 @@ void WorkspaceDrawer::drawPitchesGraph() const {
     auto getXY = [&](double time, const Pitch& pitch) {
         x = (time - now + duration) / duration * pitchGraphWidth;
         float distanceFromFirstPitch = getDistanceFromFirstPitch(pitch);
-        y = getGridHeight() - (distanceFromFirstPitch + pitch.getDistanceFromLowerBound() / 2.0) * intervalHeight;
+        y = summarizedGridHeight - (distanceFromFirstPitch + pitch.getDistanceFromLowerBound() / 2.0) * intervalHeight;
     };
 
     while (i < pitchesCount) {
@@ -332,7 +335,10 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, const std::function<void()>& on
         horizontalOffset(0),
         sizeMultiplier(1),
         intervalsPerSecond(0),
+        verticalScrollPosition(0),
+        summarizedGridHeight(0),
         running(false),
+        firstPitchIndex(-1),
         frameTime(0), drawer(drawer), onUpdateRequested(onUpdateRequested) {
     setGridColor({0x8B, 0x89, 0xB6, 0x33});
     setAccentGridColor({0x8B, 0x89, 0xB6, 0x80});
@@ -402,7 +408,7 @@ void WorkspaceDrawer::setPitchRadius(float pitchRadius) {
 }
 
 void WorkspaceDrawer::setFirstVisiblePitch(const Pitch &firstPitch) {
-    assert(getFirstPitch().isValid());
+    assert(firstPitch.isValid());
     this->firstPitchIndex = firstPitch.getPerfectFrequencyIndex();
     pianoDrawer->setFirstPitch(firstPitch);
 }
@@ -438,4 +444,24 @@ void WorkspaceDrawer::setPitchSequence(PlayingPitchSequence *pitchSequence) {
 
 Pitch WorkspaceDrawer::getFirstPitch() const {
     return Pitch::fromPerfectFrequencyIndex(firstPitchIndex);
+}
+
+float WorkspaceDrawer::getSummarizedGridHeight() const {
+    return summarizedGridHeight;
+}
+
+void WorkspaceDrawer::setSummarizedGridHeight(float summarizedGridHeight) {
+    this->summarizedGridHeight = summarizedGridHeight;
+}
+
+float WorkspaceDrawer::getVerticalScrollPosition() const {
+    return verticalScrollPosition;
+}
+
+void WorkspaceDrawer::setVerticalScrollPosition(float verticalScrollPosition) {
+    this->verticalScrollPosition = verticalScrollPosition;
+}
+
+float WorkspaceDrawer::getGridHeight(float summaryHeight) {
+    return summaryHeight - YARD_STICK_HEIGHT - 1;
 }

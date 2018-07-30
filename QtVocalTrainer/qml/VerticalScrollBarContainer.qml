@@ -2,7 +2,7 @@ import QtQuick 2.0
 
 Item {
     VerticalScrollBar {
-        pageSize: 0.3
+        pageSize: cpp.zoomController.pageSize
         anchors.fill: parent
     }
 }

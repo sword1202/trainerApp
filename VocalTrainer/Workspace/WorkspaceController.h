@@ -27,6 +27,8 @@ public:
     virtual void update() = 0;
     virtual void setDetectedPitch(const Pitch &detectedPitch) = 0;
     virtual void setPitchSequence(PlayingPitchSequence *pitchSequence) = 0;
+    virtual void setSummarizedGridHeight(float summarizedGridHeight) = 0;
+    virtual void setVerticalScrollPosition(float verticalScrollPosition) = 0;
     virtual ~WorkspaceController() = default;
 };
 

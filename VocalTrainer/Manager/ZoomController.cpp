@@ -18,6 +18,7 @@ constexpr float HORIZONTAL_TO_VERTICAL_INTERVAL_WIDTH_RELATION = 2.4117701323665
 ZoomController::ZoomController() {
     zoom = MIN_ZOOM;
     firstPitch = Pitch("C2");
+    lastPitch = Pitch("B6");
 }
 
 float ZoomController::getIntervalWidth() const {
@@ -82,4 +83,17 @@ void ZoomController::setVerticalScrollPosition(float verticalScrollPosition) {
     assert(verticalScrollPosition >= 0 && verticalScrollPosition <= 1);
     this->verticalScrollPosition = verticalScrollPosition;
     verticalScrollPositionChangedListeners.executeAll(verticalScrollPosition);
+}
+
+float ZoomController::getWorkspaceGridHeight() const {
+    return workspaceGridHeight;
+}
+
+void ZoomController::setWorkspaceGridHeight(float pageSize) {
+    this->workspaceGridHeight = pageSize;
+}
+
+float ZoomController::getPageSize() const {
+    const float result = workspaceGridHeight / getSummarizedWorkspaceGridHeight();
+    return result > 1.0f ? 1.0f : result;
 }

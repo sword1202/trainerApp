@@ -47,6 +47,8 @@ PianoDrawer::PianoDrawer(Drawer *drawer)
     drawSharpPitchesFillColor.reserve(100);
     drawSharpPitchesY.reserve(100);
     intervalHeight = 0;
+    firstPitchIndex = -1;
+    detectedPitchIndex = -1;
 }
 
 void PianoDrawer::draw(float width, float height, float devicePixelRation) {

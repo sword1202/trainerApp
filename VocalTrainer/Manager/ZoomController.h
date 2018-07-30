@@ -14,6 +14,7 @@ class ZoomController {
     Pitch firstPitch;
     Pitch lastPitch;
     float verticalScrollPosition;
+    float workspaceGridHeight;
 
 public:
     CppUtils::ListenersSet<float> zoomChangedListeners;
@@ -36,9 +37,13 @@ public:
     Pitch getFirstPitch() const;
     void setFirstPitch(const Pitch& pitch);
 
+    float getWorkspaceGridHeight() const;
+    virtual void setWorkspaceGridHeight(float pageSize);
+
     const Pitch &getLastPitch() const;
     void setLastPitch(const Pitch &lastPitch);
     float getSummarizedWorkspaceGridHeight() const;
+    float getPageSize() const;
 
     float getVerticalScrollPosition() const;
     void setVerticalScrollPosition(float verticalScrollPosition);
