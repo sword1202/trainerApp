@@ -67,11 +67,6 @@ MainController::MainController(VxPitchInputReader *pitchInputReader, MvxPlayer *
         return DONT_DELETE_LISTENER;
     });
 
-    zoomController->firstPitchChangedListeners.addListener([this](const Pitch&) {
-        updateWorkspaceFirstPitch();
-        return DONT_DELETE_LISTENER;
-    });
-
     pitchInputReader->addPitchDetectedListener([=] (const Pitch& pitch, double) {
         workspaceController->setDetectedPitch(pitch);
         return DONT_DELETE_LISTENER;
@@ -107,9 +102,26 @@ void MainController::setWorkspaceController(WorkspaceController *workspaceContro
     updateWorkspaceFirstPitch();
     workspaceController->setVxFile(mvxPlayer->getVxFile());
     workspaceController->setPitchSequence(mvxPlayer);
+    workspaceController->setSummarizedGridHeight(zoomController->getSummarizedWorkspaceGridHeight());
+    workspaceController->setVerticalScrollPosition(zoomController->getVerticalScrollPosition());
     
     mvxPlayer->seekChangedFromUserListeners.addListener([=] (double seek) {
         updateSeek(seek);
+        return DONT_DELETE_LISTENER;
+    });
+
+    zoomController->summarizedWorkspaceGridHeightChangedListeners.addListener([=] {
+        workspaceController->setSummarizedGridHeight(zoomController->getSummarizedWorkspaceGridHeight());
+        return DONT_DELETE_LISTENER;
+    });
+
+    zoomController->firstPitchChangedListeners.addListener([this](const Pitch&) {
+        updateWorkspaceFirstPitch();
+        return DONT_DELETE_LISTENER;
+    });
+
+    zoomController->verticalScrollPositionChangedListeners.addListener([=] (float value) {
+        workspaceController->setVerticalScrollPosition(value);
         return DONT_DELETE_LISTENER;
     });
 }

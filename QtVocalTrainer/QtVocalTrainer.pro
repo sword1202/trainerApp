@@ -176,7 +176,6 @@ HEADERS += \
     ../VocalTrainer/Playback/AudioPlayback/AudioPlayerWithDefaultSeekHandler.h \
     fonts.h \
     ../VocalTrainer/Workspace/PianoDrawer.h \
-    ../PitchDetection/CppUtils/SynchronizedObject.h
 
 INCLUDEPATH += ../include \
     ../VocalTrainer/Drawers \

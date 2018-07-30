@@ -161,7 +161,6 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		../VocalTrainer/Workspace/WorkspaceController.h \
 		../VocalTrainer/Workspace/PianoDrawer.h \
 		../VocalTrainer/Playback/PlayingPitchSequence.h \
-		../include/boost/thread/shared_mutex.hpp \
 		../VocalTrainer/Playback/MvxPlayer.h \
 		../VocalTrainer/Playback/MvxFile.h \
 		../VocalTrainer/Playback/AudioPlayback/VxFileAudioPlayer.h \
@@ -345,7 +344,6 @@ moc_mainwindow.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/
 		../VocalTrainer/Workspace/WorkspaceController.h \
 		../VocalTrainer/Workspace/PianoDrawer.h \
 		../VocalTrainer/Playback/PlayingPitchSequence.h \
-		../include/boost/thread/shared_mutex.hpp \
 		../VocalTrainer/Playback/MvxPlayer.h \
 		../VocalTrainer/Playback/MvxFile.h \
 		../VocalTrainer/Playback/AudioPlayback/VxFileAudioPlayer.h \
@@ -448,7 +446,6 @@ moc_qopenglworkspacewidget.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framew
 		../VocalTrainer/Workspace/WorkspaceController.h \
 		../VocalTrainer/Workspace/PianoDrawer.h \
 		../VocalTrainer/Playback/PlayingPitchSequence.h \
-		../include/boost/thread/shared_mutex.hpp \
 		qopenglworkspacewidget.h \
 		moc_predefs.h \
 		../../../Qt/5.11.0/clang_64/bin/moc

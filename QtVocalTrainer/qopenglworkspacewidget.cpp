@@ -40,6 +40,8 @@ void QOpenGLWorkspaceWidget::initializeGL() {
 }
 
 void QOpenGLWorkspaceWidget::resizeGL(int w, int h) {
+    float gridHeight = WorkspaceDrawer::getGridHeight(h);
+    MainController::instance()->getZoomController()->setWorkspaceGridHeight(gridHeight);
     workspaceDrawer->resize(w, h, (float)devicePixelRatioF());
 }
 
