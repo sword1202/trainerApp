@@ -142,8 +142,6 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		../PitchDetection/CppUtils/RoundedRect.h \
 		../PitchDetection/CppUtils/Point.h \
 		../VocalTrainer/Drawers/DrawerColor.h \
-		../VocalTrainer/Playback/CraigsappMidifile/MidiEvent.h \
-		../VocalTrainer/Playback/CraigsappMidifile/MidiMessage.h \
 		../PitchDetection/PitchesCollector.h \
 		../VocalTrainer/Playback/VxFile.h \
 		../VocalTrainer/Playback/VxPitch.h \
@@ -324,8 +322,6 @@ moc_mainwindow.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/
 		../PitchDetection/CppUtils/RoundedRect.h \
 		../PitchDetection/CppUtils/Point.h \
 		../VocalTrainer/Drawers/DrawerColor.h \
-		../VocalTrainer/Playback/CraigsappMidifile/MidiEvent.h \
-		../VocalTrainer/Playback/CraigsappMidifile/MidiMessage.h \
 		../PitchDetection/PitchesCollector.h \
 		../VocalTrainer/Playback/VxFile.h \
 		../VocalTrainer/Playback/VxPitch.h \
@@ -426,8 +422,6 @@ moc_qopenglworkspacewidget.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framew
 		../PitchDetection/CppUtils/RoundedRect.h \
 		../PitchDetection/CppUtils/Point.h \
 		../VocalTrainer/Drawers/DrawerColor.h \
-		../VocalTrainer/Playback/CraigsappMidifile/MidiEvent.h \
-		../VocalTrainer/Playback/CraigsappMidifile/MidiMessage.h \
 		../PitchDetection/PitchesCollector.h \
 		../VocalTrainer/Playback/VxFile.h \
 		../VocalTrainer/Playback/VxPitch.h \

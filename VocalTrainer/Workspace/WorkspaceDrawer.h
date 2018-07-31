@@ -72,6 +72,8 @@ class WorkspaceDrawer : public WorkspaceController {
     std::function<void()> onUpdateRequested;
 
     Pitch getFirstPitch() const;
+    float getGridTranslation() const;
+    float getMaximumGridTranslation() const;
 public:
     static constexpr float YARD_STICK_HEIGHT = 22;
     static constexpr int PIANO_WIDTH = 67;
@@ -137,7 +139,6 @@ public:
     static float getGridHeight(float workspaceHeight);
 
     void setDetectedPitch(const Pitch &detectedPitch) override;
-
     void setPitchSequence(PlayingPitchSequence *pitchSequence) override;
 };
 

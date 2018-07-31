@@ -14,12 +14,17 @@ QmlZoomController::QmlZoomController() {
     });
 
     summarizedWorkspaceGridHeightChangedListeners.addListener([=] {
-        emit onPageSizeChanged();
+        emit pageSizeChanged();
+        return DONT_DELETE_LISTENER;
+    });
+
+    verticalScrollPositionChangedListeners.addListener([=] (float) {
+        emit verticalScrollPositionChanged();
         return DONT_DELETE_LISTENER;
     });
 }
 
 void QmlZoomController::setWorkspaceGridHeight(float pageSize) {
     ZoomController::setWorkspaceGridHeight(pageSize);
-    emit onPageSizeChanged();
+    emit pageSizeChanged();
 }

@@ -122,6 +122,7 @@ void MainController::setWorkspaceController(WorkspaceController *workspaceContro
 
     zoomController->verticalScrollPositionChangedListeners.addListener([=] (float value) {
         workspaceController->setVerticalScrollPosition(value);
+        workspaceController->update();
         return DONT_DELETE_LISTENER;
     });
 }
