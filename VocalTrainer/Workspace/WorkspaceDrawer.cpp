@@ -63,7 +63,7 @@ void WorkspaceDrawer::draw() {
     drawHorizontalGrid();
     drawPitches();
     drawPitchesGraph();
-    drawer->translate(0, -YARD_STICK_HEIGHT - 1);
+    drawer->translate(0, -YARD_STICK_HEIGHT - 1 - getGridTranslation());
     drawYardStick();
     drawer->translate(0, YARD_STICK_HEIGHT);
     drawer->translate(-PIANO_WIDTH, 0);
@@ -152,7 +152,7 @@ void WorkspaceDrawer::drawHorizontalLine(float y, const Color& color) const {
 
 void WorkspaceDrawer::drawVerticalLine(float x, const WorkspaceDrawer::Color &color) const {
     drawer->beginPath();
-    drawer->moveTo(x * sizeMultiplier, 0);
+    drawer->moveTo(x * sizeMultiplier, -drawer->getTranslateY() + height - getGridHeight());
     drawer->setStrokeWidth(sizeMultiplier);
     drawer->lineTo(x * sizeMultiplier, height * sizeMultiplier);
     drawer->setStrokeColor(color);
@@ -162,9 +162,11 @@ void WorkspaceDrawer::drawVerticalLine(float x, const WorkspaceDrawer::Color &co
 void WorkspaceDrawer::drawHorizontalGrid() const {
     int index = 1;
     float offset = fmod(verticalOffset, intervalHeight * Pitch::PITCHES_IN_OCTAVE);
-    float baseHeight = getMaximumGridTranslation() - getGridTranslation() + getGridHeight();
-    for (float y = baseHeight - intervalHeight + offset;
-            y > -offset; y -= intervalHeight, index++) {
+    float gridTranslation = getGridTranslation();
+    float baseHeight = getMaximumGridTranslation() - gridTranslation + getGridHeight();
+    for (float y = baseHeight - intervalHeight - gridTranslation + offset;
+         y > -offset - gridTranslation; y -= intervalHeight, index++) {
+
         bool isOctaveBegin = index % Pitch::PITCHES_IN_OCTAVE == 0;
         drawHorizontalLine(y, isOctaveBegin ? accentGridColor : gridColor);
     }
