@@ -1,7 +1,9 @@
-//
+﻿//
 // Created by Semyon Tikhonenko on 4/29/18.
 // Copyright (c) 2018 Mac. All rights reserved.
 //
+
+#include <algorithm>
 
 #include "WavAudioPlayer.h"
 #include "WAVFile.h"

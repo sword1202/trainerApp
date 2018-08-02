@@ -14,6 +14,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+include(../PitchDetection/PitchDetection.pri)
+
 OBJECTIVE_SOURCES = ../VocalTrainer/nanovg/metal/nanovg_mtl.m
 
 SOURCES += \
@@ -21,17 +23,8 @@ SOURCES += \
     QmlCppBridge.cpp \
     qmlopenglitem.cpp \
     qmlpitch.cpp \
-    ../PitchDetection/Pitch.cpp \
-    ../PitchDetection/YinPitchDetector.cpp \
-    ../PitchDetection/PitchInputReader.cpp \
-    ../PitchDetection/PitchInputReaderCollector.cpp \
-    ../PitchDetection/PitchesCollector.cpp \
-    ../PitchDetection/PitchDetectionSmoothingAudioBuffer.cpp \
     qmlpitchinputreader.cpp \
-    ../PitchDetection/CppUtils/TimeUtils.cpp \
     app.cpp \
-    ../PitchDetection/PortAudio.cpp \
-    ../PitchDetection/AudioInputReader.cpp \
     executors.cpp \
     ../VocalTrainer/Playback/MvxPlayer.cpp \
     ../VocalTrainer/Playback/VxFile.cpp \
@@ -50,10 +43,6 @@ SOURCES += \
     ../VocalTrainer/Playback/CraigsappMidifile/MidiEventList.cpp \
     ../VocalTrainer/Playback/CraigsappMidifile/MidiEvent.cpp \
     ../VocalTrainer/Playback/CraigsappMidifile/Binasc.cpp \
-    ../PitchDetection/WAVFile.cpp \
-    ../PitchDetection/AudioUtils.cpp \
-    ../PitchDetection/CppUtils/PeriodicallySleepingBackgroundTask.cpp \
-    ../PitchDetection/CppUtils/SynchronizedCallbacksQueue.cpp \
     loadtsf.cpp \
     appmacos.mm \
     qmlvxpitch.cpp \
@@ -71,7 +60,6 @@ SOURCES += \
     mainwindowosx.mm \
     ../VocalTrainer/Manager/VxPitchInputReader.cpp \
     ../VocalTrainer/Manager/MainController.cpp \
-    ../PitchDetection/AubioPitchDetector.cpp \
     ../VocalTrainer/Manager/ZoomController.cpp \
     ../VocalTrainer/Drawers/QDrawer.cpp \
     ../VocalTrainer/Drawers/DrawerColor.cpp \
@@ -111,16 +99,8 @@ HEADERS += \
     QmlCppBridge.h \
     qmlopenglitem.h \
     qmlpitch.h \
-    ../PitchDetection/Pitch.h \
-    ../PitchDetection/PitchDetectionSmoothingAudioBuffer.h \
-    ../PitchDetection/YinPitchDetector.h \
-    ../PitchDetection/PitchInputReader.h \
-    ../PitchDetection/PitchInputReaderCollector.h \
-    ../PitchDetection/AudioInputReader.h \
     qmlpitchinputreader.h \
-    ../PitchDetection/CppUtils/TimeUtils.h \
     app.h \
-    ../PitchDetection/PortAudio.h \
     ../VocalTrainer/Playback/MvxPlayer.h \
     ../VocalTrainer/Playback/VxFile.h \
     ../VocalTrainer/Playback/MvxFile.h \
@@ -144,10 +124,6 @@ HEADERS += \
     ../VocalTrainer/Playback/CraigsappMidifile/MidiEventList.h \
     ../VocalTrainer/Playback/CraigsappMidifile/MidiEvent.h \
     ../VocalTrainer/Playback/CraigsappMidifile/Binasc.h \
-    ../PitchDetection/WAVFile.h \
-    ../PitchDetection/AudioUtils.h \
-    ../PitchDetection/CppUtils/PeriodicallySleepingBackgroundTask.h \
-    ../PitchDetection/CppUtils/SynchronizedCallbacksQueue.h \
     qmlvxpitch.h \
     qmltimedpitch.h \
     ../VocalTrainer/Workspace/WorkspaceDrawer.h \
@@ -162,7 +138,6 @@ HEADERS += \
     ../VocalTrainer/Playback/AudioPlayback/Decoder/apple/CADebugMacros.h \
     ../VocalTrainer/Playback/AudioPlayback/Decoder/apple/CAStreamBasicDescription.h \
     ../VocalTrainer/Manager/VxPitchInputReader.h \
-    ../PitchDetection/AubioPitchDetector.h \
     ../VocalTrainer/nanovg/metal/nanovg_mtl_shaders.metal \
     ../VocalTrainer/Manager/MainController.h \
     ../VocalTrainer/Manager/VxPitchInputReader.h \
@@ -184,9 +159,7 @@ INCLUDEPATH += ../include \
     ../VocalTrainer/Playback/AudioPlayback \
     ../VocalTrainer/Playback \
     ../VocalTrainer/Playback/CraigsappMidifile \
-    ../VocalTrainer/ \
-    ../PitchDetection/CppUtils \
-    ../PitchDetection \
+    ../VocalTrainer \
     ../include/nanovg
 
 DISTFILES += \

@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by Ivan Kuskov on 3/28/18.
 // Copyright (c) 2018 Mac. All rights reserved.
 //
@@ -6,6 +6,7 @@
 #include "MidiTrack.h"
 
 #include <iostream>
+#include <algorithm>
 
 // Considering 
 // value of 4th      note == n, 

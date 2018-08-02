@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by Semyon Tikhonenko on 1/5/18.
 // Copyright (c) 2018 Mac. All rights reserved.
 //
@@ -9,6 +9,7 @@
 #include <portaudio/portaudio.h>
 #include <mutex>
 #include "ListenersSet.h"
+#include "atomic"
 
 class AudioPlayer {
 protected:

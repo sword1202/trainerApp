@@ -1,7 +1,12 @@
-#ifndef APP_H
+﻿#ifndef APP_H
 #define APP_H
 
+#ifdef _WIN32
+#include <QApplication>
+#else
 #import <QApplication>
+#endif
+
 #include <QQmlApplicationEngine>
 #include "MainController.h"
 #include "player.h"

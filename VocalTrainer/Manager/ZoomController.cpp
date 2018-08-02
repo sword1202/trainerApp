@@ -6,7 +6,7 @@
 #include "ZoomController.h"
 #include "Pitch.h"
 #include <cmath>
-#include "assert.h"
+#include <cassert>
 
 
 constexpr float BASE_WIDTH = 1374.0;

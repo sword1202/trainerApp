@@ -1,9 +1,8 @@
-//
+﻿//
 // Created by Semyon Tikhonenko on 1/5/18.
 // Copyright (c) 2018 Mac. All rights reserved.
 //
 
-#import <stdexcept>
 #include "AudioPlayer.h"
 #include <string>
 #include "TimeUtils.h"
@@ -11,9 +10,16 @@
 #include "AudioUtils.h"
 #include "Executors.h"
 
-#import <iostream>
 #include <boost/assert.hpp>
 #include <cmath>
+
+#ifdef _WIN32
+ #include <stdexcept>
+ #include <iostream>
+#else
+ #import <stdexcept>
+ #import <iostream>
+#endif
 
 using namespace CppUtils;
 using std::cout;

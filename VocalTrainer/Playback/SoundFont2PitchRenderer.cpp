@@ -8,6 +8,7 @@
 #include "tsf.h"
 #include "AudioUtils.h"
 #include "LoadTsf.h"
+#include "math.h"
 
 constexpr float VOLUME = 0.5;
 

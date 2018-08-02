@@ -7,7 +7,7 @@
 #include "MetronomeAudioPlayer.h"
 #include "WAVFile.h"
 #include <iostream>
-#include "assert.h"
+#include <cassert>
 
 
 using std::cout;
