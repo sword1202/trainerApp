@@ -11,6 +11,7 @@
 #include <QMacCocoaViewContainer>
 #include <QThread>
 #include "qopenglworkspacewidget.h"
+#include "PlaybackBounds.h"
 #include <iostream>
 
 constexpr int YARD_STICK_HEIGHT = (int)WorkspaceDrawer::YARD_STICK_HEIGHT;
@@ -30,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
 #ifdef __APPLE__
     doMacOsPlatformStaff();
 #endif
+    playHeadPositions = {{-1, -1}};
     setupWorkspaceView();
     workspaceView->move(0, HEADER_HEIGHT);
     workspaceView->resize(1024, 768);
@@ -141,6 +143,17 @@ void MainWindow::setPlayHeadPosition(int position, int index) {
     geometry.moveCenter(move);
     playHeadTriangle->setGeometry(geometry);
     playHeadLine->move(move);
+    
+    playHeadPositions[index] = position;
+
+    MvxPlayer *player = MainController::instance()->getPlayer();
+    if (playHeadLine2->isVisible()) {
+        PlaybackBounds bounds(playHeadPositionToTime(playHeadPositions[0]),
+                playHeadPositionToTime(playHeadPositions[1]));
+        player->setBounds(bounds);
+    } else {
+        player->setBounds(PlaybackBounds());
+    }
 }
 
 int MainWindow::getPlayHeadPosition(int index) const {
@@ -206,12 +219,24 @@ void MainWindow::onFileOpen() {
 
 void MainWindow::setBoundsSelectionEnabled(bool enabled) {
     boundsSelectionRunning = enabled;
-    setPlayHeadPosition(getPlayHeadPosition(0) + getMinimumPlayHeadOffset(), 1);
     playHeadLine2->setVisible(enabled);
     playHeadTriangle2->setVisible(enabled);
+    setPlayHeadPosition(getPlayHeadPosition(0) + getMinimumPlayHeadOffset(), 1);
 }
 
 MainWindow::~MainWindow()
 {
 
+}
+
+double MainWindow::playHeadPositionToTime(int position) const {
+    position -= getMinimumPlayHeadOffset();
+    if (position < 0) {
+        position = 0;
+    }
+
+    MainController* main = MainController::instance();
+    MvxPlayer* player = main->getPlayer();
+    return (double)position / (player->getBeatsPerMinute() / 60.0) /
+            main->getZoomController()->getIntervalWidth() + player->getSeek();
 }

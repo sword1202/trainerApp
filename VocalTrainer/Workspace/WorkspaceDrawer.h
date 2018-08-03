@@ -14,6 +14,7 @@
 #include "VxFile.h"
 #include "WorkspaceController.h"
 #include "PianoDrawer.h"
+#include "PlaybackBounds.h"
 #include <memory>
 #include <PlayingPitchSequence.h>
 
@@ -30,6 +31,8 @@ class WorkspaceDrawer : public WorkspaceController {
     std::atomic<float> summarizedGridHeight;
     std::atomic<float> verticalScrollPosition;
 
+    std::atomic<PlaybackBounds> playbackBounds;
+
     float sizeMultiplier;
     float pitchRadius = 0;
 
@@ -39,6 +42,7 @@ class WorkspaceDrawer : public WorkspaceController {
     Color pitchColor;
     Color borderLineColor;
     Color yardStickDotAndTextColor;
+    Color boundsColor;
 
     std::string tactNumbersFontFamily;
 
@@ -63,6 +67,7 @@ class WorkspaceDrawer : public WorkspaceController {
     void drawPitch(float x, float y, float width) const;
     void drawPitches() const;
     void drawPitchesGraph() const;
+    void drawBoundsIfNeed() const;
     void drawYardStick() const;
     void drawYardStickDot(float x, float y) const;
 
@@ -140,6 +145,14 @@ public:
 
     void setDetectedPitch(const Pitch &detectedPitch) override;
     void setPitchSequence(PlayingPitchSequence *pitchSequence) override;
+
+    const PlaybackBounds &getPlaybackBounds() const;
+    void setPlaybackBounds(const PlaybackBounds &playbackBounds) override;
+
+    float getWorkspaceDuration() const;
+    float getWorkspaceSeek() const;
+
+    float durationToWidth(double duration) const;
 };
 
 

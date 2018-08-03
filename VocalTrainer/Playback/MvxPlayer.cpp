@@ -13,6 +13,7 @@
 #include "TimeUtils.h"
 #include "Functions.h"
 #include "Executors.h"
+#include "PlaybackBounds.h"
 #include <iostream>
 #include <memory>
 
@@ -27,7 +28,7 @@ MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
 
     instrumentalPlayer.seekChangedListeners.addListener([=](double seek, double) {
         if (bounds) {
-            if (seek >= bounds->getEndSeek()) {
+            if (seek >= bounds.getEndSeek()) {
                 this->onComplete();
             }
         }
@@ -95,8 +96,8 @@ void MvxPlayer::play() {
 
     if (bounds) {
         double seekValue = instrumentalPlayer.getSeek();
-        if (!bounds->isInside(seekValue)) {
-            double startSeek = bounds->getStartSeek();
+        if (!bounds.isInside(seekValue)) {
+            double startSeek = bounds.getStartSeek();
             instrumentalPlayer.setSeek(startSeek);
         }
     }
@@ -112,8 +113,8 @@ void MvxPlayer::play() {
 }
 
 void MvxPlayer::setSeek(double value) {
-    assert(!bounds || (bounds->getStartSeek() <= value &&
-            bounds->getEndSeek() <= value));
+    assert(!bounds || (bounds.getStartSeek() <= value &&
+            bounds.getEndSeek() <= value));
     assert(value >= 0 && value <= instrumentalPlayer.getTrackDurationInSeconds());
     for (auto* player : players) {
         player->setSeek(value);
@@ -152,15 +153,16 @@ const VxFile * MvxPlayer::getVxFile() const {
     return &vxPlayer.getVxFile();
 }
 
-const boost::optional<MvxPlayer::Bounds> &MvxPlayer::getBounds() const {
+const PlaybackBounds & MvxPlayer::getBounds() const {
     return bounds;
 }
 
-void MvxPlayer::setBounds(const boost::optional<MvxPlayer::Bounds> &bounds) {
+void MvxPlayer::setBounds(const PlaybackBounds &bounds) {
     assert(!instrumentalPlayer.isPlaying());
-    assert(!bounds || (bounds->getStartSeek() >= 0 &&
-            bounds->getEndSeek() <= instrumentalPlayer.getTrackDurationInSeconds()));
+    assert(!bounds || (bounds.getStartSeek() >= 0 &&
+            bounds.getEndSeek() <= instrumentalPlayer.getTrackDurationInSeconds()));
     this->bounds = bounds;
+    boundsChangedListeners.executeAll(bounds);
 }
 
 bool MvxPlayer::isPlaying() const {
@@ -169,7 +171,7 @@ bool MvxPlayer::isPlaying() const {
 
 void MvxPlayer::stopAndMoveSeekToBeginning() {
     pause();
-    setSeek(bounds ? bounds->getStartSeek() : 0);
+    setSeek(bounds ? bounds.getStartSeek() : 0);
 }
 
 double MvxPlayer::getSeek() const {
@@ -292,28 +294,4 @@ void MvxPlayer::seekToPrevTact() {
 
 double MvxPlayer::getTactDuration() const {
     return getBeatDuration() * BEATS_IN_TACT;
-}
-
-MvxPlayer::Bounds::Bounds(double startSeek, double endSeek) : startSeek(startSeek), endSeek(endSeek) {
-}
-
-double MvxPlayer::Bounds::getStartSeek() const {
-    return startSeek;
-}
-
-double MvxPlayer::Bounds::getEndSeek() const {
-    return endSeek;
-}
-
-bool MvxPlayer::Bounds::isInside(double value) const {
-    return value >= startSeek && value <= endSeek;
-}
-
-bool MvxPlayer::Bounds::operator==(const MvxPlayer::Bounds &rhs) const {
-    return startSeek == rhs.startSeek &&
-            endSeek == rhs.endSeek;
-}
-
-bool MvxPlayer::Bounds::operator!=(const MvxPlayer::Bounds &rhs) const {
-    return !(rhs == *this);
 }

@@ -16,10 +16,12 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
     QOpenGLWorkspaceWidget *workspaceView;
+
     QSvgWidget* playHeadTriangle;
     QFrame* playHeadLine;
     QSvgWidget* playHeadTriangle2;
     QFrame* playHeadLine2;
+    std::array<int, 2> playHeadPositions;
     QQuickItem *header;
     QQuickWidget *verticalScrollWidget;
     QQuickItem *verticalScroll;
@@ -37,6 +39,8 @@ class MainWindow : public QMainWindow
     float getMinimumPlayHeadOffsetF() const;
 
     void setupPlayHeadWidgets(QSvgWidget** playHeadTriangle, QFrame** playHeadLine);
+
+    double playHeadPositionToTime(int position) const;
 protected:
     void resizeEvent(QResizeEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;

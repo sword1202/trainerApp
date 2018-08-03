@@ -17,23 +17,10 @@
 #include "ListenersSet.h"
 #include "PlayingPitchSequence.h"
 #include "MetronomeAudioPlayer.h"
+#include "PlaybackBounds.h"
 #include <array>
 
 class MvxPlayer : public PlayingPitchSequence {
-public:
-    class Bounds {
-        double startSeek;
-        double endSeek;
-    public:
-        Bounds(double startSeek, double endSeek);
-        double getStartSeek() const;
-        double getEndSeek() const;
-        bool isInside(double value) const;
-
-        bool operator==(const Bounds &rhs) const;
-        bool operator!=(const Bounds &rhs) const;
-    };
-
 private:
 
     AudioFilePlayer instrumentalPlayer;
@@ -45,7 +32,7 @@ private:
     std::atomic_bool metronomeEnabled;
     int pauseRequestedCounter = 0;
 
-    boost::optional<Bounds> bounds;
+    PlaybackBounds bounds;
     double playStartedSeek = -1;
     double playStartedTime = -1;
     double beatsPerMinute;
@@ -61,6 +48,7 @@ public:
     CppUtils::ListenersSet<double> seekChangedListeners;
     CppUtils::ListenersSet<double> seekChangedFromUserListeners;
     CppUtils::ListenersSet<> tonalityChangedListeners;
+    CppUtils::ListenersSet<const PlaybackBounds&> boundsChangedListeners;
 
     MvxPlayer();
     virtual ~MvxPlayer();
@@ -82,8 +70,8 @@ public:
     virtual void seekToPrevTact();
     const VxFile* getVxFile() const;
 
-    const boost::optional<Bounds> &getBounds() const;
-    void setBounds(const boost::optional<Bounds> &bounds);
+    const PlaybackBounds &getBounds() const;
+    void setBounds(const PlaybackBounds &bounds);
 
     virtual void onComplete();
     virtual void onSeekChanged(double seek);

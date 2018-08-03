@@ -11,7 +11,6 @@
 #include "AudioPlayer.h"
 #include <vector>
 #include "VxLyricsLine.h"
-#include "PlaybackChunk.h"
 #include <boost/container/static_vector.hpp>
 #include <boost/serialization/vector.hpp>
 #include "StlDebugUtils.h"

@@ -12,12 +12,13 @@
 #include "MvxPlayer.h"
 #include "WorkspaceController.h"
 #include "ZoomController.h"
+#include "PlaybackBounds.h"
 
 class MainController {
     VxPitchInputReader* pitchInputReader;
     MvxPlayer* mvxPlayer;
     ZoomController* zoomController;
-    WorkspaceController* workspaceController;
+    WorkspaceController* workspaceController = nullptr;
 
     void updateZoom();
     void updateWorkspaceFirstPitch();

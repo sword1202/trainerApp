@@ -9,6 +9,7 @@
 
 #import "PitchesCollector.h"
 #include "PlayingPitchSequence.h"
+#include "PlaybackBounds.h"
 
 class WorkspaceController {
 public:
@@ -29,6 +30,7 @@ public:
     virtual void setPitchSequence(PlayingPitchSequence *pitchSequence) = 0;
     virtual void setSummarizedGridHeight(float summarizedGridHeight) = 0;
     virtual void setVerticalScrollPosition(float verticalScrollPosition) = 0;
+    virtual void setPlaybackBounds(const PlaybackBounds &playbackBounds) = 0;
     virtual ~WorkspaceController() = default;
 };
 

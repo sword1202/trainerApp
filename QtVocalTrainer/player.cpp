@@ -5,6 +5,7 @@
 #include "TimeUtils.h"
 #include "QtUtils/qtutils.h"
 #include "WAVFile.h"
+#include "PlaybackBounds.h"
 
 using namespace std;
 using namespace CppUtils;
@@ -87,11 +88,11 @@ void Player::onSeekChanged(double seek) {
 }
 
 void Player::setQmlBounds(const QJsonValue &bounds) {
-    boost::optional<Bounds> prevBounds = getBounds();
+    const PlaybackBounds& prevBounds = getBounds();
     if (bounds.isUndefined()) {
-        setBounds(boost::optional<Bounds>());
+        setBounds(PlaybackBounds());
     } else {
-        setBounds(Bounds(bounds["startSeek"].toDouble(), bounds["endSeek"].toDouble()));
+        setBounds(PlaybackBounds(bounds["startSeek"].toDouble(), bounds["endSeek"].toDouble()));
     }
     if (getBounds() != prevBounds) {
         emit boundsChanged();
@@ -99,15 +100,15 @@ void Player::setQmlBounds(const QJsonValue &bounds) {
 }
 
 QJsonValue Player::getQmlBounds() const {
-    const boost::optional<Bounds> &bounds = getBounds();
+    const PlaybackBounds &bounds = getBounds();
     if (!bounds) {
         return QJsonValue::Undefined;
     }
 
     return QJsonObject
     {
-        {"startSeek", bounds->getStartSeek()},
-        {"endSeek", bounds->getEndSeek()}
+        {"startSeek", bounds.getStartSeek()},
+        {"endSeek", bounds.getEndSeek()}
     };
 }
 

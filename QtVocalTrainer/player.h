@@ -7,6 +7,7 @@
 #include "qmlvxpitch.h"
 #include <QJsonValue>
 #include "WavAudioPlayer.h"
+#include "PlaybackBounds.h"
 
 class Player : public QObject, public MvxPlayer
 {

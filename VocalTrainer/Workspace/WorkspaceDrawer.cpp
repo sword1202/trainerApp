@@ -24,7 +24,10 @@ constexpr float PITCHES_GRAPH_WIDTH_IN_INTERVALS = 4.0f;
 constexpr float YARD_STICK_DOT_Y_OFFSET = 9.75f + 1.5f;
 constexpr float PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN = 6;
 constexpr float YARD_STICK_DOT_RADIUS = 1.5f;
+constexpr float PLAYBACK_BOUNDS_BOTTOM_MARGIN = 3.75f;
+constexpr float PLAYBACK_BOUNDS_HEIGHT = 15.75;
 static const int PITCH_RADIUS = 3;
+constexpr float PLAYBACK_BOUNDS_ROUND_RECT_RADIUS = 1.5f;
 
 void WorkspaceDrawer::resize(float width, float height, float devicePixelRatio) {
     assert(devicePixelRatio > 0);
@@ -190,8 +193,8 @@ void WorkspaceDrawer::drawPitches() const {
 
     drawer->setFillColor(pitchColor);
 
-    double workspaceDuration = width / intervalWidth / intervalsPerSecond;
-    double workspaceSeek = (horizontalOffset / intervalWidth) / intervalsPerSecond;
+    double workspaceDuration = getWorkspaceDuration();
+    double workspaceSeek = getWorkspaceSeek();
     double timeBegin = workspaceSeek - getPitchGraphDuration();
     double timeEnd = timeBegin + workspaceDuration;
 
@@ -206,6 +209,14 @@ void WorkspaceDrawer::drawPitches() const {
         float y = relativeHeight - (distanceFromFirstPitch + 1) * intervalHeight;
         drawPitch((float)x, y, (float)pitchWidth);
     });
+}
+
+float WorkspaceDrawer::getWorkspaceSeek() const {
+    return (horizontalOffset / intervalWidth) / intervalsPerSecond;
+}
+
+float WorkspaceDrawer::getWorkspaceDuration() const {
+    return width / intervalWidth / intervalsPerSecond;
 }
 
 float WorkspaceDrawer::getGridHeight() const {
@@ -285,6 +296,7 @@ void WorkspaceDrawer::drawPitchesGraph() const {
 }
 
 void WorkspaceDrawer::drawYardStick() const {
+    drawBoundsIfNeed();
     drawer->setFillColor(yardStickDotAndTextColor);
     int startTactIndex = (int)(getHorizontalOffset() / (getIntervalWidth() * BEATS_IN_TACT));
 
@@ -302,6 +314,28 @@ void WorkspaceDrawer::drawYardStick() const {
             startTactIndex++;
         }
     });
+}
+
+void WorkspaceDrawer::drawBoundsIfNeed() const {
+    PlaybackBounds playbackBounds = this->playbackBounds;
+    if (playbackBounds) {
+        double workspaceDuration = getWorkspaceDuration();
+        double workspaceTimeBegin = getWorkspaceSeek();
+        double workspaceTimeEnd = workspaceTimeBegin + workspaceDuration;
+
+        if (!playbackBounds.isInside(workspaceTimeBegin) && !playbackBounds.isInside(workspaceTimeEnd)) {
+            return;
+        }
+
+        float tactHeight = intervalWidth * BEATS_IN_TACT;
+        float startX = durationToWidth(playbackBounds.getStartSeek() - workspaceTimeBegin) + tactHeight;
+        float width = durationToWidth(playbackBounds.getEndSeek() - workspaceTimeBegin) - startX + tactHeight;
+
+        drawer->setFillColor(boundsColor);
+        float y = YARD_STICK_HEIGHT - PLAYBACK_BOUNDS_BOTTOM_MARGIN - PLAYBACK_BOUNDS_HEIGHT;
+        drawer->roundedRect(startX, y, width, PLAYBACK_BOUNDS_HEIGHT, PLAYBACK_BOUNDS_ROUND_RECT_RADIUS);
+        drawer->fill();
+    }
 }
 
 void WorkspaceDrawer::drawYardStickDot(float x, float y) const {
@@ -360,6 +394,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, const std::function<void()>& on
     setPitchRadius(PITCH_RADIUS);
     borderLineColor = {0x8B, 0x89, 0xB6, 0xCC};
     yardStickDotAndTextColor = {0x24, 0x23, 0x2D, 0xFF};
+    boundsColor = {0xC4, 0xCD, 0xFD, 0xFF};
 
     pianoDrawer = new PianoDrawer(drawer);
 }
@@ -477,4 +512,16 @@ void WorkspaceDrawer::setVerticalScrollPosition(float verticalScrollPosition) {
 
 float WorkspaceDrawer::getGridHeight(float summaryHeight) {
     return summaryHeight - YARD_STICK_HEIGHT - 1;
+}
+
+const PlaybackBounds &WorkspaceDrawer::getPlaybackBounds() const {
+    return playbackBounds;
+}
+
+void WorkspaceDrawer::setPlaybackBounds(const PlaybackBounds &playbackBounds) {
+    this->playbackBounds = playbackBounds;
+}
+
+float WorkspaceDrawer::durationToWidth(double duration) const {
+    return static_cast<float>(duration * intervalsPerSecond * intervalWidth);
 }

@@ -5,6 +5,7 @@
 
 #include "MainController.h"
 #include "VxPitchInputReader.h"
+#include "PlaybackBounds.h"
 #include <iostream>
 
 using namespace CppUtils;
@@ -96,6 +97,7 @@ MvxPlayer *MainController::getPlayer() const {
 }
 
 void MainController::setWorkspaceController(WorkspaceController *workspaceController) {
+    assert(!this->workspaceController);
     this->workspaceController = workspaceController;
     workspaceController->setPitchesCollector(pitchInputReader);
     updateZoom();
@@ -109,6 +111,13 @@ void MainController::setWorkspaceController(WorkspaceController *workspaceContro
         updateSeek(seek);
         return DONT_DELETE_LISTENER;
     });
+
+    mvxPlayer->boundsChangedListeners.addListener([=] (const PlaybackBounds& bounds) {
+        workspaceController->setPlaybackBounds(bounds);
+        workspaceController->update();
+        return DONT_DELETE_LISTENER;
+    });
+    workspaceController->setPlaybackBounds(mvxPlayer->getBounds());
 
     zoomController->summarizedWorkspaceGridHeightChangedListeners.addListener([=] {
         workspaceController->setSummarizedGridHeight(zoomController->getSummarizedWorkspaceGridHeight());
