@@ -15,6 +15,7 @@ public:
     PlaybackBounds(double startSeek, double endSeek);
     double getStartSeek() const;
     double getEndSeek() const;
+    double getDuration() const;
     bool isInside(double value) const;
     operator bool() const;
 

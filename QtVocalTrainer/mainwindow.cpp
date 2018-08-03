@@ -73,6 +73,16 @@ MainWindow::MainWindow(QWidget *parent) :
         movePlayHeadToPlaybackStart();
         return DONT_DELETE_LISTENER;
     });
+    
+    player->seekChangedListeners.addListener([=] (double seek) {
+        const PlaybackBounds &bounds = player->getBounds();
+        if (bounds) {
+            double factor = (bounds.getEndSeek() - seek) / bounds.getDuration();
+            double newPosition = playHeadPositions[0] + (idlePlayHead2Position - playHeadPositions[0]) * factor;
+            setPlayHeadPosition(qRound(newPosition), 1);
+        }
+        return DONT_DELETE_LISTENER;
+    });
 }
 
 void MainWindow::setupPlayHeadWidgets(QSvgWidget** playHeadTriangle, QFrame** playHeadLine) {
@@ -147,12 +157,15 @@ void MainWindow::setPlayHeadPosition(int position, int index) {
     playHeadPositions[index] = position;
 
     MvxPlayer *player = MainController::instance()->getPlayer();
-    if (playHeadLine2->isVisible()) {
-        PlaybackBounds bounds(playHeadPositionToTime(playHeadPositions[0]),
-                playHeadPositionToTime(playHeadPositions[1]));
-        player->setBounds(bounds);
-    } else {
-        player->setBounds(PlaybackBounds());
+    if (!player->isPlaying()) {
+        if (playHeadLine2->isVisible()) {
+            PlaybackBounds bounds(playHeadPositionToTime(playHeadPositions[0]),
+                    playHeadPositionToTime(playHeadPositions[1]));
+            idlePlayHead2Position = playHeadPositions[1];
+            player->setBounds(bounds);
+        } else {
+            player->setBounds(PlaybackBounds());
+        }
     }
 }
 

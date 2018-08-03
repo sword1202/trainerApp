@@ -91,6 +91,14 @@ Item {
         onImage: "images/play_on.svg"
         offImage: "images/play_off.svg"
 
+        Connections {
+            target: cpp.player
+
+            onComplete: {
+                play.on = false
+            }
+        }
+
         onOnChanged: {
             if (on) {
                 cpp.player.play();

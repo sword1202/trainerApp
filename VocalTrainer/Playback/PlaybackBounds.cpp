@@ -35,6 +35,10 @@ PlaybackBounds::PlaybackBounds() {
     endSeek = -1;
 }
 
+double PlaybackBounds::getDuration() const {
+    return endSeek - startSeek;
+}
+
 std::ostream& operator<<(std::ostream& os, const PlaybackBounds& bounds) {
     os<<"["<<bounds.getStartSeek()<<","<<bounds.getEndSeek()<<"]\n";
     return os;

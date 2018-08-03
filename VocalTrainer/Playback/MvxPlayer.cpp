@@ -113,8 +113,6 @@ void MvxPlayer::play() {
 }
 
 void MvxPlayer::setSeek(double value) {
-    assert(!bounds || (bounds.getStartSeek() <= value &&
-            bounds.getEndSeek() <= value));
     assert(value >= 0 && value <= instrumentalPlayer.getTrackDurationInSeconds());
     for (auto* player : players) {
         player->setSeek(value);

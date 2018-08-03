@@ -22,6 +22,7 @@ class MainWindow : public QMainWindow
     QSvgWidget* playHeadTriangle2;
     QFrame* playHeadLine2;
     std::array<int, 2> playHeadPositions;
+    int idlePlayHead2Position;
     QQuickItem *header;
     QQuickWidget *verticalScrollWidget;
     QQuickItem *verticalScroll;
