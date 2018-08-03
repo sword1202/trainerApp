@@ -403,6 +403,10 @@ WorkspaceDrawer::~WorkspaceDrawer() {
     if (drawer) {
         delete drawer;
     }
+
+    if (pianoDrawer) {
+        delete pianoDrawer;
+    }
 }
 
 float WorkspaceDrawer::getSizeMultiplier() const {
