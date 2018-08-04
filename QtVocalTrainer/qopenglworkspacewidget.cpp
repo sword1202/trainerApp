@@ -1,4 +1,4 @@
-#include "qopenglworkspacewidget.h"
+﻿#include "qopenglworkspacewidget.h"
 #include "NvgDrawer.h"
 #include "MainController.h"
 #include "QtUtils/qtutils.h"

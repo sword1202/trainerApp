@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by Semyon Tikhonenko on 4/28/18.
 // Copyright (c) 2018 Mac. All rights reserved.
 //
@@ -7,6 +7,8 @@
 #define VOCALTRAINER_SOUNDFONT2PITCHRENDERER_H
 
 #include "PitchRenderer.h"
+
+#define TSF_IMPLEMENTATION
 #include "tsf.h"
 
 class SoundFont2PitchRenderer : public PitchRenderer {

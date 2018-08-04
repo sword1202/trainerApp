@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by Semyon Tikhonenko on 7/23/18.
 // Copyright (c) 2018 Mac. All rights reserved.
 //
@@ -6,6 +6,7 @@
 #include "BaseWavAudioPlayer.h"
 #include "AudioPlayer.h"
 #include "WAVFile.h"
+#include <string>
 
 void BaseWavAudioPlayer::prepareAndProvidePlaybackData(AudioPlayer::PlaybackData *playbackData) {
     WavSetupData wavHeaderData = provideWavSetupData();

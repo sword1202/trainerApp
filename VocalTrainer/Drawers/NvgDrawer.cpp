@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by Semyon Tikhonenko on 6/2/18.
 // Copyright (c) 2018 Mac. All rights reserved.
 //
@@ -29,8 +29,17 @@ NvgDrawer::~NvgDrawer() {
 
 #else
 
+#define NANOVG_GL2_IMPLEMENTATION
+
+
+#ifdef _WIN32
+#include <GLEW/GL/glew.h>
+#endif
+
+#ifdef __APPLE__
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
+#endif
 
 #define NANOVG_GL2_IMPLEMENTATION
 #include <nanovg/nanovg_gl.h>

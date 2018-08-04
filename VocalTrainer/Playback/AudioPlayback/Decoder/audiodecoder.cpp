@@ -1,4 +1,4 @@
-/*
+﻿/*
  * libaudiodecoder - Native Portable Audio Decoder Library
  * libaudiodecoder API Header File
  * Latest version available at: http://www.oscillicious.com/libaudiodecoder
@@ -37,15 +37,20 @@
  */
 
 #include "audiodecoder.h"
+
+#ifdef __APPLE__
 #include "audiodecodercoreaudio.h"
+#elif _WIN32
+#include "audiodecodermediafoundation_win.h"
+#endif
 
-int    AudioDecoder::numSamples()        const { return m_iNumSamples; };
+int    AudioDecoder::numSamples()        const { return m_iNumSamples; }
 
-int    AudioDecoder::channels()          const { return m_iChannels; };
+int    AudioDecoder::channels()          const { return m_iChannels; }
 
-int    AudioDecoder::sampleRate()        const { return m_iSampleRate; };
+int    AudioDecoder::sampleRate()        const { return m_iSampleRate; }
 
-float  AudioDecoder::duration()          const { return m_fDuration; };
+float  AudioDecoder::duration()          const { return m_fDuration; }
 
 int    AudioDecoder::positionInSamples() const { return m_iPositionInSamples; }
 
@@ -53,7 +58,7 @@ AudioDecoder *AudioDecoder::create() {
 #ifdef __APPLE__
     return new AudioDecoderCoreAudio();
 #else
-#error Unsupported platform
+    return new AudioDecoderMediaFoundation("");
 #endif
 };
 

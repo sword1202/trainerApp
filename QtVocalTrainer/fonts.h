@@ -1,8 +1,7 @@
 #ifndef VOCALTRAINER_FONTS_H
 #define VOCALTRAINER_FONTS_H
 
-
-#import <qbytearray.h>
+#include <QByteArray>
 
 namespace Fonts
 {

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * libaudiodecoder - Native Portable Audio Decoder Library
  * libaudiodecoder API Header File
  * Latest version available at: http://www.oscillicious.com/libaudiodecoder
@@ -38,7 +38,7 @@
 
 #include <string>
 #include <iostream>
-#include "audiodecodercoreaudio.h"
+#include "audiodecodercoreaudio_mac.h"
 
 static SInt64 GetSizeProc(void *inClientData) {
     const std::string& data = *static_cast<std::string*>(inClientData);

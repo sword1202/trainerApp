@@ -169,6 +169,9 @@ TSFDEF void tsf_render_float(tsf* f, float* buffer, int samples, int flag_mixing
 #endif //TSF_INCLUDE_TSF_INL
 
 
+#ifndef TSF_INCLUDE_TSF_IMPLEMENTATION
+#define TSF_INCLUDE_TSF_IMPLEMENTATION
+
 #ifdef TSF_IMPLEMENTATION
 
 // The lower this block size is the more accurate the effects are.
@@ -1316,3 +1319,5 @@ TSFDEF void tsf_render_float(tsf* f, float* buffer, int samples, int flag_mixing
 #endif
 
 #endif //TSF_IMPLEMENTATION
+
+#endif //TSF_INCLUDE_TSF_IMPLEMENTATION

@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by Semyon Tikhonenko on 7/4/18.
 // Copyright (c) 2018 Mac. All rights reserved.
 //
@@ -7,7 +7,7 @@
 #define VOCALTRAINER_WORKSPACECONTROLLER_H
 
 
-#import "PitchesCollector.h"
+#include "PitchesCollector.h"
 #include "PlayingPitchSequence.h"
 
 class WorkspaceController {

@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include <QOpenGLWidget>
 #include <QHBoxLayout>
 #include <QResizeEvent>

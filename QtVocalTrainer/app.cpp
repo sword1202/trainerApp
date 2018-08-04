@@ -1,5 +1,5 @@
 #include "app.h"
-#include "../PitchDetection/PortAudio.h"
+#include "../PitchDetection/PortAudioImpl.h"
 #include "QmlCppBridge.h"
 #include "qmlpitchinputreader.h"
 #include <QQmlContext>

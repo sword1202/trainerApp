@@ -8,11 +8,7 @@
 
 #include <string>
 
-#ifdef _WIN32
- #include "tsf.h"
-#else
- #import "tsf.h"
-#endif
+#include "tsf.h"
 
 
 tsf* LoadTsf();

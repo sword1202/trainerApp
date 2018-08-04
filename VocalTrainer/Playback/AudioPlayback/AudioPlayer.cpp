@@ -6,20 +6,15 @@
 #include "AudioPlayer.h"
 #include <string>
 #include "TimeUtils.h"
-#include "PortAudio.h"
+#include "PortAudioImpl.h"
 #include "AudioUtils.h"
 #include "Executors.h"
 
 #include <boost/assert.hpp>
 #include <cmath>
 
-#ifdef _WIN32
- #include <stdexcept>
- #include <iostream>
-#else
- #import <stdexcept>
- #import <iostream>
-#endif
+#include <stdexcept>
+#include <iostream>
 
 using namespace CppUtils;
 using std::cout;
