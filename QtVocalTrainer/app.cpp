@@ -1,5 +1,5 @@
-#include "app.h"
-#include "../PitchDetection/PortAudioImpl.h"
+﻿#include "app.h"
+#include "../PitchDetection/PortAudioUtils.h"
 #include "QmlCppBridge.h"
 #include "qmlpitchinputreader.h"
 #include <QQmlContext>
@@ -14,7 +14,7 @@ public:
     }
 };
 
-VxApp::VxApp(int argc, char *argv[]) : QApplication(argc, argv), MainController(new QmlPitchInputReader(), new Player(), new QmlZoomController()) {
+VxApp::VxApp(int &argc, char *argv[]) : QApplication(argc, argv), MainController(new QmlPitchInputReader(), new Player(), new QmlZoomController()) {
     PortAudio::init();
 #ifdef __APPLE__
     doMacOsPlatformStaff();
@@ -42,6 +42,6 @@ VxApp *VxApp::instance() {
 }
 
 VxApp::~VxApp() {
-    delete engine;
+    //delete engine;
     PortAudio::terminate();
 }

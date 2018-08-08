@@ -1,6 +1,7 @@
-#include "qtutils.h"
+﻿#include "qtutils.h"
 #include <QTimer>
 #include <qfile.h>
+#include "assert.h"
 
 namespace QtUtils {
     void startRepeatedTimer(QObject *parent, const std::function<bool()> &action, int intervalInMilliseconds) {

@@ -15,6 +15,13 @@
 ///
 ////////////////////////////////////////////////////////////////////////////////
 //
+// Last changed  : $Date$
+// File revision : $Revision: 4 $
+//
+// $Id$
+//
+////////////////////////////////////////////////////////////////////////////////
+//
 // License :
 //
 //  SoundTouch audio processing library
@@ -112,7 +119,7 @@ public:
     /// 'putSamples(numSamples)' function.
     SAMPLETYPE *ptrEnd(
                 uint slackCapacity   ///< How much free capacity (in samples) there _at least_ 
-                                     ///< should be so that the caller can successfully insert the 
+                                     ///< should be so that the caller can succesfully insert the 
                                      ///< desired samples to the buffer. If necessary, the function 
                                      ///< grows the buffer size to comply with this requirement.
                 );

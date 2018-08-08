@@ -41,6 +41,13 @@
 ///
 ////////////////////////////////////////////////////////////////////////////////
 //
+// Last changed  : $Date$
+// File revision : $Revision: 4 $
+//
+// $Id$
+//
+////////////////////////////////////////////////////////////////////////////////
+//
 // License :
 //
 //  SoundTouch audio processing library
@@ -72,10 +79,10 @@ namespace soundtouch
 {
 
 /// Soundtouch library version string
-#define SOUNDTOUCH_VERSION          "2.1pre"
+#define SOUNDTOUCH_VERSION          "2.0.0"
 
 /// SoundTouch library version id
-#define SOUNDTOUCH_VERSION_ID       (20009)
+#define SOUNDTOUCH_VERSION_ID       (20000)
 
 //
 // Available setting IDs for the 'setSetting' & 'get_setting' functions:
@@ -313,7 +320,7 @@ public:
     /// Changes a setting controlling the processing system behaviour. See the
     /// 'SETTING_...' defines for available setting ID's.
     /// 
-    /// \return 'true' if the setting was successfully changed
+    /// \return 'true' if the setting was succesfully changed
     bool setSetting(int settingId,   ///< Setting ID number. see SETTING_... defines.
                     int value        ///< New setting value.
                     );

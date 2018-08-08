@@ -39,7 +39,7 @@
 #include "audiodecoder.h"
 
 #ifdef __APPLE__
-#include "audiodecodercoreaudio.h"
+#include "audiodecodercoreaudio_mac.h"
 #elif _WIN32
 #include "audiodecodermediafoundation_win.h"
 #endif

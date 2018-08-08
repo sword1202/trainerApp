@@ -42,12 +42,14 @@ Requrements:
 - build form Visual Studio 
 
 5. Build SoundTouch
-- go to https://www.surina.net/soundtouch/download.html
-- download latest https://www.surina.net/soundtouch/soundtouch_dll-2.0.0.zip
-- open source\SoundTouch\SoundTouch.sln in Visual Studio
+- go to https://gitlab.com/soundtouch/soundtouch/tree/soundtouch-2.0.0
+- download branch soundtouch-2.0.0
+- open source\SoundTouch\SoundTouchDll.sln in Visual Studio
 - go to project setting -> Code Generation
-- change runtime library from MT to MD (MTd to MDd for Debug configuration)
+- change runtime library from MT to MD for both static and dynamic libs (MTd to MDd for Debug configuration)
 - build form Visual Studio or using make-win.bat
 - requred files: 
 -- headers
--- SoundTouch.lib
+-- SoundTouchDll.lib
+-- SoundTouch.dll(copy to deploy dir) 
+
