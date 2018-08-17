@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by Semyon Tikhonenko on 7/6/18.
 // Copyright (c) 2018 Mac. All rights reserved.
 //
@@ -69,7 +69,7 @@ void PianoDrawer::draw(float width, float height, float devicePixelRation) {
 
     float intervalOctaveHeightToPianoOctaveHeightRelation = getIntervalOctaveHeightToPianoOctaveHeightRelation();
 
-    while (y > -bigPitchHeight) {
+    while (y > -bigPitchHeight && perfectFrequencyIndex < Pitch::FREQUENCIES_COUNT) {
 
         bool fill = false;
 
@@ -154,7 +154,7 @@ void PianoDrawer::drawPitchNames(float height) const {
 
     float intervalOctaveHeightToPianoOctaveHeightRelation = getIntervalOctaveHeightToPianoOctaveHeightRelation();
 
-    while (y > -bigPitchHeight) {
+    while (y > -bigPitchHeight && pitch.getPerfectFrequencyIndex() < Pitch::FREQUENCIES_COUNT -1) {
         int index = pitch.getWhiteIndex();
         int indexInMap = index % heightMapLength;
         float pitchHeight = heightMap[indexInMap] * intervalOctaveHeightToPianoOctaveHeightRelation;

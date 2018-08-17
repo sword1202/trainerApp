@@ -165,6 +165,7 @@ void WorkspaceDrawer::drawHorizontalGrid() const {
     int index = 1;
     float offset = fmod(verticalOffset, intervalHeight * Pitch::PITCHES_IN_OCTAVE);
     float baseHeight = getMaximumGridTranslation() - getGridTranslation() + getGridHeight();
+
     for (float y = baseHeight - intervalHeight + offset;
             y > -offset; y -= intervalHeight, index++) {
         bool isOctaveBegin = index % Pitch::PITCHES_IN_OCTAVE == 0;

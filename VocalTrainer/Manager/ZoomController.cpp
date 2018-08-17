@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by Semyon Tikhonenko on 7/6/18.
 // Copyright (c) 2018 Mac. All rights reserved.
 //
@@ -17,6 +17,8 @@ constexpr float HORIZONTAL_TO_VERTICAL_INTERVAL_WIDTH_RELATION = 2.4117701323665
 
 ZoomController::ZoomController() {
     zoom = MIN_ZOOM;
+    verticalScrollPosition = 0;
+    workspaceGridHeight = 0;
     firstPitch = Pitch("C2");
     lastPitch = Pitch("B6");
 }

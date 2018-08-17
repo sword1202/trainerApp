@@ -38,7 +38,7 @@ NvgDrawer::~NvgDrawer() {
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
-//#define NANOVG_GL2_IMPLEMENTATION
+#define NANOVG_GL2_IMPLEMENTATION
 #endif
 
 #include <nanovg/nanovg_gl.h>
@@ -53,25 +53,36 @@ void NvgDrawer::clear() {
 }
 
 NvgDrawer::NvgDrawer() {
+#ifdef _WIN32
     GLint GlewInitResult = glewInit();
     if (GLEW_OK != GlewInitResult)
     {
-        //reinterpret_cast<const char *>
         const GLubyte *er = glewGetErrorString(GlewInitResult);
-
         QString s = QString(reinterpret_cast<const char *>(er));
-
         qDebug() << "ERROR: " << s;
-        //exit(EXIT_FAILURE);
     }
-
     ctx = nvgCreateGL3(NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DEBUG);
+
+#endif
+
+#ifdef __APPLE__
+    ctx = nvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DEBUG);
+#endif
+
     setTextAlign(textAlign);
     setTextBaseline(textBaseline);
 }
 
 NvgDrawer::~NvgDrawer() {
+
+#ifdef _WIN32
     nvgDeleteGL3(ctx);
+#endif
+
+#ifdef __APPLE__
+    nvgDeleteGL2(ctx);
+#endif
+
 }
 #endif
 
