@@ -70,7 +70,7 @@ const int kSampleRate = 44100;
 const int kLeftoverSize = 4096; // in int16's, this seems to be the size MF AAC
 // decoder likes to give
 
-const static bool sDebug = false;
+const static bool sDebug = true;
 
 /** Microsoft examples use this snippet often. */
 template<class T> static void safeRelease(T **ppT)
@@ -105,7 +105,6 @@ AudioDecoderMediaFoundation::AudioDecoderMediaFoundation(const std::string filen
     , m_leftoverBufferLength(0)
     , m_leftoverBufferPosition(0)
     , m_mfDuration(0)
-    , m_iCurrentPosition(0)
     , m_dead(false)
     , m_seeking(false)
 {
@@ -113,6 +112,7 @@ AudioDecoderMediaFoundation::AudioDecoderMediaFoundation(const std::string filen
     m_iChannels = kNumChannels;
     m_iSampleRate = kSampleRate;
     m_iBitsPerSample = kBitsPerSample;
+    //m_iCurrentPosition = 0;
 
     // http://social.msdn.microsoft.com/Forums/en/netfxbcl/thread/35c6a451-3507-40c8-9d1c-8d4edde7c0cc
     // gives maximum path + file length as 248 + 260, using that -bkgood
@@ -197,7 +197,7 @@ void AudioDecoderMediaFoundation::open(std::string &&data)
 
 int AudioDecoderMediaFoundation::seek(int sampleIdx)
 {
-    if (sDebug) { std::cout << "seek() " << sampleIdx << std::endl; }
+    if (sDebug) { qDebug() << "AudioDecoderMediaFoundation::seek" << sampleIdx; }
     PROPVARIANT prop;
     HRESULT hr(S_OK);
     __int64 seekTarget(sampleIdx / m_iChannels);
@@ -207,7 +207,7 @@ int AudioDecoderMediaFoundation::seek(int sampleIdx)
     // enough for our calculatedFrameFromMF <= nextFrame assertion in ::read).
     // Has something to do with 100ns MF units being much smaller than most
     // frame offsets (in seconds) -bkgood
-    long result = m_iCurrentPosition;
+    long result = m_iPositionInSamples;
     if (m_dead) {
         return result;
     }
@@ -237,7 +237,7 @@ int AudioDecoderMediaFoundation::seek(int sampleIdx)
     // time we get a buffer from MFSourceReader
     m_nextFrame = seekTarget;
     m_seeking = true;
-    m_iCurrentPosition = result;
+    m_iPositionInSamples = result;
     return result;
 }
 
@@ -424,7 +424,7 @@ releaseSample:
         m_leftoverBufferPosition = m_nextFrame;
     }
     long samples_read = size - framesNeeded * m_iChannels;
-    m_iCurrentPosition += samples_read;
+    m_iPositionInSamples += samples_read;
     if (sDebug) { std::cout << "read() " << size << " returning " << samples_read << std::endl; }
 	
     const int sampleMax = 1 << (m_iBitsPerSample-1);
@@ -563,7 +563,7 @@ bool AudioDecoderMediaFoundation::configureAudioStream()
         std::cerr << "SSMF: failed to set subtype";
         return false;
     }
-/*
+
     hr = m_pAudioType->SetUINT32(MF_MT_ALL_SAMPLES_INDEPENDENT, true);
     if (FAILED(hr)) {
         std::cerr << "SSMF: failed to set samples independent";
@@ -598,9 +598,9 @@ bool AudioDecoderMediaFoundation::configureAudioStream()
         std::cerr << "SSMF: failed to set block alignment";
         return false;
     }
-    */
 
-    /*
+
+
     //MediaFoundation will not convert between mono and stereo without a transform!
     hr = m_pAudioType->SetUINT32(MF_MT_AUDIO_NUM_CHANNELS, kNumChannels);
     if (FAILED(hr)) {
@@ -615,7 +615,7 @@ bool AudioDecoderMediaFoundation::configureAudioStream()
         std::cerr << "SSMF: failed to set sample rate";
         return false;
     }
-    */
+
 
     // Set this type on the source reader. The source reader will
     // load the necessary decoder.

@@ -51,6 +51,7 @@
 #define AUDIODECODERMEDIAFOUNDATION_H
 
 #include "audiodecoder.h"
+#include <QDebug>
 
 //Force MSVC to generate a .lib file with /implib but without a .def file
 //http://msdn.microsoft.com/en-us/library/67wc07b9(v=vs.80).aspx
@@ -90,7 +91,7 @@ class AudioDecoderMediaFoundation : public AudioDecoder {
     size_t m_leftoverBufferLength;
     int m_leftoverBufferPosition;
     __int64 m_mfDuration;
-    long m_iCurrentPosition;
+    //long m_iCurrentPosition;
     bool m_dead;
     bool m_seeking;
     unsigned int m_iBitsPerSample;
