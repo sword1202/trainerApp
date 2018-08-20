@@ -40,10 +40,8 @@ build/
 *.obj
 *.tlog
 *.metagen
-*.dll
 *.exp
 *.ilk
-*.lib
 *.enc
 *.idb
 *.log
