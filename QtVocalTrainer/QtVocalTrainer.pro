@@ -177,19 +177,19 @@ win32 {
 CONFIG(debug, debug|release) {
     LIBS += ../libs/windows/Debug/SoundTouchD.lib
     LIBS += ../libs/windows/Debug/libboost_serialization-vc140-mt-gd-x32-1_67.lib
-    LIBS += ../libs/windows/Debug/portaudio_x86.lib
+    LIBS += ../libs/windows/Debug/portaudio.lib
     LIBS += ../libs/windows/Debug/aubio.lib
 } else {
     LIBS += ../libs/windows/Release/SoundTouch.lib
     LIBS += ../libs/windows/Release/libboost_serialization-vc140-mt-x32-1_67.lib
-    LIBS += ../libs/windows/Release/portaudio_x86.lib
+    LIBS += ../libs/windows/Release/portaudio.lib
     LIBS += ../libs/windows/Release/aubio.lib
 }
 
     LIBS += ../libs/windows/Release/glew32.lib
     LIBS += ../libs/windows/Release/glew32s.lib
 
-    LIBS += -lUser32 -lWinmm -lOpengl32 -lMfreadwrite -lMFPlat -lmfuuid -lOle32 -lMf -lmfuuid -lmfreadwrite
+    LIBS += -lUser32 -lWinmm -lOpengl32 -lMfreadwrite -lMFPlat -lmfuuid -lOle32 -lMf -lmfuuid -lmfreadwrite -lAdvapi32
 }
 
 DISTFILES += \
