@@ -11,7 +11,7 @@ class WorkspaceDrawerWidgetSetup
 protected:
     WorkspaceDrawer* workspaceDrawer = nullptr;
     WorkspaceDrawerWidgetSetup();
-    void setupWorkspaceDrawer(QWidget* widget);
+    void setupWorkspaceDrawer(QWidget* widget, Drawer* drawer);
     void handleResize(QWidget* widget, int w, int h);
 
 public:

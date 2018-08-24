@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D3FD1F6CD9E8CD0B0ED24AA0"
-               BuildableName = "QtVocalTrainer"
+               BuildableName = "QtVocalTrainer.app"
                BlueprintName = "QtVocalTrainer"
                ReferencedContainer = "container:QtVocalTrainer.xcodeproj">
             </BuildableReference>
@@ -23,10 +23,10 @@
       </BuildActionEntries>
    </BuildAction>
    <TestAction
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "NO"
-      buildConfiguration = "Debug">
+      shouldUseLaunchSchemeArgsEnv = "NO">
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D3FD1F6CD9E8CD0B0ED24AA0"
-            BuildableName = "QtVocalTrainer"
+            BuildableName = "QtVocalTrainer.app"
             BlueprintName = "QtVocalTrainer"
             ReferencedContainer = "container:QtVocalTrainer.xcodeproj">
          </BuildableReference>
@@ -54,22 +54,26 @@
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
+      <AdditionalOptions>
+      </AdditionalOptions>
    </TestAction>
    <LaunchAction
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      disableMainThreadChecker = "YES"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
-      disableMainThreadChecker = "YES"
       debugDocumentVersioning = "NO"
+      debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D3FD1F6CD9E8CD0B0ED24AA0"
-            BuildableName = "QtVocalTrainer"
+            BuildableName = "QtVocalTrainer.app"
             BlueprintName = "QtVocalTrainer"
             ReferencedContainer = "container:QtVocalTrainer.xcodeproj">
          </BuildableReference>
@@ -85,16 +89,17 @@
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
+      buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Release"
       debugDocumentVersioning = "NO">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D3FD1F6CD9E8CD0B0ED24AA0"
-            BuildableName = "QtVocalTrainer"
+            BuildableName = "QtVocalTrainer.app"
             BlueprintName = "QtVocalTrainer"
             ReferencedContainer = "container:QtVocalTrainer.xcodeproj">
          </BuildableReference>

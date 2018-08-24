@@ -10,10 +10,6 @@
 int AudioFilePlayer::readNextSamplesBatch(void *intoBuffer, int framesCount, const AudioPlayer::PlaybackData &playbackData) {
     int bufferSeekBefore = getBufferSeek();
     int filePos = audioDecoder->seek(bufferSeekBefore * playbackData.numChannels);
-    qDebug() << "AudioFilePlayer::readNextSamplesBatch :: bufferSeekBefore" << bufferSeekBefore
-             << ", positionInSamples" << audioDecoder->positionInSamples()
-            << ", bufferSeekBefore * numChannels" << bufferSeekBefore * playbackData.numChannels
-           << ", filePos"  << filePos;
 
     assert(audioDecoder->positionInSamples() == bufferSeekBefore * playbackData.numChannels);
     int samplesCount = framesCount * playbackData.numChannels;
@@ -32,7 +28,6 @@ int AudioFilePlayer::readNextSamplesBatch(void *intoBuffer, int framesCount, con
         AudioUtils::FloatSamplesIntoInt16Samples(tempFloatBuffer.data(), samplesCount, (short*)intoBuffer);
     }
 
-    qDebug() << "AudioFilePlayer::readNextSamplesBatch :: read" << readFramesCount << shiftInSemiTones ;
     return readFramesCount;
 }
 

@@ -12,9 +12,6 @@
 class NvgDrawer : public Drawer {
     NVGcontext* ctx = nullptr;
 
-    float translateX = 0;
-    float translateY = 0;
-
     std::unordered_set<Image*> images;
 
     void deleteImages();
@@ -50,10 +47,9 @@ public:
     void rotate(float angle) override;
     void scale(float x, float y) override;
 
-    void translate(float x, float y) override;
-    float getTranslateX() override;
-    float getTranslateY() override;
-    void translateTo(float x, float y) override;
+protected:
+    void doTranslate(float x, float y) override;
+public:
 
     void roundedRect(float x, float y, float w, float h, float r) override;
 

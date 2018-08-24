@@ -12,6 +12,7 @@
 #include <QThread>
 #include "qopenglworkspacewidget.h"
 #include "PlaybackBounds.h"
+#include "qpainterworkspacewidget.h"
 #include <iostream>
 
 constexpr int YARD_STICK_HEIGHT = (int)WorkspaceDrawer::YARD_STICK_HEIGHT;
@@ -33,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
 #endif
 
     setMinimumSize(1280, 1024);
-    setupWorkspaceView();
+    workspaceView = new QOpenGLWorkspaceWidget(this);
     workspaceView->move(0, HEADER_HEIGHT);
     //workspaceView->resize(1024, 768);
 
@@ -82,10 +83,6 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
     verticalScrollWidget->move(width - VERTICAL_SCROLL_WIDTH, HEADER_HEIGHT + YARD_STICK_HEIGHT + 1);
 }
 
-void MainWindow::setupWorkspaceView() {
-    workspaceView = new QOpenGLWorkspaceWidget(this);
-}
-
 void MainWindow::mousePressEvent(QMouseEvent *event) {
     QWidget::mousePressEvent(event);
     //header->update();
@@ -99,10 +96,10 @@ void MainWindow::setupMenus() {
 }
 
 void MainWindow::onFileOpen() {
-//    QString fileName = QFileDialog::getOpenFileName(
-//            this, "Select .mvx file for signing", "", "Mvx files(*.mvx);; All files(*)");
+    QString fileName = QFileDialog::getOpenFileName(
+            this, "Select .mvx file for signing", "", "Mvx files(*.mvx);; All files(*)");
 
-    QString fileName = "C:/projects/projects_2018/vocal/torero.mvx";
+//    QString fileName = "C:/projects/projects_2018/vocal/torero.mvx";
     if (!fileName.isEmpty()) {
         VxApp::instance()->getPlayer()->setSource(fileName);
     }

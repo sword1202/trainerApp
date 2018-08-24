@@ -36,12 +36,12 @@ public:
 
     typedef DrawerColor Color;
 
-    virtual void clear() = 0;
+    virtual void clear();
 
-    virtual void translate(float x, float y) = 0;
-    virtual float getTranslateX() = 0;
-    virtual float getTranslateY() = 0;
-    virtual void translateTo(float x, float y) = 0;
+    virtual void translate(float x, float y);
+    virtual float getTranslateX();
+    virtual float getTranslateY();
+    virtual void translateTo(float x, float y);
 
     virtual void beginFrame(float width, float height, float devicePixelRatio);
     virtual void endFrame() = 0;
@@ -99,10 +99,14 @@ protected:
     float getHeight() const;
     float getDevicePixelRatio() const;
 
+    virtual void doTranslate(float x, float y) = 0;
 private:
     float width;
     float height;
     float devicePixelRatio;
+
+    float translateX = 0;
+    float translateY = 0;
 };
 
 

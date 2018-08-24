@@ -26,24 +26,28 @@ void WorkspaceDrawerWidgetSetup::initPlayHeadImage(Drawer *drawer, QWidget* widg
     workspaceDrawer->setPlayHeadImage(imageHolder);
 }
 
-void WorkspaceDrawerWidgetSetup::setupWorkspaceDrawer(QWidget* widget) {
-    Drawer* drawer = new NvgDrawer();
-
+void WorkspaceDrawerWidgetSetup::setupWorkspaceDrawer(QWidget* widget, Drawer* drawer) {
     QByteArray latoRegular = Fonts::latoRegular();
     drawer->registerFont("Lato-Regular", latoRegular.data(), latoRegular.size());
     QByteArray latoBold = Fonts::latoBold();
     drawer->registerFont("Lato-Bold", latoRegular.data(), latoRegular.size());
     workspaceDrawer = new WorkspaceDrawer(drawer, [=] {
-        widget->update();
+        widget->repaint();
     });
     workspaceDrawer->setTactNumbersFontFamily("Lato-Regular");
     initPlayHeadImage(drawer, widget);
 
     MainController::instance()->setWorkspaceController(workspaceDrawer);
 
+    // Fix strange bug, when grid is drawing with wrong alpha
+    QtUtils::startRepeatedTimer(widget, [=] {
+        widget->repaint();
+        return false;
+    }, 1000 / 150); // 150fps
+
     QtUtils::startRepeatedTimer(widget, [=] {
         if (workspaceDrawer->isRunning()) {
-            widget->update();
+            widget->repaint();
         }
         return true;
     }, 1000 / 150); // 150fps

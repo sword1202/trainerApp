@@ -2,8 +2,10 @@
 #define QOPENGLWORKSPACEWIDGET_H
 
 #include <QOpenGLWidget>
+#include <QOpenGLPaintDevice>
 #include "WorkspaceDrawer.h"
 #include "workspacedrawerwidgetsetup.h"
+#include "QDrawer.h"
 
 class QOpenGLWorkspaceWidget : public QOpenGLWidget, WorkspaceDrawerWidgetSetup
 {
@@ -18,6 +20,12 @@ protected:
 
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
+
+private:
+    QDrawer* drawer;
+    QOpenGLPaintDevice* device = nullptr;
+
+    void initDeviceIfNeed();
 };
 
 #endif // QOPENGLWORKSPACEWIDGET_H

@@ -58,7 +58,9 @@ HEADERS += \
     qmlzoomcontroller.h \
     player.h \
     qopenglworkspacewidget.h \
-    fonts.h
+    workspacedrawerwidgetsetup.h \
+    fonts.h \
+    qpainterworkspacewidget.h
 
 SOURCES += \
     main.cpp \
@@ -107,7 +109,8 @@ SOURCES += \
     qmlzoomcontroller.cpp \
     player.cpp \
     qopenglworkspacewidget.cpp \
-    fonts.cpp
+    fonts.cpp \
+    qpainterworkspacewidget.cpp
 
 RESOURCES += qml.qrc
 

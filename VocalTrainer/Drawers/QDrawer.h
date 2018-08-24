@@ -7,7 +7,7 @@
 class QDrawer : public Drawer
 {
     QPaintDevice* paintDevice;
-    QPainter* painter = nullptr;
+    QPainter painter;
     QPainterPath path;
     Color fillColor;
     Color strokeColor;
@@ -16,11 +16,6 @@ public:
     QDrawer(QPaintDevice *paintDevice);
     ~QDrawer();
 
-    void clear() override;
-    void translate(float x, float y) override;
-    float getTranslateX() override;
-    float getTranslateY() override;
-    void translateTo(float x, float y) override;
     void beginFrame(float width, float height, float devicePixelRatio) override;
     void endFrame() override;
     void moveTo(float x, float y) override;
@@ -30,6 +25,9 @@ public:
     void setFillColor(const Color &color) override;
     void setStrokeWidth(float strokeWidth) override;
     void stroke() override;
+
+    void roundedRectDifferentCorners(float x, float y, float w, float h, float radiusLeftTop, float radiusRightTop, float radiusBottomRight, float radiusBottomLeft) override;
+
     void fill() override;
     void beginPath() override;
     void closePath() override;
@@ -39,8 +37,22 @@ public:
     void rotate(float angle) override;
     void scale(float x, float y) override;
     void rect(float x, float y, float w, float h) override;
-    void fillRect(float x, float y, float w, float h) override;
     void fillText(const std::string &text, float x, float y) override;
+
+    void arc(float x, float y, float r, float sAngle, float eAngle) override;
+
+    void fillWithImage(Image *image, float textureX1, float textureY1, float textureX2, float textureY2) override;
+
+    void registerFont(const char *name, const char *data, int dataSize) override;
+
+    Image *createImage(const void *data, int w, int h) override;
+
+    void deleteImage(Image *&image) override;
+
+    void setPaintDevice(QPaintDevice *paintDevice);
+
+protected:
+    void doTranslate(float x, float y) override;
 };
 
 #endif // QDRAWER_H

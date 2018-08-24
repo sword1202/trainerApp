@@ -105,8 +105,6 @@ NvgDrawer::~NvgDrawer() {
 
 void NvgDrawer::beginFrame(float width, float height, float devicePixelRatio) {
     Drawer::beginFrame(width, height, devicePixelRatio);
-    translateX = 0;
-    translateY = 0;
     nvgBeginFrame(ctx, width, height, devicePixelRatio);
 }
 
@@ -178,26 +176,6 @@ void NvgDrawer::rotate(float angle) {
 
 void NvgDrawer::scale(float x, float y) {
     nvgScale(ctx, x, y);
-}
-
-void NvgDrawer::translate(float x, float y) {
-    nvgTranslate(ctx, x, y);
-    translateX += x;
-    translateY += y;
-}
-
-float NvgDrawer::getTranslateX() {
-    return translateX;
-}
-
-float NvgDrawer::getTranslateY() {
-    return translateY;
-}
-
-void NvgDrawer::translateTo(float x, float y) {
-    nvgTranslate(ctx, -translateX + x, -translateY + y);
-    translateX = x;
-    translateY = y;
 }
 
 void NvgDrawer::arcTo(float x1, float y1, float x2, float y2, float radius) {
@@ -306,4 +284,8 @@ void NvgDrawer::deleteImages() {
     }
 
     images.clear();
+}
+
+void NvgDrawer::doTranslate(float x, float y) {
+    nvgTranslate(ctx, x, y);
 }

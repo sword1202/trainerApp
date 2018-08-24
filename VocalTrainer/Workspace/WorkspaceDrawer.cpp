@@ -576,7 +576,7 @@ bool WorkspaceDrawer::getBoundsStartXAndWidth(const PlaybackBounds &bounds, floa
 }
 
 void WorkspaceDrawer::setPlayHeadImage(Drawer::Image* image) {
-    assert(playHeadImage == nullptr && image != nullptr);
+    //assert(playHeadImage == nullptr && image != nullptr);
     playHeadImage = image;
 }
 

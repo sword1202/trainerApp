@@ -78,6 +78,10 @@ void Drawer::setFillColor(int color) {
 }
 
 void Drawer::fillWithImage(Drawer::Image *image) {
+    if (!image) {
+        return;
+    }
+
     fillWithImage(image, 0, 0, image->width() / devicePixelRatio, image->height() / devicePixelRatio);
 }
 
@@ -97,6 +101,8 @@ void Drawer::beginFrame(float width, float height, float devicePixelRatio) {
     this->width = width;
     this->height = height;
     this->devicePixelRatio = devicePixelRatio;
+    translateX = 0;
+    translateY = 0;
 }
 
 void Drawer::rect(float x, float y, float w, float h) {
@@ -111,4 +117,29 @@ void Drawer::rect(float x, float y, float w, float h) {
 void Drawer::fillRect(float x, float y, float w, float h) {
     rect(x, y, w, h);
     fill();
+}
+
+void Drawer::translate(float x, float y) {
+    doTranslate(x, y);
+    translateX += x;
+    translateY += y;
+}
+
+float Drawer::getTranslateX() {
+    return translateX;
+}
+
+float Drawer::getTranslateY() {
+    return translateY;
+}
+
+void Drawer::translateTo(float x, float y) {
+    doTranslate(-translateX + x, -translateY + y);
+    translateX = x;
+    translateY = y;
+}
+
+void Drawer::clear() {
+//    setFillColor(Color::white());
+//    fillRect(0, 0, width, height);
 }

@@ -8,7 +8,6 @@
 
 #include "AudioInputReader.h"
 #include "Pitch.h"
-#include "YinPitchDetector.h"
 #include "PitchDetector.h"
 #include "PitchDetectionSmoothingAudioBuffer.h"
 #include <memory>

@@ -10,7 +10,6 @@
 
 #include "tsf.h"
 
-
 tsf* LoadTsf();
 
 #endif //VOCALTRAINER_GETSF2FILEPATH_H

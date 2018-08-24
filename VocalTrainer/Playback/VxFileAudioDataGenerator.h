@@ -10,7 +10,6 @@
 
 #include "VxFileAudioDataGeneratorConfig.h"
 #include "VxFile.h"
-#include "PitchRenderer.h"
 #include "tsf.h"
 
 class VxFileAudioDataGenerator {

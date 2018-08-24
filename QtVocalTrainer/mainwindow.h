@@ -15,7 +15,7 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-    QOpenGLWorkspaceWidget *workspaceView;
+    QWidget *workspaceView;
 
     QQuickItem *header;
     QQuickWidget *verticalScrollWidget;
@@ -41,7 +41,6 @@ public:
 #ifdef __APPLE__
     void doMacOsPlatformStaff();
 #endif
-    void setupWorkspaceView();
 
 public slots:
     void onFileOpen();

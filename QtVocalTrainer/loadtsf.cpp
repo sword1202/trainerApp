@@ -1,4 +1,5 @@
 #include <qfile.h>
+#define TSF_IMPLEMENTATION
 #include "LoadTsf.h"
 #include "QtUtils/qtutils.h"
 

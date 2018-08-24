@@ -6,7 +6,6 @@
 #include <cmath>
 #include "VxFileAudioDataGenerator.h"
 #include "AudioUtils.h"
-#include "SoundFont2PitchRenderer.h"
 #include <iostream>
 #include "MemoryUtils.h"
 #include "LoadTsf.h"
