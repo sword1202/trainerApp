@@ -175,16 +175,6 @@ void NvgDrawer::arcTo(float x1, float y1, float x2, float y2, float radius) {
     nvgArcTo(ctx, x1, y1, x2, y2, radius);
 }
 
-void NvgDrawer::rect(float x, float y, float w, float h) {
-    // nvgRect doesn't work for some reasons
-    roundedRect(x, y, w, h, 0);
-}
-
-void NvgDrawer::fillRect(float x, float y, float w, float h) {
-    rect(x, y, w, h);
-    fill();
-}
-
 void NvgDrawer::roundedRect(float x, float y, float w, float h, float r) {
     Drawer::roundedRect(x, y, w, h, r);
 }

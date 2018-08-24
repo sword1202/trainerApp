@@ -98,3 +98,17 @@ void Drawer::beginFrame(float width, float height, float devicePixelRatio) {
     this->height = height;
     this->devicePixelRatio = devicePixelRatio;
 }
+
+void Drawer::rect(float x, float y, float w, float h) {
+    beginPath();
+    moveTo(x, y);
+    lineTo(x + w, y);
+    lineTo(x + w, y + h);
+    lineTo(x, y + h);
+    closePath();
+}
+
+void Drawer::fillRect(float x, float y, float w, float h) {
+    rect(x, y, w, h);
+    fill();
+}

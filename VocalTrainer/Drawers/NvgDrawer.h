@@ -49,8 +49,6 @@ public:
     void closePath() override;
     void rotate(float angle) override;
     void scale(float x, float y) override;
-    void rect(float x, float y, float w, float h) override;
-    void fillRect(float x, float y, float w, float h) override;
 
     void translate(float x, float y) override;
     float getTranslateX() override;

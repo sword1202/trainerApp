@@ -65,8 +65,8 @@ public:
     virtual void lineJoin(LineJoin type) = 0;
     virtual void rotate(float angle) = 0;
     virtual void scale(float x, float y) = 0;
-    virtual void rect(float x, float y, float w, float h) = 0;
-    virtual void fillRect(float x, float y, float w, float h) = 0;
+    virtual void rect(float x, float y, float w, float h);
+    virtual void fillRect(float x, float y, float w, float h);
     virtual void drawLine(float x1, float y1, float x2, float y2);
     virtual void drawVerticalLine(float x, float y, float height);
 

@@ -70,7 +70,6 @@ void WorkspaceDrawer::draw() {
     drawPitchesGraph();
     drawer->translate(0, -YARD_STICK_HEIGHT - 1 - getGridTranslation());
     drawYardStick();
-    drawSecondPlayHead();
     drawer->translate(0, YARD_STICK_HEIGHT);
     drawer->translate(-PIANO_WIDTH, 0);
     drawVerticalLine(PIANO_WIDTH, borderLineColor);
@@ -87,6 +86,10 @@ void WorkspaceDrawer::draw() {
     drawer->translate(0, PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN);
     drawVerticalLine(PIANO_WIDTH, borderLineColor);
     drawer->translate(0, -PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN);
+
+    drawer->translate(PIANO_WIDTH, 0);
+    drawFirstPlayHead();
+    drawSecondPlayHead();
 
     drawer->endFrame();
 }
@@ -338,18 +341,29 @@ void WorkspaceDrawer::drawYardStickDot(float x, float y) const {
     drawer->fill();
 }
 
-void WorkspaceDrawer::drawSecondPlayHead() const {
-//    PlaybackBounds bounds = this->playbackBounds;
-//    float startX, width;
-//    if (!getBoundsStartXAndWidth(bounds, &startX, &width)) {
-//        return;
-//    }
-
-//    float x = startX + width;
-
-    drawer->setFillColor(DrawerColor::black());
-    drawer->rect(0, 0, PLAYHEAD_TRIANGLE_WIDTH, playHeadImage->height());
+void WorkspaceDrawer::drawPlayHead(float x) const {
+    // NanoVg rect doesn't work well with image, use translation as a fix
+    float y = YARD_STICK_HEIGHT - PLAYHEAD_TRIANGLE_HEIGHT / 2 + 1;
+    x -= PLAYHEAD_TRIANGLE_WIDTH / 2;
+    drawer->translate(x, y);
+    drawer->rect(0, 0, PLAYHEAD_TRIANGLE_WIDTH, getGridHeight() + PLAYHEAD_TRIANGLE_HEIGHT / 2);
     drawer->fillWithImage(playHeadImage);
+    drawer->translate(-x, -y);
+}
+
+void WorkspaceDrawer::drawSecondPlayHead() const {
+    PlaybackBounds bounds = this->playbackBounds;
+    float startX, width;
+    if (!getBoundsStartXAndWidth(bounds, &startX, &width)) {
+        return;
+    }
+
+    float x = startX + width;
+    drawPlayHead(x);
+}
+
+void WorkspaceDrawer::drawFirstPlayHead() const {
+    drawPlayHead(BEATS_IN_TACT * intervalWidth);
 }
 
 int WorkspaceDrawer::getDistanceFromFirstPitch(const Pitch &pitch) const {
@@ -567,12 +581,4 @@ void WorkspaceDrawer::setPlayHeadImage(Drawer::Image* image) {
 void WorkspaceDrawer::getPlayHeadImageSize(float summaryHeight, float devicePixelRatio, int* outW, int* outH) {
     *outW = (int)round(PLAYHEAD_TRIANGLE_WIDTH * devicePixelRatio);
     *outH = (int)round((getGridHeight(summaryHeight) + PLAYHEAD_TRIANGLE_HEIGHT / 2.0f + 1) * devicePixelRatio);
-}
-
-void WorkspaceDrawer::onMouseMove(float x) {
-
-}
-
-void WorkspaceDrawer::onMouseClick(float x) {
-
 }

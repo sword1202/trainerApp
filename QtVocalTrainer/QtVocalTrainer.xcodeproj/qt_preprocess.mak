@@ -81,7 +81,6 @@ qrc_qml.cpp: qml.qrc \
 		qml/images/lyrics_show_button_on.svg \
 		qml/images/to_the_begining.svg \
 		qml/images/player_background.svg \
-		qml/images/unnamed.jpg \
 		qml/images/loop_off.svg \
 		qml/images/lyrics_show_button_off.png \
 		qml/images/tonality_up.svg \

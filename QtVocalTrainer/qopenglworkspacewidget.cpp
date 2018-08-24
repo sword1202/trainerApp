@@ -19,11 +19,11 @@ void QOpenGLWorkspaceWidget::paintGL() {
 }
 
 void QOpenGLWorkspaceWidget::mousePressEvent(QMouseEvent *event) {
-    workspaceDrawer->onMouseClick(event->x());
+
 }
 
 void QOpenGLWorkspaceWidget::mouseMoveEvent(QMouseEvent *event) {
-    workspaceDrawer->onMouseMove(event->x());
+
 }
 
 QOpenGLWorkspaceWidget::~QOpenGLWorkspaceWidget() {
