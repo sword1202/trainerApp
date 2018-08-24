@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by Semyon Tikhonenko on 7/6/18.
 // Copyright (c) 2018 Mac. All rights reserved.
 //
@@ -6,6 +6,8 @@
 #include "ZoomController.h"
 #include "Pitch.h"
 #include <cmath>
+#include <cassert>
+
 
 constexpr float BASE_WIDTH = 1374.0;
 constexpr float ZOOM_FACTOR = 12.0f * 4; // number of beats in screen of BASE_WIDTH for zoom = 1.0
@@ -15,6 +17,8 @@ constexpr float HORIZONTAL_TO_VERTICAL_INTERVAL_WIDTH_RELATION = 2.4117701323665
 
 ZoomController::ZoomController() {
     zoom = MIN_ZOOM;
+    verticalScrollPosition = 0;
+    workspaceGridHeight = 0;
     firstPitch = Pitch("C2");
     lastPitch = Pitch("B6");
 }

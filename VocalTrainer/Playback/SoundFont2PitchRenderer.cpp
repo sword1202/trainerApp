@@ -1,13 +1,13 @@
-//
+﻿//
 // Created by Semyon Tikhonenko on 4/28/18.
 // Copyright (c) 2018 Mac. All rights reserved.
 //
 
 #include "SoundFont2PitchRenderer.h"
-#define TSF_IMPLEMENTATION
-#include "tsf.h"
+
 #include "AudioUtils.h"
 #include "LoadTsf.h"
+#include "math.h"
 
 constexpr float VOLUME = 0.5;
 
@@ -30,3 +30,4 @@ SoundFont2PitchRenderer::SoundFont2PitchRenderer(int sampleRate, double smoothin
 SoundFont2PitchRenderer::~SoundFont2PitchRenderer() {
     tsf_close(_tsf);
 }
+

@@ -40,10 +40,8 @@ build/
 *.obj
 *.tlog
 *.metagen
-*.dll
 *.exp
 *.ilk
-*.lib
 *.enc
 *.idb
 *.log
@@ -62,6 +60,7 @@ object_script.*.Debug
 .qmake.cache
 .qmake.stash
 *.pro.user
+*.pro.user~*
 *.pro.user.*
 *.qbs.user
 *.qbs.user.*
@@ -89,3 +88,6 @@ target_wrapper.*
 CMakeLists.txt.user
 
 QVocalTrainer/QtVocalTrainer.build
+
+# TMP files
+*.tmp

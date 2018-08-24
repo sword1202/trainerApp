@@ -1,7 +1,9 @@
-//
+﻿//
 // Created by Semyon Tikhonenko on 5/26/18.
 // Copyright (c) 2018 Mac. All rights reserved.
 //
+
+#define _USE_MATH_DEFINES
 
 #include "WorkspaceDrawer.h"
 #include <assert.h>
@@ -540,6 +542,7 @@ void WorkspaceDrawer::setVerticalScrollPosition(float verticalScrollPosition) {
 float WorkspaceDrawer::getGridHeight(float summaryHeight) {
     return summaryHeight - YARD_STICK_HEIGHT - 1;
 }
+<<<<<<< HEAD
 
 const PlaybackBounds &WorkspaceDrawer::getPlaybackBounds() const {
     return playbackBounds;

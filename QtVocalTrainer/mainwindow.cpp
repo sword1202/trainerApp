@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include <QOpenGLWidget>
 #include <QHBoxLayout>
 #include <QResizeEvent>
@@ -31,9 +31,11 @@ MainWindow::MainWindow(QWidget *parent) :
 #ifdef __APPLE__
     doMacOsPlatformStaff();
 #endif
+
+    setMinimumSize(1280, 1024);
     setupWorkspaceView();
     workspaceView->move(0, HEADER_HEIGHT);
-    workspaceView->resize(1024, 768);
+    //workspaceView->resize(1024, 768);
 
     cpp = new QmlCppBridge(this);
 
@@ -97,9 +99,11 @@ void MainWindow::setupMenus() {
 }
 
 void MainWindow::onFileOpen() {
-    QString fileName = QFileDialog::getOpenFileName(
-            this, "Select .mvx file for signing", "", "Mvx files(*.mvx);; All files(*)");
-    if (!fileName.isNull()) {
+//    QString fileName = QFileDialog::getOpenFileName(
+//            this, "Select .mvx file for signing", "", "Mvx files(*.mvx);; All files(*)");
+
+    QString fileName = "C:/projects/projects_2018/vocal/torero.mvx";
+    if (!fileName.isEmpty()) {
         VxApp::instance()->getPlayer()->setSource(fileName);
     }
 }

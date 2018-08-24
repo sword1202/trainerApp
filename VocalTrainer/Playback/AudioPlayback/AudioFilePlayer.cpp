@@ -1,14 +1,20 @@
-//
+﻿//
 // Created by Semyon Tikhonenko on 6/7/18.
 // Copyright (c) 2018 Mac. All rights reserved.
 //
 
 #include "AudioFilePlayer.h"
 #include "AudioUtils.h"
+#include <QDebug>
 
 int AudioFilePlayer::readNextSamplesBatch(void *intoBuffer, int framesCount, const AudioPlayer::PlaybackData &playbackData) {
     int bufferSeekBefore = getBufferSeek();
-    audioDecoder->seek(bufferSeekBefore * playbackData.numChannels);
+    int filePos = audioDecoder->seek(bufferSeekBefore * playbackData.numChannels);
+    qDebug() << "AudioFilePlayer::readNextSamplesBatch :: bufferSeekBefore" << bufferSeekBefore
+             << ", positionInSamples" << audioDecoder->positionInSamples()
+            << ", bufferSeekBefore * numChannels" << bufferSeekBefore * playbackData.numChannels
+           << ", filePos"  << filePos;
+
     assert(audioDecoder->positionInSamples() == bufferSeekBefore * playbackData.numChannels);
     int samplesCount = framesCount * playbackData.numChannels;
     int readFramesCount = audioDecoder->read(samplesCount, (short*)intoBuffer)
@@ -26,6 +32,7 @@ int AudioFilePlayer::readNextSamplesBatch(void *intoBuffer, int framesCount, con
         AudioUtils::FloatSamplesIntoInt16Samples(tempFloatBuffer.data(), samplesCount, (short*)intoBuffer);
     }
 
+    qDebug() << "AudioFilePlayer::readNextSamplesBatch :: read" << readFramesCount << shiftInSemiTones ;
     return readFramesCount;
 }
 

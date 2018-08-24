@@ -1,4 +1,4 @@
-#include "Executors.h"
+﻿#include "Executors.h"
 #include "app.h"
 #include <QThreadPool>
 

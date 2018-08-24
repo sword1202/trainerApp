@@ -1,4 +1,4 @@
-/*
+﻿/*
  * libaudiodecoder - Native Portable Audio Decoder Library
  * libaudiodecoder API Header File
  * Latest version available at: http://www.oscillicious.com/libaudiodecoder
@@ -43,11 +43,11 @@
 #include <string>
 #include <vector>
 
-#ifdef _WIN32
-#define DllExport   __declspec( dllexport )
-#else
-#define DllExport
-#endif
+//#ifdef _WIN32
+//#define DllExport   __declspec( dllexport )
+//#else
+//#define DllExport
+//#endif
 
 //Types
 typedef short SAMPLE;
@@ -62,12 +62,12 @@ At present, all API calls are blocking and none are considered real-time safe. F
 try to avoid calling read() or any other libaudiodecoder function from inside your audio callback.
 */
 
-class DllExport AudioDecoder {
+class AudioDecoder {
 public:
     virtual ~AudioDecoder() = default;
 
     /** Opens the file for decoding */
-    virtual void open(std::string &&data)  = 0;
+    virtual void open(std::string &&data) = 0;
 
     /** Seek to a sample in the file */
     virtual int seek(int filepos) = 0;

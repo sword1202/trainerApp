@@ -1,7 +1,8 @@
-#ifndef APP_H
+﻿#ifndef APP_H
 #define APP_H
 
-#import <QApplication>
+#include <QApplication>
+
 #include <QQmlApplicationEngine>
 #include "MainController.h"
 #include "player.h"
@@ -9,12 +10,11 @@
 class VxApp : public QApplication, public MainController
 {
     Q_OBJECT
-    QQmlApplicationEngine* engine;
 #ifdef __APPLE__
     void doMacOsPlatformStaff();
 #endif
 public:
-    VxApp(int argc, char *argv[]);
+    VxApp(int &argc, char *argv[]);
     Player* getPlayer() const;
     void executeOnMainThread(const std::function<void()>& callback);
     ~VxApp();

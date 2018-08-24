@@ -7,6 +7,8 @@
 #include "MetronomeAudioPlayer.h"
 #include "WAVFile.h"
 #include <iostream>
+#include <cassert>
+
 
 using std::cout;
 using std::endl;

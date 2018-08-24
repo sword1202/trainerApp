@@ -1,4 +1,4 @@
-/* include/soundtouch_config.h.  Generated from soundtouch_config.h.in by configure.  */
+﻿/* include/soundtouch_config.h.  Generated from soundtouch_config.h.in by configure.  */
 /* Use Float as Sample type */
 #define SOUNDTOUCH_FLOAT_SAMPLES 1
 

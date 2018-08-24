@@ -1,6 +1,7 @@
 #include <cstdint>
 #include <assert.h>
 #include "DrawerColor.h"
+#include <cassert>
 
 DrawerColor::DrawerColor() {
     rgba[3] = 255;

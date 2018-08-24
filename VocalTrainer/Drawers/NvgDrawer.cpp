@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by Semyon Tikhonenko on 6/2/18.
 // Copyright (c) 2018 Mac. All rights reserved.
 //
@@ -30,10 +30,18 @@ NvgDrawer::~NvgDrawer() {
 
 #else
 
+
+#ifdef _WIN32
+#define NANOVG_GL3_IMPLEMENTATION
+#include <GLEW/GL/glew.h>
+#endif
+
+#ifdef __APPLE__
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
-
 #define NANOVG_GL2_IMPLEMENTATION
+#endif
+
 #include <nanovg/nanovg_gl.h>
 #include <nanovg/fontstash.h>
 
@@ -62,14 +70,36 @@ void NvgDrawer::clear() {
 }
 
 NvgDrawer::NvgDrawer() {
+#ifdef _WIN32
+    GLint GlewInitResult = glewInit();
+    if (GLEW_OK != GlewInitResult)
+    {
+        const GLubyte *er = glewGetErrorString(GlewInitResult);
+        QString s = QString(reinterpret_cast<const char *>(er));
+        qDebug() << "ERROR: " << s;
+    }
+    ctx = nvgCreateGL3(NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DEBUG);
+
+#endif
+
+#ifdef __APPLE__
     ctx = nvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DEBUG);
+#endif
+
     setTextAlign(textAlign);
     setTextBaseline(textBaseline);
 }
 
 NvgDrawer::~NvgDrawer() {
+
+#ifdef _WIN32
+    nvgDeleteGL3(ctx);
+#endif
+
+#ifdef __APPLE__
     nvgDeleteGL2(ctx);
     deleteImages();
+#endif
 }
 #endif
 
@@ -184,11 +214,11 @@ void NvgDrawer::quadraticCurveTo(float cpx, float cpy, float x, float y) {
 }
 
 void NvgDrawer::fillText(const std::string &text, float x, float y) {
-    if (nvgFindFont(ctx, fontFamily.data()) == FONS_INVALID){
-        throw std::runtime_error("Font " + fontFamily + " was not registered, call drawer->registerFont before fillText call");
-    }
+//    if (nvgFindFont(ctx, fontFamily.data()) == FONS_INVALID){
+//        throw std::runtime_error("Font " + fontFamily + " was not registered, call drawer->registerFont before fillText call");
+//    }
 
-    nvgText(ctx, x, y, text.data(), text.data() + text.size());
+//    nvgText(ctx, x, y, text.data(), text.data() + text.size());
 }
 
 void NvgDrawer::setTextFont(const std::string &fontFamily, float fontSize) {
@@ -236,7 +266,7 @@ void NvgDrawer::setTextBaseline(Drawer::TextBaseline baseline) {
 }
 
 void NvgDrawer::registerFont(const char *name, const char *data, int dataSize) {
-    nvgCreateFontMem(ctx, name, (unsigned char *) data, dataSize, 0);
+    //nvgCreateFontMem(ctx, name, (unsigned char *) data, dataSize, 0);
 }
 
 void NvgDrawer::arc(float x, float y, float r, float sAngle, float eAngle) {

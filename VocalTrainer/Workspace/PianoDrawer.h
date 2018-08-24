@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by Semyon Tikhonenko on 7/6/18.
 // Copyright (c) 2018 Mac. All rights reserved.
 //
@@ -11,6 +11,7 @@
 #include "Pitch.h"
 #include "PlayingPitchSequence.h"
 #include <unordered_set>
+#include <atomic>
 
 class PianoDrawer {
     std::atomic<float> intervalHeight;

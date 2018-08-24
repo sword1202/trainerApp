@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by Semyon Tikhonenko on 7/6/18.
 // Copyright (c) 2018 Mac. All rights reserved.
 //
@@ -7,7 +7,7 @@
 #define VOCALTRAINER_PLAYINGPITCHSEQUENCE_H
 
 
-#import "Pitch.h"
+#include "Pitch.h"
 
 class PlayingPitchSequence {
 public:
