@@ -81,6 +81,7 @@ qrc_qml.cpp: qml.qrc \
 		qml/images/lyrics_show_button_on.svg \
 		qml/images/to_the_begining.svg \
 		qml/images/player_background.svg \
+		qml/images/unnamed.jpg \
 		qml/images/loop_off.svg \
 		qml/images/lyrics_show_button_off.png \
 		qml/images/tonality_up.svg \
@@ -107,6 +108,7 @@ qrc_qml.cpp: qml.qrc \
 		qml/images/zoom_slider_triangle.svg \
 		qml/images/tracks_show_button_off.png \
 		qml/images/track_piece.png \
+		qml/images/playhead.png \
 		qml/sounds/sounds.sf2 \
 		qml/sounds/metronome.wav \
 		qml/fonts/Lato-Regular.ttf \
@@ -118,7 +120,7 @@ compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
 moc_predefs.h: ../../../Qt/5.11.0/clang_64/mkspecs/features/data/dummy.cpp
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -std=c++1z -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h ../../../Qt/5.11.0/clang_64/mkspecs/features/data/dummy.cpp
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++1y -Wall -W -dM -E -o moc_predefs.h ../../../Qt/5.11.0/clang_64/mkspecs/features/data/dummy.cpp
 
 compiler_moc_header_make_all: moc_QmlCppBridge.cpp moc_qmlopenglitem.cpp moc_qmlpitch.cpp moc_qmlpitchinputreader.cpp moc_app.cpp moc_qmlvxpitch.cpp moc_qmltimedpitch.cpp moc_mainwindow.cpp moc_qmlzoomcontroller.cpp moc_player.cpp moc_qopenglworkspacewidget.cpp
 compiler_moc_header_clean:
@@ -142,8 +144,6 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		../PitchDetection/CppUtils/RoundedRect.h \
 		../PitchDetection/CppUtils/Point.h \
 		../VocalTrainer/Drawers/DrawerColor.h \
-		../VocalTrainer/Playback/CraigsappMidifile/MidiEvent.h \
-		../VocalTrainer/Playback/CraigsappMidifile/MidiMessage.h \
 		../PitchDetection/PitchesCollector.h \
 		../VocalTrainer/Playback/VxFile.h \
 		../VocalTrainer/Playback/VxPitch.h \
@@ -154,14 +154,13 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		../PitchDetection/CppUtils/ListenersSet.h \
 		../VocalTrainer/Playback/VxLyricsLine.h \
 		../VocalTrainer/Playback/VxLyricsInterval.h \
-		../VocalTrainer/Playback/PlaybackChunk.h \
 		../include/boost/container/static_vector.hpp \
 		../include/boost/serialization/vector.hpp \
 		../PitchDetection/CppUtils/StlDebugUtils.h \
 		../VocalTrainer/Workspace/WorkspaceController.h \
 		../VocalTrainer/Workspace/PianoDrawer.h \
 		../VocalTrainer/Playback/PlayingPitchSequence.h \
-		../include/boost/thread/shared_mutex.hpp \
+		../VocalTrainer/Playback/PlaybackBounds.h \
 		../VocalTrainer/Playback/MvxPlayer.h \
 		../VocalTrainer/Playback/MvxFile.h \
 		../VocalTrainer/Playback/AudioPlayback/VxFileAudioPlayer.h \
@@ -258,7 +257,6 @@ moc_app.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QApplic
 		../include/portaudio/portaudio.h \
 		../VocalTrainer/Playback/VxLyricsLine.h \
 		../VocalTrainer/Playback/VxLyricsInterval.h \
-		../VocalTrainer/Playback/PlaybackChunk.h \
 		../include/boost/container/static_vector.hpp \
 		../include/boost/serialization/vector.hpp \
 		../PitchDetection/CppUtils/StlDebugUtils.h \
@@ -280,6 +278,7 @@ moc_app.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QApplic
 		../VocalTrainer/Playback/AudioPlayback/MetronomeAudioPlayer.h \
 		../VocalTrainer/Playback/AudioPlayback/WavAudioPlayer.h \
 		../VocalTrainer/Playback/AudioPlayback/BaseWavAudioPlayer.h \
+		../VocalTrainer/Playback/PlaybackBounds.h \
 		../VocalTrainer/Workspace/WorkspaceController.h \
 		../VocalTrainer/Manager/ZoomController.h \
 		player.h \
@@ -325,8 +324,6 @@ moc_mainwindow.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/
 		../PitchDetection/CppUtils/RoundedRect.h \
 		../PitchDetection/CppUtils/Point.h \
 		../VocalTrainer/Drawers/DrawerColor.h \
-		../VocalTrainer/Playback/CraigsappMidifile/MidiEvent.h \
-		../VocalTrainer/Playback/CraigsappMidifile/MidiMessage.h \
 		../PitchDetection/PitchesCollector.h \
 		../VocalTrainer/Playback/VxFile.h \
 		../VocalTrainer/Playback/VxPitch.h \
@@ -338,14 +335,13 @@ moc_mainwindow.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/
 		../PitchDetection/CppUtils/ListenersSet.h \
 		../VocalTrainer/Playback/VxLyricsLine.h \
 		../VocalTrainer/Playback/VxLyricsInterval.h \
-		../VocalTrainer/Playback/PlaybackChunk.h \
 		../include/boost/container/static_vector.hpp \
 		../include/boost/serialization/vector.hpp \
 		../PitchDetection/CppUtils/StlDebugUtils.h \
 		../VocalTrainer/Workspace/WorkspaceController.h \
 		../VocalTrainer/Workspace/PianoDrawer.h \
 		../VocalTrainer/Playback/PlayingPitchSequence.h \
-		../include/boost/thread/shared_mutex.hpp \
+		../VocalTrainer/Playback/PlaybackBounds.h \
 		../VocalTrainer/Playback/MvxPlayer.h \
 		../VocalTrainer/Playback/MvxFile.h \
 		../VocalTrainer/Playback/AudioPlayback/VxFileAudioPlayer.h \
@@ -391,7 +387,6 @@ moc_player.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QObject
 		../PitchDetection/CppUtils/ListenersSet.h \
 		../VocalTrainer/Playback/VxLyricsLine.h \
 		../VocalTrainer/Playback/VxLyricsInterval.h \
-		../VocalTrainer/Playback/PlaybackChunk.h \
 		../include/boost/container/static_vector.hpp \
 		../include/boost/serialization/vector.hpp \
 		../PitchDetection/CppUtils/StlDebugUtils.h \
@@ -413,6 +408,7 @@ moc_player.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QObject
 		../VocalTrainer/Playback/AudioPlayback/MetronomeAudioPlayer.h \
 		../VocalTrainer/Playback/AudioPlayback/WavAudioPlayer.h \
 		../VocalTrainer/Playback/AudioPlayback/BaseWavAudioPlayer.h \
+		../VocalTrainer/Playback/PlaybackBounds.h \
 		qmlvxpitch.h \
 		qmlpitch.h \
 		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QJsonValue \
@@ -428,8 +424,6 @@ moc_qopenglworkspacewidget.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framew
 		../PitchDetection/CppUtils/RoundedRect.h \
 		../PitchDetection/CppUtils/Point.h \
 		../VocalTrainer/Drawers/DrawerColor.h \
-		../VocalTrainer/Playback/CraigsappMidifile/MidiEvent.h \
-		../VocalTrainer/Playback/CraigsappMidifile/MidiMessage.h \
 		../PitchDetection/PitchesCollector.h \
 		../VocalTrainer/Playback/VxFile.h \
 		../VocalTrainer/Playback/VxPitch.h \
@@ -441,14 +435,13 @@ moc_qopenglworkspacewidget.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framew
 		../PitchDetection/CppUtils/ListenersSet.h \
 		../VocalTrainer/Playback/VxLyricsLine.h \
 		../VocalTrainer/Playback/VxLyricsInterval.h \
-		../VocalTrainer/Playback/PlaybackChunk.h \
 		../include/boost/container/static_vector.hpp \
 		../include/boost/serialization/vector.hpp \
 		../PitchDetection/CppUtils/StlDebugUtils.h \
 		../VocalTrainer/Workspace/WorkspaceController.h \
 		../VocalTrainer/Workspace/PianoDrawer.h \
 		../VocalTrainer/Playback/PlayingPitchSequence.h \
-		../include/boost/thread/shared_mutex.hpp \
+		../VocalTrainer/Playback/PlaybackBounds.h \
 		qopenglworkspacewidget.h \
 		moc_predefs.h \
 		../../../Qt/5.11.0/clang_64/bin/moc

@@ -60,7 +60,7 @@ int AudioPlayer::callback(
                     static_cast<int8_t*>(outputBuffer)[i] *= volume;
                 }
             } else {
-                std::runtime_error("Unsupported self->playbackData.format " + std::to_string(format));
+                throw std::runtime_error("Unsupported self->playbackData.format " + std::to_string(format));
             }
         }
 

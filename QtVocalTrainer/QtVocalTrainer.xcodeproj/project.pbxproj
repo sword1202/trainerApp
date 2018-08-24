@@ -1006,6 +1006,21 @@
 					);
 			};
 		};
+		B82A81B6499C981D63669F70 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/workspacedrawerwidgetsetup.cpp";
+			name = "workspacedrawerwidgetsetup.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		28ADC1D214EBF5FDD380CEA8 = {
+			fileRef = "B82A81B6499C981D63669F70";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
 		1157FF7E9C28CC4BCBFDCC5F = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/nanovg/metal/nanovg_mtl.m";
@@ -1676,6 +1691,13 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
+		A10320F3E3320F071648944D = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/workspacedrawerwidgetsetup.h";
+			name = "workspacedrawerwidgetsetup.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
 		757C4D2CF043B21FE9CC0678 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qml.qrc";
@@ -1821,6 +1843,7 @@
 				"691B71E006AA926BDB1BF13B",
 				"A860A392DB32EE8A62C05E71",
 				"5EFF9254F6F982443816563F",
+				"B82A81B6499C981D63669F70",
 				"1157FF7E9C28CC4BCBFDCC5F",
 				"C613FE9ADA39556AD9540F1E",
 				"1091C7F2ACC81AEE9DF74E74",
@@ -1888,7 +1911,8 @@
 				"17D76D01F51164F1E2E366F9",
 				"C2A1ABDFCE16C74629AD3E53",
 				"E330EE51C1E578B98FEF08A1",
-				"E7AEB0D1384B2060DB764220");
+				"E7AEB0D1384B2060DB764220",
+				"A10320F3E3320F071648944D");
 			name = "Sources";
 			sourceTree = "<group>";
 		};
@@ -1987,6 +2011,7 @@
 				"8C4B037729AE3718B10EF76C",
 				"A684FD488110AB86A4209E94",
 				"1689BEAD0CFCBC2226368172",
+				"28ADC1D214EBF5FDD380CEA8",
 				"0259F18B58DCB3EB6C5B3577",
 				"F3F0C5A9AE1D79D2A4930AEA",
 				"AE6596E2227260CD02B22B61",

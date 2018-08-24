@@ -43,6 +43,7 @@ class WorkspaceDrawer : public WorkspaceController {
     Color borderLineColor;
     Color yardStickDotAndTextColor;
     Color boundsColor;
+    Color playHeadColor;
 
     std::string tactNumbersFontFamily;
 
@@ -70,6 +71,7 @@ class WorkspaceDrawer : public WorkspaceController {
     void drawBoundsIfNeed() const;
     void drawYardStick() const;
     void drawYardStickDot(float x, float y) const;
+    void drawSecondPlayHead() const;
 
     double getPitchGraphDuration() const;
     double getIntervalDuration() const;
@@ -79,7 +81,16 @@ class WorkspaceDrawer : public WorkspaceController {
     Pitch getFirstPitch() const;
     float getGridTranslation() const;
     float getMaximumGridTranslation() const;
+
+    float getWorkspaceDuration() const;
+    float getWorkspaceSeek() const;
+
+    float durationToWidth(double duration) const;
+
+    bool getBoundsStartXAndWidth(const PlaybackBounds& bounds, float* startX, float* width) const;
 public:
+    Drawer::Image* playHeadImage = nullptr;
+
     static constexpr float YARD_STICK_HEIGHT = 22;
     static constexpr int PIANO_WIDTH = 67;
 
@@ -149,10 +160,11 @@ public:
     const PlaybackBounds &getPlaybackBounds() const;
     void setPlaybackBounds(const PlaybackBounds &playbackBounds) override;
 
-    float getWorkspaceDuration() const;
-    float getWorkspaceSeek() const;
+    static void getPlayHeadImageSize(float summaryHeight, float devicePixelRatio, int* outW, int* outH);
+    void setPlayHeadImage(Drawer::Image* image);
 
-    float durationToWidth(double duration) const;
+    void onMouseMove(float x);
+    void onMouseClick(float x);
 };
 
 

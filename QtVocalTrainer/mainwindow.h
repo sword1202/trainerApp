@@ -17,12 +17,6 @@ class MainWindow : public QMainWindow
 
     QOpenGLWorkspaceWidget *workspaceView;
 
-    QSvgWidget* playHeadTriangle;
-    QFrame* playHeadLine;
-    QSvgWidget* playHeadTriangle2;
-    QFrame* playHeadLine2;
-    std::array<int, 2> playHeadPositions;
-    int idlePlayHead2Position;
     QQuickItem *header;
     QQuickWidget *verticalScrollWidget;
     QQuickItem *verticalScroll;
@@ -32,16 +26,8 @@ class MainWindow : public QMainWindow
     bool boundsSelectionRunning = false;
 
     QQuickWidget *createQQuickWidget(const QString& qmlFile);
-    void movePlayHeadToPlaybackStart();
-    void updatePlayHeadPosition();
     int getMinimumPlayHeadOffset() const;
-    void onWorkspaceClick(QMouseEvent *event);
-    void onWorkspaceMouseMove(QMouseEvent *event);
     float getMinimumPlayHeadOffsetF() const;
-
-    void setupPlayHeadWidgets(QSvgWidget** playHeadTriangle, QFrame** playHeadLine);
-
-    double playHeadPositionToTime(int position) const;
 protected:
     void resizeEvent(QResizeEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
@@ -49,8 +35,6 @@ protected:
 public:
     explicit MainWindow(QWidget *parent = 0);
     virtual ~MainWindow();
-    void setPlayHeadPosition(int position, int index);
-    int getPlayHeadPosition(int index) const;
     void setupMenus();
     Q_INVOKABLE void setBoundsSelectionEnabled(bool enabled);
 
@@ -61,8 +45,6 @@ public:
 
 public slots:
     void onFileOpen();
-
-    void resizePlayHeadLine(int index);
 };
 
 #endif // MAINWINDOW_H

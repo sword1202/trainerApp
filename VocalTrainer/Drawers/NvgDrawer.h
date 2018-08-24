@@ -14,6 +14,10 @@ class NvgDrawer : public Drawer {
 
     float translateX = 0;
     float translateY = 0;
+
+    std::unordered_set<Image*> images;
+
+    void deleteImages();
 public:
 #ifndef USE_METAL
     NvgDrawer();
@@ -60,8 +64,13 @@ public:
     void setTextFont(const std::string &fontFamily, float fontSize) override;
     void setTextAlign(TextAlign align) override;
     void setTextBaseline(TextBaseline baseline) override;
-
     void registerFont(const char *name, const char *data, int dataSize) override;
+
+    void fillWithImage(Image *image, float textureX1, float textureY1, float textureX2, float textureY2) override;
+
+    Image *createImage(const void *data, int w, int h) override;
+
+    void deleteImage(Image*& image) override;
 };
 
 

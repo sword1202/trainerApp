@@ -81,6 +81,7 @@ qrc_qml.cpp: qml.qrc \
 		qml/images/lyrics_show_button_on.svg \
 		qml/images/to_the_begining.svg \
 		qml/images/player_background.svg \
+		qml/images/unnamed.jpg \
 		qml/images/loop_off.svg \
 		qml/images/lyrics_show_button_off.png \
 		qml/images/tonality_up.svg \
@@ -107,6 +108,7 @@ qrc_qml.cpp: qml.qrc \
 		qml/images/zoom_slider_triangle.svg \
 		qml/images/tracks_show_button_off.png \
 		qml/images/track_piece.png \
+		qml/images/playhead.png \
 		qml/sounds/sounds.sf2 \
 		qml/sounds/metronome.wav \
 		qml/fonts/Lato-Regular.ttf \
@@ -159,6 +161,8 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		../VocalTrainer/Workspace/PianoDrawer.h \
 		../VocalTrainer/Playback/PlayingPitchSequence.h \
 		../VocalTrainer/Playback/PlaybackBounds.h \
+		workspacedrawerwidgetsetup.h \
+		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../VocalTrainer/Playback/MvxPlayer.h \
 		../VocalTrainer/Playback/MvxFile.h \
 		../VocalTrainer/Playback/AudioPlayback/VxFileAudioPlayer.h \
@@ -340,6 +344,8 @@ moc_mainwindow.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/
 		../VocalTrainer/Workspace/PianoDrawer.h \
 		../VocalTrainer/Playback/PlayingPitchSequence.h \
 		../VocalTrainer/Playback/PlaybackBounds.h \
+		workspacedrawerwidgetsetup.h \
+		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../VocalTrainer/Playback/MvxPlayer.h \
 		../VocalTrainer/Playback/MvxFile.h \
 		../VocalTrainer/Playback/AudioPlayback/VxFileAudioPlayer.h \
@@ -440,6 +446,8 @@ moc_qopenglworkspacewidget.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framew
 		../VocalTrainer/Workspace/PianoDrawer.h \
 		../VocalTrainer/Playback/PlayingPitchSequence.h \
 		../VocalTrainer/Playback/PlaybackBounds.h \
+		workspacedrawerwidgetsetup.h \
+		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		qopenglworkspacewidget.h \
 		moc_predefs.h \
 		../../../Qt/5.11.0/clang_64/bin/moc

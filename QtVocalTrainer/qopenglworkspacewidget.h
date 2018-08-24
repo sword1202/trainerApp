@@ -3,27 +3,21 @@
 
 #include <QOpenGLWidget>
 #include "WorkspaceDrawer.h"
+#include "workspacedrawerwidgetsetup.h"
 
-class QOpenGLWorkspaceWidget : public QOpenGLWidget
+class QOpenGLWorkspaceWidget : public QOpenGLWidget, WorkspaceDrawerWidgetSetup
 {
     Q_OBJECT
 public:
     QOpenGLWorkspaceWidget(QWidget* parent);
     ~QOpenGLWorkspaceWidget();
-
-    std::function<void(QMouseEvent*)> onClick;
-    std::function<void(QMouseEvent*)> onMouseMove;
 protected:
     void initializeGL() override;
     void resizeGL(int w, int h) override;
     void paintGL() override;
 
     void mousePressEvent(QMouseEvent *event) override;
-
     void mouseMoveEvent(QMouseEvent *event) override;
-
-private:
-    WorkspaceDrawer* workspaceDrawer = nullptr;
 };
 
 #endif // QOPENGLWORKSPACEWIDGET_H

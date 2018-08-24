@@ -82,7 +82,8 @@ SOURCES += \
     ../VocalTrainer/Playback/AudioPlayback/AudioPlayerWithDefaultSeekHandler.cpp \
     fonts.cpp \
     ../VocalTrainer/Workspace/PianoDrawer.cpp \
-    ../VocalTrainer/Playback/PlaybackBounds.cpp
+    ../VocalTrainer/Playback/PlaybackBounds.cpp \
+    workspacedrawerwidgetsetup.cpp
 
 RESOURCES += qml.qrc
 
@@ -177,7 +178,8 @@ HEADERS += \
     ../VocalTrainer/Playback/AudioPlayback/AudioPlayerWithDefaultSeekHandler.h \
     fonts.h \
     ../VocalTrainer/Workspace/PianoDrawer.h \
-    ../VocalTrainer/Playback/PlaybackBounds.h
+    ../VocalTrainer/Playback/PlaybackBounds.h \
+    workspacedrawerwidgetsetup.h
 
 INCLUDEPATH += ../include \
     ../VocalTrainer/Drawers \

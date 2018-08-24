@@ -1,14 +1,5 @@
 #include "qopenglworkspacewidget.h"
-#include "NvgDrawer.h"
-#include "MainController.h"
-#include "QtUtils/qtutils.h"
-#include "fonts.h"
-#include <iostream>
-#include "Executors.h"
-
-using std::cout;
-using std::endl;
-using namespace CppUtils;
+#include <QMouseEvent>
 
 QOpenGLWorkspaceWidget::QOpenGLWorkspaceWidget(QWidget* parent) : QOpenGLWidget(parent)
 {
@@ -16,33 +7,11 @@ QOpenGLWorkspaceWidget::QOpenGLWorkspaceWidget(QWidget* parent) : QOpenGLWidget(
 }
 
 void QOpenGLWorkspaceWidget::initializeGL() {
-    NvgDrawer* drawer = new NvgDrawer();
-
-    QByteArray latoRegular = Fonts::latoRegular();
-    drawer->registerFont("Lato-Regular", latoRegular.data(), latoRegular.size());
-    QByteArray latoBold = Fonts::latoBold();
-    drawer->registerFont("Lato-Bold", latoRegular.data(), latoRegular.size());
-    workspaceDrawer = new WorkspaceDrawer(drawer, [=] {
-        update();
-    });
-    workspaceDrawer->setTactNumbersFontFamily("Lato-Regular");
-
-    MainController::instance()->setWorkspaceController(workspaceDrawer);
-
-    QtUtils::startRepeatedTimer(this, [=] {
-        if (workspaceDrawer->isRunning()) {
-            update();
-        }
-        return true;
-    }, 1000 / 150); // 150fps
-
-    setMouseTracking(true);
+    setupWorkspaceDrawer(this);
 }
 
 void QOpenGLWorkspaceWidget::resizeGL(int w, int h) {
-    float gridHeight = WorkspaceDrawer::getGridHeight(h);
-    MainController::instance()->getZoomController()->setWorkspaceGridHeight(gridHeight);
-    workspaceDrawer->resize(w, h, (float)devicePixelRatioF());
+    handleResize(this, w, h);
 }
 
 void QOpenGLWorkspaceWidget::paintGL() {
@@ -50,21 +19,13 @@ void QOpenGLWorkspaceWidget::paintGL() {
 }
 
 void QOpenGLWorkspaceWidget::mousePressEvent(QMouseEvent *event) {
-    if (onClick) {
-        onClick(event);
-    }
-    QWidget::mousePressEvent(event);
+    workspaceDrawer->onMouseClick(event->x());
 }
 
 void QOpenGLWorkspaceWidget::mouseMoveEvent(QMouseEvent *event) {
-    if (onMouseMove) {
-        onMouseMove(event);
-    }
-    QWidget::mouseMoveEvent(event);
+    workspaceDrawer->onMouseMove(event->x());
 }
 
 QOpenGLWorkspaceWidget::~QOpenGLWorkspaceWidget() {
-    if (workspaceDrawer) {
-        delete workspaceDrawer;
-    }
+
 }

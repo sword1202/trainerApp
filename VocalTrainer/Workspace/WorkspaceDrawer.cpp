@@ -28,6 +28,8 @@ constexpr float PLAYBACK_BOUNDS_BOTTOM_MARGIN = 3.75f;
 constexpr float PLAYBACK_BOUNDS_HEIGHT = 15.75;
 static const int PITCH_RADIUS = 3;
 constexpr float PLAYBACK_BOUNDS_ROUND_RECT_RADIUS = 1.5f;
+constexpr float PLAYHEAD_TRIANGLE_WIDTH = 9.75f;
+constexpr float PLAYHEAD_TRIANGLE_HEIGHT = 10.5f;
 
 void WorkspaceDrawer::resize(float width, float height, float devicePixelRatio) {
     assert(devicePixelRatio > 0);
@@ -68,6 +70,7 @@ void WorkspaceDrawer::draw() {
     drawPitchesGraph();
     drawer->translate(0, -YARD_STICK_HEIGHT - 1 - getGridTranslation());
     drawYardStick();
+    drawSecondPlayHead();
     drawer->translate(0, YARD_STICK_HEIGHT);
     drawer->translate(-PIANO_WIDTH, 0);
     drawVerticalLine(PIANO_WIDTH, borderLineColor);
@@ -317,31 +320,36 @@ void WorkspaceDrawer::drawYardStick() const {
 }
 
 void WorkspaceDrawer::drawBoundsIfNeed() const {
-    PlaybackBounds playbackBounds = this->playbackBounds;
-    if (playbackBounds) {
-        double workspaceDuration = getWorkspaceDuration();
-        double workspaceTimeBegin = getWorkspaceSeek();
-        double workspaceTimeEnd = workspaceTimeBegin + workspaceDuration;
-
-        if (!playbackBounds.isInside(workspaceTimeBegin) && !playbackBounds.isInside(workspaceTimeEnd)) {
-            return;
-        }
-
-        float tactHeight = intervalWidth * BEATS_IN_TACT;
-        float startX = durationToWidth(playbackBounds.getStartSeek() - workspaceTimeBegin) + tactHeight;
-        float width = durationToWidth(playbackBounds.getEndSeek() - workspaceTimeBegin) - startX + tactHeight;
-
-        drawer->setFillColor(boundsColor);
-        float y = YARD_STICK_HEIGHT - PLAYBACK_BOUNDS_BOTTOM_MARGIN - PLAYBACK_BOUNDS_HEIGHT;
-        drawer->roundedRect(startX, y, width, PLAYBACK_BOUNDS_HEIGHT, PLAYBACK_BOUNDS_ROUND_RECT_RADIUS);
-        drawer->fill();
+    PlaybackBounds bounds = this->playbackBounds;
+    float startX, width;
+    if (!getBoundsStartXAndWidth(bounds, &startX, &width)) {
+        return;
     }
+
+    drawer->setFillColor(boundsColor);
+    float y = YARD_STICK_HEIGHT - PLAYBACK_BOUNDS_BOTTOM_MARGIN - PLAYBACK_BOUNDS_HEIGHT;
+    drawer->roundedRect(startX, y, width, PLAYBACK_BOUNDS_HEIGHT, PLAYBACK_BOUNDS_ROUND_RECT_RADIUS);
+    drawer->fill();
 }
 
 void WorkspaceDrawer::drawYardStickDot(float x, float y) const {
     drawer->beginPath();
     drawer->arc(x, y, YARD_STICK_DOT_RADIUS, 0, 2 * M_PI);
     drawer->fill();
+}
+
+void WorkspaceDrawer::drawSecondPlayHead() const {
+//    PlaybackBounds bounds = this->playbackBounds;
+//    float startX, width;
+//    if (!getBoundsStartXAndWidth(bounds, &startX, &width)) {
+//        return;
+//    }
+
+//    float x = startX + width;
+
+    drawer->setFillColor(DrawerColor::black());
+    drawer->rect(0, 0, PLAYHEAD_TRIANGLE_WIDTH, playHeadImage->height());
+    drawer->fillWithImage(playHeadImage);
 }
 
 int WorkspaceDrawer::getDistanceFromFirstPitch(const Pitch &pitch) const {
@@ -395,6 +403,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, const std::function<void()>& on
     borderLineColor = {0x8B, 0x89, 0xB6, 0xCC};
     yardStickDotAndTextColor = {0x24, 0x23, 0x2D, 0xFF};
     boundsColor = {0xC4, 0xCD, 0xFD, 0xFF};
+    playHeadColor = {0x24, 0x23, 0x2D, 0xFF};
 
     pianoDrawer = new PianoDrawer(drawer);
 }
@@ -528,4 +537,42 @@ void WorkspaceDrawer::setPlaybackBounds(const PlaybackBounds &playbackBounds) {
 
 float WorkspaceDrawer::durationToWidth(double duration) const {
     return static_cast<float>(duration * intervalsPerSecond * intervalWidth);
+}
+
+bool WorkspaceDrawer::getBoundsStartXAndWidth(const PlaybackBounds &bounds, float *startX, float *width) const {
+    if (!bounds) {
+        return false;
+    }
+
+    double workspaceDuration = getWorkspaceDuration();
+    double workspaceTimeBegin = getWorkspaceSeek();
+    double workspaceTimeEnd = workspaceTimeBegin + workspaceDuration;
+
+    if (!bounds.isInside(workspaceTimeBegin) && !bounds.isInside(workspaceTimeEnd)) {
+        return false;
+    }
+
+    float tactHeight = intervalWidth * BEATS_IN_TACT;
+    *startX = durationToWidth(bounds.getStartSeek() - workspaceTimeBegin) + tactHeight;
+    *width = durationToWidth(bounds.getEndSeek() - workspaceTimeBegin) - *startX + tactHeight;
+
+    return true;
+}
+
+void WorkspaceDrawer::setPlayHeadImage(Drawer::Image* image) {
+    assert(playHeadImage == nullptr && image != nullptr);
+    playHeadImage = image;
+}
+
+void WorkspaceDrawer::getPlayHeadImageSize(float summaryHeight, float devicePixelRatio, int* outW, int* outH) {
+    *outW = (int)round(PLAYHEAD_TRIANGLE_WIDTH * devicePixelRatio);
+    *outH = (int)round((getGridHeight(summaryHeight) + PLAYHEAD_TRIANGLE_HEIGHT / 2.0f + 1) * devicePixelRatio);
+}
+
+void WorkspaceDrawer::onMouseMove(float x) {
+
+}
+
+void WorkspaceDrawer::onMouseClick(float x) {
+
 }

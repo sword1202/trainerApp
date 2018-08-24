@@ -25,6 +25,7 @@ NvgDrawer::NvgDrawer(void* layer) {
 
 NvgDrawer::~NvgDrawer() {
     nvgDeleteMTL(ctx);
+    deleteImages();
 }
 
 #else
@@ -35,6 +36,25 @@ NvgDrawer::~NvgDrawer() {
 #define NANOVG_GL2_IMPLEMENTATION
 #include <nanovg/nanovg_gl.h>
 #include <nanovg/fontstash.h>
+
+class __NvgImage : public Drawer::Image {
+    int w;
+    int h;
+public:
+    __NvgImage(int handle, int w, int h) : handle(handle), w(w), h(h) {
+    }
+    ~__NvgImage() {};
+    
+    int handle = -1;
+
+    int width() override {
+        return w;
+    }
+
+    int height() override {
+        return h;
+    }
+};
 
 void NvgDrawer::clear() {
     glClearColor(1, 1, 1, 1);
@@ -49,10 +69,12 @@ NvgDrawer::NvgDrawer() {
 
 NvgDrawer::~NvgDrawer() {
     nvgDeleteGL2(ctx);
+    deleteImages();
 }
 #endif
 
 void NvgDrawer::beginFrame(float width, float height, float devicePixelRatio) {
+    Drawer::beginFrame(width, height, devicePixelRatio);
     translateX = 0;
     translateY = 0;
     nvgBeginFrame(ctx, width, height, devicePixelRatio);
@@ -229,4 +251,39 @@ void NvgDrawer::registerFont(const char *name, const char *data, int dataSize) {
 
 void NvgDrawer::arc(float x, float y, float r, float sAngle, float eAngle) {
     nvgArc(ctx, x, y, r, sAngle, eAngle, NVG_CW);
+}
+
+void NvgDrawer::fillWithImage(Drawer::Image *image, float textureX1, float textureY1, float textureX2, float textureY2) {
+    assert(dynamic_cast<__NvgImage*>(image));
+    NVGpaint nvGpaint = nvgImagePattern(ctx, textureX1, textureY1, textureX2, textureY2, 0, 
+            static_cast<__NvgImage*>(image)->handle, 1);
+    nvgFillPaint(ctx, nvGpaint);
+    fill();
+}
+
+Drawer::Image *NvgDrawer::createImage(const void *data, int w, int h) {
+    int handle = nvgCreateImageRGBA(ctx, w, h, 0, (unsigned char *) data);
+    __NvgImage* image = new __NvgImage(handle, w, h);
+    images.insert(image);
+    return image;
+}
+
+static void doDeleteImage(NVGcontext* ctx, Drawer::Image*& image) {
+    assert(dynamic_cast<__NvgImage*>(image));
+    nvgDeleteImage(ctx, static_cast<__NvgImage*>(image)->handle);
+    delete image;
+    image = nullptr;
+}
+
+void NvgDrawer::deleteImage(Drawer::Image*& image) {
+    images.erase(image);
+    doDeleteImage(ctx, image);
+}
+
+void NvgDrawer::deleteImages() {
+    for (Image* image : images) {
+        doDeleteImage(ctx, image);
+    }
+
+    images.clear();
 }

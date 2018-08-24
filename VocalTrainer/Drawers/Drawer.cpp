@@ -76,3 +76,25 @@ void Drawer::setStrokeColor(int color) {
 void Drawer::setFillColor(int color) {
     setFillColor(DrawerColor::fromHex(color));
 }
+
+void Drawer::fillWithImage(Drawer::Image *image) {
+    fillWithImage(image, 0, 0, image->width() / devicePixelRatio, image->height() / devicePixelRatio);
+}
+
+float Drawer::getWidth() const {
+    return width;
+}
+
+float Drawer::getHeight() const {
+    return height;
+}
+
+float Drawer::getDevicePixelRatio() const {
+    return devicePixelRatio;
+}
+
+void Drawer::beginFrame(float width, float height, float devicePixelRatio) {
+    this->width = width;
+    this->height = height;
+    this->devicePixelRatio = devicePixelRatio;
+}
