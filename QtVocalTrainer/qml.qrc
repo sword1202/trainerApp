@@ -33,7 +33,6 @@
         <file>qml/images/tonality_down.svg</file>
         <file>qml/images/tonality_up_pressed.svg</file>
         <file>qml/images/tonality_down_pressed.svg</file>
-        <file>qml/images/unnamed.jpg</file>
         <file>qml/images/playhead.png</file>
         <file>qml/sounds/sounds.sf2</file>
         <file>qml/sounds/metronome.wav</file>
