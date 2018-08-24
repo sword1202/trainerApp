@@ -6,7 +6,6 @@ DEPENDPATH += $$PWD
 HEADERS += \
     $$PWD/Pitch.h \
     $$PWD/PitchDetectionSmoothingAudioBuffer.h \
-    $$PWD/YinPitchDetector.h \
     $$PWD/PitchInputReader.h \
     $$PWD/PitchInputReaderCollector.h \
     $$PWD/AudioInputReader.h \
@@ -18,7 +17,6 @@ HEADERS += \
 
 SOURCES += \
     $$PWD/Pitch.cpp \
-    $$PWD/YinPitchDetector.cpp \
     $$PWD/PitchInputReader.cpp \
     $$PWD/PitchInputReaderCollector.cpp \
     $$PWD/PitchesCollector.cpp \

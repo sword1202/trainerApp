@@ -9,7 +9,6 @@ include(../PitchDetection/PitchDetection.pri)
 
 HEADERS += \
     QmlCppBridge.h \
-    qmlopenglitem.h \
     qmlpitch.h \
     qmlpitchinputreader.h \
     app.h \
@@ -19,8 +18,6 @@ HEADERS += \
     ../VocalTrainer/Playback/VxPitch.h \
     ../VocalTrainer/Playback/VxLyricsLine.h \
     ../VocalTrainer/Playback/VxLyricsInterval.h \
-    ../VocalTrainer/Playback/SoundFont2PitchRenderer.h \
-    ../VocalTrainer/Playback/PitchRenderer.h \
     ../VocalTrainer/Playback/LoadTsf.h \
     ../VocalTrainer/Playback/tsf.h \
     ../VocalTrainer/Playback/AudioPlayback/VxFileAudioPlayer.h \
@@ -66,7 +63,6 @@ HEADERS += \
 SOURCES += \
     main.cpp \
     QmlCppBridge.cpp \
-    qmlopenglitem.cpp \
     qmlpitch.cpp \
     qmlpitchinputreader.cpp \
     app.cpp \
@@ -74,8 +70,6 @@ SOURCES += \
     ../VocalTrainer/Playback/MvxPlayer.cpp \
     ../VocalTrainer/Playback/VxFile.cpp \
     ../VocalTrainer/Playback/MvxFile.cpp \
-    ../VocalTrainer/Playback/SoundFont2PitchRenderer.cpp \
-    ../VocalTrainer/Playback/PitchRenderer.cpp \
     ../VocalTrainer/Playback/AudioPlayback/VxFileAudioPlayer.cpp \
     ../VocalTrainer/Playback/AudioPlayback/AudioPlayer.cpp \
     ../VocalTrainer/Playback/AudioPlayback/AudioFilePlayer.cpp \
