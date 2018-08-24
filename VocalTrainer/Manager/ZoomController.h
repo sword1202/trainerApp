@@ -13,7 +13,7 @@ class ZoomController {
     float zoom;
     Pitch firstPitch;
     Pitch lastPitch;
-    float verticalScrollPosition;
+    float verticalScrollPosition = 0;
     float workspaceGridHeight;
 
 public:
