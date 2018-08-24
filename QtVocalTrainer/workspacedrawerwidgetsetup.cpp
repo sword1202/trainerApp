@@ -2,7 +2,7 @@
 #include "NvgDrawer.h"
 #include "fonts.h"
 #include "MainController.h"
-#include "qtutils.h"
+#include "QtUtils/qtutils.h"
 #include <QByteArray>
 
 using std::cout;

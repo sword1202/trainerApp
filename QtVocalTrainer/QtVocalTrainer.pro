@@ -105,7 +105,6 @@ SOURCES += \
     ../VocalTrainer/Workspace/PianoDrawer.cpp \
     ../VocalTrainer/Playback/PlaybackBounds.cpp \
     workspacedrawerwidgetsetup.cpp \
-    ../VocalTrainer/Workspace/PianoDrawer.cpp \
     loadtsf.cpp \
     qmlvxpitch.cpp \
     qmltimedpitch.cpp \

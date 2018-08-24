@@ -19,7 +19,7 @@ constexpr float sharpPitchRadius = 1.5;
 constexpr float distanceBetweenTextLeftAndPitchRight = 18.0;
 
 constexpr float heightMap[] = {smallPitchHeight, bigPitchHeight,
-smallPitchHeight, smallPitchHeight, bigPitchHeight, bigPitchHeight, smallPitchHeight};
+        smallPitchHeight, smallPitchHeight, bigPitchHeight, bigPitchHeight, smallPitchHeight};
 constexpr int heightMapLength = 7;
 constexpr bool hasSharpMap[] = {true, true, false, true, true, true, false};
 static const Drawer::Color borderColor = {0x9A, 0x98, 0xD0, 0x7f};
@@ -69,7 +69,7 @@ void PianoDrawer::draw(float width, float height, float devicePixelRation) {
 
     float intervalOctaveHeightToPianoOctaveHeightRelation = getIntervalOctaveHeightToPianoOctaveHeightRelation();
 
-    while (y > -bigPitchHeight && perfectFrequencyIndex < Pitch::FREQUENCIES_COUNT) {
+    while (y > -bigPitchHeight) {
 
         bool fill = false;
 
@@ -154,7 +154,7 @@ void PianoDrawer::drawPitchNames(float height) const {
 
     float intervalOctaveHeightToPianoOctaveHeightRelation = getIntervalOctaveHeightToPianoOctaveHeightRelation();
 
-    while (y > -bigPitchHeight && pitch.getPerfectFrequencyIndex() < Pitch::FREQUENCIES_COUNT -1) {
+    while (y > -bigPitchHeight) {
         int index = pitch.getWhiteIndex();
         int indexInMap = index % heightMapLength;
         float pitchHeight = heightMap[indexInMap] * intervalOctaveHeightToPianoOctaveHeightRelation;
@@ -181,6 +181,9 @@ void PianoDrawer::drawPitchNames(float height) const {
 
         y -= pitchHeight + distanceBetweenPitches * intervalOctaveHeightToPianoOctaveHeightRelation;
         pitch = pitch.getNextWhitePitch();
+        if (!pitch.isValid()) {
+            break;
+        }
     }
 }
 

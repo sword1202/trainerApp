@@ -542,7 +542,6 @@ void WorkspaceDrawer::setVerticalScrollPosition(float verticalScrollPosition) {
 float WorkspaceDrawer::getGridHeight(float summaryHeight) {
     return summaryHeight - YARD_STICK_HEIGHT - 1;
 }
-<<<<<<< HEAD
 
 const PlaybackBounds &WorkspaceDrawer::getPlaybackBounds() const {
     return playbackBounds;

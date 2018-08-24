@@ -154,6 +154,8 @@ QtVocalTrainer.xcodeproj/project.pbxproj: QtVocalTrainer.pro ../../../Qt/5.11.0/
 		../../../Qt/5.11.0/clang_64/mkspecs/features/mac/toolchain.prf \
 		../../../Qt/5.11.0/clang_64/mkspecs/features/default_pre.prf \
 		../../../Qt/5.11.0/clang_64/mkspecs/features/mac/default_pre.prf \
+		../PitchDetection/CppUtils/CppUtils.pri \
+		../PitchDetection/PitchDetection.pri \
 		../../../Qt/5.11.0/clang_64/mkspecs/features/resolve_config.prf \
 		../../../Qt/5.11.0/clang_64/mkspecs/features/default_post.prf \
 		../../../Qt/5.11.0/clang_64/mkspecs/features/mac/default_post.prf \
@@ -331,6 +333,8 @@ QtVocalTrainer.xcodeproj/project.pbxproj: QtVocalTrainer.pro ../../../Qt/5.11.0/
 ../../../Qt/5.11.0/clang_64/mkspecs/features/mac/toolchain.prf:
 ../../../Qt/5.11.0/clang_64/mkspecs/features/default_pre.prf:
 ../../../Qt/5.11.0/clang_64/mkspecs/features/mac/default_pre.prf:
+../PitchDetection/CppUtils/CppUtils.pri:
+../PitchDetection/PitchDetection.pri:
 ../../../Qt/5.11.0/clang_64/mkspecs/features/resolve_config.prf:
 ../../../Qt/5.11.0/clang_64/mkspecs/features/default_post.prf:
 ../../../Qt/5.11.0/clang_64/mkspecs/features/mac/default_post.prf:
