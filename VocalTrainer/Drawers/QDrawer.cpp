@@ -13,8 +13,9 @@ void QDrawer::doTranslate(float x, float y) {
 
 void QDrawer::beginFrame(float width, float height, float devicePixelRatio) {
     Drawer::beginFrame(width, height, devicePixelRatio);
-    //painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
     assert(painter.begin(paintDevice));
+    painter.setRenderHint(QPainter::Antialiasing);
+    painter.setRenderHint(QPainter::HighQualityAntialiasing);
 }
 
 void QDrawer::endFrame() {
@@ -30,7 +31,7 @@ void QDrawer::lineTo(float x, float y) {
 }
 
 void QDrawer::arcTo(float x1, float y1, float x2, float y2, float radius) {
-
+    //path.arcTo(x1, y1, radius * 2, radius * 2, <#qreal startAngle#>, <#qreal arcLength#>)
 }
 
 void QDrawer::setStrokeColor(const Drawer::Color &color) {
@@ -131,14 +132,32 @@ void QDrawer::roundedRectDifferentCorners(float x, float y, float w, float h,
         float radiusRightTop,
         float radiusBottomRight,
         float radiusBottomLeft) {
-    QPainterPath roundRectPath;
-    roundRectPath.moveTo(80.0, 35.0);
-    roundRectPath.arcTo(70.0, 30.0, 10.0, 10.0, 0.0, 90.0);
-    roundRectPath.lineTo(25.0, 30.0);
-    roundRectPath.arcTo(20.0, 30.0, 10.0, 10.0, 90.0, 90.0);
-    roundRectPath.lineTo(20.0, 65.0);
-    roundRectPath.arcTo(20.0, 60.0, 10.0, 10.0, 180.0, 90.0);
-    roundRectPath.lineTo(75.0, 70.0);
-    roundRectPath.arcTo(70.0, 60.0, 10.0, 10.0, 270.0, 90.0);
-    roundRectPath.closeSubpath();
+    beginPath();
+    moveTo(x + w - radiusRightTop, y);
+    if (radiusLeftTop > 0) {
+        path.arcTo(x, y, radiusLeftTop, radiusLeftTop, 90.0, 90.0);
+    } else {
+        path.lineTo(x, y);
+    }
+    path.lineTo(x, y + h - radiusBottomLeft);
+    if (radiusBottomLeft > 0) {
+        path.arcTo(x, y + h - radiusBottomLeft, radiusBottomLeft, radiusBottomLeft, 180.0, 90.0);
+    } else {
+        path.lineTo(x, y + h);
+    }
+    path.lineTo(x + w - radiusBottomRight, y + h);
+    if (radiusBottomRight > 0) {
+        path.arcTo(x + w - radiusBottomRight, y + h - radiusBottomRight, radiusBottomRight,
+                radiusBottomRight, 270.0, 90.0);
+    } else {
+        path.lineTo(x + w, y + h);
+    }
+    path.lineTo(x + w, y + radiusRightTop);
+    if (radiusRightTop > 0) {
+        path.arcTo(x + w - radiusRightTop, y, radiusRightTop,
+                radiusRightTop, 0, 90.0);
+    } else {
+        path.lineTo(x + w, y);
+    }
+    closePath();
 }

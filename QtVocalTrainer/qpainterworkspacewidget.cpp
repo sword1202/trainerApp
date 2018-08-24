@@ -10,11 +10,7 @@ QPainterWorkspaceWidget::QPainterWorkspaceWidget(QWidget *parent) : QWidget(pare
 }
 
 void QPainterWorkspaceWidget::paintEvent(QPaintEvent *event) {
-    drawer->beginFrame(width(), height(), devicePixelRatio());
-    drawer->setFillColor(DrawerColor::white());
-    drawer->fillRect(0, 0, 100, 100);
-    drawer->endFrame();
-//    workspaceDrawer->draw();
+    workspaceDrawer->draw();
 }
 
 void QPainterWorkspaceWidget::resizeEvent(QResizeEvent *event) {

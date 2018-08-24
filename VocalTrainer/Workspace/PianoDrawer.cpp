@@ -54,7 +54,7 @@ PianoDrawer::PianoDrawer(Drawer *drawer)
 void PianoDrawer::draw(float width, float height, float devicePixelRation) {
     assert(intervalHeight > 0);
 
-    drawer->clear();
+    //drawer->clear();
 
     drawer->setStrokeColor(borderColor);
     drawer->setFillColor(sharpPitchColor);

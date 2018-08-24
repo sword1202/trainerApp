@@ -140,6 +140,6 @@ void Drawer::translateTo(float x, float y) {
 }
 
 void Drawer::clear() {
-//    setFillColor(Color::white());
-//    fillRect(0, 0, width, height);
+    setFillColor(Color::white());
+    fillRect(0, 0, width, height);
 }

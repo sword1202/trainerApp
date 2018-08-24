@@ -6,7 +6,9 @@
 
 QOpenGLWorkspaceWidget::QOpenGLWorkspaceWidget(QWidget* parent) : QOpenGLWidget(parent)
 {
-
+    QSurfaceFormat format = QSurfaceFormat();
+    format.setSamples(8);
+    setFormat(format);
 }
 
 void QOpenGLWorkspaceWidget::initializeGL() {
@@ -32,6 +34,8 @@ void QOpenGLWorkspaceWidget::initDeviceIfNeed() {
 void QOpenGLWorkspaceWidget::paintGL() {
     initDeviceIfNeed();
     glDisable(GL_DEPTH_TEST);
+    glEnable(GL_MULTISAMPLE);
+    glEnable(GL_LINE_SMOOTH);
     glClearColor(1, 1, 1, 1);
     workspaceDrawer->draw();
 }
