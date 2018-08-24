@@ -1,3 +1,4 @@
-[submodule "PitchDetection"]
-	path = PitchDetection
-	url = https://github.com/tiksem/Pit-hDetection.git
+
+[submodule "PitchDetection/CppUtils"]
+	path = PitchDetection/CppUtils
+	url = https://github.com/tiksem/CppUtils.git
