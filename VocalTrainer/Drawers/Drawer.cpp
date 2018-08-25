@@ -45,19 +45,6 @@ void Drawer::roundedRectDifferentCorners(float x, float y, float w,
     closePath();
 }
 
-void Drawer::setTextFont(const std::string &fontFamily, float fontSize) {
-    this->fontFamily = fontFamily;
-    this->fontSize = fontSize;
-}
-
-void Drawer::setTextAlign(Drawer::TextAlign align) {
-    textAlign = align;
-}
-
-void Drawer::setTextBaseline(Drawer::TextBaseline baseline) {
-    textBaseline = baseline;
-}
-
 void Drawer::drawLine(float x1, float y1, float x2, float y2) {
     beginPath();
     moveTo(x1, y1);

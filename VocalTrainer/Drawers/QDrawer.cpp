@@ -107,10 +107,6 @@ void QDrawer::fillWithImage(Drawer::Image *image, float textureX1, float texture
 
 }
 
-void QDrawer::registerFont(const char *name, const char *data, int dataSize) {
-
-}
-
 Drawer::Image *QDrawer::createImage(const void *data, int w, int h) {
     return nullptr;
 }
@@ -160,4 +156,16 @@ void QDrawer::roundedRectDifferentCorners(float x, float y, float w, float h,
         path.lineTo(x + w, y);
     }
     closePath();
+}
+
+void QDrawer::setTextFont(const char* fontFamily, float fontSize) {
+    //painter.setFont();
+}
+
+void QDrawer::setTextAlign(Drawer::TextAlign align) {
+
+}
+
+void QDrawer::setTextBaseline(Drawer::TextBaseline baseline) {
+
 }

@@ -78,10 +78,9 @@ public:
     virtual void lineTo(const CppUtils::PointF& point);
     virtual void moveTo(const CppUtils::PointF& point);
 
-    virtual void setTextFont(const std::string &fontFamily, float fontSize);
-    virtual void setTextAlign(TextAlign align);
-    virtual void setTextBaseline(TextBaseline baseline);
-    virtual void registerFont(const char* name, const char* data, int dataSize) = 0;
+    virtual void setTextFont(const char* fontFamily, float fontSize) = 0;
+    virtual void setTextAlign(TextAlign align) = 0;
+    virtual void setTextBaseline(TextBaseline baseline) = 0;
     virtual void fillText(const std::string &text, float x, float y) = 0;
 
     virtual Image* createImage(const void* data, int w, int h) = 0;
@@ -90,10 +89,6 @@ public:
     virtual ~Drawer() = default;
 
 protected:
-    std::string fontFamily;
-    float fontSize = 14;
-    TextBaseline textBaseline = MIDDLE;
-    TextAlign textAlign = LEFT;
 
     float getWidth() const;
     float getHeight() const;

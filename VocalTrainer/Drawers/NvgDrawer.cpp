@@ -199,9 +199,9 @@ void NvgDrawer::fillText(const std::string &text, float x, float y) {
     nvgText(ctx, x, y, text.data(), text.data() + text.size());
 }
 
-void NvgDrawer::setTextFont(const std::string &fontFamily, float fontSize) {
-    Drawer::setTextFont(fontFamily, fontSize);
-    nvgFontFace(ctx, fontFamily.data());
+void NvgDrawer::setTextFont(const char* fontFamily, float fontSize) {
+    this->fontFamily = fontFamily;
+    nvgFontFace(ctx, fontFamily);
     nvgFontSize(ctx, fontSize);
 }
 
@@ -234,12 +234,12 @@ static NVGalign toNVGAlign(Drawer::TextBaseline align) {
 }
 
 void NvgDrawer::setTextAlign(Drawer::TextAlign align) {
-    Drawer::setTextAlign(align);
+    textAlign = align;
     nvgTextAlign(ctx, toNVGAlign(align) | toNVGAlign(textBaseline));
 }
 
 void NvgDrawer::setTextBaseline(Drawer::TextBaseline baseline) {
-    Drawer::setTextBaseline(baseline);
+    textBaseline = baseline;
     nvgTextAlign(ctx, toNVGAlign(baseline) | toNVGAlign(textAlign));
 }
 

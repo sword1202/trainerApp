@@ -15,7 +15,7 @@ constexpr float distanceBetweenPitches = 2;
 constexpr float pianoWidth = 51;
 
 constexpr float pitchRadius = 3;
-constexpr float sharpPitchRadius = 1.5;
+constexpr float sharpPitchRadius = 2;
 constexpr float distanceBetweenTextLeftAndPitchRight = 18.0;
 
 constexpr float heightMap[] = {smallPitchHeight, bigPitchHeight,
@@ -29,6 +29,9 @@ static const Drawer::Color missedPitchColor = {0xFF, 0x5E, 0x85, 0xff};
 static const Drawer::Color selectedPitchColor = {0x61, 0x5F, 0x97, 0xff};
 static const Drawer::Color pitchTextColor = {0x24, 0x23, 0x2D, 0xe6};
 static const Drawer::Color selectedPitchTextColor = {0xff, 0xff, 0xff, 0xff};
+
+static const char* FONT_NAME = "Lato";
+constexpr int FONT_SIZE = 10;
 
 float PianoDrawer::getIntervalOctaveHeightToPianoOctaveHeightRelation() const {
     // 12 pitches in octave
@@ -49,6 +52,10 @@ PianoDrawer::PianoDrawer(Drawer *drawer)
     intervalHeight = 0;
     firstPitchIndex = -1;
     detectedPitchIndex = -1;
+
+    drawer->setTextAlign(Drawer::LEFT);
+    drawer->setTextBaseline(Drawer::MIDDLE);
+    drawer->setTextFont(FONT_NAME, FONT_SIZE);
 }
 
 void PianoDrawer::draw(float width, float height, float devicePixelRation) {
@@ -147,10 +154,6 @@ void PianoDrawer::drawSharpPitches() const {
 void PianoDrawer::drawPitchNames(float height) const {
     float y = height;
     Pitch pitch = getFirstPitch();
-
-    drawer->setTextAlign(Drawer::LEFT);
-    drawer->setTextBaseline(Drawer::MIDDLE);
-    drawer->setTextFont("Lato-Bold", 10);
 
     float intervalOctaveHeightToPianoOctaveHeightRelation = getIntervalOctaveHeightToPianoOctaveHeightRelation();
 

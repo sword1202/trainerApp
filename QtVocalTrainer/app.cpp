@@ -2,9 +2,11 @@
 #include "../PitchDetection/PortAudioUtils.h"
 #include "QmlCppBridge.h"
 #include "qmlpitchinputreader.h"
+#include "fonts.h"
 #include <QQmlContext>
 #include <iostream>
 #include <QThread>
+#include <QFontDatabase>
 
 class __MainThreadCallback : public QObject {
 public:
@@ -26,6 +28,9 @@ VxApp::VxApp(int &argc, char *argv[]) : QApplication(argc, argv), MainController
         static_cast<__MainThreadCallback*>(object)->func();
         delete object;
     }, Qt::QueuedConnection);
+
+    QFontDatabase::addApplicationFontFromData(Fonts::latoRegular());
+    QFontDatabase::addApplicationFontFromData(Fonts::latoBold());
 }
 
 void VxApp::executeOnMainThread(const std::function<void()>& callback) {

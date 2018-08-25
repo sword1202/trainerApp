@@ -27,14 +27,15 @@ void WorkspaceDrawerWidgetSetup::initPlayHeadImage(Drawer *drawer, QWidget* widg
 }
 
 void WorkspaceDrawerWidgetSetup::setupWorkspaceDrawer(QWidget* widget, Drawer* drawer) {
-    QByteArray latoRegular = Fonts::latoRegular();
-    drawer->registerFont("Lato-Regular", latoRegular.data(), latoRegular.size());
-    QByteArray latoBold = Fonts::latoBold();
-    drawer->registerFont("Lato-Bold", latoRegular.data(), latoRegular.size());
+
+    if (NvgDrawer* nvgDrawer = dynamic_cast<NvgDrawer*>(drawer)) {
+        QByteArray latoRegular = Fonts::latoRegular();
+        nvgDrawer->registerFont("Lato", latoRegular.data(), latoRegular.size());
+    }
+
     workspaceDrawer = new WorkspaceDrawer(drawer, [=] {
         widget->repaint();
     });
-    workspaceDrawer->setTactNumbersFontFamily("Lato-Regular");
     initPlayHeadImage(drawer, widget);
 
     MainController::instance()->setWorkspaceController(workspaceDrawer);

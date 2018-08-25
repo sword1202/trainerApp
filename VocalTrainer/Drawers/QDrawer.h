@@ -37,18 +37,17 @@ public:
     void rotate(float angle) override;
     void scale(float x, float y) override;
     void rect(float x, float y, float w, float h) override;
+
+    void setTextFont(const char* fontFamily, float fontSize) override;
+    void setTextAlign(TextAlign align) override;
+    void setTextBaseline(TextBaseline baseline) override;
     void fillText(const std::string &text, float x, float y) override;
 
     void arc(float x, float y, float r, float sAngle, float eAngle) override;
-
     void fillWithImage(Image *image, float textureX1, float textureY1, float textureX2, float textureY2) override;
-
-    void registerFont(const char *name, const char *data, int dataSize) override;
-
     Image *createImage(const void *data, int w, int h) override;
 
     void deleteImage(Image *&image) override;
-
     void setPaintDevice(QPaintDevice *paintDevice);
 
 protected:

@@ -33,6 +33,9 @@ constexpr float PLAYBACK_BOUNDS_ROUND_RECT_RADIUS = 1.5f;
 constexpr float PLAYHEAD_TRIANGLE_WIDTH = 9.75f;
 constexpr float PLAYHEAD_TRIANGLE_HEIGHT = 10.5f;
 
+constexpr int YARD_STICK_FONT_SIZE = 14;
+static const char* FONT_FAMILY = "Lato";
+
 void WorkspaceDrawer::resize(float width, float height, float devicePixelRatio) {
     assert(devicePixelRatio > 0);
     assert(width >= 0 && height >= 0);
@@ -308,10 +311,6 @@ void WorkspaceDrawer::drawYardStick() const {
     drawer->setFillColor(yardStickDotAndTextColor);
     int startTactIndex = (int)(getHorizontalOffset() / (getIntervalWidth() * BEATS_IN_TACT));
 
-    drawer->setTextFont(tactNumbersFontFamily, 14);
-    drawer->setTextAlign(Drawer::TextAlign::CENTER);
-    drawer->setTextBaseline(Drawer::TextBaseline::MIDDLE);
-
     iterateHorizontalIntervals([&](float x, bool isBeat) {
         if (isBeat) {
             this->drawYardStickDot(x, YARD_STICK_DOT_Y_OFFSET);
@@ -422,6 +421,10 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, const std::function<void()>& on
     playHeadColor = {0x24, 0x23, 0x2D, 0xFF};
 
     pianoDrawer = new PianoDrawer(drawer);
+
+    drawer->setTextFont(FONT_FAMILY, YARD_STICK_FONT_SIZE);
+    drawer->setTextAlign(Drawer::TextAlign::CENTER);
+    drawer->setTextBaseline(Drawer::TextBaseline::MIDDLE);
 }
 
 WorkspaceDrawer::~WorkspaceDrawer() {
@@ -505,10 +508,6 @@ void WorkspaceDrawer::update() {
 
 void WorkspaceDrawer::setOnUpdateRequested(const std::function<void()> &onUpdateRequested) {
     this->onUpdateRequested = onUpdateRequested;
-}
-
-void WorkspaceDrawer::setTactNumbersFontFamily(const std::string &tactNumbersFontFamily) {
-    this->tactNumbersFontFamily = tactNumbersFontFamily;
 }
 
 void WorkspaceDrawer::setDetectedPitch(const Pitch &detectedPitch) {
