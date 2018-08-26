@@ -34,7 +34,7 @@ constexpr float PLAYBACK_BOUNDS_ROUND_RECT_RADIUS = 1.5f;
 constexpr float PLAYHEAD_TRIANGLE_WIDTH = 9.75f;
 constexpr float PLAYHEAD_TRIANGLE_HEIGHT = 10.5f;
 
-constexpr int YARD_STICK_FONT_SIZE = 12;
+constexpr int YARD_STICK_FONT_SIZE = 11;
 constexpr int YARD_STICK_FONT_WEIGHT = 1;
 static const char* FONT_FAMILY = "Lato";
 

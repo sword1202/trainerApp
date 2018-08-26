@@ -31,7 +31,7 @@ static const Drawer::Color pitchTextColor = {0x24, 0x23, 0x2D, 0xe6};
 static const Drawer::Color selectedPitchTextColor = {0xff, 0xff, 0xff, 0xff};
 
 constexpr int FONT_SIZE = 8;
-constexpr int FONT_WEIGHT = 50;
+constexpr int FONT_WEIGHT = 60;
 
 float PianoDrawer::getIntervalOctaveHeightToPianoOctaveHeightRelation() const {
     // 12 pitches in octave
