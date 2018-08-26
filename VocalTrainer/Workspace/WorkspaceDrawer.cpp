@@ -15,8 +15,6 @@
 #include <PlayingPitchSequence.h>
 
 #include "NvgDrawer.h"
-#include "ConcurrentModificationAssert.h"
-#include "QDrawer.h"
 
 using namespace CppUtils;
 using std::cout;
@@ -31,8 +29,6 @@ constexpr float PLAYBACK_BOUNDS_BOTTOM_MARGIN = 3.75f;
 constexpr float PLAYBACK_BOUNDS_HEIGHT = 15.75;
 static const int PITCH_RADIUS = 3;
 constexpr float PLAYBACK_BOUNDS_ROUND_RECT_RADIUS = 1.5f;
-constexpr float PLAYHEAD_TRIANGLE_WIDTH = 9.75f;
-constexpr float PLAYHEAD_TRIANGLE_HEIGHT = 10.5f;
 
 constexpr int YARD_STICK_FONT_SIZE = 11;
 constexpr int YARD_STICK_FONT_WEIGHT = 1;
@@ -97,8 +93,6 @@ void WorkspaceDrawer::draw() {
     drawer->translate(PIANO_WIDTH, 0);
     drawFirstPlayHead();
     drawSecondPlayHead();
-
-    dynamic_cast<QDrawer*>(drawer)->testTextDraw();
 
     drawer->endFrame();
 }
@@ -351,13 +345,12 @@ void WorkspaceDrawer::drawYardStickDot(float x, float y) const {
 }
 
 void WorkspaceDrawer::drawPlayHead(float x) const {
-    // NanoVg rect doesn't work well with image, use translation as a fix
-    float y = YARD_STICK_HEIGHT - PLAYHEAD_TRIANGLE_HEIGHT / 2 + 1;
-    x -= PLAYHEAD_TRIANGLE_WIDTH / 2;
-    drawer->translate(x, y);
-    drawer->rect(0, 0, PLAYHEAD_TRIANGLE_WIDTH, getGridHeight() + PLAYHEAD_TRIANGLE_HEIGHT / 2);
-    drawer->fillWithImage(playHeadImage);
-    drawer->translate(-x, -y);
+    float triangleY = YARD_STICK_HEIGHT - PLAYHEAD_TRIANGLE_HEIGHT / 2 + 1;
+    float triangleX = x - PLAYHEAD_TRIANGLE_WIDTH / 2;
+
+    drawer->drawImage(triangleX, triangleY, PLAYHEAD_TRIANGLE_WIDTH, PLAYHEAD_TRIANGLE_HEIGHT, playHeadTriangleImage);
+    drawer->setStrokeColor(playHeadColor);
+    drawer->drawVerticalLine(x, YARD_STICK_HEIGHT, height);
 }
 
 void WorkspaceDrawer::drawSecondPlayHead() const {
@@ -579,12 +572,7 @@ bool WorkspaceDrawer::getBoundsStartXAndWidth(const PlaybackBounds &bounds, floa
     return true;
 }
 
-void WorkspaceDrawer::setPlayHeadImage(Drawer::Image* image) {
+void WorkspaceDrawer::setPlayHeadTriangleImage(Drawer::Image *image) {
     //assert(playHeadImage == nullptr && image != nullptr);
-    playHeadImage = image;
-}
-
-void WorkspaceDrawer::getPlayHeadImageSize(float summaryHeight, float devicePixelRatio, int* outW, int* outH) {
-    *outW = (int)round(PLAYHEAD_TRIANGLE_WIDTH * devicePixelRatio);
-    *outH = (int)round((getGridHeight(summaryHeight) + PLAYHEAD_TRIANGLE_HEIGHT / 2.0f + 1) * devicePixelRatio);
+    playHeadTriangleImage = image;
 }

@@ -135,3 +135,30 @@ void Drawer::circle(float x, float y, float r) {
     beginPath();
     arc(x, y, r, 0, 2 * M_PI);
 }
+
+void Drawer::deleteImage(Drawer::Image *&image) {
+    onImageDelete(image);
+    images.erase(image);
+    delete image;
+    image = nullptr;
+}
+
+Drawer::Image * Drawer::registerImage(Drawer::Image *image) {
+    images.insert(image);
+    return image;
+}
+
+void Drawer::onImageDelete(Drawer::Image *image) {
+
+}
+
+Drawer::~Drawer() {
+    for (Image* image : images) {
+        onImageDelete(image);
+        delete image;
+    }
+}
+
+bool Drawer::imageRegistered(Drawer::Image *image) const {
+    return (bool)images.count(image);
+}

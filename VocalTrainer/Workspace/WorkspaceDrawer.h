@@ -89,10 +89,12 @@ class WorkspaceDrawer : public WorkspaceController {
 
     bool getBoundsStartXAndWidth(const PlaybackBounds& bounds, float* startX, float* width) const;
 public:
-    Drawer::Image* playHeadImage = nullptr;
+    Drawer::Image* playHeadTriangleImage = nullptr;
 
     static constexpr float YARD_STICK_HEIGHT = 22;
     static constexpr int PIANO_WIDTH = 67;
+    static constexpr float PLAYHEAD_TRIANGLE_WIDTH = 11.0f;
+    static constexpr float PLAYHEAD_TRIANGLE_HEIGHT = 11.25f;
 
     WorkspaceDrawer(Drawer *drawer, const std::function<void()>& onUpdateRequested);
     ~WorkspaceDrawer();
@@ -158,8 +160,7 @@ public:
     const PlaybackBounds &getPlaybackBounds() const;
     void setPlaybackBounds(const PlaybackBounds &playbackBounds) override;
 
-    static void getPlayHeadImageSize(float summaryHeight, float devicePixelRatio, int* outW, int* outH);
-    void setPlayHeadImage(Drawer::Image* image);
+    void setPlayHeadTriangleImage(Drawer::Image *image);
 };
 
 

@@ -59,6 +59,7 @@ public:
     virtual void fill() = 0;
     virtual void fillWithImage(Image* image, float textureX1, float textureY1, float textureX2, float textureY2) = 0;
     virtual void fillWithImage(Image* image);
+    virtual void drawImage(float x, float y, float w, float h, Image *image) = 0;
     virtual void beginPath() = 0;
     virtual void closePath() = 0;
     virtual void bezierCurveTo(float c1x, float c1y, float c2x, float c2y, float x, float y) = 0;
@@ -87,9 +88,9 @@ public:
     virtual void fillText(const std::string &text, float x, float y) = 0;
 
     virtual Image* createImage(const void* data, int w, int h) = 0;
-    virtual void deleteImage(Image*& image) = 0;
+    virtual void deleteImage(Image*& image);
 
-    virtual ~Drawer() = default;
+    virtual ~Drawer();
 
 protected:
 
@@ -98,6 +99,9 @@ protected:
     float getDevicePixelRatio() const;
 
     virtual void doTranslate(float x, float y) = 0;
+    virtual Image* registerImage(Image* image);
+    virtual bool imageRegistered(Image* image) const;
+    virtual void onImageDelete(Image* image);
 private:
     float width;
     float height;
@@ -105,6 +109,8 @@ private:
 
     float translateX = 0;
     float translateY = 0;
+
+    std::unordered_set<Image*> images;
 };
 
 

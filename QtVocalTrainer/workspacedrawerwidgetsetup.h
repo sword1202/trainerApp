@@ -7,7 +7,7 @@
 
 class WorkspaceDrawerWidgetSetup
 {
-    void initPlayHeadImage(Drawer *drawer, QWidget* widget);
+    void initPlayHeadTriangleImage(Drawer *drawer, QWidget *widget);
 protected:
     WorkspaceDrawer* workspaceDrawer = nullptr;
     WorkspaceDrawerWidgetSetup();

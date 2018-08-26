@@ -14,7 +14,7 @@ class QDrawer : public Drawer
     float strokeWidth = 1;
 public:
     QDrawer(QPaintDevice *paintDevice);
-    ~QDrawer();
+    virtual ~QDrawer();
 
     void beginFrame(float width, float height, float devicePixelRatio) override;
     void endFrame() override;
@@ -51,9 +51,11 @@ public:
 
     void arc(float x, float y, float r, float sAngle, float eAngle) override;
     void fillWithImage(Image *image, float textureX1, float textureY1, float textureX2, float textureY2) override;
-    Image *createImage(const void *data, int w, int h) override;
+    Image* createImage(const void *data, int w, int h) override;
+    Image* createImage(QPixmap&& pixmap);
 
-    void deleteImage(Image *&image) override;
+    void drawImage(float x, float y, float w, float h, Image *image) override;
+
     void setPaintDevice(QPaintDevice *paintDevice);
 
     void testTextDraw();

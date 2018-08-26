@@ -25,7 +25,6 @@ NvgDrawer::NvgDrawer(void* layer) {
 
 NvgDrawer::~NvgDrawer() {
     nvgDeleteMTL(ctx);
-    deleteImages();
 }
 
 #else
@@ -44,14 +43,17 @@ NvgDrawer::~NvgDrawer() {
 
 #include <nanovg/nanovg_gl.h>
 #include <nanovg/fontstash.h>
+#include <NotImplementedAssert.h>
 
-class __NvgImage : public Drawer::Image {
+#include "CppUtils/config.h"
+
+class CPP_UTILS_DLLHIDE NvgImage : public Drawer::Image {
     int w;
     int h;
 public:
-    __NvgImage(int handle, int w, int h) : handle(handle), w(w), h(h) {
+    NvgImage(int handle, int w, int h) : handle(handle), w(w), h(h) {
     }
-    ~__NvgImage() {};
+    ~NvgImage() {};
     
     int handle = -1;
 
@@ -98,7 +100,6 @@ NvgDrawer::~NvgDrawer() {
 
 #ifdef __APPLE__
     nvgDeleteGL2(ctx);
-    deleteImages();
 #endif
 }
 #endif
@@ -256,38 +257,19 @@ void NvgDrawer::arc(float x, float y, float r, float sAngle, float eAngle) {
 }
 
 void NvgDrawer::fillWithImage(Drawer::Image *image, float textureX1, float textureY1, float textureX2, float textureY2) {
-    assert(dynamic_cast<__NvgImage*>(image));
+    assert(dynamic_cast<NvgImage*>(image));
+    assert(imageRegistered(image));
     NVGpaint nvGpaint = nvgImagePattern(ctx, textureX1, textureY1, textureX2, textureY2, 0, 
-            static_cast<__NvgImage*>(image)->handle, 1);
+            static_cast<NvgImage*>(image)->handle, 1);
     nvgFillPaint(ctx, nvGpaint);
     fill();
 }
 
 Drawer::Image *NvgDrawer::createImage(const void *data, int w, int h) {
     int handle = nvgCreateImageRGBA(ctx, w, h, 0, (unsigned char *) data);
-    __NvgImage* image = new __NvgImage(handle, w, h);
-    images.insert(image);
+    NvgImage* image = new NvgImage(handle, w, h);
+    registerImage(image);
     return image;
-}
-
-static void doDeleteImage(NVGcontext* ctx, Drawer::Image*& image) {
-    assert(dynamic_cast<__NvgImage*>(image));
-    nvgDeleteImage(ctx, static_cast<__NvgImage*>(image)->handle);
-    delete image;
-    image = nullptr;
-}
-
-void NvgDrawer::deleteImage(Drawer::Image*& image) {
-    images.erase(image);
-    doDeleteImage(ctx, image);
-}
-
-void NvgDrawer::deleteImages() {
-    for (Image* image : images) {
-        doDeleteImage(ctx, image);
-    }
-
-    images.clear();
 }
 
 void NvgDrawer::doTranslate(float x, float y) {
@@ -296,4 +278,13 @@ void NvgDrawer::doTranslate(float x, float y) {
 
 void NvgDrawer::setTextWeight(int weight) {
     // Not supported
+}
+
+void NvgDrawer::onImageDelete(Drawer::Image *image) {
+    assert(dynamic_cast<NvgImage*>(image));
+    nvgDeleteImage(ctx, static_cast<NvgImage*>(image)->handle);
+}
+
+void NvgDrawer::drawImage(float x, float y, float w, float h, Drawer::Image *image) {
+    NOT_IMPLEMENTED_ASSERT
 }

@@ -4,6 +4,8 @@
 #include "MainController.h"
 #include "QtUtils/qtutils.h"
 #include <QByteArray>
+#include <QIcon>
+#include "QDrawer.h"
 
 using std::cout;
 using std::endl;
@@ -13,17 +15,18 @@ WorkspaceDrawerWidgetSetup::WorkspaceDrawerWidgetSetup() {
 
 }
 
-void WorkspaceDrawerWidgetSetup::initPlayHeadImage(Drawer *drawer, QWidget* widget) {
-    int imageWidth, imageHeight;
-    WorkspaceDrawer::getPlayHeadImageSize(
-            widget->height(), // summaryHeight
-            widget->devicePixelRatio(), &imageWidth, &imageHeight);
+void WorkspaceDrawerWidgetSetup::initPlayHeadTriangleImage(Drawer *drawer, QWidget *widget) {
+    QIcon triangle(":qml/images/play_head_triangle.svg");
+    qreal ratio = widget->devicePixelRatioF();
+    QPixmap pixmap = triangle.pixmap(qRound(WorkspaceDrawer::PLAYHEAD_TRIANGLE_WIDTH * ratio),
+            qRound(WorkspaceDrawer::PLAYHEAD_TRIANGLE_HEIGHT * ratio));
 
-    QImage image(":qml/images/playhead.png");
-    image = image.scaledToWidth(imageWidth, Qt::FastTransformation);
-    assert(!image.isNull());
-    auto* imageHolder = drawer->createImage(image.bits(), image.width(), image.height());
-    workspaceDrawer->setPlayHeadImage(imageHolder);
+    Drawer::Image* imageHolder = nullptr;
+    if (QDrawer* qDrawer = dynamic_cast<QDrawer*>(drawer)) {
+        imageHolder = qDrawer->createImage(std::move(pixmap));
+    }
+
+    workspaceDrawer->setPlayHeadTriangleImage(imageHolder);
 }
 
 void WorkspaceDrawerWidgetSetup::setupWorkspaceDrawer(QWidget* widget, Drawer* drawer) {
@@ -36,7 +39,7 @@ void WorkspaceDrawerWidgetSetup::setupWorkspaceDrawer(QWidget* widget, Drawer* d
     workspaceDrawer = new WorkspaceDrawer(drawer, [=] {
         widget->repaint();
     });
-    initPlayHeadImage(drawer, widget);
+    initPlayHeadTriangleImage(drawer, widget);
 
     MainController::instance()->setWorkspaceController(workspaceDrawer);
 

@@ -1,7 +1,26 @@
 #include "QDrawer.h"
 #include "StringUtils.h"
+#include "CppUtils/config.h"
+#include <QIcon>
+#include "NotImplementedAssert.h"
 
 using namespace CppUtils;
+
+CPP_UTILS_DLLHIDE class QDrawerImage : public Drawer::Image {
+public:
+    QPixmap pixmap;
+
+    QDrawerImage(QPixmap &&pixmap) : pixmap(std::move(pixmap)) {
+    }
+
+    int width() override {
+        return pixmap.width();
+    }
+
+    int height() override {
+        return pixmap.height();
+    }
+};
 
 static QColor toQColor(const Drawer::Color& color) {
     return QColor(color[0], color[1], color[2], color[3]);
@@ -37,7 +56,7 @@ void QDrawer::lineTo(float x, float y) {
 }
 
 void QDrawer::arcTo(float x1, float y1, float x2, float y2, float radius) {
-    //path.arcTo(x1, y1, radius * 2, radius * 2, <#qreal startAngle#>, <#qreal arcLength#>)
+    NOT_IMPLEMENTED_ASSERT
 }
 
 void QDrawer::setStrokeColor(const Drawer::Color &color) {
@@ -75,15 +94,15 @@ void QDrawer::closePath() {
 }
 
 void QDrawer::bezierCurveTo(float c1x, float c1y, float c2x, float c2y, float x, float y) {
-
+    NOT_IMPLEMENTED_ASSERT
 }
 
 void QDrawer::quadraticCurveTo(float cpx, float cpy, float x, float y) {
-
+    NOT_IMPLEMENTED_ASSERT
 }
 
 void QDrawer::lineJoin(Drawer::LineJoin type) {
-
+    NOT_IMPLEMENTED_ASSERT
 }
 
 void QDrawer::rotate(float angle) {
@@ -123,19 +142,16 @@ void QDrawer::fillText(const std::string &text, float x, float y) {
 }
 
 void QDrawer::arc(float x, float y, float r, float sAngle, float eAngle) {
-
+    NOT_IMPLEMENTED_ASSERT
 }
 
 void QDrawer::fillWithImage(Drawer::Image *image, float textureX1, float textureY1, float textureX2, float textureY2) {
-
+    NOT_IMPLEMENTED_ASSERT
 }
 
 Drawer::Image *QDrawer::createImage(const void *data, int w, int h) {
+    NOT_IMPLEMENTED_ASSERT
     return nullptr;
-}
-
-void QDrawer::deleteImage(Drawer::Image *&image) {
-
 }
 
 QDrawer::~QDrawer() {
@@ -208,4 +224,14 @@ void QDrawer::testTextDraw() {
 void QDrawer::circle(float x, float y, float r) {
     beginPath();
     path.addEllipse(QPointF(x, y), r, r);
+}
+
+Drawer::Image *QDrawer::createImage(QPixmap &&pixmap) {
+    return registerImage(new QDrawerImage(std::move(pixmap)));
+}
+
+void QDrawer::drawImage(float x, float y, float w, float h, Drawer::Image *image) {
+    assert(imageRegistered(image));
+    painter.drawPixmap(QRectF(x, y, w, h), static_cast<QDrawerImage*>(image)->pixmap, QRectF(0, 0,
+            image->width(), image->height()));
 }

@@ -11,8 +11,6 @@
 
 class NvgDrawer : public Drawer {
     NVGcontext* ctx = nullptr;
-    std::unordered_set<Image*> images;
-    void deleteImages();
 
     std::string fontFamily;
     float fontSize = 14;
@@ -52,6 +50,9 @@ public:
 
 protected:
     void doTranslate(float x, float y) override;
+
+    void onImageDelete(Image *image) override;
+
 public:
 
     void roundedRect(float x, float y, float w, float h, float r) override;
@@ -67,9 +68,9 @@ public:
 
     void fillWithImage(Image *image, float textureX1, float textureY1, float textureX2, float textureY2) override;
 
-    Image *createImage(const void *data, int w, int h) override;
+    void drawImage(float x, float y, float w, float h, Image *image) override;
 
-    void deleteImage(Image*& image) override;
+    Image *createImage(const void *data, int w, int h) override;
 };
 
 
