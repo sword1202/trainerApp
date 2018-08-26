@@ -16,6 +16,7 @@
 
 #include "NvgDrawer.h"
 #include "ConcurrentModificationAssert.h"
+#include "QDrawer.h"
 
 using namespace CppUtils;
 using std::cout;
@@ -33,7 +34,8 @@ constexpr float PLAYBACK_BOUNDS_ROUND_RECT_RADIUS = 1.5f;
 constexpr float PLAYHEAD_TRIANGLE_WIDTH = 9.75f;
 constexpr float PLAYHEAD_TRIANGLE_HEIGHT = 10.5f;
 
-constexpr int YARD_STICK_FONT_SIZE = 14;
+constexpr int YARD_STICK_FONT_SIZE = 12;
+constexpr int YARD_STICK_FONT_WEIGHT = 1;
 static const char* FONT_FAMILY = "Lato";
 
 void WorkspaceDrawer::resize(float width, float height, float devicePixelRatio) {
@@ -95,6 +97,8 @@ void WorkspaceDrawer::draw() {
     drawer->translate(PIANO_WIDTH, 0);
     drawFirstPlayHead();
     drawSecondPlayHead();
+
+    dynamic_cast<QDrawer*>(drawer)->testTextDraw();
 
     drawer->endFrame();
 }
@@ -307,6 +311,11 @@ void WorkspaceDrawer::drawPitchesGraph() const {
 }
 
 void WorkspaceDrawer::drawYardStick() const {
+    drawer->setTextFontSize(YARD_STICK_FONT_SIZE);
+    drawer->setTextAlign(Drawer::TextAlign::CENTER);
+    drawer->setTextBaseline(Drawer::TextBaseline::MIDDLE);
+    drawer->setTextWeight(YARD_STICK_FONT_WEIGHT);
+
     drawBoundsIfNeed();
     drawer->setFillColor(yardStickDotAndTextColor);
     int startTactIndex = (int)(getHorizontalOffset() / (getIntervalWidth() * BEATS_IN_TACT));
@@ -421,10 +430,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, const std::function<void()>& on
     playHeadColor = {0x24, 0x23, 0x2D, 0xFF};
 
     pianoDrawer = new PianoDrawer(drawer);
-
-    drawer->setTextFont(FONT_FAMILY, YARD_STICK_FONT_SIZE);
-    drawer->setTextAlign(Drawer::TextAlign::CENTER);
-    drawer->setTextBaseline(Drawer::TextBaseline::MIDDLE);
+    drawer->setTextFontFamily(FONT_FAMILY);
 }
 
 WorkspaceDrawer::~WorkspaceDrawer() {

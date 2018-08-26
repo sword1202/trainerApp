@@ -9,6 +9,7 @@ class DrawerColor
 public:
     static DrawerColor white();
     static DrawerColor black();
+    static DrawerColor red();
 
     DrawerColor();
     DrawerColor(uchar r, uchar g, uchar b, uchar a = 255);

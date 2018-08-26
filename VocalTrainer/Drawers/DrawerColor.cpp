@@ -82,6 +82,10 @@ DrawerColor DrawerColor::black() {
     return DrawerColor(0, 0, 0, 255);
 }
 
+DrawerColor DrawerColor::red() {
+    return DrawerColor(255, 0, 0, 255);
+}
+
 bool DrawerColor::operator==(const DrawerColor &rhs) const {
     return *reinterpret_cast<const int32_t*>(rgba) == *reinterpret_cast<const int32_t*>(rhs.rgba);
 }

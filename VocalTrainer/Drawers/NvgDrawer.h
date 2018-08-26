@@ -58,7 +58,9 @@ public:
 
     void fillText(const std::string &text, float x, float y) override;
 
-    void setTextFont(const char* fontFamily, float fontSize) override;
+    void setTextFontFamily(const char *fontFamily) override;
+    void setTextFontSize(float fontSize) override;
+    void setTextWeight(int weight) override;
     void setTextAlign(TextAlign align) override;
     void setTextBaseline(TextBaseline baseline) override;
     void registerFont(const char *name, const char *data, int dataSize);

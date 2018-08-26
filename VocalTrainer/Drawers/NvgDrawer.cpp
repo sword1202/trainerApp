@@ -199,9 +199,13 @@ void NvgDrawer::fillText(const std::string &text, float x, float y) {
     nvgText(ctx, x, y, text.data(), text.data() + text.size());
 }
 
-void NvgDrawer::setTextFont(const char* fontFamily, float fontSize) {
+void NvgDrawer::setTextFontFamily(const char *fontFamily) {
     this->fontFamily = fontFamily;
     nvgFontFace(ctx, fontFamily);
+}
+
+void NvgDrawer::setTextFontSize(float fontSize) {
+    assert(fontSize > 0);
     nvgFontSize(ctx, fontSize);
 }
 
@@ -288,4 +292,8 @@ void NvgDrawer::deleteImages() {
 
 void NvgDrawer::doTranslate(float x, float y) {
     nvgTranslate(ctx, x, y);
+}
+
+void NvgDrawer::setTextWeight(int weight) {
+    // Not supported
 }

@@ -1,10 +1,14 @@
 #include "QDrawer.h"
+#include "StringUtils.h"
+
+using namespace CppUtils;
 
 static QColor toQColor(const Drawer::Color& color) {
     return QColor(color[0], color[1], color[2], color[3]);
 }
 
 QDrawer::QDrawer(QPaintDevice *paintDevice) : paintDevice(paintDevice) {
+
 }
 
 void QDrawer::doTranslate(float x, float y) {
@@ -16,6 +20,8 @@ void QDrawer::beginFrame(float width, float height, float devicePixelRatio) {
     assert(painter.begin(paintDevice));
     painter.setRenderHint(QPainter::Antialiasing);
     painter.setRenderHint(QPainter::HighQualityAntialiasing);
+    painter.setRenderHint(QPainter::TextAntialiasing);
+    painter.setRenderHint(QPainter::SmoothPixmapTransform);
 }
 
 void QDrawer::endFrame() {
@@ -85,18 +91,76 @@ void QDrawer::rotate(float angle) {
 }
 
 void QDrawer::scale(float x, float y) {
-
+    painter.scale(x, y);
 }
 
 void QDrawer::rect(float x, float y, float w, float h) {
-//    Drawer::rect(x, y, w, h);
     beginPath();
     path.addRect(x, y, w, h);
     closePath();
 }
 
-void QDrawer::fillText(const std::string &text, float x, float y) {
+static Qt::AlignmentFlag toQtAlignment(Drawer::TextAlign align) {
+    switch (align) {
+        case Drawer::CENTER:
+            return Qt::AlignHCenter;
+        case Drawer::LEFT:
+            return Qt::AlignLeft;
+        case Drawer::RIGHT:
+            return Qt::AlignRight;
+        default:
+            assert(false);
+    }
+}
 
+static Qt::AlignmentFlag toQtAlignment(Drawer::TextBaseline baseline) {
+    switch (baseline) {
+        case Drawer::TOP:
+            return Qt::AlignTop;
+        case Drawer::BOTTOM:
+            return Qt::AlignBottom;
+        case Drawer::MIDDLE:
+            return Qt::AlignVCenter;
+        default:
+            assert(false);
+    }
+}
+
+static void drawText(QPainter &painter, qreal x, qreal y, Qt::Alignment flags,
+        const QString & text, QRectF * boundingRect = 0) {
+    const qreal size = 32767.0;
+    QPointF corner(x, y - size);
+    if (flags & Qt::AlignHCenter) corner.rx() -= size/2.0;
+    else if (flags & Qt::AlignRight) corner.rx() -= size;
+    if (flags & Qt::AlignVCenter) corner.ry() += size/2.0;
+    else if (flags & Qt::AlignTop) corner.ry() += size;
+    else flags |= Qt::AlignBottom;
+    QRectF rect{corner.x(), corner.y(), size, size};
+    painter.drawText(rect, flags, text, boundingRect);
+}
+
+void QDrawer::fillText(const std::string &text, float x, float y) {
+    Qt::Alignment alignment { toQtAlignment(textAlign), toQtAlignment(textBaseline) };
+    QFontMetrics fm(font);
+
+    auto qStringText = QString::fromStdString(text);
+
+    float width = fm.width(qStringText);
+    float height = fm.capHeight();
+    if (textAlign == CENTER) {
+        x -= width / 2;
+    } else if(textAlign == RIGHT) {
+        x -= width;
+    }
+    if (textBaseline == MIDDLE) {
+        y += height / 2;
+    } else if(textBaseline == TOP) {
+        y += height;
+    }
+
+    beginPath();
+    path.addText(x, y, font, qStringText);
+    fill();
 }
 
 void QDrawer::arc(float x, float y, float r, float sAngle, float eAngle) {
@@ -158,14 +222,26 @@ void QDrawer::roundedRectDifferentCorners(float x, float y, float w, float h,
     closePath();
 }
 
-void QDrawer::setTextFont(const char* fontFamily, float fontSize) {
-    //painter.setFont();
-}
-
 void QDrawer::setTextAlign(Drawer::TextAlign align) {
-
+    textAlign = align;
 }
 
 void QDrawer::setTextBaseline(Drawer::TextBaseline baseline) {
+    textBaseline = baseline;
+}
+
+void QDrawer::setTextFontFamily(const char *fontFamily) {
+    font.setFamily(fontFamily);
+}
+
+void QDrawer::setTextFontSize(float fontSize) {
+    font.setPointSizeF(fontSize);
+}
+
+void QDrawer::setTextWeight(int weight) {
+    font.setWeight(weight);
+}
+
+void QDrawer::testTextDraw() {
 
 }

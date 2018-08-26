@@ -78,8 +78,10 @@ public:
     virtual void lineTo(const CppUtils::PointF& point);
     virtual void moveTo(const CppUtils::PointF& point);
 
-    virtual void setTextFont(const char* fontFamily, float fontSize) = 0;
+    virtual void setTextFontFamily(const char* fontFamily) = 0;
+    virtual void setTextFontSize(float fontSize) = 0;
     virtual void setTextAlign(TextAlign align) = 0;
+    virtual void setTextWeight(int weight) = 0;
     virtual void setTextBaseline(TextBaseline baseline) = 0;
     virtual void fillText(const std::string &text, float x, float y) = 0;
 

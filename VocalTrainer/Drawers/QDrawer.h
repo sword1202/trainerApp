@@ -38,8 +38,12 @@ public:
     void scale(float x, float y) override;
     void rect(float x, float y, float w, float h) override;
 
-    void setTextFont(const char* fontFamily, float fontSize) override;
+    void setTextFontFamily(const char *fontFamily) override;
+    void setTextFontSize(float fontSize) override;
     void setTextAlign(TextAlign align) override;
+
+    void setTextWeight(int weight) override;
+
     void setTextBaseline(TextBaseline baseline) override;
     void fillText(const std::string &text, float x, float y) override;
 
@@ -50,8 +54,15 @@ public:
     void deleteImage(Image *&image) override;
     void setPaintDevice(QPaintDevice *paintDevice);
 
+    void testTextDraw();
+
 protected:
     void doTranslate(float x, float y) override;
+
+private:
+    TextAlign textAlign = LEFT;
+    TextBaseline textBaseline = TOP;
+    QFont font;
 };
 
 #endif // QDRAWER_H
