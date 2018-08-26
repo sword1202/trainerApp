@@ -100,49 +100,8 @@ void QDrawer::rect(float x, float y, float w, float h) {
     closePath();
 }
 
-static Qt::AlignmentFlag toQtAlignment(Drawer::TextAlign align) {
-    switch (align) {
-        case Drawer::CENTER:
-            return Qt::AlignHCenter;
-        case Drawer::LEFT:
-            return Qt::AlignLeft;
-        case Drawer::RIGHT:
-            return Qt::AlignRight;
-        default:
-            assert(false);
-    }
-}
-
-static Qt::AlignmentFlag toQtAlignment(Drawer::TextBaseline baseline) {
-    switch (baseline) {
-        case Drawer::TOP:
-            return Qt::AlignTop;
-        case Drawer::BOTTOM:
-            return Qt::AlignBottom;
-        case Drawer::MIDDLE:
-            return Qt::AlignVCenter;
-        default:
-            assert(false);
-    }
-}
-
-static void drawText(QPainter &painter, qreal x, qreal y, Qt::Alignment flags,
-        const QString & text, QRectF * boundingRect = 0) {
-    const qreal size = 32767.0;
-    QPointF corner(x, y - size);
-    if (flags & Qt::AlignHCenter) corner.rx() -= size/2.0;
-    else if (flags & Qt::AlignRight) corner.rx() -= size;
-    if (flags & Qt::AlignVCenter) corner.ry() += size/2.0;
-    else if (flags & Qt::AlignTop) corner.ry() += size;
-    else flags |= Qt::AlignBottom;
-    QRectF rect{corner.x(), corner.y(), size, size};
-    painter.drawText(rect, flags, text, boundingRect);
-}
-
 void QDrawer::fillText(const std::string &text, float x, float y) {
-    Qt::Alignment alignment { toQtAlignment(textAlign), toQtAlignment(textBaseline) };
     QFontMetrics fm(font);
-
     auto qStringText = QString::fromStdString(text);
 
     float width = fm.width(qStringText);
