@@ -130,3 +130,8 @@ void Drawer::clear() {
     setFillColor(Color::white());
     fillRect(0, 0, width, height);
 }
+
+void Drawer::circle(float x, float y, float r) {
+    beginPath();
+    arc(x, y, r, 0, 2 * M_PI);
+}

@@ -38,6 +38,8 @@ public:
     void scale(float x, float y) override;
     void rect(float x, float y, float w, float h) override;
 
+    void circle(float x, float y, float r) override;
+
     void setTextFontFamily(const char *fontFamily) override;
     void setTextFontSize(float fontSize) override;
     void setTextAlign(TextAlign align) override;

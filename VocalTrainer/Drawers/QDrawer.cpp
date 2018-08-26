@@ -204,3 +204,8 @@ void QDrawer::setTextWeight(int weight) {
 void QDrawer::testTextDraw() {
 
 }
+
+void QDrawer::circle(float x, float y, float r) {
+    beginPath();
+    path.addEllipse(QPointF(x, y), r, r);
+}

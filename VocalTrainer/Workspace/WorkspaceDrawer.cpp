@@ -346,8 +346,7 @@ void WorkspaceDrawer::drawBoundsIfNeed() const {
 }
 
 void WorkspaceDrawer::drawYardStickDot(float x, float y) const {
-    drawer->beginPath();
-    drawer->arc(x, y, YARD_STICK_DOT_RADIUS, 0, 2 * M_PI);
+    drawer->circle(x, y, YARD_STICK_DOT_RADIUS);
     drawer->fill();
 }
 
