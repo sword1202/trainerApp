@@ -95,6 +95,7 @@ public:
     static constexpr int PIANO_WIDTH = 67;
     static constexpr float PLAYHEAD_TRIANGLE_WIDTH = 11.0f;
     static constexpr float PLAYHEAD_TRIANGLE_HEIGHT = 11.25f;
+    static constexpr int YARD_STICK_FONT_SIZE = 11;
 
     WorkspaceDrawer(Drawer *drawer, const std::function<void()>& onUpdateRequested);
     ~WorkspaceDrawer();

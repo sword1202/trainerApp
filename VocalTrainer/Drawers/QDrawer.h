@@ -42,12 +42,10 @@ public:
 
     void setTextFontFamily(const char *fontFamily) override;
     void setTextFontSize(float fontSize) override;
-    void setTextAlign(TextAlign align) override;
 
     void setTextWeight(int weight) override;
 
-    void setTextBaseline(TextBaseline baseline) override;
-    void fillText(const std::string &text, float x, float y) override;
+    void drawTextUsingFonts(const std::string &text, float x, float y) override;
 
     void arc(float x, float y, float r, float sAngle, float eAngle) override;
     void fillWithImage(Image *image, float textureX1, float textureY1, float textureX2, float textureY2) override;
@@ -57,8 +55,6 @@ public:
     void drawImage(float x, float y, float w, float h, Image *image) override;
 
     void setPaintDevice(QPaintDevice *paintDevice);
-
-    void testTextDraw();
 
 protected:
     void doTranslate(float x, float y) override;

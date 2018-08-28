@@ -192,20 +192,33 @@ void NvgDrawer::quadraticCurveTo(float cpx, float cpy, float x, float y) {
     nvgQuadTo(ctx, cpx, cpy, x, y);
 }
 
-void NvgDrawer::fillText(const std::string &text, float x, float y) {
+void NvgDrawer::drawTextUsingFonts(const std::string &text, float x, float y) {
+#ifndef NDEBUG
     if (nvgFindFont(ctx, fontFamily.data()) == FONS_INVALID){
         throw std::runtime_error("Font " + fontFamily + " was not registered, call drawer->registerFont before fillText call");
     }
+#endif
 
     nvgText(ctx, x, y, text.data(), text.data() + text.size());
 }
 
 void NvgDrawer::setTextFontFamily(const char *fontFamily) {
-    this->fontFamily = fontFamily;
+    if (getTextDrawStrategy() == DRAW_USING_PRE_BUILD_IMAGES) {
+        Drawer::setTextFontFamily(fontFamily);
+        return;
+    }
+
+#ifndef NDEBUG
+    this->fontFamily.assign(fontFamily);
+#endif
     nvgFontFace(ctx, fontFamily);
 }
 
 void NvgDrawer::setTextFontSize(float fontSize) {
+    if (getTextDrawStrategy() == DRAW_USING_PRE_BUILD_IMAGES) {
+        Drawer::setTextFontSize(fontSize);
+        return;
+    }
     assert(fontSize > 0);
     nvgFontSize(ctx, fontSize);
 }
@@ -239,12 +252,12 @@ static NVGalign toNVGAlign(Drawer::TextBaseline align) {
 }
 
 void NvgDrawer::setTextAlign(Drawer::TextAlign align) {
-    textAlign = align;
+    Drawer::setTextAlign(align);
     nvgTextAlign(ctx, toNVGAlign(align) | toNVGAlign(textBaseline));
 }
 
 void NvgDrawer::setTextBaseline(Drawer::TextBaseline baseline) {
-    textBaseline = baseline;
+    Drawer::setTextBaseline(baseline);
     nvgTextAlign(ctx, toNVGAlign(baseline) | toNVGAlign(textAlign));
 }
 
@@ -286,5 +299,9 @@ void NvgDrawer::onImageDelete(Drawer::Image *image) {
 }
 
 void NvgDrawer::drawImage(float x, float y, float w, float h, Drawer::Image *image) {
-    NOT_IMPLEMENTED_ASSERT
+    // nanovg can't draw image with x, y != 0, strange bug, use translate for a workground
+    translate(x, y);
+    rect(0, 0, w, h);
+    fillWithImage(image, 0, 0, w, h);
+    translate(-x, -y);
 }

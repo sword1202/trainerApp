@@ -1,6 +1,10 @@
 #include "Drawer.h"
+#include "Sets.h"
+#include "Core.h"
+#include <iostream>
 
 using namespace CppUtils;
+using namespace std;
 
 void Drawer::roundedRect(float x, float y, float w, float h, float r) {
     assert(r >= 0);
@@ -157,8 +161,110 @@ Drawer::~Drawer() {
         onImageDelete(image);
         delete image;
     }
+
+    CheckedDelete(textImagesFactory);
 }
 
 bool Drawer::imageRegistered(Drawer::Image *image) const {
     return (bool)images.count(image);
+}
+
+void Drawer::setTextAlign(Drawer::TextAlign align) {
+    textAlign = align;
+}
+
+Drawer::TextDrawStrategy Drawer::getTextDrawStrategy() const {
+    return textDrawStrategy;
+}
+
+void Drawer::setTextDrawStrategy(Drawer::TextDrawStrategy textDrawStrategy) {
+    assert(textImagesFactory && "call setTextImagesFactory before setting DRAW_USING_PRE_BUILD_IMAGES");
+    this->textDrawStrategy = textDrawStrategy;
+}
+
+void Drawer::setTextFontFamily(const char *fontFamily) {
+
+}
+
+void Drawer::setTextFontSize(float fontSize) {
+    this->fontSize = fontSize;
+}
+
+void Drawer::setTextImagesFactory(DrawerTextImagesFactory *textImagesFactory) {
+    assert(textImagesFactory);
+    CheckedDelete(this->textImagesFactory);
+    this->textImagesFactory = textImagesFactory;
+}
+
+void Drawer::fillText(const std::string &text, float x, float y) {
+    if (textDrawStrategy == DRAW_USING_FONTS) {
+        drawTextUsingFonts(text, x, y);
+    } else {
+        drawTextUsingImages(text, x, y);
+    }
+}
+
+void Drawer::drawTextUsingImages(const std::string &text, float x, float y) {
+    tempTextImages.clear();
+    float height = 0;
+    float width = 0;
+    for (char ch : text) {
+        Image* image = textImagesFactory->findImage(ch, (int)round(fontSize));
+        assert(image);
+        if (height < image->height()) {
+            height = image->height();
+        }
+        width += image->width();
+        tempTextImages.push_back(image);
+    }
+    height /= devicePixelRatio;
+    width /= devicePixelRatio;
+
+    if (textAlign == CENTER) {
+        x -= width / 2;
+    } else if(textAlign == RIGHT) {
+        x -= width;
+    }
+    if (textBaseline == MIDDLE) {
+        y -= height / 2;
+    } else if(textBaseline == BOTTOM) {
+        y -= height;
+    }
+
+    for (Image* image : tempTextImages) {
+        drawImage(x, y, image);
+        x += image->width() / devicePixelRatio;
+    }
+}
+
+Drawer::Drawer() {
+    tempTextImages.reserve(10);
+}
+
+void Drawer::drawImage(float x, float y, Drawer::Image *image) {
+    drawImage(x, y, image->width() / devicePixelRatio, image->height() / devicePixelRatio, image);
+}
+
+void Drawer::setTextBaseline(Drawer::TextBaseline baseline) {
+    textBaseline = baseline;
+}
+
+void DrawerTextImagesFactory::addImage(const DrawerTextImagesFactoryCharacterData &data) {
+    set.insert(data);
+}
+
+Drawer::Image *DrawerTextImagesFactory::findImage(char character, int fontSize) {
+    DrawerTextImagesFactoryCharacterData stub;
+    stub.character = character;
+    stub.fontSize = fontSize;
+    return Sets::FindOrDefault(set, stub).image;
+}
+
+bool DrawerTextImagesFactoryCharacterData::operator==(const DrawerTextImagesFactoryCharacterData &rhs) const {
+    return character == rhs.character &&
+            fontSize == rhs.fontSize;
+}
+
+bool DrawerTextImagesFactoryCharacterData::operator!=(const DrawerTextImagesFactoryCharacterData &rhs) const {
+    return !(rhs == *this);
 }

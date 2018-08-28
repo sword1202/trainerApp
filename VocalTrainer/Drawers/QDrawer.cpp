@@ -119,12 +119,13 @@ void QDrawer::rect(float x, float y, float w, float h) {
     closePath();
 }
 
-void QDrawer::fillText(const std::string &text, float x, float y) {
+void QDrawer::drawTextUsingFonts(const std::string &text, float x, float y) {
     QFontMetrics fm(font);
     auto qStringText = QString::fromStdString(text);
 
     float width = fm.width(qStringText);
     float height = fm.capHeight();
+
     if (textAlign == CENTER) {
         x -= width / 2;
     } else if(textAlign == RIGHT) {
@@ -197,28 +198,17 @@ void QDrawer::roundedRectDifferentCorners(float x, float y, float w, float h,
     closePath();
 }
 
-void QDrawer::setTextAlign(Drawer::TextAlign align) {
-    textAlign = align;
-}
-
-void QDrawer::setTextBaseline(Drawer::TextBaseline baseline) {
-    textBaseline = baseline;
-}
-
 void QDrawer::setTextFontFamily(const char *fontFamily) {
     font.setFamily(fontFamily);
 }
 
 void QDrawer::setTextFontSize(float fontSize) {
+    Drawer::setTextFontSize(fontSize);
     font.setPointSizeF(fontSize);
 }
 
 void QDrawer::setTextWeight(int weight) {
     font.setWeight(weight);
-}
-
-void QDrawer::testTextDraw() {
-
 }
 
 void QDrawer::circle(float x, float y, float r) {

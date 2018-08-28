@@ -28,6 +28,8 @@ class PianoDrawer {
 
     Pitch getFirstPitch() const;
 public:
+    static constexpr int FONT_SIZE = 8;
+
     PianoDrawer(Drawer *drawer);
 
     void setPitchSequence(PlayingPitchSequence *pitchSequence);

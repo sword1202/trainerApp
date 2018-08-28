@@ -74,5 +74,60 @@
         <file>qml/js/zoom.js</file>
         <file>qml/LeftSideBar.qml</file>
         <file>qml/VerticalScrollBarContainer.qml</file>
+        <file>qml/images/text/11_0.png</file>
+        <file>qml/images/text/11_0.png</file>
+        <file>qml/images/text/8_0.png</file>
+        <file>qml/images/text/11_1.png</file>
+        <file>qml/images/text/8_1.png</file>
+        <file>qml/images/text/11_2.png</file>
+        <file>qml/images/text/8_2.png</file>
+        <file>qml/images/text/11_3.png</file>
+        <file>qml/images/text/8_3.png</file>
+        <file>qml/images/text/11_4.png</file>
+        <file>qml/images/text/8_4.png</file>
+        <file>qml/images/text/11_5.png</file>
+        <file>qml/images/text/8_5.png</file>
+        <file>qml/images/text/11_6.png</file>
+        <file>qml/images/text/8_6.png</file>
+        <file>qml/images/text/11_7.png</file>
+        <file>qml/images/text/8_7.png</file>
+        <file>qml/images/text/11_8.png</file>
+        <file>qml/images/text/8_8.png</file>
+        <file>qml/images/text/11_9.png</file>
+        <file>qml/images/text/8_9.png</file>
+        <file>qml/images/text/8_A.png</file>
+        <file>qml/images/text/8_B.png</file>
+        <file>qml/images/text/8_C.png</file>
+        <file>qml/images/text/8_D.png</file>
+        <file>qml/images/text/8_E.png</file>
+        <file>qml/images/text/8_F.png</file>
+        <file>qml/images/text/8_G.png</file>
+        <file>qml/images/text/22_0.png</file>
+        <file>qml/images/text/16_0.png</file>
+        <file>qml/images/text/22_1.png</file>
+        <file>qml/images/text/16_1.png</file>
+        <file>qml/images/text/22_2.png</file>
+        <file>qml/images/text/16_2.png</file>
+        <file>qml/images/text/22_3.png</file>
+        <file>qml/images/text/16_3.png</file>
+        <file>qml/images/text/22_4.png</file>
+        <file>qml/images/text/16_4.png</file>
+        <file>qml/images/text/22_5.png</file>
+        <file>qml/images/text/16_5.png</file>
+        <file>qml/images/text/22_6.png</file>
+        <file>qml/images/text/16_6.png</file>
+        <file>qml/images/text/22_7.png</file>
+        <file>qml/images/text/16_7.png</file>
+        <file>qml/images/text/22_8.png</file>
+        <file>qml/images/text/16_8.png</file>
+        <file>qml/images/text/22_9.png</file>
+        <file>qml/images/text/16_9.png</file>
+        <file>qml/images/text/16_A.png</file>
+        <file>qml/images/text/16_B.png</file>
+        <file>qml/images/text/16_C.png</file>
+        <file>qml/images/text/16_D.png</file>
+        <file>qml/images/text/16_E.png</file>
+        <file>qml/images/text/16_F.png</file>
+        <file>qml/images/text/16_G.png</file>
     </qresource>
 </RCC>

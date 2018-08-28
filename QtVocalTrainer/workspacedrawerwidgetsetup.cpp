@@ -6,35 +6,72 @@
 #include <QByteArray>
 #include <QIcon>
 #include "QDrawer.h"
+#include "CppUtils/config.h"
 
 using std::cout;
 using std::endl;
 using namespace CppUtils;
 
+CPP_UTILS_DLLHIDE class TextImagesFactory : public DrawerTextImagesFactory {
+    constexpr static const char* path = ":qml/images/text/";
+
+    void addImage(DrawerImpl* drawer, int devicePixelRatio, int fontSize, char character) {
+        QString fileName = path + QString::number(fontSize * devicePixelRatio) + "_" + QString(character) + ".png";
+        QImage image(fileName);
+        assert(!image.isNull());
+
+        Drawer::Image* imageHolder = nullptr;
+#ifdef USE_NVG_DRAWER
+        imageHolder = drawer->createImage(image.bits(), image.width(), image.height());
+#else
+        imageHolder = drawer->createImage(QPixmap::fromImage(image));
+#endif
+        DrawerTextImagesFactoryCharacterData data;
+        data.image = imageHolder;
+        data.character = character;
+        data.fontSize = fontSize;
+        DrawerTextImagesFactory::addImage(data);
+    }
+public:
+    void load(DrawerImpl* drawer, int devicePixelRatio) {
+        for (int textInt = 0; textInt <= 9; ++textInt) {
+            char ch = (char)textInt + '0';
+            addImage(drawer, devicePixelRatio, 11, ch);
+            addImage(drawer, devicePixelRatio, 8, ch);
+        }
+
+        for (char ch = 'A'; ch <= 'G'; ch++) {
+            addImage(drawer, devicePixelRatio, 8, ch);
+        }
+    }
+};
+
 WorkspaceDrawerWidgetSetup::WorkspaceDrawerWidgetSetup() {
 
 }
 
-void WorkspaceDrawerWidgetSetup::initPlayHeadTriangleImage(Drawer *drawer, QWidget *widget) {
+void WorkspaceDrawerWidgetSetup::initPlayHeadTriangleImage(DrawerImpl *drawer, QWidget *widget) {
     QIcon triangle(":qml/images/play_head_triangle.svg");
     qreal ratio = widget->devicePixelRatioF();
     QPixmap pixmap = triangle.pixmap(qRound(WorkspaceDrawer::PLAYHEAD_TRIANGLE_WIDTH * ratio),
             qRound(WorkspaceDrawer::PLAYHEAD_TRIANGLE_HEIGHT * ratio));
 
-    Drawer::Image* imageHolder = nullptr;
-    if (QDrawer* qDrawer = dynamic_cast<QDrawer*>(drawer)) {
-        imageHolder = qDrawer->createImage(std::move(pixmap));
-    }
+    Drawer::Image* imageHolder;
+#ifdef USE_QT_DRAWER
+    imageHolder = drawer->createImage(std::move(pixmap));
+#else
+    QImage image = pixmap.toImage();
+    imageHolder = drawer->createImage(image.bits(), image.width(), image.height());
+#endif
 
     workspaceDrawer->setPlayHeadTriangleImage(imageHolder);
 }
 
-void WorkspaceDrawerWidgetSetup::setupWorkspaceDrawer(QWidget* widget, Drawer* drawer) {
-
-    if (NvgDrawer* nvgDrawer = dynamic_cast<NvgDrawer*>(drawer)) {
-        QByteArray latoRegular = Fonts::latoRegular();
-        nvgDrawer->registerFont("Lato", latoRegular.data(), latoRegular.size());
-    }
+void WorkspaceDrawerWidgetSetup::setupWorkspaceDrawer(QWidget* widget, DrawerImpl* drawer) {
+    auto* factory = new TextImagesFactory();
+    factory->load(drawer, widget->devicePixelRatio());
+    drawer->setTextImagesFactory(factory);
+    drawer->setTextDrawStrategy(Drawer::DRAW_USING_PRE_BUILD_IMAGES);
 
     workspaceDrawer = new WorkspaceDrawer(drawer, [=] {
         widget->repaint();

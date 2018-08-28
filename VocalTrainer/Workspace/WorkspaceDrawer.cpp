@@ -30,7 +30,6 @@ constexpr float PLAYBACK_BOUNDS_HEIGHT = 15.75;
 static const int PITCH_RADIUS = 3;
 constexpr float PLAYBACK_BOUNDS_ROUND_RECT_RADIUS = 1.5f;
 
-constexpr int YARD_STICK_FONT_SIZE = 11;
 constexpr int YARD_STICK_FONT_WEIGHT = 1;
 static const char* FONT_FAMILY = "Lato";
 

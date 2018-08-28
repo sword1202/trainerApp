@@ -5,8 +5,8 @@
 static QDrawer* drawer;
 
 QPainterWorkspaceWidget::QPainterWorkspaceWidget(QWidget *parent) : QWidget(parent) {
-    drawer = new QDrawer(this);
-    setupWorkspaceDrawer(this, drawer);
+//    drawer = new QDrawer(this);
+//    setupWorkspaceDrawer(this, drawer);
 }
 
 void QPainterWorkspaceWidget::paintEvent(QPaintEvent *event) {

@@ -11,7 +11,11 @@
 #include "RoundedRect.h"
 #include "Point.h"
 #include "DrawerColor.h"
+#include "HashUtils.h"
 #include <string>
+#include <unordered_set>
+
+class DrawerTextImagesFactory;
 
 class Drawer {
 public:
@@ -32,6 +36,11 @@ public:
 
     enum TextBaseline {
         TOP, BOTTOM, MIDDLE
+    };
+
+    enum TextDrawStrategy {
+        DRAW_USING_FONTS,
+        DRAW_USING_PRE_BUILD_IMAGES
     };
 
     typedef DrawerColor Color;
@@ -59,6 +68,7 @@ public:
     virtual void fill() = 0;
     virtual void fillWithImage(Image* image, float textureX1, float textureY1, float textureX2, float textureY2) = 0;
     virtual void fillWithImage(Image* image);
+    virtual void drawImage(float x, float y, Image *image);
     virtual void drawImage(float x, float y, float w, float h, Image *image) = 0;
     virtual void beginPath() = 0;
     virtual void closePath() = 0;
@@ -80,28 +90,39 @@ public:
     virtual void lineTo(const CppUtils::PointF& point);
     virtual void moveTo(const CppUtils::PointF& point);
 
-    virtual void setTextFontFamily(const char* fontFamily) = 0;
-    virtual void setTextFontSize(float fontSize) = 0;
-    virtual void setTextAlign(TextAlign align) = 0;
+    virtual void setTextFontFamily(const char* fontFamily);
+    virtual void setTextFontSize(float fontSize);
+    virtual void setTextAlign(TextAlign align);
     virtual void setTextWeight(int weight) = 0;
-    virtual void setTextBaseline(TextBaseline baseline) = 0;
-    virtual void fillText(const std::string &text, float x, float y) = 0;
+    virtual void setTextBaseline(TextBaseline baseline);
+    virtual void fillText(const std::string &text, float x, float y);
 
     virtual Image* createImage(const void* data, int w, int h) = 0;
     virtual void deleteImage(Image*& image);
 
+    Drawer();
     virtual ~Drawer();
 
+    TextDrawStrategy getTextDrawStrategy() const;
+    void setTextDrawStrategy(TextDrawStrategy textDrawStrategy);
+
+    void setTextImagesFactory(DrawerTextImagesFactory *textImagesFactory);
 protected:
 
     float getWidth() const;
     float getHeight() const;
     float getDevicePixelRatio() const;
 
+    virtual void drawTextUsingFonts(const std::string &text, float x, float y) = 0;
+    virtual void drawTextUsingImages(const std::string &text, float x, float y);
     virtual void doTranslate(float x, float y) = 0;
     virtual Image* registerImage(Image* image);
     virtual bool imageRegistered(Image* image) const;
     virtual void onImageDelete(Image* image);
+
+    float fontSize = 14;
+    TextBaseline textBaseline = MIDDLE;
+    TextAlign textAlign = LEFT;
 private:
     float width;
     float height;
@@ -111,6 +132,30 @@ private:
     float translateY = 0;
 
     std::unordered_set<Image*> images;
+    TextDrawStrategy textDrawStrategy = DRAW_USING_FONTS;
+    DrawerTextImagesFactory* textImagesFactory = nullptr;
+
+    std::vector<Image*> tempTextImages;
+};
+
+struct DrawerTextImagesFactoryCharacterData {
+    char character;
+    int fontSize;
+    Drawer::Image* image = nullptr;
+
+    bool operator==(const DrawerTextImagesFactoryCharacterData &rhs) const;
+    bool operator!=(const DrawerTextImagesFactoryCharacterData &rhs) const;
+};
+
+MAKE_HASHABLE(DrawerTextImagesFactoryCharacterData, t.character, t.fontSize)
+
+class DrawerTextImagesFactory {
+public:
+    virtual void addImage(const DrawerTextImagesFactoryCharacterData& data);
+    virtual Drawer::Image* findImage(char character, int fontSize);
+    virtual ~DrawerTextImagesFactory() = default;
+private:
+    std::unordered_set<DrawerTextImagesFactoryCharacterData> set;
 };
 
 

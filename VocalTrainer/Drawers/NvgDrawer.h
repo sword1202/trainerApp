@@ -12,10 +12,9 @@
 class NvgDrawer : public Drawer {
     NVGcontext* ctx = nullptr;
 
+#ifndef NDEBUG
     std::string fontFamily;
-    float fontSize = 14;
-    TextBaseline textBaseline = MIDDLE;
-    TextAlign textAlign = LEFT;
+#endif
 public:
 #ifndef USE_METAL
     NvgDrawer();
@@ -57,7 +56,7 @@ public:
 
     void roundedRect(float x, float y, float w, float h, float r) override;
 
-    void fillText(const std::string &text, float x, float y) override;
+    void drawTextUsingFonts(const std::string &text, float x, float y) override;
 
     void setTextFontFamily(const char *fontFamily) override;
     void setTextFontSize(float fontSize) override;
