@@ -5,8 +5,8 @@
 #include <QWidget>
 #include "WorkspaceDrawer.h"
 
-//#define USE_NVG_DRAWER
-#define USE_QT_DRAWER
+#define USE_NVG_DRAWER
+//#define USE_QT_DRAWER
 
 #ifdef USE_QT_DRAWER
 #include "QDrawer.h"

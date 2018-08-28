@@ -47,6 +47,8 @@ public:
     void rotate(float angle) override;
     void scale(float x, float y) override;
 
+    void test() override;
+
 protected:
     void doTranslate(float x, float y) override;
 

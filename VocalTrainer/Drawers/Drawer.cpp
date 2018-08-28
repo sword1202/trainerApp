@@ -249,6 +249,10 @@ void Drawer::setTextBaseline(Drawer::TextBaseline baseline) {
     textBaseline = baseline;
 }
 
+void Drawer::test() {
+
+}
+
 void DrawerTextImagesFactory::addImage(const DrawerTextImagesFactoryCharacterData &data) {
     set.insert(data);
 }

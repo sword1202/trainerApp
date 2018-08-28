@@ -47,6 +47,5 @@ VxApp *VxApp::instance() {
 }
 
 VxApp::~VxApp() {
-    //delete engine;
     PortAudio::terminate();
 }

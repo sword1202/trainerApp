@@ -94,6 +94,8 @@ void WorkspaceDrawer::draw() {
     drawSecondPlayHead();
 
     drawer->endFrame();
+
+    drawer->test();
 }
 
 float WorkspaceDrawer::getGridTranslation() const {
@@ -339,6 +341,7 @@ void WorkspaceDrawer::drawBoundsIfNeed() const {
 }
 
 void WorkspaceDrawer::drawYardStickDot(float x, float y) const {
+    drawer->setFillColor(yardStickDotAndTextColor);
     drawer->circle(x, y, YARD_STICK_DOT_RADIUS);
     drawer->fill();
 }

@@ -56,6 +56,7 @@ public:
 
     void setPaintDevice(QPaintDevice *paintDevice);
 
+
 protected:
     void doTranslate(float x, float y) override;
 
