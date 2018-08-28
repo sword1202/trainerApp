@@ -204,6 +204,8 @@ void Drawer::fillText(const std::string &text, float x, float y) {
     }
 }
 
+static constexpr float LETTER_SPACING_FACTOR = 0.5f;
+
 void Drawer::drawTextUsingImages(const std::string &text, float x, float y) {
     tempTextImages.clear();
     float height = 0;
@@ -220,6 +222,8 @@ void Drawer::drawTextUsingImages(const std::string &text, float x, float y) {
     height /= devicePixelRatio;
     width /= devicePixelRatio;
 
+    width += (tempTextImages.size() - 1) * LETTER_SPACING_FACTOR;
+
     if (textAlign == CENTER) {
         x -= width / 2;
     } else if(textAlign == RIGHT) {
@@ -233,7 +237,7 @@ void Drawer::drawTextUsingImages(const std::string &text, float x, float y) {
 
     for (Image* image : tempTextImages) {
         drawImage(x, y, image);
-        x += image->width() / devicePixelRatio;
+        x += image->width() / devicePixelRatio + LETTER_SPACING_FACTOR;
     }
 }
 
