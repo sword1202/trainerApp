@@ -235,7 +235,7 @@ int AudioDecoderCoreAudio::seek(int sampleIdx) {
     return m_iPositionInSamples; //filepos;
 }
 
-int AudioDecoderCoreAudio::read(int size, const SAMPLE *destination) {
+int AudioDecoderCoreAudio::read(int size, SAMPLE *destination) {
     OSStatus err;
     SAMPLE *destBuffer(const_cast<SAMPLE*>(destination));
     unsigned int samplesWritten = 0;

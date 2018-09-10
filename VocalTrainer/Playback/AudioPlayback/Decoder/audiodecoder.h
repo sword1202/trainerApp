@@ -75,7 +75,7 @@ public:
     /** Read a maximum of 'size' samples of audio into buffer.
         Samples are always returned as 16-bit integers, with stereo interlacing.
         Returns the number of samples read. */
-    virtual int read(int size, const SAMPLE *buffer) = 0;
+    virtual int read(int size, SAMPLE *buffer) = 0;
 
     /** Get the number of audio samples in the file. This will be a good estimate of the
         number of samples you can get out of read(), though you should not rely on it
@@ -98,8 +98,7 @@ public:
     virtual std::vector<std::string> supportedFileExtensions() = 0;
 
 protected:
-    std::string audioData;
-    int m_iNumSamples = 0;
+    int m_iNumSamples = -1;
     int m_iChannels = 0;
     int m_iSampleRate = 0;
     float m_fDuration = 0; // in seconds

@@ -71,9 +71,10 @@ public:
     // Overriding AudioDecoderBase 
     void open(std::string &&data) override;
     int seek(int sampleIdx) override;
-    int read(int size, const SAMPLE *buffer) override;
+    int read(int size, SAMPLE *buffer) override;
     std::vector<std::string> supportedFileExtensions() override;
 private:
+    std::string audioData;
     SInt64 headerFrames;
     ExtAudioFileRef audioFile;
     AudioFileID audioFileID;

@@ -1,4 +1,4 @@
-QT += quick gui core widgets quickwidgets svg
+QT += quick gui core widgets quickwidgets svg multimedia
 
 CONFIG += c++14
 #QMAKE_CXXFLAGS_DEBUG += -O0
@@ -60,7 +60,8 @@ HEADERS += \
     qopenglworkspacewidget.h \
     workspacedrawerwidgetsetup.h \
     fonts.h \
-    qpainterworkspacewidget.h
+    qpainterworkspacewidget.h \
+    ../VocalTrainer/Playback/AudioPlayback/Decoder/windows/qaudiodecoderwrapper.h
 
 SOURCES += \
     main.cpp \
@@ -110,7 +111,8 @@ SOURCES += \
     player.cpp \
     qopenglworkspacewidget.cpp \
     fonts.cpp \
-    qpainterworkspacewidget.cpp
+    qpainterworkspacewidget.cpp \
+    ../VocalTrainer/Playback/AudioPlayback/Decoder/windows/qaudiodecoderwrapper.cpp
 
 RESOURCES += qml.qrc
 

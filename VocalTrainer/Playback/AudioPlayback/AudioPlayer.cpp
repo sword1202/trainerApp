@@ -31,6 +31,7 @@ int AudioPlayer::callback(
     AudioPlayer* self = (AudioPlayer*)userData;
     float volume = self->getVolume();
 
+    memset(outputBuffer, 0, framesPerBuffer * self->getSampleSize());
     int readFramesCount = self->readNextSamplesBatch(outputBuffer, framesPerBuffer, self->playbackData);
     assert(readFramesCount <= (int)framesPerBuffer);
     // no data available, return silence and wait

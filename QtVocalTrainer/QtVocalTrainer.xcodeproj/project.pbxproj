@@ -946,6 +946,21 @@
 					);
 			};
 		};
+		A3C9DF6235CDD06F4795DADA = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback/Decoder/windows/qaudiodecoderwrapper.cpp";
+			name = "qaudiodecoderwrapper.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		D3E033FC517067067FBE5BCE = {
+			fileRef = "A3C9DF6235CDD06F4795DADA";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
 		BC415B473FEB85492D4E8674 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/appmacos.mm";
@@ -1801,6 +1816,13 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
+		5C908278C1166B83702DD02E = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback/Decoder/windows/qaudiodecoderwrapper.h";
+			name = "qaudiodecoderwrapper.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
 		E89EF8F42D53D26AE81EB3A0 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback/Decoder/audiodecodercoreaudio_mac.h";
@@ -1961,6 +1983,7 @@
 				"0D39E49872D4A8DA481556DA",
 				"691B71E006AA926BDB1BF13B",
 				"CE6E0B52805DD157A3C090BD",
+				"A3C9DF6235CDD06F4795DADA",
 				"BC415B473FEB85492D4E8674",
 				"DF4BED6495ED318D0BFE2018",
 				"A7C917B154112562C9709C79",
@@ -2052,6 +2075,7 @@
 				"A10320F3E3320F071648944D",
 				"C2A1ABDFCE16C74629AD3E53",
 				"C2B8E3B1577B7C75D4FA1761",
+				"5C908278C1166B83702DD02E",
 				"E89EF8F42D53D26AE81EB3A0");
 			name = "Sources";
 			sourceTree = "<group>";
@@ -2149,6 +2173,7 @@
 				"B68DFB2CEF3B0AAB75F1D6DA",
 				"8C4B037729AE3718B10EF76C",
 				"9FDD3756D2D05F47B053EF19",
+				"D3E033FC517067067FBE5BCE",
 				"F512D0DE937285A2596D4954",
 				"3A9D3D3CE7067FBCEA4D8FFF",
 				"35A610BD95B9AF48696237CA",
@@ -2542,6 +2567,20 @@
 			settings = {
 			};
 		};
+		82C5ED545384FE7D9BC4C8FA = {
+			isa = PBXFileReference;
+			name = "QtMultimedia.framework";
+			path = "/Users/semyon/Qt/5.11.0/clang_64/lib/QtMultimedia.framework";
+			refType = 0;
+			sourceTree = "<absolute>";
+			lastKnownFileType = "wrapper.framework";
+		};
+		3FBDE650C9863AD6973D9982 = {
+			fileRef = "82C5ED545384FE7D9BC4C8FA";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		D4B32C2222F82AC56BADEB21 = {
 			isa = PBXFileReference;
 			name = "OpenGL.framework";
@@ -2599,6 +2638,7 @@
 				"554C4EF638BE7C2288F34633",
 				"999AF243E484560AA468035D",
 				"20608C2F010033B597A7F286",
+				"82C5ED545384FE7D9BC4C8FA",
 				"D4B32C2222F82AC56BADEB21",
 				"8D9815BDB5BD9F90D2BC05C5");
 			isa = PBXGroup;
@@ -2635,6 +2675,7 @@
 				"7E6181E315EB3F51F58A7697",
 				"1AC3E204B2624A57E690285B",
 				"193CCD0A915CDB34C7345D81",
+				"3FBDE650C9863AD6973D9982",
 				"8771A8C96E9C391044035D99",
 				"E45E51A644D5FC9F942ECE55");
 			isa = PBXFrameworksBuildPhase;
@@ -2763,6 +2804,7 @@
 					"../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers",
+					"../../../Qt/5.11.0/clang_64/lib/QtMultimedia.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtGui.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtQml.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers",
@@ -2790,6 +2832,7 @@
 					"-DQT_QUICK_LIB",
 					"-DQT_SVG_LIB",
 					"-DQT_WIDGETS_LIB",
+					"-DQT_MULTIMEDIA_LIB",
 					"-DQT_GUI_LIB",
 					"-DQT_QML_LIB",
 					"-DQT_NETWORK_LIB",
@@ -2808,6 +2851,7 @@
 					"-DQT_QUICK_LIB",
 					"-DQT_SVG_LIB",
 					"-DQT_WIDGETS_LIB",
+					"-DQT_MULTIMEDIA_LIB",
 					"-DQT_GUI_LIB",
 					"-DQT_QML_LIB",
 					"-DQT_NETWORK_LIB",
@@ -2882,6 +2926,7 @@
 					"../../../Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers",
+					"../../../Qt/5.11.0/clang_64/lib/QtMultimedia.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtGui.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtQml.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers",
@@ -2909,6 +2954,7 @@
 					"-DQT_QUICK_LIB",
 					"-DQT_SVG_LIB",
 					"-DQT_WIDGETS_LIB",
+					"-DQT_MULTIMEDIA_LIB",
 					"-DQT_GUI_LIB",
 					"-DQT_QML_LIB",
 					"-DQT_NETWORK_LIB",
@@ -2927,6 +2973,7 @@
 					"-DQT_QUICK_LIB",
 					"-DQT_SVG_LIB",
 					"-DQT_WIDGETS_LIB",
+					"-DQT_MULTIMEDIA_LIB",
 					"-DQT_GUI_LIB",
 					"-DQT_QML_LIB",
 					"-DQT_NETWORK_LIB",
