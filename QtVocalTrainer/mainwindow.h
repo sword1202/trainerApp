@@ -33,8 +33,8 @@ protected:
     void mousePressEvent(QMouseEvent *event) override;
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    virtual ~MainWindow();
+    explicit MainWindow(QWidget *parent = nullptr);
+    virtual ~MainWindow() override;
     void setupMenus();
     Q_INVOKABLE void setBoundsSelectionEnabled(bool enabled);
 
