@@ -74,11 +74,9 @@ void NvgDrawer::clear() {
 NvgDrawer::NvgDrawer() {
 #ifdef _WIN32
     GLint GlewInitResult = glewInit();
-    if (GLEW_OK != GlewInitResult)
-    {
+    if (GLEW_OK != GlewInitResult) {
         const GLubyte *er = glewGetErrorString(GlewInitResult);
-        QString s = QString(reinterpret_cast<const char *>(er));
-        qDebug() << "ERROR: " << s;
+        //qDebug() << "ERROR: " << reinterpret_cast<const char *>(er);
     }
     ctx = nvgCreateGL3(NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DEBUG);
 

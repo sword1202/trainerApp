@@ -6,7 +6,7 @@
 #ifndef VOCALTRAINER_QAUDIODECODERWRAPPER_H
 #define VOCALTRAINER_QAUDIODECODERWRAPPER_H
 
-#include "audiodecoder.h"
+#include "Decoder/audiodecoder.h"
 #include <QBuffer>
 #include <QAudioDecoder>
 

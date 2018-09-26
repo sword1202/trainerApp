@@ -1,3 +1,4 @@
+#define _USE_MATH_DEFINES
 #include "Drawer.h"
 #include "Sets.h"
 #include "Core.h"

@@ -412,7 +412,10 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, const std::function<void()>& on
         summarizedGridHeight(0),
         running(false),
         firstPitchIndex(-1),
-        frameTime(0), drawer(drawer), onUpdateRequested(onUpdateRequested) {
+        frameTime(0),
+        drawer(drawer),
+        playbackBounds(PlaybackBounds()),
+        onUpdateRequested(onUpdateRequested) {
     setGridColor({0x8B, 0x89, 0xB6, 0x33});
     setAccentGridColor({0x8B, 0x89, 0xB6, 0x80});
     setPitchGraphColor({0xFF, 0x5E, 0x85, 0xFF});
