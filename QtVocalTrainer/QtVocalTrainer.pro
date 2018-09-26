@@ -175,12 +175,12 @@ win32 {
 
 CONFIG(debug, debug|release) {
     LIBS += ../libs/windows/Debug/SoundTouchD.lib
-    LIBS += ../libs/windows/Debug/libboost_serialization-vc141-mt-gd-x32-1_67.lib
+    LIBS += ../libs/windows/Debug/libboost_serialization-vc140-mt-gd-x32-1_67.lib
     LIBS += ../libs/windows/Debug/portaudio.lib
     LIBS += ../libs/windows/Debug/aubio.lib
 } else {
     LIBS += ../libs/windows/Release/SoundTouch.lib
-    LIBS += ../libs/windows/Release/libboost_serialization-vc141-mt-x32-1_67.lib
+    LIBS += ../libs/windows/Release/libboost_serialization-vc140-mt-x32-1_67.lib
     LIBS += ../libs/windows/Release/portaudio.lib
     LIBS += ../libs/windows/Release/aubio.lib
 }
