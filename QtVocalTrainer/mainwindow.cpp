@@ -16,7 +16,7 @@
 #include "qpainterworkspacewidget.h"
 #include <iostream>
 
-constexpr int YARD_STICK_HEIGHT = (int)WorkspaceDrawer::YARD_STICK_HEIGHT;
+constexpr int YARD_STICK_HEIGHT = static_cast<int>(WorkspaceDrawer::YARD_STICK_HEIGHT);
 constexpr int HEADER_HEIGHT = 75 + 61 - YARD_STICK_HEIGHT;
 constexpr int PIANO_WIDTH = WorkspaceDrawer::PIANO_WIDTH;
 constexpr int PLAY_HEAD_SIZE = 11;
