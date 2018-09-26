@@ -1,20 +1,20 @@
 ﻿#include "mainwindow.h"
+
 #include <QOpenGLWidget>
 #include <QHBoxLayout>
 #include <QResizeEvent>
 #include <QQuickItem>
 #include <QQmlContext>
 #include <QScreen>
+#include <QFileDialog>
+#include <QMenuBar>
+#include <QMacCocoaViewContainer>
+
 #include "QmlCppBridge.h"
 #include "app.h"
-#include <QMenuBar>
-#include <QFileDialog>
-#include <QMacCocoaViewContainer>
-#include <QThread>
 #include "qopenglworkspacewidget.h"
 #include "PlaybackBounds.h"
 #include "qpainterworkspacewidget.h"
-#include <iostream>
 
 constexpr int YARD_STICK_HEIGHT = static_cast<int>(WorkspaceDrawer::YARD_STICK_HEIGHT);
 constexpr int HEADER_HEIGHT = 75 + 61 - YARD_STICK_HEIGHT;
@@ -34,27 +34,46 @@ MainWindow::MainWindow(QWidget *parent) :
     doMacOsPlatformStaff();
 #endif
 
+    // Window size
     QSize availableSize = QGuiApplication::primaryScreen()->availableSize();
     if (availableSize.width() < 700)
         setMinimumSize(700, static_cast<int>(availableSize.height() * 0.6));
     else
         setMinimumSize(availableSize.height(), static_cast<int>(availableSize.height() * 0.6));
 
+    // Workspace
     workspaceView = new QOpenGLWorkspaceWidget(this);
-    workspaceView->move(0, HEADER_HEIGHT);
-    //workspaceView->resize(1024, 768);
-
+    workspaceView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     cpp = new QmlCppBridge(this);
 
-    // setup header
+    // Header
     QQuickWidget *headerWidget = createQQuickWidget("qrc:/qml/HeaderWithSubHeader.qml");
     header = headerWidget->rootObject();
+    header->setHeight(HEADER_HEIGHT);
 
+    // Scrollbar
     verticalScrollWidget = createQQuickWidget("qrc:/qml/VerticalScrollBarContainer.qml");
     verticalScroll = verticalScrollWidget->rootObject();
+    verticalScroll->setWidth(VERTICAL_SCROLL_WIDTH);
+
+    // Setup layouts
+    QWidget *centralWidget = new QWidget;
+    setCentralWidget(centralWidget);
+
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    mainLayout->setMargin(0);
+    mainLayout->setSpacing(0);
+    mainLayout->addWidget(headerWidget);
+    centralWidget->setLayout(mainLayout);
+
+    QHBoxLayout *workspaceLayout = new QHBoxLayout;
+    workspaceLayout->setMargin(0);
+    workspaceLayout->setSpacing(0);
+    workspaceLayout->addWidget(workspaceView);
+    workspaceLayout->addWidget(verticalScrollWidget);
+    mainLayout->addLayout(workspaceLayout);
 
     setBoundsSelectionEnabled(false);
-
     setupMenus();
 }
 
@@ -79,14 +98,8 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
     int width = event->size().width();
     int height = event->size().height();
 
-    workspaceView->resize(width, height - HEADER_HEIGHT);
-
     header->setWidth(width);
-    header->setHeight(HEADER_HEIGHT);
-
-    verticalScroll->setWidth(VERTICAL_SCROLL_WIDTH);
     verticalScroll->setHeight(height - HEADER_HEIGHT - YARD_STICK_HEIGHT);
-    verticalScrollWidget->move(width - VERTICAL_SCROLL_WIDTH, HEADER_HEIGHT + YARD_STICK_HEIGHT + 1);
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event) {
