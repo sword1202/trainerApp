@@ -4,6 +4,7 @@
 #include <QResizeEvent>
 #include <QQuickItem>
 #include <QQmlContext>
+#include <QScreen>
 #include "QmlCppBridge.h"
 #include "app.h"
 #include <QMenuBar>
@@ -33,7 +34,12 @@ MainWindow::MainWindow(QWidget *parent) :
     doMacOsPlatformStaff();
 #endif
 
-    setMinimumSize(1280, 1024);
+    QSize availableSize = QGuiApplication::primaryScreen()->availableSize();
+    if (availableSize.width() < 700)
+        setMinimumSize(700, static_cast<int>(availableSize.height() * 0.6));
+    else
+        setMinimumSize(availableSize.height(), static_cast<int>(availableSize.height() * 0.6));
+
     workspaceView = new QOpenGLWorkspaceWidget(this);
     workspaceView->move(0, HEADER_HEIGHT);
     //workspaceView->resize(1024, 768);
