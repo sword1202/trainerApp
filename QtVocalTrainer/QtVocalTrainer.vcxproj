@@ -1,0 +1,522 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B15D849A-2D93-334C-A6FE-31501CDE6D4C}</ProjectGuid>
+    <RootNamespace>QtVocalTrainer</RootNamespace>
+    <Keyword>Qt4VSv1.0</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.17134.0</WindowsTargetPlatformMinVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <PlatformToolset>v141</PlatformToolset>
+    <OutputDirectory>release\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>Application</ConfigurationType>
+    <IntermediateDirectory>release\</IntermediateDirectory>
+    <PrimaryOutput>QtVocalTrainer</PrimaryOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <PlatformToolset>v141</PlatformToolset>
+    <OutputDirectory>debug\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>Application</ConfigurationType>
+    <IntermediateDirectory>debug\</IntermediateDirectory>
+    <PrimaryOutput>QtVocalTrainer</PrimaryOutput>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup Condition="'$(QtMsBuild)'=='' or !Exists('$(QtMsBuild)\qt.targets')">
+    <QtMsBuild>$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+  </PropertyGroup>
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  </Target>
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
+    <Import Project="$(QtMsBuild)\qt.props" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">QtVocalTrainer</TargetName>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</IgnoreImportLibrary>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">QtVocalTrainer</TargetName>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</IgnoreImportLibrary>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;..\PitchDetection\CppUtils;../../include;..\PitchDetection;..\include;..\VocalTrainer\Drawers;..\VocalTrainer\Manager;..\VocalTrainer\Workspace;..\VocalTrainer\Playback\AudioPlayback;..\VocalTrainer\Playback;..\VocalTrainer\Playback\CraigsappMidifile;..\VocalTrainer;..\include\nanovg;..\include\nanovg\glew;$(QTDIR)\include;$(QTDIR)\include\QtQuickWidgets;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtSvg;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtQml;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtCore;release;\include;$(QTDIR)\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -Zc:referenceBinding -Zc:__cplusplus -std:c++14 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>release\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <DisableSpecificWarnings>4577;4467;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;QT_DEPRECATED_WARNINGS;QT_NO_DEBUG;QT_QUICKWIDGETS_LIB;QT_QUICK_LIB;QT_SVG_LIB;QT_WIDGETS_LIB;QT_MULTIMEDIA_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>$(QTDIR)\lib\qtmain.lib;shell32.lib;..\libs\windows\Release\SoundTouch.lib;..\libs\windows\Release\libboost_serialization-vc140-mt-x32-1_67.lib;..\libs\windows\Release\portaudio.lib;..\libs\windows\Release\aubio.lib;..\libs\windows\Release\glew32.lib;..\libs\windows\Release\glew32s.lib;User32.lib;Winmm.lib;Opengl32.lib;Mfreadwrite.lib;MFPlat.lib;Ole32.lib;Mf.lib;mfuuid.lib;mfreadwrite.lib;Advapi32.lib;$(QTDIR)\lib\Qt5QuickWidgets.lib;$(QTDIR)\lib\Qt5Quick.lib;$(QTDIR)\lib\Qt5Svg.lib;$(QTDIR)\lib\Qt5Widgets.lib;$(QTDIR)\lib\Qt5Multimedia.lib;$(QTDIR)\lib\Qt5Gui.lib;$(QTDIR)\lib\Qt5Qml.lib;$(QTDIR)\lib\Qt5Network.lib;$(QTDIR)\lib\Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;C:\opensslx86\lib;C:\Utils\my_sql\mysql-5.6.11-win32\lib;C:\Utils\postgresqlx86\pgsql\lib;$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <LinkIncremental>false</LinkIncremental>
+      <OutputFile>$(OutDir)\QtVocalTrainer.exe</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;QT_DEPRECATED_WARNINGS;QT_NO_DEBUG;QT_QUICKWIDGETS_LIB;QT_QUICK_LIB;QT_SVG_LIB;QT_WIDGETS_LIB;QT_MULTIMEDIA_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <QtMoc>
+      <QTDIR>$(QTDIR)</QTDIR>
+      <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
+      <Define>UNICODE;_UNICODE;$(Platform);_ENABLE_EXTENDED_ALIGNED_STORAGE;QT_DEPRECATED_WARNINGS;QT_NO_DEBUG;QT_QUICKWIDGETS_LIB;QT_QUICK_LIB;QT_SVG_LIB;QT_WIDGETS_LIB;QT_MULTIMEDIA_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <CompilerFlavor>msvc</CompilerFlavor>
+      <Include>./$(Configuration)/moc_predefs.h</Include>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <InputFile>%(FullPath)</InputFile>
+      <DynamicSource>output</DynamicSource>
+      <IncludePath>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;$(QTDIR)\mkspecs/$(Platform)-msvc;.;C:/ProgramData/Qt/Projects/VocalTrainerOsX/PitchDetection/CppUtils;C:/ProgramData/Qt/Projects/include;C:/ProgramData/Qt/Projects/VocalTrainerOsX/PitchDetection;C:/ProgramData/Qt/Projects/VocalTrainerOsX/include;C:/ProgramData/Qt/Projects/VocalTrainerOsX/VocalTrainer/Drawers;C:/ProgramData/Qt/Projects/VocalTrainerOsX/VocalTrainer/Manager;C:/ProgramData/Qt/Projects/VocalTrainerOsX/VocalTrainer/Workspace;C:/ProgramData/Qt/Projects/VocalTrainerOsX/VocalTrainer/Playback/AudioPlayback;C:/ProgramData/Qt/Projects/VocalTrainerOsX/VocalTrainer/Playback;C:/ProgramData/Qt/Projects/VocalTrainerOsX/VocalTrainer/Playback/CraigsappMidifile;C:/ProgramData/Qt/Projects/VocalTrainerOsX/VocalTrainer;C:/ProgramData/Qt/Projects/VocalTrainerOsX/include/nanovg;C:/ProgramData/Qt/Projects/VocalTrainerOsX/include/nanovg/glew;$(QTDIR)\include;$(QTDIR)\include/QtQuickWidgets;$(QTDIR)\include/QtQuick;$(QTDIR)\include/QtSvg;$(QTDIR)\include/QtWidgets;$(QTDIR)\include/QtMultimedia;$(QTDIR)\include/QtGui;$(QTDIR)\include/QtANGLE;$(QTDIR)\include/QtQml;$(QTDIR)\include/QtNetwork;$(QTDIR)\include/QtCore;C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.15.26726\include;C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um;C:\Program Files (x86)\Windows Kits\10\include\10.0.17134.0\ucrt;C:\Program Files (x86)\Windows Kits\10\include\10.0.17134.0\shared;C:\Program Files (x86)\Windows Kits\10\include\10.0.17134.0\um;C:\Program Files (x86)\Windows Kits\10\include\10.0.17134.0\winrt;C:\Program Files (x86)\Windows Kits\10\include\10.0.17134.0\cppwinrt</IncludePath>
+    </QtMoc>
+    <QtRcc>
+      <InitFuncName>qml</InitFuncName>
+      <OutputFile>.\GeneratedFiles\qrc_%(Filename).cpp</OutputFile>
+      <QTDIR>$(QTDIR)</QTDIR>
+      <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
+      <Compression>default</Compression>
+      <InputFile>%(FullPath)</InputFile>
+    </QtRcc>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;..\PitchDetection\CppUtils;../../include;..\PitchDetection;..\include;..\VocalTrainer\Drawers;..\VocalTrainer\Manager;..\VocalTrainer\Workspace;..\VocalTrainer\Playback\AudioPlayback;..\VocalTrainer\Playback;..\VocalTrainer\Playback\CraigsappMidifile;..\VocalTrainer;..\include\nanovg;..\include\nanovg\glew;$(QTDIR)\include;$(QTDIR)\include\QtQuickWidgets;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtSvg;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtQml;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtCore;debug;\include;$(QTDIR)\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -Zc:referenceBinding -Zc:__cplusplus -std:c++14 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>debug\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4577;4467;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;QT_DEPRECATED_WARNINGS;QT_QUICKWIDGETS_LIB;QT_QUICK_LIB;QT_SVG_LIB;QT_WIDGETS_LIB;QT_MULTIMEDIA_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>$(QTDIR)\lib\qtmaind.lib;shell32.lib;..\libs\windows\Debug\SoundTouchD.lib;..\libs\windows\Debug\libboost_serialization-vc141-mt-gd-x32-1_67.lib;..\libs\windows\Debug\portaudio.lib;..\libs\windows\Debug\aubio.lib;..\libs\windows\Release\glew32.lib;..\libs\windows\Release\glew32s.lib;User32.lib;Winmm.lib;Opengl32.lib;Mfreadwrite.lib;MFPlat.lib;Ole32.lib;Mf.lib;mfuuid.lib;mfreadwrite.lib;Advapi32.lib;$(QTDIR)\lib\Qt5QuickWidgetsd.lib;$(QTDIR)\lib\Qt5Quickd.lib;$(QTDIR)\lib\Qt5Svgd.lib;$(QTDIR)\lib\Qt5Widgetsd.lib;$(QTDIR)\lib\Qt5Multimediad.lib;$(QTDIR)\lib\Qt5Guid.lib;$(QTDIR)\lib\Qt5Qmld.lib;$(QTDIR)\lib\Qt5Networkd.lib;$(QTDIR)\lib\Qt5Cored.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;C:\opensslx86\lib;C:\Utils\my_sql\mysql-5.6.11-win32\lib;C:\Utils\postgresqlx86\pgsql\lib;$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <OutputFile>$(OutDir)\QtVocalTrainer.exe</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;QT_DEPRECATED_WARNINGS;QT_QUICKWIDGETS_LIB;QT_QUICK_LIB;QT_SVG_LIB;QT_WIDGETS_LIB;QT_MULTIMEDIA_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <QtRcc>
+      <QTDIR>$(QTDIR)</QTDIR>
+      <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
+      <Compression>default</Compression>
+      <InitFuncName>qml</InitFuncName>
+      <OutputFile>.\GeneratedFiles\qrc_%(Filename).cpp</OutputFile>
+      <InputFile>%(FullPath)</InputFile>
+    </QtRcc>
+    <QtMoc>
+      <QTDIR>$(QTDIR)</QTDIR>
+      <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
+      <Define>UNICODE;_UNICODE;$(Platform);_ENABLE_EXTENDED_ALIGNED_STORAGE;QT_DEPRECATED_WARNINGS;QT_QUICKWIDGETS_LIB;QT_QUICK_LIB;QT_SVG_LIB;QT_WIDGETS_LIB;QT_MULTIMEDIA_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <CompilerFlavor>msvc</CompilerFlavor>
+      <Include>./$(Configuration)/moc_predefs.h</Include>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <InputFile>%(FullPath)</InputFile>
+      <DynamicSource>output</DynamicSource>
+      <IncludePath>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;$(QTDIR)\mkspecs/$(Platform)-msvc;.;C:/ProgramData/Qt/Projects/VocalTrainerOsX/PitchDetection/CppUtils;C:/ProgramData/Qt/Projects/include;C:/ProgramData/Qt/Projects/VocalTrainerOsX/PitchDetection;C:/ProgramData/Qt/Projects/VocalTrainerOsX/include;C:/ProgramData/Qt/Projects/VocalTrainerOsX/VocalTrainer/Drawers;C:/ProgramData/Qt/Projects/VocalTrainerOsX/VocalTrainer/Manager;C:/ProgramData/Qt/Projects/VocalTrainerOsX/VocalTrainer/Workspace;C:/ProgramData/Qt/Projects/VocalTrainerOsX/VocalTrainer/Playback/AudioPlayback;C:/ProgramData/Qt/Projects/VocalTrainerOsX/VocalTrainer/Playback;C:/ProgramData/Qt/Projects/VocalTrainerOsX/VocalTrainer/Playback/CraigsappMidifile;C:/ProgramData/Qt/Projects/VocalTrainerOsX/VocalTrainer;C:/ProgramData/Qt/Projects/VocalTrainerOsX/include/nanovg;C:/ProgramData/Qt/Projects/VocalTrainerOsX/include/nanovg/glew;$(QTDIR)\include;$(QTDIR)\include/QtQuickWidgets;$(QTDIR)\include/QtQuick;$(QTDIR)\include/QtSvg;$(QTDIR)\include/QtWidgets;$(QTDIR)\include/QtMultimedia;$(QTDIR)\include/QtGui;$(QTDIR)\include/QtANGLE;$(QTDIR)\include/QtQml;$(QTDIR)\include/QtNetwork;$(QTDIR)\include/QtCore;C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.15.26726\include;C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um;C:\Program Files (x86)\Windows Kits\10\include\10.0.17134.0\ucrt;C:\Program Files (x86)\Windows Kits\10\include\10.0.17134.0\shared;C:\Program Files (x86)\Windows Kits\10\include\10.0.17134.0\um;C:\Program Files (x86)\Windows Kits\10\include\10.0.17134.0\winrt;C:\Program Files (x86)\Windows Kits\10\include\10.0.17134.0\cppwinrt</IncludePath>
+    </QtMoc>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\PitchDetection\AubioPitchDetector.cpp" />
+    <ClCompile Include="..\VocalTrainer\Playback\AudioPlayback\AudioFilePlayer.cpp" />
+    <ClCompile Include="..\PitchDetection\AudioInputReader_win.cpp" />
+    <ClCompile Include="..\VocalTrainer\Playback\AudioPlayback\AudioPlayer.cpp" />
+    <ClCompile Include="..\VocalTrainer\Playback\AudioPlayback\AudioPlayerWithDefaultSeekHandler.cpp" />
+    <ClCompile Include="..\PitchDetection\AudioUtils.cpp" />
+    <ClCompile Include="..\VocalTrainer\Playback\AudioPlayback\BaseWavAudioPlayer.cpp" />
+    <ClCompile Include="..\VocalTrainer\Playback\CraigsappMidifile\Binasc.cpp" />
+    <ClCompile Include="..\VocalTrainer\Drawers\Drawer.cpp" />
+    <ClCompile Include="..\VocalTrainer\Drawers\DrawerColor.cpp" />
+    <ClCompile Include="..\VocalTrainer\Manager\MainController.cpp" />
+    <ClCompile Include="..\VocalTrainer\Playback\AudioPlayback\MetronomeAudioPlayer.cpp" />
+    <ClCompile Include="..\VocalTrainer\Playback\CraigsappMidifile\MidiEvent.cpp" />
+    <ClCompile Include="..\VocalTrainer\Playback\CraigsappMidifile\MidiEventList.cpp" />
+    <ClCompile Include="..\VocalTrainer\Playback\CraigsappMidifile\MidiFile.cpp" />
+    <ClCompile Include="..\VocalTrainer\Playback\Midi\MidiFileReader.cpp" />
+    <ClCompile Include="..\VocalTrainer\Playback\CraigsappMidifile\MidiMessage.cpp" />
+    <ClCompile Include="..\VocalTrainer\Playback\Midi\MidiTrack.cpp" />
+    <ClCompile Include="..\VocalTrainer\Playback\MvxFile.cpp" />
+    <ClCompile Include="..\VocalTrainer\Playback\MvxPlayer.cpp" />
+    <ClCompile Include="..\VocalTrainer\Drawers\NvgDrawer.cpp" />
+    <ClCompile Include="..\VocalTrainer\Playback\CraigsappMidifile\Options.cpp" />
+    <ClCompile Include="..\PitchDetection\CppUtils\PeriodicallySleepingBackgroundTask.cpp" />
+    <ClCompile Include="..\VocalTrainer\Workspace\PianoDrawer.cpp" />
+    <ClCompile Include="..\PitchDetection\Pitch.cpp" />
+    <ClCompile Include="..\PitchDetection\PitchDetectionSmoothingAudioBuffer.cpp" />
+    <ClCompile Include="..\PitchDetection\PitchInputReader.cpp" />
+    <ClCompile Include="..\PitchDetection\PitchInputReaderCollector.cpp" />
+    <ClCompile Include="..\PitchDetection\PitchesCollector.cpp" />
+    <ClCompile Include="..\VocalTrainer\Playback\PlaybackBounds.cpp" />
+    <ClCompile Include="..\PitchDetection\PortAudioUtils.cpp" />
+    <ClCompile Include="..\VocalTrainer\Drawers\QDrawer.cpp" />
+    <ClCompile Include="QmlCppBridge.cpp" />
+    <ClCompile Include="..\PitchDetection\CppUtils\SynchronizedCallbacksQueue.cpp" />
+    <ClCompile Include="..\PitchDetection\CppUtils\System.cpp" />
+    <ClCompile Include="..\PitchDetection\CppUtils\TimeUtils.cpp" />
+    <ClCompile Include="..\VocalTrainer\Playback\VxFile.cpp" />
+    <ClCompile Include="..\VocalTrainer\Playback\VxFileAudioDataGenerator.cpp" />
+    <ClCompile Include="..\VocalTrainer\Playback\AudioPlayback\VxFileAudioPlayer.cpp" />
+    <ClCompile Include="..\VocalTrainer\Manager\VxPitchInputReader.cpp" />
+    <ClCompile Include="..\PitchDetection\WAVFile.cpp" />
+    <ClCompile Include="..\VocalTrainer\Playback\AudioPlayback\WavAudioPlayer.cpp" />
+    <ClCompile Include="..\VocalTrainer\Workspace\WorkspaceDrawer.cpp" />
+    <ClCompile Include="..\VocalTrainer\Manager\ZoomController.cpp" />
+    <ClCompile Include="app.cpp" />
+    <ClCompile Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\audiodecoder.cpp" />
+    <ClCompile Include="executors.cpp" />
+    <ClCompile Include="fonts.cpp" />
+    <ClCompile Include="loadtsf.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="mainwindow.cpp" />
+    <ClCompile Include="..\VocalTrainer\nanovg\nanovg.cpp" />
+    <ClCompile Include="player.cpp" />
+    <ClCompile Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\qaudiodecoderwrapper.cpp" />
+    <ClCompile Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\windows\qaudiodecoderwrapper.cpp" />
+    <ClCompile Include="qmlpitch.cpp" />
+    <ClCompile Include="qmlpitchinputreader.cpp" />
+    <ClCompile Include="qmltimedpitch.cpp" />
+    <ClCompile Include="qmlvxpitch.cpp" />
+    <ClCompile Include="qmlzoomcontroller.cpp" />
+    <ClCompile Include="qopenglworkspacewidget.cpp" />
+    <ClCompile Include="qpainterworkspacewidget.cpp" />
+    <ClCompile Include="QtUtils\qtutils.cpp" />
+    <ClCompile Include="workspacedrawerwidgetsetup.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\PitchDetection\CppUtils\Algorithms.h" />
+    <ClInclude Include="..\PitchDetection\AubioPitchDetector.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\AudioPlayback\AudioFilePlayer.h" />
+    <ClInclude Include="..\PitchDetection\AudioInputReader.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\AudioPlayback\AudioPlayer.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\AudioPlayback\AudioPlayerWithDefaultSeekHandler.h" />
+    <ClInclude Include="..\PitchDetection\AudioUtils.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\AudioPlayback\BaseWavAudioPlayer.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\CraigsappMidifile\Binasc.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\apple\CADebugMacros.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\apple\CAStreamBasicDescription.h" />
+    <ClInclude Include="..\PitchDetection\CppUtils\Circle.h" />
+    <ClInclude Include="..\PitchDetection\CppUtils\CircularBuffer.h" />
+    <ClInclude Include="..\PitchDetection\CppUtils\ConcurrentModificationAssert.h" />
+    <ClInclude Include="..\PitchDetection\CppUtils\CountAssert.h" />
+    <ClInclude Include="..\VocalTrainer\Drawers\Drawer.h" />
+    <ClInclude Include="..\VocalTrainer\Drawers\DrawerColor.h" />
+    <ClInclude Include="..\PitchDetection\CppUtils\Executors.h" />
+    <ClInclude Include="..\PitchDetection\CppUtils\Functions.h" />
+    <ClInclude Include="..\PitchDetection\CppUtils\GeometryUtils.h" />
+    <ClInclude Include="..\PitchDetection\CppUtils\HashUtils.h" />
+    <ClInclude Include="..\PitchDetection\CppUtils\Line.h" />
+    <ClInclude Include="..\PitchDetection\CppUtils\ListenersSet.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\LoadTsf.h" />
+    <ClInclude Include="..\VocalTrainer\Manager\MainController.h" />
+    <ClInclude Include="..\PitchDetection\CppUtils\MathUtils.h" />
+    <ClInclude Include="..\PitchDetection\CppUtils\MemoryUtils.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\AudioPlayback\MetronomeAudioPlayer.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\CraigsappMidifile\MidiEvent.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\CraigsappMidifile\MidiEventList.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\CraigsappMidifile\MidiFile.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\Midi\MidiFileReader.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\CraigsappMidifile\MidiMessage.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\Midi\MidiNote.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\Midi\MidiTrack.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\MvxFile.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\MvxPlayer.h" />
+    <ClInclude Include="..\VocalTrainer\Drawers\NvgDrawer.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\CraigsappMidifile\Options.h" />
+    <ClInclude Include="..\PitchDetection\CppUtils\PeriodicallySleepingBackgroundTask.h" />
+    <ClInclude Include="..\VocalTrainer\Workspace\PianoDrawer.h" />
+    <ClInclude Include="..\PitchDetection\Pitch.h" />
+    <ClInclude Include="..\PitchDetection\PitchDetectionSmoothingAudioBuffer.h" />
+    <ClInclude Include="..\PitchDetection\PitchInputReader.h" />
+    <ClInclude Include="..\PitchDetection\PitchInputReaderCollector.h" />
+    <ClInclude Include="..\PitchDetection\CppUtils\Point.h" />
+    <ClInclude Include="..\PitchDetection\PortAudioUtils.h" />
+    <ClInclude Include="..\PitchDetection\CppUtils\Primitives.h" />
+    <ClInclude Include="..\VocalTrainer\Drawers\QDrawer.h" />
+    <QtMoc Include="QmlCppBridge.h">
+    </QtMoc>
+    <ClInclude Include="..\PitchDetection\CppUtils\Rect.h" />
+    <ClInclude Include="..\PitchDetection\CppUtils\RoundedRect.h" />
+    <ClInclude Include="..\PitchDetection\CppUtils\Sets.h" />
+    <ClInclude Include="..\PitchDetection\CppUtils\StlDebugUtils.h" />
+    <ClInclude Include="..\PitchDetection\CppUtils\Streams.h" />
+    <ClInclude Include="..\PitchDetection\CppUtils\StringUtils.h" />
+    <ClInclude Include="..\PitchDetection\CppUtils\SynchronizedCallbacksQueue.h" />
+    <ClInclude Include="..\PitchDetection\CppUtils\System.h" />
+    <ClInclude Include="..\PitchDetection\CppUtils\TimeUtils.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\VxFile.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\VxFileAudioDataGenerator.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\AudioPlayback\VxFileAudioPlayer.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\VxLyricsInterval.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\VxLyricsLine.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\VxPitch.h" />
+    <ClInclude Include="..\VocalTrainer\Manager\VxPitchInputReader.h" />
+    <ClInclude Include="..\PitchDetection\WAVFile.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\AudioPlayback\WavAudioPlayer.h" />
+    <ClInclude Include="..\VocalTrainer\Workspace\WorkspaceDrawer.h" />
+    <ClInclude Include="..\VocalTrainer\Manager\ZoomController.h" />
+    <QtMoc Include="app.h">
+    </QtMoc>
+    <ClInclude Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\audiodecoder.h" />
+    <ClInclude Include="..\PitchDetection\CppUtils\config.h" />
+    <ClInclude Include="fonts.h" />
+    <QtMoc Include="mainwindow.h">
+    </QtMoc>
+    <ClInclude Include="..\VocalTrainer\nanovg\metal\nanovg_mtl_shaders.metal" />
+    <QtMoc Include="player.h">
+    </QtMoc>
+    <ClInclude Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\qaudiodecoderwrapper.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\windows\qaudiodecoderwrapper.h" />
+    <QtMoc Include="qmlpitch.h">
+    </QtMoc>
+    <QtMoc Include="qmlpitchinputreader.h">
+    </QtMoc>
+    <QtMoc Include="qmltimedpitch.h">
+    </QtMoc>
+    <QtMoc Include="qmlvxpitch.h">
+    </QtMoc>
+    <QtMoc Include="qmlzoomcontroller.h">
+    </QtMoc>
+    <QtMoc Include="qopenglworkspacewidget.h">
+    </QtMoc>
+    <QtMoc Include="qpainterworkspacewidget.h">
+    </QtMoc>
+    <ClInclude Include="QtUtils\qtutils.h" />
+    <ClInclude Include="..\PitchDetection\CppUtils\stlassert.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\tsf.h" />
+    <ClInclude Include="workspacedrawerwidgetsetup.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="debug\moc_predefs.h.cbt">
+      <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\mkspecs\features\data\dummy.cpp;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">cl -Bx"$(QTDIR)\bin\qmake.exe" -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -Zc:referenceBinding -Zc:__cplusplus -Zi -MDd -std:c++14 -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E $(QTDIR)\mkspecs\features\data\dummy.cpp 2&gt;NUL &gt;debug\moc_predefs.h</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Generate moc_predefs.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">debug\moc_predefs.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="release\moc_predefs.h.cbt">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\mkspecs\features\data\dummy.cpp;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">cl -Bx"$(QTDIR)\bin\qmake.exe" -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -Zc:referenceBinding -Zc:__cplusplus -O2 -MD -std:c++14 -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E $(QTDIR)\mkspecs\features\data\dummy.cpp 2&gt;NUL &gt;release\moc_predefs.h</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Generate moc_predefs.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">release\moc_predefs.h;%(Outputs)</Outputs>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="qml\images\text\11_0.png" />
+    <None Include="qml\images\text\11_1.png" />
+    <None Include="qml\images\text\11_2.png" />
+    <None Include="qml\images\text\11_3.png" />
+    <None Include="qml\images\text\11_4.png" />
+    <None Include="qml\images\text\11_5.png" />
+    <None Include="qml\images\text\11_6.png" />
+    <None Include="qml\images\text\11_7.png" />
+    <None Include="qml\images\text\11_8.png" />
+    <None Include="qml\images\text\11_9.png" />
+    <None Include="qml\images\text\16_0.png" />
+    <None Include="qml\images\text\16_1.png" />
+    <None Include="qml\images\text\16_2.png" />
+    <None Include="qml\images\text\16_3.png" />
+    <None Include="qml\images\text\16_4.png" />
+    <None Include="qml\images\text\16_5.png" />
+    <None Include="qml\images\text\16_6.png" />
+    <None Include="qml\images\text\16_7.png" />
+    <None Include="qml\images\text\16_8.png" />
+    <None Include="qml\images\text\16_9.png" />
+    <None Include="qml\images\text\16_A.png" />
+    <None Include="qml\images\text\16_B.png" />
+    <None Include="qml\images\text\16_C.png" />
+    <None Include="qml\images\text\16_D.png" />
+    <None Include="qml\images\text\16_E.png" />
+    <None Include="qml\images\text\16_F.png" />
+    <None Include="qml\images\text\16_G.png" />
+    <None Include="qml\images\text\22_0.png" />
+    <None Include="qml\images\text\22_1.png" />
+    <None Include="qml\images\text\22_2.png" />
+    <None Include="qml\images\text\22_3.png" />
+    <None Include="qml\images\text\22_4.png" />
+    <None Include="qml\images\text\22_5.png" />
+    <None Include="qml\images\text\22_6.png" />
+    <None Include="qml\images\text\22_7.png" />
+    <None Include="qml\images\text\22_8.png" />
+    <None Include="qml\images\text\22_9.png" />
+    <None Include="qml\images\text\8_0.png" />
+    <None Include="qml\images\text\8_1.png" />
+    <None Include="qml\images\text\8_2.png" />
+    <None Include="qml\images\text\8_3.png" />
+    <None Include="qml\images\text\8_4.png" />
+    <None Include="qml\images\text\8_5.png" />
+    <None Include="qml\images\text\8_6.png" />
+    <None Include="qml\images\text\8_7.png" />
+    <None Include="qml\images\text\8_8.png" />
+    <None Include="qml\images\text\8_9.png" />
+    <None Include="qml\images\text\8_A.png" />
+    <None Include="qml\images\text\8_B.png" />
+    <None Include="qml\images\text\8_C.png" />
+    <None Include="qml\images\text\8_D.png" />
+    <None Include="qml\images\text\8_E.png" />
+    <None Include="qml\images\text\8_F.png" />
+    <None Include="qml\images\text\8_G.png" />
+    <None Include="qml\AppWindow.qml" />
+    <None Include="qml\ButtonShadow.qml" />
+    <None Include="qml\Circle.qml" />
+    <None Include="qml\FeaturesToggleButton.qml" />
+    <None Include="qml\Header.qml" />
+    <None Include="qml\HeaderWithSubHeader.qml" />
+    <None Include="qml\HorizontalLine.qml" />
+    <None Include="qml\HorizontalScrollBar.qml" />
+    <None Include="qml\ImageButton.qml" />
+    <None Include="qml\fonts\Lato-Bold.ttf" />
+    <None Include="qml\fonts\Lato-Regular.ttf" />
+    <None Include="qml\LeftSideBar.qml" />
+    <None Include="qml\Main.qml" />
+    <None Include="qml\Piano.qml" />
+    <None Include="qml\PlayHeadTime.qml" />
+    <None Include="qml\PlayerController.qml" />
+    <None Include="qml\SingingProcessManager.qml" />
+    <None Include="qml\SvgImage.qml" />
+    <None Include="qml\Tempo.qml" />
+    <None Include="qml\ToggleButton.qml" />
+    <None Include="qml\TonalityController.qml" />
+    <None Include="qml\Track.qml" />
+    <None Include="qml\TrackButton.qml" />
+    <None Include="qml\TrackVolumeSlider.qml" />
+    <None Include="qml\TracksContainer.qml" />
+    <None Include="qml\VerticalLine.qml" />
+    <None Include="qml\VerticalScrollBar.qml" />
+    <None Include="qml\VerticalScrollBarContainer.qml" />
+    <None Include="qml\WorkspaceOld.qml" />
+    <None Include="qml\Yardstick.qml" />
+    <None Include="qml\Zoom.qml" />
+    <None Include="qml\ZoomSlider.qml" />
+    <None Include="qml\fonts\arial.ttf" />
+    <None Include="qml\js\canvasutils.js" />
+    <None Include="qml\images\go_back.svg" />
+    <None Include="qml\images\go_back_hover.svg" />
+    <None Include="qml\images\go_forward.svg" />
+    <None Include="qml\images\go_forward_hover.svg" />
+    <None Include="qml\images\instrumental_track_button.svg" />
+    <None Include="qml\images\loop_off.svg" />
+    <None Include="qml\images\loop_on.svg" />
+    <None Include="qml\images\lyrics_show_button_off.png" />
+    <None Include="qml\images\lyrics_show_button_off.svg" />
+    <None Include="qml\images\lyrics_show_button_on.svg" />
+    <None Include="qml\js\mathutils.js" />
+    <None Include="qml\sounds\metronome.wav" />
+    <None Include="qml\images\metronome_off.png" />
+    <None Include="qml\images\metronome_off.svg" />
+    <None Include="qml\images\metronome_on.svg" />
+    <None Include="qml\images\play_head_triangle.svg" />
+    <None Include="qml\images\play_off.svg" />
+    <None Include="qml\images\play_on.svg" />
+    <None Include="qml\images\player_background.png" />
+    <None Include="qml\images\player_background.svg" />
+    <None Include="qml\images\playhead.png" />
+    <QtRcc Include="qml.qrc">
+    </QtRcc>
+    <None Include="qml\sounds\sounds.sf2" />
+    <None Include="qml\images\speaker.svg" />
+    <None Include="qml\js\strings.js" />
+    <None Include="qml\images\tempo_background.svg" />
+    <None Include="qml\images\to_the_begining.svg" />
+    <None Include="qml\images\to_the_begining_hover.svg" />
+    <None Include="qml\images\tonality_controller_left.svg" />
+    <None Include="qml\images\tonality_down.svg" />
+    <None Include="qml\images\tonality_down_pressed.svg" />
+    <None Include="qml\images\tonality_up.svg" />
+    <None Include="qml\images\tonality_up_pressed.svg" />
+    <None Include="qml\images\track_piece.png" />
+    <None Include="qml\images\track_piece_small.png" />
+    <None Include="qml\images\tracks_show_button_off.png" />
+    <None Include="qml\images\tracks_show_button_off.svg" />
+    <None Include="qml\images\tracks_show_button_on.svg" />
+    <None Include="qml\js\uiutils.js" />
+    <None Include="qml\js\zoom.js" />
+    <None Include="qml\images\zoom_slider_triangle.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\VocalTrainer\Playback\CraigsappMidifile\LICENSE.txt" />
+    <None Include="..\VocalTrainer\Playback\a.sf2" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
+    <Import Project="$(QtMsBuild)\qt.targets" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" Qt5Version_x0020_Win32="5.11.2" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
