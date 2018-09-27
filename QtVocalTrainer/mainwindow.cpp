@@ -22,6 +22,8 @@ constexpr int PIANO_WIDTH = WorkspaceDrawer::PIANO_WIDTH;
 constexpr int PLAY_HEAD_SIZE = 11;
 constexpr int VERTICAL_SCROLL_WIDTH = 11;
 constexpr int BEATS_IN_TACT = 4;
+constexpr int MINIMUM_WINDOW_WIDTH = 700;
+constexpr double MINIMUM_WINDOW_HEIGHT_RATIO = 0.6;
 
 using namespace CppUtils;
 using std::cout;
@@ -36,10 +38,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Window size
     QSize availableSize = QGuiApplication::primaryScreen()->availableSize();
-    if (availableSize.width() < 700)
-        setMinimumSize(700, static_cast<int>(availableSize.height() * 0.6));
+    if (availableSize.width() < MINIMUM_WINDOW_WIDTH)
+        setMinimumSize(MINIMUM_WINDOW_WIDTH, static_cast<int>(availableSize.height() * MINIMUM_WINDOW_HEIGHT_RATIO));
     else
-        setMinimumSize(availableSize.height(), static_cast<int>(availableSize.height() * 0.6));
+        setMinimumSize(availableSize.height(), static_cast<int>(availableSize.height() * MINIMUM_WINDOW_HEIGHT_RATIO));
 
     // Workspace
     workspaceView = new QOpenGLWorkspaceWidget(this);
