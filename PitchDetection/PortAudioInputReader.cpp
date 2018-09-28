@@ -2,6 +2,7 @@
 #include <portaudio/portaudio.h>
 #include "PortAudioUtils.h"
 #include <portmixer.h>
+#include "Functions.h"
 
 #define SAMPLE_RATE 44100
 
@@ -13,26 +14,22 @@ class PortAudioInputReader : public AudioInputReader {
             PaStreamCallbackFlags statusFlags,
             void *userData ) {
         PortAudioInputReader* self = (PortAudioInputReader*)userData;
-        if (self->callback) {
-            self->callback((int16_t*)inputBuffer, framesPerBuffer);
-        }
+
+        CppUtils::Functions::ExecuteAll(self->callbacks, (int16_t*)inputBuffer, (int)framesPerBuffer);
+
+        std::memcpy(outputBuffer, inputBuffer, framesPerBuffer * sizeof(int16_t));
 
         return paContinue;
     }
 
     int maximumBufferSize;
     PaStream *stream;
-    Callback callback;
     PxMixer *mixer;
 public:
     PortAudioInputReader(int maximumBufferSize) : maximumBufferSize(maximumBufferSize) {
-        for (int i = 0; i < Pa_GetDeviceCount(); ++i) {
-            const PaDeviceInfo* pInfo = Pa_GetDeviceInfo(i);
-        }
-        
         PaError err = Pa_OpenDefaultStream(&stream,
                 1,          /* 1 input channel */
-                0,          /* no output */
+                1,          /* no output */
                 paInt16,
                 SAMPLE_RATE,
                 maximumBufferSize,  
@@ -47,10 +44,6 @@ public:
     ~PortAudioInputReader() {
         PaError err = Pa_CloseStream(stream);
         PortAudio::checkErrors(err);
-    }
-
-    void setCallback(Callback callback) override {
-        this->callback = callback;
     }
 
     void start() override {

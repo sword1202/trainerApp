@@ -7,16 +7,11 @@
 #define VOCALTRAINER_VOCALTRAINERPITCHINPUTREADER_H
 
 #include "PitchInputReaderCollector.h"
-#include "FunctionsList.h"
 #include "RealtimeStreamingAudioPlayer.h"
 
 class PitchInputReaderAndPlayer : public PitchInputReaderCollector {
     AudioInputReader* audioInputReader;
     RealtimeStreamingAudioPlayer* audioInputPlayer;
-    CppUtils::FunctionsList<const int16_t*, int> audioInputCallbacks;
-protected:
-    void setAudioInputReaderCallback(AudioInputReader *audioInputReader,
-            const AudioInputReader::Callback &callback) override;
 public:
     PitchInputReaderAndPlayer();
 
@@ -24,6 +19,9 @@ public:
     float getInputVolume() const;
     void setOutputVolume(float value);
     float getOutputVolume() const;
+
+    void start() override;
+    void stop() override;
 
     ~PitchInputReaderAndPlayer();
     void pitchDetected(float frequency, double time) override;

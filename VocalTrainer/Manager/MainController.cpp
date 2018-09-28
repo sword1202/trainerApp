@@ -63,8 +63,8 @@ void MainController::init(PitchInputReaderAndPlayer *pitchInputReader, MvxPlayer
         return DONT_DELETE_LISTENER;
     });
 
-    mvxPlayer->setInstrumentalVolume(1.0);
-    mvxPlayer->setPianoVolume(0.5);
+    mvxPlayer->setInstrumentalVolume(0.0);
+    mvxPlayer->setPianoVolume(0.0);
 
     zoomController->zoomChangedListeners.addListener([this] (float zoom) {
         updateZoom();
@@ -109,7 +109,7 @@ void MainController::setWorkspaceController(WorkspaceController *workspaceContro
     workspaceController->setPitchSequence(mvxPlayer);
     workspaceController->setSummarizedGridHeight(zoomController->getSummarizedWorkspaceGridHeight());
     workspaceController->setVerticalScrollPosition(zoomController->getVerticalScrollPosition());
-    
+
     mvxPlayer->seekChangedFromUserListeners.addListener([=] (double seek) {
         updateSeek(seek);
         return DONT_DELETE_LISTENER;

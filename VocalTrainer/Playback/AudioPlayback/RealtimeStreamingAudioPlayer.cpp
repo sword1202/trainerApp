@@ -32,7 +32,6 @@ void RealtimeStreamingAudioPlayer::prepareAndProvidePlaybackData(AudioPlayer::Pl
 }
 
 int RealtimeStreamingAudioPlayer::getBufferSeek() const {
-    NOT_IMPLEMENTED_ASSERT
     return 0;
 }
 

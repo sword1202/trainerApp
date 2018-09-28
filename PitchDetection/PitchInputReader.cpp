@@ -6,11 +6,13 @@
 #include <iostream>
 #include "PitchInputReader.h"
 
+using namespace CppUtils;
+
 PitchInputReader::PitchInputReader(AudioInputReader *audioInputReader, PitchDetector* pitchDetector, int smoothLevel) :
         audioInputReader(audioInputReader), pitchDetector(pitchDetector),
         smoothingAudioBuffer((size_t) smoothLevel, (size_t) audioInputReader->getMaximumBufferSize()) {
     pitchDetector->init(audioInputReader->getMaximumBufferSize() * smoothLevel, audioInputReader->getSampleRate());
-    audioInputReader->setCallback([=] (const int16_t* buffer, int size) {
+    audioInputReader->callbacks.push_back([=] (const int16_t* buffer, int size) {
         buffer = smoothingAudioBuffer.getRunPitchDetectionBufferIfReady(buffer, (size_t) size);
         if (!buffer) {
             return;

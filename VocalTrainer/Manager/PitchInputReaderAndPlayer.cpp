@@ -11,12 +11,13 @@ static constexpr float THRESHOLD = 0.1;
 static const int BUFFER_SIZE = 1024;
 static const int SMOOTH_LEVEL = 4;
 
+using namespace CppUtils;
+
 PitchInputReaderAndPlayer::PitchInputReaderAndPlayer() {
     AubioPitchDetector* pitchDetector = new AubioPitchDetector();
     pitchDetector->setThreshold(THRESHOLD);
 
     audioInputReader = CreateDefaultAudioInputReader(BUFFER_SIZE);
-    audioInputReader->setCallback(audioInputCallbacks);
 
     AudioPlayer::PlaybackData playbackData;
     playbackData.framesPerBuffer = BUFFER_SIZE;
@@ -25,8 +26,8 @@ PitchInputReaderAndPlayer::PitchInputReaderAndPlayer() {
     playbackData.sampleRate = audioInputReader->getSampleRate();
     audioInputPlayer = new RealtimeStreamingAudioPlayer(playbackData);
     audioInputPlayer->prepare();
-    audioInputCallbacks.push_back([=] (const int16_t* buffer, int size) {
-        audioInputPlayer->pushAudioData(buffer, size * sizeof(int16_t));
+    audioInputReader->callbacks.push_back([=] (const int16_t* buffer, int size) {
+        //audioInputPlayer->pushAudioData(buffer, size * sizeof(int16_t));
     });
 
     init(audioInputReader, SMOOTH_LEVEL, pitchDetector, true);
@@ -36,12 +37,6 @@ void PitchInputReaderAndPlayer::pitchDetected(float frequency, double time) {
     CppUtils::Executors::ExecuteOnMainThread([=] {
         PitchInputReaderCollector::pitchDetected(frequency, time);
     });
-}
-
-void PitchInputReaderAndPlayer::setAudioInputReaderCallback(
-        AudioInputReader *audioInputReader,
-        const AudioInputReader::Callback &callback) {
-    audioInputCallbacks.push_back(callback);
 }
 
 PitchInputReaderAndPlayer::~PitchInputReaderAndPlayer() {
@@ -62,4 +57,14 @@ void PitchInputReaderAndPlayer::setOutputVolume(float value) {
 
 float PitchInputReaderAndPlayer::getOutputVolume() const {
     return audioInputPlayer->getVolume();
+}
+
+void PitchInputReaderAndPlayer::start() {
+    PitchInputReaderCollector::start();
+    //audioInputPlayer->play();
+}
+
+void PitchInputReaderAndPlayer::stop() {
+    PitchInputReaderCollector::stop();
+    //audioInputPlayer->pause();
 }

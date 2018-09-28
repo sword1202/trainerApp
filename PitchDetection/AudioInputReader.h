@@ -8,13 +8,16 @@
 
 #include <cstdint>
 #include <functional>
+#include "FunctionsList.h"
 
 static const int kNumberBuffers = 3;
 
 class AudioInputReader {
 public:
     typedef std::function<void(const int16_t*, int)> Callback;
-    virtual void setCallback(Callback callback) = 0;
+
+    CppUtils::FunctionsList<const int16_t*, int> callbacks;
+
     virtual void start() = 0;
     virtual void stop() = 0;
     virtual int getSampleRate() const = 0;

@@ -10,11 +10,11 @@ QmlPitchInputReader::QmlPitchInputReader(QObject *parent) : QObject(parent) {
 }
 
 void QmlPitchInputReader::start() {
-    PitchInputReaderCollector::start();
+    PitchInputReaderAndPlayer::start();
 }
 
 void QmlPitchInputReader::stop() {
-    PitchInputReaderCollector::stop();
+    PitchInputReaderAndPlayer::stop();
 }
 
 QmlTimedPitch QmlPitchInputReader::pitchAt(int index) {
@@ -22,7 +22,7 @@ QmlTimedPitch QmlPitchInputReader::pitchAt(int index) {
 }
 
 void QmlPitchInputReader::setThreshold(float threshold) {
-    PitchInputReaderCollector::setThreshold(threshold);
+    PitchInputReaderAndPlayer::setThreshold(threshold);
     emit thresholdChanged(threshold);
 }
 
