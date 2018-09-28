@@ -12,7 +12,7 @@
 #include "atomic"
 
 class AudioPlayer {
-protected:
+public:
     struct PlaybackData {
         int sampleRate = -1;
         int framesPerBuffer = -1;
@@ -43,6 +43,8 @@ private:
 protected:
     virtual int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData& playbackData) = 0;
 	virtual void prepareAndProvidePlaybackData(PlaybackData* playbackData) = 0;
+	// Call this method if you have a predefined PlaybackData, which should not be retrieved during prepare
+    void setPlaybackData(const PlaybackData &playbackData);
 	virtual int getBufferSeek() const = 0;
 	virtual void setBufferSeek(int bufferSeek);
 	virtual double bufferSeekToSecondsSeek(int bufferSeek) const;

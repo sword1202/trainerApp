@@ -332,3 +332,7 @@ void AudioPlayer::setLooping(bool looping) {
 void AudioPlayer::setTotalDurationInSeconds(double totalDurationInSeconds) {
     playbackData.totalDurationInSeconds = totalDurationInSeconds;
 }
+
+void AudioPlayer::setPlaybackData(const AudioPlayer::PlaybackData &playbackData) {
+    this->playbackData = playbackData;
+}

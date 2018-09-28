@@ -3,11 +3,11 @@
 
 #include <QObject>
 #include "../PitchDetection/PitchInputReaderCollector.h"
-#include "VxPitchInputReader.h"
+#include "PitchInputReaderAndPlayer.h"
 #include "qmltimedpitch.h"
 #include <deque>
 
-class QmlPitchInputReader : public QObject, public VxPitchInputReader
+class QmlPitchInputReader : public QObject, public PitchInputReaderAndPlayer
 {
     Q_OBJECT
 public:

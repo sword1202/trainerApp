@@ -1,6 +1,7 @@
 #include "AudioInputReader.h"
 #include <portaudio/portaudio.h>
-#include "PortAudio.h"
+#include "PortAudioUtils.h"
+#include <portmixer.h>
 
 #define SAMPLE_RATE 44100
 
@@ -22,17 +23,25 @@ class PortAudioInputReader : public AudioInputReader {
     int maximumBufferSize;
     PaStream *stream;
     Callback callback;
+    PxMixer *mixer;
 public:
     PortAudioInputReader(int maximumBufferSize) : maximumBufferSize(maximumBufferSize) {
+        for (int i = 0; i < Pa_GetDeviceCount(); ++i) {
+            const PaDeviceInfo* pInfo = Pa_GetDeviceInfo(i);
+        }
+        
         PaError err = Pa_OpenDefaultStream(&stream,
                 1,          /* 1 input channel */
                 0,          /* no output */
                 paInt16,
                 SAMPLE_RATE,
-                maximumBufferSize,
+                maximumBufferSize,  
                 portAudioCallback,
                 this );
         PortAudio::checkErrors(err);
+
+        mixer = Px_OpenMixer(stream, 0);
+        assert(mixer);
     }
     
     ~PortAudioInputReader() {
@@ -59,12 +68,16 @@ public:
     int getMaximumBufferSize() const override {
         return maximumBufferSize;
     }
+
+    void setInputVolume(float value) override {
+        Px_SetInputVolume(mixer, value);
+    }
+
+    float getInputVolume() const override {
+        return Px_GetInputVolume(mixer);
+    }
 };
 
 AudioInputReader* CreateDefaultAudioInputReader(int maximumBufferSize) {
     return new PortAudioInputReader(maximumBufferSize);
-}
-
-AudioInputReader::~AudioInputReader() {
-
 }

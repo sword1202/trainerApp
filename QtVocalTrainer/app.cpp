@@ -16,8 +16,9 @@ public:
     }
 };
 
-VxApp::VxApp(int &argc, char *argv[]) : QApplication(argc, argv), MainController(new QmlPitchInputReader(), new Player(), new QmlZoomController()) {
+VxApp::VxApp(int &argc, char *argv[]) : QApplication(argc, argv) {
     PortAudio::init();
+    MainController::init(new QmlPitchInputReader(), new Player(), new QmlZoomController());
 #ifdef __APPLE__
     doMacOsPlatformStaff();
 #endif

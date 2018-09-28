@@ -211,15 +211,15 @@
 					);
 			};
 		};
-		7AA5B546323C994D8061A63F = {
+		42F5D95319E946AA4552EB19 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/AudioInputReader_mac.cpp";
-			name = "AudioInputReader_mac.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/PortAudioInputReader.cpp";
+			name = "PortAudioInputReader.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		D38A930CD54A903C2CAB0314 = {
-			fileRef = "7AA5B546323C994D8061A63F";
+		EB92C9E299C61E72C0FFF4E4 = {
+			fileRef = "42F5D95319E946AA4552EB19";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
@@ -616,15 +616,15 @@
 					);
 			};
 		};
-		B73294AB1C891B9B5C32CC4C = {
+		D038C11B3EBC600F9601107B = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager/VxPitchInputReader.cpp";
-			name = "VxPitchInputReader.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager/PitchInputReaderAndPlayer.cpp";
+			name = "PitchInputReaderAndPlayer.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		E14C5436684B95B9CCB8C65B = {
-			fileRef = "B73294AB1C891B9B5C32CC4C";
+		C118592C657B522710F5067E = {
+			fileRef = "D038C11B3EBC600F9601107B";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
@@ -955,6 +955,51 @@
 		};
 		D3E033FC517067067FBE5BCE = {
 			fileRef = "A3C9DF6235CDD06F4795DADA";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		3473D2CF73E14B1AA98A58AA = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/Portmixer/px_mac_coreaudio.c";
+			name = "px_mac_coreaudio.c";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.c";
+		};
+		70D8B219005C3E416CE43C11 = {
+			fileRef = "3473D2CF73E14B1AA98A58AA";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		98B1FFB557615E334CE79ADB = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/Portmixer/px_mixer.c";
+			name = "px_mixer.c";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.c";
+		};
+		ACB28F5F3A5ED1E0661AD203 = {
+			fileRef = "98B1FFB557615E334CE79ADB";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		967FD03B37F0BB9EDC90A69E = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback/RealtimeStreamingAudioPlayer.cpp";
+			name = "RealtimeStreamingAudioPlayer.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		59260172123C10B5280BCAA2 = {
+			fileRef = "967FD03B37F0BB9EDC90A69E";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
@@ -1663,10 +1708,10 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		8E5BB2E92A648CC2706A3F15 = {
+		709AFE886252A81DC2FCD79D = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager/VxPitchInputReader.h";
-			name = "VxPitchInputReader.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager/PitchInputReaderAndPlayer.h";
+			name = "PitchInputReaderAndPlayer.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
@@ -1823,6 +1868,13 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
+		588DFAD63929DC9BC812006E = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback/RealtimeStreamingAudioPlayer.h";
+			name = "RealtimeStreamingAudioPlayer.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
 		E89EF8F42D53D26AE81EB3A0 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback/Decoder/audiodecodercoreaudio_mac.h";
@@ -1934,7 +1986,7 @@
 				"7F35D2F85587C5EB5AD8253E",
 				"CB345E90E6084238A84B6F3F",
 				"399187F597E61AC14ACBD528",
-				"7AA5B546323C994D8061A63F",
+				"42F5D95319E946AA4552EB19",
 				"3EE34C6C6255F234C94584F4",
 				"A3113B7523B0D9D3CF3161D7",
 				"AD6E0E76E19B42229889D1E2",
@@ -1961,7 +2013,7 @@
 				"3DA91AE5EF3B07885DB5BD00",
 				"2155F1DA05346BF2187EACC8",
 				"9D79C641677ED8C4B9D321A6",
-				"B73294AB1C891B9B5C32CC4C",
+				"D038C11B3EBC600F9601107B",
 				"8B1185F540CBCBDC52AE6A9F",
 				"6AAB6F7EBB3DBDC544CF59A5",
 				"17B9E14F4608B814E602C9AD",
@@ -1984,6 +2036,9 @@
 				"691B71E006AA926BDB1BF13B",
 				"CE6E0B52805DD157A3C090BD",
 				"A3C9DF6235CDD06F4795DADA",
+				"3473D2CF73E14B1AA98A58AA",
+				"98B1FFB557615E334CE79ADB",
+				"967FD03B37F0BB9EDC90A69E",
 				"BC415B473FEB85492D4E8674",
 				"DF4BED6495ED318D0BFE2018",
 				"A7C917B154112562C9709C79",
@@ -2054,7 +2109,7 @@
 				"AB6A6766DCCDF7A3E84977FD",
 				"D49181650FDF5C643015F9A1",
 				"6A25F9096E486445CD85C0C9",
-				"8E5BB2E92A648CC2706A3F15",
+				"709AFE886252A81DC2FCD79D",
 				"36FB9BA52D23A8CA74499832",
 				"7AF78472B730597C0478BF4E",
 				"20AC95C55D46F47619EBFA27",
@@ -2076,6 +2131,7 @@
 				"C2A1ABDFCE16C74629AD3E53",
 				"C2B8E3B1577B7C75D4FA1761",
 				"5C908278C1166B83702DD02E",
+				"588DFAD63929DC9BC812006E",
 				"E89EF8F42D53D26AE81EB3A0");
 			name = "Sources";
 			sourceTree = "<group>";
@@ -2124,7 +2180,7 @@
 				"03FDB4560CC6439530AB776D",
 				"75A2415D73BB1998F92CD2FF",
 				"2567C356DD5EF488617E5BBF",
-				"D38A930CD54A903C2CAB0314",
+				"EB92C9E299C61E72C0FFF4E4",
 				"6A0BEF1A99FE649866352C7C",
 				"9453F35B6EB65B36D2199931",
 				"297624C7BCD6FA4C9B1993EF",
@@ -2151,7 +2207,7 @@
 				"A52EEB92FE7FC165E27133F1",
 				"592D5E81E7518B72FC97D877",
 				"060901A7C35F0EEB8023B51C",
-				"E14C5436684B95B9CCB8C65B",
+				"C118592C657B522710F5067E",
 				"9BB166EC807E398A4171A798",
 				"4D1A33080FE9B21CEB159160",
 				"5BE3B32AE495487CF0F6F07C",
@@ -2174,6 +2230,9 @@
 				"8C4B037729AE3718B10EF76C",
 				"9FDD3756D2D05F47B053EF19",
 				"D3E033FC517067067FBE5BCE",
+				"70D8B219005C3E416CE43C11",
+				"ACB28F5F3A5ED1E0661AD203",
+				"59260172123C10B5280BCAA2",
 				"F512D0DE937285A2596D4954",
 				"3A9D3D3CE7067FBCEA4D8FFF",
 				"35A610BD95B9AF48696237CA",
@@ -2810,8 +2869,8 @@
 					"../../../Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers",
 					".",
-					"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/OpenGL.framework/Headers",
-					"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/AGL.framework/Headers",
+					"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/OpenGL.framework/Headers",
+					"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/AGL.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/mkspecs/macx-clang");
 				LIBRARY_SEARCH_PATHS = (
 					"/System/Library/Frameworks/",
@@ -2932,8 +2991,8 @@
 					"../../../Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers",
 					".",
-					"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/OpenGL.framework/Headers",
-					"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/AGL.framework/Headers",
+					"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/OpenGL.framework/Headers",
+					"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/AGL.framework/Headers",
 					"../../../Qt/5.11.0/clang_64/mkspecs/macx-clang");
 				LIBRARY_SEARCH_PATHS = (
 					"/System/Library/Frameworks/",

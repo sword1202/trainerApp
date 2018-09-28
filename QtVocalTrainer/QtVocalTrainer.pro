@@ -38,10 +38,10 @@ HEADERS += \
     ../VocalTrainer/Playback/AudioPlayback/Decoder/audiodecoder.h \
     ../VocalTrainer/Playback/AudioPlayback/Decoder/apple/CADebugMacros.h \
     ../VocalTrainer/Playback/AudioPlayback/Decoder/apple/CAStreamBasicDescription.h \
-    ../VocalTrainer/Manager/VxPitchInputReader.h \
+    ../VocalTrainer/Manager/PitchInputReaderAndPlayer.h \
     ../VocalTrainer/nanovg/metal/nanovg_mtl_shaders.metal \
     ../VocalTrainer/Manager/MainController.h \
-    ../VocalTrainer/Manager/VxPitchInputReader.h \
+    ../VocalTrainer/Manager/PitchInputReaderAndPlayer.h \
     ../VocalTrainer/Manager/ZoomController.h \
     ../VocalTrainer/Drawers/QDrawer.h \
     ../VocalTrainer/Drawers/DrawerColor.h \
@@ -61,7 +61,8 @@ HEADERS += \
     workspacedrawerwidgetsetup.h \
     fonts.h \
     qpainterworkspacewidget.h \
-    ../VocalTrainer/Playback/AudioPlayback/Decoder/windows/qaudiodecoderwrapper.h
+    ../VocalTrainer/Playback/AudioPlayback/Decoder/windows/qaudiodecoderwrapper.h \
+    ../VocalTrainer/Playback/AudioPlayback/RealtimeStreamingAudioPlayer.h
 
 SOURCES += \
     main.cpp \
@@ -90,7 +91,7 @@ SOURCES += \
     ../VocalTrainer/Drawers/NvgDrawer.cpp \
     ../VocalTrainer/Drawers/Drawer.cpp \
     ../VocalTrainer/Playback/AudioPlayback/Decoder/audiodecoder.cpp \
-    ../VocalTrainer/Manager/VxPitchInputReader.cpp \
+    ../VocalTrainer/Manager/PitchInputReaderAndPlayer.cpp \
     ../VocalTrainer/Manager/MainController.cpp \
     ../VocalTrainer/Manager/ZoomController.cpp \
     ../VocalTrainer/Drawers/QDrawer.cpp \
@@ -112,7 +113,10 @@ SOURCES += \
     qopenglworkspacewidget.cpp \
     fonts.cpp \
     qpainterworkspacewidget.cpp \
-    ../VocalTrainer/Playback/AudioPlayback/Decoder/windows/qaudiodecoderwrapper.cpp
+    ../VocalTrainer/Playback/AudioPlayback/Decoder/windows/qaudiodecoderwrapper.cpp \
+    ../Portmixer/px_mac_coreaudio.c \
+    ../Portmixer/px_mixer.c \
+    ../VocalTrainer/Playback/AudioPlayback/RealtimeStreamingAudioPlayer.cpp
 
 RESOURCES += qml.qrc
 

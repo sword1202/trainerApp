@@ -8,14 +8,14 @@
 
 
 #include "PitchInputReaderCollector.h"
-#include "VxPitchInputReader.h"
+#include "PitchInputReaderAndPlayer.h"
 #include "MvxPlayer.h"
 #include "WorkspaceController.h"
 #include "ZoomController.h"
 #include "PlaybackBounds.h"
 
 class MainController {
-    VxPitchInputReader* pitchInputReader;
+    PitchInputReaderAndPlayer* pitchInputReader;
     MvxPlayer* mvxPlayer;
     ZoomController* zoomController;
     WorkspaceController* workspaceController = nullptr;
@@ -28,9 +28,9 @@ class MainController {
 public:
     typedef typename CppUtils::ListenersSet<float>::Listener WorkspaceHorizontalOffsetChangedListener;
 
-    MainController(VxPitchInputReader *pitchInputReader, MvxPlayer *mvxPlayer, ZoomController *zoomController);
+    void init(PitchInputReaderAndPlayer *pitchInputReader, MvxPlayer *mvxPlayer, ZoomController *zoomController);
 
-    VxPitchInputReader *getPitchInputReader() const;
+    PitchInputReaderAndPlayer *getPitchInputReader() const;
 
     MvxPlayer *getPlayer() const;
     ZoomController *getZoomController() const;

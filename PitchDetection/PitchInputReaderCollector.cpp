@@ -120,3 +120,8 @@ int PitchInputReaderCollector::addPitchDetectedListener(const PitchInputReaderCo
 void PitchInputReaderCollector::removePitchDetectedListener(int key) {
     pitchDetectedListeners.removeListener(key);
 }
+
+void PitchInputReaderCollector::setAudioInputReaderCallback(AudioInputReader *audioInputReader,
+        const AudioInputReader::Callback &callback) {
+    audioInputReader->setCallback(callback);
+}

@@ -5,7 +5,6 @@
 
 #include "AudioFilePlayer.h"
 #include "AudioUtils.h"
-#include <QDebug>
 
 int AudioFilePlayer::readNextSamplesBatch(void *intoBuffer, int framesCount, const AudioPlayer::PlaybackData &playbackData) {
     int bufferSeekBefore = getBufferSeek();

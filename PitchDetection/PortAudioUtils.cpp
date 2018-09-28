@@ -1,4 +1,4 @@
-﻿//
+//
 // Created by Semyon Tikhonenko on 4/26/18.
 // Copyright (c) 2018 Mac. All rights reserved.
 //
@@ -21,5 +21,5 @@ void PortAudio::checkErrors(PaError err) {
     if (err != paNoError) {
         auto error = std::string("PortAudio error: ") + Pa_GetErrorText(err);
         throw std::runtime_error(error);
-    }
+}
 }

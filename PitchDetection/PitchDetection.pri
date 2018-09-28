@@ -24,15 +24,7 @@ SOURCES += \
     $$PWD/AudioUtils.cpp \
     $$PWD/WAVFile.cpp \
     $$PWD/AubioPitchDetector.cpp \
-    $$PWD/PortAudioUtils.cpp
+    $$PWD/PortAudioUtils.cpp \
+    $$PWD/PortAudioInputReader.cpp
 
-win32 {
-SOURCES += \
-    $$PWD/AudioInputReader_win.cpp
-
-}
-macx {
-SOURCES += \
-    $$PWD/AudioInputReader_mac.cpp
-}
 INCLUDEPATH += ../include

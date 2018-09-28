@@ -1,7 +1,9 @@
 #include "mainwindow.h"
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
+#ifdef USE_METAL
 #include "MacOS/workspaceview.h"
+#endif
 
 void MainWindow::doMacOsPlatformStaff() {
     NSView* view = reinterpret_cast<NSView*>(winId());
