@@ -17,18 +17,7 @@ PitchInputReaderAndPlayer::PitchInputReaderAndPlayer() {
     AubioPitchDetector* pitchDetector = new AubioPitchDetector();
     pitchDetector->setThreshold(THRESHOLD);
 
-    audioInputReader = CreateDefaultAudioInputReader(BUFFER_SIZE);
-
-    AudioPlayer::PlaybackData playbackData;
-    playbackData.framesPerBuffer = BUFFER_SIZE;
-    playbackData.format = paInt16;
-    playbackData.numChannels = 1;
-    playbackData.sampleRate = audioInputReader->getSampleRate();
-    audioInputPlayer = new RealtimeStreamingAudioPlayer(playbackData);
-    audioInputPlayer->prepare();
-    audioInputReader->callbacks.push_back([=] (const int16_t* buffer, int size) {
-        //audioInputPlayer->pushAudioData(buffer, size * sizeof(int16_t));
-    });
+    audioInputReader = CreateDefaultAudioInputReaderWithOutput(BUFFER_SIZE);
 
     init(audioInputReader, SMOOTH_LEVEL, pitchDetector, true);
 }
@@ -40,7 +29,6 @@ void PitchInputReaderAndPlayer::pitchDetected(float frequency, double time) {
 }
 
 PitchInputReaderAndPlayer::~PitchInputReaderAndPlayer() {
-    delete audioInputPlayer;
 }
 
 void PitchInputReaderAndPlayer::setInputVolume(float value) {
@@ -52,19 +40,9 @@ float PitchInputReaderAndPlayer::getInputVolume() const {
 }
 
 void PitchInputReaderAndPlayer::setOutputVolume(float value) {
-    audioInputPlayer->setVolume(value);
+    audioInputReader->setOutputVolume(value);
 }
 
 float PitchInputReaderAndPlayer::getOutputVolume() const {
-    return audioInputPlayer->getVolume();
-}
-
-void PitchInputReaderAndPlayer::start() {
-    PitchInputReaderCollector::start();
-    //audioInputPlayer->play();
-}
-
-void PitchInputReaderAndPlayer::stop() {
-    PitchInputReaderCollector::stop();
-    //audioInputPlayer->pause();
+    return audioInputReader->getOutputVolume();
 }

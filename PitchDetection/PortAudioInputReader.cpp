@@ -3,10 +3,11 @@
 #include "PortAudioUtils.h"
 #include <portmixer.h>
 #include "Functions.h"
+#include <cmath>
 
 #define SAMPLE_RATE 44100
 
-class PortAudioInputReader : public AudioInputReader {
+class PortAudioInputReader : public AudioInputReaderWithOutput {
     static int portAudioCallback(const void *inputBuffer,
             void *outputBuffer,
             unsigned long framesPerBuffer,
@@ -17,7 +18,20 @@ class PortAudioInputReader : public AudioInputReader {
 
         CppUtils::Functions::ExecuteAll(self->callbacks, (int16_t*)inputBuffer, (int)framesPerBuffer);
 
-        std::memcpy(outputBuffer, inputBuffer, framesPerBuffer * sizeof(int16_t));
+        if (self->isOutputEnabled()) {
+            const float outputVolume = self->getOutputVolume();
+            if (outputVolume == 0.0f) {
+                memset(outputBuffer, 0, framesPerBuffer * sizeof(int16_t));
+            } else if(outputVolume == 1.0f) {
+                memcpy(outputBuffer, inputBuffer, framesPerBuffer * sizeof(int16_t));
+            } else {
+                int16_t* output = static_cast<int16_t *>(outputBuffer);
+                const int16_t* input = static_cast<const int16_t *>(inputBuffer);
+                for (int i = 0; i < framesPerBuffer; ++i) {
+                    output[i] = (int16_t)round(input[i] * outputVolume);
+                }
+            }
+        }
 
         return paContinue;
     }
@@ -25,14 +39,20 @@ class PortAudioInputReader : public AudioInputReader {
     int maximumBufferSize;
     PaStream *stream;
     PxMixer *mixer;
+    bool outputEnabled;
+    std::atomic<float> outputVolume;
 public:
-    PortAudioInputReader(int maximumBufferSize) : maximumBufferSize(maximumBufferSize) {
+    PortAudioInputReader(int maximumBufferSize, bool outputEnabled) :
+    maximumBufferSize(maximumBufferSize),
+    outputEnabled(outputEnabled),
+    outputVolume(1.0f)
+    {
         PaError err = Pa_OpenDefaultStream(&stream,
                 1,          /* 1 input channel */
-                1,          /* no output */
+                (int)outputEnabled,
                 paInt16,
                 SAMPLE_RATE,
-                maximumBufferSize,  
+                maximumBufferSize,
                 portAudioCallback,
                 this );
         PortAudio::checkErrors(err);
@@ -69,8 +89,24 @@ public:
     float getInputVolume() const override {
         return Px_GetInputVolume(mixer);
     }
+
+    void setOutputVolume(float value) override {
+        outputVolume = value;
+    }
+
+    float getOutputVolume() const override {
+        return outputVolume;
+    }
+
+    bool isOutputEnabled() const {
+        return outputEnabled;
+    }
 };
 
 AudioInputReader* CreateDefaultAudioInputReader(int maximumBufferSize) {
-    return new PortAudioInputReader(maximumBufferSize);
+    return new PortAudioInputReader(maximumBufferSize, false);
+}
+
+AudioInputReaderWithOutput* CreateDefaultAudioInputReaderWithOutput(int maximumBufferSize) {
+    return new PortAudioInputReader(maximumBufferSize, true);
 }

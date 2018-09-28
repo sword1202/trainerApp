@@ -10,8 +10,6 @@
 #include <functional>
 #include "FunctionsList.h"
 
-static const int kNumberBuffers = 3;
-
 class AudioInputReader {
 public:
     typedef std::function<void(const int16_t*, int)> Callback;
@@ -28,6 +26,13 @@ public:
     virtual ~AudioInputReader() = default;
 };
 
+class AudioInputReaderWithOutput : public AudioInputReader {
+public:
+    virtual void setOutputVolume(float value) = 0;
+    virtual float getOutputVolume() const = 0;
+};
+
 AudioInputReader* CreateDefaultAudioInputReader(int maximumBufferSize);
+AudioInputReaderWithOutput* CreateDefaultAudioInputReaderWithOutput(int maximumBufferSize);
 
 #endif //PITCHDETECTION_AUDOINPUTREADER_H
