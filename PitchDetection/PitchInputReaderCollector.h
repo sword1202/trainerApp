@@ -26,9 +26,6 @@ private:
     mutable std::mutex mutex;
 
     CppUtils::ListenersSet<const Pitch&, double> pitchDetectedListeners;
-protected:
-    virtual void setAudioInputReaderCallback(AudioInputReader* audioInputReader,
-            const AudioInputReader::Callback& callback);
 public:
     void init(AudioInputReader* audioInputReader,
             int smoothLevel,
