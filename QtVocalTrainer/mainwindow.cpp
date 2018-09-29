@@ -143,12 +143,21 @@ void MainWindow::onSelectMicrophone() {
     dialog->setFixedSize(SELECT_MICROPHONE_DIALOG_WIDTH, SELECT_MICROPHONE_DIALOG_HEIGHT);
     dialog->setWindowFlags(Qt::Tool | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::CustomizeWindowHint);
     QQuickWidget* selectMicrophoneDialogView = createQQuickWidget("qrc:/qml/SelectMicrophoneDialog.qml", dialog);
-    QStringList microphoneNames = Transform<QStringList>(PortAudio::getInputDevices(), [] (const PaDeviceInfo* device){
+    QStringList microphoneNames = Transform<QStringList>(PortAudio::getInputDevices(), [] (const PaDeviceInfo* device) {
         return device->name;
     });
     selectMicrophoneDialogView->rootContext()->setContextProperty("names", QVariant::fromValue(microphoneNames));
 
+    auto* root = selectMicrophoneDialogView->rootObject();
+    QtUtils::addDynamicPropertyChangedListener(root, "selectedMicrophoneIndex", [this] (const QVariant& value) {
+        onSelectedMicrophoneIndexChanged(value.toInt());
+    });
+
     dialog->show();
+}
+
+void MainWindow::onSelectedMicrophoneIndexChanged(int selectedMicrophoneIndex) {
+
 }
 
 void MainWindow::setBoundsSelectionEnabled(bool enabled) {

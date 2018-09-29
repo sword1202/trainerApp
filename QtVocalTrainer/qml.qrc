@@ -131,5 +131,7 @@
         <file>qml/images/text/16_G.png</file>
         <file>qml/SelectMicrophoneDialog.qml</file>
         <file>qml/TextButton.qml</file>
+        <file>qml/RadioButton.qml</file>
+        <file>qml/RoundedRect.qml</file>
     </qresource>
 </RCC>

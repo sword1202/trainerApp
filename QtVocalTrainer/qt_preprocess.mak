@@ -33,47 +33,56 @@ benchmark: first
 compilers: qrc_qml.cpp moc_predefs.h moc_QmlCppBridge.cpp moc_qmlpitch.cpp moc_qmlpitchinputreader.cpp\
 	 moc_app.cpp moc_qmlvxpitch.cpp moc_qmltimedpitch.cpp\
 	 moc_mainwindow.cpp moc_qmlzoomcontroller.cpp moc_player.cpp\
-	 moc_qopenglworkspacewidget.cpp moc_qpainterworkspacewidget.cpp
+	 moc_qopenglworkspacewidget.cpp moc_qpainterworkspacewidget.cpp qtutils.moc
 compiler_rcc_make_all: qrc_qml.cpp
 compiler_rcc_clean:
 	-$(DEL_FILE) qrc_qml.cpp
 qrc_qml.cpp: qml.qrc \
 		../../../Qt/5.11.0/clang_64/bin/rcc \
-		qml/ButtonShadow.qml \
-		qml/TrackButton.qml \
 		qml/LeftSideBar.qml \
-		qml/VerticalScrollBarContainer.qml \
 		qml/SvgImage.qml \
-		qml/Yardstick.qml \
-		qml/ImageButton.qml \
-		qml/Main.qml \
-		qml/HeaderWithSubHeader.qml \
-		qml/SingingProcessManager.qml \
-		qml/ToggleButton.qml \
-		qml/AppWindow.qml \
-		qml/Header.qml \
-		qml/TonalityController.qml \
 		qml/PlayerController.qml \
-		qml/WorkspaceOld.qml \
-		qml/HorizontalLine.qml \
-		qml/HorizontalScrollBar.qml \
-		qml/VerticalLine.qml \
-		qml/Zoom.qml \
-		qml/ZoomSlider.qml \
-		qml/TrackVolumeSlider.qml \
-		qml/Tempo.qml \
-		qml/Piano.qml \
-		qml/FeaturesToggleButton.qml \
-		qml/Track.qml \
-		qml/VerticalScrollBar.qml \
-		qml/Circle.qml \
+		qml/TextButton.qml \
 		qml/PlayHeadTime.qml \
+		qml/SingingProcessManager.qml \
+		qml/HorizontalScrollBar.qml \
+		qml/Header.qml \
+		qml/RadioButton.qml \
+		qml/TonalityController.qml \
+		qml/VerticalScrollBar.qml \
+		qml/RoundedRect.qml \
+		qml/ImageButton.qml \
+		qml/ToggleButton.qml \
+		qml/Tempo.qml \
+		qml/VerticalScrollBarContainer.qml \
+		qml/Track.qml \
+		qml/Yardstick.qml \
+		qml/Piano.qml \
+		qml/Circle.qml \
+		qml/ZoomSlider.qml \
+		qml/Main.qml \
+		qml/VerticalLine.qml \
+		qml/SelectMicrophoneDialog.qml \
+		qml/HeaderWithSubHeader.qml \
+		qml/HorizontalLine.qml \
+		qml/FeaturesToggleButton.qml \
+		qml/ButtonShadow.qml \
+		qml/AppWindow.qml \
+		qml/TrackVolumeSlider.qml \
+		qml/TrackButton.qml \
+		qml/Zoom.qml \
+		qml/WorkspaceOld.qml \
 		qml/TracksContainer.qml \
+		qml/sounds/sounds.sf2 \
+		qml/sounds/metronome.wav \
 		qml/js/strings.js \
 		qml/js/uiutils.js \
 		qml/js/canvasutils.js \
 		qml/js/mathutils.js \
 		qml/js/zoom.js \
+		qml/fonts/Lato-Regular.ttf \
+		qml/fonts/Lato-Bold.ttf \
+		qml/fonts/arial.ttf \
 		qml/images/to_the_begining_hover.svg \
 		qml/images/play_head_triangle.svg \
 		qml/images/track_piece_small.png \
@@ -162,12 +171,7 @@ qrc_qml.cpp: qml.qrc \
 		qml/images/text/8_F.png \
 		qml/images/text/11_3.png \
 		qml/images/text/22_9.png \
-		qml/images/text/16_A.png \
-		qml/sounds/sounds.sf2 \
-		qml/sounds/metronome.wav \
-		qml/fonts/Lato-Regular.ttf \
-		qml/fonts/Lato-Bold.ttf \
-		qml/fonts/arial.ttf
+		qml/images/text/16_A.png
 	/Users/semyon/Qt/5.11.0/clang_64/bin/rcc -name qml qml.qrc -o qrc_qml.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h
@@ -582,8 +586,21 @@ moc_qpainterworkspacewidget.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.frame
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
-compiler_moc_source_make_all:
+compiler_moc_source_make_all: qtutils.moc
 compiler_moc_source_clean:
+	-$(DEL_FILE) qtutils.moc
+qtutils.moc: QtUtils/qtutils.h \
+		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QFrame \
+		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QEvent \
+		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QVariant \
+		QtUtils/qtutils.cpp \
+		moc_predefs.h \
+		../../../Qt/5.11.0/clang_64/bin/moc
+	/Users/semyon/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/semyon/Qt/5.11.0/clang_64/mkspecs/macx-clang -I/Users/semyon/Projects/VocalTrainer/QtVocalTrainer -I/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils -I/Users/semyon/Projects/include -I/Users/semyon/Projects/VocalTrainer/PitchDetection -I/Users/semyon/Projects/VocalTrainer/include -I/Users/semyon/Projects/VocalTrainer/include -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Drawers -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Workspace -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback -I/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/CraigsappMidifile -I/Users/semyon/Projects/VocalTrainer/VocalTrainer -I/Users/semyon/Projects/VocalTrainer/include/nanovg -I/Users/semyon/Projects/VocalTrainer/include/nanovg/glew -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuickWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQuick.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtSvg.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtMultimedia.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtQml.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/semyon/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Users/semyon/Qt/5.11.0/clang_64/lib QtUtils/qtutils.cpp -o qtutils.moc
+
 compiler_uic_make_all:
 compiler_uic_clean:
 compiler_rez_source_make_all:
@@ -594,5 +611,5 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_moc_source_clean 
 

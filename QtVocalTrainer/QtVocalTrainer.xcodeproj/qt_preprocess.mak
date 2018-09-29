@@ -39,42 +39,50 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_qml.cpp
 qrc_qml.cpp: qml.qrc \
 		../../../Qt/5.11.0/clang_64/bin/rcc \
-		qml/ButtonShadow.qml \
-		qml/TrackButton.qml \
-		qml/SelectMicrophoneDialog.qml \
 		qml/LeftSideBar.qml \
-		qml/VerticalScrollBarContainer.qml \
 		qml/SvgImage.qml \
-		qml/Yardstick.qml \
-		qml/ImageButton.qml \
-		qml/Main.qml \
-		qml/HeaderWithSubHeader.qml \
-		qml/SingingProcessManager.qml \
-		qml/ToggleButton.qml \
-		qml/AppWindow.qml \
-		qml/Header.qml \
-		qml/TonalityController.qml \
 		qml/PlayerController.qml \
-		qml/WorkspaceOld.qml \
-		qml/HorizontalLine.qml \
-		qml/HorizontalScrollBar.qml \
-		qml/VerticalLine.qml \
-		qml/Zoom.qml \
-		qml/ZoomSlider.qml \
-		qml/TrackVolumeSlider.qml \
-		qml/Tempo.qml \
-		qml/Piano.qml \
-		qml/FeaturesToggleButton.qml \
-		qml/Track.qml \
-		qml/VerticalScrollBar.qml \
-		qml/Circle.qml \
+		qml/TextButton.qml \
 		qml/PlayHeadTime.qml \
+		qml/SingingProcessManager.qml \
+		qml/HorizontalScrollBar.qml \
+		qml/Header.qml \
+		qml/RadioButton.qml \
+		qml/TonalityController.qml \
+		qml/VerticalScrollBar.qml \
+		qml/RoundedRect.qml \
+		qml/ImageButton.qml \
+		qml/ToggleButton.qml \
+		qml/Tempo.qml \
+		qml/VerticalScrollBarContainer.qml \
+		qml/Track.qml \
+		qml/Yardstick.qml \
+		qml/Piano.qml \
+		qml/Circle.qml \
+		qml/ZoomSlider.qml \
+		qml/Main.qml \
+		qml/VerticalLine.qml \
+		qml/SelectMicrophoneDialog.qml \
+		qml/HeaderWithSubHeader.qml \
+		qml/HorizontalLine.qml \
+		qml/FeaturesToggleButton.qml \
+		qml/ButtonShadow.qml \
+		qml/AppWindow.qml \
+		qml/TrackVolumeSlider.qml \
+		qml/TrackButton.qml \
+		qml/Zoom.qml \
+		qml/WorkspaceOld.qml \
 		qml/TracksContainer.qml \
+		qml/sounds/sounds.sf2 \
+		qml/sounds/metronome.wav \
 		qml/js/strings.js \
 		qml/js/uiutils.js \
 		qml/js/canvasutils.js \
 		qml/js/mathutils.js \
 		qml/js/zoom.js \
+		qml/fonts/Lato-Regular.ttf \
+		qml/fonts/Lato-Bold.ttf \
+		qml/fonts/arial.ttf \
 		qml/images/to_the_begining_hover.svg \
 		qml/images/play_head_triangle.svg \
 		qml/images/track_piece_small.png \
@@ -163,12 +171,7 @@ qrc_qml.cpp: qml.qrc \
 		qml/images/text/8_F.png \
 		qml/images/text/11_3.png \
 		qml/images/text/22_9.png \
-		qml/images/text/16_A.png \
-		qml/sounds/sounds.sf2 \
-		qml/sounds/metronome.wav \
-		qml/fonts/Lato-Regular.ttf \
-		qml/fonts/Lato-Bold.ttf \
-		qml/fonts/arial.ttf
+		qml/images/text/16_A.png
 	/Users/semyon/Qt/5.11.0/clang_64/bin/rcc -name qml qml.qrc -o qrc_qml.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h

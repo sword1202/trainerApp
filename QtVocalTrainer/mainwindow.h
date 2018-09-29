@@ -43,6 +43,8 @@ public:
     void doMacOsPlatformStaff();
 #endif
 
+    void onSelectedMicrophoneIndexChanged(int selectedMicrophoneIndex);
+
 public slots:
     void onFileOpen();
     void onSelectMicrophone();
