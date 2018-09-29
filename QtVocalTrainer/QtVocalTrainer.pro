@@ -112,7 +112,6 @@ SOURCES += \
     qopenglworkspacewidget.cpp \
     fonts.cpp \
     qpainterworkspacewidget.cpp \
-    ../VocalTrainer/Playback/AudioPlayback/Decoder/windows/qaudiodecoderwrapper.cpp
 
 RESOURCES += qml.qrc
 
