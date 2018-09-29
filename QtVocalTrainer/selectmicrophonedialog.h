@@ -6,9 +6,11 @@
 
 class SelectMicrophoneDialog : public QDialog
 {
+    Q_OBJECT
     void onSelectedMicrophoneIndexChanged(int selectedMicrophoneIndex);
 public:
     SelectMicrophoneDialog(QWidget* parent, QmlCppBridge* cpp);
+    Q_INVOKABLE void choose(int index);
 };
 
 #endif // SELECTMICROPHONEDIALOG_H

@@ -1,6 +1,7 @@
 import QtQuick 2.0
 
 Rectangle {
+    signal clicked
     property string text: "OK"
 
     color: "#615F97"
@@ -14,5 +15,13 @@ Rectangle {
         font.pointSize: 12
         font.family: "Lato"
         color: "white"
+    }
+
+    MouseArea {
+        anchors.fill: parent
+
+        onClicked: {
+            parent.clicked()
+        }
     }
 }

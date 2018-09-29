@@ -1261,6 +1261,21 @@
 					);
 			};
 		};
+		7657336A21DEC47E30CA740D = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_selectmicrophonedialog.cpp";
+			name = "moc_selectmicrophonedialog.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		05AE404505DF9D10F6F8A2DE = {
+			fileRef = "7657336A21DEC47E30CA740D";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
 		BE2A21A1D5A957BEC05FE134 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/CppUtils/stlassert.h";
@@ -1980,7 +1995,8 @@
 				"89C27C427961B6202E6F4EE9",
 				"47F1B0DF5A87C30EB44F4368",
 				"EAEC7165B9D77044111E79CE",
-				"DBAAAF3ED3BD14F22A8391A2");
+				"DBAAAF3ED3BD14F22A8391A2",
+				"7657336A21DEC47E30CA740D");
 			name = "Generated Sources";
 			sourceTree = "<group>";
 		};
@@ -2282,6 +2298,7 @@
 				"B7AF3FDDDED05F6225F0A3CC",
 				"6CB330ABB04660CE13F417E9",
 				"2581757746E9CDB1F4F53BC6",
+				"05AE404505DF9D10F6F8A2DE",
 				"DE96A987995B398E25D392B5");
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;

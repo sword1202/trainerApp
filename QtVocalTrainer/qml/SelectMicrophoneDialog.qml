@@ -150,6 +150,10 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
             anchors.right: parent.right
             anchors.rightMargin: 11.25
+
+            onClicked: {
+                self.choose(selectedMicrophoneIndex)
+            }
         }
 
         TextButton {
@@ -157,6 +161,10 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
             anchors.right: choose.left
             anchors.rightMargin: 7.5
+
+            onClicked: {
+                self.close()
+            }
         }
     }
 }
