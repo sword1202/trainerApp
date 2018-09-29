@@ -63,7 +63,8 @@ HEADERS += \
     qpainterworkspacewidget.h \
     ../VocalTrainer/Playback/AudioPlayback/Decoder/windows/qaudiodecoderwrapper.h \
     ../VocalTrainer/Playback/AudioPlayback/RealtimeStreamingAudioPlayer.h \
-    ../PitchDetection/PortAudioInputReader.h
+    ../PitchDetection/PortAudioInputReader.h \
+    selectmicrophonedialog.h
 
 SOURCES += \
     main.cpp \
@@ -117,7 +118,8 @@ SOURCES += \
     ../VocalTrainer/Playback/AudioPlayback/Decoder/windows/qaudiodecoderwrapper.cpp \
     ../Portmixer/px_mac_coreaudio.c \
     ../Portmixer/px_mixer.c \
-    ../VocalTrainer/Playback/AudioPlayback/RealtimeStreamingAudioPlayer.cpp
+    ../VocalTrainer/Playback/AudioPlayback/RealtimeStreamingAudioPlayer.cpp \
+    selectmicrophonedialog.cpp
 
 RESOURCES += qml.qrc
 

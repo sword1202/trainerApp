@@ -34,7 +34,7 @@ Rectangle {
 
     ListView {
         id: list
-        model: names
+        model: names || 0
         anchors.top: header.bottom
         anchors.bottom: footer.top
         height: parent.height

@@ -1006,6 +1006,21 @@
 					);
 			};
 		};
+		627AD52C29E519C6545C3E27 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/selectmicrophonedialog.cpp";
+			name = "selectmicrophonedialog.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		890A830B52E3B110A613A507 = {
+			fileRef = "627AD52C29E519C6545C3E27";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
 		BC415B473FEB85492D4E8674 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/appmacos.mm";
@@ -1882,6 +1897,13 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
+		8D0F495A79EF4AAB6A182039 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/selectmicrophonedialog.h";
+			name = "selectmicrophonedialog.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
 		E89EF8F42D53D26AE81EB3A0 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback/Decoder/audiodecodercoreaudio_mac.h";
@@ -2046,6 +2068,7 @@
 				"3473D2CF73E14B1AA98A58AA",
 				"98B1FFB557615E334CE79ADB",
 				"967FD03B37F0BB9EDC90A69E",
+				"627AD52C29E519C6545C3E27",
 				"BC415B473FEB85492D4E8674",
 				"DF4BED6495ED318D0BFE2018",
 				"A7C917B154112562C9709C79",
@@ -2140,6 +2163,7 @@
 				"5C908278C1166B83702DD02E",
 				"588DFAD63929DC9BC812006E",
 				"B9E540CDAE0FA090E36E262C",
+				"8D0F495A79EF4AAB6A182039",
 				"E89EF8F42D53D26AE81EB3A0");
 			name = "Sources";
 			sourceTree = "<group>";
@@ -2241,6 +2265,7 @@
 				"70D8B219005C3E416CE43C11",
 				"ACB28F5F3A5ED1E0661AD203",
 				"59260172123C10B5280BCAA2",
+				"890A830B52E3B110A613A507",
 				"F512D0DE937285A2596D4954",
 				"3A9D3D3CE7067FBCEA4D8FFF",
 				"35A610BD95B9AF48696237CA",
