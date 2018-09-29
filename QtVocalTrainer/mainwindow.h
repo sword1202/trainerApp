@@ -26,6 +26,7 @@ class MainWindow : public QMainWindow
     bool boundsSelectionRunning = false;
 
     QQuickWidget *createQQuickWidget(const QString& qmlFile);
+    QQuickWidget *createQQuickWidget(const QString& qmlFile, QWidget* parent);
     int getMinimumPlayHeadOffset() const;
     float getMinimumPlayHeadOffsetF() const;
 protected:
@@ -44,6 +45,7 @@ public:
 
 public slots:
     void onFileOpen();
+    void onSelectMicrophone();
 };
 
 #endif // MAINWINDOW_H

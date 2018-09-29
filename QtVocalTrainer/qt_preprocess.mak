@@ -255,10 +255,12 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		../PitchDetection/PitchInputReaderCollector.h \
 		../PitchDetection/PitchInputReader.h \
 		../PitchDetection/AudioInputReader.h \
+		../PitchDetection/CppUtils/FunctionsList.h \
 		../PitchDetection/PitchDetector.h \
 		../PitchDetection/PitchDetectionSmoothingAudioBuffer.h \
 		../PitchDetection/CppUtils/CircularBuffer.h \
-		../VocalTrainer/Manager/VxAudioInputManager.h \
+		../VocalTrainer/Manager/PitchInputReaderAndPlayer.h \
+		../VocalTrainer/Playback/AudioPlayback/RealtimeStreamingAudioPlayer.h \
 		qmltimedpitch.h \
 		QmlCppBridge.h \
 		moc_predefs.h \
@@ -277,13 +279,17 @@ moc_qmlpitchinputreader.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/He
 		../PitchDetection/Pitch.h \
 		../PitchDetection/PitchInputReader.h \
 		../PitchDetection/AudioInputReader.h \
+		../PitchDetection/CppUtils/FunctionsList.h \
 		../PitchDetection/PitchDetector.h \
 		../PitchDetection/PitchDetectionSmoothingAudioBuffer.h \
 		../PitchDetection/CppUtils/stlassert.h \
 		../PitchDetection/CppUtils/CircularBuffer.h \
 		../PitchDetection/PitchesCollector.h \
 		../PitchDetection/CppUtils/ListenersSet.h \
-		../VocalTrainer/Manager/VxAudioInputManager.h \
+		../VocalTrainer/Manager/PitchInputReaderAndPlayer.h \
+		../VocalTrainer/Playback/AudioPlayback/RealtimeStreamingAudioPlayer.h \
+		../VocalTrainer/Playback/AudioPlayback/AudioPlayer.h \
+		../include/portaudio/portaudio.h \
 		qmltimedpitch.h \
 		qmlpitch.h \
 		qmlpitchinputreader.h \
@@ -298,20 +304,22 @@ moc_app.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QApplic
 		../PitchDetection/Pitch.h \
 		../PitchDetection/PitchInputReader.h \
 		../PitchDetection/AudioInputReader.h \
+		../PitchDetection/CppUtils/FunctionsList.h \
 		../PitchDetection/PitchDetector.h \
 		../PitchDetection/PitchDetectionSmoothingAudioBuffer.h \
 		../PitchDetection/CppUtils/stlassert.h \
 		../PitchDetection/CppUtils/CircularBuffer.h \
 		../PitchDetection/PitchesCollector.h \
 		../PitchDetection/CppUtils/ListenersSet.h \
-		../VocalTrainer/Manager/VxAudioInputManager.h \
+		../VocalTrainer/Manager/PitchInputReaderAndPlayer.h \
+		../VocalTrainer/Playback/AudioPlayback/RealtimeStreamingAudioPlayer.h \
+		../VocalTrainer/Playback/AudioPlayback/AudioPlayer.h \
+		../include/portaudio/portaudio.h \
 		../VocalTrainer/Playback/MvxPlayer.h \
 		../VocalTrainer/Playback/VxFile.h \
 		../VocalTrainer/Playback/VxPitch.h \
 		../include/boost/serialization/serialization.hpp \
 		../include/boost/serialization/split_member.hpp \
-		../VocalTrainer/Playback/AudioPlayback/AudioPlayer.h \
-		../include/portaudio/portaudio.h \
 		../VocalTrainer/Playback/VxLyricsLine.h \
 		../VocalTrainer/Playback/VxLyricsInterval.h \
 		../include/boost/container/static_vector.hpp \

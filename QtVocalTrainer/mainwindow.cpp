@@ -9,6 +9,7 @@
 #include <QFileDialog>
 #include <QMenuBar>
 #include <QMacCocoaViewContainer>
+#include <QSizePolicy>
 
 #include "QmlCppBridge.h"
 #include "app.h"
@@ -88,7 +89,11 @@ float MainWindow::getMinimumPlayHeadOffsetF() const {
 }
 
 QQuickWidget *MainWindow::createQQuickWidget(const QString& qmlFile) {
-    QQuickWidget* qmlWidget = new QQuickWidget(this);
+    return createQQuickWidget(qmlFile, this);
+}
+
+QQuickWidget *MainWindow::createQQuickWidget(const QString &qmlFile, QWidget *parent) {
+    QQuickWidget* qmlWidget = new QQuickWidget(parent);
     qmlWidget->rootContext()->setContextProperty("cpp", cpp);
     qmlWidget->setSource(QUrl(qmlFile));
     return qmlWidget;
@@ -114,6 +119,10 @@ void MainWindow::setupMenus() {
     QAction* openAction = fileMenu->addAction("Open...");
     openAction->setShortcut(QKeySequence::Open);
     connect(openAction, &QAction::triggered, this, &MainWindow::onFileOpen);
+
+    QMenu* editMenu = menuBar()->addMenu("Edit");
+    QAction* microphoneAction = editMenu->addAction("Select Microphone");
+    connect(microphoneAction, &QAction::triggered, this, &MainWindow::onSelectMicrophone);
 }
 
 void MainWindow::onFileOpen() {
@@ -124,6 +133,14 @@ void MainWindow::onFileOpen() {
     if (!fileName.isEmpty()) {
         VxApp::instance()->getPlayer()->setSource(fileName);
     }
+}
+
+void MainWindow::onSelectMicrophone() {
+    QDialog* dialog = new QDialog(this);
+    dialog->setFixedSize(300, 200);
+    dialog->setWindowFlags(Qt::Tool | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::CustomizeWindowHint);
+    QQuickWidget* selectMicrophoneDialogView = createQQuickWidget("qrc:/qml/SelectMicrophoneDialog.qml", dialog);
+    dialog->show();
 }
 
 void MainWindow::setBoundsSelectionEnabled(bool enabled) {
