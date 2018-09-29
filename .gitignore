@@ -80,6 +80,12 @@ target_wrapper.*
 # QtCreator
 *.autosave
 
+# Visual Studio
+.vs
+QtVocalTrainer/Win32/
+QtVocalTrainer/debug/
+QtVocalTrainer/release/
+
 # QtCreator Qml
 *.qmlproject.user
 *.qmlproject.user.*
