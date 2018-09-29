@@ -16,15 +16,18 @@
 #include "qopenglworkspacewidget.h"
 #include "PlaybackBounds.h"
 #include "qpainterworkspacewidget.h"
+#include "Algorithms.h"
+#include "PortAudioUtils.h"
 
 constexpr int YARD_STICK_HEIGHT = static_cast<int>(WorkspaceDrawer::YARD_STICK_HEIGHT);
 constexpr int HEADER_HEIGHT = 75 + 61 - YARD_STICK_HEIGHT;
-constexpr int PIANO_WIDTH = WorkspaceDrawer::PIANO_WIDTH;
-constexpr int PLAY_HEAD_SIZE = 11;
 constexpr int VERTICAL_SCROLL_WIDTH = 11;
 constexpr int BEATS_IN_TACT = 4;
 constexpr int MINIMUM_WINDOW_WIDTH = 700;
 constexpr double MINIMUM_WINDOW_HEIGHT_RATIO = 0.6;
+
+constexpr int SELECT_MICROPHONE_DIALOG_WIDTH = 439;
+constexpr int SELECT_MICROPHONE_DIALOG_HEIGHT = 331;
 
 using namespace CppUtils;
 using std::cout;
@@ -137,9 +140,14 @@ void MainWindow::onFileOpen() {
 
 void MainWindow::onSelectMicrophone() {
     QDialog* dialog = new QDialog(this);
-    dialog->setFixedSize(300, 200);
+    dialog->setFixedSize(SELECT_MICROPHONE_DIALOG_WIDTH, SELECT_MICROPHONE_DIALOG_HEIGHT);
     dialog->setWindowFlags(Qt::Tool | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::CustomizeWindowHint);
     QQuickWidget* selectMicrophoneDialogView = createQQuickWidget("qrc:/qml/SelectMicrophoneDialog.qml", dialog);
+    QStringList microphoneNames = Transform<QStringList>(PortAudio::getInputDevices(), [] (const PaDeviceInfo* device){
+        return device->name;
+    });
+    selectMicrophoneDialogView->rootContext()->setContextProperty("names", QVariant::fromValue(microphoneNames));
+
     dialog->show();
 }
 
