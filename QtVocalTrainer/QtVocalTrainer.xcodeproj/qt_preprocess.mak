@@ -255,11 +255,11 @@ moc_QmlCppBridge.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/Q
 		../PitchDetection/PitchInputReaderCollector.h \
 		../PitchDetection/PitchInputReader.h \
 		../PitchDetection/AudioInputReader.h \
+		../PitchDetection/CppUtils/FunctionsList.h \
 		../PitchDetection/PitchDetector.h \
 		../PitchDetection/PitchDetectionSmoothingAudioBuffer.h \
 		../PitchDetection/CppUtils/CircularBuffer.h \
 		../VocalTrainer/Manager/PitchInputReaderAndPlayer.h \
-		../PitchDetection/CppUtils/FunctionsList.h \
 		../VocalTrainer/Playback/AudioPlayback/RealtimeStreamingAudioPlayer.h \
 		qmltimedpitch.h \
 		QmlCppBridge.h \
@@ -279,6 +279,7 @@ moc_qmlpitchinputreader.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/He
 		../PitchDetection/Pitch.h \
 		../PitchDetection/PitchInputReader.h \
 		../PitchDetection/AudioInputReader.h \
+		../PitchDetection/CppUtils/FunctionsList.h \
 		../PitchDetection/PitchDetector.h \
 		../PitchDetection/PitchDetectionSmoothingAudioBuffer.h \
 		../PitchDetection/CppUtils/stlassert.h \
@@ -286,7 +287,6 @@ moc_qmlpitchinputreader.cpp: ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/He
 		../PitchDetection/PitchesCollector.h \
 		../PitchDetection/CppUtils/ListenersSet.h \
 		../VocalTrainer/Manager/PitchInputReaderAndPlayer.h \
-		../PitchDetection/CppUtils/FunctionsList.h \
 		../VocalTrainer/Playback/AudioPlayback/RealtimeStreamingAudioPlayer.h \
 		../VocalTrainer/Playback/AudioPlayback/AudioPlayer.h \
 		../include/portaudio/portaudio.h \
@@ -304,6 +304,7 @@ moc_app.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QApplic
 		../PitchDetection/Pitch.h \
 		../PitchDetection/PitchInputReader.h \
 		../PitchDetection/AudioInputReader.h \
+		../PitchDetection/CppUtils/FunctionsList.h \
 		../PitchDetection/PitchDetector.h \
 		../PitchDetection/PitchDetectionSmoothingAudioBuffer.h \
 		../PitchDetection/CppUtils/stlassert.h \
@@ -311,7 +312,6 @@ moc_app.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QApplic
 		../PitchDetection/PitchesCollector.h \
 		../PitchDetection/CppUtils/ListenersSet.h \
 		../VocalTrainer/Manager/PitchInputReaderAndPlayer.h \
-		../PitchDetection/CppUtils/FunctionsList.h \
 		../VocalTrainer/Playback/AudioPlayback/RealtimeStreamingAudioPlayer.h \
 		../VocalTrainer/Playback/AudioPlayback/AudioPlayer.h \
 		../include/portaudio/portaudio.h \

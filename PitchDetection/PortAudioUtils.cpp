@@ -23,3 +23,16 @@ void PortAudio::checkErrors(PaError err) {
         throw std::runtime_error(error);
 }
 }
+
+std::vector<const PaDeviceInfo*> PortAudio::getInputDevices() {
+    std::vector<const PaDeviceInfo*> result;
+    int deviceCount = Pa_GetDeviceCount();
+    for (int i = 0; i < deviceCount; ++i) {
+        const auto* info = Pa_GetDeviceInfo(i);
+        if (info->maxInputChannels > 0) {
+            result.push_back(info);
+        }
+    }
+
+    return result;
+}

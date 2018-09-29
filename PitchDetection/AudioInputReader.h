@@ -32,7 +32,4 @@ public:
     virtual float getOutputVolume() const = 0;
 };
 
-AudioInputReader* CreateDefaultAudioInputReader(int maximumBufferSize);
-AudioInputReaderWithOutput* CreateDefaultAudioInputReaderWithOutput(int maximumBufferSize);
-
 #endif //PITCHDETECTION_AUDOINPUTREADER_H

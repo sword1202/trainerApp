@@ -62,7 +62,8 @@ HEADERS += \
     fonts.h \
     qpainterworkspacewidget.h \
     ../VocalTrainer/Playback/AudioPlayback/Decoder/windows/qaudiodecoderwrapper.h \
-    ../VocalTrainer/Playback/AudioPlayback/RealtimeStreamingAudioPlayer.h
+    ../VocalTrainer/Playback/AudioPlayback/RealtimeStreamingAudioPlayer.h \
+    ../PitchDetection/PortAudioInputReader.h
 
 SOURCES += \
     main.cpp \

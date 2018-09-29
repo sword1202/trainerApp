@@ -236,13 +236,13 @@
 		C9FFF0A71BF842FC6C348D0C /* AudioUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AudioUtils.cpp; path = PitchDetection/AudioUtils.cpp; sourceTree = "<group>"; };
 		C9FFF0A770C7C4A877771027 /* melody.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = melody.mid; sourceTree = "<group>"; };
 		C9FFF0FCCE357D9E6F7F7D4B /* DrawerColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawerColor.h; sourceTree = "<group>"; };
+		C9FFF109DBB5897A44AA6271 /* PortAudioInputReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PortAudioInputReader.h; path = PitchDetection/PortAudioInputReader.h; sourceTree = "<group>"; };
 		C9FFF10C7E9FF13A43C5E76B /* SVGImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVGImageView.m; sourceTree = "<group>"; };
 		C9FFF12322F34C99321F4F18 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		C9FFF12A4E0AAAD8E783983E /* MvxPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MvxPlayer.cpp; sourceTree = "<group>"; };
 		C9FFF15878C9F431873450CF /* StringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringUtils.h; path = PitchDetection/CppUtils/StringUtils.h; sourceTree = "<group>"; };
 		C9FFF178B2D4096904FE1347 /* BaseWavAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseWavAudioPlayer.h; sourceTree = "<group>"; };
 		C9FFF1E4F9CFE2324A18F83D /* MidiFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiFile.cpp; sourceTree = "<group>"; };
-		C9FFF23D3173F02C72D612A7 /* PortAudioInputReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PortAudioInputReader.h; path = PitchDetection/PortAudioInputReader.h; sourceTree = "<group>"; };
 		C9FFF247E3AA11DD453DF318 /* NvgDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvgDrawer.h; sourceTree = "<group>"; };
 		C9FFF278E14B7F7278955980 /* UiUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UiUtils.m; sourceTree = "<group>"; };
 		C9FFF2C47ED180310DF7EA86 /* QuartzDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuartzDrawer.h; sourceTree = "<group>"; };
@@ -545,7 +545,7 @@
 				C9FFF5B5DD1196E0D3D6F5F1 /* PortAudioUtils.cpp */,
 				C9FFF589D2985E576D7DB3B4 /* PortAudioUtils.h */,
 				C9FFFAA8D67588A796D0F11B /* AudioInputReaderWithOutput.h */,
-				C9FFF23D3173F02C72D612A7 /* PortAudioInputReader.h */,
+				C9FFF109DBB5897A44AA6271 /* PortAudioInputReader.h */,
 			);
 			name = PitchDetection;
 			sourceTree = "<group>";

@@ -6,6 +6,7 @@
 #include "PitchInputReaderAndPlayer.h"
 #include "AubioPitchDetector.h"
 #include "Executors.h"
+#include "PortAudioInputReader.h"
 
 static constexpr float THRESHOLD = 0.1;
 static const int BUFFER_SIZE = 1024;
@@ -17,7 +18,7 @@ PitchInputReaderAndPlayer::PitchInputReaderAndPlayer() {
     AubioPitchDetector* pitchDetector = new AubioPitchDetector();
     pitchDetector->setThreshold(THRESHOLD);
 
-    audioInputReader = CreateDefaultAudioInputReaderWithOutput(BUFFER_SIZE);
+    audioInputReader = new PortAudioInputReader(BUFFER_SIZE, true);
 
     init(audioInputReader, SMOOTH_LEVEL, pitchDetector, true);
 }

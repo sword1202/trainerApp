@@ -7,13 +7,15 @@
 #define VOCALTRAINER_PORTAUDIO_H
 
 #include <portaudio/portaudio.h>
-
+#include <vector>
 
 class PortAudio {
 public:
     static void init();
     static void terminate();
     static void checkErrors(PaError err);
+
+    static std::vector<const PaDeviceInfo*> getInputDevices();
 };
 
 

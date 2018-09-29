@@ -1875,6 +1875,13 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
+		B9E540CDAE0FA090E36E262C = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/PortAudioInputReader.h";
+			name = "PortAudioInputReader.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
 		E89EF8F42D53D26AE81EB3A0 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback/Decoder/audiodecodercoreaudio_mac.h";
@@ -2132,6 +2139,7 @@
 				"C2B8E3B1577B7C75D4FA1761",
 				"5C908278C1166B83702DD02E",
 				"588DFAD63929DC9BC812006E",
+				"B9E540CDAE0FA090E36E262C",
 				"E89EF8F42D53D26AE81EB3A0");
 			name = "Sources";
 			sourceTree = "<group>";
