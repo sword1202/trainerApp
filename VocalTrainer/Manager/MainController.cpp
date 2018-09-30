@@ -105,30 +105,25 @@ void MainController::setWorkspaceController(WorkspaceController *workspaceContro
 
     mvxPlayer->seekChangedFromUserListeners.addListener([=] (double seek) {
         updateSeek(seek);
-        return DONT_DELETE_LISTENER;
     });
 
     mvxPlayer->boundsChangedListeners.addListener([=] (const PlaybackBounds& bounds) {
         workspaceController->setPlaybackBounds(bounds);
         workspaceController->update();
-        return DONT_DELETE_LISTENER;
     });
     workspaceController->setPlaybackBounds(mvxPlayer->getBounds());
 
     zoomController->summarizedWorkspaceGridHeightChangedListeners.addListener([=] {
         workspaceController->setSummarizedGridHeight(zoomController->getSummarizedWorkspaceGridHeight());
-        return DONT_DELETE_LISTENER;
     });
 
     zoomController->firstPitchChangedListeners.addListener([this](const Pitch&) {
         updateWorkspaceFirstPitch();
-        return DONT_DELETE_LISTENER;
     });
 
     zoomController->verticalScrollPositionChangedListeners.addListener([=] (float value) {
         workspaceController->setVerticalScrollPosition(value);
         workspaceController->update();
-        return DONT_DELETE_LISTENER;
     });
 }
 
