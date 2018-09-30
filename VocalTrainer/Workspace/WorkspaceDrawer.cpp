@@ -68,9 +68,10 @@ void WorkspaceDrawer::draw() {
     drawer->translate(0, getGridTranslation());
     drawVerticalGrid();
     drawHorizontalGrid();
+    drawer->translate(0, -getGridTranslation());
     drawPitches();
     drawPitchesGraph();
-    drawer->translate(0, -YARD_STICK_HEIGHT - 1 - getGridTranslation());
+    drawer->translate(0, -YARD_STICK_HEIGHT - 1);
     drawYardStick();
     drawer->translate(0, YARD_STICK_HEIGHT);
     drawer->translate(-PIANO_WIDTH, 0);
@@ -209,6 +210,7 @@ void WorkspaceDrawer::drawPitches() const {
     double timeEnd = timeBegin + workspaceDuration;
 
     float relativeHeight = getMaximumGridTranslation() - getGridTranslation() + getGridHeight();
+    cout<<"relativeHeight="<<relativeHeight<<endl;
     vxFile->iteratePitchesInTimeRange(timeBegin, timeEnd, [&] (const VxPitch& vxPitch) {
         double pitchTimeBegin = vxFile->ticksToSeconds(vxPitch.startTickNumber);
         double pitchDuration = vxFile->ticksToSeconds(vxPitch.ticksCount);
@@ -264,10 +266,11 @@ void WorkspaceDrawer::drawPitchesGraph() const {
     double x;
     double y;
 
+    float relativeHeight = getMaximumGridTranslation() - getGridTranslation() + getGridHeight();
     auto getXY = [&](double time, const Pitch& pitch) {
         x = (time - now + duration) / duration * pitchGraphWidth;
         float distanceFromFirstPitch = getDistanceFromFirstPitch(pitch);
-        y = summarizedGridHeight - (distanceFromFirstPitch + pitch.getDistanceFromLowerBound() / 2.0) * intervalHeight;
+        y = relativeHeight - (distanceFromFirstPitch + pitch.getDistanceFromLowerBound() / 2.0) * intervalHeight;
     };
 
     while (i < pitchesCount) {
