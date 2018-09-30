@@ -24,9 +24,9 @@ private:
     std::deque<double> times;
     double savedPitchesTimeLimit = 10.0;
     mutable std::mutex mutex;
-
-    CppUtils::ListenersSet<const Pitch&, double> pitchDetectedListeners;
 public:
+    CppUtils::ListenersSet<const Pitch&, double> pitchDetectedListeners;
+
     void init(AudioInputReader* audioInputReader,
             int smoothLevel,
             PitchDetector* pitchDetector,
@@ -49,9 +49,6 @@ public:
 
     virtual void start();
     virtual void stop();
-
-    int addPitchDetectedListener(const PitchDetectedListener& listener);
-    void removePitchDetectedListener(int key);
 };
 
 

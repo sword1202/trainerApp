@@ -112,11 +112,3 @@ double PitchInputReaderCollector::getLastDetectedTime() const {
 
     return times.front();
 }
-
-int PitchInputReaderCollector::addPitchDetectedListener(const PitchInputReaderCollector::PitchDetectedListener &listener) {
-    return pitchDetectedListeners.addListener(listener);
-}
-
-void PitchInputReaderCollector::removePitchDetectedListener(int key) {
-    pitchDetectedListeners.removeListener(key);
-}
