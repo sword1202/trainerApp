@@ -66,7 +66,9 @@ HEADERS += \
     ../PitchDetection/PortAudioInputReader.h \
     selectmicrophonedialog.h \
     appsettings.h \
-    ../PitchDetection/AudioAverageInputLevelMonitor.h
+    ../PitchDetection/AudioAverageInputLevelMonitor.h \
+    welcomewindow.h \
+    basemainwindow.h
 
 SOURCES += \
     main.cpp \
@@ -123,7 +125,9 @@ SOURCES += \
     ../VocalTrainer/Playback/AudioPlayback/RealtimeStreamingAudioPlayer.cpp \
     selectmicrophonedialog.cpp \
     appsettings.cpp \
-    ../PitchDetection/AudioAverageInputLevelMonitor.cpp
+    ../PitchDetection/AudioAverageInputLevelMonitor.cpp \
+    welcomewindow.cpp \
+    basemainwindow.cpp
 
 RESOURCES += qml.qrc
 

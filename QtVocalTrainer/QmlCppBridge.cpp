@@ -6,7 +6,7 @@
 
 using namespace CppUtils;
 
-QmlCppBridge::QmlCppBridge(MainWindow *mainWindow) : _mainWindow(mainWindow) {
+QmlCppBridge::QmlCppBridge(QMainWindow* mainWindow) : _mainWindow(mainWindow) {
 
 }
 
@@ -39,7 +39,7 @@ qreal QmlCppBridge::getDevicePixelRatio() const {
     return _mainWindow->devicePixelRatio();
 }
 
-MainWindow *QmlCppBridge::getMainWindow() const {
+QMainWindow *QmlCppBridge::getMainWindow() const {
     return _mainWindow;
 }
 

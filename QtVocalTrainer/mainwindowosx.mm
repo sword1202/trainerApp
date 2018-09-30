@@ -1,14 +1,16 @@
 #include "mainwindow.h"
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
+#include "basemainwindow.h"
 #ifdef USE_METAL
 #include "MacOS/workspaceview.h"
 #endif
 
-void MainWindow::doMacOsPlatformStaff() {
+void BaseMainWindow::doMacOsPlatformStaff(QColor windowBorderColor) {
     NSView* view = reinterpret_cast<NSView*>(winId());
     NSWindow* window = view.window;
-    window.backgroundColor = [NSColor colorWithRed:197.0 / 255.0 green:206.0 / 255.0 blue:248.0 / 255.0 alpha:1.0];
+    window.backgroundColor = [NSColor colorWithRed:windowBorderColor.redF()
+            green:windowBorderColor.greenF() blue:windowBorderColor.blueF() alpha:windowBorderColor.alphaF()];
     [window setTitlebarAppearsTransparent:YES];
     [window setCollectionBehavior:NSWindowCollectionBehaviorDefault];
 }

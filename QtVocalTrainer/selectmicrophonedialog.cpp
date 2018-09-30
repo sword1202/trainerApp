@@ -10,6 +10,7 @@
 #include "app.h"
 #include "AudioAverageInputLevelMonitor.h"
 #include <iostream>
+#include "QtUtils/qtutils.h"
 
 constexpr int DIALOG_WIDTH = 439;
 constexpr int DIALOG_HEIGHT = 331;

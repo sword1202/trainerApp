@@ -31,13 +31,9 @@ using namespace CppUtils;
 using std::cout;
 using std::endl;
 
-MainWindow::MainWindow(QWidget *parent) :
-        QMainWindow(parent)
+MainWindow::MainWindow() :
+        BaseMainWindow(QColor::fromRgb(197, 206, 248))
 {
-#ifdef __APPLE__
-    doMacOsPlatformStaff();
-#endif
-
     // Window size
     QSize availableSize = QGuiApplication::primaryScreen()->availableSize();
     if (availableSize.width() < MINIMUM_WINDOW_WIDTH)
@@ -48,7 +44,6 @@ MainWindow::MainWindow(QWidget *parent) :
     // Workspace
     workspaceView = new QOpenGLWorkspaceWidget(this);
     workspaceView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    cpp = new QmlCppBridge(this);
 
     // Header
     QQuickWidget *headerWidget = createQQuickWidget("qrc:/qml/HeaderWithSubHeader.qml");
@@ -87,17 +82,6 @@ int MainWindow::getMinimumPlayHeadOffset() const {
 
 float MainWindow::getMinimumPlayHeadOffsetF() const {
     return MainController::instance()->getZoomController()->getIntervalWidth() * BEATS_IN_TACT;
-}
-
-QQuickWidget *MainWindow::createQQuickWidget(const QString& qmlFile) {
-    return createQQuickWidget(qmlFile, this);
-}
-
-QQuickWidget *MainWindow::createQQuickWidget(const QString &qmlFile, QWidget *parent) {
-    QQuickWidget* qmlWidget = new QQuickWidget(parent);
-    qmlWidget->rootContext()->setContextProperty("cpp", cpp);
-    qmlWidget->setSource(QUrl(qmlFile));
-    return qmlWidget;
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event) {
