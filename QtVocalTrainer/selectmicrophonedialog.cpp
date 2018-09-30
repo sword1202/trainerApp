@@ -38,8 +38,7 @@ SelectMicrophoneDialog::SelectMicrophoneDialog(QWidget* parent, QmlCppBridge* cp
     selectMicrophoneDialogView->setSource(QUrl("qrc:/qml/SelectMicrophoneDialog.qml"));
     rootQml = selectMicrophoneDialogView->rootObject();
 
-    auto* root = selectMicrophoneDialogView->rootObject();
-    QtUtils::addDynamicPropertyChangedListener(root, "selectedMicrophoneIndex", [this] (const QVariant& value) {
+    QtUtils::addDynamicPropertyChangedListener(rootQml, "selectedMicrophoneIndex", [this] (const QVariant& value) {
         onSelectedMicrophoneIndexChanged(value.toInt());
     });
 
