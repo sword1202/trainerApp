@@ -1021,6 +1021,36 @@
 					);
 			};
 		};
+		40CF91DD00EB9AD33AA5D27C = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/appsettings.cpp";
+			name = "appsettings.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		18158AB8AD88BA21054C4EB2 = {
+			fileRef = "40CF91DD00EB9AD33AA5D27C";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		D96FD0D4552B9C87739C2840 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/AudioAverageInputLevelMonitor.cpp";
+			name = "AudioAverageInputLevelMonitor.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		39DBB240DD2EAF000AFA4690 = {
+			fileRef = "D96FD0D4552B9C87739C2840";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
 		BC415B473FEB85492D4E8674 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/appmacos.mm";
@@ -1919,6 +1949,20 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
+		E2CC14FFFD3211E0BDBD684A = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/appsettings.h";
+			name = "appsettings.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
+		8048F99EF71745531DC53A9A = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/PitchDetection/AudioAverageInputLevelMonitor.h";
+			name = "AudioAverageInputLevelMonitor.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
 		E89EF8F42D53D26AE81EB3A0 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback/Decoder/audiodecodercoreaudio_mac.h";
@@ -2085,6 +2129,8 @@
 				"98B1FFB557615E334CE79ADB",
 				"967FD03B37F0BB9EDC90A69E",
 				"627AD52C29E519C6545C3E27",
+				"40CF91DD00EB9AD33AA5D27C",
+				"D96FD0D4552B9C87739C2840",
 				"BC415B473FEB85492D4E8674",
 				"DF4BED6495ED318D0BFE2018",
 				"A7C917B154112562C9709C79",
@@ -2180,6 +2226,8 @@
 				"588DFAD63929DC9BC812006E",
 				"B9E540CDAE0FA090E36E262C",
 				"8D0F495A79EF4AAB6A182039",
+				"E2CC14FFFD3211E0BDBD684A",
+				"8048F99EF71745531DC53A9A",
 				"E89EF8F42D53D26AE81EB3A0");
 			name = "Sources";
 			sourceTree = "<group>";
@@ -2282,6 +2330,8 @@
 				"ACB28F5F3A5ED1E0661AD203",
 				"59260172123C10B5280BCAA2",
 				"890A830B52E3B110A613A507",
+				"18158AB8AD88BA21054C4EB2",
+				"39DBB240DD2EAF000AFA4690",
 				"F512D0DE937285A2596D4954",
 				"3A9D3D3CE7067FBCEA4D8FFF",
 				"35A610BD95B9AF48696237CA",

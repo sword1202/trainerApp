@@ -15,12 +15,16 @@ static const int SMOOTH_LEVEL = 4;
 using namespace CppUtils;
 
 PitchInputReaderAndPlayer::PitchInputReaderAndPlayer() {
+
+}
+
+void PitchInputReaderAndPlayer::init(const char* deviceName) {
     AubioPitchDetector* pitchDetector = new AubioPitchDetector();
     pitchDetector->setThreshold(THRESHOLD);
 
-    audioInputReader = new PortAudioInputReader(BUFFER_SIZE, true);
+    audioInputReader = new PortAudioInputReader(BUFFER_SIZE, true, deviceName);
 
-    init(audioInputReader, SMOOTH_LEVEL, pitchDetector, true);
+    PitchInputReaderCollector::init(audioInputReader, SMOOTH_LEVEL, pitchDetector, true);
 }
 
 void PitchInputReaderAndPlayer::pitchDetected(float frequency, double time) {
@@ -46,4 +50,12 @@ void PitchInputReaderAndPlayer::setOutputVolume(float value) {
 
 float PitchInputReaderAndPlayer::getOutputVolume() const {
     return audioInputReader->getOutputVolume();
+}
+
+const char* PitchInputReaderAndPlayer::getInputDeviceName() const {
+    return audioInputReader->getDeviceName();
+}
+
+void PitchInputReaderAndPlayer::setInputDeviceName(const char *deviceName) const {
+    audioInputReader->setDeviceName(deviceName);
 }

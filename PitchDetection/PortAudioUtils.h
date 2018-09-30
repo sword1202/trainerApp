@@ -15,7 +15,9 @@ public:
     static void terminate();
     static void checkErrors(PaError err);
 
+    static bool hasInputDevices();
     static std::vector<const PaDeviceInfo*> getInputDevices();
+    static const PaDeviceInfo* findInputDeviceByName(const char* name, int* outIndex = nullptr);
 };
 
 

@@ -1,8 +1,10 @@
 #include "qmlpitchinputreader.h"
+#include "appsettings.h"
 
 using namespace CppUtils;
 
 QmlPitchInputReader::QmlPitchInputReader(QObject *parent) : QObject(parent) {
+    init(AppSettings().getMicrophoneDeviceName());
     addPitchDetectedListener([=] (const Pitch& pitch, double time) {
         emit pitchDetected(QmlTimedPitch(pitch, time));
         return DONT_DELETE_LISTENER;

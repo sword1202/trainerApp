@@ -77,6 +77,7 @@
 		C9FFF52677955A96CA2CF85C /* AudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF3F1E0ED03499C30CD3D /* AudioPlayer.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C9FFF5D95B14517981993411 /* AudioFilePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFB85AD13A0DC254A5BFC /* AudioFilePlayer.cpp */; };
 		C9FFF64CA7878CC014CCED77 /* WavAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF4B352C76A7F89AF317E /* WavAudioPlayer.cpp */; };
+		C9FFF662C2AADF362C9B95E1 /* AudioAverageInputLevelMonitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF17F4194D20490873125 /* AudioAverageInputLevelMonitor.cpp */; };
 		C9FFF68F2F35ACFE032D5D00 /* AudioPlayerWithDefaultSeekHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFF31AC6550F4B9EF1E0D /* AudioPlayerWithDefaultSeekHandler.cpp */; };
 		C9FFF7AE7C2048B9BE210E7C /* MidiEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF9C3A05CC2DBEF0526B6 /* MidiEvent.cpp */; };
 		C9FFF8057649F5C2F293FCFF /* MetronomeAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFF5451C1C110F019F87C /* MetronomeAudioPlayer.cpp */; };
@@ -242,6 +243,7 @@
 		C9FFF12A4E0AAAD8E783983E /* MvxPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MvxPlayer.cpp; sourceTree = "<group>"; };
 		C9FFF15878C9F431873450CF /* StringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringUtils.h; path = PitchDetection/CppUtils/StringUtils.h; sourceTree = "<group>"; };
 		C9FFF178B2D4096904FE1347 /* BaseWavAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseWavAudioPlayer.h; sourceTree = "<group>"; };
+		C9FFF17F4194D20490873125 /* AudioAverageInputLevelMonitor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AudioAverageInputLevelMonitor.cpp; path = PitchDetection/AudioAverageInputLevelMonitor.cpp; sourceTree = "<group>"; };
 		C9FFF1E4F9CFE2324A18F83D /* MidiFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiFile.cpp; sourceTree = "<group>"; };
 		C9FFF247E3AA11DD453DF318 /* NvgDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvgDrawer.h; sourceTree = "<group>"; };
 		C9FFF278E14B7F7278955980 /* UiUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UiUtils.m; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 		C9FFFA10D5579C70B88DA4D6 /* AubioPitchDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AubioPitchDetector.h; path = PitchDetection/AubioPitchDetector.h; sourceTree = "<group>"; };
 		C9FFFA10EDA5C043F0ABD81E /* PianoDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PianoDrawer.h; sourceTree = "<group>"; };
 		C9FFFA423EB35396AF0A6669 /* MidiTrack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiTrack.cpp; sourceTree = "<group>"; };
+		C9FFFA669E2A85ED9B9D1C4B /* AudioAverageInputLevelMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioAverageInputLevelMonitor.h; path = PitchDetection/AudioAverageInputLevelMonitor.h; sourceTree = "<group>"; };
 		C9FFFA66ADE36706B9CF5F7F /* MathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MathUtils.h; path = PitchDetection/CppUtils/MathUtils.h; sourceTree = "<group>"; };
 		C9FFFA934598DEB3A7ED2F90 /* SoundFont2PitchRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundFont2PitchRenderer.cpp; sourceTree = "<group>"; };
 		C9FFFA9518C7A5D30F693B87 /* Primitives.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Primitives.h; path = PitchDetection/CppUtils/Primitives.h; sourceTree = "<group>"; };
@@ -546,6 +549,8 @@
 				C9FFF589D2985E576D7DB3B4 /* PortAudioUtils.h */,
 				C9FFFAA8D67588A796D0F11B /* AudioInputReaderWithOutput.h */,
 				C9FFF109DBB5897A44AA6271 /* PortAudioInputReader.h */,
+				C9FFF17F4194D20490873125 /* AudioAverageInputLevelMonitor.cpp */,
+				C9FFFA669E2A85ED9B9D1C4B /* AudioAverageInputLevelMonitor.h */,
 			);
 			name = PitchDetection;
 			sourceTree = "<group>";
@@ -999,6 +1004,7 @@
 				C9FFF3381F494DBBFAF67BBE /* PortAudioUtils.cpp in Sources */,
 				C9FFFA45A0DDD3C3A7792B64 /* qaudiodecoderwrapper.cpp in Sources */,
 				C9FFF93F1E68522736EF77B6 /* RealtimeStreamingAudioPlayer.cpp in Sources */,
+				C9FFF662C2AADF362C9B95E1 /* AudioAverageInputLevelMonitor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

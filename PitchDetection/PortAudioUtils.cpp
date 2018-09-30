@@ -36,3 +36,23 @@ std::vector<const PaDeviceInfo*> PortAudio::getInputDevices() {
 
     return result;
 }
+
+const PaDeviceInfo *PortAudio::findInputDeviceByName(const char *name, int* outIndex) {
+    int deviceCount = Pa_GetDeviceCount();
+    for (int i = 0; i < deviceCount; ++i) {
+        const auto* info = Pa_GetDeviceInfo(i);
+        if (info->maxInputChannels > 0 && strcmp(info->name, name) == 0) {
+            if (outIndex) {
+                *outIndex = i;
+            }
+
+            return info;
+        }
+    }
+
+    return nullptr;
+}
+
+bool PortAudio::hasInputDevices() {
+    return Pa_GetDefaultInputDevice() >= 0;
+}

@@ -15,8 +15,10 @@ int main(int argc, char *argv[])
     QApplication::setAttribute(Qt::AA_UseOpenGLES, false);
     QApplication::setAttribute(Qt::AA_UseSoftwareOpenGL, false);
     QApplication::setAttribute(Qt::AA_UseDesktopOpenGL, true);
-    //QApplication::setAttribute(Qt::AA_ShareOpenGLContexts, true);
-    //QApplication::setAttribute(Qt::AA_DontCheckOpenGLContextThreadAffinity, true);
+
+    QCoreApplication::setOrganizationName("NeboroSoft");
+    QCoreApplication::setOrganizationDomain("neborosoft.com");
+    QCoreApplication::setApplicationName("Vocal Trainer");
 
     qRegisterMetaType<QmlPitch>("Pitch");
     qRegisterMetaType<QmlVxPitch>("VxPitch");

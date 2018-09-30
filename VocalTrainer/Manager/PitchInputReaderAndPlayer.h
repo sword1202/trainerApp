@@ -10,14 +10,18 @@
 #include "RealtimeStreamingAudioPlayer.h"
 
 class PitchInputReaderAndPlayer : public PitchInputReaderCollector {
-    AudioInputReaderWithOutput* audioInputReader;
+    AudioInputReaderWithOutput* audioInputReader = nullptr;
 public:
     PitchInputReaderAndPlayer();
+    void init(const char* deviceName);
 
     void setInputVolume(float value);
     float getInputVolume() const;
     void setOutputVolume(float value);
     float getOutputVolume() const;
+
+    const char * getInputDeviceName() const;
+    void setInputDeviceName(const char *deviceName) const;
 
     ~PitchInputReaderAndPlayer();
     void pitchDetected(float frequency, double time) override;

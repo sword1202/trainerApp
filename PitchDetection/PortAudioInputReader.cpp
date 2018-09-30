@@ -34,41 +34,52 @@ int PortAudioInputReader::portAudioCallback(const void *inputBuffer,
     return paContinue;
 }
 
-PortAudioInputReader::PortAudioInputReader(int maximumBufferSize, bool outputEnabled, int deviceIndex) :
+PortAudioInputReader::PortAudioInputReader(int maximumBufferSize, bool outputEnabled, const char* deviceName) :
         maximumBufferSize(maximumBufferSize),
         outputEnabled(outputEnabled),
-        outputVolume(1.0f) {
-    PaError err = 0;
-    if (deviceIndex < 0) {
-        err = Pa_OpenDefaultStream(&stream,
-                1,          /* 1 input channel */
-                (int) outputEnabled,
-                paInt16,
-                SAMPLE_RATE,
-                maximumBufferSize,
-                portAudioCallback,
-                this);
-    } else {
-        PaStreamParameters inputParameters;
-        inputParameters.sampleFormat = paInt16;
-        inputParameters.channelCount = 1;
-        inputParameters.device = deviceIndex;
-        inputParameters.suggestedLatency = Pa_GetDeviceInfo(deviceIndex)->defaultHighInputLatency;
+        outputVolume(1.0f),
+        deviceName(deviceName ? deviceName : "") {
+    init();
+}
 
-        PaStreamParameters outputParameters;
+void PortAudioInputReader::init() {
+    int deviceIndex;
+    device = PortAudio::findInputDeviceByName(deviceName.data(), &deviceIndex);
+    if (device == nullptr) {
+        deviceIndex = Pa_GetDefaultInputDevice();
+        if (deviceIndex < 0) {
+            throw new std::runtime_error("No input devices found");
+        }
+
+        device = Pa_GetDeviceInfo(deviceIndex);
+        assert(device);
+        deviceName = device->name;
+    }
+
+    PaStreamParameters inputParameters;
+    inputParameters.sampleFormat = paInt16;
+    inputParameters.channelCount = 1;
+    inputParameters.device = deviceIndex;
+    inputParameters.hostApiSpecificStreamInfo = nullptr;
+    inputParameters.suggestedLatency = Pa_GetDeviceInfo(deviceIndex)->defaultHighInputLatency;
+
+    int outputDeviceIndex = Pa_GetDefaultOutputDevice();
+    PaStreamParameters outputParameters;
+    if (outputEnabled) {
         outputParameters.sampleFormat = paInt16;
         outputParameters.channelCount = 1;
-        outputParameters.device = deviceIndex;
-        outputParameters.suggestedLatency = Pa_GetDeviceInfo(deviceIndex)->defaultHighOutputLatency;
-
-        err = Pa_OpenStream(&stream, &inputParameters,
-                &outputParameters,
-                SAMPLE_RATE,
-                maximumBufferSize,
-                paNoFlag,
-                portAudioCallback,
-                this);
+        outputParameters.device = outputDeviceIndex;
+        outputParameters.hostApiSpecificStreamInfo = nullptr;
+        outputParameters.suggestedLatency = Pa_GetDeviceInfo(outputDeviceIndex)->defaultHighOutputLatency;
     }
+
+    PaError err = Pa_OpenStream(&stream, &inputParameters,
+            outputEnabled ? &outputParameters : nullptr,
+            SAMPLE_RATE,
+            maximumBufferSize,
+            paNoFlag,
+            portAudioCallback,
+            this);
 
     PortAudio::checkErrors(err);
 
@@ -77,9 +88,19 @@ PortAudioInputReader::PortAudioInputReader(int maximumBufferSize, bool outputEna
 }
 
 PortAudioInputReader::~PortAudioInputReader() {
-    PaError err = Pa_CloseStream(stream);
-    PortAudio::checkErrors(err);
-    Px_CloseMixer(mixer);
+    destroy();
+}
+
+void PortAudioInputReader::destroy() {
+    if (stream) {
+        PaError err = Pa_CloseStream(stream);
+        PortAudio::checkErrors(err);
+        stream = nullptr;
+    }
+    if (mixer) {
+        Px_CloseMixer(mixer);
+        mixer = nullptr;
+    }
 }
 
 void PortAudioInputReader::start() {
@@ -116,4 +137,27 @@ float PortAudioInputReader::getOutputVolume() const {
 
 bool PortAudioInputReader::isOutputEnabled() const {
     return outputEnabled;
+}
+
+const char* PortAudioInputReader::getDeviceName() const {
+    return deviceName.data();
+}
+
+void PortAudioInputReader::setDeviceName(const char* deviceName) {
+    deviceName = deviceName ? deviceName : "";
+    if (deviceName == this->deviceName) {
+        return;
+    }
+
+    this->deviceName = deviceName;
+    bool running = isRunning();
+    destroy();
+    init();
+    if (running) {
+        start();
+    }
+}
+
+bool PortAudioInputReader::isRunning() {
+    return stream && Pa_IsStreamActive(stream);
 }

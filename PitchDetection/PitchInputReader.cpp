@@ -11,7 +11,8 @@ using namespace CppUtils;
 PitchInputReader::PitchInputReader(AudioInputReader *audioInputReader, PitchDetector* pitchDetector, int smoothLevel) :
         audioInputReader(audioInputReader), pitchDetector(pitchDetector),
         smoothingAudioBuffer((size_t) smoothLevel, (size_t) audioInputReader->getMaximumBufferSize()) {
-    pitchDetector->init(audioInputReader->getMaximumBufferSize() * smoothLevel, audioInputReader->getSampleRate());
+    int sampleRate = audioInputReader->getSampleRate();
+    pitchDetector->init(audioInputReader->getMaximumBufferSize() * smoothLevel, sampleRate);
     audioInputReader->callbacks.push_back([=] (const int16_t* buffer, int size) {
         buffer = smoothingAudioBuffer.getRunPitchDetectionBufferIfReady(buffer, (size_t) size);
         if (!buffer) {
