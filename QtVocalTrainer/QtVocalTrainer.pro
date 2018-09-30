@@ -61,7 +61,6 @@ HEADERS += \
     workspacedrawerwidgetsetup.h \
     fonts.h \
     qpainterworkspacewidget.h \
-    ../VocalTrainer/Playback/AudioPlayback/Decoder/windows/qaudiodecoderwrapper.h
 
 SOURCES += \
     main.cpp \
