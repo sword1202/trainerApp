@@ -12,7 +12,7 @@ constexpr double THRESHOLD = 60;
 
 void AudioAverageInputLevelMonitor::operator()(const int16_t *data, int size) {
     AudioUtils::Int16SamplesIntoFloatSamples(data, size, tempFloatBuffer.data());
-    double sum = CppUtils::AbsoluteSum<double>(tempFloatBuffer.data(), (int)tempFloatBuffer.size());
+    double sum = CppUtils::AbsoluteAverage<double>(tempFloatBuffer.data(), (int)tempFloatBuffer.size());
     double value = 20 * log10(sum) + THRESHOLD;
     double inputLevel = value < 0 ? 0 : value / THRESHOLD;
     callback(inputLevel);

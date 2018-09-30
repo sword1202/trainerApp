@@ -9,12 +9,16 @@
 #include "appsettings.h"
 #include "app.h"
 #include "AudioAverageInputLevelMonitor.h"
+#include <iostream>
 
 constexpr int DIALOG_WIDTH = 439;
 constexpr int DIALOG_HEIGHT = 331;
 
 constexpr int BUFFER_SIZE = 1024;
 constexpr int MICROPHONE_MAX_LEVEL = 10;
+
+using std::cout;
+using std::endl;
 
 using namespace CppUtils;
 
@@ -41,7 +45,9 @@ SelectMicrophoneDialog::SelectMicrophoneDialog(QWidget* parent, QmlCppBridge* cp
 
     setAttribute(Qt::WA_DeleteOnClose, true);
 
-    audioInputReader = new PortAudioInputReader(BUFFER_SIZE, false, AppSettings().getMicrophoneDeviceName().data());
+    audioInputReader = new PortAudioInputReader(BUFFER_SIZE,
+            false, // outputEnabled
+            AppSettings().getMicrophoneDeviceName().data());
     audioInputReader->callbacks.push_back(AudioAverageInputLevelMonitor(BUFFER_SIZE, [this] (double level) {
         onInputLevelChanged(level);
     }));
