@@ -5,10 +5,15 @@
 
 #include "AudioFilePlayer.h"
 #include "AudioUtils.h"
+#include <iostream>
+#include <iomanip>
+
+using std::cout;
+using std::endl;
 
 int AudioFilePlayer::readNextSamplesBatch(void *intoBuffer, int framesCount, const AudioPlayer::PlaybackData &playbackData) {
     int bufferSeekBefore = getBufferSeek();
-    int filePos = audioDecoder->seek(bufferSeekBefore * playbackData.numChannels);
+    audioDecoder->seek(bufferSeekBefore * playbackData.numChannels);
 
     assert(audioDecoder->positionInSamples() == bufferSeekBefore * playbackData.numChannels);
     int samplesCount = framesCount * playbackData.numChannels;

@@ -13,6 +13,7 @@
 #include <iostream>
 #include <cmath>
 #include <PlayingPitchSequence.h>
+#include <iomanip>
 
 #include "NvgDrawer.h"
 

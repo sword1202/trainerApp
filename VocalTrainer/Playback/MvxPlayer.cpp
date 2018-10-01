@@ -34,18 +34,14 @@ MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
         }
 
         this->onSeekChanged(seek);
-
-        return DONT_DELETE_LISTENER;
     });
 
     instrumentalPlayer.onCompleteListeners.addListener([=] {
         this->onComplete();
-        return DONT_DELETE_LISTENER;
     });
 
     instrumentalPlayer.onPlaybackStartedListeners.addListener([=] {
         this->onPlaybackStarted();
-        return DONT_DELETE_LISTENER;
     });
 }
 

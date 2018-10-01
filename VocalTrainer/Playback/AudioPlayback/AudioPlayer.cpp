@@ -112,8 +112,6 @@ void AudioPlayer::prepare() {
 
     onNoDataAvailableListeners.addListener([=] {
         onPlaybackStoppedListeners.executeAll();
-
-        return DONT_DELETE_LISTENER;
     });
 }
 
@@ -249,7 +247,7 @@ void AudioPlayer::playFromSeekToSeek(double a, double b, const std::function<voi
     assert(b <= getTrackDurationInSeconds());
 
     play(a);
-    seekChangedListeners.addListener([=] (double seek, double _) {
+    seekChangedListeners.addListenerWithAction([=] (double seek, double _) {
         if (seek >= b) {
             pause();
             onFinish();
@@ -297,11 +295,10 @@ const AudioPlayer::PlaybackData &AudioPlayer::getPlaybackData() const {
 
 void AudioPlayer::setupPlaybackStartedListener() {
     assert(dataSentToOutputListenerKey == 0);
-    dataSentToOutputListenerKey = onDataSentToOutputListeners.addListener([=] (void*, int) {
+    dataSentToOutputListenerKey = onDataSentToOutputListeners.addOneShotListener([=] (void*, int) {
         playing = true;
         onPlaybackStartedListeners.executeAll();
         dataSentToOutputListenerKey = 0;
-        return DELETE_LISTENER;
     });
 }
 
