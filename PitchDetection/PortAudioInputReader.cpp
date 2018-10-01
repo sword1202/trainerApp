@@ -14,7 +14,7 @@ int PortAudioInputReader::portAudioCallback(const void *inputBuffer,
         void *userData) {
     PortAudioInputReader *self = (PortAudioInputReader *) userData;
 
-    CppUtils::Functions::ExecuteAll(self->callbacks, (int16_t *) inputBuffer, (int) framesPerBuffer);
+    self->callbacks.executeAll((int16_t *) inputBuffer, (int) framesPerBuffer);
 
     if (self->isOutputEnabled()) {
         const float outputVolume = self->getOutputVolume();

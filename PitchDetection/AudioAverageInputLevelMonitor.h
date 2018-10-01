@@ -12,12 +12,12 @@ class AudioAverageInputLevelMonitor {
 public:
     typedef std::function<void(double)> Callback;
 private:
-    std::vector<float> tempFloatBuffer;
+    mutable std::vector<float> tempFloatBuffer;
     Callback callback;
 public:
 
     AudioAverageInputLevelMonitor(int bufferSize, const Callback& callback);
-    void operator()(const int16_t* data, int size);
+    void operator()(const int16_t* data, int size) const;
 };
 
 

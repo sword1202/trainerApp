@@ -7,14 +7,13 @@
 
 
 #include <cstdint>
-#include <functional>
-#include "FunctionsList.h"
+#include "ListenersSet.h"
 
 class AudioInputReader {
 public:
     typedef std::function<void(const int16_t*, int)> Callback;
 
-    CppUtils::FunctionsList<const int16_t*, int> callbacks;
+    CppUtils::SynchronizedListenersSet<const int16_t*, int> callbacks;
 
     virtual void start() = 0;
     virtual void stop() = 0;

@@ -13,7 +13,7 @@ PitchInputReader::PitchInputReader(AudioInputReader *audioInputReader, PitchDete
         smoothingAudioBuffer((size_t) smoothLevel, (size_t) audioInputReader->getMaximumBufferSize()) {
     int sampleRate = audioInputReader->getSampleRate();
     pitchDetector->init(audioInputReader->getMaximumBufferSize() * smoothLevel, sampleRate);
-    audioInputReader->callbacks.push_back([=] (const int16_t* buffer, int size) {
+    audioInputReader->callbacks.addListener([=] (const int16_t* buffer, int size) {
         buffer = smoothingAudioBuffer.getRunPitchDetectionBufferIfReady(buffer, (size_t) size);
         if (!buffer) {
             return;
