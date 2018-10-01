@@ -30,8 +30,8 @@ int main(int argc, char *argv[])
     VxApp a(argc, argv);
     a.setAttribute(Qt::AA_DontCreateNativeWidgetSiblings);
 
-    WelcomeWindow w;
-    w.show();
+    MainWindow w;
+    w.showMaximized();
 
     return a.exec();
 }

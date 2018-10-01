@@ -16,5 +16,17 @@ Rectangle {
                 GradientStop { position: 1.0; color: "#CBC7F9" }
             }
         }
+
+        Rectangle {
+
+        }
+
+        Rectangle {
+            property bool selected: false
+            width: parent.width
+            height: 75
+
+            color: selected ? "#B7C0EF" : "#00000000"
+        }
     }
 }
