@@ -23,6 +23,8 @@ public:
     const char * getInputDeviceName() const;
     void setInputDeviceName(const char *deviceName) const;
 
+    void addAudioInputReaderCallback(const AudioInputReader::Callback& callback);
+
     ~PitchInputReaderAndPlayer();
     void pitchDetected(float frequency, double time) override;
 };

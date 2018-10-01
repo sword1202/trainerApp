@@ -59,3 +59,7 @@ const char* PitchInputReaderAndPlayer::getInputDeviceName() const {
 void PitchInputReaderAndPlayer::setInputDeviceName(const char *deviceName) const {
     audioInputReader->setDeviceName(deviceName);
 }
+
+void PitchInputReaderAndPlayer::addAudioInputReaderCallback(const AudioInputReader::Callback &callback) {
+    audioInputReader->callbacks.push_back(callback);
+}
