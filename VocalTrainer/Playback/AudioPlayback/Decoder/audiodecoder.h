@@ -70,7 +70,7 @@ public:
     virtual void open(std::string &&data) = 0;
 
     /** Seek to a sample in the file */
-    virtual int seek(int filepos) = 0;
+    virtual void seek(int filepos) = 0;
 
     /** Read a maximum of 'size' samples of audio into buffer.
         Samples are always returned as 16-bit integers, with stereo interlacing.

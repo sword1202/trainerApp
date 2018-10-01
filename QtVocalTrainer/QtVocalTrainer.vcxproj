@@ -241,7 +241,6 @@
     <ClCompile Include="..\VocalTrainer\nanovg\nanovg.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\qaudiodecoderwrapper.cpp" />
-    <ClCompile Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\windows\qaudiodecoderwrapper.cpp" />
     <ClCompile Include="qmlpitch.cpp" />
     <ClCompile Include="qmlpitchinputreader.cpp" />
     <ClCompile Include="qmltimedpitch.cpp" />
@@ -335,7 +334,6 @@
     <QtMoc Include="player.h">
     </QtMoc>
     <ClInclude Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\qaudiodecoderwrapper.h" />
-    <ClInclude Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\windows\qaudiodecoderwrapper.h" />
     <QtMoc Include="qmlpitch.h">
     </QtMoc>
     <QtMoc Include="qmlpitchinputreader.h">

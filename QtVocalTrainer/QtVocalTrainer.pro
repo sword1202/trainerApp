@@ -166,14 +166,14 @@ CoreFoundation -framework AVFoundation -framework CoreServices -framework CoreAu
 
 win32 {
     HEADERS += \
-      ../VocalTrainer/Playback/AudioPlayback/Decoder/qaudiodecoderwrapper.h
+        ../VocalTrainer/Playback/AudioPlayback/Decoder/audiodecodermediafoundation_win.h
 
     SOURCES += \
-      ../VocalTrainer/Playback/AudioPlayback/Decoder/qaudiodecoderwrapper.cpp
+        ../VocalTrainer/Playback/AudioPlayback/Decoder/audiodecodermediafoundation_win.cpp
 
 CONFIG(debug, debug|release) {
     LIBS += ../libs/windows/Debug/SoundTouchD.lib
-    LIBS += ../libs/windows/Debug/libboost_serialization-vc141-mt-gd-x32-1_67.lib
+    LIBS += ../libs/windows/Debug/libboost_serialization-vc140-mt-gd-x32-1_67.lib
     LIBS += ../libs/windows/Debug/portaudio.lib
     LIBS += ../libs/windows/Debug/aubio.lib
 } else {

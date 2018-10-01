@@ -41,7 +41,7 @@
 #ifdef __APPLE__
 #include "audiodecodercoreaudio_mac.h"
 #elif _WIN32
-#include "qaudiodecoderwrapper.h"
+#include "audiodecodermediafoundation_win.h"
 #endif
 
 int    AudioDecoder::numSamples()        const { return m_iNumSamples; }
@@ -58,7 +58,7 @@ AudioDecoder *AudioDecoder::create() {
 #ifdef __APPLE__
     return new AudioDecoderCoreAudio();
 #else
-    return new QAudioDecoderWrapper();
+    return new AudioDecoderMediaFoundation();
 #endif
 };
 

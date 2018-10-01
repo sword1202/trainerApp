@@ -209,9 +209,6 @@
     <ClCompile Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\qaudiodecoderwrapper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\windows\qaudiodecoderwrapper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="qmlpitch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -473,9 +470,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <ClInclude Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\qaudiodecoderwrapper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\windows\qaudiodecoderwrapper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <QtMoc Include="qmlpitch.h">

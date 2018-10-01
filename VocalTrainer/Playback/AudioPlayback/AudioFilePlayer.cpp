@@ -5,13 +5,14 @@
 
 #include "AudioFilePlayer.h"
 #include "AudioUtils.h"
-#include <QDebug>
 
 int AudioFilePlayer::readNextSamplesBatch(void *intoBuffer, int framesCount, const AudioPlayer::PlaybackData &playbackData) {
     int bufferSeekBefore = getBufferSeek();
-    int filePos = audioDecoder->seek(bufferSeekBefore * playbackData.numChannels);
+    if (audioDecoder->positionInSamples() != bufferSeekBefore * playbackData.numChannels) {
+        audioDecoder->seek(bufferSeekBefore * playbackData.numChannels);
+        assert (audioDecoder->positionInSamples() != bufferSeekBefore * playbackData.numChannels);
+    }
 
-    assert(audioDecoder->positionInSamples() == bufferSeekBefore * playbackData.numChannels);
     int samplesCount = framesCount * playbackData.numChannels;
     int readFramesCount = audioDecoder->read(samplesCount, (short*)intoBuffer)
             / playbackData.numChannels;

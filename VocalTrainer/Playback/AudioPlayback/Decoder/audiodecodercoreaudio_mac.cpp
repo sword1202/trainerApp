@@ -216,7 +216,7 @@ void AudioDecoderCoreAudio::open(std::string &&data) {
 	seek(0);
 }
 
-int AudioDecoderCoreAudio::seek(int sampleIdx) {
+void AudioDecoderCoreAudio::seek(int sampleIdx) {
     OSStatus err = noErr;
     SInt64 segmentStart = sampleIdx / 2;
 
@@ -231,8 +231,6 @@ int AudioDecoderCoreAudio::seek(int sampleIdx) {
 	}
 
     m_iPositionInSamples = sampleIdx;
-
-    return m_iPositionInSamples; //filepos;
 }
 
 int AudioDecoderCoreAudio::read(int size, SAMPLE *destination) {
