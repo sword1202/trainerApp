@@ -1081,6 +1081,21 @@
 					);
 			};
 		};
+		0E978984590595EC7FDEDB62 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager/PlaybackBoundsSelectionController.cpp";
+			name = "PlaybackBoundsSelectionController.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		A0AE82E8BAE9C2925F10EE16 = {
+			fileRef = "0E978984590595EC7FDEDB62";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
 		BC415B473FEB85492D4E8674 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/appmacos.mm";
@@ -2037,6 +2052,13 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
+		C5F6E0484D0A94290CD879D6 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager/PlaybackBoundsSelectionController.h";
+			name = "PlaybackBoundsSelectionController.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
 		E89EF8F42D53D26AE81EB3A0 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback/Decoder/audiodecodercoreaudio_mac.h";
@@ -2209,6 +2231,7 @@
 				"D96FD0D4552B9C87739C2840",
 				"EAA9D656863FCA9437EFEA18",
 				"0495EF9D1D1EB8CAF3E4B6CC",
+				"0E978984590595EC7FDEDB62",
 				"BC415B473FEB85492D4E8674",
 				"DF4BED6495ED318D0BFE2018",
 				"A7C917B154112562C9709C79",
@@ -2308,6 +2331,7 @@
 				"8048F99EF71745531DC53A9A",
 				"27BA51080E552D09999C61BE",
 				"1BC4E2B9EE682F7A82FCF86B",
+				"C5F6E0484D0A94290CD879D6",
 				"E89EF8F42D53D26AE81EB3A0");
 			name = "Sources";
 			sourceTree = "<group>";
@@ -2414,6 +2438,7 @@
 				"39DBB240DD2EAF000AFA4690",
 				"473D3D3F961CFCAE926176C7",
 				"3701D571ECFF4B9CA0741977",
+				"A0AE82E8BAE9C2925F10EE16",
 				"F512D0DE937285A2596D4954",
 				"3A9D3D3CE7067FBCEA4D8FFF",
 				"35A610BD95B9AF48696237CA",

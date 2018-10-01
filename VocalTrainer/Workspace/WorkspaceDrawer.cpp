@@ -210,7 +210,6 @@ void WorkspaceDrawer::drawPitches() const {
     double timeEnd = timeBegin + workspaceDuration;
 
     float relativeHeight = getMaximumGridTranslation() - getGridTranslation() + getGridHeight();
-    cout<<"relativeHeight="<<relativeHeight<<endl;
     vxFile->iteratePitchesInTimeRange(timeBegin, timeEnd, [&] (const VxPitch& vxPitch) {
         double pitchTimeBegin = vxFile->ticksToSeconds(vxPitch.startTickNumber);
         double pitchDuration = vxFile->ticksToSeconds(vxPitch.ticksCount);
@@ -583,4 +582,17 @@ bool WorkspaceDrawer::getBoundsStartXAndWidth(const PlaybackBounds &bounds, floa
 void WorkspaceDrawer::setPlayHeadTriangleImage(Drawer::Image *image) {
     //assert(playHeadImage == nullptr && image != nullptr);
     playHeadTriangleImage = image;
+}
+
+float WorkspaceDrawer::getSeekFromXPositionOnWorkspace(float x) {
+    x -= intervalWidth;
+    x -= getGridBeginXPosition();
+
+    float seek = x / intervalWidth / intervalsPerSecond;
+    seek += getWorkspaceSeek();
+    return seek;
+}
+
+float WorkspaceDrawer::getGridBeginXPosition() const {
+    return PIANO_WIDTH;
 }

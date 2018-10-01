@@ -34,14 +34,16 @@ CPP_UTILS_DLLHIDE class TextImagesFactory : public DrawerTextImagesFactory {
     }
 public:
     void load(DrawerImpl* drawer, int devicePixelRatio) {
+        // digits
         for (int textInt = 0; textInt <= 9; ++textInt) {
             char ch = (char)textInt + '0';
-            addImage(drawer, devicePixelRatio, 11, ch);
-            addImage(drawer, devicePixelRatio, 8, ch);
+            addImage(drawer, devicePixelRatio, WorkspaceDrawer::YARD_STICK_FONT_SIZE, ch);
+            addImage(drawer, devicePixelRatio, PianoDrawer::FONT_SIZE, ch);
         }
 
+        // pitch names
         for (char ch = 'A'; ch <= 'G'; ch++) {
-            addImage(drawer, devicePixelRatio, 8, ch);
+            addImage(drawer, devicePixelRatio, PianoDrawer::FONT_SIZE, ch);
         }
     }
 };
@@ -106,4 +108,12 @@ WorkspaceDrawerWidgetSetup::~WorkspaceDrawerWidgetSetup() {
     if (workspaceDrawer) {
         delete workspaceDrawer;
     }
+}
+
+void WorkspaceDrawerWidgetSetup::onMouseMove(float x) {
+    MainController::instance()->getPlaybackBoundsSelectionController()->onWorkspaceMouseMove(x);
+}
+
+void WorkspaceDrawerWidgetSetup::onMouseClick(float x) {
+    MainController::instance()->getPlaybackBoundsSelectionController()->onWorkspaceMouseClick(x);
 }

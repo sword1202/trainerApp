@@ -27,6 +27,10 @@ protected:
 
 public:
     virtual ~WorkspaceDrawerWidgetSetup();
+
+protected:
+    void onMouseMove(float x);
+    void onMouseClick(float x);
 };
 
 #endif // WORKSPACEDRAWERWIDGETSETUP_H

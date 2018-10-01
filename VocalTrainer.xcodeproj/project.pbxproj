@@ -86,6 +86,7 @@
 		C9FFF8BCB6895CF2BEF1C29D /* MidiFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF51CA94B2770B893C639 /* MidiFileReader.cpp */; };
 		C9FFF93F1E68522736EF77B6 /* RealtimeStreamingAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF088F016800CE05E6910 /* RealtimeStreamingAudioPlayer.cpp */; };
 		C9FFF968C13BA0F8889C0775 /* audiodecodercoreaudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF3C10742682FA7383057 /* audiodecodercoreaudio.cpp */; };
+		C9FFF96E0CD7C57C3C66DA2B /* PlaybackBoundsSelectionController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF4E28E480217CB32ABB4 /* PlaybackBoundsSelectionController.cpp */; };
 		C9FFF97C113AF5171AC7FE41 /* VxFileAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE25C60D3EAE8633BC72 /* VxFileAudioPlayer.cpp */; };
 		C9FFF9A98FE6194C4185CA07 /* nanovg_mtl_shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF7E457FED8A685600F59 /* nanovg_mtl_shaders.metal */; };
 		C9FFF9C7B2E1868FA95D191F /* MainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFF2396A3AAA662803D5A /* MainViewController.mm */; };
@@ -233,6 +234,7 @@
 		C9FFF08B2D6B8FA88F0959E4 /* WorkspaceDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WorkspaceDrawer.cpp; sourceTree = "<group>"; };
 		C9FFF08E11535354E15CC819 /* MvxFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MvxFile.cpp; sourceTree = "<group>"; };
 		C9FFF093B6C66FAA20714200 /* MidiFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiFileReader.h; sourceTree = "<group>"; };
+		C9FFF096F9322A74CE59C80F /* PlaybackBoundsSelectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackBoundsSelectionController.h; sourceTree = "<group>"; };
 		C9FFF0A0867AAEAF3C36F59F /* VxFileAudioDataGeneratorConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxFileAudioDataGeneratorConfig.h; sourceTree = "<group>"; };
 		C9FFF0A71BF842FC6C348D0C /* AudioUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AudioUtils.cpp; path = PitchDetection/AudioUtils.cpp; sourceTree = "<group>"; };
 		C9FFF0A770C7C4A877771027 /* melody.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = melody.mid; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 		C9FFF4AF99CFAEC81D8A838A /* audiodecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = audiodecoder.cpp; sourceTree = "<group>"; };
 		C9FFF4B352C76A7F89AF317E /* WavAudioPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WavAudioPlayer.cpp; sourceTree = "<group>"; };
 		C9FFF4CA7D0D30885678F3D6 /* MainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainWindowController.h; sourceTree = "<group>"; };
+		C9FFF4E28E480217CB32ABB4 /* PlaybackBoundsSelectionController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlaybackBoundsSelectionController.cpp; sourceTree = "<group>"; };
 		C9FFF4F6CC990DF06B2BB1C7 /* PitchRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchRenderer.h; sourceTree = "<group>"; };
 		C9FFF519F5A10D60A8B1F899 /* PitchesCollector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PitchesCollector.cpp; path = PitchDetection/PitchesCollector.cpp; sourceTree = "<group>"; };
 		C9FFF51CA94B2770B893C639 /* MidiFileReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiFileReader.cpp; sourceTree = "<group>"; };
@@ -802,6 +805,8 @@
 				C9FFF8A31C6F0BFCB55F72A1 /* PitchInputReaderAndPlayer.h */,
 				C9FFFC295B181CD47AA7CEBC /* ZoomController.cpp */,
 				C9FFF981FFAA6BEAAC30DFA6 /* ZoomController.h */,
+				C9FFF4E28E480217CB32ABB4 /* PlaybackBoundsSelectionController.cpp */,
+				C9FFF096F9322A74CE59C80F /* PlaybackBoundsSelectionController.h */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -1005,6 +1010,7 @@
 				C9FFFA45A0DDD3C3A7792B64 /* qaudiodecoderwrapper.cpp in Sources */,
 				C9FFF93F1E68522736EF77B6 /* RealtimeStreamingAudioPlayer.cpp in Sources */,
 				C9FFF662C2AADF362C9B95E1 /* AudioAverageInputLevelMonitor.cpp in Sources */,
+				C9FFF96E0CD7C57C3C66DA2B /* PlaybackBoundsSelectionController.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

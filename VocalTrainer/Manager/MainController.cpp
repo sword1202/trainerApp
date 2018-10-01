@@ -6,6 +6,7 @@
 #include "MainController.h"
 #include "PitchInputReaderAndPlayer.h"
 #include "PlaybackBounds.h"
+#include "Executors.h"
 #include <iostream>
 
 using namespace CppUtils;
@@ -86,6 +87,9 @@ ZoomController *MainController::getZoomController() const {
 MainController::~MainController() {
     delete mvxPlayer;
     delete pitchInputReader;
+    if (playbackBoundsSelectionController) {
+        delete playbackBoundsSelectionController;
+    }
 }
 
 MvxPlayer *MainController::getPlayer() const {
@@ -125,6 +129,8 @@ void MainController::setWorkspaceController(WorkspaceController *workspaceContro
         workspaceController->setVerticalScrollPosition(value);
         workspaceController->update();
     });
+
+    playbackBoundsSelectionController = new PlaybackBoundsSelectionController(this->workspaceController, mvxPlayer);
 }
 
 void MainController::updateSeek(double seek) {
@@ -146,5 +152,9 @@ void MainController::updateZoom() {
 
 void MainController::updateWorkspaceFirstPitch() {
     workspaceController->setFirstVisiblePitch(zoomController->getFirstPitch());
+}
 
+PlaybackBoundsSelectionController *MainController::getPlaybackBoundsSelectionController() const {
+    assert(playbackBoundsSelectionController != nullptr);
+    return playbackBoundsSelectionController;
 }

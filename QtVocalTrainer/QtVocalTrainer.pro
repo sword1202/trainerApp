@@ -68,7 +68,8 @@ HEADERS += \
     appsettings.h \
     ../PitchDetection/AudioAverageInputLevelMonitor.h \
     welcomewindow.h \
-    basemainwindow.h
+    basemainwindow.h \
+    ../VocalTrainer/Manager/PlaybackBoundsSelectionController.h
 
 SOURCES += \
     main.cpp \
@@ -127,7 +128,8 @@ SOURCES += \
     appsettings.cpp \
     ../PitchDetection/AudioAverageInputLevelMonitor.cpp \
     welcomewindow.cpp \
-    basemainwindow.cpp
+    basemainwindow.cpp \
+    ../VocalTrainer/Manager/PlaybackBoundsSelectionController.cpp
 
 RESOURCES += qml.qrc
 

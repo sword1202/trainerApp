@@ -63,7 +63,6 @@ MainWindow::MainWindow() :
     workspaceLayout->addWidget(verticalScrollWidget);
     mainLayout->addLayout(workspaceLayout);
 
-    setBoundsSelectionEnabled(false);
     setupMenus();
 }
 
@@ -102,10 +101,10 @@ void MainWindow::setupMenus() {
 }
 
 void MainWindow::onFileOpen() {
-    QString fileName = QFileDialog::getOpenFileName(
-            this, "Select .mvx file for signing", "", "Mvx files(*.mvx);; All files(*)");
+//    QString fileName = QFileDialog::getOpenFileName(
+//            this, "Select .mvx file for signing", "", "Mvx files(*.mvx);; All files(*)");
 
-//    QString fileName = "C:/projects/projects_2018/vocal/torero.mvx";
+    QString fileName = "/Users/Semyon/Downloads/torero.mvx";
     if (!fileName.isEmpty()) {
         VxApp::instance()->getPlayer()->setSource(fileName);
     }
@@ -117,7 +116,7 @@ void MainWindow::onSelectMicrophone() {
 }
 
 void MainWindow::setBoundsSelectionEnabled(bool enabled) {
-    boundsSelectionRunning = enabled;
+    MainController::instance()->getPlaybackBoundsSelectionController()->setBoundsSelectionEnabled(enabled);
 }
 
 MainWindow::~MainWindow()

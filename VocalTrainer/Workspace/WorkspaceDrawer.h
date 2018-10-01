@@ -83,7 +83,6 @@ class WorkspaceDrawer : public WorkspaceController {
     float getMaximumGridTranslation() const;
 
     float getWorkspaceDuration() const;
-    float getWorkspaceSeek() const;
 
     float durationToWidth(double duration) const;
 
@@ -162,6 +161,10 @@ public:
     void setPlaybackBounds(const PlaybackBounds &playbackBounds) override;
 
     void setPlayHeadTriangleImage(Drawer::Image *image);
+
+    float getWorkspaceSeek() const override;
+    float getGridBeginXPosition() const;
+    float getSeekFromXPositionOnWorkspace(float x) override;
 };
 
 

@@ -83,6 +83,8 @@ public:
     double getDuration() const;
 
     double getBeatsPerMinute() const;
+    double getBeatsPerSecond() const;
+    double getTactsPerSecond() const;
 
     double getTempoFactor() const;
 

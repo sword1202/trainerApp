@@ -13,12 +13,14 @@
 #include "WorkspaceController.h"
 #include "ZoomController.h"
 #include "PlaybackBounds.h"
+#include "PlaybackBoundsSelectionController.h"
 
 class MainController {
     PitchInputReaderAndPlayer* pitchInputReader;
     MvxPlayer* mvxPlayer;
     ZoomController* zoomController;
     WorkspaceController* workspaceController = nullptr;
+    PlaybackBoundsSelectionController* playbackBoundsSelectionController = nullptr;
 
     void updateZoom();
     void updateWorkspaceFirstPitch();
@@ -34,6 +36,7 @@ public:
 
     MvxPlayer *getPlayer() const;
     ZoomController *getZoomController() const;
+    PlaybackBoundsSelectionController* getPlaybackBoundsSelectionController() const;
 
     // Should be executed on a render thread, the same thread as workspace->draw is executed
     void setWorkspaceController(WorkspaceController* workspaceController);

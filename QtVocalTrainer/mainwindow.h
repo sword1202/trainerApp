@@ -19,8 +19,6 @@ class MainWindow : public BaseMainWindow
     QQuickWidget *verticalScrollWidget;
     QQuickItem *verticalScroll;
 
-    bool boundsSelectionRunning = false;
-
     int getMinimumPlayHeadOffset() const;
     float getMinimumPlayHeadOffsetF() const;
 protected:

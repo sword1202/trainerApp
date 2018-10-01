@@ -5,6 +5,7 @@
 #include <QOpenGLPaintDevice>
 #include <QOpenGLTexture>
 #include <QDebug>
+#include "MainController.h"
 
 QOpenGLWorkspaceWidget::QOpenGLWorkspaceWidget(QWidget* parent) : QOpenGLWidget(parent)
 {
@@ -25,6 +26,12 @@ void QOpenGLWorkspaceWidget::initializeGL() {
         new NvgDrawer();
 #endif
     setupWorkspaceDrawer(this, drawer);
+
+    MainController::instance()->
+            getPlaybackBoundsSelectionController()->
+            addBoundsSelectionEnabledChangedListener([this] (bool value) {
+        setMouseTracking(value);
+    });
 }
 
 void QOpenGLWorkspaceWidget::resizeGL(int w, int h) {
@@ -62,11 +69,13 @@ void QOpenGLWorkspaceWidget::paintGL() {
 }
 
 void QOpenGLWorkspaceWidget::mousePressEvent(QMouseEvent *event) {
-
+    if (event->button() == Qt::LeftButton) {
+        onMouseClick(event->x());
+    }
 }
 
 void QOpenGLWorkspaceWidget::mouseMoveEvent(QMouseEvent *event) {
-
+    onMouseMove(event->x());
 }
 
 QOpenGLWorkspaceWidget::~QOpenGLWorkspaceWidget() {

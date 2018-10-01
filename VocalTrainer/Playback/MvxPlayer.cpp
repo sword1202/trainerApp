@@ -196,6 +196,14 @@ double MvxPlayer::getBeatsPerMinute() const {
     return beatsPerMinute;
 }
 
+double MvxPlayer::getBeatsPerSecond() const {
+    return beatsPerMinute / 60.0;
+}
+
+double MvxPlayer::getTactsPerSecond() const {
+    return getBeatsPerSecond() / BEATS_IN_TACT;
+}
+
 void MvxPlayer::onPlaybackStarted() {
     playStartedTime = TimeUtils::NowInSeconds();
     playStartedSeek = getSeek();

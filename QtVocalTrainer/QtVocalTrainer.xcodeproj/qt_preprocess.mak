@@ -323,6 +323,7 @@ moc_app.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QApplic
 		../VocalTrainer/Playback/PlaybackBounds.h \
 		../VocalTrainer/Workspace/WorkspaceController.h \
 		../VocalTrainer/Manager/ZoomController.h \
+		../VocalTrainer/Manager/PlaybackBoundsSelectionController.h \
 		player.h \
 		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QObject \
 		qmlvxpitch.h \
