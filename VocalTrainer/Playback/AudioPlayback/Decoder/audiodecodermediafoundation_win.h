@@ -28,8 +28,6 @@ private:
     IMFSourceReader *reader;
     IMFMediaType *audioType;
 
-    wchar_t *fileNameW; // Temp solution
-
     int nextFrame = 0;
     short *m_leftoverBuffer;
     size_t m_leftoverBufferSize = 0;
