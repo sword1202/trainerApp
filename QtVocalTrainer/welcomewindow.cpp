@@ -7,7 +7,7 @@
 
 constexpr double WINDOW_SIZE_RATIO = 0.8;
 
-WelcomeWindow::WelcomeWindow() : BaseMainWindow(QColor::fromRgb(0xD2, 0xD0, 0xDD)) {
+WelcomeWindow::WelcomeWindow() : BaseMainWindow(QColor::fromRgb(0xE8, 0xE7, 0xF0)) {
     widget = createQQuickWidget("qrc:/qml/WelcomeWindow.qml");
     QScreen* screen = QGuiApplication::primaryScreen();
     QSize availableSize = screen->availableSize();
