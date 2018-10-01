@@ -585,11 +585,12 @@ void WorkspaceDrawer::setPlayHeadTriangleImage(Drawer::Image *image) {
 }
 
 float WorkspaceDrawer::getSeekFromXPositionOnWorkspace(float x) {
-    x -= intervalWidth;
+    x -= intervalWidth * BEATS_IN_TACT;
     x -= getGridBeginXPosition();
 
     float seek = x / intervalWidth / intervalsPerSecond;
-    seek += getWorkspaceSeek();
+    float workspaceSeek = getWorkspaceSeek();
+    seek += workspaceSeek;
     return seek;
 }
 
