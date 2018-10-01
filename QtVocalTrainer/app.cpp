@@ -35,6 +35,11 @@ VxApp::VxApp(int &argc, char *argv[]) : QApplication(argc, argv) {
 }
 
 void VxApp::executeOnMainThread(const std::function<void()>& callback) {
+    if (QApplication::instance()->thread() == QThread::currentThread()) {
+        callback();
+        return;
+    }
+
     __MainThreadCallback* holder = new __MainThreadCallback(callback);
     emit mainThreadCallbackPosted(holder);
 }
