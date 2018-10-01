@@ -133,5 +133,6 @@
         <file>qml/TextButton.qml</file>
         <file>qml/RadioButton.qml</file>
         <file>qml/RoundedRect.qml</file>
+        <file>qml/WelcomeWindow.qml</file>
     </qresource>
 </RCC>

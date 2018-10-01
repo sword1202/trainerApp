@@ -7,6 +7,7 @@
 #include "MacOS/workspaceview.h"
 #include "qmlpitchinputreader.h"
 #include <QApplication>
+#include "welcomewindow.h"
 
 int main(int argc, char *argv[])
 {
@@ -29,8 +30,8 @@ int main(int argc, char *argv[])
     VxApp a(argc, argv);
     a.setAttribute(Qt::AA_DontCreateNativeWidgetSiblings);
 
-    MainWindow w;
-    w.showMaximized();
+    WelcomeWindow w;
+    w.show();
 
     return a.exec();
 }

@@ -6,12 +6,12 @@
 class WelcomeWindow : public BaseMainWindow
 {
     Q_OBJECT
+    QQuickWidget *widget;
 public:
     explicit WelcomeWindow();
 
-signals:
-
-public slots:
+protected:
+    void resizeEvent(QResizeEvent *event) override;
 };
 
 #endif // WELCOMEWINDOW_H

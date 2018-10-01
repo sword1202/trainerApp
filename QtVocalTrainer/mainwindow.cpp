@@ -24,8 +24,6 @@ constexpr int YARD_STICK_HEIGHT = static_cast<int>(WorkspaceDrawer::YARD_STICK_H
 constexpr int HEADER_HEIGHT = 75 + 61 - YARD_STICK_HEIGHT;
 constexpr int VERTICAL_SCROLL_WIDTH = 11;
 constexpr int BEATS_IN_TACT = 4;
-constexpr int MINIMUM_WINDOW_WIDTH = 700;
-constexpr double MINIMUM_WINDOW_HEIGHT_RATIO = 0.6;
 
 using namespace CppUtils;
 using std::cout;
@@ -34,13 +32,6 @@ using std::endl;
 MainWindow::MainWindow() :
         BaseMainWindow(QColor::fromRgb(197, 206, 248))
 {
-    // Window size
-    QSize availableSize = QGuiApplication::primaryScreen()->availableSize();
-    if (availableSize.width() < MINIMUM_WINDOW_WIDTH)
-        setMinimumSize(MINIMUM_WINDOW_WIDTH, static_cast<int>(availableSize.height() * MINIMUM_WINDOW_HEIGHT_RATIO));
-    else
-        setMinimumSize(availableSize.height(), static_cast<int>(availableSize.height() * MINIMUM_WINDOW_HEIGHT_RATIO));
-
     // Workspace
     workspaceView = new QOpenGLWorkspaceWidget(this);
     workspaceView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);

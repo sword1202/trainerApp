@@ -69,6 +69,7 @@ qrc_qml.cpp: qml.qrc \
 		qml/FeaturesToggleButton.qml \
 		qml/ButtonShadow.qml \
 		qml/AppWindow.qml \
+		qml/WelcomeWindow.qml \
 		qml/TrackVolumeSlider.qml \
 		qml/TrackButton.qml \
 		qml/Zoom.qml \
