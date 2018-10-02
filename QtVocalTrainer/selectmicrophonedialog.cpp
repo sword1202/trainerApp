@@ -32,16 +32,13 @@ SelectMicrophoneDialog::SelectMicrophoneDialog(QWidget* parent, QmlCppBridge* cp
     QStringList microphoneNames = Transform<QStringList>(PortAudio::getInputDevices(), [] (const PaDeviceInfo* device) {
         return device->name;
     });
+    microphoneNames << "Eblo";
     context->setContextProperty("names", QVariant::fromValue(microphoneNames));
     context->setContextProperty("self", this);
     context->setContextProperty("cpp", cpp);
 
     selectMicrophoneDialogView->setSource(QUrl("qrc:/qml/SelectMicrophoneDialog.qml"));
     rootQml = selectMicrophoneDialogView->rootObject();
-
-    QtUtils::addDynamicPropertyChangedListener(rootQml, "selectedMicrophoneIndex", [this] (const QVariant& value) {
-        onSelectedMicrophoneIndexChanged(value.toInt());
-    });
 
     setAttribute(Qt::WA_DeleteOnClose, true);
 

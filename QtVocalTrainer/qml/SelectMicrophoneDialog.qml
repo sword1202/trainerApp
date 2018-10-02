@@ -59,6 +59,7 @@ Rectangle {
                     anchors.fill: parent
                     onClicked: {
                         selectedMicrophoneIndex = index
+                        self.onSelectedMicrophoneIndexChanged(index)
                     }
                 }
 

@@ -74,30 +74,32 @@ MainWindow::MainWindow() :
 void MainWindow::setupInputAndOutputVolumes() const {
     AudioInputManager *audioInputManager = MainController::instance()->getAudioInputManager();
     AppSettings settings;
+
     float inputVolume = settings.getInputVolume();
     audioInputManager->setInputVolume(inputVolume);
     header->setProperty("inputVolume", inputVolume);
-    const float outputVolume = settings.getOutputVolume();
+
+    float outputVolume = settings.getOutputVolume();
     audioInputManager->setOutputVolume(outputVolume);
     header->setProperty("outputVolume", outputVolume);
 
     audioInputManager->addAudioInputLevelMonitor([=] (double level) {
         header->setProperty("microphoneLevel", level);
     });
+}
 
-    QtUtils::addDynamicPropertyChangedListener(header, "inputVolume", [=] (const QVariant& value) {
-        AppSettings settings;
-        float floatValue = value.toFloat();
-        settings.setInputVolume(floatValue);
-        audioInputManager->setInputVolume(floatValue);
-    });
+void MainWindow::onOutputVolumeChanged(float value) {
+    AppSettings settings;
+    settings.setOutputVolume(value);
+    AudioInputManager *audioInputManager = MainController::instance()->getAudioInputManager();
+    audioInputManager->setOutputVolume(value);
+}
 
-    QtUtils::addDynamicPropertyChangedListener(header, "outputVolume", [=] (const QVariant& value) {
-        AppSettings settings;
-        float floatValue = value.toFloat();
-        settings.setOutputVolume(floatValue);
-        audioInputManager->setOutputVolume(floatValue);
-    });
+void MainWindow::onInputVolumeChanged(float value) {
+    AppSettings settings;
+    settings.setInputVolume(value);
+    AudioInputManager *audioInputManager = MainController::instance()->getAudioInputManager();
+    audioInputManager->setInputVolume(value);
 }
 
 int MainWindow::getMinimumPlayHeadOffset() const {

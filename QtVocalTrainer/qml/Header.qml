@@ -91,12 +91,14 @@ Rectangle {
             MicrophoneVolumeSlider {
                 id: outputSlider
                 volume: outputVolume
+
                 anchors.left: outputSliderIcon.right
                 anchors.leftMargin: 5.25
                 anchors.verticalCenter: parent.verticalCenter
 
                 onVolumeChanged: {
-                    outputVolume = volume
+                    header.outputVolume = volume
+                    self.onOutputVolumeChanged(volume)
                 }
             }
 
@@ -112,11 +114,18 @@ Rectangle {
 
             MicrophoneVolumeSlider {
                 id: inputSlider
-                level: microphoneLevel
                 volume: inputVolume
+
+                level: microphoneLevel
                 anchors.left: inputSliderIcon.right
                 anchors.leftMargin: 7.5
                 anchors.verticalCenter: parent.verticalCenter
+
+                onVolumeChanged: {
+                    console.log("volume="+volume)
+                    header.inputVolume = volume
+                    self.onInputVolumeChanged(volume)
+                }
             }
         }
     }

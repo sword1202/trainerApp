@@ -31,6 +31,8 @@ public:
     virtual ~MainWindow() override;
     void setupMenus();
     Q_INVOKABLE void setBoundsSelectionEnabled(bool enabled);
+    Q_INVOKABLE void onInputVolumeChanged(float value);
+    Q_INVOKABLE void onOutputVolumeChanged(float value);
 
 public slots:
     void onFileOpen();

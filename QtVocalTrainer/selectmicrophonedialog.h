@@ -8,11 +8,11 @@
 class SelectMicrophoneDialog : public QDialog
 {
     Q_OBJECT
-    void onSelectedMicrophoneIndexChanged(int selectedMicrophoneIndex);
 public:
     SelectMicrophoneDialog(QWidget* parent, QmlCppBridge* cpp);
     ~SelectMicrophoneDialog();
     Q_INVOKABLE void choose(int index);
+    Q_INVOKABLE void onSelectedMicrophoneIndexChanged(int selectedMicrophoneIndex);
 private:
     AudioInputReader* audioInputReader = nullptr;
     QQuickItem* rootQml;

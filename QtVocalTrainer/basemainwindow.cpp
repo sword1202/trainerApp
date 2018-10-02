@@ -27,6 +27,7 @@ QQuickWidget *BaseMainWindow::createQQuickWidget(const QString& qmlFile) {
 QQuickWidget *BaseMainWindow::createQQuickWidget(const QString &qmlFile, QWidget *parent) {
     QQuickWidget* qmlWidget = new QQuickWidget(parent);
     qmlWidget->rootContext()->setContextProperty("cpp", cpp);
+    qmlWidget->rootContext()->setContextProperty("self", this);
     qmlWidget->setSource(QUrl(qmlFile));
     return qmlWidget;
 }

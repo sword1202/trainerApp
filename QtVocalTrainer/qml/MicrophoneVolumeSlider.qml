@@ -9,6 +9,8 @@ Item {
 
     property real volume: 1.0
     property real level: 0.0
+    property bool blockXChanged: false
+    property bool blockVolumeChanged: false
 
     readonly property real maxX: width - circle.width
 
@@ -83,12 +85,24 @@ Item {
         }
 
         onXChanged: {
-            volume = (maxX - x) / maxX
+            if (blockXChanged) {
+                return
+            }
+
+            blockVolumeChanged = true
+            volume = x / maxX
+            blockVolumeChanged = false
         }
     }
 
     onVolumeChanged: {
-        circle.x = (1.0 - volume) * (width - circle.width)
+        if (blockVolumeChanged) {
+            return
+        }
+
+        blockXChanged = true
+        circle.x = volume * (width - circle.width)
+        blockXChanged = false
     }
 }
 

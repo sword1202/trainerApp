@@ -51,10 +51,11 @@ namespace QtUtils {
                 QDynamicPropertyChangeEvent *const propEvent = static_cast<QDynamicPropertyChangeEvent*>(event);
                 if (propEvent->propertyName() == propertyName) {
                     callback(obj->property(propertyName.data()));
+                    return true;
                 }
             }
 
-            return false;
+            return QObject::eventFilter(obj, event);
         }
     };
 
