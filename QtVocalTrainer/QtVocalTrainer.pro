@@ -186,7 +186,7 @@ CONFIG(debug, debug|release) {
     LIBS += ../libs/windows/Release/glew32.lib
     LIBS += ../libs/windows/Release/glew32s.lib
 
-    LIBS += -lUser32 -lWinmm -lOpengl32 -lMfreadwrite -lMFPlat -lmfuuid -lOle32 -lMf -lmfuuid -lmfreadwrite -lAdvapi32
+    LIBS += -lUser32 -lWinmm -lOpengl32 -lMfreadwrite -lMFPlat -lmfuuid -lOle32 -lMf -lmfuuid -lmfreadwrite -lAdvapi32 -lShlwapi
 }
 
 DISTFILES += \

@@ -26,6 +26,8 @@ private:
     inline long long mfFromFrame(long long frame);
 
     IMFSourceReader *reader;
+	IStream *dataStream;
+	IMFByteStream *byteStream;
     IMFMediaType *audioType;
 
     int nextFrame = 0;
