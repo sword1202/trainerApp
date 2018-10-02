@@ -57,8 +57,29 @@ Rectangle {
     }
 
     TonalityController {
+        id: tonalityController
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: tempo.left
         anchors.rightMargin: 3.75
+    }
+
+    Item {
+        height: parent.height
+        anchors.left: playerController.right
+        anchors.right: tonalityController.left
+
+        Row {
+            height: parent.height
+            spacing: 27.75
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            MicrophoneVolumeSlider {
+                anchors.verticalCenter: parent.verticalCenter
+            }
+
+            MicrophoneVolumeSlider {
+                anchors.verticalCenter: parent.verticalCenter
+            }
+        }
     }
 }

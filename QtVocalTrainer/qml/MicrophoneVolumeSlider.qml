@@ -1,32 +1,34 @@
 import QtQuick 2.0
+
+import QtQuick 2.0
 import QtGraphicalEffects 1.0
 
 Item {
-    width: 9
-    height: 30
+    width: 60
+    height: 13.5
 
     property real volume: 1.0
 
-    readonly property real maxY: height - circle.height
+    readonly property real maxX: width - circle.width
 
     Rectangle {
-        height: parent.height
-        width: 3
-        radius: 1.5
+        height: 6.75
+        width: parent.width
+        radius: height / 2
         anchors.centerIn: parent
-        color: "#DBDCE5"
+        color: "white"
     }
 
     MouseArea {
         anchors.fill: parent
 
         onClicked: {
-            var y = mouse.y
-            if (y > maxY) {
-                y = maxY
+            var x = mouse.x
+            if (x > maxX) {
+                x = maxX
             }
 
-            circle.y = y - circle.height / 2
+            circle.x = x - circle.width / 2
         }
     }
 
@@ -39,29 +41,30 @@ Item {
 
     Circle {
         id: circle
-        y: 0
-        circleRadius: parent.width / 2
+        x: 0
+        circleRadius: parent.height / 2
         color: "white"
 
         MouseArea {
             anchors.fill: parent
             drag {
                 target: parent
-                maximumY: maxY
-                minimumY: 0
-                threshold: 1
+                maximumX: maxX
+                minimumX: 0
                 smoothed: true
+                threshold: 1
 
-                axis: Drag.YAxis
+                axis: Drag.XAxis
             }
         }
 
-        onYChanged: {
-            volume = (maxY - y) / maxY
+        onXChanged: {
+            volume = (maxX - x) / maxX
         }
     }
 
     onVolumeChanged: {
-        circle.y = (1.0 - volume) * (height - circle.height)
+        circle.x = (1.0 - volume) * (width - circle.width)
     }
 }
+

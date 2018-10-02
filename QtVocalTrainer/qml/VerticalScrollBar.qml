@@ -43,6 +43,7 @@ Rectangle {
                     minimumY: 0
                     maximumY: scrollBar.height - parent.height - padding * 2
                     axis: Drag.YAxis
+                    threshold: 1
                 }
             }
 
