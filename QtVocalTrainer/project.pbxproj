@@ -271,21 +271,6 @@
 					);
 			};
 		};
-		ECB125321253DBBE426CEE41 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qmlpitchinputreader.cpp";
-			name = "qmlpitchinputreader.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		BDCD8246510D911A428E9488 = {
-			fileRef = "ECB125321253DBBE426CEE41";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
 		DE1588F866E2F8A362D4FA86 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/app.cpp";
@@ -616,15 +601,15 @@
 					);
 			};
 		};
-		D038C11B3EBC600F9601107B = {
+		2EAABD0B7EBE4C616F7BA025 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager/PitchInputReaderAndPlayer.cpp";
-			name = "PitchInputReaderAndPlayer.cpp";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager/AudioInputManager.cpp";
+			name = "AudioInputManager.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		C118592C657B522710F5067E = {
-			fileRef = "D038C11B3EBC600F9601107B";
+		DF91368FD703814B4BBF0D3F = {
+			fileRef = "2EAABD0B7EBE4C616F7BA025";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
@@ -1081,6 +1066,21 @@
 					);
 			};
 		};
+		0E978984590595EC7FDEDB62 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager/PlaybackBoundsSelectionController.cpp";
+			name = "PlaybackBoundsSelectionController.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		A0AE82E8BAE9C2925F10EE16 = {
+			fileRef = "0E978984590595EC7FDEDB62";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
 		BC415B473FEB85492D4E8674 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/appmacos.mm";
@@ -1180,21 +1180,6 @@
 		};
 		B453224DC7FC3E0971A15260 = {
 			fileRef = "A8DBB3B894A514ABE11FF772";
-			isa = PBXBuildFile;
-			settings = {
-				ATTRIBUTES = (
-					);
-			};
-		};
-		F8CF2B73DF3F4DAD22A38E8C = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/moc_qmlpitchinputreader.cpp";
-			name = "moc_qmlpitchinputreader.cpp";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.cpp.cpp";
-		};
-		1C90DF67E8C2A478FBB7CE6D = {
-			fileRef = "F8CF2B73DF3F4DAD22A38E8C";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
@@ -1632,13 +1617,6 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		654D24DDBA565FDCA6A13AB9 = {
-			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/qmlpitchinputreader.h";
-			name = "qmlpitchinputreader.h";
-			sourceTree = "<absolute>";
-			lastKnownFileType = "sourcecode.c.h";
-		};
 		9E78C40084B4C85FE9D0258A = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/QtVocalTrainer/app.h";
@@ -1828,10 +1806,10 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
-		709AFE886252A81DC2FCD79D = {
+		3926CFCA4DFB461889DD4E39 = {
 			isa = PBXFileReference;
-			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager/PitchInputReaderAndPlayer.h";
-			name = "PitchInputReaderAndPlayer.h";
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager/AudioInputManager.h";
+			name = "AudioInputManager.h";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
@@ -2037,6 +2015,13 @@
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.c.h";
 		};
+		C5F6E0484D0A94290CD879D6 = {
+			isa = PBXFileReference;
+			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Manager/PlaybackBoundsSelectionController.h";
+			name = "PlaybackBoundsSelectionController.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
 		E89EF8F42D53D26AE81EB3A0 = {
 			isa = PBXFileReference;
 			path = "/Users/semyon/Projects/VocalTrainer/VocalTrainer/Playback/AudioPlayback/Decoder/audiodecodercoreaudio_mac.h";
@@ -2105,7 +2090,6 @@
 				"F61C3E706670E1F71F3998D1",
 				"249023FFA514A04311BC2D5D",
 				"A8DBB3B894A514ABE11FF772",
-				"F8CF2B73DF3F4DAD22A38E8C",
 				"3EF0CA7E88300BA30E115785",
 				"897F0A33031A31C419A9EDCF",
 				"31B14BB9CC2E640CFEB7CBC6",
@@ -2155,7 +2139,6 @@
 				"3EE34C6C6255F234C94584F4",
 				"A3113B7523B0D9D3CF3161D7",
 				"AD6E0E76E19B42229889D1E2",
-				"ECB125321253DBBE426CEE41",
 				"DE1588F866E2F8A362D4FA86",
 				"010F066C0C8FAFFCB00384DA",
 				"7A7D4D8184A62A1AA417F348",
@@ -2178,7 +2161,7 @@
 				"3DA91AE5EF3B07885DB5BD00",
 				"2155F1DA05346BF2187EACC8",
 				"9D79C641677ED8C4B9D321A6",
-				"D038C11B3EBC600F9601107B",
+				"2EAABD0B7EBE4C616F7BA025",
 				"8B1185F540CBCBDC52AE6A9F",
 				"6AAB6F7EBB3DBDC544CF59A5",
 				"17B9E14F4608B814E602C9AD",
@@ -2209,6 +2192,7 @@
 				"D96FD0D4552B9C87739C2840",
 				"EAA9D656863FCA9437EFEA18",
 				"0495EF9D1D1EB8CAF3E4B6CC",
+				"0E978984590595EC7FDEDB62",
 				"BC415B473FEB85492D4E8674",
 				"DF4BED6495ED318D0BFE2018",
 				"A7C917B154112562C9709C79",
@@ -2251,7 +2235,6 @@
 				"08DA84F853D9FE6929A455E9",
 				"C613FE9ADA39556AD9540F1E",
 				"8D1AFD7B368D712618894EDF",
-				"654D24DDBA565FDCA6A13AB9",
 				"9E78C40084B4C85FE9D0258A",
 				"EF9FADA6B14F6AB3193F8D0D",
 				"786FD0E541908EAFA65E4733",
@@ -2279,7 +2262,7 @@
 				"AB6A6766DCCDF7A3E84977FD",
 				"D49181650FDF5C643015F9A1",
 				"6A25F9096E486445CD85C0C9",
-				"709AFE886252A81DC2FCD79D",
+				"3926CFCA4DFB461889DD4E39",
 				"36FB9BA52D23A8CA74499832",
 				"7AF78472B730597C0478BF4E",
 				"20AC95C55D46F47619EBFA27",
@@ -2308,6 +2291,7 @@
 				"8048F99EF71745531DC53A9A",
 				"27BA51080E552D09999C61BE",
 				"1BC4E2B9EE682F7A82FCF86B",
+				"C5F6E0484D0A94290CD879D6",
 				"E89EF8F42D53D26AE81EB3A0");
 			name = "Sources";
 			sourceTree = "<group>";
@@ -2360,7 +2344,6 @@
 				"6A0BEF1A99FE649866352C7C",
 				"9453F35B6EB65B36D2199931",
 				"297624C7BCD6FA4C9B1993EF",
-				"BDCD8246510D911A428E9488",
 				"42469CE418C42F99BFA4EECE",
 				"D7C5B34E745041BD55235BD0",
 				"060A72EF9BBCE60E2AC85833",
@@ -2383,7 +2366,7 @@
 				"A52EEB92FE7FC165E27133F1",
 				"592D5E81E7518B72FC97D877",
 				"060901A7C35F0EEB8023B51C",
-				"C118592C657B522710F5067E",
+				"DF91368FD703814B4BBF0D3F",
 				"9BB166EC807E398A4171A798",
 				"4D1A33080FE9B21CEB159160",
 				"5BE3B32AE495487CF0F6F07C",
@@ -2414,6 +2397,7 @@
 				"39DBB240DD2EAF000AFA4690",
 				"473D3D3F961CFCAE926176C7",
 				"3701D571ECFF4B9CA0741977",
+				"A0AE82E8BAE9C2925F10EE16",
 				"F512D0DE937285A2596D4954",
 				"3A9D3D3CE7067FBCEA4D8FFF",
 				"35A610BD95B9AF48696237CA",
@@ -2421,7 +2405,6 @@
 				"F3F0C5A9AE1D79D2A4930AEA",
 				"AE6596E2227260CD02B22B61",
 				"B453224DC7FC3E0971A15260",
-				"1C90DF67E8C2A478FBB7CE6D",
 				"3B6D31A35E21A602A07D5C71",
 				"B39FEAC046886E2A8CAD6451",
 				"A40AA65A4364E4B559FCE389",

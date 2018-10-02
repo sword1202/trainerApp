@@ -8,7 +8,7 @@
 
 
 #include "PitchInputReaderCollector.h"
-#include "PitchInputReaderAndPlayer.h"
+#include "AudioInputManager.h"
 #include "MvxPlayer.h"
 #include "WorkspaceController.h"
 #include "ZoomController.h"
@@ -16,7 +16,7 @@
 #include "PlaybackBoundsSelectionController.h"
 
 class MainController {
-    PitchInputReaderAndPlayer* pitchInputReader;
+    AudioInputManager* pitchInputReader;
     MvxPlayer* mvxPlayer;
     ZoomController* zoomController;
     WorkspaceController* workspaceController = nullptr;
@@ -30,9 +30,9 @@ class MainController {
 public:
     typedef typename CppUtils::ListenersSet<float>::Listener WorkspaceHorizontalOffsetChangedListener;
 
-    void init(PitchInputReaderAndPlayer *pitchInputReader, MvxPlayer *mvxPlayer, ZoomController *zoomController);
+    void init(AudioInputManager *pitchInputReader, MvxPlayer *mvxPlayer, ZoomController *zoomController);
 
-    PitchInputReaderAndPlayer *getPitchInputReader() const;
+    AudioInputManager *getAudioInputManager() const;
 
     MvxPlayer *getPlayer() const;
     ZoomController *getZoomController() const;

@@ -9,24 +9,27 @@
 #include "PitchInputReaderCollector.h"
 #include "RealtimeStreamingAudioPlayer.h"
 
-class PitchInputReaderAndPlayer : public PitchInputReaderCollector {
+class AudioInputManager : public PitchInputReaderCollector {
     AudioInputReaderWithOutput* audioInputReader = nullptr;
+    int listenerKey = -1;
 public:
-    PitchInputReaderAndPlayer();
-    void init(const char* deviceName);
+    AudioInputManager(const char* deviceName);
 
     void setInputVolume(float value);
     float getInputVolume() const;
     void setOutputVolume(float value);
     float getOutputVolume() const;
 
+    void startPitchDetection();
+    void stopPitchDetection();
+
     const char * getInputDeviceName() const;
     void setInputDeviceName(const char *deviceName) const;
 
     void addAudioInputReaderCallback(const AudioInputReader::Callback& callback);
+    void addAudioInputLevelMonitor(const std::function<void(double)>& callback);
 
-    ~PitchInputReaderAndPlayer();
-    void pitchDetected(float frequency, double time) override;
+    ~AudioInputManager();
 };
 
 

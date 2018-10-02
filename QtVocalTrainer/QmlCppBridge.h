@@ -7,7 +7,6 @@
 #include "qmlpitch.h"
 #include "qmlzoomcontroller.h"
 #include "player.h"
-#include "qmlpitchinputreader.h"
 #include <QMainWindow>
 
 class QmlCppBridge : public QObject
@@ -28,13 +27,11 @@ public:
     Q_PROPERTY(QmlZoomController* zoomController READ
             getZoomController() CONSTANT)
     Q_PROPERTY(Player* player READ getPlayer() CONSTANT)
-    Q_PROPERTY(QmlPitchInputReader* pitchInputReader READ getPitchInputReader() CONSTANT)
     Q_PROPERTY(qreal devicePixelRatio READ getDevicePixelRatio() CONSTANT)
     Q_PROPERTY(QMainWindow* mainWindow READ getMainWindow() CONSTANT)
 
     QmlZoomController* getZoomController() const;
     Player* getPlayer() const;
-    QmlPitchInputReader* getPitchInputReader() const;
     qreal getDevicePixelRatio() const;
     QMainWindow* getMainWindow() const;
 

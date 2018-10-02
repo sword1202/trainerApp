@@ -8,55 +8,35 @@
 
 using namespace CppUtils;
 
-PitchInputReader::PitchInputReader(AudioInputReader *audioInputReader, PitchDetector* pitchDetector, int smoothLevel) :
-        audioInputReader(audioInputReader), pitchDetector(pitchDetector),
+void PitchInputReader::operator()(const int16_t* buffer, int size) {
+    buffer = smoothingAudioBuffer.getRunPitchDetectionBufferIfReady(buffer, (size_t) size);
+    if (!buffer) {
+        return;
+    }
+
+    float frequency = pitchDetector->getFrequencyFromBuffer(buffer);
+    if (frequency > 0) {
+        lastDetectedPitch = Pitch(frequency);
+        if (callback) {
+            callback(lastDetectedPitch);
+        }
+    } else if(executeCallBackOnInvalidPitches && callback) {
+        callback(Pitch(frequency));
+    }
+}
+
+PitchInputReader::PitchInputReader(AudioInputReader* audioInputReader, PitchDetector* pitchDetector, int smoothLevel) :
+        pitchDetector(pitchDetector),
         smoothingAudioBuffer((size_t) smoothLevel, (size_t) audioInputReader->getMaximumBufferSize()) {
     int sampleRate = audioInputReader->getSampleRate();
     pitchDetector->init(audioInputReader->getMaximumBufferSize() * smoothLevel, sampleRate);
-    audioInputReader->callbacks.addListener([=] (const int16_t* buffer, int size) {
-        buffer = smoothingAudioBuffer.getRunPitchDetectionBufferIfReady(buffer, (size_t) size);
-        if (!buffer) {
-            return;
-        }
-
-        float frequency = pitchDetector->getFrequencyFromBuffer(buffer);
-        if (frequency > 0) {
-            lastDetectedPitch = Pitch(frequency);
-            if (callback) {
-                callback(lastDetectedPitch);
-            }
-        } else if(executeCallBackOnInvalidPitches && callback) {
-            callback(Pitch(frequency));
-        }
-    });
-}
-
-bool PitchInputReader::willDestroyAudioInputReaderOnDestructor() const {
-    return destroyAudioInputReaderOnDestructor;
-}
-
-void PitchInputReader::setDestroyAudioInputReaderOnDestructor(bool destroyAudioInputReaderOnDestructor) {
-    PitchInputReader::destroyAudioInputReaderOnDestructor = destroyAudioInputReaderOnDestructor;
 }
 
 PitchInputReader::~PitchInputReader() {
-    if (destroyAudioInputReaderOnDestructor) {
-        delete audioInputReader;
-    }
 }
 
 void PitchInputReader::setCallback(const std::function<void(Pitch)>& callback) {
     this->callback = callback;
-}
-
-void PitchInputReader::start() {
-//    running = true;
-    audioInputReader->start();
-}
-
-void PitchInputReader::stop() {
-    audioInputReader->stop();
-//    running = false;
 }
 
 const Pitch &PitchInputReader::getLastDetectedPitch() const {
@@ -69,10 +49,6 @@ bool PitchInputReader::willExecuteCallBackOnInvalidPitches() const {
 
 void PitchInputReader::setExecuteCallBackOnInvalidPitches(bool executeCallBackOnInvalidPitches) {
     PitchInputReader::executeCallBackOnInvalidPitches = executeCallBackOnInvalidPitches;
-}
-
-bool PitchInputReader::isRunning() const {
-    return true;
 }
 
 PitchDetector* PitchInputReader::getPitchDetector() const {

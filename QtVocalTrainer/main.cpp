@@ -5,7 +5,6 @@
 #include "qmltimedpitch.h"
 #include "player.h"
 #include "MacOS/workspaceview.h"
-#include "qmlpitchinputreader.h"
 #include <QApplication>
 #include "welcomewindow.h"
 
@@ -25,7 +24,6 @@ int main(int argc, char *argv[])
     qRegisterMetaType<QmlVxPitch>("VxPitch");
     qRegisterMetaType<QmlTimedPitch>("TimedPitch");
     qmlRegisterType<Player>();
-    qmlRegisterType<QmlPitchInputReader>();
 
     VxApp a(argc, argv);
     a.setAttribute(Qt::AA_DontCreateNativeWidgetSiblings);

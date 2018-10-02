@@ -74,6 +74,6 @@ void SelectMicrophoneDialog::onSelectedMicrophoneIndexChanged(int selectedMicrop
 void SelectMicrophoneDialog::choose(int index) {
     const PaDeviceInfo* inputDevice = PortAudio::getInputDevices()[index];
     AppSettings().setMicrophoneDeviceName(inputDevice->name);
-    VxApp::instance()->getPitchInputReader()->setInputDeviceName(inputDevice->name);
+    VxApp::instance()->getAudioInputManager()->setInputDeviceName(inputDevice->name);
     close();
 }

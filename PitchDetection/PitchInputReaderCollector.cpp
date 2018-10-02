@@ -28,10 +28,8 @@ int PitchInputReaderCollector::getPitchesCount() const {
 }
 
 void PitchInputReaderCollector::init(AudioInputReader *audioInputReader, int smoothLevel,
-        PitchDetector* pitchDetector,
-        bool deleteAudioInputReaderOnDestructor) {
+        PitchDetector* pitchDetector) {
     pitchInputReader = new PitchInputReader(audioInputReader, pitchDetector, smoothLevel);
-    pitchInputReader->setDestroyAudioInputReaderOnDestructor(deleteAudioInputReaderOnDestructor);
 
     pitchInputReader->setExecuteCallBackOnInvalidPitches(true);
     pitchInputReader->setCallback([=](const Pitch& pitch) {
@@ -52,8 +50,9 @@ void PitchInputReaderCollector::init(AudioInputReader *audioInputReader, int smo
     });
 }
 
-bool PitchInputReaderCollector::isRunning() const {
-    return pitchInputReader->isRunning();
+void PitchInputReaderCollector::operator()(const int16_t* data, int size) {
+    assert(pitchInputReader && "call init before");
+    pitchInputReader->operator()(data, size);
 }
 
 void PitchInputReaderCollector::setThreshold(float threshold) {
@@ -80,15 +79,6 @@ double PitchInputReaderCollector::getSavedPitchesTimeLimit() const {
 
 void PitchInputReaderCollector::setSavedPitchesTimeLimit(double savedPitchesTimeLimit) {
     this->savedPitchesTimeLimit = savedPitchesTimeLimit;
-}
-
-void PitchInputReaderCollector::start() {
-    assert(pitchInputReader && "call init before start");
-    pitchInputReader->start();
-}
-
-void PitchInputReaderCollector::stop() {
-    pitchInputReader->stop();
 }
 
 float PitchInputReaderCollector::getLastDetectedFrequency() const {

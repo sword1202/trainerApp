@@ -7,6 +7,7 @@ Item {
 
     Header {
         id: header
+        objectName: "header"
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right

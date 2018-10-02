@@ -29,15 +29,16 @@ public:
 
     void init(AudioInputReader* audioInputReader,
             int smoothLevel,
-            PitchDetector* pitchDetector,
-            bool deleteAudioInputReaderOnDestructor = true);
+            PitchDetector* pitchDetector);
+
+    void operator()(const int16_t* data, int size);
+
     float getFrequencyAt(int index) const override;
     float getLastDetectedFrequency() const;
     Pitch getLastDetectedPitch() const;
     double getTimeAt(int index) const override;
     double getLastDetectedTime() const;
     int getPitchesCount() const override;
-    bool isRunning() const;
 
     virtual void setThreshold(float threshold);
     float getThreshold() const;
@@ -46,9 +47,6 @@ public:
 
     double getSavedPitchesTimeLimit() const;
     void setSavedPitchesTimeLimit(double savedPitchesTimeLimit);
-
-    virtual void start();
-    virtual void stop();
 };
 
 

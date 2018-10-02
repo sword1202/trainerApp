@@ -15,6 +15,7 @@ class MainWindow : public BaseMainWindow
 
     QWidget *workspaceView;
 
+    QQuickItem *headerWithSubheader;
     QQuickItem *header;
     QQuickWidget *verticalScrollWidget;
     QQuickItem *verticalScroll;
@@ -34,6 +35,8 @@ public:
 public slots:
     void onFileOpen();
     void onSelectMicrophone();
+
+    void setupInputAndOutputVolumes() const;
 };
 
 #endif // MAINWINDOW_H

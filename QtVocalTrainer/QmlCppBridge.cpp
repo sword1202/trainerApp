@@ -42,7 +42,3 @@ qreal QmlCppBridge::getDevicePixelRatio() const {
 QMainWindow *QmlCppBridge::getMainWindow() const {
     return _mainWindow;
 }
-
-QmlPitchInputReader* QmlCppBridge::getPitchInputReader() const {
-    return static_cast<QmlPitchInputReader*>(MainController::instance()->getPitchInputReader());
-}

@@ -10,7 +10,6 @@ include(../PitchDetection/PitchDetection.pri)
 HEADERS += \
     QmlCppBridge.h \
     qmlpitch.h \
-    qmlpitchinputreader.h \
     app.h \
     ../VocalTrainer/Playback/MvxPlayer.h \
     ../VocalTrainer/Playback/VxFile.h \
@@ -38,10 +37,10 @@ HEADERS += \
     ../VocalTrainer/Playback/AudioPlayback/Decoder/audiodecoder.h \
     ../VocalTrainer/Playback/AudioPlayback/Decoder/apple/CADebugMacros.h \
     ../VocalTrainer/Playback/AudioPlayback/Decoder/apple/CAStreamBasicDescription.h \
-    ../VocalTrainer/Manager/PitchInputReaderAndPlayer.h \
+    ../VocalTrainer/Manager/AudioInputManager.h \
     ../VocalTrainer/nanovg/metal/nanovg_mtl_shaders.metal \
     ../VocalTrainer/Manager/MainController.h \
-    ../VocalTrainer/Manager/PitchInputReaderAndPlayer.h \
+    ../VocalTrainer/Manager/AudioInputManager.h \
     ../VocalTrainer/Manager/ZoomController.h \
     ../VocalTrainer/Drawers/QDrawer.h \
     ../VocalTrainer/Drawers/DrawerColor.h \
@@ -75,7 +74,6 @@ SOURCES += \
     main.cpp \
     QmlCppBridge.cpp \
     qmlpitch.cpp \
-    qmlpitchinputreader.cpp \
     app.cpp \
     executors.cpp \
     ../VocalTrainer/Playback/MvxPlayer.cpp \
@@ -98,7 +96,7 @@ SOURCES += \
     ../VocalTrainer/Drawers/NvgDrawer.cpp \
     ../VocalTrainer/Drawers/Drawer.cpp \
     ../VocalTrainer/Playback/AudioPlayback/Decoder/audiodecoder.cpp \
-    ../VocalTrainer/Manager/PitchInputReaderAndPlayer.cpp \
+    ../VocalTrainer/Manager/AudioInputManager.cpp \
     ../VocalTrainer/Manager/MainController.cpp \
     ../VocalTrainer/Manager/ZoomController.cpp \
     ../VocalTrainer/Drawers/QDrawer.cpp \

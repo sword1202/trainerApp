@@ -55,7 +55,7 @@
 		C9FFF0408858AAFAB5542709 /* MidiEventList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFF63DF93064D05413294 /* MidiEventList.cpp */; };
 		C9FFF045E64DA74C0FF7618C /* MidiTrack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA423EB35396AF0A6669 /* MidiTrack.cpp */; };
 		C9FFF051780243EF07304B84 /* 1.vx in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFDD798D0EB7C53086DD3 /* 1.vx */; };
-		C9FFF07E02FFCE9F94958569 /* PitchInputReaderAndPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF05245C89823C2B9926A /* PitchInputReaderAndPlayer.cpp */; };
+		C9FFF07E02FFCE9F94958569 /* AudioInputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF05245C89823C2B9926A /* AudioInputManager.cpp */; };
 		C9FFF08D6D80FC79250CE8D3 /* MainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2CC989B2655538D2732 /* MainWindowController.m */; };
 		C9FFF09DC78A783FDD0F5A3B /* a.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFEF6E23B96974A519665 /* a.sf2 */; };
 		C9FFF0C3BC65E9F88000F019 /* MvxPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF12A4E0AAAD8E783983E /* MvxPlayer.cpp */; };
@@ -228,7 +228,7 @@
 		C9FFF022E1BA8C340B4914BB /* PianoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PianoView.h; sourceTree = "<group>"; };
 		C9FFF03538CD42ED89CD354D /* Options.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Options.h; sourceTree = "<group>"; };
 		C9FFF04E4AD4119BECE62EC6 /* AudioPlayerWithDefaultSeekHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayerWithDefaultSeekHandler.h; sourceTree = "<group>"; };
-		C9FFF05245C89823C2B9926A /* PitchInputReaderAndPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PitchInputReaderAndPlayer.cpp; sourceTree = "<group>"; };
+		C9FFF05245C89823C2B9926A /* AudioInputManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioInputManager.cpp; sourceTree = "<group>"; };
 		C9FFF0789AD2038BA3DA38A5 /* Binasc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Binasc.cpp; sourceTree = "<group>"; };
 		C9FFF088F016800CE05E6910 /* RealtimeStreamingAudioPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RealtimeStreamingAudioPlayer.cpp; sourceTree = "<group>"; };
 		C9FFF08B2D6B8FA88F0959E4 /* WorkspaceDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WorkspaceDrawer.cpp; sourceTree = "<group>"; };
@@ -305,7 +305,7 @@
 		C9FFF8823954020C23E570B5 /* PeriodicallySleepingBackgroundTask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PeriodicallySleepingBackgroundTask.cpp; path = PitchDetection/CppUtils/PeriodicallySleepingBackgroundTask.cpp; sourceTree = "<group>"; };
 		C9FFF88D5019CE243BE89443 /* MetronomeAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetronomeAudioPlayer.h; sourceTree = "<group>"; };
 		C9FFF8A2E8E33F0F28A3D8B2 /* MainController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainController.cpp; sourceTree = "<group>"; };
-		C9FFF8A31C6F0BFCB55F72A1 /* PitchInputReaderAndPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchInputReaderAndPlayer.h; sourceTree = "<group>"; };
+		C9FFF8A31C6F0BFCB55F72A1 /* AudioInputManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioInputManager.h; sourceTree = "<group>"; };
 		C9FFF8C160107CFE52362C4C /* PitchInputReaderCollector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PitchInputReaderCollector.cpp; path = PitchDetection/PitchInputReaderCollector.cpp; sourceTree = "<group>"; };
 		C9FFF8DF99628FC6B2C1E3C3 /* Rect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Rect.h; path = PitchDetection/CppUtils/Rect.h; sourceTree = "<group>"; };
 		C9FFF8E7BA2D6A027BB66320 /* AubioPitchDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AubioPitchDetector.cpp; path = PitchDetection/AubioPitchDetector.cpp; sourceTree = "<group>"; };
@@ -803,8 +803,8 @@
 			children = (
 				C9FFF46CB7E53ED0A36C78E9 /* MainController.h */,
 				C9FFF8A2E8E33F0F28A3D8B2 /* MainController.cpp */,
-				C9FFF05245C89823C2B9926A /* PitchInputReaderAndPlayer.cpp */,
-				C9FFF8A31C6F0BFCB55F72A1 /* PitchInputReaderAndPlayer.h */,
+				C9FFF05245C89823C2B9926A /* AudioInputManager.cpp */,
+				C9FFF8A31C6F0BFCB55F72A1 /* AudioInputManager.h */,
 				C9FFFC295B181CD47AA7CEBC /* ZoomController.cpp */,
 				C9FFF981FFAA6BEAAC30DFA6 /* ZoomController.h */,
 				C9FFF4E28E480217CB32ABB4 /* PlaybackBoundsSelectionController.cpp */,
@@ -996,7 +996,7 @@
 				C9FFF50C38F5114229E9AB27 /* NvgDrawer.cpp in Sources */,
 				C9FFF22D8C24A8F0E7E19F6A /* QuartzDrawer.mm in Sources */,
 				C9FFFD45BB5974C87D48B29F /* MainController.cpp in Sources */,
-				C9FFF07E02FFCE9F94958569 /* PitchInputReaderAndPlayer.cpp in Sources */,
+				C9FFF07E02FFCE9F94958569 /* AudioInputManager.cpp in Sources */,
 				C9FFF39D7D8E9E68D78ADBFA /* nanovg.c in Sources */,
 				C9FFFAF2DEEFD4574C487FB1 /* ZoomController.cpp in Sources */,
 				C9FFFFE592ADED592DF68BF4 /* PianoDrawer.cpp in Sources */,

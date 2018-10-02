@@ -1,12 +1,12 @@
-﻿#include "app.h"
+#include "app.h"
 #include "../PitchDetection/PortAudioUtils.h"
 #include "QmlCppBridge.h"
-#include "qmlpitchinputreader.h"
 #include "fonts.h"
 #include <QQmlContext>
 #include <iostream>
 #include <QThread>
 #include <QFontDatabase>
+#include "appsettings.h"
 
 class __MainThreadCallback : public QObject {
 public:
@@ -18,7 +18,8 @@ public:
 
 VxApp::VxApp(int &argc, char *argv[]) : QApplication(argc, argv) {
     PortAudio::init();
-    MainController::init(new QmlPitchInputReader(), new Player(), new QmlZoomController());
+    auto microphoneName = AppSettings().getMicrophoneDeviceName();
+    MainController::init(new AudioInputManager(microphoneName.data()), new Player(), new QmlZoomController());
 #ifdef __APPLE__
     doMacOsPlatformStaff();
 #endif

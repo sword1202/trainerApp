@@ -7,6 +7,10 @@ Rectangle {
     property alias lyricsShowButton: lyricsShowButton
     property alias tempo: tempo
 
+    property real microphoneLevel: 0.0
+    property real outputVolume: 0.0
+    property real inputVolume: 0.0
+
     id: header
     height: 75
     color: "#c5cef8"
@@ -86,9 +90,14 @@ Rectangle {
 
             MicrophoneVolumeSlider {
                 id: outputSlider
+                volume: outputVolume
                 anchors.left: outputSliderIcon.right
                 anchors.leftMargin: 5.25
                 anchors.verticalCenter: parent.verticalCenter
+
+                onVolumeChanged: {
+                    outputVolume = volume
+                }
             }
 
             SvgImage {
@@ -103,7 +112,8 @@ Rectangle {
 
             MicrophoneVolumeSlider {
                 id: inputSlider
-                level: 0.6
+                level: microphoneLevel
+                volume: inputVolume
                 anchors.left: inputSliderIcon.right
                 anchors.leftMargin: 7.5
                 anchors.verticalCenter: parent.verticalCenter

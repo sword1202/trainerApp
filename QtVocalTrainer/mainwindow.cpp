@@ -1,4 +1,4 @@
-﻿#include "mainwindow.h"
+#include "mainwindow.h"
 
 #include <QOpenGLWidget>
 #include <QHBoxLayout>
@@ -19,6 +19,7 @@
 #include "Algorithms.h"
 #include "PortAudioUtils.h"
 #include "selectmicrophonedialog.h"
+#include "appsettings.h"
 
 constexpr int YARD_STICK_HEIGHT = static_cast<int>(WorkspaceDrawer::YARD_STICK_HEIGHT);
 constexpr int HEADER_HEIGHT = 75 + 61 - YARD_STICK_HEIGHT;
@@ -32,14 +33,21 @@ using std::endl;
 MainWindow::MainWindow() :
         BaseMainWindow(QColor::fromRgb(197, 206, 248))
 {
+    QWidget *centralWidget = new QWidget;
+    setCentralWidget(centralWidget);
+    
     // Workspace
     workspaceView = new QOpenGLWorkspaceWidget(this);
     workspaceView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     // Header
     QQuickWidget *headerWidget = createQQuickWidget("qrc:/qml/HeaderWithSubHeader.qml");
-    header = headerWidget->rootObject();
-    header->setHeight(HEADER_HEIGHT);
+    headerWithSubheader = headerWidget->rootObject();
+    header = headerWithSubheader->findChild<QQuickItem*>("header");
+    assert(header);
+    headerWithSubheader->setHeight(HEADER_HEIGHT);
+
+    setupInputAndOutputVolumes();
 
     // Scrollbar
     verticalScrollWidget = createQQuickWidget("qrc:/qml/VerticalScrollBarContainer.qml");
@@ -47,9 +55,6 @@ MainWindow::MainWindow() :
     verticalScroll->setWidth(VERTICAL_SCROLL_WIDTH);
 
     // Setup layouts
-    QWidget *centralWidget = new QWidget;
-    setCentralWidget(centralWidget);
-
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->setMargin(0);
     mainLayout->setSpacing(0);
@@ -66,6 +71,35 @@ MainWindow::MainWindow() :
     setupMenus();
 }
 
+void MainWindow::setupInputAndOutputVolumes() const {
+    AudioInputManager *audioInputManager = MainController::instance()->getAudioInputManager();
+    AppSettings settings;
+    float inputVolume = settings.getInputVolume();
+    audioInputManager->setInputVolume(inputVolume);
+    header->setProperty("inputVolume", inputVolume);
+    const float outputVolume = settings.getOutputVolume();
+    audioInputManager->setOutputVolume(outputVolume);
+    header->setProperty("outputVolume", outputVolume);
+
+    audioInputManager->addAudioInputLevelMonitor([=] (double level) {
+        header->setProperty("microphoneLevel", level);
+    });
+
+    QtUtils::addDynamicPropertyChangedListener(header, "inputVolume", [=] (const QVariant& value) {
+        AppSettings settings;
+        float floatValue = value.toFloat();
+        settings.setInputVolume(floatValue);
+        audioInputManager->setInputVolume(floatValue);
+    });
+
+    QtUtils::addDynamicPropertyChangedListener(header, "outputVolume", [=] (const QVariant& value) {
+        AppSettings settings;
+        float floatValue = value.toFloat();
+        settings.setOutputVolume(floatValue);
+        audioInputManager->setOutputVolume(floatValue);
+    });
+}
+
 int MainWindow::getMinimumPlayHeadOffset() const {
     return qRound(getMinimumPlayHeadOffsetF());
 }
@@ -80,7 +114,7 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
     int width = event->size().width();
     int height = event->size().height();
 
-    header->setWidth(width);
+    headerWithSubheader->setWidth(width);
     verticalScroll->setHeight(height - HEADER_HEIGHT - YARD_STICK_HEIGHT);
 }
 

@@ -4,7 +4,7 @@
 //
 
 #include "MainController.h"
-#include "PitchInputReaderAndPlayer.h"
+#include "AudioInputManager.h"
 #include "PlaybackBounds.h"
 #include "Executors.h"
 #include <iostream>
@@ -24,7 +24,7 @@ void MainController::initInstance(MainController* inst) {
     _instance = inst;
 }
 
-void MainController::init(PitchInputReaderAndPlayer *pitchInputReader, MvxPlayer *mvxPlayer, ZoomController *zoomController) {
+void MainController::init(AudioInputManager *pitchInputReader, MvxPlayer *mvxPlayer, ZoomController *zoomController) {
     this->pitchInputReader = pitchInputReader;
     this->mvxPlayer = mvxPlayer;
     this->zoomController = zoomController;
@@ -37,9 +37,9 @@ void MainController::init(PitchInputReaderAndPlayer *pitchInputReader, MvxPlayer
 
     mvxPlayer->isPlayingChangedListeners.addListener([this] (bool playing) {
         if (playing) {
-            this->pitchInputReader->start();
+            this->pitchInputReader->startPitchDetection();
         } else {
-            this->pitchInputReader->stop();
+            this->pitchInputReader->stopPitchDetection();
         }
 
         workspaceController->setRunning(playing);
@@ -76,7 +76,7 @@ void MainController::onStopPlaybackRequested() {
     updateSeek(mvxPlayer->getSeek());
 }
 
-PitchInputReaderAndPlayer *MainController::getPitchInputReader() const {
+AudioInputManager *MainController::getAudioInputManager() const {
     return pitchInputReader;
 }
 
