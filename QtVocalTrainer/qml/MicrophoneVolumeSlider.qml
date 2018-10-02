@@ -4,19 +4,43 @@ import QtQuick 2.0
 import QtGraphicalEffects 1.0
 
 Item {
-    width: 60
-    height: 13.5
+    width: 80
+    height: 17
 
     property real volume: 1.0
+    property real level: 0.0
 
     readonly property real maxX: width - circle.width
 
     Rectangle {
-        height: 6.75
+        height: 9
         width: parent.width
         radius: height / 2
         anchors.centerIn: parent
         color: "white"
+
+        Column {
+            spacing: 1
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.leftMargin: 8
+            anchors.rightMargin: 8
+
+            Rectangle {
+                height: 3
+                anchors.left: parent.left
+                width: parent.width * level
+                color: "#31DD6C"
+            }
+
+            Rectangle {
+                height: 3
+                anchors.left: parent.left
+                width: parent.width * level
+                color: "#31DD6C"
+            }
+        }
     }
 
     MouseArea {

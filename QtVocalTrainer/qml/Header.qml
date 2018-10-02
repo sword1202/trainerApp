@@ -68,16 +68,44 @@ Rectangle {
         anchors.left: playerController.right
         anchors.right: tonalityController.left
 
-        Row {
+        Item {
             height: parent.height
-            spacing: 27.75
+            width: outputSlider.width + inputSlider.width +
+                   inputSlider.anchors.leftMargin +
+                   inputSliderIcon.width  + inputSliderIcon.anchors.leftMargin +
+                   outputSliderIcon.width + outputSlider.anchors.leftMargin
             anchors.horizontalCenter: parent.horizontalCenter
 
+            SvgImage {
+                id: outputSliderIcon
+                width: 19
+                height: 29
+                source: "images/output_level_slider.svg"
+                anchors.bottom: inputSliderIcon.bottom
+            }
+
             MicrophoneVolumeSlider {
+                id: outputSlider
+                anchors.left: outputSliderIcon.right
+                anchors.leftMargin: 5.25
+                anchors.verticalCenter: parent.verticalCenter
+            }
+
+            SvgImage {
+                id: inputSliderIcon
+                width: 13
+                height: 24
+                source: "images/input_level_slider.svg"
+                anchors.left: outputSlider.right
+                anchors.leftMargin: 27.75
                 anchors.verticalCenter: parent.verticalCenter
             }
 
             MicrophoneVolumeSlider {
+                id: inputSlider
+                level: 0.6
+                anchors.left: inputSliderIcon.right
+                anchors.leftMargin: 7.5
                 anchors.verticalCenter: parent.verticalCenter
             }
         }
