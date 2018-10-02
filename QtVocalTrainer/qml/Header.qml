@@ -122,7 +122,6 @@ Rectangle {
                 anchors.verticalCenter: parent.verticalCenter
 
                 onVolumeChanged: {
-                    console.log("volume="+volume)
                     header.inputVolume = volume
                     self.onInputVolumeChanged(volume)
                 }
