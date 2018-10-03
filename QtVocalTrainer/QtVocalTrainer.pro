@@ -120,9 +120,6 @@ QML_IMPORT_PATH =
 # Additional import path used to resolve QML modules just for Qt Quick Designer
 QML_DESIGNER_IMPORT_PATH =
 
-
-
-
 INCLUDEPATH += ../include \
     ../VocalTrainer/Drawers \
     ../VocalTrainer/Manager \
@@ -134,25 +131,22 @@ INCLUDEPATH += ../include \
     ../include/nanovg \
     ../include/nanovg/glew
 
-
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 macx {
+    HEADERS += \
+        ../VocalTrainer/Playback/AudioPlayback/Decoder/audiodecodercoreaudio_mac.h
 
-HEADERS += \
-    ../VocalTrainer/Playback/AudioPlayback/Decoder/audiodecodercoreaudio_mac.h
-
-SOURCES += \
-    appmacos.mm \
-    mainwindowosx.mm \
-    ../VocalTrainer/Playback/AudioPlayback/Decoder/audiodecodercoreaudio_mac.cpp
+    SOURCES += \
+        appmacos.mm \
+        mainwindowosx.mm \
+        ../VocalTrainer/Playback/AudioPlayback/Decoder/audiodecodercoreaudio_mac.cpp
 
 
-OBJECTIVE_SOURCES = ../VocalTrainer/nanovg/metal/nanovg_mtl.m
-
+    OBJECTIVE_SOURCES = ../VocalTrainer/nanovg/metal/nanovg_mtl.m
 
     LIBS += -framework Foundation -framework AppKit -framework AudioToolbox -framework \
 CoreFoundation -framework AVFoundation -framework CoreServices -framework CoreAudio -framework Metal -framework MetalKit -framework Quartz -framework Accelerate
@@ -171,27 +165,24 @@ win32 {
     SOURCES += \
         ../VocalTrainer/Playback/AudioPlayback/Decoder/audiodecodermediafoundation_win.cpp
 
-CONFIG(debug, debug|release) {
-    LIBS += ../libs/windows/Debug/SoundTouchD.lib
-    LIBS += ../libs/windows/Debug/libboost_serialization-vc140-mt-gd-x32-1_67.lib
-    LIBS += ../libs/windows/Debug/portaudio.lib
-    LIBS += ../libs/windows/Debug/aubio.lib
-} else {
-    LIBS += ../libs/windows/Release/SoundTouch.lib
-    LIBS += ../libs/windows/Release/libboost_serialization-vc140-mt-x32-1_67.lib
-    LIBS += ../libs/windows/Release/portaudio.lib
-    LIBS += ../libs/windows/Release/aubio.lib
-}
+    CONFIG(debug, debug|release) {
+        LIBS += ../libs/windows/Debug/SoundTouchD.lib
+        LIBS += ../libs/windows/Debug/libboost_serialization-vc140-mt-gd-x32-1_67.lib
+        LIBS += ../libs/windows/Debug/portaudio.lib
+        LIBS += ../libs/windows/Debug/aubio.lib
+    } else {
+        LIBS += ../libs/windows/Release/SoundTouch.lib
+        LIBS += ../libs/windows/Release/libboost_serialization-vc140-mt-x32-1_67.lib
+        LIBS += ../libs/windows/Release/portaudio.lib
+        LIBS += ../libs/windows/Release/aubio.lib
+    }
 
     LIBS += ../libs/windows/Release/glew32.lib
     LIBS += ../libs/windows/Release/glew32s.lib
 
-    LIBS += -lUser32 -lWinmm -lOpengl32 -lMfreadwrite -lMFPlat -lmfuuid -lOle32 -lMf -lmfuuid -lmfreadwrite -lAdvapi32 -lShlwapi
+    LIBS += -lUser32 -lOpengl32 -lMFPlat -lmfuuid -lmfreadwrite -lAdvapi32 -lShlwapi
 }
 
 DISTFILES += \
     ../VocalTrainer/Playback/CraigsappMidifile/LICENSE.txt \
     ../VocalTrainer/Playback/a.sf2
-
-
-
