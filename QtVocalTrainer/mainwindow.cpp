@@ -35,6 +35,10 @@ MainWindow::MainWindow() :
 {
     QWidget *centralWidget = new QWidget;
     setCentralWidget(centralWidget);
+ 
+    AppSettings settings;
+    float inputVolume = settings.getInputVolume();
+    float outputVolume = settings.getOutputVolume();
     
     // Workspace
     workspaceView = new QOpenGLWorkspaceWidget(this);
@@ -47,7 +51,17 @@ MainWindow::MainWindow() :
     assert(header);
     headerWithSubheader->setHeight(HEADER_HEIGHT);
 
-    setupInputAndOutputVolumes();
+    AudioInputManager *audioInputManager = MainController::instance()->getAudioInputManager();
+    
+    header->setProperty("inputVolume", inputVolume);
+    onInputVolumeChanged(inputVolume);
+    
+    header->setProperty("outputVolume", outputVolume);
+    onOutputVolumeChanged(outputVolume);
+    
+    audioInputManager->addAudioInputLevelMonitor([=] (double level) {
+        header->setProperty("microphoneLevel", level);
+    });
 
     // Scrollbar
     verticalScrollWidget = createQQuickWidget("qrc:/qml/VerticalScrollBarContainer.qml");
@@ -69,23 +83,6 @@ MainWindow::MainWindow() :
     mainLayout->addLayout(workspaceLayout);
 
     setupMenus();
-}
-
-void MainWindow::setupInputAndOutputVolumes() const {
-    AudioInputManager *audioInputManager = MainController::instance()->getAudioInputManager();
-    AppSettings settings;
-
-    float inputVolume = settings.getInputVolume();
-    audioInputManager->setInputVolume(inputVolume);
-    header->setProperty("inputVolume", inputVolume);
-
-    float outputVolume = settings.getOutputVolume();
-    audioInputManager->setOutputVolume(outputVolume);
-    header->setProperty("outputVolume", outputVolume);
-
-    audioInputManager->addAudioInputLevelMonitor([=] (double level) {
-        header->setProperty("microphoneLevel", level);
-    });
 }
 
 void MainWindow::onOutputVolumeChanged(float value) {

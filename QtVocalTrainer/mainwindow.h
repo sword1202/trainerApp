@@ -37,8 +37,6 @@ public:
 public slots:
     void onFileOpen();
     void onSelectMicrophone();
-
-    void setupInputAndOutputVolumes() const;
 };
 
 #endif // MAINWINDOW_H
