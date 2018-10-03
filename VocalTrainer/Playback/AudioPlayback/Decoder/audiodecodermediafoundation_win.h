@@ -25,10 +25,10 @@ private:
     inline long long frameFromMF(long long mf);
     inline long long mfFromFrame(long long frame);
 
-    IMFSourceReader *reader;
-	IStream *dataStream;
-	IMFByteStream *byteStream;
-    IMFMediaType *audioType;
+    IMFSourceReader *reader = nullptr;
+    IStream *dataStream = nullptr;
+    IMFByteStream *byteStream = nullptr;
+    IMFMediaType *audioType = nullptr;
 
     int nextFrame = 0;
     short *m_leftoverBuffer;
