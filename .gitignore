@@ -97,3 +97,8 @@ QVocalTrainer/QtVocalTrainer.build
 
 # TMP files
 *.tmp
+
+build-QtVocalTrainer-Desktop_Qt_5_11_0_clang_64bit-Debug
+build-QtVocalTrainer-Desktop_Qt_5_11_0_clang_64bit-Release
+QtVocalTrainer.pro.user
+cmake-build-debug
