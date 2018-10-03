@@ -29,7 +29,8 @@ AudioDecoderMediaFoundation::AudioDecoderMediaFoundation()
 
 AudioDecoderMediaFoundation::~AudioDecoderMediaFoundation()
 {
-    delete [] m_leftoverBuffer;
+    if (reader != nullptr)
+        delete [] m_leftoverBuffer;
 
     if (reader != nullptr)
         reader->Release();
@@ -39,6 +40,7 @@ AudioDecoderMediaFoundation::~AudioDecoderMediaFoundation()
         dataStream->Release();
     if (byteStream != nullptr)
         byteStream->Release();
+
     MFShutdown();
     CoUninitialize();
 }
@@ -47,12 +49,12 @@ void AudioDecoderMediaFoundation::open(std::string &&data)
 {
     // Initialize the COM library.
     if (CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE) < 0) {
-       throw std::runtime_error("SSMF: failed to initialize COM");
+       throw std::runtime_error(" Failed to initialize COM");
     }
 
     // Initialize the Media Foundation platform.
     if (MFStartup(MF_VERSION) < 0) {
-        throw std::runtime_error("SSMF: failed to initialize Media Foundation");
+        throw std::runtime_error("Failed to initialize Media Foundation");
     }
 
     assert(dataStream == nullptr);
@@ -60,25 +62,25 @@ void AudioDecoderMediaFoundation::open(std::string &&data)
     dataStream = SHCreateMemStream(reinterpret_cast<const BYTE*>(data.c_str()), data.size());
 
     if (MFCreateMFByteStreamOnStream(dataStream, &byteStream) < 0) {
-        throw std::runtime_error("SSMF: failed to create stream from array");
+        throw std::runtime_error("Failed to create stream from array");
     }
 
     if (MFCreateSourceReaderFromByteStream(byteStream, nullptr, &reader) < 0) {
-        throw std::runtime_error("SSMF: failed to create source reader from stream");
+        throw std::runtime_error("Failed to create source reader from stream");
     }
 
     // Read properties
     // Use only first stream
     if (reader->SetStreamSelection(MF_SOURCE_READER_ALL_STREAMS, false) < 0) {
-        throw std::runtime_error("SSMF: failed to deselect all streams");
+        throw std::runtime_error("Failed to deselect all streams");
     }
 
     if (reader->SetStreamSelection(MF_SOURCE_READER_FIRST_AUDIO_STREAM, true) < 0) {
-        throw std::runtime_error("SSMF: failed to select first audio stream");
+        throw std::runtime_error("Failed to select first audio stream");
     }
 
     if (reader->GetNativeMediaType(MF_SOURCE_READER_FIRST_AUDIO_STREAM, 0, &audioType) < 0) {
-        throw std::runtime_error("SSMF: failed to retrieve completed media type");
+        throw std::runtime_error("Failed to retrieve completed media type");
     }
 
     UINT32 allSamplesIndependent = 0;
@@ -113,38 +115,41 @@ void AudioDecoderMediaFoundation::open(std::string &&data)
     if (m_BitsPerSample == 0)
         m_BitsPerSample = kBitsPerSample;
 
+    if (m_BitsPerSample != sizeof(SAMPLE) * 8)
+         throw std::runtime_error("Unsupported audio format");
+
     if (MFCreateMediaType(&audioType) < 0) {
-        throw std::runtime_error("SSMF: failed to create media type");
+        throw std::runtime_error("Failed to create media type");
     }
 
     if (audioType->SetGUID(MF_MT_MAJOR_TYPE, MFMediaType_Audio) < 0) {
-        throw std::runtime_error("SSMF: failed to set major type");
+        throw std::runtime_error("Failed to set major type");
     }
 
     if (audioType->SetGUID(MF_MT_SUBTYPE, MFAudioFormat_PCM) < 0) {
-        throw std::runtime_error("SSMF: failed to set subtype");
+        throw std::runtime_error("Failed to set subtype");
     }
 
     // Set this type on the source reader. The source reader will load the necessary decoder.
     if (reader->SetCurrentMediaType(MF_SOURCE_READER_FIRST_AUDIO_STREAM, NULL, audioType) < 0) {
-        throw std::runtime_error("SSMF: failed to set media type");
+        throw std::runtime_error("Failed to set media type");
     }
 
     // Get the complete uncompressed format.
     audioType->Release();
     if (reader->GetCurrentMediaType(MF_SOURCE_READER_FIRST_AUDIO_STREAM, &audioType) < 0) {
-        throw std::runtime_error("SSMF: failed to retrieve completed media type");
+        throw std::runtime_error("Failed to retrieve completed media type");
     }
 
     // Ensure the stream is selected.
     if (reader->SetStreamSelection(MF_SOURCE_READER_FIRST_AUDIO_STREAM, true) < 0) {
-        throw std::runtime_error("SSMF: failed to select first audio stream (again)");
+        throw std::runtime_error("Failed to select first audio stream (again)");
     }
 
     UINT32 leftoverBufferSize = 0;
     if (audioType->GetUINT32(MF_MT_SAMPLE_SIZE, &leftoverBufferSize) < 0) {
         leftoverBufferSize = 32;
-        std::cerr << "SSMF: failed to get buffer size" << std::endl;
+        std::cerr << "Failed to get buffer size" << std::endl;
     }
     m_leftoverBufferSize = static_cast<size_t>(leftoverBufferSize);
     m_leftoverBufferSize /= 2; // Convert size in bytes to size in int16s
@@ -153,11 +158,11 @@ void AudioDecoderMediaFoundation::open(std::string &&data)
     // Get the duration, provided as a 64-bit integer of 100-nanosecond units
     PROPVARIANT prop;
     if (reader->GetPresentationAttribute(MF_SOURCE_READER_MEDIASOURCE, MF_PD_DURATION, &prop) < 0) {
-        throw std::runtime_error("SSMF: error getting duration");
+        throw std::runtime_error("Error getting duration");
     }
     m_fDuration = static_cast<double>(prop.hVal.QuadPart) / 1e7; // Convert a 100ns Media Foundation value to a number of seconds.
     mfDuration = prop.hVal.QuadPart;
-    std::cout << "SSMF: Duration: " << m_fDuration << std::endl;
+    std::cout << "Duration: " << m_fDuration << std::endl;
     PropVariantClear(&prop);
 
     seek(0);
@@ -176,11 +181,11 @@ void AudioDecoderMediaFoundation::seek(int sampleIdx)
     InitPropVariantFromInt64(mfSeekTarget < 0 ? 0 : mfSeekTarget, &prop);
 
     if (reader->Flush(MF_SOURCE_READER_FIRST_AUDIO_STREAM) < 0) {
-        std::cerr << "SSMF: failed to flush before seek" << std::endl;
+        std::cerr << "Failed to flush before seek" << std::endl;
     }
 
     if (reader->SetCurrentPosition(GUID_NULL, prop) < 0)
-        std::cerr << "SSMF: failed to seek" << std::endl;
+        std::cerr << "Failed to seek" << std::endl;
     else
         result = sampleIdx;
 
@@ -193,7 +198,7 @@ void AudioDecoderMediaFoundation::seek(int sampleIdx)
 
 int AudioDecoderMediaFoundation::read(int size, SAMPLE *destination)
 {
-    assert(size < sizeof(destBufferShort));
+    assert(size < sizeof(destBufferShort) / sizeof(SAMPLE));
 
     short *destBuffer = destBufferShort;
     size_t framesRequested = size / m_iChannels;
@@ -227,17 +232,17 @@ int AudioDecoderMediaFoundation::read(int size, SAMPLE *destination)
 
         // Check for errors
         if (dwFlags & MF_SOURCE_READERF_ERROR) {
-            std::cerr << "SSMF: ReadSample set ERROR, SourceReader is now dead" << std::endl;
+            std::cerr << "ReadSample set ERROR, SourceReader is now dead" << std::endl;
             decoding = false;
             break;
         } else if (dwFlags & MF_SOURCE_READERF_ENDOFSTREAM) {
-            std::cout << "SSMF: End of input file." << std::endl;
+            std::cout << "End of input file." << std::endl;
             break;
         } else if (dwFlags & MF_SOURCE_READERF_CURRENTMEDIATYPECHANGED) {
-            std::cerr << "SSMF: Type change" << std::endl;
+            std::cerr << "Type change" << std::endl;
             break;
         } else if (pSample == nullptr) {
-            std::cerr << "SSMF: No sample" << std::endl;
+            std::cerr << "No sample" << std::endl;
             continue;
         }
 
