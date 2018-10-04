@@ -32,7 +32,6 @@ SelectMicrophoneDialog::SelectMicrophoneDialog(QWidget* parent, QmlCppBridge* cp
     QStringList microphoneNames = Transform<QStringList>(PortAudio::getInputDevices(), [] (const PaDeviceInfo* device) {
         return device->name;
     });
-    microphoneNames << "Eblo";
     context->setContextProperty("names", QVariant::fromValue(microphoneNames));
     context->setContextProperty("self", this);
     context->setContextProperty("cpp", cpp);

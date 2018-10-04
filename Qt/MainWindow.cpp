@@ -126,10 +126,10 @@ void MainWindow::setupMenus() {
 }
 
 void MainWindow::onFileOpen() {
-//    QString fileName = QFileDialog::getOpenFileName(
-//            this, "Select .mvx file for signing", "", "Mvx files(*.mvx);; All files(*)");
+    QString fileName = QFileDialog::getOpenFileName(
+            this, "Select .mvx file for signing", "", "Mvx files(*.mvx);; All files(*)");
 
-    QString fileName = "/Users/Semyon/Downloads/torero.mvx";
+    //QString fileName = "/Users/Semyon/Downloads/torero.mvx";
     if (!fileName.isEmpty()) {
         VxApp::instance()->getPlayer()->setSource(fileName);
     }
