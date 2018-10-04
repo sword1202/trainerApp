@@ -2,8 +2,6 @@ import QtQuick 2.0
 
 Rectangle {
         id: lyrics
-        width: parent.width
-        anchors.bottom: parent.bottom
         height: 53.25
 
         HorizontalLine {

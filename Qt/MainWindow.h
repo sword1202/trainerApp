@@ -18,7 +18,7 @@ class MainWindow : public BaseMainWindow
     QQuickItem *headerWithSubheader;
     QQuickItem *header;
     QQuickWidget *verticalScrollWidget;
-    QQuickItem *verticalScroll;
+    QQuickWidget *lyricsWidget;
 
     int getMinimumPlayHeadOffset() const;
     float getMinimumPlayHeadOffsetF() const;

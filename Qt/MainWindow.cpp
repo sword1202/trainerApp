@@ -27,6 +27,7 @@ constexpr int VERTICAL_SCROLL_WIDTH = 11;
 constexpr int BEATS_IN_TACT = 4;
 constexpr int MINIMUM_WINDOW_WIDTH = 700;
 constexpr double MINIMUM_WINDOW_HEIGHT_RATIO = 0.6;
+constexpr double LYRICS_HEIGHT = 53;
 
 using namespace CppUtils;
 using std::cout;
@@ -49,10 +50,11 @@ MainWindow::MainWindow() :
     // Header
     QQuickWidget *headerWidget = createQQuickWidget("qrc:/qml/HeaderWithSubHeader.qml");
     headerWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
+    headerWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    headerWidget->setFixedHeight(HEADER_WITH_SUBHEADER_HEIGHT);
     headerWithSubheader = headerWidget->rootObject();
     header = headerWithSubheader->findChild<QQuickItem*>("header");
     assert(header);
-    headerWithSubheader->setHeight(HEADER_WITH_SUBHEADER_HEIGHT);
 
     AudioInputManager *audioInputManager = MainController::instance()->getAudioInputManager();
     
@@ -66,20 +68,24 @@ MainWindow::MainWindow() :
         header->setProperty("microphoneLevel", level);
     });
 
+    // Lyrics
+    lyricsWidget = createQQuickWidget("qrc:/qml/Lyrics.qml");
+    lyricsWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
+    lyricsWidget->setFixedHeight(LYRICS_HEIGHT);
+    lyricsWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+
     // Setup layouts
     auto *mainLayout = new QVBoxLayout;
     mainLayout->setMargin(0);
     mainLayout->setSpacing(0);
-    headerWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-    headerWidget->setFixedHeight(HEADER_WITH_SUBHEADER_HEIGHT);
     mainLayout->addWidget(headerWidget);
     mainLayout->addWidget(workspaceView);
+    mainLayout->addWidget(lyricsWidget);
     centralWidget->setLayout(mainLayout);
 
 	// Scrollbar
     verticalScrollWidget = createQQuickWidget("qrc:/qml/VerticalScrollBarContainer.qml");
-	verticalScroll = verticalScrollWidget->rootObject();
-	verticalScroll->setWidth(VERTICAL_SCROLL_WIDTH);
+	verticalScrollWidget->rootObject()->setWidth(VERTICAL_SCROLL_WIDTH);
 
     setupMenus();
 }
@@ -112,7 +118,7 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
     const int width = event->size().width();
     const int height = event->size().height();
 
-    verticalScroll->setHeight(workspaceView->height() - YARD_STICK_HEIGHT);
+    verticalScrollWidget->rootObject()->setHeight(workspaceView->height() - YARD_STICK_HEIGHT - 1);
 	verticalScrollWidget->move(width - VERTICAL_SCROLL_WIDTH, workspaceView->y() + YARD_STICK_HEIGHT + 1);
 }
 
