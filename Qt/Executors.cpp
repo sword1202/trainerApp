@@ -1,5 +1,5 @@
 ﻿#include "Executors.h"
-#include "app.h"
+#include "VxApp.h"
 #include <QThreadPool>
 
 namespace CppUtils {

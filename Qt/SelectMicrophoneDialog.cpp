@@ -1,13 +1,13 @@
 #include <QQuickWidget>
-#include "selectmicrophonedialog.h"
+#include "SelectMicrophoneDialog.h"
 #include "PortAudioUtils.h"
 #include "Algorithms.h"
 #include <QQuickWidget>
 #include <QQmlContext>
 #include <QQuickItem>
 #include "PortAudioInputReader.h"
-#include "appsettings.h"
-#include "app.h"
+#include "AppSettings.h"
+#include "VxApp.h"
 #include "AudioAverageInputLevelMonitor.h"
 #include <iostream>
 #include "QtUtils/qtutils.h"

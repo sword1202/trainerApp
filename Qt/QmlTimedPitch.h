@@ -1,7 +1,7 @@
 #ifndef QMLTIMEDPITCH_H
 #define QMLTIMEDPITCH_H
 
-#include "qmlpitch.h"
+#include "QmlPitch.h"
 
 class QmlTimedPitch : public QmlPitch
 {

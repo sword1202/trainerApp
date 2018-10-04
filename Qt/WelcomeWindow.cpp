@@ -1,4 +1,4 @@
-#include "welcomewindow.h"
+#include "WelcomeWindow.h"
 #include <QVBoxLayout>
 #include <QQuickItem>
 #include <QGuiApplication>

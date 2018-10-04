@@ -1,4 +1,4 @@
-﻿#include "qmlvxpitch.h"
+﻿#include "QmlVxPitch.h"
 #include "assert.h"
 
 QmlVxPitch::QmlVxPitch()

@@ -4,7 +4,7 @@
 #include <QOpenGLWidget>
 #include <QOpenGLPaintDevice>
 #include "WorkspaceDrawer.h"
-#include "workspacedrawerwidgetsetup.h"
+#include "WorkspaceDrawerWidgetSetup.h"
 
 class QOpenGLWorkspaceWidget : public QOpenGLWidget, WorkspaceDrawerWidgetSetup
 {

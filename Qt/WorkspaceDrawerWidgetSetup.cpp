@@ -1,6 +1,6 @@
-#include "workspacedrawerwidgetsetup.h"
+#include "WorkspaceDrawerWidgetSetup.h"
 #include "NvgDrawer.h"
-#include "fonts.h"
+#include "Fonts.h"
 #include "MainController.h"
 #include "QtUtils/qtutils.h"
 #include <QByteArray>

@@ -1,7 +1,7 @@
 #ifndef WELCOMEWINDOW_H
 #define WELCOMEWINDOW_H
 
-#include "basemainwindow.h"
+#include "BaseMainWindow.h"
 
 class WelcomeWindow : public BaseMainWindow
 {

@@ -2,7 +2,7 @@
 #include <iostream>
 #include <QScreen>
 #include "TimeUtils.h"
-#include "app.h"
+#include "VxApp.h"
 
 using namespace CppUtils;
 

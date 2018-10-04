@@ -1,12 +1,12 @@
-#include "app.h"
+#include "VxApp.h"
 #include "PortAudioUtils.h"
 #include "QmlCppBridge.h"
-#include "fonts.h"
+#include "Fonts.h"
 #include <QQmlContext>
 #include <iostream>
 #include <QThread>
 #include <QFontDatabase>
-#include "appsettings.h"
+#include "AppSettings.h"
 
 class __MainThreadCallback : public QObject {
 public:

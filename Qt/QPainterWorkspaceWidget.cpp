@@ -1,4 +1,4 @@
-#include "qpainterworkspacewidget.h"
+#include "QPainterWorkspaceWidget.h"
 #include "QDrawer.h"
 #include <QResizeEvent>
 

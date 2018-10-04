@@ -1,4 +1,4 @@
-#include "qopenglworkspacewidget.h"
+#include "QOpenglWorkspaceWidget.h"
 #include "NvgDrawer.h"
 #include "QDrawer.h"
 #include <QMouseEvent>

@@ -1,4 +1,4 @@
-#include "qmlpitch.h"
+#include "QmlPitch.h"
 QString QmlPitch::getNameAsQString() const {
     return QString(getFullName().data());
 }

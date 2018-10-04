@@ -2,7 +2,7 @@
 #define QPAINTERWORKSPACEWIDGET_H
 
 #include <QWidget>
-#include "workspacedrawerwidgetsetup.h"
+#include "WorkspaceDrawerWidgetSetup.h"
 
 class QPainterWorkspaceWidget : public QWidget, public WorkspaceDrawerWidgetSetup
 {

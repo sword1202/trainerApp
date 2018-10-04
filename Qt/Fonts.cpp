@@ -1,4 +1,4 @@
-#include "fonts.h"
+#include "Fonts.h"
 #include "QtUtils/qtutils.h"
 
 namespace Fonts

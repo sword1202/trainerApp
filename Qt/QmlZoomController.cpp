@@ -1,4 +1,4 @@
-#include "qmlzoomcontroller.h"
+#include "QmlZoomController.h"
 
 using namespace CppUtils;
 

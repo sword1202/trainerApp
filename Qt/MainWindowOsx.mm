@@ -1,7 +1,7 @@
-#include "mainwindow.h"
+#include "MainWindow.h"
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
-#include "basemainwindow.h"
+#include "BaseMainWindow.h"
 #ifdef USE_METAL
 #include "MacOS/workspaceview.h"
 #endif

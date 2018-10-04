@@ -1,29 +1,29 @@
 set(qtSources
-        app.cpp
-        appsettings.cpp
-        basemainwindow.cpp
-        executors.cpp
-        fonts.cpp
-        loadtsf.cpp
+        VxApp.cpp
+        AppSettings.cpp
+        BaseMainWindow.cpp
+        Executors.cpp
+        Fonts.cpp
+        LoadTsf.cpp
         main.cpp
-        mainwindow.cpp
-        player.cpp
-        selectmicrophonedialog.cpp
+        MainWindow.cpp
+        Player.cpp
+        SelectMicrophoneDialog.cpp
         QmlCppBridge.cpp
-        qmlpitch.cpp
-        qmltimedpitch.cpp
-        qmlvxpitch.cpp
-        qmlzoomcontroller.cpp
+        QmlPitch.cpp
+        QmlTimedPitch.cpp
+        QmlVxPitch.cpp
+        QmlZoomController.cpp
         qml.qrc
-        qopenglworkspacewidget.cpp
-        qpainterworkspacewidget.cpp
-        welcomewindow.cpp
-        workspacedrawerwidgetsetup.cpp
+        QOpenglWorkspaceWidget.cpp
+        QPainterWorkspaceWidget.cpp
+        WelcomeWindow.cpp
+        WorkspaceDrawerWidgetSetup.cpp
         QtUtils/qtutils.cpp
         )
 
 if (APPLE)
     list(APPEND qtSources
-            mainwindowosx.mm
+            MainWindowOsx.mm
             )
 endif(APPLE)

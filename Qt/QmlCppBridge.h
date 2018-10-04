@@ -4,9 +4,9 @@
 #include <QObject>
 #include <QSize>
 #include <QQuickView>
-#include "qmlpitch.h"
-#include "qmlzoomcontroller.h"
-#include "player.h"
+#include "QmlPitch.h"
+#include "QmlZoomController.h"
+#include "Player.h"
 #include <QMainWindow>
 
 class QmlCppBridge : public QObject

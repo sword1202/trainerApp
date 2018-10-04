@@ -5,7 +5,7 @@
 
 #include <QQmlApplicationEngine>
 #include "MainController.h"
-#include "player.h"
+#include "Player.h"
 
 class VxApp : public QApplication, public MainController
 {

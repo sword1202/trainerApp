@@ -1,12 +1,12 @@
-﻿#include "mainwindow.h"
-#include "app.h"
-#include "qmlpitch.h"
-#include "qmlvxpitch.h"
-#include "qmltimedpitch.h"
-#include "player.h"
+﻿#include "MainWindow.h"
+#include "VxApp.h"
+#include "QmlPitch.h"
+#include "QmlVxPitch.h"
+#include "QmlTimedPitch.h"
+#include "Player.h"
 #include "MacOS/workspaceview.h"
 #include <QApplication>
-#include "welcomewindow.h"
+#include "WelcomeWindow.h"
 
 int main(int argc, char *argv[])
 {

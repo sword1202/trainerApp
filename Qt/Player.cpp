@@ -1,4 +1,4 @@
-#include "player.h"
+#include "Player.h"
 #include <QVariant>
 #include <QJsonObject>
 #include <iostream>

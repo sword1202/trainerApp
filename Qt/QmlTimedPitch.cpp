@@ -1,4 +1,4 @@
-#include "qmltimedpitch.h"
+#include "QmlTimedPitch.h"
 
 QmlTimedPitch::QmlTimedPitch()
 {

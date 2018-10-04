@@ -1,12 +1,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "basemainwindow.h"
+#include "BaseMainWindow.h"
 #include <QOpenGLWidget>
 #include <QQuickWidget>
 #include <QSvgWidget>
 #include "QtUtils/qtutils.h"
-#include "qopenglworkspacewidget.h"
+#include "QOpenglWorkspaceWidget.h"
 #include "MvxPlayer.h"
 
 class MainWindow : public BaseMainWindow
@@ -24,7 +24,6 @@ class MainWindow : public BaseMainWindow
     float getMinimumPlayHeadOffsetF() const;
 protected:
     void resizeEvent(QResizeEvent *event) override;
-    void mousePressEvent(QMouseEvent *event) override;
 
 public:
     MainWindow();

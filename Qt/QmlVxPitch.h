@@ -3,7 +3,7 @@
 
 
 #include <QObject>
-#include "qmlpitch.h"
+#include "QmlPitch.h"
 #include "VxPitch.h"
 
 class QmlVxPitch : QmlPitch

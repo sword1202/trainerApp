@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+#include "MainWindow.h"
 
 #include <QOpenGLWidget>
 #include <QHBoxLayout>
@@ -12,14 +12,14 @@
 #include <QSizePolicy>
 
 #include "QmlCppBridge.h"
-#include "app.h"
-#include "qopenglworkspacewidget.h"
+#include "VxApp.h"
+#include "QOpenglWorkspaceWidget.h"
 #include "PlaybackBounds.h"
-#include "qpainterworkspacewidget.h"
+#include "QPainterWorkspaceWidget.h"
 #include "Algorithms.h"
 #include "PortAudioUtils.h"
-#include "selectmicrophonedialog.h"
-#include "appsettings.h"
+#include "SelectMicrophoneDialog.h"
+#include "AppSettings.h"
 
 constexpr int YARD_STICK_HEIGHT = static_cast<int>(WorkspaceDrawer::YARD_STICK_HEIGHT);
 constexpr int HEADER_HEIGHT = 75 + 61 - YARD_STICK_HEIGHT;
@@ -112,11 +112,6 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
     headerWithSubheader->setWidth(width);
     verticalScroll->setHeight(height - HEADER_HEIGHT - YARD_STICK_HEIGHT);
 	verticalScrollWidget->move(width - VERTICAL_SCROLL_WIDTH, HEADER_HEIGHT + YARD_STICK_HEIGHT + 1);
-}
-
-void MainWindow::mousePressEvent(QMouseEvent *event) {
-    QWidget::mousePressEvent(event);
-    //header->update();
 }
 
 void MainWindow::setupMenus() {

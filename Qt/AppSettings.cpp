@@ -1,4 +1,4 @@
-#include "appsettings.h"
+#include "AppSettings.h"
 
 static const QString MICROPHONE_NAME_KEY = "microphoneDeviceName";
 static const QString INPUT_VOLUME_KEY = "inputVolume";

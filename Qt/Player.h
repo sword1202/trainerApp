@@ -4,7 +4,7 @@
 #include <QObject>
 #include "MvxPlayer.h"
 #include <memory>
-#include "qmlvxpitch.h"
+#include "QmlVxPitch.h"
 #include <QJsonValue>
 #include "WavAudioPlayer.h"
 #include "PlaybackBounds.h"

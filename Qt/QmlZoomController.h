@@ -2,7 +2,7 @@
 #define ZOOM_CONTROLLER_H
 
 #include <QObject>
-#include "qmlpitch.h"
+#include "QmlPitch.h"
 #include "ZoomController.h"
 
 class QmlZoomController : public QObject, public ZoomController
