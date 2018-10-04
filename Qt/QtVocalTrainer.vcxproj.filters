@@ -185,6 +185,9 @@
     <ClCompile Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\audiodecoder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\audiodecodermediafoundation_win.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="executors.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -204,12 +207,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\qaudiodecoderwrapper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\windows\qaudiodecoderwrapper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="qmlpitch.cpp">
@@ -457,6 +454,9 @@
     <ClInclude Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\audiodecoder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\audiodecodermediafoundation_win.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\PitchDetection\CppUtils\config.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -472,12 +472,6 @@
     <QtMoc Include="player.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <ClInclude Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\qaudiodecoderwrapper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\windows\qaudiodecoderwrapper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <QtMoc Include="qmlpitch.h">
       <Filter>Header Files</Filter>
     </QtMoc>

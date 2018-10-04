@@ -82,6 +82,7 @@ target_wrapper.*
 
 # Visual Studio
 .vs
+*.vcxproj.user
 QtVocalTrainer/Win32/
 QtVocalTrainer/debug/
 QtVocalTrainer/release/

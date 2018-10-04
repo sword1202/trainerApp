@@ -70,7 +70,7 @@ public:
     ~AudioDecoderCoreAudio();
     // Overriding AudioDecoderBase 
     void open(std::string &&data) override;
-    int seek(int sampleIdx) override;
+    void seek(int sampleIdx) override;
     int read(int size, SAMPLE *buffer) override;
     std::vector<std::string> supportedFileExtensions() override;
 private:

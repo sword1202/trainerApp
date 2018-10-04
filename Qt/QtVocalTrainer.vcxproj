@@ -86,7 +86,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>$(QTDIR)\lib\qtmain.lib;shell32.lib;..\libs\windows\Release\SoundTouch.lib;..\libs\windows\Release\libboost_serialization-vc140-mt-x32-1_67.lib;..\libs\windows\Release\portaudio.lib;..\libs\windows\Release\aubio.lib;..\libs\windows\Release\glew32.lib;..\libs\windows\Release\glew32s.lib;User32.lib;Winmm.lib;Opengl32.lib;Mfreadwrite.lib;MFPlat.lib;Ole32.lib;Mf.lib;mfuuid.lib;mfreadwrite.lib;Advapi32.lib;$(QTDIR)\lib\Qt5QuickWidgets.lib;$(QTDIR)\lib\Qt5Quick.lib;$(QTDIR)\lib\Qt5Svg.lib;$(QTDIR)\lib\Qt5Widgets.lib;$(QTDIR)\lib\Qt5Multimedia.lib;$(QTDIR)\lib\Qt5Gui.lib;$(QTDIR)\lib\Qt5Qml.lib;$(QTDIR)\lib\Qt5Network.lib;$(QTDIR)\lib\Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(QTDIR)\lib\qtmain.lib;shell32.lib;..\libs\windows\Release\SoundTouch.lib;..\libs\windows\Release\libboost_serialization-vc140-mt-x32-1_67.lib;..\libs\windows\Release\portaudio.lib;..\libs\windows\Release\aubio.lib;..\libs\windows\Release\glew32.lib;..\libs\windows\Release\glew32s.lib;User32.lib;Winmm.lib;Opengl32.lib;Mfreadwrite.lib;MFPlat.lib;Ole32.lib;Mf.lib;mfuuid.lib;mfreadwrite.lib;Advapi32.lib;Shlwapi.lib;$(QTDIR)\lib\Qt5QuickWidgets.lib;$(QTDIR)\lib\Qt5Quick.lib;$(QTDIR)\lib\Qt5Svg.lib;$(QTDIR)\lib\Qt5Widgets.lib;$(QTDIR)\lib\Qt5Multimedia.lib;$(QTDIR)\lib\Qt5Gui.lib;$(QTDIR)\lib\Qt5Qml.lib;$(QTDIR)\lib\Qt5Network.lib;$(QTDIR)\lib\Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;C:\opensslx86\lib;C:\Utils\my_sql\mysql-5.6.11-win32\lib;C:\Utils\postgresqlx86\pgsql\lib;$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
@@ -147,7 +147,7 @@
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>$(QTDIR)\lib\qtmaind.lib;shell32.lib;..\libs\windows\Debug\SoundTouchD.lib;..\libs\windows\Debug\libboost_serialization-vc141-mt-gd-x32-1_67.lib;..\libs\windows\Debug\portaudio.lib;..\libs\windows\Debug\aubio.lib;..\libs\windows\Release\glew32.lib;..\libs\windows\Release\glew32s.lib;User32.lib;Winmm.lib;Opengl32.lib;Mfreadwrite.lib;MFPlat.lib;Ole32.lib;Mf.lib;mfuuid.lib;mfreadwrite.lib;Advapi32.lib;$(QTDIR)\lib\Qt5QuickWidgetsd.lib;$(QTDIR)\lib\Qt5Quickd.lib;$(QTDIR)\lib\Qt5Svgd.lib;$(QTDIR)\lib\Qt5Widgetsd.lib;$(QTDIR)\lib\Qt5Multimediad.lib;$(QTDIR)\lib\Qt5Guid.lib;$(QTDIR)\lib\Qt5Qmld.lib;$(QTDIR)\lib\Qt5Networkd.lib;$(QTDIR)\lib\Qt5Cored.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(QTDIR)\lib\qtmaind.lib;shell32.lib;..\libs\windows\Debug\SoundTouchD.lib;..\libs\windows\Debug\libboost_serialization-vc141-mt-gd-x32-1_67.lib;..\libs\windows\Debug\portaudio.lib;..\libs\windows\Debug\aubio.lib;..\libs\windows\Release\glew32.lib;..\libs\windows\Release\glew32s.lib;User32.lib;Winmm.lib;Opengl32.lib;Mfreadwrite.lib;MFPlat.lib;Ole32.lib;Mf.lib;mfuuid.lib;mfreadwrite.lib;Advapi32.lib;Shlwapi.lib;$(QTDIR)\lib\Qt5QuickWidgetsd.lib;$(QTDIR)\lib\Qt5Quickd.lib;$(QTDIR)\lib\Qt5Svgd.lib;$(QTDIR)\lib\Qt5Widgetsd.lib;$(QTDIR)\lib\Qt5Multimediad.lib;$(QTDIR)\lib\Qt5Guid.lib;$(QTDIR)\lib\Qt5Qmld.lib;$(QTDIR)\lib\Qt5Networkd.lib;$(QTDIR)\lib\Qt5Cored.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;C:\opensslx86\lib;C:\Utils\my_sql\mysql-5.6.11-win32\lib;C:\Utils\postgresqlx86\pgsql\lib;$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
@@ -233,6 +233,7 @@
     <ClCompile Include="..\VocalTrainer\Manager\ZoomController.cpp" />
     <ClCompile Include="app.cpp" />
     <ClCompile Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\audiodecoder.cpp" />
+    <ClCompile Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\audiodecodermediafoundation_win.cpp" />
     <ClCompile Include="executors.cpp" />
     <ClCompile Include="fonts.cpp" />
     <ClCompile Include="loadtsf.cpp" />
@@ -240,8 +241,6 @@
     <ClCompile Include="mainwindow.cpp" />
     <ClCompile Include="..\VocalTrainer\nanovg\nanovg.cpp" />
     <ClCompile Include="player.cpp" />
-    <ClCompile Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\qaudiodecoderwrapper.cpp" />
-    <ClCompile Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\windows\qaudiodecoderwrapper.cpp" />
     <ClCompile Include="qmlpitch.cpp" />
     <ClCompile Include="qmlpitchinputreader.cpp" />
     <ClCompile Include="qmltimedpitch.cpp" />
@@ -327,6 +326,7 @@
     <QtMoc Include="app.h">
     </QtMoc>
     <ClInclude Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\audiodecoder.h" />
+    <ClInclude Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\audiodecodermediafoundation_win.h" />
     <ClInclude Include="..\PitchDetection\CppUtils\config.h" />
     <ClInclude Include="fonts.h" />
     <QtMoc Include="mainwindow.h">
@@ -334,8 +334,6 @@
     <ClInclude Include="..\VocalTrainer\nanovg\metal\nanovg_mtl_shaders.metal" />
     <QtMoc Include="player.h">
     </QtMoc>
-    <ClInclude Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\qaudiodecoderwrapper.h" />
-    <ClInclude Include="..\VocalTrainer\Playback\AudioPlayback\Decoder\windows\qaudiodecoderwrapper.h" />
     <QtMoc Include="qmlpitch.h">
     </QtMoc>
     <QtMoc Include="qmlpitchinputreader.h">

@@ -25,6 +25,8 @@ constexpr int YARD_STICK_HEIGHT = static_cast<int>(WorkspaceDrawer::YARD_STICK_H
 constexpr int HEADER_HEIGHT = 75 + 61 - YARD_STICK_HEIGHT;
 constexpr int VERTICAL_SCROLL_WIDTH = 11;
 constexpr int BEATS_IN_TACT = 4;
+constexpr int MINIMUM_WINDOW_WIDTH = 700;
+constexpr double MINIMUM_WINDOW_HEIGHT_RATIO = 0.6;
 
 using namespace CppUtils;
 using std::cout;
@@ -63,24 +65,18 @@ MainWindow::MainWindow() :
         header->setProperty("microphoneLevel", level);
     });
 
-    // Scrollbar
-    verticalScrollWidget = createQQuickWidget("qrc:/qml/VerticalScrollBarContainer.qml");
-    verticalScroll = verticalScrollWidget->rootObject();
-    verticalScroll->setWidth(VERTICAL_SCROLL_WIDTH);
-
     // Setup layouts
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    auto *mainLayout = new QVBoxLayout;
     mainLayout->setMargin(0);
     mainLayout->setSpacing(0);
     mainLayout->addWidget(headerWidget);
+    mainLayout->addWidget(workspaceView);
     centralWidget->setLayout(mainLayout);
 
-    QHBoxLayout *workspaceLayout = new QHBoxLayout;
-    workspaceLayout->setMargin(0);
-    workspaceLayout->setSpacing(0);
-    workspaceLayout->addWidget(workspaceView);
-    workspaceLayout->addWidget(verticalScrollWidget);
-    mainLayout->addLayout(workspaceLayout);
+	// Scrollbar
+	verticalScrollWidget = createQQuickWidget("qrc:/qml/VerticalScrollBarContainer.qml");
+	verticalScroll = verticalScrollWidget->rootObject();
+	verticalScroll->setWidth(VERTICAL_SCROLL_WIDTH);
 
     setupMenus();
 }
@@ -110,11 +106,12 @@ float MainWindow::getMinimumPlayHeadOffsetF() const {
 void MainWindow::resizeEvent(QResizeEvent *event) {
     QWidget::resizeEvent(event);
 
-    int width = event->size().width();
-    int height = event->size().height();
+    const int width = event->size().width();
+    const int height = event->size().height();
 
     headerWithSubheader->setWidth(width);
-    verticalScroll->setHeight(height - HEADER_HEIGHT - YARD_STICK_HEIGHT);
+    verticalScroll->setHeight(height - HEADER_HEIGHT - YARD_STICK_HEIGHT - YARD_STICK_HEIGHT);
+	verticalScrollWidget->move(width - VERTICAL_SCROLL_WIDTH, HEADER_HEIGHT + YARD_STICK_HEIGHT + YARD_STICK_HEIGHT + 1);
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event) {
