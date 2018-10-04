@@ -22,7 +22,7 @@
 #include "AppSettings.h"
 
 constexpr int YARD_STICK_HEIGHT = static_cast<int>(WorkspaceDrawer::YARD_STICK_HEIGHT);
-constexpr int HEADER_HEIGHT = 75 + 61 - YARD_STICK_HEIGHT;
+constexpr int HEADER_WITH_SUBHEADER_HEIGHT = 75 + 61 - YARD_STICK_HEIGHT;
 constexpr int VERTICAL_SCROLL_WIDTH = 11;
 constexpr int BEATS_IN_TACT = 4;
 constexpr int MINIMUM_WINDOW_WIDTH = 700;
@@ -37,7 +37,7 @@ MainWindow::MainWindow() :
 {
     QWidget *centralWidget = new QWidget;
     setCentralWidget(centralWidget);
- 
+
     AppSettings settings;
     float inputVolume = settings.getInputVolume();
     float outputVolume = settings.getOutputVolume();
@@ -48,10 +48,11 @@ MainWindow::MainWindow() :
 
     // Header
     QQuickWidget *headerWidget = createQQuickWidget("qrc:/qml/HeaderWithSubHeader.qml");
+    headerWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
     headerWithSubheader = headerWidget->rootObject();
     header = headerWithSubheader->findChild<QQuickItem*>("header");
     assert(header);
-    headerWithSubheader->setHeight(HEADER_HEIGHT);
+    headerWithSubheader->setHeight(HEADER_WITH_SUBHEADER_HEIGHT);
 
     AudioInputManager *audioInputManager = MainController::instance()->getAudioInputManager();
     
@@ -69,12 +70,14 @@ MainWindow::MainWindow() :
     auto *mainLayout = new QVBoxLayout;
     mainLayout->setMargin(0);
     mainLayout->setSpacing(0);
+    headerWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    headerWidget->setFixedHeight(HEADER_WITH_SUBHEADER_HEIGHT);
     mainLayout->addWidget(headerWidget);
     mainLayout->addWidget(workspaceView);
     centralWidget->setLayout(mainLayout);
 
 	// Scrollbar
-	verticalScrollWidget = createQQuickWidget("qrc:/qml/VerticalScrollBarContainer.qml");
+    verticalScrollWidget = createQQuickWidget("qrc:/qml/VerticalScrollBarContainer.qml");
 	verticalScroll = verticalScrollWidget->rootObject();
 	verticalScroll->setWidth(VERTICAL_SCROLL_WIDTH);
 
@@ -109,9 +112,8 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
     const int width = event->size().width();
     const int height = event->size().height();
 
-    headerWithSubheader->setWidth(width);
-    verticalScroll->setHeight(height - HEADER_HEIGHT - YARD_STICK_HEIGHT);
-	verticalScrollWidget->move(width - VERTICAL_SCROLL_WIDTH, HEADER_HEIGHT + YARD_STICK_HEIGHT + 1);
+    verticalScroll->setHeight(workspaceView->height() - YARD_STICK_HEIGHT);
+	verticalScrollWidget->move(width - VERTICAL_SCROLL_WIDTH, workspaceView->y() + YARD_STICK_HEIGHT + 1);
 }
 
 void MainWindow::setupMenus() {

@@ -355,27 +355,4 @@ Item {
         anchors.bottom: lyrics.top
         anchors.top: yardstick.top
     }
-
-    Rectangle {
-        id: lyrics
-        width: parent.width
-        anchors.bottom: parent.bottom
-        height: header.lyricsShowButton.state === "on" ? 53.25 : 0
-        visible: header.lyricsShowButton.state === "on"
-
-        HorizontalLine {
-            width: parent.width
-            anchors.top: parent.top
-            opacity: 0.6
-        }
-
-        Text {
-            anchors.centerIn: parent
-            font.pointSize: 18
-            font.bold: true
-            font.family: "LatoBold"
-            color: "#24232d"
-            text: "Yesterday  All my troubles seemed so far away   Now it looks as though they're here to stay   Oh, I believe in yesterday"
-        }
-    }
 }

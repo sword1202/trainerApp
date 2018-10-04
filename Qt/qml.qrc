@@ -69,7 +69,6 @@
         <file>qml/TonalityController.qml</file>
         <file>qml/SingingProcessManager.qml</file>
         <file>qml/js/mathutils.js</file>
-        <file>qml/AppWindow.qml</file>
         <file>qml/HeaderWithSubHeader.qml</file>
         <file>qml/js/zoom.js</file>
         <file>qml/LeftSideBar.qml</file>
@@ -137,5 +136,6 @@
         <file>qml/MicrophoneVolumeSlider.qml</file>
         <file>qml/images/input_level_slider.svg</file>
         <file>qml/images/output_level_slider.svg</file>
+        <file>qml/Lyrics.qml</file>
     </qresource>
 </RCC>
