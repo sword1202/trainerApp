@@ -8,7 +8,7 @@
 
 #include "WorkspaceController.h"
 #include "MvxPlayer.h"
-#include "CppUtils/ListenersSet.h"
+#include "ListenersSet.h"
 
 class PlaybackBoundsSelectionController {
     WorkspaceController* workspaceController;

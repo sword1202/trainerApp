@@ -7,7 +7,6 @@
 #define VOCALTRAINER_VOCALTRAINERPITCHINPUTREADER_H
 
 #include "PitchInputReaderCollector.h"
-#include "RealtimeStreamingAudioPlayer.h"
 
 class AudioInputManager : public PitchInputReaderCollector {
     AudioInputReaderWithOutput* audioInputReader = nullptr;

@@ -45,7 +45,7 @@ NvgDrawer::~NvgDrawer() {
 #include <nanovg/fontstash.h>
 #include <NotImplementedAssert.h>
 
-#include "CppUtils/config.h"
+#include "config.h"
 
 class CPP_UTILS_DLLHIDE NvgImage : public Drawer::Image {
     int w;

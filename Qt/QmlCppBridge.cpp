@@ -1,7 +1,7 @@
 #include "QmlCppBridge.h"
 #include <iostream>
 #include <QScreen>
-#include "../PitchDetection/CppUtils/TimeUtils.h"
+#include "TimeUtils.h"
 #include "app.h"
 
 using namespace CppUtils;

@@ -8,7 +8,6 @@
 
 #include <istream>
 #include "VxPitch.h"
-#include "AudioPlayer.h"
 #include <vector>
 #include "VxLyricsLine.h"
 #include <boost/container/static_vector.hpp>

@@ -6,7 +6,7 @@
 #include <QByteArray>
 #include <QIcon>
 #include "QDrawer.h"
-#include "CppUtils/config.h"
+#include "config.h"
 
 using std::cout;
 using std::endl;

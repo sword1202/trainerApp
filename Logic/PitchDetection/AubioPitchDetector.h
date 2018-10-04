@@ -7,7 +7,7 @@
 
 #include "PitchDetector.h"
 #include "aubio/aubio.h"
-#include "CppUtils/Functions.h"
+#include "Functions.h"
 
 class AubioPitchDetector : public PitchDetector {
 public:

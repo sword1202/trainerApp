@@ -8,8 +8,8 @@
 
 
 #include <cstdint>
-#include "CppUtils/stlassert.h"
-#include "CppUtils/CircularBuffer.h"
+#include "stlassert.h"
+#include "CircularBuffer.h"
 #include <vector>
 
 class PitchDetectionSmoothingAudioBuffer {

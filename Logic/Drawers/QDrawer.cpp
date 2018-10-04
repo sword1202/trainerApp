@@ -1,6 +1,6 @@
 #include "QDrawer.h"
 #include "StringUtils.h"
-#include "CppUtils/config.h"
+#include "config.h"
 #include <QIcon>
 #include "NotImplementedAssert.h"
 

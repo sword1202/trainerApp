@@ -10,9 +10,6 @@
 class VxApp : public QApplication, public MainController
 {
     Q_OBJECT
-#ifdef __APPLE__
-    void doMacOsPlatformStaff();
-#endif
 public:
     VxApp(int &argc, char *argv[]);
     Player* getPlayer() const;
