@@ -18,7 +18,8 @@ typedef NvgDrawer DrawerImpl;
 
 class WorkspaceDrawerWidgetSetup
 {
-    void initPlayHeadTriangleImage(DrawerImpl *drawer, QWidget *widget);
+    Drawer::Image* createImageFromSvg(const char* url, double width, double height, DrawerImpl *drawer, QWidget *widget);
+    void initImages(DrawerImpl *drawer, QWidget *widget);
 protected:
     WorkspaceDrawer* workspaceDrawer = nullptr;
     WorkspaceDrawerWidgetSetup();

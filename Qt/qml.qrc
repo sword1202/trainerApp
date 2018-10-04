@@ -33,7 +33,7 @@
         <file>qml/images/tonality_down.svg</file>
         <file>qml/images/tonality_up_pressed.svg</file>
         <file>qml/images/tonality_down_pressed.svg</file>
-        <file>qml/images/playhead.png</file>
+        <file>qml/images/clock.png</file>
         <file>qml/sounds/sounds.sf2</file>
         <file>qml/sounds/metronome.wav</file>
         <file>qml/fonts/Lato-Bold.ttf</file>
@@ -73,7 +73,6 @@
         <file>qml/js/zoom.js</file>
         <file>qml/LeftSideBar.qml</file>
         <file>qml/VerticalScrollBarContainer.qml</file>
-        <file>qml/images/text/11_0.png</file>
         <file>qml/images/text/11_0.png</file>
         <file>qml/images/text/8_0.png</file>
         <file>qml/images/text/11_1.png</file>

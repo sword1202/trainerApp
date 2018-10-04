@@ -21,14 +21,15 @@ Item {
         anchors.top: header.bottom
 
         Text {
-            anchors.verticalCenter: parent.verticalCenter
+            anchors.top: parent.top
+            anchors.topMargin: 14.25
             anchors.left: parent.left
             anchors.leftMargin: 22.5
             text: "The Beatles - Yesterday"
             color: "#24232D"
-            font.family: "LatoBold"
+            font.family: "Lato"
             font.bold: true
-            font.pointSize: 13.5
+            font.pointSize: 15
         }
     }
 
@@ -39,25 +40,4 @@ Item {
         anchors.rightMargin: 23.25
         anchors.right: parent.right
     }
-
-//    Yardstick {
-//        id: yardstick
-//        anchors.bottom: parent.bottom
-//        anchors.bottomMargin: 4.75
-//        anchors.leftMargin: 67
-//        anchors.left: parent.left
-//        anchors.right: parent.right
-//    }
-
-//    VerticalLine {
-//        anchors.right: yardstick.left
-//        height: 15.75
-//        anchors.bottom: parent.bottom
-//    }
-
-//    HorizontalLine {
-//        width: parent.width
-//        anchors.bottom: parent.bottom
-//        anchors.left: parent.left
-//    }
 }

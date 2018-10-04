@@ -53,6 +53,9 @@ class WorkspaceDrawer : public WorkspaceController {
     PitchesCollector* pitchesCollector = nullptr;
     PianoDrawer* pianoDrawer = nullptr;
 
+    Drawer::Image* playHeadTriangleImage = nullptr;
+    Drawer::Image* clockImage = nullptr;
+
     std::atomic<const VxFile*> vxFile;
 
     std::atomic<double> frameTime;
@@ -88,12 +91,13 @@ class WorkspaceDrawer : public WorkspaceController {
 
     bool getBoundsStartXAndWidth(const PlaybackBounds& bounds, float* startX, float* width) const;
 public:
-    Drawer::Image* playHeadTriangleImage = nullptr;
 
-    static constexpr float YARD_STICK_HEIGHT = 22;
     static constexpr int PIANO_WIDTH = 67;
-    static constexpr float PLAYHEAD_TRIANGLE_WIDTH = 11.0f;
-    static constexpr float PLAYHEAD_TRIANGLE_HEIGHT = 11.25f;
+    static constexpr float PLAYHEAD_TRIANGLE_WIDTH = 12.0f;
+    static constexpr float PLAYHEAD_TRIANGLE_HEIGHT = 12.0f;
+    static constexpr float CLOCK_WIDTH = 42.f;
+    static constexpr float CLOCK_HEIGHT = 22.f;
+    static constexpr float YARD_STICK_HEIGHT = CLOCK_HEIGHT  + PLAYHEAD_TRIANGLE_HEIGHT / 2;
     static constexpr int YARD_STICK_FONT_SIZE = 11;
 
     WorkspaceDrawer(Drawer *drawer, const std::function<void()>& onUpdateRequested);
@@ -161,6 +165,7 @@ public:
     void setPlaybackBounds(const PlaybackBounds &playbackBounds) override;
 
     void setPlayHeadTriangleImage(Drawer::Image *image);
+    void setClockImage(Drawer::Image *clockImage);
 
     float getWorkspaceSeek() const override;
     float getGridBeginXPosition() const;

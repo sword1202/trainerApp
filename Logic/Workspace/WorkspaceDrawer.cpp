@@ -24,6 +24,7 @@ using std::endl;
 constexpr int BEATS_IN_TACT = 4;
 constexpr float PITCHES_GRAPH_WIDTH_IN_INTERVALS = 4.0f;
 constexpr float YARD_STICK_DOT_Y_OFFSET = 9.75f + 1.5f;
+constexpr float YARD_STICK_Y_OFFSET = WorkspaceDrawer::YARD_STICK_HEIGHT - 22;
 constexpr float PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN = 6;
 constexpr float YARD_STICK_DOT_RADIUS = 1.5f;
 constexpr float PLAYBACK_BOUNDS_BOTTOM_MARGIN = 3.75f;
@@ -309,6 +310,7 @@ void WorkspaceDrawer::drawPitchesGraph() const {
 }
 
 void WorkspaceDrawer::drawYardStick() const {
+    drawer->translate(0, YARD_STICK_Y_OFFSET);
     drawer->setTextFontSize(YARD_STICK_FONT_SIZE);
     drawer->setTextAlign(Drawer::TextAlign::CENTER);
     drawer->setTextBaseline(Drawer::TextBaseline::MIDDLE);
@@ -328,6 +330,7 @@ void WorkspaceDrawer::drawYardStick() const {
             startTactIndex++;
         }
     });
+    drawer->translate(0, -YARD_STICK_Y_OFFSET);
 }
 
 void WorkspaceDrawer::drawBoundsIfNeed() const {
@@ -356,6 +359,11 @@ void WorkspaceDrawer::drawPlayHead(float x) const {
     drawer->drawImage(triangleX, triangleY, PLAYHEAD_TRIANGLE_WIDTH, PLAYHEAD_TRIANGLE_HEIGHT, playHeadTriangleImage);
     drawer->setStrokeColor(playHeadColor);
     drawer->drawVerticalLine(x, YARD_STICK_HEIGHT, height);
+
+    float clockX = x - CLOCK_WIDTH / 2;
+    float clockY = triangleY - CLOCK_HEIGHT;
+    assert(clockImage);
+    drawer->drawImage(clockX, clockY, CLOCK_WIDTH, CLOCK_HEIGHT, clockImage);
 }
 
 void WorkspaceDrawer::drawSecondPlayHead() const {
@@ -581,7 +589,6 @@ bool WorkspaceDrawer::getBoundsStartXAndWidth(const PlaybackBounds &bounds, floa
 }
 
 void WorkspaceDrawer::setPlayHeadTriangleImage(Drawer::Image *image) {
-    //assert(playHeadImage == nullptr && image != nullptr);
     playHeadTriangleImage = image;
 }
 
@@ -597,4 +604,8 @@ float WorkspaceDrawer::getSeekFromXPositionOnWorkspace(float x) {
 
 float WorkspaceDrawer::getGridBeginXPosition() const {
     return PIANO_WIDTH;
+}
+
+void WorkspaceDrawer::setClockImage(Drawer::Image *clockImage) {
+    this->clockImage = clockImage;
 }

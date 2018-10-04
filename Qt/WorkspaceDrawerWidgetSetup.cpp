@@ -7,10 +7,14 @@
 #include <QIcon>
 #include "QDrawer.h"
 #include "config.h"
+#include <QDebug>
 
 using std::cout;
+using std::cerr;
 using std::endl;
 using namespace CppUtils;
+
+constexpr int MAX_SUPPORTED_DEVICE_PIXEL_RATIO = 2;
 
 CPP_UTILS_DLLHIDE class TextImagesFactory : public DrawerTextImagesFactory {
     constexpr static const char* path = ":qml/images/text/";
@@ -34,6 +38,14 @@ CPP_UTILS_DLLHIDE class TextImagesFactory : public DrawerTextImagesFactory {
     }
 public:
     void load(DrawerImpl* drawer, int devicePixelRatio) {
+        if (devicePixelRatio < 1) {
+            devicePixelRatio = 1;
+            cerr<<"Strange device pixel ratio passed "<<devicePixelRatio;
+        } else if(devicePixelRatio > MAX_SUPPORTED_DEVICE_PIXEL_RATIO) {
+            devicePixelRatio = MAX_SUPPORTED_DEVICE_PIXEL_RATIO;
+            cerr<<"Unsupported device pixel ratio passed "<<devicePixelRatio;
+        }
+
         // digits
         for (int textInt = 0; textInt <= 9; ++textInt) {
             char ch = (char)textInt + '0';
@@ -52,11 +64,11 @@ WorkspaceDrawerWidgetSetup::WorkspaceDrawerWidgetSetup() {
 
 }
 
-void WorkspaceDrawerWidgetSetup::initPlayHeadTriangleImage(DrawerImpl *drawer, QWidget *widget) {
-    QIcon triangle(":qml/images/play_head_triangle.svg");
+Drawer::Image *WorkspaceDrawerWidgetSetup::createImageFromSvg(const char* url, double width, double height,
+        DrawerImpl *drawer, QWidget *widget) {
+    QIcon icon(url);
     qreal ratio = widget->devicePixelRatioF();
-    QPixmap pixmap = triangle.pixmap(qRound(WorkspaceDrawer::PLAYHEAD_TRIANGLE_WIDTH * ratio),
-            qRound(WorkspaceDrawer::PLAYHEAD_TRIANGLE_HEIGHT * ratio));
+    QPixmap pixmap = icon.pixmap(qRound(width * ratio), qRound(height * ratio));
 
     Drawer::Image* imageHolder;
 #ifdef USE_QT_DRAWER
@@ -66,7 +78,33 @@ void WorkspaceDrawerWidgetSetup::initPlayHeadTriangleImage(DrawerImpl *drawer, Q
     imageHolder = drawer->createImage(image.bits(), image.width(), image.height());
 #endif
 
-    workspaceDrawer->setPlayHeadTriangleImage(imageHolder);
+    return imageHolder;
+}
+
+static Drawer::Image* createImage(const QString& url, DrawerImpl *drawer) {
+    QImage image;
+    image.load(url);
+    image = image.rgbSwapped();
+    assert(!image.isNull());
+#ifdef USE_QT_DRAWER
+#error Not implemented
+#else
+    return drawer->createImage(image.bits(), image.width(), image.height());
+#endif
+
+}
+
+void WorkspaceDrawerWidgetSetup::initImages(DrawerImpl *drawer, QWidget *widget) {
+    // PlayHead
+    Drawer::Image* playHeadImage = createImageFromSvg(":qml/images/play_head_triangle.svg",
+            WorkspaceDrawer::PLAYHEAD_TRIANGLE_WIDTH,
+            WorkspaceDrawer::PLAYHEAD_TRIANGLE_HEIGHT,
+            drawer, widget);
+    workspaceDrawer->setPlayHeadTriangleImage(playHeadImage);
+
+    // Clock
+    Drawer::Image* clockImage = createImage(":qml/images/clock.png", drawer);
+    workspaceDrawer->setClockImage(clockImage);
 }
 
 void WorkspaceDrawerWidgetSetup::setupWorkspaceDrawer(QWidget* widget, DrawerImpl* drawer) {
@@ -78,7 +116,7 @@ void WorkspaceDrawerWidgetSetup::setupWorkspaceDrawer(QWidget* widget, DrawerImp
     workspaceDrawer = new WorkspaceDrawer(drawer, [=] {
         widget->repaint();
     });
-    initPlayHeadTriangleImage(drawer, widget);
+    initImages(drawer, widget);
 
     MainController::instance()->setWorkspaceController(workspaceDrawer);
 
