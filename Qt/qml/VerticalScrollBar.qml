@@ -10,13 +10,21 @@ Rectangle {
     property real padding: 2.25
     property alias upScroller: upScroller
     property alias downScroller: downScroller
+    property bool blockYChanged: false
+    property bool blockPositionChanged: false
 
     color: "#E8E7F0"
 
     width: 11.25
 
     onPositionChanged: {
+        if (blockPositionChanged) {
+            return
+        }
+
+        blockYChanged = true
         stripe.y = position * mouseArea.drag.maximumY
+        blockYChanged = false
     }
 
     Rectangle {
@@ -48,7 +56,13 @@ Rectangle {
             }
 
             onYChanged: {
+                if (blockYChanged) {
+                    return
+                }
+
+                blockPositionChanged = true
                 scrollBar.position = y / mouseArea.drag.maximumY
+                blockPositionChanged = false
             }
 
             color: "#615F97"

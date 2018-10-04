@@ -12,9 +12,9 @@ Rectangle {
 
         Text {
             anchors.centerIn: parent
-            font.pointSize: 18
+            font.pointSize: 19
             font.bold: true
-            font.family: "LatoBold"
+            font.family: "Lato"
             color: "#24232d"
             text: "Yesterday  All my troubles seemed so far away   Now it looks as though they're here to stay   Oh, I believe in yesterday"
         }
