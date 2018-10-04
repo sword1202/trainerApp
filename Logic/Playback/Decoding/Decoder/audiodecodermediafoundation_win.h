@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by Semyon Tikhonenko on 8/28/18.
 // Copyright (c) 2018 Mac. All rights reserved.
 //
@@ -31,7 +31,7 @@ private:
     IMFMediaType *audioType = nullptr;
 
     int nextFrame = 0;
-    short *m_leftoverBuffer;
+    short *m_leftoverBuffer = nullptr;
     size_t m_leftoverBufferSize = 0;
     size_t m_leftoverBufferLength = 0;
     int m_leftoverBufferPosition = 0;

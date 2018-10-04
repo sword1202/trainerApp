@@ -110,8 +110,8 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
     const int height = event->size().height();
 
     headerWithSubheader->setWidth(width);
-    verticalScroll->setHeight(height - HEADER_HEIGHT - YARD_STICK_HEIGHT - YARD_STICK_HEIGHT);
-	verticalScrollWidget->move(width - VERTICAL_SCROLL_WIDTH, HEADER_HEIGHT + YARD_STICK_HEIGHT + YARD_STICK_HEIGHT + 1);
+    verticalScroll->setHeight(height - HEADER_HEIGHT - YARD_STICK_HEIGHT);
+	verticalScrollWidget->move(width - VERTICAL_SCROLL_WIDTH, HEADER_HEIGHT + YARD_STICK_HEIGHT + 1);
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event) {
