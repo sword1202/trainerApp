@@ -24,6 +24,10 @@ Rectangle {
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
         anchors.leftMargin: 23.25
+
+        onOnChanged: {
+            self.setShowLyrics(on)
+        }
     }
 
     FeaturesToggleButton {

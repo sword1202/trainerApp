@@ -32,6 +32,7 @@ public:
     Q_INVOKABLE void setBoundsSelectionEnabled(bool enabled);
     Q_INVOKABLE void onInputVolumeChanged(float value);
     Q_INVOKABLE void onOutputVolumeChanged(float value);
+    Q_INVOKABLE void setShowLyrics(bool value);
 
 public slots:
     void onFileOpen();

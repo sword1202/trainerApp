@@ -47,6 +47,12 @@ MainWindow::MainWindow() :
     workspaceView = new QOpenGLWorkspaceWidget(this);
     workspaceView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
+    // Lyrics
+    lyricsWidget = createQQuickWidget("qrc:/qml/Lyrics.qml");
+    lyricsWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
+    lyricsWidget->setFixedHeight(LYRICS_HEIGHT);
+    lyricsWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+
     // Header
     QQuickWidget *headerWidget = createQQuickWidget("qrc:/qml/HeaderWithSubHeader.qml");
     headerWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
@@ -67,12 +73,6 @@ MainWindow::MainWindow() :
     audioInputManager->addAudioInputLevelMonitor([=] (double level) {
         header->setProperty("microphoneLevel", level);
     });
-
-    // Lyrics
-    lyricsWidget = createQQuickWidget("qrc:/qml/Lyrics.qml");
-    lyricsWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
-    lyricsWidget->setFixedHeight(LYRICS_HEIGHT);
-    lyricsWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
     // Setup layouts
     auto *mainLayout = new QVBoxLayout;
@@ -155,4 +155,8 @@ void MainWindow::setBoundsSelectionEnabled(bool enabled) {
 MainWindow::~MainWindow()
 {
 
+}
+
+void MainWindow::setShowLyrics(bool value) {
+    lyricsWidget->setVisible(value);
 }
