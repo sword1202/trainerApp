@@ -51,7 +51,7 @@ endif(APPLE)
 include_directories(
         include
         CppUtils
-        Logic/PitchDetection
+        Logic/AudioInput
         Logic/Drawers
         Logic/Manager
         Logic/Workspace

@@ -15,8 +15,8 @@ set(Workspace
         Workspace/PianoDrawer.cpp
         Workspace/WorkspaceDrawer.cpp)
 
-include(Logic/PitchDetection/CMakeLists.txt)
-list(TRANSFORM pitchDetectionSources PREPEND PitchDetection/)
+include(Logic/AudioInput/CMakeLists.txt)
+list(TRANSFORM pitchDetectionSources PREPEND AudioInput/)
 
 include(Logic/Playback/CMakeLists.txt)
 list(TRANSFORM playbackSources PREPEND Playback/)

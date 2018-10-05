@@ -2,7 +2,7 @@
 #define QMLPITCH_H
 
 #include <QObject>
-#include "../PitchDetection/Pitch.h"
+#include "Pitch.h"
 
 class QmlPitch : public Pitch
 {
