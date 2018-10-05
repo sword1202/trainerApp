@@ -35,7 +35,7 @@ Item {
 
         Text {
             anchors.centerIn: parent
-            font.family: "LatoBold"
+            font.family: "Lato"
             font.bold: true
 
             Component.onCompleted: {
@@ -72,7 +72,7 @@ Item {
             font.pointSize: 15
             color: "#615f97"
             font.bold: true
-            font.family: "LatoBold"
+            font.family: "Lato"
             anchors.bottomMargin: 1
 
             onTextChanged: {
@@ -93,7 +93,7 @@ Item {
 
             text: "TONALITY"
             color: "#8790d0"
-            font.family: "LatoRegular"
+            font.family: "Lato"
             font.pointSize: 7.5
         }
     }

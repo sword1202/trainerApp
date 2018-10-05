@@ -9,7 +9,7 @@ Item {
     property int tempo: cpp.player.source ? cpp.player.beatsPerMinute : -1
 
     height: 38.25
-    width: 52.5
+    width: 52
 
     Component.onCompleted: {
 
@@ -45,7 +45,7 @@ Item {
         font.pointSize: 15
         color: "#615f97"
         font.bold: true
-        font.family: "LatoBold"
+        font.family: "Lato"
         anchors.bottomMargin: 1
         enabled: false
         validator: IntValidator {
@@ -68,7 +68,7 @@ Item {
 
         text: "TEMPO"
         color: "#8790d0"
-        font.family: "LatoRegular"
-        font.pointSize: 7.5
+        font.family: "Lato"
+        font.pointSize: 8
     }
 }
