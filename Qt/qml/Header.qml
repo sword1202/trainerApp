@@ -86,8 +86,8 @@ Rectangle {
 
             SvgImage {
                 id: outputSliderIcon
-                width: 19
-                height: 29
+                width: 17
+                height: 26
                 source: "images/output_level_slider.svg"
                 anchors.bottom: inputSliderIcon.bottom
             }
@@ -108,8 +108,8 @@ Rectangle {
 
             SvgImage {
                 id: inputSliderIcon
-                width: 13
-                height: 24
+                width: 12
+                height: 22
                 source: "images/input_level_slider.svg"
                 anchors.left: outputSlider.right
                 anchors.leftMargin: 27.75
@@ -122,7 +122,7 @@ Rectangle {
 
                 level: microphoneLevel
                 anchors.left: inputSliderIcon.right
-                anchors.leftMargin: 7.5
+                anchors.leftMargin: 6.5
                 anchors.verticalCenter: parent.verticalCenter
 
                 onVolumeChanged: {

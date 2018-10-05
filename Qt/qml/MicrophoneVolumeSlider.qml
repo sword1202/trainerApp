@@ -4,8 +4,8 @@ import QtQuick 2.0
 import QtGraphicalEffects 1.0
 
 Item {
-    width: 80
-    height: 17
+    width: 70
+    height: 13
 
     property real volume: 1.0
     property real level: 0.0
@@ -15,7 +15,7 @@ Item {
     readonly property real maxX: width - circle.width
 
     Rectangle {
-        height: 9
+        height: 7
         width: parent.width
         radius: height / 2
         anchors.centerIn: parent
@@ -30,14 +30,14 @@ Item {
             anchors.rightMargin: 8
 
             Rectangle {
-                height: 3
+                height: 2
                 anchors.left: parent.left
                 width: parent.width * level
                 color: "#31DD6C"
             }
 
             Rectangle {
-                height: 3
+                height: 2
                 anchors.left: parent.left
                 width: parent.width * level
                 color: "#31DD6C"
