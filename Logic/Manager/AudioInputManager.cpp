@@ -22,10 +22,14 @@ AudioInputManager::AudioInputManager(const char* deviceName) {
     audioInputReader = new PortAudioInputReader(BUFFER_SIZE, true, deviceName);
     PitchInputReaderCollector::init(audioInputReader, SMOOTH_LEVEL, pitchDetector);
     audioInputReader->start();
+
+    dataCollector = new AudioInputDataCollector();
+    audioInputReader->callbacks.addListener(dataCollector);
 }
 
 AudioInputManager::~AudioInputManager() {
     delete audioInputReader;
+    delete dataCollector;
 }
 
 void AudioInputManager::setInputVolume(float value) {
@@ -57,11 +61,15 @@ void AudioInputManager::addAudioInputReaderCallback(const AudioInputReader::Call
 }
 
 void AudioInputManager::startPitchDetection() {
-    listenerKey = audioInputReader->callbacks.addListener(this);
+    audioInputReader->callbacks.addListener(this);
+    if (audioDataCollectorEnabled) {
+        dataCollector->clearCollectedData();
+        audioInputReader->callbacks.addListener(dataCollector);
+    }
 }
 
 void AudioInputManager::stopPitchDetection() {
-    audioInputReader->callbacks.removeListener(listenerKey);
+    audioInputReader->callbacks.removeListeners(this, dataCollector);
 }
 
 void AudioInputManager::addAudioInputLevelMonitor(const std::function<void(double)> &callback) {
@@ -70,4 +78,12 @@ void AudioInputManager::addAudioInputLevelMonitor(const std::function<void(doubl
             callback(value);
         });
     }));
+}
+
+bool AudioInputManager::isAudioDataCollectorEnabled() const {
+    return audioDataCollectorEnabled;
+}
+
+void AudioInputManager::setAudioDataCollectorEnabled(bool audioDataCollectorEnabled) {
+    this->audioDataCollectorEnabled = audioDataCollectorEnabled;
 }

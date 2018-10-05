@@ -10,7 +10,7 @@
 
 struct WavConfig {
     unsigned int sampleRate = 44100;
-    unsigned int numberOfChannels = 1;
+    unsigned int numberOfChannels = 2;
     unsigned int bitsPerChannel = 16;
 };
 
@@ -44,6 +44,17 @@ public:
     // tested only for 16 bits per channel.
     static std::vector<char> addWavHeaderToRawPcmData(const char* data, int size, const WavConfig& config);
     static std::vector<char> addWavHeaderToRawPcmData(const char* data, int size);
+
+    static WavConfig parseWavHeader(const char* data);
+
+    template <typename Array>
+    static WavConfig parseWavHeader(const Array& array) {
+        if (array.size() < DATA_POSITION) {
+            throw std::runtime_error("Invalid .wav file");
+        }
+
+        return parseWavHeader(array.data());
+    }
 
     static bool isWavFile(const char* data, int size);
 

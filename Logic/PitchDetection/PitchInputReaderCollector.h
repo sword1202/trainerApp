@@ -22,7 +22,7 @@ private:
 
     std::deque<float> frequencies;
     std::deque<double> times;
-    double savedPitchesTimeLimit = 10.0;
+    double savedPitchesTimeLimit = std::numeric_limits<double>::infinity();
     mutable std::mutex mutex;
 public:
     CppUtils::ListenersSet<const Pitch&, double> pitchDetectedListeners;
@@ -42,11 +42,13 @@ public:
 
     virtual void setThreshold(float threshold);
     float getThreshold() const;
-    virtual ~PitchInputReaderCollector();
+    ~PitchInputReaderCollector() override;
     virtual void pitchDetected(float frequency, double time);
 
     double getSavedPitchesTimeLimit() const;
     void setSavedPitchesTimeLimit(double savedPitchesTimeLimit);
+
+    void clearCollectedPitches();
 };
 
 

@@ -10,4 +10,5 @@ set(pitchDetectionSources
         PortAudioInputReader.cpp
         PortAudioUtils.cpp
         WAVFile.cpp
+        AudioInputDataCollector.cpp
         )

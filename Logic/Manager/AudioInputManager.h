@@ -7,12 +7,14 @@
 #define VOCALTRAINER_VOCALTRAINERPITCHINPUTREADER_H
 
 #include "PitchInputReaderCollector.h"
+#include "AudioInputDataCollector.h"
 
 class AudioInputManager : public PitchInputReaderCollector {
     AudioInputReaderWithOutput* audioInputReader = nullptr;
-    int listenerKey = -1;
+    AudioInputDataCollector* dataCollector = nullptr;
+    bool audioDataCollectorEnabled = false;
 public:
-    AudioInputManager(const char* deviceName);
+    explicit AudioInputManager(const char* deviceName);
 
     void setInputVolume(float value);
     float getInputVolume() const;
@@ -28,7 +30,10 @@ public:
     void addAudioInputReaderCallback(const AudioInputReader::Callback& callback);
     void addAudioInputLevelMonitor(const std::function<void(double)>& callback);
 
-    ~AudioInputManager();
+    bool isAudioDataCollectorEnabled() const;
+    void setAudioDataCollectorEnabled(bool audioDataCollectorEnabled);
+
+    ~AudioInputManager() override;
 };
 
 

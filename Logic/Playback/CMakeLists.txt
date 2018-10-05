@@ -17,10 +17,10 @@ set(playbackSources
         Mvx/MvxFile.cpp
         Mvx/MvxPlayer.cpp
 
-        Other/BaseWavAudioPlayer.cpp
         Other/MetronomeAudioPlayer.cpp
         Other/RealtimeStreamingAudioPlayer.cpp
         Other/WavAudioPlayer.cpp
+        Other/BaseRawPcmAudioDataPlayer.cpp
 
         Vx/VxFile.cpp
         Vx/VxFileAudioDataGenerator.cpp

@@ -102,3 +102,9 @@ double PitchInputReaderCollector::getLastDetectedTime() const {
 
     return times.front();
 }
+
+void PitchInputReaderCollector::clearCollectedPitches() {
+    LOCK;
+    frequencies.clear();
+    times.clear();
+}

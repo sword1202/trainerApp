@@ -9,9 +9,10 @@
 #include "WavAudioPlayer.h"
 #include <string>
 
-class MetronomeAudioPlayer : public WavAudioPlayer {
+class MetronomeAudioPlayer : public BaseRawPcmAudioDataPlayer {
     double beatsPerMinute = 0;
     std::string metronomeAudioData;
+    std::string audioData;
 public:
     void setMetronomeAudioData(std::string&& metronomeAudioData);
 
@@ -19,8 +20,8 @@ public:
     void setAudioDataInfo(double beatsPerMinute, double totalDurationInSeconds);
 
 protected:
-    virtual double calculateTotalDurationInSeconds(int size, int bytesPerChannel, const PlaybackData &playbackData) override;
-    virtual WavSetupData provideWavSetupData() override;
+    int getAudioDataSizeInBytes() override;
+    const char *provideAudioBuffer() override;
 };
 
 
