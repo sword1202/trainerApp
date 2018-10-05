@@ -7,6 +7,7 @@
 #define VOCALTRAINER_VXFILEAUDIODATAGENERATOR_H
 
 #include <vector>
+#include <mutex>
 
 #include "VxFileAudioDataGeneratorConfig.h"
 #include "VxFile.h"

@@ -48,6 +48,28 @@ if (APPLE)
     target_link_libraries(VocalTrainer ${CMAKE_SOURCE_DIR}/libs/macos/Release/libSoundTouch.1.dylib)
 endif(APPLE)
 
+if (WIN32)
+    target_link_libraries(VocalTrainer User32)
+    target_link_libraries(VocalTrainer Opengl32)
+    target_link_libraries(VocalTrainer MFPlat)
+    target_link_libraries(VocalTrainer mfuuid)
+    target_link_libraries(VocalTrainer mfreadwrite)
+    target_link_libraries(VocalTrainer Advapi32)
+    target_link_libraries(VocalTrainer Shlwapi)
+    target_link_libraries(VocalTrainer ${CMAKE_SOURCE_DIR}/libs/windows/Release/glew32s.lib)
+    target_link_libraries(VocalTrainer ${CMAKE_SOURCE_DIR}/libs/windows/Release/glew32.lib)
+
+    target_link_libraries(VocalTrainer debug ${CMAKE_SOURCE_DIR}/libs/windows/Debug/aubio.lib)
+    target_link_libraries(VocalTrainer debug ${CMAKE_SOURCE_DIR}/libs/windows/Debug/libboost_serialization-vc141-mt-gd-x32-1_67.lib)
+    target_link_libraries(VocalTrainer debug ${CMAKE_SOURCE_DIR}/libs/windows/Debug/portaudio.lib)
+    target_link_libraries(VocalTrainer debug ${CMAKE_SOURCE_DIR}/libs/windows/Debug/SoundTouchD.lib)
+
+    target_link_libraries(VocalTrainer general ${CMAKE_SOURCE_DIR}/libs/windows/Release/aubio.lib)
+    target_link_libraries(VocalTrainer general ${CMAKE_SOURCE_DIR}/libs/windows/Release/libboost_serialization-vc141-mt-x32-1_67.lib)
+    target_link_libraries(VocalTrainer general ${CMAKE_SOURCE_DIR}/libs/windows/Release/portaudio.lib)
+    target_link_libraries(VocalTrainer general ${CMAKE_SOURCE_DIR}/libs/windows/Release/SoundTouch.lib)
+endif(WIN32)
+
 include_directories(
         include
         CppUtils

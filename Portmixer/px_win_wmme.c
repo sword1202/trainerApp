@@ -38,8 +38,8 @@
 
 #include <windows.h>
 
-#include "portaudio.h"
-#include "pa_win_wmme.h"
+#include <portaudio/portaudio.h>
+#include <portaudio/pa_win_wmme.h>
 
 #include "portmixer.h"
 #include "px_mixer.h"
