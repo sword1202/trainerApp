@@ -1,16 +1,17 @@
-#include <QQuickWidget>
 #include "SelectMicrophoneDialog.h"
-#include "PortAudioUtils.h"
-#include "Algorithms.h"
+
+#include <QQuickWidget>
 #include <QQuickWidget>
 #include <QQmlContext>
 #include <QQuickItem>
+
+#include "QtUtils/qtutils.h"
+#include "PortAudioUtils.h"
+#include "Algorithms.h"
 #include "PortAudioInputReader.h"
 #include "AppSettings.h"
 #include "VxApp.h"
 #include "AudioAverageInputLevelMonitor.h"
-#include <iostream>
-#include "QtUtils/qtutils.h"
 
 constexpr int DIALOG_WIDTH = 439;
 constexpr int DIALOG_HEIGHT = 331;
@@ -30,7 +31,7 @@ SelectMicrophoneDialog::SelectMicrophoneDialog(QWidget* parent, QmlCppBridge* cp
 
     QQmlContext *context = selectMicrophoneDialogView->rootContext();
     QStringList microphoneNames = Transform<QStringList>(PortAudio::getInputDevices(), [] (const PaDeviceInfo* device) {
-        return device->name;
+        return QString::fromLocal8Bit(device->name);
     });
     context->setContextProperty("names", QVariant::fromValue(microphoneNames));
     context->setContextProperty("self", this);
