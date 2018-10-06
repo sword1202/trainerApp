@@ -12,6 +12,7 @@
 #include "AppSettings.h"
 #include "VxApp.h"
 #include "AudioAverageInputLevelMonitor.h"
+#include "Executors.h"
 
 constexpr int DIALOG_WIDTH = 439;
 constexpr int DIALOG_HEIGHT = 331;
@@ -46,7 +47,9 @@ SelectMicrophoneDialog::SelectMicrophoneDialog(QWidget* parent, QmlCppBridge* cp
             false, // outputEnabled
             AppSettings().getMicrophoneDeviceName().data());
     AudioAverageInputLevelMonitor monitor(BUFFER_SIZE, [this] (double level) {
-        onInputLevelChanged(level);
+        Executors::ExecuteOnMainThread([=]{
+            onInputLevelChanged(level);
+        });
     });
     audioInputReader->callbacks.addListener(monitor);
     audioInputReader->start();
