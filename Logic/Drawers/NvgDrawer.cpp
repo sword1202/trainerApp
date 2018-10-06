@@ -11,23 +11,43 @@ static NVGcolor toNvgColor(const Drawer::Color& color) {
     return nvgRGBA(color[0], color[1], color[2], color[3]);
 }
 
-#ifdef USE_METAL
+#include "config.h"
+
+class CPP_UTILS_DLLHIDE NvgImage : public Drawer::Image {
+    int w;
+    int h;
+public:
+    NvgImage(int handle, int w, int h) : handle(handle), w(w), h(h) {
+    }
+
+    int handle = -1;
+
+    int width() override {
+        return w;
+    }
+
+    int height() override {
+        return h;
+    }
+};
+
+#ifdef __APPLE__
 
 #include <nanovg/nanovg_mtl.h>
 
-void NvgDrawer::clear() {
+void MetalNvgDrawer::clear() {
     mnvgClearWithColor(ctx, nvgRGBA(255, 255, 255, 255));
 }
 
-NvgDrawer::NvgDrawer(void* layer) {
-    ctx = nvgCreateMTL(layer, NVG_ANTIALIAS);
+MetalNvgDrawer::MetalNvgDrawer(void* layer) {
+    ctx = nvgCreateMTL(layer, NVG_METAL_ANTIALIAS);
 }
 
-NvgDrawer::~NvgDrawer() {
+MetalNvgDrawer::~MetalNvgDrawer() {
     nvgDeleteMTL(ctx);
 }
 
-#else
+#endif
 
 
 #ifdef _WIN32
@@ -45,33 +65,7 @@ NvgDrawer::~NvgDrawer() {
 #include <nanovg/fontstash.h>
 #include <NotImplementedAssert.h>
 
-#include "config.h"
-
-class CPP_UTILS_DLLHIDE NvgImage : public Drawer::Image {
-    int w;
-    int h;
-public:
-    NvgImage(int handle, int w, int h) : handle(handle), w(w), h(h) {
-    }
-    ~NvgImage() {};
-    
-    int handle = -1;
-
-    int width() override {
-        return w;
-    }
-
-    int height() override {
-        return h;
-    }
-};
-
-void NvgDrawer::clear() {
-    glClearColor(1, 1, 1, 1);
-    glClear(GL_COLOR_BUFFER_BIT);
-}
-
-NvgDrawer::NvgDrawer() {
+OpenGLNvgDrawer::OpenGLNvgDrawer() {
 #ifdef _WIN32
     GLint GlewInitResult = glewInit();
     if (GLEW_OK != GlewInitResult) {
@@ -86,11 +80,20 @@ NvgDrawer::NvgDrawer() {
     ctx = nvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DEBUG);
 #endif
 
+    setupBase();
+}
+
+void OpenGLNvgDrawer::clear() {
+    glClearColor(1, 1, 1, 1);
+    glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void NvgDrawer::setupBase() {
     setTextAlign(textAlign);
     setTextBaseline(textBaseline);
 }
 
-NvgDrawer::~NvgDrawer() {
+OpenGLNvgDrawer::~OpenGLNvgDrawer() {
 
 #ifdef _WIN32
     nvgDeleteGL3(ctx);
@@ -100,7 +103,6 @@ NvgDrawer::~NvgDrawer() {
     nvgDeleteGL2(ctx);
 #endif
 }
-#endif
 
 void NvgDrawer::beginFrame(float width, float height, float devicePixelRatio) {
     Drawer::beginFrame(width, height, devicePixelRatio);

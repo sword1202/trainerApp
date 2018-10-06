@@ -1,4 +1,4 @@
-#include "qmetalwidget.h"
+#include "QMetalWidget.h"
 #include <QResizeEvent>
 
 #define LOCK std::lock_guard<std::mutex> _(sizeMutex)
@@ -27,6 +27,7 @@ QMetalWidget::QMetalWidget(QWidget *parent)
     {
         NSLog(@"DisplayLink created with error:%d", error2);
     }
+
     CVDisplayLinkSetOutputCallback(displayLink, renderCallback, this);
     CVDisplayLinkStart(displayLink);
 }
@@ -64,6 +65,10 @@ id <MTLDevice> QMetalWidget::getDevice() const {
 }
 
 void QMetalWidget::renderMetalInternal() {
+    if (!initialized) {
+        initMetal();
+        initialized = true;
+    }
     {
         LOCK;
         if (sizeChanged) {
@@ -72,4 +77,8 @@ void QMetalWidget::renderMetalInternal() {
         }
     }
     renderMetal(_size.width(), _size.height());
+}
+
+void QMetalWidget::showEvent(QShowEvent *event) {
+
 }

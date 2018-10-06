@@ -15,15 +15,17 @@ set(qtSources
         QmlVxPitch.cpp
         QmlZoomController.cpp
         qml.qrc
-        QOpenglWorkspaceWidget.cpp
-        QPainterWorkspaceWidget.cpp
+        Workspace/OpenglWorkspaceWidget.cpp
         WelcomeWindow.cpp
-        WorkspaceDrawerWidgetSetup.cpp
+        Workspace/WorkspaceDrawerWidgetSetup.cpp
         QtUtils/qtutils.cpp
+        Workspace/TextImagesFactory.cpp
         )
 
 if (APPLE)
     list(APPEND qtSources
             MainWindowOsx.mm
+            Workspace/Metal/QMetalWidget.mm
+            Workspace/Metal/MetalWorkspaceWidget.mm
             )
 endif(APPLE)

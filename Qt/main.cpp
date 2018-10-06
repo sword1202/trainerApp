@@ -4,7 +4,6 @@
 #include "QmlVxPitch.h"
 #include "QmlTimedPitch.h"
 #include "Player.h"
-#include "MacOS/workspaceview.h"
 #include <QApplication>
 #include "WelcomeWindow.h"
 

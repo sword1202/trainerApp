@@ -6,12 +6,11 @@
 #include "WorkspaceDrawer.h"
 #include "WorkspaceDrawerWidgetSetup.h"
 
-class QOpenGLWorkspaceWidget : public QOpenGLWidget, WorkspaceDrawerWidgetSetup
+class OpenGLWorkspaceWidget : public QOpenGLWidget, WorkspaceDrawerWidgetSetup
 {
     Q_OBJECT
 public:
-    QOpenGLWorkspaceWidget(QWidget* parent);
-    ~QOpenGLWorkspaceWidget();
+    explicit OpenGLWorkspaceWidget(QWidget* parent);
 protected:
     void initializeGL() override;
     void resizeGL(int w, int h) override;
@@ -19,15 +18,6 @@ protected:
 
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
-
-private:
-#ifdef USE_QT_DRAWER
-    QOpenGLPaintDevice* device = nullptr;
-#endif
-
-    DrawerImpl* drawer;
-
-    void initDeviceIfNeed();
 };
 
 #endif // QOPENGLWORKSPACEWIDGET_H

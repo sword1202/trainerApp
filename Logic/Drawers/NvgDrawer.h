@@ -10,21 +10,13 @@
 #include <nanovg/nanovg.h>
 
 class NvgDrawer : public Drawer {
-    NVGcontext* ctx = nullptr;
-
 #ifndef NDEBUG
     std::string fontFamily;
 #endif
+protected:
+    NVGcontext* ctx = nullptr;
+    void setupBase();
 public:
-#ifndef USE_METAL
-    NvgDrawer();
-#else
-    NvgDrawer(void* layer);
-#endif
-    virtual ~NvgDrawer();
-
-    void clear() override;
-
     void beginFrame(float width, float height, float devicePixelRatio) override;
     void endFrame() override;
     void moveTo(float x, float y) override;
@@ -74,5 +66,18 @@ public:
     Image *createImage(const void *data, int w, int h) override;
 };
 
+class OpenGLNvgDrawer : public NvgDrawer {
+public:
+    OpenGLNvgDrawer();
+    ~OpenGLNvgDrawer() override;
+    void clear() override;
+};
+
+class MetalNvgDrawer : public NvgDrawer {
+public:
+    MetalNvgDrawer(void* layer);
+    ~MetalNvgDrawer() override;
+    void clear() override;
+};
 
 #endif //VOCALTRAINER_NVGOPENGLDRAWER_H

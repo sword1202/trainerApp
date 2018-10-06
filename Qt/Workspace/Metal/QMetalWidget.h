@@ -18,8 +18,10 @@ class QMetalWidget : public QWidget
 public:
     QMetalWidget(QWidget *parent = 0);
     virtual ~QMetalWidget();
-
 protected:
+    void showEvent(QShowEvent *event) override;
+
+    virtual void initMetal() = 0;
     virtual void renderMetal(int width, int height) = 0;
     virtual void metalResize(int width, int height) = 0;
 
@@ -49,7 +51,8 @@ private:
     void* ____;
 #endif
 private:
-    bool sizeChanged;
+    bool sizeChanged = true;
+    bool initialized = false;
     QSize _size;
     mutable std::mutex sizeMutex;
 };

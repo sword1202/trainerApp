@@ -32,25 +32,27 @@ extern "C" {
 
 // Create flags
 
-enum NVGcreateFlags {
+
+    
+enum NVGMetalCreateFlags {
   // Flag indicating if geometry based anti-aliasing is used (may not be
   // needed when using MSAA).
-  NVG_ANTIALIAS = 1 << 0,
+  NVG_METAL_ANTIALIAS = 1 << 0,
   // Flag indicating if strokes should be drawn using stencil buffer.
   // The rendering will be a little slower, but path overlaps
   // (i.e. self-intersecting or sharp turns) will be drawn just once.
-  NVG_STENCIL_STROKES = 1 << 1,
+  NVG_METAL_STENCIL_STROKES = 1 << 1,
   // Flag indicating if double buffering scheme is used.
-  NVG_DOUBLE_BUFFER = 1 << 12,
+  NVG_METAL_DOUBLE_BUFFER = 1 << 12,
   // Flag indicating if triple buffering scheme is used.
-  NVG_TRIPLE_BUFFER = 1 << 13,
+  NVG_METAL_TRIPLE_BUFFER = 1 << 13,
   // Flag indicating that additional debug checks are done.
-  NVG_DEBUG = 1 << 2,
+  NVG_METAL_DEBUG = 1 << 2,
 };
 
 // These are additional flags on top of NVGimageFlags.
 enum NVGimageFlagsMetal {
-  NVG_IMAGE_NODELETE = 1 << 16, // Do not delete Metal texture handle.
+  NVG_METAL_IMAGE_NODELETE = 1 << 16, // Do not delete Metal texture handle.
 };
 
 struct MNVGframebuffer {
@@ -61,7 +63,7 @@ typedef struct MNVGframebuffer MNVGframebuffer;
 
 // Creates a new NanoVG context. The `metalLayer` parameter should be a
 // `CAMetalLayer` object, and the `flags` should be combination of
-// `NVGcreateFlags` above.
+// `NVGMetalCreateFlags` above.
 NVGcontext* nvgCreateMTL(void* metalLayer, int flags);
 
 // Deletes the specified NanoVG context.

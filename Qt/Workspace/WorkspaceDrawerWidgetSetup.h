@@ -5,25 +5,14 @@
 #include <QWidget>
 #include "WorkspaceDrawer.h"
 
-#define USE_NVG_DRAWER
-//#define USE_QT_DRAWER
-
-#ifdef USE_QT_DRAWER
-#include "QDrawer.h"
-typedef QDrawer DrawerImpl;
-#else
-#include "NvgDrawer.h"
-typedef NvgDrawer DrawerImpl;
-#endif
-
 class WorkspaceDrawerWidgetSetup
 {
-    Drawer::Image* createImageFromSvg(const char* url, double width, double height, DrawerImpl *drawer, QWidget *widget);
-    void initImages(DrawerImpl *drawer, QWidget *widget);
+    Drawer::Image* createImageFromSvg(const char* url, double width, double height, Drawer *drawer, QWidget *widget);
+    void initImages(Drawer *drawer, QWidget *widget);
 protected:
     WorkspaceDrawer* workspaceDrawer = nullptr;
     WorkspaceDrawerWidgetSetup();
-    void setupWorkspaceDrawer(QWidget* widget, DrawerImpl* drawer);
+    void setupWorkspaceDrawer(QWidget* widget, Drawer* drawer, bool useUpdateLoop);
     void handleResize(QWidget* widget, int w, int h);
 
 public:
@@ -32,6 +21,8 @@ public:
 protected:
     void onMouseMove(float x);
     void onMouseClick(float x);
+
+    void onRequestUpdate(QWidget* widget);
 };
 
 #endif // WORKSPACEDRAWERWIDGETSETUP_H

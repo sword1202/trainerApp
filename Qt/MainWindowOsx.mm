@@ -18,7 +18,7 @@ void BaseMainWindow::doMacOsPlatformStaff(QColor windowBorderColor) {
 #ifdef USE_METAL
 
 void MainWindow::setupWorkspaceView() {
-    workspaceView = new WorkspaceView(this);
+    workspaceView = new WorkspaceWidget(this);
 }
 
 #endif

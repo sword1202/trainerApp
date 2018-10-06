@@ -6,28 +6,23 @@
 #include <QQuickWidget>
 #include <QSvgWidget>
 #include "QtUtils/qtutils.h"
-#include "QOpenglWorkspaceWidget.h"
+#include "Workspace/OpenglWorkspaceWidget.h"
 #include "MvxPlayer.h"
 
 class MainWindow : public BaseMainWindow
 {
     Q_OBJECT
 
-    QWidget *workspaceView;
+    QWidget *workspaceWidget;
 
     QQuickItem *headerWithSubheader;
     QQuickItem *header;
     QQuickWidget *verticalScrollWidget;
     QQuickWidget *lyricsWidget;
-
-    int getMinimumPlayHeadOffset() const;
-    float getMinimumPlayHeadOffsetF() const;
 protected:
     void resizeEvent(QResizeEvent *event) override;
-
 public:
     MainWindow();
-    virtual ~MainWindow() override;
     void setupMenus();
     Q_INVOKABLE void setBoundsSelectionEnabled(bool enabled);
     Q_INVOKABLE void onInputVolumeChanged(float value);

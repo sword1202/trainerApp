@@ -377,7 +377,7 @@ static MNVGblend mtlnvg__blendCompositeOperation(NVGcompositeOperationState op) 
 
 static void mtlnvg__checkError(MNVGcontext* mtl, const char* str,
                                NSError* error) {
-  if ((mtl->flags & NVG_DEBUG) == 0) return;
+  if ((mtl->flags & NVG_METAL_DEBUG) == 0) return;
   if (error) {
     printf("Error occurs after %s: %s\n", str, [[error localizedDescription] UTF8String]);
   }
@@ -659,7 +659,7 @@ static void mtlnvg__fill(MNVGcontext* mtl, MNVGcall* call) {
 
   // Draws anti-aliased fragments.
   mtlnvg__setUniforms(mtl, call->uniformOffset, call->image);
-  if (mtl->flags & NVG_ANTIALIAS) {
+  if (mtl->flags & NVG_METAL_ANTIALIAS) {
     [mtl->renderEncoder setDepthStencilState:mtl->fillAntiAliasStencilState];
     for (i = 0; i < npaths; i++) {
       [mtl->renderEncoder drawPrimitives:MTLPrimitiveTypeTriangleStrip
@@ -693,7 +693,7 @@ static void mtlnvg__convexFill(MNVGcontext* mtl, MNVGcall* call) {
   }
 
   // Draw fringes
-  if (mtl->flags & NVG_ANTIALIAS) {
+  if (mtl->flags & NVG_METAL_ANTIALIAS) {
     for (i = 0; i < npaths; i++) {
       [mtl->renderEncoder drawPrimitives:MTLPrimitiveTypeTriangleStrip
                              vertexStart:paths[i].strokeOffset
@@ -706,7 +706,7 @@ static void mtlnvg__stroke(MNVGcontext* mtl, MNVGcall* call) {
   MNVGpath* paths = &mtl->buffers->paths[call->pathOffset];
   int i, npaths = call->pathCount;
 
-  if (mtl->flags & NVG_STENCIL_STROKES) {
+  if (mtl->flags & NVG_METAL_STENCIL_STROKES) {
     // Fills the stroke base without overlap.
     mtlnvg__setUniforms(mtl, call->uniformOffset + mtl->fragSize, call->image);
     [mtl->renderEncoder setDepthStencilState:mtl->strokeShapeStencilState];
@@ -929,8 +929,8 @@ static int mtlnvg__renderCreate(void* uptr) {
   }
 
   mtl->vertexFunction = [library newFunctionWithName:@"vertexShader"];
-  if (mtl->flags & NVG_ANTIALIAS) {
-    if (mtl->flags & NVG_STENCIL_STROKES) {
+  if (mtl->flags & NVG_METAL_ANTIALIAS) {
+    if (mtl->flags & NVG_METAL_STENCIL_STROKES) {
       mtl->fragmentFunction = \
           [library newFunctionWithName:@"fragmentShaderStencilStrokesAA"];
     } else {
@@ -944,9 +944,9 @@ static int mtlnvg__renderCreate(void* uptr) {
   mtl->commandQueue = [device newCommandQueue];
 
   // Initializes the number of available buffers.
-  if (mtl->flags & NVG_TRIPLE_BUFFER) {
+  if (mtl->flags & NVG_METAL_TRIPLE_BUFFER) {
     mtl->maxBuffers = 3;
-  } else if (mtl->flags & NVG_DOUBLE_BUFFER) {
+  } else if (mtl->flags & NVG_METAL_DOUBLE_BUFFER) {
     mtl->maxBuffers = 2;
   } else {
     mtl->maxBuffers = 1;
@@ -1118,7 +1118,7 @@ static int mtlnvg__renderDeleteTexture(void* uptr, int image) {
   for (int i = 0; i < mtl->ntextures; i++) {
     if (mtl->textures[i].id == image) {
       if (mtl->textures[i].tex != nil &&
-          (mtl->textures[i].flags & NVG_IMAGE_NODELETE) == 0) {
+          (mtl->textures[i].flags & NVG_METAL_IMAGE_NODELETE) == 0) {
         [mtl->textures[i].tex release];
         [mtl->textures[i].sampler release];
       }
@@ -1348,7 +1348,7 @@ static void mtlnvg__renderStroke(void* uptr, NVGpaint* paint,
     }
   }
 
-  if (mtl->flags & NVG_STENCIL_STROKES) {
+  if (mtl->flags & NVG_METAL_STENCIL_STROKES) {
     // Fill shader
     call->uniformOffset = mtlnvg__allocFragUniforms(mtl, 2);
     if (call->uniformOffset == -1) goto error;
@@ -1487,7 +1487,7 @@ NVGcontext* nvgCreateMTL(void* metalLayer, int flags) {
   params.renderTriangles = mtlnvg__renderTriangles;
   params.renderDelete = mtlnvg__renderDelete;
   params.userPtr = mtl;
-  params.edgeAntiAlias = flags & NVG_ANTIALIAS ? 1 : 0;
+  params.edgeAntiAlias = flags & NVG_METAL_ANTIALIAS ? 1 : 0;
 
   mtl->flags = flags;
 #if TARGET_OS_OSX == 1

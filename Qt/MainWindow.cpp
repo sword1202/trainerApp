@@ -13,9 +13,12 @@
 
 #include "QmlCppBridge.h"
 #include "VxApp.h"
-#include "QOpenglWorkspaceWidget.h"
+#ifdef __APPLE__
+#include "Workspace/Metal/MetalWorkspaceWidget.h"
+#else
+#include "Workspace/OpenglWorkspaceWidget.h"
+#endif
 #include "PlaybackBounds.h"
-#include "QPainterWorkspaceWidget.h"
 #include "Algorithms.h"
 #include "PortAudioUtils.h"
 #include "SelectMicrophoneDialog.h"
@@ -44,8 +47,12 @@ MainWindow::MainWindow() :
     float outputVolume = settings.getOutputVolume();
     
     // Workspace
-    workspaceView = new QOpenGLWorkspaceWidget(this);
-    workspaceView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+//#ifdef __APPLE__
+//    workspaceWidget = new MetalWorkspaceWidget(this);
+//#else
+    workspaceWidget = new OpenGLWorkspaceWidget(this);
+//#endif
+    workspaceWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     // Lyrics
     lyricsWidget = createQQuickWidget("qrc:/qml/Lyrics.qml");
@@ -79,7 +86,7 @@ MainWindow::MainWindow() :
     mainLayout->setMargin(0);
     mainLayout->setSpacing(0);
     mainLayout->addWidget(headerWidget);
-    mainLayout->addWidget(workspaceView);
+    mainLayout->addWidget(workspaceWidget);
     mainLayout->addWidget(lyricsWidget);
     centralWidget->setLayout(mainLayout);
 
@@ -104,22 +111,14 @@ void MainWindow::onInputVolumeChanged(float value) {
     audioInputManager->setInputVolume(value);
 }
 
-int MainWindow::getMinimumPlayHeadOffset() const {
-    return qRound(getMinimumPlayHeadOffsetF());
-}
-
-float MainWindow::getMinimumPlayHeadOffsetF() const {
-    return MainController::instance()->getZoomController()->getIntervalWidth() * BEATS_IN_TACT;
-}
-
 void MainWindow::resizeEvent(QResizeEvent *event) {
     QWidget::resizeEvent(event);
 
     const int width = event->size().width();
     const int height = event->size().height();
 
-    verticalScrollWidget->rootObject()->setHeight(workspaceView->height() - YARD_STICK_HEIGHT - 1);
-	verticalScrollWidget->move(width - VERTICAL_SCROLL_WIDTH, workspaceView->y() + YARD_STICK_HEIGHT + 1);
+    verticalScrollWidget->rootObject()->setHeight(workspaceWidget->height() - YARD_STICK_HEIGHT - 1);
+	verticalScrollWidget->move(width - VERTICAL_SCROLL_WIDTH, workspaceWidget->y() + YARD_STICK_HEIGHT + 1);
 }
 
 void MainWindow::setupMenus() {
@@ -144,17 +143,11 @@ void MainWindow::onFileOpen() {
 }
 
 void MainWindow::onSelectMicrophone() {
-    SelectMicrophoneDialog* dialog = new SelectMicrophoneDialog(this, cpp);
-    dialog->show();
+    (new SelectMicrophoneDialog(this, cpp))->show();
 }
 
 void MainWindow::setBoundsSelectionEnabled(bool enabled) {
     MainController::instance()->getPlaybackBoundsSelectionController()->setBoundsSelectionEnabled(enabled);
-}
-
-MainWindow::~MainWindow()
-{
-
 }
 
 void MainWindow::setShowLyrics(bool value) {
