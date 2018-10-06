@@ -1,5 +1,6 @@
 #include "QMetalWidget.h"
 #include <QResizeEvent>
+#include <QMacNativeWidget>
 
 #define LOCK std::lock_guard<std::mutex> _(sizeMutex)
 
@@ -9,7 +10,6 @@ QMetalWidget::QMetalWidget(QWidget *parent)
     NSView* view = reinterpret_cast<NSView *>(winId());
     layer = [CAMetalLayer new];
     device = MTLCreateSystemDefaultDevice();
-    [device retain];
     layer.device = device;
     layer.pixelFormat = MTLPixelFormatBGRA8Unorm;
     layer.framebufferOnly = true;
@@ -79,6 +79,16 @@ void QMetalWidget::renderMetalInternal() {
     renderMetal(_size.width(), _size.height());
 }
 
-void QMetalWidget::showEvent(QShowEvent *event) {
+void QMetalWidget::addSubview(NSView* view) {
+    NSView* parent = reinterpret_cast<NSView *>(winId());
+    [parent addSubview:view positioned:NSWindowAbove relativeTo:nil];
+}
 
+void QMetalWidget::addSubWidget(QWidget* widget) {
+    QMacNativeWidget *nativeWidget = new QMacNativeWidget();
+    nativeWidget->move(0, 0);
+    widget->setParent(nativeWidget);
+    NSView *nativeWidgetView = reinterpret_cast<NSView *>(nativeWidget->winId());
+    addSubview(nativeWidgetView);
+    nativeWidget->show();
 }

@@ -13,22 +13,20 @@
 
 class QMetalWidget : public QWidget
 {
-    Q_OBJECT
-
 public:
     QMetalWidget(QWidget *parent = 0);
     virtual ~QMetalWidget();
-protected:
-    void showEvent(QShowEvent *event) override;
 
+    void addSubWidget(QWidget* widget);
+protected:
     virtual void initMetal() = 0;
     virtual void renderMetal(int width, int height) = 0;
     virtual void metalResize(int width, int height) = 0;
-
 protected:
     void resizeEvent(QResizeEvent *event) override;
 #ifdef __OBJC__
 protected:
+    void addSubview(NSView* view);
     CAMetalLayer *getLayer() const;
     id<MTLDevice> getDevice() const;
 private:
