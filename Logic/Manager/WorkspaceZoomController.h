@@ -8,14 +8,14 @@
 
 #include "ListenersSet.h"
 #include "Pitch.h"
+#include "WorkspaceController.h"
 
-class ZoomController {
-    float zoom;
-    Pitch firstPitch;
-    Pitch lastPitch;
+class WorkspaceZoomController {
+    std::atomic<float> zoom;
+    std::atomic_int firstPitchIndex;
+    std::atomic_int lastPitchIndex;
     float verticalScrollPosition = 0;
-    float workspaceGridHeight;
-
+    std::atomic<float> workspaceGridHeight;
 public:
     CppUtils::ListenersSet<float> zoomChangedListeners;
     CppUtils::ListenersSet<const Pitch&> firstPitchChangedListeners;
@@ -23,7 +23,7 @@ public:
     CppUtils::ListenersSet<float> verticalScrollPositionChangedListeners;
     CppUtils::ListenersSet<> summarizedWorkspaceGridHeightChangedListeners;
 
-    ZoomController();
+    WorkspaceZoomController();
 
     float getIntervalWidth() const;
     float getIntervalHeight() const;
@@ -37,13 +37,12 @@ public:
     Pitch getFirstPitch() const;
     void setFirstPitch(const Pitch& pitch);
 
-    float getWorkspaceGridHeight() const;
-    virtual void setWorkspaceGridHeight(float pageSize);
-
     const Pitch &getLastPitch() const;
     void setLastPitch(const Pitch &lastPitch);
     float getSummarizedWorkspaceGridHeight() const;
     float getPageSize() const;
+
+    virtual void onWorkspaceWidgetHeightChanged(float height);
 
     float getVerticalScrollPosition() const;
     void setVerticalScrollPosition(float verticalScrollPosition);

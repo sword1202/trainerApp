@@ -3,9 +3,9 @@
 
 #include <QObject>
 #include "QmlPitch.h"
-#include "ZoomController.h"
+#include "WorkspaceZoomController.h"
 
-class QmlZoomController : public QObject, public ZoomController
+class QmlWorkspaceZoomController : public QObject, public WorkspaceZoomController
 {
     Q_OBJECT
 
@@ -20,9 +20,9 @@ public:
             setVerticalScrollPosition() NOTIFY verticalScrollPositionChanged())
     Q_PROPERTY(QmlPitch firstPitch READ getFirstPitch() NOTIFY firstPitchChanged())
 
-    void setWorkspaceGridHeight(float pageSize) override;
+    void onWorkspaceWidgetHeightChanged(float height) override;
 
-    QmlZoomController();
+    QmlWorkspaceZoomController();
 signals:
     void zoomChanged();
     void firstPitchChanged();

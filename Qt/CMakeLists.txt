@@ -13,7 +13,7 @@ set(qtSources
         QmlPitch.cpp
         QmlTimedPitch.cpp
         QmlVxPitch.cpp
-        QmlZoomController.cpp
+        QmlWorkspaceZoomController.cpp
         qml.qrc
         Workspace/OpenglWorkspaceWidget.cpp
         WelcomeWindow.cpp

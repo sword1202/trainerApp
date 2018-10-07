@@ -41,7 +41,7 @@ HEADERS += \
     ../VocalTrainer/nanovg/metal/nanovg_mtl_shaders.metal \
     ../VocalTrainer/Manager/MainController.h \
     ../VocalTrainer/Manager/AudioInputManager.h \
-    ../VocalTrainer/Manager/ZoomController.h \
+    ../VocalTrainer/Manager/WorkspaceZoomController.h \
     ../VocalTrainer/Drawers/QDrawer.h \
     ../VocalTrainer/Drawers/DrawerColor.h \
     ../VocalTrainer/Playback/VxFileAudioDataGenerator.h \
@@ -98,7 +98,7 @@ SOURCES += \
     ../VocalTrainer/Playback/AudioPlayback/Decoder/audiodecoder.cpp \
     ../VocalTrainer/Manager/AudioInputManager.cpp \
     ../VocalTrainer/Manager/MainController.cpp \
-    ../VocalTrainer/Manager/ZoomController.cpp \
+    ../VocalTrainer/Manager/WorkspaceZoomController.cpp \
     ../VocalTrainer/Drawers/QDrawer.cpp \
     ../VocalTrainer/Drawers/DrawerColor.cpp \
     ../VocalTrainer/Playback/VxFileAudioDataGenerator.cpp \

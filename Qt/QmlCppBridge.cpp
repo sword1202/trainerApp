@@ -27,8 +27,8 @@ QmlPitch QmlCppBridge::whitePitch(int whitePitchIndex, int octaveIndex) {
     return QmlPitch(Pitch::whitePitchPerfectFrequencyIndex(whitePitchIndex, octaveIndex));
 }
 
-QmlZoomController *QmlCppBridge::getZoomController() const {
-    return static_cast<QmlZoomController*>(VxApp::instance()->getZoomController());
+QmlWorkspaceZoomController *QmlCppBridge::getZoomController() const {
+    return static_cast<QmlWorkspaceZoomController*>(VxApp::instance()->getZoomController());
 }
 
 Player *QmlCppBridge::getPlayer() const {

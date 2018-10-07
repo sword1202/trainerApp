@@ -14,6 +14,11 @@ protected:
     void initMetal() override;
     void renderMetal(int width, int height) override;
     void metalResize(int width, int height) override;
+
+    void onRequestUpdate(QWidget *widget) override;
+
+private:
+    Drawer* drawer;
 };
 
 #endif // WORKSPACEVIEW_H

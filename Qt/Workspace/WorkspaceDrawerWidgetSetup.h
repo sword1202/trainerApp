@@ -22,7 +22,7 @@ protected:
     void onMouseMove(float x);
     void onMouseClick(float x);
 
-    void onRequestUpdate(QWidget* widget);
+    virtual void onRequestUpdate(QWidget* widget);
 };
 
 #endif // WORKSPACEDRAWERWIDGETSETUP_H

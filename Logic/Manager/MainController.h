@@ -11,14 +11,14 @@
 #include "AudioInputManager.h"
 #include "MvxPlayer.h"
 #include "WorkspaceController.h"
-#include "ZoomController.h"
+#include "WorkspaceZoomController.h"
 #include "PlaybackBounds.h"
 #include "PlaybackBoundsSelectionController.h"
 
 class MainController {
     AudioInputManager* pitchInputReader;
     MvxPlayer* mvxPlayer;
-    ZoomController* zoomController;
+    WorkspaceZoomController* zoomController;
     WorkspaceController* workspaceController = nullptr;
     PlaybackBoundsSelectionController* playbackBoundsSelectionController = nullptr;
 
@@ -30,12 +30,12 @@ class MainController {
 public:
     typedef typename CppUtils::ListenersSet<float>::Listener WorkspaceHorizontalOffsetChangedListener;
 
-    void init(AudioInputManager *pitchInputReader, MvxPlayer *mvxPlayer, ZoomController *zoomController);
+    void init(AudioInputManager *pitchInputReader, MvxPlayer *mvxPlayer, WorkspaceZoomController *zoomController);
 
     AudioInputManager *getAudioInputManager() const;
 
     MvxPlayer *getPlayer() const;
-    ZoomController *getZoomController() const;
+    WorkspaceZoomController *getZoomController() const;
     PlaybackBoundsSelectionController* getPlaybackBoundsSelectionController() const;
 
     // Should be executed on a render thread, the same thread as workspace->draw is executed

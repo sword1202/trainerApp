@@ -22,7 +22,7 @@ void MetalTestWidget::metalResize(int width, int height) {
 
 }
 
-MetalTestWidget::MetalTestWidget() {
-    QLabel* label = new QLabel("Vasia");
-    addSubWidget(label);
+MetalTestWidget::MetalTestWidget(QWidget* parent) : QMetalWidget(parent) {
+//    QLabel* label = new QLabel("Vasia");
+//    addSubWidget(label);
 }

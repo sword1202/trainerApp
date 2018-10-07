@@ -10,6 +10,7 @@
 #include <QDebug>
 #include <QThread>
 #include <QApplication>
+#include "Executors.h"
 
 using std::cout;
 using std::cerr;
@@ -52,7 +53,6 @@ void WorkspaceDrawerWidgetSetup::initImages(Drawer *drawer, QWidget *widget) {
 }
 
 void WorkspaceDrawerWidgetSetup::setupWorkspaceDrawer(QWidget* widget, Drawer* drawer, bool useUpdateLoop) {
-    assert(QApplication::instance()->thread() == QThread::currentThread());
     auto* factory = new TextImagesFactory();
     factory->load(drawer, widget->devicePixelRatio());
     drawer->setTextImagesFactory(factory);
@@ -80,13 +80,14 @@ void WorkspaceDrawerWidgetSetup::setupWorkspaceDrawer(QWidget* widget, Drawer* d
 
     }
 
-    widget->setMouseTracking(true);
+    Executors::ExecuteOnMainThread([=] {
+        widget->setMouseTracking(true);
+    });
 }
 
 void WorkspaceDrawerWidgetSetup::handleResize(QWidget* widget, int w, int h) {
-    float gridHeight = WorkspaceDrawer::getGridHeight(h);
-    MainController::instance()->getZoomController()->setWorkspaceGridHeight(gridHeight);
     workspaceDrawer->resize(w, h, (float)widget->devicePixelRatioF());
+    MainController::instance()->getZoomController()->onWorkspaceWidgetHeightChanged(h);
 }
 
 WorkspaceDrawerWidgetSetup::~WorkspaceDrawerWidgetSetup() {

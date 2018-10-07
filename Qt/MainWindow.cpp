@@ -47,11 +47,11 @@ MainWindow::MainWindow() :
     float outputVolume = settings.getOutputVolume();
     
     // Workspace
-//#ifdef __APPLE__
-//    workspaceWidget = new MetalWorkspaceWidget(this);
-//#else
+#ifdef __APPLE__
+    workspaceWidget = new MetalWorkspaceWidget(this);
+#else
     workspaceWidget = new OpenGLWorkspaceWidget(this);
-//#endif
+#endif
     workspaceWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     // Lyrics

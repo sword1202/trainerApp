@@ -17,6 +17,10 @@
 
 #include "NvgDrawer.h"
 
+#ifndef NDEBUG
+#define CHECK_IF_RENDER_THREAD assert(checkExecutedOnRenderingThread() && "WorkspaceDrawer draw, resize and constructor should be executed  in the same thread")
+#endif
+
 using namespace CppUtils;
 using std::cout;
 using std::endl;
@@ -36,6 +40,7 @@ constexpr int YARD_STICK_FONT_WEIGHT = 1;
 static const char* FONT_FAMILY = "Lato";
 
 void WorkspaceDrawer::resize(float width, float height, float devicePixelRatio) {
+    CHECK_IF_RENDER_THREAD;
     assert(devicePixelRatio > 0);
     assert(width >= 0 && height >= 0);
     this->devicePixelRatio = devicePixelRatio;
@@ -44,6 +49,7 @@ void WorkspaceDrawer::resize(float width, float height, float devicePixelRatio) 
 }
 
 void WorkspaceDrawer::draw() {
+    CHECK_IF_RENDER_THREAD;
     assert(drawer && "call resize before draw");
 
     assert(intervalWidth >= 0);
@@ -60,8 +66,8 @@ void WorkspaceDrawer::draw() {
     }
     frameTime = now;
 
-    drawer->beginFrame(width, height, devicePixelRatio);
     drawer->clear();
+    drawer->beginFrame(width, height, devicePixelRatio);
 
     summarizedGridHeight = std::max((float)summarizedGridHeight, getGridHeight());
 
@@ -427,6 +433,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, const std::function<void()>& on
         drawer(drawer),
         playbackBounds(PlaybackBounds()),
         onUpdateRequested(onUpdateRequested) {
+    CHECK_IF_RENDER_THREAD;
     setGridColor({0x8B, 0x89, 0xB6, 0x33});
     setAccentGridColor({0x8B, 0x89, 0xB6, 0x80});
     setPitchGraphColor({0xFF, 0x5E, 0x85, 0xFF});
@@ -609,3 +616,13 @@ float WorkspaceDrawer::getGridBeginXPosition() const {
 void WorkspaceDrawer::setClockImage(Drawer::Image *clockImage) {
     this->clockImage = clockImage;
 }
+
+#ifndef NDEBUG
+bool WorkspaceDrawer::checkExecutedOnRenderingThread() {
+    if (threadId == std::thread::id()) {
+        threadId = std::this_thread::get_id();
+    }
+
+    return std::this_thread::get_id() == threadId;
+}
+#endif

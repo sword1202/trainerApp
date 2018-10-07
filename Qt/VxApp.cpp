@@ -19,7 +19,7 @@ public:
 VxApp::VxApp(int &argc, char *argv[]) : QApplication(argc, argv) {
     PortAudio::init();
     auto microphoneName = AppSettings().getMicrophoneDeviceName();
-    MainController::init(new AudioInputManager(microphoneName.data()), new Player(), new QmlZoomController());
+    MainController::init(new AudioInputManager(microphoneName.data()), new Player(), new QmlWorkspaceZoomController());
     initInstance(this);
 
     connect(this, &VxApp::mainThreadCallbackPosted, this, [] (QObject* object) {

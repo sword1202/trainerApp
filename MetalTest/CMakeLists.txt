@@ -14,10 +14,12 @@ find_package(Qt5Widgets REQUIRED)
 find_package(Qt5QuickWidgets REQUIRED)
 find_package(Qt5Svg REQUIRED)
 
-add_executable(MetalTest main.cpp
+add_executable(MetalTest main.mm
         MetalTestWidget.mm
         ../Qt/Workspace/Metal/QMetalWidget.mm
         ../Qt/Workspace/Metal/QMetalWidget.h
+        WorkspaceView.mm
+        WorkspaceView.h
         ../Logic/nanovg/nanovg.cpp
         ../Logic/nanovg/metal/nanovg_mtl.m
         ../Logic/nanovg/metal/nanovg_mtl_shaders.metal

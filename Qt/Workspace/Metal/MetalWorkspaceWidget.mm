@@ -12,18 +12,23 @@ MetalWorkspaceWidget::MetalWorkspaceWidget(QWidget *parent) : QMetalWidget(paren
 }
 
 void MetalWorkspaceWidget::renderMetal(int width, int height) {
-    if (workspaceDrawer) {
-        workspaceDrawer->draw();
-    }
+    //workspaceDrawer->draw();
+    drawer->clear();
+    drawer->beginFrame(width, height, devicePixelRatio());
+    drawer->setFillColor(DrawerColor::red());
+    drawer->fillRect(0, 0, 200, 200);
+    drawer->endFrame();
 }
 
 void MetalWorkspaceWidget::metalResize(int width, int height) {
-    handleResize(this, width, height);
+    //handleResize(this, width, height);
 }
 
 void MetalWorkspaceWidget::initMetal() {
-    Drawer* drawer = new MetalNvgDrawer((__bridge void *) getLayer());
-    Executors::ExecuteOnMainThread([=] {
-        setupWorkspaceDrawer(this, drawer, false);
-    });
+    drawer = new MetalNvgDrawer((__bridge void *) getLayer());
+    //setupWorkspaceDrawer(this, drawer, false);
+}
+
+void MetalWorkspaceWidget::onRequestUpdate(QWidget *widget) {
+    // do nothing, metal is updated automatically
 }

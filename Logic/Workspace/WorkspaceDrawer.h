@@ -17,9 +17,15 @@
 #include "PlaybackBounds.h"
 #include <memory>
 #include <PlayingPitchSequence.h>
+#include <thread>
 
 class WorkspaceDrawer : public WorkspaceController {
     typedef Drawer::Color Color;
+
+#ifndef NDEBUG
+    std::thread::id threadId;
+    bool checkExecutedOnRenderingThread();
+#endif
 
     std::atomic<float> intervalWidth;
     std::atomic<float> intervalHeight;

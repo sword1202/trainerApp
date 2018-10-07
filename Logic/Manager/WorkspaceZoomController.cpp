@@ -3,10 +3,12 @@
 // Copyright (c) 2018 Mac. All rights reserved.
 //
 
-#include "ZoomController.h"
+#include "WorkspaceZoomController.h"
 #include "Pitch.h"
 #include <cmath>
 #include <cassert>
+#include "WorkspaceDrawer.h"
+#include "Executors.h"
 
 
 constexpr float BASE_WIDTH = 1374.0;
@@ -15,87 +17,84 @@ constexpr float MIN_ZOOM = 1.0;
 constexpr float MAX_ZOOM = 2.0;
 constexpr float HORIZONTAL_TO_VERTICAL_INTERVAL_WIDTH_RELATION = 2.4117701323665077f;
 
-ZoomController::ZoomController() {
+WorkspaceZoomController::WorkspaceZoomController() {
     zoom = MIN_ZOOM;
     verticalScrollPosition = 0;
     workspaceGridHeight = 0;
-    firstPitch = Pitch("C2");
-    lastPitch = Pitch("B6");
+    firstPitchIndex = Pitch("C2").getPerfectFrequencyIndex();
+    lastPitchIndex = Pitch("B6").getPerfectFrequencyIndex();
 }
 
-float ZoomController::getIntervalWidth() const {
+float WorkspaceZoomController::getIntervalWidth() const {
     int linesCount = (int)round(ZOOM_FACTOR / zoom);
     int baseIntervalsCount = linesCount + 1;
     return BASE_WIDTH / baseIntervalsCount;
 }
 
-float ZoomController::getIntervalHeight() const {
+float WorkspaceZoomController::getIntervalHeight() const {
     return getIntervalWidth() / HORIZONTAL_TO_VERTICAL_INTERVAL_WIDTH_RELATION;
 }
 
-float ZoomController::getZoom() const {
+float WorkspaceZoomController::getZoom() const {
     return zoom;
 }
 
-void ZoomController::setZoom(float zoom) {
+void WorkspaceZoomController::setZoom(float zoom) {
     assert(zoom >= MIN_ZOOM && zoom <= MAX_ZOOM);
     this->zoom = zoom;
     zoomChangedListeners.executeAll(zoom);
     summarizedWorkspaceGridHeightChangedListeners.executeAll();
 }
 
-float ZoomController::getMinZoom() const {
+float WorkspaceZoomController::getMinZoom() const {
     return MIN_ZOOM;
 }
 
-float ZoomController::getMaxZoom() const {
+float WorkspaceZoomController::getMaxZoom() const {
     return MAX_ZOOM;
 }
 
-Pitch ZoomController::getFirstPitch() const {
-    return firstPitch;
+Pitch WorkspaceZoomController::getFirstPitch() const {
+    return Pitch::fromPerfectFrequencyIndex(firstPitchIndex);
 }
 
-void ZoomController::setFirstPitch(const Pitch& pitch) {
+void WorkspaceZoomController::setFirstPitch(const Pitch& pitch) {
     assert(pitch.isWhite());
-    firstPitch = pitch;
+    firstPitchIndex = pitch.getPerfectFrequencyIndex();
+
     firstPitchChangedListeners.executeAll(pitch);
     summarizedWorkspaceGridHeightChangedListeners.executeAll();
 }
 
-const Pitch &ZoomController::getLastPitch() const {
-    return lastPitch;
+const Pitch &WorkspaceZoomController::getLastPitch() const {
+    return Pitch::fromPerfectFrequencyIndex(lastPitchIndex);
 }
 
-void ZoomController::setLastPitch(const Pitch &lastPitch) {
-    this->lastPitch = lastPitch;
+void WorkspaceZoomController::setLastPitch(const Pitch &lastPitch) {
+    this->lastPitchIndex = lastPitch.getPerfectFrequencyIndex();
     lastPitchChangedListeners.executeAll(lastPitch);
     summarizedWorkspaceGridHeightChangedListeners.executeAll();
 }
 
-float ZoomController::getSummarizedWorkspaceGridHeight() const {
-    return (lastPitch.getPerfectFrequencyIndex() - firstPitch.getPerfectFrequencyIndex() + 1) * getIntervalHeight();
+float WorkspaceZoomController::getSummarizedWorkspaceGridHeight() const {
+    return (lastPitchIndex - firstPitchIndex + 1) * getIntervalHeight();
 }
 
-float ZoomController::getVerticalScrollPosition() const {
+float WorkspaceZoomController::getVerticalScrollPosition() const {
     return verticalScrollPosition;
 }
 
-void ZoomController::setVerticalScrollPosition(float verticalScrollPosition) {
+void WorkspaceZoomController::setVerticalScrollPosition(float verticalScrollPosition) {
     assert(verticalScrollPosition >= 0 && verticalScrollPosition <= 1);
     this->verticalScrollPosition = verticalScrollPosition;
     verticalScrollPositionChangedListeners.executeAll(verticalScrollPosition);
 }
 
-float ZoomController::getWorkspaceGridHeight() const {
-    return workspaceGridHeight;
-}
-
-void ZoomController::setWorkspaceGridHeight(float pageSize) {
-    this->workspaceGridHeight = pageSize;
-}
-
-float ZoomController::getPageSize() const {
+float WorkspaceZoomController::getPageSize() const {
     const float result = workspaceGridHeight / getSummarizedWorkspaceGridHeight();
     return result > 1.0f ? 1.0f : result;
+}
+
+void WorkspaceZoomController::onWorkspaceWidgetHeightChanged(float height) {
+    workspaceGridHeight = WorkspaceDrawer::getGridHeight(height);
 }

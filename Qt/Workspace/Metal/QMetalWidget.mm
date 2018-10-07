@@ -12,7 +12,7 @@ QMetalWidget::QMetalWidget(QWidget *parent)
     device = MTLCreateSystemDefaultDevice();
     layer.device = device;
     layer.pixelFormat = MTLPixelFormatBGRA8Unorm;
-    layer.framebufferOnly = true;
+    layer.framebufferOnly = false;
     layer.frame = view.layer.frame;
     [view setLayer:layer];
     [view setWantsLayer:YES];

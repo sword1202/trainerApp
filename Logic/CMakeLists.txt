@@ -9,7 +9,7 @@ set(Manager
         Manager/AudioInputManager.cpp
         Manager/MainController.cpp
         Manager/PlaybackBoundsSelectionController.cpp
-        Manager/ZoomController.cpp)
+        Manager/WorkspaceZoomController.cpp)
 
 set(Workspace
         Workspace/PianoDrawer.cpp
