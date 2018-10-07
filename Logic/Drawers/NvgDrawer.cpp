@@ -41,6 +41,11 @@ NvgDrawer::~NvgDrawer() {
 #define NANOVG_GL2_IMPLEMENTATION
 #endif
 
+#ifdef __linux__
+#define NANOVG_GL3_IMPLEMENTATION
+#include <GL/glew.h>
+#endif
+
 #include <nanovg/nanovg_gl.h>
 #include <nanovg/fontstash.h>
 #include <NotImplementedAssert.h>

@@ -70,6 +70,17 @@ if (WIN32)
     target_link_libraries(VocalTrainer general ${CMAKE_SOURCE_DIR}/libs/windows/Release/SoundTouch.lib)
 endif(WIN32)
 
+if (UNIX)
+    target_link_libraries(VocalTrainer "GL")
+    target_link_libraries(VocalTrainer "GLEW")
+    target_link_libraries(VocalTrainer "SoundTouch")
+    target_link_libraries(VocalTrainer "atomic")
+    target_link_libraries(VocalTrainer "aubio")
+    target_link_libraries(VocalTrainer "portaudio")
+    target_link_libraries(VocalTrainer "asound")
+    target_link_libraries(VocalTrainer "boost_serialization")
+endif(UNIX)
+
 include_directories(
         include
         CppUtils

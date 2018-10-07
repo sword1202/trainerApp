@@ -3,6 +3,8 @@
 // Copyright (c) 2018 Mac. All rights reserved.
 //
 
+#include <cmath>
+
 #include "AudioAverageInputLevelMonitor.h"
 #include "Algorithms.h"
 #include "AudioUtils.h"

@@ -3,10 +3,12 @@
 //
 
 #include "Pitch.h"
+
 #include <iostream>
 #include <assert.h>
 #include <cmath>
 #include <algorithm>
+#include <cstring>
 
 #ifndef NDEBUG
 #define DEBUG_INIT fullName = getFullName();
@@ -53,7 +55,7 @@ static const int NEXT_WHITE_PITCH_INDEX_OFFSET[] = {
         2, 1, 2, 1, 1, 2, 1, 2, 1, 2, 1, 1
 };
 
-static const char const* PITCHES[]  = {
+static const char* PITCHES[]  = {
         "C", "C#", "D", "Eb", "E", "F", "F#", "G", "G#", "A", "Bb",	"B"
 };
 

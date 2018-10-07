@@ -1,8 +1,11 @@
 #include "PortAudioInputReader.h"
+
+#include <cstring>
+#include <cmath>
 #include <portaudio/portaudio.h>
+
 #include "PortAudioUtils.h"
 #include "Functions.h"
-#include <cmath>
 
 #define SAMPLE_RATE 44100
 

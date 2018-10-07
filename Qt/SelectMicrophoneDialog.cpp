@@ -4,6 +4,7 @@
 #include <QQuickWidget>
 #include <QQmlContext>
 #include <QQuickItem>
+#include <cmath>
 
 #include "QtUtils/qtutils.h"
 #include "PortAudioUtils.h"

@@ -5,7 +5,7 @@
 
 #include "PortAudioUtils.h"
 #include <stdexcept>
-#include <string>
+#include <cstring>
 
 void PortAudio::init() {
     PaError err = Pa_Initialize();

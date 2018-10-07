@@ -15,6 +15,7 @@
 
 #include <stdexcept>
 #include <iostream>
+#include <cstring>
 
 using namespace CppUtils;
 using std::cout;
