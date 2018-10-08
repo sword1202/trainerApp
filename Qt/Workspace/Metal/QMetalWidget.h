@@ -11,8 +11,8 @@
 class QMetalWidget : public QWidget, protected MetalViewCallback
 {
 public:
-    QMetalWidget(QWidget *parent = 0);
-    virtual ~QMetalWidget();
+    explicit QMetalWidget(QWidget *parent = nullptr);
+    ~QMetalWidget() override;
 protected:
 #ifdef __OBJC__
     CAMetalLayer *getLayer() const;
