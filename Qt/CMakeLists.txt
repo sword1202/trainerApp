@@ -27,5 +27,6 @@ if (APPLE)
             MainWindowOsx.mm
             Workspace/Metal/QMetalWidget.mm
             Workspace/Metal/MetalWorkspaceWidget.mm
+            Workspace/Metal/MetalView.mm
             )
 endif(APPLE)

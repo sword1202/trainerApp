@@ -4,7 +4,9 @@
 #include <QWidget>
 #include <mutex>
 #include "MetalViewCallback.h"
-#include "MetalView.h"
+#ifdef __OBJC__
+#import "MetalView.h"
+#endif
 
 class QMetalWidget : public QWidget, protected MetalViewCallback
 {
