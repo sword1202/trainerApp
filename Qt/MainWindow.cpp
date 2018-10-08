@@ -94,7 +94,7 @@ MainWindow::MainWindow() :
     centralWidget->setLayout(mainLayout);
 
 	// Scrollbar
-    verticalScrollBar = new QScrollBar(centralWidget);
+    verticalScrollBar = new QScrollBar(IS_APPLE ? nullptr : centralWidget);
 #ifdef __APPLE__
     workspaceWidgetNativeWrap = workspaceWidget->addSubWidget(verticalScrollBar);
 #endif
