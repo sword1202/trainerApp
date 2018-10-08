@@ -72,13 +72,21 @@ endif(WIN32)
 
 if (UNIX)
     target_link_libraries(VocalTrainer "GL")
-    target_link_libraries(VocalTrainer "GLEW")
     target_link_libraries(VocalTrainer "SoundTouch")
     target_link_libraries(VocalTrainer "atomic")
-    target_link_libraries(VocalTrainer "aubio")
-    target_link_libraries(VocalTrainer "portaudio")
+    target_link_libraries(VocalTrainer "pthread")
     target_link_libraries(VocalTrainer "asound")
-    target_link_libraries(VocalTrainer "boost_serialization")
+    target_link_libraries(VocalTrainer "jack")
+
+    target_link_libraries(VocalTrainer debug ${CMAKE_SOURCE_DIR}/libs/linux/Debug/libaubio.a)
+    target_link_libraries(VocalTrainer debug ${CMAKE_SOURCE_DIR}/libs/linux/Debug/libboost_serialization.a)
+    target_link_libraries(VocalTrainer debug ${CMAKE_SOURCE_DIR}/libs/linux/Debug/libportaudio.a)
+    target_link_libraries(VocalTrainer debug ${CMAKE_SOURCE_DIR}/libs/linux/Debug/libGLEW.a)
+
+    target_link_libraries(VocalTrainer general ${CMAKE_SOURCE_DIR}/libs/linux/Release/libaubio.a)
+    target_link_libraries(VocalTrainer general ${CMAKE_SOURCE_DIR}/libs/linux/Release/libboost_serialization.a)
+    target_link_libraries(VocalTrainer general ${CMAKE_SOURCE_DIR}/libs/linux/Release/libportaudio.a)
+    target_link_libraries(VocalTrainer general ${CMAKE_SOURCE_DIR}/libs/linux/Release/libGLEW.a)
 endif(UNIX)
 
 include_directories(
