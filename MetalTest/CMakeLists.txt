@@ -18,8 +18,9 @@ add_executable(MetalTest main.mm
         MetalTestWidget.mm
         ../Qt/Workspace/Metal/QMetalWidget.mm
         ../Qt/Workspace/Metal/QMetalWidget.h
-        WorkspaceView.mm
-        WorkspaceView.h
+        ../Qt/Workspace/Metal/MetalViewCallback.h
+        ../Qt/Workspace/Metal/MetalView.h
+        ../Qt/Workspace/Metal/MetalView.mm
         ../Logic/nanovg/nanovg.cpp
         ../Logic/nanovg/metal/nanovg_mtl.m
         ../Logic/nanovg/metal/nanovg_mtl_shaders.metal
@@ -36,6 +37,7 @@ include_directories(
         ../include
         ../CppUtils
         ../Logic/Drawers
+        ../Qt/Workspace/Metal
         ../include/nanovg
         ../include/nanovg/glew)
 

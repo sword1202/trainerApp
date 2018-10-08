@@ -75,15 +75,23 @@ DrawerColor DrawerColor::fromHex(int hex) {
 }
 
 DrawerColor DrawerColor::white() {
-    return DrawerColor(255, 255, 255, 255);
+    return {255, 255, 255, 255};
 }
 
 DrawerColor DrawerColor::black() {
-    return DrawerColor(0, 0, 0, 255);
+    return {0, 0, 0, 255};
 }
 
 DrawerColor DrawerColor::red() {
-    return DrawerColor(255, 0, 0, 255);
+    return {255, 0, 0, 255};
+}
+
+DrawerColor DrawerColor::green() {
+    return {0, 255, 0, 255};
+}
+
+DrawerColor DrawerColor::blue() {
+    return {0, 0, 255, 255};
 }
 
 bool DrawerColor::operator==(const DrawerColor &rhs) const {

@@ -15,7 +15,7 @@ protected:
     void renderMetal(int width, int height) override;
     void metalResize(int width, int height) override;
 public:
-    MetalTestWidget(QWidget* parent = nullptr);
+    explicit MetalTestWidget(QWidget* parent = nullptr);
 };
 
 

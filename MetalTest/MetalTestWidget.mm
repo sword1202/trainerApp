@@ -13,6 +13,8 @@ void MetalTestWidget::initMetal() {
 void MetalTestWidget::renderMetal(int width, int height) {
     drawer->clear();
     drawer->beginFrame(width, height, devicePixelRatio());
+    drawer->setFillColor(DrawerColor::green());
+    drawer->fillRect(0, 0, width, height);
     drawer->setFillColor(DrawerColor::red());
     drawer->fillRect(0, 0, 200, 200);
     drawer->endFrame();
