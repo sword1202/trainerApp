@@ -77,17 +77,16 @@ void NvgDrawer::clear() {
 }
 
 NvgDrawer::NvgDrawer() {
-#ifdef _WIN32
+#if defined(_WIN32) or defined(__linux__)
     GLint GlewInitResult = glewInit();
     if (GLEW_OK != GlewInitResult) {
         const GLubyte *er = glewGetErrorString(GlewInitResult);
         //qDebug() << "ERROR: " << reinterpret_cast<const char *>(er);
     }
     ctx = nvgCreateGL3(NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DEBUG);
-
 #endif
 
-#ifdef __APPLE__
+#if defined(__APPLE__)
     ctx = nvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DEBUG);
 #endif
 
