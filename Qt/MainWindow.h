@@ -8,16 +8,27 @@
 #include "QtUtils/qtutils.h"
 #include "Workspace/OpenglWorkspaceWidget.h"
 #include "MvxPlayer.h"
+#include <QScrollBar>
+#ifdef __APPLE__
+#include "Workspace/Metal/MetalWorkspaceWidget.h"
+#else
+#include "Workspace/OpenglWorkspaceWidget.h"
+#endif
 
 class MainWindow : public BaseMainWindow
 {
     Q_OBJECT
 
+#ifdef __APPLE__
+    MetalWorkspaceWidget *workspaceWidget;
+    QMacNativeWidget* workspaceWidgetNativeWrap;
+#else
     QWidget *workspaceWidget;
+#endif
 
     QQuickItem *headerWithSubheader;
     QQuickItem *header;
-    QQuickWidget *verticalScrollWidget;
+    QScrollBar *verticalScrollBar;
     QQuickWidget *lyricsWidget;
 protected:
     void resizeEvent(QResizeEvent *event) override;

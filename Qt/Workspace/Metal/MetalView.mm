@@ -97,4 +97,9 @@ CVReturn renderCallback(CVDisplayLinkRef displayLink,
     return _metalLayer;
 }
 
+- (void)dealloc {
+    CVDisplayLinkStop(_displayLink);
+    [super dealloc];
+}
+
 @end

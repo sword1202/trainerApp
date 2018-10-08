@@ -10,19 +10,16 @@
 #include <QMenuBar>
 #include <QMacCocoaViewContainer>
 #include <QSizePolicy>
+#include <QPushButton>
 
 #include "QmlCppBridge.h"
 #include "VxApp.h"
-#ifdef __APPLE__
-#include "Workspace/Metal/MetalWorkspaceWidget.h"
-#else
-#include "Workspace/OpenglWorkspaceWidget.h"
-#endif
 #include "PlaybackBounds.h"
 #include "Algorithms.h"
 #include "PortAudioUtils.h"
 #include "SelectMicrophoneDialog.h"
 #include "AppSettings.h"
+#include <QScrollBar>
 
 constexpr int YARD_STICK_HEIGHT = static_cast<int>(WorkspaceDrawer::YARD_STICK_HEIGHT);
 constexpr int HEADER_WITH_SUBHEADER_HEIGHT = 75 + 75 - YARD_STICK_HEIGHT;
@@ -31,6 +28,12 @@ constexpr int BEATS_IN_TACT = 4;
 constexpr int MINIMUM_WINDOW_WIDTH = 700;
 constexpr double MINIMUM_WINDOW_HEIGHT_RATIO = 0.6;
 constexpr int LYRICS_HEIGHT = 53;
+
+#ifdef __APPLE__
+#define IS_APPLE true
+#else
+#define IS_APPLE false
+#endif
 
 using namespace CppUtils;
 using std::cout;
@@ -91,8 +94,10 @@ MainWindow::MainWindow() :
     centralWidget->setLayout(mainLayout);
 
 	// Scrollbar
-    verticalScrollWidget = createQQuickWidget("qrc:/qml/VerticalScrollBarContainer.qml");
-	verticalScrollWidget->rootObject()->setWidth(VERTICAL_SCROLL_WIDTH);
+    verticalScrollBar = new QScrollBar(centralWidget);
+#ifdef __APPLE__
+    workspaceWidgetNativeWrap = workspaceWidget->addSubWidget(verticalScrollBar);
+#endif
 
     setupMenus();
 }
@@ -117,8 +122,24 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
     const int width = event->size().width();
     const int height = event->size().height();
 
-    verticalScrollWidget->rootObject()->setHeight(workspaceWidget->height() - YARD_STICK_HEIGHT);
-    verticalScrollWidget->move(width - VERTICAL_SCROLL_WIDTH, verticalScrollWidget->mapToParent(workspaceWidget->pos()).y() + YARD_STICK_HEIGHT);
+    int scrollBarHeight = workspaceWidget->height() - YARD_STICK_HEIGHT - 2;
+#ifdef __APPLE__
+    workspaceWidgetNativeWrap->setFixedHeight(scrollBarHeight);
+#endif
+    verticalScrollBar->setFixedHeight(scrollBarHeight);
+
+    int y;
+    if (!IS_APPLE) {
+        y = verticalScrollBar->mapToParent(workspaceWidget->pos()).y() + YARD_STICK_HEIGHT + 1;
+    } else {
+        y = YARD_STICK_HEIGHT + 2;
+    }
+    int x = width - verticalScrollBar->width();
+#ifdef __APPLE__
+    workspaceWidgetNativeWrap->move(x, y);
+#else
+    verticalScrollBar->move(x, y);
+#endif
 }
 
 void MainWindow::setupMenus() {
