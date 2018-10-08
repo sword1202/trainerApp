@@ -117,8 +117,8 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
     const int width = event->size().width();
     const int height = event->size().height();
 
-    verticalScroll->setHeight(workspaceView->height() - YARD_STICK_HEIGHT);
-    verticalScrollWidget->move(width - VERTICAL_SCROLL_WIDTH, verticalScrollWidget->mapToParent(workspaceView->pos()).y() + YARD_STICK_HEIGHT);
+    verticalScrollWidget->rootObject()->setHeight(workspaceWidget->height() - YARD_STICK_HEIGHT);
+    verticalScrollWidget->move(width - VERTICAL_SCROLL_WIDTH, verticalScrollWidget->mapToParent(workspaceWidget->pos()).y() + YARD_STICK_HEIGHT);
 }
 
 void MainWindow::setupMenus() {
