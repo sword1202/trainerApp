@@ -1,14 +1,15 @@
 #include <boost/assert.hpp>
+#include <boost/icl/interval_map.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
+#include <utf8.h>
+
+#include "config.h"
 #include "VxFile.h"
 #include "WAVFile.h"
 #include "AudioUtils.h"
 #include "StringUtils.h"
 #include "Algorithms.h"
-#include <utf8.h>
-#include <boost/icl/interval_map.hpp>
-#include "../../PitchDetection/CppUtils/config.h"
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
 
 using namespace CppUtils;
 

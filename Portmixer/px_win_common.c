@@ -39,7 +39,7 @@
 #include <windows.h>
 #include <tchar.h>
 
-#include "portaudio.h"
+#include <portaudio/portaudio.h>
 
 #include "portmixer.h"
 #include "px_mixer.h"

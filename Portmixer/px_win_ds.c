@@ -44,8 +44,8 @@
 #include <objbase.h>
 #include <unknwn.h>
 
-#include "portaudio.h"
-#include "pa_win_ds.h"
+#include <portaudio/portaudio.h>
+#include <portaudio/pa_win_ds.h>
 
 #include "portmixer.h"
 #include "px_mixer.h"

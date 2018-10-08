@@ -51,7 +51,7 @@
 #ifdef __APPLE__
 #define PX_USE_MAC_COREAUDIO
 #else
-#error Configure port mixer for your OS
+#define PX_USE_WIN_MME
 #endif
 
 #if defined(PX_USE_WIN_MME)

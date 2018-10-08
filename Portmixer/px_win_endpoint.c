@@ -45,7 +45,7 @@
 #include <initguid.h>
 #include <endpointvolume.h>
 
-#include "portaudio.h"
+#include <portaudio/portaudio.h>
 
 #include "portmixer.h"
 #include "px_mixer.h"

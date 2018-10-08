@@ -39,8 +39,8 @@
 
 #include <windows.h>
 
-#include "portaudio.h"
-#include "pa_win_wasapi.h"
+#include <portaudio/portaudio.h>
+#include <portaudio/pa_win_wasapi.h>
 
 #include "portmixer.h"
 #include "px_mixer.h"
