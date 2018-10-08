@@ -19,9 +19,8 @@ public:
     virtual ~WorkspaceDrawerWidgetSetup();
 
 protected:
-    void onMouseMove(float x);
-    void onMouseClick(float x);
-
+    virtual void onMouseMove(float x);
+    virtual void onMouseClick(float x);
     virtual void onRequestUpdate(QWidget* widget);
 };
 

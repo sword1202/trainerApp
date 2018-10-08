@@ -3,6 +3,7 @@
 #import "NvgDrawer.h"
 #include "Executors.h"
 #include <iostream>
+#include <QMouseEvent>
 
 using namespace std;
 using namespace CppUtils;
@@ -26,4 +27,12 @@ void MetalWorkspaceWidget::initMetal() {
 
 void MetalWorkspaceWidget::onRequestUpdate(QWidget *widget) {
     // do nothing, metal is updated automatically
+}
+
+void MetalWorkspaceWidget::mousePressEvent(QMouseEvent *event) {
+    onMouseClick(event->x());
+}
+
+void MetalWorkspaceWidget::mouseMoveEvent(QMouseEvent *event) {
+    onMouseMove(event->x());
 }
