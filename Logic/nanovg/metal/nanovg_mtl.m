@@ -41,12 +41,14 @@
 #  include "mnvg_bitcode/ios_1_1.h"
 #  include "mnvg_bitcode/ios_1_2.h"
 #  include "mnvg_bitcode/ios_2_0.h"
+#  include "mnvg_bitcode/ios_2_1.h"
 #elif TARGET_OS_TV == 1
 #  include "mnvg_bitcode/tvos.h"
 #elif TARGET_OS_OSX == 1
-#  include "mnvg_bitcode/osx_1_1.h"
-#  include "mnvg_bitcode/osx_1_2.h"
-#  include "mnvg_bitcode/osx_2_0.h"
+#  include "mnvg_bitcode/macos_1_1.h"
+#  include "mnvg_bitcode/macos_1_2.h"
+#  include "mnvg_bitcode/macos_2_0.h"
+#  include "mnvg_bitcode/macos_2_1.h"
 #else
 #  define MNVG_INVALID_TARGET
 #endif
@@ -377,7 +379,7 @@ static MNVGblend mtlnvg__blendCompositeOperation(NVGcompositeOperationState op) 
 
 static void mtlnvg__checkError(MNVGcontext* mtl, const char* str,
                                NSError* error) {
-  if ((mtl->flags & NVG_METAL_DEBUG) == 0) return;
+  if ((mtl->flags & NVG_DEBUG) == 0) return;
   if (error) {
     printf("Error occurs after %s: %s\n", str, [[error localizedDescription] UTF8String]);
   }
@@ -659,7 +661,7 @@ static void mtlnvg__fill(MNVGcontext* mtl, MNVGcall* call) {
 
   // Draws anti-aliased fragments.
   mtlnvg__setUniforms(mtl, call->uniformOffset, call->image);
-  if (mtl->flags & NVG_METAL_ANTIALIAS) {
+  if (mtl->flags & NVG_ANTIALIAS) {
     [mtl->renderEncoder setDepthStencilState:mtl->fillAntiAliasStencilState];
     for (i = 0; i < npaths; i++) {
       [mtl->renderEncoder drawPrimitives:MTLPrimitiveTypeTriangleStrip
@@ -693,8 +695,8 @@ static void mtlnvg__convexFill(MNVGcontext* mtl, MNVGcall* call) {
   }
 
   // Draw fringes
-  if (mtl->flags & NVG_METAL_ANTIALIAS) {
-    for (i = 0; i < npaths; i++) {
+  for (i = 0; i < npaths; i++) {
+    if (paths[i].strokeCount > 0) {
       [mtl->renderEncoder drawPrimitives:MTLPrimitiveTypeTriangleStrip
                              vertexStart:paths[i].strokeOffset
                              vertexCount:paths[i].strokeCount];
@@ -706,7 +708,7 @@ static void mtlnvg__stroke(MNVGcontext* mtl, MNVGcall* call) {
   MNVGpath* paths = &mtl->buffers->paths[call->pathOffset];
   int i, npaths = call->pathCount;
 
-  if (mtl->flags & NVG_METAL_STENCIL_STROKES) {
+  if (mtl->flags & NVG_STENCIL_STROKES) {
     // Fills the stroke base without overlap.
     mtlnvg__setUniforms(mtl, call->uniformOffset + mtl->fragSize, call->image);
     [mtl->renderEncoder setDepthStencilState:mtl->strokeShapeStencilState];
@@ -858,9 +860,14 @@ static int mtlnvg__renderCreate(void* uptr) {
   MNVGcontext* mtl = (MNVGcontext*)uptr;
 
   if (mtl->metalLayer.device == nil) {
-    mtl->metalLayer.device = MTLCreateSystemDefaultDevice();
+    id<MTLDevice> device = MTLCreateSystemDefaultDevice();
+    mtl->metalLayer.device = device;
+    [device release];
   }
   mtl->metalLayer.pixelFormat = MTLPixelFormatBGRA8Unorm;
+#if TARGET_OS_OSX == 1
+  mtl->metalLayer.opaque = NO;
+#endif
 
   // Loads shaders from pre-compiled metal library..
   NSError* error;
@@ -889,9 +896,12 @@ static int mtlnvg__renderCreate(void* uptr) {
   } else if (os_version.majorVersion == 10) {
     metal_library_bitcode = mnvg_bitcode_ios_1_2;
     metal_library_bitcode_len = mnvg_bitcode_ios_1_2_len;
-  } else {
+  } else if (os_version.majorVersion == 11) {
     metal_library_bitcode = mnvg_bitcode_ios_2_0;
     metal_library_bitcode_len = mnvg_bitcode_ios_2_0_len;
+  } else {
+    metal_library_bitcode = mnvg_bitcode_ios_2_1;
+    metal_library_bitcode_len = mnvg_bitcode_ios_2_1_len;
   }
 #elif TARGET_OS_TV == 1
   metal_library_bitcode = mnvg_bitcode_tvos;
@@ -904,14 +914,17 @@ static int mtlnvg__renderCreate(void* uptr) {
     return 0;
   }
   if (os_version.minorVersion == 11) {
-    metal_library_bitcode = mnvg_bitcode_osx_1_1;
-    metal_library_bitcode_len = mnvg_bitcode_osx_1_1_len;
+    metal_library_bitcode = mnvg_bitcode_macos_1_1;
+    metal_library_bitcode_len = mnvg_bitcode_macos_1_1_len;
   } else if (os_version.minorVersion == 12) {
-    metal_library_bitcode = mnvg_bitcode_osx_1_2;
-    metal_library_bitcode_len = mnvg_bitcode_osx_1_2_len;
+    metal_library_bitcode = mnvg_bitcode_macos_1_2;
+    metal_library_bitcode_len = mnvg_bitcode_macos_1_2_len;
+  } else if (os_version.minorVersion == 13) {
+    metal_library_bitcode = mnvg_bitcode_macos_2_0;
+    metal_library_bitcode_len = mnvg_bitcode_macos_2_0_len;
   } else {
-    metal_library_bitcode = mnvg_bitcode_osx_2_0;
-    metal_library_bitcode_len = mnvg_bitcode_osx_2_0_len;
+    metal_library_bitcode = mnvg_bitcode_macos_2_1;
+    metal_library_bitcode_len = mnvg_bitcode_macos_2_1_len;
   }
   creates_pseudo_texture = true;
 #endif
@@ -929,8 +942,8 @@ static int mtlnvg__renderCreate(void* uptr) {
   }
 
   mtl->vertexFunction = [library newFunctionWithName:@"vertexShader"];
-  if (mtl->flags & NVG_METAL_ANTIALIAS) {
-    if (mtl->flags & NVG_METAL_STENCIL_STROKES) {
+  if (mtl->flags & NVG_ANTIALIAS) {
+    if (mtl->flags & NVG_STENCIL_STROKES) {
       mtl->fragmentFunction = \
           [library newFunctionWithName:@"fragmentShaderStencilStrokesAA"];
     } else {
@@ -944,9 +957,9 @@ static int mtlnvg__renderCreate(void* uptr) {
   mtl->commandQueue = [device newCommandQueue];
 
   // Initializes the number of available buffers.
-  if (mtl->flags & NVG_METAL_TRIPLE_BUFFER) {
+  if (mtl->flags & NVG_TRIPLE_BUFFER) {
     mtl->maxBuffers = 3;
-  } else if (mtl->flags & NVG_METAL_DOUBLE_BUFFER) {
+  } else if (mtl->flags & NVG_DOUBLE_BUFFER) {
     mtl->maxBuffers = 2;
   } else {
     mtl->maxBuffers = 1;
@@ -1087,6 +1100,7 @@ static int mtlnvg__renderCreate(void* uptr) {
 
 static void mtlnvg__renderDelete(void* uptr) {
   MNVGcontext* mtl = (MNVGcontext*)uptr;
+  dispatch_release(mtl->semaphore);
 
   [mtl->commandQueue release];
   [mtl->defaultStencilState release];
@@ -1099,11 +1113,14 @@ static void mtlnvg__renderDelete(void* uptr) {
   [mtl->strokeShapeStencilState release];
   [mtl->strokeAntiAliasStencilState release];
   [mtl->strokeClearStencilState release];
+  [mtl->pipelineState release];
+  [mtl->stencilOnlyPipelineState release];
+  [mtl->pseudoSampler release];
 
   for (int i = 0; i < mtl->maxBuffers; ++i) {
     MNVGbuffers* buffers = &(mtl->cbuffers[i]);
-    if (buffers->stencilTexture != nil)
-      [buffers->stencilTexture release];
+    [buffers->viewSizeBuffer release];
+    [buffers->stencilTexture release];
     [buffers->indexBuffer release];
     [buffers->vertBuffer release];
     [buffers->uniformBuffer release];
@@ -1111,6 +1128,20 @@ static void mtlnvg__renderDelete(void* uptr) {
     free(buffers->calls);
   }
   free(mtl->cbuffers);
+
+  for (int i = 0; i < mtl->ntextures; i++) {
+    if (mtl->textures[i].tex != nil &&
+        (mtl->textures[i].flags & NVG_METAL_IMAGE_NODELETE) == 0) {
+      [mtl->textures[i].tex release];
+      [mtl->textures[i].sampler release];
+    }
+  }
+  free(mtl->textures);
+
+  [mtl->metalLayer.device release];
+  mtl->metalLayer.device = nil;
+  mtl->metalLayer = nil;
+  free(mtl);
 }
 
 static int mtlnvg__renderDeleteTexture(void* uptr, int image) {
@@ -1224,18 +1255,19 @@ error:
 static void mtlnvg__renderFlush(void* uptr) {
   MNVGcontext* mtl = (MNVGcontext*)uptr;
   MNVGbuffers* buffers = mtl->buffers;
+  id <MTLCommandBuffer> commandBuffer = [mtl->commandQueue commandBuffer];
   id<MTLTexture> colorTexture = nil;;
-  id<CAMetalDrawable> drawable = nil;
   vector_uint2 textureSize;
 
   mtl->metalLayer.drawableSize = CGSizeMake(mtl->viewPortSize.x,
                                             mtl->viewPortSize.y);
 
-  buffers->commandBuffer = [mtl->commandQueue commandBuffer];
+  buffers->commandBuffer = commandBuffer;
   @autoreleasepool {
     [buffers->commandBuffer enqueue];
     [buffers->commandBuffer addCompletedHandler:^(id<MTLCommandBuffer> buffer) {
         buffers->isBusy = NO;
+        [buffers->commandBuffer release];
         buffers->commandBuffer = nil;
         buffers->image = 0;
         buffers->nindexes = 0;
@@ -1259,7 +1291,7 @@ static void mtlnvg__renderFlush(void* uptr) {
     if (textureSize.x == 0 || textureSize.y == 0) return;
     mtlnvg__updateStencilTexture(mtl, &textureSize);
 
-
+    id<CAMetalDrawable> drawable = nil;
     if (colorTexture == nil) {
       drawable = mtl->metalLayer.nextDrawable;
       colorTexture = drawable.texture;
@@ -1287,7 +1319,6 @@ static void mtlnvg__renderFlush(void* uptr) {
     mtl->renderEncoder = nil;
     if (drawable) {
       [buffers->commandBuffer presentDrawable:drawable];
-      drawable = nil;
     }
     [buffers->commandBuffer commit];
   }  // @autoreleasepool
@@ -1348,7 +1379,7 @@ static void mtlnvg__renderStroke(void* uptr, NVGpaint* paint,
     }
   }
 
-  if (mtl->flags & NVG_METAL_STENCIL_STROKES) {
+  if (mtl->flags & NVG_STENCIL_STROKES) {
     // Fill shader
     call->uniformOffset = mtlnvg__allocFragUniforms(mtl, 2);
     if (call->uniformOffset == -1) goto error;
@@ -1487,7 +1518,7 @@ NVGcontext* nvgCreateMTL(void* metalLayer, int flags) {
   params.renderTriangles = mtlnvg__renderTriangles;
   params.renderDelete = mtlnvg__renderDelete;
   params.userPtr = mtl;
-  params.edgeAntiAlias = flags & NVG_METAL_ANTIALIAS ? 1 : 0;
+  params.edgeAntiAlias = flags & NVG_ANTIALIAS ? 1 : 0;
 
   mtl->flags = flags;
 #if TARGET_OS_OSX == 1

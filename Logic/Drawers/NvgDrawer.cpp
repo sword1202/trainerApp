@@ -40,7 +40,7 @@ void MetalNvgDrawer::clear() {
 }
 
 MetalNvgDrawer::MetalNvgDrawer(void* layer) {
-    ctx = nvgCreateMTL(layer, NVG_METAL_ANTIALIAS);
+    ctx = nvgCreateMTL(layer, NVG_ANTIALIAS);
 }
 
 MetalNvgDrawer::~MetalNvgDrawer() {
