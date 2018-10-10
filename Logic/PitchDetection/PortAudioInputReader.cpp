@@ -87,7 +87,9 @@ void PortAudioInputReader::init() {
     PortAudio::checkErrors(err);
 
     mixer = Px_OpenMixer(stream, 0);
+#ifndef __linux__ // Portmixer temporarily does not work on Linux
     assert(mixer);
+#endif
 }
 
 PortAudioInputReader::~PortAudioInputReader() {
