@@ -35,4 +35,5 @@ if (WIN32)
 endif(WIN32)
 
 if (UNIX)
+    list(APPEND playbackSources Decoding/Decoder/audiodecoderffmpeg.cpp)
 endif(UNIX)
