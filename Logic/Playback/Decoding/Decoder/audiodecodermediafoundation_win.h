@@ -35,11 +35,9 @@ private:
     size_t m_leftoverBufferSize = 0;
     size_t m_leftoverBufferLength = 0;
     int m_leftoverBufferPosition = 0;
-    long long mfDuration = 0;
     bool decoding = true;
     bool seeking = false;
     unsigned int m_BitsPerSample;
-    short destBufferShort[8192];
 };
 
 

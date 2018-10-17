@@ -14,18 +14,7 @@
 
 #include "audiodecodermediafoundation_win.h"
 
-const int kBitsPerSample = 16;
-const int kNumChannels = 2;
-const int kSampleRate = 44100;
-const int kLeftoverSize = 4096;
-
-AudioDecoderMediaFoundation::AudioDecoderMediaFoundation()
-{
-    // Defaults
-    m_iChannels = kNumChannels;
-    m_iSampleRate = kSampleRate;
-    m_BitsPerSample = kBitsPerSample;
-}
+AudioDecoderMediaFoundation::AudioDecoderMediaFoundation() {}
 
 AudioDecoderMediaFoundation::~AudioDecoderMediaFoundation()
 {
@@ -113,7 +102,7 @@ void AudioDecoderMediaFoundation::open(std::string &&data)
 
     // For compressed files, the bits per sample is undefined, so by convention we're going to get 16-bit integers out.
     if (m_BitsPerSample == 0)
-        m_BitsPerSample = kBitsPerSample;
+        m_BitsPerSample = sizeof(SAMPLE) * 8;
 
     if (m_BitsPerSample != sizeof(SAMPLE) * 8)
          throw std::runtime_error("Unsupported audio format");
@@ -161,7 +150,6 @@ void AudioDecoderMediaFoundation::open(std::string &&data)
         throw std::runtime_error("Error getting duration");
     }
     m_fDuration = static_cast<double>(prop.hVal.QuadPart) / 1e7; // Convert a 100ns Media Foundation value to a number of seconds.
-    mfDuration = prop.hVal.QuadPart;
     std::cout << "Duration: " << m_fDuration << std::endl;
     PropVariantClear(&prop);
 
@@ -198,15 +186,12 @@ void AudioDecoderMediaFoundation::seek(int sampleIdx)
 
 int AudioDecoderMediaFoundation::read(int size, SAMPLE *destination)
 {
-    assert(size < sizeof(destBufferShort) / sizeof(SAMPLE));
-
-    short *destBuffer = destBufferShort;
     size_t framesRequested = size / m_iChannels;
     size_t framesNeeded = framesRequested;
 
     // Copy frames from leftover buffer if the leftover buffer is at the correct frame
     if (m_leftoverBufferLength > 0 && m_leftoverBufferPosition == nextFrame) {
-        copyFrames(destBuffer, &framesNeeded, m_leftoverBuffer, m_leftoverBufferLength);
+        copyFrames(destination, &framesNeeded, m_leftoverBuffer, m_leftoverBufferLength);
         if (m_leftoverBufferLength > 0) {
             if (framesNeeded != 0) {
                 std::cerr << "WARNING: Expected frames needed to be 0. Abandoning this file." << std::endl;
@@ -267,7 +252,7 @@ int AudioDecoderMediaFoundation::read(int size, SAMPLE *destination)
             long long bufferPosition = frameFromMF(timestamp);
             if (nextFrame < bufferPosition) {
                 // We are farther forward than our seek target. Emit silence.
-                short* pBufferCurpos = destBuffer + size - framesNeeded * m_iChannels;
+                short* pBufferCurpos = destination + size - framesNeeded * m_iChannels;
                 long long offshootFrames = bufferPosition - nextFrame;
 
                 // If we can correct this immediately, write zeros and adjust m_nextFrame to pretend it never happened.
@@ -312,7 +297,7 @@ int AudioDecoderMediaFoundation::read(int size, SAMPLE *destination)
             m_leftoverBuffer = newBuffer;
             m_leftoverBufferSize = newSize;
         }
-        copyFrames(destBuffer + (size - framesNeeded * m_iChannels), &framesNeeded, buffer, bufferLength);
+        copyFrames(destination + (size - framesNeeded * m_iChannels), &framesNeeded, buffer, bufferLength);
 
         pMBuffer->Unlock();
         pMBuffer->Release();
@@ -330,11 +315,6 @@ int AudioDecoderMediaFoundation::read(int size, SAMPLE *destination)
     int samples_read = size - framesNeeded * m_iChannels;
     m_iPositionInSamples += samples_read;
 
-    // Convert to float samples
-    for (int i = 0; i < samples_read; i++)
-    {
-        destination[i] = destBuffer[i];
-    }
     return samples_read;
 }
 
