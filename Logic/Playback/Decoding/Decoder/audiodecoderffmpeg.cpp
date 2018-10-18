@@ -11,44 +11,6 @@
 constexpr int PROBE_BUFFER_SIZE = 8192; // Minumum size to detect format
 constexpr AVSampleFormat SAMPLE_FORMAT = AV_SAMPLE_FMT_S16P;
 
-// Callbacks
-static int ffmpeg_read(void *data, uint8_t *buf, int size)
-{
-    AudioDecoderFFmpeg *decoder = static_cast<AudioDecoderFFmpeg*>(data);
-    int readedBytes = static_cast<int>(std::min(decoder->input()->tellp() - decoder->input()->tellg(), static_cast<long>(size)));
-    decoder->input()->read(reinterpret_cast<char*>(buf), size);
-    return readedBytes;
-}
-
-static long ffmpeg_seek(void *data, long offset, int whence)
-{
-    AudioDecoderFFmpeg *decoder = static_cast<AudioDecoderFFmpeg*>(data);
-    long position = 0;
-
-    switch(whence)
-    {
-    case AVSEEK_SIZE:
-        return decoder->input()->tellp();
-    case SEEK_SET:
-        position = offset;
-        break;
-    case SEEK_CUR:
-        position = decoder->input()->tellg() + offset;
-        break;
-    case SEEK_END:
-        position = decoder->input()->tellp() - offset;
-        break;
-    default:
-        return -1;
-    }
-    if(position < 0 || position > decoder->input()->tellp())
-        return -1;
-
-
-    decoder->input()->seekg(position);
-    return position;
-}
-
 AudioDecoderFFmpeg::AudioDecoderFFmpeg()
 {
     tempPacket.size = 0;
@@ -62,36 +24,35 @@ AudioDecoderFFmpeg::AudioDecoderFFmpeg()
 AudioDecoderFFmpeg::~AudioDecoderFFmpeg()
 {
     tempPacket.size = 0;
-    if(codecContext)
+    if (codecContext)
         avcodec_free_context(&codecContext);
     if (formatContext)
         avformat_free_context(formatContext);
-    if(packet.data)
+    if (packet.data)
         av_packet_unref(&packet);
-    if(streamContext)
+    if (streamContext)
         av_free(streamContext);
-    if(resampleContext)
+    if (resampleContext)
         swr_free(&resampleContext);
-    if(decodedFrame)
+    if (decodedFrame)
         av_frame_free(&decodedFrame);
-    if(resampledFrame)
+    if (resampledFrame)
         av_frame_free(&resampledFrame);
 }
 
 void AudioDecoderFFmpeg::open(std::string &&data)
 {
-    audioData.write(data.c_str(), long(data.size()) + 1);
+    audioData.write(data.c_str(), long(data.size()));
 
     formatContext = avformat_alloc_context();
 
     // Minumum size for probe to detect format
-    if(audioData.tellp() < PROBE_BUFFER_SIZE) {
-        std::cerr << "Too small buffer size: " << audioData.tellp() << std::endl;
-        return;
-    }
+    if (audioData.tellp() < PROBE_BUFFER_SIZE)
+        throw std::runtime_error("Too small buffer size: " + std::to_string(audioData.tellp()));
 
     // Allocate probe buffer
-    char probeBufer[PROBE_BUFFER_SIZE + AVPROBE_PADDING_SIZE]; // Need to add padding size
+    // Need to add padding size according to https://ffmpeg.org/doxygen/4.0/structAVProbeData.html#a814cca49dda3f578ebb32d4b2f74368a
+    char probeBufer[PROBE_BUFFER_SIZE + AVPROBE_PADDING_SIZE];
     audioData.read(probeBufer, PROBE_BUFFER_SIZE);
     audioData.seekg(0);
 
@@ -101,38 +62,30 @@ void AudioDecoderFFmpeg::open(std::string &&data)
     probeData.buf = reinterpret_cast<unsigned char*>(&probeBufer[0]);
 
     AVInputFormat *inputFormat = av_probe_input_format(&probeData, 1);
-    if(!inputFormat) {
-        std::cerr << "Usupported format" << std::endl;
-        return;
-    }
+    if (!inputFormat)
+        throw std::runtime_error("Usupported format");
 
-    streamContext = avio_alloc_context(inputBuffer, INPUT_BUFFER_SIZE, 0, this, ffmpeg_read, nullptr, ffmpeg_seek);
-    if(!streamContext) {
-        std::cerr << "Unable to initialize I/O callbacks" << std::endl;
-        return;
-    }
+    streamContext = avio_alloc_context(inputBuffer, INPUT_BUFFER_SIZE, 0, this, ffmpegRead, nullptr, ffmpegSeek);
+    if (!streamContext)
+        throw std::runtime_error("Unable to initialize I/O callbacks");
 
     streamContext->seekable = true;
     streamContext->max_packet_size = INPUT_BUFFER_SIZE;
     formatContext->pb = streamContext;
 
-    if(avformat_open_input(&formatContext, nullptr, inputFormat, nullptr) != 0) {
-        std::cerr << "Open input failed" << std::endl;
-        return;
-    }
+    if (avformat_open_input(&formatContext, nullptr, inputFormat, nullptr) != 0)
+        throw std::runtime_error("Open input failed");
 
     avformat_find_stream_info(formatContext, nullptr);
-    if(formatContext->pb)
+    if (formatContext->pb)
         formatContext->pb->eof_reached = 0;
 
     formatContext->flags |= AVFMT_FLAG_GENPTS; // Generate missing pts even if it requires parsing future frames
 
     // Find audio stream
     streamIndex = av_find_best_stream(formatContext, AVMEDIA_TYPE_AUDIO, -1, -1, nullptr, 0);
-    if(streamIndex < 0) {
-        std::cerr << "Unable to find audio stream" << std::endl;
-        return;
-    }
+    if (streamIndex < 0)
+        throw std::runtime_error("Unable to find audio stream");
 
     codecContext = avcodec_alloc_context3(nullptr);
     avcodec_parameters_to_context(codecContext, formatContext->streams[streamIndex]->codecpar);
@@ -151,21 +104,17 @@ void AudioDecoderFFmpeg::open(std::string &&data)
 
     // Set codec
     AVCodec *codec = avcodec_find_decoder(codecContext->codec_id);
-    if (!codec) {
-        std::cerr << "Unsupported codec for output stream" << std::endl;
-        return;
-    }
-    if (avcodec_open2(codecContext, codec, nullptr) < 0) {
-        std::cerr << "Error while opening codec for output stream" << std::endl;
-        return;
-    }
+    if (!codec)
+        throw std::runtime_error("Unsupported codec for output stream");
+    if (avcodec_open2(codecContext, codec, nullptr) < 0)
+        throw std::runtime_error("Error while opening codec for output stream");
 
     // Decode to 16-bit int
     resampleContext = swr_alloc_set_opts(nullptr,
-                                         static_cast<long>(codecContext->channel_layout),
+                                         long(codecContext->channel_layout),
                                          SAMPLE_FORMAT,
                                          codecContext->sample_rate,
-                                          static_cast<long>(codecContext->channel_layout),
+                                         long(codecContext->channel_layout),
                                          codecContext->sample_fmt,
                                          codecContext->sample_rate,
                                          0,
@@ -180,7 +129,7 @@ void AudioDecoderFFmpeg::open(std::string &&data)
     resampledFrame->format = SAMPLE_FORMAT;
 
     // Save information
-    m_fDuration = static_cast<float>(formatContext->duration) / AV_TIME_BASE;
+    m_fDuration = float(formatContext->duration) / AV_TIME_BASE;
     m_iSampleRate = codecContext->sample_rate;
 
     return;
@@ -200,23 +149,26 @@ void AudioDecoderFFmpeg::seek(int sampleIdx)
 
 int AudioDecoderFFmpeg::read(int size, SAMPLE *destination)
 {
-    assert(samplesReaded <= samplesAvailable);
+    assert(samplesRead <= samplesAvailable);
 
-    if (samplesAvailable - samplesReaded == 0) {
+    if (samplesAvailable - samplesRead == 0) {
         // Buffer is over, need to decode next frame
         fillBuffer();
-        if (samplesAvailable - samplesReaded == 0)
+        if (samplesAvailable - samplesRead == 0)
             return 0; // End of file
     }
 
-    int samplesToCopy = std::min(samplesAvailable - samplesReaded, size);
+    int samplesToCopy = std::min(samplesAvailable - samplesRead, size);
     int sampleSize = av_get_bytes_per_sample(SAMPLE_FORMAT);
 
     // Copy samples to destination
-    for (int i = 0; i < samplesToCopy; ++i)
-        memcpy(destination + i, resampledFrame->extended_data[(i + samplesReaded) % m_iChannels] + (i + samplesReaded) / m_iChannels * sampleSize, static_cast<unsigned>(sampleSize));
+    for (int i = 0; i < samplesToCopy; ++i) {
+        int currentChannel = (i + samplesRead) % m_iChannels; // For planar audio need to interchange channels
+        int currentOffset = (i + samplesRead) / m_iChannels * sampleSize;
+        memcpy(destination + i, resampledFrame->extended_data[currentChannel] + currentOffset, unsigned(sampleSize));
+    }
 
-    samplesReaded += samplesToCopy;
+    samplesRead += samplesToCopy;
 
     // Check if all samples copied
     if (samplesToCopy < size) {
@@ -225,9 +177,14 @@ int AudioDecoderFFmpeg::read(int size, SAMPLE *destination)
         if (samplesAvailable >= size) {
             // Copy remaining samples if available
             int samplesLeft = size - samplesToCopy;
-            for(int i = 0; i < samplesLeft; ++i)
-                memcpy(destination + samplesToCopy + i, resampledFrame->extended_data[(i + samplesReaded) % m_iChannels] + (i + samplesReaded) / m_iChannels * sampleSize, static_cast<unsigned>(sampleSize));
-            samplesReaded += samplesLeft;
+
+            for (int i = 0; i < samplesLeft; ++i) {
+                int currentChannel = (i + samplesRead) % m_iChannels; // For planar audio need to interchange channels
+                int currentOffset = (i + samplesRead) / m_iChannels * sampleSize;
+                memcpy(destination + samplesToCopy + i, resampledFrame->extended_data[currentChannel] + currentOffset, unsigned(sampleSize));
+            }
+
+            samplesRead += samplesLeft;
             samplesToCopy += samplesLeft;
         }
     }
@@ -249,17 +206,49 @@ std::vector<std::string> AudioDecoderFFmpeg::supportedFileExtensions()
     return list;
 }
 
-std::stringstream *AudioDecoderFFmpeg::input()
+// Callbacks
+int AudioDecoderFFmpeg::ffmpegRead(void *data, uint8_t *buf, int size)
 {
-    return &audioData;
+    AudioDecoderFFmpeg *decoder = static_cast<AudioDecoderFFmpeg*>(data);
+    decoder->audioData.read(reinterpret_cast<char*>(buf), size);
+    return int(decoder->audioData.gcount());
+}
+
+long AudioDecoderFFmpeg::ffmpegSeek(void *data, long offset, int whence)
+{
+    AudioDecoderFFmpeg *decoder = static_cast<AudioDecoderFFmpeg*>(data);
+    long position = 0;
+
+    switch(whence)
+    {
+    case AVSEEK_SIZE:
+        return decoder->audioData.tellp();
+    case SEEK_SET:
+        position = offset;
+        break;
+    case SEEK_CUR:
+        position = decoder->audioData.tellg() + offset;
+        break;
+    case SEEK_END:
+        position = decoder->audioData.tellp() - offset;
+        break;
+    default:
+        return -1;
+    }
+    if (position < 0 || position > decoder->audioData.tellp())
+        return -1;
+
+
+    decoder->audioData.seekg(position);
+    return position;
 }
 
 void AudioDecoderFFmpeg::fillBuffer()
 {
     samplesAvailable = 0;
 
-    while(!samplesAvailable) {
-        if(!tempPacket.size) {
+    while (!samplesAvailable) {
+        if (!tempPacket.size) {
             if (av_read_frame(formatContext, &packet) < 0) {
                 tempPacket.size = 0;
                 break;
@@ -293,7 +282,7 @@ void AudioDecoderFFmpeg::fillBuffer()
         }
     }
 
-    samplesReaded = 0; // Reset samples position
+    samplesRead = 0; // Reset samples position
 }
 
 int AudioDecoderFFmpeg::decodeFrame()
@@ -306,7 +295,7 @@ int AudioDecoderFFmpeg::decodeFrame()
             return -1;
         }
 
-        int l = (err == AVERROR(EAGAIN)) ? 0 : tempPacket.size;
+        int tempPacketSize = (err == AVERROR(EAGAIN)) ? 0 : tempPacket.size;
 
         // Decode frame
         if ((err = avcodec_receive_frame(codecContext, decodedFrame)) < 0) {
@@ -327,11 +316,11 @@ int AudioDecoderFFmpeg::decodeFrame()
         else
             outSize = 0;
 
-        if(l < 0)
-            return l;
+        if (tempPacketSize < 0)
+            return tempPacketSize;
 
-        tempPacket.data += l;
-        tempPacket.size -= l;
+        tempPacket.data += tempPacketSize;
+        tempPacket.size -= tempPacketSize;
     }
 
     if (!tempPacket.size && packet.data)

@@ -15,8 +15,6 @@ extern "C"{
 
 #include "audiodecoder.h"
 
-#define INPUT_BUFFER_SIZE 16384
-
 class AudioDecoderFFmpeg : public AudioDecoder {
 
 public:
@@ -28,12 +26,16 @@ public:
     int read(int size, SAMPLE *buffer) override;
     std::vector<std::string> supportedFileExtensions() override;
 
-    std::stringstream *input(); // Need for streamContext callbacks
-
 private:
+    // Callbacks for FFmpeg
+    static int ffmpegRead(void *data, uint8_t *buf, int size);
+    static long ffmpegSeek(void *data, long offset, int whence);
+
     // Helper functions
     void fillBuffer();
     int decodeFrame();
+
+    static constexpr int INPUT_BUFFER_SIZE = 16384; // Buffer size needed for streamContext
 
     AVFormatContext *formatContext = nullptr;
     AVCodecContext *codecContext = nullptr;
@@ -46,7 +48,7 @@ private:
 
     int streamIndex = 0;
     int samplesAvailable = 0;
-    int samplesReaded = 0;
+    int samplesRead = 0;
     unsigned char inputBuffer[INPUT_BUFFER_SIZE + AV_INPUT_BUFFER_PADDING_SIZE]; // Need for streamContext
     std::stringstream audioData;
 };
