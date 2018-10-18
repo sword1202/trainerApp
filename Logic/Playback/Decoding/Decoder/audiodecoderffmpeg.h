@@ -23,7 +23,7 @@ public:
 
     void open(std::string &&data) override;
     void seek(int sampleIdx) override;
-    int read(int size, SAMPLE *buffer) override;
+    int read(int samplesCount, SAMPLE *buffer) override;
     std::vector<std::string> supportedFileExtensions() override;
 
 private:

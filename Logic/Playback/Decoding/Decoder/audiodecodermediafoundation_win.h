@@ -17,7 +17,7 @@ public:
     ~AudioDecoderMediaFoundation();
     void open(std::string &&data);
     void seek(int sampleIdx);
-    int read(int size, SAMPLE *buffer);
+    int read(int samplesCount, SAMPLE *buffer);
     std::vector<std::string> supportedFileExtensions();
 
 private:

@@ -196,12 +196,12 @@ void AudioDecoderMediaFoundation::seek(int sampleIdx)
     m_iPositionInSamples = result;
 }
 
-int AudioDecoderMediaFoundation::read(int size, SAMPLE *destination)
+int AudioDecoderMediaFoundation::read(int samplesCount, SAMPLE *destination)
 {
-    assert(size < sizeof(destBufferShort) / sizeof(SAMPLE));
+    assert(samples < sizeof(destBufferShort) / sizeof(SAMPLE));
 
     short *destBuffer = destBufferShort;
-    size_t framesRequested = size / m_iChannels;
+    size_t framesRequested = samplesCount / m_iChannels;
     size_t framesNeeded = framesRequested;
 
     // Copy frames from leftover buffer if the leftover buffer is at the correct frame
@@ -267,7 +267,7 @@ int AudioDecoderMediaFoundation::read(int size, SAMPLE *destination)
             long long bufferPosition = frameFromMF(timestamp);
             if (nextFrame < bufferPosition) {
                 // We are farther forward than our seek target. Emit silence.
-                short* pBufferCurpos = destBuffer + size - framesNeeded * m_iChannels;
+                short* pBufferCurpos = destBuffer + samples - framesNeeded * m_iChannels;
                 long long offshootFrames = bufferPosition - nextFrame;
 
                 // If we can correct this immediately, write zeros and adjust m_nextFrame to pretend it never happened.
@@ -312,7 +312,7 @@ int AudioDecoderMediaFoundation::read(int size, SAMPLE *destination)
             m_leftoverBuffer = newBuffer;
             m_leftoverBufferSize = newSize;
         }
-        copyFrames(destBuffer + (size - framesNeeded * m_iChannels), &framesNeeded, buffer, bufferLength);
+        copyFrames(destBuffer + (samples - framesNeeded * m_iChannels), &framesNeeded, buffer, bufferLength);
 
         pMBuffer->Unlock();
         pMBuffer->Release();
@@ -327,7 +327,7 @@ int AudioDecoderMediaFoundation::read(int size, SAMPLE *destination)
         }
         m_leftoverBufferPosition = nextFrame;
     }
-    int samples_read = size - framesNeeded * m_iChannels;
+    int samples_read = samples - framesNeeded * m_iChannels;
     m_iPositionInSamples += samples_read;
 
     // Convert to float samples

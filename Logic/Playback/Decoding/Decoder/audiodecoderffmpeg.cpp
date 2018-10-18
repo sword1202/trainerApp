@@ -147,7 +147,7 @@ void AudioDecoderFFmpeg::seek(int sampleIdx)
      m_iPositionInSamples = sampleIdx;
 }
 
-int AudioDecoderFFmpeg::read(int size, SAMPLE *destination)
+int AudioDecoderFFmpeg::read(int samplesCount, SAMPLE *destination)
 {
     assert(samplesRead <= samplesAvailable);
 
@@ -158,7 +158,7 @@ int AudioDecoderFFmpeg::read(int size, SAMPLE *destination)
             return 0; // End of file
     }
 
-    int samplesToCopy = std::min(samplesAvailable - samplesRead, size);
+    int samplesToCopy = std::min(samplesAvailable - samplesRead, samplesCount);
     int sampleSize = av_get_bytes_per_sample(SAMPLE_FORMAT);
 
     // Copy samples to destination
@@ -171,12 +171,12 @@ int AudioDecoderFFmpeg::read(int size, SAMPLE *destination)
     samplesRead += samplesToCopy;
 
     // Check if all samples copied
-    if (samplesToCopy < size) {
+    if (samplesToCopy < samplesCount) {
         // Need to decode next frame
         fillBuffer();
-        if (samplesAvailable >= size) {
+        if (samplesAvailable >= samplesCount) {
             // Copy remaining samples if available
-            int samplesLeft = size - samplesToCopy;
+            int samplesLeft = samplesCount - samplesToCopy;
 
             for (int i = 0; i < samplesLeft; ++i) {
                 int currentChannel = (i + samplesRead) % m_iChannels; // For planar audio need to interchange channels
