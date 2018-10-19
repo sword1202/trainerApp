@@ -10,20 +10,10 @@
 
 constexpr int PROBE_BUFFER_SIZE = 8192; // Minumum size to detect format
 constexpr AVSampleFormat SAMPLE_FORMAT = AV_SAMPLE_FMT_S16P;
-
-AudioDecoderFFmpeg::AudioDecoderFFmpeg()
-{
-    tempPacket.size = 0;
-    packet.size = 0;
-    packet.data = nullptr;
-
-    av_init_packet(&packet);
-    av_init_packet(&tempPacket);
-}
+constexpr short MAX_ERROR_COUNT = 4;
 
 AudioDecoderFFmpeg::~AudioDecoderFFmpeg()
 {
-    tempPacket.size = 0;
     if (codecContext)
         avcodec_free_context(&codecContext);
     if (formatContext)
@@ -59,7 +49,7 @@ void AudioDecoderFFmpeg::open(std::string &&data)
     AVProbeData probeData;
     memset(&probeData, 0, sizeof(probeData));
     probeData.buf_size = PROBE_BUFFER_SIZE;
-    probeData.buf = reinterpret_cast<unsigned char*>(&probeBufer[0]);
+    probeData.buf = reinterpret_cast<unsigned char*>(probeBufer);
 
     AVInputFormat *inputFormat = av_probe_input_format(&probeData, 1);
     if (!inputFormat)
@@ -128,6 +118,9 @@ void AudioDecoderFFmpeg::open(std::string &&data)
     resampledFrame->sample_rate = codecContext->sample_rate;
     resampledFrame->format = SAMPLE_FORMAT;
 
+    // Allocate packet reading frames
+    av_init_packet(&packet);
+
     // Save information
     m_fDuration = float(formatContext->duration) / AV_TIME_BASE;
     m_iSampleRate = codecContext->sample_rate;
@@ -140,11 +133,10 @@ void AudioDecoderFFmpeg::seek(int sampleIdx)
     assert(sampleIdx > 0);
 
     long timestamp = (sampleIdx / m_iSampleRate) / m_iChannels * AV_TIME_BASE;
-     av_seek_frame(formatContext, -1, timestamp, AVSEEK_FLAG_BACKWARD);
-     avcodec_flush_buffers(codecContext);
-     av_packet_unref(&packet);
-     tempPacket.size = 0;
-     m_iPositionInSamples = sampleIdx;
+    av_seek_frame(formatContext, -1, timestamp, AVSEEK_FLAG_BACKWARD);
+    avcodec_flush_buffers(codecContext);
+    av_packet_unref(&packet);
+    m_iPositionInSamples = sampleIdx;
 }
 
 int AudioDecoderFFmpeg::read(int samplesCount, SAMPLE *destination)
@@ -206,7 +198,60 @@ std::vector<std::string> AudioDecoderFFmpeg::supportedFileExtensions()
     return list;
 }
 
-// Callbacks
+void AudioDecoderFFmpeg::fillBuffer()
+{
+    for (int errorCount = 0; errorCount < MAX_ERROR_COUNT; ++errorCount) {
+        // Decode frame, in case of error repeat up to MAX_ERROR_COUNT times
+        if (av_read_frame(formatContext, &packet) < 0) {
+            // End of file
+            samplesAvailable = 0;
+            samplesRead = 0;
+            return;
+        }
+
+        if (decodeFrame()) {
+            samplesAvailable = codecContext->channels * resampledFrame->nb_samples;
+            samplesRead = 0; // Reset samples position
+            return;
+        }
+
+        if (packet.data)
+            av_packet_unref(&packet);
+    }
+
+    throw std::runtime_error("Too many errors in a row when reading the stream");
+
+}
+
+bool AudioDecoderFFmpeg::decodeFrame()
+{
+    // Use packet API: https://ffmpeg.org/doxygen/4.0/group__lavc__encdec.html
+    if (packet.stream_index != streamIndex) {
+        std::cerr << "Wrong stream index" << std::endl;
+        return false;
+    }
+
+    if (avcodec_send_packet(codecContext, &packet) < 0) {
+        std::cerr << "Send packet error" << std::endl;
+        return false;
+    }
+
+    // Decode frame
+    if (avcodec_receive_frame(codecContext, decodedFrame)  < 0) {
+        std::cerr << "Receive frame error" << std::endl;
+        return false;
+    }
+
+    // Resample frame to 16-bit int format
+    if (swr_convert_frame(resampleContext, resampledFrame, decodedFrame) != 0) {
+        std::cerr << "Resample frame error: " << std::endl;
+        return false;
+    }
+
+    return true;
+}
+
+// FFmpeg callbacks
 int AudioDecoderFFmpeg::ffmpegRead(void *data, uint8_t *buf, int size)
 {
     AudioDecoderFFmpeg *decoder = static_cast<AudioDecoderFFmpeg*>(data);
@@ -241,90 +286,4 @@ long AudioDecoderFFmpeg::ffmpegSeek(void *data, long offset, int whence)
 
     decoder->audioData.seekg(position);
     return position;
-}
-
-void AudioDecoderFFmpeg::fillBuffer()
-{
-    samplesAvailable = 0;
-
-    while (!samplesAvailable) {
-        if (!tempPacket.size) {
-            if (av_read_frame(formatContext, &packet) < 0) {
-                tempPacket.size = 0;
-                break;
-            }
-
-            tempPacket.size = packet.size;
-            tempPacket.data = packet.data;
-
-            if (packet.stream_index != streamIndex) {
-                if (packet.data)
-                    av_packet_unref(&packet);
-                tempPacket.size = 0;
-                continue;
-            }
-        }
-
-        samplesAvailable = decodeFrame();
-
-        if (samplesAvailable < 0) {
-            samplesAvailable = 0;
-            tempPacket.size = 0;
-            continue;
-        }
-
-        if (samplesAvailable == 0) {
-            if (packet.data)
-                av_packet_unref(&packet);
-            packet.data = nullptr;
-            tempPacket.size = 0;
-            continue;
-        }
-    }
-
-    samplesRead = 0; // Reset samples position
-}
-
-int AudioDecoderFFmpeg::decodeFrame()
-{
-    int outSize = 0;
-    if (packet.stream_index == streamIndex) {
-        int err = avcodec_send_packet(codecContext, &tempPacket);
-        if (err != 0 && err != AVERROR(EAGAIN) && err != AVERROR(EINVAL)) {
-            std::cerr << "Send packet error: " << err << std::endl;
-            return -1;
-        }
-
-        int tempPacketSize = (err == AVERROR(EAGAIN)) ? 0 : tempPacket.size;
-
-        // Decode frame
-        if ((err = avcodec_receive_frame(codecContext, decodedFrame)) < 0) {
-            if (err == AVERROR(EAGAIN)) // Try again
-                return 0;
-            std::cerr << "Receive frame error: " << err << std::endl;
-            return -1;
-        }
-
-        // Resample frame to 16-bit int format
-        if ((err = swr_convert_frame(resampleContext, resampledFrame, decodedFrame)) != 0) {
-            std::cerr << "Resample frame error: " << err << std::endl;
-            return -1;
-        }
-
-        if (resampledFrame->pkt_size)
-            outSize = codecContext->channels * resampledFrame->nb_samples;
-        else
-            outSize = 0;
-
-        if (tempPacketSize < 0)
-            return tempPacketSize;
-
-        tempPacket.data += tempPacketSize;
-        tempPacket.size -= tempPacketSize;
-    }
-
-    if (!tempPacket.size && packet.data)
-        av_packet_unref(&packet);
-
-    return outSize;
 }

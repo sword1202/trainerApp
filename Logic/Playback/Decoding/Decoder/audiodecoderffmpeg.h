@@ -18,7 +18,6 @@ extern "C"{
 class AudioDecoderFFmpeg : public AudioDecoder {
 
 public:
-    AudioDecoderFFmpeg();
     ~AudioDecoderFFmpeg() override;
 
     void open(std::string &&data) override;
@@ -27,13 +26,12 @@ public:
     std::vector<std::string> supportedFileExtensions() override;
 
 private:
+    void fillBuffer();
+    bool decodeFrame();
+
     // Callbacks for FFmpeg
     static int ffmpegRead(void *data, uint8_t *buf, int size);
     static long ffmpegSeek(void *data, long offset, int whence);
-
-    // Helper functions
-    void fillBuffer();
-    int decodeFrame();
 
     static constexpr int INPUT_BUFFER_SIZE = 16384; // Buffer size needed for streamContext
 
@@ -44,7 +42,6 @@ private:
     AVFrame *decodedFrame = nullptr;
     AVFrame *resampledFrame = nullptr;
     AVPacket packet;
-    AVPacket tempPacket;
 
     int streamIndex = 0;
     int samplesAvailable = 0;
