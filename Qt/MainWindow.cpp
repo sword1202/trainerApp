@@ -92,7 +92,8 @@ MainWindow::MainWindow() :
 
 	// Scrollbar
     verticalScrollWidget = createQQuickWidget("qrc:/qml/VerticalScrollBarContainer.qml");
-	verticalScrollWidget->rootObject()->setWidth(VERTICAL_SCROLL_WIDTH);
+    verticalScrollWidget->rootObject()->setWidth(VERTICAL_SCROLL_WIDTH);
+    verticalScrollWidget->setParent(centralWidget);
 
     setupMenus();
 }
@@ -117,7 +118,7 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
     const int width = event->size().width();
 
     verticalScrollWidget->rootObject()->setHeight(workspaceWidget->height() - YARD_STICK_HEIGHT);
-    verticalScrollWidget->move(width - VERTICAL_SCROLL_WIDTH, verticalScrollWidget->mapToParent(workspaceWidget->pos()).y() + YARD_STICK_HEIGHT);
+    verticalScrollWidget->move(width - VERTICAL_SCROLL_WIDTH, workspaceWidget->y() + YARD_STICK_HEIGHT);
 }
 
 void MainWindow::setupMenus() {
