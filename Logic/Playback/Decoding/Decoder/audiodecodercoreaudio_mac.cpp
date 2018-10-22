@@ -233,13 +233,13 @@ void AudioDecoderCoreAudio::seek(int sampleIdx) {
     m_iPositionInSamples = sampleIdx;
 }
 
-int AudioDecoderCoreAudio::read(int size, SAMPLE *destination) {
+int AudioDecoderCoreAudio::read(int samplesCount, SAMPLE *destination) {
     OSStatus err;
     SAMPLE *destBuffer(const_cast<SAMPLE*>(destination));
     unsigned int samplesWritten = 0;
     unsigned int i = 0;
     UInt32 numFrames = 0;
-    unsigned int totalFramesToRead = size/2;
+    unsigned int totalFramesToRead = samplesCount / 2;
     unsigned int numFramesRead = 0;
     unsigned int numFramesToRead = totalFramesToRead;
 

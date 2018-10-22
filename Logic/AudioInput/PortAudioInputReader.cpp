@@ -1,8 +1,11 @@
 #include "PortAudioInputReader.h"
+
+#include <cstring>
+#include <cmath>
 #include <portaudio/portaudio.h>
+
 #include "PortAudioUtils.h"
 #include "Functions.h"
-#include <cmath>
 
 #define SAMPLE_RATE 44100
 
@@ -84,7 +87,9 @@ void PortAudioInputReader::init() {
     PortAudio::checkErrors(err);
 
     mixer = Px_OpenMixer(stream, 0);
+#ifndef __linux__ // Portmixer temporarily does not work on Linux
     assert(mixer);
+#endif
 }
 
 PortAudioInputReader::~PortAudioInputReader() {

@@ -115,7 +115,6 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
     QWidget::resizeEvent(event);
 
     const int width = event->size().width();
-    const int height = event->size().height();
 
     verticalScrollWidget->rootObject()->setHeight(workspaceWidget->height() - YARD_STICK_HEIGHT);
     verticalScrollWidget->move(width - VERTICAL_SCROLL_WIDTH, verticalScrollWidget->mapToParent(workspaceWidget->pos()).y() + YARD_STICK_HEIGHT);

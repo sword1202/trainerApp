@@ -61,22 +61,26 @@ MetalNvgDrawer::~MetalNvgDrawer() {
 #define NANOVG_GL2_IMPLEMENTATION
 #endif
 
+#ifdef __linux__
+#define NANOVG_GL3_IMPLEMENTATION
+#include <GL/glew.h>
+#endif
+
 #include <nanovg/nanovg_gl.h>
 #include <nanovg/fontstash.h>
 #include <NotImplementedAssert.h>
 
 OpenGLNvgDrawer::OpenGLNvgDrawer() {
-#ifdef _WIN32
+#if defined(_WIN32) or defined(__linux__)
     GLint GlewInitResult = glewInit();
     if (GLEW_OK != GlewInitResult) {
         const GLubyte *er = glewGetErrorString(GlewInitResult);
         //qDebug() << "ERROR: " << reinterpret_cast<const char *>(er);
     }
     ctx = nvgCreateGL3(NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DEBUG);
-
 #endif
 
-#ifdef __APPLE__
+#if defined(__APPLE__)
     ctx = nvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DEBUG);
 #endif
 
@@ -95,11 +99,11 @@ void NvgDrawer::setupBase() {
 
 OpenGLNvgDrawer::~OpenGLNvgDrawer() {
 
-#ifdef _WIN32
+#if defined(_WIN32) or defined(__linux__)
     nvgDeleteGL3(ctx);
 #endif
 
-#ifdef __APPLE__
+#if defined(__APPLE__)
     nvgDeleteGL2(ctx);
 #endif
 }

@@ -184,9 +184,9 @@ void AudioDecoderMediaFoundation::seek(int sampleIdx)
     m_iPositionInSamples = result;
 }
 
-int AudioDecoderMediaFoundation::read(int size, SAMPLE *destination)
+int AudioDecoderMediaFoundation::read(int samplesCount, SAMPLE *destination)
 {
-    size_t framesRequested = size / m_iChannels;
+    size_t framesRequested = samplesCount / m_iChannels;
     size_t framesNeeded = framesRequested;
 
     // Copy frames from leftover buffer if the leftover buffer is at the correct frame
@@ -252,7 +252,7 @@ int AudioDecoderMediaFoundation::read(int size, SAMPLE *destination)
             long long bufferPosition = frameFromMF(timestamp);
             if (nextFrame < bufferPosition) {
                 // We are farther forward than our seek target. Emit silence.
-                short* pBufferCurpos = destination + size - framesNeeded * m_iChannels;
+                short* pBufferCurpos = destination + samplesCount - framesNeeded * m_iChannels;
                 long long offshootFrames = bufferPosition - nextFrame;
 
                 // If we can correct this immediately, write zeros and adjust m_nextFrame to pretend it never happened.
@@ -297,7 +297,7 @@ int AudioDecoderMediaFoundation::read(int size, SAMPLE *destination)
             m_leftoverBuffer = newBuffer;
             m_leftoverBufferSize = newSize;
         }
-        copyFrames(destination + (size - framesNeeded * m_iChannels), &framesNeeded, buffer, bufferLength);
+        copyFrames(destination + (samplesCount - framesNeeded * m_iChannels), &framesNeeded, buffer, bufferLength);
 
         pMBuffer->Unlock();
         pMBuffer->Release();
@@ -312,7 +312,7 @@ int AudioDecoderMediaFoundation::read(int size, SAMPLE *destination)
         }
         m_leftoverBufferPosition = nextFrame;
     }
-    int samples_read = size - framesNeeded * m_iChannels;
+    int samples_read = samplesCount - framesNeeded * m_iChannels;
     m_iPositionInSamples += samples_read;
 
     return samples_read;

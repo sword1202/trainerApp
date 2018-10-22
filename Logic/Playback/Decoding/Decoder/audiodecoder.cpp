@@ -38,10 +38,12 @@
 
 #include "audiodecoder.h"
 
-#ifdef __APPLE__
+#if defined(__APPLE__)
 #include "audiodecodercoreaudio_mac.h"
-#elif _WIN32
+#elif defined(_WIN32)
 #include "audiodecodermediafoundation_win.h"
+#else
+#include"audiodecoderffmpeg.h"
 #endif
 
 int    AudioDecoder::numSamples()        const { return m_iNumSamples; }
@@ -55,10 +57,12 @@ float  AudioDecoder::duration()          const { return m_fDuration; }
 int    AudioDecoder::positionInSamples() const { return m_iPositionInSamples; }
 
 AudioDecoder *AudioDecoder::create() {
-#ifdef __APPLE__
+#if defined(__APPLE__)
     return new AudioDecoderCoreAudio();
-#else
+#elif defined(_WIN32)
     return new AudioDecoderMediaFoundation();
+#else
+    return new AudioDecoderFFmpeg();
 #endif
 };
 

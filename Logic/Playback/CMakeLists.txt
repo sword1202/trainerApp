@@ -33,3 +33,7 @@ endif(APPLE)
 if (WIN32)
     list(APPEND playbackSources Decoding/Decoder/audiodecodermediafoundation_win.cpp)
 endif(WIN32)
+
+if (UNIX)
+    list(APPEND playbackSources Decoding/Decoder/audiodecoderffmpeg.cpp)
+endif(UNIX)
