@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>WelcomeWindow</class>
+ <widget class="QMainWindow" name="WelcomeWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QSplitter" name="splitter">
+      <property name="styleSheet">
+       <string notr="true">color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(100, 100, 100, 255), stop:1 rgba(100, 100, 100, 128));</string>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="handleWidth">
+       <number>0</number>
+      </property>
+      <widget class="QListWidget" name="listWidget">
+       <property name="maximumSize">
+        <size>
+         <width>300</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Lato</family>
+         <pointsize>13</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QListWidget {
+	background-color: qlineargradient(spread:pad, x1:1, y1:0.527955, x2:0.006, y2:0, stop:0 rgba(203, 199, 249, 255), stop:1 rgba(192, 209, 255, 255));
+	border: 0px;
+	spacing: 0px;
+	subcontrol-position: right bottom;
+}
+
+QListWidget::item {
+	border: 0px;
+	padding-left: 35px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+QListWidget::item:hover {
+	background-color: rgba(183, 192, 239, 127);
+}
+
+QListWidget::item:selected  {
+	background-color: rgba(183, 192, 239, 255);
+	color: rgb(97, 95, 151);
+}
+
+QListView::text {
+    left: 25px;
+}</string>
+       </property>
+       <property name="tabKeyNavigation">
+        <bool>true</bool>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>70</width>
+         <height>70</height>
+        </size>
+       </property>
+       <item>
+        <property name="text">
+         <string>All Projects</string>
+        </property>
+        <property name="icon">
+         <iconset resource="icons.qrc">
+          <normaloff>:/icons/all_projects.svg</normaloff>
+          <selectedoff>:/icons/all_projects_selected.svg</selectedoff>:/icons/all_projects.svg</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>New Project</string>
+        </property>
+        <property name="icon">
+         <iconset resource="icons.qrc">
+          <normaloff>:/icons/new_project.svg</normaloff>
+          <selectedoff>:/icons/new_project_selected.svg</selectedoff>:/icons/new_project.svg</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Recordings</string>
+        </property>
+        <property name="icon">
+         <iconset resource="icons.qrc">
+          <normaloff>:/icons/recordings.svg</normaloff>
+          <selectedoff>:/icons/recordings_selected.svg</selectedoff>:/icons/recordings.svg</iconset>
+        </property>
+       </item>
+      </widget>
+      <widget class="QStackedWidget" name="stackedWidget">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <widget class="QWidget" name="allProjectsPage">
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="newProjectPage"/>
+       <widget class="QWidget" name="recordingsPage"/>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="bottomWidget" native="true">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>90</height>
+       </size>
+      </property>
+      <layout class="QHBoxLayout" name="buttomLayout">
+       <property name="leftMargin">
+        <number>30</number>
+       </property>
+       <property name="rightMargin">
+        <number>30</number>
+       </property>
+       <item>
+        <widget class="QPushButton" name="openButton">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Lato</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-radius: 4px;
+background-color: rgb(97, 95, 151);
+color: rgb(255, 255, 255);
+padding: 6px 32px 6px 32px;</string>
+         </property>
+         <property name="text">
+          <string>Open existing project</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="chooseButton">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Lato</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-radius: 4px;
+background-color: rgb(97, 95, 151);
+color: rgb(255, 255, 255);
+padding: 6px 32px 6px 32px;</string>
+         </property>
+         <property name="text">
+          <string>Choose</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>listWidget</tabstop>
+ </tabstops>
+ <resources>
+  <include location="icons.qrc"/>
+ </resources>
+ <connections/>
+</ui>

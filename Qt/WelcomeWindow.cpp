@@ -1,43 +1,45 @@
 #include "WelcomeWindow.h"
-#include <QVBoxLayout>
-#include <QQuickItem>
-#include <QGuiApplication>
+
+#include <QFontDatabase>
+#include <QGraphicsEffect>
 #include <QScreen>
-#include <QStyle>
+
+#include "ui_WelcomeWindow.h"
 
 constexpr double WINDOW_SIZE_RATIO = 0.8;
 
-WelcomeWindow::WelcomeWindow() : BaseMainWindow(QColor::fromRgb(0xE8, 0xE7, 0xF0)) {
-    widget = createQQuickWidget("qrc:/qml/WelcomeWindow.qml");
+WelcomeWindow::WelcomeWindow() :
+    BaseMainWindow(QColor::fromRgb(0xE8, 0xE7, 0xF0)),
+    ui(new Ui::WelcomeWindow)
+{
+    ui->setupUi(this);
+
+    // Default window size
     QScreen* screen = QGuiApplication::primaryScreen();
     QSize availableSize = screen->availableSize();
     QRect availableGeometry = screen->availableGeometry();
 
     setGeometry(
-            QStyle::alignedRect(
+                QStyle::alignedRect(
                     Qt::LeftToRight,
                     Qt::AlignCenter,
                     availableSize * WINDOW_SIZE_RATIO,
                     availableGeometry
-            )
-    );
+                    )
+                );
 
-    QWidget *centralWidget = new QWidget;
-    setCentralWidget(centralWidget);
+    // Pages selection mechanism
+    connect(ui->listWidget, &QListWidget::currentRowChanged, ui->stackedWidget, &QStackedWidget::setCurrentIndex);
 
-    QVBoxLayout *mainLayout = new QVBoxLayout;
-    mainLayout->setMargin(0);
-    mainLayout->setSpacing(0);
-    mainLayout->addWidget(widget);
-    centralWidget->setLayout(mainLayout);
+    // Bottom shadow
+    QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
+    effect->setBlurRadius(40);
+    effect->setOffset(0, 0);
+    effect->setColor(QColor(100, 100, 100, 127));
+    ui->bottomWidget->setGraphicsEffect(effect);
 }
 
-void WelcomeWindow::resizeEvent(QResizeEvent *event) {
-    QWidget::resizeEvent(event);
-
-    int width = event->size().width();
-    int height = event->size().height();
-    QQuickItem *root = widget->rootObject();
-    root->setWidth(width);
-    root->setHeight(height);
+WelcomeWindow::~WelcomeWindow()
+{
+    delete ui;
 }

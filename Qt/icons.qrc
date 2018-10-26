@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/all_projects_selected.svg</file>
+        <file>icons/all_projects.svg</file>
+        <file>icons/new_project_selected.svg</file>
+        <file>icons/new_project.svg</file>
+        <file>icons/recordings_selected.svg</file>
+        <file>icons/recordings.svg</file>
+    </qresource>
+</RCC>

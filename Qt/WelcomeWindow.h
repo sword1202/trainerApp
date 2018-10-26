@@ -3,15 +3,20 @@
 
 #include "BaseMainWindow.h"
 
+namespace Ui {
+class WelcomeWindow;
+}
+
 class WelcomeWindow : public BaseMainWindow
 {
     Q_OBJECT
-    QQuickWidget *widget;
+
 public:
     explicit WelcomeWindow();
+    ~WelcomeWindow();
 
-protected:
-    void resizeEvent(QResizeEvent *event) override;
+private:
+    Ui::WelcomeWindow *ui;
 };
 
 #endif // WELCOMEWINDOW_H

@@ -131,7 +131,6 @@
         <file>qml/TextButton.qml</file>
         <file>qml/RadioButton.qml</file>
         <file>qml/RoundedRect.qml</file>
-        <file>qml/WelcomeWindow.qml</file>
         <file>qml/MicrophoneVolumeSlider.qml</file>
         <file>qml/images/input_level_slider.svg</file>
         <file>qml/images/output_level_slider.svg</file>

@@ -1,10 +1,11 @@
-﻿#include "MainWindow.h"
+﻿#include <QApplication>
+#include <QFontDatabase>
+
 #include "VxApp.h"
 #include "QmlPitch.h"
 #include "QmlVxPitch.h"
 #include "QmlTimedPitch.h"
 #include "Player.h"
-#include <QApplication>
 #include "WelcomeWindow.h"
 
 int main(int argc, char *argv[])
@@ -27,8 +28,8 @@ int main(int argc, char *argv[])
     VxApp a(argc, argv);
     a.setAttribute(Qt::AA_DontCreateNativeWidgetSiblings);
 
-    MainWindow w;
-    w.showMaximized();
+    WelcomeWindow w;
+    w.show();
 
     return a.exec();
 }

@@ -4,6 +4,7 @@ set(qtSources
         BaseMainWindow.cpp
         Executors.cpp
         Fonts.cpp
+        icons.qrc
         LoadTsf.cpp
         main.cpp
         MainWindow.cpp
@@ -17,6 +18,7 @@ set(qtSources
         qml.qrc
         Workspace/OpenglWorkspaceWidget.cpp
         WelcomeWindow.cpp
+        WelcomeWindow.ui
         Workspace/WorkspaceDrawerWidgetSetup.cpp
         QtUtils/qtutils.cpp
         Workspace/TextImagesFactory.cpp
