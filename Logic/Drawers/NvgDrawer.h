@@ -66,18 +66,4 @@ public:
     Image *createImage(const void *data, int w, int h) override;
 };
 
-class OpenGLNvgDrawer : public NvgDrawer {
-public:
-    OpenGLNvgDrawer();
-    ~OpenGLNvgDrawer() override;
-    void clear() override;
-};
-
-class MetalNvgDrawer : public NvgDrawer {
-public:
-    MetalNvgDrawer(void* layer);
-    ~MetalNvgDrawer() override;
-    void clear() override;
-};
-
 #endif //VOCALTRAINER_NVGOPENGLDRAWER_H

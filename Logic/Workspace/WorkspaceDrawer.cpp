@@ -12,7 +12,6 @@
 #include "TimeUtils.h"
 #include <iostream>
 #include <cmath>
-#include <PlayingPitchSequence.h>
 #include <iomanip>
 
 #include "NvgDrawer.h"
@@ -99,8 +98,8 @@ void WorkspaceDrawer::draw() {
     drawer->translate(0, -PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN);
 
     drawer->translate(PIANO_WIDTH, 0);
-    drawFirstPlayHead();
-    drawSecondPlayHead();
+    //drawFirstPlayHead();
+    //drawSecondPlayHead();
 
     drawer->endFrame();
 

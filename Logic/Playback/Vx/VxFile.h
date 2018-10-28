@@ -29,6 +29,8 @@ class VxFile {
     bool validateLyrics();
     void postInit();
 
+#ifdef USE_BOOST_SERIALIZATION
+
     friend class boost::serialization::access;
 
     template<class Archive>
@@ -46,6 +48,8 @@ class VxFile {
     }
     BOOST_SERIALIZATION_SPLIT_MEMBER()
 
+#endif
+
 public:
     VxFile();
     VxFile(std::vector<VxPitch> &&pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int ticksPerSecond);
@@ -54,8 +58,12 @@ public:
     VxFile(const VxFile& vxFile) = default;
     VxFile& operator=(const VxFile& vxFile) = default;
 
-    VxFile(std::istream& is);
+#ifdef USE_BOOST_SERIALIZATION
     static VxFile fromFilePath(const char* filePath);
+    VxFile(std::istream& is);
+    void writeToStream(std::ostream& os) const;
+#endif
+
     static int startTickNumberKeyProvider(const VxPitch &pitch);
 
     double getDurationInSeconds() const;
@@ -77,7 +85,6 @@ public:
     const VxLyricsLine &getLyricsLine(int lineIndex) const;
     int getLyricsLinesCount() const;
     void addLyricsLine(const VxLyricsLine& line);
-    void writeToStream(std::ostream& os) const;
 
     void shift(int distance);
     VxFile shifted(int distance);

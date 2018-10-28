@@ -16,7 +16,7 @@
 #include "PianoDrawer.h"
 #include "PlaybackBounds.h"
 #include <memory>
-#include <PlayingPitchSequence.h>
+#include "PlayingPitchSequence.h"
 #include <thread>
 
 class WorkspaceDrawer : public WorkspaceController {

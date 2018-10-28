@@ -1,0 +1,654 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		54494E7B2186338500FC7566 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54494E792186338500FC7566 /* Metal.framework */; };
+		54494E7C2186338500FC7566 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54494E7A2186338500FC7566 /* MetalKit.framework */; };
+		C9FFF04304374C463F29C363 /* nanovg_mtl.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF561F8FFF569F672509B /* nanovg_mtl.m */; };
+		C9FFF05869262EFC93F8B191 /* Pitch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE432B26FB7E29C91306 /* Pitch.cpp */; };
+		C9FFF1BDD2FFF5DBE01BF84D /* PlaybackBounds.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF03E73D4CD08CF2958BE /* PlaybackBounds.cpp */; };
+		C9FFF22D74BF60EA0BBB602D /* PianoDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF565A9E8EAC359E0C4AA /* PianoDrawer.cpp */; };
+		C9FFF3C98C8351766F2F332E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF95F864CD671094DC284 /* main.m */; };
+		C9FFF6842D1F70ABC0DB111F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFE99752FC60FB271C3A7 /* Assets.xcassets */; };
+		C9FFF6CAF978C1BEEC47169B /* NvgDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFFE23DAFF6372FF2678F /* NvgDrawer.cpp */; };
+		C9FFF8EBE43B2651D375AD29 /* VxFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF33754750695EC309E13 /* VxFile.cpp */; };
+		C9FFF94667478CBA25DEDA7B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF4DF2640A3B9684E43BF /* ViewController.m */; };
+		C9FFF9C027C9BBE2FEC35272 /* DrawerColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF29932DA64EDCEB179F4 /* DrawerColor.cpp */; };
+		C9FFF9F501DDB29DE650C5B8 /* MetalNvgDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF3554E8D064ABB6D5FE9 /* MetalNvgDrawer.cpp */; };
+		C9FFFAC435D7D9CE0D9D288D /* AudioUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFCA6875FEA999FAC2BD1 /* AudioUtils.cpp */; };
+		C9FFFB0329436DAB527EF834 /* MetalTestUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF468CCA3F3E26478C450 /* MetalTestUITests.m */; };
+		C9FFFB9739D52F82B43F0CF4 /* WorkspaceDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF4269D4B7C9D7E47B866 /* WorkspaceDrawer.cpp */; };
+		C9FFFC60A5F58E35E786FACF /* PitchesCollector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFABB63E897DF1683A052 /* PitchesCollector.cpp */; };
+		C9FFFD1207B75E19F268F2E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF2A921DEC87AFA431913 /* Main.storyboard */; };
+		C9FFFD1C897E53AF18C94339 /* nanovg_mtl_shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF7427780EF7BA88DF649 /* nanovg_mtl_shaders.metal */; };
+		C9FFFDC7B3CAF5C051F1F41F /* nanovg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF3B172595A1576C0D67C /* nanovg.cpp */; };
+		C9FFFE0586286A31EA256F45 /* Drawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF046ADBF05B6BB8AE9F0 /* Drawer.cpp */; };
+		C9FFFE4724CB58523329CFCA /* MetalView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF021077CE0F6B06CA6D2 /* MetalView.mm */; };
+		C9FFFF69B8C4B12A83B75BB5 /* TimeUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF36F73C3B9CB0C94FB7A /* TimeUtils.cpp */; };
+		C9FFFF9DC9DD3BDB79D87281 /* MetalTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFF334653E859C3E5DCCB /* MetalTestTests.m */; };
+		C9FFFFD55CF55629AAE949FB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2D6699B8DB460437789 /* AppDelegate.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C9FFF04F039CFD7AE6112B33 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C9FFFE9B4CD8990F4DC4A2A1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C9FFF7AF7C5687CF8950FED2;
+			remoteInfo = MetalTest;
+		};
+		C9FFFFB53E18A4072FDF5A87 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C9FFFE9B4CD8990F4DC4A2A1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C9FFF7AF7C5687CF8950FED2;
+			remoteInfo = MetalTest;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		54494E792186338500FC7566 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		54494E7A2186338500FC7566 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
+		C9FFF012A9005E32A66D3A23 /* Drawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Drawer.h; path = ../../Logic/Drawers/Drawer.h; sourceTree = "<group>"; };
+		C9FFF021077CE0F6B06CA6D2 /* MetalView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MetalView.mm; sourceTree = "<group>"; };
+		C9FFF03E73D4CD08CF2958BE /* PlaybackBounds.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlaybackBounds.cpp; path = ../../Logic/Playback/Base/PlaybackBounds.cpp; sourceTree = "<group>"; };
+		C9FFF046ADBF05B6BB8AE9F0 /* Drawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Drawer.cpp; path = ../../Logic/Drawers/Drawer.cpp; sourceTree = "<group>"; };
+		C9FFF0C95E8D80482F81DBE4 /* MetalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetalView.h; sourceTree = "<group>"; };
+		C9FFF2618F1E6B8C34B257AE /* PlayingPitchSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayingPitchSequence.h; path = ../../Logic/Playback/Vx/PlayingPitchSequence.h; sourceTree = "<group>"; };
+		C9FFF29932DA64EDCEB179F4 /* DrawerColor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DrawerColor.cpp; path = ../../Logic/Drawers/DrawerColor.cpp; sourceTree = "<group>"; };
+		C9FFF2D6699B8DB460437789 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		C9FFF33754750695EC309E13 /* VxFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VxFile.cpp; path = ../../Logic/Playback/Vx/VxFile.cpp; sourceTree = "<group>"; };
+		C9FFF3554E8D064ABB6D5FE9 /* MetalNvgDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MetalNvgDrawer.cpp; path = ../../Logic/Drawers/MetalNvgDrawer.cpp; sourceTree = "<group>"; };
+		C9FFF36F73C3B9CB0C94FB7A /* TimeUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimeUtils.cpp; path = ../../CppUtils/TimeUtils.cpp; sourceTree = "<group>"; };
+		C9FFF3B172595A1576C0D67C /* nanovg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = nanovg.cpp; path = ../../Logic/nanovg/nanovg.cpp; sourceTree = "<group>"; };
+		C9FFF4269D4B7C9D7E47B866 /* WorkspaceDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WorkspaceDrawer.cpp; path = ../../Logic/Workspace/WorkspaceDrawer.cpp; sourceTree = "<group>"; };
+		C9FFF468CCA3F3E26478C450 /* MetalTestUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MetalTestUITests.m; sourceTree = "<group>"; };
+		C9FFF4DF2640A3B9684E43BF /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		C9FFF561F8FFF569F672509B /* nanovg_mtl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = nanovg_mtl.m; path = ../../Logic/nanovg/metal/nanovg_mtl.m; sourceTree = "<group>"; };
+		C9FFF565A9E8EAC359E0C4AA /* PianoDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PianoDrawer.cpp; path = ../../Logic/Workspace/PianoDrawer.cpp; sourceTree = "<group>"; };
+		C9FFF5D31709814E9092499F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
+		C9FFF6E61A4C3F898B7650E9 /* MetalTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9FFF7427780EF7BA88DF649 /* nanovg_mtl_shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = nanovg_mtl_shaders.metal; path = ../../Logic/nanovg/metal/nanovg_mtl_shaders.metal; sourceTree = "<group>"; };
+		C9FFF775BD21BB85A34C16A1 /* AudioUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioUtils.h; path = ../../Logic/AudioInput/AudioUtils.h; sourceTree = "<group>"; };
+		C9FFF79C0E0023B75C426ECA /* MetalTest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MetalTest.entitlements; sourceTree = "<group>"; };
+		C9FFF7E8BCCF3C85C79CFA58 /* MetalTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MetalTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9FFF7F804CA7BD5F466B13D /* WorkspaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorkspaceController.h; path = ../../Logic/Workspace/WorkspaceController.h; sourceTree = "<group>"; };
+		C9FFF83B0206730100EB75F4 /* NvgDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NvgDrawer.h; path = ../../Logic/Drawers/NvgDrawer.h; sourceTree = "<group>"; };
+		C9FFF88050C99794627D64E3 /* PlaybackBounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlaybackBounds.h; path = ../../Logic/Playback/Base/PlaybackBounds.h; sourceTree = "<group>"; };
+		C9FFF95F864CD671094DC284 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C9FFFA49B319CB490CF6CE58 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		C9FFFA76C846C2A03390589D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
+		C9FFFABB63E897DF1683A052 /* PitchesCollector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PitchesCollector.cpp; path = ../../Logic/AudioInput/PitchesCollector.cpp; sourceTree = "<group>"; };
+		C9FFFABB8C3FCB2E294E0397 /* TimeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimeUtils.h; path = ../../CppUtils/TimeUtils.h; sourceTree = "<group>"; };
+		C9FFFB0D6B0B938775EA8621 /* Pitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Pitch.h; path = ../../Logic/AudioInput/Pitch.h; sourceTree = "<group>"; };
+		C9FFFB22296F899BEAF65A3F /* DrawerColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DrawerColor.h; path = ../../Logic/Drawers/DrawerColor.h; sourceTree = "<group>"; };
+		C9FFFB94EE82DEBB10CC00E2 /* PitchesCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PitchesCollector.h; path = ../../Logic/AudioInput/PitchesCollector.h; sourceTree = "<group>"; };
+		C9FFFC63E686B5E266021BCE /* VxFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VxFile.h; path = ../../Logic/Playback/Vx/VxFile.h; sourceTree = "<group>"; };
+		C9FFFCA6875FEA999FAC2BD1 /* AudioUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AudioUtils.cpp; path = ../../Logic/AudioInput/AudioUtils.cpp; sourceTree = "<group>"; };
+		C9FFFD187B4BE2252990D8F2 /* MetalTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MetalTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9FFFD3E9193305357741947 /* MetalNvgDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MetalNvgDrawer.h; path = ../../Logic/Drawers/MetalNvgDrawer.h; sourceTree = "<group>"; };
+		C9FFFD509A4D09484EFB2D3A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		C9FFFDA83B4338A88A9F7ED6 /* PianoDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PianoDrawer.h; path = ../../Logic/Workspace/PianoDrawer.h; sourceTree = "<group>"; };
+		C9FFFDCC67FB33349E66DEDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
+		C9FFFE432B26FB7E29C91306 /* Pitch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Pitch.cpp; path = ../../Logic/AudioInput/Pitch.cpp; sourceTree = "<group>"; };
+		C9FFFE69578557839B3C486F /* WorkspaceDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorkspaceDrawer.h; path = ../../Logic/Workspace/WorkspaceDrawer.h; sourceTree = "<group>"; };
+		C9FFFE99752FC60FB271C3A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C9FFFF334653E859C3E5DCCB /* MetalTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MetalTestTests.m; sourceTree = "<group>"; };
+		C9FFFFBBC6F991B9F7ACFEE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C9FFFFE23DAFF6372FF2678F /* NvgDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NvgDrawer.cpp; path = ../../Logic/Drawers/NvgDrawer.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C9FFF4DACB65261BBE539D01 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C9FFFE86ACE2A2F2B34B870E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				54494E7B2186338500FC7566 /* Metal.framework in Frameworks */,
+				54494E7C2186338500FC7566 /* MetalKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C9FFFEB510B22A9401500A58 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		54494E782186338500FC7566 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				54494E792186338500FC7566 /* Metal.framework */,
+				54494E7A2186338500FC7566 /* MetalKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C9FFF6A2D5C72D1429A5FD43 /* MetalTest */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFFA76C846C2A03390589D /* Info.plist */,
+				C9FFFE99752FC60FB271C3A7 /* Assets.xcassets */,
+				C9FFF79C0E0023B75C426ECA /* MetalTest.entitlements */,
+				C9FFFD509A4D09484EFB2D3A /* AppDelegate.h */,
+				C9FFF2D6699B8DB460437789 /* AppDelegate.m */,
+				C9FFF95F864CD671094DC284 /* main.m */,
+				C9FFF2A921DEC87AFA431913 /* Main.storyboard */,
+				C9FFFA49B319CB490CF6CE58 /* ViewController.h */,
+				C9FFF4DF2640A3B9684E43BF /* ViewController.m */,
+				C9FFF021077CE0F6B06CA6D2 /* MetalView.mm */,
+				C9FFF0C95E8D80482F81DBE4 /* MetalView.h */,
+				C9FFF046ADBF05B6BB8AE9F0 /* Drawer.cpp */,
+				C9FFF012A9005E32A66D3A23 /* Drawer.h */,
+				C9FFF29932DA64EDCEB179F4 /* DrawerColor.cpp */,
+				C9FFFB22296F899BEAF65A3F /* DrawerColor.h */,
+				C9FFF3554E8D064ABB6D5FE9 /* MetalNvgDrawer.cpp */,
+				C9FFFD3E9193305357741947 /* MetalNvgDrawer.h */,
+				C9FFFFE23DAFF6372FF2678F /* NvgDrawer.cpp */,
+				C9FFF83B0206730100EB75F4 /* NvgDrawer.h */,
+				C9FFF3B172595A1576C0D67C /* nanovg.cpp */,
+				C9FFF561F8FFF569F672509B /* nanovg_mtl.m */,
+				C9FFF7427780EF7BA88DF649 /* nanovg_mtl_shaders.metal */,
+				C9FFF565A9E8EAC359E0C4AA /* PianoDrawer.cpp */,
+				C9FFFDA83B4338A88A9F7ED6 /* PianoDrawer.h */,
+				C9FFF7F804CA7BD5F466B13D /* WorkspaceController.h */,
+				C9FFF4269D4B7C9D7E47B866 /* WorkspaceDrawer.cpp */,
+				C9FFFE69578557839B3C486F /* WorkspaceDrawer.h */,
+				C9FFFE432B26FB7E29C91306 /* Pitch.cpp */,
+				C9FFFB0D6B0B938775EA8621 /* Pitch.h */,
+				C9FFFABB63E897DF1683A052 /* PitchesCollector.cpp */,
+				C9FFFB94EE82DEBB10CC00E2 /* PitchesCollector.h */,
+				C9FFF33754750695EC309E13 /* VxFile.cpp */,
+				C9FFFC63E686B5E266021BCE /* VxFile.h */,
+				C9FFF2618F1E6B8C34B257AE /* PlayingPitchSequence.h */,
+				C9FFF03E73D4CD08CF2958BE /* PlaybackBounds.cpp */,
+				C9FFF88050C99794627D64E3 /* PlaybackBounds.h */,
+				C9FFFCA6875FEA999FAC2BD1 /* AudioUtils.cpp */,
+				C9FFF775BD21BB85A34C16A1 /* AudioUtils.h */,
+				C9FFF36F73C3B9CB0C94FB7A /* TimeUtils.cpp */,
+				C9FFFABB8C3FCB2E294E0397 /* TimeUtils.h */,
+			);
+			path = MetalTest;
+			sourceTree = "<group>";
+		};
+		C9FFF7CEEC41E21BBB157DC7 /* MetalTestTests */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFFDCC67FB33349E66DEDE /* Info.plist */,
+				C9FFFF334653E859C3E5DCCB /* MetalTestTests.m */,
+			);
+			path = MetalTestTests;
+			sourceTree = "<group>";
+		};
+		C9FFF85E65149616457FCF9E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFF6E61A4C3F898B7650E9 /* MetalTest.app */,
+				C9FFFD187B4BE2252990D8F2 /* MetalTestTests.xctest */,
+				C9FFF7E8BCCF3C85C79CFA58 /* MetalTestUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C9FFF8AC4875B02D9965EF34 /* MetalTestUITests */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFF5D31709814E9092499F /* Info.plist */,
+				C9FFF468CCA3F3E26478C450 /* MetalTestUITests.m */,
+			);
+			path = MetalTestUITests;
+			sourceTree = "<group>";
+		};
+		C9FFFA8DE14A70564ED50B30 = {
+			isa = PBXGroup;
+			children = (
+				C9FFF85E65149616457FCF9E /* Products */,
+				C9FFF6A2D5C72D1429A5FD43 /* MetalTest */,
+				C9FFF7CEEC41E21BBB157DC7 /* MetalTestTests */,
+				C9FFF8AC4875B02D9965EF34 /* MetalTestUITests */,
+				54494E782186338500FC7566 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C9FFF21B7F31C2405091AAB4 /* MetalTestUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C9FFFFE9D650F3D533A5E3CE /* Build configuration list for PBXNativeTarget "MetalTestUITests" */;
+			buildPhases = (
+				C9FFF74C2D3C42CAA43CDC87 /* Sources */,
+				C9FFFEB510B22A9401500A58 /* Frameworks */,
+				C9FFFADEFB5B09BCB8934F4A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C9FFF89F05BF88BE6EE6046F /* PBXTargetDependency */,
+			);
+			name = MetalTestUITests;
+			productName = MetalTestUITests;
+			productReference = C9FFF7E8BCCF3C85C79CFA58 /* MetalTestUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		C9FFF7AF7C5687CF8950FED2 /* MetalTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C9FFF678A3CF6AD9A280339D /* Build configuration list for PBXNativeTarget "MetalTest" */;
+			buildPhases = (
+				C9FFFCFAD5EA184A73527002 /* Sources */,
+				C9FFFE86ACE2A2F2B34B870E /* Frameworks */,
+				C9FFFE056CBEBBFF2828B84C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MetalTest;
+			productName = MetalTest;
+			productReference = C9FFF6E61A4C3F898B7650E9 /* MetalTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C9FFF8B7A59282DF6E4EE6F7 /* MetalTestTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C9FFFA112B3C19216C916014 /* Build configuration list for PBXNativeTarget "MetalTestTests" */;
+			buildPhases = (
+				C9FFFB27D33BB4C96C911A6E /* Sources */,
+				C9FFF4DACB65261BBE539D01 /* Frameworks */,
+				C9FFF8379AC9A00E4CF8A089 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C9FFFCB916644A5D05F74DE2 /* PBXTargetDependency */,
+			);
+			name = MetalTestTests;
+			productName = MetalTestTests;
+			productReference = C9FFFD187B4BE2252990D8F2 /* MetalTestTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C9FFFE9B4CD8990F4DC4A2A1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "___FULLUSERNAME___";
+			};
+			buildConfigurationList = C9FFF20BA3725075834EAEFD /* Build configuration list for PBXProject "MetalTest" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C9FFFA8DE14A70564ED50B30;
+			productRefGroup = C9FFF85E65149616457FCF9E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C9FFF7AF7C5687CF8950FED2 /* MetalTest */,
+				C9FFF8B7A59282DF6E4EE6F7 /* MetalTestTests */,
+				C9FFF21B7F31C2405091AAB4 /* MetalTestUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C9FFF8379AC9A00E4CF8A089 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C9FFFADEFB5B09BCB8934F4A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C9FFFE056CBEBBFF2828B84C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9FFF6842D1F70ABC0DB111F /* Assets.xcassets in Resources */,
+				C9FFFD1207B75E19F268F2E9 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C9FFF74C2D3C42CAA43CDC87 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9FFFB0329436DAB527EF834 /* MetalTestUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C9FFFB27D33BB4C96C911A6E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9FFFF9DC9DD3BDB79D87281 /* MetalTestTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C9FFFCFAD5EA184A73527002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9FFFFD55CF55629AAE949FB /* AppDelegate.m in Sources */,
+				C9FFF3C98C8351766F2F332E /* main.m in Sources */,
+				C9FFF94667478CBA25DEDA7B /* ViewController.m in Sources */,
+				C9FFFE4724CB58523329CFCA /* MetalView.mm in Sources */,
+				C9FFFE0586286A31EA256F45 /* Drawer.cpp in Sources */,
+				C9FFF9C027C9BBE2FEC35272 /* DrawerColor.cpp in Sources */,
+				C9FFF9F501DDB29DE650C5B8 /* MetalNvgDrawer.cpp in Sources */,
+				C9FFF6CAF978C1BEEC47169B /* NvgDrawer.cpp in Sources */,
+				C9FFFDC7B3CAF5C051F1F41F /* nanovg.cpp in Sources */,
+				C9FFF04304374C463F29C363 /* nanovg_mtl.m in Sources */,
+				C9FFFD1C897E53AF18C94339 /* nanovg_mtl_shaders.metal in Sources */,
+				C9FFF22D74BF60EA0BBB602D /* PianoDrawer.cpp in Sources */,
+				C9FFFB9739D52F82B43F0CF4 /* WorkspaceDrawer.cpp in Sources */,
+				C9FFF05869262EFC93F8B191 /* Pitch.cpp in Sources */,
+				C9FFFC60A5F58E35E786FACF /* PitchesCollector.cpp in Sources */,
+				C9FFF8EBE43B2651D375AD29 /* VxFile.cpp in Sources */,
+				C9FFF1BDD2FFF5DBE01BF84D /* PlaybackBounds.cpp in Sources */,
+				C9FFFAC435D7D9CE0D9D288D /* AudioUtils.cpp in Sources */,
+				C9FFFF69B8C4B12A83B75BB5 /* TimeUtils.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C9FFF89F05BF88BE6EE6046F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C9FFF7AF7C5687CF8950FED2 /* MetalTest */;
+			targetProxy = C9FFF04F039CFD7AE6112B33 /* PBXContainerItemProxy */;
+		};
+		C9FFFCB916644A5D05F74DE2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C9FFF7AF7C5687CF8950FED2 /* MetalTest */;
+			targetProxy = C9FFFFB53E18A4072FDF5A87 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C9FFF2A921DEC87AFA431913 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C9FFFFBBC6F991B9F7ACFEE0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C9FFF135D4C04FC408EF4E9C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MetalTestUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = neborosoft.MetalTestUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = MetalTest;
+			};
+			name = Debug;
+		};
+		C9FFF4133AA8B1DE0DD415A6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MetalTest.app/Contents/MacOS/MetalTest";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MetalTestTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = neborosoft.MetalTestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Debug;
+		};
+		C9FFF4FBFCFFCE9B4609001A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../include,
+					../CppUtils,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		C9FFF80A20D97A5D6B45ACE1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../include,
+					../CppUtils,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		C9FFF8E6679B3F0785736F5A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MetalTest.app/Contents/MacOS/MetalTest";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MetalTestTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = neborosoft.MetalTestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Release;
+		};
+		C9FFF95668D5B51C828A0DEE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MetalTest/MetalTest.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = (
+					../include,
+					../CppUtils,
+					../include/nanovg,
+				);
+				INFOPLIST_FILE = MetalTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = neborosoft.MetalTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		C9FFFC6816E1F28826652852 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MetalTest/MetalTest.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = (
+					../include,
+					../CppUtils,
+					../include/nanovg,
+				);
+				INFOPLIST_FILE = MetalTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = neborosoft.MetalTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		C9FFFE840909789C76AD2F5F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MetalTestUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = neborosoft.MetalTestUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = MetalTest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C9FFF20BA3725075834EAEFD /* Build configuration list for PBXProject "MetalTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C9FFF80A20D97A5D6B45ACE1 /* Debug */,
+				C9FFF4FBFCFFCE9B4609001A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C9FFF678A3CF6AD9A280339D /* Build configuration list for PBXNativeTarget "MetalTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C9FFF95668D5B51C828A0DEE /* Debug */,
+				C9FFFC6816E1F28826652852 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C9FFFA112B3C19216C916014 /* Build configuration list for PBXNativeTarget "MetalTestTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C9FFF4133AA8B1DE0DD415A6 /* Debug */,
+				C9FFF8E6679B3F0785736F5A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C9FFFFE9D650F3D533A5E3CE /* Build configuration list for PBXNativeTarget "MetalTestUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C9FFF135D4C04FC408EF4E9C /* Debug */,
+				C9FFFE840909789C76AD2F5F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C9FFFE9B4CD8990F4DC4A2A1 /* Project object */;
+}

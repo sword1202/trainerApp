@@ -179,7 +179,8 @@ Drawer::TextDrawStrategy Drawer::getTextDrawStrategy() const {
 }
 
 void Drawer::setTextDrawStrategy(Drawer::TextDrawStrategy textDrawStrategy) {
-    assert(textImagesFactory && "call setTextImagesFactory before setting DRAW_USING_PRE_BUILD_IMAGES");
+    assert((textDrawStrategy != DRAW_USING_PRE_BUILD_IMAGES || textImagesFactory) &&
+    "call setTextImagesFactory before setting DRAW_USING_PRE_BUILD_IMAGES");
     this->textDrawStrategy = textDrawStrategy;
 }
 
@@ -200,7 +201,7 @@ void Drawer::setTextImagesFactory(DrawerTextImagesFactory *textImagesFactory) {
 void Drawer::fillText(const std::string &text, float x, float y) {
     if (textDrawStrategy == DRAW_USING_FONTS) {
         drawTextUsingFonts(text, x, y);
-    } else {
+    } else if(textDrawStrategy == DRAW_USING_PRE_BUILD_IMAGES) {
         drawTextUsingImages(text, x, y);
     }
 }

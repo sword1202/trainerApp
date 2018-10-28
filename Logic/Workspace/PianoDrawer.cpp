@@ -5,7 +5,6 @@
 
 #include "PianoDrawer.h"
 #include "Drawer.h"
-#include "MainController.h"
 
 constexpr float bigPitchHeight = 25.5;
 constexpr float smallPitchHeight = 18.75;
@@ -55,6 +54,7 @@ PianoDrawer::PianoDrawer(Drawer *drawer)
 
 void PianoDrawer::draw(float width, float height, float devicePixelRation) {
     assert(intervalHeight > 0);
+    assert(pitchSequence != nullptr);
 
     drawer->setTextAlign(Drawer::LEFT);
     drawer->setTextBaseline(Drawer::MIDDLE);

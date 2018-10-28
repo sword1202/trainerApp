@@ -6,7 +6,6 @@
 
 #include "config.h"
 #include "VxFile.h"
-#include "WAVFile.h"
 #include "AudioUtils.h"
 #include "StringUtils.h"
 #include "Algorithms.h"
@@ -55,15 +54,6 @@ VxFile::VxFile(const std::vector<VxPitch> &pitches, int distanceInTicksBetweenLa
           distanceInTicksBetweenLastPitchEndAndTrackEnd(distanceInTicksBetweenLastPitchEndAndTrackEnd)
 {
     postInit();
-}
-
-
-VxFile::VxFile(std::istream &is) {
-    boost::archive::text_iarchive ar(is);
-    ar >> *this;
-
-    postInit();
-    BOOST_ASSERT(validateLyrics());
 }
 
 static inline size_t addSilence(std::vector<char>& pcmData, double duration, int sampleRate) {
@@ -140,15 +130,27 @@ int VxFile::getDistanceInTicksBetweenLastPitchEndAndTrackEnd() const {
     return distanceInTicksBetweenLastPitchEndAndTrackEnd;
 }
 
+#ifdef USE_BOOST_SERIALIZATION
+
 void VxFile::writeToStream(std::ostream &os) const {
     boost::archive::text_oarchive ar(os);
     ar << *this;
+}
+
+VxFile::VxFile(std::istream &is) {
+    boost::archive::text_iarchive ar(is);
+    ar >> *this;
+
+    postInit();
+    BOOST_ASSERT(validateLyrics());
 }
 
 VxFile VxFile::fromFilePath(const char *filePath) {
     std::ifstream is(filePath);
     return VxFile(is);
 }
+
+#endif
 
 bool VxFile::validateLyrics() {
     if (lyrics.empty()) {

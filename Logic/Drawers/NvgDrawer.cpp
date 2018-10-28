@@ -31,77 +31,9 @@ public:
     }
 };
 
-#ifdef __APPLE__
-
-#include <nanovg/nanovg_mtl.h>
-
-void MetalNvgDrawer::clear() {
-    mnvgClearWithColor(ctx, nvgRGBA(255, 255, 255, 255));
-}
-
-MetalNvgDrawer::MetalNvgDrawer(void* layer) {
-    ctx = nvgCreateMTL(layer, NVG_ANTIALIAS);
-}
-
-MetalNvgDrawer::~MetalNvgDrawer() {
-    nvgDeleteMTL(ctx);
-}
-
-#endif
-
-
-#ifdef _WIN32
-#define NANOVG_GL3_IMPLEMENTATION
-#include <GLEW/GL/glew.h>
-#endif
-
-#ifdef __APPLE__
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
-#define NANOVG_GL2_IMPLEMENTATION
-#endif
-
-#include <nanovg/nanovg_gl.h>
-#include <nanovg/fontstash.h>
-#include <NotImplementedAssert.h>
-
-OpenGLNvgDrawer::OpenGLNvgDrawer() {
-#ifdef _WIN32
-    GLint GlewInitResult = glewInit();
-    if (GLEW_OK != GlewInitResult) {
-        const GLubyte *er = glewGetErrorString(GlewInitResult);
-        //qDebug() << "ERROR: " << reinterpret_cast<const char *>(er);
-    }
-    ctx = nvgCreateGL3(NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DEBUG);
-
-#endif
-
-#ifdef __APPLE__
-    ctx = nvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DEBUG);
-#endif
-
-    setupBase();
-}
-
-void OpenGLNvgDrawer::clear() {
-    glClearColor(1, 1, 1, 1);
-    glClear(GL_COLOR_BUFFER_BIT);
-}
-
 void NvgDrawer::setupBase() {
     setTextAlign(textAlign);
     setTextBaseline(textBaseline);
-}
-
-OpenGLNvgDrawer::~OpenGLNvgDrawer() {
-
-#ifdef _WIN32
-    nvgDeleteGL3(ctx);
-#endif
-
-#ifdef __APPLE__
-    nvgDeleteGL2(ctx);
-#endif
 }
 
 void NvgDrawer::beginFrame(float width, float height, float devicePixelRatio) {
@@ -194,7 +126,7 @@ void NvgDrawer::quadraticCurveTo(float cpx, float cpy, float x, float y) {
 
 void NvgDrawer::drawTextUsingFonts(const std::string &text, float x, float y) {
 #ifndef NDEBUG
-    if (nvgFindFont(ctx, fontFamily.data()) == FONS_INVALID){
+    if (nvgFindFont(ctx, fontFamily.data()) == -1) {
         throw std::runtime_error("Font " + fontFamily + " was not registered, call drawer->registerFont before fillText call");
     }
 #endif

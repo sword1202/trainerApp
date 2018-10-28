@@ -40,7 +40,8 @@ public:
 
     enum TextDrawStrategy {
         DRAW_USING_FONTS,
-        DRAW_USING_PRE_BUILD_IMAGES
+        DRAW_USING_PRE_BUILD_IMAGES,
+        DONT_DRAW_TEXT
     };
 
     typedef DrawerColor Color;
