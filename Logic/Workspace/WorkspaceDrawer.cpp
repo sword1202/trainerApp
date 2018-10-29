@@ -430,6 +430,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, const std::function<void()>& on
         firstPitchIndex(-1),
         frameTime(0),
         drawer(drawer),
+        vxFile(nullptr),
         playbackBounds(PlaybackBounds()),
         onUpdateRequested(onUpdateRequested) {
     CHECK_IF_RENDER_THREAD;
