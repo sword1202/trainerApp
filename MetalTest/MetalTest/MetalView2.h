@@ -7,5 +7,7 @@
 #import <MetalKit/MetalKit.h>
 
 
-@interface MetalView : MTKView <MTKViewDelegate>
+@interface MetalView2 : MTKView <MTKViewDelegate>
+- (void)resize:(CGSize)size;
+- (instancetype)initWithFrame:(CGRect)frameRect;
 @end

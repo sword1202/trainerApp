@@ -58,7 +58,7 @@ CVReturn renderCallback(CVDisplayLinkRef displayLink,
             NSLog(@"DisplayLink created with error:%d", error2);
         }
 
-        CVDisplayLinkSetOutputCallback(_displayLink, renderCallback, self);
+        CVDisplayLinkSetOutputCallback(_displayLink, renderCallback, (__bridge void*)self);
         CVDisplayLinkStart(_displayLink);
     }
 
@@ -99,7 +99,6 @@ CVReturn renderCallback(CVDisplayLinkRef displayLink,
 
 - (void)dealloc {
     CVDisplayLinkStop(_displayLink);
-    [super dealloc];
 }
 
 @end

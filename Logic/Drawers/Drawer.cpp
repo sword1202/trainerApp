@@ -9,6 +9,8 @@ using namespace std;
 
 void Drawer::roundedRect(float x, float y, float w, float h, float r) {
     assert(r >= 0);
+    assert(w >= 0);
+    assert(h >= 0);
 
     if (w < 2 * r) {
         r = w / 2;

@@ -10,6 +10,8 @@ set(CMAKE_AUTOUIC ON)
 
 set(CMAKE_AUTORCC ON)
 
+add_compile_definitions(USE_BOOST_SERIALIZATION)
+
 include(Qt/CMakeLists.txt)
 list(TRANSFORM qtSources PREPEND Qt/)
 
@@ -30,6 +32,9 @@ find_package(Qt5Svg REQUIRED)
 
 add_executable(VocalTrainer ${sources})
 
+set_property (TARGET VocalTrainer APPEND_STRING PROPERTY
+        COMPILE_FLAGS "-fobjc-arc")
+
 target_link_libraries(VocalTrainer Qt5::Widgets)
 target_link_libraries(VocalTrainer Qt5::QuickWidgets)
 target_link_libraries(VocalTrainer Qt5::Svg)
@@ -42,7 +47,6 @@ if (APPLE)
     target_link_libraries(VocalTrainer "-framework CoreAudio")
     target_link_libraries(VocalTrainer "-framework Metal")
     target_link_libraries(VocalTrainer "-framework MetalKit")
-    target_link_libraries(VocalTrainer "-framework OpenGL")
     target_link_libraries(VocalTrainer "-framework Quartz")
 
     target_link_libraries(VocalTrainer ${CMAKE_SOURCE_DIR}/libs/macos/Release/libaubio.a)

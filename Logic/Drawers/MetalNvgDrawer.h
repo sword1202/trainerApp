@@ -9,7 +9,7 @@
 
 class MetalNvgDrawer : public NvgDrawer {
 public:
-    MetalNvgDrawer(void* layer);
+    explicit MetalNvgDrawer(void* layer);
     ~MetalNvgDrawer() override;
     void clear() override;
 };

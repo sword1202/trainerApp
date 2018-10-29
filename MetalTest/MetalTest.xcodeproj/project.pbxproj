@@ -28,7 +28,7 @@
 		C9FFFD1C897E53AF18C94339 /* nanovg_mtl_shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF7427780EF7BA88DF649 /* nanovg_mtl_shaders.metal */; };
 		C9FFFDC7B3CAF5C051F1F41F /* nanovg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF3B172595A1576C0D67C /* nanovg.cpp */; };
 		C9FFFE0586286A31EA256F45 /* Drawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF046ADBF05B6BB8AE9F0 /* Drawer.cpp */; };
-		C9FFFE4724CB58523329CFCA /* MetalView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF021077CE0F6B06CA6D2 /* MetalView.mm */; };
+		C9FFFE4724CB58523329CFCA /* MetalView2.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF021077CE0F6B06CA6D2 /* MetalView2.mm */; };
 		C9FFFF69B8C4B12A83B75BB5 /* TimeUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF36F73C3B9CB0C94FB7A /* TimeUtils.cpp */; };
 		C9FFFF9DC9DD3BDB79D87281 /* MetalTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFF334653E859C3E5DCCB /* MetalTestTests.m */; };
 		C9FFFFD55CF55629AAE949FB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2D6699B8DB460437789 /* AppDelegate.m */; };
@@ -55,10 +55,10 @@
 		54494E792186338500FC7566 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		54494E7A2186338500FC7566 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
 		C9FFF012A9005E32A66D3A23 /* Drawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Drawer.h; path = ../../Logic/Drawers/Drawer.h; sourceTree = "<group>"; };
-		C9FFF021077CE0F6B06CA6D2 /* MetalView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MetalView.mm; sourceTree = "<group>"; };
+		C9FFF021077CE0F6B06CA6D2 /* MetalView2.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MetalView2.mm; sourceTree = "<group>"; };
 		C9FFF03E73D4CD08CF2958BE /* PlaybackBounds.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlaybackBounds.cpp; path = ../../Logic/Playback/Base/PlaybackBounds.cpp; sourceTree = "<group>"; };
 		C9FFF046ADBF05B6BB8AE9F0 /* Drawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Drawer.cpp; path = ../../Logic/Drawers/Drawer.cpp; sourceTree = "<group>"; };
-		C9FFF0C95E8D80482F81DBE4 /* MetalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetalView.h; sourceTree = "<group>"; };
+		C9FFF0C95E8D80482F81DBE4 /* MetalView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetalView2.h; sourceTree = "<group>"; };
 		C9FFF2618F1E6B8C34B257AE /* PlayingPitchSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayingPitchSequence.h; path = ../../Logic/Playback/Vx/PlayingPitchSequence.h; sourceTree = "<group>"; };
 		C9FFF29932DA64EDCEB179F4 /* DrawerColor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DrawerColor.cpp; path = ../../Logic/Drawers/DrawerColor.cpp; sourceTree = "<group>"; };
 		C9FFF2D6699B8DB460437789 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -151,8 +151,8 @@
 				C9FFF2A921DEC87AFA431913 /* Main.storyboard */,
 				C9FFFA49B319CB490CF6CE58 /* ViewController.h */,
 				C9FFF4DF2640A3B9684E43BF /* ViewController.m */,
-				C9FFF021077CE0F6B06CA6D2 /* MetalView.mm */,
-				C9FFF0C95E8D80482F81DBE4 /* MetalView.h */,
+				C9FFF021077CE0F6B06CA6D2 /* MetalView2.mm */,
+				C9FFF0C95E8D80482F81DBE4 /* MetalView2.h */,
 				C9FFF046ADBF05B6BB8AE9F0 /* Drawer.cpp */,
 				C9FFF012A9005E32A66D3A23 /* Drawer.h */,
 				C9FFF29932DA64EDCEB179F4 /* DrawerColor.cpp */,
@@ -358,7 +358,7 @@
 				C9FFFFD55CF55629AAE949FB /* AppDelegate.m in Sources */,
 				C9FFF3C98C8351766F2F332E /* main.m in Sources */,
 				C9FFF94667478CBA25DEDA7B /* ViewController.m in Sources */,
-				C9FFFE4724CB58523329CFCA /* MetalView.mm in Sources */,
+				C9FFFE4724CB58523329CFCA /* MetalView2.mm in Sources */,
 				C9FFFE0586286A31EA256F45 /* Drawer.cpp in Sources */,
 				C9FFF9C027C9BBE2FEC35272 /* DrawerColor.cpp in Sources */,
 				C9FFF9F501DDB29DE650C5B8 /* MetalNvgDrawer.cpp in Sources */,

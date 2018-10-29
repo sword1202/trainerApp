@@ -3,7 +3,7 @@
 // Copyright (c) 2018 ___FULLUSERNAME___. All rights reserved.
 //
 
-#import "MetalView.h"
+#import "MetalView2.h"
 #include "MetalNvgDrawer.h"
 #include "WorkspaceDrawer.h"
 
@@ -33,7 +33,7 @@ public:
     }
 };
 
-@implementation MetalView {
+@implementation MetalView2 {
     Drawer* _drawer;
     WorkspaceDrawer* _workspaceDrawer;
     CGSize _size;
@@ -42,15 +42,25 @@ public:
 - (instancetype)initWithCoder:(nonnull NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
-        self.delegate = self;
+        self.device = MTLCreateSystemDefaultDevice();
         [self onInit];
     }
 
     return self;
 }
 
+- (instancetype)initWithFrame:(CGRect)frameRect {
+    self = [super initWithFrame:frameRect device:MTLCreateSystemDefaultDevice()];
+    if (self) {
+        [self onInit];
+    }
+
+    return self;
+}
+
+
 - (void)onInit {
-    self.device = MTLCreateSystemDefaultDevice();
+    self.delegate = self;
     _drawer = nullptr;
     _size = self.frame.size;
 }
@@ -75,12 +85,17 @@ public:
 
 - (void)mtkView:(nonnull MTKView *)view drawableSizeWillChange:(CGSize)size {
     [self initDrawerIfNeed:view];
-    _workspaceDrawer->resize(size.width, size.height, 2);
+    _workspaceDrawer->resize(size.width / 2, size.height / 2, 2);
 }
 
 - (void)drawInMTKView:(nonnull MTKView *)view {
     [self initDrawerIfNeed:view];
     _workspaceDrawer->draw();
 }
+
+- (void)resize:(CGSize)size {
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, size.width, size.height);
+}
+
 
 @end

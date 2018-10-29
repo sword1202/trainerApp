@@ -15,7 +15,6 @@ set(qtSources
         QmlVxPitch.cpp
         QmlWorkspaceZoomController.cpp
         qml.qrc
-        Workspace/OpenglWorkspaceWidget.cpp
         WelcomeWindow.cpp
         Workspace/WorkspaceDrawerWidgetSetup.cpp
         QtUtils/qtutils.cpp
@@ -24,9 +23,15 @@ set(qtSources
 
 if (APPLE)
     list(APPEND qtSources
+            QtUtils/qtutils.mm
             MainWindowOsx.mm
             Workspace/Metal/QMetalWidget.mm
             Workspace/Metal/MetalWorkspaceWidget.mm
             Workspace/Metal/MetalView.mm
+            ../MetalTest/MetalTest/MetalView2.mm
+            )
+else()
+    list(APPEND qtSources
+            Workspace/OpenglWorkspaceWidget.cpp
             )
 endif(APPLE)

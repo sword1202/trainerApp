@@ -6,7 +6,7 @@
 #import <QMacNativeWidget>
 #include "MetalViewCallback.h"
 #ifdef __OBJC__
-#import "MetalView.h"
+#import "../MetalTest/MetalTest/MetalView2.h"
 #endif
 
 class QMetalWidget : public QWidget, protected MetalViewCallback
@@ -23,7 +23,7 @@ protected:
     void resizeEvent(QResizeEvent *event) override;
 private:
 #ifdef __OBJC__
-    MetalView* metalView;
+    MetalView2* metalView;
 #else
     void* metalView;
 #endif

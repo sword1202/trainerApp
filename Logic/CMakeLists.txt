@@ -29,7 +29,11 @@ set(logicSources
 
 if (APPLE)
     list(APPEND logicSources
+            Drawers/MetalNvgDrawer.cpp
             nanovg/metal/nanovg_mtl.m
             nanovg/metal/nanovg_mtl_shaders.metal)
+else()
+    list(APPEND logicSources
+            Drawers/OpenGLNvgDrawer.cpp)
 endif(APPLE)
 
