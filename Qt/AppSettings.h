@@ -15,6 +15,11 @@ public:
     void setOutputVolume(float value);
     float getOutputVolume();
     void setInputVolume(float value);
+
+    QStringList getRecordings();
+    void setRecordings(const QStringList &recordings);
+    QStringList getProjects();
+    void setProjects(const QStringList &projects);
 };
 
 #endif // APPSETTINGS_H

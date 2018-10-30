@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>973</width>
     <height>600</height>
    </rect>
   </property>
@@ -44,7 +44,7 @@
       <property name="handleWidth">
        <number>0</number>
       </property>
-      <widget class="QListWidget" name="listWidget">
+      <widget class="QListWidget" name="leftListWidget">
        <property name="maximumSize">
         <size>
          <width>300</width>
@@ -55,18 +55,21 @@
         <font>
          <family>Lato</family>
          <pointsize>13</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
         </font>
        </property>
        <property name="styleSheet">
         <string notr="true">QListWidget {
 	background-color: qlineargradient(spread:pad, x1:1, y1:0.527955, x2:0.006, y2:0, stop:0 rgba(203, 199, 249, 255), stop:1 rgba(192, 209, 255, 255));
-	border: 0px;
+	border: none;
 	spacing: 0px;
-	subcontrol-position: right bottom;
+	padding-top: 42
 }
 
 QListWidget::item {
 	border: 0px;
+	color: rgb(36, 35, 45);
 	padding-left: 35px;
 	padding-top: 15px;
 	padding-bottom: 15px;
@@ -126,19 +129,13 @@ QListView::text {
        </item>
       </widget>
       <widget class="QStackedWidget" name="stackedWidget">
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
        <widget class="QWidget" name="allProjectsPage">
-        <layout class="QVBoxLayout" name="verticalLayout_2">
-         <property name="spacing">
-          <number>0</number>
-         </property>
+        <layout class="QGridLayout" name="allProjectsPageLayout">
          <property name="leftMargin">
-          <number>0</number>
+          <number>8</number>
          </property>
          <property name="topMargin">
-          <number>0</number>
+          <number>29</number>
          </property>
          <property name="rightMargin">
           <number>0</number>
@@ -146,10 +143,103 @@ QListView::text {
          <property name="bottomMargin">
           <number>0</number>
          </property>
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="QListWidget" name="allProjectsList">
+           <property name="styleSheet">
+            <string notr="true">QListWidget {
+	border: none;
+}</string>
+           </property>
+           <property name="resizeMode">
+            <enum>QListView::Adjust</enum>
+           </property>
+           <property name="spacing">
+            <number>8</number>
+           </property>
+           <property name="viewMode">
+            <enum>QListView::IconMode</enum>
+           </property>
+          </widget>
+         </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="newProjectPage"/>
-       <widget class="QWidget" name="recordingsPage"/>
+       <widget class="QWidget" name="newProjectPage">
+        <layout class="QGridLayout" name="newProjectPageLayout">
+         <property name="leftMargin">
+          <number>8</number>
+         </property>
+         <property name="topMargin">
+          <number>29</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="QListWidget" name="newProjectList">
+           <property name="styleSheet">
+            <string notr="true">QListWidget {
+	border: none;
+}</string>
+           </property>
+           <property name="resizeMode">
+            <enum>QListView::Adjust</enum>
+           </property>
+           <property name="spacing">
+            <number>8</number>
+           </property>
+           <property name="viewMode">
+            <enum>QListView::IconMode</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="recordingsPage">
+        <layout class="QGridLayout" name="recordingsPageLayout">
+         <property name="leftMargin">
+          <number>8</number>
+         </property>
+         <property name="topMargin">
+          <number>29</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="QListWidget" name="recordingsList">
+           <property name="styleSheet">
+            <string notr="true">QListWidget {
+	border: none;
+}</string>
+           </property>
+           <property name="resizeMode">
+            <enum>QListView::Adjust</enum>
+           </property>
+           <property name="spacing">
+            <number>8</number>
+           </property>
+           <property name="viewMode">
+            <enum>QListView::IconMode</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
       </widget>
      </widget>
     </item>
@@ -161,7 +251,7 @@ QListView::text {
         <height>90</height>
        </size>
       </property>
-      <layout class="QHBoxLayout" name="buttomLayout">
+      <layout class="QHBoxLayout" name="bottomLayout" stretch="0,0,0">
        <property name="leftMargin">
         <number>30</number>
        </property>
@@ -180,6 +270,8 @@ QListView::text {
           <font>
            <family>Lato</family>
            <pointsize>10</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
           </font>
          </property>
          <property name="styleSheet">
@@ -218,6 +310,8 @@ padding: 6px 32px 6px 32px;</string>
           <font>
            <family>Lato</family>
            <pointsize>10</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
           </font>
          </property>
          <property name="styleSheet">
@@ -238,7 +332,7 @@ padding: 6px 32px 6px 32px;</string>
   </widget>
  </widget>
  <tabstops>
-  <tabstop>listWidget</tabstop>
+  <tabstop>leftListWidget</tabstop>
  </tabstops>
  <resources>
   <include location="icons.qrc"/>

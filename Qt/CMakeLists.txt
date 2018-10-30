@@ -9,6 +9,7 @@ set(qtSources
         main.cpp
         MainWindow.cpp
         Player.cpp
+        ProjectItem.cpp
         SelectMicrophoneDialog.cpp
         QmlCppBridge.cpp
         QmlPitch.cpp

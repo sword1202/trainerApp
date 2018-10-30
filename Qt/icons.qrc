@@ -6,5 +6,11 @@
         <file>icons/new_project.svg</file>
         <file>icons/recordings_selected.svg</file>
         <file>icons/recordings.svg</file>
+        <file>icons/new_hover.svg</file>
+        <file>icons/new.svg</file>
+        <file>icons/project_hover.svg</file>
+        <file>icons/project.svg</file>
+        <file>icons/record_hover.svg</file>
+        <file>icons/record.svg</file>
     </qresource>
 </RCC>
