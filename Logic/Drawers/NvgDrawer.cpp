@@ -147,11 +147,10 @@ void NvgDrawer::setTextFontFamily(const char *fontFamily) {
 }
 
 void NvgDrawer::setTextFontSize(float fontSize) {
+    Drawer::setTextFontSize(fontSize);
     if (getTextDrawStrategy() == DRAW_USING_PRE_BUILD_IMAGES) {
-        Drawer::setTextFontSize(fontSize);
         return;
     }
-    assert(fontSize > 0);
     nvgFontSize(ctx, fontSize);
 }
 

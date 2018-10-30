@@ -191,6 +191,7 @@ void Drawer::setTextFontFamily(const char *fontFamily) {
 }
 
 void Drawer::setTextFontSize(float fontSize) {
+    assert(fontSize > 0);
     this->fontSize = fontSize;
 }
 
