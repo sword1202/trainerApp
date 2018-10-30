@@ -31,6 +31,26 @@ public:
     }
 };
 
+#ifdef _WIN32
+#define NANOVG_GL3_IMPLEMENTATION
+#include <GLEW/GL/glew.h>
+#endif
+
+#ifdef __APPLE__
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+#define NANOVG_GL2_IMPLEMENTATION
+#endif
+
+#ifdef __linux__
+#define NANOVG_GL3_IMPLEMENTATION
+#include <GL/glew.h>
+#endif
+
+#include <nanovg/nanovg_gl.h>
+#include <nanovg/fontstash.h>
+#include <NotImplementedAssert.h>
+
 void NvgDrawer::setupBase() {
     setTextAlign(textAlign);
     setTextBaseline(textBaseline);

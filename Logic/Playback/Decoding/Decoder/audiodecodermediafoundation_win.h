@@ -17,7 +17,7 @@ public:
     ~AudioDecoderMediaFoundation();
     void open(std::string &&data);
     void seek(int sampleIdx);
-    int read(int size, SAMPLE *buffer);
+    int read(int samplesCount, SAMPLE *buffer);
     std::vector<std::string> supportedFileExtensions();
 
 private:
@@ -35,11 +35,9 @@ private:
     size_t m_leftoverBufferSize = 0;
     size_t m_leftoverBufferLength = 0;
     int m_leftoverBufferPosition = 0;
-    long long mfDuration = 0;
     bool decoding = true;
     bool seeking = false;
     unsigned int m_BitsPerSample;
-    short destBufferShort[8192];
 };
 
 

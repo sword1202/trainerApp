@@ -48,10 +48,12 @@
 #endif
 #include <stdlib.h>
 
-#ifdef __APPLE__
+#if defined(__APPLE__)
 #define PX_USE_MAC_COREAUDIO
-#else
+#elif defined(_WIN32)
 #define PX_USE_WIN_MME
+#elif defined(__linux__)
+#define PX_USE_LINUX_ALSA
 #endif
 
 #if defined(PX_USE_WIN_MME)

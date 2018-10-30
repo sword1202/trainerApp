@@ -3,6 +3,7 @@
 //
 
 #include "BaseRawPcmAudioDataPlayer.h"
+#include <cstring>
 
 int BaseRawPcmAudioDataPlayer::readNextSamplesBatch(void *intoBuffer, int framesCount,
                                          const AudioPlayer::PlaybackData &playbackData) {

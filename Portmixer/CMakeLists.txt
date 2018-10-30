@@ -15,3 +15,9 @@ if (WIN32)
             px_win_wmme.c
             )
 endif(WIN32)
+
+if (UNIX)
+    list(APPEND portMixerSources
+            px_linux_alsa.c
+            )
+endif(UNIX)

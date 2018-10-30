@@ -4,6 +4,7 @@
 //
 
 #include <algorithm>
+#include <cstring>
 
 #include "WavAudioPlayer.h"
 #include "WAVFile.h"

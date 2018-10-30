@@ -72,10 +72,10 @@ public:
     /** Seek to a sample in the file */
     virtual void seek(int filepos) = 0;
 
-    /** Read a maximum of 'size' samples of audio into buffer.
+    /** Read a maximum `samplesCount` of audio into buffer.
         Samples are always returned as 16-bit integers, with stereo interlacing.
         Returns the number of samples read. */
-    virtual int read(int size, SAMPLE *buffer) = 0;
+    virtual int read(int samplesCount, SAMPLE *buffer) = 0;
 
     /** Get the number of audio samples in the file. This will be a good estimate of the
         number of samples you can get out of read(), though you should not rely on it

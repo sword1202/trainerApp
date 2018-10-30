@@ -3,6 +3,8 @@
 // Copyright (c) 2018 Mac. All rights reserved.
 //
 
+#include <cstring>
+
 #include "RealtimeStreamingAudioPlayer.h"
 #include "NotImplementedAssert.h"
 

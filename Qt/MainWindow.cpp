@@ -96,7 +96,7 @@ MainWindow::MainWindow() :
 	// Scrollbar
     verticalScrollBar = new QScrollBar(IS_APPLE ? nullptr : centralWidget);
 #ifdef __APPLE__
-    workspaceWidgetNativeWrap = workspaceWidget->addSubWidget(verticalScrollBar);
+    virticalScrollBarNativeWrap = workspaceWidget->addSubWidget(verticalScrollBar);
 #endif
 
     setupMenus();
@@ -120,11 +120,10 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
     QWidget::resizeEvent(event);
 
     const int width = event->size().width();
-    const int height = event->size().height();
 
     int scrollBarHeight = workspaceWidget->height() - YARD_STICK_HEIGHT - 2;
 #ifdef __APPLE__
-    workspaceWidgetNativeWrap->setFixedHeight(scrollBarHeight);
+    virticalScrollBarNativeWrap->setFixedHeight(scrollBarHeight);
 #endif
     verticalScrollBar->setFixedHeight(scrollBarHeight);
 
@@ -136,7 +135,7 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
     }
     int x = width - verticalScrollBar->width();
 #ifdef __APPLE__
-    workspaceWidgetNativeWrap->move(x, y);
+    virticalScrollBarNativeWrap->move(x, y);
 #else
     verticalScrollBar->move(x, y);
 #endif
