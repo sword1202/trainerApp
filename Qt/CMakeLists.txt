@@ -28,7 +28,6 @@ if (APPLE)
             Workspace/Metal/QMetalWidget.mm
             Workspace/Metal/MetalWorkspaceWidget.mm
             Workspace/Metal/MetalView.mm
-            ../MetalTest/MetalTest/MetalView2.mm
             )
 else()
     list(APPEND qtSources

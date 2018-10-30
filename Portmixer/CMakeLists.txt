@@ -16,8 +16,8 @@ if (WIN32)
             )
 endif(WIN32)
 
-if (UNIX)
+if (LINUX)
     list(APPEND portMixerSources
             px_linux_alsa.c
             )
-endif(UNIX)
+endif(LINUX)

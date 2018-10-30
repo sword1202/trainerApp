@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.12)
 project(VocalTrainer)
 
+if(UNIX AND NOT APPLE)
+    set(LINUX TRUE)
+endif()
+
 set(CMAKE_CXX_STANDARD 14)
 
 # Instruct CMake to run moc automatically when needed
@@ -77,7 +81,7 @@ if (WIN32)
     target_link_libraries(VocalTrainer general ${CMAKE_SOURCE_DIR}/libs/windows/Release/SoundTouch.lib)
 endif(WIN32)
 
-if (UNIX)
+if (LINUX)
     target_link_libraries(VocalTrainer "GL")
     target_link_libraries(VocalTrainer "SoundTouch")
     target_link_libraries(VocalTrainer "atomic")
@@ -98,7 +102,7 @@ if (UNIX)
     target_link_libraries(VocalTrainer general ${CMAKE_SOURCE_DIR}/libs/linux/Release/libboost_serialization.a)
     target_link_libraries(VocalTrainer general ${CMAKE_SOURCE_DIR}/libs/linux/Release/libportaudio.a)
     target_link_libraries(VocalTrainer general ${CMAKE_SOURCE_DIR}/libs/linux/Release/libGLEW.a)
-endif(UNIX)
+endif(LINUX)
 
 include_directories(
         include

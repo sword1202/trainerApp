@@ -21,7 +21,7 @@ class MainWindow : public BaseMainWindow
 
 #ifdef __APPLE__
     MetalWorkspaceWidget *workspaceWidget;
-    QMacNativeWidget* workspaceWidgetNativeWrap;
+    QMacNativeWidget* virticalScrollBarNativeWrap;
 #else
     QWidget *workspaceWidget;
 #endif

@@ -34,6 +34,6 @@ if (WIN32)
     list(APPEND playbackSources Decoding/Decoder/audiodecodermediafoundation_win.cpp)
 endif(WIN32)
 
-if (UNIX)
+if (LINUX)
     list(APPEND playbackSources Decoding/Decoder/audiodecoderffmpeg.cpp)
-endif(UNIX)
+endif(LINUX)

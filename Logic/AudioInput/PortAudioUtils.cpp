@@ -6,6 +6,7 @@
 #include "PortAudioUtils.h"
 #include <stdexcept>
 #include <cstring>
+#include <string>
 
 void PortAudio::init() {
     PaError err = Pa_Initialize();
@@ -21,7 +22,7 @@ void PortAudio::checkErrors(PaError err) {
     if (err != paNoError) {
         auto error = std::string("PortAudio error: ") + Pa_GetErrorText(err);
         throw std::runtime_error(error);
-}
+    }
 }
 
 std::vector<const PaDeviceInfo*> PortAudio::getInputDevices() {
