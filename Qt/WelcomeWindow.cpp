@@ -35,7 +35,7 @@ WelcomeWindow::WelcomeWindow() :
 
     // Bottom shadow
     QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
-    effect->setBlurRadius(60);
+    effect->setBlurRadius(40);
     effect->setOffset(0, 0);
     effect->setColor(QColor(100, 100, 100, 56));
     ui->bottomWidget->setGraphicsEffect(effect);

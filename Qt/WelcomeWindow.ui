@@ -47,32 +47,35 @@
       <widget class="QListWidget" name="leftListWidget">
        <property name="maximumSize">
         <size>
-         <width>300</width>
+         <width>250</width>
          <height>16777215</height>
         </size>
        </property>
        <property name="font">
         <font>
          <family>Lato</family>
-         <pointsize>13</pointsize>
+         <pointsize>12</pointsize>
          <weight>50</weight>
          <bold>false</bold>
         </font>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
        </property>
        <property name="styleSheet">
         <string notr="true">QListWidget {
 	background-color: qlineargradient(spread:pad, x1:1, y1:0.527955, x2:0.006, y2:0, stop:0 rgba(203, 199, 249, 255), stop:1 rgba(192, 209, 255, 255));
 	border: none;
 	spacing: 0px;
-	padding-top: 42
+	padding-top: 30px;
 }
 
 QListWidget::item {
 	border: 0px;
 	color: rgb(36, 35, 45);
-	padding-left: 35px;
-	padding-top: 15px;
-	padding-bottom: 15px;
+	padding-left: 20px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
 
 QListWidget::item:hover {
@@ -85,7 +88,7 @@ QListWidget::item:selected  {
 }
 
 QListView::text {
-    left: 25px;
+    left: 10px;
 }</string>
        </property>
        <property name="tabKeyNavigation">
@@ -93,9 +96,12 @@ QListView::text {
        </property>
        <property name="iconSize">
         <size>
-         <width>70</width>
-         <height>70</height>
+         <width>50</width>
+         <height>50</height>
         </size>
+       </property>
+       <property name="currentRow">
+        <number>-1</number>
        </property>
        <item>
         <property name="text">
@@ -135,7 +141,7 @@ QListView::text {
           <number>8</number>
          </property>
          <property name="topMargin">
-          <number>29</number>
+          <number>18</number>
          </property>
          <property name="rightMargin">
           <number>0</number>
@@ -148,6 +154,9 @@ QListView::text {
          </property>
          <item row="0" column="0">
           <widget class="QListWidget" name="allProjectsList">
+           <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+           </property>
            <property name="styleSheet">
             <string notr="true">QListWidget {
 	border: none;
@@ -248,7 +257,7 @@ QListView::text {
       <property name="maximumSize">
        <size>
         <width>16777215</width>
-        <height>90</height>
+        <height>70</height>
        </size>
       </property>
       <layout class="QHBoxLayout" name="bottomLayout" stretch="0,0,0">
@@ -263,7 +272,7 @@ QListView::text {
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>30</height>
+           <height>25</height>
           </size>
          </property>
          <property name="font">
@@ -274,11 +283,14 @@ QListView::text {
            <bold>false</bold>
           </font>
          </property>
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
          <property name="styleSheet">
           <string notr="true">border-radius: 4px;
 background-color: rgb(97, 95, 151);
 color: rgb(255, 255, 255);
-padding: 6px 32px 6px 32px;</string>
+padding: 6px 27px 6px 27px;</string>
          </property>
          <property name="text">
           <string>Open existing project</string>
@@ -303,7 +315,7 @@ padding: 6px 32px 6px 32px;</string>
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>30</height>
+           <height>25</height>
           </size>
          </property>
          <property name="font">
@@ -318,7 +330,7 @@ padding: 6px 32px 6px 32px;</string>
           <string notr="true">border-radius: 4px;
 background-color: rgb(97, 95, 151);
 color: rgb(255, 255, 255);
-padding: 6px 32px 6px 32px;</string>
+padding: 6px 27px 6px 27px;</string>
          </property>
          <property name="text">
           <string>Choose</string>

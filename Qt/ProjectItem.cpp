@@ -5,8 +5,8 @@
 #include <QPainter>
 #include <QFileInfo>
 
-constexpr int ICON_HEIGHT = 130;
-constexpr int ICON_WIDTH = 190;
+constexpr int ICON_HEIGHT = 115;
+constexpr int ICON_WIDTH = 168;
 constexpr int NAME_FONT_SIZE = 10;
 
 ProjectItem::ProjectItem(const QString &data, Type type, QWidget *parent) :
