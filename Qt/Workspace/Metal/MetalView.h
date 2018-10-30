@@ -1,16 +1,15 @@
 //
-// Created by Semyon Tikhonenko on 7/2/18.
-// Copyright (c) 2018 Mac. All rights reserved.
+// Created by Semyon Tikhonenko on 10/25/18.
+// Copyright (c) 2018 ___FULLUSERNAME___. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import <AppKit/AppKit.h>
 #import <MetalKit/MetalKit.h>
 #include "MetalViewCallback.h"
 
-@interface MetalView : NSView
-- (instancetype)initWithFrame:(CGRect)frameRect callback:(MetalViewCallback*)callback;
+@interface MetalView : MTKView <MTKViewDelegate>
 - (void)resize:(CGSize)size;
-- (void)render;
+- (instancetype)initWithFrame:(CGRect)frameRect callback:(MetalViewCallback*)callback
+          andDevicePixelRatio:(CGFloat)devicePixelRatio;
 - (CAMetalLayer*)metalLayer;
 @end

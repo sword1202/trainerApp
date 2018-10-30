@@ -1,104 +1,73 @@
 //
-// Created by Semyon Tikhonenko on 7/2/18.
-// Copyright (c) 2018 Mac. All rights reserved.
+// Created by Semyon Tikhonenko on 10/25/18.
+// Copyright (c) 2018 ___FULLUSERNAME___. All rights reserved.
 //
 
 #import "MetalView.h"
-#include "NvgDrawer.h"
-#include <QThread>
-#include <QApplication>
-
-#define LOCK std::lock_guard<std::mutex> _(_sizeMutex)
-
-CVReturn renderCallback(CVDisplayLinkRef displayLink,
-                                      const CVTimeStamp *inNow,
-                                      const CVTimeStamp *inOutputTime,
-                                      CVOptionFlags flagsIn,
-                                      CVOptionFlags *flagsOut,
-                                      void *displayLinkContext)
-{
-    [(__bridge MetalView*)displayLinkContext render];
-    return kCVReturnSuccess;
-}
 
 @implementation MetalView {
     CGSize _size;
-    std::mutex _sizeMutex;
     MetalViewCallback* _callback;
-    bool _sizeChanged;
+    CGFloat _devicePixelRatio;
     bool _initialized;
-
-    CAMetalLayer *_metalLayer;
-    id<MTLDevice> _device;
-    CVDisplayLinkRef _displayLink;
 }
 
-- (instancetype)initWithFrame:(CGRect)frameRect callback:(MetalViewCallback*)callback {
-    self = [super initWithFrame:frameRect];
+- (instancetype)initWithCoder:(nonnull NSCoder *)coder {
+    self = [super initWithCoder:coder];
     if (self) {
-        _sizeChanged = true;
-        _initialized = false;
-        _size = self.frame.size;
-        _callback = callback;
-
-        _metalLayer = [CAMetalLayer new];
-        _device = MTLCreateSystemDefaultDevice();
-        _metalLayer.device = _device;
-        _metalLayer.pixelFormat = MTLPixelFormatBGRA8Unorm;
-        _metalLayer.framebufferOnly = false;
-        _metalLayer.frame = self.layer.frame;
-        [self setLayer:_metalLayer];
-        [self setWantsLayer:YES];
-
-        CGDirectDisplayID   displayID = CGMainDisplayID();
-        CVReturn            error2 = kCVReturnSuccess;
-        error2 = CVDisplayLinkCreateWithCGDisplay(displayID, &_displayLink);
-        if (error2)
-        {
-            NSLog(@"DisplayLink created with error:%d", error2);
-        }
-
-        CVDisplayLinkSetOutputCallback(_displayLink, renderCallback, (__bridge void*)self);
-        CVDisplayLinkStart(_displayLink);
+        self.device = MTLCreateSystemDefaultDevice();
+        [self onInit];
     }
 
     return self;
 }
 
-- (void)render {
+- (instancetype)initWithFrame:(CGRect)frameRect
+                     callback:(MetalViewCallback*)callback
+          andDevicePixelRatio:(CGFloat)devicePixelRatio {
+    self = [super initWithFrame:frameRect device:MTLCreateSystemDefaultDevice()];
+    if (self) {
+        _devicePixelRatio = devicePixelRatio;
+        _callback = callback;
+        [self onInit];
+    }
+
+    return self;
+}
+
+- (CAMetalLayer*)metalLayer {
+    return self.currentDrawable.layer;
+}
+
+- (void)initMetalIfNeed {
     if (!_initialized) {
         _callback->initMetal();
         _initialized = true;
     }
+}
 
-    CGSize size;
-    bool sizeChanged;
-    {
-        LOCK;
-        size  = _size;
-        sizeChanged = _sizeChanged;
-    }
-    if (sizeChanged) {
-        _callback->metalResize((int)size.width, (int)size.height);
-        LOCK;
-        _sizeChanged = false;
-    }
-    _callback->renderMetal((int)size.width, (int)size.height);
+- (void)onInit {
+    self.delegate = self;
+    _size = self.frame.size;
+}
+
+- (void)mtkView:(nonnull MTKView *)view drawableSizeWillChange:(CGSize)size {
+    [self initMetalIfNeed];
+
+    int width = int(round(size.width / _devicePixelRatio));
+    int height = int(round(size.height / _devicePixelRatio));
+    _size = CGSizeMake(width, height);
+    _callback->metalResize(width, height);
+}
+
+- (void)drawInMTKView:(nonnull MTKView *)view {
+    [self initMetalIfNeed];
+    _callback->renderMetal(int(_size.width), int(_size.height));
 }
 
 - (void)resize:(CGSize)size {
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, size.width, size.height);
-    LOCK;
-    _size = size;
-    _sizeChanged = true;
 }
 
-- (CAMetalLayer*)metalLayer {
-    return _metalLayer;
-}
-
-- (void)dealloc {
-    CVDisplayLinkStop(_displayLink);
-}
 
 @end

@@ -9,7 +9,8 @@ QMetalWidget::QMetalWidget(QWidget *parent)
     : QWidget(parent)
 {
     NSView* view = QtUtils::getNSView(this);
-    metalView = [[MetalView2 alloc] initWithFrame:view.frame];
+    metalView = [[MetalView alloc] initWithFrame:view.frame
+                 callback:this andDevicePixelRatio:devicePixelRatioF()];
     [view addSubview:metalView];
 }
 
@@ -17,12 +18,8 @@ void QMetalWidget::resizeEvent(QResizeEvent *event) {
     [metalView resize:event->size().toCGSize()];
 }
 
-QMetalWidget::~QMetalWidget() {
-}
-
 CAMetalLayer *QMetalWidget::getLayer() const {
-    return nil;
-    //return metalView.metalLayer;
+    return metalView.metalLayer;
 }
 
 void QMetalWidget::addSubview(NSView* view) {
@@ -31,7 +28,7 @@ void QMetalWidget::addSubview(NSView* view) {
 }
 
 QMacNativeWidget*  QMetalWidget::addSubWidget(QWidget* widget) {
-    QMacNativeWidget *nativeWidget = new QMacNativeWidget();
+    auto *nativeWidget = new QMacNativeWidget();
     widget->setParent(nativeWidget);
     NSView *nativeWidgetView = QtUtils::getNSView(nativeWidget);
     addSubview(nativeWidgetView);
