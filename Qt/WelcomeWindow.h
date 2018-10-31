@@ -18,9 +18,9 @@ public:
     explicit WelcomeWindow();
     ~WelcomeWindow();
 
+private:
     void addItems(const QStringList &names, ProjectItem::Type type);
 
-private:
     Ui::WelcomeWindow *ui;
 };
 

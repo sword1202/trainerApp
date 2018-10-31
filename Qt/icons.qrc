@@ -12,5 +12,6 @@
         <file>icons/project.svg</file>
         <file>icons/record_hover.svg</file>
         <file>icons/record.svg</file>
+        <file>icons/no_recordings.svg</file>
     </qresource>
 </RCC>
