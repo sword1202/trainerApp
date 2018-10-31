@@ -4,6 +4,7 @@ set(qtSources
         BaseMainWindow.cpp
         Executors.cpp
         Fonts.cpp
+        icons.qrc
         LoadTsf.cpp
         main.cpp
         MainWindow.cpp
@@ -15,7 +16,9 @@ set(qtSources
         QmlVxPitch.cpp
         QmlWorkspaceZoomController.cpp
         qml.qrc
-        WelcomeWindow.cpp
+        Welcome/ProjectItem.cpp
+        Welcome/WelcomeWindow.cpp
+        Welcome/WelcomeWindow.ui
         Workspace/WorkspaceDrawerWidgetSetup.cpp
         QtUtils/qtutils.cpp
         Workspace/TextImagesFactory.cpp
