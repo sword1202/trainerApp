@@ -35,9 +35,9 @@ WelcomeWindow::WelcomeWindow() :
 
     // Bottom shadow
     QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
-    effect->setBlurRadius(40);
+    effect->setBlurRadius(20);
     effect->setOffset(0, 0);
-    effect->setColor(QColor("#615F9722"));
+    effect->setColor(QColor(97, 95, 151, 90));
     ui->bottomWidget->setGraphicsEffect(effect);
 
     // Load projects (temporary use this values)
