@@ -4,7 +4,7 @@
 
 #include "OpenGLNvgDrawer.h"
 
-#ifdef _WIN32
+#if defined(_WIN32) or defined(__linux__)
 #define NANOVG_GL3_IMPLEMENTATION
 #include <GLEW/GL/glew.h>
 #endif
