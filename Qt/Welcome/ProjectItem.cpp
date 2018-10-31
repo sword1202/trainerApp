@@ -8,6 +8,7 @@
 constexpr int ICON_HEIGHT = 115;
 constexpr int ICON_WIDTH = 168;
 constexpr int NAME_FONT_SIZE = 10;
+constexpr int PERCENT_PADDING_SIZE = 5;
 
 ProjectItem::ProjectItem(const QString &data, Type type, QWidget *parent) :
     QToolButton(parent),
@@ -15,17 +16,17 @@ ProjectItem::ProjectItem(const QString &data, Type type, QWidget *parent) :
 {
     // Set icons
     switch (type) {
-    case Project:
-        icon = QIcon("://icons/project.svg");
-        hoverIcon = QIcon("://icons/project_hover.svg");
+    case PROJECT:
+        icon = QIcon("://Resources/Welcome/project.svg");
+        hoverIcon = QIcon("://Resources/Welcome/project_hover.svg");
         break;
-    case Record:
-        icon = QIcon("://icons/record.svg");
-        hoverIcon = QIcon("://icons/record_hover.svg");
+    case RECORD:
+        icon = QIcon("://Resources/Welcome/record.svg");
+        hoverIcon = QIcon("://Resources/Welcome/record_hover.svg");
         break;
-    case NewProject:
-        icon = QIcon("://icons/new.svg");
-        hoverIcon = QIcon("://icons/new_hover.svg");
+    case NEW_PROJECT:
+        icon = QIcon("://Resources/Welcome/new.svg");
+        hoverIcon = QIcon("://Resources/Welcome/new_hover.svg");
         break;
     }
 
@@ -42,10 +43,10 @@ ProjectItem::ProjectItem(const QString &data, Type type, QWidget *parent) :
 
     // Set label
     QFontMetrics metrics(font());
-    if (type != NewProject) {
+    if (type != NEW_PROJECT) {
         // Read data
         QStringList fileData = QFileInfo(data).baseName().split(" – "); // Need to read data from file, temporary parse filename
-        if (type == Record)
+        if (type == RECORD)
             percent = 14; // Need to read percents from file, temporary use this value
 
         setText(metrics.elidedText(fileData.at(0), Qt::ElideRight, ICON_WIDTH)
@@ -85,12 +86,12 @@ void ProjectItem::paintEvent(QPaintEvent *event)
     QToolButton::paintEvent(event);
 
     // Draw percents at centre
-    if (type == Record) {
+    if (type == RECORD) {
         QFontMetrics metrics(font());
         QString percentText = QString::number(percent) + "%";
 
         int x = this->sizeHint().width() / 2 - metrics.width(percentText) / 2;
-        int y = ICON_HEIGHT / 2 + metrics.height() / 2 - 7;
+        int y = ICON_HEIGHT / 2 + metrics.height() / 2 - PERCENT_PADDING_SIZE;
 
         QPainter painter(this);
         painter.setFont(font());

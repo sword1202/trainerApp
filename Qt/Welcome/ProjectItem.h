@@ -7,9 +7,9 @@ class ProjectItem : public QToolButton
 {
 public:
     enum Type {
-        NewProject,
-        Project,
-        Record
+        NEW_PROJECT,
+        PROJECT,
+        RECORD
     };
 
     ProjectItem(const QString &data, Type type, QWidget *parent = nullptr);

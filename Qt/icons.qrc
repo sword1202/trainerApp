@@ -1,17 +1,17 @@
 <RCC>
     <qresource prefix="/">
-        <file>icons/all_projects_selected.svg</file>
-        <file>icons/all_projects.svg</file>
-        <file>icons/new_project_selected.svg</file>
-        <file>icons/new_project.svg</file>
-        <file>icons/recordings_selected.svg</file>
-        <file>icons/recordings.svg</file>
-        <file>icons/new_hover.svg</file>
-        <file>icons/new.svg</file>
-        <file>icons/project_hover.svg</file>
-        <file>icons/project.svg</file>
-        <file>icons/record_hover.svg</file>
-        <file>icons/record.svg</file>
-        <file>icons/no_recordings.svg</file>
+        <file>Resources/Icons/all_projects_selected.svg</file>
+        <file>Resources/Icons/all_projects.svg</file>
+        <file>Resources/Icons/new_project_selected.svg</file>
+        <file>Resources/Icons/new_project.svg</file>
+        <file>Resources/Icons/recordings_selected.svg</file>
+        <file>Resources/Icons/recordings.svg</file>
+        <file>Resources/Welcome/new_hover.svg</file>
+        <file>Resources/Welcome/new.svg</file>
+        <file>Resources/Welcome/no_recordings.svg</file>
+        <file>Resources/Welcome/project_hover.svg</file>
+        <file>Resources/Welcome/project.svg</file>
+        <file>Resources/Welcome/record_hover.svg</file>
+        <file>Resources/Welcome/record.svg</file>
     </qresource>
 </RCC>

@@ -9,7 +9,6 @@ set(qtSources
         main.cpp
         MainWindow.cpp
         Player.cpp
-        ProjectItem.cpp
         SelectMicrophoneDialog.cpp
         QmlCppBridge.cpp
         QmlPitch.cpp
@@ -18,8 +17,9 @@ set(qtSources
         QmlWorkspaceZoomController.cpp
         qml.qrc
         Workspace/OpenglWorkspaceWidget.cpp
-        WelcomeWindow.cpp
-        WelcomeWindow.ui
+        Welcome/ProjectItem.cpp
+        Welcome/WelcomeWindow.cpp
+        Welcome/WelcomeWindow.ui
         Workspace/WorkspaceDrawerWidgetSetup.cpp
         QtUtils/qtutils.cpp
         Workspace/TextImagesFactory.cpp

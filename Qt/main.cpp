@@ -6,7 +6,7 @@
 #include "QmlVxPitch.h"
 #include "QmlTimedPitch.h"
 #include "Player.h"
-#include "WelcomeWindow.h"
+#include "Welcome/WelcomeWindow.h"
 
 int main(int argc, char *argv[])
 {

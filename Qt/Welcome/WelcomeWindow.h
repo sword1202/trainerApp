@@ -2,8 +2,9 @@
 #define WELCOMEWINDOW_H
 
 #include <QListWidget>
+#include <QGridLayout>
 
-#include "BaseMainWindow.h"
+#include "../BaseMainWindow.h"
 #include "ProjectItem.h"
 
 namespace Ui {
@@ -20,6 +21,7 @@ public:
 
 private:
     void addItems(const QStringList &names, ProjectItem::Type type);
+    void showNoItemsInfo(QListWidget *widgetList, QGridLayout *layout);
 
     Ui::WelcomeWindow *ui;
 };

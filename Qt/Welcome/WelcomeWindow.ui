@@ -101,16 +101,16 @@ QListView::text {
         </size>
        </property>
        <property name="currentRow">
-        <number>-1</number>
+        <number>0</number>
        </property>
        <item>
         <property name="text">
          <string>All Projects</string>
         </property>
         <property name="icon">
-         <iconset resource="icons.qrc">
-          <normaloff>:/icons/all_projects.svg</normaloff>
-          <selectedoff>:/icons/all_projects_selected.svg</selectedoff>:/icons/all_projects.svg</iconset>
+         <iconset resource="../icons.qrc">
+          <normaloff>:/Resources/Icons/all_projects.svg</normaloff>
+          <selectedoff>:/Resources/Icons/all_projects_selected.svg</selectedoff>:/Resources/Icons/all_projects.svg</iconset>
         </property>
        </item>
        <item>
@@ -118,9 +118,9 @@ QListView::text {
          <string>New Project</string>
         </property>
         <property name="icon">
-         <iconset resource="icons.qrc">
-          <normaloff>:/icons/new_project.svg</normaloff>
-          <selectedoff>:/icons/new_project_selected.svg</selectedoff>:/icons/new_project.svg</iconset>
+         <iconset resource="../icons.qrc">
+          <normaloff>:/Resources/Icons/new_project.svg</normaloff>
+          <selectedoff>:/Resources/Icons/new_project_selected.svg</selectedoff>:/Resources/Icons/new_project.svg</iconset>
         </property>
        </item>
        <item>
@@ -128,9 +128,9 @@ QListView::text {
          <string>Recordings</string>
         </property>
         <property name="icon">
-         <iconset resource="icons.qrc">
-          <normaloff>:/icons/recordings.svg</normaloff>
-          <selectedoff>:/icons/recordings_selected.svg</selectedoff>:/icons/recordings.svg</iconset>
+         <iconset resource="../icons.qrc">
+          <normaloff>:/Resources/Icons/recordings.svg</normaloff>
+          <selectedoff>:/Resources/Icons/recordings_selected.svg</selectedoff>:/Resources/Icons/recordings.svg</iconset>
         </property>
        </item>
       </widget>
@@ -181,7 +181,7 @@ QListView::text {
           <number>8</number>
          </property>
          <property name="topMargin">
-          <number>29</number>
+          <number>18</number>
          </property>
          <property name="rightMargin">
           <number>0</number>
@@ -218,7 +218,7 @@ QListView::text {
           <number>8</number>
          </property>
          <property name="topMargin">
-          <number>29</number>
+          <number>18</number>
          </property>
          <property name="rightMargin">
           <number>0</number>
@@ -326,6 +326,9 @@ padding: 6px 27px 6px 27px;</string>
            <bold>false</bold>
           </font>
          </property>
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
          <property name="styleSheet">
           <string notr="true">border-radius: 4px;
 background-color: rgb(97, 95, 151);
@@ -347,7 +350,7 @@ padding: 6px 27px 6px 27px;</string>
   <tabstop>leftListWidget</tabstop>
  </tabstops>
  <resources>
-  <include location="icons.qrc"/>
+  <include location="../icons.qrc"/>
  </resources>
  <connections/>
 </ui>
