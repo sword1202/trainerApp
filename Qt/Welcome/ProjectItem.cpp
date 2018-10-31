@@ -17,16 +17,16 @@ ProjectItem::ProjectItem(const QString &data, Type type, QWidget *parent) :
     // Set icons
     switch (type) {
     case PROJECT:
-        icon = QIcon("://Resources/Welcome/project.svg");
-        hoverIcon = QIcon("://Resources/Welcome/project_hover.svg");
+        icon.addFile("://Resources/Welcome/project.svg");
+        hoverIcon.addFile("://Resources/Welcome/project_hover.svg");
         break;
     case RECORD:
-        icon = QIcon("://Resources/Welcome/record.svg");
-        hoverIcon = QIcon("://Resources/Welcome/record_hover.svg");
+        icon.addFile("://Resources/Welcome/record.svg");
+        hoverIcon.addFile("://Resources/Welcome/record_hover.svg");
         break;
     case NEW_PROJECT:
-        icon = QIcon("://Resources/Welcome/new.svg");
-        hoverIcon = QIcon("://Resources/Welcome/new_hover.svg");
+        icon.addFile("://Resources/Welcome/new.svg");
+        hoverIcon.addFile("://Resources/Welcome/new_hover.svg");
         break;
     }
 
