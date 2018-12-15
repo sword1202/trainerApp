@@ -16,7 +16,6 @@ set(qtSources
         qml.qrc
         Welcome/ProjectItemWidget.cpp
         Welcome/WelcomeWindow.cpp
-        Welcome/WelcomeWindow.ui
         Workspace/WorkspaceDrawerWidgetSetup.cpp
         Utils/QtUtils.cpp
         Workspace/TextImagesFactory.cpp

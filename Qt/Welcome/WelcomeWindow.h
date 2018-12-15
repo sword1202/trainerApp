@@ -14,16 +14,8 @@ class WelcomeWindow;
 class WelcomeWindow : public BaseMainWindow
 {
     Q_OBJECT
-
 public:
-    explicit WelcomeWindow();
-    ~WelcomeWindow();
-
-private:
-    void addItems(const QStringList &names, ProjectItem::Type type);
-    void showNoItemsInfo(QListWidget *widgetList, QGridLayout *layout);
-
-    Ui::WelcomeWindow *ui;
+    WelcomeWindow();
 };
 
 #endif // WELCOMEWINDOW_H
