@@ -15,7 +15,7 @@
 #include "Workspace/OpenglWorkspaceWidget.h"
 #endif
 
-class MainWindow : public BaseMainWindow
+class ProjectWindow : public BaseMainWindow
 {
     Q_OBJECT
 
@@ -33,7 +33,7 @@ class MainWindow : public BaseMainWindow
 protected:
     void resizeEvent(QResizeEvent *event) override;
 public:
-    MainWindow();
+    ProjectWindow();
     void setupMenus();
     Q_INVOKABLE void setBoundsSelectionEnabled(bool enabled);
     Q_INVOKABLE void onInputVolumeChanged(float value);

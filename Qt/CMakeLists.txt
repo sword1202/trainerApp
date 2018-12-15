@@ -7,7 +7,7 @@ set(qtSources
         icons.qrc
         LoadTsf.cpp
         main.cpp
-        MainWindow.cpp
+        ProjectWindow.cpp
         QtBridge/QtMvxPlayer.cpp
         SelectMicrophoneDialog.cpp
         QtBridge/QtCppBridge.cpp
@@ -25,7 +25,7 @@ set(qtSources
 if (APPLE)
     list(APPEND qtSources
             Utils/QtUtils.mm
-            MainWindowOsx.mm
+            BaseMainWindowMacOS.mm
             Workspace/Metal/QMetalWidget.mm
             Workspace/Metal/MetalWorkspaceWidget.mm
             Workspace/Metal/MetalView.mm

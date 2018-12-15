@@ -10,7 +10,7 @@ class BaseMainWindow : public QMainWindow
 {
     Q_OBJECT
 #ifdef __APPLE__
-    void doMacOsPlatformStaff(QColor windowBorderColor);
+    void setWindowBorderColor(QColor windowBorderColor);
 #endif
 protected:
     QtCppBridge *cpp;

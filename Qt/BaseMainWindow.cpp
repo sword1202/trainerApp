@@ -8,7 +8,7 @@ constexpr double MINIMUM_WINDOW_HEIGHT_RATIO = 0.6;
 
 BaseMainWindow::BaseMainWindow(QColor windowBorderColor) {
 #ifdef __APPLE__
-    doMacOsPlatformStaff(windowBorderColor);
+    setWindowBorderColor(windowBorderColor);
 #endif
 
     cpp = new QtCppBridge(this);

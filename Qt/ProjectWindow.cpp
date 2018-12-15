@@ -1,4 +1,4 @@
-#include "MainWindow.h"
+#include "ProjectWindow.h"
 
 #include <QOpenGLWidget>
 #include <QHBoxLayout>
@@ -39,7 +39,7 @@ using namespace CppUtils;
 using std::cout;
 using std::endl;
 
-MainWindow::MainWindow() :
+ProjectWindow::ProjectWindow() :
         BaseMainWindow(QColor::fromRgb(197, 206, 248))
 {
     QWidget *centralWidget = new QWidget;
@@ -102,21 +102,21 @@ MainWindow::MainWindow() :
     setupMenus();
 }
 
-void MainWindow::onOutputVolumeChanged(float value) {
+void ProjectWindow::onOutputVolumeChanged(float value) {
     AppSettings settings;
     settings.setOutputVolume(value);
     AudioInputManager *audioInputManager = MainController::instance()->getAudioInputManager();
     audioInputManager->setOutputVolume(value);
 }
 
-void MainWindow::onInputVolumeChanged(float value) {
+void ProjectWindow::onInputVolumeChanged(float value) {
     AppSettings settings;
     settings.setInputVolume(value);
     AudioInputManager *audioInputManager = MainController::instance()->getAudioInputManager();
     audioInputManager->setInputVolume(value);
 }
 
-void MainWindow::resizeEvent(QResizeEvent *event) {
+void ProjectWindow::resizeEvent(QResizeEvent *event) {
     QWidget::resizeEvent(event);
 
     const int width = event->size().width();
@@ -141,18 +141,18 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
 #endif
 }
 
-void MainWindow::setupMenus() {
+void ProjectWindow::setupMenus() {
     QMenu* fileMenu = menuBar()->addMenu("File");
     QAction* openAction = fileMenu->addAction("Open...");
     openAction->setShortcut(QKeySequence::Open);
-    connect(openAction, &QAction::triggered, this, &MainWindow::onFileOpen);
+    connect(openAction, &QAction::triggered, this, &ProjectWindow::onFileOpen);
 
     QMenu* editMenu = menuBar()->addMenu("Edit");
     QAction* microphoneAction = editMenu->addAction("Select Microphone");
-    connect(microphoneAction, &QAction::triggered, this, &MainWindow::onSelectMicrophone);
+    connect(microphoneAction, &QAction::triggered, this, &ProjectWindow::onSelectMicrophone);
 }
 
-void MainWindow::onFileOpen() {
+void ProjectWindow::onFileOpen() {
     QString fileName = QFileDialog::getOpenFileName(
             this, "Select .mvx file for signing", "", "Mvx files(*.mvx);; All files(*)");
 
@@ -162,14 +162,14 @@ void MainWindow::onFileOpen() {
     }
 }
 
-void MainWindow::onSelectMicrophone() {
+void ProjectWindow::onSelectMicrophone() {
     (new SelectMicrophoneDialog(this, cpp))->show();
 }
 
-void MainWindow::setBoundsSelectionEnabled(bool enabled) {
+void ProjectWindow::setBoundsSelectionEnabled(bool enabled) {
     MainController::instance()->getPlaybackBoundsSelectionController()->setBoundsSelectionEnabled(enabled);
 }
 
-void MainWindow::setShowLyrics(bool value) {
+void ProjectWindow::setShowLyrics(bool value) {
     lyricsWidget->setVisible(value);
 }

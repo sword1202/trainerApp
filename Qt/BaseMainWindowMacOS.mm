@@ -1,10 +1,10 @@
-#include "MainWindow.h"
+#include "ProjectWindow.h"
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 #include "BaseMainWindow.h"
 #include "Utils/QtUtils.h"
 
-void BaseMainWindow::doMacOsPlatformStaff(QColor windowBorderColor) {
+void BaseMainWindow::setWindowBorderColor(QColor windowBorderColor) {
     NSView* view = QtUtils::getNSView(this);
     NSWindow* window = view.window;
     window.backgroundColor = [NSColor colorWithRed:windowBorderColor.redF()
