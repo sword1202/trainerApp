@@ -1,7 +1,7 @@
 #include "VxApp.h"
 #include "PortAudioUtils.h"
 #include "QtBridge/QtCppBridge.h"
-#include "Fonts.h"
+#include "App/Fonts.h"
 #include <QQmlContext>
 #include <iostream>
 #include <QThread>

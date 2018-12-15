@@ -1,7 +1,7 @@
 ﻿#include <QApplication>
 #include <QFontDatabase>
 
-#include "VxApp.h"
+#include "App/VxApp.h"
 #include "QtBridge/QtPitch.h"
 #include "QtBridge/QtMvxPlayer.h"
 #include "Welcome/WelcomeWindow.h"

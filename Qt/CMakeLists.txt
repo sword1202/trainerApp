@@ -1,15 +1,15 @@
 set(qtSources
-        VxApp.cpp
-        AppSettings.cpp
-        BaseMainWindow.cpp
-        Executors.cpp
-        Fonts.cpp
+        App/VxApp.cpp
+        App/AppSettings.cpp
+        Utils/BaseMainWindow.cpp
+        App/Executors.cpp
+        App/Fonts.cpp
         icons.qrc
-        LoadTsf.cpp
+        App/LoadTsf.cpp
         main.cpp
-        ProjectWindow.cpp
+        Project/ProjectWindow.cpp
         QtBridge/QtMvxPlayer.cpp
-        SelectMicrophoneDialog.cpp
+        Project/SelectMicrophoneDialog.cpp
         QtBridge/QtCppBridge.cpp
         QtBridge/QtPitch.cpp
         QtBridge/QtWorkspaceZoomController.cpp
@@ -25,7 +25,7 @@ set(qtSources
 if (APPLE)
     list(APPEND qtSources
             Utils/QtUtils.mm
-            BaseMainWindowMacOS.mm
+            Utils/BaseMainWindowMacOS.mm
             Workspace/Metal/QMetalWidget.mm
             Workspace/Metal/MetalWorkspaceWidget.mm
             Workspace/Metal/MetalView.mm

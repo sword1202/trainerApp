@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "BaseMainWindow.h"
+#include "Utils/BaseMainWindow.h"
 #include <QOpenGLWidget>
 #include <QQuickWidget>
 #include <QSvgWidget>

@@ -1,7 +1,7 @@
-#include "ProjectWindow.h"
+#include "Project/ProjectWindow.h"
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
-#include "BaseMainWindow.h"
+#include "Utils/BaseMainWindow.h"
 #include "Utils/QtUtils.h"
 
 void BaseMainWindow::setWindowBorderColor(QColor windowBorderColor) {

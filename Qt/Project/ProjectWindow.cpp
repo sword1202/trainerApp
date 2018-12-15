@@ -13,12 +13,12 @@
 #include <QPushButton>
 
 #include "QtBridge/QtCppBridge.h"
-#include "VxApp.h"
+#include "App/VxApp.h"
 #include "PlaybackBounds.h"
 #include "Algorithms.h"
 #include "PortAudioUtils.h"
 #include "SelectMicrophoneDialog.h"
-#include "AppSettings.h"
+#include "App/AppSettings.h"
 #include <QScrollBar>
 
 constexpr int YARD_STICK_HEIGHT = static_cast<int>(WorkspaceDrawer::YARD_STICK_HEIGHT);

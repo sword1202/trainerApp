@@ -6,7 +6,7 @@
 #include <QLabel>
 
 #include "ui_WelcomeWindow.h"
-#include "../AppSettings.h"
+#include "App/AppSettings.h"
 
 constexpr double WINDOW_SIZE_RATIO = 0.8;
 

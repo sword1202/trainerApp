@@ -4,7 +4,7 @@
 #include <QListWidget>
 #include <QGridLayout>
 
-#include "../BaseMainWindow.h"
+#include "Utils/BaseMainWindow.h"
 #include "ProjectItem.h"
 
 namespace Ui {

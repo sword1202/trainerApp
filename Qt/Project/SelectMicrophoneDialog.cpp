@@ -10,8 +10,8 @@
 #include "PortAudioUtils.h"
 #include "Algorithms.h"
 #include "PortAudioInputReader.h"
-#include "AppSettings.h"
-#include "VxApp.h"
+#include "App/AppSettings.h"
+#include "App/VxApp.h"
 #include "AudioAverageInputLevelMonitor.h"
 #include "Executors.h"
 
