@@ -12,8 +12,6 @@ set(qtSources
         SelectMicrophoneDialog.cpp
         QtCppBridge.cpp
         QmlPitch.cpp
-        QmlTimedPitch.cpp
-        QmlVxPitch.cpp
         QmlWorkspaceZoomController.cpp
         qml.qrc
         Welcome/ProjectItem.cpp

@@ -3,8 +3,6 @@
 
 #include "VxApp.h"
 #include "QmlPitch.h"
-#include "QmlVxPitch.h"
-#include "QmlTimedPitch.h"
 #include "QtMvxPlayer.h"
 #include "Welcome/WelcomeWindow.h"
 
@@ -21,8 +19,6 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName("Vocal Trainer");
 
     qRegisterMetaType<QmlPitch>("Pitch");
-    qRegisterMetaType<QmlVxPitch>("VxPitch");
-    qRegisterMetaType<QmlTimedPitch>("TimedPitch");
     qmlRegisterType<QtMvxPlayer>();
 
     VxApp a(argc, argv);
