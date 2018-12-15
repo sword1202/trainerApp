@@ -14,12 +14,14 @@ set(qtSources
         QtBridge/QtPitch.cpp
         QtBridge/QtWorkspaceZoomController.cpp
         qml.qrc
-        Welcome/ProjectItem.cpp
+        Welcome/ProjectItemWidget.cpp
         Welcome/WelcomeWindow.cpp
         Welcome/WelcomeWindow.ui
         Workspace/WorkspaceDrawerWidgetSetup.cpp
         Utils/QtUtils.cpp
         Workspace/TextImagesFactory.cpp
+        Utils/BaseQmlWidget.cpp
+        Utils/BaseQmlWidget.h
         )
 
 if (APPLE)

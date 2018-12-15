@@ -5,7 +5,7 @@
 #include <QGridLayout>
 
 #include "Utils/BaseMainWindow.h"
-#include "ProjectItem.h"
+#include "ProjectItemWidget.h"
 
 namespace Ui {
 class WelcomeWindow;

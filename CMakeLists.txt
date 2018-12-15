@@ -28,7 +28,7 @@ list(TRANSFORM portMixerSources PREPEND Portmixer/)
 set(cppUtilsSources
         CppUtils/TimeUtils.cpp)
 
-set(sources ${qtSources} ${logicSources} ${portMixerSources} ${cppUtilsSources} Qt/Utils/BaseQmlWidget.cpp Qt/Utils/BaseQmlWidget.h)
+set(sources ${qtSources} ${logicSources} ${portMixerSources} ${cppUtilsSources})
 
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5QuickWidgets REQUIRED)

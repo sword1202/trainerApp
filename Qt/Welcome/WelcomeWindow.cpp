@@ -49,7 +49,7 @@ WelcomeWindow::WelcomeWindow() :
     if (recrodings.isEmpty())
         showNoItemsInfo(ui->recordingsList, ui->recordingsPageLayout);
     else
-        addItems(recrodings, ProjectItem::RECORD);
+        addItems(recrodings, ProjectItem::RECORDING);
 
     QStringList projects = settings.getProjects();
     if (recrodings.isEmpty())
@@ -76,13 +76,13 @@ void WelcomeWindow::addItems(const QStringList &list, ProjectItem::Type type)
     case ProjectItem::PROJECT:
         widgetList = ui->allProjectsList;
         break;
-    case ProjectItem::RECORD:
+    case ProjectItem::RECORDING:
         widgetList = ui->recordingsList;
         break;
     }
 
     for (const auto &name : list) {
-        auto *projectItem = new ProjectItem(ProjectItem::Data(ProjectItem::RECORD), this);
+        auto *projectItem = new ProjectItemWidget(ProjectItem(ProjectItem::RECORDING), this);
         auto *widgetItem = new QListWidgetItem(widgetList);
         widgetItem->setSizeHint(projectItem->sizeHint());
         widgetList->setItemWidget(widgetItem, projectItem);
