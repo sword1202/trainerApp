@@ -6,17 +6,17 @@
 #include <QQuickView>
 #include "QmlPitch.h"
 #include "QmlWorkspaceZoomController.h"
-#include "Player.h"
+#include "QtMvxPlayer.h"
 #include <QMainWindow>
 
-class QmlCppBridge : public QObject
+class QtCppBridge : public QObject
 {
     Q_OBJECT
 
     QMainWindow* _mainWindow;
 
 public:
-    QmlCppBridge(QMainWindow* mainWindow);
+    QtCppBridge(QMainWindow* mainWindow);
 
     Q_INVOKABLE qreal now();
 
@@ -26,12 +26,12 @@ public:
 
     Q_PROPERTY(QmlWorkspaceZoomController* zoomController READ
             getZoomController() CONSTANT)
-    Q_PROPERTY(Player* player READ getPlayer() CONSTANT)
+    Q_PROPERTY(QtMvxPlayer* player READ getPlayer() CONSTANT)
     Q_PROPERTY(qreal devicePixelRatio READ getDevicePixelRatio() CONSTANT)
     Q_PROPERTY(QMainWindow* mainWindow READ getMainWindow() CONSTANT)
 
     QmlWorkspaceZoomController* getZoomController() const;
-    Player* getPlayer() const;
+    QtMvxPlayer* getPlayer() const;
     qreal getDevicePixelRatio() const;
     QMainWindow* getMainWindow() const;
 

@@ -5,7 +5,7 @@
 #include "QmlPitch.h"
 #include "QmlVxPitch.h"
 #include "QmlTimedPitch.h"
-#include "Player.h"
+#include "QtMvxPlayer.h"
 #include "Welcome/WelcomeWindow.h"
 
 int main(int argc, char *argv[])
@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     qRegisterMetaType<QmlPitch>("Pitch");
     qRegisterMetaType<QmlVxPitch>("VxPitch");
     qRegisterMetaType<QmlTimedPitch>("TimedPitch");
-    qmlRegisterType<Player>();
+    qmlRegisterType<QtMvxPlayer>();
 
     VxApp a(argc, argv);
     a.setAttribute(Qt::AA_DontCreateNativeWidgetSiblings);

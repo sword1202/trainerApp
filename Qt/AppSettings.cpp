@@ -1,3 +1,6 @@
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "cert-err58-cpp"
+
 #include "AppSettings.h"
 
 static const QString MICROPHONE_NAME_KEY = "microphoneDeviceName";
@@ -53,3 +56,5 @@ void AppSettings::setProjects(const QStringList &projects)
 {
     setValue(PROJECTS_LIST_KEY, projects);
 }
+
+#pragma clang diagnostic pop

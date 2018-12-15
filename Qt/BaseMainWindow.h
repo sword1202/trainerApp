@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QObject>
 #include <QQuickWidget>
-#include "QmlCppBridge.h"
+#include "QtCppBridge.h"
 
 class BaseMainWindow : public QMainWindow
 {
@@ -13,7 +13,7 @@ class BaseMainWindow : public QMainWindow
     void doMacOsPlatformStaff(QColor windowBorderColor);
 #endif
 protected:
-    QmlCppBridge *cpp;
+    QtCppBridge *cpp;
 public:
     BaseMainWindow(QColor windowBorderColor);
 

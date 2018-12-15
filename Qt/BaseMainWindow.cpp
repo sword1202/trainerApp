@@ -11,7 +11,7 @@ BaseMainWindow::BaseMainWindow(QColor windowBorderColor) {
     doMacOsPlatformStaff(windowBorderColor);
 #endif
 
-    cpp = new QmlCppBridge(this);
+    cpp = new QtCppBridge(this);
 
     QSize availableSize = QGuiApplication::primaryScreen()->availableSize();
     if (availableSize.width() > MINIMUM_WINDOW_WIDTH)

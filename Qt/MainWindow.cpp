@@ -12,7 +12,7 @@
 #include <QSizePolicy>
 #include <QPushButton>
 
-#include "QmlCppBridge.h"
+#include "QtCppBridge.h"
 #include "VxApp.h"
 #include "PlaybackBounds.h"
 #include "Algorithms.h"

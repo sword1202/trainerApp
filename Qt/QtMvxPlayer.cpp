@@ -1,4 +1,4 @@
-#include "Player.h"
+#include "QtMvxPlayer.h"
 #include <QVariant>
 #include <QJsonObject>
 #include <iostream>
@@ -13,16 +13,16 @@ using namespace CppUtils;
 constexpr char FILE_URL_PREFIX[] = "file://";
 constexpr int FILE_URL_PREFIX_LENGTH = 7;
 
-Player::Player(QObject *parent) : QObject(parent) {
+QtMvxPlayer::QtMvxPlayer(QObject *parent) : QObject(parent) {
 
 }
 
-void Player::onComplete() {
+void QtMvxPlayer::onComplete() {
     MvxPlayer::onComplete();
     emit complete();
 }
 
-void Player::onPlaybackStarted() {
+void QtMvxPlayer::onPlaybackStarted() {
     MvxPlayer::onPlaybackStarted();
     assert(isPlaying());
     emit playStartedTimeChanged();
@@ -30,17 +30,17 @@ void Player::onPlaybackStarted() {
     emit isPlayingChanged(true);
 }
 
-void Player::onPlaybackStopped() {
+void QtMvxPlayer::onPlaybackStopped() {
     MvxPlayer::onPlaybackStopped();
     assert(!isPlaying());
     emit isPlayingChanged(false);
 }
 
-const QString &Player::getSource() const {
+const QString &QtMvxPlayer::getSource() const {
     return source;
 }
 
-void Player::setSource(const QString &source) {
+void QtMvxPlayer::setSource(const QString &source) {
     QString prevSource = this->source;
     if (source == prevSource) {
         return;
@@ -66,11 +66,11 @@ void Player::setSource(const QString &source) {
     emit sourceChanged(source);
 }
 
-void Player::play() {
+void QtMvxPlayer::play() {
     MvxPlayer::play();
 }
 
-void Player::pause() {
+void QtMvxPlayer::pause() {
     if (source.isNull()) {
         return;
     }
@@ -78,16 +78,16 @@ void Player::pause() {
     MvxPlayer::pause();
 }
 
-void Player::stop() {
+void QtMvxPlayer::stop() {
     stopAndMoveSeekToBeginning();
 }
 
-void Player::onSeekChanged(double seek) {
+void QtMvxPlayer::onSeekChanged(double seek) {
     MvxPlayer::onSeekChanged(seek);
     emit seekChanged(seek);
 }
 
-void Player::setQmlBounds(const QJsonValue &bounds) {
+void QtMvxPlayer::setQmlBounds(const QJsonValue &bounds) {
     const PlaybackBounds& prevBounds = getBounds();
     if (bounds.isUndefined()) {
         setBounds(PlaybackBounds());
@@ -99,7 +99,7 @@ void Player::setQmlBounds(const QJsonValue &bounds) {
     }
 }
 
-QJsonValue Player::getQmlBounds() const {
+QJsonValue QtMvxPlayer::getQmlBounds() const {
     const PlaybackBounds &bounds = getBounds();
     if (!bounds) {
         return QJsonValue::Undefined;
@@ -112,32 +112,32 @@ QJsonValue Player::getQmlBounds() const {
     };
 }
 
-bool Player::hasPitchNow(int perfectFrequencyIndex) const {
+bool QtMvxPlayer::hasPitchNow(int perfectFrequencyIndex) const {
     return MvxPlayer::hasPitchNow(Pitch::fromPerfectFrequencyIndex(perfectFrequencyIndex));
 }
 
-bool Player::hasAnyPitchNow() const {
+bool QtMvxPlayer::hasAnyPitchNow() const {
     return MvxPlayer::hasAnyPitchNow();
 }
 
-void Player::setPitchShiftInSemiTones(int value) {
+void QtMvxPlayer::setPitchShiftInSemiTones(int value) {
     MvxPlayer::setPitchShiftInSemiTones(value);
     emit pitchShiftChanged();
 }
 
-bool Player::canBeShifted(int distance) const {
+bool QtMvxPlayer::canBeShifted(int distance) const {
     return MvxPlayer::canBeShifted(distance);
 }
 
-void Player::setMetronomeEnabled(bool metronomeEnabled) {
+void QtMvxPlayer::setMetronomeEnabled(bool metronomeEnabled) {
     MvxPlayer::setMetronomeEnabled(metronomeEnabled);
     emit metronomeEnabledChanged();
 }
 
-void Player::seekToNextTact() {
+void QtMvxPlayer::seekToNextTact() {
     MvxPlayer::seekToNextTact();
 }
 
-void Player::seekToPrevTact() {
+void QtMvxPlayer::seekToPrevTact() {
     MvxPlayer::seekToPrevTact();
 }

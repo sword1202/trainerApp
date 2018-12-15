@@ -8,9 +8,9 @@ set(qtSources
         LoadTsf.cpp
         main.cpp
         MainWindow.cpp
-        Player.cpp
+        QtMvxPlayer.cpp
         SelectMicrophoneDialog.cpp
-        QmlCppBridge.cpp
+        QtCppBridge.cpp
         QmlPitch.cpp
         QmlTimedPitch.cpp
         QmlVxPitch.cpp

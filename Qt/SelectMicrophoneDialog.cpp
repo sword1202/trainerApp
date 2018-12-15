@@ -26,7 +26,7 @@ using std::endl;
 
 using namespace CppUtils;
 
-SelectMicrophoneDialog::SelectMicrophoneDialog(QWidget* parent, QmlCppBridge* cpp) : QDialog(parent) {
+SelectMicrophoneDialog::SelectMicrophoneDialog(QWidget* parent, QtCppBridge* cpp) : QDialog(parent) {
     setFixedSize(DIALOG_WIDTH, DIALOG_HEIGHT);
 
     QQuickWidget* selectMicrophoneDialogView = new QQuickWidget(this);

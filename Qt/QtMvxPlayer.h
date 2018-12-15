@@ -9,12 +9,12 @@
 #include "WavAudioPlayer.h"
 #include "PlaybackBounds.h"
 
-class Player : public QObject, public MvxPlayer
+class QtMvxPlayer : public QObject, public MvxPlayer
 {
     Q_OBJECT
     QString source;
 public:
-    explicit Player(QObject *parent = nullptr);
+    explicit QtMvxPlayer(QObject *parent = nullptr);
 
     const QString &getSource() const;
     void setSource(const QString &source);
