@@ -1,9 +1,9 @@
-#include "QmlWorkspaceZoomController.h"
+#include "QtWorkspaceZoomController.h"
 #include "Executors.h"
 
 using namespace CppUtils;
 
-QmlWorkspaceZoomController::QmlWorkspaceZoomController() {
+QtWorkspaceZoomController::QtWorkspaceZoomController() {
     zoomChangedListeners.addListener([=] (float zoom) {
         emit zoomChanged();
     });
@@ -21,7 +21,7 @@ QmlWorkspaceZoomController::QmlWorkspaceZoomController() {
     });
 }
 
-void QmlWorkspaceZoomController::onWorkspaceWidgetHeightChanged(float height) {
+void QtWorkspaceZoomController::onWorkspaceWidgetHeightChanged(float height) {
     WorkspaceZoomController::onWorkspaceWidgetHeightChanged(height);
     Executors::ExecuteOnMainThread([this] {
         emit pageSizeChanged();

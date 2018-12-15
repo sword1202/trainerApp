@@ -1,6 +1,6 @@
 #include "VxApp.h"
 #include "PortAudioUtils.h"
-#include "QtCppBridge.h"
+#include "QtBridge/QtCppBridge.h"
 #include "Fonts.h"
 #include <QQmlContext>
 #include <iostream>
@@ -19,7 +19,7 @@ public:
 VxApp::VxApp(int &argc, char *argv[]) : QApplication(argc, argv) {
     PortAudio::init();
     auto microphoneName = AppSettings().getMicrophoneDeviceName();
-    MainController::init(new AudioInputManager(microphoneName.data()), new QtMvxPlayer(), new QmlWorkspaceZoomController());
+    MainController::init(new AudioInputManager(microphoneName.data()), new QtMvxPlayer(), new QtWorkspaceZoomController());
     initInstance(this);
 
     connect(this, &VxApp::mainThreadCallbackPosted, this, [] (QObject* object) {

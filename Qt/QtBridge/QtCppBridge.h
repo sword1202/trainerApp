@@ -4,8 +4,8 @@
 #include <QObject>
 #include <QSize>
 #include <QQuickView>
-#include "QmlPitch.h"
-#include "QmlWorkspaceZoomController.h"
+#include "QtPitch.h"
+#include "QtWorkspaceZoomController.h"
 #include "QtMvxPlayer.h"
 #include <QMainWindow>
 
@@ -20,17 +20,17 @@ public:
 
     Q_INVOKABLE qreal now();
 
-    Q_INVOKABLE QmlPitch pitchWithFrequency(float frequency);
-    Q_INVOKABLE QmlPitch pitchFromPerfectFrequencyIndex(int perfectFrequencyIndex);
-    Q_INVOKABLE QmlPitch whitePitch(int whitePitchIndex, int octaveIndex);
+    Q_INVOKABLE QtPitch pitchWithFrequency(float frequency);
+    Q_INVOKABLE QtPitch pitchFromPerfectFrequencyIndex(int perfectFrequencyIndex);
+    Q_INVOKABLE QtPitch whitePitch(int whitePitchIndex, int octaveIndex);
 
-    Q_PROPERTY(QmlWorkspaceZoomController* zoomController READ
+    Q_PROPERTY(QtWorkspaceZoomController* zoomController READ
             getZoomController() CONSTANT)
     Q_PROPERTY(QtMvxPlayer* player READ getPlayer() CONSTANT)
     Q_PROPERTY(qreal devicePixelRatio READ getDevicePixelRatio() CONSTANT)
     Q_PROPERTY(QMainWindow* mainWindow READ getMainWindow() CONSTANT)
 
-    QmlWorkspaceZoomController* getZoomController() const;
+    QtWorkspaceZoomController* getZoomController() const;
     QtMvxPlayer* getPlayer() const;
     qreal getDevicePixelRatio() const;
     QMainWindow* getMainWindow() const;

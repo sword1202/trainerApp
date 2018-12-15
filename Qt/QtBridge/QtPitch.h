@@ -4,7 +4,7 @@
 #include <QObject>
 #include "Pitch.h"
 
-class QmlPitch : public Pitch
+class QtPitch : public Pitch
 {
     Q_GADGET
 public:
@@ -27,11 +27,11 @@ public:
     Q_PROPERTY(float distanceFromLowerBound READ getDistanceFromLowerBound())
 
 public:
-    QmlPitch(int perfectFrequencyIndex);
-    QmlPitch(float frequency);
-    QmlPitch(const Pitch& pitch);
-    QmlPitch(const QmlPitch& pitch) = default;
-    QmlPitch() = default;
+    QtPitch(int perfectFrequencyIndex);
+    QtPitch(float frequency);
+    QtPitch(const Pitch& pitch);
+    QtPitch(const QtPitch& pitch) = default;
+    QtPitch() = default;
 
     QString getNameAsQString() const;
 };

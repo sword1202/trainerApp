@@ -2,8 +2,8 @@
 #include <QFontDatabase>
 
 #include "VxApp.h"
-#include "QmlPitch.h"
-#include "QtMvxPlayer.h"
+#include "QtBridge/QtPitch.h"
+#include "QtBridge/QtMvxPlayer.h"
 #include "Welcome/WelcomeWindow.h"
 
 int main(int argc, char *argv[])
@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationDomain("neborosoft.com");
     QCoreApplication::setApplicationName("Vocal Trainer");
 
-    qRegisterMetaType<QmlPitch>("Pitch");
+    qRegisterMetaType<QtPitch>("Pitch");
     qmlRegisterType<QtMvxPlayer>();
 
     VxApp a(argc, argv);

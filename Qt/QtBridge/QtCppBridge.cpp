@@ -2,7 +2,7 @@
 #include <iostream>
 #include <QScreen>
 #include "TimeUtils.h"
-#include "VxApp.h"
+#include "../VxApp.h"
 
 using namespace CppUtils;
 
@@ -14,21 +14,21 @@ qreal QtCppBridge::now() {
     return TimeUtils::NowInSeconds();
 }
 
-QmlPitch QtCppBridge::pitchWithFrequency(float frequency) {
-    return QmlPitch(frequency);
+QtPitch QtCppBridge::pitchWithFrequency(float frequency) {
+    return QtPitch(frequency);
 }
 
-QmlPitch QtCppBridge::pitchFromPerfectFrequencyIndex(int perfectFrequencyIndex) {
-    return QmlPitch(perfectFrequencyIndex);
+QtPitch QtCppBridge::pitchFromPerfectFrequencyIndex(int perfectFrequencyIndex) {
+    return QtPitch(perfectFrequencyIndex);
 }
 
 
-QmlPitch QtCppBridge::whitePitch(int whitePitchIndex, int octaveIndex) {
-    return QmlPitch(Pitch::whitePitchPerfectFrequencyIndex(whitePitchIndex, octaveIndex));
+QtPitch QtCppBridge::whitePitch(int whitePitchIndex, int octaveIndex) {
+    return QtPitch(Pitch::whitePitchPerfectFrequencyIndex(whitePitchIndex, octaveIndex));
 }
 
-QmlWorkspaceZoomController *QtCppBridge::getZoomController() const {
-    return static_cast<QmlWorkspaceZoomController*>(VxApp::instance()->getZoomController());
+QtWorkspaceZoomController *QtCppBridge::getZoomController() const {
+    return static_cast<QtWorkspaceZoomController*>(VxApp::instance()->getZoomController());
 }
 
 QtMvxPlayer *QtCppBridge::getPlayer() const {

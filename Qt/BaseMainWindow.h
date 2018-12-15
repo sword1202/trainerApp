@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QObject>
 #include <QQuickWidget>
-#include "QtCppBridge.h"
+#include "QtBridge/QtCppBridge.h"
 
 class BaseMainWindow : public QMainWindow
 {

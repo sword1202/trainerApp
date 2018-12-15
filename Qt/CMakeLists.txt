@@ -8,11 +8,11 @@ set(qtSources
         LoadTsf.cpp
         main.cpp
         MainWindow.cpp
-        QtMvxPlayer.cpp
+        QtBridge/QtMvxPlayer.cpp
         SelectMicrophoneDialog.cpp
-        QtCppBridge.cpp
-        QmlPitch.cpp
-        QmlWorkspaceZoomController.cpp
+        QtBridge/QtCppBridge.cpp
+        QtBridge/QtPitch.cpp
+        QtBridge/QtWorkspaceZoomController.cpp
         qml.qrc
         Welcome/ProjectItem.cpp
         Welcome/WelcomeWindow.cpp

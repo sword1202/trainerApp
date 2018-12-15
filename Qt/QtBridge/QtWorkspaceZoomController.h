@@ -2,10 +2,10 @@
 #define ZOOM_CONTROLLER_H
 
 #include <QObject>
-#include "QmlPitch.h"
+#include "QtPitch.h"
 #include "WorkspaceZoomController.h"
 
-class QmlWorkspaceZoomController : public QObject, public WorkspaceZoomController
+class QtWorkspaceZoomController : public QObject, public WorkspaceZoomController
 {
     Q_OBJECT
 
@@ -18,11 +18,11 @@ public:
     Q_PROPERTY(qreal pageSize READ getPageSize() NOTIFY pageSizeChanged())
     Q_PROPERTY(qreal verticalScrollPosition READ getVerticalScrollPosition() WRITE
             setVerticalScrollPosition() NOTIFY verticalScrollPositionChanged())
-    Q_PROPERTY(QmlPitch firstPitch READ getFirstPitch() NOTIFY firstPitchChanged())
+    Q_PROPERTY(QtPitch firstPitch READ getFirstPitch() NOTIFY firstPitchChanged())
 
     void onWorkspaceWidgetHeightChanged(float height) override;
 
-    QmlWorkspaceZoomController();
+    QtWorkspaceZoomController();
 signals:
     void zoomChanged();
     void firstPitchChanged();

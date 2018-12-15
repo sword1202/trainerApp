@@ -2,7 +2,7 @@
 #define SELECTMICROPHONEDIALOG_H
 
 #include <QDialog>
-#include "QtCppBridge.h"
+#include "QtBridge/QtCppBridge.h"
 #include "AudioInputReader.h"
 
 class SelectMicrophoneDialog : public QDialog

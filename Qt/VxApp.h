@@ -5,7 +5,7 @@
 
 #include <QQmlApplicationEngine>
 #include "MainController.h"
-#include "QtMvxPlayer.h"
+#include "QtBridge/QtMvxPlayer.h"
 
 class VxApp : public QApplication, public MainController
 {
