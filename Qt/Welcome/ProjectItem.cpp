@@ -91,7 +91,7 @@ void ProjectItem::paintEvent(QPaintEvent *event)
         QString percentText = QString::number(percent) + "%";
 
         int x = this->sizeHint().width() / 2 - metrics.width(percentText) / 2;
-        int y = ICON_HEIGHT / 2 + metrics.height() / 2 - PERCENT_PADDING_SIZE;
+        int y = ICON_HEIGHT / 2 + metrics.height() / 2 - PERCENT_PADDING_SIZE / devicePixelRatio();
 
         QPainter painter(this);
         painter.setFont(font());
