@@ -1,7 +1,7 @@
 #include "QMetalWidget.h"
 #include <QResizeEvent>
 #include <QMacNativeWidget>
-#include "../../QtUtils/qtutils.h"
+#include "Utils/QtUtils.h"
 
 #define LOCK std::lock_guard<std::mutex> _(sizeMutex)
 

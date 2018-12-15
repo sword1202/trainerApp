@@ -3,7 +3,7 @@
 #include <QJsonObject>
 #include <iostream>
 #include "TimeUtils.h"
-#include "../QtUtils/qtutils.h"
+#include "Utils/QtUtils.h"
 #include "WAVFile.h"
 #include "PlaybackBounds.h"
 

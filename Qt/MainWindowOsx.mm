@@ -2,7 +2,7 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 #include "BaseMainWindow.h"
-#include "QtUtils/qtutils.h"
+#include "Utils/QtUtils.h"
 
 void BaseMainWindow::doMacOsPlatformStaff(QColor windowBorderColor) {
     NSView* view = QtUtils::getNSView(this);

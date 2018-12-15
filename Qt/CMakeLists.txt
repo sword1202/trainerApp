@@ -18,13 +18,13 @@ set(qtSources
         Welcome/WelcomeWindow.cpp
         Welcome/WelcomeWindow.ui
         Workspace/WorkspaceDrawerWidgetSetup.cpp
-        QtUtils/qtutils.cpp
+        Utils/QtUtils.cpp
         Workspace/TextImagesFactory.cpp
         )
 
 if (APPLE)
     list(APPEND qtSources
-            QtUtils/qtutils.mm
+            Utils/QtUtils.mm
             MainWindowOsx.mm
             Workspace/Metal/QMetalWidget.mm
             Workspace/Metal/MetalWorkspaceWidget.mm

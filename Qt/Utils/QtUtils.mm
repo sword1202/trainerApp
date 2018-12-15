@@ -2,7 +2,7 @@
 // Created by Semyon Tikhonenko on 10/29/18.
 //
 
-#include "qtutils.h"
+#include "QtUtils.h"
 
 namespace QtUtils {
     NSView* getNSView(QWidget* widget) {

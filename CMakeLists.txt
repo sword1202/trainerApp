@@ -118,5 +118,6 @@ include_directories(
         Logic/Playback/Mvx
         Logic/Playback/Midi/CraigsappMidifile
         Logic
+        Qt
         include/nanovg
         include/nanovg/glew)

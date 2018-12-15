@@ -2,7 +2,7 @@
 #include "NvgDrawer.h"
 #include "../Fonts.h"
 #include "MainController.h"
-#include "../QtUtils/qtutils.h"
+#include "Utils/QtUtils.h"
 #include <QByteArray>
 #include <QIcon>
 #include "QDrawer.h"

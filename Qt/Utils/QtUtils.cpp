@@ -1,4 +1,4 @@
-﻿#include "qtutils.h"
+﻿#include "QtUtils.h"
 #include <QTimer>
 #include <qfile.h>
 #include <QEvent>

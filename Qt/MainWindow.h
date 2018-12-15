@@ -5,7 +5,7 @@
 #include <QOpenGLWidget>
 #include <QQuickWidget>
 #include <QSvgWidget>
-#include "QtUtils/qtutils.h"
+#include "Utils/QtUtils.h"
 #include "Workspace/OpenglWorkspaceWidget.h"
 #include "MvxPlayer.h"
 #include <QScrollBar>

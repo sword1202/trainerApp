@@ -6,7 +6,7 @@
 #include <QQuickItem>
 #include <cmath>
 
-#include "QtUtils/qtutils.h"
+#include "Utils/QtUtils.h"
 #include "PortAudioUtils.h"
 #include "Algorithms.h"
 #include "PortAudioInputReader.h"

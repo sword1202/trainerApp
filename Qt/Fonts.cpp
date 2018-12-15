@@ -1,5 +1,5 @@
 #include "Fonts.h"
-#include "QtUtils/qtutils.h"
+#include "Utils/QtUtils.h"
 
 namespace Fonts
 {
