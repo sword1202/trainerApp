@@ -6,7 +6,7 @@
 
 using namespace CppUtils;
 
-QtCppBridge::QtCppBridge(QMainWindow* mainWindow) : _mainWindow(mainWindow) {
+QtCppBridge::QtCppBridge(QWidget* widget) : _widget(widget) {
 
 }
 
@@ -36,9 +36,9 @@ QtMvxPlayer *QtCppBridge::getPlayer() const {
 }
 
 qreal QtCppBridge::getDevicePixelRatio() const {
-    return _mainWindow->devicePixelRatio();
+    return _widget->devicePixelRatio();
 }
 
-QMainWindow *QtCppBridge::getMainWindow() const {
-    return _mainWindow;
+QWidget *QtCppBridge::getWidget() const {
+    return _widget;
 }

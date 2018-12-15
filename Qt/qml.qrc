@@ -135,5 +135,6 @@
         <file>qml/images/input_level_slider.svg</file>
         <file>qml/images/output_level_slider.svg</file>
         <file>qml/Lyrics.qml</file>
+        <file>qml/ProjectItem.qml</file>
     </qresource>
 </RCC>

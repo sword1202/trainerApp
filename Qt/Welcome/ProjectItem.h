@@ -2,8 +2,9 @@
 #define PROJECTITEM_H
 
 #include <QToolButton>
+#include "Utils/BaseQmlWidget.h"
 
-class ProjectItem : public QToolButton
+class ProjectItem : public BaseQmlWidget
 {
 public:
     enum Type {
@@ -12,17 +13,16 @@ public:
         RECORD
     };
 
-    ProjectItem(const QString &data, Type type, QWidget *parent = nullptr);
+    struct Data {
+        explicit Data(Type type);
 
-private:
-    void setup();
-    bool event(QEvent *event) override;
-    void paintEvent(QPaintEvent *event) override;
+        Type type;
+        QString artistName;
+        QString title;
+        int score = 0;
+    };
 
-    int percent;
-    Type type;
-    QIcon icon;
-    QIcon hoverIcon;
+    ProjectItem(const Data& data, QWidget *parent);
 };
 
 #endif // PROJECTITEM_H

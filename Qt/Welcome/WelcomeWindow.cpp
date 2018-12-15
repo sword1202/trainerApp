@@ -82,7 +82,7 @@ void WelcomeWindow::addItems(const QStringList &list, ProjectItem::Type type)
     }
 
     for (const auto &name : list) {
-        auto *projectItem = new ProjectItem(name, type, this);
+        auto *projectItem = new ProjectItem(ProjectItem::Data(ProjectItem::RECORD), this);
         auto *widgetItem = new QListWidgetItem(widgetList);
         widgetItem->setSizeHint(projectItem->sizeHint());
         widgetList->setItemWidget(widgetItem, projectItem);
