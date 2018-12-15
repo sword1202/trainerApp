@@ -34,6 +34,7 @@
         <file>qml/images/tonality_up_pressed.svg</file>
         <file>qml/images/tonality_down_pressed.svg</file>
         <file>qml/images/clock.png</file>
+        <file>qml/images/new_project.svg</file>
         <file>qml/sounds/sounds.sf2</file>
         <file>qml/sounds/metronome.wav</file>
         <file>qml/fonts/Lato-Bold.ttf</file>
@@ -135,6 +136,6 @@
         <file>qml/images/input_level_slider.svg</file>
         <file>qml/images/output_level_slider.svg</file>
         <file>qml/Lyrics.qml</file>
-        <file>qml/ProjectItem.qml</file>
+        <file>qml/NewProjectItem.qml</file>
     </qresource>
 </RCC>

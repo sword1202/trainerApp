@@ -11,7 +11,7 @@ ProjectItem::ProjectItem(ProjectItem::Type type) : type(type) {
 }
 
 ProjectItemWidget::ProjectItemWidget(const ProjectItem &item, QWidget *parent) : BaseQmlWidget(parent), item(item) {
-    setSource(QUrl("qrc:/qml/ProjectItem.qml"));
+    setSource(QUrl("qrc:/qml/NewProjectItem.qml"));
 
     if (item.type != ProjectItem::NEW_PROJECT) {
         auto* context = rootContext();
