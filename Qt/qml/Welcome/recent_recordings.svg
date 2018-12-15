@@ -1,0 +1,19 @@
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="First-Screen-2" transform="translate(-40.000000, -292.000000)">
+            <g id="Left">
+                <g id="Recordings" transform="translate(40.000000, 292.000000)">
+                    <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="60" height="60" rx="4"></rect>
+                    <g id="technology" transform="translate(15.000000, 11.000000)">
+                        <path d="M24,23 L21.5,23 C21.5,26.5172414 18.8,29.3103448 15.5,29.3103448 C12.2,29.3103448 9.5,26.5172414 9.5,23 L7,23 C7,27.5517241 10.2,31.2758621 14.3,31.8965517 L14.3,37.4827586 C14.3,37.6896552 14.5,38 14.8,38 L16.1,38 C16.4,38 16.6,37.7931034 16.6,37.4827586 L16.6,31.8965517 C20.8,31.2758621 24,27.5517241 24,23 Z" id="Shape" fill="#615F97" fill-rule="nonzero"></path>
+                        <path d="M20,13.0980392 C20,10.254902 17.9705882,8 15.5,8 C13.0294118,8 11,10.254902 11,13.0980392 C11,15.4509804 11,20.5490196 11,22.9019608 C11,25.745098 13.0294118,28 15.5,28 C17.9705882,28 20,25.745098 20,22.9019608 C20,20.5490196 20,15.4509804 20,13.0980392 Z" id="Shape_1_" fill="#615F97" fill-rule="nonzero"></path>
+                        <path d="M10.5,5.21388889 C7.9,6.44722222 6,9.11944444 6,12.3055556" id="Shape" stroke="#615F97" stroke-width="2" stroke-linecap="round"></path>
+                        <path d="M25,5.21388732 C22.4,6.44722065 20.5,9.11944288 20.5,12.305554" id="Shape-Copy" stroke="#615F97" stroke-width="2" stroke-linecap="round" transform="translate(22.750000, 8.759721) scale(-1, 1) translate(-22.750000, -8.759721) "></path>
+                        <path d="M8.5,0.719444444 C4,2.05555556 0.8,6.26944444 0.8,11.3055556" id="Shape" stroke="#615F97" stroke-width="2" stroke-linecap="round"></path>
+                        <path d="M30.2,0.719444444 C25.7,2.05555556 22.5,6.26944444 22.5,11.3055556" id="Shape-Copy-2" stroke="#615F97" stroke-width="2" stroke-linecap="round" transform="translate(26.350000, 6.012500) scale(-1, 1) translate(-26.350000, -6.012500) "></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

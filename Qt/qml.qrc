@@ -35,8 +35,6 @@
         <file>qml/images/tonality_down_pressed.svg</file>
         <file>qml/images/clock.png</file>
         <file>qml/images/new_project.svg</file>
-        <file>qml/Welcome/welcome_gradient.png</file>
-        <file>qml/Welcome/recent_projects_selected.svg</file>
         <file>qml/sounds/sounds.sf2</file>
         <file>qml/sounds/metronome.wav</file>
         <file>qml/fonts/Lato-Bold.ttf</file>
@@ -140,5 +138,12 @@
         <file>qml/NewProjectItem.qml</file>
         <file>qml/Welcome/Welcome.qml</file>
         <file>qml/Welcome/SideBarItem.qml</file>
+        <file>qml/Welcome/welcome_gradient.png</file>
+        <file>qml/Welcome/recent_projects_selected.svg</file>
+        <file>qml/Welcome/recent_projects.svg</file>
+        <file>qml/Welcome/recent_recordings.svg</file>
+        <file>qml/Welcome/recent_recordings_selected.svg</file>
+        <file>qml/Welcome/new_project_sidebar.svg</file>
+        <file>qml/Welcome/new_project_sidebar_selected.svg</file>
     </qresource>
 </RCC>
