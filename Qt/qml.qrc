@@ -39,7 +39,6 @@
         <file>qml/fonts/Lato-Bold.ttf</file>
         <file>qml/fonts/Lato-Regular.ttf</file>
         <file>qml/fonts/arial.ttf</file>
-        <file>qml/Main.qml</file>
         <file>qml/SvgImage.qml</file>
         <file>qml/ToggleButton.qml</file>
         <file>qml/PlayerController.qml</file>
@@ -47,31 +46,22 @@
         <file>qml/ImageButton.qml</file>
         <file>qml/ButtonShadow.qml</file>
         <file>qml/Tempo.qml</file>
-        <file>qml/HorizontalScrollBar.qml</file>
-        <file>qml/VerticalScrollBar.qml</file>
         <file>qml/js/strings.js</file>
-        <file>qml/Yardstick.qml</file>
-        <file>qml/Zoom.qml</file>
         <file>qml/Track.qml</file>
         <file>qml/js/uiutils.js</file>
         <file>qml/VerticalLine.qml</file>
         <file>qml/HorizontalLine.qml</file>
         <file>qml/TrackButton.qml</file>
-        <file>qml/Piano.qml</file>
-        <file>qml/js/canvasutils.js</file>
         <file>qml/ZoomSlider.qml</file>
         <file>qml/Circle.qml</file>
         <file>qml/Header.qml</file>
         <file>qml/TrackVolumeSlider.qml</file>
         <file>qml/TracksContainer.qml</file>
-        <file>qml/PlayHeadTime.qml</file>
         <file>qml/TonalityController.qml</file>
-        <file>qml/SingingProcessManager.qml</file>
         <file>qml/js/mathutils.js</file>
         <file>qml/HeaderWithSubHeader.qml</file>
         <file>qml/js/zoom.js</file>
         <file>qml/LeftSideBar.qml</file>
-        <file>qml/VerticalScrollBarContainer.qml</file>
         <file>qml/images/text/11_0.png</file>
         <file>qml/images/text/8_0.png</file>
         <file>qml/images/text/11_1.png</file>
