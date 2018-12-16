@@ -110,6 +110,21 @@ Item {
                 anchors.rightMargin: 4
                 anchors.topMargin: 4
                 anchors.bottomMargin: 4
+
+                Text {
+                    function getScore() {
+                        if (model.modelData.score !== undefined) {
+                            return model.modelData.score + "%"
+                        }
+
+                        return ""
+                    }
+
+                    text: getScore()
+                    anchors.centerIn: parent
+                    font.family: "Lato"
+                    font.pointSize: 13
+                }
             }
 
             MouseArea {
