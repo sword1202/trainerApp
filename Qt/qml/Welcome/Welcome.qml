@@ -129,6 +129,12 @@ Item {
                 cursorShape: Qt.OpenHandCursor
                 anchors.fill: image
                 hoverEnabled: true
+
+                onClicked: {
+                    if (recentProjects.selected) {
+                        self.openRecentProject(model.modelData.filePath)
+                    }
+                }
             }
 
             Item {

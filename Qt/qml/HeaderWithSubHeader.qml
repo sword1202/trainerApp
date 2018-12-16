@@ -1,10 +1,6 @@
 import QtQuick 2.0
 
 Item {
-    Zoom {
-        id: zoom
-    }
-
     Header {
         id: header
         width: parent.width
@@ -34,7 +30,6 @@ Item {
     }
 
     ZoomSlider {
-        zoom: zoom
         anchors.top: header.bottom
         anchors.topMargin: 15
         anchors.rightMargin: 23.25

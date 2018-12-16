@@ -53,12 +53,14 @@ void AppSettings::setProjects(const QStringList &projects) {
 
 void AppSettings::addProject(const QString &filePath) {
     auto projects = getProjects();
+    projects.removeAll(filePath);
     projects.prepend(filePath);
     setProjects(projects);
 }
 
 void AppSettings::addRecording(const QString &filePath) {
     auto recordings = getRecordings();
+    recordings.removeAll(filePath);
     recordings.prepend(filePath);
     setRecordings(recordings);
 }

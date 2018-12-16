@@ -27,4 +27,15 @@ namespace VxAppUtils {
 
         return fileSelected;
     }
+
+    void OpenProject(const QString& fileName) {
+        QtMvxPlayer *player = VxApp::instance()->getPlayer();
+        player->setSource(fileName);
+        AppSettings settings;
+        if (player->isRecording()) {
+            settings.addRecording(fileName);
+        } else {
+            settings.addProject(fileName);
+        }
+    }
 }

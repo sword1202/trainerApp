@@ -10,6 +10,7 @@
 
 namespace VxAppUtils {
     bool OpenExistingProject(QWidget* parent);
+    void OpenProject(const QString& fileName);
 }
 
 

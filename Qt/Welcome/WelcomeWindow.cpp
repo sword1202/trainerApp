@@ -55,6 +55,7 @@ void WelcomeWindow::setupProjectsList(QQmlContext *context) {
         QVariantMap map;
         map["artistName"] = QtUtils::QStringFromUtf8(file.getArtistNameUtf8());
         map["title"] = QtUtils::QStringFromUtf8(file.getSongTitleUtf8());
+        map["filePath"] = filePath;
 
         if (file.isRecording()) {
             map["score"] = file.getScore();
@@ -71,10 +72,20 @@ void WelcomeWindow::setupProjectsList(QQmlContext *context) {
 void WelcomeWindow::openExistingProject() {
     hide();
     if (VxAppUtils::OpenExistingProject(this)) {
-        auto *projectWindow = new ProjectWindow();
-        projectWindow->setAttribute(Qt::WA_DeleteOnClose, true);
-        projectWindow->showMaximized();
+        showProjectWindow();
     } else {
         show();
     }
+}
+
+void WelcomeWindow::openRecentProject(const QString& filePath) {
+    hide();
+    VxAppUtils::OpenProject(filePath);
+    showProjectWindow();
+}
+
+void WelcomeWindow::showProjectWindow() {
+    auto *projectWindow = new ProjectWindow();
+    projectWindow->setAttribute(Qt::WA_DeleteOnClose, true);
+    projectWindow->showMaximized();
 }
