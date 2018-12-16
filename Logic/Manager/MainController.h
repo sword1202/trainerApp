@@ -16,9 +16,9 @@
 #include "PlaybackBoundsSelectionController.h"
 
 class MainController {
-    AudioInputManager* pitchInputReader;
-    MvxPlayer* mvxPlayer;
-    WorkspaceZoomController* zoomController;
+    AudioInputManager* pitchInputReader = nullptr;
+    MvxPlayer* mvxPlayer = nullptr;
+    WorkspaceZoomController* zoomController = nullptr;
     WorkspaceController* workspaceController = nullptr;
     PlaybackBoundsSelectionController* playbackBoundsSelectionController = nullptr;
 
