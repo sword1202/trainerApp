@@ -5,6 +5,7 @@
 #include <QScreen>
 #include <QLabel>
 #include <QGuiApplication>
+#include <QQmlContext>
 
 #include "App/AppSettings.h"
 
@@ -32,4 +33,25 @@ WelcomeWindow::WelcomeWindow() :
     rootWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     rootWidget->setSource(QUrl("qrc:/qml/Welcome/Welcome.qml"));
     setCentralWidget(rootWidget);
+
+    QQmlContext* context = rootWidget->rootContext();
+    QVariantList recordings {
+            QVariantMap {
+                {"title", "Fear of the Dark"},
+                {"artistName", "Iron Maiden"},
+                {"score", 57}
+            },
+            QVariantMap {
+                {"title", "Send Me An Angel"},
+                {"artistName", "Scorpions"},
+                {"score", 98}
+            },
+            QVariantMap {
+                {"title", "Sky Is Over"},
+                {"artistName", "Serj Tankian"},
+                {"score", 67}
+            }
+    };
+    recordings.append(recordings);
+    context->setContextProperty("recordings", recordings);
 }

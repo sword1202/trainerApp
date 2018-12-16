@@ -3,6 +3,7 @@ import "../"
 
 Item {
     Image {
+        id: sidebar
         anchors.left: parent.left
         height: parent.height
         width: 225
@@ -36,6 +37,76 @@ Item {
             selected: false
             normalIcon: "recent_recordings.svg"
             hoverIcon: "recent_recordings_selected.svg"
+        }
+    }
+
+    ListView {
+        anchors.left: sidebar.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        anchors.leftMargin: 19
+        anchors.rightMargin: 19
+        anchors.topMargin: 17
+        anchors.bottomMargin: 17
+
+        spacing: 15
+
+        model: [""]
+
+        delegate: Rectangle {
+            width: 143
+            height: 125
+
+            Rectangle {
+                id: border
+                visible: mouseArea.containsMouse
+
+                anchors.top: parent.top
+                anchors.left: parent.left
+                anchors.right: parent.right
+                height: 98
+
+                border.width: 1
+                border.color: "#615F97"
+                radius: 3
+            }
+
+            SvgImage {
+                id: image
+                source: mouseArea.containsMouse ? "new_project_hover.svg" : "new_project.svg"
+                width: 135
+                height: 90
+                anchors.top: parent.top
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 4
+                anchors.rightMargin: 4
+                anchors.topMargin: 4
+                anchors.bottomMargin: 4
+            }
+
+            MouseArea {
+                id: mouseArea
+                cursorShape: Qt.OpenHandCursor
+                anchors.fill: image
+                hoverEnabled: true
+            }
+
+            Item {
+                anchors.bottom: parent.bottom
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: border.bottom
+
+                Text {
+                    anchors.centerIn: parent
+                    text: "Empty Project"
+                    color: mouseArea.containsMouse ? "#615F97" : "#24232D"
+                    font.pointSize: 12
+                    font.family: "Lato"
+                }
+            }
         }
     }
 }
