@@ -145,5 +145,9 @@
         <file>qml/Welcome/new_project_sidebar_selected.svg</file>
         <file>qml/Welcome/new_project.svg</file>
         <file>qml/Welcome/new_project_hover.svg</file>
+        <file>qml/Welcome/project.svg</file>
+        <file>qml/Welcome/project_hover.svg</file>
+        <file>qml/Welcome/recording.svg</file>
+        <file>qml/Welcome/recording_hover.svg</file>
     </qresource>
 </RCC>

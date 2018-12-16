@@ -31,10 +31,9 @@ WelcomeWindow::WelcomeWindow() :
     BaseQmlWidget* rootWidget = new BaseQmlWidget(this);
     rootWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
     rootWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    rootWidget->setSource(QUrl("qrc:/qml/Welcome/Welcome.qml"));
-    setCentralWidget(rootWidget);
 
     QQmlContext* context = rootWidget->rootContext();
+
     QVariantList recordings {
             QVariantMap {
                 {"title", "Fear of the Dark"},
@@ -52,6 +51,24 @@ WelcomeWindow::WelcomeWindow() :
                 {"score", 67}
             }
     };
-    recordings.append(recordings);
     context->setContextProperty("recordings", recordings);
+
+    QVariantList projects {
+            QVariantMap {
+                    {"title", "Fear of the Dark"},
+                    {"artistName", "Iron Maiden"},
+            },
+            QVariantMap {
+                    {"title", "Send Me An Angel"},
+                    {"artistName", "Scorpions"},
+            },
+            QVariantMap {
+                    {"title", "Sky Is Over"},
+                    {"artistName", "Serj Tankian"}
+            }
+    };
+    context->setContextProperty("projects", projects);
+
+    rootWidget->setSource(QUrl("qrc:/qml/Welcome/Welcome.qml"));
+    setCentralWidget(rootWidget);
 }

@@ -11,6 +11,7 @@ Item {
 
         SideBarItem {
             id: recentProjects
+            otherItems: [newProject, recentRecordings]
             anchors.topMargin: 21
             anchors.top: parent.top
 
@@ -22,6 +23,7 @@ Item {
 
         SideBarItem {
             id: newProject
+            otherItems: [recentProjects, recentRecordings]
             anchors.top: recentProjects.bottom
 
             title: "New Project"
@@ -31,6 +33,8 @@ Item {
         }
 
         SideBarItem {
+            id: recentRecordings
+            otherItems: [newProject, recentProjects]
             anchors.top: newProject.bottom
 
             title: "Recent Recordings"
@@ -41,6 +45,7 @@ Item {
     }
 
     ListView {
+        id: list
         anchors.left: sidebar.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
@@ -52,11 +57,11 @@ Item {
 
         spacing: 15
 
-        model: [""]
+        model: newProject.selected ? [""] : (recentProjects.selected ? projects : recordings)
 
         delegate: Rectangle {
             width: 143
-            height: 125
+            height: newProject.selected ? 125 : 140
 
             Rectangle {
                 id: border
@@ -72,9 +77,19 @@ Item {
                 radius: 3
             }
 
+            function getSvgSource() {
+                if (newProject.selected) {
+                    return mouseArea.containsMouse ? "new_project_hover.svg" : "new_project.svg"
+                } else if(recentProjects.selected) {
+                    return mouseArea.containsMouse ? "project_hover.svg" : "project.svg"
+                } else {
+                    return mouseArea.containsMouse ? "recording_hover.svg" : "recording.svg"
+                }
+            }
+
             SvgImage {
                 id: image
-                source: mouseArea.containsMouse ? "new_project_hover.svg" : "new_project.svg"
+                source: getSvgSource()
                 width: 135
                 height: 90
                 anchors.top: parent.top
@@ -101,10 +116,11 @@ Item {
 
                 Text {
                     anchors.centerIn: parent
-                    text: "Empty Project"
+                    text: newProject.selected ? "Empty Project" : model.modelData.artistName + "\n" + model.modelData.title
                     color: mouseArea.containsMouse ? "#615F97" : "#24232D"
                     font.pointSize: 12
                     font.family: "Lato"
+                    horizontalAlignment: Text.AlignHCenter
                 }
             }
         }

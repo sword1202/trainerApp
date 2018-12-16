@@ -2,10 +2,12 @@ import QtQuick 2.0
 import "../"
 
 Rectangle {
+    id: root
     property string title: ""
     property url normalIcon: ""
     property url hoverIcon: ""
     property bool selected: false
+    property var otherItems: []
 
     anchors.left: parent.left
     height: 65
@@ -36,5 +38,12 @@ Rectangle {
         id: mouseArea
         hoverEnabled: true
         anchors.fill: parent
+
+        onClicked: {
+            root.selected = true
+            for (var i = 0; i < otherItems.length; i++) {
+                otherItems[i].selected = false
+            }
+        }
     }
 }
