@@ -14,7 +14,6 @@ set(qtSources
         QtBridge/QtPitch.cpp
         QtBridge/QtWorkspaceZoomController.cpp
         qml.qrc
-        Welcome/ProjectItemWidget.cpp
         Welcome/WelcomeWindow.cpp
         Workspace/WorkspaceDrawerWidgetSetup.cpp
         Utils/QtUtils.cpp

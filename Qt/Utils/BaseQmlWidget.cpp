@@ -8,5 +8,4 @@
 
 BaseQmlWidget::BaseQmlWidget(QWidget *parent) : QQuickWidget(parent) {
     rootContext()->setContextProperty("cpp", new QtCppBridge(this));
-    rootContext()->setContextProperty("self", this);
 }

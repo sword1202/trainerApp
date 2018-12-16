@@ -13,6 +13,9 @@ class MvxFile {
     VxFile vxFile;
     std::string instrumental;
     double beatsPerMinute;
+    std::string songTitleUtf8;
+    std::string artistNameUtf8;
+    double score = -1.0;
 
     friend class boost::serialization::access;
 
@@ -49,6 +52,16 @@ public:
 
     double getBeatsPerMinute() const;
     void setBeatsPerMinute(double beatsPerMinute);
+
+    double getScore() const;
+    void setScore(double score);
+
+    const std::string &getSongTitleUtf8() const;
+    void setSongTitleUtf8(const std::string &songTitleUtf8);
+
+    const std::string &getArtistNameUtf8() const;
+    void setArtistNameUtf8(const std::string &artistNameUtf8);
+
     void loadInstrumentalFromStream(std::istream& is);
     void loadInstrumentalFromFile(const char* filePath);
 };

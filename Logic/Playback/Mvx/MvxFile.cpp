@@ -85,3 +85,27 @@ MvxFile::MvxFile(const VxFile &vxFile, const char *instrumentalFile, double beat
     std::fstream file = Streams::OpenFile(instrumentalFile, std::ios::in | std::ios::binary);
     instrumental = Strings::StreamToString(file);
 }
+
+double MvxFile::getScore() const {
+    return score;
+}
+
+void MvxFile::setScore(double score) {
+    MvxFile::score = score;
+}
+
+const std::string &MvxFile::getSongTitleUtf8() const {
+    return songTitleUtf8;
+}
+
+void MvxFile::setSongTitleUtf8(const std::string &songTitleUtf8) {
+    MvxFile::songTitleUtf8 = songTitleUtf8;
+}
+
+const std::string &MvxFile::getArtistNameUtf8() const {
+    return artistNameUtf8;
+}
+
+void MvxFile::setArtistNameUtf8(const std::string &artistNameUtf8) {
+    MvxFile::artistNameUtf8 = artistNameUtf8;
+}

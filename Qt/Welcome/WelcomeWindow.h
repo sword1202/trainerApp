@@ -5,17 +5,16 @@
 #include <QGridLayout>
 
 #include "Utils/BaseMainWindow.h"
-#include "ProjectItemWidget.h"
-
-namespace Ui {
-class WelcomeWindow;
-}
 
 class WelcomeWindow : public BaseMainWindow
 {
     Q_OBJECT
 public:
     WelcomeWindow();
+    Q_INVOKABLE void openExistingProject();
+
+protected:
+    void closeEvent(QCloseEvent *event) override;
 };
 
 #endif // WELCOMEWINDOW_H

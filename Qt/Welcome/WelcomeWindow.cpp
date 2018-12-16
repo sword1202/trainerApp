@@ -8,6 +8,8 @@
 #include <QQmlContext>
 
 #include "App/AppSettings.h"
+#include "Project/ProjectWindow.h"
+#include "Utils/BaseQmlWidget.h"
 
 constexpr double WINDOW_SIZE_RATIO = 0.65;
 
@@ -33,42 +35,26 @@ WelcomeWindow::WelcomeWindow() :
     rootWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     QQmlContext* context = rootWidget->rootContext();
+    context->setContextProperty("self", this);
 
     QVariantList recordings {
-//            QVariantMap {
-//                {"title", "Fear of the Dark"},
-//                {"artistName", "Iron Maiden"},
-//                {"score", 57}
-//            },
-//            QVariantMap {
-//                {"title", "Send Me An Angel"},
-//                {"artistName", "Scorpions"},
-//                {"score", 98}
-//            },
-//            QVariantMap {
-//                {"title", "Sky Is Over"},
-//                {"artistName", "Serj Tankian"},
-//                {"score", 67}
-//            }
     };
     context->setContextProperty("recordings", recordings);
 
     QVariantList projects {
-//            QVariantMap {
-//                    {"title", "Fear of the Dark"},
-//                    {"artistName", "Iron Maiden"},
-//            },
-//            QVariantMap {
-//                    {"title", "Send Me An Angel"},
-//                    {"artistName", "Scorpions"},
-//            },
-//            QVariantMap {
-//                    {"title", "Sky Is Over"},
-//                    {"artistName", "Serj Tankian"}
-//            }
     };
     context->setContextProperty("projects", projects);
 
     rootWidget->setSource(QUrl("qrc:/qml/Welcome/Welcome.qml"));
     setCentralWidget(rootWidget);
+}
+
+void WelcomeWindow::openExistingProject() {
+    close();
+    (new ProjectWindow())->showMaximized();
+}
+
+void WelcomeWindow::closeEvent(QCloseEvent *event) {
+    QWidget::closeEvent(event);
+    //delete this;
 }

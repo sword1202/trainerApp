@@ -218,6 +218,10 @@ or create your own in the “New Project”"
             anchors.left: parent.left
             width: 172.5
             anchors.verticalCenter: parent.verticalCenter
+
+            onClicked: {
+                self.openExistingProject()
+            }
         }
     }
 }
