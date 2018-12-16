@@ -137,5 +137,6 @@
         <file>qml/Welcome/recording_hover.svg</file>
         <file>qml/Welcome/no_items_box.svg</file>
         <file>qml/Project/SingingResultDialog.qml</file>
+        <file>qml/TextOnlyButton.qml</file>
     </qresource>
 </RCC>
