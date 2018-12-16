@@ -44,24 +44,35 @@ Item {
         }
     }
 
-    ListView {
+    GridView {
         id: list
         anchors.left: sidebar.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.right: parent.right
-        anchors.leftMargin: 19
-        anchors.rightMargin: 19
-        anchors.topMargin: 17
-        anchors.bottomMargin: 17
 
-        spacing: 15
+        anchors.leftMargin: 4 + spacing
+        anchors.rightMargin: 4 + spacing
+        anchors.topMargin: 2 + spacing
+        anchors.bottomMargin: 2 + spacing
+
+        property real spacing: 7.5
+        property real itemWidth: 143
+        property real itemHeight: newProject.selected ? 125 : 140
+
+        cellWidth: itemWidth + spacing
+        cellHeight: itemHeight + spacing
+
+        Component.onCompleted: {
+            console.log("cellWidth = " + cellWidth + " cellHeight = " + cellHeight)
+        }
 
         model: newProject.selected ? [""] : (recentProjects.selected ? projects : recordings)
 
         delegate: Rectangle {
-            width: 143
-            height: newProject.selected ? 125 : 140
+            width: list.itemWidth
+            height: list.itemHeight
+            //anchors.centerIn: parent
 
             Rectangle {
                 id: border
