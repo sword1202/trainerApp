@@ -9,6 +9,7 @@
 class WelcomeWindow : public BaseMainWindow
 {
     Q_OBJECT
+    void setupProjectsList(QQmlContext *context);
 public:
     WelcomeWindow();
     Q_INVOKABLE void openExistingProject();

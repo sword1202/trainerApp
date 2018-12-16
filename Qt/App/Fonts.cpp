@@ -4,12 +4,12 @@
 namespace Fonts
 {
     QByteArray latoRegular() {
-        static QByteArray data = QtUtils::readAllFromFile(":qml/fonts/Lato-Regular.ttf");
+        static QByteArray data = QtUtils::ReadAllFromFile(":qml/fonts/Lato-Regular.ttf");
         return data;
     }
 
     QByteArray latoBold() {
-        static QByteArray data = QtUtils::readAllFromFile(":qml/fonts/Lato-Bold.ttf");
+        static QByteArray data = QtUtils::ReadAllFromFile(":qml/fonts/Lato-Bold.ttf");
         return data;
     }
 }

@@ -4,6 +4,7 @@
 
 #include "VxAppUtils.h"
 #include "VxApp.h"
+#include "AppSettings.h"
 #include <QString>
 #include <QFileDialog>
 
@@ -12,10 +13,16 @@ namespace VxAppUtils {
         QString fileName = QFileDialog::getOpenFileName(
                 parent, "Select .mvx file for signing", "", "Mvx files(*.mvx);; All files(*)");
 
-        //QString fileName = "/Users/Semyon/Downloads/torero.mvx";
         bool fileSelected = !fileName.isEmpty();
         if (fileSelected) {
-            VxApp::instance()->getPlayer()->setSource(fileName);
+            QtMvxPlayer *player = VxApp::instance()->getPlayer();
+            player->setSource(fileName);
+            AppSettings settings;
+            if (player->isRecording()) {
+                settings.addRecording(fileName);
+            } else {
+                settings.addProject(fileName);
+            }
         }
 
         return fileSelected;

@@ -20,6 +20,8 @@ public:
     void setRecordings(const QStringList &recordings);
     QStringList getProjects();
     void setProjects(const QStringList &projects);
+    void addProject(const QString& filePath);
+    void addRecording(const QString& filePath);
 };
 
 #endif // APPSETTINGS_H

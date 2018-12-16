@@ -35,7 +35,7 @@ private:
     PlaybackBounds bounds;
     double playStartedSeek = -1;
     double playStartedTime = -1;
-    double beatsPerMinute;
+    MvxFile mvxFile;
 
     void updateMetronomeVolume();
     void pausePlayer(AudioPlayer* player);
@@ -101,6 +101,8 @@ public:
 
     double getBeatDuration() const;
     double getTactDuration() const;
+
+    bool isRecording() const;
 };
 
 

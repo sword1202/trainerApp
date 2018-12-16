@@ -66,12 +66,12 @@ void WorkspaceDrawerWidgetSetup::setupWorkspaceDrawer(QWidget* widget, Drawer* d
     MainController::instance()->setWorkspaceController(workspaceDrawer);
     if (useUpdateLoop) {
         // Fix strange bug, when grid is drawing with wrong alpha
-        QtUtils::startRepeatedTimer(widget, [=] {
+        QtUtils::StartRepeatedTimer(widget, [=] {
             widget->repaint();
             return false;
         }, 1000 / 150); // 150fps
 
-        QtUtils::startRepeatedTimer(widget, [=] {
+        QtUtils::StartRepeatedTimer(widget, [=] {
             if (workspaceDrawer->isRunning()) {
                 widget->repaint();
             }

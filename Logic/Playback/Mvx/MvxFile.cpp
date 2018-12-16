@@ -21,16 +21,17 @@ void MvxFile::writeToFile(const char *outFilePath) {
     writeToStream(file);
 }
 
-MvxFile MvxFile::readFromStream(std::istream &is) {
+MvxFile MvxFile::readFromStream(std::istream &is, bool readOnlySignature) {
     MvxFile file;
+    file.readOnlySignature = readOnlySignature;
     boost::archive::text_iarchive ar(is);
     ar >> file;
     return file;
 }
 
-MvxFile MvxFile::readFromFile(const char *filePath) {
+MvxFile MvxFile::readFromFile(const char *filePath, bool readOnlySignature) {
     std::fstream file = Streams::OpenFile(filePath, std::ios::binary | std::ios::in);
-    return readFromStream(file);
+    return readFromStream(file, readOnlySignature);
 }
 
 const VxFile &MvxFile::getVxFile() const {
@@ -87,8 +88,8 @@ void MvxFile::setArtistNameUtf8(const std::string &artistNameUtf8) {
     MvxFile::artistNameUtf8 = artistNameUtf8;
 }
 
-const std::string &MvxFile::getRecording() const {
-    return recording;
+const std::string &MvxFile::getRecordingData() const {
+    return recordingData;
 }
 
 void MvxFile::setInstrumental(const std::string &instrumental) {
@@ -99,4 +100,13 @@ std::string &&MvxFile::moveInstrumental() {
     std::string moved = std::move(instrumental);
     instrumental = "";
     return std::move(moved);
+}
+
+bool MvxFile::isRecording() const {
+    return recording;
+}
+
+void MvxFile::setRecordingData(const std::string &recordingData) {
+    MvxFile::recordingData = recordingData;
+    recording = !recordingData.empty();
 }

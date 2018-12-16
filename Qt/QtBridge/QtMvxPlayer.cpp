@@ -55,7 +55,7 @@ void QtMvxPlayer::setSource(const QString &source) {
     init(local8Bit.data());
 
     if (!isMetronomeSoundDataSet()) {
-        std::string metronomeData = QtUtils::readAllFromFile(":qml/sounds/metronome.wav").toStdString();
+        std::string metronomeData = QtUtils::ReadAllFromFile(":qml/sounds/metronome.wav").toStdString();
         setMetronomeSoundData(std::move(metronomeData));
     }
 

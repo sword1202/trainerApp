@@ -37,17 +37,35 @@ WelcomeWindow::WelcomeWindow() :
 
     QQmlContext* context = rootWidget->rootContext();
     context->setContextProperty("self", this);
-
-    QVariantList recordings {
-    };
-    context->setContextProperty("recordings", recordings);
-
-    QVariantList projects {
-    };
-    context->setContextProperty("projects", projects);
+    setupProjectsList(context);
 
     rootWidget->setSource(QUrl("qrc:/qml/Welcome/Welcome.qml"));
     setCentralWidget(rootWidget);
+}
+
+void WelcomeWindow::setupProjectsList(QQmlContext *context) {
+    QVariantList recordings, projects;
+    AppSettings appSettings;
+    QStringList filePaths;
+    filePaths << appSettings.getProjects() << appSettings.getRecordings();
+    for (const QString &filePath : filePaths) {
+        // read only signature
+        MvxFile file = MvxFile::readFromFile(filePath.toLocal8Bit(), true);
+
+        QVariantMap map;
+        map["artistName"] = QtUtils::QStringFromUtf8(file.getArtistNameUtf8());
+        map["title"] = QtUtils::QStringFromUtf8(file.getSongTitleUtf8());
+
+        if (file.isRecording()) {
+            map["score"] = file.getScore();
+            recordings.append(map);
+        } else {
+            projects.append(map);
+        }
+    }
+
+    context->setContextProperty("recordings", recordings);
+    context->setContextProperty("projects", projects);
 }
 
 void WelcomeWindow::openExistingProject() {

@@ -6,7 +6,7 @@
 #include <QVariant>
 
 namespace QtUtils {
-    void startRepeatedTimer(QObject *parent, const std::function<bool()> &action, int intervalInMilliseconds) {
+    void StartRepeatedTimer(QObject *parent, const std::function<bool()> &action, int intervalInMilliseconds) {
         assert(action);
         assert(intervalInMilliseconds >= 0);
         QTimer* timer = new QTimer(parent);
@@ -19,7 +19,7 @@ namespace QtUtils {
         timer->start(intervalInMilliseconds);
     }
 
-    QFrame* createVerticalLine(int width, QWidget* parent) {
+    QFrame* CreateVerticalLine(int width, QWidget *parent) {
         QFrame* frame = new QFrame(parent);
         frame->setFrameShape(QFrame::VLine);
         frame->setLineWidth(width);
@@ -27,7 +27,7 @@ namespace QtUtils {
         return frame;
     }
 
-    QByteArray readAllFromFile(const char* fileName) {
+    QByteArray ReadAllFromFile(const char *fileName) {
         QFile file(fileName);
         file.open(QFile::ReadOnly);
         return file.readAll();
@@ -59,8 +59,12 @@ namespace QtUtils {
         }
     };
 
-    void addDynamicPropertyChangedListener(QObject* self, const QByteArray& propertyName,
-            const std::function<void(const QVariant& value)>& callback) {
+    void AddDynamicPropertyChangedListener(QObject *self, const QByteArray &propertyName,
+                                           const std::function<void(const QVariant &value)> &callback) {
         self->installEventFilter(new Watcher(self, callback, propertyName));
+    }
+
+    QString QStringFromUtf8(const std::string& utf8) {
+        return QString::fromUtf8(utf8.data(), utf8.size());
     }
 }

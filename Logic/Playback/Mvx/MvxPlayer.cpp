@@ -46,11 +46,9 @@ MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
 }
 
 void MvxPlayer::init(std::istream &is) {
-    MvxFile file = MvxFile::readFromStream(is);
-    instrumentalPlayer.setAudioData(std::move(file.moveInstrumental()));
-    vxPlayer.setVxFile(file.getVxFile());
-
-    beatsPerMinute = file.getBeatsPerMinute();
+    mvxFile = std::move(MvxFile::readFromStream(is));
+    instrumentalPlayer.setAudioData(std::move(mvxFile.moveInstrumental()));
+    vxPlayer.setVxFile(mvxFile.getVxFile());
 }
 
 void MvxPlayer::init(const char *filePath) {
@@ -133,7 +131,7 @@ MvxPlayer::~MvxPlayer() {
 void MvxPlayer::prepare() {
     instrumentalPlayer.prepare();
     vxPlayer.prepare();
-    metronomePlayer.setAudioDataInfo(beatsPerMinute, instrumentalPlayer.getTrackDurationInSeconds());
+    metronomePlayer.setAudioDataInfo(getBeatsPerMinute(), instrumentalPlayer.getTrackDurationInSeconds());
     assert(fabs(instrumentalPlayer.getTrackDurationInSeconds() - vxPlayer.getTrackDurationInSeconds()) < 0.1);
     prepareFinishedListeners.executeAll();
     vxFileChangedListeners.executeAll(&vxPlayer.getVxFile());
@@ -189,11 +187,11 @@ double MvxPlayer::getDuration() const {
 }
 
 double MvxPlayer::getBeatsPerMinute() const {
-    return beatsPerMinute;
+    return mvxFile.getBeatsPerMinute();
 }
 
 double MvxPlayer::getBeatsPerSecond() const {
-    return beatsPerMinute / 60.0;
+    return getBeatsPerMinute() / 60.0;
 }
 
 double MvxPlayer::getTactsPerSecond() const {
@@ -265,7 +263,7 @@ void MvxPlayer::setMetronomeEnabled(bool metronomeEnabled) {
 }
 
 double MvxPlayer::getBeatDuration() const {
-    return 60.0 / beatsPerMinute;
+    return 60.0 / mvxFile.getBeatsPerMinute();
 }
 
 bool MvxPlayer::isMetronomeSoundDataSet() const {
@@ -296,4 +294,8 @@ void MvxPlayer::seekToPrevTact() {
 
 double MvxPlayer::getTactDuration() const {
     return getBeatDuration() * BEATS_IN_TACT;
+}
+
+bool MvxPlayer::isRecording() const {
+    return mvxFile.isRecording();
 }
