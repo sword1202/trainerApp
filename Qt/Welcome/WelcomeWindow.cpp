@@ -9,7 +9,7 @@
 
 #include "App/AppSettings.h"
 
-constexpr double WINDOW_SIZE_RATIO = 0.8;
+constexpr double WINDOW_SIZE_RATIO = 0.65;
 
 WelcomeWindow::WelcomeWindow() :
     BaseMainWindow(QColor::fromRgb(0xE8, 0xE7, 0xF0))

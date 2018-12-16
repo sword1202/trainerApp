@@ -1,11 +1,13 @@
 import QtQuick 2.0
+import QtGraphicalEffects 1.0
 import "../"
 
 Item {
     Image {
         id: sidebar
         anchors.left: parent.left
-        height: parent.height
+        anchors.top: parent.top
+        anchors.bottom: footer.top
         width: 225
         source: "welcome_gradient.png"
 
@@ -48,7 +50,7 @@ Item {
         id: list
         anchors.left: sidebar.right
         anchors.top: parent.top
-        anchors.bottom: parent.bottom
+        anchors.bottom: footer.top
         anchors.right: parent.right
 
         anchors.leftMargin: 4 + spacing
@@ -63,16 +65,11 @@ Item {
         cellWidth: itemWidth + spacing
         cellHeight: itemHeight + spacing
 
-        Component.onCompleted: {
-            console.log("cellWidth = " + cellWidth + " cellHeight = " + cellHeight)
-        }
-
         model: newProject.selected ? [""] : (recentProjects.selected ? projects : recordings)
 
         delegate: Rectangle {
             width: list.itemWidth
             height: list.itemHeight
-            //anchors.centerIn: parent
 
             Rectangle {
                 id: border
@@ -149,6 +146,31 @@ Item {
                     horizontalAlignment: Text.AlignHCenter
                 }
             }
+        }
+    }
+
+    DropShadow {
+        anchors.fill: footer
+        source: footer
+
+        color: "#615F97"
+        opacity: 0.14
+        samples: 20
+        radius: 20
+    }
+
+    Rectangle {
+        id: footer
+        height: 67.5
+        width: parent.width
+        anchors.bottom: parent.bottom
+
+        TextButton {
+            text: "Open an existing Project..."
+            anchors.leftMargin: 22.5
+            anchors.left: parent.left
+            width: 172.5
+            anchors.verticalCenter: parent.verticalCenter
         }
     }
 }
