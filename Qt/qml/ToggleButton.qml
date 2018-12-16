@@ -5,8 +5,8 @@ Item {
 
     property bool on: false
 
-    property string onImage
-    property string offImage
+    property url onImage
+    property url offImage
     property alias svg: svg
 
     MouseArea {

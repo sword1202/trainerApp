@@ -58,6 +58,7 @@ void MvxPlayer::init(const char *filePath) {
 
 void MvxPlayer::onComplete() {
     stopAndMoveSeekToBeginning();
+
 }
 
 void MvxPlayer::pausePlayer(AudioPlayer *player) {

@@ -3,8 +3,8 @@ import QtQuick 2.0
 SvgImage {
     id: svg
 
-    property string idleImage
-    property string hoverImage
+    property url idleImage
+    property url hoverImage
 
     signal clicked
 

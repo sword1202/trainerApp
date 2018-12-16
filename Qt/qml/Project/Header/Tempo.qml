@@ -1,8 +1,9 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
-import "js/strings.js" as Strings
+import "../../js/strings.js" as Strings
 import QtGraphicalEffects 1.0
+import "../../"
 
 Item {
     id: root

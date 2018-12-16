@@ -11,6 +11,7 @@
 namespace AudioUtils {
     double GetSampleTimeInSeconds(int sampleSize, int sampleRate);
     int64_t GetSampleTimeInMicroseconds(int sampleSize, int sampleRate);
+    int GetSamplesByteIndexFromTime(double time, int sampleRate, int sampleSize);
 
     void MakeLinearFadeInAtBeginning(short *array, int size, int affectedSize);
     void MakeLinearFadeOutAtEnding(short *array, int size, int affectedSize);

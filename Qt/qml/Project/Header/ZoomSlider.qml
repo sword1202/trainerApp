@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import "../../"
 
 Rectangle {
     width: 121.75 + 8.07

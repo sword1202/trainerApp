@@ -166,3 +166,7 @@ void PortAudioInputReader::setDeviceName(const char* deviceName) {
 bool PortAudioInputReader::isRunning() {
     return stream && Pa_IsStreamActive(stream);
 }
+
+int PortAudioInputReader::getSampleSizeInBytes() const {
+    return sizeof(int16_t);
+}

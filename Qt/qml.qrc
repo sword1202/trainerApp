@@ -1,39 +1,35 @@
 <RCC>
     <qresource prefix="/">
-        <file>qml/images/lyrics_show_button_on.svg</file>
-        <file>qml/images/tracks_show_button_on.svg</file>
-        <file>qml/images/metronome_on.svg</file>
-        <file>qml/images/lyrics_show_button_off.png</file>
-        <file>qml/images/tracks_show_button_off.png</file>
-        <file>qml/images/metronome_off.png</file>
-        <file>qml/images/lyrics_show_button_off.svg</file>
-        <file>qml/images/tracks_show_button_off.svg</file>
-        <file>qml/images/metronome_off.svg</file>
-        <file>qml/images/player_background.svg</file>
-        <file>qml/images/player_background.png</file>
-        <file>qml/images/loop_on.svg</file>
-        <file>qml/images/loop_off.svg</file>
-        <file>qml/images/go_back.svg</file>
-        <file>qml/images/go_back_hover.svg</file>
-        <file>qml/images/go_forward.svg</file>
-        <file>qml/images/go_forward_hover.svg</file>
-        <file>qml/images/to_the_begining.svg</file>
-        <file>qml/images/to_the_begining_hover.svg</file>
-        <file>qml/images/play_on.svg</file>
-        <file>qml/images/play_off.svg</file>
-        <file>qml/images/tempo_background.svg</file>
-        <file>qml/images/play_head_triangle.svg</file>
-        <file>qml/images/speaker.svg</file>
-        <file>qml/images/track_piece.png</file>
-        <file>qml/images/track_piece_small.png</file>
-        <file>qml/images/instrumental_track_button.svg</file>
-        <file>qml/images/zoom_slider_triangle.svg</file>
-        <file>qml/images/tonality_controller_left.svg</file>
-        <file>qml/images/tonality_up.svg</file>
-        <file>qml/images/tonality_down.svg</file>
-        <file>qml/images/tonality_up_pressed.svg</file>
-        <file>qml/images/tonality_down_pressed.svg</file>
-        <file>qml/images/clock.png</file>
+        <file>qml/Project/Header/images/lyrics_show_button_on.svg</file>
+        <file>qml/Project/Header/images/tracks_show_button_on.svg</file>
+        <file>qml/Project/Header/images/metronome_on.svg</file>
+        <file>qml/Project/Header/images/lyrics_show_button_off.svg</file>
+        <file>qml/Project/Header/images/tracks_show_button_off.svg</file>
+        <file>qml/Project/Header/images/metronome_off.svg</file>
+        <file>qml/Project/Header/images/player_background.svg</file>
+        <file>qml/Project/Header/images/loop_on.svg</file>
+        <file>qml/Project/Header/images/loop_off.svg</file>
+        <file>qml/Project/Header/images/go_back.svg</file>
+        <file>qml/Project/Header/images/go_back_hover.svg</file>
+        <file>qml/Project/Header/images/go_forward.svg</file>
+        <file>qml/Project/Header/images/go_forward_hover.svg</file>
+        <file>qml/Project/Header/images/to_the_begining.svg</file>
+        <file>qml/Project/Header/images/to_the_begining_hover.svg</file>
+        <file>qml/Project/Header/images/play_on.svg</file>
+        <file>qml/Project/Header/images/play_off.svg</file>
+        <file>qml/Project/Header/images/tempo_background.svg</file>
+        <file>qml/sharedimages/play_head_triangle.svg</file>
+        <file>qml/sharedimages/speaker.svg</file>
+        <file>qml/sharedimages/track_piece.png</file>
+        <file>qml/sharedimages/track_piece_small.png</file>
+        <file>qml/sharedimages/instrumental_track_button.svg</file>
+        <file>qml/Project/Header/images/zoom_slider_triangle.svg</file>
+        <file>qml/Project/Header/images/tonality_controller_left.svg</file>
+        <file>qml/Project/Header/images/tonality_up.svg</file>
+        <file>qml/Project/Header/images/tonality_down.svg</file>
+        <file>qml/Project/Header/images/tonality_up_pressed.svg</file>
+        <file>qml/Project/Header/images/tonality_down_pressed.svg</file>
+        <file>qml/sharedimages/clock.png</file>
         <file>qml/sounds/sounds.sf2</file>
         <file>qml/sounds/metronome.wav</file>
         <file>qml/fonts/Lato-Bold.ttf</file>
@@ -41,89 +37,88 @@
         <file>qml/fonts/arial.ttf</file>
         <file>qml/SvgImage.qml</file>
         <file>qml/ToggleButton.qml</file>
-        <file>qml/PlayerController.qml</file>
-        <file>qml/FeaturesToggleButton.qml</file>
+        <file>qml/Project/Header/PlayerController.qml</file>
+        <file>qml/Project/Header/FeaturesToggleButton.qml</file>
         <file>qml/ImageButton.qml</file>
         <file>qml/ButtonShadow.qml</file>
-        <file>qml/Tempo.qml</file>
+        <file>qml/Project/Header/Tempo.qml</file>
         <file>qml/js/strings.js</file>
-        <file>qml/Track.qml</file>
+        <file>qml/Project/Track.qml</file>
         <file>qml/js/uiutils.js</file>
         <file>qml/VerticalLine.qml</file>
         <file>qml/HorizontalLine.qml</file>
-        <file>qml/TrackButton.qml</file>
-        <file>qml/ZoomSlider.qml</file>
+        <file>qml/Project/TrackButton.qml</file>
+        <file>qml/Project/Header/ZoomSlider.qml</file>
         <file>qml/Circle.qml</file>
-        <file>qml/Header.qml</file>
+        <file>qml/Project/Header/Header.qml</file>
         <file>qml/TrackVolumeSlider.qml</file>
-        <file>qml/TracksContainer.qml</file>
-        <file>qml/TonalityController.qml</file>
+        <file>qml/Project/TracksContainer.qml</file>
+        <file>qml/Project/Header/TonalityController.qml</file>
         <file>qml/js/mathutils.js</file>
-        <file>qml/HeaderWithSubHeader.qml</file>
+        <file>qml/Project/Header/HeaderWithSubHeader.qml</file>
         <file>qml/js/zoom.js</file>
-        <file>qml/LeftSideBar.qml</file>
-        <file>qml/images/text/11_0.png</file>
-        <file>qml/images/text/8_0.png</file>
-        <file>qml/images/text/11_1.png</file>
-        <file>qml/images/text/8_1.png</file>
-        <file>qml/images/text/11_2.png</file>
-        <file>qml/images/text/8_2.png</file>
-        <file>qml/images/text/11_3.png</file>
-        <file>qml/images/text/8_3.png</file>
-        <file>qml/images/text/11_4.png</file>
-        <file>qml/images/text/8_4.png</file>
-        <file>qml/images/text/11_5.png</file>
-        <file>qml/images/text/8_5.png</file>
-        <file>qml/images/text/11_6.png</file>
-        <file>qml/images/text/8_6.png</file>
-        <file>qml/images/text/11_7.png</file>
-        <file>qml/images/text/8_7.png</file>
-        <file>qml/images/text/11_8.png</file>
-        <file>qml/images/text/8_8.png</file>
-        <file>qml/images/text/11_9.png</file>
-        <file>qml/images/text/8_9.png</file>
-        <file>qml/images/text/8_A.png</file>
-        <file>qml/images/text/8_B.png</file>
-        <file>qml/images/text/8_C.png</file>
-        <file>qml/images/text/8_D.png</file>
-        <file>qml/images/text/8_E.png</file>
-        <file>qml/images/text/8_F.png</file>
-        <file>qml/images/text/8_G.png</file>
-        <file>qml/images/text/22_0.png</file>
-        <file>qml/images/text/16_0.png</file>
-        <file>qml/images/text/22_1.png</file>
-        <file>qml/images/text/16_1.png</file>
-        <file>qml/images/text/22_2.png</file>
-        <file>qml/images/text/16_2.png</file>
-        <file>qml/images/text/22_3.png</file>
-        <file>qml/images/text/16_3.png</file>
-        <file>qml/images/text/22_4.png</file>
-        <file>qml/images/text/16_4.png</file>
-        <file>qml/images/text/22_5.png</file>
-        <file>qml/images/text/16_5.png</file>
-        <file>qml/images/text/22_6.png</file>
-        <file>qml/images/text/16_6.png</file>
-        <file>qml/images/text/22_7.png</file>
-        <file>qml/images/text/16_7.png</file>
-        <file>qml/images/text/22_8.png</file>
-        <file>qml/images/text/16_8.png</file>
-        <file>qml/images/text/22_9.png</file>
-        <file>qml/images/text/16_9.png</file>
-        <file>qml/images/text/16_A.png</file>
-        <file>qml/images/text/16_B.png</file>
-        <file>qml/images/text/16_C.png</file>
-        <file>qml/images/text/16_D.png</file>
-        <file>qml/images/text/16_E.png</file>
-        <file>qml/images/text/16_F.png</file>
-        <file>qml/images/text/16_G.png</file>
-        <file>qml/SelectMicrophoneDialog.qml</file>
+        <file>qml/sharedimages/text/11_0.png</file>
+        <file>qml/sharedimages/text/8_0.png</file>
+        <file>qml/sharedimages/text/11_1.png</file>
+        <file>qml/sharedimages/text/8_1.png</file>
+        <file>qml/sharedimages/text/11_2.png</file>
+        <file>qml/sharedimages/text/8_2.png</file>
+        <file>qml/sharedimages/text/11_3.png</file>
+        <file>qml/sharedimages/text/8_3.png</file>
+        <file>qml/sharedimages/text/11_4.png</file>
+        <file>qml/sharedimages/text/8_4.png</file>
+        <file>qml/sharedimages/text/11_5.png</file>
+        <file>qml/sharedimages/text/8_5.png</file>
+        <file>qml/sharedimages/text/11_6.png</file>
+        <file>qml/sharedimages/text/8_6.png</file>
+        <file>qml/sharedimages/text/11_7.png</file>
+        <file>qml/sharedimages/text/8_7.png</file>
+        <file>qml/sharedimages/text/11_8.png</file>
+        <file>qml/sharedimages/text/8_8.png</file>
+        <file>qml/sharedimages/text/11_9.png</file>
+        <file>qml/sharedimages/text/8_9.png</file>
+        <file>qml/sharedimages/text/8_A.png</file>
+        <file>qml/sharedimages/text/8_B.png</file>
+        <file>qml/sharedimages/text/8_C.png</file>
+        <file>qml/sharedimages/text/8_D.png</file>
+        <file>qml/sharedimages/text/8_E.png</file>
+        <file>qml/sharedimages/text/8_F.png</file>
+        <file>qml/sharedimages/text/8_G.png</file>
+        <file>qml/sharedimages/text/22_0.png</file>
+        <file>qml/sharedimages/text/16_0.png</file>
+        <file>qml/sharedimages/text/22_1.png</file>
+        <file>qml/sharedimages/text/16_1.png</file>
+        <file>qml/sharedimages/text/22_2.png</file>
+        <file>qml/sharedimages/text/16_2.png</file>
+        <file>qml/sharedimages/text/22_3.png</file>
+        <file>qml/sharedimages/text/16_3.png</file>
+        <file>qml/sharedimages/text/22_4.png</file>
+        <file>qml/sharedimages/text/16_4.png</file>
+        <file>qml/sharedimages/text/22_5.png</file>
+        <file>qml/sharedimages/text/16_5.png</file>
+        <file>qml/sharedimages/text/22_6.png</file>
+        <file>qml/sharedimages/text/16_6.png</file>
+        <file>qml/sharedimages/text/22_7.png</file>
+        <file>qml/sharedimages/text/16_7.png</file>
+        <file>qml/sharedimages/text/22_8.png</file>
+        <file>qml/sharedimages/text/16_8.png</file>
+        <file>qml/sharedimages/text/22_9.png</file>
+        <file>qml/sharedimages/text/16_9.png</file>
+        <file>qml/sharedimages/text/16_A.png</file>
+        <file>qml/sharedimages/text/16_B.png</file>
+        <file>qml/sharedimages/text/16_C.png</file>
+        <file>qml/sharedimages/text/16_D.png</file>
+        <file>qml/sharedimages/text/16_E.png</file>
+        <file>qml/sharedimages/text/16_F.png</file>
+        <file>qml/sharedimages/text/16_G.png</file>
+        <file>qml/Project/SelectMicrophoneDialog.qml</file>
         <file>qml/TextButton.qml</file>
         <file>qml/RadioButton.qml</file>
         <file>qml/RoundedRect.qml</file>
-        <file>qml/MicrophoneVolumeSlider.qml</file>
-        <file>qml/images/input_level_slider.svg</file>
-        <file>qml/images/output_level_slider.svg</file>
-        <file>qml/Lyrics.qml</file>
+        <file>qml/Project/Header/MicrophoneVolumeSlider.qml</file>
+        <file>qml/Project/Header/images/input_level_slider.svg</file>
+        <file>qml/Project/Header/images/output_level_slider.svg</file>
+        <file>qml/Project/Lyrics.qml</file>
         <file>qml/Welcome/Welcome.qml</file>
         <file>qml/Welcome/SideBarItem.qml</file>
         <file>qml/Welcome/welcome_gradient.png</file>
@@ -140,5 +135,6 @@
         <file>qml/Welcome/recording.svg</file>
         <file>qml/Welcome/recording_hover.svg</file>
         <file>qml/Welcome/no_items_box.svg</file>
+        <file>qml/Project/SingingResultDialog.qml</file>
     </qresource>
 </RCC>

@@ -8,6 +8,7 @@
 #include "Executors.h"
 #include "PortAudioInputReader.h"
 #include "AudioAverageInputLevelMonitor.h"
+#include "AudioUtils.h"
 
 static constexpr float THRESHOLD = 0.1;
 static const int BUFFER_SIZE = 1024;
@@ -63,7 +64,6 @@ void AudioInputManager::addAudioInputReaderCallback(const AudioInputReader::Call
 void AudioInputManager::startPitchDetection() {
     audioInputReader->callbacks.addListener(this);
     if (audioDataCollectorEnabled) {
-        dataCollector->clearCollectedData();
         audioInputReader->callbacks.addListener(dataCollector);
     }
 }
@@ -86,4 +86,10 @@ bool AudioInputManager::isAudioDataCollectorEnabled() const {
 
 void AudioInputManager::setAudioDataCollectorEnabled(bool audioDataCollectorEnabled) {
     this->audioDataCollectorEnabled = audioDataCollectorEnabled;
+}
+
+void AudioInputManager::setDataCollectorSeek(double time) {
+    int seek = AudioUtils::GetSamplesByteIndexFromTime(time, audioInputReader->getSampleRate(),
+            audioInputReader->getSampleSizeInBytes());
+    dataCollector->setSeek(seek);
 }

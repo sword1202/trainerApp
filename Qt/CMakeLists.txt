@@ -8,8 +8,12 @@ set(qtSources
         App/LoadTsf.cpp
         main.cpp
         Project/ProjectWindow.cpp
-        QtBridge/QtMvxPlayer.cpp
+        Project/ProjectWindow.h
         Project/SelectMicrophoneDialog.cpp
+        Project/SelectMicrophoneDialog.h
+        Project/SingingResultDialog.cpp
+        Project/SingingResultDialog.h
+        QtBridge/QtMvxPlayer.cpp
         QtBridge/QtCppBridge.cpp
         QtBridge/QtPitch.cpp
         QtBridge/QtWorkspaceZoomController.cpp

@@ -10,7 +10,7 @@
 #include <iostream>
 
 constexpr int MAX_SUPPORTED_DEVICE_PIXEL_RATIO = 2;
-constexpr const char* path = ":qml/images/text/";
+constexpr const char* path = ":qml/sharedimages/text/";
 
 using std::cerr;
 

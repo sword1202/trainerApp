@@ -60,13 +60,13 @@ ProjectWindow::ProjectWindow() :
     workspaceWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     // Lyrics
-    lyricsWidget = createQQuickWidget("qrc:/qml/Lyrics.qml");
+    lyricsWidget = createQQuickWidget("qrc:/qml/Project/Lyrics.qml");
     lyricsWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
     lyricsWidget->setFixedHeight(LYRICS_HEIGHT);
     lyricsWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
     // Header
-    QQuickWidget *headerWidget = createQQuickWidget("qrc:/qml/HeaderWithSubHeader.qml");
+    QQuickWidget *headerWidget = createQQuickWidget("qrc:/qml/Project/Header/HeaderWithSubHeader.qml");
     headerWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
     headerWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     headerWidget->setFixedHeight(HEADER_WITH_SUBHEADER_HEIGHT);

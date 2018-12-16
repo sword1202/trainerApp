@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import "js/uiutils.js" as UiUtils
+import "../js/uiutils.js" as UiUtils
 
 Rectangle {
     id: root

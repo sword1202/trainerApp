@@ -15,6 +15,10 @@ namespace AudioUtils {
         return (double)sampleSize / (double)sampleRate;
     }
 
+    int GetSamplesByteIndexFromTime(double time, int sampleRate, int sampleSize) {
+        return time * sampleRate * sampleSize;
+    }
+
     void MakeLinearFadeInAtBeginning(short *array, int size, int affectedSize) {
         assert(affectedSize <= size);
         double volumePercentageIncrement = 1.0 / affectedSize;

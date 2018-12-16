@@ -6,15 +6,24 @@
 #define VOCALTRAINER_AUDIOINPUTDATACOLLECTOR_H
 
 #include <stdint.h>
-#include <deque>
+#include <string>
+#include <mutex>
 
 class AudioInputDataCollector {
 public:
     void operator()(const int16_t* data, int size);
-    const std::deque<int16_t> &getCollectedData() const;
-    void clearCollectedData();
+    const std::string &getCollectedData() const;
+
+    int getSeek() const;
+    void setSeek(int seek);
+
+    AudioInputDataCollector();
+
 private:
-    std::deque<int16_t> collectedData;
+    std::string collectedData;
+    int seek;
+    mutable std::mutex seekMutex;
+    mutable std::mutex dataMutex;
 };
 
 

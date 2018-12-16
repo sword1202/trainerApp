@@ -50,6 +50,8 @@ public:
     void setDeviceName(const char* name) override;
 
     void init();
+
+    int getSampleSizeInBytes() const override;
 };
 
 

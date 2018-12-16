@@ -19,6 +19,7 @@ public:
     virtual void stop() = 0;
     virtual bool isRunning() = 0;
     virtual int getSampleRate() const = 0;
+    virtual int getSampleSizeInBytes() const = 0;
     virtual int getMaximumBufferSize() const = 0;
     virtual void setInputVolume(float value) = 0;
     virtual float getInputVolume() const = 0;

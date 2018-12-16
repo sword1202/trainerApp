@@ -41,14 +41,14 @@ static Drawer::Image* createImage(const QString& url, Drawer *drawer) {
 
 void WorkspaceDrawerWidgetSetup::initImages(Drawer *drawer, QWidget *widget) {
     // PlayHead
-    Drawer::Image* playHeadImage = createImageFromSvg(":qml/images/play_head_triangle.svg",
+    Drawer::Image* playHeadImage = createImageFromSvg(":qml/sharedimages/play_head_triangle.svg",
             WorkspaceDrawer::PLAYHEAD_TRIANGLE_WIDTH,
             WorkspaceDrawer::PLAYHEAD_TRIANGLE_HEIGHT,
             drawer, widget);
     workspaceDrawer->setPlayHeadTriangleImage(playHeadImage);
 
     // Clock
-    Drawer::Image* clockImage = createImage(":qml/images/clock.png", drawer);
+    Drawer::Image* clockImage = createImage(":qml/sharedimages/clock.png", drawer);
     workspaceDrawer->setClockImage(clockImage);
 }
 

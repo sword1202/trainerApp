@@ -32,6 +32,7 @@ public:
 
     bool isAudioDataCollectorEnabled() const;
     void setAudioDataCollectorEnabled(bool audioDataCollectorEnabled);
+    void setDataCollectorSeek(double time);
 
     ~AudioInputManager() override;
 };
