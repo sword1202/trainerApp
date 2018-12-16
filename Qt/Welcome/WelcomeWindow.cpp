@@ -10,6 +10,7 @@
 #include "App/AppSettings.h"
 #include "Project/ProjectWindow.h"
 #include "Utils/BaseQmlWidget.h"
+#include "App/VxAppUtils.h"
 
 constexpr double WINDOW_SIZE_RATIO = 0.65;
 
@@ -50,11 +51,12 @@ WelcomeWindow::WelcomeWindow() :
 }
 
 void WelcomeWindow::openExistingProject() {
-    close();
-    (new ProjectWindow())->showMaximized();
-}
-
-void WelcomeWindow::closeEvent(QCloseEvent *event) {
-    QWidget::closeEvent(event);
-    //delete this;
+    hide();
+    if (VxAppUtils::OpenExistingProject(this)) {
+        auto *projectWindow = new ProjectWindow();
+        projectWindow->setAttribute(Qt::WA_DeleteOnClose, true);
+        projectWindow->showMaximized();
+    } else {
+        show();
+    }
 }

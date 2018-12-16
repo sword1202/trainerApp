@@ -21,6 +21,8 @@
 #include "App/AppSettings.h"
 #include <QScrollBar>
 
+#include "App/VxAppUtils.h"
+
 constexpr int YARD_STICK_HEIGHT = static_cast<int>(WorkspaceDrawer::YARD_STICK_HEIGHT);
 constexpr int HEADER_WITH_SUBHEADER_HEIGHT = 75 + 75 - YARD_STICK_HEIGHT;
 constexpr int VERTICAL_SCROLL_WIDTH = 11;
@@ -153,13 +155,7 @@ void ProjectWindow::setupMenus() {
 }
 
 void ProjectWindow::onFileOpen() {
-    QString fileName = QFileDialog::getOpenFileName(
-            this, "Select .mvx file for signing", "", "Mvx files(*.mvx);; All files(*)");
-
-    //QString fileName = "/Users/Semyon/Downloads/torero.mvx";
-    if (!fileName.isEmpty()) {
-        VxApp::instance()->getPlayer()->setSource(fileName);
-    }
+    VxAppUtils::OpenExistingProject(this);
 }
 
 void ProjectWindow::onSelectMicrophone() {

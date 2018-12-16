@@ -22,10 +22,11 @@ int main(int argc, char *argv[])
     qmlRegisterType<QtMvxPlayer>();
 
     VxApp a(argc, argv);
-    a.setAttribute(Qt::AA_DontCreateNativeWidgetSiblings);
+    VxApp::setAttribute(Qt::AA_DontCreateNativeWidgetSiblings);
 
-    WelcomeWindow w;
-    w.show();
+    auto* welcomeWindow = new WelcomeWindow();
+    welcomeWindow->setAttribute(Qt::WA_DeleteOnClose, true);
+    welcomeWindow->show();
 
-    return a.exec();
+    return VxApp::exec();
 }

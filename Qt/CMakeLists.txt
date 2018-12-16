@@ -20,6 +20,8 @@ set(qtSources
         Workspace/TextImagesFactory.cpp
         Utils/BaseQmlWidget.cpp
         Utils/BaseQmlWidget.h
+        App/VxAppUtils.cpp
+        App/VxAppUtils.h
         )
 
 if (APPLE)

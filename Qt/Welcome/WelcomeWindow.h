@@ -12,9 +12,6 @@ class WelcomeWindow : public BaseMainWindow
 public:
     WelcomeWindow();
     Q_INVOKABLE void openExistingProject();
-
-protected:
-    void closeEvent(QCloseEvent *event) override;
 };
 
 #endif // WELCOMEWINDOW_H

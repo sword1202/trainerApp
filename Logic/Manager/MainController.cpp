@@ -47,15 +47,21 @@ void MainController::init(AudioInputManager *pitchInputReader, MvxPlayer *mvxPla
     });
 
     mvxPlayer->vxFileChangedListeners.addListener([this] (const VxFile* vxFile) {
-        workspaceController->setVxFile(vxFile);
+        if (workspaceController) {
+            workspaceController->setVxFile(vxFile);
+        }
     });
 
     mvxPlayer->prepareFinishedListeners.addListener([=] {
-        workspaceController->setIntervalsPerSecond(this->mvxPlayer->getBeatsPerMinute() / 60.0);
+        if (workspaceController) {
+            workspaceController->setIntervalsPerSecond(this->mvxPlayer->getBeatsPerMinute() / 60.0);
+        }
     });
 
     mvxPlayer->tonalityChangedListeners.addListener([=] {
-        workspaceController->update();
+        if (workspaceController) {
+            workspaceController->update();
+        }
     });
 
     mvxPlayer->setInstrumentalVolume(1.0);
@@ -97,6 +103,7 @@ void MainController::setWorkspaceController(WorkspaceController *workspaceContro
     this->workspaceController = workspaceController;
     workspaceController->setPitchesCollector(pitchInputReader);
     workspaceController->setVxFile(mvxPlayer->getVxFile());
+    workspaceController->setIntervalsPerSecond(mvxPlayer->getBeatsPerMinute() / 60.0);
     workspaceController->setPitchSequence(mvxPlayer);
 
     updateZoom();
