@@ -18,6 +18,7 @@
         <file>qml/Project/Header/images/play_on.svg</file>
         <file>qml/Project/Header/images/play_off.svg</file>
         <file>qml/Project/Header/images/tempo_background.svg</file>
+        <file>qml/Project/singing_result_dialog_background.svg</file>
         <file>qml/sharedimages/play_head_triangle.svg</file>
         <file>qml/sharedimages/speaker.svg</file>
         <file>qml/sharedimages/track_piece.png</file>

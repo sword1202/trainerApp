@@ -5,6 +5,7 @@
 #include "QtBridge/QtPitch.h"
 #include "QtBridge/QtMvxPlayer.h"
 #include "Welcome/WelcomeWindow.h"
+#include "Project/SingingResultDialog.h"
 
 int main(int argc, char *argv[])
 {
@@ -24,9 +25,12 @@ int main(int argc, char *argv[])
     VxApp a(argc, argv);
     VxApp::setAttribute(Qt::AA_DontCreateNativeWidgetSiblings);
 
-    auto* welcomeWindow = new WelcomeWindow();
-    welcomeWindow->setAttribute(Qt::WA_DeleteOnClose, true);
-    welcomeWindow->show();
+//    auto* welcomeWindow = new WelcomeWindow();
+//    welcomeWindow->setAttribute(Qt::WA_DeleteOnClose, true);
+//    welcomeWindow->show();
+
+    SingingResultDialog d(nullptr);
+    d.show();
 
     return VxApp::exec();
 }
