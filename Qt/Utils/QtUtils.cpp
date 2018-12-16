@@ -1,4 +1,6 @@
-﻿#include "QtUtils.h"
+﻿#include <utility>
+
+#include "QtUtils.h"
 #include <QTimer>
 #include <qfile.h>
 #include <QEvent>
@@ -9,7 +11,7 @@ namespace QtUtils {
     void StartRepeatedTimer(QObject *parent, const std::function<bool()> &action, int intervalInMilliseconds) {
         assert(action);
         assert(intervalInMilliseconds >= 0);
-        QTimer* timer = new QTimer(parent);
+        auto * timer = new QTimer(parent);
         timer->setInterval(intervalInMilliseconds);
         QObject::connect(timer, &QTimer::timeout, [=] {
             if (!action()) {
@@ -37,18 +39,16 @@ namespace QtUtils {
         std::function<void(const QVariant& value)> callback;
         QByteArray propertyName;
     public:
-        Watcher(QObject *parent, const std::function<void(const QVariant& value)>& callback,
-                const QByteArray& propertyName) :
+        Watcher(QObject *parent, std::function<void(const QVariant &value)> callback,
+                QByteArray propertyName) :
         QObject(parent),
-        propertyName(propertyName),
-        callback(callback) {}
-
-        virtual ~Watcher() {}
+        propertyName(std::move(propertyName)),
+        callback(std::move(callback)) {}
 
     protected:
         bool eventFilter(QObject *obj, QEvent *event) override {
             if (event->type() == QEvent::DynamicPropertyChange) {
-                QDynamicPropertyChangeEvent *const propEvent = static_cast<QDynamicPropertyChangeEvent*>(event);
+                auto *const propEvent = static_cast<QDynamicPropertyChangeEvent*>(event);
                 if (propEvent->propertyName() == propertyName) {
                     callback(obj->property(propertyName.data()));
                     return true;
