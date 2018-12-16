@@ -149,6 +149,53 @@ Item {
         }
     }
 
+    Item {
+        anchors.left: sidebar.right
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.bottom: footer.top
+        visible: (recentProjects.selected && projects.length <= 0) || (recentRecordings.selected && recordings.length <= 0)
+
+        SvgImage {
+            id: box
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: parent.top
+            anchors.topMargin: 113
+            width: 163.5
+            height: 175
+            source: "no_items_box.svg"
+        }
+
+        Text {
+            id: header
+            text: recentRecordings.selected ? "You don’t have any recordings" : "You don’t have any projects"
+            font.family: "Lato"
+            color: "#24232D"
+            font.pointSize: 17
+            anchors.top: box.bottom
+            anchors.topMargin: 25
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+
+        Text {
+            text: recentRecordings.selected ? "Your recordings appear here.
+To start recording you can either use one of the existing projects
+in the “All Projects” or create your own in the “New Project”" :
+
+            "Your recent projects appear here.
+To start signing you can either open an exisiting project
+or create your own in the “New Project”"
+
+            font.pointSize: 13
+            font.family: "Lato"
+            anchors.topMargin: 15
+            anchors.top: header.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            horizontalAlignment: Text.AlignHCenter
+            color: "#24232D"
+        }
+    }
+
     DropShadow {
         anchors.fill: footer
         source: footer

@@ -35,37 +35,37 @@ WelcomeWindow::WelcomeWindow() :
     QQmlContext* context = rootWidget->rootContext();
 
     QVariantList recordings {
-            QVariantMap {
-                {"title", "Fear of the Dark"},
-                {"artistName", "Iron Maiden"},
-                {"score", 57}
-            },
-            QVariantMap {
-                {"title", "Send Me An Angel"},
-                {"artistName", "Scorpions"},
-                {"score", 98}
-            },
-            QVariantMap {
-                {"title", "Sky Is Over"},
-                {"artistName", "Serj Tankian"},
-                {"score", 67}
-            }
+//            QVariantMap {
+//                {"title", "Fear of the Dark"},
+//                {"artistName", "Iron Maiden"},
+//                {"score", 57}
+//            },
+//            QVariantMap {
+//                {"title", "Send Me An Angel"},
+//                {"artistName", "Scorpions"},
+//                {"score", 98}
+//            },
+//            QVariantMap {
+//                {"title", "Sky Is Over"},
+//                {"artistName", "Serj Tankian"},
+//                {"score", 67}
+//            }
     };
     context->setContextProperty("recordings", recordings);
 
     QVariantList projects {
-            QVariantMap {
-                    {"title", "Fear of the Dark"},
-                    {"artistName", "Iron Maiden"},
-            },
-            QVariantMap {
-                    {"title", "Send Me An Angel"},
-                    {"artistName", "Scorpions"},
-            },
-            QVariantMap {
-                    {"title", "Sky Is Over"},
-                    {"artistName", "Serj Tankian"}
-            }
+//            QVariantMap {
+//                    {"title", "Fear of the Dark"},
+//                    {"artistName", "Iron Maiden"},
+//            },
+//            QVariantMap {
+//                    {"title", "Send Me An Angel"},
+//                    {"artistName", "Scorpions"},
+//            },
+//            QVariantMap {
+//                    {"title", "Sky Is Over"},
+//                    {"artistName", "Serj Tankian"}
+//            }
     };
     context->setContextProperty("projects", projects);
 

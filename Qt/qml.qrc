@@ -149,5 +149,6 @@
         <file>qml/Welcome/project_hover.svg</file>
         <file>qml/Welcome/recording.svg</file>
         <file>qml/Welcome/recording_hover.svg</file>
+        <file>qml/Welcome/no_items_box.svg</file>
     </qresource>
 </RCC>
