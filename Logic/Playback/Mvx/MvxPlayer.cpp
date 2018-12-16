@@ -47,7 +47,7 @@ MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
 
 void MvxPlayer::init(std::istream &is) {
     MvxFile file = MvxFile::readFromStream(is);
-    instrumentalPlayer.setAudioData(std::move(file.getInstrumental()));
+    instrumentalPlayer.setAudioData(std::move(file.moveInstrumental()));
     vxPlayer.setVxFile(file.getVxFile());
 
     beatsPerMinute = file.getBeatsPerMinute();

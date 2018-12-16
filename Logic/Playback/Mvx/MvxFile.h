@@ -12,10 +12,11 @@
 class MvxFile {
     VxFile vxFile;
     std::string instrumental;
-    double beatsPerMinute;
+    double beatsPerMinute = 0;
     std::string songTitleUtf8;
     std::string artistNameUtf8;
     double score = -1.0;
+    std::string recording;
 
     friend class boost::serialization::access;
 
@@ -25,14 +26,14 @@ class MvxFile {
         ar & beatsPerMinute;
         ar & vxFile;
         ar & instrumental;
+        ar & songTitleUtf8;
+        ar & artistNameUtf8;
+        ar & score;
+        ar & recording;
     }
 
 public:
-
-    MvxFile();
-    MvxFile(VxFile &&vxFile, std::string &&instrumental, double beatsPerMinute);
-    MvxFile(const VxFile &vxFile, std::istream& instrumentalStream, double beatsPerMinute);
-    MvxFile(const VxFile &vxFile, const char* instrumentalFile, double beatsPerMinute);
+    MvxFile() = default;
 
     MvxFile(MvxFile&& mvxFile) = default;
     // Preferably use move constructor instead
@@ -42,13 +43,16 @@ public:
     void writeToFile(const char* outFilePath);
 
     static MvxFile readFromStream(std::istream& is);
-    static MvxFile readFromFile(const char* outFilePath);
+    static MvxFile readFromFile(const char* filePath);
 
     const VxFile &getVxFile() const;
     VxFile &getVxFile();
 
     const std::string &getInstrumental() const;
-    std::string &getInstrumental();
+    std::string &&moveInstrumental();
+    void setInstrumental(const std::string &instrumental);
+
+    const std::string &getRecording() const;
 
     double getBeatsPerMinute() const;
     void setBeatsPerMinute(double beatsPerMinute);

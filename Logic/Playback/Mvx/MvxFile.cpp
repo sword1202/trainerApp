@@ -11,15 +11,6 @@
 
 using namespace CppUtils;
 
-MvxFile::MvxFile() {
-
-}
-
-MvxFile::MvxFile(VxFile &&vxFile, std::string &&instrumental, double beatsPerMinute) : vxFile(std::move(vxFile)),
-                                                                                       instrumental(std::move(instrumental)),
-                                                                                       beatsPerMinute(beatsPerMinute) {
-}
-
 void MvxFile::writeToStream(std::ostream &os) {
     boost::archive::text_oarchive ar(os);
     ar << *this;
@@ -37,8 +28,8 @@ MvxFile MvxFile::readFromStream(std::istream &is) {
     return file;
 }
 
-MvxFile MvxFile::readFromFile(const char *outFilePath) {
-    std::fstream file = Streams::OpenFile(outFilePath, std::ios::binary | std::ios::in);
+MvxFile MvxFile::readFromFile(const char *filePath) {
+    std::fstream file = Streams::OpenFile(filePath, std::ios::binary | std::ios::in);
     return readFromStream(file);
 }
 
@@ -71,26 +62,12 @@ const std::string &MvxFile::getInstrumental() const {
     return instrumental;
 }
 
-std::string &MvxFile::getInstrumental() {
-    return instrumental;
-}
-
-MvxFile::MvxFile(const VxFile &vxFile, std::istream &instrumentalStream, double beatsPerMinute) :
-        beatsPerMinute(beatsPerMinute), vxFile(vxFile) {
-    instrumental = Strings::StreamToString(instrumentalStream);
-}
-
-MvxFile::MvxFile(const VxFile &vxFile, const char *instrumentalFile, double beatsPerMinute) :
-        beatsPerMinute(beatsPerMinute), vxFile(vxFile) {
-    std::fstream file = Streams::OpenFile(instrumentalFile, std::ios::in | std::ios::binary);
-    instrumental = Strings::StreamToString(file);
-}
-
 double MvxFile::getScore() const {
     return score;
 }
 
 void MvxFile::setScore(double score) {
+    assert(score <= 100);
     MvxFile::score = score;
 }
 
@@ -108,4 +85,18 @@ const std::string &MvxFile::getArtistNameUtf8() const {
 
 void MvxFile::setArtistNameUtf8(const std::string &artistNameUtf8) {
     MvxFile::artistNameUtf8 = artistNameUtf8;
+}
+
+const std::string &MvxFile::getRecording() const {
+    return recording;
+}
+
+void MvxFile::setInstrumental(const std::string &instrumental) {
+    MvxFile::instrumental = instrumental;
+}
+
+std::string &&MvxFile::moveInstrumental() {
+    std::string moved = std::move(instrumental);
+    instrumental = "";
+    return std::move(moved);
 }
