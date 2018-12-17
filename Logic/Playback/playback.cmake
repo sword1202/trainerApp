@@ -37,3 +37,5 @@ endif(WIN32)
 if (LINUX)
     list(APPEND playbackSources Decoding/Decoder/audiodecoderffmpeg.cpp)
 endif(LINUX)
+
+list(TRANSFORM playbackSources PREPEND ${CMAKE_CURRENT_LIST_DIR}/)

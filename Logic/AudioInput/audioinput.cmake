@@ -12,3 +12,5 @@ set(pitchDetectionSources
         WAVFile.cpp
         AudioInputDataCollector.cpp
         )
+
+list(TRANSFORM pitchDetectionSources PREPEND ${CMAKE_CURRENT_LIST_DIR}/)
