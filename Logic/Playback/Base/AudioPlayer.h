@@ -66,7 +66,7 @@ public:
 	CppUtils::ListenersSet<> onNoDataAvailableListeners;
 	CppUtils::ListenersSet<> onPlaybackStartedListeners;
 	CppUtils::ListenersSet<> onPlaybackStoppedListeners;
-    CppUtils::ListenersSet<void*, int> onDataSentToOutputListeners; // <buffer, framesCount>
+    CppUtils::SynchronizedListenersSet<void*, int> onDataSentToOutputListeners; // <buffer, framesCount>
     CppUtils::ListenersSet<double, double> seekChangedListeners; // <seek, totalDuration>
     
     AudioPlayer();

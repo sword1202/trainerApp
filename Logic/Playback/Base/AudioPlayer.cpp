@@ -67,9 +67,7 @@ int AudioPlayer::callback(
             }
         }
 
-        Executors::ExecuteOnMainThread([=] {
-            self->onDataSentToOutputListeners.executeAll(outputBuffer, readFramesCount);
-        });
+        self->onDataSentToOutputListeners.executeAll(outputBuffer, readFramesCount);
 
         if (readFramesCount == framesPerBuffer) {
             return paContinue;
@@ -297,9 +295,11 @@ const AudioPlayer::PlaybackData &AudioPlayer::getPlaybackData() const {
 void AudioPlayer::setupPlaybackStartedListener() {
     assert(dataSentToOutputListenerKey == 0);
     dataSentToOutputListenerKey = onDataSentToOutputListeners.addOneShotListener([=] (void*, int) {
-        playing = true;
-        onPlaybackStartedListeners.executeAll();
-        dataSentToOutputListenerKey = 0;
+        Executors::ExecuteOnMainThread([this] {
+            playing = true;
+            onPlaybackStartedListeners.executeAll();
+            dataSentToOutputListenerKey = 0;
+        });
     });
 }
 
