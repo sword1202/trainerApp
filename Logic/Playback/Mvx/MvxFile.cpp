@@ -96,10 +96,8 @@ void MvxFile::setInstrumental(const std::string &instrumental) {
     MvxFile::instrumental = instrumental;
 }
 
-std::string &&MvxFile::moveInstrumental() {
-    std::string moved = std::move(instrumental);
-    instrumental = "";
-    return std::move(moved);
+std::string &MvxFile::moveInstrumental() {
+    return instrumental;
 }
 
 bool MvxFile::isRecording() const {

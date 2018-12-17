@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include "VxFile.h"
+#include "StringUtils.h"
 
 class MvxFile {
     // signature
@@ -34,6 +35,8 @@ class MvxFile {
         if (version < 1) {
             recording = false;
         }
+
+        CppUtils::Strings::WriteStringToFile("/Users/semyontikhonenko/Desktop/yo.mp3", instrumental);
     }
 
     template<typename Archive>
@@ -80,7 +83,7 @@ public:
     void setVxFile(const VxFile &vxFile);
 
     const std::string &getInstrumental() const;
-    std::string &&moveInstrumental();
+    std::string &moveInstrumental();
     void setInstrumental(const std::string &instrumental);
 
     const std::string &getRecordingData() const;
