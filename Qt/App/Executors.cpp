@@ -1,5 +1,6 @@
 ﻿#include "Executors.h"
 #include "VxApp.h"
+#include <QTimer>
 #include <QThreadPool>
 
 namespace CppUtils {
@@ -23,6 +24,12 @@ namespace CppUtils {
         void ExecuteOnBackgroundThread(std::function<void()> function) {
             _Runnable* runnable = new _Runnable(function);
             QThreadPool::globalInstance()->start(runnable);
+        }
+
+        void ExecuteOnMainThreadAfterDelay(std::function<void()> function, int delayInMilliseconds) {
+            ExecuteOnMainThread([=] {
+                QTimer::singleShot(delayInMilliseconds, function);
+            });
         }
     }
 }
