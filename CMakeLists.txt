@@ -16,13 +16,13 @@ set(CMAKE_AUTORCC ON)
 
 add_compile_definitions(USE_BOOST_SERIALIZATION)
 
-include(Qt/CMakeLists.txt)
+include(Qt/qt.cmake)
 list(TRANSFORM qtSources PREPEND Qt/)
 
-include(Logic/CMakeLists.txt)
+include(Logic/logic.cmake)
 list(TRANSFORM logicSources PREPEND Logic/)
 
-include(Portmixer/CMakeLists.txt)
+include(Portmixer/portmixer.cmake)
 list(TRANSFORM portMixerSources PREPEND Portmixer/)
 
 set(cppUtilsSources
