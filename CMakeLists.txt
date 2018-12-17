@@ -101,20 +101,4 @@ if (LINUX)
     target_link_libraries(VocalTrainer general ${CMAKE_SOURCE_DIR}/libs/linux/Release/libGLEW.a)
 endif(LINUX)
 
-include_directories(
-        include
-        CppUtils
-        Logic/AudioInput
-        Logic/Drawers
-        Logic/Manager
-        Logic/Workspace
-        Logic/Playback/Decoding
-        Logic/Playback/Base
-        Logic/Playback/Other
-        Logic/Playback/Vx
-        Logic/Playback/Mvx
-        Logic/Playback/Midi/CraigsappMidifile
-        Logic
-        Qt
-        include/nanovg
-        include/nanovg/glew)
+include(include.cmake)

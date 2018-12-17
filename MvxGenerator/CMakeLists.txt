@@ -18,8 +18,7 @@ set(CMAKE_AUTORCC ON)
 
 add_compile_definitions(USE_BOOST_SERIALIZATION)
 
-include(../Logic/CMakeLists.txt)
-list(TRANSFORM logicSources PREPEND ../Logic/)
+include(../Logic/logic.cmake)
 
 set(cppUtilsSources
         ../CppUtils/TimeUtils.cpp)
@@ -31,3 +30,25 @@ find_package(Qt5QuickWidgets REQUIRED)
 find_package(Qt5Svg REQUIRED)
 
 add_executable(MvxGenerator ${sources} main.cpp)
+
+target_link_libraries(MvxGenerator Qt5::Widgets)
+target_link_libraries(MvxGenerator Qt5::QuickWidgets)
+target_link_libraries(MvxGenerator Qt5::Svg)
+
+include_directories(
+        include
+        CppUtils
+        Logic/AudioInput
+        Logic/Drawers
+        Logic/Manager
+        Logic/Workspace
+        Logic/Playback/Decoding
+        Logic/Playback/Base
+        Logic/Playback/Other
+        Logic/Playback/Vx
+        Logic/Playback/Mvx
+        Logic/Playback/Midi/CraigsappMidifile
+        Logic
+        Qt
+        include/nanovg
+        include/nanovg/glew)
