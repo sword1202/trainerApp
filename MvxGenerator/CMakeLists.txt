@@ -19,11 +19,14 @@ set(CMAKE_AUTORCC ON)
 add_compile_definitions(USE_BOOST_SERIALIZATION)
 
 include(../Logic/Playback/playback.cmake)
+include(../cpputils.cmake)
 
-set(cppUtilsSources
-        ../CppUtils/TimeUtils.cpp)
-
-set(sources ${playbackSources} ${cppUtilsSources})
+set(sources ${playbackSources}
+        ${cppUtilsSources}
+        ../CppUtils/Executors.mm
+        ../Logic/AudioInput/Pitch.cpp
+        ../Qt/Utils/QtUtils.cpp
+        ../Qt/App/LoadTsf.cpp)
 
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5QuickWidgets REQUIRED)
@@ -39,3 +42,15 @@ target_link_libraries(MvxGenerator Qt5::QuickWidgets)
 target_link_libraries(MvxGenerator Qt5::Svg)
 
 include(../include.cmake)
+
+if (APPLE)
+    target_link_libraries(MvxGenerator "-framework Accelerate")
+    target_link_libraries(MvxGenerator "-framework AppKit")
+    target_link_libraries(MvxGenerator "-framework AudioToolbox")
+    target_link_libraries(MvxGenerator "-framework AVFoundation")
+    target_link_libraries(MvxGenerator "-framework CoreAudio")
+
+    target_link_libraries(MvxGenerator ${CMAKE_SOURCE_DIR}/../libs/macos/Release/libboost_serialization.a)
+    target_link_libraries(MvxGenerator ${CMAKE_SOURCE_DIR}/../libs/macos/Release/libportaudio.a)
+    target_link_libraries(MvxGenerator ${CMAKE_SOURCE_DIR}/../libs/macos/Release/libSoundTouch.1.dylib)
+endif(APPLE)

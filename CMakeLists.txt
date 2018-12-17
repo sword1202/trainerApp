@@ -22,8 +22,7 @@ include(Logic/logic.cmake)
 include(Portmixer/portmixer.cmake)
 list(TRANSFORM portMixerSources PREPEND Portmixer/)
 
-set(cppUtilsSources
-        CppUtils/TimeUtils.cpp)
+include(cpputils.cmake)
 
 set(sources ${qtSources} ${logicSources} ${portMixerSources} ${cppUtilsSources})
 
