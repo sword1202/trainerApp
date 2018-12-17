@@ -48,6 +48,7 @@ public:
     CppUtils::ListenersSet<double> seekChangedListeners;
     CppUtils::ListenersSet<double> seekChangedFromUserListeners;
     CppUtils::ListenersSet<> tonalityChangedListeners;
+    CppUtils::ListenersSet<> onCompleteListeners;
     CppUtils::ListenersSet<const PlaybackBounds&> boundsChangedListeners;
 
     MvxPlayer();

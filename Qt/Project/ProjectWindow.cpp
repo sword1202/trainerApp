@@ -22,6 +22,7 @@
 #include <QScrollBar>
 
 #include "App/VxAppUtils.h"
+#include "SingingResultDialog.h"
 
 constexpr int YARD_STICK_HEIGHT = static_cast<int>(WorkspaceDrawer::YARD_STICK_HEIGHT);
 constexpr int HEADER_WITH_SUBHEADER_HEIGHT = 75 + 75 - YARD_STICK_HEIGHT;
@@ -102,6 +103,11 @@ ProjectWindow::ProjectWindow() :
 #endif
 
     setupMenus();
+
+    VxApp::instance()->getPlayer()->onCompleteListeners.addListener([=] {
+        auto* dialog = new SingingResultDialog(this);
+        dialog->show();
+    });
 }
 
 void ProjectWindow::onOutputVolumeChanged(float value) {

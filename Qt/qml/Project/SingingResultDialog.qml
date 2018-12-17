@@ -46,6 +46,10 @@ SvgImage {
             anchors.left: parent.left
             anchors.verticalCenter: parent.verticalCenter
             text: "Close"
+
+            onClicked: {
+                self.close()
+            }
         }
 
         TextOnlyButton {

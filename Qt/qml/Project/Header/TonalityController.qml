@@ -117,7 +117,7 @@ Item {
         height: 18.75
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        idleImage: ""
+        idleImage: "images/tonality_down.svg"
         hoverImage: "images/tonality_down_pressed.svg"
 
         onClicked: {

@@ -48,26 +48,16 @@ class MvxFile {
     void doSerialize(Archive & ar, const unsigned int version, bool readOnlySignature){
         this->version = version;
 
-        if (version < 1) {
+        ar & recording;
+        ar & songTitleUtf8;
+        ar & artistNameUtf8;
+        ar & score;
+
+        if (!readOnlySignature) {
             ar & beatsPerMinute;
             ar & vxFile;
             ar & instrumental;
-            ar & songTitleUtf8;
-            ar & artistNameUtf8;
-            ar & score;
             ar & recordingData;
-        } else {
-            ar & recording;
-            ar & songTitleUtf8;
-            ar & artistNameUtf8;
-            ar & score;
-
-            if (!readOnlySignature) {
-                ar & beatsPerMinute;
-                ar & vxFile;
-                ar & instrumental;
-                ar & recordingData;
-            }
         }
     }
 
