@@ -26,13 +26,14 @@ set(sources ${playbackSources}
         ../CppUtils/Executors.mm
         ../Logic/AudioInput/Pitch.cpp
         ../Qt/Utils/QtUtils.cpp
+        Handler.h
         ../Qt/App/LoadTsf.cpp)
 
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5QuickWidgets REQUIRED)
 find_package(Qt5Svg REQUIRED)
 
-add_executable(MvxGenerator ${sources} main.cpp)
+add_executable(MvxGenerator ${sources} main.cpp main.qrc)
 
 set_property (TARGET MvxGenerator APPEND_STRING PROPERTY
         COMPILE_FLAGS "-fobjc-arc")

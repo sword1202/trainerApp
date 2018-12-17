@@ -16,7 +16,9 @@ set(playbackSources
         Midi/CraigsappMidifile/MidiMessage.cpp
 
         Mvx/MvxFile.cpp
+        Mvx/MvxFile.h
         Mvx/MvxPlayer.cpp
+        Mvx/MvxPlayer.h
 
         Other/MetronomeAudioPlayer.cpp
         Other/RealtimeStreamingAudioPlayer.cpp
