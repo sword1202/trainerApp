@@ -47,11 +47,36 @@ Rectangle {
             }
         }
 
+        RowLayout {
+            Text {
+                text: "Artist name"
+            }
+
+            TextEdit {
+                id: artistName
+                text: "Uknown"
+                inputMethodHints: Qt.ImhDigitsOnly
+            }
+        }
+
+        RowLayout {
+            Text {
+                text: "Artist name"
+            }
+
+            TextEdit {
+                id: title
+                text: "Untitled"
+                inputMethodHints: Qt.ImhDigitsOnly
+            }
+        }
+
         Button {
             text: "Submit"
 
             onClicked: {
-                self.submit(inctrumentalFilePath.text, midiFilePath.text, parseInt(midiIndex.text))
+                self.submit(inctrumentalFilePath.text, midiFilePath.text, parseInt(midiIndex.text),
+                            artistName.text, title.text)
             }
         }
     }

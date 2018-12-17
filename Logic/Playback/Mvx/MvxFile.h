@@ -77,6 +77,7 @@ public:
 
     const VxFile &getVxFile() const;
     VxFile &getVxFile();
+    void setVxFile(const VxFile &vxFile);
 
     const std::string &getInstrumental() const;
     std::string &&moveInstrumental();

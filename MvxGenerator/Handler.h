@@ -7,6 +7,8 @@
 #include <QQmlContext>
 #include <Playback/Midi/MidiFileReader.h>
 #include <QMessageBox>
+#include <QStandardPaths>
+#include "MvxFile.h"
 
 #ifndef MVXGENERATOR_HANDLER_H
 #define MVXGENERATOR_HANDLER_H
@@ -30,10 +32,14 @@ public:
     Q_INVOKABLE QString showSelectMidi() {
         return QFileDialog::getOpenFileName(
                 dynamic_cast<QWidget *>(parent()),
-                "Select midi", "", "Midi files(*.midi,*.mid);; All files(*)");
+                "Select midi", "", "Midi files(*.midi *.mid);; All files(*)");
     }
 
-    Q_INVOKABLE void submit(const QString& instrumentalFilePath, const QString& midiFilePath, int midiIndex) {
+    Q_INVOKABLE void submit(const QString& instrumentalFilePath,
+            const QString& midiFilePath,
+            int midiIndex,
+            const QString& artistName,
+            const QString& title) {
         assert(!instrumentalFilePath.isEmpty())
         assert(!midiFilePath.isEmpty())
 
@@ -43,6 +49,23 @@ public:
         reader.read(midiFilePath.toLocal8Bit().toStdString(), &result, &beatsPerMinute);
 
         assert(result.size() > midiIndex)
+        auto outputFilePath = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation)[0];
+        outputFilePath += "/" + artistName + "-" + title;
+
+        while (QFile::exists(outputFilePath)) {
+            outputFilePath += "_";
+        }
+
+        outputFilePath += ".mvx";
+
+        MvxFile mvxFile;
+        mvxFile.setVxFile(result[midiIndex]);
+        mvxFile.setArtistNameUtf8(artistName.toUtf8().toStdString());
+        mvxFile.setSongTitleUtf8(title.toUtf8().toStdString());
+        mvxFile.loadInstrumentalFromFile(instrumentalFilePath.toLocal8Bit().data());
+        mvxFile.writeToFile(outputFilePath.toLocal8Bit().data());
+
+        QMessageBox::information(dynamic_cast<QWidget *>(parent()), "File created", outputFilePath);
     }
 };
 

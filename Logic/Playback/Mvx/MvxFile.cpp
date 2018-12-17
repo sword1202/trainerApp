@@ -110,3 +110,7 @@ void MvxFile::setRecordingData(const std::string &recordingData) {
     MvxFile::recordingData = recordingData;
     recording = !recordingData.empty();
 }
+
+void MvxFile::setVxFile(const VxFile &vxFile) {
+    this->vxFile = vxFile;
+}
