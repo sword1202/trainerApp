@@ -17,10 +17,7 @@ set(CMAKE_AUTORCC ON)
 add_compile_definitions(USE_BOOST_SERIALIZATION)
 
 include(Qt/qt.cmake)
-list(TRANSFORM qtSources PREPEND Qt/)
-
 include(Logic/logic.cmake)
-list(TRANSFORM logicSources PREPEND Logic/)
 
 include(Portmixer/portmixer.cmake)
 list(TRANSFORM portMixerSources PREPEND Portmixer/)

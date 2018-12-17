@@ -41,3 +41,5 @@ else()
             Workspace/OpenglWorkspaceWidget.cpp
             )
 endif(APPLE)
+
+list(TRANSFORM qtSources PREPEND ${CMAKE_CURRENT_LIST_DIR}/)

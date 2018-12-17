@@ -15,10 +15,10 @@ set(Workspace
         Workspace/PianoDrawer.cpp
         Workspace/WorkspaceDrawer.cpp)
 
-include(Logic/AudioInput/CMakeLists.txt)
+include(${CMAKE_CURRENT_LIST_DIR}/AudioInput/audioinput.cmake)
 list(TRANSFORM pitchDetectionSources PREPEND AudioInput/)
 
-include(Logic/Playback/CMakeLists.txt)
+include(${CMAKE_CURRENT_LIST_DIR}/Playback/playback.cmake)
 list(TRANSFORM playbackSources PREPEND Playback/)
 
 set(logicSources
@@ -36,4 +36,6 @@ else()
     list(APPEND logicSources
             Drawers/OpenGLNvgDrawer.cpp)
 endif(APPLE)
+
+list(TRANSFORM logicSources PREPEND ${CMAKE_CURRENT_LIST_DIR}/)
 
