@@ -37,8 +37,8 @@ class MvxFile {
     }
 
     template<typename Archive>
-    void save(Archive & ar, const unsigned int version) const
-    {
+    void save(Archive & ar, const unsigned int version) const {
+        assert(beatsPerMinute > 0 && "beatsPerMinute not set");
         const_cast<MvxFile*>(this)->doSerialize(ar, version, false);
     }
 

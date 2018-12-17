@@ -52,7 +52,7 @@ public:
         auto outputFilePath = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation)[0];
         outputFilePath += "/" + artistName + "-" + title;
 
-        while (QFile::exists(outputFilePath)) {
+        while (QFile::exists(outputFilePath + ".mvx")) {
             outputFilePath += "_";
         }
 
@@ -63,6 +63,7 @@ public:
         mvxFile.setArtistNameUtf8(artistName.toUtf8().toStdString());
         mvxFile.setSongTitleUtf8(title.toUtf8().toStdString());
         mvxFile.loadInstrumentalFromFile(instrumentalFilePath.toLocal8Bit().data());
+        mvxFile.setBeatsPerMinute(beatsPerMinute);
         mvxFile.writeToFile(outputFilePath.toLocal8Bit().data());
 
         QMessageBox::information(dynamic_cast<QWidget *>(parent()), "File created", outputFilePath);

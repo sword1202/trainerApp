@@ -14,7 +14,7 @@ static constexpr int    MAX_MIDI_CHANNELS = 15;
 
 static constexpr int    NO_CHANNEL_PREFIX = -1;
 
-static constexpr int    MILLISECONDS_IN_MINUTE = 60'000'000;
+static constexpr int    MICROSECONDS_IN_MINUTE = 60'000'000;
 static constexpr int    SECONDS_IN_MINUTE = 60;
 
 // MIDI Message = array[status_midi_message_byte, midi_message_byte_1, midi_message_byte_2, midi_message_byte_3, ...]
@@ -105,7 +105,7 @@ void MidiFileReader::reset()
     durationInTicks = 0;
     ticksPerQuarter = 0;
     ticksPerSecond = 0.0;
-    beatsPerMinute = 0.0;
+    beatsPerMinute = -1;
     ticksPerBeat = 0;
     beatsPerTick = 0.0;
     currentChannelPrefix = NO_CHANNEL_PREFIX;
@@ -223,9 +223,12 @@ void MidiFileReader::processEvent(const MidiEvent &event)
 			int microsecondsPerQuarter = event[MIDI_MESSAGE_BYTE_INDEX_3] << 16 | 
 									     event[MIDI_MESSAGE_BYTE_INDEX_4] << 8  | 
 				                         event[MIDI_MESSAGE_BYTE_INDEX_5];
-            beatsPerMinute = 1.0 * MILLISECONDS_IN_MINUTE / microsecondsPerQuarter;
-            ticksPerBeat   =  ticksPerSecond * SECONDS_IN_MINUTE / beatsPerMinute;
-            beatsPerTick =   1.0 / ticksPerBeat;
+			// Assign beatsPerMinute only ones
+            if (beatsPerMinute < 0) {
+                beatsPerMinute = 1.0 * MICROSECONDS_IN_MINUTE / microsecondsPerQuarter;
+                ticksPerBeat   =  ticksPerSecond * SECONDS_IN_MINUTE / beatsPerMinute;
+                beatsPerTick =   1.0 / ticksPerBeat;
+            }
             break;
         }
 

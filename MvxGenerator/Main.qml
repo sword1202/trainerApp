@@ -49,7 +49,7 @@ Rectangle {
 
         RowLayout {
             Text {
-                text: "Artist name"
+                text: "Artist name:"
             }
 
             TextEdit {
@@ -61,7 +61,7 @@ Rectangle {
 
         RowLayout {
             Text {
-                text: "Artist name"
+                text: "Song title:"
             }
 
             TextEdit {

@@ -24,6 +24,8 @@ double MetronomeAudioPlayer::getBeatsPerMinute() const {
 }
 
 void MetronomeAudioPlayer::setAudioDataInfo(double beatsPerMinute, double totalDurationInSeconds) {
+    assert(beatsPerMinute > 0);
+
     this->beatsPerMinute = beatsPerMinute;
     setTotalDurationInSeconds(totalDurationInSeconds);
 
