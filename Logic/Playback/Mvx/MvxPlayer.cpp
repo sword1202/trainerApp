@@ -38,6 +38,7 @@ MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
 
     instrumentalPlayer.onCompleteListeners.addListener([=] {
         this->onComplete();
+        onPlaybackStopped();
     });
 
     instrumentalPlayer.onPlaybackStartedListeners.addListener([=] {
@@ -59,7 +60,6 @@ void MvxPlayer::init(const char *filePath) {
 void MvxPlayer::onComplete() {
     stopAndMoveSeekToBeginning();
     onCompleteListeners.executeAll();
-    onPlaybackStopped();
 }
 
 void MvxPlayer::pausePlayer(AudioPlayer *player) {

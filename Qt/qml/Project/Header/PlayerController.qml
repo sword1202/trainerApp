@@ -29,7 +29,7 @@ Item {
         offImage: "images/loop_off.svg"
 
         onOnChanged: {
-            cpp.mainWindow.setBoundsSelectionEnabled(on)
+            self.setBoundsSelectionEnabled(on)
         }
     }
 
