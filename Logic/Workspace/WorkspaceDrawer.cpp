@@ -251,8 +251,8 @@ void WorkspaceDrawer::drawPitchesGraph() const {
     assert(pitchGraphColor[3] > 0 && "pitchGraphColor not initialized or is completely transparent");
 
     // Pre-draw one beat more to avoid graph interruption
-    double pitchesGraphDrawBeginTime = TimeUtils::NowInSeconds() - this->getIntervalDuration()
-                                                                   * (BEATS_IN_TACT + 1);
+    double drawInterval = this->getIntervalDuration() * (BEATS_IN_TACT + 1);
+    double pitchesGraphDrawBeginTime = TimeUtils::NowInSeconds() - drawInterval;
     int pitchesCount = pitchesCollector->getPitchesCountAfterTime(pitchesGraphDrawBeginTime);
     if (pitchesCount <= 0) {
         return;
