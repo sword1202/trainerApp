@@ -29,7 +29,10 @@ MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
     instrumentalPlayer.seekChangedListeners.addListener([=](double seek, double) {
         if (bounds) {
             if (seek >= bounds.getEndSeek()) {
-                this->onComplete();
+                // avoid multiple onComplete calls
+                if (pauseRequestedCounter == 0) {
+                    this->onComplete();
+                }
             }
         }
 
