@@ -362,7 +362,7 @@ static std::string generateClockText(float seconds) {
     return TimeUtils::ConvertSecondsToFormattedTimeString("%M:%S", static_cast<int>(seconds));
 }
 
-void WorkspaceDrawer::drawPlayHead(float x) const {
+void WorkspaceDrawer::drawPlayHead(float x, float timeInSeconds) const {
     float triangleY = YARD_STICK_HEIGHT - PLAYHEAD_TRIANGLE_HEIGHT / 2 + 1;
     float triangleX = x - PLAYHEAD_TRIANGLE_WIDTH / 2;
 
@@ -382,7 +382,6 @@ void WorkspaceDrawer::drawPlayHead(float x) const {
     drawer->setTextBaseline(Drawer::MIDDLE);
     float clockTextX = x;
     float clockTextY = clockY + CLOCK_HEIGHT / 2;
-    double timeInSeconds = getWorkspaceSeek();
     std::string clockText = generateClockText(timeInSeconds);
     drawer->fillText(clockText, clockTextX, clockTextY);
 }
@@ -395,11 +394,12 @@ void WorkspaceDrawer::drawSecondPlayHead() const {
     }
 
     float x = startX + width;
-    drawPlayHead(x);
+    drawPlayHead(x, bounds.getEndSeek());
 }
 
 void WorkspaceDrawer::drawFirstPlayHead() const {
-    drawPlayHead(BEATS_IN_TACT * intervalWidth);
+    double time = getWorkspaceSeek();
+    drawPlayHead(BEATS_IN_TACT * intervalWidth, time);
 }
 
 int WorkspaceDrawer::getDistanceFromFirstPitch(const Pitch &pitch) const {

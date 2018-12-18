@@ -78,7 +78,7 @@ class WorkspaceDrawer : public WorkspaceController {
     void drawBoundsIfNeed() const;
     void drawYardStick() const;
     void drawYardStickDot(float x, float y) const;
-    void drawPlayHead(float x) const;
+    void drawPlayHead(float x, float timeInSeconds) const;
     void drawFirstPlayHead() const;
     void drawSecondPlayHead() const;
 
