@@ -14,8 +14,17 @@ constexpr const char* path = ":qml/sharedimages/text/";
 
 using std::cerr;
 
-void TextImagesFactory::addImage(Drawer* drawer, int devicePixelRatio, int fontSize, char character) {
-    QString fileName = path + QString::number(fontSize * devicePixelRatio) + "_" + QString(character) + ".png";
+void TextImagesFactory::addImage(Drawer* drawer, int devicePixelRatio, int fontSize,
+        char character, bool useCharacterCode) {
+    QString fileName = path + QString::number(fontSize * devicePixelRatio) + "_";
+    if (!useCharacterCode) {
+        fileName += QString(character);
+    } else {
+        fileName += "code" + QString::number(int(character));
+    }
+    fileName += ".png";
+
+    std::string fileNameStd = fileName.toStdString();
     QImage image(fileName);
     assert(!image.isNull());
 
@@ -48,4 +57,6 @@ void TextImagesFactory::load(Drawer* drawer, int devicePixelRatio) {
     for (char ch = 'A'; ch <= 'G'; ch++) {
         addImage(drawer, devicePixelRatio, PianoDrawer::FONT_SIZE, ch);
     }
+
+    addImage(drawer, devicePixelRatio, WorkspaceDrawer::CLOCK_FONT_SIZE, ':', true);
 }

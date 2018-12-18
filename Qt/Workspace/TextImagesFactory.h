@@ -8,7 +8,7 @@
 #include "Drawer.h"
 
 class TextImagesFactory : public DrawerTextImagesFactory {
-    void addImage(Drawer* drawer, int devicePixelRatio, int fontSize, char character);
+    void addImage(Drawer* drawer, int devicePixelRatio, int fontSize, char character, bool useCharacterCode = false);
 public:
     void load(Drawer* drawer, int devicePixelRatio);
 };

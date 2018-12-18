@@ -102,8 +102,6 @@ void WorkspaceDrawer::draw() {
     drawSecondPlayHead();
 
     drawer->endFrame();
-
-    drawer->test();
 }
 
 float WorkspaceDrawer::getGridTranslation() const {
@@ -360,6 +358,10 @@ void WorkspaceDrawer::drawYardStickDot(float x, float y) const {
     drawer->fill();
 }
 
+static std::string generateClockText(float seconds) {
+    return TimeUtils::ConvertSecondsToFormattedTimeString("%M:%S", static_cast<int>(seconds));
+}
+
 void WorkspaceDrawer::drawPlayHead(float x) const {
     float triangleY = YARD_STICK_HEIGHT - PLAYHEAD_TRIANGLE_HEIGHT / 2 + 1;
     float triangleX = x - PLAYHEAD_TRIANGLE_WIDTH / 2;
@@ -368,10 +370,21 @@ void WorkspaceDrawer::drawPlayHead(float x) const {
     drawer->setStrokeColor(playHeadColor);
     drawer->drawVerticalLine(x, YARD_STICK_HEIGHT, height);
 
+    // Draw clock above playhead
     float clockX = x - CLOCK_WIDTH / 2;
     float clockY = triangleY - CLOCK_HEIGHT;
     assert(clockImage);
     drawer->drawImage(clockX, clockY, CLOCK_WIDTH, CLOCK_HEIGHT, clockImage);
+
+    // Draw clock text
+    drawer->setTextFontSize(CLOCK_FONT_SIZE);
+    drawer->setTextAlign(Drawer::CENTER);
+    drawer->setTextBaseline(Drawer::MIDDLE);
+    float clockTextX = x;
+    float clockTextY = clockY + CLOCK_HEIGHT / 2;
+    double timeInSeconds = getWorkspaceSeek();
+    std::string clockText = generateClockText(timeInSeconds);
+    drawer->fillText(clockText, clockTextX, clockTextY);
 }
 
 void WorkspaceDrawer::drawSecondPlayHead() const {

@@ -105,6 +105,7 @@ public:
     static constexpr float CLOCK_HEIGHT = 22.f;
     static constexpr float YARD_STICK_HEIGHT = CLOCK_HEIGHT  + PLAYHEAD_TRIANGLE_HEIGHT / 2;
     static constexpr int YARD_STICK_FONT_SIZE = 11;
+    static constexpr int CLOCK_FONT_SIZE = 11;
 
     WorkspaceDrawer(Drawer *drawer, const std::function<void()>& onUpdateRequested);
     ~WorkspaceDrawer();

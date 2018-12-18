@@ -108,8 +108,6 @@ public:
     void setTextDrawStrategy(TextDrawStrategy textDrawStrategy);
 
     void setTextImagesFactory(DrawerTextImagesFactory *textImagesFactory);
-
-    virtual void test();
 protected:
 
     float getWidth() const;

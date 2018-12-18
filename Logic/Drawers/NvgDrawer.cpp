@@ -236,7 +236,3 @@ void NvgDrawer::drawImage(float x, float y, float w, float h, Drawer::Image *ima
     fillWithImage(image, 0, 0, w, h);
     translate(-x, -y);
 }
-
-void NvgDrawer::test() {
-
-}
