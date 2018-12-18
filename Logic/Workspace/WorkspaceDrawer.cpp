@@ -30,7 +30,7 @@ constexpr float YARD_STICK_DOT_Y_OFFSET = 9.75f + 1.5f;
 constexpr float YARD_STICK_Y_OFFSET = WorkspaceDrawer::YARD_STICK_HEIGHT - 22;
 constexpr float PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN = 6;
 constexpr float YARD_STICK_DOT_RADIUS = 1.5f;
-constexpr float PLAYBACK_BOUNDS_BOTTOM_MARGIN = 3.75f;
+constexpr float PLAYBACK_BOUNDS_BOTTOM_MARGIN = 3.25f;
 constexpr float PLAYBACK_BOUNDS_HEIGHT = 15.75;
 static const int PITCH_RADIUS = 3;
 constexpr float PLAYBACK_BOUNDS_ROUND_RECT_RADIUS = 1.5f;
@@ -316,13 +316,14 @@ void WorkspaceDrawer::drawPitchesGraph() const {
 }
 
 void WorkspaceDrawer::drawYardStick() const {
-    drawer->translate(0, YARD_STICK_Y_OFFSET);
     drawer->setTextFontSize(YARD_STICK_FONT_SIZE);
     drawer->setTextAlign(Drawer::TextAlign::CENTER);
     drawer->setTextBaseline(Drawer::TextBaseline::MIDDLE);
     drawer->setTextWeight(YARD_STICK_FONT_WEIGHT);
 
     drawBoundsIfNeed();
+
+    drawer->translate(0, YARD_STICK_Y_OFFSET);
     drawer->setFillColor(yardStickDotAndTextColor);
     int startTactIndex = (int)(getHorizontalOffset() / (getIntervalWidth() * BEATS_IN_TACT));
 
