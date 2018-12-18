@@ -7,8 +7,10 @@
 #include "TimeUtils.h"
 #include "AubioPitchDetector.h"
 #include "Executors.h"
+#include <iostream>
 
 using namespace CppUtils;
+using namespace std;
 
 #define LOCK std::lock_guard<std::mutex> _(mutex)
 
@@ -107,4 +109,13 @@ void PitchInputReaderCollector::clearCollectedPitches() {
     LOCK;
     frequencies.clear();
     times.clear();
+}
+
+int PitchInputReaderCollector::getPitchesCountAfterTime(double time) const {
+    auto iter = std::upper_bound(times.begin(), times.end(), time, std::greater<>());
+    if (iter == times.end()) {
+        return getPitchesCount();
+    }
+
+    return static_cast<int>(iter - times.begin());
 }

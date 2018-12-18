@@ -49,6 +49,8 @@ public:
     void setSavedPitchesTimeLimit(double savedPitchesTimeLimit);
 
     void clearCollectedPitches();
+
+    int getPitchesCountAfterTime(double time) const override;
 };
 
 

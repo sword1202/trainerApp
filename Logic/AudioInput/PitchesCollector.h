@@ -15,6 +15,7 @@ public:
     virtual float getFrequencyAt(int index) const = 0;
     virtual Pitch getPitchAt(int index) const;
     virtual double getTimeAt(int index) const = 0;
+    virtual int getPitchesCountAfterTime(double time) const = 0;
 };
 
 
