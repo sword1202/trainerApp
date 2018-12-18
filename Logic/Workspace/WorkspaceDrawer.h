@@ -65,6 +65,7 @@ class WorkspaceDrawer : public WorkspaceController {
     std::atomic<const VxFile*> vxFile;
 
     std::atomic<double> frameTime;
+    std::atomic<float> firstPlayHeadPosition, secondPlayHeadPosition;
 
     void iterateHorizontalIntervals(const std::function<void(float x, bool isBeat)>& func) const;
 
@@ -78,9 +79,9 @@ class WorkspaceDrawer : public WorkspaceController {
     void drawBoundsIfNeed() const;
     void drawYardStick() const;
     void drawYardStickDot(float x, float y) const;
-    void drawPlayHead(float x, float timeInSeconds) const;
-    void drawFirstPlayHead() const;
-    void drawSecondPlayHead() const;
+    void drawPlayHead(float x, float timeInSeconds);
+    void drawFirstPlayHead();
+    void drawSecondPlayHead();
 
     double getPitchGraphDuration() const;
     double getIntervalDuration() const;
@@ -177,6 +178,8 @@ public:
     float getWorkspaceSeek() const override;
     float getGridBeginXPosition() const;
     float getSeekFromXPositionOnWorkspace(float x) override;
+
+    float getPlayHeadXPosition(int playHeadIndex) override;
 };
 
 

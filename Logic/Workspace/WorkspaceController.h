@@ -34,6 +34,7 @@ public:
     virtual void setPlaybackBounds(const PlaybackBounds &playbackBounds) = 0;
     virtual float getSeekFromXPositionOnWorkspace(float x) = 0;
     virtual float getWorkspaceSeek() const = 0;
+    virtual float getPlayHeadXPosition(int playHeadIndex) = 0;
     virtual ~WorkspaceController() = default;
 };
 

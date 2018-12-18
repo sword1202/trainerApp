@@ -363,7 +363,7 @@ static std::string generateClockText(float seconds) {
     return TimeUtils::ConvertSecondsToFormattedTimeString("%M:%S", static_cast<int>(seconds));
 }
 
-void WorkspaceDrawer::drawPlayHead(float x, float timeInSeconds) const {
+void WorkspaceDrawer::drawPlayHead(float x, float timeInSeconds) {
     float triangleY = YARD_STICK_HEIGHT - PLAYHEAD_TRIANGLE_HEIGHT / 2 + 1;
     float triangleX = x - PLAYHEAD_TRIANGLE_WIDTH / 2;
 
@@ -387,7 +387,7 @@ void WorkspaceDrawer::drawPlayHead(float x, float timeInSeconds) const {
     drawer->fillText(clockText, clockTextX, clockTextY);
 }
 
-void WorkspaceDrawer::drawSecondPlayHead() const {
+void WorkspaceDrawer::drawSecondPlayHead() {
     PlaybackBounds bounds = this->playbackBounds;
     float startX, width;
     if (!getBoundsStartXAndWidth(bounds, &startX, &width)) {
@@ -395,11 +395,14 @@ void WorkspaceDrawer::drawSecondPlayHead() const {
     }
 
     float x = startX + width;
+    secondPlayHeadPosition = x;
     drawPlayHead(x, bounds.getEndSeek());
 }
 
-void WorkspaceDrawer::drawFirstPlayHead() const {
+void WorkspaceDrawer::drawFirstPlayHead() {
     double time = getWorkspaceSeek();
+    float x = BEATS_IN_TACT * intervalWidth;
+    firstPlayHeadPosition = x;
     drawPlayHead(BEATS_IN_TACT * intervalWidth, time);
 }
 
@@ -448,6 +451,8 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, const std::function<void()>& on
         frameTime(0),
         drawer(drawer),
         vxFile(nullptr),
+        firstPlayHeadPosition(0),
+        secondPlayHeadPosition(0),
         playbackBounds(PlaybackBounds()),
         onUpdateRequested(onUpdateRequested) {
     CHECK_IF_RENDER_THREAD;
@@ -634,6 +639,11 @@ void WorkspaceDrawer::setClockImage(Drawer::Image *clockImage) {
     this->clockImage = clockImage;
 }
 
+float WorkspaceDrawer::getPlayHeadXPosition(int playHeadIndex) {
+    assert(playHeadIndex == 0 || playHeadIndex == 1);
+    return playHeadIndex == 0 ? firstPlayHeadPosition : secondPlayHeadPosition;
+}
+
 #ifndef NDEBUG
 bool WorkspaceDrawer::checkExecutedOnRenderingThread() {
     if (threadId == std::thread::id()) {
@@ -642,4 +652,5 @@ bool WorkspaceDrawer::checkExecutedOnRenderingThread() {
 
     return std::this_thread::get_id() == threadId;
 }
+
 #endif
