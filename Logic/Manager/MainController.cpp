@@ -25,7 +25,7 @@ void MainController::initInstance(MainController* inst) {
 }
 
 void MainController::init(AudioInputManager *pitchInputReader, MvxPlayer *mvxPlayer, WorkspaceZoomController *zoomController) {
-    this->pitchInputReader = pitchInputReader;
+    this->audioInputManager = pitchInputReader;
     this->mvxPlayer = mvxPlayer;
     this->zoomController = zoomController;
 
@@ -37,9 +37,9 @@ void MainController::init(AudioInputManager *pitchInputReader, MvxPlayer *mvxPla
 
     mvxPlayer->isPlayingChangedListeners.addListener([this] (bool playing) {
         if (playing) {
-            this->pitchInputReader->startPitchDetection();
+            this->audioInputManager->startPitchDetection();
         } else {
-            this->pitchInputReader->stopPitchDetection();
+            this->audioInputManager->stopPitchDetection();
         }
 
         workspaceController->setRunning(playing);
@@ -68,7 +68,7 @@ void MainController::init(AudioInputManager *pitchInputReader, MvxPlayer *mvxPla
     mvxPlayer->setPianoVolume(0.5);
     pitchInputReader->setOutputVolume(0.0);
 
-    pitchInputReader->pitchDetectedListeners.addListener([=] (const Pitch& pitch, double) {
+    pitchInputReader->getPitchDetectedListeners().addListener([=] (const Pitch& pitch, double) {
         workspaceController->setDetectedPitch(pitch);
     });
 }
@@ -79,7 +79,7 @@ void MainController::onStopPlaybackRequested() {
 }
 
 AudioInputManager *MainController::getAudioInputManager() const {
-    return pitchInputReader;
+    return audioInputManager;
 }
 
 WorkspaceZoomController *MainController::getZoomController() const {
@@ -88,7 +88,7 @@ WorkspaceZoomController *MainController::getZoomController() const {
 
 MainController::~MainController() {
     delete mvxPlayer;
-    delete pitchInputReader;
+    delete audioInputManager;
     if (playbackBoundsSelectionController) {
         delete playbackBoundsSelectionController;
     }
@@ -101,7 +101,7 @@ MvxPlayer *MainController::getPlayer() const {
 void MainController::setWorkspaceController(WorkspaceController *workspaceController) {
     assert(!this->workspaceController);
     this->workspaceController = workspaceController;
-    workspaceController->setPitchesCollector(pitchInputReader);
+    workspaceController->setPitchesRecorder(audioInputManager->getPitchesRecorder());
     workspaceController->setVxFile(mvxPlayer->getVxFile());
     workspaceController->setIntervalsPerSecond(mvxPlayer->getBeatsPerMinute() / 60.0);
     workspaceController->setPitchSequence(mvxPlayer);

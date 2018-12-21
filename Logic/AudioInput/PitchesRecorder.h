@@ -8,9 +8,9 @@
 
 #include "Pitch.h"
 
-class PitchesCollector {
+class PitchesRecorder {
 public:
-    virtual ~PitchesCollector() = default;
+    virtual ~PitchesRecorder() = default;
     virtual int getPitchesCount() const = 0;
     virtual float getFrequencyAt(int index) const = 0;
     virtual Pitch getPitchAt(int index) const;

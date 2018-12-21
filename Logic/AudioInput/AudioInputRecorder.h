@@ -9,7 +9,7 @@
 #include <string>
 #include <mutex>
 
-class AudioInputDataCollector {
+class AudioInputRecorder {
 public:
     void operator()(const int16_t* data, int size);
     const std::string &getCollectedData() const;
@@ -17,7 +17,7 @@ public:
     int getSeek() const;
     void setSeek(int seek);
 
-    AudioInputDataCollector();
+    AudioInputRecorder();
 
 private:
     std::string collectedData;

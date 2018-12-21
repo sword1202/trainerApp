@@ -3,11 +3,11 @@ set(pitchDetectionSources
         AudioAverageInputLevelMonitor.cpp
         Pitch.cpp
         PitchDetectionSmoothingAudioBuffer.cpp
-        PitchesCollector.cpp
+        PitchesRecorder.cpp
         PitchInputReader.cpp
-        PitchInputReaderCollector.cpp
+        AudioInputPitchesRecorder.cpp
         PortAudioInputReader.cpp
-        AudioInputDataCollector.cpp
+        AudioInputRecorder.cpp
         )
 
 list(TRANSFORM pitchDetectionSources PREPEND ${CMAKE_CURRENT_LIST_DIR}/)

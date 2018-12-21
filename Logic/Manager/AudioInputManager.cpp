@@ -21,16 +21,18 @@ AudioInputManager::AudioInputManager(const char* deviceName) {
     pitchDetector->setThreshold(THRESHOLD);
     
     audioInputReader = new PortAudioInputReader(BUFFER_SIZE, true, deviceName);
-    PitchInputReaderCollector::init(audioInputReader, SMOOTH_LEVEL, pitchDetector);
+    pitchesRecorder = new AudioInputPitchesRecorder();
+    pitchesRecorder->init(audioInputReader, SMOOTH_LEVEL, pitchDetector);
     audioInputReader->start();
 
-    dataCollector = new AudioInputDataCollector();
-    audioInputReader->callbacks.addListener(dataCollector);
+    audioRecorder = new AudioInputRecorder();
+    audioInputReader->callbacks.addListener(audioRecorder);
 }
 
 AudioInputManager::~AudioInputManager() {
     delete audioInputReader;
-    delete dataCollector;
+    delete audioRecorder;
+    delete pitchesRecorder;
 }
 
 void AudioInputManager::setInputVolume(float value) {
@@ -62,14 +64,14 @@ void AudioInputManager::addAudioInputReaderCallback(const AudioInputReader::Call
 }
 
 void AudioInputManager::startPitchDetection() {
-    audioInputReader->callbacks.addListener(this);
-    if (audioDataCollectorEnabled) {
-        audioInputReader->callbacks.addListener(dataCollector);
+    audioInputReader->callbacks.addListener(pitchesRecorder);
+    if (audioRecordingEnabled) {
+        audioInputReader->callbacks.addListener(audioRecorder);
     }
 }
 
 void AudioInputManager::stopPitchDetection() {
-    audioInputReader->callbacks.removeListeners(this, dataCollector);
+    audioInputReader->callbacks.removeListeners(pitchesRecorder, audioRecorder);
 }
 
 void AudioInputManager::addAudioInputLevelMonitor(const std::function<void(double)> &callback) {
@@ -80,16 +82,24 @@ void AudioInputManager::addAudioInputLevelMonitor(const std::function<void(doubl
     }));
 }
 
-bool AudioInputManager::isAudioDataCollectorEnabled() const {
-    return audioDataCollectorEnabled;
+bool AudioInputManager::isAudioRecordingEnabled() const {
+    return audioRecordingEnabled;
 }
 
-void AudioInputManager::setAudioDataCollectorEnabled(bool audioDataCollectorEnabled) {
-    this->audioDataCollectorEnabled = audioDataCollectorEnabled;
+void AudioInputManager::setAudioRecordingEnabled(bool audioDataCollectorEnabled) {
+    this->audioRecordingEnabled = audioDataCollectorEnabled;
 }
 
-void AudioInputManager::setDataCollectorSeek(double time) {
+void AudioInputManager::setAudioRecorderSeek(double time) {
     int seek = AudioUtils::GetSamplesByteIndexFromTime(time, audioInputReader->getSampleRate(),
             audioInputReader->getSampleSizeInBytes());
-    dataCollector->setSeek(seek);
+    audioRecorder->setSeek(seek);
+}
+
+CppUtils::ListenersSet<const Pitch &, double> &AudioInputManager::getPitchDetectedListeners() {
+    return pitchesRecorder->pitchDetectedListeners;
+}
+
+AudioInputPitchesRecorder *AudioInputManager::getPitchesRecorder() const {
+    return pitchesRecorder;
 }

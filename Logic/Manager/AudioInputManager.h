@@ -6,13 +6,14 @@
 #ifndef VOCALTRAINER_VOCALTRAINERPITCHINPUTREADER_H
 #define VOCALTRAINER_VOCALTRAINERPITCHINPUTREADER_H
 
-#include "PitchInputReaderCollector.h"
-#include "AudioInputDataCollector.h"
+#include "AudioInputPitchesRecorder.h"
+#include "AudioInputRecorder.h"
 
-class AudioInputManager : public PitchInputReaderCollector {
+class AudioInputManager {
     AudioInputReaderWithOutput* audioInputReader = nullptr;
-    AudioInputDataCollector* dataCollector = nullptr;
-    bool audioDataCollectorEnabled = false;
+    AudioInputRecorder* audioRecorder = nullptr;
+    AudioInputPitchesRecorder* pitchesRecorder;
+    bool audioRecordingEnabled = true;
 public:
     explicit AudioInputManager(const char* deviceName);
 
@@ -30,11 +31,15 @@ public:
     void addAudioInputReaderCallback(const AudioInputReader::Callback& callback);
     void addAudioInputLevelMonitor(const std::function<void(double)>& callback);
 
-    bool isAudioDataCollectorEnabled() const;
-    void setAudioDataCollectorEnabled(bool audioDataCollectorEnabled);
-    void setDataCollectorSeek(double time);
+    bool isAudioRecordingEnabled() const;
+    void setAudioRecordingEnabled(bool audioDataCollectorEnabled);
+    void setAudioRecorderSeek(double time);
 
-    ~AudioInputManager() override;
+    CppUtils::ListenersSet<const Pitch&, double >& getPitchDetectedListeners();
+
+    AudioInputPitchesRecorder *getPitchesRecorder() const;
+
+    ~AudioInputManager();
 };
 
 

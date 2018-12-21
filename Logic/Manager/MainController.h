@@ -7,7 +7,7 @@
 #define VOCALTRAINER_MANAGER_H
 
 
-#include "PitchInputReaderCollector.h"
+#include "AudioInputPitchesRecorder.h"
 #include "AudioInputManager.h"
 #include "MvxPlayer.h"
 #include "WorkspaceController.h"
@@ -16,7 +16,7 @@
 #include "PlaybackBoundsSelectionController.h"
 
 class MainController {
-    AudioInputManager* pitchInputReader = nullptr;
+    AudioInputManager* audioInputManager = nullptr;
     MvxPlayer* mvxPlayer = nullptr;
     WorkspaceZoomController* zoomController = nullptr;
     WorkspaceController* workspaceController = nullptr;

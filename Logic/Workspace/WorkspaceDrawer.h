@@ -10,7 +10,7 @@
 #include <nanovg/nanovg.h>
 #include "Drawer.h"
 #include <array>
-#include "PitchesCollector.h"
+#include "PitchesRecorder.h"
 #include "VxFile.h"
 #include "WorkspaceController.h"
 #include "PianoDrawer.h"
@@ -56,7 +56,7 @@ class WorkspaceDrawer : public WorkspaceController {
     float devicePixelRatio = -1;
 
     Drawer* drawer = nullptr;
-    PitchesCollector* pitchesCollector = nullptr;
+    PitchesRecorder* pitchesRecorder = nullptr;
     PianoDrawer* pianoDrawer = nullptr;
 
     Drawer::Image* playHeadTriangleImage = nullptr;
@@ -154,8 +154,7 @@ public:
     const Color &getPitchColor() const;
     void setPitchColor(const Color &pitchColor);
 
-    PitchesCollector *getPitchesCollector() const;
-    void setPitchesCollector(PitchesCollector *pitchesCollector) override;
+    void setPitchesRecorder(PitchesRecorder *pitchesRecorder) override;
 
     // Warning: VxFile should not be changed from outside
     void setVxFile(const VxFile* vxFile) override;

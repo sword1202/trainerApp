@@ -3,7 +3,7 @@
 // Copyright (c) 2018 Mac. All rights reserved.
 //
 
-#include "PitchInputReaderCollector.h"
+#include "AudioInputPitchesRecorder.h"
 #include "TimeUtils.h"
 #include "AubioPitchDetector.h"
 #include "Executors.h"
@@ -14,22 +14,22 @@ using namespace std;
 
 #define LOCK std::lock_guard<std::mutex> _(mutex)
 
-float PitchInputReaderCollector::getFrequencyAt(int index) const {
+float AudioInputPitchesRecorder::getFrequencyAt(int index) const {
     LOCK;
     return frequencies[index];
 }
 
-double PitchInputReaderCollector::getTimeAt(int index) const {
+double AudioInputPitchesRecorder::getTimeAt(int index) const {
     LOCK;
     return times[index];
 }
 
-int PitchInputReaderCollector::getPitchesCount() const {
+int AudioInputPitchesRecorder::getPitchesCount() const {
     LOCK;
     return frequencies.size();
 }
 
-void PitchInputReaderCollector::init(AudioInputReader *audioInputReader, int smoothLevel,
+void AudioInputPitchesRecorder::init(AudioInputReader *audioInputReader, int smoothLevel,
         PitchDetector* pitchDetector) {
     pitchInputReader = new PitchInputReader(audioInputReader, pitchDetector, smoothLevel);
 
@@ -52,38 +52,38 @@ void PitchInputReaderCollector::init(AudioInputReader *audioInputReader, int smo
     });
 }
 
-void PitchInputReaderCollector::operator()(const int16_t* data, int size) {
+void AudioInputPitchesRecorder::operator()(const int16_t* data, int size) {
     assert(pitchInputReader && "call init before");
     pitchInputReader->operator()(data, size);
 }
 
-void PitchInputReaderCollector::setThreshold(float threshold) {
+void AudioInputPitchesRecorder::setThreshold(float threshold) {
     pitchInputReader->getPitchDetector()->setThreshold(threshold);
 }
 
-float PitchInputReaderCollector::getThreshold() const {
+float AudioInputPitchesRecorder::getThreshold() const {
     return pitchInputReader->getPitchDetector()->getThreshold();
 }
 
-PitchInputReaderCollector::~PitchInputReaderCollector() {
+AudioInputPitchesRecorder::~AudioInputPitchesRecorder() {
     delete pitchInputReader;
 }
 
-void PitchInputReaderCollector::pitchDetected(float frequency, double time) {
+void AudioInputPitchesRecorder::pitchDetected(float frequency, double time) {
     Executors::ExecuteOnMainThread([=] {
         pitchDetectedListeners.executeAll(Pitch(frequency), time);
     });
 }
 
-double PitchInputReaderCollector::getSavedPitchesTimeLimit() const {
+double AudioInputPitchesRecorder::getSavedPitchesTimeLimit() const {
     return savedPitchesTimeLimit;
 }
 
-void PitchInputReaderCollector::setSavedPitchesTimeLimit(double savedPitchesTimeLimit) {
+void AudioInputPitchesRecorder::setSavedPitchesTimeLimit(double savedPitchesTimeLimit) {
     this->savedPitchesTimeLimit = savedPitchesTimeLimit;
 }
 
-float PitchInputReaderCollector::getLastDetectedFrequency() const {
+float AudioInputPitchesRecorder::getLastDetectedFrequency() const {
     LOCK;
     if (frequencies.empty()) {
         return -1;
@@ -92,11 +92,11 @@ float PitchInputReaderCollector::getLastDetectedFrequency() const {
     return frequencies.front();
 }
 
-Pitch PitchInputReaderCollector::getLastDetectedPitch() const {
+Pitch AudioInputPitchesRecorder::getLastDetectedPitch() const {
     return Pitch(getLastDetectedFrequency());
 }
 
-double PitchInputReaderCollector::getLastDetectedTime() const {
+double AudioInputPitchesRecorder::getLastDetectedTime() const {
     LOCK;
     if (times.empty()) {
         return -1;
@@ -105,13 +105,13 @@ double PitchInputReaderCollector::getLastDetectedTime() const {
     return times.front();
 }
 
-void PitchInputReaderCollector::clearCollectedPitches() {
+void AudioInputPitchesRecorder::clearCollectedPitches() {
     LOCK;
     frequencies.clear();
     times.clear();
 }
 
-int PitchInputReaderCollector::getPitchesCountAfterTime(double time) const {
+int AudioInputPitchesRecorder::getPitchesCountAfterTime(double time) const {
     auto iter = std::upper_bound(times.begin(), times.end(), time, std::greater<>());
     if (iter == times.end()) {
         return getPitchesCount();

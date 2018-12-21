@@ -9,12 +9,12 @@
 #include <deque>
 #include "Pitch.h"
 #include "PitchInputReader.h"
-#include "PitchesCollector.h"
+#include "PitchesRecorder.h"
 #include "ListenersSet.h"
 #include <functional>
 #include <mutex>
 
-class PitchInputReaderCollector : public PitchesCollector {
+class AudioInputPitchesRecorder : public PitchesRecorder {
 public:
     typedef CppUtils::ListenersSet<const Pitch&, double>::Listener PitchDetectedListener;
 private:
@@ -42,7 +42,7 @@ public:
 
     virtual void setThreshold(float threshold);
     float getThreshold() const;
-    ~PitchInputReaderCollector() override;
+    ~AudioInputPitchesRecorder() override;
     virtual void pitchDetected(float frequency, double time);
 
     double getSavedPitchesTimeLimit() const;

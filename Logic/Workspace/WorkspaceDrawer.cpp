@@ -245,20 +245,20 @@ void WorkspaceDrawer::setVxFile(const VxFile* vxFile) {
 
 void WorkspaceDrawer::drawPitchesGraph() const {
     assert(getFirstPitch().isValid());
-    assert(pitchesCollector);
+    assert(pitchesRecorder);
     assert(pitchGraphColor[3] > 0 && "pitchGraphColor not initialized or is completely transparent");
 
     // Pre-draw one beat more to avoid graph interruption
     double drawInterval = this->getIntervalDuration() * (BEATS_IN_TACT + 1);
     double pitchesGraphDrawBeginTime = TimeUtils::NowInSeconds() - drawInterval;
-    int pitchesCount = pitchesCollector->getPitchesCountAfterTime(pitchesGraphDrawBeginTime);
+    int pitchesCount = pitchesRecorder->getPitchesCountAfterTime(pitchesGraphDrawBeginTime);
     if (pitchesCount <= 0) {
         return;
     }
 
     int i = 0;
 
-    while (i < pitchesCount && !pitchesCollector->getPitchAt(i).isValid()) {
+    while (i < pitchesCount && !pitchesRecorder->getPitchAt(i).isValid()) {
         i++;
     }
 
@@ -281,13 +281,13 @@ void WorkspaceDrawer::drawPitchesGraph() const {
     };
 
     while (i < pitchesCount) {
-        Pitch pitch = pitchesCollector->getPitchAt(i);
+        Pitch pitch = pitchesRecorder->getPitchAt(i);
         if (!pitch.isValid()) {
             i++;
             continue;
         }
 
-        double time = pitchesCollector->getTimeAt(i);
+        double time = pitchesRecorder->getTimeAt(i);
         getXY(time, pitch);
         drawer->moveTo((float)x, (float)y);
 
@@ -296,18 +296,18 @@ void WorkspaceDrawer::drawPitchesGraph() const {
             break;
         }
 
-        if (!pitchesCollector->getPitchAt(i).isValid()) {
+        if (!pitchesRecorder->getPitchAt(i).isValid()) {
             drawer->lineTo((float)x, (float)y);
             continue;
         }
 
         for (; i < pitchesCount; i++) {
-            Pitch pitch = pitchesCollector->getPitchAt(i);
+            Pitch pitch = pitchesRecorder->getPitchAt(i);
             if (!pitch.isValid()) {
                 break;
             }
 
-            double time = pitchesCollector->getTimeAt(i);
+            double time = pitchesRecorder->getTimeAt(i);
             getXY(time, pitch);
             drawer->lineTo((float)x, (float)y);
         }
@@ -497,12 +497,8 @@ void WorkspaceDrawer::setIntervalsPerSecond(double intervalsPerSecond) {
     this->intervalsPerSecond = intervalsPerSecond;
 }
 
-PitchesCollector *WorkspaceDrawer::getPitchesCollector() const {
-    return pitchesCollector;
-}
-
-void WorkspaceDrawer::setPitchesCollector(PitchesCollector *pitchesCollector) {
-    this->pitchesCollector = pitchesCollector;
+void WorkspaceDrawer::setPitchesRecorder(PitchesRecorder *pitchesRecorder) {
+    this->pitchesRecorder = pitchesRecorder;
 }
 
 const WorkspaceDrawer::Color &WorkspaceDrawer::getPitchGraphColor() const {
