@@ -69,12 +69,12 @@ public:
     AudioDecoderCoreAudio();
     ~AudioDecoderCoreAudio();
     // Overriding AudioDecoderBase 
-    void open(std::string &&data) override;
+    void open(const std::string *data) override;
     void seek(int sampleIdx) override;
     int read(int samplesCount, SAMPLE *buffer) override;
     std::vector<std::string> supportedFileExtensions() override;
 private:
-    std::string audioData;
+    const std::string* audioData;
     SInt64 headerFrames;
     ExtAudioFileRef audioFile;
     AudioFileID audioFileID;

@@ -47,17 +47,17 @@ static SInt64 GetSizeProc(void *inClientData) {
 
 static OSStatus ReadProc(void *inClientData, SInt64 inPosition, UInt32 requestCount, void *buffer, UInt32 *actualCount) {
     assert(inPosition >= 0);
-    const std::string& data = *static_cast<std::string*>(inClientData);
+    auto* data = static_cast<const std::string*>(inClientData);
     SInt64 end = inPosition + requestCount;
-    if (end > data.size()) {
-        end = (SInt64)data.size();
+    if (end > data->size()) {
+        end = (SInt64)data->size();
     }
     
     if (end <= inPosition) {
         *actualCount = 0;
     } else {
         size_t count = static_cast<size_t>(end - inPosition);
-        memcpy(buffer, data.data() + inPosition, count);
+        memcpy(buffer, data->data() + inPosition, count);
         *actualCount = (UInt32)count;
     }
     
@@ -73,13 +73,13 @@ AudioDecoderCoreAudio::~AudioDecoderCoreAudio() {
     AudioFileClose(audioFileID);
 }
 
-void AudioDecoderCoreAudio::open(std::string &&data) {
+void AudioDecoderCoreAudio::open(const std::string *data) {
 
-    audioData = std::move(data);
+    audioData = data;
     //Open the audio file.
     OSStatus err;
 
-    err = AudioFileOpenWithCallbacks(&audioData, ReadProc, 0, GetSizeProc, 0, 0, &audioFileID);
+    err = AudioFileOpenWithCallbacks(const_cast<std::string*>(audioData), ReadProc, 0, GetSizeProc, 0, 0, &audioFileID);
     if (err != noErr)
     {
         throw std::runtime_error("AudioDecoderCoreAudio: AudioFileOpenWithCallbacks error " + std::to_string(err));

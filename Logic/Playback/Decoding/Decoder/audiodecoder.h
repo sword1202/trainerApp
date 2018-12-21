@@ -67,7 +67,7 @@ public:
     virtual ~AudioDecoder() = default;
 
     /** Opens the file for decoding */
-    virtual void open(std::string &&data) = 0;
+    virtual void open(const std::string *data) = 0;
 
     /** Seek to a sample in the file */
     virtual void seek(int filepos) = 0;

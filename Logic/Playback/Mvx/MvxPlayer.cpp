@@ -50,7 +50,7 @@ MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
 }
 
 void MvxPlayer::init(std::istream &is) {
-    mvxFile = std::move(MvxFile::readFromStream(is));
+    mvxFile = MvxFile::readFromStream(is);
     instrumentalPlayer.setAudioData(std::move(mvxFile.moveInstrumental()));
     vxPlayer.setVxFile(mvxFile.getVxFile());
 }
@@ -303,4 +303,12 @@ double MvxPlayer::getTactDuration() const {
 
 bool MvxPlayer::isRecording() const {
     return mvxFile.isRecording();
+}
+
+const std::string &MvxPlayer::getArtistNameUtf8() const {
+    return mvxFile.getArtistNameUtf8();
+}
+
+const std::string &MvxPlayer::getSongTitleUtf8() const {
+    return mvxFile.getSongTitleUtf8();
 }

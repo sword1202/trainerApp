@@ -104,6 +104,9 @@ public:
     double getTactDuration() const;
 
     bool isRecording() const;
+
+    const std::string& getArtistNameUtf8() const;
+    const std::string& getSongTitleUtf8() const;
 };
 
 
