@@ -113,7 +113,7 @@ void MvxFile::setVxFile(const VxFile &vxFile) {
     this->vxFile = vxFile;
 }
 
-const std::vector<double> &MvxFile::getRecordedPitchesTimes() const {
+std::vector<double> &MvxFile::moveRecordedPitchesTimes() {
     return recordedPitchesTimes;
 }
 
@@ -121,7 +121,7 @@ void MvxFile::setRecordedPitchesTimes(const std::vector<double> &recordedPitches
     MvxFile::recordedPitchesTimes = recordedPitchesTimes;
 }
 
-const std::vector<float> &MvxFile::getRecordedPitchesFrequencies() const {
+std::vector<float> &MvxFile::moveRecordedPitchesFrequencies() {
     return recordedPitchesFrequencies;
 }
 

@@ -48,3 +48,11 @@ Pitch PitchesMutableList::getNearestPitch(double time) const {
     size_t index = iter - times.begin();
     return Pitch(frequencies[index]);
 }
+
+PitchesMutableList::PitchesMutableList(const std::vector<float> &frequencies, const std::vector<double> &times)
+        : frequencies(frequencies), times(times) {}
+
+PitchesMutableList::PitchesMutableList(std::vector<float> &&frequencies, std::vector<double> &&times) {
+    this->frequencies = std::move(frequencies);
+    this->times = std::move(times);
+}

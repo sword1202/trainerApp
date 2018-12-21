@@ -16,6 +16,7 @@
 #include "PlaybackBounds.h"
 #include <iostream>
 #include <memory>
+#include <PitchesMutableList.h>
 
 using namespace CppUtils;
 using std::cout;
@@ -55,6 +56,10 @@ void MvxPlayer::init(std::istream &is) {
     mvxFile = MvxFile::readFromStream(is);
     instrumentalPlayer.setAudioData(std::move(mvxFile.moveInstrumental()));
     vxPlayer.setVxFile(mvxFile.getVxFile());
+    if (mvxFile.isRecording()) {
+        pitchesCollection = new PitchesMutableList(std::move(mvxFile.moveRecordedPitchesFrequencies()),
+                std::move(mvxFile.moveRecordedPitchesTimes()));
+    }
 }
 
 void MvxPlayer::init(const char *filePath) {
@@ -132,7 +137,9 @@ void MvxPlayer::setPianoVolume(float pianoVolume) {
 }
 
 MvxPlayer::~MvxPlayer() {
-
+    if (pitchesCollection) {
+        delete pitchesCollection;
+    }
 }
 
 void MvxPlayer::prepare() {
@@ -316,4 +323,8 @@ const std::string &MvxPlayer::getInstrumental() {
 
 bool MvxPlayer::isCompleted() const {
     return instrumentalPlayer.isCompleted();
+}
+
+const PitchesCollection* MvxPlayer::getPitchesCollection() {
+    return pitchesCollection;
 }

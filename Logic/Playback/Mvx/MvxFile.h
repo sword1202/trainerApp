@@ -110,9 +110,9 @@ public:
 
     bool isRecording() const;
 
-    const std::vector<double> &getRecordedPitchesTimes() const;
+    std::vector<double> &moveRecordedPitchesTimes();
     void setRecordedPitchesTimes(const std::vector<double> &recordedPitchesTimes);
-    const std::vector<float> &getRecordedPitchesFrequencies() const;
+    std::vector<float> &moveRecordedPitchesFrequencies();
     void setRecordedPitchesFrequencies(const std::vector<float> &recordedPitchesFrequencies);
 };
 

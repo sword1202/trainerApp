@@ -470,6 +470,9 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, const std::function<void()>& on
 
     pianoDrawer = new PianoDrawer(drawer);
     drawer->setTextFontFamily(FONT_FAMILY);
+
+    pitchesTimes.reserve(5000);
+    pitchesFrequencies.reserve(5000);
 }
 
 WorkspaceDrawer::~WorkspaceDrawer() {

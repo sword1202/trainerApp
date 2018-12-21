@@ -18,6 +18,7 @@
 #include "PlayingPitchSequence.h"
 #include "MetronomeAudioPlayer.h"
 #include "PlaybackBounds.h"
+#include "PitchesCollection.h"
 #include <array>
 
 class MvxPlayer : public PlayingPitchSequence {
@@ -36,6 +37,8 @@ private:
     double playStartedSeek = -1;
     double playStartedTime = -1;
     MvxFile mvxFile;
+    // is valid only for recordings
+    PitchesCollection* pitchesCollection = nullptr;
 
     void updateMetronomeVolume();
     void pausePlayer(AudioPlayer* player);
@@ -110,6 +113,9 @@ public:
     const std::string &getInstrumental();
 
     bool isCompleted() const;
+
+    // The method is valid only for recordigns
+    const PitchesCollection* getPitchesCollection();
 };
 
 
