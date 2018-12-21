@@ -90,10 +90,14 @@ void AudioInputManager::setAudioRecordingEnabled(bool audioDataCollectorEnabled)
     this->audioRecordingEnabled = audioDataCollectorEnabled;
 }
 
-void AudioInputManager::setAudioRecorderSeek(double time) {
-    int seek = AudioUtils::GetSamplesByteIndexFromTime(time, audioInputReader->getSampleRate(),
+void AudioInputManager::setAudioRecorderSeek(double timeSeek) {
+    int seek = AudioUtils::GetSamplesByteIndexFromTime(timeSeek, audioInputReader->getSampleRate(),
             audioInputReader->getSampleSizeInBytes());
     audioRecorder->setSeek(seek);
+}
+
+void AudioInputManager::setPitchesRecorderSeek(double timeSeek) {
+    pitchesRecorder->setSeek(timeSeek);
 }
 
 CppUtils::ListenersSet<const Pitch &, double> &AudioInputManager::getPitchDetectedListeners() {

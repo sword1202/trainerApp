@@ -33,7 +33,8 @@ public:
 
     bool isAudioRecordingEnabled() const;
     void setAudioRecordingEnabled(bool audioDataCollectorEnabled);
-    void setAudioRecorderSeek(double time);
+    void setAudioRecorderSeek(double timeSeek);
+    void setPitchesRecorderSeek(double timeSeek);
 
     CppUtils::ListenersSet<const Pitch&, double >& getPitchDetectedListeners();
 

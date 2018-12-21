@@ -22,7 +22,6 @@ public:
 
     Q_PROPERTY(QString source READ getSource() WRITE setSource() NOTIFY sourceChanged())
     Q_PROPERTY(bool isPlaying READ isPlaying() NOTIFY isPlayingChanged())
-    Q_PROPERTY(double seek READ getSeek() WRITE setSeek() NOTIFY seekChanged())
     Q_PROPERTY(QJsonValue bounds READ getQmlBounds() WRITE setQmlBounds() NOTIFY boundsChanged())
     Q_PROPERTY(double playStartedTime READ getPlayStartedTime() NOTIFY playStartedTimeChanged())
     Q_PROPERTY(double playStartedSeek READ getPlayStartedSeek()  NOTIFY playStartedSeekChanged())
@@ -48,7 +47,6 @@ public:
     void onPlaybackStopped() override;
 
     void onComplete() override;
-    void onSeekChanged(double seek) override;
     void onPlaybackStarted() override;
 
     void setPitchShiftInSemiTones(int value) override;
@@ -59,7 +57,6 @@ signals:
     void complete();
     void sourceChanged(const QString& newSource);
     void isPlayingChanged(bool isPlaying);
-    void seekChanged(double seek);
     void boundsChanged();
     void durationChanged();
     void playStartedTimeChanged();

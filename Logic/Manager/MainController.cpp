@@ -64,6 +64,10 @@ void MainController::init(AudioInputManager *pitchInputReader, MvxPlayer *mvxPla
         }
     });
 
+    mvxPlayer->seekChangedListeners.addListener([=] (double seek) {
+        audioInputManager->setPitchesRecorderSeek(seek);
+    });
+
     mvxPlayer->setInstrumentalVolume(1.0);
     mvxPlayer->setPianoVolume(0.5);
     pitchInputReader->setOutputVolume(0.0);
@@ -116,6 +120,7 @@ void MainController::setWorkspaceController(WorkspaceController *workspaceContro
 
         mvxPlayer->seekChangedFromUserListeners.addListener([=] (double seek) {
             updateSeek(seek);
+            audioInputManager->setAudioRecorderSeek(seek);
         });
 
         mvxPlayer->boundsChangedListeners.addListener([=] (const PlaybackBounds& bounds) {

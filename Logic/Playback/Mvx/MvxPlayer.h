@@ -45,7 +45,7 @@ public:
     CppUtils::ListenersSet<> playRequestedListeners;
     CppUtils::ListenersSet<> prepareFinishedListeners;
     CppUtils::ListenersSet<const VxFile*> vxFileChangedListeners;
-    CppUtils::ListenersSet<double> seekChangedListeners;
+    CppUtils::SynchronizedListenersSet <double> seekChangedListeners;
     CppUtils::ListenersSet<double> seekChangedFromUserListeners;
     CppUtils::ListenersSet<> tonalityChangedListeners;
     CppUtils::ListenersSet<> onCompleteListeners;
@@ -75,7 +75,6 @@ public:
     void setBounds(const PlaybackBounds &bounds);
 
     virtual void onComplete();
-    virtual void onSeekChanged(double seek);
     virtual void onPlaybackStarted();
     virtual void onPlaybackStopped();
 

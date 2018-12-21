@@ -67,7 +67,7 @@ public:
 	CppUtils::ListenersSet<> onPlaybackStartedListeners;
 	CppUtils::ListenersSet<> onPlaybackStoppedListeners;
     CppUtils::SynchronizedListenersSet<void*, int> onDataSentToOutputListeners; // <buffer, framesCount>
-    CppUtils::ListenersSet<double, double> seekChangedListeners; // <seek, totalDuration>
+    CppUtils::SynchronizedListenersSet<double, double> seekChangedListeners; // <seek, totalDuration>
     
     AudioPlayer();
     virtual ~AudioPlayer();
@@ -96,9 +96,7 @@ public:
 
     double getTrackDurationInSeconds() const;
 
-    void playFromSeekToSeek(double a, double b, const std::function<void()> onFinish);
-
-	const PlaybackData &getPlaybackData() const;
+    const PlaybackData &getPlaybackData() const;
 	double getCallbackBufferDurationInSeconds() const;
 
     bool isLooping() const;

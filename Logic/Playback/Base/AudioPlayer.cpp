@@ -240,23 +240,6 @@ int AudioPlayer::getSampleSize() const {
     return Pa_GetSampleSize(playbackData.format) * playbackData.numChannels;
 }
 
-void AudioPlayer::playFromSeekToSeek(double a, double b, const std::function<void()> onFinish) {
-    assert(a < b);
-    assert(a > 0 && b > 0);
-    assert(b <= getTrackDurationInSeconds());
-
-    play(a);
-    seekChangedListeners.addListenerWithAction([=] (double seek, double _) {
-        if (seek >= b) {
-            pause();
-            onFinish();
-            return DELETE_LISTENER;
-        }
-
-        return DONT_DELETE_LISTENER;
-    });
-}
-
 double AudioPlayer::bufferSeekToSecondsSeek(int bufferSeek) const {
     return samplesCountToSeconds(bufferSeek);
 }
@@ -268,9 +251,7 @@ int AudioPlayer::secondsSeekToBufferSeek(double timestamp) const {
 void AudioPlayer::setBufferSeek(int bufferSeek) {
     double seek = bufferSeekToSecondsSeek(bufferSeek);
     double total = getTrackDurationInSeconds();
-    Executors::ExecuteOnMainThread([=] {
-        seekChangedListeners.executeAll(seek, total);
-    });
+    seekChangedListeners.executeAll(seek, total);
 }
 
 void AudioPlayer::prepareAsync(const std::function<void()>& callback) {

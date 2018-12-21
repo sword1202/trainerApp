@@ -7,6 +7,7 @@
 #include "TimeUtils.h"
 #include "AubioPitchDetector.h"
 #include "Executors.h"
+#include "Algorithms.h"
 #include <iostream>
 
 using namespace CppUtils;
@@ -36,16 +37,17 @@ void AudioInputPitchesRecorder::init(AudioInputReader *audioInputReader, int smo
     pitchInputReader->setExecuteCallBackOnInvalidPitches(true);
     pitchInputReader->setCallback([=](const Pitch& pitch) {
         float frequency = pitch.getFrequency();
-        double time = TimeUtils::NowInSeconds();
+        double seek = this->seek;
 
         {
             LOCK;
             frequencies.push_back(frequency);
-            times.push_back(time);
+            times.push_back(seek);
         }
 
-        pitchDetected(frequency, time);
+        pitchDetected(frequency, seek);
     });
+    seek = 0;
 }
 
 void AudioInputPitchesRecorder::operator()(const int16_t* data, int size) {
@@ -93,14 +95,25 @@ double AudioInputPitchesRecorder::getLastDetectedTime() const {
     return times.back();
 }
 
-void AudioInputPitchesRecorder::clearCollectedPitches() {
-    LOCK;
-    frequencies.clear();
-    times.clear();
-}
-
 int AudioInputPitchesRecorder::getPitchesCountAfterTime(double time) const {
     auto iter = std::upper_bound(times.begin(), times.end(), time);
 
     return static_cast<int>(times.end() - iter);
+}
+
+double AudioInputPitchesRecorder::getSeek() const {
+    return seek;
+}
+
+void AudioInputPitchesRecorder::setSeek(double seek) {
+    this->seek = seek;
+
+    LOCK;
+    if (!times.empty() && seek < times.back()) {
+        // remove all pitches after seek
+        auto iter = std::lower_bound(times.begin(), times.end(), seek);
+        times.erase(iter, times.end());
+        int index = static_cast<int>(times.end() - iter);
+        CppUtils::EraseEndingOfCollection(frequencies, index);
+    }
 }

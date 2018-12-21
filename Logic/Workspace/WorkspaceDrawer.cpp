@@ -250,7 +250,8 @@ void WorkspaceDrawer::drawPitchesGraph() const {
 
     // Pre-draw one beat more to avoid graph interruption
     double drawInterval = this->getIntervalDuration() * (BEATS_IN_TACT + 1);
-    double pitchesGraphDrawBeginTime = TimeUtils::NowInSeconds() - drawInterval;
+    float workspaceSeek = getWorkspaceSeek();
+    double pitchesGraphDrawBeginTime = workspaceSeek - drawInterval;
     int pitchesCount = pitchesRecorder->getPitchesCountAfterTime(pitchesGraphDrawBeginTime);
     if (pitchesCount <= 0) {
         return;
@@ -268,14 +269,13 @@ void WorkspaceDrawer::drawPitchesGraph() const {
 
     float pitchGraphWidth = intervalWidth * PITCHES_GRAPH_WIDTH_IN_INTERVALS;
     double duration = getPitchGraphDuration();
-    double now = TimeUtils::NowInSeconds();
 
     double x;
     double y;
 
     float relativeHeight = getMaximumGridTranslation() - getGridTranslation() + getGridHeight();
     auto getXY = [&](double time, const Pitch& pitch) {
-        x = (time - now + duration) / duration * pitchGraphWidth;
+        x = (time - workspaceSeek + duration) / duration * pitchGraphWidth;
         float distanceFromFirstPitch = getDistanceFromFirstPitch(pitch);
         y = relativeHeight - (distanceFromFirstPitch + pitch.getDistanceFromLowerBound() / 2.0) * intervalHeight;
     };

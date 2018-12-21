@@ -27,16 +27,18 @@ MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
     players = {{&instrumentalPlayer, &vxPlayer, &metronomePlayer}};
 
     instrumentalPlayer.seekChangedListeners.addListener([=](double seek, double) {
-        if (bounds) {
-            if (seek >= bounds.getEndSeek()) {
-                // avoid multiple onComplete calls
-                if (pauseRequestedCounter == 0) {
-                    this->onComplete();
+        Executors::ExecuteOnMainThread([=] {
+            if (bounds) {
+                if (seek >= bounds.getEndSeek()) {
+                    // avoid multiple onComplete calls
+                    if (pauseRequestedCounter == 0) {
+                        this->onComplete();
+                    }
                 }
             }
-        }
+        });
 
-        this->onSeekChanged(seek);
+        seekChangedListeners.executeAll(seek);
     });
 
     instrumentalPlayer.onCompleteListeners.addListener([=] {
@@ -173,10 +175,6 @@ void MvxPlayer::stopAndMoveSeekToBeginning() {
 
 double MvxPlayer::getSeek() const {
     return instrumentalPlayer.getSeek();
-}
-
-void MvxPlayer::onSeekChanged(double seek) {
-    seekChangedListeners.executeAll(seek);
 }
 
 double MvxPlayer::getPlayStartedSeek() const {

@@ -82,11 +82,6 @@ void QtMvxPlayer::stop() {
     stopAndMoveSeekToBeginning();
 }
 
-void QtMvxPlayer::onSeekChanged(double seek) {
-    MvxPlayer::onSeekChanged(seek);
-    emit seekChanged(seek);
-}
-
 void QtMvxPlayer::setQmlBounds(const QJsonValue &bounds) {
     const PlaybackBounds& prevBounds = getBounds();
     if (bounds.isUndefined()) {

@@ -23,6 +23,7 @@ private:
     std::vector<float> frequencies;
     std::vector<double> times;
     mutable std::mutex mutex;
+    std::atomic<double> seek;
 public:
     CppUtils::ListenersSet<const Pitch&, double> pitchDetectedListeners;
 
@@ -44,7 +45,8 @@ public:
     ~AudioInputPitchesRecorder() override;
     virtual void pitchDetected(float frequency, double time);
 
-    void clearCollectedPitches();
+    double getSeek() const;
+    void setSeek(double seek);
 
     int getPitchesCountAfterTime(double time) const override;
 };
