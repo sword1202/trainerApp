@@ -93,7 +93,7 @@ const std::string &MvxFile::getRecordingData() const {
 }
 
 void MvxFile::setInstrumental(const std::string &instrumental) {
-    MvxFile::instrumental = instrumental;
+    this->instrumental = instrumental;
 }
 
 std::string &MvxFile::moveInstrumental() {
@@ -111,4 +111,20 @@ void MvxFile::setRecordingData(const std::string &recordingData) {
 
 void MvxFile::setVxFile(const VxFile &vxFile) {
     this->vxFile = vxFile;
+}
+
+const std::vector<double> &MvxFile::getRecordedPitchesTimes() const {
+    return recordedPitchesTimes;
+}
+
+void MvxFile::setRecordedPitchesTimes(const std::vector<double> &recordedPitchesTimes) {
+    MvxFile::recordedPitchesTimes = recordedPitchesTimes;
+}
+
+const std::vector<float> &MvxFile::getRecordedPitchesFrequencies() const {
+    return recordedPitchesFrequencies;
+}
+
+void MvxFile::setRecordedPitchesFrequencies(const std::vector<float > &recordedPitchesFrequencies) {
+    MvxFile::recordedPitchesFrequencies = recordedPitchesFrequencies;
 }

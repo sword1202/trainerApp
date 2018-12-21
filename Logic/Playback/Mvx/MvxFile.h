@@ -9,6 +9,7 @@
 #include <iostream>
 #include "VxFile.h"
 #include "StringUtils.h"
+#include <boost/variant.hpp>
 
 class MvxFile {
     // signature
@@ -21,7 +22,11 @@ class MvxFile {
     VxFile vxFile;
     std::string instrumental;
     double beatsPerMinute = 0;
+
+    // recording
     std::string recordingData;
+    std::vector<double> recordedPitchesTimes;
+    std::vector<float> recordedPitchesFrequencies;
 
     bool readOnlySignature = false;
     int version = 0;
@@ -29,14 +34,8 @@ class MvxFile {
     friend class boost::serialization::access;
 
     template<typename Archive>
-    void load(Archive & ar, const unsigned int version)
-    {
+    void load(Archive & ar, const unsigned int version) {
         doSerialize(ar, version, readOnlySignature);
-        if (version < 1) {
-            recording = false;
-        }
-
-        CppUtils::Strings::WriteStringToFile("/Users/semyontikhonenko/Desktop/yo.mp3", instrumental);
     }
 
     template<typename Archive>
@@ -61,6 +60,11 @@ class MvxFile {
             ar & vxFile;
             ar & instrumental;
             ar & recordingData;
+
+            if (version >= 2) {
+                ar & recordedPitchesTimes;
+                ar & recordedPitchesFrequencies;
+            }
         }
     }
 
@@ -87,7 +91,6 @@ public:
     void setInstrumental(const std::string &instrumental);
 
     const std::string &getRecordingData() const;
-
     void setRecordingData(const std::string &recordingData);
 
     double getBeatsPerMinute() const;
@@ -106,9 +109,18 @@ public:
     void loadInstrumentalFromFile(const char* filePath);
 
     bool isRecording() const;
+
+    const std::vector<double> &getRecordedPitchesTimes() const;
+    void setRecordedPitchesTimes(const std::vector<double> &recordedPitchesTimes);
+    const std::vector<float> &getRecordedPitchesFrequencies() const;
+    void setRecordedPitchesFrequencies(const std::vector<float> &recordedPitchesFrequencies);
 };
 
-BOOST_CLASS_VERSION(MvxFile, 1)
+
+/**
+ * Version 2: recordedPitchesTimes and recordedPitchesFrequencies are added
+ */
+BOOST_CLASS_VERSION(MvxFile, 2)
 
 
 #endif //VOCALTRAINER_MVXFILE_H
