@@ -3,6 +3,9 @@
 //
 
 #include "AudioInputRecorder.h"
+#include <iostream>
+
+using namespace std;
 
 #define SEEK_LOCK std::lock_guard<std::mutex> _(seekMutex)
 #define DATA_LOCK std::lock_guard<std::mutex> _(dataMutex)
@@ -18,6 +21,7 @@ void AudioInputRecorder::operator()(const int16_t *data, int size) {
         DATA_LOCK;
         recordedData.resize(seek);
         recordedData.append(reinterpret_cast<const char*>(data), size);
+        cout<<"recordedData.size = "<<recordedData.size()<<"\n";
     }
 
     {

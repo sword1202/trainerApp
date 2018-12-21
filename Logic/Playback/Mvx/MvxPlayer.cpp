@@ -208,7 +208,6 @@ void MvxPlayer::onPlaybackStarted() {
 }
 
 void MvxPlayer::onPlaybackStopped() {
-    pauseRequestedCounter = false;
     isPlayingChangedListeners.executeAll(false);
 }
 
@@ -313,4 +312,8 @@ const std::string &MvxPlayer::getSongTitleUtf8() const {
 
 const std::string &MvxPlayer::getInstrumental() {
     return instrumentalPlayer.getAudioData();
+}
+
+bool MvxPlayer::isCompleted() const {
+    return instrumentalPlayer.isCompleted();
 }

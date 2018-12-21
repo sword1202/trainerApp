@@ -25,6 +25,7 @@ private:
     PlaybackData playbackData;
     std::atomic_bool playing;
     std::atomic<float> volume;
+    std::atomic_bool completed;
 
     std::atomic_int pitchShift;
     double tempoFactor;
@@ -101,5 +102,7 @@ public:
 
     bool isLooping() const;
     void setLooping(bool looping);
+
+	bool isCompleted() const;
 };
 #endif //VOCALTRAINER_AUDIOPLAYER_H

@@ -11,7 +11,7 @@
 namespace VxAppUtils {
     bool OpenExistingProject(QWidget* parent) {
         QString fileName = QFileDialog::getOpenFileName(
-                parent, "Select .mvx file for signing", "", "Mvx files(*.mvx);; All files(*)");
+                parent, "Select .mvx file for signing", "", "Mvx files(*.mvx *.rvx);; All files(*)");
 
         bool fileSelected = !fileName.isEmpty();
         if (fileSelected) {

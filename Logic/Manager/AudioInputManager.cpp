@@ -26,7 +26,6 @@ AudioInputManager::AudioInputManager(const char* deviceName) {
     audioInputReader->start();
 
     audioRecorder = new AudioInputRecorder();
-    audioInputReader->callbacks.addListener(audioRecorder);
 }
 
 AudioInputManager::~AudioInputManager() {

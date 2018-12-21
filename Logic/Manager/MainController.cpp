@@ -66,7 +66,9 @@ void MainController::init(AudioInputManager *pitchInputReader, MvxPlayer *mvxPla
     });
 
     mvxPlayer->seekChangedListeners.addListener([=] (double seek) {
-        audioInputManager->setPitchesRecorderSeek(seek);
+        if (!mvxPlayer->isCompleted()) {
+            audioInputManager->setPitchesRecorderSeek(seek);
+        }
     });
 
     mvxPlayer->setInstrumentalVolume(1.0);
@@ -121,7 +123,9 @@ void MainController::setWorkspaceController(WorkspaceController *workspaceContro
 
         mvxPlayer->seekChangedFromUserListeners.addListener([=] (double seek) {
             updateSeek(seek);
-            audioInputManager->setAudioRecorderSeek(seek);
+            if (!mvxPlayer->isCompleted()) {
+                audioInputManager->setAudioRecorderSeek(seek);
+            }
         });
 
         mvxPlayer->boundsChangedListeners.addListener([=] (const PlaybackBounds& bounds) {
@@ -184,6 +188,7 @@ void MainController::generateRecording(MvxFile *out) {
 
     // save instrumental
     out->setInstrumental(mvxPlayer->getInstrumental());
+    out->setBeatsPerMinute(mvxPlayer->getBeatsPerMinute());
 
     // save recorded pitches, to display a graph in the future
     AudioInputPitchesRecorder *pitchesRecorder = audioInputManager->getPitchesRecorder();

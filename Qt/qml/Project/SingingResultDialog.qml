@@ -55,12 +55,20 @@ SvgImage {
         TextOnlyButton {
             anchors.centerIn: parent
             text: "Save"
+
+            onClicked: {
+                self.save()
+            }
         }
 
         TextOnlyButton {
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
             text: "Again"
+
+            onClicked: {
+                self.again()
+            }
         }
     }
 }

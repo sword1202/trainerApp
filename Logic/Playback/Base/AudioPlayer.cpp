@@ -122,6 +122,7 @@ void AudioPlayer::play(double seek) {
         return;
     }
 
+    completed = false;
     setSeek(seek);
 
     setupPlaybackStartedListener();
@@ -199,6 +200,7 @@ AudioPlayer::AudioPlayer() {
     pitchShift = 0;
     tempoFactor = 1;
     looping = false;
+    completed = false;
 }
 
 void AudioPlayer::play() {
@@ -228,6 +230,7 @@ double AudioPlayer::samplesCountToSeconds(int samplesCount) const {
 
 void AudioPlayer::onComplete() {
     playing = false;
+    completed = true;
     setSeek(0);
 
     Executors::ExecuteOnMainThread([=] {
@@ -314,4 +317,8 @@ void AudioPlayer::setTotalDurationInSeconds(double totalDurationInSeconds) {
 
 void AudioPlayer::setPlaybackData(const AudioPlayer::PlaybackData &playbackData) {
     this->playbackData = playbackData;
+}
+
+bool AudioPlayer::isCompleted() const {
+    return completed;
 }

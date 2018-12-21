@@ -108,6 +108,8 @@ public:
     const std::string& getSongTitleUtf8() const;
 
     const std::string &getInstrumental();
+
+    bool isCompleted() const;
 };
 
 
