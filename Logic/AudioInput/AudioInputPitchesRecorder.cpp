@@ -16,12 +16,12 @@ using namespace std;
 
 float AudioInputPitchesRecorder::getFrequencyAt(int index) const {
     LOCK;
-    return frequencies[index];
+    return frequencies[frequencies.size() - index - 1];
 }
 
 double AudioInputPitchesRecorder::getTimeAt(int index) const {
     LOCK;
-    return times[index];
+    return times[times.size() - index - 1];
 }
 
 int AudioInputPitchesRecorder::getPitchesCount() const {
@@ -40,12 +40,8 @@ void AudioInputPitchesRecorder::init(AudioInputReader *audioInputReader, int smo
 
         {
             LOCK;
-            frequencies.push_front(frequency);
-            times.push_front(time);
-            if (times.front() - times.back() > savedPitchesTimeLimit) {
-                times.pop_back();
-                frequencies.pop_back();
-            }
+            frequencies.push_back(frequency);
+            times.push_back(time);
         }
 
         pitchDetected(frequency, time);
@@ -75,21 +71,13 @@ void AudioInputPitchesRecorder::pitchDetected(float frequency, double time) {
     });
 }
 
-double AudioInputPitchesRecorder::getSavedPitchesTimeLimit() const {
-    return savedPitchesTimeLimit;
-}
-
-void AudioInputPitchesRecorder::setSavedPitchesTimeLimit(double savedPitchesTimeLimit) {
-    this->savedPitchesTimeLimit = savedPitchesTimeLimit;
-}
-
 float AudioInputPitchesRecorder::getLastDetectedFrequency() const {
     LOCK;
     if (frequencies.empty()) {
         return -1;
     }
 
-    return frequencies.front();
+    return frequencies.back();
 }
 
 Pitch AudioInputPitchesRecorder::getLastDetectedPitch() const {
@@ -102,7 +90,7 @@ double AudioInputPitchesRecorder::getLastDetectedTime() const {
         return -1;
     }
 
-    return times.front();
+    return times.back();
 }
 
 void AudioInputPitchesRecorder::clearCollectedPitches() {
@@ -112,10 +100,7 @@ void AudioInputPitchesRecorder::clearCollectedPitches() {
 }
 
 int AudioInputPitchesRecorder::getPitchesCountAfterTime(double time) const {
-    auto iter = std::upper_bound(times.begin(), times.end(), time, std::greater<>());
-    if (iter == times.end()) {
-        return getPitchesCount();
-    }
+    auto iter = std::upper_bound(times.begin(), times.end(), time);
 
-    return static_cast<int>(iter - times.begin());
+    return static_cast<int>(times.end() - iter);
 }

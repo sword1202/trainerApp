@@ -6,7 +6,7 @@
 #ifndef VOCALTRAINER_PITCHINPUTREADERCOLLECTOR_H
 #define VOCALTRAINER_PITCHINPUTREADERCOLLECTOR_H
 
-#include <deque>
+#include <vector>
 #include "Pitch.h"
 #include "PitchInputReader.h"
 #include "PitchesRecorder.h"
@@ -20,9 +20,8 @@ public:
 private:
     PitchInputReader* pitchInputReader = nullptr;
 
-    std::deque<float> frequencies;
-    std::deque<double> times;
-    double savedPitchesTimeLimit = std::numeric_limits<double>::infinity();
+    std::vector<float> frequencies;
+    std::vector<double> times;
     mutable std::mutex mutex;
 public:
     CppUtils::ListenersSet<const Pitch&, double> pitchDetectedListeners;
@@ -44,9 +43,6 @@ public:
     float getThreshold() const;
     ~AudioInputPitchesRecorder() override;
     virtual void pitchDetected(float frequency, double time);
-
-    double getSavedPitchesTimeLimit() const;
-    void setSavedPitchesTimeLimit(double savedPitchesTimeLimit);
 
     void clearCollectedPitches();
 
