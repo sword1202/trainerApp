@@ -291,3 +291,25 @@ double VxFile::getFirstPitchStartTime() const {
 VxFile VxFile::withChangedTempo(double tempoFactor) const {
     return VxFile(pitches, distanceInTicksBetweenLastPitchEndAndTrackEnd, (int)round(ticksPerSecond * tempoFactor));
 }
+
+VxFile VxFile::cut(double start, double end) {
+    std::vector<VxPitch> newPitches;
+    int startTick = timeInSecondsToTicks(start);
+    int endTick = timeInSecondsToTicks(end);
+    iteratePitchesInTimeRange(start, end, [&] (VxPitch vxPitch) {
+        if (vxPitch.startTickNumber < startTick) {
+            vxPitch.startTickNumber = startTick;
+        }
+
+        if(vxPitch.endTickNumber() >= endTick) {
+            vxPitch.ticksCount = endTick - vxPitch.startTickNumber;
+        }
+
+        newPitches.push_back(vxPitch);
+    });
+
+    int distanceInTicksBetweenLastPitchEndAndTrackEnd = this->distanceInTicksBetweenLastPitchEndAndTrackEnd;
+    std::max(0, distanceInTicksBetweenLastPitchEndAndTrackEnd - (durationInTicks - endTick));
+
+    return VxFile(std::move(newPitches), distanceInTicksBetweenLastPitchEndAndTrackEnd, ticksPerSecond);
+}

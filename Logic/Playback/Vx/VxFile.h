@@ -99,6 +99,8 @@ public:
 
     double getFirstPitchStartTime() const;
 
+    VxFile cut(double start, double end);
+
     template<typename Function>
     void iteratePitchesInTickRange(int startTick, int endTick, const Function& function) const {
         for (const auto& pitch : pitches) {
