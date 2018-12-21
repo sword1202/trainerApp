@@ -310,3 +310,7 @@ const std::string &MvxPlayer::getArtistNameUtf8() const {
 const std::string &MvxPlayer::getSongTitleUtf8() const {
     return mvxFile.getSongTitleUtf8();
 }
+
+const std::string &MvxPlayer::getInstrumental() {
+    return instrumentalPlayer.getAudioData();
+}

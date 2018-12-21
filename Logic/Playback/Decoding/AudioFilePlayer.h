@@ -14,6 +14,7 @@ class AudioFilePlayer : public AudioPlayerWithDefaultSeekHandler {
 public:
     AudioFilePlayer();
     void setAudioData(std::string&& audioData);
+    const std::string &getAudioData() const;
 protected:
     int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) override;
     void prepareAndProvidePlaybackData(PlaybackData *playbackData) override;

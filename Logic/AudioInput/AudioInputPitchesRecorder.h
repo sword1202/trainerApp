@@ -49,6 +49,9 @@ public:
     void setSeek(double seek);
 
     int getPitchesCountAfterTime(double time) const override;
+
+    const std::vector<double> &getTimesInAscAddedTimeOrder();
+    const std::vector<float> &getFrequenciesInAscAddedTimeOrder();
 };
 
 

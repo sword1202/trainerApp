@@ -16,8 +16,8 @@ void AudioInputRecorder::operator()(const int16_t *data, int size) {
     size *= sizeof(int16_t);
     {
         DATA_LOCK;
-        collectedData.resize(seek);
-        collectedData.append(reinterpret_cast<const char*>(data), size);
+        recordedData.resize(seek);
+        recordedData.append(reinterpret_cast<const char*>(data), size);
     }
 
     {
@@ -28,9 +28,9 @@ void AudioInputRecorder::operator()(const int16_t *data, int size) {
     }
 }
 
-const std::string &AudioInputRecorder::getCollectedData() const {
+const std::string &AudioInputRecorder::getRecordedData() const {
     DATA_LOCK;
-    return collectedData;
+    return recordedData;
 }
 
 int AudioInputRecorder::getSeek() const {

@@ -97,7 +97,6 @@ double AudioInputPitchesRecorder::getLastDetectedTime() const {
 
 int AudioInputPitchesRecorder::getPitchesCountAfterTime(double time) const {
     auto iter = std::upper_bound(times.begin(), times.end(), time);
-
     return static_cast<int>(times.end() - iter);
 }
 
@@ -116,4 +115,12 @@ void AudioInputPitchesRecorder::setSeek(double seek) {
         int index = static_cast<int>(times.end() - iter);
         CppUtils::EraseEndingOfCollection(frequencies, index);
     }
+}
+
+const std::vector<double> &AudioInputPitchesRecorder::getTimesInAscAddedTimeOrder() {
+    return times;
+}
+
+const std::vector<float> &AudioInputPitchesRecorder::getFrequenciesInAscAddedTimeOrder() {
+    return frequencies;
 }

@@ -69,3 +69,7 @@ void AudioFilePlayer::destroy() {
         delete audioDecoder;
     }
 }
+
+const std::string &AudioFilePlayer::getAudioData() const {
+    return audioData;
+}

@@ -170,3 +170,15 @@ bool PortAudioInputReader::isRunning() {
 int PortAudioInputReader::getSampleSizeInBytes() const {
     return sizeof(int16_t);
 }
+
+int PortAudioInputReader::getNumberOfChannels() const {
+    return 1;
+}
+
+WavConfig PortAudioInputReader::generateWavConfig() const {
+    WavConfig wavConfig;
+    wavConfig.bitsPerChannel = sizeof(int16_t);
+    wavConfig.numberOfChannels = getNumberOfChannels();
+    wavConfig.sampleRate = getSampleRate();
+    return wavConfig;
+}

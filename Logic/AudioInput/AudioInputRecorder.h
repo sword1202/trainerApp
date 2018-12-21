@@ -12,7 +12,7 @@
 class AudioInputRecorder {
 public:
     void operator()(const int16_t* data, int size);
-    const std::string &getCollectedData() const;
+    const std::string &getRecordedData() const;
 
     int getSeek() const;
     void setSeek(int seek);
@@ -20,7 +20,7 @@ public:
     AudioInputRecorder();
 
 private:
-    std::string collectedData;
+    std::string recordedData;
     int seek;
     mutable std::mutex seekMutex;
     mutable std::mutex dataMutex;

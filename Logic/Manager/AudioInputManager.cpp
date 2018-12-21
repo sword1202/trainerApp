@@ -63,7 +63,9 @@ void AudioInputManager::addAudioInputReaderCallback(const AudioInputReader::Call
     audioInputReader->callbacks.addListener(callback);
 }
 
-void AudioInputManager::startPitchDetection() {
+void AudioInputManager::startPitchDetection(double seek) {
+    setAudioRecorderSeek(seek);
+    setPitchesRecorderSeek(seek);
     audioInputReader->callbacks.addListener(pitchesRecorder);
     if (audioRecordingEnabled) {
         audioInputReader->callbacks.addListener(audioRecorder);
@@ -106,4 +108,10 @@ CppUtils::ListenersSet<const Pitch &, double> &AudioInputManager::getPitchDetect
 
 AudioInputPitchesRecorder *AudioInputManager::getPitchesRecorder() const {
     return pitchesRecorder;
+}
+
+std::string AudioInputManager::getRecordedDataInWavFormat() const {
+    WavConfig wavConfig = audioInputReader->generateWavConfig();
+    const std::string& recordedData = audioRecorder->getRecordedData();
+    return WAVFile::addWavHeaderToRawPcmData<std::string>(recordedData.data(), recordedData.size(), wavConfig);
 }

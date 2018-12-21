@@ -11,6 +11,8 @@ class SingingResultDialog : public QDialog {
     Q_OBJECT
 public:
     explicit SingingResultDialog(QWidget *parent);
+    Q_INVOKABLE void save();
+    Q_INVOKABLE void again();
 };
 
 

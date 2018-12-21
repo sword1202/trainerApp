@@ -52,6 +52,8 @@ public:
     void init();
 
     int getSampleSizeInBytes() const override;
+    int getNumberOfChannels() const override;
+    WavConfig generateWavConfig() const override;
 };
 
 

@@ -7,6 +7,7 @@
 #include "AudioInputManager.h"
 #include "PlaybackBounds.h"
 #include "Executors.h"
+#include "WAVFile.h"
 #include <iostream>
 
 using namespace CppUtils;
@@ -37,7 +38,7 @@ void MainController::init(AudioInputManager *pitchInputReader, MvxPlayer *mvxPla
 
     mvxPlayer->isPlayingChangedListeners.addListener([this] (bool playing) {
         if (playing) {
-            this->audioInputManager->startPitchDetection();
+            this->audioInputManager->startPitchDetection(this->mvxPlayer->getSeek());
         } else {
             this->audioInputManager->stopPitchDetection();
         }
@@ -171,4 +172,27 @@ void MainController::updateWorkspaceFirstPitch() {
 PlaybackBoundsSelectionController *MainController::getPlaybackBoundsSelectionController() const {
     assert(playbackBoundsSelectionController != nullptr);
     return playbackBoundsSelectionController;
+}
+
+void MainController::generateRecording(MvxFile *out) {
+    out->setArtistNameUtf8(mvxPlayer->getArtistNameUtf8());
+    out->setSongTitleUtf8(mvxPlayer->getSongTitleUtf8());
+
+    // save recorded .wav audio data
+    std::string recording = audioInputManager->getRecordedDataInWavFormat();
+    out->setRecordingData(recording);
+
+    // save instrumental
+    out->setInstrumental(mvxPlayer->getInstrumental());
+
+    // save recorded pitches, to display a graph in the future
+    AudioInputPitchesRecorder *pitchesRecorder = audioInputManager->getPitchesRecorder();
+    out->setRecordedPitchesTimes(pitchesRecorder->getTimesInAscAddedTimeOrder());
+    out->setRecordedPitchesFrequencies(pitchesRecorder->getFrequenciesInAscAddedTimeOrder());
+}
+
+void MainController::saveRecordingIntoFile(const char *filePath) {
+    MvxFile mvxFile;
+    generateRecording(&mvxFile);
+    mvxFile.writeToFile(filePath);
 }

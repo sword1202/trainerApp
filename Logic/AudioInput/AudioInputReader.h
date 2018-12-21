@@ -8,6 +8,7 @@
 
 #include <cstdint>
 #include "ListenersSet.h"
+#include "WAVFile.h"
 
 class AudioInputReader {
 public:
@@ -23,6 +24,8 @@ public:
     virtual int getMaximumBufferSize() const = 0;
     virtual void setInputVolume(float value) = 0;
     virtual float getInputVolume() const = 0;
+    virtual int getNumberOfChannels() const = 0;
+    virtual WavConfig generateWavConfig() const = 0;
 
     virtual const char* getDeviceName() const = 0;
     virtual void setDeviceName(const char* deviceName) = 0;

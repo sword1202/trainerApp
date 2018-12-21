@@ -27,6 +27,8 @@ class MainController {
 
     void onStopPlaybackRequested();
     void updateSeek(double seek);
+
+    void generateRecording(MvxFile* out);
 public:
     typedef typename CppUtils::ListenersSet<float>::Listener WorkspaceHorizontalOffsetChangedListener;
 
@@ -40,6 +42,8 @@ public:
 
     // Should be executed on a render thread, the same thread as workspace->draw is executed
     void setWorkspaceController(WorkspaceController* workspaceController);
+
+    void saveRecordingIntoFile(const char* filePath);
 
     static MainController* instance();
     static void initInstance(MainController* inst);

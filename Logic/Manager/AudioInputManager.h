@@ -22,7 +22,7 @@ public:
     void setOutputVolume(float value);
     float getOutputVolume() const;
 
-    void startPitchDetection();
+    void startPitchDetection(double seek);
     void stopPitchDetection();
 
     const char * getInputDeviceName() const;
@@ -33,6 +33,7 @@ public:
 
     bool isAudioRecordingEnabled() const;
     void setAudioRecordingEnabled(bool audioDataCollectorEnabled);
+    std::string getRecordedDataInWavFormat() const;
     void setAudioRecorderSeek(double timeSeek);
     void setPitchesRecorderSeek(double timeSeek);
 
