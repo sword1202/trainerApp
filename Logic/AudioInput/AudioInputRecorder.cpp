@@ -21,7 +21,6 @@ void AudioInputRecorder::operator()(const int16_t *data, int size) {
         DATA_LOCK;
         recordedData.resize(seek);
         recordedData.append(reinterpret_cast<const char*>(data), size);
-        cout<<"recordedData.size = "<<recordedData.size()<<"\n";
     }
 
     {

@@ -38,8 +38,7 @@ public:
     void setPitchesRecorderSeek(double timeSeek);
 
     CppUtils::ListenersSet<const Pitch&, double >& getPitchDetectedListeners();
-
-    AudioInputPitchesRecorder *getPitchesRecorder() const;
+    const PitchesCollection *getRecordedPitches() const;
 
     ~AudioInputManager();
 };

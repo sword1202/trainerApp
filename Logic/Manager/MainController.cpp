@@ -108,7 +108,7 @@ MvxPlayer *MainController::getPlayer() const {
 void MainController::setWorkspaceController(WorkspaceController *workspaceController) {
     assert(!this->workspaceController);
     this->workspaceController = workspaceController;
-    workspaceController->setPitchesRecorder(audioInputManager->getPitchesRecorder());
+    workspaceController->setPitchesCollection(audioInputManager->getRecordedPitches());
     workspaceController->setVxFile(mvxPlayer->getVxFile());
     workspaceController->setIntervalsPerSecond(mvxPlayer->getBeatsPerMinute() / 60.0);
     workspaceController->setPitchSequence(mvxPlayer);
@@ -191,9 +191,9 @@ void MainController::generateRecording(MvxFile *out) {
     out->setBeatsPerMinute(mvxPlayer->getBeatsPerMinute());
 
     // save recorded pitches, to display a graph in the future
-    AudioInputPitchesRecorder *pitchesRecorder = audioInputManager->getPitchesRecorder();
-    out->setRecordedPitchesTimes(pitchesRecorder->getTimesInAscAddedTimeOrder());
-    out->setRecordedPitchesFrequencies(pitchesRecorder->getFrequenciesInAscAddedTimeOrder());
+    const PitchesCollection *pitches = audioInputManager->getRecordedPitches();
+    out->setRecordedPitchesTimes(pitches->getTimes());
+    out->setRecordedPitchesFrequencies(pitches->getFrequencies());
 }
 
 void MainController::saveRecordingIntoFile(const char *filePath) {

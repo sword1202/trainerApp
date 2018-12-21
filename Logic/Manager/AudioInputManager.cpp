@@ -105,8 +105,8 @@ CppUtils::ListenersSet<const Pitch &, double> &AudioInputManager::getPitchDetect
     return pitchesRecorder->pitchDetectedListeners;
 }
 
-AudioInputPitchesRecorder *AudioInputManager::getPitchesRecorder() const {
-    return pitchesRecorder;
+const PitchesCollection *AudioInputManager::getRecordedPitches() const {
+    return pitchesRecorder->getPitches();
 }
 
 std::string AudioInputManager::getRecordedDataInWavFormat() const {

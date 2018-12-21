@@ -10,7 +10,7 @@
 #include <nanovg/nanovg.h>
 #include "Drawer.h"
 #include <array>
-#include "PitchesRecorder.h"
+#include "PitchesCollection.h"
 #include "VxFile.h"
 #include "WorkspaceController.h"
 #include "PianoDrawer.h"
@@ -39,6 +39,8 @@ class WorkspaceDrawer : public WorkspaceController {
 
     std::atomic<PlaybackBounds> playbackBounds;
 
+    bool recording = false;
+
     float sizeMultiplier;
     float pitchRadius = 0;
 
@@ -56,7 +58,7 @@ class WorkspaceDrawer : public WorkspaceController {
     float devicePixelRatio = -1;
 
     Drawer* drawer = nullptr;
-    PitchesRecorder* pitchesRecorder = nullptr;
+    const PitchesCollection* pitchesCollection = nullptr;
     PianoDrawer* pianoDrawer = nullptr;
 
     Drawer::Image* playHeadTriangleImage = nullptr;
@@ -67,6 +69,9 @@ class WorkspaceDrawer : public WorkspaceController {
     std::atomic<double> frameTime;
     std::atomic<float> firstPlayHeadPosition, secondPlayHeadPosition;
 
+    std::vector<float> pitchesFrequencies;
+    std::vector<double> pitchesTimes;
+
     void iterateHorizontalIntervals(const std::function<void(float x, bool isBeat)>& func) const;
 
     void drawHorizontalLine(float y, const Color& color) const;
@@ -75,7 +80,7 @@ class WorkspaceDrawer : public WorkspaceController {
     void drawHorizontalGrid() const;
     void drawPitch(float x, float y, float width) const;
     void drawPitches() const;
-    void drawPitchesGraph() const;
+    void drawPitchesGraph();
     void drawBoundsIfNeed() const;
     void drawYardStick() const;
     void drawYardStickDot(float x, float y) const;
@@ -154,7 +159,7 @@ public:
     const Color &getPitchColor() const;
     void setPitchColor(const Color &pitchColor);
 
-    void setPitchesRecorder(PitchesRecorder *pitchesRecorder) override;
+    void setPitchesCollection(const PitchesCollection *pitchesCollection) override;
 
     // Warning: VxFile should not be changed from outside
     void setVxFile(const VxFile* vxFile) override;
@@ -179,6 +184,8 @@ public:
     float getSeekFromXPositionOnWorkspace(float x) override;
 
     float getPlayHeadXPosition(int playHeadIndex) override;
+
+    void setRecording(bool recording) override;
 };
 
 

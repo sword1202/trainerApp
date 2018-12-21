@@ -7,7 +7,7 @@
 #define VOCALTRAINER_WORKSPACECONTROLLER_H
 
 
-#include "PitchesRecorder.h"
+#include "PitchesCollection.h"
 #include "PlayingPitchSequence.h"
 #include "PlaybackBounds.h"
 #include "VxFile.h"
@@ -16,7 +16,7 @@ class WorkspaceController {
 public:
     virtual void setIntervalWidth(float intervalWidth) = 0;
     virtual void setIntervalHeight(float intervalHeight) = 0;
-    virtual void setPitchesRecorder(PitchesRecorder *pitchesRecorder) = 0;
+    virtual void setPitchesCollection(const PitchesCollection *pitchesCollection) = 0;
     virtual void setIntervalsPerSecond(double intervalsPerSecond) = 0;
     virtual bool isRunning() const = 0;
     virtual void setRunning(bool value) = 0;
@@ -35,6 +35,7 @@ public:
     virtual float getSeekFromXPositionOnWorkspace(float x) = 0;
     virtual float getWorkspaceSeek() const = 0;
     virtual float getPlayHeadXPosition(int playHeadIndex) = 0;
+    virtual void setRecording(bool recording) = 0;
     virtual ~WorkspaceController() = default;
 };
 

@@ -9,21 +9,15 @@
 #include <vector>
 #include "Pitch.h"
 #include "PitchInputReader.h"
-#include "PitchesRecorder.h"
+#include "PitchesCollection.h"
+#include "SeekablePitchesList.h"
 #include "ListenersSet.h"
 #include <functional>
 #include <mutex>
 
-class AudioInputPitchesRecorder : public PitchesRecorder {
-public:
-    typedef CppUtils::ListenersSet<const Pitch&, double>::Listener PitchDetectedListener;
-private:
+class AudioInputPitchesRecorder {
     PitchInputReader* pitchInputReader = nullptr;
-
-    std::vector<float> frequencies;
-    std::vector<double> times;
-    mutable std::mutex mutex;
-    std::atomic<double> seek;
+    SeekablePitchesList pitches;
 public:
     CppUtils::ListenersSet<const Pitch&, double> pitchDetectedListeners;
 
@@ -33,25 +27,14 @@ public:
 
     void operator()(const int16_t* data, int size);
 
-    float getFrequencyAt(int index) const override;
-    float getLastDetectedFrequency() const;
-    Pitch getLastDetectedPitch() const;
-    double getTimeAt(int index) const override;
-    double getLastDetectedTime() const;
-    int getPitchesCount() const override;
-
-    virtual void setThreshold(float threshold);
+    void setThreshold(float threshold);
     float getThreshold() const;
-    ~AudioInputPitchesRecorder() override;
+    ~AudioInputPitchesRecorder();
     virtual void pitchDetected(float frequency, double time);
 
-    double getSeek() const;
     void setSeek(double seek);
 
-    int getPitchesCountAfterTime(double time) const override;
-
-    const std::vector<double> &getTimesInAscAddedTimeOrder();
-    const std::vector<float> &getFrequenciesInAscAddedTimeOrder();
+    const PitchesCollection* getPitches() const;
 };
 
 

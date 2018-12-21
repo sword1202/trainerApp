@@ -243,23 +243,24 @@ void WorkspaceDrawer::setVxFile(const VxFile* vxFile) {
     this->vxFile = vxFile;
 }
 
-void WorkspaceDrawer::drawPitchesGraph() const {
+void WorkspaceDrawer::drawPitchesGraph() {
     assert(getFirstPitch().isValid());
-    assert(pitchesRecorder);
+    assert(pitchesCollection);
     assert(pitchGraphColor[3] > 0 && "pitchGraphColor not initialized or is completely transparent");
 
     // Pre-draw one beat more to avoid graph interruption
     double drawInterval = this->getIntervalDuration() * (BEATS_IN_TACT + 1);
     float workspaceSeek = getWorkspaceSeek();
     double pitchesGraphDrawBeginTime = workspaceSeek - drawInterval;
-    int pitchesCount = pitchesRecorder->getPitchesCountAfterTime(pitchesGraphDrawBeginTime);
-    if (pitchesCount <= 0) {
-        return;
-    }
+    double pitchesGraphDrawEndTime = workspaceSeek + 0.001;
+
+    pitchesCollection->getPitchesInTimeRange(pitchesGraphDrawBeginTime,
+            pitchesGraphDrawEndTime, &pitchesTimes, &pitchesFrequencies);
+    int pitchesCount = static_cast<int>(pitchesTimes.size());
 
     int i = 0;
 
-    while (i < pitchesCount && !pitchesRecorder->getPitchAt(i).isValid()) {
+    while (i < pitchesCount && !Pitch(pitchesFrequencies[i]).isValid()) {
         i++;
     }
 
@@ -281,13 +282,13 @@ void WorkspaceDrawer::drawPitchesGraph() const {
     };
 
     while (i < pitchesCount) {
-        Pitch pitch = pitchesRecorder->getPitchAt(i);
+        Pitch pitch(pitchesFrequencies[i]);
         if (!pitch.isValid()) {
             i++;
             continue;
         }
 
-        double time = pitchesRecorder->getTimeAt(i);
+        double time = pitchesTimes[i];
         getXY(time, pitch);
         drawer->moveTo((float)x, (float)y);
 
@@ -296,18 +297,19 @@ void WorkspaceDrawer::drawPitchesGraph() const {
             break;
         }
 
-        if (!pitchesRecorder->getPitchAt(i).isValid()) {
+        pitch = Pitch(pitchesFrequencies[i]);
+        if (!pitch.isValid()) {
             drawer->lineTo((float)x, (float)y);
             continue;
         }
 
         for (; i < pitchesCount; i++) {
-            Pitch pitch = pitchesRecorder->getPitchAt(i);
+            pitch = Pitch(pitchesFrequencies[i]);
             if (!pitch.isValid()) {
                 break;
             }
 
-            double time = pitchesRecorder->getTimeAt(i);
+            time = pitchesTimes[i];
             getXY(time, pitch);
             drawer->lineTo((float)x, (float)y);
         }
@@ -497,8 +499,8 @@ void WorkspaceDrawer::setIntervalsPerSecond(double intervalsPerSecond) {
     this->intervalsPerSecond = intervalsPerSecond;
 }
 
-void WorkspaceDrawer::setPitchesRecorder(PitchesRecorder *pitchesRecorder) {
-    this->pitchesRecorder = pitchesRecorder;
+void WorkspaceDrawer::setPitchesCollection(const PitchesCollection *pitchesCollection) {
+    this->pitchesCollection = pitchesCollection;
 }
 
 const WorkspaceDrawer::Color &WorkspaceDrawer::getPitchGraphColor() const {
@@ -638,6 +640,10 @@ void WorkspaceDrawer::setClockImage(Drawer::Image *clockImage) {
 float WorkspaceDrawer::getPlayHeadXPosition(int playHeadIndex) {
     assert(playHeadIndex == 0 || playHeadIndex == 1);
     return playHeadIndex == 0 ? firstPlayHeadPosition : secondPlayHeadPosition;
+}
+
+void WorkspaceDrawer::setRecording(bool recording) {
+    this->recording = recording;
 }
 
 #ifndef NDEBUG
