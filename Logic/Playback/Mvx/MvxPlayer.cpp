@@ -117,6 +117,10 @@ void MvxPlayer::play() {
     }
     vxPlayer.play();
     instrumentalPlayer.play();
+    if (isRecording()) {
+        recordingPlayer.setSeek(seek);
+        recordingPlayer.play();
+    }
 }
 
 void MvxPlayer::setSeek(double value) {
@@ -146,6 +150,10 @@ MvxPlayer::~MvxPlayer() {
 void MvxPlayer::prepare() {
     instrumentalPlayer.prepare();
     vxPlayer.prepare();
+    if (isRecording()) {
+        recordingPlayer.prepare();
+    }
+
     metronomePlayer.setAudioDataInfo(getBeatsPerMinute(), instrumentalPlayer.getTrackDurationInSeconds());
     assert(fabs(instrumentalPlayer.getTrackDurationInSeconds() - vxPlayer.getTrackDurationInSeconds()) < 0.1);
     prepareFinishedListeners.executeAll();
