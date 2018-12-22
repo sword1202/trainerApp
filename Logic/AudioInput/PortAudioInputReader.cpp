@@ -177,7 +177,7 @@ int PortAudioInputReader::getNumberOfChannels() const {
 
 WavConfig PortAudioInputReader::generateWavConfig() const {
     WavConfig wavConfig;
-    wavConfig.bitsPerChannel = sizeof(int16_t);
+    wavConfig.bitsPerChannel = sizeof(int16_t) * 8;
     wavConfig.numberOfChannels = getNumberOfChannels();
     wavConfig.sampleRate = getSampleRate();
     return wavConfig;

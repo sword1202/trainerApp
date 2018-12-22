@@ -128,3 +128,7 @@ std::vector<float> &MvxFile::moveRecordedPitchesFrequencies() {
 void MvxFile::setRecordedPitchesFrequencies(const std::vector<float > &recordedPitchesFrequencies) {
     MvxFile::recordedPitchesFrequencies = recordedPitchesFrequencies;
 }
+
+std::string &MvxFile::moveRecordingData() {
+    return recordingData;
+}

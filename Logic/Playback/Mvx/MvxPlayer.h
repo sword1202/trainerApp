@@ -19,6 +19,7 @@
 #include "MetronomeAudioPlayer.h"
 #include "PlaybackBounds.h"
 #include "PitchesCollection.h"
+#include "WavAudioPlayer.h"
 #include <array>
 
 class MvxPlayer : public PlayingPitchSequence {
@@ -27,8 +28,9 @@ private:
     AudioFilePlayer instrumentalPlayer;
     VxFileAudioPlayer vxPlayer;
     MetronomeAudioPlayer metronomePlayer;
+    WavAudioPlayer recordingPlayer;
 
-    std::array<AudioPlayer*, 3> players;
+    std::vector<AudioPlayer*> players;
 
     std::atomic_bool metronomeEnabled;
     int pauseRequestedCounter = 0;

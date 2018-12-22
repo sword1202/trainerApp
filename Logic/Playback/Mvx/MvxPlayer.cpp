@@ -25,8 +25,6 @@ using std::endl;
 constexpr int BEATS_IN_TACT = 4;
 
 MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
-    players = {{&instrumentalPlayer, &vxPlayer, &metronomePlayer}};
-
     instrumentalPlayer.seekChangedListeners.addListener([=](double seek, double) {
         Executors::ExecuteOnMainThread([=] {
             if (bounds) {
@@ -56,9 +54,12 @@ void MvxPlayer::init(std::istream &is) {
     mvxFile = MvxFile::readFromStream(is);
     instrumentalPlayer.setAudioData(std::move(mvxFile.moveInstrumental()));
     vxPlayer.setVxFile(mvxFile.getVxFile());
+    players = {&instrumentalPlayer, &vxPlayer, &metronomePlayer};
     if (mvxFile.isRecording()) {
         pitchesCollection = new PitchesMutableList(std::move(mvxFile.moveRecordedPitchesFrequencies()),
                 std::move(mvxFile.moveRecordedPitchesTimes()));
+        recordingPlayer.setAudioData(std::move(mvxFile.moveRecordingData()));
+        players.push_back(&recordingPlayer);
     }
 }
 
