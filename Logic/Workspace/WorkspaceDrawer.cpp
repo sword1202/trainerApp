@@ -211,7 +211,7 @@ void WorkspaceDrawer::drawPitches() const {
 
     double workspaceDuration = getWorkspaceDuration();
     double workspaceSeek = getWorkspaceSeek();
-    double timeBegin = workspaceSeek - getPitchGraphDuration();
+    double timeBegin = workspaceSeek - getSingingPitchGraphDuration();
     double timeEnd = timeBegin + workspaceDuration;
 
     float relativeHeight = getMaximumGridTranslation() - getGridTranslation() + getGridHeight();
@@ -243,19 +243,33 @@ void WorkspaceDrawer::setVxFile(const VxFile* vxFile) {
     this->vxFile = vxFile;
 }
 
+void WorkspaceDrawer::initGraphPitchesArrays(float workspaceSeek) {
+    double pitchesGraphDrawBeginTime;
+    double pitchesGraphDrawEndTime;
+    if (recording) {
+        double intervalDuration = getIntervalDuration();
+        pitchesGraphDrawBeginTime = workspaceSeek - getSingingPitchGraphDuration() - intervalDuration;
+        // Pre-draw one beat more to avoid graph interruption
+        pitchesGraphDrawEndTime = getWorkspaceDuration() + pitchesGraphDrawBeginTime + intervalDuration;
+    } else {
+        // Pre-draw one beat more to avoid graph interruption
+        double drawInterval = this->getIntervalDuration() * (BEATS_IN_TACT + 1);
+        pitchesGraphDrawBeginTime = workspaceSeek - drawInterval;
+        pitchesGraphDrawEndTime = workspaceSeek + 0.001;
+    }
+
+    pitchesCollection->getPitchesInTimeRange(pitchesGraphDrawBeginTime,
+                                             pitchesGraphDrawEndTime,
+                                             &pitchesTimes, &pitchesFrequencies);
+}
+
 void WorkspaceDrawer::drawPitchesGraph() {
     assert(getFirstPitch().isValid());
     assert(pitchesCollection);
     assert(pitchGraphColor[3] > 0 && "pitchGraphColor not initialized or is completely transparent");
 
-    // Pre-draw one beat more to avoid graph interruption
-    double drawInterval = this->getIntervalDuration() * (BEATS_IN_TACT + 1);
     float workspaceSeek = getWorkspaceSeek();
-    double pitchesGraphDrawBeginTime = workspaceSeek - drawInterval;
-    double pitchesGraphDrawEndTime = workspaceSeek + 0.001;
-
-    pitchesCollection->getPitchesInTimeRange(pitchesGraphDrawBeginTime,
-            pitchesGraphDrawEndTime, &pitchesTimes, &pitchesFrequencies);
+    initGraphPitchesArrays(workspaceSeek);
     int pitchesCount = static_cast<int>(pitchesTimes.size());
 
     int i = 0;
@@ -269,7 +283,7 @@ void WorkspaceDrawer::drawPitchesGraph() {
     drawer->setStrokeColor(pitchGraphColor);
 
     float pitchGraphWidth = intervalWidth * PITCHES_GRAPH_WIDTH_IN_INTERVALS;
-    double duration = getPitchGraphDuration();
+    double duration = getSingingPitchGraphDuration();
 
     double x;
     double y;
@@ -412,7 +426,7 @@ int WorkspaceDrawer::getDistanceFromFirstPitch(const Pitch &pitch) const {
     return pitch.getPerfectFrequencyIndex() - firstPitchIndex;
 }
 
-double WorkspaceDrawer::getPitchGraphDuration() const {
+double WorkspaceDrawer::getSingingPitchGraphDuration() const {
     return getIntervalDuration() * PITCHES_GRAPH_WIDTH_IN_INTERVALS;
 }
 

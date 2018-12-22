@@ -37,10 +37,12 @@ void MainController::init(AudioInputManager *pitchInputReader, MvxPlayer *mvxPla
     });
 
     mvxPlayer->isPlayingChangedListeners.addListener([this] (bool playing) {
-        if (playing) {
-            this->audioInputManager->startPitchDetection(this->mvxPlayer->getSeek());
-        } else {
-            this->audioInputManager->stopPitchDetection();
+        if (!this->mvxPlayer->isRecording()) {
+            if (playing) {
+                this->audioInputManager->startPitchDetection(this->mvxPlayer->getSeek());
+            } else {
+                this->audioInputManager->stopPitchDetection();
+            }
         }
 
         workspaceController->setRunning(playing);
@@ -108,10 +110,16 @@ MvxPlayer *MainController::getPlayer() const {
 void MainController::setWorkspaceController(WorkspaceController *workspaceController) {
     assert(!this->workspaceController);
     this->workspaceController = workspaceController;
-    workspaceController->setPitchesCollection(audioInputManager->getRecordedPitches());
     workspaceController->setVxFile(mvxPlayer->getVxFile());
     workspaceController->setIntervalsPerSecond(mvxPlayer->getBeatsPerMinute() / 60.0);
     workspaceController->setPitchSequence(mvxPlayer);
+    bool isRecording = mvxPlayer->isRecording();
+    workspaceController->setRecording(isRecording);
+    if (isRecording) {
+        workspaceController->setPitchesCollection(mvxPlayer->getPitchesCollection());
+    } else {
+        workspaceController->setPitchesCollection(audioInputManager->getRecordedPitches());
+    }
 
     updateZoom();
     updateWorkspaceFirstPitch();
@@ -188,6 +196,7 @@ void MainController::generateRecording(MvxFile *out) {
 
     // save instrumental
     out->setInstrumental(mvxPlayer->getInstrumental());
+    out->setVxFile(*mvxPlayer->getVxFile());
     out->setBeatsPerMinute(mvxPlayer->getBeatsPerMinute());
 
     // save recorded pitches, to display a graph in the future

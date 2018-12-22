@@ -80,6 +80,7 @@ class WorkspaceDrawer : public WorkspaceController {
     void drawHorizontalGrid() const;
     void drawPitch(float x, float y, float width) const;
     void drawPitches() const;
+    void initGraphPitchesArrays(float workspaceSeek);
     void drawPitchesGraph();
     void drawBoundsIfNeed() const;
     void drawYardStick() const;
@@ -88,7 +89,7 @@ class WorkspaceDrawer : public WorkspaceController {
     void drawFirstPlayHead();
     void drawSecondPlayHead();
 
-    double getPitchGraphDuration() const;
+    double getSingingPitchGraphDuration() const;
     double getIntervalDuration() const;
 
     std::function<void()> onUpdateRequested;

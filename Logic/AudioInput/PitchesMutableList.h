@@ -15,6 +15,10 @@ protected:
     std::vector<double> times;
     mutable std::mutex mutex;
 public:
+    PitchesMutableList(const std::vector<float> &frequencies, const std::vector<double> &times);
+    PitchesMutableList(std::vector<float> &&frequencies, std::vector<double> &&times);
+    PitchesMutableList() = default;
+
     void getPitchesInTimeRange(double begin, double end, std::vector<double> *timesOut,
                                std::vector<float> *frequenciesOut) const override;
 
@@ -23,6 +27,8 @@ public:
     std::vector<float> getFrequencies() const;
 
     Pitch getNearestPitch(double time) const override;
+
+
 };
 
 

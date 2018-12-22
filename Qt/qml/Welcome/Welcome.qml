@@ -131,7 +131,7 @@ Item {
                 hoverEnabled: true
 
                 onClicked: {
-                    if (recentProjects.selected) {
+                    if (recentProjects.selected || recentRecordings.selected) {
                         self.openRecentProject(model.modelData.filePath)
                     }
                 }
