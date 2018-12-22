@@ -76,7 +76,7 @@ void AudioInputManager::stopPitchDetection() {
 }
 
 void AudioInputManager::addAudioInputLevelMonitor(const std::function<void(double)> &callback) {
-    addAudioInputReaderCallback(AudioAverageInputLevelMonitor(BUFFER_SIZE, [=] (double value) {
+    addAudioInputReaderCallback(AudioAverageInputLevelMonitor([=] (double value) {
         Executors::ExecuteOnMainThread([=] {
             callback(value);
         });

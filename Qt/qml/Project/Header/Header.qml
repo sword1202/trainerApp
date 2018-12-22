@@ -11,6 +11,7 @@ Rectangle {
     property real microphoneLevel: 0.0
     property real outputVolume: 0.0
     property real inputVolume: 0.0
+    property real recordingVolume: -1.0
 
     id: header
     height: 75
@@ -87,6 +88,7 @@ Rectangle {
 
             SvgImage {
                 id: outputSliderIcon
+                visible: recordingVolume < 0
                 width: 17
                 height: 26
                 source: "images/output_level_slider.svg"
@@ -96,6 +98,7 @@ Rectangle {
             MicrophoneVolumeSlider {
                 id: outputSlider
                 volume: outputVolume
+                visible: recordingVolume < 0
 
                 anchors.left: outputSliderIcon.right
                 anchors.leftMargin: 5.25
@@ -119,7 +122,7 @@ Rectangle {
 
             MicrophoneVolumeSlider {
                 id: inputSlider
-                volume: inputVolume
+                volume: recordingVolume >= 0 ? recordingVolume : inputVolume
 
                 level: microphoneLevel
                 anchors.left: inputSliderIcon.right
@@ -128,7 +131,11 @@ Rectangle {
 
                 onVolumeChanged: {
                     header.inputVolume = volume
-                    self.onInputVolumeChanged(volume)
+                    if (recordingVolume < 0) {
+                        self.onInputVolumeChanged(volume)
+                    } else {
+                        self.onRecordingVolumeChanged(volume)
+                    }
                 }
             }
         }

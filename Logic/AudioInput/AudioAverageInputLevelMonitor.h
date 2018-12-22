@@ -16,7 +16,7 @@ private:
     Callback callback;
 public:
 
-    AudioAverageInputLevelMonitor(int bufferSize, const Callback& callback);
+    AudioAverageInputLevelMonitor(const Callback& callback);
     void operator()(const int16_t* data, int size) const;
 };
 

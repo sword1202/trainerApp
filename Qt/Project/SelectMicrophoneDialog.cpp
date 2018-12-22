@@ -47,7 +47,7 @@ SelectMicrophoneDialog::SelectMicrophoneDialog(QWidget* parent, QtCppBridge* cpp
     audioInputReader = new PortAudioInputReader(BUFFER_SIZE,
             false, // outputEnabled
             AppSettings().getMicrophoneDeviceName().data());
-    AudioAverageInputLevelMonitor monitor(BUFFER_SIZE, [this] (double level) {
+    AudioAverageInputLevelMonitor monitor([this] (double level) {
         Executors::ExecuteOnMainThread([=]{
             onInputLevelChanged(level);
         });

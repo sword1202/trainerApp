@@ -14,6 +14,7 @@
 #include "Functions.h"
 #include "Executors.h"
 #include "PlaybackBounds.h"
+#include "AudioAverageInputLevelMonitor.h"
 #include <iostream>
 #include <memory>
 #include <PitchesMutableList.h>
@@ -48,6 +49,15 @@ MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
     instrumentalPlayer.onPlaybackStartedListeners.addListener([=] {
         this->onPlaybackStarted();
     });
+
+    if (isRecording()) {
+        recordingLevelMonitor = new AudioAverageInputLevelMonitor([=] (double level) {
+            recordingVoiceLevelListeners.executeAll(level);
+        });
+        recordingPlayer.onDataSentToOutputListeners.addListener([=] (void* data, int size) {
+            recordingLevelMonitor->operator()(static_cast<const int16_t *>(data), size / sizeof(int16_t));
+        });
+    }
 }
 
 void MvxPlayer::init(std::istream &is) {
@@ -141,10 +151,14 @@ void MvxPlayer::setPianoVolume(float pianoVolume) {
     updateMetronomeVolume();
 }
 
+void MvxPlayer::setRecordingVolume(float volume) {
+    recordingPlayer.setVolume(volume);
+    updateMetronomeVolume();
+}
+
 MvxPlayer::~MvxPlayer() {
-    if (pitchesCollection) {
-        delete pitchesCollection;
-    }
+    delete pitchesCollection;
+    delete recordingLevelMonitor;
 }
 
 void MvxPlayer::prepare() {
@@ -290,7 +304,8 @@ bool MvxPlayer::isMetronomeSoundDataSet() const {
 
 void MvxPlayer::updateMetronomeVolume() {
     if (metronomeEnabled) {
-        metronomePlayer.setVolume(std::max(instrumentalPlayer.getVolume(), vxPlayer.getVolume()) * 0.2f);
+        metronomePlayer.setVolume(std::max({instrumentalPlayer.getVolume(),
+                vxPlayer.getVolume(), recordingPlayer.getVolume()}) * 0.2f);
     } else {
         metronomePlayer.setVolume(0.0f);
     }

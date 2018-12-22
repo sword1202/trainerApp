@@ -21,6 +21,7 @@
 #include "PitchesCollection.h"
 #include "WavAudioPlayer.h"
 #include <array>
+#include <AudioAverageInputLevelMonitor.h>
 
 class MvxPlayer : public PlayingPitchSequence {
 private:
@@ -44,6 +45,8 @@ private:
 
     void updateMetronomeVolume();
     void pausePlayer(AudioPlayer* player);
+
+    AudioAverageInputLevelMonitor* recordingLevelMonitor;
 public:
     CppUtils::ListenersSet<bool> isPlayingChangedListeners;
     CppUtils::ListenersSet<> stopRequestedListeners;
@@ -55,6 +58,7 @@ public:
     CppUtils::ListenersSet<> tonalityChangedListeners;
     CppUtils::ListenersSet<> onCompleteListeners;
     CppUtils::ListenersSet<const PlaybackBounds&> boundsChangedListeners;
+    CppUtils::ListenersSet<double> recordingVoiceLevelListeners;
 
     MvxPlayer();
     virtual ~MvxPlayer();
@@ -63,6 +67,7 @@ public:
     void prepare();
     void setInstrumentalVolume(float instrumentalVolume);
     void setPianoVolume(float pianoVolume);
+    void setRecordingVolume(float volume);
     virtual void pause();
     virtual void stopAndMoveSeekToBeginning();
     virtual void play();

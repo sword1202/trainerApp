@@ -35,13 +35,13 @@ int AudioPlayer::callback(
     memset(outputBuffer, 0, framesPerBuffer * self->getSampleSize());
     int readFramesCount = self->readNextSamplesBatch(outputBuffer, framesPerBuffer, self->playbackData);
     assert(readFramesCount <= (int)framesPerBuffer);
+    int sampleSize = self->getSampleSize();
     // no data available, return silence and wait
     const PaSampleFormat format = self->playbackData.format;
     if (readFramesCount < 0) {
         Executors::ExecuteOnMainThread([=] {
             self->onNoDataAvailableListeners.executeAll();
         });
-        int sampleSize = self->getSampleSize();
         memset(outputBuffer, 0, framesPerBuffer * sampleSize);
         return paContinue;
     } else {
@@ -67,7 +67,7 @@ int AudioPlayer::callback(
             }
         }
 
-        self->onDataSentToOutputListeners.executeAll(outputBuffer, readFramesCount);
+        self->onDataSentToOutputListeners.executeAll(outputBuffer, readFramesCount * sampleSize);
 
         if (readFramesCount == framesPerBuffer) {
             return paContinue;

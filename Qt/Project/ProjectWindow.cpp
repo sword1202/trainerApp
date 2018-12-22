@@ -51,6 +51,7 @@ ProjectWindow::ProjectWindow() :
     AppSettings settings;
     float inputVolume = settings.getInputVolume();
     float outputVolume = settings.getOutputVolume();
+    float recordingVolume = settings.getRecordingVolume();
     
     // Workspace
 #ifdef __APPLE__
@@ -75,17 +76,28 @@ ProjectWindow::ProjectWindow() :
     header = headerWithSubheader->findChild<QQuickItem*>("header");
     assert(header);
 
-    AudioInputManager *audioInputManager = MainController::instance()->getAudioInputManager();
-    
-    header->setProperty("inputVolume", inputVolume);
-    onInputVolumeChanged(inputVolume);
-    
-    header->setProperty("outputVolume", outputVolume);
-    onOutputVolumeChanged(outputVolume);
-    
-    audioInputManager->addAudioInputLevelMonitor([=] (double level) {
+    MainController *mainController = MainController::instance();
+    MvxPlayer *player = mainController->getPlayer();
+    AudioInputManager *audioInputManager = mainController->getAudioInputManager();
+
+    if (player->isRecording()) {
+        header->setProperty("recordingVolume", recordingVolume);
+    } else {
+        header->setProperty("inputVolume", inputVolume);
+        onInputVolumeChanged(inputVolume);
+
+        header->setProperty("outputVolume", outputVolume);
+        onOutputVolumeChanged(outputVolume);
+    }
+
+    auto audioLevelListener = [=] (double level) {
         header->setProperty("microphoneLevel", level);
-    });
+    };
+    if (player->isRecording()) {
+        player->recordingVoiceLevelListeners.addListener(audioLevelListener);
+    } else {
+        audioInputManager->addAudioInputLevelMonitor(audioLevelListener);
+    }
 
     // Setup layouts
     auto *mainLayout = new QVBoxLayout;
@@ -122,6 +134,12 @@ void ProjectWindow::onInputVolumeChanged(float value) {
     settings.setInputVolume(value);
     AudioInputManager *audioInputManager = MainController::instance()->getAudioInputManager();
     audioInputManager->setInputVolume(value);
+}
+
+void ProjectWindow::onRecordingVolumeChanged(float value) {
+    AppSettings settings;
+    settings.setRecordingVolume(value);
+    MainController::instance()->getPlayer()->setRecordingVolume(value);
 }
 
 void ProjectWindow::resizeEvent(QResizeEvent *event) {

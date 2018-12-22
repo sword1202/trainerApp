@@ -9,10 +9,10 @@
 #include "Algorithms.h"
 #include "AudioUtils.h"
 
-constexpr int BUFFER_SIZE = 1024;
 constexpr double THRESHOLD = 60;
 
 void AudioAverageInputLevelMonitor::operator()(const int16_t *data, int size) const {
+    tempFloatBuffer.resize(size);
     AudioUtils::Int16SamplesIntoFloatSamples(data, size, tempFloatBuffer.data());
     double sum = CppUtils::AbsoluteAverage<double>(tempFloatBuffer.data(), (int)tempFloatBuffer.size());
     double value = 20 * log10(sum) + THRESHOLD;
@@ -20,7 +20,7 @@ void AudioAverageInputLevelMonitor::operator()(const int16_t *data, int size) co
     callback(inputLevel);
 }
 
-AudioAverageInputLevelMonitor::AudioAverageInputLevelMonitor(int bufferSize, const Callback& callback)
+AudioAverageInputLevelMonitor::AudioAverageInputLevelMonitor(const Callback& callback)
 : callback(callback) {
-    tempFloatBuffer.resize((size_t)bufferSize);
+    tempFloatBuffer.reserve(2048);
 }

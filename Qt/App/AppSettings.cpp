@@ -6,6 +6,7 @@
 static const QString MICROPHONE_NAME_KEY = "microphoneDeviceName";
 static const QString INPUT_VOLUME_KEY = "inputVolume";
 static const QString OUTPUT_VOLUME_KEY = "outputVolume";
+static const QString RECORDING_VOLUME_KEY = "recordingVolume";
 static const QString RECORDINGS_LIST_KEY = "recordingsList";
 static const QString PROJECTS_LIST_KEY = "projectsList";
 
@@ -29,6 +30,14 @@ void AppSettings::setOutputVolume(float value) {
 
 float AppSettings::getOutputVolume() {
     return value(OUTPUT_VOLUME_KEY, 0.0f).toFloat();
+}
+
+float AppSettings::getRecordingVolume() {
+    return value(RECORDING_VOLUME_KEY, 1.0f).toFloat();
+}
+
+void AppSettings::setRecordingVolume(float value) {
+    setValue(RECORDING_VOLUME_KEY, value);
 }
 
 void AppSettings::setInputVolume(float value) {
