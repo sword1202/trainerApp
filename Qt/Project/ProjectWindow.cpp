@@ -113,9 +113,9 @@ ProjectWindow::ProjectWindow() :
 #ifdef __APPLE__
     verticalScrollBarNativeWrap = workspaceWidget->addSubWidget(verticalScrollBar);
 #endif
-    updateVerticalScrollBar();
+    updateVerticalScrollBarValues();
     MainController::instance()->getZoomController()->summarizedWorkspaceGridHeightChangedListeners.addListener([=] {
-        updateVerticalScrollBar();
+        updateVerticalScrollBarValues();
     });
     connect(verticalScrollBar, &QScrollBar::valueChanged, this, &ProjectWindow::onVerticalScrollBarValueChanged);
 
@@ -127,6 +127,10 @@ ProjectWindow::ProjectWindow() :
             dialog->show();
         });
     }
+
+    QtUtils::AddResizeListener(workspaceWidget, [=] (int, int) {
+        updateScrollBarHeightAndPosition(width());
+    });
 }
 
 void ProjectWindow::onOutputVolumeChanged(float value) {
@@ -151,8 +155,14 @@ void ProjectWindow::onRecordingVolumeChanged(float value) {
 
 void ProjectWindow::resizeEvent(QResizeEvent *event) {
     QWidget::resizeEvent(event);
-
     const int width = event->size().width();
+    updateScrollBarHeightAndPosition(width);
+}
+
+void ProjectWindow::updateScrollBarHeightAndPosition(int windowWidth) {
+    if (!verticalScrollBar) {
+        return;
+    }
 
     int scrollBarHeight = workspaceWidget->height() - YARD_STICK_HEIGHT - 2;
 #ifdef __APPLE__
@@ -166,13 +176,13 @@ void ProjectWindow::resizeEvent(QResizeEvent *event) {
     } else {
         y = YARD_STICK_HEIGHT + 2;
     }
-    int x = width - verticalScrollBar->width();
+    int x = windowWidth - verticalScrollBar->width();
 #ifdef __APPLE__
     verticalScrollBarNativeWrap->move(x, y);
 #else
     verticalScrollBar->move(x, y);
 #endif
-    updateVerticalScrollBar();
+    updateVerticalScrollBarValues();
 }
 
 void ProjectWindow::setupMenus() {
@@ -202,7 +212,7 @@ void ProjectWindow::setShowLyrics(bool value) {
     lyricsWidget->setVisible(value);
 }
 
-void ProjectWindow::updateVerticalScrollBar() {
+void ProjectWindow::updateVerticalScrollBarValues() {
     WorkspaceZoomController* zoomController = MainController::instance()->getZoomController();
     float summarizedWorkspaceGridHeight = zoomController->getSummarizedWorkspaceGridHeight();
     int pageStep = verticalScrollBar->height();

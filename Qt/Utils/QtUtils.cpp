@@ -6,6 +6,7 @@
 #include <QEvent>
 #include "assert.h"
 #include <QVariant>
+#include <QResizeEvent>
 
 namespace QtUtils {
     void StartRepeatedTimer(QObject *parent, const std::function<bool()> &action, int intervalInMilliseconds) {
@@ -67,4 +68,22 @@ namespace QtUtils {
     QString QStringFromUtf8(const std::string& utf8) {
         return QString::fromUtf8(utf8.data(), utf8.size());
     }
+
+    void AddResizeListener(QWidget* widget, const std::function<void(int, int)>& listener) {
+        auto* resizeListener = new _ResizeListener(widget, listener);
+        widget->installEventFilter(resizeListener);
+    }
+
+    bool _ResizeListener::eventFilter(QObject *watched, QEvent *event) {
+        if (event->type() == QEvent::Resize) {
+            auto* resizeEvent = static_cast<QResizeEvent *>(event);
+            QSize size = resizeEvent->size();
+            listener(size.width(), size.height());
+        }
+
+        return false;
+    }
+
+    _ResizeListener::_ResizeListener(QObject *parent, const std::function<void(int, int)> &listener) : QObject(parent),
+    listener(listener) {}
 }

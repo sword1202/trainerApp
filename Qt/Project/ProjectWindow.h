@@ -28,11 +28,12 @@ class ProjectWindow : public BaseMainWindow
 
     QQuickItem *headerWithSubheader;
     QQuickItem *header;
-    QScrollBar *verticalScrollBar;
+    QScrollBar *verticalScrollBar = nullptr;
     QQuickWidget *lyricsWidget;
 protected:
     void resizeEvent(QResizeEvent *event) override;
-    void updateVerticalScrollBar();
+    void updateScrollBarHeightAndPosition(int windowWidth);
+    void updateVerticalScrollBarValues();
     void wheelEvent(QWheelEvent *event) override;
 public:
     ProjectWindow();

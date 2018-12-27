@@ -18,6 +18,15 @@ namespace QtUtils {
 
     QString QStringFromUtf8(const std::string& utf8);
 
+    class _ResizeListener : public QObject {
+        std::function<void(int, int)> listener;
+    public:
+        _ResizeListener(QObject *parent, const std::function<void(int, int)> &listener);
+        bool eventFilter(QObject *watched, QEvent *event) override;
+    };
+
+    void AddResizeListener(QWidget* widget, const std::function<void(int, int)>& listener);
+
 #ifdef __OBJC__
     NSView* getNSView(QWidget* widget);
 #endif
