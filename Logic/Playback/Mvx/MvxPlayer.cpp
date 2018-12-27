@@ -262,6 +262,7 @@ int MvxPlayer::getPitchShiftInSemiTones() const {
 void MvxPlayer::setPitchShiftInSemiTones(int value) {
     vxPlayer.setPitchShiftInSemiTones(value);
     instrumentalPlayer.setPitchShiftInSemiTones(value);
+    recordingPlayer.setPitchShiftInSemiTones(value);
     tonalityChangedListeners.executeAll();
 }
 

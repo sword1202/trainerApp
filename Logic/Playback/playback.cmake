@@ -3,6 +3,7 @@ set(playbackSources
         Base/AudioPlayerWithDefaultSeekHandler.cpp
         Base/PlaybackBounds.cpp
         Base/PortAudioUtils.cpp
+        Base/SoundTouchManager.cpp
 
         Decoding/AudioFilePlayer.cpp
         Decoding/Decoder/audiodecoder.cpp

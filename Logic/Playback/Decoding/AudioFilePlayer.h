@@ -24,8 +24,6 @@ protected:
 
 private:
     AudioDecoder* audioDecoder = nullptr;
-    soundtouch::SoundTouch soundTouch;
-    std::vector<float> tempFloatBuffer;
     std::string audioData;
 };
 

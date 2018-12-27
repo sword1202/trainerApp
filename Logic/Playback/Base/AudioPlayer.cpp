@@ -34,6 +34,11 @@ int AudioPlayer::callback(
 
     memset(outputBuffer, 0, framesPerBuffer * self->getSampleSize());
     int readFramesCount = self->readNextSamplesBatch(outputBuffer, framesPerBuffer, self->playbackData);
+    if (self->soundTouchManager) {
+        self->soundTouchManager->changeTonality(static_cast<int16_t *>(outputBuffer),
+                readFramesCount, self->getPitchShiftInSemiTones());
+    }
+
     assert(readFramesCount <= (int)framesPerBuffer);
     int sampleSize = self->getSampleSize();
     // no data available, return silence and wait
@@ -86,6 +91,10 @@ int AudioPlayer::callback(
 void AudioPlayer::prepare() {
     assert(!isPrepared());
     prepareAndProvidePlaybackData(&playbackData);
+    if (soundTouchManager) {
+        soundTouchManager->onPlayBackDataReceived(playbackData);
+    }
+
     BOOST_ASSERT_MSG(playbackData.sampleRate > 0 &&
             playbackData.framesPerBuffer >= 0 &&
             playbackData.numChannels > 0 &&
@@ -153,6 +162,8 @@ void AudioPlayer::destroy() {
     auto err = Pa_CloseStream(stream);
     PortAudio::checkErrors(err);
     stream = nullptr;
+    delete soundTouchManager;
+    soundTouchManager = nullptr;
 }
 
 void AudioPlayer::pause() {
@@ -272,7 +283,7 @@ void AudioPlayer::setPitchShiftInSemiTones(int value) {
     pitchShift = value;
 }
 
-const AudioPlayer::PlaybackData &AudioPlayer::getPlaybackData() const {
+const PlaybackData &AudioPlayer::getPlaybackData() const {
     return playbackData;
 }
 
@@ -315,7 +326,7 @@ void AudioPlayer::setTotalDurationInSeconds(double totalDurationInSeconds) {
     playbackData.totalDurationInSeconds = totalDurationInSeconds;
 }
 
-void AudioPlayer::setPlaybackData(const AudioPlayer::PlaybackData &playbackData) {
+void AudioPlayer::setPlaybackData(const PlaybackData &playbackData) {
     this->playbackData = playbackData;
 }
 
@@ -329,4 +340,10 @@ const std::string &AudioPlayer::getPlayerName() const {
 
 void AudioPlayer::setPlayerName(const std::string &playerName) {
     this->playerName = playerName;
+}
+
+void AudioPlayer::initSoundTouch() {
+    if (!soundTouchManager) {
+        soundTouchManager = new SoundTouchManager();
+    }
 }

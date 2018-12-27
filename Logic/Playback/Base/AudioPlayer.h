@@ -10,16 +10,10 @@
 #include <mutex>
 #include "ListenersSet.h"
 #include "atomic"
+#include "SoundTouchManager.h"
+#include "PlaybackData.h"
 
 class AudioPlayer {
-public:
-    struct PlaybackData {
-        int sampleRate = -1;
-        int framesPerBuffer = -1;
-        int numChannels = -1;
-        double totalDurationInSeconds = -1;
-        PaSampleFormat format = paInt16;
-    };
 private:
     PaStream* stream = nullptr;
     PlaybackData playbackData;
@@ -34,6 +28,8 @@ private:
     int dataSentToOutputListenerKey = 0;
     std::atomic_bool looping;
 
+    SoundTouchManager* soundTouchManager = nullptr;
+
     void setupPlaybackStartedListener();
 	void pauseStream();
 
@@ -43,6 +39,7 @@ private:
             const PaStreamCallbackTimeInfo* timeInfo,
             PaStreamCallbackFlags statusFlags,
             void *userData);
+
 protected:
     virtual int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData& playbackData) = 0;
 	virtual void prepareAndProvidePlaybackData(PlaybackData* playbackData) = 0;
@@ -63,6 +60,8 @@ protected:
 
     // Used for players, where totalDurationInSeconds can be changed after prepare
     void setTotalDurationInSeconds(double totalDurationInSeconds);
+
+    void initSoundTouch();
 public:
 
 	CppUtils::ListenersSet<> onCompleteListeners;

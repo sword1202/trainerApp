@@ -14,7 +14,7 @@ public:
     void setPlaybackData(const WavConfig& wavConfig, int framesPerBuffer = 256);
 protected:
     int readNextSamplesBatch(void *intoBuffer, int framesCount,
-            const AudioPlayer::PlaybackData &playbackData) override;
+            const PlaybackData &playbackData) override;
     void prepareAndProvidePlaybackData(PlaybackData *playbackData) override;
     virtual int getAudioDataSizeInBytes() = 0;
     virtual const char *provideAudioBuffer() = 0;

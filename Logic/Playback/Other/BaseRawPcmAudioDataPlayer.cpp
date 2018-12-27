@@ -6,7 +6,7 @@
 #include <cstring>
 
 int BaseRawPcmAudioDataPlayer::readNextSamplesBatch(void *intoBuffer, int framesCount,
-                                         const AudioPlayer::PlaybackData &playbackData) {
+                                         const PlaybackData &playbackData) {
     int frameSize = getSampleSize();
     int seek = getBufferSeek();
     int offset = seek * frameSize;
@@ -22,7 +22,7 @@ int BaseRawPcmAudioDataPlayer::readNextSamplesBatch(void *intoBuffer, int frames
     return size / frameSize;
 }
 
-void BaseRawPcmAudioDataPlayer::prepareAndProvidePlaybackData(AudioPlayer::PlaybackData *playbackData) {
+void BaseRawPcmAudioDataPlayer::prepareAndProvidePlaybackData(PlaybackData *playbackData) {
     playbackData->totalDurationInSeconds = samplesCountToSeconds(getAudioDataSizeInBytes() / getSampleSize());
 }
 

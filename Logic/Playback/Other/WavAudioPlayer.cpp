@@ -26,5 +26,6 @@ int WavAudioPlayer::getAudioDataSizeInBytes() {
 
 WavAudioPlayer::WavAudioPlayer() {
     setPlayerName("WavAudioPlayer");
+    initSoundTouch();
 }
 

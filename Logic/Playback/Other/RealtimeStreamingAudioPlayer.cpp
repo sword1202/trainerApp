@@ -10,7 +10,8 @@
 
 #define LOCK std::lock_guard<std::mutex> _(mutex)
 
-int RealtimeStreamingAudioPlayer::readNextSamplesBatch(void *intoBuffer, int framesCount, const AudioPlayer::PlaybackData &playbackData) {
+int RealtimeStreamingAudioPlayer::readNextSamplesBatch(void *intoBuffer, int framesCount,
+        const PlaybackData &playbackData) {
     size_t bufferSize = (size_t)framesCount * getSampleSize();
     if (mutex.try_lock()) {
         size_t availableFeedSize = std::min(bufferSize, audioFeed.size());
@@ -27,7 +28,7 @@ int RealtimeStreamingAudioPlayer::readNextSamplesBatch(void *intoBuffer, int fra
     return framesCount;
 }
 
-void RealtimeStreamingAudioPlayer::prepareAndProvidePlaybackData(AudioPlayer::PlaybackData *playbackData) {
+void RealtimeStreamingAudioPlayer::prepareAndProvidePlaybackData(PlaybackData *playbackData) {
     if (playbackData->totalDurationInSeconds <= 0) {
         playbackData->totalDurationInSeconds = INT32_MAX;
     }
