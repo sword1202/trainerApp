@@ -116,10 +116,12 @@ ProjectWindow::ProjectWindow() :
 
     setupMenus();
 
-    VxApp::instance()->getPlayer()->onCompleteListeners.addListener([=] {
-        auto* dialog = new SingingResultDialog(this);
-        dialog->show();
-    });
+    if (!player->isRecording()) {
+        player->onCompleteListeners.addListener([=] {
+            auto* dialog = new SingingResultDialog(this);
+            dialog->show();
+        });
+    }
 }
 
 void ProjectWindow::onOutputVolumeChanged(float value) {
