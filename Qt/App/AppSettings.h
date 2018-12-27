@@ -24,7 +24,9 @@ public:
     QStringList getProjects();
     void setProjects(const QStringList &projects);
     void addProject(const QString& filePath);
+    void removeProject(const QString& filePath);
     void addRecording(const QString& filePath);
+    void removeRecording(const QString& filePath);
 };
 
 #endif // APPSETTINGS_H

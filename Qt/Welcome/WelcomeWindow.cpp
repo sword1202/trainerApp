@@ -50,7 +50,15 @@ void WelcomeWindow::setupProjectsList(QQmlContext *context) {
     filePaths << appSettings.getProjects() << appSettings.getRecordings();
     for (const QString &filePath : filePaths) {
         // read only signature
-        MvxFile file = MvxFile::readFromFile(filePath.toLocal8Bit(), true);
+        MvxFile file;
+        try {
+            file = MvxFile::readFromFile(filePath.toLocal8Bit(), true);
+        } catch (...) {
+            appSettings.removeProject(filePath);
+            appSettings.removeRecording(filePath);
+            return;
+        }
+
 
         QVariantMap map;
         map["artistName"] = QtUtils::QStringFromUtf8(file.getArtistNameUtf8());

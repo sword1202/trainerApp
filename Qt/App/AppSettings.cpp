@@ -74,4 +74,16 @@ void AppSettings::addRecording(const QString &filePath) {
     setRecordings(recordings);
 }
 
+void AppSettings::removeProject(const QString &filePath) {
+    auto projects = getProjects();
+    projects.removeAll(filePath);
+    setProjects(projects);
+}
+
+void AppSettings::removeRecording(const QString &filePath) {
+    auto recordings = getRecordings();
+    recordings.removeAll(filePath);
+    setRecordings(recordings);
+}
+
 #pragma clang diagnostic pop
