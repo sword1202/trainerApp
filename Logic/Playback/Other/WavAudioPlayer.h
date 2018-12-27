@@ -15,6 +15,8 @@ protected:
     const char *provideAudioBuffer() override;
     int getAudioDataSizeInBytes() override;
 public:
+    WavAudioPlayer();
+
     virtual void setAudioData(std::string&& audioData);
 };
 

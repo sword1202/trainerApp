@@ -20,6 +20,7 @@ void VxFileAudioPlayer::prepareAndProvidePlaybackData(PlaybackData *playbackData
 
 VxFileAudioPlayer::VxFileAudioPlayer() {
     generator = new VxFileAudioDataGenerator();
+    setPlayerName("VxFileAudioPlayer");
 }
 
 int VxFileAudioPlayer::getBufferSeek() const {

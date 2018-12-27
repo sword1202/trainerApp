@@ -322,3 +322,11 @@ void AudioPlayer::setPlaybackData(const AudioPlayer::PlaybackData &playbackData)
 bool AudioPlayer::isCompleted() const {
     return completed;
 }
+
+const std::string &AudioPlayer::getPlayerName() const {
+    return playerName;
+}
+
+void AudioPlayer::setPlayerName(const std::string &playerName) {
+    this->playerName = playerName;
+}

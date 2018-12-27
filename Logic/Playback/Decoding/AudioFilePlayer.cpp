@@ -54,7 +54,7 @@ void AudioFilePlayer::prepareAndProvidePlaybackData(AudioPlayer::PlaybackData *p
 }
 
 AudioFilePlayer::AudioFilePlayer() {
-
+    setPlayerName("AudioFilePlayer");
 }
 
 void AudioFilePlayer::setAudioData(std::string &&audioData) {

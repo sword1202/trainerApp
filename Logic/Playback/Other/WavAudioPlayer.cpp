@@ -24,3 +24,7 @@ int WavAudioPlayer::getAudioDataSizeInBytes() {
     return (int)audioData.size() - WAVFile::DATA_POSITION;
 }
 
+WavAudioPlayer::WavAudioPlayer() {
+    setPlayerName("WavAudioPlayer");
+}
+

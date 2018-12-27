@@ -46,7 +46,7 @@ private:
     void updateMetronomeVolume();
     void pausePlayer(AudioPlayer* player);
 
-    AudioAverageInputLevelMonitor* recordingLevelMonitor;
+    AudioAverageInputLevelMonitor* recordingLevelMonitor = nullptr;
 public:
     CppUtils::ListenersSet<bool> isPlayingChangedListeners;
     CppUtils::ListenersSet<> stopRequestedListeners;
@@ -58,7 +58,7 @@ public:
     CppUtils::ListenersSet<> tonalityChangedListeners;
     CppUtils::ListenersSet<> onCompleteListeners;
     CppUtils::ListenersSet<const PlaybackBounds&> boundsChangedListeners;
-    CppUtils::ListenersSet<double> recordingVoiceLevelListeners;
+    CppUtils::SynchronizedListenersSet<double> recordingVoiceLevelListeners;
 
     MvxPlayer();
     virtual ~MvxPlayer();

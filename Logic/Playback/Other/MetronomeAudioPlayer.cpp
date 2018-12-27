@@ -59,3 +59,7 @@ int MetronomeAudioPlayer::getAudioDataSizeInBytes() {
 const char *MetronomeAudioPlayer::provideAudioBuffer() {
     return audioData.data();
 }
+
+MetronomeAudioPlayer::MetronomeAudioPlayer() {
+    setPlayerName("MetronomeAudioPlayer");
+}
