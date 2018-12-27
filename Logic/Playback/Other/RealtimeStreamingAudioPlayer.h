@@ -12,7 +12,7 @@
 
 class RealtimeStreamingAudioPlayer : public AudioPlayer {
 public:
-    RealtimeStreamingAudioPlayer(const PlaybackData& playbackData);
+    explicit RealtimeStreamingAudioPlayer(const PlaybackData& playbackData);
     void pushAudioData(const void* data, int size);
 protected:
     int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) override;
