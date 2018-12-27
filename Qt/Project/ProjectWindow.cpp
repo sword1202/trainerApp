@@ -222,3 +222,10 @@ void ProjectWindow::onVerticalScrollBarValueChanged(int value) {
     MainController::instance()->getZoomController()->setVerticalScrollPosition(position);
 }
 
+void ProjectWindow::wheelEvent(QWheelEvent *event) {
+    QWidget::wheelEvent(event);
+    QPoint delta = event->pixelDelta();
+    int y = delta.y();
+    verticalScrollBar->setValue(verticalScrollBar->value() - y);
+}
+

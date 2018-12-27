@@ -33,6 +33,7 @@ class ProjectWindow : public BaseMainWindow
 protected:
     void resizeEvent(QResizeEvent *event) override;
     void updateVerticalScrollBar();
+    void wheelEvent(QWheelEvent *event) override;
 public:
     ProjectWindow();
     void setupMenus();
