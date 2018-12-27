@@ -21,7 +21,7 @@ class ProjectWindow : public BaseMainWindow
 
 #ifdef __APPLE__
     MetalWorkspaceWidget *workspaceWidget;
-    QMacNativeWidget* virticalScrollBarNativeWrap;
+    QMacNativeWidget* verticalScrollBarNativeWrap;
 #else
     QWidget *workspaceWidget;
 #endif
@@ -32,6 +32,7 @@ class ProjectWindow : public BaseMainWindow
     QQuickWidget *lyricsWidget;
 protected:
     void resizeEvent(QResizeEvent *event) override;
+    void updateVerticalScrollBar();
 public:
     ProjectWindow();
     void setupMenus();
@@ -44,6 +45,7 @@ public:
 public slots:
     void onFileOpen();
     void onSelectMicrophone();
+    void onVerticalScrollBarValueChanged(int value);
 };
 
 #endif // MAINWINDOW_H

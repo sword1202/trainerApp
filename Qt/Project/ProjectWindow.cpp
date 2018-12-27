@@ -111,8 +111,13 @@ ProjectWindow::ProjectWindow() :
 	// Scrollbar
     verticalScrollBar = new QScrollBar(IS_APPLE ? nullptr : centralWidget);
 #ifdef __APPLE__
-    virticalScrollBarNativeWrap = workspaceWidget->addSubWidget(verticalScrollBar);
+    verticalScrollBarNativeWrap = workspaceWidget->addSubWidget(verticalScrollBar);
 #endif
+    updateVerticalScrollBar();
+    MainController::instance()->getZoomController()->summarizedWorkspaceGridHeightChangedListeners.addListener([=] {
+        updateVerticalScrollBar();
+    });
+    connect(verticalScrollBar, &QScrollBar::valueChanged, this, &ProjectWindow::onVerticalScrollBarValueChanged);
 
     setupMenus();
 
@@ -151,7 +156,7 @@ void ProjectWindow::resizeEvent(QResizeEvent *event) {
 
     int scrollBarHeight = workspaceWidget->height() - YARD_STICK_HEIGHT - 2;
 #ifdef __APPLE__
-    virticalScrollBarNativeWrap->setFixedHeight(scrollBarHeight);
+    verticalScrollBarNativeWrap->setFixedHeight(scrollBarHeight);
 #endif
     verticalScrollBar->setFixedHeight(scrollBarHeight);
 
@@ -163,10 +168,11 @@ void ProjectWindow::resizeEvent(QResizeEvent *event) {
     }
     int x = width - verticalScrollBar->width();
 #ifdef __APPLE__
-    virticalScrollBarNativeWrap->move(x, y);
+    verticalScrollBarNativeWrap->move(x, y);
 #else
     verticalScrollBar->move(x, y);
 #endif
+    updateVerticalScrollBar();
 }
 
 void ProjectWindow::setupMenus() {
@@ -195,3 +201,24 @@ void ProjectWindow::setBoundsSelectionEnabled(bool enabled) {
 void ProjectWindow::setShowLyrics(bool value) {
     lyricsWidget->setVisible(value);
 }
+
+void ProjectWindow::updateVerticalScrollBar() {
+    WorkspaceZoomController* zoomController = MainController::instance()->getZoomController();
+    float summarizedWorkspaceGridHeight = zoomController->getSummarizedWorkspaceGridHeight();
+    int pageStep = verticalScrollBar->height();
+    verticalScrollBar->setMinimum(0);
+    int maximum = qRound(summarizedWorkspaceGridHeight - pageStep);
+    if (maximum <= 0) {
+        verticalScrollBar->setVisible(false);
+    } else {
+        verticalScrollBar->setVisible(true);
+        verticalScrollBar->setMaximum(maximum);
+        verticalScrollBar->setPageStep(pageStep);
+    }
+}
+
+void ProjectWindow::onVerticalScrollBarValueChanged(int value) {
+    float position = float(value) / verticalScrollBar->maximum();
+    MainController::instance()->getZoomController()->setVerticalScrollPosition(position);
+}
+
