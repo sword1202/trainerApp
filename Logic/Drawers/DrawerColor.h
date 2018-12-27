@@ -8,6 +8,7 @@ class DrawerColor
     uchar rgba[4];
 public:
     static DrawerColor white();
+    static DrawerColor transparent();
     static DrawerColor black();
     static DrawerColor red();
     static DrawerColor green();

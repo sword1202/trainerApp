@@ -94,6 +94,10 @@ DrawerColor DrawerColor::blue() {
     return {0, 0, 255, 255};
 }
 
+DrawerColor DrawerColor::transparent() {
+    return {0, 0, 0, 0};
+}
+
 bool DrawerColor::operator==(const DrawerColor &rhs) const {
     return *reinterpret_cast<const int32_t*>(rgba) == *reinterpret_cast<const int32_t*>(rhs.rgba);
 }

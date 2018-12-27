@@ -16,6 +16,9 @@ class NvgDrawer : public Drawer {
 protected:
     NVGcontext* ctx = nullptr;
     void setupBase();
+
+    void doTranslate(float x, float y) override;
+    void onImageDelete(Image *image) override;
 public:
     void beginFrame(float width, float height, float devicePixelRatio) override;
     void endFrame() override;
@@ -39,13 +42,6 @@ public:
     void rotate(float angle) override;
     void scale(float x, float y) override;
 
-protected:
-    void doTranslate(float x, float y) override;
-
-    void onImageDelete(Image *image) override;
-
-public:
-
     void roundedRect(float x, float y, float w, float h, float r) override;
 
     void drawTextUsingFonts(const std::string &text, float x, float y) override;
@@ -58,10 +54,11 @@ public:
     void registerFont(const char *name, const char *data, int dataSize);
 
     void fillWithImage(Image *image, float textureX1, float textureY1, float textureX2, float textureY2) override;
-
     void drawImage(float x, float y, float w, float h, Image *image) override;
-
     Image *createImage(const void *data, int w, int h) override;
+
+    void drawShadow(float x, float y, float w, float h, float radius, float blurFactor, const DrawerColor &color) override;
+
 };
 
 #endif //VOCALTRAINER_NVGOPENGLDRAWER_H

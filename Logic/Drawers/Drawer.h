@@ -98,6 +98,9 @@ public:
     virtual void setTextBaseline(TextBaseline baseline);
     virtual void fillText(const std::string &text, float x, float y);
 
+    virtual void
+    drawShadow(float x, float y, float w, float h, float radius, float blurFactor, const DrawerColor &color) = 0;
+
     virtual Image* createImage(const void* data, int w, int h) = 0;
     virtual void deleteImage(Image*& image);
 

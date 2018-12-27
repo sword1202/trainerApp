@@ -236,3 +236,12 @@ void NvgDrawer::drawImage(float x, float y, float w, float h, Drawer::Image *ima
     fillWithImage(image, 0, 0, w, h);
     translate(-x, -y);
 }
+
+void
+NvgDrawer::drawShadow(float x, float y, float w, float h, float radius, float blurFactor, const DrawerColor &color) {
+    NVGcolor nvgColor = toNvgColor(color);
+    NVGpaint paint = nvgBoxGradient(ctx, x, y, w, h, radius, blurFactor, nvgColor, toNvgColor(DrawerColor::transparent()));
+    rect(x - radius, y - radius, w + radius * 2, h + radius * 2);
+    nvgFillPaint(ctx, paint);
+    nvgFill(ctx);
+}
