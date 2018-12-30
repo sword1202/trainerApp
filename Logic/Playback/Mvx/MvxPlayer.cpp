@@ -51,14 +51,14 @@ MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
     });
 }
 
-void MvxPlayer::init(std::istream &is) {
-    mvxFile = MvxFile::readFromStream(is);
+void MvxPlayer::init(MvxFile&& file) {
+    mvxFile = std::move(file);
     instrumentalPlayer.setAudioData(std::move(mvxFile.moveInstrumental()));
     vxPlayer.setVxFile(mvxFile.getVxFile());
     players = {&instrumentalPlayer, &vxPlayer, &metronomePlayer};
     if (mvxFile.isRecording()) {
         pitchesCollection = new PitchesMutableList(std::move(mvxFile.moveRecordedPitchesFrequencies()),
-                std::move(mvxFile.moveRecordedPitchesTimes()));
+                                                   std::move(mvxFile.moveRecordedPitchesTimes()));
         recordingPlayer.setAudioData(std::move(mvxFile.moveRecordingData()));
         players.push_back(&recordingPlayer);
 
@@ -69,6 +69,11 @@ void MvxPlayer::init(std::istream &is) {
             recordingLevelMonitor->operator()(static_cast<const int16_t *>(data), size / sizeof(int16_t));
         });
     }
+}
+
+void MvxPlayer::init(std::istream &is) {
+    MvxFile mvxFile = MvxFile::readFromStream(is);
+    init(std::move(mvxFile));
 }
 
 void MvxPlayer::init(const char *filePath) {
@@ -350,4 +355,8 @@ bool MvxPlayer::isCompleted() const {
 
 const PitchesCollection* MvxPlayer::getPitchesCollection() {
     return pitchesCollection;
+}
+
+const MvxFile &MvxPlayer::getMvxFile() const {
+    return mvxFile;
 }

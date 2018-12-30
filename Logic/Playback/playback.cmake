@@ -7,6 +7,8 @@ set(playbackSources
 
         Decoding/AudioFilePlayer.cpp
         Decoding/Decoder/audiodecoder.cpp
+        Decoding/Decoder/DecodedTrack.h
+        Decoding/Decoder/DecodedTrack.cpp
 
         Midi/MidiFileReader.cpp
         Midi/MidiTrack.cpp

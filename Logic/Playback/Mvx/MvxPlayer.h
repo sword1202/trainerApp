@@ -64,6 +64,7 @@ public:
     virtual ~MvxPlayer();
     void init(std::istream& is);
     void init(const char* filePath);
+    void init(MvxFile&& file);
     void prepare();
     void setInstrumentalVolume(float instrumentalVolume);
     void setPianoVolume(float pianoVolume);
@@ -80,6 +81,7 @@ public:
     virtual void seekToNextTact();
     virtual void seekToPrevTact();
     const VxFile* getVxFile() const;
+    const MvxFile &getMvxFile() const;
 
     const PlaybackBounds &getBounds() const;
     void setBounds(const PlaybackBounds &bounds);
