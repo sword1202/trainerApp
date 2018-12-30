@@ -37,9 +37,14 @@
  */
 
 #include "audiodecoder.h"
+#include "WAVFile.h"
+
+#include <memory>
 
 #if defined(__APPLE__)
 #include "audiodecodercoreaudio_mac.h"
+#include "DecodedTrack.h"
+
 #elif defined(_WIN32)
 #include "audiodecodermediafoundation_win.h"
 #else
@@ -64,6 +69,41 @@ AudioDecoder *AudioDecoder::create() {
 #else
     return new AudioDecoderFFmpeg();
 #endif
+}
+
+static const int MP3_FRAME_COMMON_SIZE = 1152;
+
+DecodedTrack
+AudioDecoder::decodeAllIntoRawPcm(const std::string &data, const std::function<void(float)> &progressListener,
+                                  OperationCancelerPtr operationCanceller) {
+    std::unique_ptr<AudioDecoder> decoder(AudioDecoder::create());
+    decoder->open(&data);
+
+    WavConfig wavConfig;
+    wavConfig.bitsPerChannel = 16;
+    wavConfig.numberOfChannels = static_cast<unsigned int>(decoder->channels());
+    wavConfig.sampleRate = 44100;
+    std::string result;
+    size_t totalSize = decoder->numSamples() * sizeof(int16_t);
+    // reserve a bit more
+    result.reserve(totalSize + 1000);
+
+    int16_t buffer[MP3_FRAME_COMMON_SIZE];
+    int readSamplesCount = MP3_FRAME_COMMON_SIZE;
+    while (readSamplesCount >= MP3_FRAME_COMMON_SIZE) {
+        if (operationCanceller && operationCanceller->isCancelled()) {
+            return {result, wavConfig};
+        }
+
+        readSamplesCount = decoder->read(MP3_FRAME_COMMON_SIZE, buffer);
+        result.append(reinterpret_cast<char*>(buffer), readSamplesCount * sizeof(int16_t));
+        if (progressListener) {
+            float progress = std::min(float(result.size()) / totalSize, 1.0f);
+            progressListener(progress);
+        }
+    }
+
+    return {result, wavConfig};
 };
 
 
