@@ -2,7 +2,6 @@ set(Drawers
         Drawers/Drawer.cpp
         Drawers/DrawerColor.cpp
         Drawers/NvgDrawer.cpp
-        Drawers/QDrawer.cpp
         nanovg/nanovg.cpp
         )
 

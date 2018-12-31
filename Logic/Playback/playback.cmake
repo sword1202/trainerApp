@@ -1,3 +1,20 @@
+set(midiSources
+        Midi/MidiFileReader.cpp
+        Midi/MidiTrack.cpp
+        Midi/CraigsappMidifile/Binasc.cpp
+        Midi/CraigsappMidifile/MidiEvent.cpp
+        Midi/CraigsappMidifile/MidiEventList.cpp
+        Midi/CraigsappMidifile/MidiFile.cpp
+        Midi/CraigsappMidifile/MidiMessage.cpp
+        )
+
+set(vxMvxFileSources
+        Mvx/MvxFile.cpp
+        Mvx/MvxFile.h
+
+        Vx/VxFile.cpp
+        )
+
 set(playbackSources
         Base/AudioPlayer.cpp
         Base/AudioPlayerWithDefaultSeekHandler.cpp
@@ -10,27 +27,26 @@ set(playbackSources
         Decoding/Decoder/DecodedTrack.h
         Decoding/Decoder/DecodedTrack.cpp
 
-        Midi/MidiFileReader.cpp
-        Midi/MidiTrack.cpp
-        Midi/CraigsappMidifile/Binasc.cpp
-        Midi/CraigsappMidifile/MidiEvent.cpp
-        Midi/CraigsappMidifile/MidiEventList.cpp
-        Midi/CraigsappMidifile/MidiFile.cpp
-        Midi/CraigsappMidifile/MidiMessage.cpp
+        ${midiSources}
+        ${vxMvxFileSources}
+        ${midiSources}
 
-        Mvx/MvxFile.cpp
-        Mvx/MvxFile.h
         Mvx/MvxPlayer.cpp
         Mvx/MvxPlayer.h
+
+        Vx/VxFileAudioDataGenerator.cpp
+        Vx/VxFileAudioPlayer.cpp
 
         Other/MetronomeAudioPlayer.cpp
         Other/RealtimeStreamingAudioPlayer.cpp
         Other/WavAudioPlayer.cpp
-        Other/BaseRawPcmAudioDataPlayer.cpp
+        Other/BaseRawPcmAudioDataPlayer.cpp)
 
-        Vx/VxFile.cpp
-        Vx/VxFileAudioDataGenerator.cpp
-        Vx/VxFileAudioPlayer.cpp)
+set(playbackTestSources
+        ${midiSources}
+        ${vxMvxFileSources}
+        ${midiSources}
+        )
 
 if (APPLE)
     list(APPEND playbackSources Decoding/Decoder/audiodecodercoreaudio_mac.cpp)
@@ -45,3 +61,4 @@ if (LINUX)
 endif(LINUX)
 
 list(TRANSFORM playbackSources PREPEND ${CMAKE_CURRENT_LIST_DIR}/)
+list(TRANSFORM playbackTestSources PREPEND ${CMAKE_CURRENT_LIST_DIR}/)

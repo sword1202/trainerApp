@@ -93,13 +93,13 @@ void addTrack(MidiFile &midifile,
 *
 * \return
 */
-stringstream midiDataEmptyTempoTPQ() {
+std::stringstream midiDataEmptyTempoTPQ() {
 	MidiFile midifile;
 	midifile.setTicksPerQuarterNote(MIDI_TPQ);
 
 	//addTempo(int aTrack, int aTick, double aTempo)
 	midifile.addTempo(0, 0, MIDI_TEMPO);
-	stringstream s;
+	std::stringstream s;
 	midifile.write(s);
 	return s;
 }
@@ -114,14 +114,14 @@ stringstream midiDataEmptyTempoTPQ() {
 *
 * \return
 */
-stringstream midiDataMonophonic() {
+std::stringstream midiDataMonophonic() {
 	MidiFile midifile;
 	midifile.setTicksPerQuarterNote(MIDI_TPQ);
 	addTrack(midifile,
 		MIDI_MELODY,
 		MIDI_RYTHM);
 	midifile.sortTracks();
-	stringstream s;
+	std::stringstream s;
 	midifile.write(s);
 	return s;
 }
@@ -136,7 +136,7 @@ stringstream midiDataMonophonic() {
 *
 * \return
 */
-stringstream midiDataPolyphonic() {
+std::stringstream midiDataPolyphonic() {
 	MidiFile midifile;
 	midifile.setTicksPerQuarterNote(MIDI_TPQ);
 	addTrack(midifile,
@@ -147,7 +147,7 @@ stringstream midiDataPolyphonic() {
 		MIDI_MELODY_OCTAVE_LOWER,
 		MIDI_RYTHM);
 	midifile.sortTracks();
-	stringstream s;
+	std::stringstream s;
 	midifile.write(s);
 	return s;
 }
@@ -163,7 +163,7 @@ stringstream midiDataPolyphonic() {
 *
 * \return
 */
-stringstream midiDataDrums() {
+std::stringstream midiDataDrums() {
 	MidiFile midifile;
 	midifile.setTicksPerQuarterNote(MIDI_TPQ);
 	addTrack(midifile,
@@ -173,7 +173,7 @@ stringstream midiDataDrums() {
 		MIDI_DRUMS_CHANNEL_INDEX);
 	//Octave lower
 	midifile.sortTracks();
-	stringstream s;
+	std::stringstream s;
 	midifile.write(s);
 	return s;
 }
@@ -185,8 +185,8 @@ stringstream midiDataDrums() {
 *
 * \return
 */
-stringstream midiDataInvalid() {
-	stringstream s;
+std::stringstream midiDataInvalid() {
+	std::stringstream s;
 	s << "Not a midi";
 	return s;
 }
@@ -200,7 +200,7 @@ stringstream midiDataInvalid() {
 *
 * \return
 */
-stringstream midiDataMultitrack() {
+std::stringstream midiDataMultitrack() {
 	MidiFile midifile;
 	midifile.addTracks(1);
 	midifile.setTicksPerQuarterNote(MIDI_TPQ);
@@ -219,7 +219,7 @@ stringstream midiDataMultitrack() {
 		MIDI_FIRST_TRACK_INDEX,
 		MIDI_FIRST_CHANNEL_INDEX);
 	midifile.sortTracks();
-	stringstream s;
+	std::stringstream s;
 	midifile.write(s);
 	return s;
 }
@@ -234,7 +234,7 @@ stringstream midiDataMultitrack() {
 *
 * \return
 */
-stringstream midiDataMultitrackWithDrums() {
+std::stringstream midiDataMultitrackWithDrums() {
 	MidiFile midifile;
 	midifile.addTracks(1);
 	midifile.setTicksPerQuarterNote(MIDI_TPQ);
@@ -253,7 +253,7 @@ stringstream midiDataMultitrackWithDrums() {
 		MIDI_FIRST_TRACK_INDEX,
 		MIDI_DRUMS_CHANNEL_INDEX);
 	midifile.sortTracks();
-	stringstream s;
+	std::stringstream s;
 	midifile.write(s);
 	return s;
 }
@@ -268,7 +268,7 @@ stringstream midiDataMultitrackWithDrums() {
 *
 * \return
 */
-stringstream midiDataLowestNote() {
+std::stringstream midiDataLowestNote() {
 	MidiFile midifile;
 	midifile.addTracks(1);
 	midifile.setTicksPerQuarterNote(MIDI_TPQ);
@@ -287,7 +287,7 @@ stringstream midiDataLowestNote() {
 		MIDI_FIRST_TRACK_INDEX,
 		MIDI_FIRST_CHANNEL_INDEX);
 	midifile.sortTracks();
-	stringstream s;
+	std::stringstream s;
 	midifile.write(s);
 	return s;
 }
@@ -302,7 +302,7 @@ stringstream midiDataLowestNote() {
 *
 * \return
 */
-stringstream midiDataHighestNote() {
+std::stringstream midiDataHighestNote() {
 	MidiFile midifile;
 	midifile.addTracks(1);
 	midifile.setTicksPerQuarterNote(MIDI_TPQ);
@@ -321,7 +321,7 @@ stringstream midiDataHighestNote() {
 		MIDI_FIRST_TRACK_INDEX,
 		MIDI_FIRST_CHANNEL_INDEX);
 	midifile.sortTracks();
-	stringstream s;
+	std::stringstream s;
 	midifile.write(s);
 	return s;
 }
@@ -336,7 +336,7 @@ stringstream midiDataHighestNote() {
 *
 * \return
 */
-stringstream midiDataNoteRange() {
+std::stringstream midiDataNoteRange() {
 	MidiFile midifile;
 	midifile.addTracks(1);
 	midifile.setTicksPerQuarterNote(MIDI_TPQ);
@@ -355,7 +355,7 @@ stringstream midiDataNoteRange() {
 		MIDI_FIRST_TRACK_INDEX,
 		MIDI_FIRST_CHANNEL_INDEX);
 	midifile.sortTracks();
-	stringstream s;
+	std::stringstream s;
 	midifile.write(s);
 	return s;
 }
@@ -369,7 +369,7 @@ stringstream midiDataNoteRange() {
 *
 * \return
 */
-stringstream midiDataValuesDistribution() {
+std::stringstream midiDataValuesDistribution() {
 	MidiFile midifile;
 	midifile.addTracks(1);
 	midifile.setTicksPerQuarterNote(MIDI_TPQ);
@@ -388,7 +388,7 @@ stringstream midiDataValuesDistribution() {
 		MIDI_FIRST_TRACK_INDEX,
 		MIDI_FIRST_CHANNEL_INDEX);
 	midifile.sortTracks();
-	stringstream s;
+	std::stringstream s;
 	midifile.write(s);
 	return s;
 }
@@ -402,7 +402,7 @@ stringstream midiDataValuesDistribution() {
 *
 * \return
 */
-stringstream midiDataNotesPerSecond() {
+std::stringstream midiDataNotesPerSecond() {
 	MidiFile midifile;
 	midifile.addTracks(1);
 	midifile.setTicksPerQuarterNote(MIDI_TPQ);
@@ -421,7 +421,7 @@ stringstream midiDataNotesPerSecond() {
 		MIDI_FIRST_TRACK_INDEX,
 		MIDI_FIRST_CHANNEL_INDEX);
 	midifile.sortTracks();
-	stringstream s;
+	std::stringstream s;
 	midifile.write(s);
 	return s;
 }
@@ -437,7 +437,7 @@ stringstream midiDataNotesPerSecond() {
 * Fifth track contains name "melod"
 * \return
 */
-stringstream midiDataVocalSubstring() {
+std::stringstream midiDataVocalSubstring() {
 	MidiFile midifile;
 	midifile.addTracks(4);
 	midifile.setTicksPerQuarterNote(MIDI_TPQ);
@@ -482,7 +482,7 @@ stringstream midiDataVocalSubstring() {
 		SUBSTRING_MELODY);
 
 	midifile.sortTracks();
-	stringstream s;
+	std::stringstream s;
 	midifile.write(s);
 	return s;
 }

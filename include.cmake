@@ -10,6 +10,7 @@ set(includes
         Logic/Playback/Other
         Logic/Playback/Vx
         Logic/Playback/Mvx
+        Logic/Playback/Midi
         Logic/Playback/Midi/CraigsappMidifile
         Logic
         Qt
