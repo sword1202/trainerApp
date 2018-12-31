@@ -132,3 +132,24 @@ void MvxFile::setRecordedPitchesFrequencies(const std::vector<float > &recordedP
 std::string &MvxFile::moveRecordingData() {
     return recordingData;
 }
+
+std::vector<int16_t> MvxFile::generatePreviewSamplesFromRawPcm(const std::string &rawPcm, int batchSize) {
+    const int16_t* asInt16 = reinterpret_cast<const int16_t *>(rawPcm.data());
+    size_t rawPcmSize = rawPcm.size() / sizeof(int16_t);
+
+    std::vector<int16_t> result;
+    result.reserve(rawPcmSize / batchSize + 1);
+    for (int i = 0; i < rawPcmSize;) {
+        double sample = 0;
+        int j;
+        for (j = 0; j < batchSize && i < rawPcmSize; ++j, ++i) {
+            sample += asInt16[i];
+        }
+        if (j > 0) {
+            auto value = int16_t(round(sample / j));
+            result.push_back(value);
+        }
+    }
+
+    return result;
+}

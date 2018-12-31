@@ -69,6 +69,8 @@ class MvxFile {
     }
 
 public:
+    constexpr static int DEFAULT_PREVIEW_BATCH_SIZE = 1000;
+
     MvxFile() = default;
 
     MvxFile(MvxFile&&) = default;
@@ -115,6 +117,9 @@ public:
     void setRecordedPitchesTimes(const std::vector<double> &recordedPitchesTimes);
     std::vector<float> &moveRecordedPitchesFrequencies();
     void setRecordedPitchesFrequencies(const std::vector<float> &recordedPitchesFrequencies);
+
+    static std::vector<int16_t> generatePreviewSamplesFromRawPcm(const std::string& rawPcm,
+            int batchSize = DEFAULT_PREVIEW_BATCH_SIZE);
 };
 
 
