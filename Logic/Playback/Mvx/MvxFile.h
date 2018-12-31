@@ -118,8 +118,7 @@ public:
     std::vector<float> &moveRecordedPitchesFrequencies();
     void setRecordedPitchesFrequencies(const std::vector<float> &recordedPitchesFrequencies);
 
-    static std::vector<int16_t> generatePreviewSamplesFromRawPcm(const std::string& rawPcm,
-            int batchSize = DEFAULT_PREVIEW_BATCH_SIZE);
+    static std::vector<int16_t> generatePreviewSamplesFromRawPcm(const int16_t *rawPcm, int rawPcmSize, int batchSize);
 };
 
 

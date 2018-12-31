@@ -28,19 +28,19 @@ include(cpputils.cmake)
 set(sources ${qtSources} ${logicSources} ${portMixerSources} ${cppUtilsSources})
 set(tests ${playbackTestSources}
         ${cppUtilsSources}
-        Logic/AudioInput/Pitch.cpp)
+        Logic/AudioInput/Pitch.cpp
+        VocalTrainerTests/BoostAssert.cpp
+        VocalTrainerTests/MidiFileTest.cpp
+        VocalTrainerTests/VxFileTests.cpp
+        VocalTrainerTests/LoadTsf.cpp
+        VocalTrainerTests/MvxFileTests.cpp)
 
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5QuickWidgets REQUIRED)
 find_package(Qt5Svg REQUIRED)
 
 add_executable(VocalTrainer ${sources})
-add_executable(VocalTrainerTests ${tests}
-        VocalTrainerTests/BoostAssert.cpp
-        VocalTrainerTests/MidiFileTest.cpp
-        VocalTrainerTests/VxFileTests.cpp
-        VocalTrainerTests/LoadTsf.cpp
-        )
+add_executable(VocalTrainerTests ${tests})
 
 set_property (TARGET VocalTrainer APPEND_STRING PROPERTY
         COMPILE_FLAGS "-fobjc-arc")
