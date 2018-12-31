@@ -79,10 +79,7 @@ AudioDecoder::decodeAllIntoRawPcm(const std::string &data, const std::function<v
     std::unique_ptr<AudioDecoder> decoder(AudioDecoder::create());
     decoder->open(&data);
 
-    WavConfig wavConfig;
-    wavConfig.bitsPerChannel = 16;
-    wavConfig.numberOfChannels = static_cast<unsigned int>(decoder->channels());
-    wavConfig.sampleRate = 44100;
+    WavConfig wavConfig = decoder->generateWavConfig();
     std::string result;
     size_t totalSize = decoder->numSamples() * sizeof(int16_t);
     // reserve a bit more
@@ -104,6 +101,15 @@ AudioDecoder::decodeAllIntoRawPcm(const std::string &data, const std::function<v
     }
 
     return {result, wavConfig};
+}
+
+WavConfig AudioDecoder::generateWavConfig() const {
+    assert(channels() > 0 && "Call open before generateWavConfig");
+    WavConfig wavConfig;
+    wavConfig.bitsPerChannel = 16;
+    wavConfig.numberOfChannels = static_cast<unsigned int>(channels());
+    wavConfig.sampleRate = 44100;
+    return wavConfig;
 };
 
 
