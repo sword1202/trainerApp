@@ -72,6 +72,8 @@ class WorkspaceDrawer : public WorkspaceController {
     std::vector<float> pitchesFrequencies;
     std::vector<double> pitchesTimes;
 
+    std::vector<float> instrumentalTrackSamples;
+
     void iterateHorizontalIntervals(const std::function<void(float x, bool isBeat)>& func) const;
 
     void drawHorizontalLine(float y, const Color& color) const;
@@ -88,6 +90,7 @@ class WorkspaceDrawer : public WorkspaceController {
     void drawPlayHead(float x, float timeInSeconds);
     void drawFirstPlayHead();
     void drawSecondPlayHead();
+    void drawInstrumentalTrack();
 
     double getSingingPitchGraphDuration() const;
     double getIntervalDuration() const;
@@ -187,6 +190,8 @@ public:
     float getPlayHeadXPosition(int playHeadIndex) override;
 
     void setRecording(bool recording) override;
+
+    void generateInstrumentalTrackSamples(float width);
 };
 
 

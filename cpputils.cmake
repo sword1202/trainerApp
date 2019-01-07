@@ -7,6 +7,7 @@ set(cppUtilsSources
         CppUtils/TimeUtils.h
         CppUtils/OperationCanceler.cpp
         CppUtils/OperationCanceler.h
+        CppUtils/Random.cpp
         )
 
 list(TRANSFORM cppUtilsSources PREPEND ${CMAKE_CURRENT_LIST_DIR}/)

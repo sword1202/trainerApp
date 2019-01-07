@@ -10,6 +10,7 @@
 #include "CountAssert.h"
 #include "Pitch.h"
 #include "TimeUtils.h"
+#include "Random.h"
 #include <iostream>
 #include <cmath>
 #include <iomanip>
@@ -34,6 +35,8 @@ constexpr float PLAYBACK_BOUNDS_BOTTOM_MARGIN = 3.25f;
 constexpr float PLAYBACK_BOUNDS_HEIGHT = 15.75;
 static const int PITCH_RADIUS = 3;
 constexpr float PLAYBACK_BOUNDS_ROUND_RECT_RADIUS = 1.5f;
+constexpr float INSTRUMENTAL_TRACK_HEIGHT = 208.f;
+constexpr float INSTRUMENTAL_TRACK_BOTTOM_MARGIN = 14.f;
 
 constexpr int YARD_STICK_FONT_WEIGHT = 1;
 static const char* FONT_FAMILY = "Lato";
@@ -45,6 +48,17 @@ void WorkspaceDrawer::resize(float width, float height, float devicePixelRatio) 
     this->devicePixelRatio = devicePixelRatio;
     this->width = width;
     this->height = height;
+
+    generateInstrumentalTrackSamples(width);
+}
+
+void WorkspaceDrawer::generateInstrumentalTrackSamples(float width) {
+    instrumentalTrackSamples.clear();
+    int max = round(width) - 1;
+    for (int i = 0; i <= max; ++i) {
+        double random = Random::RandomDoubleInClosedRange(0.1, 0.8);
+        instrumentalTrackSamples.push_back(float(random));
+    }
 }
 
 void WorkspaceDrawer::draw() {
@@ -100,6 +114,7 @@ void WorkspaceDrawer::draw() {
     drawer->translate(PIANO_WIDTH, 0);
     drawFirstPlayHead();
     drawSecondPlayHead();
+    drawInstrumentalTrack();
 
     drawer->endFrame();
 }
@@ -225,6 +240,51 @@ void WorkspaceDrawer::drawPitches() const {
         float y = relativeHeight - (distanceFromFirstPitch + 1) * intervalHeight;
         drawPitch((float)x, y, (float)pitchWidth);
     });
+}
+
+void WorkspaceDrawer::drawInstrumentalTrack() {
+    static bool firstCall = true;
+
+    drawer->beginPath();
+    float halfInstrumentalTrackHeight = INSTRUMENTAL_TRACK_HEIGHT / 2;
+    float trackMiddle = height - INSTRUMENTAL_TRACK_BOTTOM_MARGIN - halfInstrumentalTrackHeight;
+
+    auto getY = [=] (int index, bool drawDirectionUp) {
+        float value = instrumentalTrackSamples[index];
+
+        assert(value >= 0);
+        if (!drawDirectionUp) {
+            value = -value;
+        }
+
+        if (firstCall) {
+            cout<<"y="<<(trackMiddle - value * halfInstrumentalTrackHeight)<<endl;
+        }
+
+        return trackMiddle - value * halfInstrumentalTrackHeight;
+    };
+
+    drawer->moveTo(0, getY(0, true));
+    drawer->setFillColor(DrawerColor::blue());
+    for (int i = 1; i < instrumentalTrackSamples.size(); ++i) {
+        float x = i;
+        float y = getY(i, true);
+        drawer->lineTo(x, y);
+    }
+
+    for (int i = instrumentalTrackSamples.size() - 2; i >= 0; --i) {
+        float x = i;
+        float y = getY(i, false);
+        drawer->lineTo(x, y);
+    }
+
+    drawer->lineTo(0, trackMiddle);
+    drawer->closePath();
+    drawer->setStrokeColor(DrawerColor::blue());
+    drawer->stroke();
+    drawer->fill();
+
+    firstCall = false;
 }
 
 float WorkspaceDrawer::getWorkspaceSeek() const {
