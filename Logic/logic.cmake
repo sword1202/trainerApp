@@ -1,6 +1,6 @@
 set(Drawers
         Drawers/Drawer.cpp
-        Drawers/DrawerColor.cpp
+        ../CppUtils/Color.cpp
         Drawers/NvgDrawer.cpp
         nanovg/nanovg.cpp
         )

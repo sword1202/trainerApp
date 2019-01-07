@@ -196,7 +196,7 @@
     <ClCompile Include="..\VocalTrainer\Playback\AudioPlayback\BaseWavAudioPlayer.cpp" />
     <ClCompile Include="..\VocalTrainer\Playback\CraigsappMidifile\Binasc.cpp" />
     <ClCompile Include="..\VocalTrainer\Drawers\Drawer.cpp" />
-    <ClCompile Include="..\VocalTrainer\Drawers\DrawerColor.cpp" />
+    <ClCompile Include="..\VocalTrainer\Drawers\Color.cpp" />
     <ClCompile Include="..\VocalTrainer\Manager\MainController.cpp" />
     <ClCompile Include="..\VocalTrainer\Playback\AudioPlayback\MetronomeAudioPlayer.cpp" />
     <ClCompile Include="..\VocalTrainer\Playback\CraigsappMidifile\MidiEvent.cpp" />
@@ -268,7 +268,7 @@
     <ClInclude Include="..\PitchDetection\CppUtils\ConcurrentModificationAssert.h" />
     <ClInclude Include="..\PitchDetection\CppUtils\CountAssert.h" />
     <ClInclude Include="..\VocalTrainer\Drawers\Drawer.h" />
-    <ClInclude Include="..\VocalTrainer\Drawers\DrawerColor.h" />
+    <ClInclude Include="..\VocalTrainer\Drawers\Color.h" />
     <ClInclude Include="..\PitchDetection\CppUtils\Executors.h" />
     <ClInclude Include="..\PitchDetection\CppUtils\Functions.h" />
     <ClInclude Include="..\PitchDetection\CppUtils\GeometryUtils.h" />

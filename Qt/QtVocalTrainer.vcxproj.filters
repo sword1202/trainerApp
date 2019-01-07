@@ -74,7 +74,7 @@
     <ClCompile Include="..\VocalTrainer\Drawers\Drawer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\VocalTrainer\Drawers\DrawerColor.cpp">
+    <ClCompile Include="..\VocalTrainer\Drawers\Color.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\VocalTrainer\Manager\MainController.cpp">
@@ -286,7 +286,7 @@
     <ClInclude Include="..\VocalTrainer\Drawers\Drawer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\VocalTrainer\Drawers\DrawerColor.h">
+    <ClInclude Include="..\VocalTrainer\Drawers\Color.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\PitchDetection\CppUtils\Executors.h">

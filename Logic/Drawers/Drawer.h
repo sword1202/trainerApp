@@ -10,7 +10,7 @@
 #include <vector>
 #include "RoundedRect.h"
 #include "Point.h"
-#include "DrawerColor.h"
+#include "Color.h"
 #include "HashUtils.h"
 #include <string>
 #include <unordered_set>
@@ -44,7 +44,7 @@ public:
         DONT_DRAW_TEXT
     };
 
-    typedef DrawerColor Color;
+    typedef CppUtils::Color Color;
 
     virtual void clear();
 
@@ -99,7 +99,7 @@ public:
     virtual void fillText(const std::string &text, float x, float y);
 
     virtual void
-    drawShadow(float x, float y, float w, float h, float radius, float blurFactor, const DrawerColor &color) = 0;
+    drawShadow(float x, float y, float w, float h, float radius, float blurFactor, const Color &color) = 0;
 
     virtual Image* createImage(const void* data, int w, int h) = 0;
     virtual void deleteImage(Image*& image);

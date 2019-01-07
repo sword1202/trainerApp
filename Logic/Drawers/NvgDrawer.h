@@ -57,7 +57,7 @@ public:
     void drawImage(float x, float y, float w, float h, Image *image) override;
     Image *createImage(const void *data, int w, int h) override;
 
-    void drawShadow(float x, float y, float w, float h, float radius, float blurFactor, const DrawerColor &color) override;
+    void drawShadow(float x, float y, float w, float h, float radius, float blurFactor, const Color &color) override;
 
 };
 

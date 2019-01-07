@@ -73,6 +73,7 @@ class WorkspaceDrawer : public WorkspaceController {
     std::vector<double> pitchesTimes;
 
     std::vector<float> instrumentalTrackSamples;
+    Drawer::Image* instrumentalTrackImage;
 
     void iterateHorizontalIntervals(const std::function<void(float x, bool isBeat)>& func) const;
 

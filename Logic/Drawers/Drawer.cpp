@@ -64,11 +64,11 @@ void Drawer::drawVerticalLine(float x, float y, float height) {
 }
 
 void Drawer::setStrokeColor(int color) {
-    setStrokeColor(DrawerColor::fromHex(color));
+    setStrokeColor(Color::fromHex(color));
 }
 
 void Drawer::setFillColor(int color) {
-    setFillColor(DrawerColor::fromHex(color));
+    setFillColor(Color::fromHex(color));
 }
 
 void Drawer::fillWithImage(Drawer::Image *image) {

@@ -43,7 +43,7 @@ HEADERS += \
     ../VocalTrainer/Manager/AudioInputManager.h \
     ../VocalTrainer/Manager/WorkspaceZoomController.h \
     ../VocalTrainer/Drawers/QDrawer.h \
-    ../VocalTrainer/Drawers/DrawerColor.h \
+    ../VocalTrainer/Drawers/Color.h \
     ../VocalTrainer/Playback/VxFileAudioDataGenerator.h \
     ../VocalTrainer/Playback/AudioPlayback/BaseWavAudioPlayer.h \
     ../VocalTrainer/Playback/AudioPlayback/MetronomeAudioPlayer.h \
@@ -100,7 +100,7 @@ SOURCES += \
     ../VocalTrainer/Manager/MainController.cpp \
     ../VocalTrainer/Manager/WorkspaceZoomController.cpp \
     ../VocalTrainer/Drawers/QDrawer.cpp \
-    ../VocalTrainer/Drawers/DrawerColor.cpp \
+    ../VocalTrainer/Drawers/Color.cpp \
     ../VocalTrainer/Playback/VxFileAudioDataGenerator.cpp \
     ../VocalTrainer/Playback/AudioPlayback/BaseWavAudioPlayer.cpp \
     ../VocalTrainer/Playback/AudioPlayback/MetronomeAudioPlayer.cpp \

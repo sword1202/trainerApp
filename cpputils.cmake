@@ -8,6 +8,7 @@ set(cppUtilsSources
         CppUtils/OperationCanceler.cpp
         CppUtils/OperationCanceler.h
         CppUtils/Random.cpp
+        CppUtils/Bitmap.cpp
         )
 
 list(TRANSFORM cppUtilsSources PREPEND ${CMAKE_CURRENT_LIST_DIR}/)

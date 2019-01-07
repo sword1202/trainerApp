@@ -7,6 +7,8 @@
 #include <nanovg/nanovg.h>
 #include <assert.h>
 
+using namespace CppUtils;
+
 static NVGcolor toNvgColor(const Drawer::Color& color) {
     return nvgRGBA(color[0], color[1], color[2], color[3]);
 }
@@ -238,9 +240,9 @@ void NvgDrawer::drawImage(float x, float y, float w, float h, Drawer::Image *ima
 }
 
 void
-NvgDrawer::drawShadow(float x, float y, float w, float h, float radius, float blurFactor, const DrawerColor &color) {
+NvgDrawer::drawShadow(float x, float y, float w, float h, float radius, float blurFactor, const Color &color) {
     NVGcolor nvgColor = toNvgColor(color);
-    NVGpaint paint = nvgBoxGradient(ctx, x, y, w, h, radius, blurFactor, nvgColor, toNvgColor(DrawerColor::transparent()));
+    NVGpaint paint = nvgBoxGradient(ctx, x, y, w, h, radius, blurFactor, nvgColor, toNvgColor(Color::transparent()));
     rect(x - radius, y - radius, w + radius * 2, h + radius * 2);
     nvgFillPaint(ctx, paint);
     nvgFill(ctx);

@@ -16,6 +16,7 @@
 #include <iomanip>
 
 #include "NvgDrawer.h"
+#include "Bitmap.h"
 
 #ifndef NDEBUG
 #define CHECK_IF_RENDER_THREAD assert(checkExecutedOnRenderingThread() && "WorkspaceDrawer draw, resize and constructor should be executed  in the same thread")
@@ -53,12 +54,23 @@ void WorkspaceDrawer::resize(float width, float height, float devicePixelRatio) 
 }
 
 void WorkspaceDrawer::generateInstrumentalTrackSamples(float width) {
-    instrumentalTrackSamples.clear();
-    int max = round(width) - 1;
-    for (int i = 0; i <= max; ++i) {
-        double random = Random::RandomDoubleInClosedRange(0.1, 0.8);
-        instrumentalTrackSamples.push_back(float(random));
+    int bitmapWidth = int(round(width * devicePixelRatio));
+    int bitmapHeight = int(round(INSTRUMENTAL_TRACK_HEIGHT * devicePixelRatio));
+    Bitmap bitmap(bitmapWidth, bitmapHeight);
+    bitmap.fill(Color::white());
+
+    Color color = Color::red();
+    for (int x = 0; x < bitmapWidth; ++x) {
+        int random = Random::RandomIntInRange(1, bitmapHeight / 2);
+        int middle = bitmapHeight / 2;
+
+        for (int y = middle - random; y < middle + random; ++y) {
+            bitmap.setPixel(x, y, color);
+        }
     }
+
+    //bitmap.fill(Color::red());
+    instrumentalTrackImage = drawer->createImage(bitmap.getData(), bitmapWidth, bitmapHeight);
 }
 
 void WorkspaceDrawer::draw() {
@@ -243,48 +255,8 @@ void WorkspaceDrawer::drawPitches() const {
 }
 
 void WorkspaceDrawer::drawInstrumentalTrack() {
-    static bool firstCall = true;
-
-    drawer->beginPath();
-    float halfInstrumentalTrackHeight = INSTRUMENTAL_TRACK_HEIGHT / 2;
-    float trackMiddle = height - INSTRUMENTAL_TRACK_BOTTOM_MARGIN - halfInstrumentalTrackHeight;
-
-    auto getY = [=] (int index, bool drawDirectionUp) {
-        float value = instrumentalTrackSamples[index];
-
-        assert(value >= 0);
-        if (!drawDirectionUp) {
-            value = -value;
-        }
-
-        if (firstCall) {
-            cout<<"y="<<(trackMiddle - value * halfInstrumentalTrackHeight)<<endl;
-        }
-
-        return trackMiddle - value * halfInstrumentalTrackHeight;
-    };
-
-    drawer->moveTo(0, getY(0, true));
-    drawer->setFillColor(DrawerColor::blue());
-    for (int i = 1; i < instrumentalTrackSamples.size(); ++i) {
-        float x = i;
-        float y = getY(i, true);
-        drawer->lineTo(x, y);
-    }
-
-    for (int i = instrumentalTrackSamples.size() - 2; i >= 0; --i) {
-        float x = i;
-        float y = getY(i, false);
-        drawer->lineTo(x, y);
-    }
-
-    drawer->lineTo(0, trackMiddle);
-    drawer->closePath();
-    drawer->setStrokeColor(DrawerColor::blue());
-    drawer->stroke();
-    drawer->fill();
-
-    firstCall = false;
+    drawer->drawImage(0, height - INSTRUMENTAL_TRACK_BOTTOM_MARGIN - INSTRUMENTAL_TRACK_HEIGHT / 2,
+            width, INSTRUMENTAL_TRACK_HEIGHT, instrumentalTrackImage);
 }
 
 float WorkspaceDrawer::getWorkspaceSeek() const {

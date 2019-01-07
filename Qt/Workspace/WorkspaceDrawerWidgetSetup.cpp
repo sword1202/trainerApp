@@ -28,7 +28,7 @@ Drawer::Image *WorkspaceDrawerWidgetSetup::createImageFromSvg(const char* url, d
     QPixmap pixmap = icon.pixmap(qRound(width * ratio), qRound(height * ratio));
 
     QImage image = pixmap.toImage();
-    return drawer->createImage(image.bits(), image.width(), image.height());;
+    return drawer->createImage(image.constBits(), image.width(), image.height());;
 }
 
 static Drawer::Image* createImage(const QString& url, Drawer *drawer) {
@@ -36,7 +36,7 @@ static Drawer::Image* createImage(const QString& url, Drawer *drawer) {
     image.load(url);
     image = image.rgbSwapped();
     assert(!image.isNull());
-    return drawer->createImage(image.bits(), image.width(), image.height());
+    return drawer->createImage(image.constBits(), image.width(), image.height());
 }
 
 void WorkspaceDrawerWidgetSetup::initImages(Drawer *drawer, QWidget *widget) {
