@@ -111,7 +111,7 @@ protected:
 public:
     static AudioDecoder* create();
     static DecodedTrack
-    decodeAllIntoRawPcm(const std::string &data, const std::function<void(float)> &progressListener,
+    decodeAllIntoRawPcm(const std::string &data, const std::function<void(float)> &progressListener = nullptr,
                         OperationCancelerPtr operationCanceller = nullptr);
 
     WavConfig generateWavConfig() const;

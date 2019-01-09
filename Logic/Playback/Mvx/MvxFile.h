@@ -28,6 +28,8 @@ class MvxFile {
     std::vector<double> recordedPitchesTimes;
     std::vector<float> recordedPitchesFrequencies;
 
+    std::vector<short> instrumentalPreviewSamples;
+
     bool readOnlySignature = false;
     int version = 0;
 
@@ -65,12 +67,14 @@ class MvxFile {
                 ar & recordedPitchesTimes;
                 ar & recordedPitchesFrequencies;
             }
+
+            if (version >= 3) {
+                ar & instrumentalPreviewSamples;
+            }
         }
     }
 
 public:
-    constexpr static int DEFAULT_PREVIEW_BATCH_SIZE = 1000;
-
     MvxFile() = default;
 
     MvxFile(MvxFile&&) = default;
@@ -118,14 +122,17 @@ public:
     std::vector<float> &moveRecordedPitchesFrequencies();
     void setRecordedPitchesFrequencies(const std::vector<float> &recordedPitchesFrequencies);
 
-    static std::vector<int16_t> generatePreviewSamplesFromRawPcm(const int16_t *rawPcm, int rawPcmSize, int batchSize);
+    const std::vector<short> &getInstrumentalPreviewSamples() const;
+    void setInstrumentalPreviewSamples(const std::vector<short> &instrumentalPreviewSamples);
+
+    void generateInstrumentalPreviewSamplesFromInstrumental();
 };
 
 
 /**
  * Version 2: recordedPitchesTimes and recordedPitchesFrequencies are added
  */
-BOOST_CLASS_VERSION(MvxFile, 2)
+BOOST_CLASS_VERSION(MvxFile, 3)
 
 
 #endif //VOCALTRAINER_MVXFILE_H

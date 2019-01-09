@@ -7,7 +7,11 @@
 #include <fstream>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
+#include <Decoder/audiodecoder.h>
 #include "StringUtils.h"
+#include "AudioUtils.h"
+
+constexpr int MAX_SAMPLES_PREVIEW_COUNT = 5000;
 
 using namespace CppUtils;
 
@@ -133,20 +137,17 @@ std::string &MvxFile::moveRecordingData() {
     return recordingData;
 }
 
-std::vector<int16_t> MvxFile::generatePreviewSamplesFromRawPcm(const int16_t *rawPcm, int rawPcmSize, int batchSize) {
-    std::vector<int16_t> result;
-    result.reserve(rawPcmSize / batchSize + 1);
-    for (int i = 0; i < rawPcmSize;) {
-        double sample = 0;
-        int j;
-        for (j = 0; j < batchSize && i < rawPcmSize; ++j, ++i) {
-            sample += rawPcm[i];
-        }
-        if (j > 0) {
-            auto value = int16_t(round(sample / j));
-            result.push_back(value);
-        }
-    }
+const std::vector<short> &MvxFile::getInstrumentalPreviewSamples() const {
+    return instrumentalPreviewSamples;
+}
 
-    return result;
+void MvxFile::setInstrumentalPreviewSamples(const std::vector<short> &instrumentalPreviewSamples) {
+    this->instrumentalPreviewSamples = instrumentalPreviewSamples;
+}
+
+void MvxFile::generateInstrumentalPreviewSamplesFromInstrumental() {
+    DecodedTrack decoded = AudioDecoder::decodeAllIntoRawPcm(instrumental);
+    int previewSamplesCount = std::min(MAX_SAMPLES_PREVIEW_COUNT, int(decoded.rawPcm.size() / sizeof(short)));
+    std::vector<short> previewSamples = AudioUtils::ResizePreviewSamples(decoded.rawPcm, previewSamplesCount);
+    setInstrumentalPreviewSamples(previewSamples);
 }

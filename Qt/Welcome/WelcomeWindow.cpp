@@ -52,7 +52,7 @@ void WelcomeWindow::setupProjectsList(QQmlContext *context) {
         // read only signature
         MvxFile file;
         try {
-            file = MvxFile::readFromFile(filePath.toLocal8Bit(), true);
+            file = MvxFile::readFromFile(filePath.toLocal8Bit().data(), true);
         } catch (...) {
             appSettings.removeProject(filePath);
             appSettings.removeRecording(filePath);

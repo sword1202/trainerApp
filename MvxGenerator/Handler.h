@@ -8,7 +8,9 @@
 #include <Playback/Midi/MidiFileReader.h>
 #include <QMessageBox>
 #include <QStandardPaths>
+#include <Decoder/audiodecoder.h>
 #include "MvxFile.h"
+#include "AudioUtils.h"
 
 #ifndef MVXGENERATOR_HANDLER_H
 #define MVXGENERATOR_HANDLER_H
@@ -64,6 +66,8 @@ public:
         mvxFile.setSongTitleUtf8(title.toUtf8().toStdString());
         mvxFile.loadInstrumentalFromFile(instrumentalFilePath.toLocal8Bit().data());
         mvxFile.setBeatsPerMinute(beatsPerMinute);
+        mvxFile.generateInstrumentalPreviewSamplesFromInstrumental();
+
         mvxFile.writeToFile(outputFilePath.toLocal8Bit().data());
 
         QMessageBox::information(dynamic_cast<QWidget *>(parent()), "File created", outputFilePath);
