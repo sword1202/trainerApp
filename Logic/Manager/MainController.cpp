@@ -55,12 +55,6 @@ void MainController::init(AudioInputManager *pitchInputReader, MvxPlayer *mvxPla
         }
     });
 
-    mvxPlayer->prepareFinishedListeners.addListener([=] {
-        if (workspaceController) {
-            workspaceController->setIntervalsPerSecond(this->mvxPlayer->getBeatsPerMinute() / 60.0);
-        }
-    });
-
     mvxPlayer->tonalityChangedListeners.addListener([=] {
         if (workspaceController) {
             workspaceController->update();
@@ -98,9 +92,7 @@ WorkspaceZoomController *MainController::getZoomController() const {
 MainController::~MainController() {
     delete mvxPlayer;
     delete audioInputManager;
-    if (playbackBoundsSelectionController) {
-        delete playbackBoundsSelectionController;
-    }
+    delete playbackBoundsSelectionController;
 }
 
 MvxPlayer *MainController::getPlayer() const {
@@ -112,6 +104,8 @@ void MainController::setWorkspaceController(WorkspaceController *workspaceContro
     this->workspaceController = workspaceController;
     workspaceController->setVxFile(mvxPlayer->getVxFile());
     workspaceController->setIntervalsPerSecond(mvxPlayer->getBeatsPerMinute() / 60.0);
+    workspaceController->setInstrumentalTrackSamples(
+            this->mvxPlayer->getMvxFile().getInstrumentalPreviewSamples());
     workspaceController->setPitchSequence(mvxPlayer);
     bool isRecording = mvxPlayer->isRecording();
     workspaceController->setRecording(isRecording);

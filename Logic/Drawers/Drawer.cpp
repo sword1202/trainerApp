@@ -144,6 +144,10 @@ void Drawer::circle(float x, float y, float r) {
 }
 
 void Drawer::deleteImage(Drawer::Image *&image) {
+    if (image == nullptr) {
+        return;
+    }
+
     onImageDelete(image);
     images.erase(image);
     delete image;

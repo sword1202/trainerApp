@@ -74,7 +74,7 @@ class WorkspaceDrawer : public WorkspaceController {
     std::vector<double> pitchesTimes;
 
     std::vector<short> instrumentalTrackSamples;
-    Drawer::Image* instrumentalTrackImage;
+    Drawer::Image* instrumentalTrackImage = nullptr;
 
     void iterateHorizontalIntervals(const std::function<void(float x, bool isBeat)>& func) const;
 
@@ -193,8 +193,7 @@ public:
 
     void setRecording(bool recording) override;
 
-    void generateInstrumentalTrackSamples(float width);
-
+    void generateInstrumentalTrackSamplesImage(float width);
     void setInstrumentalTrackSamples(const std::vector<short> &instrumentalTrackSamples) override;
 };
 

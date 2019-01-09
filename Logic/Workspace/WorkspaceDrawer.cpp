@@ -10,13 +10,14 @@
 #include "CountAssert.h"
 #include "Pitch.h"
 #include "TimeUtils.h"
-#include "Random.h"
 #include <iostream>
 #include <cmath>
 #include <iomanip>
 
 #include "NvgDrawer.h"
 #include "Bitmap.h"
+#include "AudioUtils.h"
+#include "MathUtils.h"
 
 #ifndef NDEBUG
 #define CHECK_IF_RENDER_THREAD assert(checkExecutedOnRenderingThread() && "WorkspaceDrawer draw, resize and constructor should be executed  in the same thread")
@@ -36,7 +37,7 @@ constexpr float PLAYBACK_BOUNDS_BOTTOM_MARGIN = 3.25f;
 constexpr float PLAYBACK_BOUNDS_HEIGHT = 15.75;
 static const int PITCH_RADIUS = 3;
 constexpr float PLAYBACK_BOUNDS_ROUND_RECT_RADIUS = 1.5f;
-constexpr float INSTRUMENTAL_TRACK_HEIGHT = 208.f;
+constexpr float INSTRUMENTAL_TRACK_HEIGHT = 28.f;
 constexpr float INSTRUMENTAL_TRACK_BOTTOM_MARGIN = 14.f;
 
 constexpr int YARD_STICK_FONT_WEIGHT = 1;
@@ -60,26 +61,34 @@ void WorkspaceDrawer::resize(float width, float height, float devicePixelRatio) 
     this->width = width;
     this->height = height;
 
-    generateInstrumentalTrackSamples(width);
+    generateInstrumentalTrackSamplesImage(width);
 }
 
-void WorkspaceDrawer::generateInstrumentalTrackSamples(float width) {
+void WorkspaceDrawer::generateInstrumentalTrackSamplesImage(float width) {
+    drawer->deleteImage(instrumentalTrackImage);
+
+    if (instrumentalTrackSamples.empty()) {
+        return;
+    }
+
     int bitmapWidth = int(round(width * devicePixelRatio));
     int bitmapHeight = int(round(INSTRUMENTAL_TRACK_HEIGHT * devicePixelRatio));
     Bitmap bitmap(bitmapWidth, bitmapHeight);
-    bitmap.fill(Color::white());
+    bitmap.fill(Color::transparent());
 
-    Color color = Color::red();
+    std::vector<short> resizedSamples = AudioUtils::ResizePreviewSamples(instrumentalTrackSamples.data(),
+            instrumentalTrackSamples.size(), bitmapWidth);
     for (int x = 0; x < bitmapWidth; ++x) {
-        int random = Random::RandomIntInRange(1, bitmapHeight / 2);
         int middle = bitmapHeight / 2;
+        int value = Math::SelectValueFromRangeProjectedInRange<int>(resizedSamples[x],
+                                                                    0, std::numeric_limits<short>::max(),
+                                                                    1, middle);
 
-        for (int y = middle - random; y < middle + random; ++y) {
-            bitmap.setPixel(x, y, color);
+        for (int y = middle - value; y < middle + value; ++y) {
+            bitmap.setPixel(x, y, instrumentalTrackColor);
         }
     }
 
-    //bitmap.fill(Color::red());
     instrumentalTrackImage = drawer->createImage(bitmap.getData(), bitmapWidth, bitmapHeight);
 }
 
@@ -265,8 +274,10 @@ void WorkspaceDrawer::drawPitches() const {
 }
 
 void WorkspaceDrawer::drawInstrumentalTrack() {
-    drawer->drawImage(0, height - INSTRUMENTAL_TRACK_BOTTOM_MARGIN - INSTRUMENTAL_TRACK_HEIGHT / 2,
-            width, INSTRUMENTAL_TRACK_HEIGHT, instrumentalTrackImage);
+    if (instrumentalTrackImage) {
+        drawer->drawImage(0, height - INSTRUMENTAL_TRACK_BOTTOM_MARGIN - INSTRUMENTAL_TRACK_HEIGHT,
+                          instrumentalTrackImage);
+    }
 }
 
 float WorkspaceDrawer::getWorkspaceSeek() const {
@@ -708,4 +719,7 @@ void WorkspaceDrawer::setRecording(bool recording) {
 
 void WorkspaceDrawer::setInstrumentalTrackSamples(const std::vector<short> &instrumentalTrackSamples) {
     this->instrumentalTrackSamples = instrumentalTrackSamples;
+    if (width > 0 && height > 0 && devicePixelRatio > 0) {
+        generateInstrumentalTrackSamplesImage(width);
+    }
 }
