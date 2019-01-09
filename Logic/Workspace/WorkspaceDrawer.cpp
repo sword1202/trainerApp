@@ -37,7 +37,8 @@ constexpr float PLAYBACK_BOUNDS_BOTTOM_MARGIN = 3.25f;
 constexpr float PLAYBACK_BOUNDS_HEIGHT = 15.75;
 static const int PITCH_RADIUS = 3;
 constexpr float PLAYBACK_BOUNDS_ROUND_RECT_RADIUS = 1.5f;
-constexpr float INSTRUMENTAL_TRACK_HEIGHT = 28.f;
+constexpr int INSTRUMENTAL_TRACK_HEIGHT = 24;
+constexpr int MINIMUM_TRACK_HEIGHT = 4;
 constexpr float INSTRUMENTAL_TRACK_BOTTOM_MARGIN = 14.f;
 
 constexpr int YARD_STICK_FONT_WEIGHT = 1;
@@ -78,14 +79,26 @@ void WorkspaceDrawer::generateInstrumentalTrackSamplesImage(float width) {
 
     std::vector<short> resizedSamples = AudioUtils::ResizePreviewSamples(instrumentalTrackSamples.data(),
             instrumentalTrackSamples.size(), bitmapWidth);
+
+    // Minimum part of track line, where opacity should be applied.
+    double minimumK = 0.75;
     for (int x = 0; x < bitmapWidth; ++x) {
         int middle = bitmapHeight / 2;
         int value = Math::SelectValueFromRangeProjectedInRange<int>(resizedSamples[x],
                                                                     0, std::numeric_limits<short>::max(),
-                                                                    1, middle);
+                                                                    MINIMUM_TRACK_HEIGHT, middle);
 
         for (int y = middle - value; y < middle + value; ++y) {
-            bitmap.setPixel(x, y, instrumentalTrackColor);
+            int offset = abs(y - middle);
+            double k = double(offset) / value;
+            Color color = instrumentalTrackColor;
+            if (k >= minimumK) {
+                double factor = (k - minimumK) / (1.0 - minimumK);
+                double opacity = 1.0 - factor;
+                color = color.applyOpacity(opacity);
+            }
+
+            bitmap.setPixel(x, y, color);
         }
     }
 
