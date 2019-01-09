@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
 project(VocalTrainer)
 project(VocalTrainerTests)
+project(MvxGenerator)
 
 if(UNIX AND NOT APPLE)
     set(LINUX TRUE)
@@ -50,6 +51,39 @@ set_property (TARGET VocalTrainerTests APPEND_STRING PROPERTY
 target_link_libraries(VocalTrainer Qt5::Widgets)
 target_link_libraries(VocalTrainer Qt5::QuickWidgets)
 target_link_libraries(VocalTrainer Qt5::Svg)
+
+set(mvxGeneratorSources
+        ${playbackTestSources}
+        ${cppUtilsSources}
+        CppUtils/Executors.mm
+        Logic/AudioInput/Pitch.cpp
+        Qt/Utils/QtUtils.cpp
+        MvxGenerator/Handler.h
+        Qt/App/LoadTsf.cpp
+        MvxGenerator/main.cpp
+        MvxGenerator/main.qrc
+        )
+
+add_executable(MvxGenerator ${mvxGeneratorSources})
+
+set_property (TARGET MvxGenerator APPEND_STRING PROPERTY
+        COMPILE_FLAGS "-fobjc-arc")
+
+target_link_libraries(MvxGenerator Qt5::Widgets)
+target_link_libraries(MvxGenerator Qt5::QuickWidgets)
+target_link_libraries(MvxGenerator Qt5::Svg)
+
+if (APPLE)
+    target_link_libraries(MvxGenerator "-framework Accelerate")
+    target_link_libraries(MvxGenerator "-framework AppKit")
+    target_link_libraries(MvxGenerator "-framework AudioToolbox")
+    target_link_libraries(MvxGenerator "-framework AVFoundation")
+    target_link_libraries(MvxGenerator "-framework CoreAudio")
+
+    target_link_libraries(MvxGenerator ${CMAKE_SOURCE_DIR}/libs/macos/Release/libboost_serialization.a)
+    target_link_libraries(MvxGenerator ${CMAKE_SOURCE_DIR}/libs/macos/Release/libportaudio.a)
+    target_link_libraries(MvxGenerator ${CMAKE_SOURCE_DIR}/libs/macos/Release/libSoundTouch.1.dylib)
+endif(APPLE)
 
 if (APPLE)
     target_link_libraries(VocalTrainer "-framework Accelerate")

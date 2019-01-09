@@ -52,6 +52,7 @@ class WorkspaceDrawer : public WorkspaceController {
     Color yardStickDotAndTextColor;
     Color boundsColor;
     Color playHeadColor;
+    Color instrumentalTrackColor;
 
     float width = -1;
     float height = -1;
@@ -72,7 +73,7 @@ class WorkspaceDrawer : public WorkspaceController {
     std::vector<float> pitchesFrequencies;
     std::vector<double> pitchesTimes;
 
-    std::vector<float> instrumentalTrackSamples;
+    std::vector<short> instrumentalTrackSamples;
     Drawer::Image* instrumentalTrackImage;
 
     void iterateHorizontalIntervals(const std::function<void(float x, bool isBeat)>& func) const;
@@ -193,6 +194,8 @@ public:
     void setRecording(bool recording) override;
 
     void generateInstrumentalTrackSamples(float width);
+
+    void setInstrumentalTrackSamples(const std::vector<short> &instrumentalTrackSamples) override;
 };
 
 

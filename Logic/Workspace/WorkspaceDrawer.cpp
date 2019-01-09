@@ -42,6 +42,16 @@ constexpr float INSTRUMENTAL_TRACK_BOTTOM_MARGIN = 14.f;
 constexpr int YARD_STICK_FONT_WEIGHT = 1;
 static const char* FONT_FAMILY = "Lato";
 
+#ifndef NDEBUG
+bool WorkspaceDrawer::checkExecutedOnRenderingThread() {
+    if (threadId == std::thread::id()) {
+        threadId = std::this_thread::get_id();
+    }
+
+    return std::this_thread::get_id() == threadId;
+}
+#endif
+
 void WorkspaceDrawer::resize(float width, float height, float devicePixelRatio) {
     CHECK_IF_RENDER_THREAD;
     assert(devicePixelRatio > 0);
@@ -513,6 +523,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, const std::function<void()>& on
     yardStickDotAndTextColor = {0x24, 0x23, 0x2D, 0xFF};
     boundsColor = {0xC4, 0xCD, 0xFD, 0xFF};
     playHeadColor = {0x24, 0x23, 0x2D, 0xFF};
+    instrumentalTrackColor = {0x97, 0x98, 0xB5, 0xFF};
 
     pianoDrawer = new PianoDrawer(drawer);
     drawer->setTextFontFamily(FONT_FAMILY);
@@ -695,13 +706,6 @@ void WorkspaceDrawer::setRecording(bool recording) {
     this->recording = recording;
 }
 
-#ifndef NDEBUG
-bool WorkspaceDrawer::checkExecutedOnRenderingThread() {
-    if (threadId == std::thread::id()) {
-        threadId = std::this_thread::get_id();
-    }
-
-    return std::this_thread::get_id() == threadId;
+void WorkspaceDrawer::setInstrumentalTrackSamples(const std::vector<short> &instrumentalTrackSamples) {
+    this->instrumentalTrackSamples = instrumentalTrackSamples;
 }
-
-#endif
