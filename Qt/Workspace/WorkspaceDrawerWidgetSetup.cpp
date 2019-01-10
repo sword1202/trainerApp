@@ -55,6 +55,10 @@ void WorkspaceDrawerWidgetSetup::initImages(Drawer *drawer, QWidget *widget) {
     Drawer::Image* instrumentalTrackButtonImage = createImage(":qml/sharedimages/instrumental_track_button.png",
             drawer);
     workspaceDrawer->setInstrumentalTrackButtonImage(instrumentalTrackButtonImage);
+
+    // Vocal track button
+    Drawer::Image* pianoTrackButtonImage = createImage(":qml/sharedimages/vocal_track_button.png", drawer);
+    workspaceDrawer->setPianoTrackButtonImage(pianoTrackButtonImage);
 }
 
 void WorkspaceDrawerWidgetSetup::setupWorkspaceDrawer(QWidget* widget, Drawer* drawer, bool useUpdateLoop) {

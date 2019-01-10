@@ -40,9 +40,10 @@ constexpr float PLAYBACK_BOUNDS_ROUND_RECT_RADIUS = 1.5f;
 constexpr int INSTRUMENTAL_TRACK_HEIGHT = 24;
 constexpr int MINIMUM_INSTRUMENTAL_TRACK_HEIGHT = 4;
 constexpr float INSTRUMENTAL_TRACK_BOTTOM_MARGIN = 14.f;
+constexpr float PIANO_TRACK_BUTTON_LEFT = 19.f;
 constexpr float INSTRUMENTAL_TRACK_BUTTON_LEFT = 19.f;
-constexpr float INSTRUMENTAL_TRACK_BUTTON_HEIGHT = 17.f;
-constexpr float INSTRUMENTAL_TRACK_BUTTON_WIDTH = 108.f;
+constexpr float TRACK_BUTTON_HEIGHT = 17.f;
+constexpr float INSTRUMENTAL_TRACK_BUTTON_WIDTH = 82.f;
 constexpr float PIANO_TRACK_HEIGHT = 38.f;
 constexpr float PIANO_TRACK_BOTTOM = 56.f;
 constexpr float PIANO_TRACK_SHADOW_RADIUS = 50.f;
@@ -50,6 +51,7 @@ constexpr float PIANO_TRACK_SHADOW_BLUR = 25.f;
 constexpr float PIANO_TRACK_PITCH_HEIGHT = 2.f;
 constexpr float PIANO_TRACK_DISTANCE_BETWEEN_PITCHES = 1.f;
 constexpr float PIANO_TRACK_PITCH_RADIUS = 1.f;
+constexpr float PIANO_TRACK_BUTTON_WIDTH = 77.f;
 
 constexpr int YARD_STICK_FONT_WEIGHT = 1;
 static const char* FONT_FAMILY = "Lato";
@@ -312,11 +314,52 @@ void WorkspaceDrawer::drawInstrumentalTrack() {
 void WorkspaceDrawer::drawInstrumentalTrackButton() {
     assert(instrumentalTrackButtonImage != nullptr);
     float trackMiddle = height - INSTRUMENTAL_TRACK_BOTTOM_MARGIN - INSTRUMENTAL_TRACK_HEIGHT / 2.f;
-    float y = trackMiddle - INSTRUMENTAL_TRACK_BUTTON_HEIGHT / 2;
+    float y = trackMiddle - TRACK_BUTTON_HEIGHT / 2;
     drawer->drawImage(INSTRUMENTAL_TRACK_BUTTON_LEFT, y,
             INSTRUMENTAL_TRACK_BUTTON_WIDTH,
-            INSTRUMENTAL_TRACK_BUTTON_HEIGHT,
+            TRACK_BUTTON_HEIGHT,
             instrumentalTrackButtonImage);
+}
+
+void WorkspaceDrawer::drawPianoTrack() {
+    // Draw rectangle and shadow
+    float y = height - PIANO_TRACK_BOTTOM - PIANO_TRACK_HEIGHT;
+    float x = 1;
+    float width = this->width - drawer->getTranslateX();
+    float height = PIANO_TRACK_HEIGHT;
+    // make a width of shadow a bit bigger than rect width
+    drawer->drawShadow(x - 200, y, width + 400, height, PIANO_TRACK_SHADOW_RADIUS,
+                       PIANO_TRACK_SHADOW_BLUR, pianoTrackShadowColor);
+    drawer->setFillColor(pianoTrackColor);
+    drawer->fillRect(x, y, width, height);
+
+    // Draw pitches
+    const VxFile* vxFile = this->vxFile;
+    int durationInTicks = vxFile->getDurationInTicks();
+    float tickSize = width / durationInTicks;
+
+    drawer->setFillColor(pianoTrackPitchesColor);
+    const auto& pitches = vxFile->getPitches();
+    for (const VxPitch& vxPitch : pitches) {
+        float pitchX = vxPitch.startTickNumber * tickSize;
+        float pitchWidth = vxPitch.ticksCount * tickSize;
+        float pitchY = (Pitch::PITCHES_IN_OCTAVE - vxPitch.pitch.getPitchInOctaveIndex() - 1) *
+                       (PIANO_TRACK_PITCH_HEIGHT + PIANO_TRACK_DISTANCE_BETWEEN_PITCHES) + y;
+        drawer->roundedRect(pitchX, pitchY, pitchWidth, PIANO_TRACK_PITCH_HEIGHT, PIANO_TRACK_PITCH_RADIUS);
+        drawer->fill();
+    }
+
+    drawPianoTrackButton();
+}
+
+void WorkspaceDrawer::drawPianoTrackButton() {
+    assert(pianoTrackButtonImage != nullptr);
+    float trackMiddle = height - PIANO_TRACK_BOTTOM - PIANO_TRACK_HEIGHT / 2.f;
+    float y = trackMiddle - TRACK_BUTTON_HEIGHT / 2;
+    drawer->drawImage(PIANO_TRACK_BUTTON_LEFT, y,
+                      PIANO_TRACK_BUTTON_WIDTH,
+                      TRACK_BUTTON_HEIGHT,
+                      pianoTrackButtonImage);
 }
 
 float WorkspaceDrawer::getWorkspaceSeek() const {
@@ -771,31 +814,6 @@ void WorkspaceDrawer::setInstrumentalTrackButtonImage(Drawer::Image *instrumenta
     this->instrumentalTrackButtonImage = instrumentalTrackButtonImage;
 }
 
-void WorkspaceDrawer::drawPianoTrack() {
-    // Draw rectangle and shadow
-    float y = height - PIANO_TRACK_BOTTOM - PIANO_TRACK_HEIGHT;
-    float x = 1;
-    float width = this->width - drawer->getTranslateX();
-    float height = PIANO_TRACK_HEIGHT;
-    // make a width of shadow a bit bigger than rect width
-    drawer->drawShadow(x - 200, y, width + 400, height, PIANO_TRACK_SHADOW_RADIUS,
-            PIANO_TRACK_SHADOW_BLUR, pianoTrackShadowColor);
-    drawer->setFillColor(pianoTrackColor);
-    drawer->fillRect(x, y, width, height);
-
-    // Draw pitches
-    const VxFile* vxFile = this->vxFile;
-    int durationInTicks = vxFile->getDurationInTicks();
-    float tickSize = width / durationInTicks;
-
-    drawer->setFillColor(pianoTrackPitchesColor);
-    const auto& pitches = vxFile->getPitches();
-    for (const VxPitch& vxPitch : pitches) {
-        float pitchX = vxPitch.startTickNumber * tickSize;
-        float pitchWidth = vxPitch.ticksCount * tickSize;
-        float pitchY = (Pitch::PITCHES_IN_OCTAVE - vxPitch.pitch.getPitchInOctaveIndex() - 1) *
-                (PIANO_TRACK_PITCH_HEIGHT + PIANO_TRACK_DISTANCE_BETWEEN_PITCHES) + y;
-        drawer->roundedRect(pitchX, pitchY, pitchWidth, PIANO_TRACK_PITCH_HEIGHT, PIANO_TRACK_PITCH_RADIUS);
-        drawer->fill();
-    }
+void WorkspaceDrawer::setPianoTrackButtonImage(Drawer::Image *pianoTrackButtonImage) {
+    this->pianoTrackButtonImage = pianoTrackButtonImage;
 }

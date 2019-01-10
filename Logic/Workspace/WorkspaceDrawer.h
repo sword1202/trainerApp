@@ -80,6 +80,7 @@ class WorkspaceDrawer : public WorkspaceController {
     std::vector<short> instrumentalTrackSamples;
     Drawer::Image* instrumentalTrackImage = nullptr;
     Drawer::Image* instrumentalTrackButtonImage = nullptr;
+    Drawer::Image* pianoTrackButtonImage = nullptr;
 
     void iterateHorizontalIntervals(const std::function<void(float x, bool isBeat)>& func) const;
 
@@ -100,6 +101,7 @@ class WorkspaceDrawer : public WorkspaceController {
     void drawInstrumentalTrack();
     void drawInstrumentalTrackButton();
     void drawPianoTrack();
+    void drawPianoTrackButton();
 
     double getSingingPitchGraphDuration() const;
     double getIntervalDuration() const;
@@ -203,6 +205,8 @@ public:
     void generateInstrumentalTrackSamplesImage(float width);
     void setInstrumentalTrackSamples(const std::vector<short> &instrumentalTrackSamples) override;
     void setInstrumentalTrackButtonImage(Drawer::Image *instrumentalTrackButtonImage);
+
+    void setPianoTrackButtonImage(Drawer::Image *pianoTrackButtonImage);
 };
 
 
