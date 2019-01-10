@@ -271,7 +271,7 @@ Drawer::Image *DrawerTextImagesFactory::findImage(char character, int fontSize) 
     DrawerTextImagesFactoryCharacterData stub;
     stub.character = character;
     stub.fontSize = fontSize;
-    return Sets::FindOrDefault(set, stub).image;
+    return Sets::FindOrDefault(set, stub, stub).image;
 }
 
 bool DrawerTextImagesFactoryCharacterData::operator==(const DrawerTextImagesFactoryCharacterData &rhs) const {
