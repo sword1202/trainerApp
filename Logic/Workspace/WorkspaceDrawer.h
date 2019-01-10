@@ -54,6 +54,8 @@ class WorkspaceDrawer : public WorkspaceController {
     Color playHeadColor;
     Color instrumentalTrackColor;
     Color trackButtonColor;
+    Color pianoTrackColor;
+    Color pianoTrackShadowColor;
 
     float width = -1;
     float height = -1;
@@ -96,6 +98,7 @@ class WorkspaceDrawer : public WorkspaceController {
     void drawSecondPlayHead();
     void drawInstrumentalTrack();
     void drawInstrumentalTrackButton();
+    void drawPianoTrack();
 
     double getSingingPitchGraphDuration() const;
     double getIntervalDuration() const;
@@ -121,8 +124,6 @@ public:
     static constexpr float YARD_STICK_HEIGHT = CLOCK_HEIGHT  + PLAYHEAD_TRIANGLE_HEIGHT / 2;
     static constexpr int YARD_STICK_FONT_SIZE = 11;
     static constexpr int CLOCK_FONT_SIZE = 11;
-    static constexpr float INSTRUMENTAL_TRACK_BUTTON_HEIGHT = 17.f;
-    static constexpr float INSTRUMENTAL_TRACK_BUTTON_WIDTH = 108.f;
 
     WorkspaceDrawer(Drawer *drawer, const std::function<void()>& onUpdateRequested);
     ~WorkspaceDrawer();

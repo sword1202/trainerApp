@@ -41,6 +41,12 @@ constexpr int INSTRUMENTAL_TRACK_HEIGHT = 24;
 constexpr int MINIMUM_INSTRUMENTAL_TRACK_HEIGHT = 4;
 constexpr float INSTRUMENTAL_TRACK_BOTTOM_MARGIN = 14.f;
 constexpr float INSTRUMENTAL_TRACK_BUTTON_LEFT = 19.f;
+constexpr float INSTRUMENTAL_TRACK_BUTTON_HEIGHT = 17.f;
+constexpr float INSTRUMENTAL_TRACK_BUTTON_WIDTH = 108.f;
+constexpr float PIANO_TRACK_HEIGHT = 34.f;
+constexpr float PIANO_TRACK_BOTTOM = 56.f;
+constexpr float PIANO_TRACK_SHADOW_RADIUS = 50.f;
+constexpr float PIANO_TRACK_SHADOW_BLUR = 25.f;
 
 constexpr int YARD_STICK_FONT_WEIGHT = 1;
 static const char* FONT_FAMILY = "Lato";
@@ -142,7 +148,14 @@ void WorkspaceDrawer::draw() {
     drawer->translate(0, YARD_STICK_HEIGHT);
     drawer->translate(-PIANO_WIDTH, 0);
     drawVerticalLine(PIANO_WIDTH, borderLineColor);
+
+    drawer->translateTo(0, 0);
     drawer->translate(PIANO_WIDTH, 0);
+
+    drawPianoTrack();
+    drawInstrumentalTrack();
+    drawFirstPlayHead();
+    drawSecondPlayHead();
 
     drawer->translateTo(0, 0);
     drawer->setFillColor(Color::white());
@@ -155,11 +168,6 @@ void WorkspaceDrawer::draw() {
     drawer->translate(0, PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN);
     drawVerticalLine(PIANO_WIDTH, borderLineColor);
     drawer->translate(0, -PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN);
-
-    drawer->translate(PIANO_WIDTH, 0);
-    drawFirstPlayHead();
-    drawSecondPlayHead();
-    drawInstrumentalTrack();
 
     drawer->endFrame();
 }
@@ -561,6 +569,8 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, const std::function<void()>& on
     playHeadColor = {0x24, 0x23, 0x2D, 0xFF};
     instrumentalTrackColor = {0x97, 0x98, 0xB5, 0xFF};
     trackButtonColor = {0x51, 0x4E, 0x64, 0xFF};
+    pianoTrackColor = Color::white();
+    pianoTrackShadowColor = {0xDD, 0xDB, 0xEE, 0x99};
 
     pianoDrawer = new PianoDrawer(drawer);
     drawer->setTextFontFamily(FONT_FAMILY);
@@ -752,4 +762,16 @@ void WorkspaceDrawer::setInstrumentalTrackSamples(const std::vector<short> &inst
 
 void WorkspaceDrawer::setInstrumentalTrackButtonImage(Drawer::Image *instrumentalTrackButtonImage) {
     this->instrumentalTrackButtonImage = instrumentalTrackButtonImage;
+}
+
+void WorkspaceDrawer::drawPianoTrack() {
+    float y = height - PIANO_TRACK_BOTTOM - PIANO_TRACK_HEIGHT;
+    float x = 1;
+    float width = this->width - drawer->getTranslateX();
+    float height = PIANO_TRACK_HEIGHT;
+    // make a width of shadow a bit bigger than rect width
+    drawer->drawShadow(x - 200, y, width + 400, height, PIANO_TRACK_SHADOW_RADIUS,
+            PIANO_TRACK_SHADOW_BLUR, pianoTrackShadowColor);
+    drawer->setFillColor(pianoTrackColor);
+    drawer->fillRect(x, y, width, height);
 }
