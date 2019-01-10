@@ -21,7 +21,7 @@ Item {
             anchors.topMargin: 14.25
             anchors.left: parent.left
             anchors.leftMargin: 22.5
-            text: "The Beatles - Yesterday"
+            text: cpp.player.artistName + " - " + cpp.player.songTitle
             color: "#24232D"
             font.family: "Lato"
             font.bold: true

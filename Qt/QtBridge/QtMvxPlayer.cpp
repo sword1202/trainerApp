@@ -136,3 +136,11 @@ void QtMvxPlayer::seekToNextTact() {
 void QtMvxPlayer::seekToPrevTact() {
     MvxPlayer::seekToPrevTact();
 }
+
+QString QtMvxPlayer::getArtistName() const {
+    return QString::fromUtf8(getArtistNameUtf8().data());
+}
+
+QString QtMvxPlayer::getSongTitle() const {
+    return QString::fromUtf8(getSongTitleUtf8().data());
+}

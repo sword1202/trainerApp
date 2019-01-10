@@ -31,6 +31,8 @@ public:
             setPitchShiftInSemiTones() NOTIFY pitchShiftChanged())
     Q_PROPERTY(int metronomeEnabled READ isMetronomeEnabled() WRITE
             setMetronomeEnabled() NOTIFY metronomeEnabledChanged())
+    Q_PROPERTY(QString artistName READ getArtistName() NOTIFY sourceChanged())
+    Q_PROPERTY(QString songTitle READ getSongTitle() NOTIFY sourceChanged())
 
     Q_INVOKABLE bool hasPitchNow(int perfectFrequencyIndex) const;
     Q_INVOKABLE bool hasAnyPitchNow() const;
@@ -53,6 +55,8 @@ public:
 
     void setMetronomeEnabled(bool metronomeEnabled) override;
 
+    QString getArtistName() const;
+    QString getSongTitle() const;
 signals:
     void complete();
     void sourceChanged(const QString& newSource);
