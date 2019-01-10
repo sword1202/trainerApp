@@ -82,6 +82,8 @@ class WorkspaceDrawer : public WorkspaceController {
     Drawer::Image* instrumentalTrackButtonImage = nullptr;
     Drawer::Image* pianoTrackButtonImage = nullptr;
 
+    std::atomic_bool drawTracks;
+
     void iterateHorizontalIntervals(const std::function<void(float x, bool isBeat)>& func) const;
 
     void drawHorizontalLine(float y, const Color& color) const;
@@ -207,6 +209,8 @@ public:
     void setInstrumentalTrackButtonImage(Drawer::Image *instrumentalTrackButtonImage);
 
     void setPianoTrackButtonImage(Drawer::Image *pianoTrackButtonImage);
+
+    void setDrawTracks(bool value) override;
 };
 
 

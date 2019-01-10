@@ -158,8 +158,10 @@ void WorkspaceDrawer::draw() {
     drawHorizontalLine(YARD_STICK_HEIGHT + 0.5f, borderLineColor);
     drawer->translate(PIANO_WIDTH, 0);
 
-    drawPianoTrack();
-    drawInstrumentalTrack();
+    if (drawTracks) {
+        drawPianoTrack();
+        drawInstrumentalTrack();
+    }
     drawFirstPlayHead();
     drawSecondPlayHead();
 
@@ -605,6 +607,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, const std::function<void()>& on
         firstPlayHeadPosition(0),
         secondPlayHeadPosition(0),
         playbackBounds(PlaybackBounds()),
+        drawTracks(true),
         onUpdateRequested(onUpdateRequested) {
     CHECK_IF_RENDER_THREAD;
     setGridColor({0x8B, 0x89, 0xB6, 0x33});
@@ -816,4 +819,8 @@ void WorkspaceDrawer::setInstrumentalTrackButtonImage(Drawer::Image *instrumenta
 
 void WorkspaceDrawer::setPianoTrackButtonImage(Drawer::Image *pianoTrackButtonImage) {
     this->pianoTrackButtonImage = pianoTrackButtonImage;
+}
+
+void WorkspaceDrawer::setDrawTracks(bool value) {
+    drawTracks = value;
 }

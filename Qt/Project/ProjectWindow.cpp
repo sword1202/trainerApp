@@ -212,6 +212,10 @@ void ProjectWindow::setShowLyrics(bool value) {
     lyricsWidget->setVisible(value);
 }
 
+void ProjectWindow::setShowTracks(bool value) {
+    workspaceWidget->setShowTracks(value);
+}
+
 void ProjectWindow::updateVerticalScrollBarValues() {
     WorkspaceZoomController* zoomController = MainController::instance()->getZoomController();
     float summarizedWorkspaceGridHeight = zoomController->getSummarizedWorkspaceGridHeight();

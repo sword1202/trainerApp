@@ -23,7 +23,7 @@ class ProjectWindow : public BaseMainWindow
     MetalWorkspaceWidget *workspaceWidget;
     QMacNativeWidget* verticalScrollBarNativeWrap;
 #else
-    QWidget *workspaceWidget;
+    OpenGLWorkspaceWidget *workspaceWidget;
 #endif
 
     QQuickItem *headerWithSubheader;
@@ -43,6 +43,7 @@ public:
     Q_INVOKABLE void onOutputVolumeChanged(float value);
     Q_INVOKABLE void onRecordingVolumeChanged(float value);
     Q_INVOKABLE void setShowLyrics(bool value);
+    Q_INVOKABLE void setShowTracks(bool value);
 
 public slots:
     void onFileOpen();

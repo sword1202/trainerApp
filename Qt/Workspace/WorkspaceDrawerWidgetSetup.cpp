@@ -17,9 +17,7 @@ using std::cerr;
 using std::endl;
 using namespace CppUtils;
 
-WorkspaceDrawerWidgetSetup::WorkspaceDrawerWidgetSetup() {
-
-}
+WorkspaceDrawerWidgetSetup::WorkspaceDrawerWidgetSetup() = default;
 
 Drawer::Image *WorkspaceDrawerWidgetSetup::createImageFromSvg(const char* url, double width, double height,
         Drawer *drawer, QWidget *widget) {
@@ -71,6 +69,7 @@ void WorkspaceDrawerWidgetSetup::setupWorkspaceDrawer(QWidget* widget, Drawer* d
         onRequestUpdate(widget);
     });
     initImages(drawer, widget);
+    workspaceDrawer->setDrawTracks(showTracks);
 
     MainController::instance()->setWorkspaceController(workspaceDrawer);
     if (useUpdateLoop) {
@@ -115,4 +114,11 @@ void WorkspaceDrawerWidgetSetup::onMouseClick(float x) {
 
 void WorkspaceDrawerWidgetSetup::onRequestUpdate(QWidget* widget) {
     widget->repaint();
+}
+
+void WorkspaceDrawerWidgetSetup::setShowTracks(bool value) {
+    showTracks = value;
+    if (workspaceDrawer) {
+        workspaceDrawer->setDrawTracks(value);
+    }
 }

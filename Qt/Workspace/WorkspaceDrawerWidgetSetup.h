@@ -9,6 +9,7 @@ class WorkspaceDrawerWidgetSetup
 {
     Drawer::Image* createImageFromSvg(const char* url, double width, double height, Drawer *drawer, QWidget *widget);
     void initImages(Drawer *drawer, QWidget *widget);
+    bool showTracks = false;
 protected:
     WorkspaceDrawer* workspaceDrawer = nullptr;
     WorkspaceDrawerWidgetSetup();
@@ -17,7 +18,7 @@ protected:
 
 public:
     virtual ~WorkspaceDrawerWidgetSetup();
-
+    void setShowTracks(bool value);
 protected:
     virtual void onMouseMove(float x);
     virtual void onMouseClick(float x);

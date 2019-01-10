@@ -37,6 +37,7 @@ public:
     virtual float getPlayHeadXPosition(int playHeadIndex) = 0;
     virtual void setRecording(bool recording) = 0;
     virtual void setInstrumentalTrackSamples(const std::vector<short> &instrumentalTrackSamples) = 0;
+    virtual void setDrawTracks(bool value) = 0;
     virtual ~WorkspaceController() = default;
 };
 

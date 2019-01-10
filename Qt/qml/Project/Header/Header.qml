@@ -40,6 +40,10 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: lyricsShowButton.right
         anchors.leftMargin: 4
+
+        onOnChanged: {
+            self.setShowTracks(on)
+        }
     }
 
     FeaturesToggleButton {
