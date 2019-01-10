@@ -6,7 +6,7 @@
 #include <QByteArray>
 #include <QIcon>
 #include "QDrawer.h"
-#include "TextImagesFactory.h"
+#include "QtDrawerTextImagesFactory.h"
 #include <QDebug>
 #include <QThread>
 #include <QApplication>
@@ -60,7 +60,7 @@ void WorkspaceDrawerWidgetSetup::initImages(Drawer *drawer, QWidget *widget) {
 }
 
 void WorkspaceDrawerWidgetSetup::setupWorkspaceDrawer(QWidget* widget, Drawer* drawer, bool useUpdateLoop) {
-    auto* factory = new TextImagesFactory();
+    auto* factory = new QtDrawerTextImagesFactory();
     factory->load(drawer, widget->devicePixelRatio());
     drawer->setTextImagesFactory(factory);
     drawer->setTextDrawStrategy(Drawer::DRAW_USING_PRE_BUILD_IMAGES);

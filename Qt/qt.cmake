@@ -21,7 +21,7 @@ set(qtSources
         Welcome/WelcomeWindow.cpp
         Workspace/WorkspaceDrawerWidgetSetup.cpp
         Utils/QtUtils.cpp
-        Workspace/TextImagesFactory.cpp
+        Workspace/QtDrawerTextImagesFactory.cpp
         Utils/BaseQmlWidget.cpp
         Utils/BaseQmlWidget.h
         App/VxAppUtils.cpp

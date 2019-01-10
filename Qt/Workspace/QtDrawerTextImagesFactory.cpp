@@ -2,7 +2,7 @@
 // Created by Semyon Tikhonenko on 10/6/18.
 //
 
-#include "TextImagesFactory.h"
+#include "QtDrawerTextImagesFactory.h"
 #include "WorkspaceDrawer.h"
 #include "PianoDrawer.h"
 #include <QString>
@@ -14,7 +14,7 @@ constexpr const char* path = ":qml/sharedimages/text/";
 
 using std::cerr;
 
-void TextImagesFactory::addImage(Drawer* drawer, int devicePixelRatio, int fontSize,
+void QtDrawerTextImagesFactory::addImage(Drawer* drawer, int devicePixelRatio, int fontSize,
         char character, bool useCharacterCode) {
     QString fileName = path + QString::number(fontSize * devicePixelRatio) + "_";
     if (!useCharacterCode) {
@@ -37,7 +37,7 @@ void TextImagesFactory::addImage(Drawer* drawer, int devicePixelRatio, int fontS
     DrawerTextImagesFactory::addImage(data);
 }
 
-void TextImagesFactory::load(Drawer* drawer, int devicePixelRatio) {
+void QtDrawerTextImagesFactory::load(Drawer* drawer, int devicePixelRatio) {
     if (devicePixelRatio < 1) {
         devicePixelRatio = 1;
         cerr<<"Strange device pixel ratio passed "<<devicePixelRatio;

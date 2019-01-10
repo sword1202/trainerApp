@@ -143,8 +143,8 @@ private:
 };
 
 struct DrawerTextImagesFactoryCharacterData {
-    char character;
-    int fontSize;
+    char character = '\0';
+    int fontSize = -1;
     Drawer::Image* image = nullptr;
 
     bool operator==(const DrawerTextImagesFactoryCharacterData &rhs) const;
