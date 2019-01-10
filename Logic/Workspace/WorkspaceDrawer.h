@@ -56,6 +56,7 @@ class WorkspaceDrawer : public WorkspaceController {
     Color trackButtonColor;
     Color pianoTrackColor;
     Color pianoTrackShadowColor;
+    Color pianoTrackPitchesColor;
 
     float width = -1;
     float height = -1;
