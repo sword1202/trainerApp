@@ -53,6 +53,7 @@ class WorkspaceDrawer : public WorkspaceController {
     Color boundsColor;
     Color playHeadColor;
     Color instrumentalTrackColor;
+    Color trackButtonColor;
 
     float width = -1;
     float height = -1;
@@ -75,6 +76,7 @@ class WorkspaceDrawer : public WorkspaceController {
 
     std::vector<short> instrumentalTrackSamples;
     Drawer::Image* instrumentalTrackImage = nullptr;
+    Drawer::Image* instrumentalTrackButtonImage = nullptr;
 
     void iterateHorizontalIntervals(const std::function<void(float x, bool isBeat)>& func) const;
 
@@ -93,6 +95,7 @@ class WorkspaceDrawer : public WorkspaceController {
     void drawFirstPlayHead();
     void drawSecondPlayHead();
     void drawInstrumentalTrack();
+    void drawInstrumentalTrackButton();
 
     double getSingingPitchGraphDuration() const;
     double getIntervalDuration() const;
@@ -118,6 +121,8 @@ public:
     static constexpr float YARD_STICK_HEIGHT = CLOCK_HEIGHT  + PLAYHEAD_TRIANGLE_HEIGHT / 2;
     static constexpr int YARD_STICK_FONT_SIZE = 11;
     static constexpr int CLOCK_FONT_SIZE = 11;
+    static constexpr float INSTRUMENTAL_TRACK_BUTTON_HEIGHT = 17.f;
+    static constexpr float INSTRUMENTAL_TRACK_BUTTON_WIDTH = 108.f;
 
     WorkspaceDrawer(Drawer *drawer, const std::function<void()>& onUpdateRequested);
     ~WorkspaceDrawer();
@@ -195,6 +200,7 @@ public:
 
     void generateInstrumentalTrackSamplesImage(float width);
     void setInstrumentalTrackSamples(const std::vector<short> &instrumentalTrackSamples) override;
+    void setInstrumentalTrackButtonImage(Drawer::Image *instrumentalTrackButtonImage);
 };
 
 

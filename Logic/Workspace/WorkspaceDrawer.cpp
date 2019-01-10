@@ -38,8 +38,9 @@ constexpr float PLAYBACK_BOUNDS_HEIGHT = 15.75;
 static const int PITCH_RADIUS = 3;
 constexpr float PLAYBACK_BOUNDS_ROUND_RECT_RADIUS = 1.5f;
 constexpr int INSTRUMENTAL_TRACK_HEIGHT = 24;
-constexpr int MINIMUM_TRACK_HEIGHT = 4;
+constexpr int MINIMUM_INSTRUMENTAL_TRACK_HEIGHT = 4;
 constexpr float INSTRUMENTAL_TRACK_BOTTOM_MARGIN = 14.f;
+constexpr float INSTRUMENTAL_TRACK_BUTTON_LEFT = 19.f;
 
 constexpr int YARD_STICK_FONT_WEIGHT = 1;
 static const char* FONT_FAMILY = "Lato";
@@ -62,7 +63,7 @@ void WorkspaceDrawer::resize(float width, float height, float devicePixelRatio) 
     this->width = width;
     this->height = height;
 
-    generateInstrumentalTrackSamplesImage(width);
+    generateInstrumentalTrackSamplesImage(width - PIANO_WIDTH);
 }
 
 void WorkspaceDrawer::generateInstrumentalTrackSamplesImage(float width) {
@@ -86,7 +87,7 @@ void WorkspaceDrawer::generateInstrumentalTrackSamplesImage(float width) {
         int middle = bitmapHeight / 2;
         int value = Math::SelectValueFromRangeProjectedInRange<int>(resizedSamples[x],
                                                                     0, std::numeric_limits<short>::max(),
-                                                                    MINIMUM_TRACK_HEIGHT, middle);
+                                                                    MINIMUM_INSTRUMENTAL_TRACK_HEIGHT, middle);
 
         for (int y = middle - value; y < middle + value; ++y) {
             int offset = abs(y - middle);
@@ -290,7 +291,18 @@ void WorkspaceDrawer::drawInstrumentalTrack() {
     if (instrumentalTrackImage) {
         drawer->drawImage(0, height - INSTRUMENTAL_TRACK_BOTTOM_MARGIN - INSTRUMENTAL_TRACK_HEIGHT,
                           instrumentalTrackImage);
+        drawInstrumentalTrackButton();
     }
+}
+
+void WorkspaceDrawer::drawInstrumentalTrackButton() {
+    assert(instrumentalTrackButtonImage != nullptr);
+    float trackMiddle = height - INSTRUMENTAL_TRACK_BOTTOM_MARGIN - INSTRUMENTAL_TRACK_HEIGHT / 2.f;
+    float y = trackMiddle - INSTRUMENTAL_TRACK_BUTTON_HEIGHT / 2;
+    drawer->drawImage(INSTRUMENTAL_TRACK_BUTTON_LEFT, y,
+            INSTRUMENTAL_TRACK_BUTTON_WIDTH,
+            INSTRUMENTAL_TRACK_BUTTON_HEIGHT,
+            instrumentalTrackButtonImage);
 }
 
 float WorkspaceDrawer::getWorkspaceSeek() const {
@@ -548,6 +560,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, const std::function<void()>& on
     boundsColor = {0xC4, 0xCD, 0xFD, 0xFF};
     playHeadColor = {0x24, 0x23, 0x2D, 0xFF};
     instrumentalTrackColor = {0x97, 0x98, 0xB5, 0xFF};
+    trackButtonColor = {0x51, 0x4E, 0x64, 0xFF};
 
     pianoDrawer = new PianoDrawer(drawer);
     drawer->setTextFontFamily(FONT_FAMILY);
@@ -733,6 +746,10 @@ void WorkspaceDrawer::setRecording(bool recording) {
 void WorkspaceDrawer::setInstrumentalTrackSamples(const std::vector<short> &instrumentalTrackSamples) {
     this->instrumentalTrackSamples = instrumentalTrackSamples;
     if (width > 0 && height > 0 && devicePixelRatio > 0) {
-        generateInstrumentalTrackSamplesImage(width);
+        generateInstrumentalTrackSamplesImage(width - PIANO_WIDTH);
     }
+}
+
+void WorkspaceDrawer::setInstrumentalTrackButtonImage(Drawer::Image *instrumentalTrackButtonImage) {
+    this->instrumentalTrackButtonImage = instrumentalTrackButtonImage;
 }

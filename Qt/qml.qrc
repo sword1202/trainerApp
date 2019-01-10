@@ -23,7 +23,7 @@
         <file>qml/sharedimages/speaker.svg</file>
         <file>qml/sharedimages/track_piece.png</file>
         <file>qml/sharedimages/track_piece_small.png</file>
-        <file>qml/sharedimages/instrumental_track_button.svg</file>
+        <file>qml/sharedimages/instrumental_track_button.png</file>
         <file>qml/Project/Header/images/zoom_slider_triangle.svg</file>
         <file>qml/Project/Header/images/tonality_controller_left.svg</file>
         <file>qml/Project/Header/images/tonality_up.svg</file>

@@ -28,7 +28,7 @@ Drawer::Image *WorkspaceDrawerWidgetSetup::createImageFromSvg(const char* url, d
     QPixmap pixmap = icon.pixmap(qRound(width * ratio), qRound(height * ratio));
 
     QImage image = pixmap.toImage();
-    return drawer->createImage(image.constBits(), image.width(), image.height());;
+    return drawer->createImage(image.constBits(), image.width(), image.height());
 }
 
 static Drawer::Image* createImage(const QString& url, Drawer *drawer) {
@@ -50,6 +50,11 @@ void WorkspaceDrawerWidgetSetup::initImages(Drawer *drawer, QWidget *widget) {
     // Clock
     Drawer::Image* clockImage = createImage(":qml/sharedimages/clock.png", drawer);
     workspaceDrawer->setClockImage(clockImage);
+
+    // Instrumental track button
+    Drawer::Image* instrumentalTrackButtonImage = createImage(":qml/sharedimages/instrumental_track_button.png",
+            drawer);
+    workspaceDrawer->setInstrumentalTrackButtonImage(instrumentalTrackButtonImage);
 }
 
 void WorkspaceDrawerWidgetSetup::setupWorkspaceDrawer(QWidget* widget, Drawer* drawer, bool useUpdateLoop) {
