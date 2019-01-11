@@ -138,7 +138,7 @@ void WorkspaceDrawer::draw() {
     drawer->clear();
     drawer->beginFrame(width, height, devicePixelRatio);
 
-    summarizedGridHeight = std::max((float)summarizedGridHeight, getGridHeight());
+    summarizedGridHeight = std::max((float)summarizedGridHeight, getVisibleGridHeight());
 
     drawer->translate(PIANO_WIDTH, 0);
     drawer->translate(0, YARD_STICK_HEIGHT + 1);
@@ -187,7 +187,7 @@ float WorkspaceDrawer::getGridTranslation() const {
 }
 
 float WorkspaceDrawer::getMaximumGridTranslation() const {
-    return summarizedGridHeight - getGridHeight();
+    return summarizedGridHeight - getVisibleGridHeight();
 }
 
 float WorkspaceDrawer::getIntervalWidth() const {
@@ -249,7 +249,7 @@ void WorkspaceDrawer::drawHorizontalLine(float y, const Color& color) const {
 
 void WorkspaceDrawer::drawVerticalLine(float x, const WorkspaceDrawer::Color &color) const {
     drawer->beginPath();
-    drawer->moveTo(x * sizeMultiplier, -drawer->getTranslateY() + height - getGridHeight());
+    drawer->moveTo(x * sizeMultiplier, -drawer->getTranslateY() + height - getVisibleGridHeight());
     drawer->setStrokeWidth(sizeMultiplier);
     drawer->lineTo(x * sizeMultiplier, height * sizeMultiplier);
     drawer->setStrokeColor(color);
@@ -260,7 +260,7 @@ void WorkspaceDrawer::drawHorizontalGrid() const {
     int index = 1;
     float offset = fmod(verticalOffset, intervalHeight * Pitch::PITCHES_IN_OCTAVE);
     float gridTranslation = getGridTranslation();
-    float baseHeight = getMaximumGridTranslation() - gridTranslation + getGridHeight();
+    float baseHeight = getMaximumGridTranslation() - gridTranslation + getVisibleGridHeight();
     for (float y = baseHeight - intervalHeight - gridTranslation + offset;
          y > -offset - gridTranslation; y -= intervalHeight, index++) {
 
@@ -292,7 +292,7 @@ void WorkspaceDrawer::drawPitches() const {
     double timeBegin = workspaceSeek - getSingingPitchGraphDuration();
     double timeEnd = timeBegin + workspaceDuration;
 
-    float relativeHeight = getMaximumGridTranslation() - getGridTranslation() + getGridHeight();
+    float relativeHeight = getMaximumGridTranslation() - getGridTranslation() + getVisibleGridHeight();
     vxFile->iteratePitchesInTimeRange(timeBegin, timeEnd, [&] (const VxPitch& vxPitch) {
         double pitchTimeBegin = vxFile->ticksToSeconds(vxPitch.startTickNumber);
         double pitchDuration = vxFile->ticksToSeconds(vxPitch.ticksCount);
@@ -372,8 +372,17 @@ float WorkspaceDrawer::getWorkspaceDuration() const {
     return width / intervalWidth / intervalsPerSecond;
 }
 
-float WorkspaceDrawer::getGridHeight() const {
-    return getGridHeight(height);
+float WorkspaceDrawer::getVisibleGridHeight() const {
+    return getVisibleGridHeight(height);
+}
+
+float WorkspaceDrawer::getVisibleGridWidth() const {
+    return width - PIANO_WIDTH - 1;
+}
+
+float WorkspaceDrawer::getSummarizedGridWidth() const {
+    float intervalsCount = totalDurationInSeconds * intervalsPerSecond;
+    return intervalsCount * intervalWidth;
 }
 
 void WorkspaceDrawer::setVxFile(const VxFile* vxFile) {
@@ -425,7 +434,7 @@ void WorkspaceDrawer::drawPitchesGraph() {
     double x;
     double y;
 
-    float relativeHeight = getMaximumGridTranslation() - getGridTranslation() + getGridHeight();
+    float relativeHeight = getMaximumGridTranslation() - getGridTranslation() + getVisibleGridHeight();
     auto getXY = [&](double time, const Pitch& pitch) {
         x = (time - workspaceSeek + duration) / duration * pitchGraphWidth;
         float distanceFromFirstPitch = getDistanceFromFirstPitch(pitch);
@@ -659,6 +668,14 @@ void WorkspaceDrawer::setIntervalsPerSecond(double intervalsPerSecond) {
     this->intervalsPerSecond = intervalsPerSecond;
 }
 
+double WorkspaceDrawer::getTotalDurationInSeconds() const {
+    return totalDurationInSeconds;
+}
+
+void WorkspaceDrawer::setTotalDurationInSeconds(double totalDurationInSeconds) {
+    this->totalDurationInSeconds = totalDurationInSeconds;
+}
+
 void WorkspaceDrawer::setPitchesCollection(const PitchesCollection *pitchesCollection) {
     this->pitchesCollection = pitchesCollection;
 }
@@ -739,7 +756,7 @@ void WorkspaceDrawer::setVerticalScrollPosition(float verticalScrollPosition) {
     this->verticalScrollPosition = verticalScrollPosition;
 }
 
-float WorkspaceDrawer::getGridHeight(float summaryHeight) {
+float WorkspaceDrawer::getVisibleGridHeight(float summaryHeight) {
     return summaryHeight - YARD_STICK_HEIGHT - 1;
 }
 

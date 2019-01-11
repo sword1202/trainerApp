@@ -146,7 +146,7 @@
     <ClCompile Include="QmlCppBridge.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\PitchDetection\CppUtils\SynchronizedCallbacksQueue.cpp">
+    <ClCompile Include="..\PitchDetection\CppUtils\CallbacksQueue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\PitchDetection\CppUtils\System.cpp">
@@ -406,7 +406,7 @@
     <ClInclude Include="..\PitchDetection\CppUtils\StringUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\PitchDetection\CppUtils\SynchronizedCallbacksQueue.h">
+    <ClInclude Include="..\PitchDetection\CppUtils\CallbacksQueue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\PitchDetection\CppUtils\System.h">

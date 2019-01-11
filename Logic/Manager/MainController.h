@@ -14,6 +14,7 @@
 #include "WorkspaceZoomController.h"
 #include "PlaybackBounds.h"
 #include "PlaybackBoundsSelectionController.h"
+#include "CallbacksQueue.h"
 
 class MainController {
     AudioInputManager* audioInputManager = nullptr;
@@ -21,6 +22,7 @@ class MainController {
     WorkspaceZoomController* zoomController = nullptr;
     WorkspaceController* workspaceController = nullptr;
     PlaybackBoundsSelectionController* playbackBoundsSelectionController = nullptr;
+    CppUtils::CallbacksQueue workspaceControllerReadyCallbacksQueue;
 
     void updateZoom();
     void updateWorkspaceFirstPitch();
@@ -30,7 +32,6 @@ class MainController {
 
     void generateRecording(MvxFile* out);
 public:
-    typedef typename CppUtils::ListenersSet<float>::Listener WorkspaceHorizontalOffsetChangedListener;
 
     void init(AudioInputManager *pitchInputReader, MvxPlayer *mvxPlayer, WorkspaceZoomController *zoomController);
 
@@ -42,6 +43,8 @@ public:
 
     // Should be executed on a render thread, the same thread as workspace->draw is executed
     void setWorkspaceController(WorkspaceController* workspaceController);
+
+    void getWorkspaceController(const std::function<void(WorkspaceController*)>& callback);
 
     void saveRecordingIntoFile(const char* filePath);
 

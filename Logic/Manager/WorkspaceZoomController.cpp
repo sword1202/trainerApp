@@ -96,5 +96,5 @@ float WorkspaceZoomController::getPageSize() const {
 }
 
 void WorkspaceZoomController::onWorkspaceWidgetHeightChanged(float height) {
-    workspaceGridHeight = WorkspaceDrawer::getGridHeight(height);
+    workspaceGridHeight = WorkspaceDrawer::getVisibleGridHeight(height);
 }

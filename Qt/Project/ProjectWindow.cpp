@@ -20,6 +20,7 @@
 #include "SelectMicrophoneDialog.h"
 #include "App/AppSettings.h"
 #include <QScrollBar>
+#include <NotImplementedAssert.h>
 
 #include "App/VxAppUtils.h"
 #include "SingingResultDialog.h"
@@ -108,15 +109,12 @@ ProjectWindow::ProjectWindow() :
     mainLayout->addWidget(lyricsWidget);
     centralWidget->setLayout(mainLayout);
 
-	// Scrollbar
+	// Vertical scrollbar
     verticalScrollBar = new QScrollBar(IS_APPLE ? nullptr : centralWidget);
 #ifdef __APPLE__
     verticalScrollBarNativeWrap = workspaceWidget->addSubWidget(verticalScrollBar);
 #endif
     updateVerticalScrollBarValues();
-    MainController::instance()->getZoomController()->summarizedWorkspaceGridHeightChangedListeners.addListener([=] {
-        updateVerticalScrollBarValues();
-    });
     connect(verticalScrollBar, &QScrollBar::valueChanged, this, &ProjectWindow::onVerticalScrollBarValueChanged);
 
     setupMenus();
@@ -129,8 +127,27 @@ ProjectWindow::ProjectWindow() :
     }
 
     QtUtils::AddResizeListener(workspaceWidget, [=] (int, int) {
-        updateScrollBarHeightAndPosition(width());
+        updateScrollBarsSizeAndPosition(this->size());
     });
+
+    MainController::instance()->getWorkspaceController([this] (WorkspaceController* workspaceController) {
+        this->workspaceController = workspaceController;
+        setupHorizontalScrollBar();
+    });
+
+    MainController::instance()->getZoomController()->summarizedWorkspaceGridHeightChangedListeners.addListener([=] {
+        updateVerticalScrollBarValues();
+        updateHorizontalScrollBarValues();
+    });
+}
+
+void ProjectWindow::setupHorizontalScrollBar() {
+    horizontalScrollBar = new QScrollBar(Qt::Horizontal, IS_APPLE ? nullptr : centralWidget());
+#ifdef __APPLE__
+    horizontalScrollBarNativeWrap = workspaceWidget->addSubWidget(horizontalScrollBar);
+#endif
+    connect(horizontalScrollBar, &QScrollBar::valueChanged, this, &ProjectWindow::onHorizontalScrollBarValueChanged);
+    updateHorizontalScrollBarValues();
 }
 
 void ProjectWindow::onOutputVolumeChanged(float value) {
@@ -155,34 +172,53 @@ void ProjectWindow::onRecordingVolumeChanged(float value) {
 
 void ProjectWindow::resizeEvent(QResizeEvent *event) {
     QWidget::resizeEvent(event);
-    const int width = event->size().width();
-    updateScrollBarHeightAndPosition(width);
+    updateScrollBarsSizeAndPosition(event->size());
 }
 
-void ProjectWindow::updateScrollBarHeightAndPosition(int windowWidth) {
-    if (!verticalScrollBar) {
-        return;
-    }
-
-    int scrollBarHeight = workspaceWidget->height() - YARD_STICK_HEIGHT - 2;
+void ProjectWindow::updateScrollBarsSizeAndPosition(const QSize &windowSize) {
+    if (verticalScrollBar) {
+        int scrollBarHeight = workspaceWidget->height() - YARD_STICK_HEIGHT - 2;
 #ifdef __APPLE__
-    verticalScrollBarNativeWrap->setFixedHeight(scrollBarHeight);
+        verticalScrollBarNativeWrap->setFixedHeight(scrollBarHeight);
 #endif
-    verticalScrollBar->setFixedHeight(scrollBarHeight);
+        verticalScrollBar->setFixedHeight(scrollBarHeight);
 
-    int y;
-    if (!IS_APPLE) {
-        y = verticalScrollBar->mapToParent(workspaceWidget->pos()).y() + YARD_STICK_HEIGHT + 1;
-    } else {
-        y = YARD_STICK_HEIGHT + 2;
-    }
-    int x = windowWidth - verticalScrollBar->width();
+        int y;
+        if (!IS_APPLE) {
+            y = verticalScrollBar->mapToParent(workspaceWidget->pos()).y() + YARD_STICK_HEIGHT + 1;
+            NOT_IMPLEMENTED_ASSERT
+        } else {
+            y = YARD_STICK_HEIGHT + 2;
+        }
+        int x = windowSize.width() - verticalScrollBar->width();
 #ifdef __APPLE__
-    verticalScrollBarNativeWrap->move(x, y);
+        verticalScrollBarNativeWrap->move(x, y);
 #else
-    verticalScrollBar->move(x, y);
+        verticalScrollBar->move(x, y);
 #endif
-    updateVerticalScrollBarValues();
+        updateVerticalScrollBarValues();
+    }
+
+    if (horizontalScrollBar) {
+        int scrollBarWidth = workspaceWidget->width() - WorkspaceDrawer::PIANO_WIDTH - 1;
+#ifdef __APPLE__
+        horizontalScrollBarNativeWrap->setFixedWidth(scrollBarWidth);
+#endif
+        horizontalScrollBar->setFixedWidth(scrollBarWidth);
+        int x = WorkspaceDrawer::PIANO_WIDTH + 1;
+        int y;
+        if (IS_APPLE) {
+            y = workspaceWidget->height() - horizontalScrollBar->height();
+        } else {
+            NOT_IMPLEMENTED_ASSERT
+        }
+#ifdef __APPLE__
+        horizontalScrollBarNativeWrap->move(x, y);
+#else
+        horizontalScrollBar->move(x, y);
+#endif
+        updateHorizontalScrollBarValues();
+    }
 }
 
 void ProjectWindow::setupMenus() {
@@ -220,15 +256,8 @@ void ProjectWindow::updateVerticalScrollBarValues() {
     WorkspaceZoomController* zoomController = MainController::instance()->getZoomController();
     float summarizedWorkspaceGridHeight = zoomController->getSummarizedWorkspaceGridHeight();
     int pageStep = verticalScrollBar->height();
-    verticalScrollBar->setMinimum(0);
     int maximum = qRound(summarizedWorkspaceGridHeight - pageStep);
-    if (maximum <= 0) {
-        verticalScrollBar->setVisible(false);
-    } else {
-        verticalScrollBar->setVisible(true);
-        verticalScrollBar->setMaximum(maximum);
-        verticalScrollBar->setPageStep(pageStep);
-    }
+    updateScrollBarValues(verticalScrollBar, pageStep, maximum);
 }
 
 void ProjectWindow::onVerticalScrollBarValueChanged(int value) {
@@ -241,5 +270,30 @@ void ProjectWindow::wheelEvent(QWheelEvent *event) {
     QPoint delta = event->pixelDelta();
     int y = delta.y();
     verticalScrollBar->setValue(verticalScrollBar->value() - y);
+}
+
+void ProjectWindow::onHorizontalScrollBarValueChanged(int value) {
+    float position = float(value) / horizontalScrollBar->maximum();
+}
+
+void ProjectWindow::updateHorizontalScrollBarValues() {
+    if (!horizontalScrollBar) {
+        return;
+    }
+
+    int pageStep = qRound(workspaceController->getVisibleGridWidth());
+    int maximum = qRound(workspaceController->getSummarizedGridWidth()) - pageStep;
+    updateScrollBarValues(horizontalScrollBar, pageStep, maximum);
+}
+
+void ProjectWindow::updateScrollBarValues(QScrollBar* scrollBar, int pageStep, int maximum) {
+    if (maximum <= 0) {
+        scrollBar->setVisible(false);
+    } else {
+        scrollBar->setVisible(true);
+        scrollBar->setMinimum(0);
+        scrollBar->setMaximum(maximum);
+        scrollBar->setPageStep(pageStep);
+    }
 }
 

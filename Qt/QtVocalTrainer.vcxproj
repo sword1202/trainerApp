@@ -220,7 +220,7 @@
     <ClCompile Include="..\PitchDetection\PortAudioUtils.cpp" />
     <ClCompile Include="..\VocalTrainer\Drawers\QDrawer.cpp" />
     <ClCompile Include="QmlCppBridge.cpp" />
-    <ClCompile Include="..\PitchDetection\CppUtils\SynchronizedCallbacksQueue.cpp" />
+    <ClCompile Include="..\PitchDetection\CppUtils\CallbacksQueue.cpp" />
     <ClCompile Include="..\PitchDetection\CppUtils\System.cpp" />
     <ClCompile Include="..\PitchDetection\CppUtils\TimeUtils.cpp" />
     <ClCompile Include="..\VocalTrainer\Playback\VxFile.cpp" />
@@ -309,7 +309,7 @@
     <ClInclude Include="..\PitchDetection\CppUtils\StlDebugUtils.h" />
     <ClInclude Include="..\PitchDetection\CppUtils\Streams.h" />
     <ClInclude Include="..\PitchDetection\CppUtils\StringUtils.h" />
-    <ClInclude Include="..\PitchDetection\CppUtils\SynchronizedCallbacksQueue.h" />
+    <ClInclude Include="..\PitchDetection\CppUtils\CallbacksQueue.h" />
     <ClInclude Include="..\PitchDetection\CppUtils\System.h" />
     <ClInclude Include="..\PitchDetection\CppUtils\TimeUtils.h" />
     <ClInclude Include="..\VocalTrainer\Playback\VxFile.h" />

@@ -18,12 +18,15 @@ public:
     virtual void setIntervalHeight(float intervalHeight) = 0;
     virtual void setPitchesCollection(const PitchesCollection *pitchesCollection) = 0;
     virtual void setIntervalsPerSecond(double intervalsPerSecond) = 0;
+    virtual void setTotalDurationInSeconds(double totalDurationInSeconds) = 0;
     virtual bool isRunning() const = 0;
     virtual void setRunning(bool value) = 0;
     virtual double getIntervalsPerSecond() const = 0;
     virtual void setVerticalOffset(float verticalOffset) = 0;
     virtual void setHorizontalOffset(float horizontalOffset) = 0;
     virtual float getHorizontalOffset() const = 0;
+    virtual float getVisibleGridWidth() const = 0;
+    virtual float getSummarizedGridWidth() const = 0;
     virtual void setVxFile(const VxFile* vxFile) = 0;
     virtual void setFirstVisiblePitch(const Pitch &firstPitch) = 0;
     virtual void update() = 0;

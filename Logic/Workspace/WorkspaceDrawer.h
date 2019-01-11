@@ -31,7 +31,9 @@ class WorkspaceDrawer : public WorkspaceController {
     std::atomic<float> intervalHeight;
     std::atomic<float> verticalOffset;
     std::atomic<float> horizontalOffset;
+    // the same as beatsPerSecond
     std::atomic<double> intervalsPerSecond;
+    std::atomic<double> totalDurationInSeconds;
     std::atomic_bool running;
     std::atomic_int firstPitchIndex;
     std::atomic<float> summarizedGridHeight;
@@ -150,6 +152,9 @@ public:
     double getIntervalsPerSecond() const override;
     void setIntervalsPerSecond(double intervalsPerSecond) override;
 
+    double getTotalDurationInSeconds() const;
+    void setTotalDurationInSeconds(double totalDurationInSeconds) override;
+
     float getSummarizedGridHeight() const;
     void setSummarizedGridHeight(float summarizedGridHeight) override;
 
@@ -184,8 +189,10 @@ public:
 
     void update() override;
 
-    float getGridHeight() const;
-    static float getGridHeight(float workspaceHeight);
+    float getVisibleGridHeight() const;
+    float getVisibleGridWidth() const override;
+    float getSummarizedGridWidth() const override;
+    static float getVisibleGridHeight(float workspaceHeight);
 
     void setDetectedPitch(const Pitch &detectedPitch) override;
     void setPitchSequence(PlayingPitchSequence *pitchSequence) override;

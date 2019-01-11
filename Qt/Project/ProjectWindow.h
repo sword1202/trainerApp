@@ -22,6 +22,7 @@ class ProjectWindow : public BaseMainWindow
 #ifdef __APPLE__
     MetalWorkspaceWidget *workspaceWidget;
     QMacNativeWidget* verticalScrollBarNativeWrap;
+    QMacNativeWidget* horizontalScrollBarNativeWrap;
 #else
     OpenGLWorkspaceWidget *workspaceWidget;
 #endif
@@ -29,11 +30,17 @@ class ProjectWindow : public BaseMainWindow
     QQuickItem *headerWithSubheader;
     QQuickItem *header;
     QScrollBar *verticalScrollBar = nullptr;
+    QScrollBar *horizontalScrollBar = nullptr;
     QQuickWidget *lyricsWidget;
+    WorkspaceController* workspaceController = nullptr;
+
+    void updateScrollBarValues(QScrollBar* scrollBar, int pageStep, int maximum);
 protected:
     void resizeEvent(QResizeEvent *event) override;
-    void updateScrollBarHeightAndPosition(int windowWidth);
+    void updateScrollBarsSizeAndPosition(const QSize &windowSize);
     void updateVerticalScrollBarValues();
+    void updateHorizontalScrollBarValues();
+    void setupHorizontalScrollBar();
     void wheelEvent(QWheelEvent *event) override;
 public:
     ProjectWindow();
@@ -49,6 +56,7 @@ public slots:
     void onFileOpen();
     void onSelectMicrophone();
     void onVerticalScrollBarValueChanged(int value);
+    void onHorizontalScrollBarValueChanged(int value);
 };
 
 #endif // MAINWINDOW_H

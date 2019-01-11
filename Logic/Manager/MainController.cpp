@@ -101,9 +101,9 @@ MvxPlayer *MainController::getPlayer() const {
 
 void MainController::setWorkspaceController(WorkspaceController *workspaceController) {
     assert(!this->workspaceController);
-    this->workspaceController = workspaceController;
     workspaceController->setVxFile(mvxPlayer->getVxFile());
     workspaceController->setIntervalsPerSecond(mvxPlayer->getBeatsPerMinute() / 60.0);
+    workspaceController->setTotalDurationInSeconds(mvxPlayer->getDuration());
     workspaceController->setInstrumentalTrackSamples(
             this->mvxPlayer->getMvxFile().getInstrumentalPreviewSamples());
     workspaceController->setPitchSequence(mvxPlayer);
@@ -115,10 +115,10 @@ void MainController::setWorkspaceController(WorkspaceController *workspaceContro
         workspaceController->setPitchesCollection(audioInputManager->getRecordedPitches());
     }
 
-    updateZoom();
-    updateWorkspaceFirstPitch();
-
-    Executors::ExecuteOnMainThread([this] {
+    Executors::ExecuteOnMainThread([this, workspaceController] {
+        this->workspaceController = workspaceController;
+        updateZoom();
+        updateWorkspaceFirstPitch();
 
         this->workspaceController->setSummarizedGridHeight(zoomController->getSummarizedWorkspaceGridHeight());
         this->workspaceController->setVerticalScrollPosition(zoomController->getVerticalScrollPosition());
@@ -154,6 +154,8 @@ void MainController::setWorkspaceController(WorkspaceController *workspaceContro
         });
 
         playbackBoundsSelectionController = new PlaybackBoundsSelectionController(this->workspaceController, mvxPlayer);
+
+        workspaceControllerReadyCallbacksQueue.process();
     });
 }
 
@@ -203,4 +205,14 @@ void MainController::saveRecordingIntoFile(const char *filePath) {
     MvxFile mvxFile;
     generateRecording(&mvxFile);
     mvxFile.writeToFile(filePath);
+}
+
+void MainController::getWorkspaceController(const std::function<void(WorkspaceController *)> &callback) {
+    if (workspaceController) {
+        callback(workspaceController);
+    } else {
+        workspaceControllerReadyCallbacksQueue.post([=] {
+            callback(workspaceController);
+        });
+    }
 }
