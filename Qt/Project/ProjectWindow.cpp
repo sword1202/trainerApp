@@ -274,7 +274,9 @@ void ProjectWindow::wheelEvent(QWheelEvent *event) {
     QWidget::wheelEvent(event);
     QPoint delta = event->pixelDelta();
     int y = delta.y();
-    verticalScrollBar->setValue(verticalScrollBar->value() - y);
+    if (verticalScrollBar && verticalScrollBar->isVisible()) {
+        verticalScrollBar->setValue(verticalScrollBar->value() - y);
+    }
 }
 
 void ProjectWindow::onHorizontalScrollBarValueChanged(int value) {
