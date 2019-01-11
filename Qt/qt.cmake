@@ -16,7 +16,6 @@ set(qtSources
         QtBridge/QtMvxPlayer.cpp
         QtBridge/QtCppBridge.cpp
         QtBridge/QtPitch.cpp
-        QtBridge/QtWorkspaceZoomController.cpp
         qml.qrc
         Welcome/WelcomeWindow.cpp
         Workspace/WorkspaceDrawerWidgetSetup.cpp

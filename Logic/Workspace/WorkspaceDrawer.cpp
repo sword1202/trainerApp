@@ -53,6 +53,11 @@ constexpr float PIANO_TRACK_DISTANCE_BETWEEN_PITCHES = 1.f;
 constexpr float PIANO_TRACK_PITCH_RADIUS = 1.f;
 constexpr float PIANO_TRACK_BUTTON_WIDTH = 77.f;
 
+// Zoom
+constexpr float ZOOM_BASE_WIDTH = 1374.0;
+constexpr float ZOOM_FACTOR = 12.0f * 4; // number of beats in screen of BASE_WIDTH for zoom = 1.0
+constexpr float HORIZONTAL_TO_VERTICAL_INTERVAL_WIDTH_RELATION = 2.4117701323665077f;
+
 constexpr int YARD_STICK_FONT_WEIGHT = 1;
 static const char* FONT_FAMILY = "Lato";
 
@@ -138,8 +143,6 @@ void WorkspaceDrawer::draw() {
     drawer->clear();
     drawer->beginFrame(width, height, devicePixelRatio);
 
-    summarizedGridHeight = std::max((float)summarizedGridHeight, getVisibleGridHeight());
-
     drawer->translate(PIANO_WIDTH, 0);
     drawer->translate(0, YARD_STICK_HEIGHT + 1);
     drawer->translate(0, getGridTranslation());
@@ -168,7 +171,8 @@ void WorkspaceDrawer::draw() {
     drawer->translateTo(0, 0);
     drawer->setFillColor(Color::white());
     drawer->fillRect(0, 0, PIANO_WIDTH, height);
-    pianoDrawer->draw(PIANO_WIDTH, height + getMaximumGridTranslation() - getGridTranslation(), devicePixelRatio);
+    pianoDrawer->draw(PIANO_WIDTH, height - bottomStripeHeight + getMaximumGridTranslation() - getGridTranslation(),
+            devicePixelRatio);
     drawer->setFillColor(Color::white());
     drawer->fillRect(0, 0, PIANO_WIDTH, YARD_STICK_HEIGHT);
     drawer->setStrokeColor(borderLineColor);
@@ -187,40 +191,11 @@ float WorkspaceDrawer::getGridTranslation() const {
 }
 
 float WorkspaceDrawer::getMaximumGridTranslation() const {
-    return summarizedGridHeight - getVisibleGridHeight();
-}
-
-float WorkspaceDrawer::getIntervalWidth() const {
-    return intervalWidth;
-}
-
-void WorkspaceDrawer::setIntervalWidth(float intervalWidth) {
-    this->intervalWidth = intervalWidth;
-}
-
-float WorkspaceDrawer::getIntervalHeight() const {
-    return intervalHeight;
-}
-
-void WorkspaceDrawer::setIntervalHeight(float intervalHeight) {
-    this->intervalHeight = intervalHeight;
-    pianoDrawer->setIntervalHeight(intervalHeight);
-}
-
-float WorkspaceDrawer::getVerticalOffset() const {
-    return verticalOffset;
-}
-
-void WorkspaceDrawer::setVerticalOffset(float verticalOffset) {
-    this->verticalOffset = verticalOffset;
+    return getSummarizedGridHeight() - getVisibleGridHeight();
 }
 
 float WorkspaceDrawer::getHorizontalOffset() const {
     return horizontalOffset;
-}
-
-void WorkspaceDrawer::setHorizontalOffset(float horizontalOffset) {
-    this->horizontalOffset = horizontalOffset;
 }
 
 void WorkspaceDrawer::iterateHorizontalIntervals(const std::function<void(float x, bool isBeat)> &func) const {
@@ -487,7 +462,7 @@ void WorkspaceDrawer::drawYardStick() const {
 
     drawer->translate(0, YARD_STICK_Y_OFFSET);
     drawer->setFillColor(yardStickDotAndTextColor);
-    int startTactIndex = (int)(getHorizontalOffset() / (getIntervalWidth() * BEATS_IN_TACT));
+    int startTactIndex = (int)(getHorizontalOffset() / (intervalWidth * BEATS_IN_TACT));
 
     iterateHorizontalIntervals([&](float x, bool isBeat) {
         if (isBeat) {
@@ -607,7 +582,6 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, const std::function<void()>& on
         sizeMultiplier(1),
         intervalsPerSecond(0),
         verticalScrollPosition(0),
-        summarizedGridHeight(0),
         running(false),
         firstPitchIndex(-1),
         frameTime(0),
@@ -617,6 +591,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, const std::function<void()>& on
         secondPlayHeadPosition(0),
         playbackBounds(PlaybackBounds()),
         drawTracks(true),
+        bottomStripeHeight(0),
         onUpdateRequested(onUpdateRequested) {
     CHECK_IF_RENDER_THREAD;
     setGridColor({0x8B, 0x89, 0xB6, 0x33});
@@ -639,6 +614,11 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, const std::function<void()>& on
 
     pitchesTimes.reserve(5000);
     pitchesFrequencies.reserve(5000);
+
+    setFirstVisiblePitch(Pitch("C2"));
+    lastPitchIndex = Pitch("B6").getPerfectFrequencyIndex();
+
+    setZoom(MIN_ZOOM);
 }
 
 WorkspaceDrawer::~WorkspaceDrawer() {
@@ -741,11 +721,7 @@ Pitch WorkspaceDrawer::getFirstPitch() const {
 }
 
 float WorkspaceDrawer::getSummarizedGridHeight() const {
-    return summarizedGridHeight;
-}
-
-void WorkspaceDrawer::setSummarizedGridHeight(float summarizedGridHeight) {
-    this->summarizedGridHeight = summarizedGridHeight;
+    return (lastPitchIndex - firstPitchIndex + 1) * intervalHeight;
 }
 
 float WorkspaceDrawer::getVerticalScrollPosition() const {
@@ -840,4 +816,31 @@ void WorkspaceDrawer::setPianoTrackButtonImage(Drawer::Image *pianoTrackButtonIm
 
 void WorkspaceDrawer::setDrawTracks(bool value) {
     drawTracks = value;
+}
+
+void WorkspaceDrawer::setBottomStripeHeight(float bottomStripeHeight) {
+    this->bottomStripeHeight = bottomStripeHeight;
+}
+
+float WorkspaceDrawer::getZoom() const {
+    return zoom;
+}
+
+void WorkspaceDrawer::setZoom(float zoom) {
+    assert(zoom >= MIN_ZOOM && zoom <= MAX_ZOOM);
+    float workspaceSeek = getWorkspaceSeek();
+    this->zoom = zoom;
+    // Calculate intervalWidth and intervalHeight
+    int linesCount = (int)round(ZOOM_FACTOR / zoom);
+    int baseIntervalsCount = linesCount + 1;
+    intervalWidth = ZOOM_BASE_WIDTH / baseIntervalsCount;
+    intervalHeight = intervalWidth / HORIZONTAL_TO_VERTICAL_INTERVAL_WIDTH_RELATION;
+    pianoDrawer->setIntervalHeight(intervalHeight);
+    if (!isnan(workspaceSeek)) {
+        updateSeek(workspaceSeek);
+    }
+}
+
+void WorkspaceDrawer::updateSeek(float seek) {
+    horizontalOffset = intervalsPerSecond * seek * intervalsPerSecond;
 }

@@ -27,10 +27,6 @@ QtPitch QtCppBridge::whitePitch(int whitePitchIndex, int octaveIndex) {
     return QtPitch(Pitch::whitePitchPerfectFrequencyIndex(whitePitchIndex, octaveIndex));
 }
 
-QtWorkspaceZoomController *QtCppBridge::getZoomController() const {
-    return static_cast<QtWorkspaceZoomController*>(VxApp::instance()->getZoomController());
-}
-
 QtMvxPlayer *QtCppBridge::getPlayer() const {
     return static_cast<QtMvxPlayer*>(VxApp::instance()->getPlayer());
 }

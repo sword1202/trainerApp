@@ -11,7 +11,6 @@
 #include "AudioInputManager.h"
 #include "MvxPlayer.h"
 #include "WorkspaceController.h"
-#include "WorkspaceZoomController.h"
 #include "PlaybackBounds.h"
 #include "PlaybackBoundsSelectionController.h"
 #include "CallbacksQueue.h"
@@ -19,13 +18,9 @@
 class MainController {
     AudioInputManager* audioInputManager = nullptr;
     MvxPlayer* mvxPlayer = nullptr;
-    WorkspaceZoomController* zoomController = nullptr;
     WorkspaceController* workspaceController = nullptr;
     PlaybackBoundsSelectionController* playbackBoundsSelectionController = nullptr;
     CppUtils::CallbacksQueue workspaceControllerReadyCallbacksQueue;
-
-    void updateZoom();
-    void updateWorkspaceFirstPitch();
 
     void onStopPlaybackRequested();
     void updateSeek(double seek);
@@ -33,12 +28,11 @@ class MainController {
     void generateRecording(MvxFile* out);
 public:
 
-    void init(AudioInputManager *pitchInputReader, MvxPlayer *mvxPlayer, WorkspaceZoomController *zoomController);
+    void init(AudioInputManager *pitchInputReader, MvxPlayer *mvxPlayer);
 
     AudioInputManager *getAudioInputManager() const;
 
     MvxPlayer *getPlayer() const;
-    WorkspaceZoomController *getZoomController() const;
     PlaybackBoundsSelectionController* getPlaybackBoundsSelectionController() const;
 
     // Should be executed on a render thread, the same thread as workspace->draw is executed

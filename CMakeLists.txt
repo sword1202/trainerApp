@@ -34,7 +34,7 @@ set(tests ${playbackTestSources}
         VocalTrainerTests/MidiFileTest.cpp
         VocalTrainerTests/VxFileTests.cpp
         VocalTrainerTests/LoadTsf.cpp
-        VocalTrainerTests/MvxFileTests.cpp)
+        )
 
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5QuickWidgets REQUIRED)

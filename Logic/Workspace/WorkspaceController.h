@@ -14,25 +14,22 @@
 
 class WorkspaceController {
 public:
-    virtual void setIntervalWidth(float intervalWidth) = 0;
-    virtual void setIntervalHeight(float intervalHeight) = 0;
     virtual void setPitchesCollection(const PitchesCollection *pitchesCollection) = 0;
     virtual void setIntervalsPerSecond(double intervalsPerSecond) = 0;
     virtual void setTotalDurationInSeconds(double totalDurationInSeconds) = 0;
     virtual bool isRunning() const = 0;
     virtual void setRunning(bool value) = 0;
     virtual double getIntervalsPerSecond() const = 0;
-    virtual void setVerticalOffset(float verticalOffset) = 0;
-    virtual void setHorizontalOffset(float horizontalOffset) = 0;
+    virtual void updateSeek(float seek) = 0;
     virtual float getHorizontalOffset() const = 0;
     virtual float getVisibleGridWidth() const = 0;
     virtual float getSummarizedGridWidth() const = 0;
+    virtual float getSummarizedGridHeight() const = 0;
     virtual void setVxFile(const VxFile* vxFile) = 0;
     virtual void setFirstVisiblePitch(const Pitch &firstPitch) = 0;
     virtual void update() = 0;
     virtual void setDetectedPitch(const Pitch &detectedPitch) = 0;
     virtual void setPitchSequence(PlayingPitchSequence *pitchSequence) = 0;
-    virtual void setSummarizedGridHeight(float summarizedGridHeight) = 0;
     virtual void setVerticalScrollPosition(float verticalScrollPosition) = 0;
     virtual void setPlaybackBounds(const PlaybackBounds &playbackBounds) = 0;
     virtual float getSeekFromXPositionOnWorkspace(float x) = 0;
@@ -41,6 +38,8 @@ public:
     virtual void setRecording(bool recording) = 0;
     virtual void setInstrumentalTrackSamples(const std::vector<short> &instrumentalTrackSamples) = 0;
     virtual void setDrawTracks(bool value) = 0;
+    virtual float getZoom() const = 0;
+    virtual void setZoom(float zoom) = 0;
     virtual ~WorkspaceController() = default;
 };
 

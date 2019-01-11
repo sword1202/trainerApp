@@ -25,10 +25,9 @@ void MainController::initInstance(MainController* inst) {
     _instance = inst;
 }
 
-void MainController::init(AudioInputManager *pitchInputReader, MvxPlayer *mvxPlayer, WorkspaceZoomController *zoomController) {
+void MainController::init(AudioInputManager *pitchInputReader, MvxPlayer *mvxPlayer) {
     this->audioInputManager = pitchInputReader;
     this->mvxPlayer = mvxPlayer;
-    this->zoomController = zoomController;
 
     workspaceController = nullptr;
 
@@ -85,10 +84,6 @@ AudioInputManager *MainController::getAudioInputManager() const {
     return audioInputManager;
 }
 
-WorkspaceZoomController *MainController::getZoomController() const {
-    return zoomController;
-}
-
 MainController::~MainController() {
     delete mvxPlayer;
     delete audioInputManager;
@@ -117,11 +112,6 @@ void MainController::setWorkspaceController(WorkspaceController *workspaceContro
 
     Executors::ExecuteOnMainThread([this, workspaceController] {
         this->workspaceController = workspaceController;
-        updateZoom();
-        updateWorkspaceFirstPitch();
-
-        this->workspaceController->setSummarizedGridHeight(zoomController->getSummarizedWorkspaceGridHeight());
-        this->workspaceController->setVerticalScrollPosition(zoomController->getVerticalScrollPosition());
 
         mvxPlayer->seekChangedFromUserListeners.addListener([=] (double seek) {
             updateSeek(seek);
@@ -136,45 +126,10 @@ void MainController::setWorkspaceController(WorkspaceController *workspaceContro
         });
         this->workspaceController->setPlaybackBounds(mvxPlayer->getBounds());
 
-        zoomController->summarizedWorkspaceGridHeightChangedListeners.addListener([=] {
-            this->workspaceController->setSummarizedGridHeight(zoomController->getSummarizedWorkspaceGridHeight());
-        });
-
-        zoomController->firstPitchChangedListeners.addListener([this](const Pitch&) {
-            updateWorkspaceFirstPitch();
-        });
-
-        zoomController->verticalScrollPositionChangedListeners.addListener([=] (float value) {
-            this->workspaceController->setVerticalScrollPosition(value);
-            this->workspaceController->update();
-        });
-
-        zoomController->zoomChangedListeners.addListener([this] (float zoom) {
-            updateZoom();
-        });
-
         playbackBoundsSelectionController = new PlaybackBoundsSelectionController(this->workspaceController, mvxPlayer);
 
         workspaceControllerReadyCallbacksQueue.process();
     });
-}
-
-void MainController::updateSeek(double seek) {
-    double intervalsPerSecond = workspaceController->getIntervalsPerSecond();
-    float intervalWidth = zoomController->getIntervalWidth();
-    double horizontalOffset = intervalsPerSecond * seek * intervalWidth;
-    workspaceController->setHorizontalOffset((float)horizontalOffset);
-    workspaceController->update();
-}
-
-void MainController::updateZoom() {
-    workspaceController->setIntervalWidth(zoomController->getIntervalWidth());
-    workspaceController->setIntervalHeight(zoomController->getIntervalHeight());
-    updateSeek(mvxPlayer->getSeek());
-}
-
-void MainController::updateWorkspaceFirstPitch() {
-    workspaceController->setFirstVisiblePitch(zoomController->getFirstPitch());
 }
 
 PlaybackBoundsSelectionController *MainController::getPlaybackBoundsSelectionController() const {
@@ -215,4 +170,9 @@ void MainController::getWorkspaceController(const std::function<void(WorkspaceCo
             callback(workspaceController);
         });
     }
+}
+
+void MainController::updateSeek(double seek) {
+    workspaceController->updateSeek(float(seek));
+    workspaceController->update();
 }

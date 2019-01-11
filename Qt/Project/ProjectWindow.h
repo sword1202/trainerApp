@@ -40,7 +40,8 @@ protected:
     void updateScrollBarsSizeAndPosition(const QSize &windowSize);
     void updateVerticalScrollBarValues();
     void updateHorizontalScrollBarValues();
-    void setupHorizontalScrollBar();
+
+    void setupScrollBars();
     void wheelEvent(QWheelEvent *event) override;
 public:
     ProjectWindow();
@@ -52,11 +53,19 @@ public:
     Q_INVOKABLE void setShowLyrics(bool value);
     Q_INVOKABLE void setShowTracks(bool value);
 
+    Q_PROPERTY(qreal zoom READ getZoom() WRITE setZoom() NOTIFY zoomChanged())
+
+    float getZoom() const;
+    void setZoom(float zoom);
+
 public slots:
     void onFileOpen();
     void onSelectMicrophone();
     void onVerticalScrollBarValueChanged(int value);
     void onHorizontalScrollBarValueChanged(int value);
+
+signals:
+    void zoomChanged();
 };
 
 #endif // MAINWINDOW_H

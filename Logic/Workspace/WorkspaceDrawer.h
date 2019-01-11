@@ -36,7 +36,7 @@ class WorkspaceDrawer : public WorkspaceController {
     std::atomic<double> totalDurationInSeconds;
     std::atomic_bool running;
     std::atomic_int firstPitchIndex;
-    std::atomic<float> summarizedGridHeight;
+    std::atomic_int lastPitchIndex;
     std::atomic<float> verticalScrollPosition;
 
     std::atomic<PlaybackBounds> playbackBounds;
@@ -85,6 +85,9 @@ class WorkspaceDrawer : public WorkspaceController {
     Drawer::Image* pianoTrackButtonImage = nullptr;
 
     std::atomic_bool drawTracks;
+    std::atomic<float> bottomStripeHeight;
+
+    std::atomic<float> zoom;
 
     void iterateHorizontalIntervals(const std::function<void(float x, bool isBeat)>& func) const;
 
@@ -131,6 +134,8 @@ public:
     static constexpr float YARD_STICK_HEIGHT = CLOCK_HEIGHT  + PLAYHEAD_TRIANGLE_HEIGHT / 2;
     static constexpr int YARD_STICK_FONT_SIZE = 11;
     static constexpr int CLOCK_FONT_SIZE = 11;
+    static constexpr float MIN_ZOOM = 1.0;
+    static constexpr float MAX_ZOOM = 2.0;
 
     WorkspaceDrawer(Drawer *drawer, const std::function<void()>& onUpdateRequested);
     ~WorkspaceDrawer();
@@ -140,14 +145,7 @@ public:
     void resize(float width, float height, float devicePixelRatio);
     void draw();
 
-    float getIntervalWidth() const;
-    void setIntervalWidth(float intervalWidth) override;
-    float getIntervalHeight() const;
-    void setIntervalHeight(float intervalHeight) override;
-    float getVerticalOffset() const;
-    void setVerticalOffset(float verticalOffset) override;
     float getHorizontalOffset() const override;
-    void setHorizontalOffset(float horizontalOffset) override;
 
     double getIntervalsPerSecond() const override;
     void setIntervalsPerSecond(double intervalsPerSecond) override;
@@ -155,8 +153,7 @@ public:
     double getTotalDurationInSeconds() const;
     void setTotalDurationInSeconds(double totalDurationInSeconds) override;
 
-    float getSummarizedGridHeight() const;
-    void setSummarizedGridHeight(float summarizedGridHeight) override;
+    float getSummarizedGridHeight() const override;
 
     float getVerticalScrollPosition() const;
     void setVerticalScrollPosition(float verticalScrollPosition) override;
@@ -218,6 +215,12 @@ public:
     void setPianoTrackButtonImage(Drawer::Image *pianoTrackButtonImage);
 
     void setDrawTracks(bool value) override;
+    void setBottomStripeHeight(float bottomStripeHeight);
+
+    float getZoom() const override;
+    void setZoom(float zoom) override;
+
+    void updateSeek(float seek) override;
 };
 
 
