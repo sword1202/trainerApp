@@ -260,7 +260,7 @@ void ProjectWindow::setShowTracks(bool value) {
 
 void ProjectWindow::updateVerticalScrollBarValues() {
     float summarizedWorkspaceGridHeight = workspaceController->getSummarizedGridHeight();
-    int pageStep = verticalScrollBar->height();
+    int pageStep = qRound(workspaceController->getVisibleGridHeight());
     int maximum = qRound(summarizedWorkspaceGridHeight - pageStep);
     updateScrollBarValues(verticalScrollBar, pageStep, maximum);
 }

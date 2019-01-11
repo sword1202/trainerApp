@@ -348,7 +348,7 @@ float WorkspaceDrawer::getWorkspaceDuration() const {
 }
 
 float WorkspaceDrawer::getVisibleGridHeight() const {
-    return getVisibleGridHeight(height);
+    return height - YARD_STICK_HEIGHT - 1 - bottomStripeHeight;
 }
 
 float WorkspaceDrawer::getVisibleGridWidth() const {
@@ -721,7 +721,8 @@ Pitch WorkspaceDrawer::getFirstPitch() const {
 }
 
 float WorkspaceDrawer::getSummarizedGridHeight() const {
-    return (lastPitchIndex - firstPitchIndex + 1) * intervalHeight;
+    return std::max((lastPitchIndex - firstPitchIndex + 1) * intervalHeight,
+            getVisibleGridHeight());
 }
 
 float WorkspaceDrawer::getVerticalScrollPosition() const {
@@ -730,10 +731,6 @@ float WorkspaceDrawer::getVerticalScrollPosition() const {
 
 void WorkspaceDrawer::setVerticalScrollPosition(float verticalScrollPosition) {
     this->verticalScrollPosition = verticalScrollPosition;
-}
-
-float WorkspaceDrawer::getVisibleGridHeight(float summaryHeight) {
-    return summaryHeight - YARD_STICK_HEIGHT - 1;
 }
 
 const PlaybackBounds &WorkspaceDrawer::getPlaybackBounds() const {

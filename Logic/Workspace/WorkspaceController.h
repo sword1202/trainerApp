@@ -23,6 +23,7 @@ public:
     virtual void updateSeek(float seek) = 0;
     virtual float getHorizontalOffset() const = 0;
     virtual float getVisibleGridWidth() const = 0;
+    virtual float getVisibleGridHeight() const = 0;
     virtual float getSummarizedGridWidth() const = 0;
     virtual float getSummarizedGridHeight() const = 0;
     virtual void setVxFile(const VxFile* vxFile) = 0;

@@ -186,10 +186,9 @@ public:
 
     void update() override;
 
-    float getVisibleGridHeight() const;
+    float getVisibleGridHeight() const override;
     float getVisibleGridWidth() const override;
     float getSummarizedGridWidth() const override;
-    static float getVisibleGridHeight(float workspaceHeight);
 
     void setDetectedPitch(const Pitch &detectedPitch) override;
     void setPitchSequence(PlayingPitchSequence *pitchSequence) override;
