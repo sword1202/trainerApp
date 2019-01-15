@@ -99,6 +99,15 @@ public:
 
     double getFirstPitchStartTime() const;
 
+    int getLowestPitchIndex() const;
+    int getHighestPitchIndex() const;
+
+    const VxPitch& getLowestVxPitch() const;
+    const VxPitch& getHighestVxPitch() const;
+
+    const Pitch& getLowestPitch() const;
+    const Pitch& getHighestPitch() const;
+
     VxFile cut(double start, double end);
 
     template<typename Function>

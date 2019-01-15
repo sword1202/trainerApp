@@ -313,3 +313,29 @@ VxFile VxFile::cut(double start, double end) {
 
     return VxFile(std::move(newPitches), distanceInTicksBetweenLastPitchEndAndTrackEnd, ticksPerSecond);
 }
+
+int VxFile::getLowestPitchIndex() const {
+    return lowestPitchIndex;
+}
+
+int VxFile::getHighestPitchIndex() const {
+    return highestPitchIndex;
+}
+
+const VxPitch& VxFile::getLowestVxPitch() const {
+    assert(lowestPitchIndex >= 0);
+    return pitches[lowestPitchIndex];
+}
+
+const VxPitch& VxFile::getHighestVxPitch() const {
+    assert(highestPitchIndex >= 0);
+    return pitches[highestPitchIndex];
+}
+
+const Pitch& VxFile::getLowestPitch() const {
+    return getLowestVxPitch().pitch;
+}
+
+const Pitch &VxFile::getHighestPitch() const {
+    return getHighestVxPitch().pitch;
+}

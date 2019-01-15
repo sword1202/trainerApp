@@ -44,12 +44,12 @@ constexpr float PIANO_TRACK_BUTTON_LEFT = 19.f;
 constexpr float INSTRUMENTAL_TRACK_BUTTON_LEFT = 19.f;
 constexpr float TRACK_BUTTON_HEIGHT = 17.f;
 constexpr float INSTRUMENTAL_TRACK_BUTTON_WIDTH = 82.f;
-constexpr float PIANO_TRACK_HEIGHT = 38.f;
+constexpr float PIANO_TRACK_HEIGHT = 36.f;
+constexpr int PIANO_TRACK_PITCHES_INDEXES_COUNT = 17;
 constexpr float PIANO_TRACK_BOTTOM = 56.f;
 constexpr float PIANO_TRACK_SHADOW_RADIUS = 50.f;
 constexpr float PIANO_TRACK_SHADOW_BLUR = 25.f;
 constexpr float PIANO_TRACK_PITCH_HEIGHT = 2.f;
-constexpr float PIANO_TRACK_DISTANCE_BETWEEN_PITCHES = 1.f;
 constexpr float PIANO_TRACK_PITCH_RADIUS = 1.f;
 constexpr float PIANO_TRACK_BUTTON_WIDTH = 77.f;
 
@@ -316,12 +316,21 @@ void WorkspaceDrawer::drawPianoTrack() {
     float tickSize = width / durationInTicks;
 
     drawer->setFillColor(pianoTrackPitchesColor);
+    Pitch lowest = vxFile->getLowestPitch();
+    Pitch highest = vxFile->getHighestPitch();
+    int lowestIndex = lowest.getPerfectFrequencyIndex();
+    int maxIndexFactor = std::min(highest.getPerfectFrequencyIndex() - lowestIndex,
+            PIANO_TRACK_PITCHES_INDEXES_COUNT - 1);
+
+    int topMargin = PIANO_TRACK_PITCHES_INDEXES_COUNT - maxIndexFactor;
+
     const auto& pitches = vxFile->getPitches();
     for (const VxPitch& vxPitch : pitches) {
         float pitchX = vxPitch.startTickNumber * tickSize;
         float pitchWidth = vxPitch.ticksCount * tickSize;
-        float pitchY = (Pitch::PITCHES_IN_OCTAVE - vxPitch.pitch.getPitchInOctaveIndex() - 1) *
-                       (PIANO_TRACK_PITCH_HEIGHT + PIANO_TRACK_DISTANCE_BETWEEN_PITCHES) + y;
+
+        int indexFactor = (vxPitch.pitch.getPerfectFrequencyIndex() - lowestIndex) % (maxIndexFactor + 1);
+        float pitchY = indexFactor * PIANO_TRACK_PITCH_HEIGHT + y + topMargin;
         drawer->roundedRect(pitchX, pitchY, pitchWidth, PIANO_TRACK_PITCH_HEIGHT, PIANO_TRACK_PITCH_RADIUS);
         drawer->fill();
     }
