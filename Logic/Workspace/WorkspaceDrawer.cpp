@@ -316,8 +316,8 @@ void WorkspaceDrawer::drawPianoTrack() {
     float tickSize = width / durationInTicks;
 
     drawer->setFillColor(pianoTrackPitchesColor);
-    Pitch lowest = vxFile->getLowestPitch();
-    Pitch highest = vxFile->getHighestPitch();
+    const Pitch &lowest = vxFile->getLowestPitch();
+    const Pitch &highest = vxFile->getHighestPitch();
     int lowestIndex = lowest.getPerfectFrequencyIndex();
     int maxIndexFactor = std::min(highest.getPerfectFrequencyIndex() - lowestIndex,
             PIANO_TRACK_PITCHES_INDEXES_COUNT - 1);
