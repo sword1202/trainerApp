@@ -25,6 +25,7 @@ set(qtSources
         Utils/BaseQmlWidget.h
         App/VxAppUtils.cpp
         App/VxAppUtils.h
+        Project/QtWidgetMouseEventsReceiver.cpp
         )
 
 if (APPLE)

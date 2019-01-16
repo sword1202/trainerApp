@@ -140,11 +140,11 @@ void ProjectWindow::setupScrollBars() {
     updateVerticalScrollBarValues();
     connect(verticalScrollBar, &QScrollBar::valueChanged, this, &ProjectWindow::onVerticalScrollBarValueChanged);
 
-    horizontalScrollBar = new QScrollBar(Qt::Horizontal, IS_APPLE ? nullptr : centralWidget());
-#ifdef __APPLE__
-    horizontalScrollBarNativeWrap = workspaceWidget->addSubWidget(horizontalScrollBar);
-#endif
-    connect(horizontalScrollBar, &QScrollBar::valueChanged, this, &ProjectWindow::onHorizontalScrollBarValueChanged);
+//    horizontalScrollBar = new QScrollBar(Qt::Horizontal, IS_APPLE ? nullptr : centralWidget());
+//#ifdef __APPLE__
+//    horizontalScrollBarNativeWrap = workspaceWidget->addSubWidget(horizontalScrollBar);
+//#endif
+//    connect(horizontalScrollBar, &QScrollBar::valueChanged, this, &ProjectWindow::onHorizontalScrollBarValueChanged);
     updateHorizontalScrollBarValues();
 
     MainController::instance()->getPlayer()->seekChangedListeners.addListener([=] (double) {

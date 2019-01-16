@@ -85,7 +85,6 @@ class WorkspaceDrawer : public WorkspaceController {
     Drawer::Image* pianoTrackButtonImage = nullptr;
 
     std::atomic_bool drawTracks;
-    std::atomic<float> bottomStripeHeight;
 
     std::atomic<float> zoom;
 
@@ -214,7 +213,6 @@ public:
     void setPianoTrackButtonImage(Drawer::Image *pianoTrackButtonImage);
 
     void setDrawTracks(bool value) override;
-    void setBottomStripeHeight(float bottomStripeHeight);
 
     float getZoom() const override;
     void setZoom(float zoom) override;

@@ -23,10 +23,15 @@ set(Manager
 
 set(Workspace
         Workspace/PianoDrawer.cpp
+        Workspace/ScrollBar.cpp
         Workspace/WorkspaceDrawer.cpp)
 
 set(logicSources
-        ${Drawers} ${Manager} ${Workspace})
+        ${Drawers}
+        ${Manager}
+        Events/MouseEventsReceiver.h
+        Events/BaseSynchronizedMouseEventsReceiver.cpp
+        ${Workspace})
 
 list(TRANSFORM logicSources PREPEND ${CMAKE_CURRENT_LIST_DIR}/)
 

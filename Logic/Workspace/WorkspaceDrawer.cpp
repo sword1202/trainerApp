@@ -171,7 +171,7 @@ void WorkspaceDrawer::draw() {
     drawer->translateTo(0, 0);
     drawer->setFillColor(Color::white());
     drawer->fillRect(0, 0, PIANO_WIDTH, height);
-    pianoDrawer->draw(PIANO_WIDTH, height - bottomStripeHeight + getMaximumGridTranslation() - getGridTranslation(),
+    pianoDrawer->draw(PIANO_WIDTH, height + getMaximumGridTranslation() - getGridTranslation(),
             devicePixelRatio);
     drawer->setFillColor(Color::white());
     drawer->fillRect(0, 0, PIANO_WIDTH, YARD_STICK_HEIGHT);
@@ -357,7 +357,7 @@ float WorkspaceDrawer::getWorkspaceDuration() const {
 }
 
 float WorkspaceDrawer::getVisibleGridHeight() const {
-    return height - YARD_STICK_HEIGHT - 1 - bottomStripeHeight;
+    return height - YARD_STICK_HEIGHT - 1;
 }
 
 float WorkspaceDrawer::getVisibleGridWidth() const {
@@ -600,7 +600,6 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, const std::function<void()>& on
         secondPlayHeadPosition(0),
         playbackBounds(PlaybackBounds()),
         drawTracks(true),
-        bottomStripeHeight(0),
         onUpdateRequested(onUpdateRequested) {
     CHECK_IF_RENDER_THREAD;
     setGridColor({0x8B, 0x89, 0xB6, 0x33});
@@ -822,10 +821,6 @@ void WorkspaceDrawer::setPianoTrackButtonImage(Drawer::Image *pianoTrackButtonIm
 
 void WorkspaceDrawer::setDrawTracks(bool value) {
     drawTracks = value;
-}
-
-void WorkspaceDrawer::setBottomStripeHeight(float bottomStripeHeight) {
-    this->bottomStripeHeight = bottomStripeHeight;
 }
 
 float WorkspaceDrawer::getZoom() const {

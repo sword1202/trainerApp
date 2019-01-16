@@ -3,6 +3,7 @@ set(includes
         CppUtils
         Logic/AudioInput
         Logic/Drawers
+        Logic/Events
         Logic/Manager
         Logic/Workspace
         Logic/Playback/Decoding
