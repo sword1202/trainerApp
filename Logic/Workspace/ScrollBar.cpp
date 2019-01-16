@@ -13,7 +13,8 @@ static const Color stripeColor = {0x61, 0x5F, 0x97, 0xFF};
 
 ScrollBar::ScrollBar(Drawer *drawer, MouseEventsReceiver *mouseEventsReceiver, ScrollBar::Orientation orientation)
         : drawer(drawer), mouseEventsReceiver(mouseEventsReceiver), orientation(orientation) {
-
+    pageSize = 0;
+    position = 0;
 }
 
 void ScrollBar::draw(float x, float y, float length) {
