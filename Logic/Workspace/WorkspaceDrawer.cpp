@@ -166,8 +166,10 @@ void WorkspaceDrawer::draw() {
     drawer->translate(PIANO_WIDTH, 0);
 
     if (drawTracks) {
+        drawer->translate(0, -ScrollBar::SCROLLBAR_WEIGHT);
         drawPianoTrack();
         drawInstrumentalTrack();
+        drawer->translate(0, ScrollBar::SCROLLBAR_WEIGHT);
     }
     drawFirstPlayHead();
     drawSecondPlayHead();
@@ -176,8 +178,8 @@ void WorkspaceDrawer::draw() {
     drawer->translateTo(0, 0);
     drawer->setFillColor(Color::white());
     drawer->fillRect(0, 0, PIANO_WIDTH, height);
-    pianoDrawer->draw(PIANO_WIDTH, height + getMaximumGridTranslation() - getGridTranslation(),
-            devicePixelRatio);
+    float pianoHeight = height - ScrollBar::SCROLLBAR_WEIGHT + getMaximumGridTranslation() - getGridTranslation();
+    pianoDrawer->draw(PIANO_WIDTH, pianoHeight, devicePixelRatio);
     drawer->setFillColor(Color::white());
     drawer->fillRect(0, 0, PIANO_WIDTH, YARD_STICK_HEIGHT);
     drawer->setStrokeColor(borderLineColor);
@@ -192,7 +194,7 @@ void WorkspaceDrawer::draw() {
 }
 
 void WorkspaceDrawer::drawScrollBars() {
-    horizontalScrollBar.draw(0, height - ScrollBar::SCROLLBAR_WEIGHT, getVisibleGridWidth());
+    horizontalScrollBar.draw(1, height - ScrollBar::SCROLLBAR_WEIGHT, getVisibleGridWidth());
 }
 
 float WorkspaceDrawer::getGridTranslation() const {
@@ -233,7 +235,8 @@ void WorkspaceDrawer::drawHorizontalLine(float y, const Color& color) const {
 
 void WorkspaceDrawer::drawVerticalLine(float x, const WorkspaceDrawer::Color &color) const {
     drawer->beginPath();
-    drawer->moveTo(x * sizeMultiplier, -drawer->getTranslateY() + height - getVisibleGridHeight());
+    float y = -drawer->getTranslateY() - ScrollBar::SCROLLBAR_WEIGHT + height - getVisibleGridHeight();
+    drawer->moveTo(x * sizeMultiplier, y);
     drawer->setStrokeWidth(sizeMultiplier);
     drawer->lineTo(x * sizeMultiplier, height * sizeMultiplier);
     drawer->setStrokeColor(color);
@@ -366,7 +369,7 @@ float WorkspaceDrawer::getWorkspaceDuration() const {
 }
 
 float WorkspaceDrawer::getVisibleGridHeight() const {
-    return height - YARD_STICK_HEIGHT - 1;
+    return height - YARD_STICK_HEIGHT - 1 - ScrollBar::SCROLLBAR_WEIGHT;
 }
 
 float WorkspaceDrawer::getVisibleGridWidth() const {
