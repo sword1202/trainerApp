@@ -11,6 +11,7 @@
 #include <QThread>
 #include <QApplication>
 #include "Executors.h"
+#include "QtWidgetMouseEventsReceiver.h"
 
 using std::cout;
 using std::cerr;
@@ -65,7 +66,7 @@ void WorkspaceDrawerWidgetSetup::setupWorkspaceDrawer(QWidget* widget, Drawer* d
     drawer->setTextImagesFactory(factory);
     drawer->setTextDrawStrategy(Drawer::DRAW_USING_PRE_BUILD_IMAGES);
 
-    workspaceDrawer = new WorkspaceDrawer(drawer, [=] {
+    workspaceDrawer = new WorkspaceDrawer(drawer, new QtWidgetMouseEventsReceiver(widget), [=] {
         onRequestUpdate(widget);
     });
     initImages(drawer, widget);

@@ -6,7 +6,6 @@
 
 using namespace CppUtils;
 
-constexpr float SCROLLBAR_WEIGHT = 11.f;
 constexpr float SCROLLBAR_PADDING = 2.f;
 
 static const Color backgroundColor = {0xE8, 0xE7, 0xF0, 0xFF};
@@ -18,7 +17,10 @@ ScrollBar::ScrollBar(Drawer *drawer, MouseEventsReceiver *mouseEventsReceiver, S
 }
 
 void ScrollBar::draw(float x, float y, float length) {
+    assert(pageSize > 0 && "Call setPageSize before draw");
     bool isVertical = orientation == VERTICAL;
+    float position = this->position;
+    float pageSize = this->pageSize;
 
     drawer->setFillColor(backgroundColor);
     drawer->fillRect(x, y, isVertical ? SCROLLBAR_WEIGHT : length, isVertical ? length : SCROLLBAR_WEIGHT);
@@ -75,4 +77,23 @@ void ScrollBar::draw(float x, float y, float length) {
 
     drawer->roundedRect(scrollerStripeRect);
     drawer->fill();
+    this->position = position;
+}
+
+float ScrollBar::getPageSize() const {
+    return pageSize;
+}
+
+void ScrollBar::setPageSize(float pageSize) {
+    assert(pageSize > 0);
+    this->pageSize = pageSize;
+}
+
+float ScrollBar::getPosition() const {
+    return position;
+}
+
+void ScrollBar::setPosition(float position) {
+    assert(position >= 0 && position <= 1);
+    this->position = position;
 }

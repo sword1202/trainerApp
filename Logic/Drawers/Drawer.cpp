@@ -29,7 +29,7 @@ void Drawer::roundedRect(float x, float y, float w, float h, float r) {
 }
 
 void Drawer::roundedRect(const RoundedRectF &rect) {
-    roundedRect(rect.A.x, rect.A.x, rect.width, rect.height, rect.getRadius());
+    roundedRect(rect.A.x, rect.A.y, rect.width, rect.height, rect.getRadius());
 }
 
 void Drawer::lineTo(const CppUtils::PointF &point) {

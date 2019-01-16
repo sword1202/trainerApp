@@ -17,6 +17,7 @@
 #include "PlaybackBounds.h"
 #include <memory>
 #include "PlayingPitchSequence.h"
+#include "ScrollBar.h"
 #include <thread>
 
 class WorkspaceDrawer : public WorkspaceController {
@@ -65,6 +66,7 @@ class WorkspaceDrawer : public WorkspaceController {
     float devicePixelRatio = -1;
 
     Drawer* drawer = nullptr;
+    MouseEventsReceiver* mouseEventsReceiver;
     const PitchesCollection* pitchesCollection = nullptr;
     PianoDrawer* pianoDrawer = nullptr;
 
@@ -88,6 +90,8 @@ class WorkspaceDrawer : public WorkspaceController {
 
     std::atomic<float> zoom;
 
+    ScrollBar horizontalScrollBar;
+
     void iterateHorizontalIntervals(const std::function<void(float x, bool isBeat)>& func) const;
 
     void drawHorizontalLine(float y, const Color& color) const;
@@ -108,6 +112,7 @@ class WorkspaceDrawer : public WorkspaceController {
     void drawInstrumentalTrackButton();
     void drawPianoTrack();
     void drawPianoTrackButton();
+    void drawScrollBars();
 
     double getSingingPitchGraphDuration() const;
     double getIntervalDuration() const;
@@ -123,6 +128,7 @@ class WorkspaceDrawer : public WorkspaceController {
     float durationToWidth(double duration) const;
 
     bool getBoundsStartXAndWidth(const PlaybackBounds& bounds, float* startX, float* width) const;
+    void updateHorizontalScrollBarPageSize();
 public:
 
     static constexpr int PIANO_WIDTH = 67;
@@ -136,7 +142,8 @@ public:
     static constexpr float MIN_ZOOM = 1.0;
     static constexpr float MAX_ZOOM = 2.0;
 
-    WorkspaceDrawer(Drawer *drawer, const std::function<void()>& onUpdateRequested);
+    WorkspaceDrawer(Drawer *drawer, MouseEventsReceiver *mouseEventsReceiver,
+                        const std::function<void()> &onUpdateRequested);
     ~WorkspaceDrawer();
 
     void setOnUpdateRequested(const std::function<void()> &onUpdateRequested);

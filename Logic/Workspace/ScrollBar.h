@@ -15,17 +15,25 @@ public:
         HORIZONTAL
     };
 private:
-    float position = 0;
-    float pageSize = 0;
+    std::atomic<float> position;
+    std::atomic<float> pageSize;
     Drawer* drawer;
     MouseEventsReceiver* mouseEventsReceiver;
     Orientation orientation;
     bool leftMouseWasDownOnScroller = false;
 public:
+    static constexpr float SCROLLBAR_WEIGHT = 11.f;
+
     ScrollBar(Drawer *drawer,
             MouseEventsReceiver *mouseEventsReceiver,
             Orientation orientation);
     void draw(float x, float y, float length);
+
+    float getPageSize() const;
+    void setPageSize(float pageSize);
+
+    float getPosition() const;
+    void setPosition(float position);
 };
 
 
