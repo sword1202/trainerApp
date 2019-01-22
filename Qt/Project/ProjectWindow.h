@@ -27,8 +27,6 @@ class ProjectWindow : public BaseMainWindow
 
     QQuickItem *headerWithSubheader;
     QQuickItem *header;
-    QScrollBar *verticalScrollBar = nullptr;
-    QScrollBar *horizontalScrollBar = nullptr;
     QQuickWidget *lyricsWidget;
     WorkspaceController* workspaceController = nullptr;
 

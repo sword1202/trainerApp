@@ -766,6 +766,10 @@ float WorkspaceDrawer::getVerticalScrollPosition() const {
 }
 
 void WorkspaceDrawer::setVerticalScrollPosition(float verticalScrollPosition) {
+    if (verticalScrollBar.getPageSize() <= 0) {
+        return;
+    }
+
     verticalScrollBar.setPosition(verticalScrollPosition);
 }
 

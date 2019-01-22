@@ -163,7 +163,7 @@ public:
 
     float getSummarizedGridHeight() const override;
 
-    float getVerticalScrollPosition() const;
+    float getVerticalScrollPosition() const override;
     void setVerticalScrollPosition(float verticalScrollPosition) override;
 
     bool isRunning() const override;

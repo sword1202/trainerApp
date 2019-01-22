@@ -183,10 +183,17 @@ void ProjectWindow::setShowTracks(bool value) {
 void ProjectWindow::wheelEvent(QWheelEvent *event) {
     QWidget::wheelEvent(event);
     QPoint delta = event->pixelDelta();
-    int y = delta.y();
-    if (verticalScrollBar && verticalScrollBar->isVisible()) {
-        verticalScrollBar->setValue(verticalScrollBar->value() - y);
+    int y = -delta.y();
+    float maxDelta = workspaceController->getVisibleGridHeight();
+    float positionDelta = y / maxDelta;
+    float newPosition = workspaceController->getVerticalScrollPosition() + positionDelta;
+    if (newPosition < 0) {
+        newPosition = 0;
+    } else if(newPosition > 1) {
+        newPosition = 1;
     }
+
+    workspaceController->setVerticalScrollPosition(newPosition);
 }
 
 float ProjectWindow::getZoom() const {

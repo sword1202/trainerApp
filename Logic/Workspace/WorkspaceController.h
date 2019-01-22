@@ -31,6 +31,7 @@ public:
     virtual void update() = 0;
     virtual void setDetectedPitch(const Pitch &detectedPitch) = 0;
     virtual void setPitchSequence(PlayingPitchSequence *pitchSequence) = 0;
+    virtual float getVerticalScrollPosition() const = 0;
     virtual void setVerticalScrollPosition(float verticalScrollPosition) = 0;
     virtual void setPlaybackBounds(const PlaybackBounds &playbackBounds) = 0;
     virtual float getSeekFromXPositionOnWorkspace(float x) = 0;
