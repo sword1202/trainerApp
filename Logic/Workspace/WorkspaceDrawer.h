@@ -91,6 +91,7 @@ class WorkspaceDrawer : public WorkspaceController {
     std::atomic<float> zoom;
 
     ScrollBar horizontalScrollBar;
+    ScrollBar verticalScrollBar;
     std::function<void(float)> seekUpdatedInsideListener;
 
     void iterateHorizontalIntervals(const std::function<void(float x, bool isBeat)>& func) const;

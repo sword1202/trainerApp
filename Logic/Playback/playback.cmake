@@ -11,7 +11,6 @@ set(midiSources
 set(vxMvxFileSources
         Mvx/MvxFile.cpp
         Mvx/MvxFile.h
-
         Vx/VxFile.cpp
         )
 
@@ -46,6 +45,8 @@ set(playbackTestSources
         ${midiSources}
         ${vxMvxFileSources}
         ${midiSources}
+        Decoding/Decoder/audiodecoder.cpp
+        Decoding/Decoder/audiodecodercoreaudio_mac.cpp
         )
 
 if (APPLE)

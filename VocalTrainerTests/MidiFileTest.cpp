@@ -2,7 +2,7 @@
 #include "MidiFileReader.h"
 #include "VxFile.h"
 
-#define CATCH_CONFIG_MAIN
+#include <sstream>
 #include "catch.hpp"
 
 static constexpr int    MIDI_TPQ = 120;

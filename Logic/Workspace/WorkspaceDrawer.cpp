@@ -202,6 +202,11 @@ void WorkspaceDrawer::drawScrollBars() {
         float seek = position * totalDurationInSeconds;
         seekUpdatedInsideListener(seek);
     }
+
+    verticalScrollBar.setPageSize(0.5);
+    if (verticalScrollBar.getPageSize() > 0) {
+        verticalScrollBar.draw(getVisibleGridWidth() - ScrollBar::SCROLLBAR_WEIGHT, YARD_STICK_HEIGHT + 1, getVisibleGridHeight());
+    }
 }
 
 float WorkspaceDrawer::getGridTranslation() const {
@@ -622,6 +627,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, MouseEventsReceiver *mouseEvent
         playbackBounds(PlaybackBounds()),
         drawTracks(true),
         mouseEventsReceiver(mouseEventsReceiver),
+        verticalScrollBar(drawer, mouseEventsReceiver, ScrollBar::VERTICAL),
         horizontalScrollBar(drawer, mouseEventsReceiver, ScrollBar::HORIZONTAL),
         onUpdateRequested(onUpdateRequested) {
     CHECK_IF_RENDER_THREAD;

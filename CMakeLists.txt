@@ -34,6 +34,7 @@ set(tests ${playbackTestSources}
         VocalTrainerTests/MidiFileTest.cpp
         VocalTrainerTests/VxFileTests.cpp
         VocalTrainerTests/LoadTsf.cpp
+        ../CppUtils/tests/GeometryUtilsTest.cpp
         )
 
 find_package(Qt5Widgets REQUIRED)
@@ -90,6 +91,8 @@ if (APPLE)
     target_link_libraries(VocalTrainer "-framework AppKit")
     target_link_libraries(VocalTrainer "-framework AudioToolbox")
     target_link_libraries(VocalTrainer "-framework AVFoundation")
+    target_link_libraries(VocalTrainerTests "-framework CoreAudio")
+    target_link_libraries(VocalTrainerTests "-framework AudioToolbox")
     target_link_libraries(VocalTrainer "-framework CoreAudio")
     target_link_libraries(VocalTrainer "-framework Metal")
     target_link_libraries(VocalTrainer "-framework MetalKit")

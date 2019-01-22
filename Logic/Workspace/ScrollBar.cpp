@@ -78,7 +78,7 @@ void ScrollBar::draw(float x, float y, float length) {
     }
 
     // translate back to local coordinates
-    scrollerStripeRect.translate(drawer->getTranslateX(), drawer->getTranslateY());
+    scrollerStripeRect.translate(-drawer->getTranslateX(), -drawer->getTranslateY());
     applyPositionTranslation();
 
     drawer->roundedRect(scrollerStripeRect);
