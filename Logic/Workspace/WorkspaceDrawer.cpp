@@ -868,7 +868,7 @@ void WorkspaceDrawer::setZoom(float zoom) {
 }
 
 void WorkspaceDrawer::updateSeek(float seek) {
-    horizontalOffset = intervalsPerSecond * seek * intervalsPerSecond;
+    horizontalOffset = intervalsPerSecond * seek * intervalWidth;
     updateHorizontalScrollBarPagePosition();
 }
 
