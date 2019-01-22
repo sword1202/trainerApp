@@ -137,6 +137,7 @@ void WorkspaceDrawer::draw() {
     // old logic
     if (running) {
         horizontalOffset = horizontalOffset + intervalsPerSecond * intervalWidth * frameDuration;
+        updateHorizontalScrollBarPagePosition();
     }
     frameTime = now;
 
@@ -862,6 +863,7 @@ void WorkspaceDrawer::setZoom(float zoom) {
 
 void WorkspaceDrawer::updateSeek(float seek) {
     horizontalOffset = intervalsPerSecond * seek * intervalsPerSecond;
+    updateHorizontalScrollBarPagePosition();
 }
 
 void WorkspaceDrawer::updateHorizontalScrollBarPageSize() {
@@ -871,4 +873,10 @@ void WorkspaceDrawer::updateHorizontalScrollBarPageSize() {
     if (pageSize > 0) {
         horizontalScrollBar.setPageSize(pageSize);
     }
+}
+
+void WorkspaceDrawer::updateHorizontalScrollBarPagePosition() {
+    float horizontalOffset = this->horizontalOffset;
+    float summarizedGridWidth = getSummarizedGridWidth();
+    horizontalScrollBar.setPosition(horizontalOffset / summarizedGridWidth);
 }
