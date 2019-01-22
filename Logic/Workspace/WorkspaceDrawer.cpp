@@ -264,7 +264,8 @@ void WorkspaceDrawer::drawHorizontalGrid() const {
 }
 
 void WorkspaceDrawer::drawPitch(float x, float y, float width) const {
-    drawer->roundedRect(x, y, width, intervalHeight, pitchRadius);
+    float radius = pitchRadius * zoom;
+    drawer->roundedRect(x, y, width, intervalHeight, radius);
     drawer->fill();
 }
 
