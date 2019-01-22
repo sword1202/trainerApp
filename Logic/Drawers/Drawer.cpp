@@ -262,6 +262,10 @@ void Drawer::setTextBaseline(Drawer::TextBaseline baseline) {
     textBaseline = baseline;
 }
 
+void Drawer::fillRect(const RectF &rect) {
+    fillRect(rect.A.x, rect.A.y, rect.width, rect.height);
+}
+
 void DrawerTextImagesFactory::addImage(const DrawerTextImagesFactoryCharacterData &data) {
     assert(data.character != '\0' && data.fontSize > 0);
     set.insert(data);

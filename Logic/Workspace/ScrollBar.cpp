@@ -3,6 +3,7 @@
 //
 
 #include "ScrollBar.h"
+#include "Rect.h"
 
 using namespace CppUtils;
 
@@ -27,7 +28,8 @@ void ScrollBar::draw(float x, float y, float length) {
     float pageSize = this->pageSize;
 
     drawer->setFillColor(backgroundColor);
-    drawer->fillRect(x, y, isVertical ? SCROLLBAR_WEIGHT : length, isVertical ? length : SCROLLBAR_WEIGHT);
+    RectF scrollBarRect(x, y, isVertical ? SCROLLBAR_WEIGHT : length, isVertical ? length : SCROLLBAR_WEIGHT);
+    drawer->fillRect(scrollBarRect);
 
     drawer->setFillColor(stripeColor);
     float stripeWeight = SCROLLBAR_WEIGHT - SCROLLBAR_PADDING * 2;
@@ -55,13 +57,14 @@ void ScrollBar::draw(float x, float y, float length) {
 
     // translate to global coordinates
     scrollerStripeRect.translate(drawer->getTranslateX(), drawer->getTranslateY());
+    scrollBarRect.translate(drawer->getTranslateX(), drawer->getTranslateY());
 
     positionWasChangedFromUser = false;
+    auto currentMousePosition = mouseEventsReceiver->getMousePosition();
     if (mouseEventsReceiver->isLeftMouseDown()) {
         if (leftMouseWasDownOnScroller) {
-            auto currentMousePosition = mouseEventsReceiver->getMousePosition();
-            PointF delta = currentMousePosition - lastMousePosition;
-            lastMousePosition = currentMousePosition;
+            PointF delta = currentMousePosition - lastDragMousePosition;
+            lastDragMousePosition = currentMousePosition;
             float lengthDelta = isVertical ? delta.y : delta.x;
             float positionDelta = lengthDelta / maxPositionTranslation;
             position += positionDelta;
@@ -73,11 +76,29 @@ void ScrollBar::draw(float x, float y, float length) {
             positionWasChangedFromUser = true;
 
         } else {
-            lastMousePosition = mouseEventsReceiver->getMousePosition();
-            leftMouseWasDownOnScroller = scrollerStripeRect.containsPoint(lastMousePosition);
+            lastDragMousePosition = mouseEventsReceiver->getMousePosition();
+            leftMouseWasDownOnScroller = scrollerStripeRect.containsPoint(lastDragMousePosition);
+        }
+
+        if (scrollBarRect.containsPoint(currentMousePosition)) {
+            lastMouseClickPosition = currentMousePosition;
         }
     } else {
         leftMouseWasDownOnScroller = false;
+
+        if (currentMousePosition.compareUsingEpsilon(lastMouseClickPosition, 0.1)) {
+            auto relatedMousePosition = lastMouseClickPosition - scrollBarRect.A;
+            float mousePosition = isVertical ? relatedMousePosition.y : relatedMousePosition.x;
+            float maxMousePosition = isVertical ? scrollBarRect.height : scrollBarRect.width;
+            position = mousePosition / maxMousePosition;
+            if (position < 0) {
+                position = 0;
+            } else if (position > 1) {
+                position = 1;
+            }
+            positionWasChangedFromUser = true;
+        }
+        lastMouseClickPosition = PointF(-1, -1);
     }
 
     // translate back to local coordinates
