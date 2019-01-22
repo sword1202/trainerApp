@@ -19,6 +19,7 @@ private:
     std::atomic<float> pageSize;
     Drawer* drawer;
     MouseEventsReceiver* mouseEventsReceiver;
+    CppUtils::PointF lastMousePosition;
     Orientation orientation;
     bool leftMouseWasDownOnScroller = false;
 public:

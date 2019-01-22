@@ -51,11 +51,13 @@ void ScrollBar::draw(float x, float y, float length) {
     applyPositionTranslation();
 
     // translate to global coordinates
-    scrollerStripeRect.translate(-drawer->getTranslateX(), -drawer->getTranslateY());
+    scrollerStripeRect.translate(drawer->getTranslateX(), drawer->getTranslateY());
 
     if (mouseEventsReceiver->isLeftMouseDown()) {
         if (leftMouseWasDownOnScroller) {
-            PointF delta = mouseEventsReceiver->getMousePositionDelta();
+            auto currentMousePosition = mouseEventsReceiver->getMousePosition();
+            PointF delta = currentMousePosition - lastMousePosition;
+            lastMousePosition = currentMousePosition;
             float lengthDelta = isVertical ? delta.y : delta.x;
             float positionDelta = lengthDelta / maxPositionTranslation;
             position += positionDelta;
@@ -66,7 +68,8 @@ void ScrollBar::draw(float x, float y, float length) {
             }
 
         } else {
-            leftMouseWasDownOnScroller = scrollerStripeRect.containsPoint(mouseEventsReceiver->getMousePosition());
+            lastMousePosition = mouseEventsReceiver->getMousePosition();
+            leftMouseWasDownOnScroller = scrollerStripeRect.containsPoint(lastMousePosition);
         }
     } else {
         leftMouseWasDownOnScroller = false;

@@ -28,24 +28,9 @@ PointF BaseSynchronizedMouseEventsReceiver::getMousePosition() {
     return currentMousePosition;
 }
 
-PointF BaseSynchronizedMouseEventsReceiver::getPreviousMousePosition() {
-    LOCK;
-    return previousMousePosition;
-}
-
-PointF BaseSynchronizedMouseEventsReceiver::getMousePositionDelta() {
-    LOCK;
-    if (previousMousePosition.x < 0 || currentMousePosition.x < 0) {
-        return {-1, -1};
-    }
-
-    return currentMousePosition - previousMousePosition;
-}
-
 void BaseSynchronizedMouseEventsReceiver::onMouseEvent(const CppUtils::PointF &position,
         bool leftButtonDown, bool rightButtonDown) {
     LOCK;
-    previousMousePosition = currentMousePosition;
     currentMousePosition = position;
     leftMouseDown = leftButtonDown;
     rightMouseDown = rightButtonDown;

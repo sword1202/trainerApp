@@ -12,8 +12,6 @@ public:
     virtual bool isLeftMouseDown() = 0;
     virtual bool isRightMouseDown() = 0;
     virtual CppUtils::PointF getMousePosition() = 0;
-    virtual CppUtils::PointF getPreviousMousePosition() = 0;
-    virtual CppUtils::PointF getMousePositionDelta() = 0;
     virtual ~MouseEventsReceiver() = default;
 };
 

@@ -10,7 +10,6 @@
 #include <mutex>
 
 class BaseSynchronizedMouseEventsReceiver : public MouseEventsReceiver {
-    CppUtils::PointF previousMousePosition;
     CppUtils::PointF currentMousePosition;
     std::mutex mousePositionMutex;
     bool rightMouseDown;
@@ -25,8 +24,6 @@ public:
     bool isRightMouseDown() override;
 
     CppUtils::PointF getMousePosition() override;
-    CppUtils::PointF getPreviousMousePosition() override;
-    CppUtils::PointF getMousePositionDelta() override;
 };
 
 
