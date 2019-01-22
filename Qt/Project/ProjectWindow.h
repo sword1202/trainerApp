@@ -21,8 +21,6 @@ class ProjectWindow : public BaseMainWindow
 
 #ifdef __APPLE__
     MetalWorkspaceWidget *workspaceWidget;
-    QMacNativeWidget* verticalScrollBarNativeWrap;
-    QMacNativeWidget* horizontalScrollBarNativeWrap;
 #else
     OpenGLWorkspaceWidget *workspaceWidget;
 #endif
@@ -34,14 +32,7 @@ class ProjectWindow : public BaseMainWindow
     QQuickWidget *lyricsWidget;
     WorkspaceController* workspaceController = nullptr;
 
-    void updateScrollBarValues(QScrollBar* scrollBar, int pageStep, int maximum);
 protected:
-    void resizeEvent(QResizeEvent *event) override;
-    void updateScrollBarsSizeAndPosition(const QSize &windowSize);
-    void updateVerticalScrollBarValues();
-    void updateHorizontalScrollBarValues();
-
-    void setupScrollBars();
     void wheelEvent(QWheelEvent *event) override;
 public:
     ProjectWindow();
@@ -61,8 +52,6 @@ public:
 public slots:
     void onFileOpen();
     void onSelectMicrophone();
-    void onVerticalScrollBarValueChanged(int value);
-    void onHorizontalScrollBarValueChanged(int value);
 
 signals:
     void zoomChanged();
