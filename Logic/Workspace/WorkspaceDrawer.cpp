@@ -203,14 +203,12 @@ void WorkspaceDrawer::drawScrollBars() {
         seekUpdatedInsideListener(seek);
     }
 
-    verticalScrollBar.setPageSize(0.5);
-    if (verticalScrollBar.getPageSize() > 0) {
-        verticalScrollBar.draw(getVisibleGridWidth() - ScrollBar::SCROLLBAR_WEIGHT, YARD_STICK_HEIGHT + 1, getVisibleGridHeight());
-    }
+    verticalScrollBar.draw(getVisibleGridWidth() - ScrollBar::SCROLLBAR_WEIGHT,
+            YARD_STICK_HEIGHT + 1, getVisibleGridHeight());
 }
 
 float WorkspaceDrawer::getGridTranslation() const {
-    return getMaximumGridTranslation() * verticalScrollPosition;
+    return getMaximumGridTranslation() * verticalScrollBar.getPosition();
 }
 
 float WorkspaceDrawer::getMaximumGridTranslation() const {
@@ -616,7 +614,6 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, MouseEventsReceiver *mouseEvent
         horizontalOffset(0),
         sizeMultiplier(1),
         intervalsPerSecond(0),
-        verticalScrollPosition(0),
         running(false),
         firstPitchIndex(-1),
         frameTime(0),
@@ -765,11 +762,11 @@ float WorkspaceDrawer::getSummarizedGridHeight() const {
 }
 
 float WorkspaceDrawer::getVerticalScrollPosition() const {
-    return verticalScrollPosition;
+    return verticalScrollBar.getPosition();
 }
 
 void WorkspaceDrawer::setVerticalScrollPosition(float verticalScrollPosition) {
-    this->verticalScrollPosition = verticalScrollPosition;
+    verticalScrollBar.setPosition(verticalScrollPosition);
 }
 
 const PlaybackBounds &WorkspaceDrawer::getPlaybackBounds() const {
@@ -872,6 +869,13 @@ void WorkspaceDrawer::setZoom(float zoom) {
         updateSeek(workspaceSeek);
     }
     updateHorizontalScrollBarPageSize();
+
+    // Update vertical scroll bar
+    float pageSize = getVisibleGridHeight() / getSummarizedGridHeight();
+    if (pageSize >= 1) {
+        pageSize = 0;
+    }
+    verticalScrollBar.setPageSize(pageSize);
 }
 
 void WorkspaceDrawer::updateSeek(float seek) {

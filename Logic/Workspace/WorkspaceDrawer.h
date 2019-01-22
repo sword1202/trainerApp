@@ -38,7 +38,6 @@ class WorkspaceDrawer : public WorkspaceController {
     std::atomic_bool running;
     std::atomic_int firstPitchIndex;
     std::atomic_int lastPitchIndex;
-    std::atomic<float> verticalScrollPosition;
 
     std::atomic<PlaybackBounds> playbackBounds;
 

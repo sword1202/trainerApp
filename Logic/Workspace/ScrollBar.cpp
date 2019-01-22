@@ -18,7 +18,10 @@ ScrollBar::ScrollBar(Drawer *drawer, MouseEventsReceiver *mouseEventsReceiver, S
 }
 
 void ScrollBar::draw(float x, float y, float length) {
-    assert(pageSize > 0 && "Call setPageSize before draw");
+    if (pageSize <= 0) {
+        return;
+    }
+
     bool isVertical = orientation == VERTICAL;
     float position = this->position;
     float pageSize = this->pageSize;
@@ -91,7 +94,6 @@ float ScrollBar::getPageSize() const {
 }
 
 void ScrollBar::setPageSize(float pageSize) {
-    assert(pageSize > 0);
     this->pageSize = pageSize;
 }
 
