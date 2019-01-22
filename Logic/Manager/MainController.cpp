@@ -114,7 +114,6 @@ void MainController::setWorkspaceController(WorkspaceController *workspaceContro
         this->workspaceController = workspaceController;
 
         mvxPlayer->seekChangedFromUserListeners.addListener([=] (double seek) {
-            updateSeek(seek);
             if (!mvxPlayer->isCompleted()) {
                 audioInputManager->setAudioRecorderSeek(seek);
             }
@@ -129,6 +128,9 @@ void MainController::setWorkspaceController(WorkspaceController *workspaceContro
         playbackBoundsSelectionController = new PlaybackBoundsSelectionController(this->workspaceController, mvxPlayer);
 
         workspaceControllerReadyCallbacksQueue.process();
+        workspaceController->setSeekUpdatedInsideListener([=] (float seek) {
+            mvxPlayer->setSeek(seek);
+        });
     });
 }
 

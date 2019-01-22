@@ -53,6 +53,7 @@ void ScrollBar::draw(float x, float y, float length) {
     // translate to global coordinates
     scrollerStripeRect.translate(drawer->getTranslateX(), drawer->getTranslateY());
 
+    positionWasChangedFromUser = false;
     if (mouseEventsReceiver->isLeftMouseDown()) {
         if (leftMouseWasDownOnScroller) {
             auto currentMousePosition = mouseEventsReceiver->getMousePosition();
@@ -66,6 +67,7 @@ void ScrollBar::draw(float x, float y, float length) {
             } else if(position > 1) {
                 position = 1;
             }
+            positionWasChangedFromUser = true;
 
         } else {
             lastMousePosition = mouseEventsReceiver->getMousePosition();
@@ -100,4 +102,8 @@ float ScrollBar::getPosition() const {
 void ScrollBar::setPosition(float position) {
     assert(position >= 0 && position <= 1);
     this->position = position;
+}
+
+bool ScrollBar::isPositionWasChangedFromUser() const {
+    return positionWasChangedFromUser;
 }

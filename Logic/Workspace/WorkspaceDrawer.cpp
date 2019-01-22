@@ -196,6 +196,12 @@ void WorkspaceDrawer::draw() {
 
 void WorkspaceDrawer::drawScrollBars() {
     horizontalScrollBar.draw(1, height - ScrollBar::SCROLLBAR_WEIGHT, getVisibleGridWidth());
+    if (horizontalScrollBar.isPositionWasChangedFromUser()) {
+        float position = horizontalScrollBar.getPosition();
+        horizontalOffset = position * getSummarizedGridWidth();
+        float seek = position * totalDurationInSeconds;
+        seekUpdatedInsideListener(seek);
+    }
 }
 
 float WorkspaceDrawer::getGridTranslation() const {
@@ -879,4 +885,9 @@ void WorkspaceDrawer::updateHorizontalScrollBarPagePosition() {
     float horizontalOffset = this->horizontalOffset;
     float summarizedGridWidth = getSummarizedGridWidth();
     horizontalScrollBar.setPosition(horizontalOffset / summarizedGridWidth);
+}
+
+void WorkspaceDrawer::setSeekUpdatedInsideListener(const std::function<void(float)> &listener) {
+    CHECK_IF_RENDER_THREAD;
+    this->seekUpdatedInsideListener = listener;
 }

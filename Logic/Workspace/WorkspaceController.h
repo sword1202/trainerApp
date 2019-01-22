@@ -41,6 +41,7 @@ public:
     virtual void setDrawTracks(bool value) = 0;
     virtual float getZoom() const = 0;
     virtual void setZoom(float zoom) = 0;
+    virtual void setSeekUpdatedInsideListener(const std::function<void(float)>& listener) = 0;
     virtual ~WorkspaceController() = default;
 };
 

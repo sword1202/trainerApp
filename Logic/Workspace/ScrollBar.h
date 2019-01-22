@@ -22,6 +22,7 @@ private:
     CppUtils::PointF lastMousePosition;
     Orientation orientation;
     bool leftMouseWasDownOnScroller = false;
+    bool positionWasChangedFromUser = false;
 public:
     static constexpr float SCROLLBAR_WEIGHT = 11.f;
 
@@ -35,6 +36,8 @@ public:
 
     float getPosition() const;
     void setPosition(float position);
+
+    bool isPositionWasChangedFromUser() const;
 };
 
 
