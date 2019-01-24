@@ -71,7 +71,7 @@ void PianoDrawer::draw(float width, float height, float devicePixelRation) {
 
     drawSharpPitchesY.clear();
     drawSharpPitchesFillColor.clear();
-    selectedWhitePitchIndexes.clear();
+    selectedPitchIndexes.clear();
 
     float intervalOctaveHeightToPianoOctaveHeightRelation = getIntervalOctaveHeightToPianoOctaveHeightRelation();
 
@@ -101,7 +101,7 @@ void PianoDrawer::draw(float width, float height, float devicePixelRation) {
         if (fillColor != sharpPitchColor) {
             fill = true;
             drawer->setFillColor(fillColor);
-            selectedWhitePitchIndexes.insert(index);
+            selectedPitchIndexes.insert(perfectFrequencyIndex);
         }
 
         float pitchHeight = heightMap[index % heightMapLength] * intervalOctaveHeightToPianoOctaveHeightRelation;
@@ -172,7 +172,7 @@ void PianoDrawer::drawPitchNames(float height) const {
             text = pitch.getName();
         }
 
-        if (selectedWhitePitchIndexes.count(index)) {
+        if (selectedPitchIndexes.count(pitch.getPerfectFrequencyIndex())) {
             drawer->setFillColor(SELECTED_PITCH_TEXT_COLOR);
         } else {
             drawer->setFillColor(PITCH_TEXT_COLOR);

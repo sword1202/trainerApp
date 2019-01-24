@@ -22,7 +22,7 @@ class PianoDrawer {
     std::atomic_int detectedPitchIndex;
     std::vector<Drawer::Color> drawSharpPitchesFillColor;
     std::vector<float> drawSharpPitchesY;
-    std::unordered_set<int> selectedWhitePitchIndexes;
+    std::unordered_set<int> selectedPitchIndexes;
 
     float getIntervalOctaveHeightToPianoOctaveHeightRelation() const;
 
