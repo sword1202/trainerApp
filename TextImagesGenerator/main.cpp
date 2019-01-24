@@ -8,10 +8,18 @@
 #include <WorkspaceDrawer.h>
 #include "Color.h"
 #include "PianoDrawer.h"
+#include <iostream>
+#include "StringUtils.h"
+#include "Algorithms.h"
 
 using namespace CppUtils;
+using std::cout;
 
-QString path = "/Users/semyontikhonenko/Projects/VocalTrainer/Qt/qml/sharedimages/text/";
+const char* pathToken = "qml/sharedimages/text/";
+const char* path = "/Users/semyontikhonenko/Projects/VocalTrainer/Qt/qml/sharedimages/text/";
+const char* qrcPath = "/Users/semyontikhonenko/Projects/VocalTrainer/Qt/qml.qrc";
+
+std::vector<std::string> generatedLines;
 
 static void drawText(int textSize, QString text, QString fileNameIdPart, const Color& color) {
     QFont font;
@@ -33,7 +41,9 @@ static void drawText(int textSize, QString text, QString fileNameIdPart, const C
     QString filePath = path + fileName;
     assert(pix.save(filePath));
 
-    std::cout<<("        <file>qml/sharedimages/text/" + fileName.toLocal8Bit() + "</file>\n").data();
+    QByteArray line = "        <file>qml/sharedimages/text/" + fileName.toLocal8Bit() + "</file>";
+    generatedLines.push_back(line.data());
+    std::cout << line.data() << "\n";
 }
 
 int main(int argc, char *argv[])
@@ -46,20 +56,32 @@ int main(int argc, char *argv[])
     for (int devicePixelRatio = 1; devicePixelRatio <= 2; ++devicePixelRatio) {
         for (int textInt = 0; textInt <= 9; ++textInt) {
             QString text = QString::number(textInt);
-            drawText(11 * devicePixelRatio, text, text, WorkspaceDrawer::YARD_STICK_DOT_AND_TEXT_COLOR);
-            drawText(8 * devicePixelRatio, text, text, PianoDrawer::PITCH_TEXT_COLOR);
-            drawText(8 * devicePixelRatio, text, text, PianoDrawer::SELECTED_PITCH_TEXT_COLOR);
+            drawText(WorkspaceDrawer::YARD_STICK_FONT_SIZE * devicePixelRatio, text, text, WorkspaceDrawer::YARD_STICK_DOT_AND_TEXT_COLOR);
+            drawText(PianoDrawer::FONT_SIZE * devicePixelRatio, text, text, PianoDrawer::PITCH_TEXT_COLOR);
+            drawText(PianoDrawer::FONT_SIZE * devicePixelRatio, text, text, PianoDrawer::SELECTED_PITCH_TEXT_COLOR);
         }
 
         for (char ch = 'A'; ch <= 'G'; ch++) {
             QChar text = QChar(ch);
-            drawText(8 * devicePixelRatio, text, text, PianoDrawer::PITCH_TEXT_COLOR);
-            drawText(8 * devicePixelRatio, text, text, PianoDrawer::SELECTED_PITCH_TEXT_COLOR);
+            drawText(PianoDrawer::FONT_SIZE * devicePixelRatio, text, text, PianoDrawer::PITCH_TEXT_COLOR);
+            drawText(PianoDrawer::FONT_SIZE * devicePixelRatio, text, text, PianoDrawer::SELECTED_PITCH_TEXT_COLOR);
         }
 
-        drawText(11 * devicePixelRatio, QChar(':'), "code" + QString::number(int(':')),
+        drawText(WorkspaceDrawer::YARD_STICK_FONT_SIZE * devicePixelRatio,
+                QChar(':'), "code" + QString::number(int(':')),
                 WorkspaceDrawer::YARD_STICK_DOT_AND_TEXT_COLOR);
     }
+
+    auto lines = Strings::ReadAllIntoLines(qrcPath);
+    lines = Filter(lines, [&] (const std::string& value) {
+        return value.find(pathToken) == std::string::npos;
+    });
+    
+    InsertAfter(&lines, [] (const std::string& str) {
+        return str.find(R"(<qresource prefix="/">)") != std::string::npos;
+    }, generatedLines);
+
+    Strings::WriteLinesToFile(qrcPath, lines);
 
     std::cout<<"Done\n";
 
