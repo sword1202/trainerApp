@@ -51,7 +51,6 @@ class WorkspaceDrawer : public WorkspaceController {
     Color pitchGraphColor;
     Color pitchColor;
     Color borderLineColor;
-    Color yardStickDotAndTextColor;
     Color boundsColor;
     Color playHeadColor;
     Color instrumentalTrackColor;
@@ -143,6 +142,7 @@ public:
     static constexpr int CLOCK_FONT_SIZE = 11;
     static constexpr float MIN_ZOOM = 1.0;
     static constexpr float MAX_ZOOM = 2.0;
+    static const Color YARD_STICK_DOT_AND_TEXT_COLOR;
 
     WorkspaceDrawer(Drawer *drawer, MouseEventsReceiver *mouseEventsReceiver,
                         const std::function<void()> &onUpdateRequested);

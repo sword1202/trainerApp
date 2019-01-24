@@ -63,14 +63,6 @@ void Drawer::drawVerticalLine(float x, float y, float height) {
     drawLine(x, y, x, y + height);
 }
 
-void Drawer::setStrokeColor(int color) {
-    setStrokeColor(Color::fromHex(color));
-}
-
-void Drawer::setFillColor(int color) {
-    setFillColor(Color::fromHex(color));
-}
-
 void Drawer::fillWithImage(Drawer::Image *image) {
     if (!image) {
         return;
@@ -220,7 +212,7 @@ void Drawer::drawTextUsingImages(const std::string &text, float x, float y) {
     float height = 0;
     float width = 0;
     for (char ch : text) {
-        Image* image = textImagesFactory->findImage(ch, (int)round(fontSize));
+        Image* image = textImagesFactory->findImage(ch, (int) round(fontSize), getFillColor());
         assert(image);
         if (height < image->height()) {
             height = image->height();
@@ -271,16 +263,18 @@ void DrawerTextImagesFactory::addImage(const DrawerTextImagesFactoryCharacterDat
     set.insert(data);
 }
 
-Drawer::Image *DrawerTextImagesFactory::findImage(char character, int fontSize) {
+Drawer::Image *DrawerTextImagesFactory::findImage(char character, int fontSize, const CppUtils::Color &color) {
     DrawerTextImagesFactoryCharacterData stub;
     stub.character = character;
     stub.fontSize = fontSize;
+    stub.color = color;
     return Sets::FindOrDefault(set, stub, stub).image;
 }
 
 bool DrawerTextImagesFactoryCharacterData::operator==(const DrawerTextImagesFactoryCharacterData &rhs) const {
     return character == rhs.character &&
-            fontSize == rhs.fontSize;
+            fontSize == rhs.fontSize &&
+            color == rhs.color;
 }
 
 bool DrawerTextImagesFactoryCharacterData::operator!=(const DrawerTextImagesFactoryCharacterData &rhs) const {

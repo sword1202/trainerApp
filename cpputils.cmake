@@ -10,6 +10,14 @@ set(cppUtilsSources
         CppUtils/Random.cpp
         CppUtils/Bitmap.cpp
         CppUtils/Color.cpp
+        CppUtils/BinaryMath.h
+        )
+
+set(cppUtilsTests
+        CppUtils/tests/GeometryUtilsTest.cpp
+        CppUtils/tests/BinaryMathTests.cpp
+        CppUtils/tests/ColorTests.cpp
         )
 
 list(TRANSFORM cppUtilsSources PREPEND ${CMAKE_CURRENT_LIST_DIR}/)
+list(TRANSFORM cppUtilsTests PREPEND ${CMAKE_CURRENT_LIST_DIR}/)

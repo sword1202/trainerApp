@@ -86,6 +86,7 @@ void NvgDrawer::fill() {
 
 void NvgDrawer::setFillColor(const Drawer::Color &color) {
     nvgFillColor(ctx, toNvgColor(color));
+    fillColor = color;
 }
 
 void NvgDrawer::lineJoin(Drawer::LineJoin type) {
@@ -246,4 +247,8 @@ NvgDrawer::drawShadow(float x, float y, float w, float h, float radius, float bl
     rect(x - radius, y - radius, w + radius * 2, h + radius * 2);
     nvgFillPaint(ctx, paint);
     nvgFill(ctx);
+}
+
+Color NvgDrawer::getFillColor() const {
+    return fillColor;
 }

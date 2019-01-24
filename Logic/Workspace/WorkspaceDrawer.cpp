@@ -52,6 +52,7 @@ constexpr float PIANO_TRACK_SHADOW_BLUR = 25.f;
 constexpr float PIANO_TRACK_PITCH_HEIGHT = 2.f;
 constexpr float PIANO_TRACK_PITCH_RADIUS = 1.f;
 constexpr float PIANO_TRACK_BUTTON_WIDTH = 77.f;
+const Drawer::Color WorkspaceDrawer::YARD_STICK_DOT_AND_TEXT_COLOR(0x24, 0x23, 0x2D, 0xFF);
 
 // Zoom
 constexpr float ZOOM_BASE_WIDTH = 1374.0;
@@ -493,7 +494,7 @@ void WorkspaceDrawer::drawYardStick() const {
     drawBoundsIfNeed();
 
     drawer->translate(0, YARD_STICK_Y_OFFSET);
-    drawer->setFillColor(yardStickDotAndTextColor);
+    drawer->setFillColor(YARD_STICK_DOT_AND_TEXT_COLOR);
     int startTactIndex = (int)(getHorizontalOffset() / (intervalWidth * BEATS_IN_TACT));
 
     iterateHorizontalIntervals([&](float x, bool isBeat) {
@@ -523,7 +524,7 @@ void WorkspaceDrawer::drawBoundsIfNeed() const {
 }
 
 void WorkspaceDrawer::drawYardStickDot(float x, float y) const {
-    drawer->setFillColor(yardStickDotAndTextColor);
+    drawer->setFillColor(YARD_STICK_DOT_AND_TEXT_COLOR);
     drawer->circle(x, y, YARD_STICK_DOT_RADIUS);
     drawer->fill();
 }
@@ -553,6 +554,7 @@ void WorkspaceDrawer::drawPlayHead(float x, float timeInSeconds) {
     float clockTextX = x;
     float clockTextY = clockY + CLOCK_HEIGHT / 2;
     std::string clockText = generateClockText(timeInSeconds);
+    drawer->setFillColor(YARD_STICK_DOT_AND_TEXT_COLOR);
     drawer->fillText(clockText, clockTextX, clockTextY);
 }
 
@@ -634,7 +636,6 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, MouseEventsReceiver *mouseEvent
     setPitchColor({0x6E, 0x7E, 0xC5, 0xFF});
     setPitchRadius(PITCH_RADIUS);
     borderLineColor = {0x8B, 0x89, 0xB6, 0xCC};
-    yardStickDotAndTextColor = {0x24, 0x23, 0x2D, 0xFF};
     boundsColor = {0xC4, 0xCD, 0xFD, 0xFF};
     playHeadColor = {0x24, 0x23, 0x2D, 0xFF};
     instrumentalTrackColor = {0x97, 0x98, 0xB5, 0xFF};

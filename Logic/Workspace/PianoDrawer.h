@@ -29,6 +29,8 @@ class PianoDrawer {
     Pitch getFirstPitch() const;
 public:
     static constexpr int FONT_SIZE = 8;
+    static const Drawer::Color PITCH_TEXT_COLOR;
+    static const Drawer::Color SELECTED_PITCH_TEXT_COLOR;
 
     PianoDrawer(Drawer *drawer);
 

@@ -26,8 +26,9 @@ static const Drawer::Color sharpPitchColor = {0x9A, 0x98, 0xD0, 0xff};
 static const Drawer::Color reachedPitchColor = {0x31, 0xDD, 0x6C, 0xff};
 static const Drawer::Color missedPitchColor = {0xFF, 0x5E, 0x85, 0xff};
 static const Drawer::Color selectedPitchColor = {0x61, 0x5F, 0x97, 0xff};
-static const Drawer::Color pitchTextColor = {0x24, 0x23, 0x2D, 0xe6};
-static const Drawer::Color selectedPitchTextColor = {0xff, 0xff, 0xff, 0xff};
+
+const Drawer::Color PianoDrawer::PITCH_TEXT_COLOR(0x24, 0x23, 0x2D, 0xe6);
+const Drawer::Color PianoDrawer::SELECTED_PITCH_TEXT_COLOR(Drawer::Color::white());
 
 constexpr int FONT_WEIGHT = 60;
 
@@ -172,9 +173,9 @@ void PianoDrawer::drawPitchNames(float height) const {
         }
 
         if (selectedWhitePitchIndexes.count(index)) {
-            drawer->setFillColor(selectedPitchTextColor);
+            drawer->setFillColor(SELECTED_PITCH_TEXT_COLOR);
         } else {
-            drawer->setFillColor(pitchTextColor);
+            drawer->setFillColor(PITCH_TEXT_COLOR);
         }
 
         float textX = pianoWidth - distanceBetweenTextLeftAndPitchRight;

@@ -13,12 +13,16 @@ class NvgDrawer : public Drawer {
 #ifndef NDEBUG
     std::string fontFamily;
 #endif
+    CppUtils::Color fillColor;
 protected:
     NVGcontext* ctx = nullptr;
     void setupBase();
 
     void doTranslate(float x, float y) override;
     void onImageDelete(Image *image) override;
+
+    Color getFillColor() const override;
+
 public:
     void beginFrame(float width, float height, float devicePixelRatio) override;
     void endFrame() override;

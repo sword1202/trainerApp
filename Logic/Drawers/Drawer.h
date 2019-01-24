@@ -60,8 +60,6 @@ public:
     virtual void arcTo(float x1, float y1, float x2, float y2, float radius) = 0;
     virtual void arc(float x, float y, float r, float sAngle, float eAngle) = 0;
     virtual void circle(float x, float y, float r);
-    virtual void setStrokeColor(int color);
-    virtual void setFillColor(int color);
     virtual void setStrokeColor(const Color& color) = 0;
     virtual void setFillColor(const Color& color) = 0;
     virtual void setStrokeWidth(float strokeWidth) = 0;
@@ -124,6 +122,7 @@ protected:
     virtual Image* registerImage(Image* image);
     virtual bool imageRegistered(Image* image) const;
     virtual void onImageDelete(Image* image);
+    virtual CppUtils::Color getFillColor() const = 0;
 
     float fontSize = 14;
     TextBaseline textBaseline = MIDDLE;
@@ -146,18 +145,19 @@ private:
 struct DrawerTextImagesFactoryCharacterData {
     char character = '\0';
     int fontSize = -1;
+    CppUtils::Color color;
     Drawer::Image* image = nullptr;
 
     bool operator==(const DrawerTextImagesFactoryCharacterData &rhs) const;
     bool operator!=(const DrawerTextImagesFactoryCharacterData &rhs) const;
 };
 
-MAKE_HASHABLE(DrawerTextImagesFactoryCharacterData, t.character, t.fontSize)
+MAKE_HASHABLE(DrawerTextImagesFactoryCharacterData, t.character, t.fontSize, t.color)
 
 class DrawerTextImagesFactory {
 public:
     virtual void addImage(const DrawerTextImagesFactoryCharacterData& data);
-    virtual Drawer::Image* findImage(char character, int fontSize);
+    virtual Drawer::Image *findImage(char character, int fontSize, const CppUtils::Color &color);
     virtual ~DrawerTextImagesFactory() = default;
 private:
     std::unordered_set<DrawerTextImagesFactoryCharacterData> set;

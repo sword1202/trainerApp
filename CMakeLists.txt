@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.12)
 project(VocalTrainer)
 project(VocalTrainerTests)
 project(MvxGenerator)
+project(TextImagesGenerator)
 
 if(UNIX AND NOT APPLE)
     set(LINUX TRUE)
@@ -29,12 +30,12 @@ include(cpputils.cmake)
 set(sources ${qtSources} ${logicSources} ${portMixerSources} ${cppUtilsSources})
 set(tests ${playbackTestSources}
         ${cppUtilsSources}
+        ${cppUtilsTests}
         Logic/AudioInput/Pitch.cpp
         VocalTrainerTests/BoostAssert.cpp
         VocalTrainerTests/MidiFileTest.cpp
         VocalTrainerTests/VxFileTests.cpp
         VocalTrainerTests/LoadTsf.cpp
-        ../CppUtils/tests/GeometryUtilsTest.cpp
         )
 
 find_package(Qt5Widgets REQUIRED)
@@ -43,6 +44,16 @@ find_package(Qt5Svg REQUIRED)
 
 add_executable(VocalTrainer ${sources})
 add_executable(VocalTrainerTests ${tests})
+add_executable(TextImagesGenerator
+        TextImagesGenerator/main.cpp
+        Logic/Drawers/Drawer.cpp
+        Logic/Workspace/WorkspaceDrawer.cpp
+        Logic/Workspace/PianoDrawer.cpp
+        Logic/Workspace/ScrollBar.cpp
+        Logic/Playback/Vx/VxFile.cpp
+        Logic/Playback/Base/PlaybackBounds.cpp
+        Logic/AudioInput/Pitch.cpp
+        ${cppUtilsSources})
 
 set_property (TARGET VocalTrainer APPEND_STRING PROPERTY
         COMPILE_FLAGS "-fobjc-arc")
@@ -74,6 +85,9 @@ target_link_libraries(MvxGenerator Qt5::Widgets)
 target_link_libraries(MvxGenerator Qt5::QuickWidgets)
 target_link_libraries(MvxGenerator Qt5::Svg)
 
+target_link_libraries(TextImagesGenerator Qt5::Core)
+target_link_libraries(TextImagesGenerator Qt5::Widgets)
+
 if (APPLE)
     target_link_libraries(MvxGenerator "-framework Accelerate")
     target_link_libraries(MvxGenerator "-framework AppKit")
@@ -100,6 +114,7 @@ if (APPLE)
 
     target_link_libraries(VocalTrainer ${CMAKE_SOURCE_DIR}/libs/macos/Release/libaubio.a)
     target_link_libraries(VocalTrainer ${CMAKE_SOURCE_DIR}/libs/macos/Release/libboost_serialization.a)
+    target_link_libraries(TextImagesGenerator ${CMAKE_SOURCE_DIR}/libs/macos/Release/libboost_serialization.a)
     target_link_libraries(VocalTrainerTests ${CMAKE_SOURCE_DIR}/libs/macos/Release/libboost_serialization.a)
     target_link_libraries(VocalTrainer ${CMAKE_SOURCE_DIR}/libs/macos/Release/libportaudio.a)
     target_link_libraries(VocalTrainer ${CMAKE_SOURCE_DIR}/libs/macos/Release/libSoundTouch.1.dylib)

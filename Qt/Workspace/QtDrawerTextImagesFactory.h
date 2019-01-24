@@ -8,7 +8,8 @@
 #include "Drawer.h"
 
 class QtDrawerTextImagesFactory : public DrawerTextImagesFactory {
-    void addImage(Drawer* drawer, int devicePixelRatio, int fontSize, char character, bool useCharacterCode = false);
+    void addImage(Drawer *drawer, int devicePixelRatio, int fontSize, char character,
+                      const CppUtils::Color &color, bool useCharacterCode = false);
 public:
     void load(Drawer* drawer, int devicePixelRatio);
 };
