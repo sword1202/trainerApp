@@ -197,7 +197,12 @@ void AudioPlayer::pauseSync() {
 }
 
 void AudioPlayer::setSeek(double timeStamp) {
-    assert(timeStamp >= 0 && timeStamp <= getTrackDurationInSeconds());
+    assert(timeStamp >= 0);
+    double durationInSeconds = getTrackDurationInSeconds();
+    if (timeStamp > durationInSeconds) {
+        timeStamp = durationInSeconds;
+    }
+    
     setBufferSeek(secondsSeekToBufferSeek(timeStamp));
 }
 
