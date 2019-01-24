@@ -53,6 +53,7 @@ constexpr float PIANO_TRACK_PITCH_HEIGHT = 2.f;
 constexpr float PIANO_TRACK_PITCH_RADIUS = 1.f;
 constexpr float PIANO_TRACK_BUTTON_WIDTH = 77.f;
 const Drawer::Color WorkspaceDrawer::YARD_STICK_DOT_AND_TEXT_COLOR(0x24, 0x23, 0x2D, 0xFF);
+const Drawer::Color WorkspaceDrawer::PLAYBACK_MARK_TEXT_COLOR(0xA6, 0x76, 0x3C, 0xFF);
 
 // Zoom
 constexpr float ZOOM_BASE_WIDTH = 1374.0;
@@ -167,6 +168,7 @@ void WorkspaceDrawer::draw() {
     drawHorizontalLine(YARD_STICK_HEIGHT + 0.5f, borderLineColor);
     drawer->translate(PIANO_WIDTH, 0);
 
+    drawEnding();
     if (drawTracks) {
         drawer->translate(0, -ScrollBar::SCROLLBAR_WEIGHT);
         drawPianoTrack();
@@ -175,7 +177,6 @@ void WorkspaceDrawer::draw() {
     }
     drawFirstPlayHead();
     drawSecondPlayHead();
-    drawEnding();
     drawScrollBars();
 
     drawer->translateTo(0, 0);
@@ -582,9 +583,9 @@ void WorkspaceDrawer::drawEnding() {
     float distanceInSeconds = totalDurationInSeconds - getWorkspaceSeek();
     float distance = BEATS_IN_TACT * intervalWidth + distanceInSeconds * intervalsPerSecond * intervalWidth;
     if (distance < getVisibleGridWidth()) {
-        float y = YARD_STICK_HEIGHT - PLAYHEAD_TRIANGLE_HEIGHT;
+        float y = YARD_STICK_HEIGHT;
         float scrollBarHeight = horizontalScrollBar.getPageSize() > 0 ? ScrollBar::SCROLLBAR_WEIGHT : 0;
-        drawer->setStrokeColor(playbackMarksColor);
+        drawer->setStrokeColor(playbackMarksLineColor);
         drawer->drawVerticalLine(distance, y, height - y - scrollBarHeight);
     }
 }
@@ -655,7 +656,8 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, MouseEventsReceiver *mouseEvent
     pianoTrackColor = Color::white();
     pianoTrackShadowColor = {0xDD, 0xDB, 0xEE, 0x99};
     pianoTrackPitchesColor = {0x51, 0x4E, 0x64, 0xFF};
-    playbackMarksColor = {0xDD, 0xAB, 0x70, 0xFF};
+    playbackMarksLineColor = {0xDD, 0xAB, 0x70, 0xFF};
+    playbackMarksRectColor = {0xFA, 0xDE, 0xB4, 0xFF};
 
     pianoDrawer = new PianoDrawer(drawer);
     drawer->setTextFontFamily(FONT_FAMILY);
