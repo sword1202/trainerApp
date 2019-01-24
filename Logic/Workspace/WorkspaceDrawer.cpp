@@ -175,6 +175,7 @@ void WorkspaceDrawer::draw() {
     }
     drawFirstPlayHead();
     drawSecondPlayHead();
+    drawEnding();
     drawScrollBars();
 
     drawer->translateTo(0, 0);
@@ -577,6 +578,17 @@ void WorkspaceDrawer::drawFirstPlayHead() {
     drawPlayHead(BEATS_IN_TACT * intervalWidth, time);
 }
 
+void WorkspaceDrawer::drawEnding() {
+    float distanceInSeconds = totalDurationInSeconds - getWorkspaceSeek();
+    float distance = BEATS_IN_TACT * intervalWidth + distanceInSeconds * intervalsPerSecond * intervalWidth;
+    if (distance < getVisibleGridWidth()) {
+        float y = YARD_STICK_HEIGHT - PLAYHEAD_TRIANGLE_HEIGHT;
+        float scrollBarHeight = horizontalScrollBar.getPageSize() > 0 ? ScrollBar::SCROLLBAR_WEIGHT : 0;
+        drawer->setStrokeColor(playbackMarksColor);
+        drawer->drawVerticalLine(distance, y, height - y - scrollBarHeight);
+    }
+}
+
 int WorkspaceDrawer::getDistanceFromFirstPitch(const Pitch &pitch) const {
     return pitch.getPerfectFrequencyIndex() - firstPitchIndex;
 }
@@ -643,6 +655,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, MouseEventsReceiver *mouseEvent
     pianoTrackColor = Color::white();
     pianoTrackShadowColor = {0xDD, 0xDB, 0xEE, 0x99};
     pianoTrackPitchesColor = {0x51, 0x4E, 0x64, 0xFF};
+    playbackMarksColor = {0xDD, 0xAB, 0x70, 0xFF};
 
     pianoDrawer = new PianoDrawer(drawer);
     drawer->setTextFontFamily(FONT_FAMILY);

@@ -58,6 +58,7 @@ class WorkspaceDrawer : public WorkspaceController {
     Color pianoTrackColor;
     Color pianoTrackShadowColor;
     Color pianoTrackPitchesColor;
+    Color playbackMarksColor;
 
     float width = -1;
     float height = -1;
@@ -113,6 +114,7 @@ class WorkspaceDrawer : public WorkspaceController {
     void drawPianoTrack();
     void drawPianoTrackButton();
     void drawScrollBars();
+    void drawEnding();
 
     double getSingingPitchGraphDuration() const;
     double getIntervalDuration() const;
