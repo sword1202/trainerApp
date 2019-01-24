@@ -31,5 +31,6 @@ void SingingResultDialog::save() {
 }
 
 void SingingResultDialog::again() {
+    close();
     VxApp::instance()->getPlayer()->play();
 }
