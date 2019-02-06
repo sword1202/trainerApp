@@ -13,11 +13,13 @@
 #include <iostream>
 #include <cmath>
 #include <iomanip>
+#include <Executors.h>
 
 #include "NvgDrawer.h"
 #include "Bitmap.h"
 #include "AudioUtils.h"
 #include "MathUtils.h"
+#include "StringUtils.h"
 
 #ifndef NDEBUG
 #define CHECK_IF_RENDER_THREAD assert(checkExecutedOnRenderingThread() && "WorkspaceDrawer draw, resize and constructor should be executed  in the same thread")
@@ -135,7 +137,7 @@ void WorkspaceDrawer::draw() {
 
     double now = TimeUtils::NowInSeconds();
     float frameDuration = now - frameTime;
-//    cout<<"fps = "<<(1.0 / frameDuration)<<"\n";
+    float fps = 1.0 / frameDuration;
     // old logic
     if (running) {
         horizontalOffset = horizontalOffset + intervalsPerSecond * intervalWidth * frameDuration;
@@ -193,6 +195,9 @@ void WorkspaceDrawer::draw() {
     drawer->translate(0, PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN);
     drawVerticalLine(PIANO_WIDTH, borderLineColor);
     drawer->translate(0, -PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN);
+
+    drawer->translateTo(200, 200);
+    drawFps(fps);
 
     drawer->endFrame();
 }
@@ -923,4 +928,15 @@ void WorkspaceDrawer::updateHorizontalScrollBarPagePosition() {
 void WorkspaceDrawer::setSeekUpdatedInsideListener(const std::function<void(float)> &listener) {
     CHECK_IF_RENDER_THREAD;
     this->seekUpdatedInsideListener = listener;
+}
+
+void WorkspaceDrawer::drawFps(float fps) {
+    auto str = std::to_string(int(round(fps)));
+    if (fps < 53) {
+        str = "0000000";
+    }
+
+    drawer->setTextFontSize(YARD_STICK_FONT_SIZE);
+    drawer->setFillColor(YARD_STICK_DOT_AND_TEXT_COLOR);
+    drawer->fillText(str, 0, 0);
 }

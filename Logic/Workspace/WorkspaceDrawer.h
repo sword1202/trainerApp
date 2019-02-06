@@ -116,6 +116,7 @@ class WorkspaceDrawer : public WorkspaceController {
     void drawPianoTrackButton();
     void drawScrollBars();
     void drawEnding();
+    void drawFps(float fps);
 
     double getSingingPitchGraphDuration() const;
     double getIntervalDuration() const;
