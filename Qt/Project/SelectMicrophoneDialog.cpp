@@ -39,7 +39,7 @@ SelectMicrophoneDialog::SelectMicrophoneDialog(QWidget* parent, QtCppBridge* cpp
     context->setContextProperty("self", this);
     context->setContextProperty("cpp", cpp);
 
-    selectMicrophoneDialogView->setSource(QUrl("qrc:/qml/SelectMicrophoneDialog.qml"));
+    selectMicrophoneDialogView->setSource(QUrl("qrc:/qml/Project/SelectMicrophoneDialog.qml"));
     rootQml = selectMicrophoneDialogView->rootObject();
 
     setAttribute(Qt::WA_DeleteOnClose, true);
