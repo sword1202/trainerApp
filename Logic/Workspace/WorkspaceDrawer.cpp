@@ -197,7 +197,7 @@ void WorkspaceDrawer::draw() {
     drawer->translate(0, -PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN);
 
     drawer->translateTo(200, 200);
-    drawFps(fps);
+    //drawFps(fps);
 
     drawer->endFrame();
 }
