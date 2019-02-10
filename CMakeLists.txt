@@ -117,7 +117,7 @@ if (APPLE)
     target_link_libraries(TextImagesGenerator ${CMAKE_SOURCE_DIR}/libs/macos/Release/libboost_serialization.a)
     target_link_libraries(VocalTrainerTests ${CMAKE_SOURCE_DIR}/libs/macos/Release/libboost_serialization.a)
     target_link_libraries(VocalTrainer ${CMAKE_SOURCE_DIR}/libs/macos/Release/libportaudio.a)
-    target_link_libraries(VocalTrainer ${CMAKE_SOURCE_DIR}/libs/macos/Release/libSoundTouch.1.dylib)
+    target_link_libraries(VocalTrainer ${CMAKE_SOURCE_DIR}/libs/macos/Release/libSoundTouch.a)
 endif(APPLE)
 
 if (WIN32)
