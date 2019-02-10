@@ -22,59 +22,63 @@ Item {
         anchors.centerIn: parent
         color: "white"
 
-        Canvas {
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.leftMargin: 8
-            anchors.rightMargin: 8
+        // Canvas {
+        //     anchors.left: parent.left
+        //     anchors.right: parent.right
+        //     anchors.leftMargin: 8
+        //     anchors.rightMargin: 8
 
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            anchors.topMargin: 1
-            anchors.bottomMargin: 1
+        //     anchors.top: parent.top
+        //     anchors.bottom: parent.bottom
+        //     anchors.topMargin: 1
+        //     anchors.bottomMargin: 1
 
-            onPaint: {
-                var ctx = getContext("2d");
-                ctx.clearRect(0, 0, parent.width, parent.height)
-                ctx.fillStyle = "#31DD6C"
-                var width = parent.width * level
-                ctx.fillRect(0, 0, width, 2)
-                ctx.fillRect(0, 3, width, 2)
-            }
+        //     onPaint: {
+        //         var ctx = getContext("2d");
+        //         ctx.clearRect(0, 0, parent.width, parent.height)
+        //         ctx.fillStyle = "#31DD6C"
+        //         var width = parent.width * level
+        //         ctx.fillRect(0, 0, width, 2)
+        //         ctx.fillRect(0, 3, width, 2)
+        //     }
 
-            Timer {
-                interval: 1000 / 60
-                running: true
-                repeat: true
+        //     Timer {
+        //         interval: 1000 / 60
+        //         running: true
+        //         repeat: true
 
-                onTriggered: {
-                    parent.requestPaint()
-                }
-            }
-        }
+        //         onTriggered: {
+        //             parent.requestPaint()
+        //         }
+        //     }
+        // }
 
-//        Column {
-//            spacing: 1
-//            anchors.left: parent.left
-//            anchors.right: parent.right
-//            anchors.verticalCenter: parent.verticalCenter
-//            anchors.leftMargin: 8
-//            anchors.rightMargin: 8
+       Column {
+           spacing: 1
+           anchors.left: parent.left
+           anchors.right: parent.right
+           anchors.verticalCenter: parent.verticalCenter
+           anchors.leftMargin: 8
+           anchors.rightMargin: 8
+           width: parent.width
+           transform: Scale {
+              xScale: level
+           }
 
-//            Rectangle {
-//                height: 2
-//                anchors.left: parent.left
-//                width: parent.width * level
-//                color: "#31DD6C"
-//            }
+           Rectangle {
+               height: 2
+               width: parent.width
+               anchors.left: parent.left
+               color: "#31DD6C"
+           }
 
-//            Rectangle {
-//                height: 2
-//                anchors.left: parent.left
-//                width: parent.width * level
-//                color: "#31DD6C"
-//            }
-//        }
+           Rectangle {
+               height: 2
+               anchors.left: parent.left
+               width: parent.width
+               color: "#31DD6C"
+           }
+       }
     }
 
     MouseArea {
