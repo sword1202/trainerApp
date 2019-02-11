@@ -22,38 +22,7 @@ Item {
         anchors.centerIn: parent
         color: "white"
 
-        // Canvas {
-        //     anchors.left: parent.left
-        //     anchors.right: parent.right
-        //     anchors.leftMargin: 8
-        //     anchors.rightMargin: 8
-
-        //     anchors.top: parent.top
-        //     anchors.bottom: parent.bottom
-        //     anchors.topMargin: 1
-        //     anchors.bottomMargin: 1
-
-        //     onPaint: {
-        //         var ctx = getContext("2d");
-        //         ctx.clearRect(0, 0, parent.width, parent.height)
-        //         ctx.fillStyle = "#31DD6C"
-        //         var width = parent.width * level
-        //         ctx.fillRect(0, 0, width, 2)
-        //         ctx.fillRect(0, 3, width, 2)
-        //     }
-
-        //     Timer {
-        //         interval: 1000 / 60
-        //         running: true
-        //         repeat: true
-
-        //         onTriggered: {
-        //             parent.requestPaint()
-        //         }
-        //     }
-        // }
-
-       Column {
+        Column {
            spacing: 1
            anchors.left: parent.left
            anchors.right: parent.right
@@ -78,7 +47,7 @@ Item {
                width: parent.width
                color: "#31DD6C"
            }
-       }
+        }
     }
 
     MouseArea {
