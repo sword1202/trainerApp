@@ -4,8 +4,10 @@
 
 #include "ScrollBar.h"
 #include "Rect.h"
+#include <iostream>
 
 using namespace CppUtils;
+using namespace std;
 
 constexpr float SCROLLBAR_PADDING = 2.f;
 
@@ -81,12 +83,20 @@ void ScrollBar::draw(float x, float y, float length) {
         }
 
         if (scrollBarRect.containsPoint(currentMousePosition)) {
-            lastMouseClickPosition = currentMousePosition;
+            if (!clickFailed && lastMouseClickPosition == PointF(-1, -1)) {
+                lastMouseClickPosition = currentMousePosition;
+            }
         }
+
+        if (!currentMousePosition.compareUsingEpsilon(lastMouseClickPosition, 0.1)) {
+            lastMouseClickPosition = PointF(-1, -1);
+            clickFailed = true;
+        }
+
     } else {
         leftMouseWasDownOnScroller = false;
 
-        if (currentMousePosition.compareUsingEpsilon(lastMouseClickPosition, 0.1)) {
+        if (!clickFailed && currentMousePosition.compareUsingEpsilon(lastMouseClickPosition, 0.1)) {
             auto relatedMousePosition = lastMouseClickPosition - scrollBarRect.A;
             float mousePosition = isVertical ? relatedMousePosition.y : relatedMousePosition.x;
             float maxMousePosition = isVertical ? scrollBarRect.height : scrollBarRect.width;
@@ -99,6 +109,7 @@ void ScrollBar::draw(float x, float y, float length) {
             positionWasChangedFromUser = true;
         }
         lastMouseClickPosition = PointF(-1, -1);
+        clickFailed = false;
     }
 
     // translate back to local coordinates

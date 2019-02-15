@@ -24,6 +24,7 @@ private:
     Orientation orientation;
     bool leftMouseWasDownOnScroller = false;
     bool positionWasChangedFromUser = false;
+    bool clickFailed = false;
 public:
     static constexpr float SCROLLBAR_WEIGHT = 11.f;
 
