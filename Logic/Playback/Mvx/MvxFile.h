@@ -135,6 +135,7 @@ public:
     void generateInstrumentalPreviewSamplesFromInstrumental();
 
     const Lyrics &getLyrics() const;
+    void setLyrics(const Lyrics &lyrics);
 };
 
 

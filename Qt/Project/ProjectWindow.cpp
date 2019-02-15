@@ -134,7 +134,8 @@ ProjectWindow::ProjectWindow() :
     setShowLyrics(hasLyrics);
     if (hasLyrics) {
         QtUtils::StartRepeatedTimer(this, [=] {
-            lyricsWidget->setProperty("lyricsText", QtUtils::QStringFromUtf8(player->getLyricsTextAtLine(0)));
+            const std::string& lyricsTextUtf8 = player->getLyricsTextAtLine(0);
+            lyricsWidget->rootContext()->setContextProperty("lyricsText", QtUtils::QStringFromUtf8(lyricsTextUtf8));
             return true;
         }, LYRICS_UPDATE_DELAY);
     }

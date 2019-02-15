@@ -155,3 +155,7 @@ void MvxFile::generateInstrumentalPreviewSamplesFromInstrumental() {
 const Lyrics &MvxFile::getLyrics() const {
     return lyrics;
 }
+
+void MvxFile::setLyrics(const Lyrics &lyrics) {
+    this->lyrics = lyrics;
+}
