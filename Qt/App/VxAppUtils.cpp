@@ -37,21 +37,5 @@ namespace VxAppUtils {
         } else {
             settings.addProject(fileName);
         }
-
-//        LyricsLine lyricsLine;
-//        LyricsInterval interval;
-//        interval.startTime = 33;
-//        interval.endTime = 44;
-//        interval.text = "Hey torero, jizn kak mig, opiat zvuchit, trubi prizivnii zov";
-//        lyricsLine.intervals.push_back(interval);
-//        interval = LyricsInterval();
-//        interval.startTime = 44.5;
-//        interval.endTime = 53;
-//        interval.text = "Hey torero, ti ili bik, kachaetsa chasha vesov";
-//        lyricsLine.intervals.push_back(interval);
-//
-//        auto mvxFile = MvxFile::readFromFile(fileName.toLocal8Bit().data());
-//        mvxFile.setLyrics(Lyrics(lyricsLine));
-//        mvxFile.writeToFile(fileName.toLocal8Bit().data());
     }
 }
