@@ -9,7 +9,6 @@
 #include <istream>
 #include "VxPitch.h"
 #include <vector>
-#include "VxLyricsLine.h"
 #include <boost/container/static_vector.hpp>
 #include <boost/serialization/vector.hpp>
 #include "StlDebugUtils.h"
@@ -23,10 +22,7 @@ class VxFile {
     int lowestPitchIndex;
     int highestPitchIndex;
 
-    boost::container::static_vector<VxLyricsLine, 2> lyrics;
-
     bool validatePitches();
-    bool validateLyrics();
     void postInit();
 
 #ifdef USE_BOOST_SERIALIZATION
@@ -81,10 +77,6 @@ public:
     int getDurationInTicks() const;
     int getDistanceInTicksBetweenLastPitchEndAndTrackEnd() const;
     const VxPitch& getShortestPitch() const;
-
-    const VxLyricsLine &getLyricsLine(int lineIndex) const;
-    int getLyricsLinesCount() const;
-    void addLyricsLine(const VxLyricsLine& line);
 
     void shift(int distance);
     VxFile shifted(int distance);

@@ -125,6 +125,10 @@ public:
 
     // The method is valid only for recordigns
     const PitchesCollection* getPitchesCollection();
+
+    virtual bool hasLyrics() const;
+    int getLyricsLinesCount() const;
+    const std::string& getLyricsTextAtLine(int lineIndex) const;
 };
 
 

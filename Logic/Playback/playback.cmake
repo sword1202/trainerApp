@@ -32,6 +32,7 @@ set(playbackSources
 
         Mvx/MvxPlayer.cpp
         Mvx/MvxPlayer.h
+        Mvx/Lyrics.cpp
 
         Vx/VxFileAudioDataGenerator.cpp
         Vx/VxFileAudioPlayer.cpp

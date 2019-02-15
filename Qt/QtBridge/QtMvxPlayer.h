@@ -46,6 +46,8 @@ public:
     Q_INVOKABLE void seekToNextTact() override;
     Q_INVOKABLE void seekToPrevTact() override;
 
+    Q_INVOKABLE bool hasLyrics() const override;
+
     void onPlaybackStopped() override;
 
     void onComplete() override;

@@ -151,3 +151,7 @@ void MvxFile::generateInstrumentalPreviewSamplesFromInstrumental() {
     std::vector<short> previewSamples = AudioUtils::ResizePreviewSamples(decoded.rawPcm, previewSamplesCount);
     setInstrumentalPreviewSamples(previewSamples);
 }
+
+const Lyrics &MvxFile::getLyrics() const {
+    return lyrics;
+}

@@ -106,3 +106,5 @@ cmake-build-debug
 
 CMakeCache.txt
 CMakeFiles
+
+*_autogen

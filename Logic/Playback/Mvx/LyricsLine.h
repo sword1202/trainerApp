@@ -6,13 +6,13 @@
 #ifndef VOCALTRAINER_VXLYRICSLINE_H
 #define VOCALTRAINER_VXLYRICSLINE_H
 
-#include "VxLyricsInterval.h"
+#include "LyricsInterval.h"
 #include <string>
 #include <vector>
 
-struct VxLyricsLine {
+struct LyricsLine {
     std::string name;
-    std::vector<VxLyricsInterval> intervals;
+    std::vector<LyricsInterval> intervals;
 
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version)

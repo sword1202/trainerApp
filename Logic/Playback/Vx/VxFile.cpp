@@ -140,9 +140,7 @@ void VxFile::writeToStream(std::ostream &os) const {
 VxFile::VxFile(std::istream &is) {
     boost::archive::text_iarchive ar(is);
     ar >> *this;
-
     postInit();
-    BOOST_ASSERT(validateLyrics());
 }
 
 VxFile VxFile::fromFilePath(const char *filePath) {
@@ -151,58 +149,6 @@ VxFile VxFile::fromFilePath(const char *filePath) {
 }
 
 #endif
-
-bool VxFile::validateLyrics() {
-    if (lyrics.empty()) {
-        return true;
-    }
-
-    for (const auto& line : lyrics) {
-        const std::vector<VxLyricsInterval> &intervals = line.intervals;
-        if (intervals[0].startTimestampInMilliseconds < 0) {
-            return false;
-        }
-
-        if (intervals[0].endTimestampInMilliseconds < 1) {
-            return false;
-        }
-
-        if (intervals[0].endTimestampInMilliseconds < intervals[0].startTimestampInMilliseconds) {
-            return false;
-        }
-
-        for (int i = 1; i < lyrics.size(); ++i) {
-            const VxLyricsInterval &interval = intervals[i];
-            const VxLyricsInterval &prev = intervals[i - 1];
-
-            if (interval.startTimestampInMilliseconds < 0) {
-                return false;
-            }
-
-            if (interval.endTimestampInMilliseconds <= interval.startTimestampInMilliseconds) {
-                return false;
-            }
-
-            if (interval.startTimestampInMilliseconds < prev.endTimestampInMilliseconds) {
-                return false;
-            }
-        }
-
-        if (intervals.back().endTimestampInMilliseconds > getDurationInSeconds() * 1000) {
-            return false;
-        }
-    }
-
-    return true;
-}
-
-const VxLyricsLine &VxFile::getLyricsLine(int lineIndex) const {
-    return lyrics[lineIndex];
-}
-
-int VxFile::getLyricsLinesCount() const {
-    return (int)lyrics.size();
-}
 
 int VxFile::timeInSecondsToTicks(double timeInSeconds)const {
     return static_cast<int>(round(timeInSeconds / getTickDurationInSeconds()));
@@ -228,10 +174,6 @@ const VxPitch &VxFile::getShortestPitch() const {
     return FindMinValueUsingKeyProvider(pitches, [](const VxPitch& pitch) {
         return pitch.ticksCount;
     });
-}
-
-void VxFile::addLyricsLine(const VxLyricsLine &line) {
-    lyrics.push_back(line);
 }
 
 VxFile::VxFile() {

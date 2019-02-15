@@ -17,44 +17,42 @@ Rectangle {
     height: 75
     color: "#c5cef8"
 
-    FeaturesToggleButton {
-        id: lyricsShowButton
-        on: true
-        onImage: "images/lyrics_show_button_on.svg"
-        offImage: "images/lyrics_show_button_off.svg"
-
+    Row {
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
         anchors.leftMargin: 23.25
+        spacing: 4
 
-        onOnChanged: {
-            self.setShowLyrics(on)
+        FeaturesToggleButton {
+            id: lyricsShowButton
+            on: cpp.player.hasLyrics()
+            visible: cpp.player.hasLyrics()
+            onImage: "images/lyrics_show_button_on.svg"
+            offImage: "images/lyrics_show_button_off.svg"
+
+            onOnChanged: {
+                self.setShowLyrics(on)
+            }
         }
-    }
 
-    FeaturesToggleButton {
-        id: tracksShowButton
-        on: true
-        onImage: "images/tracks_show_button_on.svg"
-        offImage: "images/tracks_show_button_off.svg"
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: lyricsShowButton.right
-        anchors.leftMargin: 4
+        FeaturesToggleButton {
+            id: tracksShowButton
+            on: true
+            onImage: "images/tracks_show_button_on.svg"
+            offImage: "images/tracks_show_button_off.svg"
 
-        onOnChanged: {
-            self.setShowTracks(on)
+            onOnChanged: {
+                self.setShowTracks(on)
+            }
         }
-    }
 
-    FeaturesToggleButton {
-        onImage: "images/metronome_on.svg"
-        offImage: "images/metronome_off.svg"
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: tracksShowButton.right
-        anchors.leftMargin: 4
+        FeaturesToggleButton {
+            onImage: "images/metronome_on.svg"
+            offImage: "images/metronome_off.svg"
 
-        onOnChanged: {
-            cpp.player.metronomeEnabled = on
+            onOnChanged: {
+                cpp.player.metronomeEnabled = on
+            }
         }
     }
 

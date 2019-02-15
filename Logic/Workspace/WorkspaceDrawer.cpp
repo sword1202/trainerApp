@@ -23,6 +23,8 @@
 
 #ifndef NDEBUG
 #define CHECK_IF_RENDER_THREAD assert(checkExecutedOnRenderingThread() && "WorkspaceDrawer draw, resize and constructor should be executed  in the same thread")
+#else
+#define CHECK_IF_RENDER_THREAD
 #endif
 
 using namespace CppUtils;

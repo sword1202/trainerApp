@@ -360,3 +360,16 @@ const PitchesCollection* MvxPlayer::getPitchesCollection() {
 const MvxFile &MvxPlayer::getMvxFile() const {
     return mvxFile;
 }
+
+bool MvxPlayer::hasLyrics() const {
+    return getLyricsLinesCount() > 0;
+}
+
+int MvxPlayer::getLyricsLinesCount() const {
+    return mvxFile.getLyrics().getLinesCount();
+}
+
+const std::string& MvxPlayer::getLyricsTextAtLine(int lineIndex) const {
+    double seek = getSeek();
+    return mvxFile.getLyrics().getCurrentLyricsTextAtLine(lineIndex, seek);
+}

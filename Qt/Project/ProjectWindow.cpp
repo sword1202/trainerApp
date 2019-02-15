@@ -33,6 +33,7 @@ constexpr int BEATS_IN_TACT = 4;
 constexpr int MINIMUM_WINDOW_WIDTH = 700;
 constexpr double MINIMUM_WINDOW_HEIGHT_RATIO = 0.6;
 constexpr int LYRICS_HEIGHT = 53;
+constexpr int LYRICS_UPDATE_DELAY = 50;
 
 #ifdef __APPLE__
 #define IS_APPLE true
@@ -125,6 +126,16 @@ ProjectWindow::ProjectWindow() :
     MainController::instance()->getWorkspaceController([this] (WorkspaceController* workspaceController) {
         this->workspaceController = workspaceController;
     });
+
+
+    bool hasLyrics = player->hasLyrics();
+    setShowLyrics(hasLyrics);
+    if (hasLyrics) {
+        QtUtils::StartRepeatedTimer(this, [=] {
+            lyricsWidget->setProperty("lyricsText", QtUtils::QStringFromUtf8(player->getLyricsTextAtLine(0)));
+            return true;
+        }, LYRICS_UPDATE_DELAY);
+    }
 }
 
 void ProjectWindow::onOutputVolumeChanged(float value) {

@@ -9,6 +9,7 @@
 #include <iostream>
 #include "VxFile.h"
 #include "StringUtils.h"
+#include "Lyrics.h"
 #include <boost/variant.hpp>
 
 class MvxFile {
@@ -29,6 +30,8 @@ class MvxFile {
     std::vector<float> recordedPitchesFrequencies;
 
     std::vector<short> instrumentalPreviewSamples;
+
+    Lyrics lyrics;
 
     bool readOnlySignature = false;
     int version = 0;
@@ -70,6 +73,10 @@ class MvxFile {
 
             if (version >= 3) {
                 ar & instrumentalPreviewSamples;
+            }
+
+            if (version >= 4) {
+                ar & lyrics;
             }
         }
     }
@@ -126,13 +133,17 @@ public:
     void setInstrumentalPreviewSamples(const std::vector<short> &instrumentalPreviewSamples);
 
     void generateInstrumentalPreviewSamplesFromInstrumental();
+
+    const Lyrics &getLyrics() const;
 };
 
 
 /**
  * Version 2: recordedPitchesTimes and recordedPitchesFrequencies are added
+ * Version 3: instrumentalPreviewSamples added
+ * Version 4: Lyrics added
  */
-BOOST_CLASS_VERSION(MvxFile, 3)
+BOOST_CLASS_VERSION(MvxFile, 4)
 
 
 #endif //VOCALTRAINER_MVXFILE_H

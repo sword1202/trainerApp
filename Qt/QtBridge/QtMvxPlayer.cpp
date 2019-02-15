@@ -144,3 +144,7 @@ QString QtMvxPlayer::getArtistName() const {
 QString QtMvxPlayer::getSongTitle() const {
     return QString::fromUtf8(getSongTitleUtf8().data());
 }
+
+bool QtMvxPlayer::hasLyrics() const {
+    return MvxPlayer::hasLyrics();
+}
