@@ -19,6 +19,9 @@ class Lyrics {
         ar & lyrics;
     }
 public:
+    Lyrics() = default;
+    explicit Lyrics(const LyricsLine& lyricsLine);
+    Lyrics(const LyricsLine& lyricsLine1, const LyricsLine& lyricsLine2);
 
     int getLinesCount() const;
     const std::string& getLineName(int index) const;

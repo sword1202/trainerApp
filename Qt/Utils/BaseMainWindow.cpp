@@ -20,14 +20,18 @@ BaseMainWindow::BaseMainWindow(QColor windowBorderColor) {
         setMinimumSize(availableSize.width(), static_cast<int>(availableSize.height() * MINIMUM_WINDOW_HEIGHT_RATIO));
 }
 
-QQuickWidget *BaseMainWindow::createQQuickWidget(const QString& qmlFile) {
-    return createQQuickWidget(qmlFile, this);
+QQuickWidget *BaseMainWindow::createQQuickWidget(const QString& qmlFile, const std::function<void(QQmlContext* context)>& initContext) {
+    return createQQuickWidget(qmlFile, this, initContext);
 }
 
-QQuickWidget *BaseMainWindow::createQQuickWidget(const QString &qmlFile, QWidget *parent) {
+QQuickWidget *BaseMainWindow::createQQuickWidget(const QString &qmlFile, QWidget *parent, const std::function<void(QQmlContext* context)>& initContext) {
     QQuickWidget* qmlWidget = new QQuickWidget(parent);
-    qmlWidget->rootContext()->setContextProperty("cpp", cpp);
-    qmlWidget->rootContext()->setContextProperty("self", this);
+    QQmlContext *context = qmlWidget->rootContext();
+    context->setContextProperty("cpp", cpp);
+    context->setContextProperty("self", this);
+    if (initContext) {
+        initContext(context);
+    }
     qmlWidget->setSource(QUrl(qmlFile));
     return qmlWidget;
 }

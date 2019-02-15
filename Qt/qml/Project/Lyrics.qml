@@ -17,6 +17,6 @@ Rectangle {
         font.bold: true
         font.family: "Lato"
         color: "#24232d"
-        text: lyricsText || ""
+        text: lyricsText
     }
 }

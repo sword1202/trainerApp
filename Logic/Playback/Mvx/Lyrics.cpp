@@ -31,3 +31,12 @@ const std::string& Lyrics::getLineName(int index) const {
     assert(index < lyrics.size());
     return lyrics[index].name;
 }
+
+Lyrics::Lyrics(const LyricsLine &lyricsLine) {
+    lyrics.push_back(lyricsLine);
+}
+
+Lyrics::Lyrics(const LyricsLine &lyricsLine1, const LyricsLine &lyricsLine2) {
+    lyrics.push_back(lyricsLine1);
+    lyrics.push_back(lyricsLine2);
+}

@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QObject>
 #include <QQuickWidget>
+#include <QQmlContext>
 #include "QtBridge/QtCppBridge.h"
 
 class BaseMainWindow : public QMainWindow
@@ -17,8 +18,10 @@ protected:
 public:
     BaseMainWindow(QColor windowBorderColor);
 
-    QQuickWidget *createQQuickWidget(const QString& qmlFile);
-    QQuickWidget *createQQuickWidget(const QString& qmlFile, QWidget* parent);
+    QQuickWidget *createQQuickWidget(const QString& qmlFile,
+            const std::function<void(QQmlContext* context)>& initContext = nullptr);
+    QQuickWidget *createQQuickWidget(const QString& qmlFile, QWidget* parent,
+            const std::function<void(QQmlContext* context)>& initContext = nullptr);
 };
 
 #endif // BASEMAINWINDOW_H

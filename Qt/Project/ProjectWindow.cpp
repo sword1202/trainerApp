@@ -65,7 +65,9 @@ ProjectWindow::ProjectWindow() :
     workspaceWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     // Lyrics
-    lyricsWidget = createQQuickWidget("qrc:/qml/Project/Lyrics.qml");
+    lyricsWidget = createQQuickWidget("qrc:/qml/Project/Lyrics.qml", [] (QQmlContext* context) {
+        context->setContextProperty("lyricsText", "");
+    });
     lyricsWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
     lyricsWidget->setFixedHeight(LYRICS_HEIGHT);
     lyricsWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
