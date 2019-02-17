@@ -318,8 +318,13 @@ void WorkspaceDrawer::drawInstrumentalTrack() {
     if (instrumentalTrackImage) {
         drawer->drawImage(0, height - INSTRUMENTAL_TRACK_BOTTOM_MARGIN - INSTRUMENTAL_TRACK_HEIGHT,
                           instrumentalTrackImage);
-        drawInstrumentalTrackButton();
+    } else {
+        drawer->setStrokeColor(instrumentalTrackColor);
+        drawer->drawHorizontalLine(0, height - INSTRUMENTAL_TRACK_BOTTOM_MARGIN - INSTRUMENTAL_TRACK_HEIGHT / 2,
+                width);
     }
+
+    drawInstrumentalTrackButton();
 }
 
 void WorkspaceDrawer::drawInstrumentalTrackButton() {
@@ -593,7 +598,7 @@ void WorkspaceDrawer::drawEnding() {
     if (distance < getVisibleGridWidth()) {
         float y = YARD_STICK_HEIGHT;
         float scrollBarHeight = horizontalScrollBar.getPageSize() > 0 ? ScrollBar::SCROLLBAR_WEIGHT : 0;
-        drawer->setStrokeColor(playbackMarksLineColor);
+        drawer->setStrokeColor(endingColor);
         drawer->drawVerticalLine(distance, y, height - y - scrollBarHeight);
     }
 }
@@ -666,6 +671,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, MouseEventsReceiver *mouseEvent
     pianoTrackPitchesColor = {0x51, 0x4E, 0x64, 0xFF};
     playbackMarksLineColor = {0xDD, 0xAB, 0x70, 0xFF};
     playbackMarksRectColor = {0xFA, 0xDE, 0xB4, 0xFF};
+    endingColor = {0xFF, 0x5E, 0x85, 0xFF};
 
     pianoDrawer = new PianoDrawer(drawer);
     drawer->setTextFontFamily(FONT_FAMILY);
@@ -673,7 +679,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, MouseEventsReceiver *mouseEvent
     pitchesTimes.reserve(5000);
     pitchesFrequencies.reserve(5000);
 
-    setFirstVisiblePitch(Pitch("C2"));
+    setFirstVisiblePitch(Pitch("C1"));
     lastPitchIndex = Pitch("B6").getPerfectFrequencyIndex();
 
     setZoom(MIN_ZOOM);

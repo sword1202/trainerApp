@@ -4,8 +4,7 @@
 
 #include "BaseSynchronizedMouseEventsReceiver.h"
 
-//#define LOCK std::lock_guard<std::mutex> _(mousePositionMutex)
-#define LOCK
+#define LOCK std::lock_guard<std::mutex> _(mousePositionMutex)
 
 using namespace CppUtils;
 

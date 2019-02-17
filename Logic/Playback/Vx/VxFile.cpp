@@ -44,14 +44,14 @@ std::ostream& operator<<(std::ostream& os, const VxPitch& pitch) {
 VxFile::VxFile(std::vector<VxPitch> &&pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int ticksPerSecond)
         : pitches(std::move(pitches)),
           ticksPerSecond(ticksPerSecond),
-          distanceInTicksBetweenLastPitchEndAndTrackEnd(distanceInTicksBetweenLastPitchEndAndTrackEnd) {
+          endSilenceDurationInTicks(distanceInTicksBetweenLastPitchEndAndTrackEnd) {
     postInit();
 }
 
 VxFile::VxFile(const std::vector<VxPitch> &pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int ticksPerSecond)
         : pitches(pitches),
           ticksPerSecond(ticksPerSecond),
-          distanceInTicksBetweenLastPitchEndAndTrackEnd(distanceInTicksBetweenLastPitchEndAndTrackEnd)
+          endSilenceDurationInTicks(distanceInTicksBetweenLastPitchEndAndTrackEnd)
 {
     postInit();
 }
@@ -100,13 +100,13 @@ void VxFile::postInit() {
     lowestPitchIndex = pair.first - pitches.begin();
     highestPitchIndex = pair.second - pitches.begin();
 
-    BOOST_ASSERT(distanceInTicksBetweenLastPitchEndAndTrackEnd >= 0);
+    BOOST_ASSERT(endSilenceDurationInTicks >= 0);
     BOOST_ASSERT(validatePitches());
     if (!pitches.empty()) {
         auto lastPitchIter = MaxByKey(pitches, [] (const VxPitch& vxPitch) {
             return vxPitch.endTickNumber();
         });
-        durationInTicks = lastPitchIter->endTickNumber() + distanceInTicksBetweenLastPitchEndAndTrackEnd;
+        durationInTicks = lastPitchIter->endTickNumber() + endSilenceDurationInTicks;
     }
 }
 
@@ -126,8 +126,8 @@ int VxFile::getDurationInTicks() const {
     return durationInTicks;
 }
 
-int VxFile::getDistanceInTicksBetweenLastPitchEndAndTrackEnd() const {
-    return distanceInTicksBetweenLastPitchEndAndTrackEnd;
+int VxFile::getEndSilenceDurationInTicks() const {
+    return endSilenceDurationInTicks;
 }
 
 #ifdef USE_BOOST_SERIALIZATION
@@ -231,7 +231,7 @@ double VxFile::getFirstPitchStartTime() const {
 }
 
 VxFile VxFile::withChangedTempo(double tempoFactor) const {
-    return VxFile(pitches, distanceInTicksBetweenLastPitchEndAndTrackEnd, (int)round(ticksPerSecond * tempoFactor));
+    return VxFile(pitches, endSilenceDurationInTicks, (int)round(ticksPerSecond * tempoFactor));
 }
 
 VxFile VxFile::cut(double start, double end) {
@@ -250,7 +250,7 @@ VxFile VxFile::cut(double start, double end) {
         newPitches.push_back(vxPitch);
     });
 
-    int distanceInTicksBetweenLastPitchEndAndTrackEnd = this->distanceInTicksBetweenLastPitchEndAndTrackEnd;
+    int distanceInTicksBetweenLastPitchEndAndTrackEnd = this->endSilenceDurationInTicks;
     std::max(0, distanceInTicksBetweenLastPitchEndAndTrackEnd - (durationInTicks - endTick));
 
     return VxFile(std::move(newPitches), distanceInTicksBetweenLastPitchEndAndTrackEnd, ticksPerSecond);

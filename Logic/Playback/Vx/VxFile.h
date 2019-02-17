@@ -18,7 +18,7 @@ class VxFile {
     std::vector<VxPitch> pitches;
     int ticksPerSecond = 0;
     int durationInTicks = 0;
-    int distanceInTicksBetweenLastPitchEndAndTrackEnd = 0;
+    int endSilenceDurationInTicks = 0;
     int lowestPitchIndex;
     int highestPitchIndex;
 
@@ -33,13 +33,13 @@ class VxFile {
     void save(Archive & ar, const unsigned int version) const {
         ar & ticksPerSecond;
         ar & pitches;
-        ar & distanceInTicksBetweenLastPitchEndAndTrackEnd;
+        ar & endSilenceDurationInTicks;
     }
     template<class Archive>
     void load(Archive & ar, const unsigned int version) {
         ar & ticksPerSecond;
         ar & pitches;
-        ar & distanceInTicksBetweenLastPitchEndAndTrackEnd;
+        ar & endSilenceDurationInTicks;
         postInit();
     }
     BOOST_SERIALIZATION_SPLIT_MEMBER()
@@ -75,7 +75,7 @@ public:
 
     int getTicksPerSecond() const;
     int getDurationInTicks() const;
-    int getDistanceInTicksBetweenLastPitchEndAndTrackEnd() const;
+    int getEndSilenceDurationInTicks() const;
     const VxPitch& getShortestPitch() const;
 
     void shift(int distance);

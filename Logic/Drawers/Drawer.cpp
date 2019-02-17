@@ -63,6 +63,10 @@ void Drawer::drawVerticalLine(float x, float y, float height) {
     drawLine(x, y, x, y + height);
 }
 
+void Drawer::drawHorizontalLine(float x, float y, float width) {
+    drawLine(x, y, x + width, y);
+}
+
 void Drawer::fillWithImage(Drawer::Image *image) {
     if (!image) {
         return;

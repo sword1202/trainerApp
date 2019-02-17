@@ -151,7 +151,7 @@ void MidiFileReader::processMidiFile(MidiFile &midi, std::vector<VxFile> *outRes
         // VxFile
         outResult->emplace_back(
                 std::move(pitches),
-                durationInTicks - track->finalTick, //distanceInTicksBetweenLastPitchEndAndTrackEnd
+                durationInTicks - track->finalTick, //endSilenceLengthInTicks
                 ticksPerSecond
         );
     }

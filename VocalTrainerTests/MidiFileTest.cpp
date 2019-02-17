@@ -598,8 +598,8 @@ TEST_CASE("MIDI reader unit test") {
 				REQUIRE(outResult.at(1).getPitches().size() == 1);
 			}
 			SECTION("Distance in ticks between last pitch end and track end test") {
-				REQUIRE(outResult.at(0).getDistanceInTicksBetweenLastPitchEndAndTrackEnd() == 0);
-				REQUIRE(outResult.at(1).getDistanceInTicksBetweenLastPitchEndAndTrackEnd() != 0);
+				REQUIRE(outResult.at(0).getEndSilenceDurationInTicks() == 0);
+				REQUIRE(outResult.at(1).getEndSilenceDurationInTicks() != 0);
 			}
 		}
 	}

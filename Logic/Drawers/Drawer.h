@@ -81,6 +81,7 @@ public:
     virtual void fillRect(const CppUtils::RectF& rect);
     virtual void drawLine(float x1, float y1, float x2, float y2);
     virtual void drawVerticalLine(float x, float y, float height);
+    virtual void drawHorizontalLine(float x, float y, float width);
 
     virtual void roundedRect(float x, float y, float w, float h, float r);
     virtual void roundedRectDifferentCorners(float x, float y, float w,
