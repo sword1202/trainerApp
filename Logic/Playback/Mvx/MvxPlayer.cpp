@@ -198,7 +198,9 @@ void MvxPlayer::setBounds(const PlaybackBounds &bounds) {
     } else {
         isPlayingChangedListeners.addOneShotListener([=] (bool isPlaying) {
             assert(!isPlaying);
-            setSeek(bounds.getStartSeek());
+            if (bounds) {
+                setSeek(bounds.getStartSeek());
+            }
             this->setBounds(bounds);
         });
         pause();
