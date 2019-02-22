@@ -135,6 +135,7 @@ class WorkspaceDrawer : public WorkspaceController {
     bool getBoundsStartXAndWidth(const PlaybackBounds& bounds, float* startX, float* width) const;
     void updateHorizontalScrollBarPageSize();
     void updateHorizontalScrollBarPagePosition();
+    void updateZoom();
 public:
 
     static constexpr int PIANO_WIDTH = 67;

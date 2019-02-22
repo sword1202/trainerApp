@@ -86,6 +86,7 @@ void WorkspaceDrawer::resize(float width, float height, float devicePixelRatio) 
     this->height = height;
 
     generateInstrumentalTrackSamplesImage(width - PIANO_WIDTH);
+    updateZoom();
 }
 
 void WorkspaceDrawer::generateInstrumentalTrackSamplesImage(float width) {
@@ -685,7 +686,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, MouseEventsReceiver *mouseEvent
     setFirstVisiblePitch(Pitch("C1"));
     lastPitchIndex = Pitch("B6").getPerfectFrequencyIndex();
 
-    setZoom(MIN_ZOOM);
+    this->zoom = MIN_ZOOM;
 }
 
 WorkspaceDrawer::~WorkspaceDrawer() {
@@ -894,8 +895,12 @@ float WorkspaceDrawer::getZoom() const {
 
 void WorkspaceDrawer::setZoom(float zoom) {
     assert(zoom >= MIN_ZOOM && zoom <= MAX_ZOOM);
-    float workspaceSeek = getWorkspaceSeek();
     this->zoom = zoom;
+    updateZoom();
+}
+
+void WorkspaceDrawer::updateZoom() {
+    float workspaceSeek = getWorkspaceSeek();
     // Calculate intervalWidth and intervalHeight
     int linesCount = (int)round(ZOOM_FACTOR / zoom);
     int baseIntervalsCount = linesCount + 1;
