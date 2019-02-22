@@ -56,7 +56,7 @@ void WelcomeWindow::setupProjectsList(QQmlContext *context) {
         } catch (...) {
             appSettings.removeProject(filePath);
             appSettings.removeRecording(filePath);
-            return;
+            break;
         }
 
 
