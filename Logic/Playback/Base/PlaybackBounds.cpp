@@ -38,6 +38,7 @@ PlaybackBounds::PlaybackBounds() {
 }
 
 double PlaybackBounds::getDuration() const {
+    assert(startSeek >= 0 && startSeek < endSeek);
     return endSeek - startSeek;
 }
 
