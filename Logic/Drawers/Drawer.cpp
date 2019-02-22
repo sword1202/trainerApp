@@ -139,6 +139,12 @@ void Drawer::circle(float x, float y, float r) {
     arc(x, y, r, 0, 2 * M_PI);
 }
 
+Drawer::Image* Drawer::createImage(const void* data, int w, int h) {
+    auto* image = createImageNative(w, h, data);
+    registerImage(image);
+    return image;
+}
+
 void Drawer::deleteImage(Drawer::Image *&image) {
     if (image == nullptr) {
         return;

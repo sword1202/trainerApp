@@ -212,11 +212,9 @@ void NvgDrawer::fillWithImage(Drawer::Image *image, float textureX1, float textu
     fill();
 }
 
-Drawer::Image *NvgDrawer::createImage(const void *data, int w, int h) {
+Drawer::Image *NvgDrawer::createImageNative(int w, int h, const void *data) {
     int handle = nvgCreateImageRGBA(ctx, w, h, 0, (unsigned char *) data);
-    NvgImage* image = new NvgImage(handle, w, h);
-    registerImage(image);
-    return image;
+    return new NvgImage(handle, w, h);
 }
 
 void NvgDrawer::doTranslate(float x, float y) {
@@ -229,7 +227,13 @@ void NvgDrawer::setTextWeight(int weight) {
 
 void NvgDrawer::onImageDelete(Drawer::Image *image) {
     assert(dynamic_cast<NvgImage*>(image));
-    nvgDeleteImage(ctx, static_cast<NvgImage*>(image)->handle);
+    auto iter = frameBuffersImagesMap.find(image);
+    if (iter == frameBuffersImagesMap.end()) {
+        nvgDeleteImage(ctx, static_cast<NvgImage*>(image)->handle);
+    } else {
+        deleteFrameBuffer(iter->second);
+        frameBuffersImagesMap.erase(iter);
+    }
 }
 
 void NvgDrawer::drawImage(float x, float y, float w, float h, Drawer::Image *image) {
@@ -251,4 +255,16 @@ NvgDrawer::drawShadow(float x, float y, float w, float h, float radius, float bl
 
 Color NvgDrawer::getFillColor() const {
     return fillColor;
+}
+
+Drawer::Image *NvgDrawer::renderIntoImage(const std::function<void()> &renderingFunction, int w, int h) {
+    void* frameBuffer = createFrameBuffer(w, h);
+    bindFrameBuffer(frameBuffer);
+    renderingFunction();
+    bindFrameBuffer(nullptr);
+    int imageHandle = getImageHandleFromFrameBuffer(frameBuffer);
+    auto *image = new NvgImage(imageHandle, w, h);
+    registerImage(image);
+    frameBuffersImagesMap[image] = frameBuffer;
+    return image;
 }

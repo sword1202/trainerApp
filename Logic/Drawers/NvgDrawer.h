@@ -8,12 +8,14 @@
 
 #include "Drawer.h"
 #include <nanovg/nanovg.h>
+#include <unordered_map>
 
 class NvgDrawer : public Drawer {
 #ifndef NDEBUG
     std::string fontFamily;
 #endif
     CppUtils::Color fillColor;
+    std::unordered_map<Image*, void*> frameBuffersImagesMap;
 protected:
     NVGcontext* ctx = nullptr;
     void setupBase();
@@ -21,7 +23,14 @@ protected:
     void doTranslate(float x, float y) override;
     void onImageDelete(Image *image) override;
 
+    Image *createImageNative(int w, int h, const void *data) override;
+
     Color getFillColor() const override;
+
+    virtual int getImageHandleFromFrameBuffer(void* frameBuffer) = 0;
+    virtual void* createFrameBuffer(int w, int h) = 0;
+    virtual void bindFrameBuffer(void* frameBuffer) = 0;
+    virtual void deleteFrameBuffer(void* frameBuffer) = 0;
 
 public:
     void beginFrame(float width, float height, float devicePixelRatio) override;
@@ -59,10 +68,10 @@ public:
 
     void fillWithImage(Image *image, float textureX1, float textureY1, float textureX2, float textureY2) override;
     void drawImage(float x, float y, float w, float h, Image *image) override;
-    Image *createImage(const void *data, int w, int h) override;
 
     void drawShadow(float x, float y, float w, float h, float radius, float blurFactor, const Color &color) override;
 
+    Image *renderIntoImage(const std::function<void()> &renderingFunction, int w, int h) override;
 };
 
 #endif //VOCALTRAINER_NVGOPENGLDRAWER_H

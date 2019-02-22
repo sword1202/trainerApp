@@ -17,3 +17,19 @@ MetalNvgDrawer::MetalNvgDrawer(void* layer) {
 MetalNvgDrawer::~MetalNvgDrawer() {
     nvgDeleteMTL(ctx);
 }
+
+int MetalNvgDrawer::getImageHandleFromFrameBuffer(void *frameBuffer) {
+    return static_cast<MNVGframebuffer*>(frameBuffer)->image;
+}
+
+void *MetalNvgDrawer::createFrameBuffer(int w, int h) {
+    return mnvgCreateFramebuffer(ctx, w, h, 0);
+}
+
+void MetalNvgDrawer::bindFrameBuffer(void *frameBuffer) {
+    mnvgBindFramebuffer(static_cast<MNVGframebuffer*>(frameBuffer));
+}
+
+void MetalNvgDrawer::deleteFrameBuffer(void *frameBuffer) {
+    mnvgDeleteFramebuffer(static_cast<MNVGframebuffer*>(frameBuffer));
+}
