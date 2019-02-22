@@ -281,3 +281,7 @@ const Pitch& VxFile::getLowestPitch() const {
 const Pitch &VxFile::getHighestPitch() const {
     return getHighestVxPitch().pitch;
 }
+
+bool VxFile::isEmpty() const {
+    return durationInTicks == 0;
+}

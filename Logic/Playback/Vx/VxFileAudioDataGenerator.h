@@ -26,15 +26,17 @@ class VxFileAudioDataGenerator {
     std::vector<int> tempPitchIndexes;
     std::vector<int> difference;
 
-    int pcmDataSize;
+    int pcmDataSize = 0;
 
     tsf* _tsf;
 public:
-    VxFileAudioDataGenerator(const VxFileAudioDataGeneratorConfig &config);
     VxFileAudioDataGenerator();
+    VxFileAudioDataGenerator(const VxFile& vxFile, const VxFileAudioDataGeneratorConfig &config);
+    VxFileAudioDataGenerator(const VxFile& vxFile);
     ~VxFileAudioDataGenerator();
 
-    int readNextSamplesBatch(short *intoBuffer, bool moveSeekAndFillWithZero);
+    int readNextSamplesBatch(short *intoBuffer, bool moveSeekAndFillWithZero = false);
+    std::vector<short> readAll();
     int getSeek() const;
     void setSeek(int seek);
 

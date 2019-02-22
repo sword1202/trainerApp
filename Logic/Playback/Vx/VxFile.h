@@ -102,6 +102,8 @@ public:
 
     VxFile cut(double start, double end);
 
+    bool isEmpty() const;
+
     template<typename Function>
     void iteratePitchesInTickRange(int startTick, int endTick, const Function& function) const {
         for (const auto& pitch : pitches) {

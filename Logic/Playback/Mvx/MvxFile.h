@@ -100,7 +100,6 @@ public:
     void setVxFile(const VxFile &vxFile);
 
     const std::string &getInstrumental() const;
-    std::string &moveInstrumental();
     void setInstrumental(const std::string &instrumental);
 
     const std::string &getRecordingData() const;
@@ -136,6 +135,8 @@ public:
 
     const Lyrics &getLyrics() const;
     void setLyrics(const Lyrics &lyrics);
+
+    std::string convertInstrumentalAndVocalTrackToWav(float vocalVolume = 0.5f) const;
 };
 
 

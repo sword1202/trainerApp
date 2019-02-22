@@ -23,6 +23,7 @@ using std::endl;
 #define VXFILE_LOCK std::lock_guard<std::mutex> _(vxFileMutex)
 
 int VxFileAudioDataGenerator::readNextSamplesBatch(short *intoBuffer, bool moveSeekAndFillWithZero) {
+    assert(!vxFile.isEmpty());
     int seek = getSeek();
     int size = std::min(pcmDataSize - seek, outBufferSize);
 
@@ -66,7 +67,7 @@ int VxFileAudioDataGenerator::readNextSamplesBatch(short *intoBuffer, bool moveS
     return size;
 }
 
-VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFileAudioDataGeneratorConfig &config)
+VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile& vxFile, const VxFileAudioDataGeneratorConfig &config)
         : outBufferSize(config.outBufferSize), sampleRate(config.sampleRate) {
     pitchesIndexes.reserve(10);
     tempPitchIndexes.reserve(10);
@@ -74,9 +75,11 @@ VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFileAudioDataGenerato
 
     _tsf = LoadTsf();
     tsf_set_output(_tsf, TSF_MONO, sampleRate, 0);
+    resetVxFile(vxFile);
 }
 
-VxFileAudioDataGenerator::VxFileAudioDataGenerator() : VxFileAudioDataGenerator(VxFileAudioDataGeneratorConfig()) {
+VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile& vxFile) :
+VxFileAudioDataGenerator(vxFile, VxFileAudioDataGeneratorConfig()) {
 
 }
 
@@ -110,7 +113,8 @@ const VxFile &VxFileAudioDataGenerator::getVxFile() const {
 void VxFileAudioDataGenerator::setVxFile(const VxFile &vxFile) {
     VXFILE_LOCK;
     assert(this->vxFile.getDurationInTicks() == vxFile.getDurationInTicks() &&
-            this->vxFile.getTicksPerSecond() == vxFile.getTicksPerSecond());
+            this->vxFile.getTicksPerSecond() == vxFile.getTicksPerSecond() &&
+            "Use resetVxFile instead");
     this->vxFile = vxFile;
 }
 
@@ -124,4 +128,23 @@ void VxFileAudioDataGenerator::resetVxFile(const VxFile &vxFile) {
 
 VxFileAudioDataGenerator::~VxFileAudioDataGenerator() {
     tsf_close(_tsf);
+}
+
+std::vector<short> VxFileAudioDataGenerator::readAll() {
+    assert(!vxFile.isEmpty());
+    std::vector<short> result;
+    result.reserve(size_t(pcmDataSize));
+
+    std::vector<short> temp(static_cast<size_t>(outBufferSize));
+    int size = 0;
+    do {
+        size = readNextSamplesBatch(temp.data());
+        result.insert(result.end(), temp.begin(), temp.begin() + size);
+    } while (size == outBufferSize);
+
+    return result;
+}
+
+VxFileAudioDataGenerator::VxFileAudioDataGenerator() : VxFileAudioDataGenerator(VxFile()) {
+
 }

@@ -37,7 +37,7 @@ int AudioFilePlayer::readNextSamplesBatch(void *intoBuffer, int framesCount, con
 void AudioFilePlayer::prepareAndProvidePlaybackData(PlaybackData *playbackData) {
     assert(!audioDecoder);
     audioDecoder = AudioDecoder::create();
-    audioDecoder->open(&audioData);
+    audioDecoder->open(audioData);
     playbackData->numChannels = audioDecoder->channels();
     playbackData->format = paInt16;
     playbackData->sampleRate = audioDecoder->sampleRate();
@@ -50,9 +50,9 @@ AudioFilePlayer::AudioFilePlayer() {
     initSoundTouch();
 }
 
-void AudioFilePlayer::setAudioData(std::string &&audioData) {
+void AudioFilePlayer::setAudioData(const std::string* audioData) {
     destroy();
-    this->audioData = std::move(audioData);
+    this->audioData = audioData;
     setBufferSeek(0);
 }
 
@@ -63,6 +63,6 @@ void AudioFilePlayer::destroy() {
     }
 }
 
-const std::string &AudioFilePlayer::getAudioData() const {
+const std::string* AudioFilePlayer::getAudioData() const {
     return audioData;
 }

@@ -53,7 +53,7 @@ MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
 
 void MvxPlayer::init(MvxFile&& file) {
     mvxFile = std::move(file);
-    instrumentalPlayer.setAudioData(std::move(mvxFile.moveInstrumental()));
+    instrumentalPlayer.setAudioData(&mvxFile.getInstrumental());
     vxPlayer.setVxFile(mvxFile.getVxFile());
     players = {&instrumentalPlayer, &vxPlayer, &metronomePlayer};
     if (mvxFile.isRecording()) {
@@ -346,7 +346,7 @@ const std::string &MvxPlayer::getSongTitleUtf8() const {
 }
 
 const std::string &MvxPlayer::getInstrumental() {
-    return instrumentalPlayer.getAudioData();
+    return mvxFile.getInstrumental();
 }
 
 bool MvxPlayer::isCompleted() const {
