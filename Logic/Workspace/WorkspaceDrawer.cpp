@@ -501,6 +501,9 @@ void WorkspaceDrawer::drawPitchesGraph() {
 }
 
 void WorkspaceDrawer::drawYardStick() const {
+    drawer->setFillColor(Color::white());
+    drawer->fillRect(0, 0, width, YARD_STICK_HEIGHT);
+
     drawer->setTextFontSize(YARD_STICK_FONT_SIZE);
     drawer->setTextAlign(Drawer::TextAlign::CENTER);
     drawer->setTextBaseline(Drawer::TextBaseline::MIDDLE);
