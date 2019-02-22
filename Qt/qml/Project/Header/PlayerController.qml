@@ -88,6 +88,7 @@ Item {
         anchors.leftMargin: 1
         height: parent.height
         width: 52.5
+        on: cpp.player.isPlaying
 
         onImage: "images/play_on.svg"
         offImage: "images/play_off.svg"
@@ -97,6 +98,10 @@ Item {
 
             onComplete: {
                 play.on = false
+            }
+
+            onIsPlayingChanged: {
+                play.on = cpp.player.isPlaying
             }
         }
 

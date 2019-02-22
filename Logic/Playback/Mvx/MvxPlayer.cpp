@@ -190,11 +190,19 @@ const PlaybackBounds & MvxPlayer::getBounds() const {
 }
 
 void MvxPlayer::setBounds(const PlaybackBounds &bounds) {
-    assert(!instrumentalPlayer.isPlaying());
     assert(!bounds || (bounds.getStartSeek() >= 0 &&
             bounds.getEndSeek() <= instrumentalPlayer.getTrackDurationInSeconds()));
-    this->bounds = bounds;
-    boundsChangedListeners.executeAll(bounds);
+    if (!isPlaying()) {
+        this->bounds = bounds;
+        boundsChangedListeners.executeAll(bounds);
+    } else {
+        isPlayingChangedListeners.addOneShotListener([=] (bool isPlaying) {
+            assert(!isPlaying);
+            setSeek(bounds.getStartSeek());
+            this->setBounds(bounds);
+        });
+        pause();
+    }
 }
 
 bool MvxPlayer::isPlaying() const {

@@ -116,6 +116,7 @@ void MainController::setWorkspaceController(WorkspaceController *workspaceContro
         mvxPlayer->seekChangedFromUserListeners.addListener([=] (double seek) {
             if (!mvxPlayer->isCompleted()) {
                 audioInputManager->setAudioRecorderSeek(seek);
+                updateSeek(seek);
             }
         });
 

@@ -27,6 +27,8 @@ void PlaybackBoundsSelectionController::setBoundsSelectionEnabled(bool boundsSel
 
         if (!boundsSelectionEnabled) {
             player->setBounds(PlaybackBounds());
+        } else {
+            selectedBounds.setStartSeek(workspaceController->getWorkspaceSeek());
         }
     });
 }
@@ -39,7 +41,7 @@ void PlaybackBoundsSelectionController::onWorkspaceMouseMove(float x) {
     float seek = workspaceController->getSeekFromXPositionOnWorkspace(x);
     float minimumSeek = player->getTactDuration();
     seek = std::max(seek, minimumSeek);
-    selectedBounds = PlaybackBounds(workspaceController->getWorkspaceSeek(), seek);
+    selectedBounds.setEndSeek(seek);
     workspaceController->setPlaybackBounds(selectedBounds);
     workspaceController->update();
 }

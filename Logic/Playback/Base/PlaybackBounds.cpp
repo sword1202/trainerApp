@@ -6,10 +6,12 @@ PlaybackBounds::PlaybackBounds(double startSeek, double endSeek) : startSeek(sta
 }
 
 double PlaybackBounds::getStartSeek() const {
+    assert(startSeek >= 0 && startSeek < endSeek);
     return startSeek;
 }
 
 double PlaybackBounds::getEndSeek() const {
+    assert(startSeek >= 0 && startSeek < endSeek);
     return endSeek;
 }
 
@@ -37,6 +39,14 @@ PlaybackBounds::PlaybackBounds() {
 
 double PlaybackBounds::getDuration() const {
     return endSeek - startSeek;
+}
+
+void PlaybackBounds::setStartSeek(double startSeek) {
+    this->startSeek = startSeek;
+}
+
+void PlaybackBounds::setEndSeek(double endSeek) {
+    this->endSeek = endSeek;
 }
 
 std::ostream& operator<<(std::ostream& os, const PlaybackBounds& bounds) {
