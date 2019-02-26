@@ -33,6 +33,9 @@ public:
             setMetronomeEnabled() NOTIFY metronomeEnabledChanged())
     Q_PROPERTY(QString artistName READ getArtistName() NOTIFY sourceChanged())
     Q_PROPERTY(QString songTitle READ getSongTitle() NOTIFY sourceChanged())
+    Q_PROPERTY(float instrumentalVolume READ getInstrumentalVolume() WRITE setInstrumentalVolume() NOTIFY
+            instrumentalVolumeChanged())
+    Q_PROPERTY(float pianoVolume READ getPianoVolume() WRITE setPianoVolume() NOTIFY pianoVolumeChanged())
 
     Q_INVOKABLE bool hasPitchNow(int perfectFrequencyIndex) const;
     Q_INVOKABLE bool hasAnyPitchNow() const;
@@ -54,11 +57,15 @@ public:
     void onPlaybackStarted() override;
 
     void setPitchShiftInSemiTones(int value) override;
-
     void setMetronomeEnabled(bool metronomeEnabled) override;
 
     QString getArtistName() const;
     QString getSongTitle() const;
+
+    void setInstrumentalVolume(float instrumentalVolume) override;
+
+    void setPianoVolume(float pianoVolume) override;
+
 signals:
     void complete();
     void sourceChanged(const QString& newSource);
@@ -70,6 +77,8 @@ signals:
     void beatsPerMinuteChanged();
     void pitchShiftChanged();
     void metronomeEnabledChanged();
+    void pianoVolumeChanged();
+    void instrumentalVolumeChanged();
 };
 
 #endif // QMLPLAYER_H

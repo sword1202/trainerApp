@@ -148,3 +148,13 @@ QString QtMvxPlayer::getSongTitle() const {
 bool QtMvxPlayer::hasLyrics() const {
     return MvxPlayer::hasLyrics();
 }
+
+void QtMvxPlayer::setInstrumentalVolume(float instrumentalVolume) {
+    MvxPlayer::setInstrumentalVolume(instrumentalVolume);
+    emit instrumentalVolumeChanged();
+}
+
+void QtMvxPlayer::setPianoVolume(float pianoVolume) {
+    MvxPlayer::setPianoVolume(pianoVolume);
+    emit pianoVolumeChanged();
+}

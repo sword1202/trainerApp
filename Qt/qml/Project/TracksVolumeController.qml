@@ -14,19 +14,29 @@ Rectangle {
     }
 
     TrackVolumeSlider {
+        volume: cpp.player.pianoVolume
         id: vocalVolumeSlider
         anchors.left: parent.left
         anchors.topMargin: 26 - height / 2
         anchors.top: parent.top
         anchors.leftMargin: 45
+
+        onVolumeChanged: {
+            cpp.player.pianoVolume = volume
+        }
     }
 
     TrackVolumeSlider {
+        volume: cpp.player.instrumentalVolume
         id: instrumentalVolumeSlider
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 38 - height / 2
         anchors.left: parent.left
         anchors.leftMargin: 45
+
+        onVolumeChanged: {
+            cpp.player.instrumentalVolume = volume
+        }
     }
 
     Item {

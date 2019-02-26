@@ -154,6 +154,14 @@ void MvxPlayer::setPianoVolume(float pianoVolume) {
     updateMetronomeVolume();
 }
 
+float MvxPlayer::getInstrumentalVolume() const {
+    return instrumentalPlayer.getVolume();
+}
+
+float MvxPlayer::getPianoVolume() const {
+    return vxPlayer.getVolume();
+}
+
 void MvxPlayer::setRecordingVolume(float volume) {
     recordingPlayer.setVolume(volume);
     updateMetronomeVolume();

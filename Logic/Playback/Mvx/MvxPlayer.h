@@ -66,8 +66,10 @@ public:
     void init(const char* filePath);
     void init(MvxFile&& file);
     void prepare();
-    void setInstrumentalVolume(float instrumentalVolume);
-    void setPianoVolume(float pianoVolume);
+    virtual void setInstrumentalVolume(float instrumentalVolume);
+    virtual void setPianoVolume(float pianoVolume);
+    float getInstrumentalVolume() const;
+    float getPianoVolume() const;
     void setRecordingVolume(float volume);
     virtual void pause();
     virtual void stopAndMoveSeekToBeginning();

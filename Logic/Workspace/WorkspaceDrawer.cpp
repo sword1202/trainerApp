@@ -56,6 +56,8 @@ constexpr float PIANO_TRACK_SHADOW_BLUR = 25.f;
 constexpr float PIANO_TRACK_PITCH_HEIGHT = 2.f;
 constexpr float PIANO_TRACK_PITCH_RADIUS = 1.f;
 constexpr float PIANO_TRACK_BUTTON_WIDTH = 77.f;
+constexpr float VOLUME_CONTROLLER_HEIGHT = 111.f;
+
 const Drawer::Color WorkspaceDrawer::YARD_STICK_DOT_AND_TEXT_COLOR(0x24, 0x23, 0x2D, 0xFF);
 const Drawer::Color WorkspaceDrawer::PLAYBACK_MARK_TEXT_COLOR(0xA6, 0x76, 0x3C, 0xFF);
 
@@ -202,9 +204,6 @@ void WorkspaceDrawer::draw() {
     drawer->translate(0, PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN);
     drawVerticalLine(PIANO_WIDTH + 0.5, borderLineColor);
     drawer->translate(0, -PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN);
-
-    drawer->translateTo(200, 200);
-    //drawFps(fps);
 
     drawer->endFrame();
 }

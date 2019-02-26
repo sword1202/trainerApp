@@ -67,7 +67,7 @@ void MainController::init(AudioInputManager *pitchInputReader, MvxPlayer *mvxPla
     });
 
     mvxPlayer->setInstrumentalVolume(1.0);
-    mvxPlayer->setPianoVolume(0.05);
+    mvxPlayer->setPianoVolume(0.5);
     pitchInputReader->setOutputVolume(0.0);
 
     pitchInputReader->getPitchDetectedListeners().addListener([=] (const Pitch& pitch, double) {
