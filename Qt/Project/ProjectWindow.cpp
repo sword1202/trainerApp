@@ -66,6 +66,8 @@ ProjectWindow::ProjectWindow() :
 #endif
     workspaceWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
+    setupVolumeWidget();
+
     // Lyrics
     lyricsWidget = createQQuickWidget("qrc:/qml/Project/Lyrics.qml", [] (QQmlContext* context) {
         context->setContextProperty("lyricsText", "");
@@ -141,8 +143,6 @@ ProjectWindow::ProjectWindow() :
             return true;
         }, LYRICS_UPDATE_DELAY);
     }
-
-    setupVolumeWidget();
 }
 
 void ProjectWindow::setupVolumeWidget() {
@@ -154,6 +154,8 @@ void ProjectWindow::setupVolumeWidget() {
         int y = height - volumeWidget->height();
         wrapper->move(0, y);
     });
+
+    this->volumeWidget = wrapper;
 }
 
 void ProjectWindow::onOutputVolumeChanged(float value) {
@@ -207,6 +209,7 @@ void ProjectWindow::setShowTracks(bool value) {
     MainController::instance()->getWorkspaceController([=] (WorkspaceController* workspaceController) {
         workspaceController->setDrawTracks(value);
     });
+    volumeWidget->setVisible(value);
 }
 
 void ProjectWindow::wheelEvent(QWheelEvent *event) {

@@ -29,6 +29,7 @@ class ProjectWindow : public BaseMainWindow
     QQuickItem *header;
     QQuickWidget *lyricsWidget;
     WorkspaceController* workspaceController = nullptr;
+    QWidget* volumeWidget;
 
     void setupVolumeWidget();
     void setupMenus();
