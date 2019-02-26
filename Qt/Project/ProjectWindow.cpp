@@ -26,6 +26,8 @@
 #include "App/VxAppUtils.h"
 #include "SingingResultDialog.h"
 
+#include "Utils/BaseQmlWidget.h"
+
 constexpr int YARD_STICK_HEIGHT = static_cast<int>(WorkspaceDrawer::YARD_STICK_HEIGHT);
 constexpr int HEADER_WITH_SUBHEADER_HEIGHT = 75 + 75 - YARD_STICK_HEIGHT;
 constexpr int VERTICAL_SCROLL_WIDTH = 11;
@@ -139,6 +141,19 @@ ProjectWindow::ProjectWindow() :
             return true;
         }, LYRICS_UPDATE_DELAY);
     }
+
+    setupVolumeWidget();
+}
+
+void ProjectWindow::setupVolumeWidget() {
+    QQuickWidget* volumeWidget = new BaseQmlWidget(this);
+    volumeWidget->setSource(QUrl("qrc:/qml/Project/TracksVolumeController.qml"));
+    auto* wrapper = workspaceWidget->addSubWidget(volumeWidget);
+
+    QtUtils::AddResizeListener(workspaceWidget, [=] (int width, int height) {
+        int y = height - volumeWidget->height();
+        wrapper->move(0, y);
+    });
 }
 
 void ProjectWindow::onOutputVolumeChanged(float value) {

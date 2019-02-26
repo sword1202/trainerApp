@@ -33,5 +33,11 @@ QMacNativeWidget*  QMetalWidget::addSubWidget(QWidget* widget) {
     NSView *nativeWidgetView = QtUtils::getNSView(nativeWidget);
     addSubview(nativeWidgetView);
     nativeWidget->show();
+
+    nativeWidget->resize(widget->size());
+    QtUtils::AddResizeListener(widget, [&] (int width, int height) {
+        nativeWidget->resize(width, height);
+    });
+
     return nativeWidget;
 }

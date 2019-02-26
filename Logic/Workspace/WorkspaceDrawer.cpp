@@ -167,7 +167,6 @@ void WorkspaceDrawer::draw() {
     drawYardStick();
     drawer->translate(0, YARD_STICK_HEIGHT);
     drawer->translate(-PIANO_WIDTH, 0);
-    drawVerticalLine(PIANO_WIDTH, borderLineColor);
 
     drawer->translateTo(0, 0);
     drawHorizontalLine(YARD_STICK_HEIGHT + 0.5f, borderLineColor);
@@ -175,10 +174,15 @@ void WorkspaceDrawer::draw() {
 
     drawEnding();
     if (drawTracks) {
-        drawer->translate(0, -ScrollBar::SCROLLBAR_WEIGHT);
+        bool verticalScrollBarVisible = verticalScrollBar.getPageSize() > 0;
+        if (verticalScrollBarVisible) {
+            drawer->translate(0, -ScrollBar::SCROLLBAR_WEIGHT);
+        }
         drawPianoTrack();
         drawInstrumentalTrack();
-        drawer->translate(0, ScrollBar::SCROLLBAR_WEIGHT);
+        if (verticalScrollBarVisible) {
+            drawer->translate(0, ScrollBar::SCROLLBAR_WEIGHT);
+        }
     }
     drawFirstPlayHead();
     drawSecondPlayHead();
@@ -196,7 +200,7 @@ void WorkspaceDrawer::draw() {
     drawer->drawLine(0, YARD_STICK_HEIGHT + 0.5f, PIANO_WIDTH, YARD_STICK_HEIGHT + 0.5f);
 
     drawer->translate(0, PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN);
-    drawVerticalLine(PIANO_WIDTH, borderLineColor);
+    drawVerticalLine(PIANO_WIDTH + 0.5, borderLineColor);
     drawer->translate(0, -PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN);
 
     drawer->translateTo(200, 200);

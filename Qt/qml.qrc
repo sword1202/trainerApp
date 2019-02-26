@@ -110,7 +110,7 @@
         <file>qml/Project/Header/images/tempo_background.svg</file>
         <file>qml/Project/singing_result_dialog_background.svg</file>
         <file>qml/sharedimages/play_head_triangle.svg</file>
-        <file>qml/sharedimages/speaker.svg</file>
+        <file>qml/Project/speaker.svg</file>
         <file>qml/sharedimages/track_piece.png</file>
         <file>qml/sharedimages/track_piece_small.png</file>
         <file>qml/sharedimages/instrumental_track_button.png</file>
@@ -135,16 +135,14 @@
         <file>qml/ButtonShadow.qml</file>
         <file>qml/Project/Header/Tempo.qml</file>
         <file>qml/js/strings.js</file>
-        <file>qml/Project/Track.qml</file>
         <file>qml/js/uiutils.js</file>
         <file>qml/VerticalLine.qml</file>
         <file>qml/HorizontalLine.qml</file>
-        <file>qml/Project/TrackButton.qml</file>
         <file>qml/Project/Header/ZoomSlider.qml</file>
         <file>qml/Circle.qml</file>
         <file>qml/Project/Header/Header.qml</file>
-        <file>qml/TrackVolumeSlider.qml</file>
-        <file>qml/Project/TracksContainer.qml</file>
+        <file>qml/Project/TrackVolumeSlider.qml</file>
+        <file>qml/Project/TracksVolumeController.qml</file>
         <file>qml/Project/Header/TonalityController.qml</file>
         <file>qml/js/mathutils.js</file>
         <file>qml/Project/Header/HeaderWithSubHeader.qml</file>
