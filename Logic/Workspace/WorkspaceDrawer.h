@@ -87,7 +87,7 @@ class WorkspaceDrawer : public WorkspaceController {
     Drawer::Image* instrumentalTrackButtonImage = nullptr;
     Drawer::Image* pianoTrackButtonImage = nullptr;
 
-    std::atomic_bool drawTracks;
+    std::atomic_bool willDrawTracks;
 
     std::atomic<float> zoom;
 
@@ -117,6 +117,7 @@ class WorkspaceDrawer : public WorkspaceController {
     void drawPianoTrackButton();
     void drawScrollBars();
     void drawEnding();
+    void drawTracks();
     void drawFps(float fps);
 
     double getSingingPitchGraphDuration() const;

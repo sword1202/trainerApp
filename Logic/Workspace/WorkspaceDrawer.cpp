@@ -56,7 +56,7 @@ constexpr float PIANO_TRACK_SHADOW_BLUR = 25.f;
 constexpr float PIANO_TRACK_PITCH_HEIGHT = 2.f;
 constexpr float PIANO_TRACK_PITCH_RADIUS = 1.f;
 constexpr float PIANO_TRACK_BUTTON_WIDTH = 77.f;
-constexpr float VOLUME_CONTROLLER_HEIGHT = 111.f;
+constexpr float VOLUME_CONTROLLER_HEIGHT = 110.5f;
 
 const Drawer::Color WorkspaceDrawer::YARD_STICK_DOT_AND_TEXT_COLOR(0x24, 0x23, 0x2D, 0xFF);
 const Drawer::Color WorkspaceDrawer::PLAYBACK_MARK_TEXT_COLOR(0xA6, 0x76, 0x3C, 0xFF);
@@ -175,16 +175,8 @@ void WorkspaceDrawer::draw() {
     drawer->translate(PIANO_WIDTH, 0);
 
     drawEnding();
-    if (drawTracks) {
-        bool verticalScrollBarVisible = verticalScrollBar.getPageSize() > 0;
-        if (verticalScrollBarVisible) {
-            drawer->translate(0, -ScrollBar::SCROLLBAR_WEIGHT);
-        }
-        drawPianoTrack();
-        drawInstrumentalTrack();
-        if (verticalScrollBarVisible) {
-            drawer->translate(0, ScrollBar::SCROLLBAR_WEIGHT);
-        }
+    if (willDrawTracks) {
+        drawTracks();
     }
     drawFirstPlayHead();
     drawSecondPlayHead();
@@ -657,7 +649,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, MouseEventsReceiver *mouseEvent
         firstPlayHeadPosition(0),
         secondPlayHeadPosition(0),
         playbackBounds(PlaybackBounds()),
-        drawTracks(true),
+        willDrawTracks(true),
         mouseEventsReceiver(mouseEventsReceiver),
         verticalScrollBar(drawer, mouseEventsReceiver, ScrollBar::VERTICAL),
         horizontalScrollBar(drawer, mouseEventsReceiver, ScrollBar::HORIZONTAL),
@@ -889,7 +881,7 @@ void WorkspaceDrawer::setPianoTrackButtonImage(Drawer::Image *pianoTrackButtonIm
 }
 
 void WorkspaceDrawer::setDrawTracks(bool value) {
-    drawTracks = value;
+    willDrawTracks = value;
 }
 
 float WorkspaceDrawer::getZoom() const {
@@ -958,4 +950,18 @@ void WorkspaceDrawer::drawFps(float fps) {
     drawer->setTextFontSize(YARD_STICK_FONT_SIZE);
     drawer->setFillColor(YARD_STICK_DOT_AND_TEXT_COLOR);
     drawer->fillText(str, 0, 0);
+}
+
+void WorkspaceDrawer::drawTracks() {
+    bool verticalScrollBarVisible = verticalScrollBar.getPageSize() > 0;
+    if (verticalScrollBarVisible) {
+        drawer->translate(0, -ScrollBar::SCROLLBAR_WEIGHT);
+    }
+    drawPianoTrack();
+    drawInstrumentalTrack();
+    if (verticalScrollBarVisible) {
+        drawer->translate(0, ScrollBar::SCROLLBAR_WEIGHT);
+    }
+
+    drawHorizontalLine(height - VOLUME_CONTROLLER_HEIGHT, borderLineColor);
 }
