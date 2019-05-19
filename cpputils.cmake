@@ -18,6 +18,8 @@ set(cppUtilsTests
         CppUtils/tests/BinaryMathTests.cpp
         CppUtils/tests/ColorTests.cpp
         CppUtils/tests/StringsTest.cpp
+        CppUtils/tests/ListenersSetTests.h
+        CppUtils/tests/ListenersSetTests.cpp
         )
 
 list(TRANSFORM cppUtilsSources PREPEND ${CMAKE_CURRENT_LIST_DIR}/)
