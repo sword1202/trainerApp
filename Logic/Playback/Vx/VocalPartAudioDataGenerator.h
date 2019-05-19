@@ -9,12 +9,12 @@
 #include <vector>
 #include <mutex>
 
-#include "VxFileAudioDataGeneratorConfig.h"
-#include "VxFile.h"
+#include "VocalPartAudioDataGeneratorConfig.h"
+#include "VocalPart.h"
 #include "tsf.h"
 
-class VxFileAudioDataGenerator {
-    VxFile vxFile;
+class VocalPartAudioDataGenerator {
+    VocalPart vocalPart;
     mutable std::mutex vxFileMutex;
 
     int outBufferSize;
@@ -30,10 +30,10 @@ class VxFileAudioDataGenerator {
 
     tsf* _tsf;
 public:
-    VxFileAudioDataGenerator();
-    VxFileAudioDataGenerator(const VxFile& vxFile, const VxFileAudioDataGeneratorConfig &config);
-    VxFileAudioDataGenerator(const VxFile& vxFile);
-    ~VxFileAudioDataGenerator();
+    VocalPartAudioDataGenerator();
+    VocalPartAudioDataGenerator(const VocalPart& vocalPart, const VocalPartAudioDataGeneratorConfig &config);
+    VocalPartAudioDataGenerator(const VocalPart& vocalPart);
+    ~VocalPartAudioDataGenerator();
 
     int readNextSamplesBatch(short *intoBuffer, bool moveSeekAndFillWithZero = false);
     std::vector<short> readAll();
@@ -44,11 +44,11 @@ public:
     int getSampleRate() const;
     double getDurationInSeconds() const;
 
-    const VxFile &getVxFile() const;
+    const VocalPart &getVocalPart() const;
 
-    void setVxFile(const VxFile &vxFile);
-    // setVxFile and set seek to 0
-    void resetVxFile(const VxFile &vxFile);
+    void setVocalPart(const VocalPart &vocalPart);
+    // setVocalPart and set seek to 0
+    void resetVocalPart(const VocalPart &vocalPart);
 };
 
 

@@ -46,7 +46,7 @@ public:
         assert(!midiFilePath.isEmpty())
 
         MidiFileReader reader;
-        std::vector<VxFile> result;
+        std::vector<VocalPart> result;
         double beatsPerMinute;
         reader.read(midiFilePath.toLocal8Bit().toStdString(), &result, &beatsPerMinute);
 
@@ -61,7 +61,7 @@ public:
         outputFilePath += ".mvx";
 
         MvxFile mvxFile;
-        mvxFile.setVxFile(result[midiIndex]);
+        mvxFile.setVocalPart(result[midiIndex]);
         mvxFile.setArtistNameUtf8(artistName.toUtf8().toStdString());
         mvxFile.setSongTitleUtf8(title.toUtf8().toStdString());
         mvxFile.loadInstrumentalFromFile(instrumentalFilePath.toLocal8Bit().data());

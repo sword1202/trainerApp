@@ -8,14 +8,14 @@
 
 #include "StlDebugUtils.h"
 #include "AudioPlayer.h"
-#include "VxFile.h"
-#include "VxFileAudioDataGenerator.h"
+#include "VocalPart.h"
+#include "VocalPartAudioDataGenerator.h"
 #include "PeriodicallySleepingBackgroundTask.h"
 #include <atomic>
 
-class VxFileAudioPlayer : public AudioPlayer {
-    VxFileAudioDataGenerator* generator;
-    VxFile originalVxFile;
+class VocalPartAudioPlayer : public AudioPlayer {
+    VocalPartAudioDataGenerator* generator;
+    VocalPart originalVocalPart;
 protected:
     int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) override;
     void prepareAndProvidePlaybackData(PlaybackData *playbackData) override;
@@ -25,16 +25,16 @@ private:
     void setBufferSeek(int samplesCountSeek) override;
 
 public:
-    VxFileAudioPlayer();
-    virtual ~VxFileAudioPlayer();
+    VocalPartAudioPlayer();
+    virtual ~VocalPartAudioPlayer();
 
     bool isPitchShiftingAvailable(int distance) const;
     virtual void setPitchShiftInSemiTones(int value) override;
 
     void setTempoFactor(double tempoFactor) override;
 
-    const VxFile& getVxFile() const;
-    void setVxFile(const VxFile& vxFile);
+    const VocalPart& getVocalPart() const;
+    void setVocalPart(const VocalPart &vocalPart);
 };
 
 

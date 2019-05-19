@@ -34,7 +34,7 @@ set(tests ${playbackTestSources}
         Logic/AudioInput/Pitch.cpp
         VocalTrainerTests/BoostAssert.cpp
         VocalTrainerTests/MidiFileTest.cpp
-        VocalTrainerTests/VxFileTests.cpp
+        VocalTrainerTests/VocalPartTests.cpp
         VocalTrainerTests/LoadTsf.cpp
         )
 
@@ -50,7 +50,7 @@ add_executable(TextImagesGenerator
         Logic/Workspace/WorkspaceDrawer.cpp
         Logic/Workspace/PianoDrawer.cpp
         Logic/Workspace/ScrollBar.cpp
-        Logic/Playback/Vx/VxFile.cpp
+        Logic/Playback/Vx/VocalPart.cpp
         Logic/Playback/Base/PlaybackBounds.cpp
         Logic/AudioInput/Pitch.cpp
         ${cppUtilsSources})

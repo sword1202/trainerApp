@@ -35,7 +35,8 @@ public:
     Q_PROPERTY(QString songTitle READ getSongTitle() NOTIFY sourceChanged())
     Q_PROPERTY(float instrumentalVolume READ getInstrumentalVolume() WRITE setInstrumentalVolume() NOTIFY
             instrumentalVolumeChanged())
-    Q_PROPERTY(float pianoVolume READ getPianoVolume() WRITE setPianoVolume() NOTIFY pianoVolumeChanged())
+    Q_PROPERTY(float pianoVolume READ getPianoVolume() WRITE
+                       setVocalPartPianoVolume() NOTIFY pianoVolumeChanged())
 
     Q_INVOKABLE bool hasPitchNow(int perfectFrequencyIndex) const;
     Q_INVOKABLE bool hasAnyPitchNow() const;
@@ -64,7 +65,7 @@ public:
 
     void setInstrumentalVolume(float instrumentalVolume) override;
 
-    void setPianoVolume(float pianoVolume) override;
+    void setVocalPartPianoVolume(float pianoVolume) override;
 
 signals:
     void complete();

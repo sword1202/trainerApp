@@ -5,7 +5,7 @@
 #include <utf8.h>
 
 #include "config.h"
-#include "VxFile.h"
+#include "VocalPart.h"
 #include "AudioUtils.h"
 #include "StringUtils.h"
 #include "Algorithms.h"
@@ -41,14 +41,14 @@ std::ostream& operator<<(std::ostream& os, const VxPitch& pitch) {
     return os;
 }
 
-VxFile::VxFile(std::vector<VxPitch> &&pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int ticksPerSecond)
+VocalPart::VocalPart(std::vector<VxPitch> &&pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int ticksPerSecond)
         : pitches(std::move(pitches)),
           ticksPerSecond(ticksPerSecond),
           endSilenceDurationInTicks(distanceInTicksBetweenLastPitchEndAndTrackEnd) {
     postInit();
 }
 
-VxFile::VxFile(const std::vector<VxPitch> &pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int ticksPerSecond)
+VocalPart::VocalPart(const std::vector<VxPitch> &pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int ticksPerSecond)
         : pitches(pitches),
           ticksPerSecond(ticksPerSecond),
           endSilenceDurationInTicks(distanceInTicksBetweenLastPitchEndAndTrackEnd)
@@ -62,11 +62,11 @@ static inline size_t addSilence(std::vector<char>& pcmData, double duration, int
     return size;
 }
 
-double VxFile::getTickDurationInSeconds() const {
+double VocalPart::getTickDurationInSeconds() const {
     return 1.0 / (double) ticksPerSecond;
 }
 
-bool VxFile::validatePitches() {
+bool VocalPart::validatePitches() {
     if (!pitches.empty()) {
         if (pitches[0].startTickNumber < 0) {
             return false;
@@ -91,7 +91,7 @@ bool VxFile::validatePitches() {
     return true;
 }
 
-void VxFile::postInit() {
+void VocalPart::postInit() {
     SortByKey(pitches, startTickNumberKeyProvider);
     auto pair = FindMinMaxUsingKeyProvider(pitches, [](const VxPitch& vxPitch) {
         return vxPitch.pitch.getPerfectFrequencyIndex();
@@ -110,100 +110,100 @@ void VxFile::postInit() {
     }
 }
 
-double VxFile::getDurationInSeconds() const {
+double VocalPart::getDurationInSeconds() const {
     return getTickDurationInSeconds() * durationInTicks;
 }
 
-const std::vector<VxPitch> &VxFile::getPitches() const {
+const std::vector<VxPitch> &VocalPart::getPitches() const {
     return pitches;
 }
 
-int VxFile::getTicksPerSecond() const {
+int VocalPart::getTicksPerSecond() const {
     return ticksPerSecond;
 }
 
-int VxFile::getDurationInTicks() const {
+int VocalPart::getDurationInTicks() const {
     return durationInTicks;
 }
 
-int VxFile::getEndSilenceDurationInTicks() const {
+int VocalPart::getEndSilenceDurationInTicks() const {
     return endSilenceDurationInTicks;
 }
 
 #ifdef USE_BOOST_SERIALIZATION
 
-void VxFile::writeToStream(std::ostream &os) const {
+void VocalPart::writeToStream(std::ostream &os) const {
     boost::archive::text_oarchive ar(os);
     ar << *this;
 }
 
-VxFile::VxFile(std::istream &is) {
+VocalPart::VocalPart(std::istream &is) {
     boost::archive::text_iarchive ar(is);
     ar >> *this;
     postInit();
 }
 
-VxFile VxFile::fromFilePath(const char *filePath) {
+VocalPart VocalPart::fromFilePath(const char *filePath) {
     std::ifstream is(filePath);
-    return VxFile(is);
+    return VocalPart(is);
 }
 
 #endif
 
-int VxFile::timeInSecondsToTicks(double timeInSeconds)const {
+int VocalPart::timeInSecondsToTicks(double timeInSeconds)const {
     return static_cast<int>(round(timeInSeconds / getTickDurationInSeconds()));
 }
 
-double VxFile::ticksToSeconds(int ticks) const {
+double VocalPart::ticksToSeconds(int ticks) const {
     return ticks * getTickDurationInSeconds();
 }
 
-int VxFile::samplesCountFromTicks(int ticks, int sampleRate) const {
+int VocalPart::samplesCountFromTicks(int ticks, int sampleRate) const {
     return (int) round(ticksToSeconds(ticks) * sampleRate);
 }
 
-int VxFile::ticksFromSamplesCount(int samplesCount, int sampleRate) const {
+int VocalPart::ticksFromSamplesCount(int samplesCount, int sampleRate) const {
     return timeInSecondsToTicks(AudioUtils::GetSampleTimeInSeconds(samplesCount, sampleRate));
 }
 
-int VxFile::startTickNumberKeyProvider(const VxPitch &pitch) {
+int VocalPart::startTickNumberKeyProvider(const VxPitch &pitch) {
     return pitch.startTickNumber;
 }
 
-const VxPitch &VxFile::getShortestPitch() const {
+const VxPitch &VocalPart::getShortestPitch() const {
     return FindMinValueUsingKeyProvider(pitches, [](const VxPitch& pitch) {
         return pitch.ticksCount;
     });
 }
 
-VxFile::VxFile() {
+VocalPart::VocalPart() {
 
 }
 
-void VxFile::setPitches(const std::vector<VxPitch> &pitches) {
-    VxFile::pitches = pitches;
+void VocalPart::setPitches(const std::vector<VxPitch> &pitches) {
+    VocalPart::pitches = pitches;
     postInit();
 }
 
-bool VxFile::canBeShifted(int distance) const {
+bool VocalPart::canBeShifted(int distance) const {
     return pitches[lowestPitchIndex].pitch.canBeShifted(distance) &&
             pitches[highestPitchIndex].pitch.canBeShifted(distance);
 }
 
-void VxFile::shift(int distance) {
+void VocalPart::shift(int distance) {
     assert(canBeShifted(distance));
     for (auto& pitch : pitches) {
         pitch.pitch.shift(distance);
     }
 }
 
-VxFile VxFile::shifted(int distance) {
-    VxFile copy = VxFile(*this);
+VocalPart VocalPart::shifted(int distance) {
+    VocalPart copy = VocalPart(*this);
     copy.shift(distance);
     return copy;
 }
 
-void VxFile::removeSilenceSpaceFromBeginning() {
+void VocalPart::removeSilenceSpaceFromBeginning() {
     assert(!pitches.empty());
 
     int firstPitchStartTickNumber = pitches[0].startTickNumber;
@@ -212,29 +212,29 @@ void VxFile::removeSilenceSpaceFromBeginning() {
     }
 }
 
-bool VxFile::hasPitchesInMoment(double time) const {
+bool VocalPart::hasPitchesInMoment(double time) const {
     int tick = timeInSecondsToTicks(time);
     return Contains(pitches, [=] (const VxPitch& pitch) {
         return pitch.containsTick(tick);
     });
 }
 
-bool VxFile::hasPitchInMoment(double time, const Pitch &pitch) const {
+bool VocalPart::hasPitchInMoment(double time, const Pitch &pitch) const {
     int tick = timeInSecondsToTicks(time);
     return Contains(pitches, [=] (const VxPitch& vxPitch) {
         return vxPitch.containsTick(tick) && vxPitch.pitch.getPerfectFrequencyIndex() == pitch.getPerfectFrequencyIndex();
     });
 }
 
-double VxFile::getFirstPitchStartTime() const {
+double VocalPart::getFirstPitchStartTime() const {
     return ticksToSeconds(pitches.front().startTickNumber);
 }
 
-VxFile VxFile::withChangedTempo(double tempoFactor) const {
-    return VxFile(pitches, endSilenceDurationInTicks, (int)round(ticksPerSecond * tempoFactor));
+VocalPart VocalPart::withChangedTempo(double tempoFactor) const {
+    return VocalPart(pitches, endSilenceDurationInTicks, (int)round(ticksPerSecond * tempoFactor));
 }
 
-VxFile VxFile::cut(double start, double end) {
+VocalPart VocalPart::cut(double start, double end) {
     std::vector<VxPitch> newPitches;
     int startTick = timeInSecondsToTicks(start);
     int endTick = timeInSecondsToTicks(end);
@@ -253,35 +253,35 @@ VxFile VxFile::cut(double start, double end) {
     int distanceInTicksBetweenLastPitchEndAndTrackEnd = this->endSilenceDurationInTicks;
     std::max(0, distanceInTicksBetweenLastPitchEndAndTrackEnd - (durationInTicks - endTick));
 
-    return VxFile(std::move(newPitches), distanceInTicksBetweenLastPitchEndAndTrackEnd, ticksPerSecond);
+    return VocalPart(std::move(newPitches), distanceInTicksBetweenLastPitchEndAndTrackEnd, ticksPerSecond);
 }
 
-int VxFile::getLowestPitchIndex() const {
+int VocalPart::getLowestPitchIndex() const {
     return lowestPitchIndex;
 }
 
-int VxFile::getHighestPitchIndex() const {
+int VocalPart::getHighestPitchIndex() const {
     return highestPitchIndex;
 }
 
-const VxPitch& VxFile::getLowestVxPitch() const {
+const VxPitch& VocalPart::getLowestVxPitch() const {
     assert(lowestPitchIndex >= 0);
     return pitches[lowestPitchIndex];
 }
 
-const VxPitch& VxFile::getHighestVxPitch() const {
+const VxPitch& VocalPart::getHighestVxPitch() const {
     assert(highestPitchIndex >= 0);
     return pitches[highestPitchIndex];
 }
 
-const Pitch& VxFile::getLowestPitch() const {
+const Pitch& VocalPart::getLowestPitch() const {
     return getLowestVxPitch().pitch;
 }
 
-const Pitch &VxFile::getHighestPitch() const {
+const Pitch &VocalPart::getHighestPitch() const {
     return getHighestVxPitch().pitch;
 }
 
-bool VxFile::isEmpty() const {
+bool VocalPart::isEmpty() const {
     return durationInTicks == 0;
 }

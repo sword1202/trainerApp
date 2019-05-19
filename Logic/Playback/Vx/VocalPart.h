@@ -14,7 +14,7 @@
 #include "StlDebugUtils.h"
 #include <iostream>
 
-class VxFile {
+class VocalPart {
     std::vector<VxPitch> pitches;
     int ticksPerSecond = 0;
     int durationInTicks = 0;
@@ -47,16 +47,16 @@ class VxFile {
 #endif
 
 public:
-    VxFile();
-    VxFile(std::vector<VxPitch> &&pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int ticksPerSecond);
-    VxFile(const std::vector<VxPitch> &pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int ticksPerSecond);
-    VxFile(VxFile&& vxFile) = default;
-    VxFile(const VxFile& vxFile) = default;
-    VxFile& operator=(const VxFile& vxFile) = default;
+    VocalPart();
+    VocalPart(std::vector<VxPitch> &&pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int ticksPerSecond);
+    VocalPart(const std::vector<VxPitch> &pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int ticksPerSecond);
+    VocalPart(VocalPart&& vxFile) = default;
+    VocalPart(const VocalPart& vocalPart) = default;
+    VocalPart& operator=(const VocalPart& vocalPart) = default;
 
 #ifdef USE_BOOST_SERIALIZATION
-    static VxFile fromFilePath(const char* filePath);
-    VxFile(std::istream& is);
+    static VocalPart fromFilePath(const char* filePath);
+    VocalPart(std::istream& is);
     void writeToStream(std::ostream& os) const;
 #endif
 
@@ -79,10 +79,10 @@ public:
     const VxPitch& getShortestPitch() const;
 
     void shift(int distance);
-    VxFile shifted(int distance);
+    VocalPart shifted(int distance);
     bool canBeShifted(int distance) const;
 
-    VxFile withChangedTempo(double tempoFactor) const;
+    VocalPart withChangedTempo(double tempoFactor) const;
 
     void removeSilenceSpaceFromBeginning();
 
@@ -100,7 +100,7 @@ public:
     const Pitch& getLowestPitch() const;
     const Pitch& getHighestPitch() const;
 
-    VxFile cut(double start, double end);
+    VocalPart cut(double start, double end);
 
     bool isEmpty() const;
 

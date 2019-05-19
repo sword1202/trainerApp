@@ -4,7 +4,7 @@
 //
 
 #include <cmath>
-#include "VxFileAudioDataGenerator.h"
+#include "VocalPartAudioDataGenerator.h"
 #include "AudioUtils.h"
 #include <iostream>
 #include "MemoryUtils.h"
@@ -22,8 +22,8 @@ using std::endl;
 #define SEEK_LOCK std::lock_guard<std::mutex> _(seekMutex)
 #define VXFILE_LOCK std::lock_guard<std::mutex> _(vxFileMutex)
 
-int VxFileAudioDataGenerator::readNextSamplesBatch(short *intoBuffer, bool moveSeekAndFillWithZero) {
-    assert(!vxFile.isEmpty());
+int VocalPartAudioDataGenerator::readNextSamplesBatch(short *intoBuffer, bool moveSeekAndFillWithZero) {
+    assert(!vocalPart.isEmpty());
     int seek = getSeek();
     int size = std::min(pcmDataSize - seek, outBufferSize);
 
@@ -31,7 +31,7 @@ int VxFileAudioDataGenerator::readNextSamplesBatch(short *intoBuffer, bool moveS
         double startTime = GetSampleTimeInSeconds(seek, sampleRate);
         double endTime = GetSampleTimeInSeconds(seek + size, sampleRate);
 
-        VxFile vxFile = getVxFile();
+        VocalPart vxFile = getVocalPart();
 
         tempPitchIndexes.clear();
         vxFile.getPitchesIndexesInTimeRange(startTime, endTime, std::back_inserter(tempPitchIndexes));
@@ -67,7 +67,7 @@ int VxFileAudioDataGenerator::readNextSamplesBatch(short *intoBuffer, bool moveS
     return size;
 }
 
-VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile& vxFile, const VxFileAudioDataGeneratorConfig &config)
+VocalPartAudioDataGenerator::VocalPartAudioDataGenerator(const VocalPart& vocalPart, const VocalPartAudioDataGeneratorConfig &config)
         : outBufferSize(config.outBufferSize), sampleRate(config.sampleRate) {
     pitchesIndexes.reserve(10);
     tempPitchIndexes.reserve(10);
@@ -75,63 +75,63 @@ VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile& vxFile, const V
 
     _tsf = LoadTsf();
     tsf_set_output(_tsf, TSF_MONO, sampleRate, 0);
-    resetVxFile(vxFile);
+    resetVocalPart(vocalPart);
 }
 
-VxFileAudioDataGenerator::VxFileAudioDataGenerator(const VxFile& vxFile) :
-VxFileAudioDataGenerator(vxFile, VxFileAudioDataGeneratorConfig()) {
+VocalPartAudioDataGenerator::VocalPartAudioDataGenerator(const VocalPart& vocalPart) :
+VocalPartAudioDataGenerator(vocalPart, VocalPartAudioDataGeneratorConfig()) {
 
 }
 
-int VxFileAudioDataGenerator::getSeek() const {
+int VocalPartAudioDataGenerator::getSeek() const {
     SEEK_LOCK;
     return seek;
 }
 
-void VxFileAudioDataGenerator::setSeek(int seek) {
+void VocalPartAudioDataGenerator::setSeek(int seek) {
     SEEK_LOCK;
     this->seek = seek;
 }
 
-int VxFileAudioDataGenerator::getOutBufferSize() const {
+int VocalPartAudioDataGenerator::getOutBufferSize() const {
     return outBufferSize;
 }
 
-int VxFileAudioDataGenerator::getSampleRate() const {
+int VocalPartAudioDataGenerator::getSampleRate() const {
     return sampleRate;
 }
 
-double VxFileAudioDataGenerator::getDurationInSeconds() const {
-    return vxFile.getDurationInSeconds();
+double VocalPartAudioDataGenerator::getDurationInSeconds() const {
+    return vocalPart.getDurationInSeconds();
 }
 
-const VxFile &VxFileAudioDataGenerator::getVxFile() const {
+const VocalPart &VocalPartAudioDataGenerator::getVocalPart() const {
     VXFILE_LOCK;
-    return vxFile;
+    return vocalPart;
 }
 
-void VxFileAudioDataGenerator::setVxFile(const VxFile &vxFile) {
+void VocalPartAudioDataGenerator::setVocalPart(const VocalPart &vocalPart) {
     VXFILE_LOCK;
-    assert(this->vxFile.getDurationInTicks() == vxFile.getDurationInTicks() &&
-            this->vxFile.getTicksPerSecond() == vxFile.getTicksPerSecond() &&
-            "Use resetVxFile instead");
-    this->vxFile = vxFile;
+    assert(this->vocalPart.getDurationInTicks() == vocalPart.getDurationInTicks() &&
+            this->vocalPart.getTicksPerSecond() == vocalPart.getTicksPerSecond() &&
+            "Use resetVocalPart instead");
+    this->vocalPart = vocalPart;
 }
 
-void VxFileAudioDataGenerator::resetVxFile(const VxFile &vxFile) {
+void VocalPartAudioDataGenerator::resetVocalPart(const VocalPart &vocalPart) {
     setSeek(0);
-    double durationInSeconds = vxFile.getDurationInSeconds();
+    double durationInSeconds = vocalPart.getDurationInSeconds();
     pcmDataSize = (int)ceil(durationInSeconds * sampleRate);
     VXFILE_LOCK;
-    this->vxFile = vxFile;
+    this->vocalPart = vocalPart;
 }
 
-VxFileAudioDataGenerator::~VxFileAudioDataGenerator() {
+VocalPartAudioDataGenerator::~VocalPartAudioDataGenerator() {
     tsf_close(_tsf);
 }
 
-std::vector<short> VxFileAudioDataGenerator::readAll() {
-    assert(!vxFile.isEmpty());
+std::vector<short> VocalPartAudioDataGenerator::readAll() {
+    assert(!vocalPart.isEmpty());
     std::vector<short> result;
     result.reserve(size_t(pcmDataSize));
 
@@ -145,6 +145,6 @@ std::vector<short> VxFileAudioDataGenerator::readAll() {
     return result;
 }
 
-VxFileAudioDataGenerator::VxFileAudioDataGenerator() : VxFileAudioDataGenerator(VxFile()) {
+VocalPartAudioDataGenerator::VocalPartAudioDataGenerator() : VocalPartAudioDataGenerator(VocalPart()) {
 
 }

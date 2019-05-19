@@ -1,6 +1,6 @@
 #include "MidiFile.h"
 #include "MidiFileReader.h"
-#include "VxFile.h"
+#include "VocalPart.h"
 
 #include <sstream>
 #include "catch.hpp"
@@ -491,7 +491,7 @@ TEST_CASE("MIDI reader unit test") {
 	std::stringstream midiBuffer;
 	MidiFile midifile;
 	MidiFileReader midiReader;
-	std::vector<VxFile> outResult;
+	std::vector<VocalPart> outResult;
 	double outBeatsPerMinute = 0.0;
 
 	/** Testing beats per minute **/
@@ -593,7 +593,7 @@ TEST_CASE("MIDI reader unit test") {
 		SECTION(MIDI_READER_TEST) {
 			midiReader.read(midiBuffer, &outResult, &outBeatsPerMinute);
 			REQUIRE(outResult.size() == 2);
-			SECTION("Output VxFile size test") {
+			SECTION("Output VocalPart size test") {
 				REQUIRE(outResult.at(0).getPitches().size() == 6);
 				REQUIRE(outResult.at(1).getPitches().size() == 1);
 			}

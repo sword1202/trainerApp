@@ -281,8 +281,8 @@ void WorkspaceDrawer::drawPitch(float x, float y, float width) const {
 
 void WorkspaceDrawer::drawPitches() const {
     assert(getFirstPitch().isValid());
-    const VxFile* vxFile = this->vxFile;
-    if (!vxFile) {
+    const VocalPart* vocalPart = this->vocalPart;
+    if (!vocalPart) {
         return;
     }
 
@@ -298,9 +298,9 @@ void WorkspaceDrawer::drawPitches() const {
     double timeEnd = timeBegin + workspaceDuration;
 
     float relativeHeight = getMaximumGridTranslation() - getGridTranslation() + getVisibleGridHeight();
-    vxFile->iteratePitchesInTimeRange(timeBegin, timeEnd, [&] (const VxPitch& vxPitch) {
-        double pitchTimeBegin = vxFile->ticksToSeconds(vxPitch.startTickNumber);
-        double pitchDuration = vxFile->ticksToSeconds(vxPitch.ticksCount);
+    vocalPart->iteratePitchesInTimeRange(timeBegin, timeEnd, [&] (const VxPitch& vxPitch) {
+        double pitchTimeBegin = vocalPart->ticksToSeconds(vxPitch.startTickNumber);
+        double pitchDuration = vocalPart->ticksToSeconds(vxPitch.ticksCount);
 
         double x = (pitchTimeBegin - timeBegin) / workspaceDuration * width;
         double pitchWidth = pitchDuration / workspaceDuration * width;
@@ -346,20 +346,20 @@ void WorkspaceDrawer::drawPianoTrack() {
     drawer->fillRect(x, y, width, height);
 
     // Draw pitches
-    const VxFile* vxFile = this->vxFile;
-    int durationInTicks = vxFile->getDurationInTicks();
+    const VocalPart* vocalPart = this->vocalPart;
+    int durationInTicks = vocalPart->getDurationInTicks();
     float tickSize = width / durationInTicks;
 
     drawer->setFillColor(pianoTrackPitchesColor);
-    const Pitch &lowest = vxFile->getLowestPitch();
-    const Pitch &highest = vxFile->getHighestPitch();
+    const Pitch &lowest = vocalPart->getLowestPitch();
+    const Pitch &highest = vocalPart->getHighestPitch();
     int lowestIndex = lowest.getPerfectFrequencyIndex();
     int maxIndexFactor = std::min(highest.getPerfectFrequencyIndex() - lowestIndex,
             PIANO_TRACK_PITCHES_INDEXES_COUNT - 1);
 
     int topMargin = PIANO_TRACK_PITCHES_INDEXES_COUNT - maxIndexFactor;
 
-    const auto& pitches = vxFile->getPitches();
+    const auto& pitches = vocalPart->getPitches();
     for (const VxPitch& vxPitch : pitches) {
         float pitchX = vxPitch.startTickNumber * tickSize;
         float pitchWidth = vxPitch.ticksCount * tickSize;
@@ -404,8 +404,8 @@ float WorkspaceDrawer::getSummarizedGridWidth() const {
     return intervalsCount * intervalWidth;
 }
 
-void WorkspaceDrawer::setVxFile(const VxFile* vxFile) {
-    this->vxFile = vxFile;
+void WorkspaceDrawer::setVocalPart(const VocalPart *vocalPart) {
+    this->vocalPart = vocalPart;
 }
 
 void WorkspaceDrawer::initGraphPitchesArrays(float workspaceSeek) {
@@ -645,7 +645,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, MouseEventsReceiver *mouseEvent
         firstPitchIndex(-1),
         frameTime(0),
         drawer(drawer),
-        vxFile(nullptr),
+        vocalPart(nullptr),
         firstPlayHeadPosition(0),
         secondPlayHeadPosition(0),
         playbackBounds(PlaybackBounds()),

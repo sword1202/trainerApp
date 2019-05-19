@@ -11,7 +11,7 @@ set(midiSources
 set(vxMvxFileSources
         Mvx/MvxFile.cpp
         Mvx/MvxFile.h
-        Vx/VxFile.cpp
+        Vx/VocalPart.cpp
         )
 
 set(playbackSources
@@ -34,8 +34,8 @@ set(playbackSources
         Mvx/MvxPlayer.h
         Mvx/Lyrics.cpp
 
-        Vx/VxFileAudioDataGenerator.cpp
-        Vx/VxFileAudioPlayer.cpp
+        Vx/VocalPartAudioDataGenerator.cpp
+        Vx/VocalPartAudioPlayer.cpp
 
         Other/MetronomeAudioPlayer.cpp
         Other/RealtimeStreamingAudioPlayer.cpp
@@ -47,7 +47,7 @@ set(playbackTestSources
         ${vxMvxFileSources}
         ${midiSources}
 
-        Vx/VxFileAudioDataGenerator.cpp
+        Vx/VocalPartAudioDataGenerator.cpp
 
         Decoding/Decoder/audiodecoder.cpp
         Decoding/Decoder/audiodecodercoreaudio_mac.cpp

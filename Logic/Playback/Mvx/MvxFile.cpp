@@ -8,7 +8,7 @@
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <Decoder/audiodecoder.h>
-#include <VxFileAudioDataGenerator.h>
+#include <VocalPartAudioDataGenerator.h>
 #include "StringUtils.h"
 #include "AudioUtils.h"
 
@@ -39,12 +39,8 @@ MvxFile MvxFile::readFromFile(const char *filePath, bool readOnlySignature) {
     return readFromStream(file, readOnlySignature);
 }
 
-const VxFile &MvxFile::getVxFile() const {
-    return vxFile;
-}
-
-VxFile &MvxFile::getVxFile() {
-    return vxFile;
+const VocalPart &MvxFile::getVocalPart() const {
+    return vocalPart;
 }
 
 double MvxFile::getBeatsPerMinute() const {
@@ -110,8 +106,8 @@ void MvxFile::setRecordingData(const std::string &recordingData) {
     recording = !recordingData.empty();
 }
 
-void MvxFile::setVxFile(const VxFile &vxFile) {
-    this->vxFile = vxFile;
+void MvxFile::setVocalPart(const VocalPart &vocalPart) {
+    this->vocalPart = vocalPart;
 }
 
 std::vector<double> &MvxFile::moveRecordedPitchesTimes() {
@@ -176,9 +172,9 @@ std::string MvxFile::convertInstrumentalAndVocalTrackToWav(float vocalVolume) co
         throw std::runtime_error("Unsupported instrumental bitsPerChannel");
     }
 
-    VxFileAudioDataGeneratorConfig config;
+    VocalPartAudioDataGeneratorConfig config;
     config.sampleRate = decoded.wavConfig.sampleRate;
-    VxFileAudioDataGenerator generator(vxFile, config);
+    VocalPartAudioDataGenerator generator(vocalPart, config);
     std::vector<short> vocal = generator.readAll();
     int numberOfChannels = decoded.wavConfig.numberOfChannels;
     if (numberOfChannels >= 2) {

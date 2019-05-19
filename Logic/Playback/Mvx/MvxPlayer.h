@@ -7,9 +7,9 @@
 #define VOCALTRAINER_MVXPLAYER_H
 
 #include <iostream>
-#include "VxFile.h"
+#include "VocalPart.h"
 #include "MvxFile.h"
-#include "VxFileAudioPlayer.h"
+#include "VocalPartAudioPlayer.h"
 #include "AudioFilePlayer.h"
 #include <boost/optional.hpp>
 #include <memory>
@@ -27,7 +27,7 @@ class MvxPlayer : public PlayingPitchSequence {
 private:
 
     AudioFilePlayer instrumentalPlayer;
-    VxFileAudioPlayer vxPlayer;
+    VocalPartAudioPlayer vocalPartPianoPlayer;
     MetronomeAudioPlayer metronomePlayer;
     WavAudioPlayer recordingPlayer;
 
@@ -52,7 +52,7 @@ public:
     CppUtils::ListenersSet<> stopRequestedListeners;
     CppUtils::ListenersSet<> playRequestedListeners;
     CppUtils::ListenersSet<> prepareFinishedListeners;
-    CppUtils::ListenersSet<const VxFile*> vxFileChangedListeners;
+    CppUtils::ListenersSet<const VocalPart*> vocalPartChangedListeners;
     CppUtils::SynchronizedListenersSet <double> seekChangedListeners;
     CppUtils::ListenersSet<double> seekChangedFromUserListeners;
     CppUtils::ListenersSet<> tonalityChangedListeners;
@@ -67,7 +67,7 @@ public:
     void init(MvxFile&& file);
     void prepare();
     virtual void setInstrumentalVolume(float instrumentalVolume);
-    virtual void setPianoVolume(float pianoVolume);
+    virtual void setVocalPartPianoVolume(float pianoVolume);
     float getInstrumentalVolume() const;
     float getPianoVolume() const;
     void setRecordingVolume(float volume);
@@ -82,7 +82,7 @@ public:
     double getSeek() const;
     virtual void seekToNextTact();
     virtual void seekToPrevTact();
-    const VxFile* getVxFile() const;
+    const VocalPart* getVocalPart() const;
     const MvxFile &getMvxFile() const;
 
     const PlaybackBounds &getBounds() const;

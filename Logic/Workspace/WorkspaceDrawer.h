@@ -11,7 +11,7 @@
 #include "Drawer.h"
 #include <array>
 #include "PitchesCollection.h"
-#include "VxFile.h"
+#include "VocalPart.h"
 #include "WorkspaceController.h"
 #include "PianoDrawer.h"
 #include "PlaybackBounds.h"
@@ -74,7 +74,7 @@ class WorkspaceDrawer : public WorkspaceController {
     Drawer::Image* playHeadTriangleImage = nullptr;
     Drawer::Image* clockImage = nullptr;
 
-    std::atomic<const VxFile*> vxFile;
+    std::atomic<const VocalPart*> vocalPart;
 
     std::atomic<double> frameTime;
     std::atomic<float> firstPlayHeadPosition, secondPlayHeadPosition;
@@ -200,8 +200,8 @@ public:
 
     void setPitchesCollection(const PitchesCollection *pitchesCollection) override;
 
-    // Warning: VxFile should not be changed from outside
-    void setVxFile(const VxFile* vxFile) override;
+    // Warning: VocalPart should not be changed from outside
+    void setVocalPart(const VocalPart *vocalPart) override;
     int getDistanceFromFirstPitch(const Pitch &pitch) const;
 
     void update() override;

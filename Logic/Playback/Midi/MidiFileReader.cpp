@@ -5,7 +5,7 @@
 
 #include "MidiFileReader.h"
 #include "MidiFile.h"
-#include "VxFile.h"
+#include "VocalPart.h"
 
 #include <iostream>
 #include <algorithm>
@@ -76,7 +76,7 @@ MidiFileReader::~MidiFileReader()
 
 }
 
-void MidiFileReader::read(const std::string &filename, std::vector<VxFile> *outResult, double *outBeatsPerMinute)
+void MidiFileReader::read(const std::string &filename, std::vector<VocalPart> *outResult, double *outBeatsPerMinute)
 {
     reset();
     MidiFile midifile;
@@ -85,7 +85,7 @@ void MidiFileReader::read(const std::string &filename, std::vector<VxFile> *outR
     }
 }
 
-void MidiFileReader::read(std::istream &is, std::vector<VxFile> *outResult, double *outBeatsPerMinute)
+void MidiFileReader::read(std::istream &is, std::vector<VocalPart> *outResult, double *outBeatsPerMinute)
 {
     reset();
     MidiFile midifile;
@@ -121,7 +121,7 @@ void MidiFileReader::reset()
  * \param outResult
  * \param outBeatsPerMinute
  */
-void MidiFileReader::processMidiFile(MidiFile &midi, std::vector<VxFile> *outResult, double *outBeatsPerMinute)
+void MidiFileReader::processMidiFile(MidiFile &midi, std::vector<VocalPart> *outResult, double *outBeatsPerMinute)
 {
     currentChannelPrefix = NO_CHANNEL_PREFIX;
     durationInSeconds = midi.getTotalTimeInSeconds();
@@ -148,7 +148,7 @@ void MidiFileReader::processMidiFile(MidiFile &midi, std::vector<VxFile> *outRes
             pitches.push_back(pitch);
         }
 
-        // VxFile
+        // VocalPart
         outResult->emplace_back(
                 std::move(pitches),
                 durationInTicks - track->finalTick, //endSilenceLengthInTicks

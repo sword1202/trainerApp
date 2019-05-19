@@ -7,7 +7,7 @@
 #define VOCALTRAINER_MVXFILE_H
 
 #include <iostream>
-#include "VxFile.h"
+#include "VocalPart.h"
 #include "StringUtils.h"
 #include "Lyrics.h"
 #include <boost/variant.hpp>
@@ -20,7 +20,7 @@ class MvxFile {
     double score = -1.0;
 
     // core data
-    VxFile vxFile;
+    VocalPart vocalPart;
     std::string instrumental;
     double beatsPerMinute = 0;
 
@@ -62,7 +62,7 @@ class MvxFile {
 
         if (!readOnlySignature) {
             ar & beatsPerMinute;
-            ar & vxFile;
+            ar & vocalPart;
             ar & instrumental;
             ar & recordingData;
 
@@ -95,9 +95,8 @@ public:
     static MvxFile readFromStream(std::istream& is, bool readOnlySignature = false);
     static MvxFile readFromFile(const char* filePath, bool readOnlySignature = false);
 
-    const VxFile &getVxFile() const;
-    VxFile &getVxFile();
-    void setVxFile(const VxFile &vxFile);
+    const VocalPart &getVocalPart() const;
+    void setVocalPart(const VocalPart &vocalPart);
 
     const std::string &getInstrumental() const;
     void setInstrumental(const std::string &instrumental);

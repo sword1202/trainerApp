@@ -154,7 +154,7 @@ void QtMvxPlayer::setInstrumentalVolume(float instrumentalVolume) {
     emit instrumentalVolumeChanged();
 }
 
-void QtMvxPlayer::setPianoVolume(float pianoVolume) {
-    MvxPlayer::setPianoVolume(pianoVolume);
+void QtMvxPlayer::setVocalPartPianoVolume(float pianoVolume) {
+    MvxPlayer::setVocalPartPianoVolume(pianoVolume);
     emit pianoVolumeChanged();
 }

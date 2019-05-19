@@ -48,9 +48,9 @@ void MainController::init(AudioInputManager *pitchInputReader, MvxPlayer *mvxPla
         updateSeek(this->mvxPlayer->getSeek());
     });
 
-    mvxPlayer->vxFileChangedListeners.addListener([this] (const VxFile* vxFile) {
+    mvxPlayer->vocalPartChangedListeners.addListener([this] (const VocalPart* vocalPart) {
         if (workspaceController) {
-            workspaceController->setVxFile(vxFile);
+            workspaceController->setVocalPart(vocalPart);
         }
     });
 
@@ -67,7 +67,7 @@ void MainController::init(AudioInputManager *pitchInputReader, MvxPlayer *mvxPla
     });
 
     mvxPlayer->setInstrumentalVolume(1.0);
-    mvxPlayer->setPianoVolume(0.5);
+    mvxPlayer->setVocalPartPianoVolume(0.5);
     pitchInputReader->setOutputVolume(0.0);
 
     pitchInputReader->getPitchDetectedListeners().addListener([=] (const Pitch& pitch, double) {
@@ -96,7 +96,7 @@ MvxPlayer *MainController::getPlayer() const {
 
 void MainController::setWorkspaceController(WorkspaceController *workspaceController) {
     assert(!this->workspaceController);
-    workspaceController->setVxFile(mvxPlayer->getVxFile());
+    workspaceController->setVocalPart(mvxPlayer->getVocalPart());
     workspaceController->setIntervalsPerSecond(mvxPlayer->getBeatsPerMinute() / 60.0);
     workspaceController->setTotalDurationInSeconds(mvxPlayer->getDuration());
     workspaceController->setInstrumentalTrackSamples(
@@ -150,7 +150,7 @@ void MainController::generateRecording(MvxFile *out) {
 
     // save instrumental
     out->setInstrumental(mvxPlayer->getInstrumental());
-    out->setVxFile(*mvxPlayer->getVxFile());
+    out->setVocalPart(*mvxPlayer->getVocalPart());
     out->setBeatsPerMinute(mvxPlayer->getBeatsPerMinute());
 
     // save recorded pitches, to display a graph in the future

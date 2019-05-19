@@ -6,7 +6,7 @@
 #ifndef VOCALTRAINER_VXFILEAUDIODATAGENERATORCONFIG_H
 #define VOCALTRAINER_VXFILEAUDIODATAGENERATORCONFIG_H
 
-struct VxFileAudioDataGeneratorConfig {
+struct VocalPartAudioDataGeneratorConfig {
     int sampleRate = 44100;
     int outBufferSize = 256;
 };

@@ -17,7 +17,7 @@
 #include "MidiTrack.h"
 #include "MidiFile.h"
 
-#include "VxFile.h"
+#include "VocalPart.h"
 
 class MidiFileReader {
 
@@ -40,12 +40,12 @@ public:
     explicit MidiFileReader();
     ~MidiFileReader();
 
-    void read(const std::string  &filename, std::vector<VxFile> *outResult, double *outBeatsPerMinute);
-    void read(      std::istream &is,       std::vector<VxFile> *outResult, double *outBeatsPerMinute);
+    void read(const std::string  &filename, std::vector<VocalPart> *outResult, double *outBeatsPerMinute);
+    void read(      std::istream &is,       std::vector<VocalPart> *outResult, double *outBeatsPerMinute);
 
 private:
 	void reset();
-    void processMidiFile(MidiFile &midi, std::vector<VxFile> *outResult, double *outBeatsPerMinute);
+    void processMidiFile(MidiFile &midi, std::vector<VocalPart> *outResult, double *outBeatsPerMinute);
     void processEvent(const MidiEvent &event);
     std::shared_ptr<MidiTrack> getTrack(const int trackID, const int channelID);
     std::string eventText(const MidiEvent &event, const int startByte, const int bytesAmount);

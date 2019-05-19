@@ -10,7 +10,7 @@
 #include "PitchesCollection.h"
 #include "PlayingPitchSequence.h"
 #include "PlaybackBounds.h"
-#include "VxFile.h"
+#include "VocalPart.h"
 
 class WorkspaceController {
 public:
@@ -26,7 +26,7 @@ public:
     virtual float getVisibleGridHeight() const = 0;
     virtual float getSummarizedGridWidth() const = 0;
     virtual float getSummarizedGridHeight() const = 0;
-    virtual void setVxFile(const VxFile* vxFile) = 0;
+    virtual void setVocalPart(const VocalPart *vocalPart) = 0;
     virtual void setFirstVisiblePitch(const Pitch &firstPitch) = 0;
     virtual void update() = 0;
     virtual void setDetectedPitch(const Pitch &detectedPitch) = 0;
