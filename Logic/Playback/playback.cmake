@@ -46,6 +46,9 @@ set(playbackTestSources
         ${midiSources}
         ${vxMvxFileSources}
         ${midiSources}
+
+        Vx/VxFileAudioDataGenerator.cpp
+
         Decoding/Decoder/audiodecoder.cpp
         Decoding/Decoder/audiodecodercoreaudio_mac.cpp
         )
