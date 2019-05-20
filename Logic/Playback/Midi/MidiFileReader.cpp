@@ -6,9 +6,12 @@
 #include "MidiFileReader.h"
 #include "MidiFile.h"
 #include "VocalPart.h"
+#include "MidiFileReaderException.h"
 
 #include <iostream>
 #include <algorithm>
+
+using namespace CppUtils;
 
 static constexpr int    MAX_MIDI_CHANNELS = 15;
 
@@ -76,21 +79,21 @@ MidiFileReader::~MidiFileReader()
 
 }
 
-void MidiFileReader::read(const std::string &filename, std::vector<VocalPart> *outResult, double *outBeatsPerMinute)
+void MidiFileReader::read(const std::string &filename)
 {
     reset();
     MidiFile midifile;
     if (midifile.read(filename) != 0) {
-        processMidiFile(midifile, outResult, outBeatsPerMinute);
+        processMidiFile(midifile);
     }
 }
 
-void MidiFileReader::read(std::istream &is, std::vector<VocalPart> *outResult, double *outBeatsPerMinute)
+void MidiFileReader::read(std::istream &is)
 {
     reset();
     MidiFile midifile;
     if (midifile.read(is) != 0) {
-        processMidiFile(midifile, outResult, outBeatsPerMinute);
+        processMidiFile(midifile);
     }
 }
 
@@ -121,7 +124,7 @@ void MidiFileReader::reset()
  * \param outResult
  * \param outBeatsPerMinute
  */
-void MidiFileReader::processMidiFile(MidiFile &midi, std::vector<VocalPart> *outResult, double *outBeatsPerMinute)
+void MidiFileReader::processMidiFile(MidiFile &midi)
 {
     currentChannelPrefix = NO_CHANNEL_PREFIX;
     durationInSeconds = midi.getTotalTimeInSeconds();
@@ -136,25 +139,6 @@ void MidiFileReader::processMidiFile(MidiFile &midi, std::vector<VocalPart> *out
         }
     }
     postProcess();
-    *outBeatsPerMinute = beatsPerMinute;
-
-    for (const auto &track : availableTracks) {
-        std::vector<VxPitch> pitches;
-        for (const auto &note : track->getNotes()) {
-            VxPitch pitch;
-            pitch.pitch = Pitch::fromMidiIndex(note->keyNumber);
-            pitch.startTickNumber = note->startTick;
-            pitch.ticksCount = note->durationInTicks();
-            pitches.push_back(pitch);
-        }
-
-        // VocalPart
-        outResult->emplace_back(
-                std::move(pitches),
-                durationInTicks - track->finalTick, //endSilenceLengthInTicks
-                ticksPerSecond
-        );
-    }
 }
 
 /*!
@@ -379,19 +363,7 @@ void MidiFileReader::postProcess()
 
         track->postProcess(ticksPerQuarter, durationInTicks);
         track->durationInTime = 1.0 * track->durationInTicks() / ticksPerSecond;
-
-        // If track satisfies base conditions, then add it to vector of available tracks
-        if (track->noteCount > 0
-                && track->channelId != DRUMS_CHANNEL_ID
-                && track->polyphonicTracksCount <= MAX_SUPPORTED_POLYPHONIC_TRACKS_COUNT
-                && Pitch::isMidiPitchSupported(track->highestNote)
-                && Pitch::isMidiPitchSupported(track->lowestNote)
-                ) {
-            availableTracks.emplace_back(track);
-        }
     }
-
-    std::sort(availableTracks.begin(), availableTracks.end(), sortCompare);
 }
 
 /*!
@@ -491,4 +463,47 @@ bool MidiFileReader::satisfiesDistribution(const double &value, const double &mx
 int MidiFileReader::tickToBeat(const int tick)
 {
     return tick / ticksPerBeat;
+}
+
+double MidiFileReader::getBeatsPerMinute() const {
+    return beatsPerMinute;
+}
+
+VocalPart MidiFileReader::tryGetVocalPartFromMidiTrackWithId(int midiTrackId) const {
+    assert(beatsPerMinute >= 0 && "The midifile has not been parsed, call read before tryGetVocalPartFromMidiTrackWithId");
+
+    auto iter = std::find_if(tracksMap.begin(), tracksMap.end(), [=] (const auto& pair) {
+        return pair.second->trackId == midiTrackId;
+    });
+
+    if (iter == tracksMap.end()) {
+        throw MidiFileReaderException(MidiFileReaderException::OUT_OF_RANGE);
+    }
+
+    std::shared_ptr<MidiTrack> track = iter->second;
+
+    // Check if track satisfies base conditions
+    if (track->channelId == DRUMS_CHANNEL_ID) {
+        throw MidiFileReaderException(MidiFileReaderException::DRUM_TRACK);
+    } else if(!Pitch::isMidiPitchSupported(track->highestNote)
+              || !Pitch::isMidiPitchSupported(track->lowestNote)) {
+        throw MidiFileReaderException(MidiFileReaderException::HAS_UNSUPPORTED_PITCHES);
+    } else if(track->polyphonicTracksCount > MAX_SUPPORTED_POLYPHONIC_TRACKS_COUNT) {
+        throw MidiFileReaderException(MidiFileReaderException::OUT_OF_MAX_SUPPORTED_POLYPHONIC_TRACKS_COUNT);
+    }
+
+    std::vector<VxPitch> pitches;
+    const auto &notes = track->getNotes();
+    pitches.reserve(notes.size());
+    for (const auto &note : notes) {
+        VxPitch pitch;
+        pitch.pitch = Pitch::fromMidiIndex(note->keyNumber);
+        pitch.startTickNumber = note->startTick;
+        pitch.ticksCount = note->durationInTicks();
+        pitches.push_back(pitch);
+    }
+
+    return VocalPart(std::move(pitches),
+                     durationInTicks - track->finalTick, //endSilenceLengthInTicks
+                     int(ticksPerSecond));
 }

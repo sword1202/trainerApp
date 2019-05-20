@@ -9,6 +9,8 @@
 #include <QMessageBox>
 #include <QStandardPaths>
 #include <Decoder/audiodecoder.h>
+#include <MidiFileReaderException.h>
+#include <MvxPlayer.h>
 #include "MvxFile.h"
 #include "AudioUtils.h"
 
@@ -46,11 +48,21 @@ public:
         assert(!midiFilePath.isEmpty())
 
         MidiFileReader reader;
-        std::vector<VocalPart> result;
-        double beatsPerMinute;
-        reader.read(midiFilePath.toLocal8Bit().toStdString(), &result, &beatsPerMinute);
+        reader.read(midiFilePath.toLocal8Bit().toStdString());
+        double beatsPerMinute = reader.getBeatsPerMinute();
+        if (beatsPerMinute < 0) {
+            QMessageBox::critical(dynamic_cast<QWidget *>(parent()), "Error", "Broken or unsupported midi file");
+            return;
+        }
 
-        assert(result.size() > midiIndex)
+        VocalPart vocalPart;
+        try {
+            vocalPart = reader.tryGetVocalPartFromMidiTrackWithId(midiIndex);
+        } catch (MidiFileReaderException& e) {
+            QMessageBox::critical(dynamic_cast<QWidget *>(parent()), "Error", e.what());
+            return;
+        }
+
         auto outputFilePath = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation)[0];
         outputFilePath += "/" + artistName + "-" + title;
 
@@ -61,14 +73,23 @@ public:
         outputFilePath += ".mvx";
 
         MvxFile mvxFile;
-        mvxFile.setVocalPart(result[midiIndex]);
+        mvxFile.setVocalPart(vocalPart);
         mvxFile.setArtistNameUtf8(artistName.toUtf8().toStdString());
         mvxFile.setSongTitleUtf8(title.toUtf8().toStdString());
         mvxFile.loadInstrumentalFromFile(instrumentalFilePath.toLocal8Bit().data());
         mvxFile.setBeatsPerMinute(beatsPerMinute);
         mvxFile.generateInstrumentalPreviewSamplesFromInstrumental();
 
-        mvxFile.writeToFile(outputFilePath.toLocal8Bit().data());
+        MvxPlayer mvxPlayer;
+        mvxPlayer.init(std::move(mvxFile));
+        try {
+            mvxPlayer.prepare();
+        } catch (std::exception& e) {
+            QMessageBox::critical(dynamic_cast<QWidget *>(parent()), "Error", e.what());
+            return;
+        }
+
+        mvxPlayer.getMvxFile().writeToFile(outputFilePath.toLocal8Bit().data());
 
         QMessageBox::information(dynamic_cast<QWidget *>(parent()), "File created", outputFilePath);
     }

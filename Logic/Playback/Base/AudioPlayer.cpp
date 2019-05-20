@@ -95,11 +95,12 @@ void AudioPlayer::prepare() {
         soundTouchManager->onPlayBackDataReceived(playbackData);
     }
 
-    BOOST_ASSERT_MSG(playbackData.sampleRate > 0 &&
-            playbackData.framesPerBuffer >= 0 &&
-            playbackData.numChannels > 0 &&
-            playbackData.totalDurationInSeconds >= 0,
-            "not all playback data provided");
+    if (playbackData.sampleRate <= 0 ||
+            playbackData.framesPerBuffer < 0 ||
+            playbackData.numChannels <= 0 ||
+            playbackData.totalDurationInSeconds < 0) {
+        throw std::runtime_error("AudioPlayer::prepare failed");
+    }
 
     auto err = Pa_OpenDefaultStream( &stream,
             0,          /* no input channels */

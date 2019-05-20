@@ -15,9 +15,11 @@
 #include "Executors.h"
 #include "PlaybackBounds.h"
 #include "AudioAverageInputLevelMonitor.h"
+#include "MvxPlayerPrepareException.h"
 #include <iostream>
 #include <memory>
 #include <PitchesMutableList.h>
+#include "PrepareFailedException.h"
 
 using namespace CppUtils;
 using std::cout;
@@ -173,14 +175,28 @@ MvxPlayer::~MvxPlayer() {
 }
 
 void MvxPlayer::prepare() {
-    instrumentalPlayer.prepare();
-    vocalPartPianoPlayer.prepare();
+    try {
+        instrumentalPlayer.prepare();
+    } catch (PrepareFailedException&) {
+        throw MvxPlayerPrepareException(MvxPlayerPrepareException::BROKEN_INSTRUMENTAL);
+    }
+    try {
+        vocalPartPianoPlayer.prepare();
+    } catch (PrepareFailedException&) {
+        throw MvxPlayerPrepareException(MvxPlayerPrepareException::BROKEN_VOCAL_PART);
+    }
     if (isRecording()) {
-        recordingPlayer.prepare();
+        try {
+            recordingPlayer.prepare();
+        } catch (PrepareFailedException&) {
+            throw MvxPlayerPrepareException(MvxPlayerPrepareException::BROKEN_RECORDING);
+        }
     }
 
     metronomePlayer.setAudioDataInfo(getBeatsPerMinute(), instrumentalPlayer.getTrackDurationInSeconds());
-    assert(fabs(instrumentalPlayer.getTrackDurationInSeconds() - vocalPartPianoPlayer.getTrackDurationInSeconds()) < 0.1);
+    if (fabs(instrumentalPlayer.getTrackDurationInSeconds() - vocalPartPianoPlayer.getTrackDurationInSeconds()) > 0.1) {
+        throw MvxPlayerPrepareException(MvxPlayerPrepareException::DIFFERENT_DURATIONS);
+    }
     prepareFinishedListeners.executeAll();
     vocalPartChangedListeners.executeAll(&vocalPartPianoPlayer.getVocalPart());
 }

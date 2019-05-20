@@ -65,7 +65,9 @@ target_link_libraries(VocalTrainer Qt5::QuickWidgets)
 target_link_libraries(VocalTrainer Qt5::Svg)
 
 set(mvxGeneratorSources
-        ${playbackTestSources}
+        ${playbackSources}
+        Logic/AudioInput/PitchesMutableList.cpp
+        Logic/AudioInput/AudioAverageInputLevelMonitor.cpp
         ${cppUtilsSources}
         CppUtils/Executors.mm
         Logic/AudioInput/Pitch.cpp
@@ -73,8 +75,7 @@ set(mvxGeneratorSources
         MvxGenerator/Handler.h
         Qt/App/LoadTsf.cpp
         MvxGenerator/main.cpp
-        MvxGenerator/main.qrc
-        )
+        MvxGenerator/main.qrc)
 
 add_executable(MvxGenerator ${mvxGeneratorSources})
 

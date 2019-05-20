@@ -35,17 +35,19 @@ class MidiFileReader {
     using TrackNamesMap = std::unordered_map<int, std::string>;
     TrackMap      tracksMap;     // key = 15 * trackID + channelID
     TrackNamesMap trackNamesMap; // key = trackID
-    std::vector<std::shared_ptr<MidiTrack> > availableTracks;
 public:
     explicit MidiFileReader();
     ~MidiFileReader();
 
-    void read(const std::string  &filename, std::vector<VocalPart> *outResult, double *outBeatsPerMinute);
-    void read(      std::istream &is,       std::vector<VocalPart> *outResult, double *outBeatsPerMinute);
+    void read(const std::string &filename);
+    void read(std::istream &is);
+
+	double getBeatsPerMinute() const;
+	VocalPart tryGetVocalPartFromMidiTrackWithId(int midiTrackId) const;
 
 private:
 	void reset();
-    void processMidiFile(MidiFile &midi, std::vector<VocalPart> *outResult, double *outBeatsPerMinute);
+    void processMidiFile(MidiFile &midi);
     void processEvent(const MidiEvent &event);
     std::shared_ptr<MidiTrack> getTrack(const int trackID, const int channelID);
     std::string eventText(const MidiEvent &event, const int startByte, const int bytesAmount);

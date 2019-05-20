@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>Main.qml</file>
+        <file>../Qt/qml/sounds/sounds.sf2</file>
     </qresource>
 </RCC>

@@ -1,6 +1,8 @@
 set(midiSources
         Midi/MidiFileReader.cpp
         Midi/MidiTrack.cpp
+        Midi/MidiFileReaderException.cpp
+        Midi/MidiFileReaderException.h
         Midi/CraigsappMidifile/Binasc.cpp
         Midi/CraigsappMidifile/MidiEvent.cpp
         Midi/CraigsappMidifile/MidiEventList.cpp
@@ -20,6 +22,8 @@ set(playbackSources
         Base/PlaybackBounds.cpp
         Base/PortAudioUtils.cpp
         Base/SoundTouchManager.cpp
+        Base/PrepareFailedException.cpp
+        Base/PrepareFailedException.h
 
         Decoding/AudioFilePlayer.cpp
         Decoding/Decoder/audiodecoder.cpp
@@ -33,6 +37,8 @@ set(playbackSources
         Mvx/MvxPlayer.cpp
         Mvx/MvxPlayer.h
         Mvx/Lyrics.cpp
+        Mvx/MvxPlayerPrepareException.cpp
+        Mvx/MvxPlayerPrepareException.h
 
         Vx/VocalPartAudioDataGenerator.cpp
         Vx/VocalPartAudioPlayer.cpp

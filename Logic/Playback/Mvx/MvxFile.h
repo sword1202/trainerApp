@@ -89,8 +89,8 @@ public:
     // Preferably use move constructor instead
     MvxFile(const MvxFile& mvxFile) = delete;
 
-    void writeToStream(std::ostream& os);
-    void writeToFile(const char* outFilePath);
+    void writeToStream(std::ostream& os) const;
+    void writeToFile(const char* outFilePath) const;
 
     static MvxFile readFromStream(std::istream& is, bool readOnlySignature = false);
     static MvxFile readFromFile(const char* filePath, bool readOnlySignature = false);

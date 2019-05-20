@@ -16,12 +16,12 @@ constexpr int MAX_SAMPLES_PREVIEW_COUNT = 5000;
 
 using namespace CppUtils;
 
-void MvxFile::writeToStream(std::ostream &os) {
+void MvxFile::writeToStream(std::ostream &os) const {
     boost::archive::text_oarchive ar(os);
     ar << *this;
 }
 
-void MvxFile::writeToFile(const char *outFilePath) {
+void MvxFile::writeToFile(const char *outFilePath) const {
     std::fstream file = Streams::OpenFile(outFilePath, std::ios::binary | std::ios::out);
     writeToStream(file);
 }

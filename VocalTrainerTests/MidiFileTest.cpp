@@ -504,7 +504,7 @@ TEST_CASE("MIDI reader unit test") {
 		}
 
 		SECTION("MIDI BPM read test") {
-			midiReader.read(midiBuffer, &outResult, &outBeatsPerMinute);
+			midiReader.read(midiBuffer);
 			double epsilon = 0.01;
 			REQUIRE(fabs(outBeatsPerMinute - MIDI_TEMPO) < epsilon);
 		}
@@ -520,7 +520,7 @@ TEST_CASE("MIDI reader unit test") {
 		}
 
 		SECTION(MIDI_READER_TEST) {
-			midiReader.read(midiBuffer, &outResult, &outBeatsPerMinute);
+			midiReader.read(midiBuffer);
 			double epsilon = 0.01;
 			REQUIRE(fabs(outBeatsPerMinute - MIDI_TEMPO) < epsilon);
 			REQUIRE(!outResult.empty());
@@ -561,7 +561,7 @@ TEST_CASE("MIDI reader unit test") {
 		}
 
 		SECTION(MIDI_READER_TEST) {
-			midiReader.read(midiBuffer, &outResult, &outBeatsPerMinute);
+			midiReader.read(midiBuffer);
 			REQUIRE(outResult.empty());
 		}
 	}
@@ -575,7 +575,7 @@ TEST_CASE("MIDI reader unit test") {
 		}
 
 		SECTION(MIDI_READER_TEST) {
-			midiReader.read(midiBuffer, &outResult, &outBeatsPerMinute);
+			midiReader.read(midiBuffer);
 			REQUIRE(outResult.empty());
 			REQUIRE(outBeatsPerMinute == 0.0);
 		}
@@ -591,7 +591,7 @@ TEST_CASE("MIDI reader unit test") {
 		}
 
 		SECTION(MIDI_READER_TEST) {
-			midiReader.read(midiBuffer, &outResult, &outBeatsPerMinute);
+			midiReader.read(midiBuffer);
 			REQUIRE(outResult.size() == 2);
 			SECTION("Output VocalPart size test") {
 				REQUIRE(outResult.at(0).getPitches().size() == 6);
@@ -614,7 +614,7 @@ TEST_CASE("MIDI reader unit test") {
 		}
 
 		SECTION(MIDI_READER_TEST) {
-			midiReader.read(midiBuffer, &outResult, &outBeatsPerMinute);
+			midiReader.read(midiBuffer);
 			REQUIRE(outResult.size() == 1);
 			REQUIRE(outResult.at(0).getPitches().size() != 1); // Drums channel has only 1 note
 		}
@@ -630,7 +630,7 @@ TEST_CASE("MIDI reader unit test") {
 			}
 
 			SECTION(MIDI_READER_TEST) {
-				midiReader.read(midiBuffer, &outResult, &outBeatsPerMinute);
+				midiReader.read(midiBuffer);
 				REQUIRE(outResult.size() == 2);
 				REQUIRE(outResult.at(0).getPitches().size() == 1);
 				REQUIRE(outResult.at(1).getPitches().size() == 1);
@@ -648,7 +648,7 @@ TEST_CASE("MIDI reader unit test") {
 			}
 
 			SECTION(MIDI_READER_TEST) {
-				midiReader.read(midiBuffer, &outResult, &outBeatsPerMinute);
+				midiReader.read(midiBuffer);
 				REQUIRE(outResult.size() == 2);
 				REQUIRE(outResult.at(0).getPitches().size() == 1);
 				REQUIRE(outResult.at(1).getPitches().size() == 1);
@@ -666,7 +666,7 @@ TEST_CASE("MIDI reader unit test") {
 			}
 
 			SECTION(MIDI_READER_TEST) {
-				midiReader.read(midiBuffer, &outResult, &outBeatsPerMinute);
+				midiReader.read(midiBuffer);
 				REQUIRE(outResult.size() == 2);
 				REQUIRE(outResult.at(0).getPitches().size() == 2);
 				REQUIRE(outResult.at(1).getPitches().size() == 2);
@@ -684,7 +684,7 @@ TEST_CASE("MIDI reader unit test") {
 			}
 
 			SECTION(MIDI_READER_TEST) {
-				midiReader.read(midiBuffer, &outResult, &outBeatsPerMinute);
+				midiReader.read(midiBuffer);
 				REQUIRE(outResult.size() == 2);
 				auto &pitches1 = outResult.at(0).getPitches();
 				auto &pitches2 = outResult.at(1).getPitches();
@@ -708,7 +708,7 @@ TEST_CASE("MIDI reader unit test") {
 			}
 
 			SECTION(MIDI_READER_TEST) {
-				midiReader.read(midiBuffer, &outResult, &outBeatsPerMinute);
+				midiReader.read(midiBuffer);
 				REQUIRE(outResult.size() == 2);
 				auto &pitches1 = outResult.at(0).getPitches();
 				auto &pitches2 = outResult.at(1).getPitches();
@@ -732,7 +732,7 @@ TEST_CASE("MIDI reader unit test") {
 			}
 
 			SECTION(MIDI_READER_TEST) {
-				midiReader.read(midiBuffer, &outResult, &outBeatsPerMinute);
+				midiReader.read(midiBuffer);
 				REQUIRE(outResult.size() == 5);
 				auto &pitchesLast = outResult.at(outResult.size() - 1);
 				REQUIRE(pitchesLast.getPitches().size() != 0);
