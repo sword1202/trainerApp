@@ -74,6 +74,7 @@ VocalPartAudioDataGenerator::VocalPartAudioDataGenerator(const VocalPart& vocalP
     difference.reserve(10);
 
     _tsf = LoadTsf();
+    assert(_tsf);
     tsf_set_output(_tsf, TSF_MONO, sampleRate, 0);
     resetVocalPart(vocalPart);
 }

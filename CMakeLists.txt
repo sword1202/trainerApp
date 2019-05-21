@@ -73,7 +73,7 @@ set(mvxGeneratorSources
         Logic/AudioInput/Pitch.cpp
         Qt/Utils/QtUtils.cpp
         MvxGenerator/Handler.h
-        Qt/App/LoadTsf.cpp
+        VocalTrainerTests/LoadTsf.cpp
         MvxGenerator/main.cpp
         MvxGenerator/main.qrc)
 
@@ -168,6 +168,8 @@ endif(LINUX)
 
 include(include.cmake)
 
-if (${CMAKE_PROJECT_NAME} STREQUAL "VocalTrainerTests")
-    include(VocalTrainerTests/tests.cmake)
+if (TARGET "MvxGenerator")
+    include(copysounds.cmake)
+elseif(TARGET "VocalTrainerTests")
+    include(copysounds.cmake)
 endif()

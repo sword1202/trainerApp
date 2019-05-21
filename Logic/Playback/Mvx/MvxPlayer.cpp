@@ -193,7 +193,9 @@ void MvxPlayer::prepare() {
         }
     }
 
-    metronomePlayer.setAudioDataInfo(getBeatsPerMinute(), instrumentalPlayer.getTrackDurationInSeconds());
+    if (metronomePlayer.isPrepared()) {
+        metronomePlayer.setAudioDataInfo(getBeatsPerMinute(), instrumentalPlayer.getTrackDurationInSeconds());
+    }
     if (fabs(instrumentalPlayer.getTrackDurationInSeconds() - vocalPartPianoPlayer.getTrackDurationInSeconds()) > 0.1) {
         throw MvxPlayerPrepareException(MvxPlayerPrepareException::DIFFERENT_DURATIONS);
     }
@@ -328,6 +330,9 @@ bool MvxPlayer::isMetronomeEnabled() const {
 }
 
 void MvxPlayer::setMetronomeEnabled(bool metronomeEnabled) {
+    assert(!metronomeEnabled || metronomePlayer.isPrepared() && "Metronome data has not been provided, "
+                                                                "call setMetronomeSoundData and then prepare, "
+                                                                "before enabling metronome");
     this->metronomeEnabled = metronomeEnabled;
     updateMetronomeVolume();
 }
