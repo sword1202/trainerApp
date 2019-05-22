@@ -39,7 +39,7 @@ private:
     PlaybackBounds bounds;
     double playStartedSeek = -1;
     double playStartedTime = -1;
-    const MvxFile* mvxFile;
+    const MvxFile* mvxFile = nullptr;
     bool destroyMvxFileOnDestructor;
     // is valid only for recordings
     PitchesCollection* pitchesCollection = nullptr;
