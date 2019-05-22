@@ -10,8 +10,8 @@
 #include <mutex>
 #include "ListenersSet.h"
 #include "atomic"
-#include "SoundTouchManager.h"
 #include "PlaybackData.h"
+#include <SoundTouch/SoundTouch.h>
 
 class AudioPlayer {
 private:
@@ -28,7 +28,8 @@ private:
     int dataSentToOutputListenerKey = 0;
     std::atomic_bool looping;
 
-    SoundTouchManager* soundTouchManager = nullptr;
+    soundtouch::SoundTouch* soundTouch = nullptr;
+    std::vector<float> soundTouchTempFloatBuffer;
 
     void setupPlaybackStartedListener();
 	void pauseStream();
@@ -40,9 +41,11 @@ private:
             PaStreamCallbackFlags statusFlags,
             void *userData);
 
+    int readAudioDataApplySoundTouchIfNeed(void *outputBuffer, int requestedFramesCount);
+
 protected:
     virtual int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData& playbackData) = 0;
-	virtual void prepareAndProvidePlaybackData(PlaybackData* playbackData) = 0;
+	virtual void providePlaybackData(PlaybackData *playbackData) = 0;
 	// Call this method if you have a predefined PlaybackData, which should not be retrieved during prepare
     void setPlaybackData(const PlaybackData &playbackData);
 	virtual int getBufferSeek() const = 0;
@@ -51,6 +54,7 @@ protected:
     virtual int secondsSeekToBufferSeek(double timestamp) const;
 
 	virtual void onComplete();
+	virtual void onTonalityChanged(int value);
 
 	int secondsToSamplesCount(double secondsSeek) const;
     double samplesCountToSeconds(int samplesCount) const;
@@ -60,8 +64,6 @@ protected:
 
     // Used for players, where totalDurationInSeconds can be changed after prepare
     void setTotalDurationInSeconds(double totalDurationInSeconds);
-
-    void initSoundTouch();
 public:
 
 	CppUtils::ListenersSet<> onCompleteListeners;
@@ -91,7 +93,7 @@ public:
     double getSeek() const;
 
     virtual int getPitchShiftInSemiTones() const;
-    virtual void setPitchShiftInSemiTones(int value);
+    void setPitchShiftInSemiTones(int value);
 
     virtual double getTempoFactor() const;
     virtual void setTempoFactor(double tempoFactor);
@@ -108,5 +110,7 @@ public:
 
 	const std::string &getPlayerName() const;
 	void setPlayerName(const std::string &playerName);
+
+    void initSoundTouch();
 };
 #endif //VOCALTRAINER_AUDIOPLAYER_H

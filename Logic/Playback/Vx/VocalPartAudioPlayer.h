@@ -18,9 +18,10 @@ class VocalPartAudioPlayer : public AudioPlayer {
     VocalPart originalVocalPart;
 protected:
     int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) override;
-    void prepareAndProvidePlaybackData(PlaybackData *playbackData) override;
+    void providePlaybackData(PlaybackData *playbackData) override;
     void onComplete() override;
     int getBufferSeek() const override;
+    void onTonalityChanged(int pitchShift) override;
 private:
     void setBufferSeek(int samplesCountSeek) override;
 
@@ -29,10 +30,9 @@ public:
     virtual ~VocalPartAudioPlayer();
 
     bool isPitchShiftingAvailable(int distance) const;
-    virtual void setPitchShiftInSemiTones(int value) override;
 
+public:
     void setTempoFactor(double tempoFactor) override;
-
     const VocalPart& getVocalPart() const;
     void setVocalPart(const VocalPart &vocalPart);
 };

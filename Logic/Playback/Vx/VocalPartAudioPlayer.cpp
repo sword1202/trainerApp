@@ -10,7 +10,7 @@ int VocalPartAudioPlayer::readNextSamplesBatch(void *intoBuffer, int framesCount
     return generator->readNextSamplesBatch((short*)intoBuffer, getVolume() <= 0.00001f);
 }
 
-void VocalPartAudioPlayer::prepareAndProvidePlaybackData(PlaybackData *playbackData) {
+void VocalPartAudioPlayer::providePlaybackData(PlaybackData *playbackData) {
     playbackData->format = paInt16;
     playbackData->totalDurationInSeconds = generator->getDurationInSeconds();
     playbackData->framesPerBuffer = generator->getOutBufferSize();
@@ -44,16 +44,6 @@ bool VocalPartAudioPlayer::isPitchShiftingAvailable(int distance) const {
     return originalVocalPart.canBeShifted(distance);
 }
 
-void VocalPartAudioPlayer::setPitchShiftInSemiTones(int value) {
-    if (value == getPitchShiftInSemiTones()) {
-        return;
-    }
-
-    AudioPlayer::setPitchShiftInSemiTones(value);
-    VocalPart vxFile = originalVocalPart.shifted(value);
-    generator->setVocalPart(vxFile);
-}
-
 const VocalPart &VocalPartAudioPlayer::getVocalPart() const {
     return generator->getVocalPart();
 }
@@ -72,4 +62,9 @@ void VocalPartAudioPlayer::setTempoFactor(double tempoFactor) {
     AudioPlayer::setTempoFactor(tempoFactor);
     VocalPart vocalPart = originalVocalPart.withChangedTempo(tempoFactor);
     generator->setVocalPart(vocalPart);
+}
+
+void VocalPartAudioPlayer::onTonalityChanged(int value) {
+    VocalPart vxFile = originalVocalPart.shifted(value);
+    generator->setVocalPart(vxFile);
 }

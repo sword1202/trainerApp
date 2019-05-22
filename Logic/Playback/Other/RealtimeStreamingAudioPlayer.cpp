@@ -28,7 +28,7 @@ int RealtimeStreamingAudioPlayer::readNextSamplesBatch(void *intoBuffer, int fra
     return framesCount;
 }
 
-void RealtimeStreamingAudioPlayer::prepareAndProvidePlaybackData(PlaybackData *playbackData) {
+void RealtimeStreamingAudioPlayer::providePlaybackData(PlaybackData *playbackData) {
     if (playbackData->totalDurationInSeconds <= 0) {
         playbackData->totalDurationInSeconds = INT32_MAX;
     }

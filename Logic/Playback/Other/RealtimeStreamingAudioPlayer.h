@@ -16,7 +16,7 @@ public:
     void pushAudioData(const void* data, int size);
 protected:
     int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) override;
-    void prepareAndProvidePlaybackData(PlaybackData *playbackData) override;
+    void providePlaybackData(PlaybackData *playbackData) override;
     int getBufferSeek() const override;
 private:
     std::deque<char> audioFeed;

@@ -22,7 +22,7 @@ int BaseRawPcmAudioDataPlayer::readNextSamplesBatch(void *intoBuffer, int frames
     return size / frameSize;
 }
 
-void BaseRawPcmAudioDataPlayer::prepareAndProvidePlaybackData(PlaybackData *playbackData) {
+void BaseRawPcmAudioDataPlayer::providePlaybackData(PlaybackData *playbackData) {
     playbackData->totalDurationInSeconds = samplesCountToSeconds(getAudioDataSizeInBytes() / getSampleSize());
 }
 

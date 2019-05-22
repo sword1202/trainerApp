@@ -21,7 +21,6 @@ set(playbackSources
         Base/AudioPlayerWithDefaultSeekHandler.cpp
         Base/PlaybackBounds.cpp
         Base/PortAudioUtils.cpp
-        Base/SoundTouchManager.cpp
         Base/PrepareFailedException.cpp
         Base/PrepareFailedException.h
 

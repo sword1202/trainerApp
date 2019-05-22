@@ -49,10 +49,10 @@ void WelcomeWindow::setupProjectsList(QQmlContext *context) {
     QStringList filePaths;
     filePaths << appSettings.getProjects() << appSettings.getRecordings();
     for (const QString &filePath : filePaths) {
-        // read only signature
         MvxFile file;
         try {
-            file = MvxFile::readFromFile(filePath.toLocal8Bit().data(), true);
+            // read only signature
+            file.readFromFile(filePath.toLocal8Bit().data(), true);
         } catch (...) {
             appSettings.removeProject(filePath);
             appSettings.removeRecording(filePath);

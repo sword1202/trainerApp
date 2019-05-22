@@ -17,7 +17,7 @@ public:
     const std::string* getAudioData() const;
 protected:
     int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) override;
-    void prepareAndProvidePlaybackData(PlaybackData *playbackData) override;
+    void providePlaybackData(PlaybackData *playbackData) override;
 
 protected:
     void destroy() override;

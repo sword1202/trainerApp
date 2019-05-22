@@ -26,15 +26,10 @@ int AudioFilePlayer::readNextSamplesBatch(void *intoBuffer, int framesCount, con
         moveBufferSeekIfNotChangedBefore(readFramesCount, bufferSeekBefore);
     }
 
-    int shiftInSemiTones = getPitchShiftInSemiTones();
-    if (shiftInSemiTones != 0) {
-
-    }
-
     return readFramesCount;
 }
 
-void AudioFilePlayer::prepareAndProvidePlaybackData(PlaybackData *playbackData) {
+void AudioFilePlayer::providePlaybackData(PlaybackData *playbackData) {
     assert(!audioDecoder);
     audioDecoder = AudioDecoder::create();
     audioDecoder->open(audioData);

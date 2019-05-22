@@ -29,21 +29,18 @@ int AudioPlayer::callback(
         PaStreamCallbackFlags statusFlags,
         void *userData )
 {
-    AudioPlayer* self = (AudioPlayer*)userData;
+    auto* self = static_cast<AudioPlayer*>(userData);
     float volume = self->getVolume();
 
     memset(outputBuffer, 0, framesPerBuffer * self->getSampleSize());
-    int readFramesCount = self->readNextSamplesBatch(outputBuffer, framesPerBuffer, self->playbackData);
-    if (self->soundTouchManager) {
-        self->soundTouchManager->changeTonality(static_cast<int16_t *>(outputBuffer),
-                readFramesCount, self->getPitchShiftInSemiTones());
-    }
+    self->readAudioDataApplySoundTouchIfNeed(outputBuffer, framesPerBuffer);
+    int framesCopiedToOutputBufferCount = self->readAudioDataApplySoundTouchIfNeed(outputBuffer, framesPerBuffer);
 
-    assert(readFramesCount <= (int)framesPerBuffer);
+    assert(framesCopiedToOutputBufferCount <= (int)framesPerBuffer);
     int sampleSize = self->getSampleSize();
     // no data available, return silence and wait
     const PaSampleFormat format = self->playbackData.format;
-    if (readFramesCount < 0) {
+    if (framesCopiedToOutputBufferCount < 0) {
         Executors::ExecuteOnMainThread([=] {
             self->onNoDataAvailableListeners.executeAll();
         });
@@ -52,9 +49,9 @@ int AudioPlayer::callback(
     } else {
         if (volume == 0.0f) {
             auto sampleSize = self->getSampleSize();
-            memset(outputBuffer, 0, sampleSize * readFramesCount);
+            memset(outputBuffer, 0, sampleSize * framesCopiedToOutputBufferCount);
         } else if (volume != 1.0f) {
-            int bufferSize = readFramesCount * self->playbackData.numChannels;
+            int bufferSize = framesCopiedToOutputBufferCount * self->playbackData.numChannels;
             if (format == paInt16) {
                 for (int i = 0; i < bufferSize; ++i) {
                     static_cast<int16_t*>(outputBuffer)[i] *= volume;
@@ -72,9 +69,9 @@ int AudioPlayer::callback(
             }
         }
 
-        self->onDataSentToOutputListeners.executeAll(outputBuffer, readFramesCount * sampleSize);
+        self->onDataSentToOutputListeners.executeAll(outputBuffer, framesCopiedToOutputBufferCount * sampleSize);
 
-        if (readFramesCount == framesPerBuffer) {
+        if (framesCopiedToOutputBufferCount == framesPerBuffer) {
             return paContinue;
         } else {
             if (!self->looping) {
@@ -90,16 +87,21 @@ int AudioPlayer::callback(
 
 void AudioPlayer::prepare() {
     assert(!isPrepared());
-    prepareAndProvidePlaybackData(&playbackData);
-    if (soundTouchManager) {
-        soundTouchManager->onPlayBackDataReceived(playbackData);
-    }
+    providePlaybackData(&playbackData);
 
     if (playbackData.sampleRate <= 0 ||
             playbackData.framesPerBuffer < 0 ||
             playbackData.numChannels <= 0 ||
             playbackData.totalDurationInSeconds < 0) {
         throw std::runtime_error("AudioPlayer::prepare failed");
+    }
+
+    // Init soundtouch
+    if (soundTouch) {
+        soundTouch->setChannels((uint)playbackData.numChannels);
+        soundTouch->setSampleRate((uint)playbackData.sampleRate);
+        assert(playbackData.framesPerBuffer > 0 && playbackData.numChannels > 0);
+        soundTouchTempFloatBuffer.resize(static_cast<size_t>(playbackData.framesPerBuffer) * playbackData.numChannels);
     }
 
     auto err = Pa_OpenDefaultStream( &stream,
@@ -163,8 +165,8 @@ void AudioPlayer::destroy() {
     auto err = Pa_CloseStream(stream);
     PortAudio::checkErrors(err);
     stream = nullptr;
-    delete soundTouchManager;
-    soundTouchManager = nullptr;
+    delete soundTouch;
+    soundTouch = nullptr;
 }
 
 void AudioPlayer::pause() {
@@ -286,7 +288,12 @@ int AudioPlayer::getPitchShiftInSemiTones() const {
 }
 
 void AudioPlayer::setPitchShiftInSemiTones(int value) {
+    if (value == pitchShift) {
+        return;
+    }
+
     pitchShift = value;
+    onTonalityChanged(value);
 }
 
 const PlaybackData &AudioPlayer::getPlaybackData() const {
@@ -349,7 +356,41 @@ void AudioPlayer::setPlayerName(const std::string &playerName) {
 }
 
 void AudioPlayer::initSoundTouch() {
-    if (!soundTouchManager) {
-        soundTouchManager = new SoundTouchManager();
+    assert(!soundTouch && "SoundTouch already initialised");
+    soundTouch = new soundtouch::SoundTouch();
+}
+
+void AudioPlayer::onTonalityChanged(int value) {
+    assert(pitchShift == 0 || soundTouch && "tonality changes are not allowed, soundtouch not "
+                                            "initialised, call initSoundTouch() before prepare to use pitch shifting");
+    soundTouch->setPitchSemiTones(value);
+}
+
+int AudioPlayer::readAudioDataApplySoundTouchIfNeed(void *outputBuffer, int requestedFramesCount) {
+    // Apply tempo and tonality changes, if need.
+    if (soundTouch && (pitchShift != 0 || tempoFactor != 0)) {
+        auto* samplesData = static_cast<int16_t *>(outputBuffer);
+
+        while (soundTouch->numSamples() < requestedFramesCount) {
+            int readFramesCount = readNextSamplesBatch(outputBuffer, requestedFramesCount, playbackData);
+            int dataArraySize = readFramesCount * playbackData.numChannels;
+            AudioUtils::Int16SamplesIntoFloatSamples(samplesData,
+                                                     dataArraySize,
+                                                     soundTouchTempFloatBuffer.data());
+            soundTouch->putSamples(soundTouchTempFloatBuffer.data(), uint(readFramesCount));
+
+            // End of a track reached
+            if (readFramesCount != requestedFramesCount) {
+                break;
+            }
+        }
+
+        int readFramesCount = std::min(soundTouch->numSamples(), uint(requestedFramesCount));
+        int dataArraySize = readFramesCount * playbackData.numChannels;
+        soundTouch->receiveSamples(soundTouchTempFloatBuffer.data(), uint(readFramesCount));
+        AudioUtils::FloatSamplesIntoInt16Samples(soundTouchTempFloatBuffer.data(), dataArraySize, samplesData);
+        return readFramesCount;
+    } else {
+        return readNextSamplesBatch(outputBuffer, requestedFramesCount, playbackData);
     }
 }
