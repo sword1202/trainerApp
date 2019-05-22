@@ -92,8 +92,8 @@ public:
     void writeToStream(std::ostream& os) const;
     void writeToFile(const char* outFilePath) const;
 
-    static MvxFile readFromStream(std::istream& is, bool readOnlySignature = false);
-    static MvxFile readFromFile(const char* filePath, bool readOnlySignature = false);
+    void readFromStream(std::istream &is, bool readOnlySignature = false);
+    void readFromFile(const char *filePath, bool readOnlySignature = false);
 
     const VocalPart &getVocalPart() const;
     void setVocalPart(const VocalPart &vocalPart);
@@ -122,9 +122,9 @@ public:
 
     bool isRecording() const;
 
-    std::vector<double> &moveRecordedPitchesTimes();
+    const std::vector<double> &getRecordedPitchesTimes() const;
     void setRecordedPitchesTimes(const std::vector<double> &recordedPitchesTimes);
-    std::vector<float> &moveRecordedPitchesFrequencies();
+    const std::vector<float> &getRecordedPitchesFrequencies() const;
     void setRecordedPitchesFrequencies(const std::vector<float> &recordedPitchesFrequencies);
 
     const std::vector<short> &getInstrumentalPreviewSamples() const;

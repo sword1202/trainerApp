@@ -12,16 +12,16 @@
 const int FRAMES_PER_BUFFER = 256;
 
 const char *WavAudioPlayer::provideAudioBuffer() {
-    return audioData.data() + WAVFile::DATA_POSITION;
+    return audioData->data() + WAVFile::DATA_POSITION;
 }
 
-void WavAudioPlayer::setAudioData(std::string &&audioData) {
-    this->audioData = std::move(audioData);
-    setPlaybackData(WAVFile::parseWavHeader(this->audioData), FRAMES_PER_BUFFER);
+void WavAudioPlayer::setAudioData(const std::string *audioData) {
+    this->audioData = audioData;
+    setPlaybackData(WAVFile::parseWavHeader(*this->audioData), FRAMES_PER_BUFFER);
 }
 
 int WavAudioPlayer::getAudioDataSizeInBytes() {
-    return (int)audioData.size() - WAVFile::DATA_POSITION;
+    return (int)audioData->size() - WAVFile::DATA_POSITION;
 }
 
 WavAudioPlayer::WavAudioPlayer() {

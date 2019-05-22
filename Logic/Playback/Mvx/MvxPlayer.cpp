@@ -53,15 +53,16 @@ MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
     });
 }
 
-void MvxPlayer::init(MvxFile&& file) {
-    mvxFile = std::move(file);
-    instrumentalPlayer.setAudioData(&mvxFile.getInstrumental());
-    vocalPartPianoPlayer.setVocalPart(mvxFile.getVocalPart());
+void MvxPlayer::init(const MvxFile* file, bool destroyMvxFileOnDestructor) {
+    this->mvxFile = file;
+    this->destroyMvxFileOnDestructor = destroyMvxFileOnDestructor;
+    instrumentalPlayer.setAudioData(&mvxFile->getInstrumental());
+    vocalPartPianoPlayer.setVocalPart(mvxFile->getVocalPart());
     players = {&instrumentalPlayer, &vocalPartPianoPlayer, &metronomePlayer};
-    if (mvxFile.isRecording()) {
-        pitchesCollection = new PitchesMutableList(std::move(mvxFile.moveRecordedPitchesFrequencies()),
-                                                   std::move(mvxFile.moveRecordedPitchesTimes()));
-        recordingPlayer.setAudioData(std::move(mvxFile.moveRecordingData()));
+    if (mvxFile->isRecording()) {
+        pitchesCollection = new PitchesMutableList(mvxFile->getRecordedPitchesFrequencies(),
+                                                   mvxFile->getRecordedPitchesTimes());
+        recordingPlayer.setAudioData(&mvxFile->getRecordingData());
         players.push_back(&recordingPlayer);
 
         recordingLevelMonitor = new AudioAverageInputLevelMonitor([=] (double level) {
@@ -74,8 +75,10 @@ void MvxPlayer::init(MvxFile&& file) {
 }
 
 void MvxPlayer::init(std::istream &is) {
-    MvxFile mvxFile = MvxFile::readFromStream(is);
-    init(std::move(mvxFile));
+    auto* mvxFile = new MvxFile();
+    mvxFile->readFromStream(is);
+    this->mvxFile = mvxFile;
+    init(mvxFile);
 }
 
 void MvxPlayer::init(const char *filePath) {
@@ -172,6 +175,9 @@ void MvxPlayer::setRecordingVolume(float volume) {
 MvxPlayer::~MvxPlayer() {
     delete pitchesCollection;
     delete recordingLevelMonitor;
+    if (destroyMvxFileOnDestructor) {
+        delete mvxFile;
+    }
 }
 
 void MvxPlayer::prepare() {
@@ -259,7 +265,7 @@ double MvxPlayer::getDuration() const {
 }
 
 double MvxPlayer::getBeatsPerMinute() const {
-    return mvxFile.getBeatsPerMinute();
+    return mvxFile->getBeatsPerMinute();
 }
 
 double MvxPlayer::getBeatsPerSecond() const {
@@ -338,7 +344,7 @@ void MvxPlayer::setMetronomeEnabled(bool metronomeEnabled) {
 }
 
 double MvxPlayer::getBeatDuration() const {
-    return 60.0 / mvxFile.getBeatsPerMinute();
+    return 60.0 / mvxFile->getBeatsPerMinute();
 }
 
 bool MvxPlayer::isMetronomeSoundDataSet() const {
@@ -373,19 +379,19 @@ double MvxPlayer::getTactDuration() const {
 }
 
 bool MvxPlayer::isRecording() const {
-    return mvxFile.isRecording();
+    return mvxFile->isRecording();
 }
 
 const std::string &MvxPlayer::getArtistNameUtf8() const {
-    return mvxFile.getArtistNameUtf8();
+    return mvxFile->getArtistNameUtf8();
 }
 
 const std::string &MvxPlayer::getSongTitleUtf8() const {
-    return mvxFile.getSongTitleUtf8();
+    return mvxFile->getSongTitleUtf8();
 }
 
 const std::string &MvxPlayer::getInstrumental() {
-    return mvxFile.getInstrumental();
+    return mvxFile->getInstrumental();
 }
 
 bool MvxPlayer::isCompleted() const {
@@ -397,7 +403,7 @@ const PitchesCollection* MvxPlayer::getPitchesCollection() {
 }
 
 const MvxFile &MvxPlayer::getMvxFile() const {
-    return mvxFile;
+    return *mvxFile;
 }
 
 bool MvxPlayer::hasLyrics() const {
@@ -405,10 +411,18 @@ bool MvxPlayer::hasLyrics() const {
 }
 
 int MvxPlayer::getLyricsLinesCount() const {
-    return mvxFile.getLyrics().getLinesCount();
+    return mvxFile->getLyrics().getLinesCount();
 }
 
 const std::string& MvxPlayer::getLyricsTextAtLine(int lineIndex) const {
     double seek = getSeek();
-    return mvxFile.getLyrics().getCurrentLyricsTextAtLine(lineIndex, seek);
+    return mvxFile->getLyrics().getCurrentLyricsTextAtLine(lineIndex, seek);
+}
+
+const AudioPlayer &MvxPlayer::getInstrumentalPlayer() const {
+    return instrumentalPlayer;
+}
+
+const VocalPartAudioPlayer &MvxPlayer::getVocalPartPlayer() const {
+    return vocalPartPianoPlayer;
 }

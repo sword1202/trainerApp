@@ -13,6 +13,7 @@
 #include <MvxPlayer.h>
 #include "MvxFile.h"
 #include "AudioUtils.h"
+#include "MvxPlayerPrepareException.h"
 
 #ifndef MVXGENERATOR_HANDLER_H
 #define MVXGENERATOR_HANDLER_H
@@ -47,11 +48,15 @@ public:
         assert(!instrumentalFilePath.isEmpty())
         assert(!midiFilePath.isEmpty())
 
+        auto showCriticalMessage = [=] (const char* message) {
+            QMessageBox::critical(dynamic_cast<QWidget *>(parent()), "Error", message);
+        };
+
         MidiFileReader reader;
         reader.read(midiFilePath.toLocal8Bit().toStdString());
         double beatsPerMinute = reader.getBeatsPerMinute();
         if (beatsPerMinute < 0) {
-            QMessageBox::critical(dynamic_cast<QWidget *>(parent()), "Error", "Broken or unsupported midi file");
+            showCriticalMessage("Broken or unsupported midi file");
             return;
         }
 
@@ -81,11 +86,25 @@ public:
         mvxFile.generateInstrumentalPreviewSamplesFromInstrumental();
 
         MvxPlayer mvxPlayer;
-        mvxPlayer.init(std::move(mvxFile));
+        mvxPlayer.init(
+                &mvxFile,
+                false //destroyMvxFileOnDestructor
+                );
+
         try {
             mvxPlayer.prepare();
+        } catch (MvxPlayerPrepareException& e) {
+            if (e.getReason() == MvxPlayerPrepareException::DIFFERENT_DURATIONS) {
+                std::stringstream message;
+                message << e.what() <<", vocal track: "<< mvxPlayer.getVocalPartPlayer().getTrackDurationInSeconds()
+                <<", instrumental track: "<< mvxPlayer.getInstrumentalPlayer().getTrackDurationInSeconds();
+                showCriticalMessage(message.str().data());
+            } else {
+                showCriticalMessage(e.what());
+            }
+            return;
         } catch (std::exception& e) {
-            QMessageBox::critical(dynamic_cast<QWidget *>(parent()), "Error", e.what());
+            showCriticalMessage(e.what());
             return;
         }
 

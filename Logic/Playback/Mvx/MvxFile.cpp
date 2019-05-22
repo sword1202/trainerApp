@@ -26,17 +26,15 @@ void MvxFile::writeToFile(const char *outFilePath) const {
     writeToStream(file);
 }
 
-MvxFile MvxFile::readFromStream(std::istream &is, bool readOnlySignature) {
-    MvxFile file;
-    file.readOnlySignature = readOnlySignature;
+void MvxFile::readFromStream(std::istream &is, bool readOnlySignature) {
+    this->readOnlySignature = readOnlySignature;
     boost::archive::text_iarchive ar(is);
-    ar >> file;
-    return file;
+    ar >> *this;
 }
 
-MvxFile MvxFile::readFromFile(const char *filePath, bool readOnlySignature) {
+void MvxFile::readFromFile(const char *filePath, bool readOnlySignature) {
     std::fstream file = Streams::OpenFile(filePath, std::ios::binary | std::ios::in);
-    return readFromStream(file, readOnlySignature);
+    readFromStream(file, readOnlySignature);
 }
 
 const VocalPart &MvxFile::getVocalPart() const {
@@ -110,7 +108,7 @@ void MvxFile::setVocalPart(const VocalPart &vocalPart) {
     this->vocalPart = vocalPart;
 }
 
-std::vector<double> &MvxFile::moveRecordedPitchesTimes() {
+const std::vector<double> &MvxFile::getRecordedPitchesTimes() const {
     return recordedPitchesTimes;
 }
 
@@ -118,7 +116,7 @@ void MvxFile::setRecordedPitchesTimes(const std::vector<double> &recordedPitches
     MvxFile::recordedPitchesTimes = recordedPitchesTimes;
 }
 
-std::vector<float> &MvxFile::moveRecordedPitchesFrequencies() {
+const std::vector<float> &MvxFile::getRecordedPitchesFrequencies() const {
     return recordedPitchesFrequencies;
 }
 

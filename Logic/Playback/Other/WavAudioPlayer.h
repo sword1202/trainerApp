@@ -10,14 +10,14 @@
 #include <string>
 
 class WavAudioPlayer : public BaseRawPcmAudioDataPlayer {
-    std::string audioData;
+    const std::string* audioData = nullptr;
 protected:
     const char *provideAudioBuffer() override;
     int getAudioDataSizeInBytes() override;
 public:
     WavAudioPlayer();
 
-    virtual void setAudioData(std::string&& audioData);
+    virtual void setAudioData(const std::string *audioData);
 };
 
 

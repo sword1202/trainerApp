@@ -39,7 +39,8 @@ private:
     PlaybackBounds bounds;
     double playStartedSeek = -1;
     double playStartedTime = -1;
-    MvxFile mvxFile;
+    const MvxFile* mvxFile;
+    bool destroyMvxFileOnDestructor;
     // is valid only for recordings
     PitchesCollection* pitchesCollection = nullptr;
 
@@ -64,7 +65,7 @@ public:
     virtual ~MvxPlayer();
     void init(std::istream& is);
     void init(const char* filePath);
-    void init(MvxFile&& file);
+    void init(const MvxFile* file, bool destroyMvxFileOnDestructor = true);
     void prepare();
     virtual void setInstrumentalVolume(float instrumentalVolume);
     virtual void setVocalPartPianoVolume(float pianoVolume);
@@ -131,6 +132,9 @@ public:
     virtual bool hasLyrics() const;
     int getLyricsLinesCount() const;
     const std::string& getLyricsTextAtLine(int lineIndex) const;
+
+    const AudioPlayer& getInstrumentalPlayer() const;
+    const VocalPartAudioPlayer& getVocalPartPlayer() const;
 };
 
 
