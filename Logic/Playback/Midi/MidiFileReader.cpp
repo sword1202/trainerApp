@@ -31,7 +31,7 @@ static constexpr int    MIDI_MESSAGE_BYTE_INDEX_5 = 5;
 static constexpr int    MIN_NOTE_COUNT = 40;
 static constexpr int    MAX_NOTE_COUNT = 1000;
 static constexpr int    DRUMS_CHANNEL_ID = 9;
-static constexpr int    MAX_SUPPORTED_POLYPHONIC_TRACKS_COUNT = 1;
+static constexpr int    MAX_SUPPORTED_POLYPHONIC_TRACKS_COUNT = 2;
 
 static constexpr double NAME_WEIGHT = 3.0;
 static constexpr double NOTE_COUNT_WEIGHT = 2.0;
