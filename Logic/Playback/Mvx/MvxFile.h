@@ -11,6 +11,8 @@
 #include "StringUtils.h"
 #include "Lyrics.h"
 #include <boost/variant.hpp>
+#include <map>
+#include <boost/serialization/map.hpp>
 
 class MvxFile {
     // signature
@@ -28,6 +30,7 @@ class MvxFile {
     std::string recordingData;
     std::vector<double> recordedPitchesTimes;
     std::vector<float> recordedPitchesFrequencies;
+    std::map<double, int> recordingTonalityChanges; // seek -> pitchSifting
 
     std::vector<short> instrumentalPreviewSamples;
 
@@ -73,6 +76,10 @@ class MvxFile {
 
             if (version >= 3) {
                 ar & instrumentalPreviewSamples;
+            }
+
+            if (version >= 5) {
+                ar & recordingTonalityChanges;
             }
 
             if (version >= 4) {
@@ -135,6 +142,9 @@ public:
     const Lyrics &getLyrics() const;
     void setLyrics(const Lyrics &lyrics);
 
+    const std::map<double, int> &getRecordingTonalityChanges() const;
+    void setRecordingTonalityChanges(const std::map<double, int> &recordingTonalityChanges);
+
     std::string convertInstrumentalAndVocalTrackToWav(float vocalVolume = 0.5f) const;
 };
 
@@ -143,8 +153,9 @@ public:
  * Version 2: recordedPitchesTimes and recordedPitchesFrequencies are added
  * Version 3: instrumentalPreviewSamples added
  * Version 4: Lyrics added
+ * Version 5: recordingTonalityChanges added
  */
-BOOST_CLASS_VERSION(MvxFile, 4)
+BOOST_CLASS_VERSION(MvxFile, 5)
 
 
 #endif //VOCALTRAINER_MVXFILE_H

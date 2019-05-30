@@ -44,6 +44,9 @@ private:
     // is valid only for recordings
     PitchesCollection* pitchesCollection = nullptr;
 
+    // Save tonality changes while playback, not used with recordings
+    std::map<double, int> tonalityChanges;
+
     void updateMetronomeVolume();
     void pausePlayer(AudioPlayer* player);
 
@@ -135,6 +138,8 @@ public:
 
     const AudioPlayer& getInstrumentalPlayer() const;
     const VocalPartAudioPlayer& getVocalPartPlayer() const;
+
+    const std::map<double, int> &getTonalityChanges() const;
 };
 
 

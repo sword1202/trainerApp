@@ -38,6 +38,12 @@ MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
                     }
                 }
             }
+
+            // Cut not actual tonality changes
+            if (!isRecording() && pauseRequestedCounter == 0) {
+                auto iter = tonalityChanges.upper_bound(seek);
+                tonalityChanges.erase(iter, tonalityChanges.end());
+            }
         });
 
         seekChangedListeners.executeAll(seek);
@@ -311,6 +317,7 @@ void MvxPlayer::setPitchShiftInSemiTones(int value) {
     instrumentalPlayer.setPitchShiftInSemiTones(value);
     recordingPlayer.setPitchShiftInSemiTones(value);
     tonalityChangedListeners.executeAll();
+    tonalityChanges[getSeek()] = value;
 }
 
 bool MvxPlayer::canBeShifted(int distance) const {
@@ -425,4 +432,8 @@ const AudioPlayer &MvxPlayer::getInstrumentalPlayer() const {
 
 const VocalPartAudioPlayer &MvxPlayer::getVocalPartPlayer() const {
     return vocalPartPianoPlayer;
+}
+
+const std::map<double, int> &MvxPlayer::getTonalityChanges() const {
+    return tonalityChanges;
 }

@@ -192,3 +192,11 @@ std::string MvxFile::convertInstrumentalAndVocalTrackToWav(float vocalVolume) co
 
     return result;
 }
+
+const std::map<double, int> &MvxFile::getRecordingTonalityChanges() const {
+    return recordingTonalityChanges;
+}
+
+void MvxFile::setRecordingTonalityChanges(const std::map<double, int> &recordingTonalityChanges) {
+    this->recordingTonalityChanges = recordingTonalityChanges;
+}

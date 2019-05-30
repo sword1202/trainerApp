@@ -157,6 +157,9 @@ void MainController::generateRecording(MvxFile *out) {
     const PitchesCollection *pitches = audioInputManager->getRecordedPitches();
     out->setRecordedPitchesTimes(pitches->getTimes());
     out->setRecordedPitchesFrequencies(pitches->getFrequencies());
+
+    // save tonality changes
+    out->setRecordingTonalityChanges(mvxPlayer->getTonalityChanges());
 }
 
 void MainController::saveRecordingIntoFile(const char *filePath) {
