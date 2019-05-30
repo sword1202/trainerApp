@@ -33,7 +33,6 @@ int AudioPlayer::callback(
     float volume = self->getVolume();
 
     memset(outputBuffer, 0, framesPerBuffer * self->getSampleSize());
-    self->readAudioDataApplySoundTouchIfNeed(outputBuffer, framesPerBuffer);
     int framesCopiedToOutputBufferCount = self->readAudioDataApplySoundTouchIfNeed(outputBuffer, framesPerBuffer);
 
     assert(framesCopiedToOutputBufferCount <= (int)framesPerBuffer);
@@ -368,7 +367,7 @@ void AudioPlayer::onTonalityChanged(int value) {
 
 int AudioPlayer::readAudioDataApplySoundTouchIfNeed(void *outputBuffer, int requestedFramesCount) {
     // Apply tempo and tonality changes, if need.
-    if (soundTouch && (pitchShift != 0 || tempoFactor != 0)) {
+    if (soundTouch && (pitchShift != 0 || tempoFactor != 1)) {
         auto* samplesData = static_cast<int16_t *>(outputBuffer);
 
         while (soundTouch->numSamples() < requestedFramesCount) {

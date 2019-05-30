@@ -24,7 +24,7 @@ private:
     std::string playerName;
 
     std::atomic_int pitchShift;
-    double tempoFactor;
+    double tempoFactor = 1;
     int dataSentToOutputListenerKey = 0;
     std::atomic_bool looping;
 
