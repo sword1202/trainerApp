@@ -116,6 +116,10 @@ bool QtMvxPlayer::hasAnyPitchNow() const {
 }
 
 void QtMvxPlayer::setPitchShiftInSemiTones(int value) {
+    if (value == getPitchShiftInSemiTones()) {
+        return;
+    }
+
     MvxPlayer::setPitchShiftInSemiTones(value);
     emit pitchShiftChanged();
 }

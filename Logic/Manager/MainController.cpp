@@ -159,6 +159,11 @@ void MainController::generateRecording(MvxFile *out) {
     out->setRecordedPitchesFrequencies(pitches->getFrequencies());
 
     // save tonality changes
+    const auto& a = mvxPlayer->getTonalityChanges();
+    for (const auto& pair : a) {
+        cout<<pair.first<<"->"<<pair.second<<"\n";
+    }
+
     out->setRecordingTonalityChanges(mvxPlayer->getTonalityChanges());
 }
 
