@@ -22,6 +22,7 @@ public:
 
     Q_PROPERTY(QString source READ getSource() WRITE setSource() NOTIFY sourceChanged())
     Q_PROPERTY(bool isPlaying READ isPlaying() NOTIFY isPlayingChanged())
+    Q_PROPERTY(bool isRecording READ isRecording() NOTIFY sourceChanged())
     Q_PROPERTY(QJsonValue bounds READ getQmlBounds() WRITE setQmlBounds() NOTIFY boundsChanged())
     Q_PROPERTY(double playStartedTime READ getPlayStartedTime() NOTIFY playStartedTimeChanged())
     Q_PROPERTY(double playStartedSeek READ getPlayStartedSeek()  NOTIFY playStartedSeekChanged())
