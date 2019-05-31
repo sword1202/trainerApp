@@ -45,8 +45,10 @@ MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
                 if (iter != tonalityChanges.begin()) {
                     --iter;
                     setPitchShiftInSemiTones(iter->second);
+                } else {
+                    setPitchShiftInSemiTones(0);
                 }
-            } else if(pauseRequestedCounter == 0 && seek != 0) {
+            } else if(pauseRequestedCounter == 0) {
                 // Cut tonality changes
                 auto iter = tonalityChanges.upper_bound(seek);
                 tonalityChanges.erase(iter, tonalityChanges.end());

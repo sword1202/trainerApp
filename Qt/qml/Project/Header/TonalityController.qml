@@ -84,6 +84,14 @@ Item {
 
                 cpp.player.pitchShift = value;
             }
+
+            Connections {
+                target: cpp.player
+
+                onPitchShiftChanged: {
+                    tonality.text = cpp.player.pitchShift.toString()
+                }
+            }
         }
 
         Label {

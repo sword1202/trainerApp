@@ -11,6 +11,7 @@ set(cppUtilsSources
         CppUtils/Bitmap.cpp
         CppUtils/Color.cpp
         CppUtils/BinaryMath.h
+        CppUtils/Debug.h
         )
 
 set(cppUtilsTests
