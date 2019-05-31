@@ -8,7 +8,7 @@ Item {
     property string tonalityGroup: "maj"
     readonly property var pitches: ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
 
-    width: 126.5
+    width: cpp.player.isRecording ? 126.5 - 18.75 - 1 : 126.5
     height: 38.25
 
     DropShadow {
@@ -57,10 +57,12 @@ Item {
         }
     }
 
-    Rectangle {
+    RoundedRect {
         anchors.left: left.right
         anchors.leftMargin: 1
         width: 51.75
+        rightRadius: cpp.player.isRecording ? 7.5 : 0
+        leftRadius: 0
         height: parent.height
 
         Text {
@@ -108,7 +110,7 @@ Item {
     }
 
     ImageButton {
-        width: 18.75
+        width: cpp.player.isRecording ? 0 : 18.75
         height: 18.75
         anchors.right: parent.right
         anchors.top: parent.top
@@ -121,7 +123,7 @@ Item {
     }
 
     ImageButton {
-        width: 18.75
+        width: cpp.player.isRecording ? 0 : 18.75
         height: 18.75
         anchors.right: parent.right
         anchors.bottom: parent.bottom
