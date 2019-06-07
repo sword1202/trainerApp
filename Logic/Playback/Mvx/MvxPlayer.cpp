@@ -217,7 +217,7 @@ void MvxPlayer::prepare() {
     if (metronomePlayer.isPrepared()) {
         metronomePlayer.setAudioDataInfo(getBeatsPerMinute(), instrumentalPlayer.getTrackDurationInSeconds());
     }
-    if (fabs(instrumentalPlayer.getTrackDurationInSeconds() - vocalPartPianoPlayer.getTrackDurationInSeconds()) > 0.1) {
+    if (fabs(instrumentalPlayer.getTrackDurationInSeconds() - vocalPartPianoPlayer.getTrackDurationInSeconds()) > 0.005) {
         throw MvxPlayerPrepareException(MvxPlayerPrepareException::DIFFERENT_DURATIONS);
     }
     prepareFinishedListeners.executeAll();
@@ -379,7 +379,7 @@ bool MvxPlayer::isMetronomeSoundDataSet() const {
 void MvxPlayer::updateMetronomeVolume() {
     if (metronomeEnabled) {
         metronomePlayer.setVolume(std::max({instrumentalPlayer.getVolume(),
-                vocalPartPianoPlayer.getVolume(), recordingPlayer.getVolume()}) * 0.2f);
+                vocalPartPianoPlayer.getVolume(), recordingPlayer.getVolume()}) * 1.f);
     } else {
         metronomePlayer.setVolume(0.0f);
     }

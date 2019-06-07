@@ -95,10 +95,8 @@ public:
             mvxPlayer.prepare();
         } catch (MvxPlayerPrepareException& e) {
             if (e.getReason() == MvxPlayerPrepareException::DIFFERENT_DURATIONS) {
-                std::stringstream message;
-                message << e.what() <<", vocal track: "<< mvxPlayer.getVocalPartPlayer().getTrackDurationInSeconds()
-                <<", instrumental track: "<< mvxPlayer.getInstrumentalPlayer().getTrackDurationInSeconds();
-                showCriticalMessage(message.str().data());
+                vocalPart = vocalPart.cutOrExpand(0, mvxPlayer.getInstrumentalPlayer().getTrackDurationInSeconds());
+                mvxFile.setVocalPart(vocalPart);
             } else {
                 showCriticalMessage(e.what());
             }
@@ -108,7 +106,7 @@ public:
             return;
         }
 
-        mvxPlayer.getMvxFile().writeToFile(outputFilePath.toLocal8Bit().data());
+        mvxFile.writeToFile(outputFilePath.toLocal8Bit().data());
 
         QMessageBox::information(dynamic_cast<QWidget *>(parent()), "File created", outputFilePath);
     }

@@ -100,7 +100,7 @@ public:
     const Pitch& getLowestPitch() const;
     const Pitch& getHighestPitch() const;
 
-    VocalPart cut(double start, double end);
+    VocalPart cutOrExpand(double start, double end);
 
     bool isEmpty() const;
 

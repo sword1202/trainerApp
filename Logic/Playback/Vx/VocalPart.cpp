@@ -234,24 +234,28 @@ VocalPart VocalPart::withChangedTempo(double tempoFactor) const {
     return VocalPart(pitches, endSilenceDurationInTicks, (int)round(ticksPerSecond * tempoFactor));
 }
 
-VocalPart VocalPart::cut(double start, double end) {
+VocalPart VocalPart::cutOrExpand(double start, double end) {
     std::vector<VxPitch> newPitches;
     int startTick = timeInSecondsToTicks(start);
     int endTick = timeInSecondsToTicks(end);
-    iteratePitchesInTimeRange(start, end, [&] (VxPitch vxPitch) {
-        if (vxPitch.startTickNumber < startTick) {
-            vxPitch.startTickNumber = startTick;
-        }
+    if (startTick > 0 || endTick < durationInTicks - endSilenceDurationInTicks) {
+        iteratePitchesInTimeRange(start, end, [&] (VxPitch vxPitch) {
+            if (vxPitch.startTickNumber < startTick) {
+                vxPitch.startTickNumber = startTick;
+            }
 
-        if(vxPitch.endTickNumber() >= endTick) {
-            vxPitch.ticksCount = endTick - vxPitch.startTickNumber;
-        }
+            if(vxPitch.endTickNumber() >= endTick) {
+                vxPitch.ticksCount = endTick - vxPitch.startTickNumber;
+            }
 
-        newPitches.push_back(vxPitch);
-    });
+            newPitches.push_back(vxPitch);
+        });
+    } else {
+        newPitches = pitches;
+    }
 
-    int distanceInTicksBetweenLastPitchEndAndTrackEnd = this->endSilenceDurationInTicks;
-    std::max(0, distanceInTicksBetweenLastPitchEndAndTrackEnd - (durationInTicks - endTick));
+    int distanceInTicksBetweenLastPitchEndAndTrackEnd = std::max(0,
+            this->endSilenceDurationInTicks - (durationInTicks - endTick));
 
     return VocalPart(std::move(newPitches), distanceInTicksBetweenLastPitchEndAndTrackEnd, ticksPerSecond);
 }
