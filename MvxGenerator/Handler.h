@@ -99,8 +99,8 @@ public:
                 mvxFile.setVocalPart(vocalPart);
             } else {
                 showCriticalMessage(e.what());
+                return;
             }
-            return;
         } catch (std::exception& e) {
             showCriticalMessage(e.what());
             return;
