@@ -32,7 +32,7 @@ const int16_t* PitchDetectionSmoothingAudioBuffer::getRunPitchDetectionBufferIfR
         return buffer.data();
     }
 
-    return 0;
+    return nullptr;
 }
 
 PitchDetectionSmoothingAudioBuffer::PitchDetectionSmoothingAudioBuffer(size_t smoothLevel, size_t sampleSize)

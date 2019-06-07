@@ -23,12 +23,10 @@ public:
 
     void init(AudioInputReader* audioInputReader,
             int smoothLevel,
-            PitchDetector* pitchDetector);
+            const std::function<PitchDetector*()>& pitchDetectorFactory);
 
     void operator()(const int16_t* data, int size);
 
-    void setThreshold(float threshold);
-    float getThreshold() const;
     ~AudioInputPitchesRecorder();
     virtual void pitchDetected(float frequency, double time);
 

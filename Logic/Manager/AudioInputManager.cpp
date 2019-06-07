@@ -17,12 +17,16 @@ static const int SMOOTH_LEVEL = 4;
 using namespace CppUtils;
 
 AudioInputManager::AudioInputManager(const char* deviceName) {
-    AubioPitchDetector* pitchDetector = new AubioPitchDetector();
-    pitchDetector->setThreshold(THRESHOLD);
+
+    auto pitchDetectorFactory = [] {
+        auto* pitchDetector = new AubioPitchDetector();
+        pitchDetector->setThreshold(THRESHOLD);
+        return pitchDetector;
+    };
     
     audioInputReader = new PortAudioInputReader(BUFFER_SIZE, true, deviceName);
     pitchesRecorder = new AudioInputPitchesRecorder();
-    pitchesRecorder->init(audioInputReader, SMOOTH_LEVEL, pitchDetector);
+    pitchesRecorder->init(audioInputReader, SMOOTH_LEVEL, pitchDetectorFactory);
     audioInputReader->start();
 
     audioRecorder = new AudioInputRecorder();
