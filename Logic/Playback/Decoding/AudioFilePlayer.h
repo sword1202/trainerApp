@@ -24,7 +24,7 @@ protected:
 
 private:
     AudioDecoder* audioDecoder = nullptr;
-    const std::string* audioData;
+    const std::string* audioData = nullptr;
 };
 
 
