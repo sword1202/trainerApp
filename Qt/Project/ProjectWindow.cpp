@@ -209,7 +209,7 @@ void ProjectWindow::setShowTracks(bool value) {
     MainController::instance()->getWorkspaceController([=] (WorkspaceController* workspaceController) {
         workspaceController->setDrawTracks(value);
     });
-    volumeWidget->setVisible(false);
+    volumeWidget->setVisible(value);
 }
 
 void ProjectWindow::wheelEvent(QWheelEvent *event) {
