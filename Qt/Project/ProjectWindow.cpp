@@ -134,7 +134,6 @@ ProjectWindow::ProjectWindow() :
         this->workspaceController = workspaceController;
     });
 
-
     bool hasLyrics = player->hasLyrics();
     setShowLyrics(hasLyrics);
     QtUtils::StartRepeatedTimer(this, [=] {
@@ -146,6 +145,13 @@ ProjectWindow::ProjectWindow() :
         lyricsWidget->rootContext()->setContextProperty("lyricsText", QtUtils::QStringFromUtf8(lyricsTextUtf8));
         return true;
     }, LYRICS_UPDATE_INTERVAL);
+
+    player->lyricsChangedListeners.addListener([=] {
+        showSaveIndicator = true;
+        emit showSaveIndicatorChanged();
+        bool hasLyrics = player->hasLyrics();
+        setShowLyrics(hasLyrics);
+    });
 }
 
 void ProjectWindow::setupVolumeWidget() {
@@ -187,6 +193,14 @@ void ProjectWindow::setupMenus() {
     openAction->setShortcut(QKeySequence::Open);
     connect(openAction, &QAction::triggered, this, &ProjectWindow::onFileOpen);
 
+    QAction* saveAction = fileMenu->addAction("Save");
+    saveAction->setShortcut(QKeySequence::Save);
+    saveAction->setVisible(shouldShowSaveIndicator());
+    connect(saveAction, &QAction::triggered, this, &ProjectWindow::onSave);
+    connect(this, &ProjectWindow::showSaveIndicatorChanged, [=] {
+        saveAction->setVisible(shouldShowSaveIndicator());
+    });
+
     QMenu* editMenu = menuBar()->addMenu("Edit");
     QAction* microphoneAction = editMenu->addAction("Select Microphone");
     connect(microphoneAction, &QAction::triggered, this, &ProjectWindow::onSelectMicrophone);
@@ -202,6 +216,13 @@ void ProjectWindow::setupMenus() {
 
 void ProjectWindow::onFileOpen() {
     VxAppUtils::OpenExistingProject(this);
+}
+
+void ProjectWindow::onSave() {
+    auto* player = static_cast<QtMvxPlayer*>(MainController::instance()->getPlayer());
+    player->getMvxFile().writeToFile(player->getSource().toLocal8Bit().data());
+    showSaveIndicator = false;
+    showSaveIndicatorChanged();
 }
 
 void ProjectWindow::onSelectMicrophone() {
@@ -252,5 +273,9 @@ void ProjectWindow::setZoom(float zoom) {
         workspaceController->setZoom(zoom);
         emit zoomChanged();
     });
+}
+
+bool ProjectWindow::shouldShowSaveIndicator() const {
+    return showSaveIndicator;
 }
 
