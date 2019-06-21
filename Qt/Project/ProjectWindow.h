@@ -30,6 +30,7 @@ class ProjectWindow : public BaseMainWindow
     QQuickWidget *lyricsWidget;
     WorkspaceController* workspaceController = nullptr;
     QWidget* volumeWidget;
+    bool showSaveIndicator = false;
 
     void setupVolumeWidget();
     void setupMenus();
@@ -46,17 +47,22 @@ public:
     Q_INVOKABLE void setShowTracks(bool value);
 
     Q_PROPERTY(qreal zoom READ getZoom() WRITE setZoom() NOTIFY zoomChanged())
+    Q_PROPERTY(bool showSaveIndicator READ shouldShowSaveIndicator() NOTIFY showSaveIndicatorChanged())
 
     float getZoom() const;
     void setZoom(float zoom);
 
+    bool shouldShowSaveIndicator() const;
+
 public slots:
     void onFileOpen();
+    void onSave();
     void onSelectMicrophone();
     void onAddLyrics();
 
 signals:
     void zoomChanged();
+    void showSaveIndicatorChanged();
 };
 
 #endif // MAINWINDOW_H
