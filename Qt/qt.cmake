@@ -13,6 +13,7 @@ set(qtSources
         Project/SelectMicrophoneDialog.h
         Project/SingingResultDialog.cpp
         Project/SingingResultDialog.h
+        Project/AddLyricsDialog.cpp
         QtBridge/QtMvxPlayer.cpp
         QtBridge/QtCppBridge.cpp
         QtBridge/QtPitch.cpp
@@ -23,6 +24,7 @@ set(qtSources
         Workspace/QtDrawerTextImagesFactory.cpp
         Utils/BaseQmlWidget.cpp
         Utils/BaseQmlWidget.h
+        Utils/BaseQmlDialog.cpp
         App/VxAppUtils.cpp
         App/VxAppUtils.h
         Workspace/QtWidgetMouseEventsReceiver.cpp

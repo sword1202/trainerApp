@@ -20,6 +20,15 @@ struct LyricsLine {
         ar & name;
         ar & intervals;
     }
+
+    bool operator==(const LyricsLine &rhs) const {
+        return name == rhs.name &&
+               intervals == rhs.intervals;
+    }
+
+    bool operator!=(const LyricsLine &rhs) const {
+        return !(rhs == *this);
+    }
 };
 
 

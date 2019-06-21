@@ -173,5 +173,6 @@
         <file>qml/Welcome/no_items_box.svg</file>
         <file>qml/Project/SingingResultDialog.qml</file>
         <file>qml/TextOnlyButton.qml</file>
+        <file>qml/Project/AddLyricsDialog.qml</file>
     </qresource>
 </RCC>

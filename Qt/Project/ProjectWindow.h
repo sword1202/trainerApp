@@ -53,6 +53,7 @@ public:
 public slots:
     void onFileOpen();
     void onSelectMicrophone();
+    void onAddLyrics();
 
 signals:
     void zoomChanged();

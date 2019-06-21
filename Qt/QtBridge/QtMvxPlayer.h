@@ -23,6 +23,7 @@ public:
     Q_PROPERTY(QString source READ getSource() WRITE setSource() NOTIFY sourceChanged())
     Q_PROPERTY(bool isPlaying READ isPlaying() NOTIFY isPlayingChanged())
     Q_PROPERTY(bool isRecording READ isRecording() NOTIFY sourceChanged())
+    Q_PROPERTY(bool hasLyrics READ hasLyrics() NOTIFY lyricsChanged())
     Q_PROPERTY(QJsonValue bounds READ getQmlBounds() WRITE setQmlBounds() NOTIFY boundsChanged())
     Q_PROPERTY(double playStartedTime READ getPlayStartedTime() NOTIFY playStartedTimeChanged())
     Q_PROPERTY(double playStartedSeek READ getPlayStartedSeek()  NOTIFY playStartedSeekChanged())
@@ -50,8 +51,6 @@ public:
 
     Q_INVOKABLE void seekToNextTact() override;
     Q_INVOKABLE void seekToPrevTact() override;
-
-    Q_INVOKABLE bool hasLyrics() const override;
 
     void onPlaybackStopped() override;
 
@@ -81,6 +80,7 @@ signals:
     void metronomeEnabledChanged();
     void pianoVolumeChanged();
     void instrumentalVolumeChanged();
+    void lyricsChanged();
 };
 
 #endif // QMLPLAYER_H

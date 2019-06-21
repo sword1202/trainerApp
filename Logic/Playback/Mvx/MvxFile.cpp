@@ -124,10 +124,6 @@ void MvxFile::setRecordedPitchesFrequencies(const std::vector<float > &recordedP
     MvxFile::recordedPitchesFrequencies = recordedPitchesFrequencies;
 }
 
-std::string &MvxFile::moveRecordingData() {
-    return recordingData;
-}
-
 const std::vector<short> &MvxFile::getInstrumentalPreviewSamples() const {
     return instrumentalPreviewSamples;
 }
@@ -199,4 +195,8 @@ const std::map<double, int> &MvxFile::getRecordingTonalityChanges() const {
 
 void MvxFile::setRecordingTonalityChanges(const std::map<double, int> &recordingTonalityChanges) {
     this->recordingTonalityChanges = recordingTonalityChanges;
+}
+
+Lyrics &MvxFile::getLyricsNonConst() {
+    return lyrics;
 }

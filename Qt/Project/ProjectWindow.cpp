@@ -18,6 +18,7 @@
 #include "Algorithms.h"
 #include "PortAudioUtils.h"
 #include "SelectMicrophoneDialog.h"
+#include "AddLyricsDialog.h"
 #include "App/AppSettings.h"
 #include <QScrollBar>
 #include <NotImplementedAssert.h>
@@ -35,7 +36,7 @@ constexpr int BEATS_IN_TACT = 4;
 constexpr int MINIMUM_WINDOW_WIDTH = 700;
 constexpr double MINIMUM_WINDOW_HEIGHT_RATIO = 0.6;
 constexpr int LYRICS_HEIGHT = 53;
-constexpr int LYRICS_UPDATE_DELAY = 50;
+constexpr int LYRICS_UPDATE_INTERVAL = 50;
 
 #ifdef __APPLE__
 #define IS_APPLE true
@@ -136,13 +137,15 @@ ProjectWindow::ProjectWindow() :
 
     bool hasLyrics = player->hasLyrics();
     setShowLyrics(hasLyrics);
-    if (hasLyrics) {
-        QtUtils::StartRepeatedTimer(this, [=] {
-            const std::string& lyricsTextUtf8 = player->getLyricsTextAtLine(0);
-            lyricsWidget->rootContext()->setContextProperty("lyricsText", QtUtils::QStringFromUtf8(lyricsTextUtf8));
+    QtUtils::StartRepeatedTimer(this, [=] {
+        if (player->getLyricsLinesCount() <= 0) {
             return true;
-        }, LYRICS_UPDATE_DELAY);
-    }
+        }
+
+        const std::string& lyricsTextUtf8 = player->getLyricsTextAtLine(0);
+        lyricsWidget->rootContext()->setContextProperty("lyricsText", QtUtils::QStringFromUtf8(lyricsTextUtf8));
+        return true;
+    }, LYRICS_UPDATE_INTERVAL);
 }
 
 void ProjectWindow::setupVolumeWidget() {
@@ -187,6 +190,14 @@ void ProjectWindow::setupMenus() {
     QMenu* editMenu = menuBar()->addMenu("Edit");
     QAction* microphoneAction = editMenu->addAction("Select Microphone");
     connect(microphoneAction, &QAction::triggered, this, &ProjectWindow::onSelectMicrophone);
+
+    QAction* addLyricsAction = editMenu->addAction("Add Lyrics");
+    connect(addLyricsAction, &QAction::triggered, this, &ProjectWindow::onAddLyrics);
+    MvxPlayer *player = MainController::instance()->getPlayer();
+    addLyricsAction->setVisible(player->getBounds());
+    player->boundsChangedListeners.addListener([=] (const PlaybackBounds& bounds) {
+        addLyricsAction->setVisible(bounds);
+    });
 }
 
 void ProjectWindow::onFileOpen() {
@@ -195,6 +206,10 @@ void ProjectWindow::onFileOpen() {
 
 void ProjectWindow::onSelectMicrophone() {
     (new SelectMicrophoneDialog(this, cpp))->show();
+}
+
+void ProjectWindow::onAddLyrics() {
+    (new AddLyricsDialog(this, cpp))->show();
 }
 
 void ProjectWindow::setBoundsSelectionEnabled(bool enabled) {

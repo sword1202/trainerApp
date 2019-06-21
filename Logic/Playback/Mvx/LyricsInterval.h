@@ -19,6 +19,9 @@ struct LyricsInterval {
     }
 
     bool containsTime(double time) const;
+
+    bool operator==(const LyricsInterval &rhs) const;
+    bool operator!=(const LyricsInterval &rhs) const;
 };
 
 #endif //VXFILE_LYRICS_INTERVAL_H

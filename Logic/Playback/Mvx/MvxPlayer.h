@@ -39,7 +39,7 @@ private:
     PlaybackBounds bounds;
     double playStartedSeek = -1;
     double playStartedTime = -1;
-    const MvxFile* mvxFile = nullptr;
+    MvxFile* mvxFile = nullptr;
     bool destroyMvxFileOnDestructor;
     // is valid only for recordings
     PitchesCollection* pitchesCollection = nullptr;
@@ -63,12 +63,13 @@ public:
     CppUtils::ListenersSet<> onCompleteListeners;
     CppUtils::ListenersSet<const PlaybackBounds&> boundsChangedListeners;
     CppUtils::SynchronizedListenersSet<double> recordingVoiceLevelListeners;
+    CppUtils::ListenersSet<> lyricsChangedListeners;
 
     MvxPlayer();
     virtual ~MvxPlayer();
     void init(std::istream& is);
     void init(const char* filePath);
-    void init(const MvxFile* file, bool destroyMvxFileOnDestructor = true);
+    void init(MvxFile* file, bool destroyMvxFileOnDestructor = true);
     void prepare();
     virtual void setInstrumentalVolume(float instrumentalVolume);
     virtual void setVocalPartPianoVolume(float pianoVolume);
@@ -88,6 +89,7 @@ public:
     virtual void seekToPrevTact();
     const VocalPart* getVocalPart() const;
     const MvxFile &getMvxFile() const;
+    void editLyrics(const std::function<void(Lyrics *lyrics)> &editAction);
 
     const PlaybackBounds &getBounds() const;
     void setBounds(const PlaybackBounds &bounds);

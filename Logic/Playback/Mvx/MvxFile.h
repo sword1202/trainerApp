@@ -109,7 +109,6 @@ public:
     void setInstrumental(const std::string &instrumental);
 
     const std::string &getRecordingData() const;
-    std::string& moveRecordingData();
     void setRecordingData(const std::string &recordingData);
 
     double getBeatsPerMinute() const;
@@ -140,6 +139,7 @@ public:
     void generateInstrumentalPreviewSamplesFromInstrumental();
 
     const Lyrics &getLyrics() const;
+    Lyrics &getLyricsNonConst();
     void setLyrics(const Lyrics &lyrics);
 
     const std::map<double, int> &getRecordingTonalityChanges() const;
