@@ -62,8 +62,8 @@ void AudioInputManager::setInputDeviceName(const char *deviceName) const {
     audioInputReader->setDeviceName(deviceName);
 }
 
-void AudioInputManager::addAudioInputReaderCallback(const AudioInputReader::Callback &callback) {
-    audioInputReader->callbacks.addListener(callback);
+void AudioInputManager::addAudioInputReaderCallback(const AudioInputReader::Callback &callback, CppUtils::AbstractDestructorQueue* parent) {
+    audioInputReader->callbacks.addListener(callback, parent);
 }
 
 void AudioInputManager::startPitchDetection(double seek) {
@@ -79,12 +79,12 @@ void AudioInputManager::stopPitchDetection() {
     audioInputReader->callbacks.removeListeners(pitchesRecorder, audioRecorder);
 }
 
-void AudioInputManager::addAudioInputLevelMonitor(const std::function<void(double)> &callback) {
+void AudioInputManager::addAudioInputLevelMonitor(const std::function<void(double)> &callback, CppUtils::AbstractDestructorQueue* parent) {
     addAudioInputReaderCallback(AudioAverageInputLevelMonitor([=] (double value) {
         Executors::ExecuteOnMainThread([=] {
             callback(value);
         });
-    }));
+    }), parent);
 }
 
 bool AudioInputManager::isAudioRecordingEnabled() const {

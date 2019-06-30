@@ -107,9 +107,9 @@ ProjectWindow::ProjectWindow() :
         header->setProperty("microphoneLevel", level);
     };
     if (player->isRecording()) {
-        player->recordingVoiceLevelListeners.addListener(audioLevelListener);
+        player->recordingVoiceLevelListeners.addListener(audioLevelListener, this);
     } else {
-        audioInputManager->addAudioInputLevelMonitor(audioLevelListener);
+        audioInputManager->addAudioInputLevelMonitor(audioLevelListener, this);
     }
 
     // Setup layouts
@@ -127,7 +127,7 @@ ProjectWindow::ProjectWindow() :
         player->onCompleteListeners.addListener([=] {
             auto* dialog = new SingingResultDialog(this);
             dialog->show();
-        });
+        }, this);
     }
 
     MainController::instance()->getWorkspaceController([this] (WorkspaceController* workspaceController) {
@@ -151,7 +151,7 @@ ProjectWindow::ProjectWindow() :
         emit showSaveIndicatorChanged();
         bool hasLyrics = player->hasLyrics();
         setShowLyrics(hasLyrics);
-    });
+    }, this);
 }
 
 void ProjectWindow::setupVolumeWidget() {
@@ -211,7 +211,7 @@ void ProjectWindow::setupMenus() {
     addLyricsAction->setVisible(player->getBounds());
     player->boundsChangedListeners.addListener([=] (const PlaybackBounds& bounds) {
         addLyricsAction->setVisible(bounds);
-    });
+    }, this);
 }
 
 void ProjectWindow::onFileOpen() {

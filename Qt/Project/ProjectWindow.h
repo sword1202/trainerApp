@@ -15,7 +15,7 @@
 #include "Workspace/OpenglWorkspaceWidget.h"
 #endif
 
-class ProjectWindow : public BaseMainWindow
+class ProjectWindow : public BaseMainWindow, CppUtils::DestructorQueue
 {
     Q_OBJECT
 
