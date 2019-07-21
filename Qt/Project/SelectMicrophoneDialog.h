@@ -1,21 +1,19 @@
 #ifndef SELECTMICROPHONEDIALOG_H
 #define SELECTMICROPHONEDIALOG_H
 
-#include <QDialog>
-#include "QtBridge/QtCppBridge.h"
+#include <Utils/BaseQmlDialog.h>
 #include "AudioInputReader.h"
 
-class SelectMicrophoneDialog : public QDialog
+class SelectMicrophoneDialog : public BaseQmlDialog
 {
     Q_OBJECT
 public:
     SelectMicrophoneDialog(QWidget* parent, QtCppBridge* cpp);
-    ~SelectMicrophoneDialog();
+    ~SelectMicrophoneDialog() override;
     Q_INVOKABLE void choose(int index);
     Q_INVOKABLE void onSelectedMicrophoneIndexChanged(int selectedMicrophoneIndex);
 private:
     AudioInputReader* audioInputReader = nullptr;
-    QQuickItem* rootQml;
 
     void onInputLevelChanged(double level);
 };

@@ -15,6 +15,7 @@ public:
     virtual float getThreshold() const = 0;
     virtual void setThreshold(float threshold) = 0;
     virtual bool hasThreshold() const = 0;
+    virtual ~PitchDetector() = default;
 };
 
 

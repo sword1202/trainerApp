@@ -18,6 +18,7 @@
 #include "Algorithms.h"
 #include "PortAudioUtils.h"
 #include "SelectMicrophoneDialog.h"
+#include "AddLyricsDialog.h"
 #include "App/AppSettings.h"
 #include <QScrollBar>
 #include <NotImplementedAssert.h>
@@ -35,7 +36,7 @@ constexpr int BEATS_IN_TACT = 4;
 constexpr int MINIMUM_WINDOW_WIDTH = 700;
 constexpr double MINIMUM_WINDOW_HEIGHT_RATIO = 0.6;
 constexpr int LYRICS_HEIGHT = 53;
-constexpr int LYRICS_UPDATE_DELAY = 50;
+constexpr int LYRICS_UPDATE_INTERVAL = 50;
 
 #ifdef __APPLE__
 #define IS_APPLE true
@@ -106,9 +107,9 @@ ProjectWindow::ProjectWindow() :
         header->setProperty("microphoneLevel", level);
     };
     if (player->isRecording()) {
-        player->recordingVoiceLevelListeners.addListener(audioLevelListener);
+        player->recordingVoiceLevelListeners.addListener(audioLevelListener, this);
     } else {
-        audioInputManager->addAudioInputLevelMonitor(audioLevelListener);
+        audioInputManager->addAudioInputLevelMonitor(audioLevelListener, this);
     }
 
     // Setup layouts
@@ -126,23 +127,31 @@ ProjectWindow::ProjectWindow() :
         player->onCompleteListeners.addListener([=] {
             auto* dialog = new SingingResultDialog(this);
             dialog->show();
-        });
+        }, this);
     }
 
     MainController::instance()->getWorkspaceController([this] (WorkspaceController* workspaceController) {
         this->workspaceController = workspaceController;
     });
 
-
     bool hasLyrics = player->hasLyrics();
     setShowLyrics(hasLyrics);
-    if (hasLyrics) {
-        QtUtils::StartRepeatedTimer(this, [=] {
-            const std::string& lyricsTextUtf8 = player->getLyricsTextAtLine(0);
-            lyricsWidget->rootContext()->setContextProperty("lyricsText", QtUtils::QStringFromUtf8(lyricsTextUtf8));
+    QtUtils::StartRepeatedTimer(this, [=] {
+        if (player->getLyricsLinesCount() <= 0) {
             return true;
-        }, LYRICS_UPDATE_DELAY);
-    }
+        }
+
+        const std::string& lyricsTextUtf8 = player->getLyricsTextAtLine(0);
+        lyricsWidget->rootContext()->setContextProperty("lyricsText", QtUtils::QStringFromUtf8(lyricsTextUtf8));
+        return true;
+    }, LYRICS_UPDATE_INTERVAL);
+
+    player->lyricsChangedListeners.addListener([=] {
+        showSaveIndicator = true;
+        emit showSaveIndicatorChanged();
+        bool hasLyrics = player->hasLyrics();
+        setShowLyrics(hasLyrics);
+    }, this);
 }
 
 void ProjectWindow::setupVolumeWidget() {
@@ -184,17 +193,44 @@ void ProjectWindow::setupMenus() {
     openAction->setShortcut(QKeySequence::Open);
     connect(openAction, &QAction::triggered, this, &ProjectWindow::onFileOpen);
 
+    QAction* saveAction = fileMenu->addAction("Save");
+    saveAction->setShortcut(QKeySequence::Save);
+    saveAction->setVisible(shouldShowSaveIndicator());
+    connect(saveAction, &QAction::triggered, this, &ProjectWindow::onSave);
+    connect(this, &ProjectWindow::showSaveIndicatorChanged, [=] {
+        saveAction->setVisible(shouldShowSaveIndicator());
+    });
+
     QMenu* editMenu = menuBar()->addMenu("Edit");
     QAction* microphoneAction = editMenu->addAction("Select Microphone");
     connect(microphoneAction, &QAction::triggered, this, &ProjectWindow::onSelectMicrophone);
+
+    QAction* addLyricsAction = editMenu->addAction("Add Lyrics");
+    connect(addLyricsAction, &QAction::triggered, this, &ProjectWindow::onAddLyrics);
+    MvxPlayer *player = MainController::instance()->getPlayer();
+    addLyricsAction->setVisible(player->getBounds());
+    player->boundsChangedListeners.addListener([=] (const PlaybackBounds& bounds) {
+        addLyricsAction->setVisible(bounds);
+    }, this);
 }
 
 void ProjectWindow::onFileOpen() {
     VxAppUtils::OpenExistingProject(this);
 }
 
+void ProjectWindow::onSave() {
+    auto* player = static_cast<QtMvxPlayer*>(MainController::instance()->getPlayer());
+    player->getMvxFile().writeToFile(player->getSource().toLocal8Bit().data());
+    showSaveIndicator = false;
+    showSaveIndicatorChanged();
+}
+
 void ProjectWindow::onSelectMicrophone() {
     (new SelectMicrophoneDialog(this, cpp))->show();
+}
+
+void ProjectWindow::onAddLyrics() {
+    (new AddLyricsDialog(this, cpp))->show();
 }
 
 void ProjectWindow::setBoundsSelectionEnabled(bool enabled) {
@@ -209,7 +245,7 @@ void ProjectWindow::setShowTracks(bool value) {
     MainController::instance()->getWorkspaceController([=] (WorkspaceController* workspaceController) {
         workspaceController->setDrawTracks(value);
     });
-    volumeWidget->setVisible(false);
+    volumeWidget->setVisible(value);
 }
 
 void ProjectWindow::wheelEvent(QWheelEvent *event) {
@@ -237,5 +273,9 @@ void ProjectWindow::setZoom(float zoom) {
         workspaceController->setZoom(zoom);
         emit zoomChanged();
     });
+}
+
+bool ProjectWindow::shouldShowSaveIndicator() const {
+    return showSaveIndicator;
 }
 

@@ -21,7 +21,7 @@ Item {
             anchors.topMargin: 14.25
             anchors.left: parent.left
             anchors.leftMargin: 22.5
-            text: cpp.player.artistName + " - " + cpp.player.songTitle
+            text: cpp.player.artistName + " - " + cpp.player.songTitle + (self.showSaveIndicator ? "*" : "")
             color: "#24232D"
             font.family: "Lato"
             font.bold: true

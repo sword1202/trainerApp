@@ -14,7 +14,9 @@ constexpr char FILE_URL_PREFIX[] = "file://";
 constexpr int FILE_URL_PREFIX_LENGTH = 7;
 
 QtMvxPlayer::QtMvxPlayer(QObject *parent) : QObject(parent) {
-
+    lyricsChangedListeners.addListener([=] {
+        emit lyricsChanged();
+    });
 }
 
 void QtMvxPlayer::onComplete() {
@@ -147,10 +149,6 @@ QString QtMvxPlayer::getArtistName() const {
 
 QString QtMvxPlayer::getSongTitle() const {
     return QString::fromUtf8(getSongTitleUtf8().data());
-}
-
-bool QtMvxPlayer::hasLyrics() const {
-    return MvxPlayer::hasLyrics();
 }
 
 void QtMvxPlayer::setInstrumentalVolume(float instrumentalVolume) {

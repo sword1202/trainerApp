@@ -17,12 +17,16 @@ static const int SMOOTH_LEVEL = 4;
 using namespace CppUtils;
 
 AudioInputManager::AudioInputManager(const char* deviceName) {
-    AubioPitchDetector* pitchDetector = new AubioPitchDetector();
-    pitchDetector->setThreshold(THRESHOLD);
+
+    auto pitchDetectorFactory = [] {
+        auto* pitchDetector = new AubioPitchDetector();
+        pitchDetector->setThreshold(THRESHOLD);
+        return pitchDetector;
+    };
     
     audioInputReader = new PortAudioInputReader(BUFFER_SIZE, true, deviceName);
     pitchesRecorder = new AudioInputPitchesRecorder();
-    pitchesRecorder->init(audioInputReader, SMOOTH_LEVEL, pitchDetector);
+    pitchesRecorder->init(audioInputReader, SMOOTH_LEVEL, pitchDetectorFactory);
     audioInputReader->start();
 
     audioRecorder = new AudioInputRecorder();
@@ -58,8 +62,8 @@ void AudioInputManager::setInputDeviceName(const char *deviceName) const {
     audioInputReader->setDeviceName(deviceName);
 }
 
-void AudioInputManager::addAudioInputReaderCallback(const AudioInputReader::Callback &callback) {
-    audioInputReader->callbacks.addListener(callback);
+void AudioInputManager::addAudioInputReaderCallback(const AudioInputReader::Callback &callback, CppUtils::AbstractDestructorQueue* parent) {
+    audioInputReader->callbacks.addListener(callback, parent);
 }
 
 void AudioInputManager::startPitchDetection(double seek) {
@@ -75,12 +79,12 @@ void AudioInputManager::stopPitchDetection() {
     audioInputReader->callbacks.removeListeners(pitchesRecorder, audioRecorder);
 }
 
-void AudioInputManager::addAudioInputLevelMonitor(const std::function<void(double)> &callback) {
+void AudioInputManager::addAudioInputLevelMonitor(const std::function<void(double)> &callback, CppUtils::AbstractDestructorQueue* parent) {
     addAudioInputReaderCallback(AudioAverageInputLevelMonitor([=] (double value) {
         Executors::ExecuteOnMainThread([=] {
             callback(value);
         });
-    }));
+    }), parent);
 }
 
 bool AudioInputManager::isAudioRecordingEnabled() const {

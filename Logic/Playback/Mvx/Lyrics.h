@@ -24,8 +24,14 @@ public:
     Lyrics(const LyricsLine& lyricsLine1, const LyricsLine& lyricsLine2);
 
     int getLinesCount() const;
+    const LyricsLine& getLyricsLine(int index);
     const std::string& getLineName(int index) const;
     const std::string &getCurrentLyricsTextAtLine(int lineIndex, double time) const;
+
+    bool operator==(const Lyrics &rhs) const;
+    bool operator!=(const Lyrics &rhs) const;
+
+    void addLyricsInterval(int lineIndex, const LyricsInterval& interval);
 };
 
 

@@ -79,7 +79,7 @@
 
 #include "pymem.h"
 
-#include "object.h"
+#include "DestructorQueue.h"
 #include "objimpl.h"
 
 #include "pydebug.h"

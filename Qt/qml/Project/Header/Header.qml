@@ -25,8 +25,8 @@ Rectangle {
 
         FeaturesToggleButton {
             id: lyricsShowButton
-            on: cpp.player.hasLyrics()
-            visible: cpp.player.hasLyrics()
+            on: true
+            visible: cpp.player.hasLyrics
             onImage: "images/lyrics_show_button_on.svg"
             offImage: "images/lyrics_show_button_off.svg"
 

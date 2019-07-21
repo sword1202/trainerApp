@@ -8,6 +8,7 @@
 
 #include "AudioInputPitchesRecorder.h"
 #include "AudioInputRecorder.h"
+#include "DestructorQueue.h"
 
 class AudioInputManager {
     AudioInputReaderWithOutput* audioInputReader = nullptr;
@@ -28,8 +29,8 @@ public:
     const char * getInputDeviceName() const;
     void setInputDeviceName(const char *deviceName) const;
 
-    void addAudioInputReaderCallback(const AudioInputReader::Callback& callback);
-    void addAudioInputLevelMonitor(const std::function<void(double)>& callback);
+    void addAudioInputReaderCallback(const AudioInputReader::Callback& callback, CppUtils::AbstractDestructorQueue* parent);
+    void addAudioInputLevelMonitor(const std::function<void(double)>& callback, CppUtils::AbstractDestructorQueue* parent);
 
     bool isAudioRecordingEnabled() const;
     void setAudioRecordingEnabled(bool audioDataCollectorEnabled);

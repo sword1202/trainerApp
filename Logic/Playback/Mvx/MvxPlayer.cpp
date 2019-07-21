@@ -68,7 +68,7 @@ MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
     });
 }
 
-void MvxPlayer::init(const MvxFile* file, bool destroyMvxFileOnDestructor) {
+void MvxPlayer::init(MvxFile* file, bool destroyMvxFileOnDestructor) {
     this->mvxFile = file;
     this->destroyMvxFileOnDestructor = destroyMvxFileOnDestructor;
     instrumentalPlayer.setAudioData(&mvxFile->getInstrumental());
@@ -80,12 +80,14 @@ void MvxPlayer::init(const MvxFile* file, bool destroyMvxFileOnDestructor) {
         recordingPlayer.setAudioData(&mvxFile->getRecordingData());
         players.push_back(&recordingPlayer);
 
-        recordingLevelMonitor = new AudioAverageInputLevelMonitor([=] (double level) {
-            recordingVoiceLevelListeners.executeAll(level);
-        });
-        recordingPlayer.onDataSentToOutputListeners.addListener([=] (void* data, int size) {
-            recordingLevelMonitor->operator()(static_cast<const int16_t *>(data), size / sizeof(int16_t));
-        });
+        if (recordingLevelMonitor == nullptr) {
+            recordingLevelMonitor = new AudioAverageInputLevelMonitor([=] (double level) {
+                recordingVoiceLevelListeners.executeAll(level);
+            });
+            recordingPlayer.onDataSentToOutputListeners.addListener([=] (void* data, int size) {
+                recordingLevelMonitor->operator()(static_cast<const int16_t *>(data), size / sizeof(int16_t));
+            });
+        }
     }
 }
 
@@ -454,4 +456,12 @@ const VocalPartAudioPlayer &MvxPlayer::getVocalPartPlayer() const {
 
 const std::map<double, int> &MvxPlayer::getTonalityChanges() const {
     return tonalityChanges;
+}
+
+void MvxPlayer::editLyrics(const std::function<void(Lyrics *lyrics)> &editAction) {
+    auto lyrics = mvxFile->getLyrics();
+    editAction(&mvxFile->getLyricsNonConst());
+    if (lyrics != mvxFile->getLyrics()) {
+        lyricsChangedListeners.executeAll();
+    }
 }

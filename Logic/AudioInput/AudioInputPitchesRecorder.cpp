@@ -16,8 +16,8 @@ using namespace std;
 #define LOCK std::lock_guard<std::mutex> _(mutex)
 
 void AudioInputPitchesRecorder::init(AudioInputReader *audioInputReader, int smoothLevel,
-        PitchDetector* pitchDetector) {
-    pitchInputReader = new PitchInputReader(audioInputReader, pitchDetector, smoothLevel);
+                                     const std::function<PitchDetector*()>& pitchDetectorFactory) {
+    pitchInputReader = new PitchInputReader(audioInputReader, pitchDetectorFactory, smoothLevel);
 
     pitchInputReader->setExecuteCallBackOnInvalidPitches(true);
     pitchInputReader->setCallback([=](const Pitch& pitch) {
@@ -30,14 +30,6 @@ void AudioInputPitchesRecorder::init(AudioInputReader *audioInputReader, int smo
 void AudioInputPitchesRecorder::operator()(const int16_t* data, int size) {
     assert(pitchInputReader && "call init before");
     pitchInputReader->operator()(data, size);
-}
-
-void AudioInputPitchesRecorder::setThreshold(float threshold) {
-    pitchInputReader->getPitchDetector()->setThreshold(threshold);
-}
-
-float AudioInputPitchesRecorder::getThreshold() const {
-    return pitchInputReader->getPitchDetector()->getThreshold();
 }
 
 AudioInputPitchesRecorder::~AudioInputPitchesRecorder() {

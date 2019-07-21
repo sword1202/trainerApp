@@ -11,6 +11,16 @@ bool LyricsInterval::containsTime(double time) const {
     return time >= startTime && time <= endTime;
 }
 
+bool LyricsInterval::operator==(const LyricsInterval &rhs) const {
+    return startTime == rhs.startTime &&
+           endTime == rhs.endTime &&
+           text == rhs.text;
+}
+
+bool LyricsInterval::operator!=(const LyricsInterval &rhs) const {
+    return !(rhs == *this);
+}
+
 int Lyrics::getLinesCount() const {
     return int(lyrics.size());
 }
@@ -39,4 +49,22 @@ Lyrics::Lyrics(const LyricsLine &lyricsLine) {
 Lyrics::Lyrics(const LyricsLine &lyricsLine1, const LyricsLine &lyricsLine2) {
     lyrics.push_back(lyricsLine1);
     lyrics.push_back(lyricsLine2);
+}
+
+const LyricsLine& Lyrics::getLyricsLine(int index) {
+    assert(index < getLinesCount());
+    return lyrics[index];
+}
+
+void Lyrics::addLyricsInterval(int lineIndex, const LyricsInterval& interval) {
+    lyrics.resize(lineIndex + 1);
+    lyrics[lineIndex].intervals.push_back(interval);
+}
+
+bool Lyrics::operator==(const Lyrics &rhs) const {
+    return lyrics == rhs.lyrics;
+}
+
+bool Lyrics::operator!=(const Lyrics &rhs) const {
+    return !(rhs == *this);
 }
