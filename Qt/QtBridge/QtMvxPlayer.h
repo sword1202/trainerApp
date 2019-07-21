@@ -36,7 +36,8 @@ public:
     Q_PROPERTY(QString songTitle READ getSongTitle() NOTIFY sourceChanged())
     Q_PROPERTY(float instrumentalVolume READ getInstrumentalVolume() WRITE setInstrumentalVolume() NOTIFY
             instrumentalVolumeChanged())
-    Q_PROPERTY(float pianoVolume READ getPianoVolume() WRITE
+    Q_PROPERTY(float pianoVolume READ
+                       getVocalPianoVolume() WRITE
                        setVocalPartPianoVolume() NOTIFY pianoVolumeChanged())
 
     Q_INVOKABLE bool hasPitchNow(int perfectFrequencyIndex) const;

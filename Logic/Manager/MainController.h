@@ -12,7 +12,7 @@
 #include "MvxPlayer.h"
 #include "WorkspaceController.h"
 #include "PlaybackBounds.h"
-#include "PlaybackBoundsSelectionController.h"
+#include "Controllers/PlaybackBoundsSelectionController.h"
 #include "CallbacksQueue.h"
 
 class MainController {

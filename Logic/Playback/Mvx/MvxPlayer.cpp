@@ -178,7 +178,7 @@ float MvxPlayer::getInstrumentalVolume() const {
     return instrumentalPlayer.getVolume();
 }
 
-float MvxPlayer::getPianoVolume() const {
+float MvxPlayer::getVocalPianoVolume() const {
     return vocalPartPianoPlayer.getVolume();
 }
 

@@ -17,8 +17,8 @@ class AudioInputManager {
 public:
     explicit AudioInputManager(const char* deviceName);
 
-    void setInputVolume(float value);
-    float getInputVolume() const;
+    void setInputSensitivity(float value);
+    float getInputSensitivity() const;
     void setOutputVolume(float value);
     float getOutputVolume() const;
 

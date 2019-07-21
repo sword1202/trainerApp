@@ -169,7 +169,7 @@ void ProjectWindow::onInputVolumeChanged(float value) {
     AppSettings settings;
     settings.setInputVolume(value);
     AudioInputManager *audioInputManager = MainController::instance()->getAudioInputManager();
-    audioInputManager->setInputVolume(value);
+    audioInputManager->setInputSensitivity(value);
 }
 
 void ProjectWindow::onRecordingVolumeChanged(float value) {

@@ -34,12 +34,12 @@ AudioInputManager::~AudioInputManager() {
     delete pitchesRecorder;
 }
 
-void AudioInputManager::setInputVolume(float value) {
-    audioInputReader->setInputVolume(value);
+void AudioInputManager::setInputSensitivity(float value) {
+    audioInputReader->setSensitivity(value);
 }
 
-float AudioInputManager::getInputVolume() const {
-    return audioInputReader->getInputVolume();
+float AudioInputManager::getInputSensitivity() const {
+    return audioInputReader->getSensitivity();
 }
 
 void AudioInputManager::setOutputVolume(float value) {

@@ -22,8 +22,8 @@ public:
     virtual int getSampleRate() const = 0;
     virtual int getSampleSizeInBytes() const = 0;
     virtual int getMaximumBufferSize() const = 0;
-    virtual void setInputVolume(float value) = 0;
-    virtual float getInputVolume() const = 0;
+    virtual void setSensitivity(float value) = 0;
+    virtual float getSensitivity() const = 0;
     virtual int getNumberOfChannels() const = 0;
     virtual WavConfig generateWavConfig() const = 0;
 

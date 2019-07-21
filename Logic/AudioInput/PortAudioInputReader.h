@@ -30,7 +30,7 @@ class PortAudioInputReader : public AudioInputReaderWithOutput {
     void destroy();
 public:
     PortAudioInputReader(int maximumBufferSize, bool outputEnabled, const char* deviceName = nullptr);
-    ~PortAudioInputReader();
+    ~PortAudioInputReader() override;
 
     void start() override;
     void stop() override;
@@ -39,8 +39,8 @@ public:
     int getSampleRate() const override;
     int getMaximumBufferSize() const override;
 
-    void setInputVolume(float value) override;
-    float getInputVolume() const override;
+    void setSensitivity(float value) override;
+    float getSensitivity() const override;
     void setOutputVolume(float value) override;
     float getOutputVolume() const override;
 

@@ -16,9 +16,10 @@ else()
 endif(APPLE)
 
 set(Manager
+        Controllers/ProjectController.cpp
         Manager/AudioInputManager.cpp
         Manager/MainController.cpp
-        Manager/PlaybackBoundsSelectionController.cpp
+        Controllers/PlaybackBoundsSelectionController.cpp
         )
 
 set(Workspace
@@ -29,6 +30,7 @@ set(Workspace
 set(logicSources
         ${Drawers}
         ${Manager}
+        ApplicationModel.cpp
         Events/MouseEventsReceiver.h
         Events/BaseSynchronizedMouseEventsReceiver.cpp
         ${Workspace})

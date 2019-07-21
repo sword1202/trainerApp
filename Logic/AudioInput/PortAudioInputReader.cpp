@@ -124,11 +124,11 @@ int PortAudioInputReader::getMaximumBufferSize() const {
     return maximumBufferSize;
 }
 
-void PortAudioInputReader::setInputVolume(float value) {
+void PortAudioInputReader::setSensitivity(float value) {
     Px_SetInputVolume(mixer, value);
 }
 
-float PortAudioInputReader::getInputVolume() const {
+float PortAudioInputReader::getSensitivity() const {
     return Px_GetInputVolume(mixer);
 }
 

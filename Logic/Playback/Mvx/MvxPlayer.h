@@ -73,7 +73,7 @@ public:
     virtual void setInstrumentalVolume(float instrumentalVolume);
     virtual void setVocalPartPianoVolume(float pianoVolume);
     float getInstrumentalVolume() const;
-    float getPianoVolume() const;
+    float getVocalPianoVolume() const;
     void setRecordingVolume(float volume);
     virtual void pause();
     virtual void stopAndMoveSeekToBeginning();
