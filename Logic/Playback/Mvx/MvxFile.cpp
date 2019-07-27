@@ -7,7 +7,7 @@
 #include <fstream>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
-#include <Decoder/audiodecoder.h>
+#include "audiodecoder.h"
 #include <VocalPartAudioDataGenerator.h>
 #include "StringUtils.h"
 #include "AudioUtils.h"

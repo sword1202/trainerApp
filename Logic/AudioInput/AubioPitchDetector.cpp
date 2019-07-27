@@ -5,7 +5,7 @@
 #include "AubioPitchDetector.h"
 #include "AudioUtils.h"
 #include <cassert>
-#include <aubio/pitch/pitch.h>
+#include "aubio/pitch/pitch.h"
 
 using namespace CppUtils;
 

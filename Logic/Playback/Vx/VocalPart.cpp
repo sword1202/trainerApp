@@ -130,8 +130,6 @@ int VocalPart::getEndSilenceDurationInTicks() const {
     return endSilenceDurationInTicks;
 }
 
-#ifdef USE_BOOST_SERIALIZATION
-
 void VocalPart::writeToStream(std::ostream &os) const {
     boost::archive::text_oarchive ar(os);
     ar << *this;
@@ -147,8 +145,6 @@ VocalPart VocalPart::fromFilePath(const char *filePath) {
     std::ifstream is(filePath);
     return VocalPart(is);
 }
-
-#endif
 
 int VocalPart::timeInSecondsToTicks(double timeInSeconds)const {
     return static_cast<int>(round(timeInSeconds / getTickDurationInSeconds()));

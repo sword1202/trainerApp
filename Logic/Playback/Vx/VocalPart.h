@@ -25,8 +25,6 @@ class VocalPart {
     bool validatePitches();
     void postInit();
 
-#ifdef USE_BOOST_SERIALIZATION
-
     friend class boost::serialization::access;
 
     template<class Archive>
@@ -44,8 +42,6 @@ class VocalPart {
     }
     BOOST_SERIALIZATION_SPLIT_MEMBER()
 
-#endif
-
 public:
     VocalPart();
     VocalPart(std::vector<VxPitch> &&pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int ticksPerSecond);
@@ -54,11 +50,9 @@ public:
     VocalPart(const VocalPart& vocalPart) = default;
     VocalPart& operator=(const VocalPart& vocalPart) = default;
 
-#ifdef USE_BOOST_SERIALIZATION
     static VocalPart fromFilePath(const char* filePath);
     VocalPart(std::istream& is);
     void writeToStream(std::ostream& os) const;
-#endif
 
     static int startTickNumberKeyProvider(const VxPitch &pitch);
 

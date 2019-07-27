@@ -10,6 +10,7 @@
 
 #include "tsf.h"
 
+// Load TinySoundFont, struct of library used for playing separate pitches
 tsf* LoadTsf();
 
 #endif //VOCALTRAINER_GETSF2FILEPATH_H

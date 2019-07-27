@@ -1,4 +1,4 @@
 
 [submodule "PitchDetection/CppUtils"]
-	path = CppUtils
+	path = Logic/CppUtils
 	url = https://github.com/tiksem/CppUtils.git
