@@ -984,13 +984,13 @@ void WorkspaceDrawer::drawFps(float fps) {
 }
 
 void WorkspaceDrawer::drawTracks() {
-    bool verticalScrollBarVisible = verticalScrollBar.getPageSize() > 0;
-    if (verticalScrollBarVisible) {
+    bool horizontalScrollBarVisible = horizontalScrollBar.getPageSize() > 0;
+    if (horizontalScrollBarVisible) {
         drawer->translate(0, -ScrollBar::SCROLLBAR_WEIGHT);
     }
     drawPianoTrack();
     drawInstrumentalTrack();
-    if (verticalScrollBarVisible) {
+    if (horizontalScrollBarVisible) {
         drawer->translate(0, ScrollBar::SCROLLBAR_WEIGHT);
     }
 
