@@ -1,0 +1,628 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		71AD21242278085DEBD45787 /* NSImage+Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2DEA9FC7B3F13CD06FF3 /* NSImage+Drawing.swift */; };
+		71AD221A602A44D64B950BFA /* ProjectWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD21C74A29AB6B2D6F7582 /* ProjectWindowController.swift */; };
+		71AD27AD436983C0D551C6D6 /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD22FAC42E30FA831A8953 /* ProjectViewController.swift */; };
+		71AD27E82582B5E20A3D1F6D /* InitializationManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 71AD29605A6EF90E1D9E2F98 /* InitializationManager.mm */; };
+		71AD292BE2211C7B95389888 /* NSWorkspaceDrawerImagesFactory.mm in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2E6EB3AD3596FA6A4A33 /* NSWorkspaceDrawerImagesFactory.mm */; };
+		71AD2D51C0A891A5F7D1661E /* WorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2BBFFA971D22C5AD524D /* WorkspaceDrawerView.mm */; };
+		ACF18AD122EC7EBF008E7DAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF18AD022EC7EBF008E7DAA /* AppDelegate.swift */; };
+		ACF18AD522EC7EBF008E7DAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACF18AD422EC7EBF008E7DAA /* Assets.xcassets */; };
+		ACF18AD822EC7EBF008E7DAA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACF18AD622EC7EBF008E7DAA /* Main.storyboard */; };
+		ACF18AE422EC7EBF008E7DAA /* VocalTrainerMacOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF18AE322EC7EBF008E7DAA /* VocalTrainerMacOSUITests.swift */; };
+		ACF18B0122EC8611008E7DAA /* Logic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF18B0022EC8611008E7DAA /* Logic.framework */; };
+		ACF18B2522ECB97C008E7DAA /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF18B2422ECB97C008E7DAA /* MetalKit.framework */; };
+		BFB182D411423011FAFD5562 /* Pods_VocalTrainerMacOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A44887549DC04E36E875C1E4 /* Pods_VocalTrainerMacOS.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		ACF18AE022EC7EBF008E7DAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ACF18AC522EC7EBF008E7DAA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ACF18ACC22EC7EBF008E7DAA;
+			remoteInfo = VocalTrainerMacOS;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		67748B5386791DDBEBEF3101 /* Pods-VocalTrainerMacOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VocalTrainerMacOS.debug.xcconfig"; path = "Target Support Files/Pods-VocalTrainerMacOS/Pods-VocalTrainerMacOS.debug.xcconfig"; sourceTree = "<group>"; };
+		71AD21C74A29AB6B2D6F7582 /* ProjectWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectWindowController.swift; sourceTree = "<group>"; };
+		71AD22FAC42E30FA831A8953 /* ProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
+		71AD2651F7102F1CF5FE06DA /* Workspace-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Workspace-Bridging-Header.h"; sourceTree = "<group>"; };
+		71AD27F400CFEF8EA89FB180 /* WorkspaceDrawerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceDrawerView.h; sourceTree = "<group>"; };
+		71AD29605A6EF90E1D9E2F98 /* InitializationManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InitializationManager.mm; sourceTree = "<group>"; };
+		71AD2ACE3A195D54F918916A /* InitializationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitializationManager.h; sourceTree = "<group>"; };
+		71AD2BBFFA971D22C5AD524D /* WorkspaceDrawerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WorkspaceDrawerView.mm; sourceTree = "<group>"; };
+		71AD2D4FBE1FE1ECA287A3BE /* NSWorkspaceDrawerImagesFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSWorkspaceDrawerImagesFactory.h; sourceTree = "<group>"; };
+		71AD2DEA9FC7B3F13CD06FF3 /* NSImage+Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+Drawing.swift"; sourceTree = "<group>"; };
+		71AD2E6EB3AD3596FA6A4A33 /* NSWorkspaceDrawerImagesFactory.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSWorkspaceDrawerImagesFactory.mm; sourceTree = "<group>"; };
+		8C479712EE025C296F7ABECD /* Pods-VocalTrainerMacOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VocalTrainerMacOSUITests.release.xcconfig"; path = "Target Support Files/Pods-VocalTrainerMacOSUITests/Pods-VocalTrainerMacOSUITests.release.xcconfig"; sourceTree = "<group>"; };
+		A44887549DC04E36E875C1E4 /* Pods_VocalTrainerMacOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VocalTrainerMacOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACF18ACD22EC7EBF008E7DAA /* VocalTrainer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VocalTrainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACF18AD022EC7EBF008E7DAA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		ACF18AD422EC7EBF008E7DAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ACF18AD722EC7EBF008E7DAA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		ACF18AD922EC7EBF008E7DAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ACF18ADA22EC7EBF008E7DAA /* VocalTrainerMacOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VocalTrainerMacOS.entitlements; sourceTree = "<group>"; };
+		ACF18ADF22EC7EBF008E7DAA /* VocalTrainerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VocalTrainerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACF18AE322EC7EBF008E7DAA /* VocalTrainerMacOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocalTrainerMacOSUITests.swift; sourceTree = "<group>"; };
+		ACF18AE522EC7EBF008E7DAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ACF18B0022EC8611008E7DAA /* Logic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Logic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACF18B2422ECB97C008E7DAA /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
+		CD8CC49422BFBB8B8D3F3293 /* Pods-VocalTrainerMacOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VocalTrainerMacOSUITests.debug.xcconfig"; path = "Target Support Files/Pods-VocalTrainerMacOSUITests/Pods-VocalTrainerMacOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E4182398962A0FCB5CFBD20F /* Pods-VocalTrainerMacOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VocalTrainerMacOS.release.xcconfig"; path = "Target Support Files/Pods-VocalTrainerMacOS/Pods-VocalTrainerMacOS.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ACF18ACA22EC7EBF008E7DAA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ACF18B2522ECB97C008E7DAA /* MetalKit.framework in Frameworks */,
+				ACF18B0122EC8611008E7DAA /* Logic.framework in Frameworks */,
+				BFB182D411423011FAFD5562 /* Pods_VocalTrainerMacOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ACF18ADC22EC7EBF008E7DAA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		71AD20BB309FA4D4993D4B53 /* Generic */ = {
+			isa = PBXGroup;
+			children = (
+				71AD2F9D33ABB2C5BC8751F2 /* Extensions */,
+			);
+			path = Generic;
+			sourceTree = "<group>";
+		};
+		71AD27969E14578C56033F00 /* Workspace */ = {
+			isa = PBXGroup;
+			children = (
+				71AD27F400CFEF8EA89FB180 /* WorkspaceDrawerView.h */,
+				71AD2BBFFA971D22C5AD524D /* WorkspaceDrawerView.mm */,
+				71AD2E6EB3AD3596FA6A4A33 /* NSWorkspaceDrawerImagesFactory.mm */,
+				71AD2D4FBE1FE1ECA287A3BE /* NSWorkspaceDrawerImagesFactory.h */,
+			);
+			path = Workspace;
+			sourceTree = "<group>";
+		};
+		71AD291CFFD069EF352B6BE6 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				71AD2651F7102F1CF5FE06DA /* Workspace-Bridging-Header.h */,
+				71AD27969E14578C56033F00 /* Workspace */,
+				71AD29605A6EF90E1D9E2F98 /* InitializationManager.mm */,
+				71AD2ACE3A195D54F918916A /* InitializationManager.h */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		71AD2C2F2205065E90BD996C /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				71AD22FAC42E30FA831A8953 /* ProjectViewController.swift */,
+				71AD21C74A29AB6B2D6F7582 /* ProjectWindowController.swift */,
+			);
+			path = Project;
+			sourceTree = "<group>";
+		};
+		71AD2F9D33ABB2C5BC8751F2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				71AD2DEA9FC7B3F13CD06FF3 /* NSImage+Drawing.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		ACF18AC422EC7EBF008E7DAA = {
+			isa = PBXGroup;
+			children = (
+				ACF18ACF22EC7EBF008E7DAA /* MacOS */,
+				ACF18AE222EC7EBF008E7DAA /* VocalTrainerUITests */,
+				ACF18ACE22EC7EBF008E7DAA /* Products */,
+				BA99F2852ABC58169B5ABAA9 /* Pods */,
+				FAAA747C4DF5693877F41DFE /* Frameworks */,
+				71AD291CFFD069EF352B6BE6 /* Shared */,
+			);
+			sourceTree = "<group>";
+		};
+		ACF18ACE22EC7EBF008E7DAA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ACF18ACD22EC7EBF008E7DAA /* VocalTrainer.app */,
+				ACF18ADF22EC7EBF008E7DAA /* VocalTrainerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ACF18ACF22EC7EBF008E7DAA /* MacOS */ = {
+			isa = PBXGroup;
+			children = (
+				ACF18AD022EC7EBF008E7DAA /* AppDelegate.swift */,
+				ACF18AD422EC7EBF008E7DAA /* Assets.xcassets */,
+				ACF18AD622EC7EBF008E7DAA /* Main.storyboard */,
+				ACF18AD922EC7EBF008E7DAA /* Info.plist */,
+				ACF18ADA22EC7EBF008E7DAA /* VocalTrainerMacOS.entitlements */,
+				71AD2C2F2205065E90BD996C /* Project */,
+				71AD20BB309FA4D4993D4B53 /* Generic */,
+			);
+			path = MacOS;
+			sourceTree = "<group>";
+		};
+		ACF18AE222EC7EBF008E7DAA /* VocalTrainerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				ACF18AE322EC7EBF008E7DAA /* VocalTrainerMacOSUITests.swift */,
+				ACF18AE522EC7EBF008E7DAA /* Info.plist */,
+			);
+			path = VocalTrainerUITests;
+			sourceTree = "<group>";
+		};
+		BA99F2852ABC58169B5ABAA9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				67748B5386791DDBEBEF3101 /* Pods-VocalTrainerMacOS.debug.xcconfig */,
+				E4182398962A0FCB5CFBD20F /* Pods-VocalTrainerMacOS.release.xcconfig */,
+				CD8CC49422BFBB8B8D3F3293 /* Pods-VocalTrainerMacOSUITests.debug.xcconfig */,
+				8C479712EE025C296F7ABECD /* Pods-VocalTrainerMacOSUITests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		FAAA747C4DF5693877F41DFE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ACF18B2422ECB97C008E7DAA /* MetalKit.framework */,
+				ACF18B0022EC8611008E7DAA /* Logic.framework */,
+				A44887549DC04E36E875C1E4 /* Pods_VocalTrainerMacOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ACF18ACC22EC7EBF008E7DAA /* VocalTrainer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ACF18AE822EC7EBF008E7DAA /* Build configuration list for PBXNativeTarget "VocalTrainer" */;
+			buildPhases = (
+				18CC11A8514F6FD74ECA2DB5 /* [CP] Check Pods Manifest.lock */,
+				ACF18AC922EC7EBF008E7DAA /* Sources */,
+				ACF18ACA22EC7EBF008E7DAA /* Frameworks */,
+				ACF18ACB22EC7EBF008E7DAA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VocalTrainer;
+			productName = VocalTrainerMacOS;
+			productReference = ACF18ACD22EC7EBF008E7DAA /* VocalTrainer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		ACF18ADE22EC7EBF008E7DAA /* VocalTrainerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ACF18AEB22EC7EBF008E7DAA /* Build configuration list for PBXNativeTarget "VocalTrainerUITests" */;
+			buildPhases = (
+				90FB5D39D1F7BC71A13D0E41 /* [CP] Check Pods Manifest.lock */,
+				ACF18ADB22EC7EBF008E7DAA /* Sources */,
+				ACF18ADC22EC7EBF008E7DAA /* Frameworks */,
+				ACF18ADD22EC7EBF008E7DAA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ACF18AE122EC7EBF008E7DAA /* PBXTargetDependency */,
+			);
+			name = VocalTrainerUITests;
+			productName = VocalTrainerMacOSUITests;
+			productReference = ACF18ADF22EC7EBF008E7DAA /* VocalTrainerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ACF18AC522EC7EBF008E7DAA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1020;
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = "Semyon Tikhonenko";
+				TargetAttributes = {
+					ACF18ACC22EC7EBF008E7DAA = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+					ACF18ADE22EC7EBF008E7DAA = {
+						CreatedOnToolsVersion = 10.2.1;
+						TestTargetID = ACF18ACC22EC7EBF008E7DAA;
+					};
+				};
+			};
+			buildConfigurationList = ACF18AC822EC7EBF008E7DAA /* Build configuration list for PBXProject "VocalTrainer" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = ACF18AC422EC7EBF008E7DAA;
+			productRefGroup = ACF18ACE22EC7EBF008E7DAA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ACF18ACC22EC7EBF008E7DAA /* VocalTrainer */,
+				ACF18ADE22EC7EBF008E7DAA /* VocalTrainerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ACF18ACB22EC7EBF008E7DAA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ACF18AD522EC7EBF008E7DAA /* Assets.xcassets in Resources */,
+				ACF18AD822EC7EBF008E7DAA /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ACF18ADD22EC7EBF008E7DAA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		18CC11A8514F6FD74ECA2DB5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VocalTrainerMacOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		90FB5D39D1F7BC71A13D0E41 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VocalTrainerMacOSUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ACF18AC922EC7EBF008E7DAA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ACF18AD122EC7EBF008E7DAA /* AppDelegate.swift in Sources */,
+				71AD27AD436983C0D551C6D6 /* ProjectViewController.swift in Sources */,
+				71AD221A602A44D64B950BFA /* ProjectWindowController.swift in Sources */,
+				71AD2D51C0A891A5F7D1661E /* WorkspaceDrawerView.mm in Sources */,
+				71AD292BE2211C7B95389888 /* NSWorkspaceDrawerImagesFactory.mm in Sources */,
+				71AD21242278085DEBD45787 /* NSImage+Drawing.swift in Sources */,
+				71AD27E82582B5E20A3D1F6D /* InitializationManager.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ACF18ADB22EC7EBF008E7DAA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ACF18AE422EC7EBF008E7DAA /* VocalTrainerMacOSUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ACF18AE122EC7EBF008E7DAA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ACF18ACC22EC7EBF008E7DAA /* VocalTrainer */;
+			targetProxy = ACF18AE022EC7EBF008E7DAA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		ACF18AD622EC7EBF008E7DAA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ACF18AD722EC7EBF008E7DAA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		ACF18AE622EC7EBF008E7DAA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		ACF18AE722EC7EBF008E7DAA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		ACF18AE922EC7EBF008E7DAA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 67748B5386791DDBEBEF3101 /* Pods-VocalTrainerMacOS.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = FLHXHQP8H4;
+				HEADER_SEARCH_PATHS = (
+					../include,
+					../Logic/CppUtils,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/MacOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Neborosoft.VocalTrainerMacOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Shared/Workspace-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		ACF18AEA22EC7EBF008E7DAA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E4182398962A0FCB5CFBD20F /* Pods-VocalTrainerMacOS.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = FLHXHQP8H4;
+				HEADER_SEARCH_PATHS = (
+					../include,
+					../Logic/CppUtils,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/MacOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Neborosoft.VocalTrainerMacOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Shared/Workspace-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		ACF18AEC22EC7EBF008E7DAA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD8CC49422BFBB8B8D3F3293 /* Pods-VocalTrainerMacOSUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = FLHXHQP8H4;
+				INFOPLIST_FILE = VocalTrainerMacOSUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Neborosoft.VocalTrainerMacOSUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = VocalTrainerMacOS;
+			};
+			name = Debug;
+		};
+		ACF18AED22EC7EBF008E7DAA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C479712EE025C296F7ABECD /* Pods-VocalTrainerMacOSUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = FLHXHQP8H4;
+				INFOPLIST_FILE = VocalTrainerMacOSUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Neborosoft.VocalTrainerMacOSUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = VocalTrainerMacOS;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ACF18AC822EC7EBF008E7DAA /* Build configuration list for PBXProject "VocalTrainer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ACF18AE622EC7EBF008E7DAA /* Debug */,
+				ACF18AE722EC7EBF008E7DAA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ACF18AE822EC7EBF008E7DAA /* Build configuration list for PBXNativeTarget "VocalTrainer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ACF18AE922EC7EBF008E7DAA /* Debug */,
+				ACF18AEA22EC7EBF008E7DAA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ACF18AEB22EC7EBF008E7DAA /* Build configuration list for PBXNativeTarget "VocalTrainerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ACF18AEC22EC7EBF008E7DAA /* Debug */,
+				ACF18AED22EC7EBF008E7DAA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ACF18AC522EC7EBF008E7DAA /* Project object */;
+}

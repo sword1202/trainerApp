@@ -12,6 +12,7 @@
 #include "Point.h"
 #include "Color.h"
 #include "HashUtils.h"
+#include "Bitmap.h"
 #include <string>
 #include <unordered_set>
 
@@ -102,6 +103,7 @@ public:
     drawShadow(float x, float y, float w, float h, float radius, float blurFactor, const Color &color) = 0;
 
     virtual Image* createImage(const void* data, int w, int h);
+    Image* createImage(const CppUtils::Bitmap& bitmap);
     virtual void deleteImage(Image*& image);
 
     Drawer();

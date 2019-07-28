@@ -18,6 +18,7 @@
 #include <memory>
 #include "PlayingPitchSequence.h"
 #include "ScrollBar.h"
+#include "WorkspaceDrawerImagesFactory.h"
 #include <thread>
 
 class WorkspaceDrawer : public WorkspaceController {
@@ -157,7 +158,8 @@ public:
     static const Color PLAYBACK_MARK_TEXT_COLOR;
 
     WorkspaceDrawer(Drawer *drawer, MouseEventsReceiver *mouseEventsReceiver,
-                        const std::function<void()> &onUpdateRequested);
+            const WorkspaceDrawerImagesFactory& imagesFactory,
+            const std::function<void()> &onUpdateRequested);
     ~WorkspaceDrawer();
 
     void setOnUpdateRequested(const std::function<void()> &onUpdateRequested);
@@ -216,9 +218,6 @@ public:
     const PlaybackBounds &getPlaybackBounds() const;
     void setPlaybackBounds(const PlaybackBounds &playbackBounds) override;
 
-    void setPlayHeadTriangleImage(Drawer::Image *image);
-    void setClockImage(Drawer::Image *clockImage);
-
     float getWorkspaceSeek() const override;
     float getGridBeginXPosition() const;
     float getSeekFromXPositionOnWorkspace(float x) override;
@@ -229,9 +228,6 @@ public:
 
     void generateInstrumentalTrackSamplesImage(float width);
     void setInstrumentalTrackSamples(const std::vector<short> &instrumentalTrackSamples) override;
-    void setInstrumentalTrackButtonImage(Drawer::Image *instrumentalTrackButtonImage);
-
-    void setPianoTrackButtonImage(Drawer::Image *pianoTrackButtonImage);
 
     void setDrawTracks(bool value) override;
 

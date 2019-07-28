@@ -24,6 +24,5 @@ void ApplicationModel::init(ApplicationModel *instance) {
 }
 
 ApplicationModel *ApplicationModel::instance() {
-    assert(model && "Call init before instance");
     return model;
 }

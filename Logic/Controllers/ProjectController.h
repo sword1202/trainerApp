@@ -6,9 +6,9 @@
 #define TEXTIMAGESGENERATOR_PROJECTCONTROLLER_H
 
 #include <string>
-#include <WorkspaceController.h>
-#include <MvxPlayer.h>
-#include <AudioInputManager.h>
+#include "WorkspaceController.h"
+#include "MvxPlayer.h"
+#include "AudioInputManager.h"
 
 class ProjectControllerDelegate {
 public:

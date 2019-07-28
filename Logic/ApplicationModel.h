@@ -11,8 +11,8 @@
 class ApplicationModel {
     MvxPlayer* player;
     AudioInputManager* audioInputManager;
-    ApplicationModel();
 public:
+    ApplicationModel();
     static void init(ApplicationModel* instance);
     static ApplicationModel* instance();
     MvxPlayer *getPlayer();

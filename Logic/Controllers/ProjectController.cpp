@@ -26,6 +26,11 @@ ProjectController::ProjectController(ProjectControllerDelegate* delegate) : dele
         if (workspaceController) {
             workspaceController->setRunning(playing);
         }
+        if (playing) {
+            this->delegate->onPlaybackStarted();
+        } else {
+            this->delegate->onPlaybackStopped();
+        }
         updateSeek(this->player->getSeek());
     });
 

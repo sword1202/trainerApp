@@ -634,7 +634,9 @@ void WorkspaceDrawer::setAccentGridColor(const Color& color) {
 }
 
 WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, MouseEventsReceiver *mouseEventsReceiver,
-                                 const std::function<void()> &onUpdateRequested) :
+        const WorkspaceDrawerImagesFactory& imagesFactory,
+        const std::function<void()> &onUpdateRequested)
+        :
         intervalWidth(-1),
         intervalHeight(-1),
         verticalOffset(0),
@@ -682,16 +684,53 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, MouseEventsReceiver *mouseEvent
     lastPitchIndex = Pitch("B6").getPerfectFrequencyIndex();
 
     this->zoom = MIN_ZOOM;
+
+    // Setup images
+
+    auto createImage = [&] (const char* name) {
+        return drawer->createImage(imagesFactory.createImageForName(name));
+    };
+    playHeadTriangleImage = createImage("playHeadTriangle");
+    clockImage = createImage("clock");
+    instrumentalTrackButtonImage = createImage("instrumentalTrackButton");
+    pianoTrackButtonImage = createImage("pianoTrackButton");
+
+    DrawerTextImagesFactory* textImagesFactory = new DrawerTextImagesFactory();
+    auto createImageForCharacter = [&] (char ch, int fontSize, const Color& color) {
+        Bitmap bitmap = imagesFactory.createImageForCharacter(ch, fontSize, color);
+        DrawerTextImagesFactoryCharacterData data;
+        data.character = ch;
+        data.color = color;
+        data.fontSize = fontSize;
+        data.image = drawer->createImage(bitmap);
+        textImagesFactory->addImage(data);
+    };
+    
+    // digits
+    for (char ch = '0'; ch <= '9'; ++ch) {
+        createImageForCharacter(ch, WorkspaceDrawer::YARD_STICK_FONT_SIZE,
+                WorkspaceDrawer::YARD_STICK_DOT_AND_TEXT_COLOR);
+        createImageForCharacter(ch, PianoDrawer::FONT_SIZE, PianoDrawer::PITCH_TEXT_COLOR);
+        createImageForCharacter(ch, PianoDrawer::FONT_SIZE, PianoDrawer::SELECTED_PITCH_TEXT_COLOR);
+    }
+
+    // pitch names
+    for (char ch = 'A'; ch <= 'G'; ch++) {
+        createImageForCharacter(ch, PianoDrawer::FONT_SIZE, PianoDrawer::PITCH_TEXT_COLOR);
+        createImageForCharacter(ch, PianoDrawer::FONT_SIZE, PianoDrawer::SELECTED_PITCH_TEXT_COLOR);
+    }
+
+    createImageForCharacter(':', WorkspaceDrawer::CLOCK_FONT_SIZE,
+            WorkspaceDrawer::YARD_STICK_DOT_AND_TEXT_COLOR);
+
+    drawer->setTextImagesFactory(textImagesFactory);
+    drawer->setTextDrawStrategy(Drawer::DRAW_USING_PRE_BUILD_IMAGES);
 }
 
 WorkspaceDrawer::~WorkspaceDrawer() {
-    if (drawer) {
-        delete drawer;
-    }
-
-    if (pianoDrawer) {
-        delete pianoDrawer;
-    }
+    delete drawer;
+    delete pianoDrawer;
+    delete mouseEventsReceiver;
 }
 
 float WorkspaceDrawer::getSizeMultiplier() const {
@@ -834,10 +873,6 @@ bool WorkspaceDrawer::getBoundsStartXAndWidth(const PlaybackBounds &bounds, floa
     return true;
 }
 
-void WorkspaceDrawer::setPlayHeadTriangleImage(Drawer::Image *image) {
-    playHeadTriangleImage = image;
-}
-
 float WorkspaceDrawer::getSeekFromXPositionOnWorkspace(float x) {
     x -= intervalWidth * BEATS_IN_TACT;
     x -= getGridBeginXPosition();
@@ -850,10 +885,6 @@ float WorkspaceDrawer::getSeekFromXPositionOnWorkspace(float x) {
 
 float WorkspaceDrawer::getGridBeginXPosition() const {
     return PIANO_WIDTH;
-}
-
-void WorkspaceDrawer::setClockImage(Drawer::Image *clockImage) {
-    this->clockImage = clockImage;
 }
 
 float WorkspaceDrawer::getPlayHeadXPosition(int playHeadIndex) {
@@ -870,14 +901,6 @@ void WorkspaceDrawer::setInstrumentalTrackSamples(const std::vector<short> &inst
     if (width > 0 && height > 0 && devicePixelRatio > 0) {
         generateInstrumentalTrackSamplesImage(width - PIANO_WIDTH);
     }
-}
-
-void WorkspaceDrawer::setInstrumentalTrackButtonImage(Drawer::Image *instrumentalTrackButtonImage) {
-    this->instrumentalTrackButtonImage = instrumentalTrackButtonImage;
-}
-
-void WorkspaceDrawer::setPianoTrackButtonImage(Drawer::Image *pianoTrackButtonImage) {
-    this->pianoTrackButtonImage = pianoTrackButtonImage;
 }
 
 void WorkspaceDrawer::setDrawTracks(bool value) {

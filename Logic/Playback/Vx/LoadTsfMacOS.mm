@@ -3,6 +3,6 @@
 #import <Foundation/Foundation.h>
 
 tsf* LoadTsf() {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"sounds" ofType:@"sf2"];
+    NSString *path = [[NSBundle bundleWithIdentifier:@"Logic"] pathForResource:@"sounds" ofType:@"sf2"];
     return tsf_load_filename(path.cString);
 }

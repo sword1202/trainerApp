@@ -21,7 +21,7 @@
 #include "PitchesCollection.h"
 #include "WavAudioPlayer.h"
 #include <array>
-#include <AudioAverageInputLevelMonitor.h>
+#include "AudioAverageInputLevelMonitor.h"
 
 class MvxPlayer : public PlayingPitchSequence {
 private:
@@ -67,9 +67,9 @@ public:
 
     MvxPlayer();
     virtual ~MvxPlayer();
-    void init(std::istream& is);
-    void init(const char* filePath);
-    void init(MvxFile* file, bool destroyMvxFileOnDestructor = true);
+    void setSource(std::istream &is);
+    void setSource(const char *filePath);
+    void setSource(MvxFile *file, bool destroyMvxFileOnDestructor = true);
     void prepare();
     virtual void setInstrumentalVolume(float instrumentalVolume);
     virtual void setVocalPartPianoVolume(float pianoVolume);

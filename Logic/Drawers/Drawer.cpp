@@ -145,6 +145,10 @@ Drawer::Image* Drawer::createImage(const void* data, int w, int h) {
     return image;
 }
 
+Drawer::Image* Drawer::createImage(const CppUtils::Bitmap& bitmap) {
+    return createImage(bitmap.getData(), bitmap.getWidth(), bitmap.getHeight());
+}
+
 void Drawer::deleteImage(Drawer::Image *&image) {
     if (image == nullptr) {
         return;

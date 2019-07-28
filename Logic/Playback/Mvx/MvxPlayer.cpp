@@ -68,7 +68,7 @@ MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
     });
 }
 
-void MvxPlayer::init(MvxFile* file, bool destroyMvxFileOnDestructor) {
+void MvxPlayer::setSource(MvxFile *file, bool destroyMvxFileOnDestructor) {
     this->mvxFile = file;
     this->destroyMvxFileOnDestructor = destroyMvxFileOnDestructor;
     instrumentalPlayer.setAudioData(&mvxFile->getInstrumental());
@@ -91,16 +91,16 @@ void MvxPlayer::init(MvxFile* file, bool destroyMvxFileOnDestructor) {
     }
 }
 
-void MvxPlayer::init(std::istream &is) {
+void MvxPlayer::setSource(std::istream &is) {
     auto* mvxFile = new MvxFile();
     mvxFile->readFromStream(is);
     this->mvxFile = mvxFile;
-    init(mvxFile);
+    setSource(mvxFile);
 }
 
-void MvxPlayer::init(const char *filePath) {
+void MvxPlayer::setSource(const char *filePath) {
     std::fstream is = Streams::OpenFile(filePath, std::ios::in | std::ios::binary);
-    init(is);
+    setSource(is);
 }
 
 void MvxPlayer::onComplete() {
