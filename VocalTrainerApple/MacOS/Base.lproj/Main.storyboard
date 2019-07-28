@@ -684,10 +684,10 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" customClass="ProjectWindowController" customModule="VocalTrainer" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                    <window key="window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                        <rect key="contentRect" x="196" y="240" width="1000" height="600"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
@@ -706,18 +706,30 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ProjectViewController" customModule="VocalTrainer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="600"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <containerView translatesAutoresizingMaskIntoConstraints="NO" id="kZ2-YE-IbA">
+                                <rect key="frame" x="0.0" y="478" width="1000" height="122"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="122" id="BTH-O8-hKf"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="Aps-yL-S0c" kind="embed" id="phA-wK-3GU"/>
+                                </connections>
+                            </containerView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="FlE-wc-JX8" customClass="WorkspaceDrawerView">
-                                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1000" height="478"/>
                             </customView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="FlE-wc-JX8" secondAttribute="bottom" id="49p-gK-Iew"/>
-                            <constraint firstItem="FlE-wc-JX8" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="KVK-jK-kq7"/>
-                            <constraint firstItem="FlE-wc-JX8" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="P2G-G0-ZCc"/>
-                            <constraint firstAttribute="trailing" secondItem="FlE-wc-JX8" secondAttribute="trailing" id="oqP-5l-WYW"/>
+                            <constraint firstItem="FlE-wc-JX8" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="1zu-ZS-J6e"/>
+                            <constraint firstItem="kZ2-YE-IbA" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="IR0-wu-NEJ"/>
+                            <constraint firstItem="FlE-wc-JX8" firstAttribute="top" secondItem="kZ2-YE-IbA" secondAttribute="bottom" id="J2b-E5-NaK"/>
+                            <constraint firstAttribute="trailing" secondItem="FlE-wc-JX8" secondAttribute="trailing" id="Kz9-Yt-xSy"/>
+                            <constraint firstAttribute="bottom" secondItem="FlE-wc-JX8" secondAttribute="bottom" id="fsk-px-eBr"/>
+                            <constraint firstItem="kZ2-YE-IbA" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="pg9-pG-5iI"/>
+                            <constraint firstAttribute="trailing" secondItem="kZ2-YE-IbA" secondAttribute="trailing" id="q39-mU-3yn"/>
                         </constraints>
                     </view>
                     <connections>
@@ -726,7 +738,50 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="-81" y="1037"/>
+        </scene>
+        <!--Header View Controller-->
+        <scene sceneID="2W7-tz-DFe">
+            <objects>
+                <viewController id="Aps-yL-S0c" customClass="HeaderViewController" customModule="VocalTrainer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="11c-iQ-zUi">
+                        <rect key="frame" x="0.0" y="0.0" width="1440" height="131"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="vkI-Jd-ZJV" customClass="ColorView" customModule="VocalTrainer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="56" width="1440" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="JmW-vZ-uTz"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                        <color key="value" red="0.77254901960784317" green="0.80784313725490198" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </customView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="SCr-MX-SNe" customClass="ColorView" customModule="VocalTrainer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="1440" height="56"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </customView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="vkI-Jd-ZJV" secondAttribute="trailing" id="1nc-4U-QXU"/>
+                            <constraint firstAttribute="bottom" secondItem="SCr-MX-SNe" secondAttribute="bottom" id="58s-Q2-AIh"/>
+                            <constraint firstAttribute="trailing" secondItem="SCr-MX-SNe" secondAttribute="trailing" id="iMJ-zM-mF3"/>
+                            <constraint firstItem="SCr-MX-SNe" firstAttribute="leading" secondItem="11c-iQ-zUi" secondAttribute="leading" id="nlG-eY-Q5a"/>
+                            <constraint firstItem="vkI-Jd-ZJV" firstAttribute="top" secondItem="11c-iQ-zUi" secondAttribute="top" id="p83-HF-GVc"/>
+                            <constraint firstItem="vkI-Jd-ZJV" firstAttribute="leading" secondItem="11c-iQ-zUi" secondAttribute="leading" id="vAx-Hx-9bc"/>
+                            <constraint firstItem="SCr-MX-SNe" firstAttribute="top" secondItem="vkI-Jd-ZJV" secondAttribute="bottom" id="xzJ-aS-BXG"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="4JL-xa-ddL" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1203" y="570.5"/>
         </scene>
     </scenes>
 </document>

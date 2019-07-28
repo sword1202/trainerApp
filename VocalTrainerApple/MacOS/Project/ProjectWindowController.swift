@@ -10,5 +10,7 @@ class ProjectWindowController : NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
         window?.setFrame(NSScreen.main!.visibleFrame, display: true)
+        window?.backgroundColor = UIConstants.headerColor;
+        window?.titlebarAppearsTransparent = true
     }
 }
