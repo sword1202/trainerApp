@@ -709,12 +709,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="31l-CS-c6s">
-                                <rect key="frame" x="0.0" y="0.0" width="480" height="250"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="FlE-wc-JX8" customClass="WorkspaceDrawerView">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                             </customView>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="FlE-wc-JX8" secondAttribute="bottom" id="49p-gK-Iew"/>
+                            <constraint firstItem="FlE-wc-JX8" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="KVK-jK-kq7"/>
+                            <constraint firstItem="FlE-wc-JX8" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="P2G-G0-ZCc"/>
+                            <constraint firstAttribute="trailing" secondItem="FlE-wc-JX8" secondAttribute="trailing" id="oqP-5l-WYW"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="workspaceView" destination="FlE-wc-JX8" id="2xA-S4-E1I"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

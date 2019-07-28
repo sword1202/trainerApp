@@ -82,8 +82,9 @@ using namespace CppUtils;
 }
 
 - (void)resizeWorkspaceDrawer:(CGSize)size {
-    _workspaceDrawer->resize(float(size.width), float(size.height),
-            float(NSScreen.mainScreen.backingScaleFactor));
+    float devicePixelRatio = float(NSScreen.mainScreen.backingScaleFactor);
+    _workspaceDrawer->resize(float(size.width) / devicePixelRatio, float(size.height) / devicePixelRatio,
+            devicePixelRatio);
 }
 
 - (void)drawInMTKView:(nonnull MTKView *)view {
