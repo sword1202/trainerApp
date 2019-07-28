@@ -221,10 +221,6 @@ void NvgDrawer::doTranslate(float x, float y) {
     nvgTranslate(ctx, x, y);
 }
 
-void NvgDrawer::setTextWeight(int weight) {
-    // Not supported
-}
-
 void NvgDrawer::onImageDelete(Drawer::Image *image) {
     assert(dynamic_cast<NvgImage*>(image));
     auto iter = frameBuffersImagesMap.find(image);

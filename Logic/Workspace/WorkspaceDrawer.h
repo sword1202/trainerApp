@@ -18,7 +18,7 @@
 #include <memory>
 #include "PlayingPitchSequence.h"
 #include "ScrollBar.h"
-#include "WorkspaceDrawerImagesFactory.h"
+#include "WorkspaceDrawerSetupDelegate.h"
 #include <thread>
 
 class WorkspaceDrawer : public WorkspaceController {
@@ -62,6 +62,11 @@ class WorkspaceDrawer : public WorkspaceController {
     Color playbackMarksLineColor;
     Color endingColor;
     Color playbackMarksRectColor;
+
+    int yardStickFontSize = 11;
+    Drawer::FontStyle yardStickFontStyle = Drawer::NORMAL;
+    int clockFontSize = 11;
+    Drawer::FontStyle clockFontStyle = Drawer::NORMAL;
 
     float width = -1;
     float height = -1;
@@ -145,20 +150,13 @@ public:
     static constexpr float PLAYHEAD_TRIANGLE_HEIGHT = 12.0f;
     static constexpr float CLOCK_WIDTH = 42.f;
     static constexpr float CLOCK_HEIGHT = 22.f;
-    static constexpr float PLAYBACK_MARK_HEIGHT = 15.f;
-    static constexpr float PLAYBACK_MARK_WIDTH = 40.f;
-    static constexpr float PLAYBACK_MARK_RADIUS = 3.75f;
     static constexpr float YARD_STICK_HEIGHT = CLOCK_HEIGHT  + PLAYHEAD_TRIANGLE_HEIGHT / 2;
-    static constexpr int YARD_STICK_FONT_SIZE = 11;
-    static constexpr int PLAYBACK_MARK_FONT_SIZE = 11;
-    static constexpr int CLOCK_FONT_SIZE = 11;
     static constexpr float MIN_ZOOM = 1.0;
     static constexpr float MAX_ZOOM = 2.0;
     static const Color YARD_STICK_DOT_AND_TEXT_COLOR;
-    static const Color PLAYBACK_MARK_TEXT_COLOR;
 
     WorkspaceDrawer(Drawer *drawer, MouseEventsReceiver *mouseEventsReceiver,
-            const WorkspaceDrawerImagesFactory& imagesFactory,
+            const WorkspaceDrawerSetupDelegate& setupDelegate,
             const std::function<void()> &onUpdateRequested);
     ~WorkspaceDrawer();
 

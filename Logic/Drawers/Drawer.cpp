@@ -226,7 +226,7 @@ void Drawer::drawTextUsingImages(const std::string &text, float x, float y) {
     float height = 0;
     float width = 0;
     for (char ch : text) {
-        Image* image = textImagesFactory->findImage(ch, (int) round(fontSize), getFillColor());
+        Image* image = textImagesFactory->findImage(ch, (int) round(fontSize), getFillColor(), fontStyle);
         assert(image);
         if (height < image->height()) {
             height = image->height();
@@ -272,16 +272,21 @@ void Drawer::fillRect(const RectF &rect) {
     fillRect(rect.A.x, rect.A.y, rect.width, rect.height);
 }
 
+void Drawer::setTextStyle(FontStyle fontStyle) {
+    this->fontStyle = fontStyle;
+}
+
 void DrawerTextImagesFactory::addImage(const DrawerTextImagesFactoryCharacterData &data) {
     assert(data.character != '\0' && data.fontSize > 0);
     set.insert(data);
 }
 
-Drawer::Image *DrawerTextImagesFactory::findImage(char character, int fontSize, const CppUtils::Color &color) {
+Drawer::Image *DrawerTextImagesFactory::findImage(char character, int fontSize, const CppUtils::Color &color, Drawer::FontStyle style) {
     DrawerTextImagesFactoryCharacterData stub;
     stub.character = character;
     stub.fontSize = fontSize;
     stub.color = color;
+    stub.style = style;
     return Sets::FindOrDefault(set, stub, stub).image;
 }
 

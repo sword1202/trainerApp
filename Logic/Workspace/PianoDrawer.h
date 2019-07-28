@@ -23,12 +23,16 @@ class PianoDrawer {
     std::vector<Drawer::Color> drawSharpPitchesFillColor;
     std::vector<float> drawSharpPitchesY;
     std::unordered_set<int> selectedPitchIndexes;
+    int fontSize = 8;
+    Drawer::FontStyle fontStyle;
 
     float getIntervalOctaveHeightToPianoOctaveHeightRelation() const;
 
     Pitch getFirstPitch() const;
 public:
-    static constexpr int FONT_SIZE = 8;
+    void setFontSize(int fontSize);
+    void setFontStyle(Drawer::FontStyle fontStyle);
+
     static const Drawer::Color PITCH_TEXT_COLOR;
     static const Drawer::Color SELECTED_PITCH_TEXT_COLOR;
 

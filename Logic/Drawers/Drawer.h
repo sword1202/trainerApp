@@ -45,6 +45,10 @@ public:
         DONT_DRAW_TEXT
     };
 
+    enum FontStyle {
+        NORMAL, BOLD, SEMIBOLD
+    };
+
     typedef CppUtils::Color Color;
 
     virtual void clear();
@@ -95,7 +99,7 @@ public:
     virtual void setTextFontFamily(const char* fontFamily);
     virtual void setTextFontSize(float fontSize);
     virtual void setTextAlign(TextAlign align);
-    virtual void setTextWeight(int weight) = 0;
+    virtual void setTextStyle(FontStyle fontStyle);
     virtual void setTextBaseline(TextBaseline baseline);
     virtual void fillText(const std::string &text, float x, float y);
 
@@ -131,6 +135,7 @@ protected:
     virtual CppUtils::Color getFillColor() const = 0;
 
     float fontSize = 14;
+    FontStyle fontStyle = NORMAL;
     TextBaseline textBaseline = MIDDLE;
     TextAlign textAlign = LEFT;
 private:
@@ -152,18 +157,19 @@ struct DrawerTextImagesFactoryCharacterData {
     char character = '\0';
     int fontSize = -1;
     CppUtils::Color color;
+    Drawer::FontStyle style;
     Drawer::Image* image = nullptr;
 
     bool operator==(const DrawerTextImagesFactoryCharacterData &rhs) const;
     bool operator!=(const DrawerTextImagesFactoryCharacterData &rhs) const;
 };
 
-MAKE_HASHABLE(DrawerTextImagesFactoryCharacterData, t.character, t.fontSize, t.color)
+MAKE_HASHABLE(DrawerTextImagesFactoryCharacterData, t.character, t.fontSize, t.color, t.style)
 
 class DrawerTextImagesFactory {
 public:
     virtual void addImage(const DrawerTextImagesFactoryCharacterData& data);
-    virtual Drawer::Image *findImage(char character, int fontSize, const CppUtils::Color &color);
+    virtual Drawer::Image *findImage(char character, int fontSize, const CppUtils::Color &color, Drawer::FontStyle style);
     virtual ~DrawerTextImagesFactory() = default;
 private:
     std::unordered_set<DrawerTextImagesFactoryCharacterData> set;

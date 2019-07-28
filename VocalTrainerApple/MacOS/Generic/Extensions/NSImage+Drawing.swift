@@ -15,16 +15,19 @@ extension NSImage {
                 bytesPerRow: 0,
                 space:
                 CGColorSpaceCreateDeviceRGB(),
-                bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)
+                bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)!
 
-        drawer(context!)
-
-        return NSImage(cgImage: context!.makeImage()!, size: size)
+        NSGraphicsContext.saveGraphicsState()
+        NSGraphicsContext.current = NSGraphicsContext(cgContext: context, flipped: false)
+        drawer(context)
+        NSGraphicsContext.restoreGraphicsState()
+        return NSImage(cgImage: context.makeImage()!, size: size)
     }
 
     @objc static func from(text: String, font: NSFont, color: NSColor) -> NSImage {
         let string = NSAttributedString(string: text, attributes: [
-            NSAttributedString.Key.font : font,
+            NSAttributedString.Key.font : NSFont(descriptor: font.fontDescriptor,
+                    size: font.pointSize * (NSScreen.main?.backingScaleFactor ?? 2.0))!,
             NSAttributedString.Key.foregroundColor : color
         ])
 

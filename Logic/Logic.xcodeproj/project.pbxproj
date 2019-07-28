@@ -164,7 +164,7 @@
 		71AD2CBC3EC386F36315A268 /* nanovg_mtl.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AD22A4AEEAB7D48F089AFD /* nanovg_mtl.m */; };
 		71AD2CDC0CF7D9F2BC59160B /* PeriodicallySleepingBackgroundTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2FF2194C1B9EF33E4F93 /* PeriodicallySleepingBackgroundTask.cpp */; };
 		71AD2CEF8F1B5108E74E611F /* Line.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD22AD99429ABB7581539F /* Line.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		71AD2D07B138A053E414DDE6 /* WorkspaceDrawerImagesFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD22F90632570F2D6CD6B1 /* WorkspaceDrawerImagesFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		71AD2D07B138A053E414DDE6 /* WorkspaceDrawerSetupDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD22F90632570F2D6CD6B1 /* WorkspaceDrawerSetupDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2D14705FDA65A48FE1C6 /* MidiMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2E92E9B8FA30974E0F73 /* MidiMessage.cpp */; };
 		71AD2D22A8E394A2341836C3 /* MidiEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2D5696C34D7A096CDAF8 /* MidiEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2D31BE1A49E8B217E283 /* GeometryUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2FB90CF936CCF0B9004C /* GeometryUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -240,7 +240,7 @@
 		71AD226F0F6AD40B7F1DA0FD /* PlaybackBounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackBounds.h; sourceTree = "<group>"; };
 		71AD22A4AEEAB7D48F089AFD /* nanovg_mtl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nanovg_mtl.m; sourceTree = "<group>"; };
 		71AD22AD99429ABB7581539F /* Line.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Line.h; sourceTree = "<group>"; };
-		71AD22F90632570F2D6CD6B1 /* WorkspaceDrawerImagesFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceDrawerImagesFactory.h; sourceTree = "<group>"; };
+		71AD22F90632570F2D6CD6B1 /* WorkspaceDrawerSetupDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceDrawerSetupDelegate.h; sourceTree = "<group>"; };
 		71AD231133D6E227F2998881 /* MetalNvgDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetalNvgDrawer.h; sourceTree = "<group>"; };
 		71AD2311746EC9D95FEDBFB6 /* WorkspaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceController.h; sourceTree = "<group>"; };
 		71AD233FA0B515CA1C4761CE /* Core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Core.h; sourceTree = "<group>"; };
@@ -679,7 +679,7 @@
 				71AD2A5C234185C9CE21811A /* WorkspaceDrawer.h */,
 				71AD2AF776B9B7054524E921 /* WorkspaceDrawer.cpp */,
 				71AD2311746EC9D95FEDBFB6 /* WorkspaceController.h */,
-				71AD22F90632570F2D6CD6B1 /* WorkspaceDrawerImagesFactory.h */,
+				71AD22F90632570F2D6CD6B1 /* WorkspaceDrawerSetupDelegate.h */,
 			);
 			path = Workspace;
 			sourceTree = "<group>";
@@ -983,7 +983,7 @@
 				71AD22BC02081D0ACB711D46 /* AudioInputManager.h in Headers */,
 				71AD2BDF7DAA21FC1C74C960 /* MvxPlayer.h in Headers */,
 				71AD290EF23AE66AE308E34E /* ApplicationModel.h in Headers */,
-				71AD2D07B138A053E414DDE6 /* WorkspaceDrawerImagesFactory.h in Headers */,
+				71AD2D07B138A053E414DDE6 /* WorkspaceDrawerSetupDelegate.h in Headers */,
 				71AD2E71637EDE5162582640 /* NvgDrawer.h in Headers */,
 				71AD2C9288A8E8C98FAA72D4 /* ScrollBar.h in Headers */,
 				71AD228D16FBA9729731BCFE /* PianoDrawer.h in Headers */,

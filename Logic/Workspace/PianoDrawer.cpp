@@ -59,8 +59,8 @@ void PianoDrawer::draw(float width, float height, float devicePixelRation) {
 
     drawer->setTextAlign(Drawer::LEFT);
     drawer->setTextBaseline(Drawer::MIDDLE);
-    drawer->setTextFontSize(FONT_SIZE);
-    drawer->setTextWeight(FONT_WEIGHT);
+    drawer->setTextFontSize(fontSize);
+    drawer->setTextStyle(fontStyle);
 
     drawer->setStrokeColor(borderColor);
     drawer->setFillColor(sharpPitchColor);
@@ -203,4 +203,12 @@ void PianoDrawer::setPitchSequence(PlayingPitchSequence *pitchSequence) {
 
 Pitch PianoDrawer::getFirstPitch() const {
     return Pitch::fromPerfectFrequencyIndex(firstPitchIndex);
+}
+
+void PianoDrawer::setFontSize(int fontSize) {
+    this->fontSize = fontSize;
+}
+
+void PianoDrawer::setFontStyle(Drawer::FontStyle fontStyle) {
+    this->fontStyle = fontStyle;
 }

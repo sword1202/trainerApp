@@ -9,9 +9,12 @@
 /* Begin PBXBuildFile section */
 		71AD21242278085DEBD45787 /* NSImage+Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2DEA9FC7B3F13CD06FF3 /* NSImage+Drawing.swift */; };
 		71AD221A602A44D64B950BFA /* ProjectWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD21C74A29AB6B2D6F7582 /* ProjectWindowController.swift */; };
+		71AD26ED98C8F823F5F621DB /* CGRect+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2BA3FE6C79FF0FAED7B1 /* CGRect+Extensions.swift */; };
 		71AD27AD436983C0D551C6D6 /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD22FAC42E30FA831A8953 /* ProjectViewController.swift */; };
 		71AD27E82582B5E20A3D1F6D /* InitializationManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 71AD29605A6EF90E1D9E2F98 /* InitializationManager.mm */; };
-		71AD292BE2211C7B95389888 /* NSWorkspaceDrawerImagesFactory.mm in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2E6EB3AD3596FA6A4A33 /* NSWorkspaceDrawerImagesFactory.mm */; };
+		71AD28739FBA3A3DF2D20E51 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2D3B87D6702FFDE3939F /* CGPoint+Extensions.swift */; };
+		71AD292BE2211C7B95389888 /* MacOSWorkspaceDrawerSetupDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2E6EB3AD3596FA6A4A33 /* MacOSWorkspaceDrawerSetupDelegate.mm */; };
+		71AD2A180D3226B294C54C1A /* CGSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2E2C77501A215B455E28 /* CGSize+Extensions.swift */; };
 		71AD2D51C0A891A5F7D1661E /* WorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2BBFFA971D22C5AD524D /* WorkspaceDrawerView.mm */; };
 		ACF18AD122EC7EBF008E7DAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF18AD022EC7EBF008E7DAA /* AppDelegate.swift */; };
 		ACF18AD522EC7EBF008E7DAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACF18AD422EC7EBF008E7DAA /* Assets.xcassets */; };
@@ -40,10 +43,13 @@
 		71AD27F400CFEF8EA89FB180 /* WorkspaceDrawerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceDrawerView.h; sourceTree = "<group>"; };
 		71AD29605A6EF90E1D9E2F98 /* InitializationManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InitializationManager.mm; sourceTree = "<group>"; };
 		71AD2ACE3A195D54F918916A /* InitializationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitializationManager.h; sourceTree = "<group>"; };
+		71AD2BA3FE6C79FF0FAED7B1 /* CGRect+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+Extensions.swift"; sourceTree = "<group>"; };
 		71AD2BBFFA971D22C5AD524D /* WorkspaceDrawerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WorkspaceDrawerView.mm; sourceTree = "<group>"; };
-		71AD2D4FBE1FE1ECA287A3BE /* NSWorkspaceDrawerImagesFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSWorkspaceDrawerImagesFactory.h; sourceTree = "<group>"; };
+		71AD2D3B87D6702FFDE3939F /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
+		71AD2D4FBE1FE1ECA287A3BE /* MacOSWorkspaceDrawerSetupDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacOSWorkspaceDrawerSetupDelegate.h; sourceTree = "<group>"; };
 		71AD2DEA9FC7B3F13CD06FF3 /* NSImage+Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+Drawing.swift"; sourceTree = "<group>"; };
-		71AD2E6EB3AD3596FA6A4A33 /* NSWorkspaceDrawerImagesFactory.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSWorkspaceDrawerImagesFactory.mm; sourceTree = "<group>"; };
+		71AD2E2C77501A215B455E28 /* CGSize+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGSize+Extensions.swift"; sourceTree = "<group>"; };
+		71AD2E6EB3AD3596FA6A4A33 /* MacOSWorkspaceDrawerSetupDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MacOSWorkspaceDrawerSetupDelegate.mm; sourceTree = "<group>"; };
 		8C479712EE025C296F7ABECD /* Pods-VocalTrainerMacOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VocalTrainerMacOSUITests.release.xcconfig"; path = "Target Support Files/Pods-VocalTrainerMacOSUITests/Pods-VocalTrainerMacOSUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A44887549DC04E36E875C1E4 /* Pods_VocalTrainerMacOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VocalTrainerMacOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF18ACD22EC7EBF008E7DAA /* VocalTrainer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VocalTrainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,13 +96,23 @@
 			path = Generic;
 			sourceTree = "<group>";
 		};
+		71AD21DA5644C4A3E72E8680 /* Extesnions */ = {
+			isa = PBXGroup;
+			children = (
+				71AD2D3B87D6702FFDE3939F /* CGPoint+Extensions.swift */,
+				71AD2BA3FE6C79FF0FAED7B1 /* CGRect+Extensions.swift */,
+				71AD2E2C77501A215B455E28 /* CGSize+Extensions.swift */,
+			);
+			path = Extesnions;
+			sourceTree = "<group>";
+		};
 		71AD27969E14578C56033F00 /* Workspace */ = {
 			isa = PBXGroup;
 			children = (
 				71AD27F400CFEF8EA89FB180 /* WorkspaceDrawerView.h */,
 				71AD2BBFFA971D22C5AD524D /* WorkspaceDrawerView.mm */,
-				71AD2E6EB3AD3596FA6A4A33 /* NSWorkspaceDrawerImagesFactory.mm */,
-				71AD2D4FBE1FE1ECA287A3BE /* NSWorkspaceDrawerImagesFactory.h */,
+				71AD2E6EB3AD3596FA6A4A33 /* MacOSWorkspaceDrawerSetupDelegate.mm */,
+				71AD2D4FBE1FE1ECA287A3BE /* MacOSWorkspaceDrawerSetupDelegate.h */,
 			);
 			path = Workspace;
 			sourceTree = "<group>";
@@ -108,6 +124,7 @@
 				71AD27969E14578C56033F00 /* Workspace */,
 				71AD29605A6EF90E1D9E2F98 /* InitializationManager.mm */,
 				71AD2ACE3A195D54F918916A /* InitializationManager.h */,
+				71AD21DA5644C4A3E72E8680 /* Extesnions */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -347,9 +364,12 @@
 				71AD27AD436983C0D551C6D6 /* ProjectViewController.swift in Sources */,
 				71AD221A602A44D64B950BFA /* ProjectWindowController.swift in Sources */,
 				71AD2D51C0A891A5F7D1661E /* WorkspaceDrawerView.mm in Sources */,
-				71AD292BE2211C7B95389888 /* NSWorkspaceDrawerImagesFactory.mm in Sources */,
+				71AD292BE2211C7B95389888 /* MacOSWorkspaceDrawerSetupDelegate.mm in Sources */,
 				71AD21242278085DEBD45787 /* NSImage+Drawing.swift in Sources */,
 				71AD27E82582B5E20A3D1F6D /* InitializationManager.mm in Sources */,
+				71AD28739FBA3A3DF2D20E51 /* CGPoint+Extensions.swift in Sources */,
+				71AD26ED98C8F823F5F621DB /* CGRect+Extensions.swift in Sources */,
+				71AD2A180D3226B294C54C1A /* CGSize+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
