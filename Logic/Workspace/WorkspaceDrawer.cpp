@@ -41,7 +41,7 @@ constexpr float PLAYBACK_BOUNDS_BOTTOM_MARGIN = 3.25f;
 constexpr float PLAYBACK_BOUNDS_HEIGHT = 15.75;
 static const int PITCH_RADIUS = 3;
 constexpr float PLAYBACK_BOUNDS_ROUND_RECT_RADIUS = 1.5f;
-constexpr int INSTRUMENTAL_TRACK_HEIGHT = 24;
+constexpr int INSTRUMENTAL_TRACK_HEIGHT = 30;
 constexpr int MINIMUM_INSTRUMENTAL_TRACK_HEIGHT = 4;
 constexpr float INSTRUMENTAL_TRACK_BOTTOM_MARGIN = 14.f;
 constexpr float PIANO_TRACK_BUTTON_LEFT = 19.f;
@@ -103,7 +103,7 @@ void WorkspaceDrawer::generateInstrumentalTrackSamplesImage(float width) {
     bitmap.fill(Color::transparent());
 
     std::vector<short> resizedSamples = AudioUtils::ResizePreviewSamples(instrumentalTrackSamples.data(),
-            instrumentalTrackSamples.size(), bitmapWidth);
+            int(instrumentalTrackSamples.size()), bitmapWidth);
 
     // Minimum part of track line, where opacity should be applied.
     double minimumK = 0.75;
@@ -111,7 +111,7 @@ void WorkspaceDrawer::generateInstrumentalTrackSamplesImage(float width) {
         int middle = bitmapHeight / 2;
         int value = Math::SelectValueFromRangeProjectedInRange<int>(resizedSamples[x],
                                                                     0, std::numeric_limits<short>::max(),
-                                                                    MINIMUM_INSTRUMENTAL_TRACK_HEIGHT, middle);
+                                                                    MINIMUM_INSTRUMENTAL_TRACK_HEIGHT / 2, middle);
 
         for (int y = middle - value; y < middle + value; ++y) {
             int offset = abs(y - middle);
