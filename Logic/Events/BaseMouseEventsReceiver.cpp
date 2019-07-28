@@ -4,17 +4,20 @@
 //
 
 #include "BaseMouseEventsReceiver.h"
+#include <iostream>
+
+using namespace std;
 
 bool BaseMouseEventsReceiver::isLeftMouseDown() {
-    return false;
+    return leftMouseDown;
 }
 
 bool BaseMouseEventsReceiver::isRightMouseDown() {
-    return false;
+    return rightMouseDown;
 }
 
 CppUtils::PointF BaseMouseEventsReceiver::getMousePosition() {
-    return CppUtils::PointF();
+    return currentMousePosition;
 }
 
 void BaseMouseEventsReceiver::setCurrentMousePosition(const CppUtils::PointF &currentMousePosition) {

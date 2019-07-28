@@ -122,8 +122,17 @@ using namespace CppUtils;
     [self updateMouseLocation:event];
 }
 
+- (void)mouseDragged:(NSEvent *)event {
+    [self updateMouseLocation:event];
+}
+
+- (void)rightMouseDragged:(NSEvent *)event {
+    [self updateMouseLocation:event];
+}
+
 - (void)updateMouseLocation:(NSEvent *)event {
     NSPoint mouseLocation = [self convertPoint:[event locationInWindow] fromView:nil];
+    mouseLocation.y = self.frame.size.height - mouseLocation.y;
     _mouseEventsReceiver->setCurrentMousePosition(PointF(float(mouseLocation.x), float(mouseLocation.y)));
 }
 
