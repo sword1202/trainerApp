@@ -15,7 +15,7 @@ const char *WavAudioPlayer::provideAudioBuffer() {
     return audioData->data() + WAVFile::DATA_POSITION;
 }
 
-void WavAudioPlayer::setAudioData(const std::string *audioData) {
+void WavAudioPlayer::setAudioData(const AudioData *audioData) {
     this->audioData = audioData;
     setPlaybackData(WAVFile::parseWavHeader(*this->audioData), FRAMES_PER_BUFFER);
 }

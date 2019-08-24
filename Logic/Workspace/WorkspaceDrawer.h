@@ -19,7 +19,10 @@
 #include "PlayingPitchSequence.h"
 #include "ScrollBar.h"
 #include "WorkspaceDrawerSetupDelegate.h"
+#include "BoundsSelectionController.h"
 #include <thread>
+
+class BoundsSelectionController;
 
 class WorkspaceDrawer : public WorkspaceController {
     typedef Drawer::Color Color;
@@ -33,8 +36,7 @@ class WorkspaceDrawer : public WorkspaceController {
     std::atomic<float> intervalHeight;
     std::atomic<float> verticalOffset;
     std::atomic<float> horizontalOffset;
-    // the same as beatsPerSecond
-    std::atomic<double> intervalsPerSecond;
+    std::atomic<double> beatsPerSecond;
     std::atomic<double> totalDurationInSeconds;
     std::atomic_bool running;
     std::atomic_int firstPitchIndex;
@@ -99,7 +101,8 @@ class WorkspaceDrawer : public WorkspaceController {
 
     ScrollBar horizontalScrollBar;
     ScrollBar verticalScrollBar;
-    std::function<void(float)> seekUpdatedInsideListener;
+    WorkspaceControllerDelegate* delegate = nullptr;
+    BoundsSelectionController* boundsSelectionController = nullptr;
 
     void iterateHorizontalIntervals(const std::function<void(float x, bool isBeat)>& func) const;
 
@@ -127,7 +130,6 @@ class WorkspaceDrawer : public WorkspaceController {
     void drawFps(float fps);
 
     double getSingingPitchGraphDuration() const;
-    double getIntervalDuration() const;
 
     std::function<void()> onUpdateRequested;
 
@@ -151,9 +153,8 @@ public:
     static constexpr float CLOCK_WIDTH = 42.f;
     static constexpr float CLOCK_HEIGHT = 22.f;
     static constexpr float YARD_STICK_HEIGHT = CLOCK_HEIGHT  + PLAYHEAD_TRIANGLE_HEIGHT / 2;
-    static constexpr float MIN_ZOOM = 1.0;
-    static constexpr float MAX_ZOOM = 2.0;
     static const Color YARD_STICK_DOT_AND_TEXT_COLOR;
+    static constexpr int BEATS_IN_TACT = 4;
 
     WorkspaceDrawer(Drawer *drawer, MouseEventsReceiver *mouseEventsReceiver,
             const WorkspaceDrawerSetupDelegate& setupDelegate,
@@ -167,8 +168,9 @@ public:
 
     float getHorizontalOffset() const override;
 
-    double getIntervalsPerSecond() const override;
-    void setIntervalsPerSecond(double intervalsPerSecond) override;
+    double getBeatsPerSecond() const override;
+    void setBeatsPerSecond(double beatsPerSecond) override;
+    double getBeatDuration() const;
 
     double getTotalDurationInSeconds() const;
     void setTotalDurationInSeconds(double totalDurationInSeconds) override;
@@ -218,9 +220,9 @@ public:
 
     float getWorkspaceSeek() const override;
     float getGridBeginXPosition() const;
-    float getSeekFromXPositionOnWorkspace(float x) override;
+    float getSeekFromXPositionOnWorkspace(float x) const;
 
-    float getPlayHeadXPosition(int playHeadIndex) override;
+    float getPlayHeadXPosition(int playHeadIndex);
 
     void setRecording(bool recording) override;
 
@@ -229,12 +231,15 @@ public:
 
     void setDrawTracks(bool value) override;
 
+    bool shouldDrawTracks() override;
+
     float getZoom() const override;
     void setZoom(float zoom) override;
 
     void updateSeek(float seek) override;
 
-    void setSeekUpdatedInsideListener(const std::function<void(float)> &listener) override;
+    void setDelegate(WorkspaceControllerDelegate *delegate) override;
+    void setBoundsSelectionEnabled(bool boundsSelectionEnabled) override;
 };
 
 

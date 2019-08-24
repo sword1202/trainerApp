@@ -1,6 +1,0 @@
-framework module Pods_VocalTrainerMacOSUITests {
-  umbrella header "Pods-VocalTrainerMacOSUITests-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -5,66 +5,113 @@
 
 #import "ProjectControllerBridge.h"
 #include "ProjectController.h"
+#import <Foundation/Foundation.h>
 #include "config.h"
-#import <Logic/Logic-Swift.h>
+#include "Algorithms.h"
+
 
 CPP_UTILS_DLLHIDE class DelegateWrapper : public ProjectControllerDelegate {
-    id <ProjectControllerBridgeDelegate> delegate;
+    std::vector<__weak id<ProjectControllerBridgeDelegate> > delegates;
 public:
-    DelegateWrapper(id <ProjectControllerBridgeDelegate> delegate) : delegate(delegate) {
+    DelegateWrapper(){
+    }
 
+    void addDelegate(id <ProjectControllerBridgeDelegate> delegate) {
+        delegates.push_back(delegate);
+    }
+
+    void removeDelegate(id <ProjectControllerBridgeDelegate> delegate) {
+        CppUtils::Remove(delegates, delegate);
     }
 
     void updateAudioLevel(double level) override {
-        [delegate projectControllerUpdateWithAudioLevel:level];
+        for (auto delegate : delegates) {
+            [delegate projectControllerUpdateWithAudioLevel:level];
+        }
     }
 
     void updateSeek(double seek) override {
-        [delegate projectControllerUpdateWithSeek:seek];
+        for (auto delegate : delegates) {
+            [delegate projectControllerUpdateWithSeek:seek];
+        }
     }
 
     void onPlaybackStarted() override {
-        [delegate projectControllerPlaybackDidStart];
+        for (auto delegate : delegates) {
+            [delegate projectControllerPlaybackDidStart];
+        }
     }
 
     void onPlaybackStopped() override {
-        [delegate projectControllerPlaybackDidStop];
+        for (auto delegate : delegates) {
+            [delegate projectControllerPlaybackDidStop];
+        }
     }
 
     void onHasLyricsChanged(bool hasLyrics) override {
-        [delegate projectControllerWithDidChangeHasLyrics:hasLyrics];
+        for (auto delegate : delegates) {
+            [delegate projectControllerWithDidChangeHasLyrics:hasLyrics];
+        }
     }
 
-    void updateLyricsLine(const std::string &lyricsLineUtf8) override {
-        [delegate projectControllerUpdateWithLyricsLine:[NSString stringWithUTF8String:lyricsLineUtf8.data()]];
+    void updateLyricsText(const std::string &lyricsLineUtf8) override {
+        for (auto delegate : delegates) {
+            [delegate projectControllerUpdateWithLyricsText:[NSString stringWithUTF8String:lyricsLineUtf8.data()]];
+        }
     }
 
-    void onShowLyricsChanged(bool showLyrics) override {
-        [delegate projectControllerWithDidChangeShowLyrics:showLyrics];
+    void onLyricsVisibilityChanged(bool showLyrics) override {
+        for (auto delegate : delegates) {
+            [delegate projectControllerWithDidChangeLyricsVisibility:showLyrics];
+        }
+    }
+
+    void onTracksVisibilityChanged(bool value) override {
+        for (auto delegate : delegates) {
+            [delegate projectControllerWithDidChangeTracksVisibility:value];
+        }
     }
 
     void onMetronomeEnabledChanged(bool enabled) override {
-        [delegate projectControllerWithDidChangeMetronomeEnabled:enabled];
+        for (auto delegate : delegates) {
+            [delegate projectControllerWithDidChangeMetronomeEnabled:enabled];
+        }
     }
 
     void updateVocalPianoVolume(float volume) override {
-        [delegate projectControllerUpdateWithVocalPianoVolume:volume];
+        for (auto delegate : delegates) {
+            [delegate projectControllerUpdateWithVocalPianoVolume:volume];
+        }
     }
 
     void updateInstrumentalVolume(float volume) override {
-        [delegate projectControllerUpdateWithInstrumentalVolume:volume];
+        for (auto delegate : delegates) {
+            [delegate projectControllerUpdateWithInstrumentalVolume:volume];
+        }
     }
 
     void updateVocalVolume(float volume) override {
-        [delegate projectControllerUpdateWithVocalVolume:volume];
+        for (auto delegate : delegates) {
+            [delegate projectControllerUpdateWithVocalVolume:volume];
+        }
     }
 
     void updateInputSensitivity(float value) override {
-        [delegate projectControllerUpdateWithInputSensitivity:value];
+        for (auto delegate : delegates) {
+            [delegate projectControllerUpdateWithInputSensitivity:value];
+        }
     }
 
     void updateSaveIndicator(bool hasSaveIndicator) override {
-        [delegate projectControllerUpdateWithHasSaveIndicator:hasSaveIndicator];
+        for (auto delegate : delegates) {
+            [delegate projectControllerUpdateWithHasSaveIndicator:hasSaveIndicator];
+        }
+    }
+
+    void onZoomChanged(float value) override {
+        for (auto delegate : delegates) {
+            [delegate projectControllerWithDidChangeZoom:value];
+        }
     }
 };
 
@@ -73,15 +120,24 @@ public:
     DelegateWrapper* _delegate;
 }
 
-- (instancetype)initWithDelegate:(id <ProjectControllerBridgeDelegate>)delegate {
+- (instancetype)init {
     self = [super init];
     if (self) {
-        _delegate = new DelegateWrapper(delegate);
+        _delegate = new DelegateWrapper();
         _cpp = new ProjectController(_delegate);
     }
 
     return self;
 }
+
+- (void)addDelegate:(id <ProjectControllerBridgeDelegate>)delegate {
+    _delegate->addDelegate(delegate);
+}
+
+- (void)removeDelegate:(id <ProjectControllerBridgeDelegate>)delegate {
+    _delegate->removeDelegate(delegate);
+}
+
 
 - (void)setWorkspaceController:(void*)workspaceController {
     _cpp->setWorkspaceController(static_cast<WorkspaceController *>(workspaceController));
@@ -95,6 +151,14 @@ public:
     return [NSString stringWithUTF8String:_cpp->getSongTitleUtf8().data()];
 }
 
+- (float)minZoom {
+    return _cpp->getMinZoom();
+}
+
+- (float)maxZoom {
+    return _cpp->getMaxZoom();
+}
+
 - (void)play {
     _cpp->play();
 }
@@ -105,14 +169,6 @@ public:
 
 - (void)setBoundsSelectionEnabled:(BOOL)boundsSelectionEnabled {
     _cpp->setBoundsSelectionEnabled(boundsSelectionEnabled);
-}
-
-- (void)workspaceMouseDidMove:(float)x {
-    _cpp->onWorkspaceMouseMove(x);
-}
-
-- (void)workspaceMouseDidClick:(float)x {
-    _cpp->onWorkspaceMouseClick(x);
 }
 
 - (void)setVocalVolume:(float)value {
@@ -131,6 +187,28 @@ public:
     _cpp->setInstrumentalVolume(value);
 }
 
+- (void)toggleTracksVisibility {
+    _cpp->setTracksVisible(!_cpp->isTracksVisible());
+}
+
+- (void)toggleLyricsVisibility {
+    printf("uuuuu");
+    _cpp->setLyricsVisible(!_cpp->isLyricsVisible());
+}
+
+- (void)toggleMetronomeEnabled {
+    _cpp->setMetronomeEnabled(!_cpp->isMetronomeEnabled());
+}
+
+- (bool)lyricsVisible {
+    return _cpp->isLyricsVisible();
+}
+- (bool)tracksVisible {
+    return _cpp->isTracksVisible();
+}
+- (bool)metronomeEnabled {
+    return _cpp->isMetronomeEnabled();
+}
 
 - (void)dealloc {
     delete _cpp;

@@ -145,7 +145,6 @@ using namespace CppUtils;
 
 - (void)dealloc {
     delete _workspaceDrawer;
-    delete _mouseEventsReceiver;
 }
 
 

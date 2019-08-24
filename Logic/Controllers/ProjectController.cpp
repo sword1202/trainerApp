@@ -4,6 +4,9 @@
 
 #include "ProjectController.h"
 #include "ApplicationModel.h"
+#include "Primitives.h"
+
+using namespace CppUtils;
 
 ProjectController::ProjectController(ProjectControllerDelegate* delegate) : delegate(delegate) {
     auto* model = ApplicationModel::instance();
@@ -12,7 +15,7 @@ ProjectController::ProjectController(ProjectControllerDelegate* delegate) : dele
 
     player->stopRequestedListeners.addListener([=] {
         onStopPlaybackRequested();
-    });
+    }, this);
 
     player->isPlayingChangedListeners.addListener([this] (bool playing) {
         if (!this->player->isRecording()) {
@@ -32,25 +35,25 @@ ProjectController::ProjectController(ProjectControllerDelegate* delegate) : dele
             this->delegate->onPlaybackStopped();
         }
         updateSeek(this->player->getSeek());
-    });
+    }, this);
 
     player->vocalPartChangedListeners.addListener([this] (const VocalPart* vocalPart) {
         if (workspaceController) {
             workspaceController->setVocalPart(vocalPart);
         }
-    });
+    }, this);
 
     player->tonalityChangedListeners.addListener([=] {
         if (workspaceController) {
             workspaceController->update();
         }
-    });
+    }, this);
 
     player->seekChangedListeners.addListener([=] (double seek) {
         if (!player->isCompleted()) {
             audioInputManager->setPitchesRecorderSeek(seek);
         }
-    });
+    }, this);
 
     player->setInstrumentalVolume(1.0);
     player->setVocalPartPianoVolume(0.5);
@@ -58,7 +61,19 @@ ProjectController::ProjectController(ProjectControllerDelegate* delegate) : dele
 
     audioInputManager->getPitchDetectedListeners().addListener([=] (const Pitch& pitch, double) {
         workspaceController->setDetectedPitch(pitch);
-    });
+    }, this);
+
+    audioInputManager->addAudioInputLevelMonitor([=] (double level) {
+        delegate->updateAudioLevel(level);
+    }, this);
+
+    player->lyricsChangedListeners.addListener([=] {
+        delegate->onHasLyricsChanged(player->hasLyrics());
+    }, this);
+
+    player->currentLyricsLinesChangedListeners.addListener([=] {
+        delegate->updateLyricsText(player->getLyricsTextForPart(0));
+    }, this);
 }
 
 void ProjectController::onStopPlaybackRequested() {
@@ -84,44 +99,12 @@ void ProjectController::stop() {
     player->pause();
 }
 
-std::string ProjectController::getArtistNameUtf8() {
+const std::string & ProjectController::getArtistNameUtf8() {
     return player->getArtistNameUtf8();
 }
 
-std::string ProjectController::getSongTitleUtf8() {
+const std::string & ProjectController::getSongTitleUtf8() {
     return player->getSongTitleUtf8();
-}
-
-void ProjectController::setBoundsSelectionEnabled(bool boundsSelectionEnabled) {
-    this->boundsSelectionEnabled = boundsSelectionEnabled;
-
-    if (!boundsSelectionEnabled) {
-        player->setBounds(PlaybackBounds());
-    } else {
-        selectedBounds.setStartSeek(workspaceController->getWorkspaceSeek());
-    }
-}
-
-void ProjectController::onWorkspaceMouseMove(float x) {
-    if (!boundsSelectionEnabled) {
-        return;
-    }
-
-    float seek = workspaceController->getSeekFromXPositionOnWorkspace(x);
-    float minimumSeek = player->getTactDuration();
-    seek = std::max(seek, minimumSeek);
-    selectedBounds.setEndSeek(seek);
-    workspaceController->setPlaybackBounds(selectedBounds);
-    workspaceController->update();
-}
-
-void ProjectController::onWorkspaceMouseClick(float x) {
-    if (!boundsSelectionEnabled) {
-        return;
-    }
-
-    boundsSelectionEnabled = false;
-    player->setBounds(selectedBounds);
 }
 
 void ProjectController::setVocalVolume(float value) {
@@ -148,8 +131,9 @@ void ProjectController::setWorkspaceController(WorkspaceController *workspaceCon
     assert(!this->workspaceController && workspaceController);
     this->workspaceController = workspaceController;
 
+    workspaceController->setDelegate(this);
     workspaceController->setVocalPart(player->getVocalPart());
-    workspaceController->setIntervalsPerSecond(player->getBeatsPerMinute() / 60.0);
+    workspaceController->setBeatsPerSecond(player->getBeatsPerMinute() / 60.0);
     workspaceController->setTotalDurationInSeconds(player->getDuration());
     workspaceController->setInstrumentalTrackSamples(
             this->player->getMvxFile().getInstrumentalPreviewSamples());
@@ -175,8 +159,79 @@ void ProjectController::setWorkspaceController(WorkspaceController *workspaceCon
     });
     this->workspaceController->setPlaybackBounds(player->getBounds());
 
+    delegate->onTracksVisibilityChanged(isTracksVisible());
+}
 
-    workspaceController->setSeekUpdatedInsideListener([=] (float seek) {
-        player->setSeek(seek);
-    });
+void ProjectController::setLyricsVisible(bool value) {
+    lyricsVisible = value;
+    delegate->onLyricsVisibilityChanged(value);
+}
+
+void ProjectController::setMetronomeEnabled(bool value) {
+    if (value == isMetronomeEnabled()) {
+        return;
+    }
+
+    player->setMetronomeEnabled(value);
+    delegate->onMetronomeEnabledChanged(value);
+}
+
+void ProjectController::setTracksVisible(bool value) {
+    if (value == isTracksVisible()) {
+        return;
+    }
+
+    workspaceController->setDrawTracks(value);
+    delegate->onTracksVisibilityChanged(value);
+}
+
+bool ProjectController::isLyricsVisible() const {
+    return lyricsVisible;
+}
+
+bool ProjectController::isTracksVisible() const {
+    if (!workspaceController) {
+        return false;
+    }
+
+    return workspaceController->shouldDrawTracks();
+}
+
+bool ProjectController::isMetronomeEnabled() const {
+    return player->isMetronomeEnabled();
+}
+
+void ProjectController::setZoom(float zoom) {
+    assert(workspaceController && "setZoom has been called before WorkspaceController initialized");
+    if (Primitives::CompareFloats(workspaceController->getZoom(), zoom)) {
+        return;
+    }
+
+    workspaceController->setZoom(zoom);
+    delegate->onZoomChanged(zoom);
+}
+
+float ProjectController::getZoom() const {
+    return workspaceController == nullptr ? getMinZoom() : workspaceController->getZoom();
+}
+
+void ProjectController::onPlaybackBoundsChangedByUserEvent(const PlaybackBounds &newBounds) {
+    player->setBounds(newBounds);
+}
+
+void ProjectController::onSeekChangedByUserEvent(float newSeek) {
+    player->setSeek(newSeek);
+}
+
+float ProjectController::getMinZoom() const {
+    return WorkspaceController::MIN_ZOOM;
+}
+
+float ProjectController::getMaxZoom() const {
+    return WorkspaceController::MAX_ZOOM;
+}
+
+void ProjectController::setBoundsSelectionEnabled(bool boundsSelectionEnabled) {
+    assert(workspaceController && "call setWorkspaceController before setBoundsSelectionEnabled");
+    workspaceController->setBoundsSelectionEnabled(boundsSelectionEnabled);
 }

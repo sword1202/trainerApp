@@ -46,6 +46,7 @@
 #include <WAVFile.h>
 #include "DecodedTrack.h"
 #include "OperationCanceler.h"
+#include "AudioData.h"
 
 //#ifdef _WIN32
 //#define DllExport   __declspec( dllexport )
@@ -111,7 +112,7 @@ protected:
 public:
     static AudioDecoder* create();
     static DecodedTrack
-    decodeAllIntoRawPcm(const std::string &data, const std::function<void(float)> &progressListener = nullptr,
+    decodeAllIntoRawPcm(const AudioData &data, const std::function<void(float)> &progressListener = nullptr,
                         OperationCancelerPtr operationCanceller = nullptr);
 
     WavConfig generateWavConfig() const;

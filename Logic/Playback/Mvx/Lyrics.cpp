@@ -21,13 +21,13 @@ bool LyricsInterval::operator!=(const LyricsInterval &rhs) const {
     return !(rhs == *this);
 }
 
-int Lyrics::getLinesCount() const {
+int Lyrics::getNumberOfParts() const {
     return int(lyrics.size());
 }
 
-const std::string &Lyrics::getCurrentLyricsTextAtLine(int lineIndex, double time) const {
-    assert(lineIndex < lyrics.size());
-    const LyricsLine& line = lyrics[lineIndex];
+const std::string &Lyrics::getCurrentLyricsTextForPart(int partIndex, double time) const {
+    assert(partIndex < lyrics.size());
+    const LyricsPart& line = lyrics[partIndex];
     for (const LyricsInterval& interval : line.intervals) {
         if (interval.containsTime(time)) {
             return interval.text;
@@ -37,22 +37,22 @@ const std::string &Lyrics::getCurrentLyricsTextAtLine(int lineIndex, double time
     return Strings::EMPTY;
 }
 
-const std::string& Lyrics::getLineName(int index) const {
+const std::string& Lyrics::getPartName(int index) const {
     assert(index < lyrics.size());
     return lyrics[index].name;
 }
 
-Lyrics::Lyrics(const LyricsLine &lyricsLine) {
+Lyrics::Lyrics(const LyricsPart &lyricsLine) {
     lyrics.push_back(lyricsLine);
 }
 
-Lyrics::Lyrics(const LyricsLine &lyricsLine1, const LyricsLine &lyricsLine2) {
+Lyrics::Lyrics(const LyricsPart &lyricsLine1, const LyricsPart &lyricsLine2) {
     lyrics.push_back(lyricsLine1);
     lyrics.push_back(lyricsLine2);
 }
 
-const LyricsLine& Lyrics::getLyricsLine(int index) {
-    assert(index < getLinesCount());
+const LyricsPart& Lyrics::getLyricsPart(int index) {
+    assert(index < getNumberOfParts());
     return lyrics[index];
 }
 
@@ -67,4 +67,13 @@ bool Lyrics::operator==(const Lyrics &rhs) const {
 
 bool Lyrics::operator!=(const Lyrics &rhs) const {
     return !(rhs == *this);
+}
+
+Lyrics::Snapshot Lyrics::getCurrentSnapshot(double time) const {
+    Snapshot result;
+    for (int i = 0; i < getNumberOfParts(); ++i) {
+        result.push_back(getCurrentLyricsTextForPart(i, time));
+    }
+
+    return result;
 }

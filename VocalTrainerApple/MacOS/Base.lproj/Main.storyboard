@@ -281,7 +281,7 @@
                                                             <action selector="toggleAutomaticDataDetection:" target="Ady-hI-5gd" id="R1I-Nq-Kbl"/>
                                                         </connections>
                                                     </menuItem>
-                                                    <menuItem title="Text Replacement" id="HFQ-gK-NFA">
+                                                    <menuItem title="Snapshot Replacement" id="HFQ-gK-NFA">
                                                         <modifierMask key="keyEquivalentModifierMask"/>
                                                         <connections>
                                                             <action selector="toggleAutomaticTextReplacement:" target="Ady-hI-5gd" id="DvP-Fe-Py6"/>
@@ -492,9 +492,9 @@
                                                 </items>
                                             </menu>
                                         </menuItem>
-                                        <menuItem title="Text" id="Fal-I4-PZk">
+                                        <menuItem title="Snapshot" id="Fal-I4-PZk">
                                             <modifierMask key="keyEquivalentModifierMask"/>
-                                            <menu key="submenu" title="Text" id="d9c-me-L2H">
+                                            <menu key="submenu" title="Snapshot" id="d9c-me-L2H">
                                                 <items>
                                                     <menuItem title="Align Left" keyEquivalent="{" id="ZM1-6Q-yy1">
                                                         <connections>
@@ -745,13 +745,66 @@
             <objects>
                 <viewController id="Aps-yL-S0c" customClass="HeaderViewController" customModule="VocalTrainer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="11c-iQ-zUi">
-                        <rect key="frame" x="0.0" y="0.0" width="1440" height="131"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1440" height="122"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="vkI-Jd-ZJV" customClass="ColorView" customModule="VocalTrainer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="56" width="1440" height="75"/>
+                                <rect key="frame" x="0.0" y="47" width="1440" height="75"/>
+                                <subviews>
+                                    <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eKf-dg-hJX">
+                                        <rect key="frame" x="23" y="18" width="151" height="40"/>
+                                        <subviews>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fxf-pN-2Ct" customClass="HeaderButton" customModule="VocalTrainer" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="45" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="p5w-Af-8JQ"/>
+                                                    <constraint firstAttribute="width" constant="45" id="rM8-gp-0hJ"/>
+                                                </constraints>
+                                                <buttonCell key="cell" type="inline" bezelStyle="inline" image="lyrics" imagePosition="only" alignment="center" alternateImage="lyricsSelected" imageScaling="proportionallyDown" inset="2" id="1zK-Zi-FB6">
+                                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="smallSystemBold"/>
+                                                </buttonCell>
+                                            </button>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8Mh-fx-G8d" userLabel="Tracks Button" customClass="HeaderButton" customModule="VocalTrainer" customModuleProvider="target">
+                                                <rect key="frame" x="53" y="0.0" width="45" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="5cq-8X-qgz"/>
+                                                    <constraint firstAttribute="width" constant="45" id="99j-Bj-L7I"/>
+                                                </constraints>
+                                                <buttonCell key="cell" type="inline" bezelStyle="inline" image="tracksButton" imagePosition="only" alignment="center" alternateImage="tracksButtonSelected" imageScaling="proportionallyDown" inset="2" id="s7W-HJ-Ham">
+                                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="smallSystemBold"/>
+                                                </buttonCell>
+                                            </button>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3iB-La-dym" userLabel="Metronome Button" customClass="HeaderButton" customModule="VocalTrainer" customModuleProvider="target">
+                                                <rect key="frame" x="106" y="0.0" width="45" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="45" id="l8j-a0-fN5"/>
+                                                    <constraint firstAttribute="height" constant="40" id="ns3-Nz-jQb"/>
+                                                </constraints>
+                                                <buttonCell key="cell" type="inline" bezelStyle="inline" image="metronome" imagePosition="only" alignment="center" alternateImage="metronomeSelected" imageScaling="proportionallyDown" inset="2" id="SLo-Hz-46R">
+                                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="smallSystemBold"/>
+                                                </buttonCell>
+                                            </button>
+                                        </subviews>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
+                                </subviews>
                                 <constraints>
+                                    <constraint firstItem="eKf-dg-hJX" firstAttribute="centerY" secondItem="vkI-Jd-ZJV" secondAttribute="centerY" id="Hbi-n2-71x"/>
                                     <constraint firstAttribute="height" constant="75" id="JmW-vZ-uTz"/>
+                                    <constraint firstItem="eKf-dg-hJX" firstAttribute="leading" secondItem="vkI-Jd-ZJV" secondAttribute="leading" constant="23" id="YuN-VS-5Ov"/>
+                                    <constraint firstItem="eKf-dg-hJX" firstAttribute="leading" secondItem="vkI-Jd-ZJV" secondAttribute="leading" constant="23" id="eSm-M5-Xn7"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
@@ -760,7 +813,10 @@
                                 </userDefinedRuntimeAttributes>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="SCr-MX-SNe" customClass="ColorView" customModule="VocalTrainer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="1440" height="56"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1440" height="47"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="47" id="f3T-IN-AdI"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
                                         <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -778,10 +834,23 @@
                             <constraint firstItem="SCr-MX-SNe" firstAttribute="top" secondItem="vkI-Jd-ZJV" secondAttribute="bottom" id="xzJ-aS-BXG"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="lyricsButton" destination="fxf-pN-2Ct" id="gMy-0f-zGr"/>
+                        <outlet property="metronomeButton" destination="3iB-La-dym" id="5Ez-pO-jJ2"/>
+                        <outlet property="tracksButton" destination="8Mh-fx-G8d" id="8lr-LB-UVp"/>
+                    </connections>
                 </viewController>
                 <customObject id="4JL-xa-ddL" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1203" y="570.5"/>
+            <point key="canvasLocation" x="1203" y="598.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="lyrics" width="60" height="50"/>
+        <image name="lyricsSelected" width="60" height="50"/>
+        <image name="metronome" width="60" height="50"/>
+        <image name="metronomeSelected" width="60" height="50"/>
+        <image name="tracksButton" width="60" height="50"/>
+        <image name="tracksButtonSelected" width="60" height="50"/>
+    </resources>
 </document>

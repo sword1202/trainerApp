@@ -12,11 +12,11 @@
 class MetronomeAudioPlayer : public BaseRawPcmAudioDataPlayer {
     double beatsPerMinute = 0;
     std::string metronomeAudioData;
-    std::string audioData;
+    AudioData audioData;
 public:
     MetronomeAudioPlayer();
 
-    void setMetronomeAudioData(std::string&& metronomeAudioData);
+    void setMetronomeAudioData(AudioData&& metronomeAudioData);
 
     double getBeatsPerMinute() const;
     void setAudioDataInfo(double beatsPerMinute, double totalDurationInSeconds);

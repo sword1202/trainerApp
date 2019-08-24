@@ -51,6 +51,8 @@ private:
     void pausePlayer(AudioPlayer* player);
 
     AudioAverageInputLevelMonitor* recordingLevelMonitor = nullptr;
+
+    Lyrics::Snapshot lastLyricsSnapshot;
 public:
     CppUtils::ListenersSet<bool> isPlayingChangedListeners;
     CppUtils::ListenersSet<> stopRequestedListeners;
@@ -64,6 +66,7 @@ public:
     CppUtils::ListenersSet<const PlaybackBounds&> boundsChangedListeners;
     CppUtils::SynchronizedListenersSet<double> recordingVoiceLevelListeners;
     CppUtils::ListenersSet<> lyricsChangedListeners;
+    CppUtils::ListenersSet<> currentLyricsLinesChangedListeners;
 
     MvxPlayer();
     virtual ~MvxPlayer();
@@ -136,7 +139,7 @@ public:
 
     virtual bool hasLyrics() const;
     int getLyricsLinesCount() const;
-    const std::string& getLyricsTextAtLine(int lineIndex) const;
+    const std::string& getLyricsTextForPart(int partIndex) const;
 
     const AudioPlayer& getInstrumentalPlayer() const;
     const VocalPartAudioPlayer& getVocalPartPlayer() const;

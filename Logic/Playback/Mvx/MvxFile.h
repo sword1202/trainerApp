@@ -10,6 +10,7 @@
 #include "VocalPart.h"
 #include "StringUtils.h"
 #include "Lyrics.h"
+#include "AudioData.h"
 #include <boost/variant.hpp>
 #include <map>
 #include <boost/serialization/map.hpp>
@@ -23,11 +24,11 @@ class MvxFile {
 
     // core data
     VocalPart vocalPart;
-    std::string instrumental;
+    AudioData instrumental;
     double beatsPerMinute = 0;
 
     // recording
-    std::string recordingData;
+    AudioData recordingData;
     std::vector<double> recordedPitchesTimes;
     std::vector<float> recordedPitchesFrequencies;
     std::map<double, int> recordingTonalityChanges; // seek -> pitchSifting
@@ -105,11 +106,11 @@ public:
     const VocalPart &getVocalPart() const;
     void setVocalPart(const VocalPart &vocalPart);
 
-    const std::string &getInstrumental() const;
-    void setInstrumental(const std::string &instrumental);
+    const AudioData &getInstrumental() const;
+    void setInstrumental(const AudioData &instrumental);
 
-    const std::string &getRecordingData() const;
-    void setRecordingData(const std::string &recordingData);
+    const AudioData &getRecordingData() const;
+    void setRecordingData(const AudioData &recordingData);
 
     double getBeatsPerMinute() const;
     void setBeatsPerMinute(double beatsPerMinute);

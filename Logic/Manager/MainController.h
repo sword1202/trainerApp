@@ -12,14 +12,12 @@
 #include "MvxPlayer.h"
 #include "WorkspaceController.h"
 #include "PlaybackBounds.h"
-#include "PlaybackBoundsSelectionController.h"
 #include "CallbacksQueue.h"
 
 class MainController {
     AudioInputManager* audioInputManager = nullptr;
     MvxPlayer* mvxPlayer = nullptr;
     WorkspaceController* workspaceController = nullptr;
-    PlaybackBoundsSelectionController* playbackBoundsSelectionController = nullptr;
     CppUtils::CallbacksQueue workspaceControllerReadyCallbacksQueue;
 
     void onStopPlaybackRequested();
@@ -33,7 +31,6 @@ public:
     AudioInputManager *getAudioInputManager() const;
 
     MvxPlayer *getPlayer() const;
-    PlaybackBoundsSelectionController* getPlaybackBoundsSelectionController() const;
 
     // Should be executed on a render thread, the same thread as workspace->draw is executed
     void setWorkspaceController(WorkspaceController* workspaceController);

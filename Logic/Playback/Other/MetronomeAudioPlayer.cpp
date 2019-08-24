@@ -14,7 +14,7 @@ using std::cout;
 using std::endl;
 
 
-void MetronomeAudioPlayer::setMetronomeAudioData(std::string&& metronomeAudioData) {
+void MetronomeAudioPlayer::setMetronomeAudioData(AudioData&& metronomeAudioData) {
     this->metronomeAudioData = std::move(metronomeAudioData);
     setPlaybackData(WAVFile::parseWavHeader(this->metronomeAudioData));
 }

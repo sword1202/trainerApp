@@ -16,67 +16,19 @@ class ProjectViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         InitializationManager.initializeApplicationIfNeed()
-        projectController = ProjectControllerBridge(delegate: self)
+        projectController = ProjectControllerBridge()
         self.workspaceView.configure(projectController)
+    }
+
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        if let controller = segue.destinationController as? ConfigurableWithProjectController {
+            controller.configure(projectController: projectController)
+        }
     }
 
     override var representedObject: Any? {
         didSet {
         }
-    }
-}
-
-extension ProjectViewController : ProjectControllerBridgeDelegate {
-    func projectControllerUpdate(audioLevel: Double) {
-
-    }
-
-    func projectControllerUpdate(seek: Double) {
-
-    }
-
-    func projectControllerPlaybackDidStart() {
-
-    }
-
-    func projectControllerPlaybackDidStop() {
-
-    }
-
-    func projectControllerUpdate(lyricsLine: String) {
-
-    }
-
-    func projectControllerUpdate(vocalPianoVolume: Float) {
-
-    }
-
-    func projectControllerUpdate(instrumentalVolume: Float) {
-
-    }
-
-    func projectControllerUpdate(vocalVolume: Float) {
-
-    }
-
-    func projectControllerUpdate(inputSensitivity: Float) {
-
-    }
-
-    func projectControllerUpdate(hasSaveIndicator: Bool) {
-
-    }
-
-    func projectController(didChangeHasLyrics hasLyrics: Bool) {
-
-    }
-
-    func projectController(didChangeShowLyrics showLyrics: Bool) {
-
-    }
-
-    func projectController(didChangeMetronomeEnabled enabled: Bool) {
-
     }
 }
 

@@ -31,7 +31,6 @@ using namespace CppUtils;
 using std::cout;
 using std::endl;
 
-constexpr int BEATS_IN_TACT = 4;
 constexpr float PITCHES_GRAPH_WIDTH_IN_INTERVALS = 4.0f;
 constexpr float YARD_STICK_DOT_Y_OFFSET = 9.75f + 1.5f;
 constexpr float YARD_STICK_Y_OFFSET = WorkspaceDrawer::YARD_STICK_HEIGHT - 22;
@@ -144,13 +143,17 @@ void WorkspaceDrawer::draw() {
     float fps = 1.0 / frameDuration;
     // old logic
     if (running) {
-        horizontalOffset = horizontalOffset + intervalsPerSecond * intervalWidth * frameDuration;
+        horizontalOffset = horizontalOffset + beatsPerSecond * intervalWidth * frameDuration;
         updateHorizontalScrollBarPagePosition();
     }
     frameTime = now;
 
     drawer->clear();
     drawer->beginFrame(width, height, devicePixelRatio);
+
+    if (boundsSelectionController) {
+        boundsSelectionController->update();
+    }
 
     if (horizontalScrollBar.getPageSize() <= 0) {
         updateHorizontalScrollBarPageSize();
@@ -206,7 +209,9 @@ void WorkspaceDrawer::drawScrollBars() {
         horizontalOffset = position * getSummarizedGridWidth();
         assert(position <= 1);
         float seek = position * totalDurationInSeconds;
-        seekUpdatedInsideListener(seek);
+        if (delegate) {
+            delegate->onSeekChangedByUserEvent(seek);
+        }
     }
 
     verticalScrollBar.draw(getVisibleGridWidth() - ScrollBar::SCROLLBAR_WEIGHT,
@@ -285,7 +290,7 @@ void WorkspaceDrawer::drawPitches() const {
         return;
     }
 
-    if (intervalsPerSecond <= 0) {
+    if (beatsPerSecond <= 0) {
         return;
     }
 
@@ -383,11 +388,11 @@ void WorkspaceDrawer::drawPianoTrackButton() {
 }
 
 float WorkspaceDrawer::getWorkspaceSeek() const {
-    return (horizontalOffset / intervalWidth) / intervalsPerSecond;
+    return (horizontalOffset / intervalWidth) / beatsPerSecond;
 }
 
 float WorkspaceDrawer::getWorkspaceDuration() const {
-    return width / intervalWidth / intervalsPerSecond;
+    return width / intervalWidth / beatsPerSecond;
 }
 
 float WorkspaceDrawer::getVisibleGridHeight() const {
@@ -399,7 +404,7 @@ float WorkspaceDrawer::getVisibleGridWidth() const {
 }
 
 float WorkspaceDrawer::getSummarizedGridWidth() const {
-    float intervalsCount = totalDurationInSeconds * intervalsPerSecond;
+    float intervalsCount = totalDurationInSeconds * beatsPerSecond;
     return intervalsCount * intervalWidth;
 }
 
@@ -411,13 +416,13 @@ void WorkspaceDrawer::initGraphPitchesArrays(float workspaceSeek) {
     double pitchesGraphDrawBeginTime;
     double pitchesGraphDrawEndTime;
     if (recording) {
-        double intervalDuration = getIntervalDuration();
+        double intervalDuration = getBeatDuration();
         pitchesGraphDrawBeginTime = workspaceSeek - getSingingPitchGraphDuration() - intervalDuration;
         // Pre-draw one beat more to avoid graph interruption
         pitchesGraphDrawEndTime = getWorkspaceDuration() + pitchesGraphDrawBeginTime + intervalDuration;
     } else {
         // Pre-draw one beat more to avoid graph interruption
-        double drawInterval = this->getIntervalDuration() * (BEATS_IN_TACT + 1);
+        double drawInterval = this->getBeatDuration() * (BEATS_IN_TACT + 1);
         pitchesGraphDrawBeginTime = workspaceSeek - drawInterval;
         pitchesGraphDrawEndTime = workspaceSeek + 0.001;
     }
@@ -593,7 +598,7 @@ void WorkspaceDrawer::drawFirstPlayHead() {
 
 void WorkspaceDrawer::drawEnding() {
     float distanceInSeconds = totalDurationInSeconds - getWorkspaceSeek();
-    float distance = BEATS_IN_TACT * intervalWidth + distanceInSeconds * intervalsPerSecond * intervalWidth;
+    float distance = BEATS_IN_TACT * intervalWidth + distanceInSeconds * beatsPerSecond * intervalWidth;
     if (distance < getVisibleGridWidth()) {
         float y = YARD_STICK_HEIGHT;
         float scrollBarHeight = horizontalScrollBar.getPageSize() > 0 ? ScrollBar::SCROLLBAR_WEIGHT : 0;
@@ -607,12 +612,12 @@ int WorkspaceDrawer::getDistanceFromFirstPitch(const Pitch &pitch) const {
 }
 
 double WorkspaceDrawer::getSingingPitchGraphDuration() const {
-    return getIntervalDuration() * PITCHES_GRAPH_WIDTH_IN_INTERVALS;
+    return getBeatDuration() * PITCHES_GRAPH_WIDTH_IN_INTERVALS;
 }
 
-double WorkspaceDrawer::getIntervalDuration() const {
-    assert(intervalsPerSecond > 0);
-    return 1.0 / intervalsPerSecond;
+double WorkspaceDrawer::getBeatDuration() const {
+    assert(beatsPerSecond > 0);
+    return 1.0 / beatsPerSecond;
 }
 
 const WorkspaceDrawer::Color & WorkspaceDrawer::getGridColor() const {
@@ -642,7 +647,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, MouseEventsReceiver *mouseEvent
         verticalOffset(0),
         horizontalOffset(0),
         sizeMultiplier(1),
-        intervalsPerSecond(0),
+        beatsPerSecond(0),
         running(false),
         firstPitchIndex(-1),
         frameTime(0),
@@ -738,6 +743,7 @@ WorkspaceDrawer::~WorkspaceDrawer() {
     delete drawer;
     delete pianoDrawer;
     delete mouseEventsReceiver;
+    delete boundsSelectionController;
 }
 
 float WorkspaceDrawer::getSizeMultiplier() const {
@@ -749,12 +755,12 @@ void WorkspaceDrawer::setSizeMultiplier(float sizeMultiplier) {
     this->sizeMultiplier = sizeMultiplier;
 }
 
-double WorkspaceDrawer::getIntervalsPerSecond() const {
-    return intervalsPerSecond;
+double WorkspaceDrawer::getBeatsPerSecond() const {
+    return beatsPerSecond;
 }
 
-void WorkspaceDrawer::setIntervalsPerSecond(double intervalsPerSecond) {
-    this->intervalsPerSecond = intervalsPerSecond;
+void WorkspaceDrawer::setBeatsPerSecond(double beatsPerSecond) {
+    this->beatsPerSecond = beatsPerSecond;
     updateHorizontalScrollBarPageSize();
 }
 
@@ -857,7 +863,7 @@ void WorkspaceDrawer::setPlaybackBounds(const PlaybackBounds &playbackBounds) {
 }
 
 float WorkspaceDrawer::durationToWidth(double duration) const {
-    return static_cast<float>(duration * intervalsPerSecond * intervalWidth);
+    return static_cast<float>(duration * beatsPerSecond * intervalWidth);
 }
 
 bool WorkspaceDrawer::getBoundsStartXAndWidth(const PlaybackBounds &bounds, float *startX, float *width) const {
@@ -880,11 +886,11 @@ bool WorkspaceDrawer::getBoundsStartXAndWidth(const PlaybackBounds &bounds, floa
     return true;
 }
 
-float WorkspaceDrawer::getSeekFromXPositionOnWorkspace(float x) {
+float WorkspaceDrawer::getSeekFromXPositionOnWorkspace(float x) const {
     x -= intervalWidth * BEATS_IN_TACT;
     x -= getGridBeginXPosition();
 
-    float seek = x / intervalWidth / intervalsPerSecond;
+    float seek = x / intervalWidth / beatsPerSecond;
     float workspaceSeek = getWorkspaceSeek();
     seek += workspaceSeek;
     return seek;
@@ -946,7 +952,7 @@ void WorkspaceDrawer::updateZoom() {
 }
 
 void WorkspaceDrawer::updateSeek(float seek) {
-    horizontalOffset = intervalsPerSecond * seek * intervalWidth;
+    horizontalOffset = beatsPerSecond * seek * intervalWidth;
     updateHorizontalScrollBarPagePosition();
 }
 
@@ -964,11 +970,6 @@ void WorkspaceDrawer::updateHorizontalScrollBarPagePosition() {
     float summarizedGridWidth = getSummarizedGridWidth();
     float position = std::min(horizontalOffset / summarizedGridWidth, 1.f);
     horizontalScrollBar.setPosition(position);
-}
-
-void WorkspaceDrawer::setSeekUpdatedInsideListener(const std::function<void(float)> &listener) {
-    CHECK_IF_RENDER_THREAD;
-    this->seekUpdatedInsideListener = listener;
 }
 
 void WorkspaceDrawer::drawFps(float fps) {
@@ -995,4 +996,21 @@ void WorkspaceDrawer::drawTracks() {
     }
 
     drawHorizontalLine(height - VOLUME_CONTROLLER_HEIGHT, borderLineColor);
+}
+
+bool WorkspaceDrawer::shouldDrawTracks() {
+    return willDrawTracks;
+}
+
+void WorkspaceDrawer::setDelegate(WorkspaceControllerDelegate *delegate) {
+    CHECK_IF_RENDER_THREAD;
+    assert(!this->delegate && "setDelegate could not be called twice");
+    assert(delegate && "delegate should not be null");
+    this->delegate = delegate;
+    this->boundsSelectionController = new BoundsSelectionController(delegate, mouseEventsReceiver, this);
+}
+
+void WorkspaceDrawer::setBoundsSelectionEnabled(bool boundsSelectionEnabled) {
+    assert(boundsSelectionController && "Call setDelegate before setBoundsSelectionEnabled");
+    boundsSelectionController->setBoundsSelectionEnabled(boundsSelectionEnabled);
 }

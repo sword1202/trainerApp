@@ -17,46 +17,62 @@ public:
     virtual inline void onPlaybackStarted() {}
     virtual inline void onPlaybackStopped() {}
     virtual inline void onHasLyricsChanged(bool hasLyrics) {}
-    virtual inline void updateLyricsLine(const std::string& lyricsLineUtf8) {}
-    virtual inline void onShowLyricsChanged(bool showLyrics) {}
+    virtual inline void updateLyricsText(const std::string& lyricsLineUtf8) {}
+    virtual inline void onLyricsVisibilityChanged(bool showLyrics) {}
     virtual inline void onMetronomeEnabledChanged(bool enabled) {}
+    virtual inline void onTracksVisibilityChanged(bool value) {}
     virtual inline void updateVocalPianoVolume(float volume) {}
     virtual inline void updateInstrumentalVolume(float volume) {}
     virtual inline void updateVocalVolume(float volume) {}
     virtual inline void updateInputSensitivity(float value) {}
     virtual inline void updateSaveIndicator(bool hasSaveIndicator) {}
+    virtual inline void onZoomChanged(float value) {}
 };
 
-class ProjectController {
+class ProjectController : CppUtils::DestructorQueue, public WorkspaceControllerDelegate {
     WorkspaceController* workspaceController = nullptr;
     ProjectControllerDelegate* delegate = nullptr;
     MvxPlayer* player;
     AudioInputManager* audioInputManager;
-    bool boundsSelectionEnabled = false;
-    PlaybackBounds selectedBounds;
+    bool lyricsVisible = true;
 
     void onStopPlaybackRequested();
     void updateSeek(double seek);
 public:
     explicit ProjectController(ProjectControllerDelegate* delegate);
 
+    // Public interface
     void setWorkspaceController(WorkspaceController *workspaceController);
 
-    std::string getArtistNameUtf8();
-    std::string getSongTitleUtf8();
+    const std::string& getArtistNameUtf8();
+    const std::string& getSongTitleUtf8();
 
     void play();
     void stop();
 
-    // Bounds
     void setBoundsSelectionEnabled(bool boundsSelectionEnabled);
-    void onWorkspaceMouseMove(float x);
-    void onWorkspaceMouseClick(float x);
 
     void setVocalVolume(float value);
     void setInputSensitivity(float value);
     void setVocalPianoVolume(float value);
     void setInstrumentalVolume(float value);
+
+    void setLyricsVisible(bool value);
+    void setMetronomeEnabled(bool value);
+    void setTracksVisible(bool value);
+
+    bool isLyricsVisible() const;
+    bool isTracksVisible() const;
+    bool isMetronomeEnabled() const;
+
+    void setZoom(float zoom);
+    float getZoom() const;
+    float getMinZoom() const;
+    float getMaxZoom() const;
+
+    // Delegates
+    void onPlaybackBoundsChangedByUserEvent(const PlaybackBounds &newBounds) override;
+    void onSeekChangedByUserEvent(float newSeek) override;
 };
 
 

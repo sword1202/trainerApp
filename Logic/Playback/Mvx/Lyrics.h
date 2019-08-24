@@ -6,10 +6,14 @@
 #define TEXTIMAGESGENERATOR_LYRICS_H
 
 #include "boostext/serialization/static_vector.h"
-#include "LyricsLine.h"
+#include "LyricsPart.h"
 
 class Lyrics {
-    boost::container::static_vector<LyricsLine, 2> lyrics;
+public:
+    static constexpr int MAX_PARTS_COUNT = 2;
+    typedef boost::container::static_vector<std::string, MAX_PARTS_COUNT> Snapshot;
+private:
+    boost::container::static_vector<LyricsPart, MAX_PARTS_COUNT> lyrics;
 
     friend class boost::serialization::access;
 
@@ -19,14 +23,17 @@ class Lyrics {
         ar & lyrics;
     }
 public:
-    Lyrics() = default;
-    explicit Lyrics(const LyricsLine& lyricsLine);
-    Lyrics(const LyricsLine& lyricsLine1, const LyricsLine& lyricsLine2);
 
-    int getLinesCount() const;
-    const LyricsLine& getLyricsLine(int index);
-    const std::string& getLineName(int index) const;
-    const std::string &getCurrentLyricsTextAtLine(int lineIndex, double time) const;
+    Lyrics() = default;
+    explicit Lyrics(const LyricsPart& lyricsLine);
+    Lyrics(const LyricsPart& lyricsLine1, const LyricsPart& lyricsLine2);
+
+    int getNumberOfParts() const;
+    const LyricsPart& getLyricsPart(int index);
+    const std::string& getPartName(int index) const;
+    const std::string &getCurrentLyricsTextForPart(int partIndex, double time) const;
+
+    Snapshot getCurrentSnapshot(double time) const;
 
     bool operator==(const Lyrics &rhs) const;
     bool operator!=(const Lyrics &rhs) const;

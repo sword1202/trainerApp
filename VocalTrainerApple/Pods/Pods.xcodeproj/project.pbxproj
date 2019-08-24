@@ -7,99 +7,118 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0EF5D54F6DD429E97F9C3DE35703AF5A /* Pods-VocalTrainerMacOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B4A61E6578EF050DA94EB29374FAB6 /* Pods-VocalTrainerMacOS-dummy.m */; };
-		1B9B2F296BEB69C59296EE9454A6FAA2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F940C819049CFF8741C0F5E3E075E607 /* Cocoa.framework */; };
-		6170107A71AD0CE30F06AA6F50ED0360 /* Pods-VocalTrainerMacOSUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 88E7C5BACF04AA5C270CAEF974EF44A5 /* Pods-VocalTrainerMacOSUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8A21FEA73B7AC9E3B876C0EB3B27B2EB /* Pods-VocalTrainerMacOSUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C06A46DBF85B6B4F16CF91F75C4BAE9F /* Pods-VocalTrainerMacOSUITests-dummy.m */; };
-		97C0BA253DD5BF9BBFCAAFAA01AC1F34 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F940C819049CFF8741C0F5E3E075E607 /* Cocoa.framework */; };
-		9858142A475F7ED4919DB427CAD3A164 /* Pods-VocalTrainerMacOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F5C04A860D9397DA2BDD6D2A500786C /* Pods-VocalTrainerMacOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2E37A2A543585002824658E44242199E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F940C819049CFF8741C0F5E3E075E607 /* Cocoa.framework */; };
+		3C74A0BCA80FE79C52FB257F40BE7C00 /* SwiftHEXColors-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C4EE29326F6D081B6FEFEF61D1D36FB1 /* SwiftHEXColors-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4355779ABECB225FB462A78C70361AB2 /* SwiftHEXColors.h in Headers */ = {isa = PBXBuildFile; fileRef = CD6172FCD6AD23B0763775836A2AE7FA /* SwiftHEXColors.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4892FC5A87101F2D7E15AEE56DA8C1F6 /* Pods-VocalTrainer-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F0253AB936D34D5A28F55AFD63986661 /* Pods-VocalTrainer-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		969857D99305AA4FCF4A7A92178CBC50 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F940C819049CFF8741C0F5E3E075E607 /* Cocoa.framework */; };
+		AD395EE702976F638FDD5F29C921DFA9 /* SwiftHEXColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC8F6E98F50B1AF81FDF59B5CB8E504 /* SwiftHEXColors.swift */; };
+		C12753C90366069B2A5DC1B62F4217E1 /* SwiftHEXColors-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FFF091D0F7D7DEAE6C2376E3F5BC078A /* SwiftHEXColors-dummy.m */; };
+		CFC0C5A5CF15C127F7E72C7FB4E7C2E9 /* Pods-VocalTrainer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE1B9F2302CD9EF882209FB589AFF4A /* Pods-VocalTrainer-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		AE867688EE887AC1F87B8E6AFC63F40D /* PBXContainerItemProxy */ = {
+		9CEE96E6539487EBC753ACEADE9BBAA4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 7AFDC4A43C1C751B9580751518681741;
-			remoteInfo = "Pods-VocalTrainerMacOS";
+			remoteGlobalIDString = FBCA5614C6DE80E95DB0A68DF224D729;
+			remoteInfo = SwiftHEXColors;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		01C66E1B22DC1921B4F050E731416204 /* Pods-VocalTrainerMacOSUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-VocalTrainerMacOSUITests-acknowledgements.plist"; sourceTree = "<group>"; };
-		0938F153E72B78B97ADFE98C9F9A4811 /* Pods-VocalTrainerMacOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VocalTrainerMacOS.release.xcconfig"; sourceTree = "<group>"; };
-		09CFD55B7FA43D86FE4B8B02E31F71AE /* Pods-VocalTrainerMacOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VocalTrainerMacOS.debug.xcconfig"; sourceTree = "<group>"; };
-		1137E08E28894C2E4FC3147A4C2D2E98 /* Pods_VocalTrainerMacOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VocalTrainerMacOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B4A61E6578EF050DA94EB29374FAB6 /* Pods-VocalTrainerMacOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-VocalTrainerMacOS-dummy.m"; sourceTree = "<group>"; };
-		362408A449ABC05B36B15D26D851373C /* Pods-VocalTrainerMacOSUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-VocalTrainerMacOSUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		3C48991DB90977AC78475483FBB3F977 /* Pods-VocalTrainerMacOSUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-VocalTrainerMacOSUITests.modulemap"; sourceTree = "<group>"; };
-		47E66F71F9C39B01BA4054DC1AC74F06 /* Pods-VocalTrainerMacOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VocalTrainerMacOSUITests.release.xcconfig"; sourceTree = "<group>"; };
-		4F5C04A860D9397DA2BDD6D2A500786C /* Pods-VocalTrainerMacOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-VocalTrainerMacOS-umbrella.h"; sourceTree = "<group>"; };
-		5038D22A0C1CBA38B42577544BFD0E7A /* Pods_VocalTrainerMacOSUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VocalTrainerMacOSUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5D525F36F07F12C926B78619DDE4CA08 /* Pods-VocalTrainerMacOSUITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-VocalTrainerMacOSUITests-Info.plist"; sourceTree = "<group>"; };
-		7224611E83C44A045D4F8CA977E8CE9E /* Pods-VocalTrainerMacOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VocalTrainerMacOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		735EBE6E942D4A502E73F949DA318CF2 /* Pods-VocalTrainerMacOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-VocalTrainerMacOS-acknowledgements.plist"; sourceTree = "<group>"; };
-		88E7C5BACF04AA5C270CAEF974EF44A5 /* Pods-VocalTrainerMacOSUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-VocalTrainerMacOSUITests-umbrella.h"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		B2AF9F581D18FA11407BBB92BF2A7EBF /* Pods-VocalTrainerMacOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-VocalTrainerMacOS.modulemap"; sourceTree = "<group>"; };
-		C06A46DBF85B6B4F16CF91F75C4BAE9F /* Pods-VocalTrainerMacOSUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-VocalTrainerMacOSUITests-dummy.m"; sourceTree = "<group>"; };
-		D2554A7F4D0E285727933F44047421AC /* Pods-VocalTrainerMacOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-VocalTrainerMacOS-Info.plist"; sourceTree = "<group>"; };
-		EBF19849A0C95A2884F7D25310F9A9CB /* Pods-VocalTrainerMacOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-VocalTrainerMacOS-acknowledgements.markdown"; sourceTree = "<group>"; };
+		154CA0DB8B8C481FE86D9A940818CA0E /* SwiftHEXColors.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftHEXColors.xcconfig; sourceTree = "<group>"; };
+		1D9AFE75A18D44914E8FAC5BF6E837FB /* Pods-VocalTrainer-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-VocalTrainer-frameworks.sh"; sourceTree = "<group>"; };
+		2B4E3D72540AB200CDCCBC8CD60AAAED /* Pods-VocalTrainer.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-VocalTrainer.modulemap"; sourceTree = "<group>"; };
+		3A5B519755F133CEBFE0698516132EA1 /* Pods-VocalTrainer-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-VocalTrainer-acknowledgements.markdown"; sourceTree = "<group>"; };
+		3C8A094F6B1E6445B439CC2C35ED70EE /* Pods-VocalTrainer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VocalTrainer.debug.xcconfig"; sourceTree = "<group>"; };
+		458A00954C34549B3D2D4EE1AFB1B15C /* SwiftHEXColors.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftHEXColors.modulemap; sourceTree = "<group>"; };
+		4EC8F6E98F50B1AF81FDF59B5CB8E504 /* SwiftHEXColors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftHEXColors.swift; path = Sources/SwiftHEXColors.swift; sourceTree = "<group>"; };
+		519693519EAC81ACA80057BE5B74DCED /* Pods-VocalTrainer-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-VocalTrainer-Info.plist"; sourceTree = "<group>"; };
+		87E1187DDD3FF0F1B079631DB0E992E8 /* Pods-VocalTrainer-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-VocalTrainer-acknowledgements.plist"; sourceTree = "<group>"; };
+		8AF7E92817594C70515E04F1F0D15CFC /* SwiftHEXColors.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftHEXColors.framework; path = SwiftHEXColors.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A35C7FCBFF3B51071B704259E5E9CA44 /* SwiftHEXColors-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftHEXColors-Info.plist"; sourceTree = "<group>"; };
+		B129B679D7E387AB5BEA947171AFFED9 /* Pods-VocalTrainer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VocalTrainer.release.xcconfig"; sourceTree = "<group>"; };
+		C0508C4A951603E3E1553EC36D6F04DF /* SwiftHEXColors-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftHEXColors-prefix.pch"; sourceTree = "<group>"; };
+		C4EE29326F6D081B6FEFEF61D1D36FB1 /* SwiftHEXColors-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftHEXColors-umbrella.h"; sourceTree = "<group>"; };
+		CD6172FCD6AD23B0763775836A2AE7FA /* SwiftHEXColors.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SwiftHEXColors.h; path = Sources/SwiftHEXColors.h; sourceTree = "<group>"; };
+		DC7BB4BE038C32C54E7A7F12A2B8EAC6 /* Pods_VocalTrainer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_VocalTrainer.framework; path = "Pods-VocalTrainer.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EFE1B9F2302CD9EF882209FB589AFF4A /* Pods-VocalTrainer-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-VocalTrainer-dummy.m"; sourceTree = "<group>"; };
+		F0253AB936D34D5A28F55AFD63986661 /* Pods-VocalTrainer-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-VocalTrainer-umbrella.h"; sourceTree = "<group>"; };
 		F940C819049CFF8741C0F5E3E075E607 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		FFF091D0F7D7DEAE6C2376E3F5BC078A /* SwiftHEXColors-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftHEXColors-dummy.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		9F972B05481C24639384029406FAB341 /* Frameworks */ = {
+		2DD791DC974A0609187E894DA6A9DED4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B9B2F296BEB69C59296EE9454A6FAA2 /* Cocoa.framework in Frameworks */,
+				2E37A2A543585002824658E44242199E /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CA2A834862BFB6CF4522E06F4F2AF213 /* Frameworks */ = {
+		BA6D4F8F2E62561FDC59CC39CF43796E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97C0BA253DD5BF9BBFCAAFAA01AC1F34 /* Cocoa.framework in Frameworks */,
+				969857D99305AA4FCF4A7A92178CBC50 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		227AE603C9B09B906776552DBC3EACED /* Products */ = {
+		27D82A897050BBB32961BF780FD3E833 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				1137E08E28894C2E4FC3147A4C2D2E98 /* Pods_VocalTrainerMacOS.framework */,
-				5038D22A0C1CBA38B42577544BFD0E7A /* Pods_VocalTrainerMacOSUITests.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		89193FCCD9940B0B790276659A26C51C /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				C47F9C4EA1CE18684E1877F97BC2BBE0 /* Pods-VocalTrainerMacOS */,
-				DB458AED1494DC53FECDFDBEDB245597 /* Pods-VocalTrainerMacOSUITests */,
+				8A9F3B46825BD6E9D17901131C7A83D7 /* Pods-VocalTrainer */,
 			);
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		C47F9C4EA1CE18684E1877F97BC2BBE0 /* Pods-VocalTrainerMacOS */ = {
+		2FB57D1F599BB600F126A54249C4832D /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				B2AF9F581D18FA11407BBB92BF2A7EBF /* Pods-VocalTrainerMacOS.modulemap */,
-				EBF19849A0C95A2884F7D25310F9A9CB /* Pods-VocalTrainerMacOS-acknowledgements.markdown */,
-				735EBE6E942D4A502E73F949DA318CF2 /* Pods-VocalTrainerMacOS-acknowledgements.plist */,
-				13B4A61E6578EF050DA94EB29374FAB6 /* Pods-VocalTrainerMacOS-dummy.m */,
-				D2554A7F4D0E285727933F44047421AC /* Pods-VocalTrainerMacOS-Info.plist */,
-				4F5C04A860D9397DA2BDD6D2A500786C /* Pods-VocalTrainerMacOS-umbrella.h */,
-				09CFD55B7FA43D86FE4B8B02E31F71AE /* Pods-VocalTrainerMacOS.debug.xcconfig */,
-				0938F153E72B78B97ADFE98C9F9A4811 /* Pods-VocalTrainerMacOS.release.xcconfig */,
+				458A00954C34549B3D2D4EE1AFB1B15C /* SwiftHEXColors.modulemap */,
+				154CA0DB8B8C481FE86D9A940818CA0E /* SwiftHEXColors.xcconfig */,
+				FFF091D0F7D7DEAE6C2376E3F5BC078A /* SwiftHEXColors-dummy.m */,
+				A35C7FCBFF3B51071B704259E5E9CA44 /* SwiftHEXColors-Info.plist */,
+				C0508C4A951603E3E1553EC36D6F04DF /* SwiftHEXColors-prefix.pch */,
+				C4EE29326F6D081B6FEFEF61D1D36FB1 /* SwiftHEXColors-umbrella.h */,
 			);
-			name = "Pods-VocalTrainerMacOS";
-			path = "Target Support Files/Pods-VocalTrainerMacOS";
+			name = "Support Files";
+			path = "../Target Support Files/SwiftHEXColors";
+			sourceTree = "<group>";
+		};
+		697DA5694E042A0DE9C4796BBB00542B /* SwiftHEXColors */ = {
+			isa = PBXGroup;
+			children = (
+				CD6172FCD6AD23B0763775836A2AE7FA /* SwiftHEXColors.h */,
+				4EC8F6E98F50B1AF81FDF59B5CB8E504 /* SwiftHEXColors.swift */,
+				2FB57D1F599BB600F126A54249C4832D /* Support Files */,
+			);
+			name = SwiftHEXColors;
+			path = SwiftHEXColors;
+			sourceTree = "<group>";
+		};
+		8A9F3B46825BD6E9D17901131C7A83D7 /* Pods-VocalTrainer */ = {
+			isa = PBXGroup;
+			children = (
+				2B4E3D72540AB200CDCCBC8CD60AAAED /* Pods-VocalTrainer.modulemap */,
+				3A5B519755F133CEBFE0698516132EA1 /* Pods-VocalTrainer-acknowledgements.markdown */,
+				87E1187DDD3FF0F1B079631DB0E992E8 /* Pods-VocalTrainer-acknowledgements.plist */,
+				EFE1B9F2302CD9EF882209FB589AFF4A /* Pods-VocalTrainer-dummy.m */,
+				1D9AFE75A18D44914E8FAC5BF6E837FB /* Pods-VocalTrainer-frameworks.sh */,
+				519693519EAC81ACA80057BE5B74DCED /* Pods-VocalTrainer-Info.plist */,
+				F0253AB936D34D5A28F55AFD63986661 /* Pods-VocalTrainer-umbrella.h */,
+				3C8A094F6B1E6445B439CC2C35ED70EE /* Pods-VocalTrainer.debug.xcconfig */,
+				B129B679D7E387AB5BEA947171AFFED9 /* Pods-VocalTrainer.release.xcconfig */,
+			);
+			name = "Pods-VocalTrainer";
+			path = "Target Support Files/Pods-VocalTrainer";
 			sourceTree = "<group>";
 		};
 		CBD43E0947D94E318A0ED1350CFF29ED /* OS X */ = {
@@ -115,25 +134,19 @@
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				E0A1E60606E0BF6E2E10F1F01350DFE8 /* Frameworks */,
-				227AE603C9B09B906776552DBC3EACED /* Products */,
-				89193FCCD9940B0B790276659A26C51C /* Targets Support Files */,
+				F84D679A24A21721E70534F4FC08E593 /* Pods */,
+				DF792AD37F8CF04530C4520223772F18 /* Products */,
+				27D82A897050BBB32961BF780FD3E833 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		DB458AED1494DC53FECDFDBEDB245597 /* Pods-VocalTrainerMacOSUITests */ = {
+		DF792AD37F8CF04530C4520223772F18 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3C48991DB90977AC78475483FBB3F977 /* Pods-VocalTrainerMacOSUITests.modulemap */,
-				362408A449ABC05B36B15D26D851373C /* Pods-VocalTrainerMacOSUITests-acknowledgements.markdown */,
-				01C66E1B22DC1921B4F050E731416204 /* Pods-VocalTrainerMacOSUITests-acknowledgements.plist */,
-				C06A46DBF85B6B4F16CF91F75C4BAE9F /* Pods-VocalTrainerMacOSUITests-dummy.m */,
-				5D525F36F07F12C926B78619DDE4CA08 /* Pods-VocalTrainerMacOSUITests-Info.plist */,
-				88E7C5BACF04AA5C270CAEF974EF44A5 /* Pods-VocalTrainerMacOSUITests-umbrella.h */,
-				7224611E83C44A045D4F8CA977E8CE9E /* Pods-VocalTrainerMacOSUITests.debug.xcconfig */,
-				47E66F71F9C39B01BA4054DC1AC74F06 /* Pods-VocalTrainerMacOSUITests.release.xcconfig */,
+				DC7BB4BE038C32C54E7A7F12A2B8EAC6 /* Pods_VocalTrainer.framework */,
+				8AF7E92817594C70515E04F1F0D15CFC /* SwiftHEXColors.framework */,
 			);
-			name = "Pods-VocalTrainerMacOSUITests";
-			path = "Target Support Files/Pods-VocalTrainerMacOSUITests";
+			name = Products;
 			sourceTree = "<group>";
 		};
 		E0A1E60606E0BF6E2E10F1F01350DFE8 /* Frameworks */ = {
@@ -144,63 +157,72 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F84D679A24A21721E70534F4FC08E593 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				697DA5694E042A0DE9C4796BBB00542B /* SwiftHEXColors */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		D4F25289A4B27D1CCE845F2610741BD3 /* Headers */ = {
+		0493CCC5CF20561627C2521FB7389BB9 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9858142A475F7ED4919DB427CAD3A164 /* Pods-VocalTrainerMacOS-umbrella.h in Headers */,
+				3C74A0BCA80FE79C52FB257F40BE7C00 /* SwiftHEXColors-umbrella.h in Headers */,
+				4355779ABECB225FB462A78C70361AB2 /* SwiftHEXColors.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E6F64C7FA969420915D83AC8DEF1C7CD /* Headers */ = {
+		0D2B054A493D7C68CDF7C4D940DE85DE /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6170107A71AD0CE30F06AA6F50ED0360 /* Pods-VocalTrainerMacOSUITests-umbrella.h in Headers */,
+				4892FC5A87101F2D7E15AEE56DA8C1F6 /* Pods-VocalTrainer-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		606211CE617116667027F5ABA77B7ABE /* Pods-VocalTrainerMacOSUITests */ = {
+		EEE3A799D263B72FB567E2C675253188 /* Pods-VocalTrainer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0A2CC527BDB67A27B6525165E5BB7033 /* Build configuration list for PBXNativeTarget "Pods-VocalTrainerMacOSUITests" */;
+			buildConfigurationList = F1F1D0C3D81BC141D2E91605109F77CC /* Build configuration list for PBXNativeTarget "Pods-VocalTrainer" */;
 			buildPhases = (
-				E6F64C7FA969420915D83AC8DEF1C7CD /* Headers */,
-				C5B05E5D0944F5BB12675B4290A1319E /* Sources */,
-				CA2A834862BFB6CF4522E06F4F2AF213 /* Frameworks */,
-				CCD8E60829A48EDFE8DC40017FEF23DF /* Resources */,
+				0D2B054A493D7C68CDF7C4D940DE85DE /* Headers */,
+				96E40B0DC0444D0829F65015BB4977D4 /* Sources */,
+				BA6D4F8F2E62561FDC59CC39CF43796E /* Frameworks */,
+				4C002BCC20437CB6FA2890B6006E607D /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				0CBDB523D1884137E44BD80443693C42 /* PBXTargetDependency */,
+				2ABD854B22D6E21371375C0D142596F7 /* PBXTargetDependency */,
 			);
-			name = "Pods-VocalTrainerMacOSUITests";
-			productName = "Pods-VocalTrainerMacOSUITests";
-			productReference = 5038D22A0C1CBA38B42577544BFD0E7A /* Pods_VocalTrainerMacOSUITests.framework */;
+			name = "Pods-VocalTrainer";
+			productName = "Pods-VocalTrainer";
+			productReference = DC7BB4BE038C32C54E7A7F12A2B8EAC6 /* Pods_VocalTrainer.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		7AFDC4A43C1C751B9580751518681741 /* Pods-VocalTrainerMacOS */ = {
+		FBCA5614C6DE80E95DB0A68DF224D729 /* SwiftHEXColors */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 246601745A9077C6B3F85BD5CE69CE3B /* Build configuration list for PBXNativeTarget "Pods-VocalTrainerMacOS" */;
+			buildConfigurationList = B40F408122DA90C7E8A8F13CEF97ACFF /* Build configuration list for PBXNativeTarget "SwiftHEXColors" */;
 			buildPhases = (
-				D4F25289A4B27D1CCE845F2610741BD3 /* Headers */,
-				1752A2F1EDAD12ADF9E5846940FA3EA9 /* Sources */,
-				9F972B05481C24639384029406FAB341 /* Frameworks */,
-				3D687956482264842451A371D3BC986C /* Resources */,
+				0493CCC5CF20561627C2521FB7389BB9 /* Headers */,
+				26C110AB7D44C3E8D641504312E2596B /* Sources */,
+				2DD791DC974A0609187E894DA6A9DED4 /* Frameworks */,
+				4C4C3360D6B6A03F6EC5E7E9AE8653CE /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Pods-VocalTrainerMacOS";
-			productName = "Pods-VocalTrainerMacOS";
-			productReference = 1137E08E28894C2E4FC3147A4C2D2E98 /* Pods_VocalTrainerMacOS.framework */;
+			name = SwiftHEXColors;
+			productName = SwiftHEXColors;
+			productReference = 8AF7E92817594C70515E04F1F0D15CFC /* SwiftHEXColors.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -220,25 +242,25 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 227AE603C9B09B906776552DBC3EACED /* Products */;
+			productRefGroup = DF792AD37F8CF04530C4520223772F18 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7AFDC4A43C1C751B9580751518681741 /* Pods-VocalTrainerMacOS */,
-				606211CE617116667027F5ABA77B7ABE /* Pods-VocalTrainerMacOSUITests */,
+				EEE3A799D263B72FB567E2C675253188 /* Pods-VocalTrainer */,
+				FBCA5614C6DE80E95DB0A68DF224D729 /* SwiftHEXColors */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		3D687956482264842451A371D3BC986C /* Resources */ = {
+		4C002BCC20437CB6FA2890B6006E607D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CCD8E60829A48EDFE8DC40017FEF23DF /* Resources */ = {
+		4C4C3360D6B6A03F6EC5E7E9AE8653CE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -248,30 +270,31 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		1752A2F1EDAD12ADF9E5846940FA3EA9 /* Sources */ = {
+		26C110AB7D44C3E8D641504312E2596B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EF5D54F6DD429E97F9C3DE35703AF5A /* Pods-VocalTrainerMacOS-dummy.m in Sources */,
+				C12753C90366069B2A5DC1B62F4217E1 /* SwiftHEXColors-dummy.m in Sources */,
+				AD395EE702976F638FDD5F29C921DFA9 /* SwiftHEXColors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C5B05E5D0944F5BB12675B4290A1319E /* Sources */ = {
+		96E40B0DC0444D0829F65015BB4977D4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A21FEA73B7AC9E3B876C0EB3B27B2EB /* Pods-VocalTrainerMacOSUITests-dummy.m in Sources */,
+				CFC0C5A5CF15C127F7E72C7FB4E7C2E9 /* Pods-VocalTrainer-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0CBDB523D1884137E44BD80443693C42 /* PBXTargetDependency */ = {
+		2ABD854B22D6E21371375C0D142596F7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "Pods-VocalTrainerMacOS";
-			target = 7AFDC4A43C1C751B9580751518681741 /* Pods-VocalTrainerMacOS */;
-			targetProxy = AE867688EE887AC1F87B8E6AFC63F40D /* PBXContainerItemProxy */;
+			name = SwiftHEXColors;
+			target = FBCA5614C6DE80E95DB0A68DF224D729 /* SwiftHEXColors */;
+			targetProxy = 9CEE96E6539487EBC753ACEADE9BBAA4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -400,13 +423,11 @@
 			};
 			name = Release;
 		};
-		5EA9BE8481813F61B79185602ECEA183 /* Debug */ = {
+		944D5D39391794DF68CD5021E80DACB4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 09CFD55B7FA43D86FE4B8B02E31F71AE /* Pods-VocalTrainerMacOS.debug.xcconfig */;
+			baseConfigurationReference = 154CA0DB8B8C481FE86D9A940818CA0E /* SwiftHEXColors.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -418,31 +439,30 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "Target Support Files/Pods-VocalTrainerMacOS/Pods-VocalTrainerMacOS-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftHEXColors/SwiftHEXColors-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftHEXColors/SwiftHEXColors-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MODULEMAP_FILE = "Target Support Files/Pods-VocalTrainerMacOS/Pods-VocalTrainerMacOS.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MODULEMAP_FILE = "Target Support Files/SwiftHEXColors/SwiftHEXColors.modulemap";
+				PRODUCT_MODULE_NAME = SwiftHEXColors;
+				PRODUCT_NAME = SwiftHEXColors;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
-		BDCCFD737AB64B7BA8538111A0190289 /* Debug */ = {
+		CD0259020EC7AA7AE62E6655AE6731A0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7224611E83C44A045D4F8CA977E8CE9E /* Pods-VocalTrainerMacOSUITests.debug.xcconfig */;
+			baseConfigurationReference = B129B679D7E387AB5BEA947171AFFED9 /* Pods-VocalTrainer.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
@@ -458,7 +478,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "Target Support Files/Pods-VocalTrainerMacOSUITests/Pods-VocalTrainerMacOSUITests-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-VocalTrainer/Pods-VocalTrainer-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -467,47 +487,7 @@
 				);
 				MACH_O_TYPE = staticlib;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MODULEMAP_FILE = "Target Support Files/Pods-VocalTrainerMacOSUITests/Pods-VocalTrainerMacOSUITests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		F0A4ED3DFB51A4E6444FCAF9BC3CCC7A /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 47E66F71F9C39B01BA4054DC1AC74F06 /* Pods-VocalTrainerMacOSUITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "Target Support Files/Pods-VocalTrainerMacOSUITests/Pods-VocalTrainerMacOSUITests-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MODULEMAP_FILE = "Target Support Files/Pods-VocalTrainerMacOSUITests/Pods-VocalTrainerMacOSUITests.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-VocalTrainer/Pods-VocalTrainer.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -520,9 +500,46 @@
 			};
 			name = Release;
 		};
-		F4C50E701CB61B3F50BF56A6604F3126 /* Release */ = {
+		E20838B3AE995711171003C17E89CD42 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0938F153E72B78B97ADFE98C9F9A4811 /* Pods-VocalTrainerMacOS.release.xcconfig */;
+			baseConfigurationReference = 154CA0DB8B8C481FE86D9A940818CA0E /* SwiftHEXColors.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftHEXColors/SwiftHEXColors-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftHEXColors/SwiftHEXColors-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MODULEMAP_FILE = "Target Support Files/SwiftHEXColors/SwiftHEXColors.modulemap";
+				PRODUCT_MODULE_NAME = SwiftHEXColors;
+				PRODUCT_NAME = SwiftHEXColors;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.2;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E2F80BF873F8CF75F38EF7182CD9C80C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3C8A094F6B1E6445B439CC2C35ED70EE /* Pods-VocalTrainer.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
@@ -538,7 +555,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "Target Support Files/Pods-VocalTrainerMacOS/Pods-VocalTrainerMacOS-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-VocalTrainer/Pods-VocalTrainer-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -547,7 +564,7 @@
 				);
 				MACH_O_TYPE = staticlib;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MODULEMAP_FILE = "Target Support Files/Pods-VocalTrainerMacOS/Pods-VocalTrainerMacOS.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-VocalTrainer/Pods-VocalTrainer.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -558,34 +575,34 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0A2CC527BDB67A27B6525165E5BB7033 /* Build configuration list for PBXNativeTarget "Pods-VocalTrainerMacOSUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BDCCFD737AB64B7BA8538111A0190289 /* Debug */,
-				F0A4ED3DFB51A4E6444FCAF9BC3CCC7A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		246601745A9077C6B3F85BD5CE69CE3B /* Build configuration list for PBXNativeTarget "Pods-VocalTrainerMacOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5EA9BE8481813F61B79185602ECEA183 /* Debug */,
-				F4C50E701CB61B3F50BF56A6604F3126 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				430C0A1F2A9CB52955BEC7CE69B7B629 /* Debug */,
 				597E092427DF423992C59C814880FE96 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B40F408122DA90C7E8A8F13CEF97ACFF /* Build configuration list for PBXNativeTarget "SwiftHEXColors" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E20838B3AE995711171003C17E89CD42 /* Debug */,
+				944D5D39391794DF68CD5021E80DACB4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F1F1D0C3D81BC141D2E91605109F77CC /* Build configuration list for PBXNativeTarget "Pods-VocalTrainer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E2F80BF873F8CF75F38EF7182CD9C80C /* Debug */,
+				CD0259020EC7AA7AE62E6655AE6731A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

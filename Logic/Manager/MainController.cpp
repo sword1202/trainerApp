@@ -87,7 +87,6 @@ AudioInputManager *MainController::getAudioInputManager() const {
 MainController::~MainController() {
     delete mvxPlayer;
     delete audioInputManager;
-    delete playbackBoundsSelectionController;
 }
 
 MvxPlayer *MainController::getPlayer() const {
@@ -97,7 +96,7 @@ MvxPlayer *MainController::getPlayer() const {
 void MainController::setWorkspaceController(WorkspaceController *workspaceController) {
     assert(!this->workspaceController);
     workspaceController->setVocalPart(mvxPlayer->getVocalPart());
-    workspaceController->setIntervalsPerSecond(mvxPlayer->getBeatsPerMinute() / 60.0);
+    workspaceController->setBeatsPerSecond(mvxPlayer->getBeatsPerMinute() / 60.0);
     workspaceController->setTotalDurationInSeconds(mvxPlayer->getDuration());
     workspaceController->setInstrumentalTrackSamples(
             this->mvxPlayer->getMvxFile().getInstrumentalPreviewSamples());
@@ -126,18 +125,8 @@ void MainController::setWorkspaceController(WorkspaceController *workspaceContro
         });
         this->workspaceController->setPlaybackBounds(mvxPlayer->getBounds());
 
-        playbackBoundsSelectionController = new PlaybackBoundsSelectionController(this->workspaceController, mvxPlayer);
-
         workspaceControllerReadyCallbacksQueue.process();
-        workspaceController->setSeekUpdatedInsideListener([=] (float seek) {
-            mvxPlayer->setSeek(seek);
-        });
     });
-}
-
-PlaybackBoundsSelectionController *MainController::getPlaybackBoundsSelectionController() const {
-    assert(playbackBoundsSelectionController != nullptr);
-    return playbackBoundsSelectionController;
 }
 
 void MainController::generateRecording(MvxFile *out) {

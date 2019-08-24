@@ -1,0 +1,6 @@
+framework module Pods_VocalTrainer {
+  umbrella header "Pods-VocalTrainer-umbrella.h"
+
+  export *
+  module * { export * }
+}

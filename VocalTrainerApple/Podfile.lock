@@ -1,3 +1,16 @@
-PODFILE CHECKSUM: 5aef3232ac3104f5766b120eaea1672f72fe503f
+PODS:
+  - SwiftHEXColors (1.2.0)
+
+DEPENDENCIES:
+  - SwiftHEXColors
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - SwiftHEXColors
+
+SPEC CHECKSUMS:
+  SwiftHEXColors: a4ebe93a70890a9fa124e205dd785cc7552273b4
+
+PODFILE CHECKSUM: 7b0b5c50b8668646bbb9fac0bde282c74ae08243
 
 COCOAPODS: 1.7.0

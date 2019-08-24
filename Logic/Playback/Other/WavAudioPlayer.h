@@ -7,6 +7,7 @@
 #define VOCALTRAINER_WAVAUDIOPLAYER_H
 
 #include "BaseRawPcmAudioDataPlayer.h"
+#include "AudioData.h"
 #include <string>
 
 class WavAudioPlayer : public BaseRawPcmAudioDataPlayer {
@@ -17,7 +18,7 @@ protected:
 public:
     WavAudioPlayer();
 
-    virtual void setAudioData(const std::string *audioData);
+    virtual void setAudioData(const AudioData *audioData);
 };
 
 

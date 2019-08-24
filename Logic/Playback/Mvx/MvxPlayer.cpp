@@ -18,7 +18,7 @@
 #include "MvxPlayerPrepareException.h"
 #include <iostream>
 #include <memory>
-#include <PitchesMutableList.h>
+#include "PitchesMutableList.h"
 #include "PrepareFailedException.h"
 
 using namespace CppUtils;
@@ -52,6 +52,12 @@ MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
                 // Cut tonality changes
                 auto iter = tonalityChanges.upper_bound(seek);
                 tonalityChanges.erase(iter, tonalityChanges.end());
+            }
+
+            auto currentSnapshot = mvxFile->getLyrics().getCurrentSnapshot(seek);
+            if (lastLyricsSnapshot != currentSnapshot) {
+                lyricsChangedListeners.executeAll();
+                lastLyricsSnapshot = currentSnapshot;
             }
         });
 
@@ -438,12 +444,12 @@ bool MvxPlayer::hasLyrics() const {
 }
 
 int MvxPlayer::getLyricsLinesCount() const {
-    return mvxFile->getLyrics().getLinesCount();
+    return mvxFile->getLyrics().getNumberOfParts();
 }
 
-const std::string& MvxPlayer::getLyricsTextAtLine(int lineIndex) const {
+const std::string& MvxPlayer::getLyricsTextForPart(int partIndex) const {
     double seek = getSeek();
-    return mvxFile->getLyrics().getCurrentLyricsTextAtLine(lineIndex, seek);
+    return mvxFile->getLyrics().getCurrentLyricsTextForPart(partIndex, seek);
 }
 
 const AudioPlayer &MvxPlayer::getInstrumentalPlayer() const {

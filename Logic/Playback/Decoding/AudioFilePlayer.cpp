@@ -45,7 +45,7 @@ AudioFilePlayer::AudioFilePlayer() {
     initSoundTouch();
 }
 
-void AudioFilePlayer::setAudioData(const std::string* audioData) {
+void AudioFilePlayer::setAudioData(const AudioData* audioData) {
     destroy();
     this->audioData = audioData;
     setBufferSeek(0);
@@ -58,6 +58,6 @@ void AudioFilePlayer::destroy() {
     }
 }
 
-const std::string* AudioFilePlayer::getAudioData() const {
+const AudioData* AudioFilePlayer::getAudioData() const {
     return audioData;
 }
