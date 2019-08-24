@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "metronome.png",
+      "filename" : "a@2x.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "metronome@2x.png",
+      "filename" : "a@2x.png",
       "scale" : "2x"
     },
     {

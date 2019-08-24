@@ -12,6 +12,7 @@ class HeaderViewController : NSViewController, ConfigurableWithProjectController
     @IBOutlet private weak var lyricsButton: HeaderButton!
     @IBOutlet private weak var tracksButton: HeaderButton!
     @IBOutlet private weak var metronomeButton: HeaderButton!
+    @IBOutlet private weak var playbackControlsView: NSView!
 
     func configure(projectController: ProjectControllerBridge) {
         self.projectController = projectController
@@ -21,6 +22,8 @@ class HeaderViewController : NSViewController, ConfigurableWithProjectController
     override func viewDidLoad() {
         super.viewDidLoad()
         updateButtonState(button: lyricsButton, value: projectController.lyricsVisible)
+        updateButtonState(button: metronomeButton, value: projectController.metronomeEnabled)
+        updateButtonState(button: tracksButton, value: projectController.tracksVisible)
 
         lyricsButton.handler = {
             self.projectController.toggleLyricsVisibility()
@@ -33,6 +36,12 @@ class HeaderViewController : NSViewController, ConfigurableWithProjectController
         tracksButton.handler = {
             self.projectController.toggleTracksVisibility()
         }
+
+        playbackControlsView.wantsLayer = true
+        playbackControlsView.layer?.backgroundColor = NSColor(hex: 0xC2CFFE)!.cgColor
+        playbackControlsView.layer?.cornerRadius = 22.5
+        // For some reasons the shadow is displayed upside down, so revert it
+        HeaderUiUtils.applyShadow(view: self.playbackControlsView, cornerRadius: 22.5, revert: true);
     }
 
     private func updateButtonState(button: HeaderButton, value: Bool) {

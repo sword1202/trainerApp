@@ -192,7 +192,6 @@ public:
 }
 
 - (void)toggleLyricsVisibility {
-    printf("uuuuu");
     _cpp->setLyricsVisible(!_cpp->isLyricsVisible());
 }
 

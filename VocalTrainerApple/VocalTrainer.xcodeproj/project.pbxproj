@@ -11,6 +11,7 @@
 		71AD2137071D834E915C2D44 /* HeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2AD0DC2A1BD1B9B058AA /* HeaderViewController.swift */; };
 		71AD221A602A44D64B950BFA /* ProjectWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD21C74A29AB6B2D6F7582 /* ProjectWindowController.swift */; };
 		71AD235952A821616CC9617E /* HeaderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2436A9C6F6406C50A7E6 /* HeaderButton.swift */; };
+		71AD24EFBDE80511DB2613E8 /* HeaderUiUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2331042B9D6CB1A4E6E7 /* HeaderUiUtils.swift */; };
 		71AD26ED98C8F823F5F621DB /* CGRect+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2BA3FE6C79FF0FAED7B1 /* CGRect+Extensions.swift */; };
 		71AD27AD436983C0D551C6D6 /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD22FAC42E30FA831A8953 /* ProjectViewController.swift */; };
 		71AD27E82582B5E20A3D1F6D /* InitializationManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 71AD29605A6EF90E1D9E2F98 /* InitializationManager.mm */; };
@@ -21,6 +22,7 @@
 		71AD2B086E0F0CA5D32FCADF /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2D6D43DDF8B4D35BD451 /* UIConstants.swift */; };
 		71AD2BC467EDBF0B234F63B7 /* ConfigurableWithProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2D9271E270F476840FA3 /* ConfigurableWithProjectController.swift */; };
 		71AD2BCD52424995B74D903F /* ColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD29FFCDB98EB9A00519EB /* ColorView.swift */; };
+		71AD2BDDA8810E1A47C09103 /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2884FCDE9A29BCA80D33 /* UI.swift */; };
 		71AD2D51C0A891A5F7D1661E /* WorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2BBFFA971D22C5AD524D /* WorkspaceDrawerView.mm */; };
 		ACF18AD122EC7EBF008E7DAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF18AD022EC7EBF008E7DAA /* AppDelegate.swift */; };
 		ACF18AD522EC7EBF008E7DAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACF18AD422EC7EBF008E7DAA /* Assets.xcassets */; };
@@ -47,9 +49,11 @@
 		67748B5386791DDBEBEF3101 /* Pods-VocalTrainerMacOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VocalTrainerMacOS.debug.xcconfig"; path = "Target Support Files/Pods-VocalTrainerMacOS/Pods-VocalTrainerMacOS.debug.xcconfig"; sourceTree = "<group>"; };
 		71AD21C74A29AB6B2D6F7582 /* ProjectWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectWindowController.swift; sourceTree = "<group>"; };
 		71AD22FAC42E30FA831A8953 /* ProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
+		71AD2331042B9D6CB1A4E6E7 /* HeaderUiUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderUiUtils.swift; sourceTree = "<group>"; };
 		71AD2436A9C6F6406C50A7E6 /* HeaderButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderButton.swift; sourceTree = "<group>"; };
 		71AD2651F7102F1CF5FE06DA /* Workspace-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Workspace-Bridging-Header.h"; sourceTree = "<group>"; };
 		71AD27F400CFEF8EA89FB180 /* WorkspaceDrawerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceDrawerView.h; sourceTree = "<group>"; };
+		71AD2884FCDE9A29BCA80D33 /* UI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
 		71AD29605A6EF90E1D9E2F98 /* InitializationManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InitializationManager.mm; sourceTree = "<group>"; };
 		71AD29FFCDB98EB9A00519EB /* ColorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorView.swift; sourceTree = "<group>"; };
 		71AD2ACE3A195D54F918916A /* InitializationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitializationManager.h; sourceTree = "<group>"; };
@@ -105,8 +109,17 @@
 			children = (
 				71AD2F9D33ABB2C5BC8751F2 /* Extensions */,
 				71AD2D6D43DDF8B4D35BD451 /* UIConstants.swift */,
+				71AD2884FCDE9A29BCA80D33 /* UI.swift */,
 			);
 			path = Generic;
+			sourceTree = "<group>";
+		};
+		71AD2148A0A936CEF229EC25 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				71AD2331042B9D6CB1A4E6E7 /* HeaderUiUtils.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		71AD21DA5644C4A3E72E8680 /* Extesnions */ = {
@@ -158,6 +171,7 @@
 				71AD2AD0DC2A1BD1B9B058AA /* HeaderViewController.swift */,
 				71AD22E26BEB85EAB8596ACE /* View */,
 				71AD2D9271E270F476840FA3 /* ConfigurableWithProjectController.swift */,
+				71AD2148A0A936CEF229EC25 /* Utils */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -397,6 +411,8 @@
 				71AD235952A821616CC9617E /* HeaderButton.swift in Sources */,
 				71AD29577693616F0CF11B4E /* CALayer+Extensions.swift in Sources */,
 				71AD2BC467EDBF0B234F63B7 /* ConfigurableWithProjectController.swift in Sources */,
+				71AD2BDDA8810E1A47C09103 /* UI.swift in Sources */,
+				71AD24EFBDE80511DB2613E8 /* HeaderUiUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

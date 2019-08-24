@@ -799,10 +799,90 @@
                                             <real value="3.4028234663852886e+38"/>
                                         </customSpacing>
                                     </stackView>
+                                    <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="1" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q4N-7H-n3o">
+                                        <rect key="frame" x="588" y="15" width="264" height="45"/>
+                                        <subviews>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FFT-Ei-hiU">
+                                                <rect key="frame" x="0.0" y="0.0" width="52" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="45" id="73a-fc-RwX"/>
+                                                    <constraint firstAttribute="width" constant="52" id="qtw-ES-e5z"/>
+                                                </constraints>
+                                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="goback" imagePosition="overlaps" alignment="center" alternateImage="gobackSelected" imageScaling="proportionallyDown" inset="2" id="fzZ-20-aLO">
+                                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                            </button>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="V0c-hO-Eqx">
+                                                <rect key="frame" x="53" y="0.0" width="52" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="45" id="2HG-pA-f8x"/>
+                                                    <constraint firstAttribute="width" constant="52" id="vys-Tq-d5N"/>
+                                                </constraints>
+                                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="goforward" imagePosition="overlaps" alignment="center" alternateImage="goforwardSelected" imageScaling="proportionallyDown" inset="2" id="Z8A-lO-aHM">
+                                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                            </button>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="P2T-cZ-F6J">
+                                                <rect key="frame" x="106" y="0.0" width="52" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="45" id="4vU-nZ-Zqe"/>
+                                                    <constraint firstAttribute="width" constant="52" id="JfD-7f-7am"/>
+                                                </constraints>
+                                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="tobegining" imagePosition="overlaps" alignment="center" alternateImage="tobeginingSelected" imageScaling="proportionallyDown" inset="2" id="CU0-ed-s5Q">
+                                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                            </button>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ce1-Ki-apP">
+                                                <rect key="frame" x="159" y="0.0" width="52" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="45" id="DZt-uO-36V"/>
+                                                    <constraint firstAttribute="width" constant="52" id="bfQ-vH-ymn"/>
+                                                </constraints>
+                                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="play" imagePosition="overlaps" alignment="center" alternateImage="playSelected" imageScaling="proportionallyDown" inset="2" id="Zvj-zY-WS1">
+                                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                            </button>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bZD-Xl-0NP">
+                                                <rect key="frame" x="212" y="0.0" width="52" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="45" id="KZD-Yw-5ua"/>
+                                                    <constraint firstAttribute="width" constant="52" id="NCP-C4-udP"/>
+                                                </constraints>
+                                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="bounds" imagePosition="overlaps" alignment="center" alternateImage="boundsSelected" imageScaling="proportionallyDown" inset="2" id="5aF-6Z-t4D">
+                                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="Evz-x3-m4u"/>
+                                            <constraint firstAttribute="width" constant="264" id="sbA-kh-ZhP"/>
+                                        </constraints>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="q4N-7H-n3o" firstAttribute="centerY" secondItem="vkI-Jd-ZJV" secondAttribute="centerY" id="6mQ-wD-tUG"/>
                                     <constraint firstItem="eKf-dg-hJX" firstAttribute="centerY" secondItem="vkI-Jd-ZJV" secondAttribute="centerY" id="Hbi-n2-71x"/>
                                     <constraint firstAttribute="height" constant="75" id="JmW-vZ-uTz"/>
+                                    <constraint firstItem="q4N-7H-n3o" firstAttribute="centerX" secondItem="vkI-Jd-ZJV" secondAttribute="centerX" id="Rmf-yc-3v8"/>
                                     <constraint firstItem="eKf-dg-hJX" firstAttribute="leading" secondItem="vkI-Jd-ZJV" secondAttribute="leading" constant="23" id="YuN-VS-5Ov"/>
                                     <constraint firstItem="eKf-dg-hJX" firstAttribute="leading" secondItem="vkI-Jd-ZJV" secondAttribute="leading" constant="23" id="eSm-M5-Xn7"/>
                                 </constraints>
@@ -837,19 +917,30 @@
                     <connections>
                         <outlet property="lyricsButton" destination="fxf-pN-2Ct" id="gMy-0f-zGr"/>
                         <outlet property="metronomeButton" destination="3iB-La-dym" id="5Ez-pO-jJ2"/>
+                        <outlet property="playbackControlsView" destination="q4N-7H-n3o" id="erx-7a-f80"/>
                         <outlet property="tracksButton" destination="8Mh-fx-G8d" id="8lr-LB-UVp"/>
                     </connections>
                 </viewController>
                 <customObject id="4JL-xa-ddL" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1203" y="598.5"/>
+            <point key="canvasLocation" x="1203" y="598"/>
         </scene>
     </scenes>
     <resources>
+        <image name="bounds" width="70" height="60"/>
+        <image name="boundsSelected" width="70" height="60"/>
+        <image name="goback" width="70" height="60"/>
+        <image name="gobackSelected" width="70" height="60"/>
+        <image name="goforward" width="70" height="60"/>
+        <image name="goforwardSelected" width="70" height="60"/>
         <image name="lyrics" width="60" height="50"/>
         <image name="lyricsSelected" width="60" height="50"/>
         <image name="metronome" width="60" height="50"/>
         <image name="metronomeSelected" width="60" height="50"/>
+        <image name="play" width="70" height="60"/>
+        <image name="playSelected" width="70" height="60"/>
+        <image name="tobegining" width="70" height="60"/>
+        <image name="tobeginingSelected" width="70" height="60"/>
         <image name="tracksButton" width="60" height="50"/>
         <image name="tracksButtonSelected" width="60" height="50"/>
     </resources>

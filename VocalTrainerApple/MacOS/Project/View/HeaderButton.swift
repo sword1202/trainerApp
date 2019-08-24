@@ -12,14 +12,7 @@ class HeaderButton : NSButton {
         if self.state == .on {
             self.layer?.removeShadow()
         } else {
-            self.layer?.applySketchShadow(
-                    color: NSColor(hex: 0x9DA3DC)!,
-                    alpha: 0.8,
-                    x: 0,
-                    y: 2,
-                    blur: 3,
-                    spread: 0,
-                    cornerRadius: 7.5)
+            HeaderUiUtils.applyShadow(view: self, cornerRadius: 7.5)
         }
     }
 

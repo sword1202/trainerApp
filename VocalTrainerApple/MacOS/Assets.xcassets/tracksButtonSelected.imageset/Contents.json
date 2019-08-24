@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "a.png",
+      "filename" : "a@2x.png",
       "scale" : "1x"
     },
     {
