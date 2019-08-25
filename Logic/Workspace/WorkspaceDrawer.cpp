@@ -1023,3 +1023,7 @@ void WorkspaceDrawer::initImages() {
     drawer->setTextImagesFactory(textImagesFactory);
     drawer->setTextDrawStrategy(Drawer::DRAW_USING_PRE_BUILD_IMAGES);
 }
+
+bool WorkspaceDrawer::isBoundsSelectionEnabled() const {
+    return boundsSelectionController->isBoundsSelectionEnabled();
+}

@@ -113,6 +113,12 @@ public:
             [delegate projectControllerWithDidChangeZoom:value];
         }
     }
+
+    void onRewindStatusChanged(bool rewindRunning, bool backward) override {
+        for (auto delegate : delegates) {
+            [delegate projectControllerWithDidChangeRewindStatus:rewindRunning isBackward:backward];
+        }
+    }
 };
 
 @implementation ProjectControllerBridge {
@@ -159,16 +165,16 @@ public:
     return _cpp->getMaxZoom();
 }
 
-- (void)play {
-    _cpp->play();
-}
-
-- (void)stop {
-    _cpp->stop();
-}
-
 - (void)setBoundsSelectionEnabled:(BOOL)boundsSelectionEnabled {
     _cpp->setBoundsSelectionEnabled(boundsSelectionEnabled);
+}
+
+- (void)togglePlay {
+    _cpp->togglePlay();
+}
+
+- (void)toggleRewindWithBackward:(BOOL)backward {
+    _cpp->toggleRewind(backward);
 }
 
 - (void)setVocalVolume:(float)value {
@@ -199,6 +205,11 @@ public:
     _cpp->setMetronomeEnabled(!_cpp->isMetronomeEnabled());
 }
 
+- (void)toggleBoundsSelectionEnabled {
+    _cpp->setBoundsSelectionEnabled(!_cpp->isBoundsSelectionEnabled());
+}
+
+
 - (bool)lyricsVisible {
     return _cpp->isLyricsVisible();
 }
@@ -207,6 +218,14 @@ public:
 }
 - (bool)metronomeEnabled {
     return _cpp->isMetronomeEnabled();
+}
+
+- (bool)boundsSelectionEnabled {
+    return _cpp->isBoundsSelectionEnabled();
+}
+
+- (bool)isPlaying {
+    return _cpp->isPlaying();
 }
 
 - (void)dealloc {

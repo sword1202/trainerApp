@@ -21,4 +21,5 @@ import Foundation
     func projectControllerUpdate(inputSensitivity: Float)
     func projectControllerUpdate(hasSaveIndicator: Bool)
     func projectController(didChangeZoom: Float)
+    func projectController(didChangeRewindStatus running: Bool, isBackward: Bool)
 }

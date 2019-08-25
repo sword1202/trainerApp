@@ -75,7 +75,7 @@ static const int MP3_FRAME_COMMON_SIZE = 1152;
 
 DecodedTrack
 AudioDecoder::decodeAllIntoRawPcm(const AudioData &data, const std::function<void(float)> &progressListener,
-                                  OperationCancelerPtr operationCanceller) {
+                                  CppUtils::OperationCancelerPtr operationCanceller) {
     std::unique_ptr<AudioDecoder> decoder(AudioDecoder::create());
     decoder->open(&data);
 

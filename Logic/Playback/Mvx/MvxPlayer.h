@@ -22,6 +22,7 @@
 #include "WavAudioPlayer.h"
 #include <array>
 #include "AudioAverageInputLevelMonitor.h"
+#include "Timer.h"
 
 class MvxPlayer : public PlayingPitchSequence {
 private:
@@ -47,12 +48,13 @@ private:
     // Save tonality changes while playback, not used with recordings
     std::map<double, int> tonalityChanges;
 
+    AudioAverageInputLevelMonitor* recordingLevelMonitor = nullptr;
+    Lyrics::Snapshot lastLyricsSnapshot;
+    CppUtils::Timer rewindTimer;
+    bool backwardRewind = false;
+
     void updateMetronomeVolume();
     void pausePlayer(AudioPlayer* player);
-
-    AudioAverageInputLevelMonitor* recordingLevelMonitor = nullptr;
-
-    Lyrics::Snapshot lastLyricsSnapshot;
 public:
     CppUtils::ListenersSet<bool> isPlayingChangedListeners;
     CppUtils::ListenersSet<> stopRequestedListeners;
@@ -145,6 +147,12 @@ public:
     const VocalPartAudioPlayer& getVocalPartPlayer() const;
 
     const std::map<double, int> &getTonalityChanges() const;
+
+    void startBackwardRewind(int changeIntervalInMilliseconds);
+    void startForwardRewind(int changeIntervalInMilliseconds);
+    void startRewind(int changeIntervalInMilliseconds, bool backward);
+    void stopRewind();
+    bool isRewindRunning(bool* backward = nullptr) const;
 };
 
 

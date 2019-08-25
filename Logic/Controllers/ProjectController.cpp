@@ -8,6 +8,8 @@
 
 using namespace CppUtils;
 
+static int REWIND_INTERVAL = 100;
+
 ProjectController::ProjectController(ProjectControllerDelegate* delegate) : delegate(delegate) {
     auto* model = ApplicationModel::instance();
     player = model->getPlayer();
@@ -234,4 +236,35 @@ float ProjectController::getMaxZoom() const {
 void ProjectController::setBoundsSelectionEnabled(bool boundsSelectionEnabled) {
     assert(workspaceController && "call setWorkspaceController before setBoundsSelectionEnabled");
     workspaceController->setBoundsSelectionEnabled(boundsSelectionEnabled);
+}
+
+bool ProjectController::isBoundsSelectionEnabled() const {
+    return workspaceController == nullptr ? false : workspaceController->isBoundsSelectionEnabled();
+}
+
+void ProjectController::togglePlay() {
+    if (isPlaying()) {
+        stop();
+    } else {
+        play();
+    }
+}
+
+bool ProjectController::isPlaying() const {
+    return player->isPlaying();
+}
+
+void ProjectController::toggleRewind(bool backward) {
+    bool isCurrentRewindBackward;
+    if (player->isRewindRunning(&isCurrentRewindBackward)) {
+        player->stopRewind();
+        delegate->onRewindStatusChanged(false, isCurrentRewindBackward);
+        if (isCurrentRewindBackward != backward) {
+            player->startRewind(REWIND_INTERVAL, backward);
+            delegate->onRewindStatusChanged(true, backward);
+        }
+    } else {
+        player->startRewind(REWIND_INTERVAL, backward);
+        delegate->onRewindStatusChanged(true, backward);
+    }
 }

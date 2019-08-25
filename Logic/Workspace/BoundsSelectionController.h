@@ -27,6 +27,8 @@ public:
             WorkspaceDrawer *workspaceDrawer);
 
     void setBoundsSelectionEnabled(bool boundsSelectionEnabled);
+    bool isBoundsSelectionEnabled() const;
+
     void update();
 };
 

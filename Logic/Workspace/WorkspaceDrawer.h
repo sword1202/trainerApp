@@ -244,6 +244,7 @@ public:
 
     void setDelegate(WorkspaceControllerDelegate *delegate) override;
     void setBoundsSelectionEnabled(bool boundsSelectionEnabled) override;
+    bool isBoundsSelectionEnabled() const override;
 };
 
 

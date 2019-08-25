@@ -51,6 +51,7 @@ public:
     virtual void setZoom(float zoom) = 0;
     virtual void setDelegate(WorkspaceControllerDelegate* delegate) = 0;
     virtual void setBoundsSelectionEnabled(bool boundsSelectionEnabled) = 0;
+    virtual bool isBoundsSelectionEnabled() const = 0;
     virtual ~WorkspaceController() = default;
 };
 

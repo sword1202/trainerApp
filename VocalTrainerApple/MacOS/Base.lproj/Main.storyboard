@@ -802,59 +802,59 @@
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="1" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q4N-7H-n3o">
                                         <rect key="frame" x="588" y="15" width="264" height="45"/>
                                         <subviews>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FFT-Ei-hiU">
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FFT-Ei-hiU" userLabel="Backward" customClass="ToggleButton" customModule="VocalTrainer" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="52" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="73a-fc-RwX"/>
                                                     <constraint firstAttribute="width" constant="52" id="qtw-ES-e5z"/>
                                                 </constraints>
-                                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="goback" imagePosition="overlaps" alignment="center" alternateImage="gobackSelected" imageScaling="proportionallyDown" inset="2" id="fzZ-20-aLO">
+                                                <buttonCell key="cell" type="inline" bezelStyle="inline" image="goback" imagePosition="overlaps" alignment="center" alternateImage="gobackSelected" imageScaling="proportionallyDown" inset="2" id="fzZ-20-aLO">
                                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                                                    <font key="font" metaFont="system"/>
+                                                    <font key="font" metaFont="smallSystemBold"/>
                                                 </buttonCell>
                                             </button>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="V0c-hO-Eqx">
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="V0c-hO-Eqx" userLabel="Forward" customClass="ToggleButton" customModule="VocalTrainer" customModuleProvider="target">
                                                 <rect key="frame" x="53" y="0.0" width="52" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="2HG-pA-f8x"/>
                                                     <constraint firstAttribute="width" constant="52" id="vys-Tq-d5N"/>
                                                 </constraints>
-                                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="goforward" imagePosition="overlaps" alignment="center" alternateImage="goforwardSelected" imageScaling="proportionallyDown" inset="2" id="Z8A-lO-aHM">
+                                                <buttonCell key="cell" type="inline" bezelStyle="inline" image="goforward" imagePosition="overlaps" alignment="center" alternateImage="goforwardSelected" imageScaling="proportionallyDown" inset="2" id="Z8A-lO-aHM">
                                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                                                    <font key="font" metaFont="system"/>
+                                                    <font key="font" metaFont="smallSystemBold"/>
                                                 </buttonCell>
                                             </button>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="P2T-cZ-F6J">
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="P2T-cZ-F6J" userLabel="ToBegining" customClass="Button" customModule="VocalTrainer" customModuleProvider="target">
                                                 <rect key="frame" x="106" y="0.0" width="52" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="4vU-nZ-Zqe"/>
                                                     <constraint firstAttribute="width" constant="52" id="JfD-7f-7am"/>
                                                 </constraints>
                                                 <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="tobegining" imagePosition="overlaps" alignment="center" alternateImage="tobeginingSelected" imageScaling="proportionallyDown" inset="2" id="CU0-ed-s5Q">
-                                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                                    <behavior key="behavior" lightByContents="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                             </button>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ce1-Ki-apP">
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ce1-Ki-apP" userLabel="Play" customClass="ToggleButton" customModule="VocalTrainer" customModuleProvider="target">
                                                 <rect key="frame" x="159" y="0.0" width="52" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="DZt-uO-36V"/>
                                                     <constraint firstAttribute="width" constant="52" id="bfQ-vH-ymn"/>
                                                 </constraints>
-                                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="play" imagePosition="overlaps" alignment="center" alternateImage="playSelected" imageScaling="proportionallyDown" inset="2" id="Zvj-zY-WS1">
+                                                <buttonCell key="cell" type="inline" bezelStyle="inline" image="play" imagePosition="overlaps" alignment="center" alternateImage="playSelected" imageScaling="proportionallyDown" inset="2" id="Zvj-zY-WS1">
                                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                                                    <font key="font" metaFont="system"/>
+                                                    <font key="font" metaFont="smallSystemBold"/>
                                                 </buttonCell>
                                             </button>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bZD-Xl-0NP">
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bZD-Xl-0NP" userLabel="Bounds" customClass="ToggleButton" customModule="VocalTrainer" customModuleProvider="target">
                                                 <rect key="frame" x="212" y="0.0" width="52" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="KZD-Yw-5ua"/>
                                                     <constraint firstAttribute="width" constant="52" id="NCP-C4-udP"/>
                                                 </constraints>
-                                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="bounds" imagePosition="overlaps" alignment="center" alternateImage="boundsSelected" imageScaling="proportionallyDown" inset="2" id="5aF-6Z-t4D">
+                                                <buttonCell key="cell" type="inline" bezelStyle="inline" image="bounds" imagePosition="only" alignment="center" alternateImage="boundsSelected" imageScaling="proportionallyDown" inset="2" id="5aF-6Z-t4D">
                                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                                                    <font key="font" metaFont="system"/>
+                                                    <font key="font" metaFont="smallSystemBold"/>
                                                 </buttonCell>
                                             </button>
                                         </subviews>
@@ -915,9 +915,14 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backwardButton" destination="FFT-Ei-hiU" id="nkM-fq-xSU"/>
+                        <outlet property="boundsButton" destination="bZD-Xl-0NP" id="bUz-x4-QlK"/>
+                        <outlet property="forwardButton" destination="V0c-hO-Eqx" id="BMT-BM-PJa"/>
                         <outlet property="lyricsButton" destination="fxf-pN-2Ct" id="gMy-0f-zGr"/>
                         <outlet property="metronomeButton" destination="3iB-La-dym" id="5Ez-pO-jJ2"/>
+                        <outlet property="playButton" destination="ce1-Ki-apP" id="Y7G-EE-rPH"/>
                         <outlet property="playbackControlsView" destination="q4N-7H-n3o" id="erx-7a-f80"/>
+                        <outlet property="toBeginningButton" destination="P2T-cZ-F6J" id="cT6-0i-Daw"/>
                         <outlet property="tracksButton" destination="8Mh-fx-G8d" id="8lr-LB-UVp"/>
                     </connections>
                 </viewController>

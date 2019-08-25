@@ -27,13 +27,16 @@
 @property (readonly) bool lyricsVisible;
 @property (readonly) bool tracksVisible;
 @property (readonly) bool metronomeEnabled;
+@property (readonly) bool boundsSelectionEnabled;
+@property (readonly) bool isPlaying;
 
 - (void)toggleTracksVisibility;
 - (void)toggleLyricsVisibility;
 - (void)toggleMetronomeEnabled;
+- (void)toggleBoundsSelectionEnabled;
 
-- (void)play;
-- (void)stop;
+- (void)togglePlay;
+- (void)toggleRewindWithBackward:(BOOL)backward;
 
 - (void)setVocalVolume:(float)value;
 - (void)setInputSensitivity:(float)value;

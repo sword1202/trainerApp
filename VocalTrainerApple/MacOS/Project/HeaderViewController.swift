@@ -12,7 +12,13 @@ class HeaderViewController : NSViewController, ConfigurableWithProjectController
     @IBOutlet private weak var lyricsButton: HeaderButton!
     @IBOutlet private weak var tracksButton: HeaderButton!
     @IBOutlet private weak var metronomeButton: HeaderButton!
+
     @IBOutlet private weak var playbackControlsView: NSView!
+    @IBOutlet private weak var playButton: ToggleButton!
+    @IBOutlet private weak var boundsButton: ToggleButton!
+    @IBOutlet private weak var backwardButton: ToggleButton!
+    @IBOutlet private weak var forwardButton: ToggleButton!
+    @IBOutlet private weak var toBeginningButton: Button!
 
     func configure(projectController: ProjectControllerBridge) {
         self.projectController = projectController
@@ -24,17 +30,19 @@ class HeaderViewController : NSViewController, ConfigurableWithProjectController
         updateButtonState(button: lyricsButton, value: projectController.lyricsVisible)
         updateButtonState(button: metronomeButton, value: projectController.metronomeEnabled)
         updateButtonState(button: tracksButton, value: projectController.tracksVisible)
+        updateButtonState(button: playButton, value: projectController.isPlaying)
+        updateButtonState(button: boundsButton, value: projectController.boundsSelectionEnabled)
 
-        lyricsButton.handler = {
-            self.projectController.toggleLyricsVisibility()
+        lyricsButton.handler = { [weak self] in
+            self?.projectController.toggleLyricsVisibility()
         }
 
-        metronomeButton.handler = {
-            self.projectController.toggleMetronomeEnabled()
+        metronomeButton.handler = { [weak self] in
+            self?.projectController.toggleMetronomeEnabled()
         }
 
-        tracksButton.handler = {
-            self.projectController.toggleTracksVisibility()
+        tracksButton.handler = { [weak self] in
+            self?.projectController.toggleTracksVisibility()
         }
 
         playbackControlsView.wantsLayer = true
@@ -42,9 +50,25 @@ class HeaderViewController : NSViewController, ConfigurableWithProjectController
         playbackControlsView.layer?.cornerRadius = 22.5
         // For some reasons the shadow is displayed upside down, so revert it
         HeaderUiUtils.applyShadow(view: self.playbackControlsView, cornerRadius: 22.5, revert: true);
+
+        playButton.handler = { [weak self] in
+            self?.projectController.togglePlay()
+        }
+
+        boundsButton.handler = { [weak self] in
+            self?.projectController.toggleBoundsSelectionEnabled()
+        }
+        
+        forwardButton.handler = { [weak self] in
+            self?.projectController.toggleRewind(withBackward: false)
+        }
+
+        backwardButton.handler = { [weak self] in
+            self?.projectController.toggleRewind(withBackward: true)
+        }
     }
 
-    private func updateButtonState(button: HeaderButton, value: Bool) {
+    private func updateButtonState(button: ToggleButton, value: Bool) {
         button.state = value ? .on : .off
     }
 
@@ -73,9 +97,11 @@ extension HeaderViewController : ProjectControllerBridgeDelegate {
     }
 
     public func projectControllerPlaybackDidStart() {
+        self.playButton.state = .on
     }
 
     public func projectControllerPlaybackDidStop() {
+        self.playButton.state = .off
     }
 
     public func projectController(didChangeHasLyrics hasLyrics: Bool) {
@@ -100,5 +126,10 @@ extension HeaderViewController : ProjectControllerBridgeDelegate {
     }
 
     public func projectController(didChangeZoom: Float) {
+    }
+
+    public func projectController(didChangeRewindStatus running: Bool, isBackward: Bool) {
+        let button = (isBackward ? backwardButton : forwardButton)!
+        updateButtonState(button: button, value: running);
     }
 }

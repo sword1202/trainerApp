@@ -79,7 +79,7 @@ void MvxPlayer::setSource(MvxFile *file, bool destroyMvxFileOnDestructor) {
     this->destroyMvxFileOnDestructor = destroyMvxFileOnDestructor;
     instrumentalPlayer.setAudioData(&mvxFile->getInstrumental());
     vocalPartPianoPlayer.setVocalPart(mvxFile->getVocalPart());
-    players = {&instrumentalPlayer, &vocalPartPianoPlayer, &metronomePlayer};
+    players = {&instrumentalPlayer, &vocalPartPianoPlayer};
     if (mvxFile->isRecording()) {
         pitchesCollection = new PitchesMutableList(mvxFile->getRecordedPitchesFrequencies(),
                                                    mvxFile->getRecordedPitchesTimes());
@@ -362,6 +362,7 @@ void MvxPlayer::setTempoFactor(double tempoFactor) {
 void MvxPlayer::setMetronomeSoundData(std::string &&data) {
     metronomePlayer.setMetronomeAudioData(std::move(data));
     metronomePlayer.prepare();
+    players.push_back(&metronomePlayer);
 }
 
 bool MvxPlayer::isMetronomeEnabled() const {
@@ -470,4 +471,39 @@ void MvxPlayer::editLyrics(const std::function<void(Lyrics *lyrics)> &editAction
     if (lyrics != mvxFile->getLyrics()) {
         lyricsChangedListeners.executeAll();
     }
+}
+
+void MvxPlayer::startBackwardRewind(int changeIntervalInMilliseconds) {
+    startRewind(changeIntervalInMilliseconds, true);
+}
+
+void MvxPlayer::startForwardRewind(int changeIntervalInMilliseconds) {
+    startRewind(changeIntervalInMilliseconds, false);
+}
+
+void MvxPlayer::stopRewind() {
+    assert(rewindTimer.isRunning() && "no rewind running");
+    rewindTimer.stop();
+}
+
+void MvxPlayer::startRewind(int changeIntervalInMilliseconds, bool backward) {
+    assert(!rewindTimer.isRunning() && "forward, backward rewind is already running");
+    backwardRewind = backward;
+    rewindTimer.start(changeIntervalInMilliseconds, [=] {
+        double diff = backward ? -getTactDuration() : getTactDuration();
+        double seek = getSeek() - changeIntervalInMilliseconds / 1000.0 + diff;
+        setSeek(seek);
+    });
+}
+
+bool MvxPlayer::isRewindRunning(bool *backward) const {
+    if (!rewindTimer.isRunning()) {
+        return false;
+    }
+
+    if (backward) {
+        *backward = backwardRewind;
+    }
+
+    return true;
 }

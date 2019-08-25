@@ -9,6 +9,7 @@
 #include "WorkspaceController.h"
 #include "MvxPlayer.h"
 #include "AudioInputManager.h"
+#include "Timer.h"
 
 class ProjectControllerDelegate {
 public:
@@ -27,6 +28,7 @@ public:
     virtual inline void updateInputSensitivity(float value) {}
     virtual inline void updateSaveIndicator(bool hasSaveIndicator) {}
     virtual inline void onZoomChanged(float value) {}
+    virtual inline void onRewindStatusChanged(bool rewindRunning, bool backward) {}
 };
 
 class ProjectController : CppUtils::DestructorQueue, public WorkspaceControllerDelegate {
@@ -35,9 +37,13 @@ class ProjectController : CppUtils::DestructorQueue, public WorkspaceControllerD
     MvxPlayer* player;
     AudioInputManager* audioInputManager;
     bool lyricsVisible = true;
+    CppUtils::Timer timer;
 
     void onStopPlaybackRequested();
     void updateSeek(double seek);
+
+    void play();
+    void stop();
 public:
     explicit ProjectController(ProjectControllerDelegate* delegate);
 
@@ -47,9 +53,11 @@ public:
     const std::string& getArtistNameUtf8();
     const std::string& getSongTitleUtf8();
 
-    void play();
-    void stop();
+    void togglePlay();
+    bool isPlaying() const;
+    void toggleRewind(bool backward);
 
+    bool isBoundsSelectionEnabled() const;
     void setBoundsSelectionEnabled(bool boundsSelectionEnabled);
 
     void setVocalVolume(float value);

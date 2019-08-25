@@ -6,7 +6,7 @@
 import Cocoa
 import SwiftHEXColors
 
-class HeaderButton : NSButton {
+class HeaderButton : ToggleButton {
     private func updateShadow() {
         assert(self.layer != nil)
         if self.state == .on {
@@ -16,8 +16,6 @@ class HeaderButton : NSButton {
         }
     }
 
-    var handler: (()->Void)?
-
     override var layer: CALayer? {
         didSet {
             // Postpone the shadow update or otherwise the shadow is not updated for some reasons
@@ -25,26 +23,6 @@ class HeaderButton : NSButton {
                 self.updateShadow()
             }
         }
-    }
-
-    private func postInit() {
-        self.wantsLayer = true
-        addGestureRecognizer(NSClickGestureRecognizer(target: self, action: #selector(didTap(_:))))
-    }
-
-    override init(frame frameRect: NSRect) {
-        super.init(frame: frameRect)
-        postInit()
-    }
-
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        postInit()
-    }
-
-    @objc func didTap(_:NSGestureRecognizer) {
-        self.state = self.state == .on ? .off : .on
-        handler?()
     }
 
     override var state: StateValue {

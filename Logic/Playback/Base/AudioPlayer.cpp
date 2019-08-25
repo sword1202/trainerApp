@@ -204,6 +204,10 @@ void AudioPlayer::setSeek(double timeStamp) {
     if (timeStamp > durationInSeconds) {
         timeStamp = durationInSeconds;
     }
+
+    if (timeStamp < 0) {
+        timeStamp = 0;
+    }
     
     setBufferSeek(secondsSeekToBufferSeek(timeStamp));
 }

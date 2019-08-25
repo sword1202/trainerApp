@@ -26,6 +26,8 @@ void BoundsSelectionController::stopBoundsSelection() {
 void BoundsSelectionController::setBoundsSelectionEnabled(bool boundsSelectionEnabled) {
     this->boundsSelectionEnabled = boundsSelectionEnabled;
     if (!boundsSelectionEnabled) {
+        boundsSelectionRunning = false;
+        workspaceDrawer->setPlaybackBounds(PlaybackBounds());
         delegate->onPlaybackBoundsChangedByUserEvent(PlaybackBounds());
     } else {
         startBoundsSelection();
@@ -51,4 +53,8 @@ BoundsSelectionController::BoundsSelectionController(BoundsSelectionDelegate *de
         MouseEventsReceiver *mouseEventsReceiver,
         WorkspaceDrawer *workspaceDrawer)
         : delegate(delegate), mouseEventsReceiver(mouseEventsReceiver), workspaceDrawer(workspaceDrawer) {
+}
+
+bool BoundsSelectionController::isBoundsSelectionEnabled() const {
+    return boundsSelectionEnabled;
 }
