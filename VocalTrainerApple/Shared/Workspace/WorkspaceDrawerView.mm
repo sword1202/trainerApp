@@ -6,7 +6,7 @@
 //
 
 #import "WorkspaceDrawerView.h"
-#import "MacOSWorkspaceDrawerSetupDelegate.h"
+#import "MacOSWorkspaceDrawerResourcesProvider.h"
 #import <Logic/WorkspaceDrawer.h>
 #import <Logic/MetalNvgDrawer.h>
 #import <Logic/BaseMouseEventsReceiver.h>
@@ -63,11 +63,11 @@ using namespace CppUtils;
         Drawer* drawer = new MetalNvgDrawer((__bridge void *) self.metalLayer);
 
 #ifdef TARGET_OS_MAC
-        MacOSWorkspaceDrawerSetupDelegate imagesFactory;
+        auto* resourcesProvider = new MacOSWorkspaceDrawerResourcesProvider();
 #else
-#error Define imagesFactory
+#error Define resourcesProvider
 #endif
-        _workspaceDrawer = new WorkspaceDrawer(drawer, _mouseEventsReceiver, imagesFactory, [] {
+        _workspaceDrawer = new WorkspaceDrawer(drawer, _mouseEventsReceiver, resourcesProvider, [] {
             // update workspace drawer automatically, nothing to do here
         });
 

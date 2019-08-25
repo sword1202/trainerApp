@@ -28,6 +28,7 @@
 #endif
 
 using namespace CppUtils;
+using  namespace Math;
 using std::cout;
 using std::endl;
 
@@ -45,8 +46,8 @@ constexpr int MINIMUM_INSTRUMENTAL_TRACK_HEIGHT = 4;
 constexpr float INSTRUMENTAL_TRACK_BOTTOM_MARGIN = 14.f;
 constexpr float PIANO_TRACK_BUTTON_LEFT = 19.f;
 constexpr float INSTRUMENTAL_TRACK_BUTTON_LEFT = 19.f;
-constexpr float TRACK_BUTTON_HEIGHT = 17.f;
-constexpr float INSTRUMENTAL_TRACK_BUTTON_WIDTH = 82.f;
+constexpr float TRACK_BUTTON_HEIGHT = 18.f;
+constexpr float INSTRUMENTAL_TRACK_BUTTON_WIDTH = 128.f;
 constexpr float PIANO_TRACK_HEIGHT = 36.f;
 constexpr int PIANO_TRACK_PITCHES_INDEXES_COUNT = 17;
 constexpr float PIANO_TRACK_BOTTOM = 56.f;
@@ -54,7 +55,7 @@ constexpr float PIANO_TRACK_SHADOW_RADIUS = 50.f;
 constexpr float PIANO_TRACK_SHADOW_BLUR = 25.f;
 constexpr float PIANO_TRACK_PITCH_HEIGHT = 2.f;
 constexpr float PIANO_TRACK_PITCH_RADIUS = 1.f;
-constexpr float PIANO_TRACK_BUTTON_WIDTH = 77.f;
+constexpr float PIANO_TRACK_BUTTON_WIDTH = 90.f;
 constexpr float VOLUME_CONTROLLER_HEIGHT = 110.5f;
 
 const Drawer::Color WorkspaceDrawer::YARD_STICK_DOT_AND_TEXT_COLOR(0x24, 0x23, 0x2D, 0xFF);
@@ -81,9 +82,13 @@ void WorkspaceDrawer::resize(float width, float height, float devicePixelRatio) 
     CHECK_IF_RENDER_THREAD;
     assert(devicePixelRatio > 0);
     assert(width >= 0 && height >= 0);
-    this->devicePixelRatio = devicePixelRatio;
+
     this->width = width;
     this->height = height;
+    if (!Primitives::CompareFloats(devicePixelRatio, this->devicePixelRatio)) {
+        this->devicePixelRatio = devicePixelRatio;
+        initImages();
+    }
 
     generateInstrumentalTrackSamplesImage(width - PIANO_WIDTH);
     updateZoom();
@@ -131,7 +136,7 @@ void WorkspaceDrawer::generateInstrumentalTrackSamplesImage(float width) {
 
 void WorkspaceDrawer::draw() {
     CHECK_IF_RENDER_THREAD;
-    assert(drawer && "call resize before draw");
+    assert(width >= 0 && height >= 0 && "call resize before draw");
 
     assert(intervalWidth >= 0);
     assert(intervalHeight >= 0);
@@ -639,7 +644,7 @@ void WorkspaceDrawer::setAccentGridColor(const Color& color) {
 }
 
 WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, MouseEventsReceiver *mouseEventsReceiver,
-        const WorkspaceDrawerSetupDelegate& setupDelegate,
+        WorkspaceDrawerResourcesProvider *resourcesProvider,
         const std::function<void()> &onUpdateRequested)
         :
         intervalWidth(-1),
@@ -660,7 +665,8 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, MouseEventsReceiver *mouseEvent
         mouseEventsReceiver(mouseEventsReceiver),
         verticalScrollBar(drawer, mouseEventsReceiver, ScrollBar::VERTICAL),
         horizontalScrollBar(drawer, mouseEventsReceiver, ScrollBar::HORIZONTAL),
-        onUpdateRequested(onUpdateRequested) {
+        onUpdateRequested(onUpdateRequested),
+        resourcesProvider(resourcesProvider) {
     CHECK_IF_RENDER_THREAD;
     setGridColor({0x8B, 0x89, 0xB6, 0x33});
     setAccentGridColor({0x8B, 0x89, 0xB6, 0x80});
@@ -689,54 +695,6 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, MouseEventsReceiver *mouseEvent
     lastPitchIndex = Pitch("B6").getPerfectFrequencyIndex();
 
     this->zoom = MIN_ZOOM;
-
-    // Setup images
-
-    auto createImage = [&] (const char* name) {
-        return drawer->createImage(setupDelegate.createImageForName(name));
-    };
-    playHeadTriangleImage = createImage("playHeadTriangle");
-    clockImage = createImage("clock");
-    instrumentalTrackButtonImage = createImage("instrumentalTrackButton");
-    pianoTrackButtonImage = createImage("pianoTrackButton");
-
-    DrawerTextImagesFactory* textImagesFactory = new DrawerTextImagesFactory();
-    auto createImageForCharacter = [&] (char ch, int fontSize, const Color& color, Drawer::FontStyle style) {
-        Bitmap bitmap = setupDelegate.createImageForCharacter(ch, fontSize, color, style);
-        DrawerTextImagesFactoryCharacterData data;
-        data.character = ch;
-        data.color = color;
-        data.fontSize = fontSize;
-        data.style = style;
-        data.image = drawer->createImage(bitmap);
-        textImagesFactory->addImage(data);
-    };
-
-    int pianoFontSize = 8;
-    Drawer::FontStyle pianoFontStyle = Drawer::NORMAL;
-    setupDelegate.providePianoFont(&pianoFontSize, &pianoFontStyle);
-    setupDelegate.provideClockFont(&clockFontSize, &clockFontStyle);
-    setupDelegate.provideYardStickFont(&yardStickFontSize, &yardStickFontStyle);
-    pianoDrawer->setFontSize(pianoFontSize);
-    pianoDrawer->setFontStyle(pianoFontStyle);
-
-    // digits
-    for (char ch = '0'; ch <= '9'; ++ch) {
-        createImageForCharacter(ch, yardStickFontSize, WorkspaceDrawer::YARD_STICK_DOT_AND_TEXT_COLOR, yardStickFontStyle);
-        createImageForCharacter(ch, pianoFontSize, PianoDrawer::PITCH_TEXT_COLOR, pianoFontStyle);
-        createImageForCharacter(ch, pianoFontSize, PianoDrawer::SELECTED_PITCH_TEXT_COLOR, pianoFontStyle);
-    }
-
-    // pitch names
-    for (char ch = 'A'; ch <= 'G'; ch++) {
-        createImageForCharacter(ch, pianoFontSize, PianoDrawer::PITCH_TEXT_COLOR, pianoFontStyle);
-        createImageForCharacter(ch, pianoFontSize, PianoDrawer::SELECTED_PITCH_TEXT_COLOR, pianoFontStyle);
-    }
-
-    createImageForCharacter(':', clockFontSize, WorkspaceDrawer::YARD_STICK_DOT_AND_TEXT_COLOR, clockFontStyle);
-
-    drawer->setTextImagesFactory(textImagesFactory);
-    drawer->setTextDrawStrategy(Drawer::DRAW_USING_PRE_BUILD_IMAGES);
 }
 
 WorkspaceDrawer::~WorkspaceDrawer() {
@@ -744,6 +702,7 @@ WorkspaceDrawer::~WorkspaceDrawer() {
     delete pianoDrawer;
     delete mouseEventsReceiver;
     delete boundsSelectionController;
+    delete resourcesProvider;
 }
 
 float WorkspaceDrawer::getSizeMultiplier() const {
@@ -1013,4 +972,54 @@ void WorkspaceDrawer::setDelegate(WorkspaceControllerDelegate *delegate) {
 void WorkspaceDrawer::setBoundsSelectionEnabled(bool boundsSelectionEnabled) {
     assert(boundsSelectionController && "Call setDelegate before setBoundsSelectionEnabled");
     boundsSelectionController->setBoundsSelectionEnabled(boundsSelectionEnabled);
+}
+
+#define R(I) WorkspaceDrawerResourcesProvider::I
+
+void WorkspaceDrawer::initImages() {
+    auto createImage = [&] (WorkspaceDrawerResourcesProvider::Image image, float width, float height) {
+        return drawer->createImage(resourcesProvider->createImageForName(image, RoundToInt(width), RoundToInt(height), devicePixelRatio));
+    };
+    playHeadTriangleImage = createImage(R(playHeadTriangle), PLAYHEAD_TRIANGLE_WIDTH, PLAYHEAD_TRIANGLE_HEIGHT);
+    clockImage = createImage(R(clock), CLOCK_WIDTH, CLOCK_HEIGHT);
+    instrumentalTrackButtonImage = createImage(R(instrumentalTrackButton), INSTRUMENTAL_TRACK_BUTTON_WIDTH, TRACK_BUTTON_HEIGHT);
+    pianoTrackButtonImage = createImage(R(pianoTrackButton), PIANO_TRACK_BUTTON_WIDTH, TRACK_BUTTON_HEIGHT);
+
+    DrawerTextImagesFactory* textImagesFactory = new DrawerTextImagesFactory();
+    auto createImageForCharacter = [&] (char ch, int fontSize, const Color& color, Drawer::FontStyle style) {
+        Bitmap bitmap = resourcesProvider->createImageForCharacter(ch, fontSize, color, style, devicePixelRatio);
+        DrawerTextImagesFactoryCharacterData data;
+        data.character = ch;
+        data.color = color;
+        data.fontSize = fontSize;
+        data.style = style;
+        data.image = drawer->createImage(bitmap);
+        textImagesFactory->addImage(data);
+    };
+
+    int pianoFontSize = 8;
+    Drawer::FontStyle pianoFontStyle = Drawer::NORMAL;
+    resourcesProvider->providePianoFont(&pianoFontSize, &pianoFontStyle);
+    resourcesProvider->provideClockFont(&clockFontSize, &clockFontStyle);
+    resourcesProvider->provideYardStickFont(&yardStickFontSize, &yardStickFontStyle);
+    pianoDrawer->setFontSize(pianoFontSize);
+    pianoDrawer->setFontStyle(pianoFontStyle);
+
+    // digits
+    for (char ch = '0'; ch <= '9'; ++ch) {
+        createImageForCharacter(ch, yardStickFontSize, WorkspaceDrawer::YARD_STICK_DOT_AND_TEXT_COLOR, yardStickFontStyle);
+        createImageForCharacter(ch, pianoFontSize, PianoDrawer::PITCH_TEXT_COLOR, pianoFontStyle);
+        createImageForCharacter(ch, pianoFontSize, PianoDrawer::SELECTED_PITCH_TEXT_COLOR, pianoFontStyle);
+    }
+
+    // pitch names
+    for (char ch = 'A'; ch <= 'G'; ch++) {
+        createImageForCharacter(ch, pianoFontSize, PianoDrawer::PITCH_TEXT_COLOR, pianoFontStyle);
+        createImageForCharacter(ch, pianoFontSize, PianoDrawer::SELECTED_PITCH_TEXT_COLOR, pianoFontStyle);
+    }
+
+    createImageForCharacter(':', clockFontSize, WorkspaceDrawer::YARD_STICK_DOT_AND_TEXT_COLOR, clockFontStyle);
+
+    drawer->setTextImagesFactory(textImagesFactory);
+    drawer->setTextDrawStrategy(Drawer::DRAW_USING_PRE_BUILD_IMAGES);
 }

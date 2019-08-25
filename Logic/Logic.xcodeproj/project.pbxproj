@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		71AD202BB3D0B792CDC57759 /* MetalNvgDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2CFD99DCF20663FFEA80 /* MetalNvgDrawer.cpp */; };
+		71AD207E2B3F6E5F286AAE43 /* EnumMap.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2C7BF7FB96D16A8EF16C /* EnumMap.h */; };
 		71AD208CE6A13F9D3C9BB473 /* AudioUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2A7EE98C193865A7F185 /* AudioUtils.cpp */; };
 		71AD20C742A14945D7C35666 /* AudioFilePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2E2F1B0618043F8069B6 /* AudioFilePlayer.cpp */; };
 		71AD20CF0DF266AC1D2CCFFA /* Pitch.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2D90DDE092CAA7D1471B /* Pitch.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -165,7 +166,7 @@
 		71AD2CBC3EC386F36315A268 /* nanovg_mtl.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AD22A4AEEAB7D48F089AFD /* nanovg_mtl.m */; };
 		71AD2CDC0CF7D9F2BC59160B /* PeriodicallySleepingBackgroundTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2FF2194C1B9EF33E4F93 /* PeriodicallySleepingBackgroundTask.cpp */; };
 		71AD2CEF8F1B5108E74E611F /* Line.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD22AD99429ABB7581539F /* Line.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		71AD2D07B138A053E414DDE6 /* WorkspaceDrawerSetupDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD22F90632570F2D6CD6B1 /* WorkspaceDrawerSetupDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		71AD2D07B138A053E414DDE6 /* WorkspaceDrawerResourcesProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD22F90632570F2D6CD6B1 /* WorkspaceDrawerResourcesProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2D14705FDA65A48FE1C6 /* MidiMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2E92E9B8FA30974E0F73 /* MidiMessage.cpp */; };
 		71AD2D22A8E394A2341836C3 /* MidiEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2D5696C34D7A096CDAF8 /* MidiEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2D31BE1A49E8B217E283 /* GeometryUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2FB90CF936CCF0B9004C /* GeometryUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -243,7 +244,7 @@
 		71AD226F0F6AD40B7F1DA0FD /* PlaybackBounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackBounds.h; sourceTree = "<group>"; };
 		71AD22A4AEEAB7D48F089AFD /* nanovg_mtl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nanovg_mtl.m; sourceTree = "<group>"; };
 		71AD22AD99429ABB7581539F /* Line.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Line.h; sourceTree = "<group>"; };
-		71AD22F90632570F2D6CD6B1 /* WorkspaceDrawerSetupDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceDrawerSetupDelegate.h; sourceTree = "<group>"; };
+		71AD22F90632570F2D6CD6B1 /* WorkspaceDrawerResourcesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceDrawerResourcesProvider.h; sourceTree = "<group>"; };
 		71AD231133D6E227F2998881 /* MetalNvgDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetalNvgDrawer.h; sourceTree = "<group>"; };
 		71AD2311746EC9D95FEDBFB6 /* WorkspaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceController.h; sourceTree = "<group>"; };
 		71AD233FA0B515CA1C4761CE /* Core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Core.h; sourceTree = "<group>"; };
@@ -355,6 +356,7 @@
 		71AD2C6157EC8C243B56D626 /* DecodedTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DecodedTrack.h; sourceTree = "<group>"; };
 		71AD2C73A80F48698DC31BB4 /* MathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathUtils.h; sourceTree = "<group>"; };
 		71AD2C798A127824B65DDF44 /* PortAudioUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PortAudioUtils.cpp; sourceTree = "<group>"; };
+		71AD2C7BF7FB96D16A8EF16C /* EnumMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumMap.h; sourceTree = "<group>"; };
 		71AD2C9D6872D12BA87CD4BC /* MainController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainController.cpp; sourceTree = "<group>"; };
 		71AD2CBED6FA1E08D2F2F940 /* DecodedTrack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DecodedTrack.cpp; sourceTree = "<group>"; };
 		71AD2CC2F3597DFE26AD1373 /* ApplicationModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ApplicationModel.cpp; sourceTree = "<group>"; };
@@ -545,6 +547,7 @@
 				71AD283FF1075FCE8ADA05D5 /* ConcurrentModificationAssert.h */,
 				71AD26E5BB21F5F5A870F2E5 /* PeriodicallySleepingBackgroundTask.h */,
 				71AD2FF2194C1B9EF33E4F93 /* PeriodicallySleepingBackgroundTask.cpp */,
+				71AD2C7BF7FB96D16A8EF16C /* EnumMap.h */,
 			);
 			path = CppUtils;
 			sourceTree = "<group>";
@@ -684,7 +687,7 @@
 				71AD2A5C234185C9CE21811A /* WorkspaceDrawer.h */,
 				71AD2AF776B9B7054524E921 /* WorkspaceDrawer.cpp */,
 				71AD2311746EC9D95FEDBFB6 /* WorkspaceController.h */,
-				71AD22F90632570F2D6CD6B1 /* WorkspaceDrawerSetupDelegate.h */,
+				71AD22F90632570F2D6CD6B1 /* WorkspaceDrawerResourcesProvider.h */,
 				71AD2F6C47686C40182C94EA /* BoundsSelectionController.cpp */,
 				71AD200521649A156A2F0149 /* BoundsSelectionController.h */,
 				71AD28A1306F3AB1C307C7A3 /* BoundsSelectionDelegate.h */,
@@ -992,7 +995,7 @@
 				71AD22BC02081D0ACB711D46 /* AudioInputManager.h in Headers */,
 				71AD2BDF7DAA21FC1C74C960 /* MvxPlayer.h in Headers */,
 				71AD290EF23AE66AE308E34E /* ApplicationModel.h in Headers */,
-				71AD2D07B138A053E414DDE6 /* WorkspaceDrawerSetupDelegate.h in Headers */,
+				71AD2D07B138A053E414DDE6 /* WorkspaceDrawerResourcesProvider.h in Headers */,
 				71AD2E71637EDE5162582640 /* NvgDrawer.h in Headers */,
 				71AD2C9288A8E8C98FAA72D4 /* ScrollBar.h in Headers */,
 				71AD228D16FBA9729731BCFE /* PianoDrawer.h in Headers */,
@@ -1012,6 +1015,7 @@
 				71AD23BB49F676FD313148E7 /* Drawer.h in Headers */,
 				71AD274B3FBF1E952CBAE8A2 /* WorkspaceDrawer.h in Headers */,
 				ACF18AA422EC711A008E7DAA /* Logic.h in Headers */,
+				71AD207E2B3F6E5F286AAE43 /* EnumMap.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1284,6 +1288,7 @@
 		ACF18AA822EC711A008E7DAA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1316,6 +1321,7 @@
 		ACF18AA922EC711A008E7DAA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;

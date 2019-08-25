@@ -18,7 +18,7 @@
 #include <memory>
 #include "PlayingPitchSequence.h"
 #include "ScrollBar.h"
-#include "WorkspaceDrawerSetupDelegate.h"
+#include "WorkspaceDrawerResourcesProvider.h"
 #include "BoundsSelectionController.h"
 #include <thread>
 
@@ -101,6 +101,8 @@ class WorkspaceDrawer : public WorkspaceController {
 
     ScrollBar horizontalScrollBar;
     ScrollBar verticalScrollBar;
+
+    WorkspaceDrawerResourcesProvider* resourcesProvider;
     WorkspaceControllerDelegate* delegate = nullptr;
     BoundsSelectionController* boundsSelectionController = nullptr;
 
@@ -145,6 +147,8 @@ class WorkspaceDrawer : public WorkspaceController {
     void updateHorizontalScrollBarPageSize();
     void updateHorizontalScrollBarPagePosition();
     void updateZoom();
+
+    void initImages();
 public:
 
     static constexpr int PIANO_WIDTH = 67;
@@ -157,7 +161,7 @@ public:
     static constexpr int BEATS_IN_TACT = 4;
 
     WorkspaceDrawer(Drawer *drawer, MouseEventsReceiver *mouseEventsReceiver,
-            const WorkspaceDrawerSetupDelegate& setupDelegate,
+            WorkspaceDrawerResourcesProvider *resourcesProvider,
             const std::function<void()> &onUpdateRequested);
     ~WorkspaceDrawer();
 
