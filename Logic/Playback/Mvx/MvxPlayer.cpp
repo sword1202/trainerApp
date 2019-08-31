@@ -291,14 +291,6 @@ double MvxPlayer::getBeatsPerMinute() const {
     return mvxFile->getBeatsPerMinute();
 }
 
-double MvxPlayer::getBeatsPerSecond() const {
-    return getBeatsPerMinute() / 60.0;
-}
-
-double MvxPlayer::getTactsPerSecond() const {
-    return getBeatsPerSecond() / BEATS_IN_TACT;
-}
-
 void MvxPlayer::onPlaybackStarted() {
     playStartedTime = TimeUtils::NowInSeconds();
     playStartedSeek = getSeek();
@@ -377,10 +369,6 @@ void MvxPlayer::setMetronomeEnabled(bool metronomeEnabled) {
     updateMetronomeVolume();
 }
 
-double MvxPlayer::getBeatDuration() const {
-    return 60.0 / mvxFile->getBeatsPerMinute();
-}
-
 bool MvxPlayer::isMetronomeSoundDataSet() const {
     return metronomePlayer.isPrepared();
 }
@@ -406,10 +394,6 @@ void MvxPlayer::seekToPrevTact() {
     double seek = getSeek();
     double mod = fmod(seek, tactDuration);
     setSeek(seek - mod);
-}
-
-double MvxPlayer::getTactDuration() const {
-    return getBeatDuration() * BEATS_IN_TACT;
 }
 
 bool MvxPlayer::isRecording() const {
@@ -471,39 +455,4 @@ void MvxPlayer::editLyrics(const std::function<void(Lyrics *lyrics)> &editAction
     if (lyrics != mvxFile->getLyrics()) {
         lyricsChangedListeners.executeAll();
     }
-}
-
-void MvxPlayer::startBackwardRewind(int changeIntervalInMilliseconds) {
-    startRewind(changeIntervalInMilliseconds, true);
-}
-
-void MvxPlayer::startForwardRewind(int changeIntervalInMilliseconds) {
-    startRewind(changeIntervalInMilliseconds, false);
-}
-
-void MvxPlayer::stopRewind() {
-    assert(rewindTimer.isRunning() && "no rewind running");
-    rewindTimer.stop();
-}
-
-void MvxPlayer::startRewind(int changeIntervalInMilliseconds, bool backward) {
-    assert(!rewindTimer.isRunning() && "forward, backward rewind is already running");
-    backwardRewind = backward;
-    rewindTimer.start(changeIntervalInMilliseconds, [=] {
-        double diff = backward ? -getTactDuration() : getTactDuration();
-        double seek = getSeek() - changeIntervalInMilliseconds / 1000.0 + diff;
-        setSeek(seek);
-    });
-}
-
-bool MvxPlayer::isRewindRunning(bool *backward) const {
-    if (!rewindTimer.isRunning()) {
-        return false;
-    }
-
-    if (backward) {
-        *backward = backwardRewind;
-    }
-
-    return true;
 }

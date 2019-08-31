@@ -16,13 +16,37 @@ class HeaderViewController : NSViewController, ConfigurableWithProjectController
     @IBOutlet private weak var playbackControlsView: NSView!
     @IBOutlet private weak var playButton: ToggleButton!
     @IBOutlet private weak var boundsButton: ToggleButton!
-    @IBOutlet private weak var backwardButton: ToggleButton!
-    @IBOutlet private weak var forwardButton: ToggleButton!
-    @IBOutlet private weak var toBeginningButton: Button!
+    @IBOutlet private weak var backwardButton: TouchUpDownButton!
+    @IBOutlet private weak var forwardButton: TouchUpDownButton!
+    @IBOutlet private weak var toBeginningButton: NSButton!
 
     func configure(projectController: ProjectControllerBridge) {
         self.projectController = projectController
         self.projectController.add(delegate: self)
+    }
+
+    @IBAction func didTapLyricsButton(_:NSButton) {
+        self.projectController.toggleLyricsVisibility()
+    }
+
+    @IBAction func didTapMetronomeButton(_:NSButton) {
+        self.projectController.toggleMetronomeEnabled()
+    }
+
+    @IBAction func didTapTracksButton(_:NSButton) {
+        self.projectController.toggleTracksVisibility()
+    }
+
+    @IBAction func didTapPlayButton(_:NSButton) {
+        self.projectController.togglePlay()
+    }
+
+    @IBAction func didTapBoundsButton(_:NSButton) {
+        self.projectController.toggleBoundsSelectionEnabled()
+    }
+
+    @IBAction func didTapToBeginningButton(_:NSButton) {
+        self.projectController.goToBeginning()
     }
 
     override func viewDidLoad() {
@@ -33,42 +57,24 @@ class HeaderViewController : NSViewController, ConfigurableWithProjectController
         updateButtonState(button: playButton, value: projectController.isPlaying)
         updateButtonState(button: boundsButton, value: projectController.boundsSelectionEnabled)
 
-        lyricsButton.handler = { [weak self] in
-            self?.projectController.toggleLyricsVisibility()
-        }
-
-        metronomeButton.handler = { [weak self] in
-            self?.projectController.toggleMetronomeEnabled()
-        }
-
-        tracksButton.handler = { [weak self] in
-            self?.projectController.toggleTracksVisibility()
-        }
-
         playbackControlsView.wantsLayer = true
         playbackControlsView.layer?.backgroundColor = NSColor(hex: 0xC2CFFE)!.cgColor
         playbackControlsView.layer?.cornerRadius = 22.5
         // For some reasons the shadow is displayed upside down, so revert it
         HeaderUiUtils.applyShadow(view: self.playbackControlsView, cornerRadius: 22.5, revert: true);
 
-        playButton.handler = { [weak self] in
-            self?.projectController.togglePlay()
+        forwardButton.onMouseDown = {
+            self.projectController.toggleRewind(withBackward: false)
         }
+        forwardButton.onMouseUp = forwardButton.onMouseDown
 
-        boundsButton.handler = { [weak self] in
-            self?.projectController.toggleBoundsSelectionEnabled()
+        backwardButton.onMouseDown = {
+            self.projectController.toggleRewind(withBackward: true)
         }
-        
-        forwardButton.handler = { [weak self] in
-            self?.projectController.toggleRewind(withBackward: false)
-        }
-
-        backwardButton.handler = { [weak self] in
-            self?.projectController.toggleRewind(withBackward: true)
-        }
+        backwardButton.onMouseUp = backwardButton.onMouseDown
     }
 
-    private func updateButtonState(button: ToggleButton, value: Bool) {
+    private func updateButtonState(button: NSButton, value: Bool) {
         button.state = value ? .on : .off
     }
 

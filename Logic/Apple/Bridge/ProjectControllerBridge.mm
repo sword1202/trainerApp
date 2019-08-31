@@ -228,6 +228,11 @@ public:
     return _cpp->isPlaying();
 }
 
+- (void)goToBeginning {
+    _cpp->goToBeginning();
+}
+
+
 - (void)dealloc {
     delete _cpp;
 }

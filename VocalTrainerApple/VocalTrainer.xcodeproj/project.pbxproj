@@ -13,6 +13,7 @@
 		71AD235952A821616CC9617E /* HeaderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2436A9C6F6406C50A7E6 /* HeaderButton.swift */; };
 		71AD24277375FA316F05FFC8 /* NSAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD25CBF89B6518B64657E2 /* NSAttributedString+Extensions.swift */; };
 		71AD24EFBDE80511DB2613E8 /* HeaderUiUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2331042B9D6CB1A4E6E7 /* HeaderUiUtils.swift */; };
+		71AD26497250888BDEB3A14E /* TouchUpDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2C4EAB705DCF47CAC77C /* TouchUpDownButton.swift */; };
 		71AD26ED98C8F823F5F621DB /* CGRect+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2BA3FE6C79FF0FAED7B1 /* CGRect+Extensions.swift */; };
 		71AD27AD436983C0D551C6D6 /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD22FAC42E30FA831A8953 /* ProjectViewController.swift */; };
 		71AD27E82582B5E20A3D1F6D /* InitializationManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 71AD29605A6EF90E1D9E2F98 /* InitializationManager.mm */; };
@@ -22,7 +23,6 @@
 		71AD292BE2211C7B95389888 /* MacOSWorkspaceDrawerResourcesProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2E6EB3AD3596FA6A4A33 /* MacOSWorkspaceDrawerResourcesProvider.mm */; };
 		71AD29577693616F0CF11B4E /* CALayer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2E25FA2D80BDF0849D47 /* CALayer+Extensions.swift */; };
 		71AD2A180D3226B294C54C1A /* CGSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2E2C77501A215B455E28 /* CGSize+Extensions.swift */; };
-		71AD2AAE434224652BD1BB18 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD28FD8416E3E53A166325 /* Button.swift */; };
 		71AD2B086E0F0CA5D32FCADF /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2D6D43DDF8B4D35BD451 /* UIConstants.swift */; };
 		71AD2BC467EDBF0B234F63B7 /* ConfigurableWithProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2D9271E270F476840FA3 /* ConfigurableWithProjectController.swift */; };
 		71AD2BCD52424995B74D903F /* ColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD29FFCDB98EB9A00519EB /* ColorView.swift */; };
@@ -63,13 +63,13 @@
 		71AD27F400CFEF8EA89FB180 /* WorkspaceDrawerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceDrawerView.h; sourceTree = "<group>"; };
 		71AD2849C886EFD054B43C66 /* CGContext+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGContext+Extensions.swift"; sourceTree = "<group>"; };
 		71AD2884FCDE9A29BCA80D33 /* UI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
-		71AD28FD8416E3E53A166325 /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		71AD29605A6EF90E1D9E2F98 /* InitializationManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InitializationManager.mm; sourceTree = "<group>"; };
 		71AD29FFCDB98EB9A00519EB /* ColorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorView.swift; sourceTree = "<group>"; };
 		71AD2ACE3A195D54F918916A /* InitializationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitializationManager.h; sourceTree = "<group>"; };
 		71AD2AD0DC2A1BD1B9B058AA /* HeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderViewController.swift; sourceTree = "<group>"; };
 		71AD2BA3FE6C79FF0FAED7B1 /* CGRect+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+Extensions.swift"; sourceTree = "<group>"; };
 		71AD2BBFFA971D22C5AD524D /* WorkspaceDrawerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WorkspaceDrawerView.mm; sourceTree = "<group>"; };
+		71AD2C4EAB705DCF47CAC77C /* TouchUpDownButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchUpDownButton.swift; sourceTree = "<group>"; };
 		71AD2D3B87D6702FFDE3939F /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
 		71AD2D4FBE1FE1ECA287A3BE /* MacOSWorkspaceDrawerResourcesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacOSWorkspaceDrawerResourcesProvider.h; sourceTree = "<group>"; };
 		71AD2D6D43DDF8B4D35BD451 /* UIConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
@@ -118,7 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				71AD274B07C0FB7FF9C4BB32 /* ToggleButton.swift */,
-				71AD28FD8416E3E53A166325 /* Button.swift */,
+				71AD2C4EAB705DCF47CAC77C /* TouchUpDownButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -440,7 +440,7 @@
 				71AD28B69AA7E771B512D067 /* CGContext+Extensions.swift in Sources */,
 				71AD24277375FA316F05FFC8 /* NSAttributedString+Extensions.swift in Sources */,
 				71AD287439F13E457974A154 /* ToggleButton.swift in Sources */,
-				71AD2AAE434224652BD1BB18 /* Button.swift in Sources */,
+				71AD26497250888BDEB3A14E /* TouchUpDownButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

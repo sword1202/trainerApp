@@ -5,9 +5,9 @@
 
 import Cocoa
 
-class ToggleButton : Button {
-    override func didTap(_ recognizer: NSGestureRecognizer) {
+class ToggleButton : NSButton {
+    override func mouseUp(with event: NSEvent) {
+        super.mouseUp(with: event)
         self.state = self.state == .on ? .off : .on
-        super.didTap(recognizer)
     }
 }

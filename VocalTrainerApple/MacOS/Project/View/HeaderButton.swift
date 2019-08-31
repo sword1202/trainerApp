@@ -8,9 +8,10 @@ import SwiftHEXColors
 
 class HeaderButton : ToggleButton {
     private func updateShadow() {
-        assert(self.layer != nil)
+        guard let layer = self.layer else { return }
+
         if self.state == .on {
-            self.layer?.removeShadow()
+            layer.removeShadow()
         } else {
             HeaderUiUtils.applyShadow(view: self, cornerRadius: 7.5)
         }

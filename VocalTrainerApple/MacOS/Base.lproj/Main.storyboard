@@ -764,6 +764,9 @@
                                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                                     <font key="font" metaFont="smallSystemBold"/>
                                                 </buttonCell>
+                                                <connections>
+                                                    <action selector="didTapLyricsButton:" target="Aps-yL-S0c" id="siN-Gs-zbw"/>
+                                                </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8Mh-fx-G8d" userLabel="Tracks Button" customClass="HeaderButton" customModule="VocalTrainer" customModuleProvider="target">
                                                 <rect key="frame" x="53" y="0.0" width="45" height="40"/>
@@ -775,6 +778,9 @@
                                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                                     <font key="font" metaFont="smallSystemBold"/>
                                                 </buttonCell>
+                                                <connections>
+                                                    <action selector="didTapTracksButton:" target="Aps-yL-S0c" id="2hq-gd-nyH"/>
+                                                </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3iB-La-dym" userLabel="Metronome Button" customClass="HeaderButton" customModule="VocalTrainer" customModuleProvider="target">
                                                 <rect key="frame" x="106" y="0.0" width="45" height="40"/>
@@ -786,6 +792,9 @@
                                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                                     <font key="font" metaFont="smallSystemBold"/>
                                                 </buttonCell>
+                                                <connections>
+                                                    <action selector="didTapMetronomeButton:" target="Aps-yL-S0c" id="ElD-80-d1m"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <visibilityPriorities>
@@ -802,7 +811,7 @@
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="1" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q4N-7H-n3o">
                                         <rect key="frame" x="588" y="15" width="264" height="45"/>
                                         <subviews>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FFT-Ei-hiU" userLabel="Backward" customClass="ToggleButton" customModule="VocalTrainer" customModuleProvider="target">
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FFT-Ei-hiU" userLabel="Backward" customClass="TouchUpDownButton" customModule="VocalTrainer" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="52" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="73a-fc-RwX"/>
@@ -813,7 +822,7 @@
                                                     <font key="font" metaFont="smallSystemBold"/>
                                                 </buttonCell>
                                             </button>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="V0c-hO-Eqx" userLabel="Forward" customClass="ToggleButton" customModule="VocalTrainer" customModuleProvider="target">
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="V0c-hO-Eqx" userLabel="Forward" customClass="TouchUpDownButton" customModule="VocalTrainer" customModuleProvider="target">
                                                 <rect key="frame" x="53" y="0.0" width="52" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="2HG-pA-f8x"/>
@@ -824,7 +833,7 @@
                                                     <font key="font" metaFont="smallSystemBold"/>
                                                 </buttonCell>
                                             </button>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="P2T-cZ-F6J" userLabel="ToBegining" customClass="Button" customModule="VocalTrainer" customModuleProvider="target">
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="P2T-cZ-F6J" userLabel="ToBegining">
                                                 <rect key="frame" x="106" y="0.0" width="52" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="4vU-nZ-Zqe"/>
@@ -834,17 +843,22 @@
                                                     <behavior key="behavior" lightByContents="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
+                                                <connections>
+                                                    <action selector="didTapToBeginningButton:" target="Aps-yL-S0c" id="pM3-fl-nFu"/>
+                                                </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ce1-Ki-apP" userLabel="Play" customClass="ToggleButton" customModule="VocalTrainer" customModuleProvider="target">
                                                 <rect key="frame" x="159" y="0.0" width="52" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="DZt-uO-36V"/>
-                                                    <constraint firstAttribute="width" constant="52" id="bfQ-vH-ymn"/>
                                                 </constraints>
                                                 <buttonCell key="cell" type="inline" bezelStyle="inline" image="play" imagePosition="overlaps" alignment="center" alternateImage="playSelected" imageScaling="proportionallyDown" inset="2" id="Zvj-zY-WS1">
                                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                                     <font key="font" metaFont="smallSystemBold"/>
                                                 </buttonCell>
+                                                <connections>
+                                                    <action selector="didTapPlayButton:" target="Aps-yL-S0c" id="AuU-P0-snc"/>
+                                                </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bZD-Xl-0NP" userLabel="Bounds" customClass="ToggleButton" customModule="VocalTrainer" customModuleProvider="target">
                                                 <rect key="frame" x="212" y="0.0" width="52" height="45"/>
@@ -856,6 +870,9 @@
                                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                                     <font key="font" metaFont="smallSystemBold"/>
                                                 </buttonCell>
+                                                <connections>
+                                                    <action selector="didTapBoundsButton:" target="Aps-yL-S0c" id="6u0-H3-Qgn"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>

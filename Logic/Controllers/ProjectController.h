@@ -10,6 +10,7 @@
 #include "MvxPlayer.h"
 #include "AudioInputManager.h"
 #include "Timer.h"
+#include "Rewinder.h"
 
 class ProjectControllerDelegate {
 public:
@@ -37,7 +38,7 @@ class ProjectController : CppUtils::DestructorQueue, public WorkspaceControllerD
     MvxPlayer* player;
     AudioInputManager* audioInputManager;
     bool lyricsVisible = true;
-    CppUtils::Timer timer;
+    Rewinder* rewinder = nullptr;
 
     void onStopPlaybackRequested();
     void updateSeek(double seek);
@@ -56,6 +57,8 @@ public:
     void togglePlay();
     bool isPlaying() const;
     void toggleRewind(bool backward);
+
+    void goToBeginning();
 
     bool isBoundsSelectionEnabled() const;
     void setBoundsSelectionEnabled(bool boundsSelectionEnabled);

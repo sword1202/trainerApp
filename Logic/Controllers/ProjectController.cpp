@@ -8,8 +8,6 @@
 
 using namespace CppUtils;
 
-static int REWIND_INTERVAL = 100;
-
 ProjectController::ProjectController(ProjectControllerDelegate* delegate) : delegate(delegate) {
     auto* model = ApplicationModel::instance();
     player = model->getPlayer();
@@ -76,6 +74,8 @@ ProjectController::ProjectController(ProjectControllerDelegate* delegate) : dele
     player->currentLyricsLinesChangedListeners.addListener([=] {
         delegate->updateLyricsText(player->getLyricsTextForPart(0));
     }, this);
+
+    rewinder = new Rewinder(player);
 }
 
 void ProjectController::onStopPlaybackRequested() {
@@ -256,15 +256,19 @@ bool ProjectController::isPlaying() const {
 
 void ProjectController::toggleRewind(bool backward) {
     bool isCurrentRewindBackward;
-    if (player->isRewindRunning(&isCurrentRewindBackward)) {
-        player->stopRewind();
+    if (rewinder->isRewindRunning(&isCurrentRewindBackward)) {
+        rewinder->stopRewind();
         delegate->onRewindStatusChanged(false, isCurrentRewindBackward);
         if (isCurrentRewindBackward != backward) {
-            player->startRewind(REWIND_INTERVAL, backward);
+            rewinder->startRewind(backward);
             delegate->onRewindStatusChanged(true, backward);
         }
     } else {
-        player->startRewind(REWIND_INTERVAL, backward);
+        rewinder->startRewind(backward);
         delegate->onRewindStatusChanged(true, backward);
     }
+}
+
+void ProjectController::goToBeginning() {
+    player->stopAndMoveSeekToBeginning();
 }

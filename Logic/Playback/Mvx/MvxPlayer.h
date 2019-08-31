@@ -23,8 +23,10 @@
 #include <array>
 #include "AudioAverageInputLevelMonitor.h"
 #include "Timer.h"
+#include "Rewindable.h"
+#include "BeatsPerMinuteProvider.h"
 
-class MvxPlayer : public PlayingPitchSequence {
+class MvxPlayer : public PlayingPitchSequence, public Rewindable, public BeatsPerMinuteProvider {
 private:
 
     AudioFilePlayer instrumentalPlayer;
@@ -50,8 +52,6 @@ private:
 
     AudioAverageInputLevelMonitor* recordingLevelMonitor = nullptr;
     Lyrics::Snapshot lastLyricsSnapshot;
-    CppUtils::Timer rewindTimer;
-    bool backwardRewind = false;
 
     void updateMetronomeVolume();
     void pausePlayer(AudioPlayer* player);
@@ -88,8 +88,8 @@ public:
     virtual int getPitchShiftInSemiTones() const;
     virtual void setPitchShiftInSemiTones(int value);
     bool isPlaying() const;
-    void setSeek(double value);
-    double getSeek() const;
+    void setSeek(double value) override;
+    double getSeek() const override;
     virtual void seekToNextTact();
     virtual void seekToPrevTact();
     const VocalPart* getVocalPart() const;
@@ -107,9 +107,7 @@ public:
     double getPlayStartedTime() const;
     double getDuration() const;
 
-    double getBeatsPerMinute() const;
-    double getBeatsPerSecond() const;
-    double getTactsPerSecond() const;
+    double getBeatsPerMinute() const override;
 
     double getTempoFactor() const;
 
@@ -123,9 +121,6 @@ public:
 
     bool isMetronomeEnabled() const;
     virtual void setMetronomeEnabled(bool metronomeEnabled);
-
-    double getBeatDuration() const;
-    double getTactDuration() const;
 
     bool isRecording() const;
 
@@ -147,12 +142,6 @@ public:
     const VocalPartAudioPlayer& getVocalPartPlayer() const;
 
     const std::map<double, int> &getTonalityChanges() const;
-
-    void startBackwardRewind(int changeIntervalInMilliseconds);
-    void startForwardRewind(int changeIntervalInMilliseconds);
-    void startRewind(int changeIntervalInMilliseconds, bool backward);
-    void stopRewind();
-    bool isRewindRunning(bool* backward = nullptr) const;
 };
 
 

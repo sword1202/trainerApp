@@ -30,6 +30,7 @@
 @property (readonly) bool boundsSelectionEnabled;
 @property (readonly) bool isPlaying;
 
+- (void)goToBeginning;
 - (void)toggleTracksVisibility;
 - (void)toggleLyricsVisibility;
 - (void)toggleMetronomeEnabled;
