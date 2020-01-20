@@ -4,7 +4,7 @@
 //
 
 #include "Executors.h"
-#include "MvxPlayer.h"
+#include "VocalTrainerFilePlayer.h"
 #include "StringUtils.h"
 #include "AudioFilePlayer.h"
 #include "VocalPartAudioPlayer.h"
@@ -27,7 +27,7 @@ using std::endl;
 
 constexpr int BEATS_IN_TACT = 4;
 
-MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
+VocalTrainerFilePlayer::VocalTrainerFilePlayer() : metronomeEnabled(false) {
     instrumentalPlayer.seekChangedListeners.addListener([=](double seek, double) {
         Executors::ExecuteOnMainThread([=] {
             if (bounds) {
@@ -40,7 +40,7 @@ MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
             }
 
             if (isRecording()) {
-                const auto& tonalityChanges = mvxFile->getRecordingTonalityChanges();
+                const auto& tonalityChanges = file->getRecordingTonalityChanges();
                 auto iter = tonalityChanges.upper_bound(seek);
                 if (iter != tonalityChanges.begin()) {
                     --iter;
@@ -54,7 +54,7 @@ MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
                 tonalityChanges.erase(iter, tonalityChanges.end());
             }
 
-            auto currentSnapshot = mvxFile->getLyrics().getCurrentSnapshot(seek);
+            auto currentSnapshot = file->getLyrics().getCurrentSnapshot(seek);
             if (lastLyricsSnapshot != currentSnapshot) {
                 lyricsChangedListeners.executeAll();
                 lastLyricsSnapshot = currentSnapshot;
@@ -74,16 +74,24 @@ MvxPlayer::MvxPlayer() : metronomeEnabled(false) {
     });
 }
 
-void MvxPlayer::setSource(MvxFile *file, bool destroyMvxFileOnDestructor) {
-    this->mvxFile = file;
-    this->destroyMvxFileOnDestructor = destroyMvxFileOnDestructor;
-    instrumentalPlayer.setAudioData(&mvxFile->getInstrumental());
-    vocalPartPianoPlayer.setVocalPart(mvxFile->getVocalPart());
-    players = {&instrumentalPlayer, &vocalPartPianoPlayer};
-    if (mvxFile->isRecording()) {
-        pitchesCollection = new PitchesMutableList(mvxFile->getRecordedPitchesFrequencies(),
-                                                   mvxFile->getRecordedPitchesTimes());
-        recordingPlayer.setAudioData(&mvxFile->getRecordingData());
+void VocalTrainerFilePlayer::setSource(VocalTrainerFile *file, bool destroyFileOnDestructor) {
+    this->file = file;
+    this->destroyMvxFileOnDestructor = destroyFileOnDestructor;
+    players.clear();
+    const AudioData* instrumental = &file->getInstrumental();
+    if (!instrumental->empty()) {
+        instrumentalPlayer.setAudioData(instrumental);
+        players.push_back(&instrumentalPlayer);
+    } else {
+        instrumentalPlayer.setAudioData(nullptr);
+    }
+
+    vocalPartPianoPlayer.setVocalPart(file->getVocalPart());
+    players.push_back(&vocalPartPianoPlayer);
+    if (file->isRecording()) {
+        pitchesCollection = new PitchesMutableList(file->getRecordedPitchesFrequencies(),
+                                                   file->getRecordedPitchesTimes());
+        recordingPlayer.setAudioData(&file->getRecordingData());
         players.push_back(&recordingPlayer);
 
         if (recordingLevelMonitor == nullptr) {
@@ -97,24 +105,22 @@ void MvxPlayer::setSource(MvxFile *file, bool destroyMvxFileOnDestructor) {
     }
 }
 
-void MvxPlayer::setSource(std::istream &is) {
-    auto* mvxFile = new MvxFile();
-    mvxFile->readFromStream(is);
-    this->mvxFile = mvxFile;
-    setSource(mvxFile);
+void VocalTrainerFilePlayer::setSource(std::istream &is) {
+    auto* file = VocalTrainerFile::read(is);
+    setSource(file);
 }
 
-void MvxPlayer::setSource(const char *filePath) {
+void VocalTrainerFilePlayer::setSource(const char *filePath) {
     std::fstream is = Streams::OpenFile(filePath, std::ios::in | std::ios::binary);
     setSource(is);
 }
 
-void MvxPlayer::onComplete() {
+void VocalTrainerFilePlayer::onComplete() {
     stopAndMoveSeekToBeginning();
     onCompleteListeners.executeAll();
 }
 
-void MvxPlayer::pausePlayer(AudioPlayer *player) {
+void VocalTrainerFilePlayer::pausePlayer(AudioPlayer *player) {
     Executors::ExecuteOnBackgroundThread([=] {
         player->pauseSync();
         Executors::ExecuteOnMainThread([=] {
@@ -125,7 +131,7 @@ void MvxPlayer::pausePlayer(AudioPlayer *player) {
     });
 }
 
-void MvxPlayer::pause() {
+void VocalTrainerFilePlayer::pause() {
     if (!isPlaying() || pauseRequestedCounter != 0) {
         return;
     }
@@ -138,74 +144,77 @@ void MvxPlayer::pause() {
     }
 }
 
-void MvxPlayer::play() {
+void VocalTrainerFilePlayer::play() {
     playRequestedListeners.executeAll();
     updateMetronomeVolume();
 
+    AudioPlayer* mainPlayer = players.at(0);
     if (bounds) {
-        double seekValue = instrumentalPlayer.getSeek();
+        double seekValue = mainPlayer->getSeek();
         if (!bounds.isInside(seekValue)) {
             double startSeek = bounds.getStartSeek();
-            instrumentalPlayer.setSeek(startSeek);
+            mainPlayer->setSeek(startSeek);
         }
     }
 
-    double seek = instrumentalPlayer.getSeek();
+    double seek = mainPlayer->getSeek();
     vocalPartPianoPlayer.setSeek(seek);
     if (metronomePlayer.isPrepared()) {
         metronomePlayer.setSeek(seek);
-        metronomePlayer.play();
     }
-    vocalPartPianoPlayer.play();
-    instrumentalPlayer.play();
     if (isRecording()) {
         recordingPlayer.setSeek(seek);
-        recordingPlayer.play();
+    }
+
+    for (AudioPlayer* player : players) {
+        player->play();
     }
 }
 
-void MvxPlayer::setSeek(double value) {
-    assert(value >= 0 && value <= instrumentalPlayer.getTrackDurationInSeconds());
+void VocalTrainerFilePlayer::setSeek(double value) {
+    assert(value >= 0 && value <= players.at(0)->getTrackDurationInSeconds());
     for (auto* player : players) {
         player->setSeek(value);
     }
     seekChangedFromUserListeners.executeAll(value);
 }
 
-void MvxPlayer::setInstrumentalVolume(float instrumentalVolume) {
+void VocalTrainerFilePlayer::setInstrumentalVolume(float instrumentalVolume) {
     instrumentalPlayer.setVolume(instrumentalVolume);
     updateMetronomeVolume();
 }
 
-void MvxPlayer::setVocalPartPianoVolume(float pianoVolume) {
+void VocalTrainerFilePlayer::setVocalPartPianoVolume(float pianoVolume) {
     vocalPartPianoPlayer.setVolume(pianoVolume);
     updateMetronomeVolume();
 }
 
-float MvxPlayer::getInstrumentalVolume() const {
+float VocalTrainerFilePlayer::getInstrumentalVolume() const {
     return instrumentalPlayer.getVolume();
 }
 
-float MvxPlayer::getVocalPianoVolume() const {
+float VocalTrainerFilePlayer::getVocalPianoVolume() const {
     return vocalPartPianoPlayer.getVolume();
 }
 
-void MvxPlayer::setRecordingVolume(float volume) {
+void VocalTrainerFilePlayer::setRecordingVolume(float volume) {
     recordingPlayer.setVolume(volume);
     updateMetronomeVolume();
 }
 
-MvxPlayer::~MvxPlayer() {
+VocalTrainerFilePlayer::~VocalTrainerFilePlayer() {
     delete pitchesCollection;
     delete recordingLevelMonitor;
     if (destroyMvxFileOnDestructor) {
-        delete mvxFile;
+        delete file;
     }
 }
 
-void MvxPlayer::prepare() {
+void VocalTrainerFilePlayer::prepare() {
     try {
-        instrumentalPlayer.prepare();
+        if (instrumentalPlayer.getAudioData() != nullptr) {
+            instrumentalPlayer.prepare();
+        }
     } catch (PrepareFailedException&) {
         throw MvxPlayerPrepareException(MvxPlayerPrepareException::BROKEN_INSTRUMENTAL);
     }
@@ -225,14 +234,16 @@ void MvxPlayer::prepare() {
     if (metronomePlayer.isPrepared()) {
         metronomePlayer.setAudioDataInfo(getBeatsPerMinute(), instrumentalPlayer.getTrackDurationInSeconds());
     }
-    if (fabs(instrumentalPlayer.getTrackDurationInSeconds() - vocalPartPianoPlayer.getTrackDurationInSeconds()) > 0.005) {
-        throw MvxPlayerPrepareException(MvxPlayerPrepareException::DIFFERENT_DURATIONS);
+    if (instrumentalPlayer.getAudioData()) {
+        if (fabs(instrumentalPlayer.getTrackDurationInSeconds() - vocalPartPianoPlayer.getTrackDurationInSeconds()) > 0.005) {
+            throw MvxPlayerPrepareException(MvxPlayerPrepareException::DIFFERENT_DURATIONS);
+        }
     }
     prepareFinishedListeners.executeAll();
     vocalPartChangedListeners.executeAll(&vocalPartPianoPlayer.getVocalPart());
 }
 
-const VocalPart * MvxPlayer::getVocalPart() const {
+const VocalPart * VocalTrainerFilePlayer::getVocalPart() const {
     if (!vocalPartPianoPlayer.isPrepared()) {
         return nullptr;
     }
@@ -240,11 +251,11 @@ const VocalPart * MvxPlayer::getVocalPart() const {
     return &vocalPartPianoPlayer.getVocalPart();
 }
 
-const PlaybackBounds & MvxPlayer::getBounds() const {
+const PlaybackBounds & VocalTrainerFilePlayer::getBounds() const {
     return bounds;
 }
 
-void MvxPlayer::setBounds(const PlaybackBounds &bounds) {
+void VocalTrainerFilePlayer::setBounds(const PlaybackBounds &bounds) {
     assert(!bounds || (bounds.getStartSeek() >= 0 &&
             bounds.getEndSeek() <= instrumentalPlayer.getTrackDurationInSeconds()));
     if (!isPlaying()) {
@@ -262,46 +273,46 @@ void MvxPlayer::setBounds(const PlaybackBounds &bounds) {
     }
 }
 
-bool MvxPlayer::isPlaying() const {
+bool VocalTrainerFilePlayer::isPlaying() const {
     return instrumentalPlayer.isPlaying();
 }
 
-void MvxPlayer::stopAndMoveSeekToBeginning() {
+void VocalTrainerFilePlayer::stopAndMoveSeekToBeginning() {
     pause();
     setSeek(bounds ? bounds.getStartSeek() : 0);
 }
 
-double MvxPlayer::getSeek() const {
+double VocalTrainerFilePlayer::getSeek() const {
     return instrumentalPlayer.getSeek();
 }
 
-double MvxPlayer::getPlayStartedSeek() const {
+double VocalTrainerFilePlayer::getPlayStartedSeek() const {
     return playStartedSeek;
 }
 
-double MvxPlayer::getPlayStartedTime() const {
+double VocalTrainerFilePlayer::getPlayStartedTime() const {
     return playStartedTime;
 }
 
-double MvxPlayer::getDuration() const {
+double VocalTrainerFilePlayer::getDuration() const {
     return instrumentalPlayer.getTrackDurationInSeconds();
 }
 
-double MvxPlayer::getBeatsPerMinute() const {
-    return mvxFile->getBeatsPerMinute();
+double VocalTrainerFilePlayer::getBeatsPerMinute() const {
+    return file->getBeatsPerMinute();
 }
 
-void MvxPlayer::onPlaybackStarted() {
+void VocalTrainerFilePlayer::onPlaybackStarted() {
     playStartedTime = TimeUtils::NowInSeconds();
     playStartedSeek = getSeek();
     isPlayingChangedListeners.executeAll(true);
 }
 
-void MvxPlayer::onPlaybackStopped() {
+void VocalTrainerFilePlayer::onPlaybackStopped() {
     isPlayingChangedListeners.executeAll(false);
 }
 
-bool MvxPlayer::hasPitchNow(const Pitch &pitch) const {
+bool VocalTrainerFilePlayer::hasPitchNow(const Pitch &pitch) const {
     if (!vocalPartPianoPlayer.isPrepared()) {
         return false;
     }
@@ -309,7 +320,7 @@ bool MvxPlayer::hasPitchNow(const Pitch &pitch) const {
     return getVocalPart()->hasPitchInMoment(getSeek(), pitch);
 }
 
-bool MvxPlayer::hasAnyPitchNow() const {
+bool VocalTrainerFilePlayer::hasAnyPitchNow() const {
     if (!vocalPartPianoPlayer.isPrepared()) {
         return false;
     }
@@ -317,11 +328,11 @@ bool MvxPlayer::hasAnyPitchNow() const {
     return getVocalPart()->hasPitchesInMoment(getSeek());
 }
 
-int MvxPlayer::getPitchShiftInSemiTones() const {
+int VocalTrainerFilePlayer::getPitchShiftInSemiTones() const {
     return vocalPartPianoPlayer.getPitchShiftInSemiTones();
 }
 
-void MvxPlayer::setPitchShiftInSemiTones(int value) {
+void VocalTrainerFilePlayer::setPitchShiftInSemiTones(int value) {
     if (value == getPitchShiftInSemiTones()) {
         return;
     }
@@ -338,30 +349,30 @@ void MvxPlayer::setPitchShiftInSemiTones(int value) {
     }
 }
 
-bool MvxPlayer::canBeShifted(int distance) const {
+bool VocalTrainerFilePlayer::canBeShifted(int distance) const {
     return vocalPartPianoPlayer.isPitchShiftingAvailable(distance);
 }
 
-double MvxPlayer::getTempoFactor() const {
+double VocalTrainerFilePlayer::getTempoFactor() const {
     return instrumentalPlayer.getTempoFactor();
 }
 
-void MvxPlayer::setTempoFactor(double tempoFactor) {
+void VocalTrainerFilePlayer::setTempoFactor(double tempoFactor) {
     vocalPartPianoPlayer.setTempoFactor(tempoFactor);
     instrumentalPlayer.setTempoFactor(tempoFactor);
 }
 
-void MvxPlayer::setMetronomeSoundData(std::string &&data) {
+void VocalTrainerFilePlayer::setMetronomeSoundData(std::string &&data) {
     metronomePlayer.setMetronomeAudioData(std::move(data));
     metronomePlayer.prepare();
     players.push_back(&metronomePlayer);
 }
 
-bool MvxPlayer::isMetronomeEnabled() const {
+bool VocalTrainerFilePlayer::isMetronomeEnabled() const {
     return metronomeEnabled;
 }
 
-void MvxPlayer::setMetronomeEnabled(bool metronomeEnabled) {
+void VocalTrainerFilePlayer::setMetronomeEnabled(bool metronomeEnabled) {
     assert(!metronomeEnabled || metronomePlayer.isPrepared() && "Metronome data has not been provided, "
                                                                 "call setMetronomeSoundData and then prepare, "
                                                                 "before enabling metronome");
@@ -369,11 +380,11 @@ void MvxPlayer::setMetronomeEnabled(bool metronomeEnabled) {
     updateMetronomeVolume();
 }
 
-bool MvxPlayer::isMetronomeSoundDataSet() const {
+bool VocalTrainerFilePlayer::isMetronomeSoundDataSet() const {
     return metronomePlayer.isPrepared();
 }
 
-void MvxPlayer::updateMetronomeVolume() {
+void VocalTrainerFilePlayer::updateMetronomeVolume() {
     if (metronomeEnabled) {
         metronomePlayer.setVolume(std::max({instrumentalPlayer.getVolume(),
                 vocalPartPianoPlayer.getVolume(), recordingPlayer.getVolume()}) * 1.f);
@@ -382,77 +393,78 @@ void MvxPlayer::updateMetronomeVolume() {
     }
 }
 
-void MvxPlayer::seekToNextTact() {
+void VocalTrainerFilePlayer::seekToNextTact() {
     double tactDuration = getTactDuration();
     double seek = getSeek() + tactDuration;
     double mod = fmod(seek, tactDuration);
     setSeek(seek - mod);
 }
 
-void MvxPlayer::seekToPrevTact() {
+void VocalTrainerFilePlayer::seekToPrevTact() {
     double tactDuration = getTactDuration();
     double seek = getSeek();
     double mod = fmod(seek, tactDuration);
     setSeek(seek - mod);
 }
 
-bool MvxPlayer::isRecording() const {
-    return mvxFile->isRecording();
+bool VocalTrainerFilePlayer::isRecording() const {
+    return file->isRecording();
 }
 
-const std::string &MvxPlayer::getArtistNameUtf8() const {
-    return mvxFile->getArtistNameUtf8();
+const std::string &VocalTrainerFilePlayer::getArtistNameUtf8() const {
+    return file->getArtistNameUtf8();
 }
 
-const std::string &MvxPlayer::getSongTitleUtf8() const {
-    return mvxFile->getSongTitleUtf8();
+const std::string &VocalTrainerFilePlayer::getSongTitleUtf8() const {
+    return file->getSongTitleUtf8();
 }
 
-const std::string &MvxPlayer::getInstrumental() {
-    return mvxFile->getInstrumental();
+const std::string &VocalTrainerFilePlayer::getInstrumental() {
+    return file->getInstrumental();
 }
 
-bool MvxPlayer::isCompleted() const {
+bool VocalTrainerFilePlayer::isCompleted() const {
     return instrumentalPlayer.isCompleted();
 }
 
-const PitchesCollection* MvxPlayer::getPitchesCollection() {
+const PitchesCollection* VocalTrainerFilePlayer::getPitchesCollection() {
     return pitchesCollection;
 }
 
-const MvxFile &MvxPlayer::getMvxFile() const {
-    return *mvxFile;
+const VocalTrainerFile &VocalTrainerFilePlayer::getFile() const {
+    return *file;
 }
 
-bool MvxPlayer::hasLyrics() const {
+bool VocalTrainerFilePlayer::hasLyrics() const {
     return getLyricsLinesCount() > 0;
 }
 
-int MvxPlayer::getLyricsLinesCount() const {
-    return mvxFile->getLyrics().getNumberOfParts();
+int VocalTrainerFilePlayer::getLyricsLinesCount() const {
+    return file->getLyrics().getNumberOfParts();
 }
 
-const std::string& MvxPlayer::getLyricsTextForPart(int partIndex) const {
+const std::string& VocalTrainerFilePlayer::getLyricsTextForPart(int partIndex) const {
     double seek = getSeek();
-    return mvxFile->getLyrics().getCurrentLyricsTextForPart(partIndex, seek);
+    return file->getLyrics().getCurrentLyricsTextForPart(partIndex, seek);
 }
 
-const AudioPlayer &MvxPlayer::getInstrumentalPlayer() const {
+const AudioPlayer &VocalTrainerFilePlayer::getInstrumentalPlayer() const {
     return instrumentalPlayer;
 }
 
-const VocalPartAudioPlayer &MvxPlayer::getVocalPartPlayer() const {
+const VocalPartAudioPlayer &VocalTrainerFilePlayer::getVocalPartPlayer() const {
     return vocalPartPianoPlayer;
 }
 
-const std::map<double, int> &MvxPlayer::getTonalityChanges() const {
+const std::map<double, int> &VocalTrainerFilePlayer::getTonalityChanges() const {
     return tonalityChanges;
 }
 
-void MvxPlayer::editLyrics(const std::function<void(Lyrics *lyrics)> &editAction) {
-    auto lyrics = mvxFile->getLyrics();
-    editAction(&mvxFile->getLyricsNonConst());
-    if (lyrics != mvxFile->getLyrics()) {
+void VocalTrainerFilePlayer::editLyrics(const std::function<void(Lyrics *lyrics)> &editAction) {
+    assert(file->isLyricsEditAvailable());
+    auto lyrics = file->getLyrics();
+    editAction(&file->getLyricsNonConst());
+    if (lyrics != file->getLyrics()) {
         lyricsChangedListeners.executeAll();
     }
 }

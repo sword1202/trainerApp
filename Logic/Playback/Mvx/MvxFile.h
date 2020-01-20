@@ -11,11 +11,12 @@
 #include "StringUtils.h"
 #include "Lyrics.h"
 #include "AudioData.h"
+#import "VocalTrainerFile.h"
 #include <boost/variant.hpp>
 #include <map>
 #include <boost/serialization/map.hpp>
 
-class MvxFile {
+class MvxFile : public VocalTrainerFile {
     // signature
     bool recording = false;
     std::string songTitleUtf8;
@@ -141,6 +142,9 @@ public:
 
     const Lyrics &getLyrics() const;
     Lyrics &getLyricsNonConst();
+
+    bool isLyricsEditAvailable() const override;
+
     void setLyrics(const Lyrics &lyrics);
 
     const std::map<double, int> &getRecordingTonalityChanges() const;

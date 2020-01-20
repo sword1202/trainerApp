@@ -7,7 +7,7 @@
 
 #include <string>
 #include "WorkspaceController.h"
-#include "MvxPlayer.h"
+#include "VocalTrainerFilePlayer.h"
 #include "AudioInputManager.h"
 #include "Timer.h"
 #include "Rewinder.h"
@@ -35,7 +35,7 @@ public:
 class ProjectController : CppUtils::DestructorQueue, public WorkspaceControllerDelegate {
     WorkspaceController* workspaceController = nullptr;
     ProjectControllerDelegate* delegate = nullptr;
-    MvxPlayer* player;
+    VocalTrainerFilePlayer* player;
     AudioInputManager* audioInputManager;
     bool lyricsVisible = true;
     Rewinder* rewinder = nullptr;

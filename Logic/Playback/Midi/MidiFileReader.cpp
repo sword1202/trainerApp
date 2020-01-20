@@ -492,11 +492,11 @@ VocalPart MidiFileReader::tryGetVocalPartFromMidiTrackWithId(int midiTrackId) co
         throw MidiFileReaderException(MidiFileReaderException::OUT_OF_MAX_SUPPORTED_POLYPHONIC_TRACKS_COUNT);
     }
 
-    std::vector<VxPitch> pitches;
+    std::vector<NoteInterval> pitches;
     const auto &notes = track->getNotes();
     pitches.reserve(notes.size());
     for (const auto &note : notes) {
-        VxPitch pitch;
+        NoteInterval pitch;
         pitch.pitch = Pitch::fromMidiIndex(note->keyNumber);
         pitch.startTickNumber = note->startTick;
         pitch.ticksCount = note->durationInTicks();
@@ -505,5 +505,5 @@ VocalPart MidiFileReader::tryGetVocalPartFromMidiTrackWithId(int midiTrackId) co
 
     return VocalPart(std::move(pitches),
                      durationInTicks - track->finalTick, //endSilenceLengthInTicks
-                     int(ticksPerSecond));
+                     ticksPerSecond);
 }

@@ -138,7 +138,7 @@ void ProjectController::setWorkspaceController(WorkspaceController *workspaceCon
     workspaceController->setBeatsPerSecond(player->getBeatsPerMinute() / 60.0);
     workspaceController->setTotalDurationInSeconds(player->getDuration());
     workspaceController->setInstrumentalTrackSamples(
-            this->player->getMvxFile().getInstrumentalPreviewSamples());
+            this->player->getFile().getInstrumentalPreviewSamples());
     workspaceController->setPitchSequence(player);
     bool isRecording = player->isRecording();
     workspaceController->setRecording(isRecording);

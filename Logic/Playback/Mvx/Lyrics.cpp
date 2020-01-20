@@ -77,3 +77,5 @@ Lyrics::Snapshot Lyrics::getCurrentSnapshot(double time) const {
 
     return result;
 }
+
+const Lyrics Lyrics::EMPTY;

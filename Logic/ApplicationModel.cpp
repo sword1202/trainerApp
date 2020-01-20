@@ -7,11 +7,11 @@
 static ApplicationModel* model = nullptr;
 
 ApplicationModel::ApplicationModel() {
-    player = new MvxPlayer();
+    player = new VocalTrainerFilePlayer();
     audioInputManager = new AudioInputManager("");
 }
 
-MvxPlayer *ApplicationModel::getPlayer() {
+VocalTrainerFilePlayer *ApplicationModel::getPlayer() {
     return player;
 }
 

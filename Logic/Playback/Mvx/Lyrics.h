@@ -11,6 +11,7 @@
 class Lyrics {
 public:
     static constexpr int MAX_PARTS_COUNT = 2;
+    static const Lyrics EMPTY;
     typedef boost::container::static_vector<std::string, MAX_PARTS_COUNT> Snapshot;
 private:
     boost::container::static_vector<LyricsPart, MAX_PARTS_COUNT> lyrics;

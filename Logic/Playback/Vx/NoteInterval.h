@@ -26,11 +26,11 @@ struct Interval {
     bool intersectsWith(const Interval& interval) const;
 };
 
-struct VxPitch : Interval {
+struct NoteInterval : Interval {
     Pitch pitch;
 
-    VxPitch() = default;
-    VxPitch(const Pitch &pitch, int startTickNumber, int ticksCount);
+    NoteInterval() = default;
+    NoteInterval(const Pitch &pitch, int startTickNumber, int ticksCount);
 
     template<typename Archive>
     void load(Archive & ar, const unsigned int version)
@@ -53,7 +53,7 @@ struct VxPitch : Interval {
     BOOST_SERIALIZATION_SPLIT_MEMBER()
 };
 
-std::ostream& operator<<(std::ostream& os, const VxPitch& pitch);
+std::ostream& operator<<(std::ostream& os, const NoteInterval& pitch);
 
 
 #endif //VOCALTRAINER_VXPITCHDEFENITION_H

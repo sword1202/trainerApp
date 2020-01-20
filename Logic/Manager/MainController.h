@@ -9,14 +9,14 @@
 
 #include "AudioInputPitchesRecorder.h"
 #include "AudioInputManager.h"
-#include "MvxPlayer.h"
+#include "VocalTrainerFilePlayer.h"
 #include "WorkspaceController.h"
 #include "PlaybackBounds.h"
 #include "CallbacksQueue.h"
 
 class MainController {
     AudioInputManager* audioInputManager = nullptr;
-    MvxPlayer* mvxPlayer = nullptr;
+    VocalTrainerFilePlayer* mvxPlayer = nullptr;
     WorkspaceController* workspaceController = nullptr;
     CppUtils::CallbacksQueue workspaceControllerReadyCallbacksQueue;
 
@@ -26,11 +26,11 @@ class MainController {
     void generateRecording(MvxFile* out);
 public:
 
-    void init(AudioInputManager *pitchInputReader, MvxPlayer *mvxPlayer);
+    void init(AudioInputManager *pitchInputReader, VocalTrainerFilePlayer *mvxPlayer);
 
     AudioInputManager *getAudioInputManager() const;
 
-    MvxPlayer *getPlayer() const;
+    VocalTrainerFilePlayer *getPlayer() const;
 
     // Should be executed on a render thread, the same thread as workspace->draw is executed
     void setWorkspaceController(WorkspaceController* workspaceController);

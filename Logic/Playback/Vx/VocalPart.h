@@ -3,11 +3,11 @@
 // Copyright (c) 2018 Mac. All rights reserved.
 //
 
-#ifndef VOCALTRAINER_VXFILE_H
-#define VOCALTRAINER_VXFILE_H
+#ifndef VOCALTRAINER_VOCAL_PART_H
+#define VOCALTRAINER_VOCAL_PART_H
 
 #include <istream>
-#include "VxPitch.h"
+#include "NoteInterval.h"
 #include <vector>
 #include <boost/container/static_vector.hpp>
 #include <boost/serialization/vector.hpp>
@@ -15,8 +15,8 @@
 #include <iostream>
 
 class VocalPart {
-    std::vector<VxPitch> pitches;
-    int ticksPerSecond = 0;
+    std::vector<NoteInterval> pitches;
+    double ticksPerSecond = 0;
     int durationInTicks = 0;
     int endSilenceDurationInTicks = 0;
     int lowestPitchIndex;
@@ -44,8 +44,8 @@ class VocalPart {
 
 public:
     VocalPart();
-    VocalPart(std::vector<VxPitch> &&pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int ticksPerSecond);
-    VocalPart(const std::vector<VxPitch> &pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, int ticksPerSecond);
+    VocalPart(std::vector<NoteInterval> &&pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, double ticksPerSecond);
+    VocalPart(const std::vector<NoteInterval> &pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, double ticksPerSecond);
     VocalPart(VocalPart&& vxFile) = default;
     VocalPart(const VocalPart& vocalPart) = default;
     VocalPart& operator=(const VocalPart& vocalPart) = default;
@@ -54,7 +54,7 @@ public:
     VocalPart(std::istream& is);
     void writeToStream(std::ostream& os) const;
 
-    static int startTickNumberKeyProvider(const VxPitch &pitch);
+    static int startTickNumberKeyProvider(const NoteInterval &pitch);
 
     double getDurationInSeconds() const;
     double getTickDurationInSeconds() const;
@@ -63,14 +63,14 @@ public:
     int samplesCountFromTicks(int ticks, int sampleRate) const;
     int ticksFromSamplesCount(int samplesCount, int sampleRate) const;
 
-    const std::vector<VxPitch> &getPitches() const;
+    const std::vector<NoteInterval> &getPitches() const;
 
-    void setPitches(const std::vector<VxPitch> &pitches);
+    void setPitches(const std::vector<NoteInterval> &pitches);
 
     int getTicksPerSecond() const;
     int getDurationInTicks() const;
     int getEndSilenceDurationInTicks() const;
-    const VxPitch& getShortestPitch() const;
+    const NoteInterval& getShortestPitch() const;
 
     void shift(int distance);
     VocalPart shifted(int distance);
@@ -88,8 +88,8 @@ public:
     int getLowestPitchIndex() const;
     int getHighestPitchIndex() const;
 
-    const VxPitch& getLowestVxPitch() const;
-    const VxPitch& getHighestVxPitch() const;
+    const NoteInterval& getLowestVxPitch() const;
+    const NoteInterval& getHighestVxPitch() const;
 
     const Pitch& getLowestPitch() const;
     const Pitch& getHighestPitch() const;
@@ -110,7 +110,7 @@ public:
     template<typename Function>
     void iteratePitchesIndexesInTickRange(int startTick, int endTick, const Function& function) const {
         for (int i = 0; i < pitches.size(); ++i) {
-            const VxPitch& pitch = pitches[i];
+            const NoteInterval& pitch = pitches[i];
             if (pitch.intersectsWith(startTick, endTick)) {
                 function(i);
             }
@@ -133,7 +133,7 @@ public:
 
     template<typename OutputIterator>
     void getPitchesInTimeRange(double startTime, double endTime, OutputIterator iterator) const {
-        iteratePitchesInTimeRange(startTime, endTime, [&] (const VxPitch& vxPitch) {
+        iteratePitchesInTimeRange(startTime, endTime, [&] (const NoteInterval& vxPitch) {
             *iterator++ = vxPitch;
         });
     }
@@ -146,4 +146,4 @@ public:
     }
 };
 
-#endif //VOCALTRAINER_VXFILE_H
+#endif //VOCALTRAINER_VOCAL_PART_H

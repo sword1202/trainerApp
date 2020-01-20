@@ -369,3 +369,10 @@ std::ostream& operator<<(std::ostream& os, const Pitch& pitch) {
     os<<pitch.getName()<<pitch.getOctave()<<" ("<<pitch.getFrequency()<<")";
     return os;
 }
+
+std::istream& operator>>(std::istream& is, Pitch& pitch) {
+    std::string pitchAsString;
+    is >> pitchAsString;
+    pitch = Pitch(pitchAsString.data());
+    return is;
+}

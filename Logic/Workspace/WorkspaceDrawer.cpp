@@ -307,7 +307,7 @@ void WorkspaceDrawer::drawPitches() const {
     double timeEnd = timeBegin + workspaceDuration;
 
     float relativeHeight = getMaximumGridTranslation() - getGridTranslation() + getVisibleGridHeight();
-    vocalPart->iteratePitchesInTimeRange(timeBegin, timeEnd, [&] (const VxPitch& vxPitch) {
+    vocalPart->iteratePitchesInTimeRange(timeBegin, timeEnd, [&] (const NoteInterval& vxPitch) {
         double pitchTimeBegin = vocalPart->ticksToSeconds(vxPitch.startTickNumber);
         double pitchDuration = vocalPart->ticksToSeconds(vxPitch.ticksCount);
 
@@ -369,7 +369,7 @@ void WorkspaceDrawer::drawPianoTrack() {
     int topMargin = PIANO_TRACK_PITCHES_INDEXES_COUNT - maxIndexFactor;
 
     const auto& pitches = vocalPart->getPitches();
-    for (const VxPitch& vxPitch : pitches) {
+    for (const NoteInterval& vxPitch : pitches) {
         float pitchX = vxPitch.startTickNumber * tickSize;
         float pitchWidth = vxPitch.ticksCount * tickSize;
 

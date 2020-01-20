@@ -1,11 +1,12 @@
+#define CATCH_CONFIG_MAIN
 #include "catch.hpp"
-#include "VxPitch.h"
+#include "NoteInterval.h"
 
 TEST_CASE("VxPitch intersection test") {
-    VxPitch a;
+    NoteInterval a;
     a.startTickNumber = 0;
     a.ticksCount = 100;
-    VxPitch b;
+    NoteInterval b;
     b.startTickNumber = 100;
     b.ticksCount = 200;
 
@@ -41,11 +42,11 @@ TEST_CASE("VxPitch intersection test 2") {
     int startTick = 7198;
     int endTick = 7203;
 
-    VxPitch pitch;
-    pitch.startTickNumber = 14399;
-    pitch.ticksCount = 180;
+    NoteInterval note;
+    note.startTickNumber = 14399;
+    note.ticksCount = 180;
 
-    REQUIRE(!pitch.intersectsWith(startTick, endTick));
+    REQUIRE(!note.intersectsWith(startTick, endTick));
 }
 
 TEST_CASE("iteratePitchesInTickRange test") {

@@ -3,8 +3,8 @@
 // Copyright (c) 2018 Mac. All rights reserved.
 //
 
-#ifndef VOCALTRAINER_MVXPLAYER_H
-#define VOCALTRAINER_MVXPLAYER_H
+#ifndef VOCALTRAINER_VOCALTRAINERFILEPLAYER_H
+#define VOCALTRAINER_VOCALTRAINERFILEPLAYER_H
 
 #include <iostream>
 #include "VocalPart.h"
@@ -25,8 +25,9 @@
 #include "Timer.h"
 #include "Rewindable.h"
 #include "BeatsPerMinuteProvider.h"
+#include "VocalTrainerFile.h"
 
-class MvxPlayer : public PlayingPitchSequence, public Rewindable, public BeatsPerMinuteProvider {
+class VocalTrainerFilePlayer : public PlayingPitchSequence, public Rewindable, public BeatsPerMinuteProvider {
 private:
 
     AudioFilePlayer instrumentalPlayer;
@@ -42,7 +43,7 @@ private:
     PlaybackBounds bounds;
     double playStartedSeek = -1;
     double playStartedTime = -1;
-    MvxFile* mvxFile = nullptr;
+    VocalTrainerFile* file = nullptr;
     bool destroyMvxFileOnDestructor;
     // is valid only for recordings
     PitchesCollection* pitchesCollection = nullptr;
@@ -70,11 +71,11 @@ public:
     CppUtils::ListenersSet<> lyricsChangedListeners;
     CppUtils::ListenersSet<> currentLyricsLinesChangedListeners;
 
-    MvxPlayer();
-    virtual ~MvxPlayer();
+    VocalTrainerFilePlayer();
+    virtual ~VocalTrainerFilePlayer();
     void setSource(std::istream &is);
     void setSource(const char *filePath);
-    void setSource(MvxFile *file, bool destroyMvxFileOnDestructor = true);
+    void setSource(VocalTrainerFile *file, bool destroyFileOnDestructor = true);
     void prepare();
     virtual void setInstrumentalVolume(float instrumentalVolume);
     virtual void setVocalPartPianoVolume(float pianoVolume);
@@ -93,7 +94,7 @@ public:
     virtual void seekToNextTact();
     virtual void seekToPrevTact();
     const VocalPart* getVocalPart() const;
-    const MvxFile &getMvxFile() const;
+    const VocalTrainerFile &getFile() const;
     void editLyrics(const std::function<void(Lyrics *lyrics)> &editAction);
 
     const PlaybackBounds &getBounds() const;
@@ -145,4 +146,4 @@ public:
 };
 
 
-#endif //VOCALTRAINER_MVXPLAYER_H
+#endif //VOCALTRAINER_VOCALTRAINERFILEPLAYER_H

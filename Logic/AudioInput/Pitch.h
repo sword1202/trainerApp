@@ -86,5 +86,6 @@ public:
 };
 
 std::ostream& operator<<(std::ostream& os, const Pitch& pitch);
+std::istream& operator>>(std::istream& is, Pitch& pitch);
 
 #endif //PITCHDETECTION_PITCH_H

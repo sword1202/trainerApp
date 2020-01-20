@@ -5,17 +5,17 @@
 #ifndef TEXTIMAGESGENERATOR_APPLICATIONMODEL_H
 #define TEXTIMAGESGENERATOR_APPLICATIONMODEL_H
 
-#include "MvxPlayer.h"
+#include "VocalTrainerFilePlayer.h"
 #include "AudioInputManager.h"
 
 class ApplicationModel {
-    MvxPlayer* player;
+    VocalTrainerFilePlayer* player;
     AudioInputManager* audioInputManager;
 public:
     ApplicationModel();
     static void init(ApplicationModel* instance);
     static ApplicationModel* instance();
-    MvxPlayer *getPlayer();
+    VocalTrainerFilePlayer *getPlayer();
 
     AudioInputManager *getAudioInputManager();
 };

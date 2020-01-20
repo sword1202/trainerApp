@@ -200,3 +200,7 @@ void MvxFile::setRecordingTonalityChanges(const std::map<double, int> &recording
 Lyrics &MvxFile::getLyricsNonConst() {
     return lyrics;
 }
+
+bool MvxFile::isLyricsEditAvailable() const {
+    return lyrics.getNumberOfParts() != 0;
+}

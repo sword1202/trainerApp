@@ -25,7 +25,7 @@ void MainController::initInstance(MainController* inst) {
     _instance = inst;
 }
 
-void MainController::init(AudioInputManager *pitchInputReader, MvxPlayer *mvxPlayer) {
+void MainController::init(AudioInputManager *pitchInputReader, VocalTrainerFilePlayer *mvxPlayer) {
     this->audioInputManager = pitchInputReader;
     this->mvxPlayer = mvxPlayer;
 
@@ -89,7 +89,7 @@ MainController::~MainController() {
     delete audioInputManager;
 }
 
-MvxPlayer *MainController::getPlayer() const {
+VocalTrainerFilePlayer *MainController::getPlayer() const {
     return mvxPlayer;
 }
 
@@ -99,7 +99,7 @@ void MainController::setWorkspaceController(WorkspaceController *workspaceContro
     workspaceController->setBeatsPerSecond(mvxPlayer->getBeatsPerMinute() / 60.0);
     workspaceController->setTotalDurationInSeconds(mvxPlayer->getDuration());
     workspaceController->setInstrumentalTrackSamples(
-            this->mvxPlayer->getMvxFile().getInstrumentalPreviewSamples());
+            this->mvxPlayer->getFile().getInstrumentalPreviewSamples());
     workspaceController->setPitchSequence(mvxPlayer);
     bool isRecording = mvxPlayer->isRecording();
     workspaceController->setRecording(isRecording);
