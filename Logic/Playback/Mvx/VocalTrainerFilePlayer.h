@@ -56,6 +56,9 @@ private:
 
     void updateMetronomeVolume();
     void pausePlayer(AudioPlayer* player);
+
+    const AudioPlayer* getMainPlayer() const;
+    AudioPlayer* getMainPlayer();
 public:
     CppUtils::ListenersSet<bool> isPlayingChangedListeners;
     CppUtils::ListenersSet<> stopRequestedListeners;
