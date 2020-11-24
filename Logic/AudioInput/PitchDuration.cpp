@@ -33,9 +33,9 @@ int PitchDuration::getRequiredTicksPerBeat(int duration) {
         case SIXTEENTH:
             return 4;
         case SIXTEENTH_WITH_DOT:
-        case THIRTY:
+        case THIRTY_SECOND:
             return 8;
-        case THIRTY_WITH_DOT:
+        case THIRTY_SECOND_WITH_DOT:
             return 16;
         default:
             assert(false && "Duration not supported");
@@ -46,6 +46,6 @@ int PitchDuration::getRequiredTicksPerBeat(int duration) {
 
 bool PitchDuration::isValid(int duration) {
     static std::vector<int> values { WHOLE, WHOLE_WITH_DOT, HALF, HALF_WITH_DOT, QUARTER, QUARTER_WITH_DOT, EIGHTH,
-            EIGHTH_WITH_DOT, SIXTEENTH, SIXTEENTH_WITH_DOT, THIRTY, THIRTY_WITH_DOT };
+            EIGHTH_WITH_DOT, SIXTEENTH, SIXTEENTH_WITH_DOT, THIRTY_SECOND, THIRTY_SECOND_WITH_DOT };
     return CppUtils::ContainsValue(values, duration);
 }
