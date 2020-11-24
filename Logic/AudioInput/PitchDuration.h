@@ -19,8 +19,8 @@ public:
     static constexpr int EIGHTH_WITH_DOT = -8;
     static constexpr int SIXTEENTH = 16;
     static constexpr int SIXTEENTH_WITH_DOT = -16;
-    static constexpr int THIRTY = 32;
-    static constexpr int THIRTY_WITH_DOT = -32;
+    static constexpr int THIRTY_SECOND = 32;
+    static constexpr int THIRTY_SECOND_WITH_DOT = -32;
 
     static double getBeatsCount(int duration);
     static int getRequiredTicksPerBeat(int duration);
