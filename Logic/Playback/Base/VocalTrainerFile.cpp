@@ -10,13 +10,23 @@ VocalTrainerFile* VocalTrainerFile::read(std::istream& is) {
     if (vxSignature[0] == 'V' && vxSignature[1] == 'X') {
         is.seekg(0);
         auto* file = new VxFile();
-        file->readFromStream(is);
+        try {
+            file->readFromStream(is);
+        } catch (...) {
+            delete file;
+            throw;
+        }
         return file;
     } else {
         // MvxFile
         is.seekg(0);
         auto* file  = new MvxFile();
-        file->readFromStream(is);
+        try {
+            file->readFromStream(is);
+        } catch (...) {
+            delete file;
+            throw;
+        }
         return file;
     }
 }

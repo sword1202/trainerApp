@@ -7,7 +7,7 @@
 
 #include <exception>
 
-class MvxPlayerPrepareException : public std::exception {
+class VocalTrainerPlayerPrepareException : public std::exception {
 public:
     enum Reason {
         BROKEN_INSTRUMENTAL,
@@ -18,7 +18,7 @@ public:
 private:
     Reason reason;
 public:
-    explicit MvxPlayerPrepareException(Reason reason);
+    explicit VocalTrainerPlayerPrepareException(Reason reason);
     Reason getReason() const;
 
     const char *what() const noexcept override;

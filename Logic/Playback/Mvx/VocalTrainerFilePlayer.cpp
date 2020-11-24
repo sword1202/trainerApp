@@ -15,7 +15,7 @@
 #include "Executors.h"
 #include "PlaybackBounds.h"
 #include "AudioAverageInputLevelMonitor.h"
-#include "MvxPlayerPrepareException.h"
+#include "VocalTrainerPlayerPrepareException.h"
 #include <iostream>
 #include <memory>
 #include "PitchesMutableList.h"
@@ -222,18 +222,18 @@ void VocalTrainerFilePlayer::prepare() {
             instrumentalPlayer.prepare();
         }
     } catch (PrepareFailedException&) {
-        throw MvxPlayerPrepareException(MvxPlayerPrepareException::BROKEN_INSTRUMENTAL);
+        throw VocalTrainerPlayerPrepareException(VocalTrainerPlayerPrepareException::BROKEN_INSTRUMENTAL);
     }
     try {
         vocalPartPianoPlayer.prepare();
     } catch (PrepareFailedException&) {
-        throw MvxPlayerPrepareException(MvxPlayerPrepareException::BROKEN_VOCAL_PART);
+        throw VocalTrainerPlayerPrepareException(VocalTrainerPlayerPrepareException::BROKEN_VOCAL_PART);
     }
     if (isRecording()) {
         try {
             recordingPlayer.prepare();
         } catch (PrepareFailedException&) {
-            throw MvxPlayerPrepareException(MvxPlayerPrepareException::BROKEN_RECORDING);
+            throw VocalTrainerPlayerPrepareException(VocalTrainerPlayerPrepareException::BROKEN_RECORDING);
         }
     }
 
@@ -242,7 +242,7 @@ void VocalTrainerFilePlayer::prepare() {
     }
     if (instrumentalPlayer.getAudioData()) {
         if (fabs(instrumentalPlayer.getTrackDurationInSeconds() - vocalPartPianoPlayer.getTrackDurationInSeconds()) > 0.005) {
-            throw MvxPlayerPrepareException(MvxPlayerPrepareException::DIFFERENT_DURATIONS);
+            throw VocalTrainerPlayerPrepareException(VocalTrainerPlayerPrepareException::DIFFERENT_DURATIONS);
         }
     }
     prepareFinishedListeners.executeAll();

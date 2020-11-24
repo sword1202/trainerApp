@@ -2,17 +2,17 @@
 // Created by Semyon Tykhonenko on 2019-05-20.
 //
 
-#include "MvxPlayerPrepareException.h"
+#include "VocalTrainerPlayerPrepareException.h"
 
-MvxPlayerPrepareException::MvxPlayerPrepareException(Reason reason) : reason(reason) {
+VocalTrainerPlayerPrepareException::VocalTrainerPlayerPrepareException(Reason reason) : reason(reason) {
 
 }
 
-MvxPlayerPrepareException::Reason MvxPlayerPrepareException::getReason() const {
+VocalTrainerPlayerPrepareException::Reason VocalTrainerPlayerPrepareException::getReason() const {
     return reason;
 }
 
-const char *MvxPlayerPrepareException::what() const noexcept {
+const char *VocalTrainerPlayerPrepareException::what() const noexcept {
     switch (reason) {
         case BROKEN_INSTRUMENTAL:
             return "Instrumental file is broken";

@@ -39,6 +39,7 @@
 
 #include "portmixer.h"
 #include "px_mixer.h"
+#include <stdlib.h>
 
 typedef struct PxInfo
 {

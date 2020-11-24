@@ -41,6 +41,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5454909C2554014B00E8E7F2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 545490982554014B00E8E7F2 /* MvxGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5454908E2554014B00E8E7F2;
+			remoteInfo = MvxGenerator;
+		};
 		ACF18AE022EC7EBF008E7DAA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ACF18AC522EC7EBF008E7DAA /* Project object */;
@@ -53,6 +60,7 @@
 /* Begin PBXFileReference section */
 		316CF42FAAC5685B522A455A /* Pods_VocalTrainer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VocalTrainer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EB14089B9F185478AB5567 /* Pods-VocalTrainer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VocalTrainer.release.xcconfig"; path = "Target Support Files/Pods-VocalTrainer/Pods-VocalTrainer.release.xcconfig"; sourceTree = "<group>"; };
+		545490982554014B00E8E7F2 /* MvxGenerator.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MvxGenerator.xcodeproj; path = ../MvxGenerator/MvxGenerator.xcodeproj; sourceTree = "<group>"; };
 		67748B5386791DDBEBEF3101 /* Pods-VocalTrainerMacOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VocalTrainerMacOS.debug.xcconfig"; path = "Target Support Files/Pods-VocalTrainerMacOS/Pods-VocalTrainerMacOS.debug.xcconfig"; sourceTree = "<group>"; };
 		71AD21C74A29AB6B2D6F7582 /* ProjectWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectWindowController.swift; sourceTree = "<group>"; };
 		71AD22FAC42E30FA831A8953 /* ProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +126,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		545490992554014B00E8E7F2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5454909D2554014B00E8E7F2 /* MvxGenerator */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		71AD20ACDEBC3A0DCA95A336 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -218,6 +234,7 @@
 		ACF18AC422EC7EBF008E7DAA = {
 			isa = PBXGroup;
 			children = (
+				545490982554014B00E8E7F2 /* MvxGenerator.xcodeproj */,
 				ACF18ACF22EC7EBF008E7DAA /* MacOS */,
 				ACF18AE222EC7EBF008E7DAA /* VocalTrainerUITests */,
 				ACF18ACE22EC7EBF008E7DAA /* Products */,
@@ -350,6 +367,12 @@
 			mainGroup = ACF18AC422EC7EBF008E7DAA;
 			productRefGroup = ACF18ACE22EC7EBF008E7DAA /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 545490992554014B00E8E7F2 /* Products */;
+					ProjectRef = 545490982554014B00E8E7F2 /* MvxGenerator.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				ACF18ACC22EC7EBF008E7DAA /* VocalTrainer */,
@@ -357,6 +380,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		5454909D2554014B00E8E7F2 /* MvxGenerator */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = MvxGenerator;
+			remoteRef = 5454909C2554014B00E8E7F2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		ACF18ACB22EC7EBF008E7DAA /* Resources */ = {

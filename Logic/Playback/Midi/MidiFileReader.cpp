@@ -79,22 +79,28 @@ MidiFileReader::~MidiFileReader()
 
 }
 
-void MidiFileReader::read(const std::string &filename)
+bool MidiFileReader::read(const std::string &filename)
 {
     reset();
     MidiFile midifile;
     if (midifile.read(filename) != 0) {
         processMidiFile(midifile);
+        return true;
     }
+
+    return false;
 }
 
-void MidiFileReader::read(std::istream &is)
+bool MidiFileReader::read(std::istream &is)
 {
     reset();
     MidiFile midifile;
     if (midifile.read(is) != 0) {
         processMidiFile(midifile);
+        return true;
     }
+
+    return false;
 }
 
 /*!

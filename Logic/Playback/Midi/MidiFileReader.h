@@ -39,8 +39,8 @@ public:
     explicit MidiFileReader();
     ~MidiFileReader();
 
-    void read(const std::string &filename);
-    void read(std::istream &is);
+    bool read(const std::string &filename);
+	bool read(std::istream &is);
 
 	double getBeatsPerMinute() const;
 	VocalPart tryGetVocalPartFromMidiTrackWithId(int midiTrackId) const;
