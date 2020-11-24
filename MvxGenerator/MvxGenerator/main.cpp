@@ -100,6 +100,7 @@ int main(int argc, char *argv[]) {
             double vocalPartDuration = vocalPart.getDurationInSeconds();
             double instrumentalDuration = player.getInstrumentalPlayer().getTrackDurationInSeconds();
             vocalPart = vocalPart.cutOrExpand(0, instrumentalDuration);
+            mvxFile.setVocalPart(vocalPart);
             cout << "Vocal part has duration "
                 << vocalPartDuration
                 <<". Instrumental has duration "

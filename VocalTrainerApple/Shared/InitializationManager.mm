@@ -17,7 +17,7 @@
         ApplicationModel::init(new ApplicationModel());
         auto* player = ApplicationModel::instance()->getPlayer();
         //player->setSource("/Users/semyontykhonenko/Desktop/Ария-Дай руку мне.mvx");
-        player->setSource("/Users/semyontykhonenko/Desktop/Vocalis1.vx");
+        player->setSource("/Users/semyon/drm.mvx");
         player->prepare();
         player->setPitchShiftInSemiTones(2);
     }
