@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5482F422256E8C3800299548 /* VocalTrainerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5482F421256E8C3800299548 /* VocalTrainerApp.swift */; };
+		5482F424256E8C3800299548 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5482F423256E8C3800299548 /* ContentView.swift */; };
+		5482F426256E8C3900299548 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5482F425256E8C3900299548 /* Assets.xcassets */; };
+		5482F429256E8C3900299548 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5482F428256E8C3900299548 /* Preview Assets.xcassets */; };
 		71AD21242278085DEBD45787 /* NSImage+Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2DEA9FC7B3F13CD06FF3 /* NSImage+Drawing.swift */; };
 		71AD2137071D834E915C2D44 /* HeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2AD0DC2A1BD1B9B058AA /* HeaderViewController.swift */; };
 		71AD221A602A44D64B950BFA /* ProjectWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD21C74A29AB6B2D6F7582 /* ProjectWindowController.swift */; };
@@ -61,6 +65,12 @@
 		316CF42FAAC5685B522A455A /* Pods_VocalTrainer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VocalTrainer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EB14089B9F185478AB5567 /* Pods-VocalTrainer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VocalTrainer.release.xcconfig"; path = "Target Support Files/Pods-VocalTrainer/Pods-VocalTrainer.release.xcconfig"; sourceTree = "<group>"; };
 		545490982554014B00E8E7F2 /* MvxGenerator.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MvxGenerator.xcodeproj; path = ../MvxGenerator/MvxGenerator.xcodeproj; sourceTree = "<group>"; };
+		5482F41F256E8C3800299548 /* VocalTraineriOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VocalTraineriOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5482F421256E8C3800299548 /* VocalTrainerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocalTrainerApp.swift; sourceTree = "<group>"; };
+		5482F423256E8C3800299548 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		5482F425256E8C3900299548 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5482F428256E8C3900299548 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5482F42A256E8C3900299548 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		67748B5386791DDBEBEF3101 /* Pods-VocalTrainerMacOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VocalTrainerMacOS.debug.xcconfig"; path = "Target Support Files/Pods-VocalTrainerMacOS/Pods-VocalTrainerMacOS.debug.xcconfig"; sourceTree = "<group>"; };
 		71AD21C74A29AB6B2D6F7582 /* ProjectWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectWindowController.swift; sourceTree = "<group>"; };
 		71AD22FAC42E30FA831A8953 /* ProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
@@ -90,7 +100,7 @@
 		71AD2E25FA2D80BDF0849D47 /* CALayer+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+Extensions.swift"; sourceTree = "<group>"; };
 		71AD2E2C77501A215B455E28 /* CGSize+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGSize+Extensions.swift"; sourceTree = "<group>"; };
 		71AD2E6EB3AD3596FA6A4A33 /* MacOSWorkspaceDrawerResourcesProvider.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MacOSWorkspaceDrawerResourcesProvider.mm; sourceTree = "<group>"; };
-		ACF18ACD22EC7EBF008E7DAA /* VocalTrainer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VocalTrainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACF18ACD22EC7EBF008E7DAA /* VocalTrainerMacOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VocalTrainerMacOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF18AD022EC7EBF008E7DAA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACF18AD422EC7EBF008E7DAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ACF18AD722EC7EBF008E7DAA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -106,6 +116,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5482F41C256E8C3800299548 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ACF18ACA22EC7EBF008E7DAA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -132,6 +149,26 @@
 				5454909D2554014B00E8E7F2 /* MvxGenerator */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		5482F420256E8C3800299548 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				5482F421256E8C3800299548 /* VocalTrainerApp.swift */,
+				5482F423256E8C3800299548 /* ContentView.swift */,
+				5482F425256E8C3900299548 /* Assets.xcassets */,
+				5482F42A256E8C3900299548 /* Info.plist */,
+				5482F427256E8C3900299548 /* Preview Content */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		5482F427256E8C3900299548 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				5482F428256E8C3900299548 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		71AD20ACDEBC3A0DCA95A336 /* Views */ = {
@@ -237,6 +274,7 @@
 				545490982554014B00E8E7F2 /* MvxGenerator.xcodeproj */,
 				ACF18ACF22EC7EBF008E7DAA /* MacOS */,
 				ACF18AE222EC7EBF008E7DAA /* VocalTrainerUITests */,
+				5482F420256E8C3800299548 /* iOS */,
 				ACF18ACE22EC7EBF008E7DAA /* Products */,
 				BA99F2852ABC58169B5ABAA9 /* Pods */,
 				FAAA747C4DF5693877F41DFE /* Frameworks */,
@@ -247,8 +285,9 @@
 		ACF18ACE22EC7EBF008E7DAA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				ACF18ACD22EC7EBF008E7DAA /* VocalTrainer.app */,
+				ACF18ACD22EC7EBF008E7DAA /* VocalTrainerMacOS.app */,
 				ACF18ADF22EC7EBF008E7DAA /* VocalTrainerUITests.xctest */,
+				5482F41F256E8C3800299548 /* VocalTraineriOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -300,9 +339,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		ACF18ACC22EC7EBF008E7DAA /* VocalTrainer */ = {
+		5482F41E256E8C3800299548 /* VocalTraineriOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ACF18AE822EC7EBF008E7DAA /* Build configuration list for PBXNativeTarget "VocalTrainer" */;
+			buildConfigurationList = 5482F42B256E8C3900299548 /* Build configuration list for PBXNativeTarget "VocalTraineriOS" */;
+			buildPhases = (
+				5482F41B256E8C3800299548 /* Sources */,
+				5482F41C256E8C3800299548 /* Frameworks */,
+				5482F41D256E8C3800299548 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VocalTraineriOS;
+			productName = VocalTraineriOS;
+			productReference = 5482F41F256E8C3800299548 /* VocalTraineriOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		ACF18ACC22EC7EBF008E7DAA /* VocalTrainerMacOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ACF18AE822EC7EBF008E7DAA /* Build configuration list for PBXNativeTarget "VocalTrainerMacOS" */;
 			buildPhases = (
 				18CC11A8514F6FD74ECA2DB5 /* [CP] Check Pods Manifest.lock */,
 				ACF18AC922EC7EBF008E7DAA /* Sources */,
@@ -314,9 +370,9 @@
 			);
 			dependencies = (
 			);
-			name = VocalTrainer;
+			name = VocalTrainerMacOS;
 			productName = VocalTrainerMacOS;
-			productReference = ACF18ACD22EC7EBF008E7DAA /* VocalTrainer.app */;
+			productReference = ACF18ACD22EC7EBF008E7DAA /* VocalTrainerMacOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 		ACF18ADE22EC7EBF008E7DAA /* VocalTrainerUITests */ = {
@@ -343,10 +399,13 @@
 		ACF18AC522EC7EBF008E7DAA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1020;
+				LastSwiftUpdateCheck = 1220;
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Semyon Tikhonenko";
 				TargetAttributes = {
+					5482F41E256E8C3800299548 = {
+						CreatedOnToolsVersion = 12.2;
+					};
 					ACF18ACC22EC7EBF008E7DAA = {
 						CreatedOnToolsVersion = 10.2.1;
 					};
@@ -375,8 +434,9 @@
 			);
 			projectRoot = "";
 			targets = (
-				ACF18ACC22EC7EBF008E7DAA /* VocalTrainer */,
+				ACF18ACC22EC7EBF008E7DAA /* VocalTrainerMacOS */,
 				ACF18ADE22EC7EBF008E7DAA /* VocalTrainerUITests */,
+				5482F41E256E8C3800299548 /* VocalTraineriOS */,
 			);
 		};
 /* End PBXProject section */
@@ -392,6 +452,15 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5482F41D256E8C3800299548 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5482F429256E8C3900299548 /* Preview Assets.xcassets in Resources */,
+				5482F426256E8C3900299548 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ACF18ACB22EC7EBF008E7DAA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -453,6 +522,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5482F41B256E8C3800299548 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5482F424256E8C3800299548 /* ContentView.swift in Sources */,
+				5482F422256E8C3800299548 /* VocalTrainerApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ACF18AC922EC7EBF008E7DAA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -498,7 +576,7 @@
 /* Begin PBXTargetDependency section */
 		ACF18AE122EC7EBF008E7DAA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = ACF18ACC22EC7EBF008E7DAA /* VocalTrainer */;
+			target = ACF18ACC22EC7EBF008E7DAA /* VocalTrainerMacOS */;
 			targetProxy = ACF18AE022EC7EBF008E7DAA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -515,6 +593,55 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		5482F42C256E8C3900299548 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"iOS/Preview Content\"";
+				DEVELOPMENT_TEAM = FLHXHQP8H4;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.neborosoft.VocalTrainer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5482F42D256E8C3900299548 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"iOS/Preview Content\"";
+				DEVELOPMENT_TEAM = FLHXHQP8H4;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.neborosoft.VocalTrainer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		ACF18AE622EC7EBF008E7DAA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -727,6 +854,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5482F42B256E8C3900299548 /* Build configuration list for PBXNativeTarget "VocalTraineriOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5482F42C256E8C3900299548 /* Debug */,
+				5482F42D256E8C3900299548 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		ACF18AC822EC7EBF008E7DAA /* Build configuration list for PBXProject "VocalTrainer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -736,7 +872,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ACF18AE822EC7EBF008E7DAA /* Build configuration list for PBXNativeTarget "VocalTrainer" */ = {
+		ACF18AE822EC7EBF008E7DAA /* Build configuration list for PBXNativeTarget "VocalTrainerMacOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ACF18AE922EC7EBF008E7DAA /* Debug */,

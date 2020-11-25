@@ -40,7 +40,6 @@
 
 /* Begin PBXFileReference section */
 		5406B2A3256D09CE007D8922 /* Pods_VocalTrainer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_VocalTrainer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5454908E2554014B00E8E7F2 /* MvxGenerator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MvxGenerator; sourceTree = BUILT_PRODUCTS_DIR; };
 		545490912554014B00E8E7F2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		545490A1255401D600E8E7F2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = MvxGenerator/main.cpp; sourceTree = "<group>"; };
 		545490AB2554065900E8E7F2 /* Logic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Logic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,17 +63,8 @@
 			children = (
 				545490A1255401D600E8E7F2 /* main.cpp */,
 				545490902554014B00E8E7F2 /* MvxGenerator */,
-				5454908F2554014B00E8E7F2 /* Products */,
 				545490AA2554065900E8E7F2 /* Frameworks */,
 			);
-			sourceTree = "<group>";
-		};
-		5454908F2554014B00E8E7F2 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5454908E2554014B00E8E7F2 /* MvxGenerator */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		545490902554014B00E8E7F2 /* MvxGenerator */ = {
@@ -112,7 +102,6 @@
 			);
 			name = MvxGenerator;
 			productName = MvxGenerator;
-			productReference = 5454908E2554014B00E8E7F2 /* MvxGenerator */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -137,7 +126,6 @@
 				Base,
 			);
 			mainGroup = 545490852554014B00E8E7F2;
-			productRefGroup = 5454908F2554014B00E8E7F2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
