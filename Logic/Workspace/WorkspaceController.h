@@ -32,7 +32,7 @@ public:
     virtual float getHorizontalOffset() const = 0;
     virtual float getVisibleGridWidth() const = 0;
     virtual float getVisibleGridHeight() const = 0;
-    virtual float getSummarizedGridWidth() const = 0;
+    virtual float getSummarizedPlayableGridWidth() const = 0;
     virtual float getSummarizedGridHeight() const = 0;
     virtual void setVocalPart(const VocalPart *vocalPart) = 0;
     virtual void setFirstVisiblePitch(const Pitch &firstPitch) = 0;

@@ -204,14 +204,35 @@ void WorkspaceDrawer::draw() {
     drawVerticalLine(PIANO_WIDTH + 0.5, borderLineColor);
     drawer->translate(0, -PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN);
 
+    captureClickEvents();
+
     drawer->endFrame();
+}
+
+void WorkspaceDrawer::captureClickEvents() {
+    PointF clickPosition = mouseClickChecker.getClickPosition();
+    float horizontalTouchScrollingAreaHeight = PIANO_TRACK_BOTTOM + PIANO_TRACK_HEIGHT;
+    RectF horizontalTouchScrollingArea(
+        getGridBeginXPosition(),
+        height - horizontalTouchScrollingAreaHeight,
+        getVisibleGridWidth(),
+        horizontalTouchScrollingAreaHeight
+    );
+    if (horizontalTouchScrollingArea.containsPoint(clickPosition)) {
+        float position = SelectValueFromRangeProjectedInRange(
+                clickPosition.x,
+                horizontalTouchScrollingArea.A.x, horizontalTouchScrollingArea.getB().x,
+                0.0f, 1.0f);
+        float seek = position * totalDurationInSeconds;
+        updateSeek(seek);
+    }
 }
 
 void WorkspaceDrawer::drawScrollBars() {
     horizontalScrollBar.draw(1, height - ScrollBar::SCROLLBAR_WEIGHT, getVisibleGridWidth());
     if (horizontalScrollBar.isPositionWasChangedFromUser()) {
         float position = horizontalScrollBar.getPosition();
-        horizontalOffset = position * getSummarizedGridWidth();
+        horizontalOffset = position * getSummarizedPlayableGridWidth();
         assert(position <= 1);
         float seek = position * totalDurationInSeconds;
         if (delegate) {
@@ -400,6 +421,7 @@ float WorkspaceDrawer::getWorkspaceDuration() const {
     return width / intervalWidth / beatsPerSecond;
 }
 
+
 float WorkspaceDrawer::getVisibleGridHeight() const {
     return height - YARD_STICK_HEIGHT - 1 - ScrollBar::SCROLLBAR_WEIGHT;
 }
@@ -408,7 +430,7 @@ float WorkspaceDrawer::getVisibleGridWidth() const {
     return width - PIANO_WIDTH - 1;
 }
 
-float WorkspaceDrawer::getSummarizedGridWidth() const {
+float WorkspaceDrawer::getSummarizedPlayableGridWidth() const {
     float intervalsCount = totalDurationInSeconds * beatsPerSecond;
     return intervalsCount * intervalWidth;
 }
@@ -666,6 +688,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, MouseEventsReceiver *mouseEvent
         verticalScrollBar(drawer, mouseEventsReceiver, ScrollBar::VERTICAL),
         horizontalScrollBar(drawer, mouseEventsReceiver, ScrollBar::HORIZONTAL),
         onUpdateRequested(onUpdateRequested),
+        mouseClickChecker(mouseEventsReceiver),
         resourcesProvider(resourcesProvider) {
     CHECK_IF_RENDER_THREAD;
     setGridColor({0x8B, 0x89, 0xB6, 0x33});
@@ -917,7 +940,7 @@ void WorkspaceDrawer::updateSeek(float seek) {
 
 void WorkspaceDrawer::updateHorizontalScrollBarPageSize() {
     float visibleGridWidth = getVisibleGridWidth();
-    float summarizedGridWidth = getSummarizedGridWidth();
+    float summarizedGridWidth = getSummarizedPlayableGridWidth();
     float pageSize = visibleGridWidth / summarizedGridWidth;
     if (pageSize > 0) {
         horizontalScrollBar.setPageSize(pageSize);
@@ -926,7 +949,7 @@ void WorkspaceDrawer::updateHorizontalScrollBarPageSize() {
 
 void WorkspaceDrawer::updateHorizontalScrollBarPagePosition() {
     float horizontalOffset = this->horizontalOffset;
-    float summarizedGridWidth = getSummarizedGridWidth();
+    float summarizedGridWidth = getSummarizedPlayableGridWidth();
     float position = std::min(horizontalOffset / summarizedGridWidth, 1.f);
     horizontalScrollBar.setPosition(position);
 }

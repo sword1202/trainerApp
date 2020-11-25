@@ -20,6 +20,7 @@
 #include "ScrollBar.h"
 #include "WorkspaceDrawerResourcesProvider.h"
 #include "BoundsSelectionController.h"
+#include "MouseClickChecker.h"
 #include <thread>
 
 class BoundsSelectionController;
@@ -76,6 +77,7 @@ class WorkspaceDrawer : public WorkspaceController {
 
     Drawer* drawer = nullptr;
     MouseEventsReceiver* mouseEventsReceiver;
+    MouseClickChecker mouseClickChecker;
     const PitchesCollection* pitchesCollection = nullptr;
     PianoDrawer* pianoDrawer = nullptr;
 
@@ -149,6 +151,7 @@ class WorkspaceDrawer : public WorkspaceController {
     void updateZoom();
 
     void initImages();
+    void captureClickEvents();
 public:
 
     static constexpr int PIANO_WIDTH = 67;
@@ -214,7 +217,7 @@ public:
 
     float getVisibleGridHeight() const override;
     float getVisibleGridWidth() const override;
-    float getSummarizedGridWidth() const override;
+    float getSummarizedPlayableGridWidth() const override;
 
     void setDetectedPitch(const Pitch &detectedPitch) override;
     void setPitchSequence(PlayingPitchSequence *pitchSequence) override;

@@ -256,6 +256,8 @@
 		ACF18AB422EC76E3008E7DAA /* libportaudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AD27FB01D73C14638A6EDB /* libportaudio.a */; };
 		ACF18AB522EC76E3008E7DAA /* libSoundTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AD2636B9DE49D31F43C412 /* libSoundTouch.a */; };
 		ACF18AB722EC77D5008E7DAA /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF18AB622EC77D5008E7DAA /* Accelerate.framework */; };
+		C9FFFB9ADFF2D62E247BD58F /* MouseClickChecker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8557DD0DA640840A097 /* MouseClickChecker.cpp */; };
+		C9FFFEB7B645150428CFEF49 /* MouseClickChecker.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFC6D1098747848058E71 /* MouseClickChecker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -514,6 +516,8 @@
 		ACF18AAC22EC74E9008E7DAA /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		ACF18AAE22EC7512008E7DAA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		ACF18AB622EC77D5008E7DAA /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		C9FFF8557DD0DA640840A097 /* MouseClickChecker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MouseClickChecker.cpp; sourceTree = "<group>"; };
+		C9FFFC6D1098747848058E71 /* MouseClickChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MouseClickChecker.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -903,6 +907,8 @@
 				71AD26BA5294013E17E6F9A5 /* BaseSynchronizedMouseEventsReceiver.cpp */,
 				71AD223712B4878E8451D22D /* BaseMouseEventsReceiver.cpp */,
 				71AD2D0AC802F7CF13ECDA0F /* BaseMouseEventsReceiver.h */,
+				C9FFF8557DD0DA640840A097 /* MouseClickChecker.cpp */,
+				C9FFFC6D1098747848058E71 /* MouseClickChecker.h */,
 			);
 			path = Events;
 			sourceTree = "<group>";
@@ -1064,6 +1070,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9FFFEB7B645150428CFEF49 /* MouseClickChecker.h in Headers */,
 				71AD2BBBE09B86B58F1C292E /* VocalTrainerFile.h in Headers */,
 				71AD28C615E5E4012943D513 /* Rewindable.h in Headers */,
 				71AD2870EAF4CBDB63728D14 /* BeatsPerMinuteProvider.h in Headers */,
@@ -1401,6 +1408,7 @@
 				71AD23C6F09C2F22AC023A82 /* ZipFile.cpp in Sources */,
 				71AD2AC54FE7D6DBB8FB47E2 /* SfzSectionsParser.cpp in Sources */,
 				71AD2D4F5864539E71A1D4A0 /* SfzFile.cpp in Sources */,
+				C9FFFB9ADFF2D62E247BD58F /* MouseClickChecker.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
