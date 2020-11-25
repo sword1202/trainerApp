@@ -126,8 +126,9 @@ class WorkspaceDrawer : public WorkspaceController {
     void drawSecondPlayHead();
     void drawInstrumentalTrack();
     void drawInstrumentalTrackButton();
-    void drawPianoTrack();
-    void drawPianoTrackButton();
+
+    float drawPianoTrackAndCalculateHeight();
+    void drawPianoTrackButton(float pianoTrackHeight);
     void drawScrollBars();
     void drawEnding();
     void drawTracks();
@@ -151,7 +152,7 @@ class WorkspaceDrawer : public WorkspaceController {
     void updateZoom();
 
     void initImages();
-    void captureClickEvents();
+    void captureClickEventsInTracksArea(float pianoTrackHeight);
 public:
 
     static constexpr int PIANO_WIDTH = 67;

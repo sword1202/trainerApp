@@ -48,12 +48,13 @@ constexpr float PIANO_TRACK_BUTTON_LEFT = 19.f;
 constexpr float INSTRUMENTAL_TRACK_BUTTON_LEFT = 19.f;
 constexpr float TRACK_BUTTON_HEIGHT = 18.f;
 constexpr float INSTRUMENTAL_TRACK_BUTTON_WIDTH = 128.f;
-constexpr float PIANO_TRACK_HEIGHT = 36.f;
+constexpr float MIN_PIANO_TRACK_HEIGHT = 36.f;
+constexpr float PIANO_TRACK_VERTICAL_PADDING = 1.f;
 constexpr int PIANO_TRACK_PITCHES_INDEXES_COUNT = 17;
 constexpr float PIANO_TRACK_BOTTOM = 56.f;
 constexpr float PIANO_TRACK_SHADOW_RADIUS = 50.f;
 constexpr float PIANO_TRACK_SHADOW_BLUR = 25.f;
-constexpr float PIANO_TRACK_PITCH_HEIGHT = 2.f;
+constexpr float PIANO_TRACK_PITCH_HEIGHT = 1.5f;
 constexpr float PIANO_TRACK_PITCH_RADIUS = 1.f;
 constexpr float PIANO_TRACK_BUTTON_WIDTH = 90.f;
 constexpr float VOLUME_CONTROLLER_HEIGHT = 110.5f;
@@ -204,14 +205,12 @@ void WorkspaceDrawer::draw() {
     drawVerticalLine(PIANO_WIDTH + 0.5, borderLineColor);
     drawer->translate(0, -PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN);
 
-    captureClickEvents();
-
     drawer->endFrame();
 }
 
-void WorkspaceDrawer::captureClickEvents() {
+void WorkspaceDrawer::captureClickEventsInTracksArea(float pianoTrackHeight) {
     PointF clickPosition = mouseClickChecker.getClickPosition();
-    float horizontalTouchScrollingAreaHeight = PIANO_TRACK_BOTTOM + PIANO_TRACK_HEIGHT;
+    float horizontalTouchScrollingAreaHeight = PIANO_TRACK_BOTTOM + pianoTrackHeight;
     RectF horizontalTouchScrollingArea(
         getGridBeginXPosition(),
         height - horizontalTouchScrollingAreaHeight,
@@ -363,12 +362,26 @@ void WorkspaceDrawer::drawInstrumentalTrackButton() {
             instrumentalTrackButtonImage);
 }
 
-void WorkspaceDrawer::drawPianoTrack() {
+float WorkspaceDrawer::drawPianoTrackAndCalculateHeight() {
+    const VocalPart* vocalPart = this->vocalPart;
+    const Pitch &lowest = vocalPart->getLowestPitch();
+    const Pitch &highest = vocalPart->getHighestPitch();
+
+    int lowestIndex = lowest.getPerfectFrequencyIndex();
+    int highestIndex = highest.getPerfectFrequencyIndex();
+    float pianoTrackHeight = (highestIndex - lowestIndex + 1) * PIANO_TRACK_PITCH_HEIGHT +
+            PIANO_TRACK_VERTICAL_PADDING * 2;
+    float verticalPadding = PIANO_TRACK_VERTICAL_PADDING;
+    if (pianoTrackHeight < MIN_PIANO_TRACK_HEIGHT) {
+        verticalPadding = (MIN_PIANO_TRACK_HEIGHT - pianoTrackHeight) / 2;
+        pianoTrackHeight = MIN_PIANO_TRACK_HEIGHT;
+    }
+
     // Draw rectangle and shadow
-    float y = height - PIANO_TRACK_BOTTOM - PIANO_TRACK_HEIGHT;
+    float y = height - PIANO_TRACK_BOTTOM - pianoTrackHeight;
     float x = 1;
     float width = this->width - drawer->getTranslateX();
-    float height = PIANO_TRACK_HEIGHT;
+    float height = pianoTrackHeight;
     // make a width of shadow a bit bigger than rect width
     drawer->drawShadow(x - 200, y, width + 400, height, PIANO_TRACK_SHADOW_RADIUS,
                        PIANO_TRACK_SHADOW_BLUR, pianoTrackShadowColor);
@@ -376,36 +389,29 @@ void WorkspaceDrawer::drawPianoTrack() {
     drawer->fillRect(x, y, width, height);
 
     // Draw pitches
-    const VocalPart* vocalPart = this->vocalPart;
     int durationInTicks = vocalPart->getDurationInTicks();
     float tickSize = width / durationInTicks;
 
     drawer->setFillColor(pianoTrackPitchesColor);
-    const Pitch &lowest = vocalPart->getLowestPitch();
-    const Pitch &highest = vocalPart->getHighestPitch();
-    int lowestIndex = lowest.getPerfectFrequencyIndex();
-    int maxIndexFactor = std::min(highest.getPerfectFrequencyIndex() - lowestIndex,
-            PIANO_TRACK_PITCHES_INDEXES_COUNT - 1);
-
-    int topMargin = PIANO_TRACK_PITCHES_INDEXES_COUNT - maxIndexFactor;
 
     const auto& pitches = vocalPart->getPitches();
     for (const NoteInterval& vxPitch : pitches) {
         float pitchX = vxPitch.startTickNumber * tickSize;
         float pitchWidth = vxPitch.ticksCount * tickSize;
 
-        int indexFactor = (vxPitch.pitch.getPerfectFrequencyIndex() - lowestIndex) % (maxIndexFactor + 1);
-        float pitchY = indexFactor * PIANO_TRACK_PITCH_HEIGHT + y + topMargin;
+        int pitchIndexInSongRange = vxPitch.pitch.getPerfectFrequencyIndex() - lowestIndex;
+        float pitchY = pianoTrackHeight - verticalPadding - (pitchIndexInSongRange + 1) * PIANO_TRACK_PITCH_HEIGHT + y;
         drawer->roundedRect(pitchX, pitchY, pitchWidth, PIANO_TRACK_PITCH_HEIGHT, PIANO_TRACK_PITCH_RADIUS);
         drawer->fill();
     }
 
-    drawPianoTrackButton();
+    drawPianoTrackButton(pianoTrackHeight);
+    return pianoTrackHeight;
 }
 
-void WorkspaceDrawer::drawPianoTrackButton() {
+void WorkspaceDrawer::drawPianoTrackButton(float pianoTrackHeight) {
     assert(pianoTrackButtonImage != nullptr);
-    float trackMiddle = height - PIANO_TRACK_BOTTOM - PIANO_TRACK_HEIGHT / 2.f;
+    float trackMiddle = height - PIANO_TRACK_BOTTOM - pianoTrackHeight / 2.f;
     float y = trackMiddle - TRACK_BUTTON_HEIGHT / 2;
     drawer->drawImage(PIANO_TRACK_BUTTON_LEFT, y,
                       PIANO_TRACK_BUTTON_WIDTH,
@@ -971,7 +977,8 @@ void WorkspaceDrawer::drawTracks() {
     if (horizontalScrollBarVisible) {
         drawer->translate(0, -ScrollBar::SCROLLBAR_WEIGHT);
     }
-    drawPianoTrack();
+    float pianoTrackHeight = drawPianoTrackAndCalculateHeight();
+    captureClickEventsInTracksArea(pianoTrackHeight);
     drawInstrumentalTrack();
     if (horizontalScrollBarVisible) {
         drawer->translate(0, ScrollBar::SCROLLBAR_WEIGHT);
