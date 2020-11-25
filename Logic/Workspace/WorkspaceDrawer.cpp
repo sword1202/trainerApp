@@ -50,7 +50,6 @@ constexpr float TRACK_BUTTON_HEIGHT = 18.f;
 constexpr float INSTRUMENTAL_TRACK_BUTTON_WIDTH = 128.f;
 constexpr float MIN_PIANO_TRACK_HEIGHT = 36.f;
 constexpr float PIANO_TRACK_VERTICAL_PADDING = 1.f;
-constexpr int PIANO_TRACK_PITCHES_INDEXES_COUNT = 17;
 constexpr float PIANO_TRACK_BOTTOM = 56.f;
 constexpr float PIANO_TRACK_SHADOW_RADIUS = 50.f;
 constexpr float PIANO_TRACK_SHADOW_BLUR = 25.f;
