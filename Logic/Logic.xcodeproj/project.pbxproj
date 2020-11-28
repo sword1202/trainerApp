@@ -143,7 +143,7 @@
 		71AD29A61EE85F6579B1E668 /* ListenersSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD26A35DFE11EE996E629B /* ListenersSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD29A859655E4F757B0B04 /* FunctionsList.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD28A639C48C998EF07670 /* FunctionsList.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD29CDFE16BF042E268C55 /* MidiTrack.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD21366B3DB9FB2DDD10CB /* MidiTrack.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		71AD29D70BFBEB149807B14F /* AudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD26510E43A804E401A178 /* AudioPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		71AD29D70BFBEB149807B14F /* PortAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD26510E43A804E401A178 /* PortAudioPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD29EE4E3E33D464C674DD /* PitchDuration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2F8E9DB0340EEF8E5551 /* PitchDuration.cpp */; };
 		71AD29F2433AE33E6819229A /* DecodedTrack.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2C6157EC8C243B56D626 /* DecodedTrack.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2A123DD2A219B5DAFC48 /* VocalPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD284C1B557C8A1A303283 /* VocalPart.cpp */; };
@@ -204,7 +204,7 @@
 		71AD2E29ED0C0070CEDA61F9 /* ZipFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD25B20FC08B87125506D6 /* ZipFile.h */; };
 		71AD2E347B27203430EE4485 /* Maps.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD22681AC572B2799F6483 /* Maps.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2E38E871FD91E2383B2A /* audiodecodercoreaudio_mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD29C6287FB817B5159A31 /* audiodecodercoreaudio_mac.cpp */; };
-		71AD2E568E96BB768B67DAA6 /* AudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD260D0BBDC79636A85DE3 /* AudioPlayer.cpp */; };
+		71AD2E568E96BB768B67DAA6 /* PortAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD260D0BBDC79636A85DE3 /* PortAudioPlayer.cpp */; };
 		71AD2E71637EDE5162582640 /* NvgDrawer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2F86E4F78B08336152A6 /* NvgDrawer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2E8998A6828E9C169C0D /* SfzFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD25AE7BC536A7ECD50D06 /* SfzFile.h */; };
 		71AD2EAADC789DC169663BE7 /* SfzSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2872971B5679D300420E /* SfzSection.h */; };
@@ -348,11 +348,11 @@
 		71AD25D28AB6980DB6AD54FE /* NotImplementedAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotImplementedAssert.h; sourceTree = "<group>"; };
 		71AD25DBEBB7D907CB04B84B /* PitchInputReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchInputReader.h; sourceTree = "<group>"; };
 		71AD25E0CF7A5E97BF4CB17C /* Color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Color.cpp; sourceTree = "<group>"; };
-		71AD260D0BBDC79636A85DE3 /* AudioPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioPlayer.cpp; sourceTree = "<group>"; };
+		71AD260D0BBDC79636A85DE3 /* PortAudioPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PortAudioPlayer.cpp; sourceTree = "<group>"; };
 		71AD26179700FDC84158D199 /* AudioInputManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioInputManager.cpp; sourceTree = "<group>"; };
 		71AD261D970249A90BDAE248 /* MidiMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiMessage.h; sourceTree = "<group>"; };
 		71AD2636B9DE49D31F43C412 /* libSoundTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSoundTouch.a; sourceTree = "<group>"; };
-		71AD26510E43A804E401A178 /* AudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayer.h; sourceTree = "<group>"; };
+		71AD26510E43A804E401A178 /* PortAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PortAudioPlayer.h; sourceTree = "<group>"; };
 		71AD26A35DFE11EE996E629B /* ListenersSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListenersSet.h; sourceTree = "<group>"; };
 		71AD26B2BEC5BEE09F688699 /* BaseRawPcmAudioDataPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseRawPcmAudioDataPlayer.cpp; sourceTree = "<group>"; };
 		71AD26B5599DB53B728689DA /* px_mixer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = px_mixer.c; sourceTree = "<group>"; };
@@ -711,9 +711,9 @@
 		71AD25BD30CAFB342E49E96D /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				71AD26510E43A804E401A178 /* AudioPlayer.h */,
+				71AD26510E43A804E401A178 /* PortAudioPlayer.h */,
 				71AD20E6C3A255A4EF630588 /* PlaybackData.h */,
-				71AD260D0BBDC79636A85DE3 /* AudioPlayer.cpp */,
+				71AD260D0BBDC79636A85DE3 /* PortAudioPlayer.cpp */,
 				71AD226F0F6AD40B7F1DA0FD /* PlaybackBounds.h */,
 				71AD27B5B5F9B983712E41FA /* PortAudioUtils.h */,
 				71AD224683097BE5C42F6AD3 /* PlaybackBounds.cpp */,
@@ -962,6 +962,7 @@
 				71AD2AE62CD08157A3611116 /* Midi */,
 				71AD20DAAD9DCFE6382FC9CB /* Other */,
 				71AD201D1B02A780A3B5F88E /* Decoding */,
+				C9FFF08091B2EE04E2807C80 /* Sfz */,
 			);
 			path = Playback;
 			sourceTree = "<group>";
@@ -1061,6 +1062,13 @@
 				ACF18AAC22EC74E9008E7DAA /* CoreAudio.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C9FFF08091B2EE04E2807C80 /* Sfz */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Sfz;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1164,7 +1172,7 @@
 				71AD2840EBECB2FE9D051ED9 /* ConcurrentModificationAssert.h in Headers */,
 				71AD25F46DC899D3760D0DFD /* PeriodicallySleepingBackgroundTask.h in Headers */,
 				71AD23541470EBA844832CD7 /* PlaybackData.h in Headers */,
-				71AD29D70BFBEB149807B14F /* AudioPlayer.h in Headers */,
+				71AD29D70BFBEB149807B14F /* PortAudioPlayer.h in Headers */,
 				71AD29426FB829B8982799EF /* VocalPartAudioPlayer.h in Headers */,
 				71AD224E4CC8B48D0689B661 /* LyricsInterval.h in Headers */,
 				71AD2680E83553583A3D3E77 /* LyricsPart.h in Headers */,
@@ -1355,7 +1363,7 @@
 				71AD243F08BD1F00E1D1A43A /* MvxFile.cpp in Sources */,
 				71AD251D3FF2D66C37D53BA4 /* VocalTrainerFilePlayer.cpp in Sources */,
 				71AD2992E77829583B8186CC /* VocalTrainerPlayerPrepareException.cpp in Sources */,
-				71AD2E568E96BB768B67DAA6 /* AudioPlayer.cpp in Sources */,
+				71AD2E568E96BB768B67DAA6 /* PortAudioPlayer.cpp in Sources */,
 				71AD26185A534A512D11E19B /* PlaybackBounds.cpp in Sources */,
 				71AD2CAEAB4A095573DC1EA8 /* PortAudioUtils.cpp in Sources */,
 				71AD287686DD051E07C39901 /* PrepareFailedException.cpp in Sources */,

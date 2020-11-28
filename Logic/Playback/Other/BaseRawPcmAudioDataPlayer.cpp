@@ -46,5 +46,5 @@ void BaseRawPcmAudioDataPlayer::setPlaybackData(const WavConfig &wavConfig, int 
             throw std::runtime_error("Unsupported wav bytes per channel " + std::to_string(bytesPerChannel));
     }
 
-    AudioPlayer::setPlaybackData(playbackData);
+    PortAudioPlayer::setPlaybackData(playbackData);
 }

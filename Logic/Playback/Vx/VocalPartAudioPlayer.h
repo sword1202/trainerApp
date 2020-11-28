@@ -7,13 +7,13 @@
 #define VOCALTRAINER_VXFILEAUDIOPLAYER_H
 
 #include "StlDebugUtils.h"
-#include "AudioPlayer.h"
+#include "PortAudioPlayer.h"
 #include "VocalPart.h"
 #include "VocalPartAudioDataGenerator.h"
 #include "PeriodicallySleepingBackgroundTask.h"
 #include <atomic>
 
-class VocalPartAudioPlayer : public AudioPlayer {
+class VocalPartAudioPlayer : public PortAudioPlayer {
     VocalPartAudioDataGenerator* generator;
     VocalPart originalVocalPart;
 protected:

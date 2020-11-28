@@ -29,7 +29,7 @@ int VocalPartAudioPlayer::getBufferSeek() const {
 
 void VocalPartAudioPlayer::setBufferSeek(int samplesCountSeek) {
     generator->setSeek(samplesCountSeek);
-    AudioPlayer::setBufferSeek(samplesCountSeek);
+    PortAudioPlayer::setBufferSeek(samplesCountSeek);
 }
 
 VocalPartAudioPlayer::~VocalPartAudioPlayer() {
@@ -37,7 +37,7 @@ VocalPartAudioPlayer::~VocalPartAudioPlayer() {
 }
 
 void VocalPartAudioPlayer::onComplete() {
-    AudioPlayer::onComplete();
+    PortAudioPlayer::onComplete();
 }
 
 bool VocalPartAudioPlayer::isPitchShiftingAvailable(int distance) const {
@@ -59,7 +59,7 @@ void VocalPartAudioPlayer::setTempoFactor(double tempoFactor) {
         return;
     }
 
-    AudioPlayer::setTempoFactor(tempoFactor);
+    PortAudioPlayer::setTempoFactor(tempoFactor);
     VocalPart vocalPart = originalVocalPart.withChangedTempo(tempoFactor);
     generator->setVocalPart(vocalPart);
 }

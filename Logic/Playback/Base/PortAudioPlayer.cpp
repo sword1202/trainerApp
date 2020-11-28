@@ -3,7 +3,7 @@
 // Copyright (c) 2018 Mac. All rights reserved.
 //
 
-#include "AudioPlayer.h"
+#include "PortAudioPlayer.h"
 #include <string>
 #include "TimeUtils.h"
 #include "PortAudioUtils.h"
@@ -21,7 +21,7 @@ using namespace CppUtils;
 using std::cout;
 using std::endl;
 
-int AudioPlayer::callback(
+int PortAudioPlayer::callback(
         const void *inputBuffer,
         void *outputBuffer,
         unsigned long framesPerBuffer,
@@ -29,7 +29,7 @@ int AudioPlayer::callback(
         PaStreamCallbackFlags statusFlags,
         void *userData )
 {
-    auto* self = static_cast<AudioPlayer*>(userData);
+    auto* self = static_cast<PortAudioPlayer*>(userData);
     float volume = self->getVolume();
 
     memset(outputBuffer, 0, framesPerBuffer * self->getSampleSize());
@@ -84,7 +84,7 @@ int AudioPlayer::callback(
     }
 }
 
-void AudioPlayer::prepare() {
+void PortAudioPlayer::prepare() {
     assert(!isPrepared());
     providePlaybackData(&playbackData);
 
@@ -125,7 +125,7 @@ void AudioPlayer::prepare() {
     });
 }
 
-void AudioPlayer::play(double seek) {
+void PortAudioPlayer::play(double seek) {
     BOOST_ASSERT_MSG(isPrepared(), "call prepare before play");
     BOOST_ASSERT(seek >= 0);
 
@@ -146,15 +146,15 @@ void AudioPlayer::play(double seek) {
     PortAudio::checkErrors(err);
 }
 
-bool AudioPlayer::isPlaying() const {
+bool PortAudioPlayer::isPlaying() const {
     return playing;
 }
 
-AudioPlayer::~AudioPlayer() {
+PortAudioPlayer::~PortAudioPlayer() {
     destroy();
 }
 
-void AudioPlayer::destroy() {
+void PortAudioPlayer::destroy() {
     if (!stream) {
         return;
     }
@@ -168,7 +168,7 @@ void AudioPlayer::destroy() {
     soundTouch = nullptr;
 }
 
-void AudioPlayer::pause() {
+void PortAudioPlayer::pause() {
     assert(isPrepared());
     if (!playing) {
         return;
@@ -179,7 +179,7 @@ void AudioPlayer::pause() {
     });
 }
 
-void AudioPlayer::pauseStream() {
+void PortAudioPlayer::pauseStream() {
     auto err = Pa_AbortStream(stream);
     PortAudio::checkErrors(err);
     Executors::ExecuteOnMainThread([=] {
@@ -189,7 +189,7 @@ void AudioPlayer::pauseStream() {
     });
 }
 
-void AudioPlayer::pauseSync() {
+void PortAudioPlayer::pauseSync() {
     assert(isPrepared());
     if (!playing) {
         return;
@@ -198,7 +198,7 @@ void AudioPlayer::pauseSync() {
     pauseStream();
 }
 
-void AudioPlayer::setSeek(double timeStamp) {
+void PortAudioPlayer::setSeek(double timeStamp) {
     assert(timeStamp >= 0);
     double durationInSeconds = getTrackDurationInSeconds();
     if (timeStamp > durationInSeconds) {
@@ -212,11 +212,11 @@ void AudioPlayer::setSeek(double timeStamp) {
     setBufferSeek(secondsSeekToBufferSeek(timeStamp));
 }
 
-double AudioPlayer::getTrackDurationInSeconds() const {
+double PortAudioPlayer::getTrackDurationInSeconds() const {
     return playbackData.totalDurationInSeconds;
 }
 
-AudioPlayer::AudioPlayer() {
+PortAudioPlayer::PortAudioPlayer() {
     playing = false;
     volume = 1.0f;
     pitchShift = 0;
@@ -225,32 +225,32 @@ AudioPlayer::AudioPlayer() {
     completed = false;
 }
 
-void AudioPlayer::play() {
+void PortAudioPlayer::play() {
     play(getSeek());
 }
 
-float AudioPlayer::getVolume() const {
+float PortAudioPlayer::getVolume() const {
     return volume;
 }
 
-void AudioPlayer::setVolume(float volume) {
+void PortAudioPlayer::setVolume(float volume) {
     BOOST_ASSERT(volume >= 0.0f && volume <= 1.0f);
     this->volume = volume;
 }
 
-double AudioPlayer::getSeek() const {
+double PortAudioPlayer::getSeek() const {
     return bufferSeekToSecondsSeek(getBufferSeek());
 }
 
-int AudioPlayer::secondsToSamplesCount(double secondsSeek) const {
+int PortAudioPlayer::secondsToSamplesCount(double secondsSeek) const {
     return (int)round(secondsSeek * playbackData.sampleRate);
 }
 
-double AudioPlayer::samplesCountToSeconds(int samplesCount) const {
+double PortAudioPlayer::samplesCountToSeconds(int samplesCount) const {
     return AudioUtils::GetSampleTimeInSeconds(samplesCount, playbackData.sampleRate);
 }
 
-void AudioPlayer::onComplete() {
+void PortAudioPlayer::onComplete() {
     playing = false;
     completed = true;
     setSeek(0);
@@ -261,36 +261,36 @@ void AudioPlayer::onComplete() {
     });
 }
 
-int AudioPlayer::getSampleSize() const {
+int PortAudioPlayer::getSampleSize() const {
     return Pa_GetSampleSize(playbackData.format) * playbackData.numChannels;
 }
 
-double AudioPlayer::bufferSeekToSecondsSeek(int bufferSeek) const {
+double PortAudioPlayer::bufferSeekToSecondsSeek(int bufferSeek) const {
     return samplesCountToSeconds(bufferSeek);
 }
 
-int AudioPlayer::secondsSeekToBufferSeek(double timestamp) const {
+int PortAudioPlayer::secondsSeekToBufferSeek(double timestamp) const {
     return secondsToSamplesCount(timestamp);
 }
 
-void AudioPlayer::setBufferSeek(int bufferSeek) {
+void PortAudioPlayer::setBufferSeek(int bufferSeek) {
     double seek = bufferSeekToSecondsSeek(bufferSeek);
     double total = getTrackDurationInSeconds();
     seekChangedListeners.executeAll(seek, total);
 }
 
-void AudioPlayer::prepareAsync(const std::function<void()>& callback) {
+void PortAudioPlayer::prepareAsync(const std::function<void()>& callback) {
     Executors::ExecuteOnBackgroundThread([=] {
         prepare();
         Executors::ExecuteOnMainThread(callback);
     });
 }
 
-int AudioPlayer::getPitchShiftInSemiTones() const {
+int PortAudioPlayer::getPitchShiftInSemiTones() const {
     return pitchShift;
 }
 
-void AudioPlayer::setPitchShiftInSemiTones(int value) {
+void PortAudioPlayer::setPitchShiftInSemiTones(int value) {
     if (value == pitchShift) {
         return;
     }
@@ -299,11 +299,11 @@ void AudioPlayer::setPitchShiftInSemiTones(int value) {
     onTonalityChanged(value);
 }
 
-const PlaybackData &AudioPlayer::getPlaybackData() const {
+const PlaybackData &PortAudioPlayer::getPlaybackData() const {
     return playbackData;
 }
 
-void AudioPlayer::setupPlaybackStartedListener() {
+void PortAudioPlayer::setupPlaybackStartedListener() {
     assert(dataSentToOutputListenerKey == 0);
     dataSentToOutputListenerKey = onDataSentToOutputListeners.addOneShotListener([=] (void*, int) {
         Executors::ExecuteOnMainThread([this] {
@@ -314,62 +314,62 @@ void AudioPlayer::setupPlaybackStartedListener() {
     });
 }
 
-bool AudioPlayer::isPrepared() const {
+bool PortAudioPlayer::isPrepared() const {
     return stream != nullptr;
 }
 
-double AudioPlayer::getTempoFactor() const {
+double PortAudioPlayer::getTempoFactor() const {
     return tempoFactor;
 }
 
-void AudioPlayer::setTempoFactor(double tempoFactor) {
+void PortAudioPlayer::setTempoFactor(double tempoFactor) {
     this->tempoFactor = tempoFactor;
 }
 
-double AudioPlayer::getCallbackBufferDurationInSeconds() const {
+double PortAudioPlayer::getCallbackBufferDurationInSeconds() const {
     return AudioUtils::GetSampleTimeInSeconds(playbackData.framesPerBuffer, playbackData.sampleRate);
 }
 
-bool AudioPlayer::isLooping() const {
+bool PortAudioPlayer::isLooping() const {
     return looping;
 }
 
-void AudioPlayer::setLooping(bool looping) {
+void PortAudioPlayer::setLooping(bool looping) {
     this->looping = looping;
 }
 
-void AudioPlayer::setTotalDurationInSeconds(double totalDurationInSeconds) {
+void PortAudioPlayer::setTotalDurationInSeconds(double totalDurationInSeconds) {
     playbackData.totalDurationInSeconds = totalDurationInSeconds;
 }
 
-void AudioPlayer::setPlaybackData(const PlaybackData &playbackData) {
+void PortAudioPlayer::setPlaybackData(const PlaybackData &playbackData) {
     this->playbackData = playbackData;
 }
 
-bool AudioPlayer::isCompleted() const {
+bool PortAudioPlayer::isCompleted() const {
     return completed;
 }
 
-const std::string &AudioPlayer::getPlayerName() const {
+const std::string &PortAudioPlayer::getPlayerName() const {
     return playerName;
 }
 
-void AudioPlayer::setPlayerName(const std::string &playerName) {
+void PortAudioPlayer::setPlayerName(const std::string &playerName) {
     this->playerName = playerName;
 }
 
-void AudioPlayer::initSoundTouch() {
+void PortAudioPlayer::initSoundTouch() {
     assert(!soundTouch && "SoundTouch already initialised");
     soundTouch = new soundtouch::SoundTouch();
 }
 
-void AudioPlayer::onTonalityChanged(int value) {
+void PortAudioPlayer::onTonalityChanged(int value) {
     assert(pitchShift == 0 || soundTouch && "tonality changes are not allowed, soundtouch not "
                                             "initialised, call initSoundTouch() before prepare to use pitch shifting");
     soundTouch->setPitchSemiTones(value);
 }
 
-int AudioPlayer::readAudioDataApplySoundTouchIfNeed(void *outputBuffer, int requestedFramesCount) {
+int PortAudioPlayer::readAudioDataApplySoundTouchIfNeed(void *outputBuffer, int requestedFramesCount) {
     // Apply tempo and tonality changes, if need.
     if (soundTouch && (pitchShift != 0 || tempoFactor != 1)) {
         auto* samplesData = static_cast<int16_t *>(outputBuffer);

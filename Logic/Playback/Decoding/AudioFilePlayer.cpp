@@ -52,7 +52,7 @@ void AudioFilePlayer::setAudioData(const AudioData* audioData) {
 }
 
 void AudioFilePlayer::destroy() {
-    AudioPlayer::destroy();
+    PortAudioPlayer::destroy();
     if (audioDecoder) {
         delete audioDecoder;
     }

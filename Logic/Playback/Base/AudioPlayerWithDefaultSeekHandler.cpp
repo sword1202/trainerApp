@@ -17,7 +17,7 @@ void AudioPlayerWithDefaultSeekHandler::setBufferSeek(int bufferSeek) {
         SEEK_LOCK;
         this->bufferSeek = bufferSeek;
     }
-    AudioPlayer::setBufferSeek(bufferSeek);
+    PortAudioPlayer::setBufferSeek(bufferSeek);
 }
 
 void AudioPlayerWithDefaultSeekHandler::moveBufferSeekIfNotChangedBefore(int moveBy, int seekBefore) {
@@ -30,6 +30,6 @@ void AudioPlayerWithDefaultSeekHandler::moveBufferSeekIfNotChangedBefore(int mov
         }
     }
     if (changed) {
-        AudioPlayer::setBufferSeek(bufferSeek);
+        PortAudioPlayer::setBufferSeek(bufferSeek);
     }
 }

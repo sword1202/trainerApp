@@ -61,7 +61,7 @@ void VocalTrainerFilePlayer::setSource(VocalTrainerFile *file, bool destroyFileO
         }
     }
 
-    AudioPlayer* mainPlayer = getMainPlayer();
+    PortAudioPlayer* mainPlayer = getMainPlayer();
     mainPlayer->seekChangedListeners.clear();
     mainPlayer->onCompleteListeners.clear();
     mainPlayer->onPlaybackStartedListeners.clear();
@@ -126,7 +126,7 @@ void VocalTrainerFilePlayer::onComplete() {
     onCompleteListeners.executeAll();
 }
 
-void VocalTrainerFilePlayer::pausePlayer(AudioPlayer *player) {
+void VocalTrainerFilePlayer::pausePlayer(PortAudioPlayer *player) {
     Executors::ExecuteOnBackgroundThread([=] {
         player->pauseSync();
         Executors::ExecuteOnMainThread([=] {
@@ -154,7 +154,7 @@ void VocalTrainerFilePlayer::play() {
     playRequestedListeners.executeAll();
     updateMetronomeVolume();
 
-    AudioPlayer* mainPlayer = getMainPlayer();
+    PortAudioPlayer* mainPlayer = getMainPlayer();
     if (bounds) {
         double seekValue = mainPlayer->getSeek();
         if (!bounds.isInside(seekValue)) {
@@ -172,7 +172,7 @@ void VocalTrainerFilePlayer::play() {
         recordingPlayer.setSeek(seek);
     }
 
-    for (AudioPlayer* player : players) {
+    for (PortAudioPlayer* player : players) {
         player->play();
     }
 }
@@ -454,7 +454,7 @@ const std::string& VocalTrainerFilePlayer::getLyricsTextForPart(int partIndex) c
     return file->getLyrics().getCurrentLyricsTextForPart(partIndex, seek);
 }
 
-const AudioPlayer &VocalTrainerFilePlayer::getInstrumentalPlayer() const {
+const PortAudioPlayer &VocalTrainerFilePlayer::getInstrumentalPlayer() const {
     return instrumentalPlayer;
 }
 
@@ -475,10 +475,10 @@ void VocalTrainerFilePlayer::editLyrics(const std::function<void(Lyrics *lyrics)
     }
 }
 
-const AudioPlayer* VocalTrainerFilePlayer::getMainPlayer() const {
+const PortAudioPlayer* VocalTrainerFilePlayer::getMainPlayer() const {
     return players.at(0);
 }
 
-AudioPlayer* VocalTrainerFilePlayer::getMainPlayer() {
+PortAudioPlayer* VocalTrainerFilePlayer::getMainPlayer() {
     return players.at(0);
 }

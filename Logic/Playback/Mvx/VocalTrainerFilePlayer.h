@@ -35,7 +35,7 @@ private:
     MetronomeAudioPlayer metronomePlayer;
     WavAudioPlayer recordingPlayer;
 
-    std::vector<AudioPlayer*> players;
+    std::vector<PortAudioPlayer*> players;
 
     std::atomic_bool metronomeEnabled;
     int pauseRequestedCounter = 0;
@@ -55,10 +55,10 @@ private:
     Lyrics::Snapshot lastLyricsSnapshot;
 
     void updateMetronomeVolume();
-    void pausePlayer(AudioPlayer* player);
+    void pausePlayer(PortAudioPlayer* player);
 
-    const AudioPlayer* getMainPlayer() const;
-    AudioPlayer* getMainPlayer();
+    const PortAudioPlayer* getMainPlayer() const;
+    PortAudioPlayer* getMainPlayer();
 public:
     CppUtils::ListenersSet<bool> isPlayingChangedListeners;
     CppUtils::ListenersSet<> stopRequestedListeners;
@@ -142,7 +142,7 @@ public:
     int getLyricsLinesCount() const;
     const std::string& getLyricsTextForPart(int partIndex) const;
 
-    const AudioPlayer& getInstrumentalPlayer() const;
+    const PortAudioPlayer& getInstrumentalPlayer() const;
     const VocalPartAudioPlayer& getVocalPartPlayer() const;
 
     const std::map<double, int> &getTonalityChanges() const;

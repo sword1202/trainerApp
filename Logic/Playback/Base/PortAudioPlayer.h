@@ -3,8 +3,8 @@
 // Copyright (c) 2018 Mac. All rights reserved.
 //
 
-#ifndef VOCALTRAINER_AUDIOPLAYER_H
-#define VOCALTRAINER_AUDIOPLAYER_H
+#ifndef VOCALTRAINER_PORTAUDIOPLAYER_H
+#define VOCALTRAINER_PORTAUDIOPLAYER_H
 
 #include <portaudio/portaudio.h>
 #include <mutex>
@@ -13,7 +13,7 @@
 #include "PlaybackData.h"
 #include <SoundTouch/SoundTouch.h>
 
-class AudioPlayer {
+class PortAudioPlayer {
 private:
     PaStream* stream = nullptr;
     PlaybackData playbackData;
@@ -73,8 +73,8 @@ public:
     CppUtils::SynchronizedListenersSet<void*, int> onDataSentToOutputListeners; // <buffer, framesCount>
     CppUtils::SynchronizedListenersSet<double, double> seekChangedListeners; // <seek, totalDuration>
     
-    AudioPlayer();
-    virtual ~AudioPlayer();
+    PortAudioPlayer();
+    virtual ~PortAudioPlayer();
     void prepare();
     void prepareAsync(const std::function<void()>& callback);
     void play(double seek);
@@ -113,4 +113,4 @@ public:
 
     void initSoundTouch();
 };
-#endif //VOCALTRAINER_AUDIOPLAYER_H
+#endif //VOCALTRAINER_PORTAUDIOPLAYER_H
