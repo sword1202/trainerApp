@@ -5,7 +5,7 @@
 
 #include "MacOSWorkspaceDrawerResourcesProvider.h"
 #import <Logic/Logic-Swift.h>
-#import <VocalTrainer-Swift.h>
+#import <VocalTrainerMacOS-Swift.h>
 
 using namespace CppUtils;
 

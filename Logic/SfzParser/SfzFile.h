@@ -7,12 +7,16 @@
 #define VOCALTRAINER_SFZFILE_H
 
 #include "SfzRegion.h"
+#include "Pitch.h"
 #include <vector>
 
 class SfzFile {
     std::vector<SfzRegion> regions;
 public:
-    SfzFile(const std::string& data);
+    typedef std::function<AudioData(const std::string&)> SampleReader;
+
+    SfzFile(const std::string& data, const SampleReader& sampleReader);
+    const SfzRegion& findRegion(const Pitch& pitch) const;
 };
 
 

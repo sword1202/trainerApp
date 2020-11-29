@@ -20,6 +20,7 @@
 #include <memory>
 #include "PitchesMutableList.h"
 #include "PrepareFailedException.h"
+#include "SfzFileProvider.h"
 
 using namespace CppUtils;
 using std::cout;
@@ -28,7 +29,7 @@ using std::endl;
 constexpr int BEATS_IN_TACT = 4;
 
 VocalTrainerFilePlayer::VocalTrainerFilePlayer() : metronomeEnabled(false) {
-
+    vocalPartPianoPlayer.setSfz(SfzFileProvider::get());
 }
 
 void VocalTrainerFilePlayer::setSource(VocalTrainerFile *file, bool destroyFileOnDestructor) {
@@ -61,7 +62,7 @@ void VocalTrainerFilePlayer::setSource(VocalTrainerFile *file, bool destroyFileO
         }
     }
 
-    PortAudioPlayer* mainPlayer = getMainPlayer();
+    AudioPlayer* mainPlayer = getMainPlayer();
     mainPlayer->seekChangedListeners.clear();
     mainPlayer->onCompleteListeners.clear();
     mainPlayer->onPlaybackStartedListeners.clear();
@@ -126,7 +127,7 @@ void VocalTrainerFilePlayer::onComplete() {
     onCompleteListeners.executeAll();
 }
 
-void VocalTrainerFilePlayer::pausePlayer(PortAudioPlayer *player) {
+void VocalTrainerFilePlayer::pausePlayer(AudioPlayer *player) {
     Executors::ExecuteOnBackgroundThread([=] {
         player->pauseSync();
         Executors::ExecuteOnMainThread([=] {
@@ -154,7 +155,7 @@ void VocalTrainerFilePlayer::play() {
     playRequestedListeners.executeAll();
     updateMetronomeVolume();
 
-    PortAudioPlayer* mainPlayer = getMainPlayer();
+    AudioPlayer* mainPlayer = getMainPlayer();
     if (bounds) {
         double seekValue = mainPlayer->getSeek();
         if (!bounds.isInside(seekValue)) {
@@ -172,7 +173,7 @@ void VocalTrainerFilePlayer::play() {
         recordingPlayer.setSeek(seek);
     }
 
-    for (PortAudioPlayer* player : players) {
+    for (AudioPlayer* player : players) {
         player->play();
     }
 }
@@ -454,7 +455,7 @@ const std::string& VocalTrainerFilePlayer::getLyricsTextForPart(int partIndex) c
     return file->getLyrics().getCurrentLyricsTextForPart(partIndex, seek);
 }
 
-const PortAudioPlayer &VocalTrainerFilePlayer::getInstrumentalPlayer() const {
+const AudioPlayer & VocalTrainerFilePlayer::getInstrumentalPlayer() const {
     return instrumentalPlayer;
 }
 
@@ -475,10 +476,10 @@ void VocalTrainerFilePlayer::editLyrics(const std::function<void(Lyrics *lyrics)
     }
 }
 
-const PortAudioPlayer* VocalTrainerFilePlayer::getMainPlayer() const {
+const AudioPlayer * VocalTrainerFilePlayer::getMainPlayer() const {
     return players.at(0);
 }
 
-PortAudioPlayer* VocalTrainerFilePlayer::getMainPlayer() {
+AudioPlayer * VocalTrainerFilePlayer::getMainPlayer() {
     return players.at(0);
 }

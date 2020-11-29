@@ -6,6 +6,7 @@
 #ifndef VOCALTRAINER_PORTAUDIOPLAYER_H
 #define VOCALTRAINER_PORTAUDIOPLAYER_H
 
+#include "AudioPlayer.h"
 #include <portaudio/portaudio.h>
 #include <mutex>
 #include "ListenersSet.h"
@@ -13,7 +14,7 @@
 #include "PlaybackData.h"
 #include <SoundTouch/SoundTouch.h>
 
-class PortAudioPlayer {
+class PortAudioPlayer : public AudioPlayer {
 private:
     PaStream* stream = nullptr;
     PlaybackData playbackData;
@@ -64,21 +65,16 @@ protected:
 
     // Used for players, where totalDurationInSeconds can be changed after prepare
     void setTotalDurationInSeconds(double totalDurationInSeconds);
-public:
 
-	CppUtils::ListenersSet<> onCompleteListeners;
-	CppUtils::ListenersSet<> onNoDataAvailableListeners;
-	CppUtils::ListenersSet<> onPlaybackStartedListeners;
-	CppUtils::ListenersSet<> onPlaybackStoppedListeners;
-    CppUtils::SynchronizedListenersSet<void*, int> onDataSentToOutputListeners; // <buffer, framesCount>
-    CppUtils::SynchronizedListenersSet<double, double> seekChangedListeners; // <seek, totalDuration>
+	void initSoundTouch();
+	void setPlayerName(const std::string &playerName);
+    const PlaybackData &getPlaybackData() const;
+public:
     
     PortAudioPlayer();
     virtual ~PortAudioPlayer();
     void prepare();
-    void prepareAsync(const std::function<void()>& callback);
     void play(double seek);
-    void play();
     bool isPlaying() const;
     bool isPrepared() const;
     void pause();
@@ -100,7 +96,6 @@ public:
 
     double getTrackDurationInSeconds() const;
 
-    const PlaybackData &getPlaybackData() const;
 	double getCallbackBufferDurationInSeconds() const;
 
     bool isLooping() const;
@@ -109,8 +104,5 @@ public:
 	bool isCompleted() const;
 
 	const std::string &getPlayerName() const;
-	void setPlayerName(const std::string &playerName);
-
-    void initSoundTouch();
 };
 #endif //VOCALTRAINER_PORTAUDIOPLAYER_H

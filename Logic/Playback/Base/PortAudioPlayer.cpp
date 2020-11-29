@@ -225,10 +225,6 @@ PortAudioPlayer::PortAudioPlayer() {
     completed = false;
 }
 
-void PortAudioPlayer::play() {
-    play(getSeek());
-}
-
 float PortAudioPlayer::getVolume() const {
     return volume;
 }
@@ -277,13 +273,6 @@ void PortAudioPlayer::setBufferSeek(int bufferSeek) {
     double seek = bufferSeekToSecondsSeek(bufferSeek);
     double total = getTrackDurationInSeconds();
     seekChangedListeners.executeAll(seek, total);
-}
-
-void PortAudioPlayer::prepareAsync(const std::function<void()>& callback) {
-    Executors::ExecuteOnBackgroundThread([=] {
-        prepare();
-        Executors::ExecuteOnMainThread(callback);
-    });
 }
 
 int PortAudioPlayer::getPitchShiftInSemiTones() const {

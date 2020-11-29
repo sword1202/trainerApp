@@ -8,6 +8,7 @@
 
 #include <optional>
 #include <string>
+#include "AudioData.h"
 
 struct SfzLoop {
     int start;
@@ -15,10 +16,14 @@ struct SfzLoop {
 
     SfzLoop(int start, int end) : start(start), end(end) {
     }
+
+    inline int duration() const {
+        return end - start + 1;
+    }
 };
 
 struct SfzRegion {
-    std::string filePath;
+    AudioData audioData;
     int lowKey = -1;
     int highKey = -1;
     int keyCenter = -1;

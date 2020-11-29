@@ -8,9 +8,10 @@
 
 #include <string>
 #include <map>
+#include <optional>
 
 struct SfzSection {
-    using Attrs = std::map<std::string, std::string>;
+    using Attrs = std::map<std::string, std::optional<std::string>>;
     std::string name;
     Attrs attrs;
 };

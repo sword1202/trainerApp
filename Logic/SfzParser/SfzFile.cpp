@@ -5,10 +5,14 @@
 
 #include "SfzFile.h"
 #include "SfzSectionsParser.h"
+#include "Algorithms.h"
+#include "MathUtils.h"
+#include "StringUtils.h"
 
 using OptString = std::optional<std::string>;
+using namespace CppUtils;
 
-SfzFile::SfzFile(const std::string &data) {
+SfzFile::SfzFile(const std::string& data, const SampleReader& sampleReader) {
     SfzSectionsParser parser;
     std::vector<SfzSection> sections = parser.parse(data);
 
@@ -28,7 +32,8 @@ SfzFile::SfzFile(const std::string &data) {
             assert(sampleFilePath && "sample not present");
 
             SfzRegion region;
-            region.filePath = *sampleFilePath;
+            region.audioData = sampleReader(*sampleFilePath);
+
             auto key = *(keyCenterOpt ? keyCenterOpt : keyOpt);
             region.keyCenter = std::stoi(key);
 
@@ -58,4 +63,14 @@ SfzFile::SfzFile(const std::string &data) {
             isLowVelocity = section.attrs.count("lovel") == 0;
         }
     }
+}
+
+const SfzRegion &SfzFile::findRegion(const Pitch &pitch) const {
+    int index = pitch.getPerfectFrequencyIndex();
+    const auto* result = CppUtils::Find(regions, [=] (const SfzRegion& region) -> bool {
+        return region.keyCenter == index || Math::IsInClosedInterval(region.lowKey, region.highKey, index);
+    });
+
+    assert(result && "Failed to find a region");
+    return *result;
 }

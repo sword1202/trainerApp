@@ -6,6 +6,8 @@
 #ifndef VOCALTRAINER_AUDIODATA_H
 #define VOCALTRAINER_AUDIODATA_H
 
+#include <string>
+
 typedef std::string AudioData;
 
 #endif //VOCALTRAINER_AUDIODATA_H
