@@ -29,6 +29,9 @@ struct SfzRegion {
     int keyCenter = -1;
     std::optional<SfzLoop> loop;
     bool isLowVelocity = false;
+
+    const char* getRawPcmPtr() const;
+    int getRawPcmBytesCount() const;
 };
 
 #endif //VOCALTRAINER_SFZREGION_H

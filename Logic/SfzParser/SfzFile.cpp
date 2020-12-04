@@ -8,6 +8,7 @@
 #include "Algorithms.h"
 #include "MathUtils.h"
 #include "StringUtils.h"
+#include "WAVFile.h"
 
 using OptString = std::optional<std::string>;
 using namespace CppUtils;
@@ -18,6 +19,7 @@ SfzFile::SfzFile(const std::string& data, const SampleReader& sampleReader) {
 
     bool isLowVelocity = false;
 
+    bool wavConfigInitialized = false;
     for (auto& section : sections) {
         if (section.name == "region") {
             OptString sampleFilePath = section.attrs["sample"];
@@ -33,6 +35,12 @@ SfzFile::SfzFile(const std::string& data, const SampleReader& sampleReader) {
 
             SfzRegion region;
             region.audioData = sampleReader(*sampleFilePath);
+            auto config = WAVFile::parseWavHeader(region.audioData);
+            if (!wavConfigInitialized) {
+                this->config = config;
+            } else {
+                assert(this->config == config && "Sfz samples have different wav format");
+            }
 
             auto key = *(keyCenterOpt ? keyCenterOpt : keyOpt);
             region.keyCenter = std::stoi(key);
@@ -66,11 +74,15 @@ SfzFile::SfzFile(const std::string& data, const SampleReader& sampleReader) {
 }
 
 const SfzRegion &SfzFile::findRegion(const Pitch &pitch) const {
-    int index = pitch.getPerfectFrequencyIndex();
+    int index = pitch.getMidiIndex();
     const auto* result = CppUtils::Find(regions, [=] (const SfzRegion& region) -> bool {
         return region.keyCenter == index || Math::IsInClosedInterval(region.lowKey, region.highKey, index);
     });
 
     assert(result && "Failed to find a region");
     return *result;
+}
+
+const WavConfig &SfzFile::getWavConfig() const {
+    return config;
 }

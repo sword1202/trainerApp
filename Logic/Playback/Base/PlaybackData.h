@@ -6,6 +6,7 @@
 #define VOCALTRAINER_PLAYBACKDATA_H
 
 #include "PortAudioUtils.h"
+#include "WAVFile.h"
 
 struct PlaybackData {
     int sampleRate = -1;
@@ -13,6 +14,9 @@ struct PlaybackData {
     int numChannels = -1;
     double totalDurationInSeconds = -1;
     PaSampleFormat format = paInt16;
+
+    PlaybackData() = default;
+    PlaybackData(const WavConfig &wavConfig, int framesPerBuffer);
 };
 
 

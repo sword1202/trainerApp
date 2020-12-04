@@ -8,15 +8,18 @@
 
 #include "SfzRegion.h"
 #include "Pitch.h"
+#include "WAVFile.h"
 #include <vector>
 
 class SfzFile {
     std::vector<SfzRegion> regions;
+    WavConfig config;
 public:
     typedef std::function<AudioData(const std::string&)> SampleReader;
 
     SfzFile(const std::string& data, const SampleReader& sampleReader);
     const SfzRegion& findRegion(const Pitch& pitch) const;
+    const WavConfig& getWavConfig() const;
 };
 
 

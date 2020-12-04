@@ -13,23 +13,28 @@ int AudioPlayerWithDefaultSeekHandler::getBufferSeek() const {
 }
 
 void AudioPlayerWithDefaultSeekHandler::setBufferSeek(int bufferSeek) {
+    int seekBefore;
     {
         SEEK_LOCK;
+        seekBefore = this->bufferSeek;
         this->bufferSeek = bufferSeek;
+        onBufferSeekChanged(seekBefore, bufferSeek);
     }
     PortAudioPlayer::setBufferSeek(bufferSeek);
 }
 
 void AudioPlayerWithDefaultSeekHandler::moveBufferSeekIfNotChangedBefore(int moveBy, int seekBefore) {
-    bool changed = false;
-    SEEK_LOCK;
-    {
-        if (seekBefore == this->bufferSeek) {
-            this->bufferSeek = bufferSeek + moveBy;
-            changed = true;
-        }
-    }
-    if (changed) {
+    bufferSeekMutex.lock();
+    if (seekBefore == this->bufferSeek) {
+        this->bufferSeek = bufferSeek + moveBy;
+        onBufferSeekChanged(seekBefore, this->bufferSeek);
+        bufferSeekMutex.unlock();
         PortAudioPlayer::setBufferSeek(bufferSeek);
+    } else {
+        bufferSeekMutex.unlock();
     }
+}
+
+void AudioPlayerWithDefaultSeekHandler::onBufferSeekChanged(int before, int now) {
+
 }

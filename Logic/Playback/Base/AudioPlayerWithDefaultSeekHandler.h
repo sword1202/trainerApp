@@ -17,6 +17,7 @@ protected:
     void setBufferSeek(int bufferSeek) override;
     // handle a case, when seek is set from outside while audioDecoder is reading the data
     void moveBufferSeekIfNotChangedBefore(int moveBy, int seekBefore);
+    virtual void onBufferSeekChanged(int before, int now);
 };
 
 

@@ -977,7 +977,7 @@ void WorkspaceDrawer::drawTracks() {
         drawer->translate(0, -ScrollBar::SCROLLBAR_WEIGHT);
     }
     float pianoTrackHeight = drawPianoTrackAndCalculateHeight();
-    captureClickEventsInTracksArea(pianoTrackHeight);
+    //captureClickEventsInTracksArea(pianoTrackHeight);
     drawInstrumentalTrack();
     if (horizontalScrollBarVisible) {
         drawer->translate(0, ScrollBar::SCROLLBAR_WEIGHT);

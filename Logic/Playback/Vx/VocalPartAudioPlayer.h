@@ -7,41 +7,43 @@
 #define VOCALTRAINER_VXFILEAUDIOPLAYER_H
 
 #include "StlDebugUtils.h"
-#include "BaseRawPcmAudioDataPlayer.h"
+#include "AudioPlayerWithDefaultSeekHandler.h"
 #include "VocalPart.h"
 #include "SfzFile.h"
 #include "AudioData.h"
 #include "SoundTouch/SoundTouch.h"
+#include "FixedSizeObjectPool.h"
 #include "PeriodicallySleepingBackgroundTask.h"
 #include <atomic>
 #include <optional>
 #include <queue>
 
-class VocalPartAudioPlayer : public BaseRawPcmAudioDataPlayer {
+class VocalPartAudioPlayer : public AudioPlayerWithDefaultSeekHandler {
     VocalPart originalVocalPart;
     VocalPart vocalPart;
-    std::map<int, AudioData*> pitchesAudioDataMap;
-    std::mutex pitchesAudioDataMapMutex;
-    std::mutex updateAudioDataMutex;
-    // Needed for fast synchronization
-    std::queue<std::vector<short>*> audioDataPool;
-    std::mutex audioDataMutex;
     const SfzFile* sfz = nullptr;
+
+    struct PlayingPitch {
+        const SfzRegion* region;
+        int vocalPartPitchIndex;
+        int bufferSeek = 0;
+    };
+
+    std::vector<const short*> soundsToMix;
+    std::vector<int> soundsToMixSizes;
+    std::vector<float> tempFloatBuffer;
+    CppUtils::FixedSizeObjectPool<std::vector<short>> tempShortBufferPool;
+    std::vector<PlayingPitch> playingPitches;
+    std::mutex playingPitchesMutex;
     soundtouch::SoundTouch soundTouch;
-    std::vector<short> tempPitchBuffer;
-    std::vector<float> tempFloatSamplesBuffer;
-    std::optional<WavConfig> wavConfig;
 
-    void updateAudioData();
-    void updateAudioDataOnBackground();
-    size_t getAudioDataBufferSize() const;
+    PlayingPitch* findPlayingPitch(int vocalPartPitchIndex);
 protected:
-    void providePlaybackData(PlaybackData *playbackData) override;
     void onTonalityChanged(int pitchShift) override;
-    int getAudioDataSizeInBytes() override;
-    const char *provideAudioBuffer() override;
-
+    void providePlaybackData(PlaybackData *playbackData) override;
     int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) override;
+
+    void onBufferSeekChanged(int seekBefore, int seekNow) override;
 
 public:
     VocalPartAudioPlayer();
