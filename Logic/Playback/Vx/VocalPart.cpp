@@ -285,3 +285,8 @@ const Pitch &VocalPart::getHighestPitch() const {
 bool VocalPart::isEmpty() const {
     return durationInTicks == 0;
 }
+
+double VocalPart::getPitchDuration(int index) const {
+    assert(index < pitches.size());
+    return ticksToSeconds(pitches[index].ticksCount);
+}

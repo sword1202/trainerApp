@@ -35,7 +35,9 @@ class VocalPartAudioPlayer : public AudioPlayerWithDefaultSeekHandler {
     CppUtils::FixedSizeObjectPool<std::vector<short>> tempShortBufferPool;
     std::vector<PlayingPitch> playingPitches;
     std::mutex playingPitchesMutex;
+    std::mutex vocalPartMutex;
     soundtouch::SoundTouch soundTouch;
+    int crossfadeSamplesCount;
 
     PlayingPitch* findPlayingPitch(int vocalPartPitchIndex);
 protected:
@@ -54,6 +56,8 @@ public:
     void setTempoFactor(double tempoFactor) override;
     const VocalPart& getVocalPart() const;
     void setVocalPart(const VocalPart &vocalPart);
+
+    void addPitchWithIndexToMixingSounds(int framesCount, int index);
 };
 
 

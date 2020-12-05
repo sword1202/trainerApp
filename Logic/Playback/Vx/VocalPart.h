@@ -98,6 +98,8 @@ public:
 
     bool isEmpty() const;
 
+    double getPitchDuration(int index) const;
+
     template<typename Function>
     void iteratePitchesInTickRange(int startTick, int endTick, const Function& function) const {
         for (const auto& pitch : pitches) {
