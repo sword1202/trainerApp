@@ -167,7 +167,7 @@ void VocalPartAudioPlayer::setTempoFactor(double tempoFactor) {
         return;
     }
 
-    AudioPlayer::setTempoFactor(tempoFactor);
+    BaseAudioPlayer::setTempoFactor(tempoFactor);
     {
         PLAYING_PITCHES_LOCK;
         playingPitches.clear();

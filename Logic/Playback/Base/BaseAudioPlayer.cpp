@@ -1,4 +1,4 @@
-#include "AudioPlayer.h"
+#include "BaseAudioPlayer.h"
 #include "Executors.h"
 #include "AudioUtils.h"
 #include "AudioOperationFailedException.h"
@@ -7,7 +7,7 @@
 using namespace CppUtils;
 using namespace std::placeholders;
 
-void AudioPlayer::writerCallback(void* outputBuffer, int samplesPerBuffer) {
+void BaseAudioPlayer::writerCallback(void* outputBuffer, int samplesPerBuffer) {
     memset(outputBuffer, 0, static_cast<size_t>(playbackData.getCallbackBufferSizeInBytes()));
     int samplesCopiedToOutputBufferCount = readAudioDataApplySoundTouchIfNeed(outputBuffer, samplesPerBuffer);
 
@@ -60,18 +60,18 @@ void AudioPlayer::writerCallback(void* outputBuffer, int samplesPerBuffer) {
     }
 }
 
-void AudioPlayer::play() {
+void BaseAudioPlayer::play() {
     play(getSeek());
 }
 
-void AudioPlayer::prepareAsync(const std::function<void()>& callback) {
+void BaseAudioPlayer::prepareAsync(const std::function<void()>& callback) {
     Executors::ExecuteOnBackgroundThread([=] {
         prepare();
         Executors::ExecuteOnMainThread(callback);
     });
 }
 
-void AudioPlayer::prepare() {
+void BaseAudioPlayer::prepare() {
     assert(!isPrepared());
     providePlaybackData(&playbackData);
 
@@ -91,14 +91,14 @@ void AudioPlayer::prepare() {
     }
 
     writer = AudioOutputWriter::create(playbackData);
-    writer->callback = std::bind(&AudioPlayer::writerCallback, this, _1, _2);
+    writer->callback = std::bind(&BaseAudioPlayer::writerCallback, this, _1, _2);
 
     onNoDataAvailableListeners.addListener([=] {
         onPlaybackStoppedListeners.executeAll();
     });
 }
 
-void AudioPlayer::play(double seek) {
+void BaseAudioPlayer::play(double seek) {
     BOOST_ASSERT_MSG(isPrepared(), "call prepare before play");
     BOOST_ASSERT(seek >= 0);
 
@@ -113,24 +113,24 @@ void AudioPlayer::play(double seek) {
     writer->start();
 }
 
-bool AudioPlayer::isPlaying() const {
+bool BaseAudioPlayer::isPlaying() const {
     return playing;
 }
 
-AudioPlayer::~AudioPlayer() {
+BaseAudioPlayer::~BaseAudioPlayer() {
     destroy();
     delete soundTouch;
     soundTouch = nullptr;
 }
 
-void AudioPlayer::destroy() {
+void BaseAudioPlayer::destroy() {
     playing = false;
     playbackData = PlaybackData();
     delete writer;
     writer = nullptr;
 }
 
-void AudioPlayer::pause() {
+void BaseAudioPlayer::pause() {
     assert(isPrepared());
     if (!playing) {
         return;
@@ -142,7 +142,7 @@ void AudioPlayer::pause() {
     onPlaybackStoppedListeners.executeAll();
 }
 
-void AudioPlayer::setSeek(double timeStamp) {
+void BaseAudioPlayer::setSeek(double timeStamp) {
     assert(timeStamp >= 0);
     double durationInSeconds = getTrackDurationInSeconds();
     if (timeStamp > durationInSeconds) {
@@ -156,11 +156,11 @@ void AudioPlayer::setSeek(double timeStamp) {
     setBufferSeek(secondsSeekToBufferSeek(timeStamp));
 }
 
-double AudioPlayer::getTrackDurationInSeconds() const {
+double BaseAudioPlayer::getTrackDurationInSeconds() const {
     return playbackData.totalDurationInSeconds;
 }
 
-AudioPlayer::AudioPlayer() {
+BaseAudioPlayer::BaseAudioPlayer() {
     playing = false;
     volume = 1.0f;
     pitchShift = 0;
@@ -169,28 +169,28 @@ AudioPlayer::AudioPlayer() {
     completed = false;
 }
 
-float AudioPlayer::getVolume() const {
+float BaseAudioPlayer::getVolume() const {
     return volume;
 }
 
-void AudioPlayer::setVolume(float volume) {
+void BaseAudioPlayer::setVolume(float volume) {
     BOOST_ASSERT(volume >= 0.0f && volume <= 1.0f);
     this->volume = volume;
 }
 
-double AudioPlayer::getSeek() const {
+double BaseAudioPlayer::getSeek() const {
     return bufferSeekToSecondsSeek(getBufferSeek());
 }
 
-int AudioPlayer::secondsToSamplesCount(double secondsSeek) const {
+int BaseAudioPlayer::secondsToSamplesCount(double secondsSeek) const {
     return (int)round(secondsSeek * playbackData.sampleRate);
 }
 
-double AudioPlayer::samplesCountToSeconds(int samplesCount) const {
+double BaseAudioPlayer::samplesCountToSeconds(int samplesCount) const {
     return AudioUtils::GetSampleTimeInSeconds(samplesCount, playbackData.sampleRate);
 }
 
-void AudioPlayer::onComplete() {
+void BaseAudioPlayer::onComplete() {
     playing = false;
     completed = true;
     setSeek(0);
@@ -201,29 +201,29 @@ void AudioPlayer::onComplete() {
     });
 }
 
-int AudioPlayer::getSampleSize() const {
+int BaseAudioPlayer::getSampleSize() const {
     return playbackData.getSampleBytesCount();
 }
 
-double AudioPlayer::bufferSeekToSecondsSeek(int bufferSeek) const {
+double BaseAudioPlayer::bufferSeekToSecondsSeek(int bufferSeek) const {
     return samplesCountToSeconds(bufferSeek);
 }
 
-int AudioPlayer::secondsSeekToBufferSeek(double timestamp) const {
+int BaseAudioPlayer::secondsSeekToBufferSeek(double timestamp) const {
     return secondsToSamplesCount(timestamp);
 }
 
-void AudioPlayer::setBufferSeek(int bufferSeek) {
+void BaseAudioPlayer::setBufferSeek(int bufferSeek) {
     double seek = bufferSeekToSecondsSeek(bufferSeek);
     double total = getTrackDurationInSeconds();
     seekChangedListeners.executeAll(seek, total);
 }
 
-int AudioPlayer::getPitchShiftInSemiTones() const {
+int BaseAudioPlayer::getPitchShiftInSemiTones() const {
     return pitchShift;
 }
 
-void AudioPlayer::setPitchShiftInSemiTones(int value) {
+void BaseAudioPlayer::setPitchShiftInSemiTones(int value) {
     if (value == pitchShift) {
         return;
     }
@@ -232,11 +232,11 @@ void AudioPlayer::setPitchShiftInSemiTones(int value) {
     onTonalityChanged(value);
 }
 
-const PlaybackData &AudioPlayer::getPlaybackData() const {
+const PlaybackData &BaseAudioPlayer::getPlaybackData() const {
     return playbackData;
 }
 
-void AudioPlayer::setupPlaybackStartedListener() {
+void BaseAudioPlayer::setupPlaybackStartedListener() {
     assert(dataSentToOutputListenerKey == 0);
     dataSentToOutputListenerKey = onDataSentToOutputListeners.addOneShotListener([=] (void*, int) {
         Executors::ExecuteOnMainThread([this] {
@@ -247,62 +247,62 @@ void AudioPlayer::setupPlaybackStartedListener() {
     });
 }
 
-bool AudioPlayer::isPrepared() const {
+bool BaseAudioPlayer::isPrepared() const {
     return writer != nullptr;
 }
 
-double AudioPlayer::getTempoFactor() const {
+double BaseAudioPlayer::getTempoFactor() const {
     return tempoFactor;
 }
 
-void AudioPlayer::setTempoFactor(double tempoFactor) {
+void BaseAudioPlayer::setTempoFactor(double tempoFactor) {
     this->tempoFactor = tempoFactor;
 }
 
-double AudioPlayer::getCallbackBufferDurationInSeconds() const {
+double BaseAudioPlayer::getCallbackBufferDurationInSeconds() const {
     return AudioUtils::GetSampleTimeInSeconds(playbackData.samplesPerBuffer, playbackData.sampleRate);
 }
 
-bool AudioPlayer::isLooping() const {
+bool BaseAudioPlayer::isLooping() const {
     return looping;
 }
 
-void AudioPlayer::setLooping(bool looping) {
+void BaseAudioPlayer::setLooping(bool looping) {
     this->looping = looping;
 }
 
-void AudioPlayer::setTotalDurationInSeconds(double totalDurationInSeconds) {
+void BaseAudioPlayer::setTotalDurationInSeconds(double totalDurationInSeconds) {
     playbackData.totalDurationInSeconds = totalDurationInSeconds;
 }
 
-void AudioPlayer::setPlaybackData(const PlaybackData &playbackData) {
+void BaseAudioPlayer::setPlaybackData(const PlaybackData &playbackData) {
     this->playbackData = playbackData;
 }
 
-bool AudioPlayer::isCompleted() const {
+bool BaseAudioPlayer::isCompleted() const {
     return completed;
 }
 
-const std::string &AudioPlayer::getPlayerName() const {
+const std::string &BaseAudioPlayer::getPlayerName() const {
     return playerName;
 }
 
-void AudioPlayer::setPlayerName(const std::string &playerName) {
+void BaseAudioPlayer::setPlayerName(const std::string &playerName) {
     this->playerName = playerName;
 }
 
-void AudioPlayer::initSoundTouch() {
+void BaseAudioPlayer::initSoundTouch() {
     assert(!soundTouch && "SoundTouch already initialised");
     soundTouch = new soundtouch::SoundTouch();
 }
 
-void AudioPlayer::onTonalityChanged(int value) {
+void BaseAudioPlayer::onTonalityChanged(int value) {
     assert(pitchShift == 0 || soundTouch && "tonality changes are not allowed, soundtouch not "
                                             "initialised, call initSoundTouch() before prepare to use pitch shifting");
     soundTouch->setPitchSemiTones(value);
 }
 
-int AudioPlayer::readAudioDataApplySoundTouchIfNeed(void *outputBuffer, int requestedSamplesCount) {
+int BaseAudioPlayer::readAudioDataApplySoundTouchIfNeed(void *outputBuffer, int requestedSamplesCount) {
     // Apply tempo and tonality changes, if need.
     if (soundTouch && (pitchShift != 0 || tempoFactor != 1)) {
         auto* samplesData = static_cast<int16_t *>(outputBuffer);

@@ -7,9 +7,9 @@
 #define VOCALTRAINER_AUDIOPLAYERWITHDEFAULTSEEKHANDLER_H
 
 
-#include "AudioPlayer.h"
+#include "BaseAudioPlayer.h"
 
-class AudioPlayerWithDefaultSeekHandler : public AudioPlayer {
+class AudioPlayerWithDefaultSeekHandler : public BaseAudioPlayer {
     int bufferSeek = 0;
     mutable std::mutex bufferSeekMutex;
 protected:

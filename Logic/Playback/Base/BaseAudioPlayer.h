@@ -3,8 +3,8 @@
 // Copyright (c) 2020 Semyon Tikhonenko. All rights reserved.
 //
 
-#ifndef VOCALTRAINER_AUDIOPLAYER_H
-#define VOCALTRAINER_AUDIOPLAYER_H
+#ifndef VOCALTRAINER_BASEAUDIOPLAYER_H
+#define VOCALTRAINER_BASEAUDIOPLAYER_H
 
 
 #include "ListenersSet.h"
@@ -12,7 +12,7 @@
 #include "AudioOutputWriter.h"
 #include <SoundTouch/SoundTouch.h>
 
-class AudioPlayer {
+class BaseAudioPlayer {
     AudioOutputWriter* writer = nullptr;
     PlaybackData playbackData;
     std::atomic_bool playing;
@@ -67,7 +67,7 @@ public:
     CppUtils::SynchronizedListenersSet<void*, int> onDataSentToOutputListeners; // <buffer, framesCount>
     CppUtils::SynchronizedListenersSet<double, double> seekChangedListeners; // <seek, totalDuration>
 
-    AudioPlayer();
+    BaseAudioPlayer();
     virtual void prepare();
     virtual void prepareAsync(const std::function<void()>& callback);
     virtual void play(double seek);
@@ -100,8 +100,8 @@ public:
 
     virtual const std::string &getPlayerName() const;
 
-    virtual ~AudioPlayer();
+    virtual ~BaseAudioPlayer();
 };
 
 
-#endif //VOCALTRAINER_AUDIOPLAYER_H
+#endif //VOCALTRAINER_BASEAUDIOPLAYER_H

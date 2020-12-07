@@ -8,9 +8,9 @@
 
 #include <deque>
 #include <vector>
-#include "AudioPlayer.h"
+#include "BaseAudioPlayer.h"
 
-class RealtimeStreamingAudioPlayer : public AudioPlayer {
+class RealtimeStreamingAudioPlayer : public BaseAudioPlayer {
 public:
     explicit RealtimeStreamingAudioPlayer(const PlaybackData& playbackData);
     void pushAudioData(const void* data, int size);
