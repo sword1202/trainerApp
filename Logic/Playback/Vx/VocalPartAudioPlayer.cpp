@@ -48,7 +48,7 @@ int VocalPartAudioPlayer::readNextSamplesBatch(void *intoBuffer, int framesCount
 }
 
 void VocalPartAudioPlayer::addPitchWithIndexToMixingSounds(int framesCount, int index) {
-    int numChannels = getPlaybackData().numChannels;
+    int numChannels = getPlaybackData().numberOfChannels;
     int maxSoundBufferSize = framesCount * numChannels;
 
     PlayingPitch* playingPitch = findPlayingPitch(index);
@@ -121,10 +121,10 @@ void VocalPartAudioPlayer::providePlaybackData(PlaybackData *playbackData) {
     *playbackData = PlaybackData(sfz->getWavConfig(), FRAMES_PER_BUFFER);
     playbackData->totalDurationInSeconds = vocalPart.getDurationInSeconds();
 
-    soundTouch.setChannels(static_cast<uint>(playbackData->numChannels));
-    soundTouch.setSampleRate(static_cast<uint>(playbackData->sampleRate));
+    soundTouch.setChannels(playbackData->numberOfChannels);
+    soundTouch.setSampleRate(playbackData->sampleRate);
 
-    tempFloatBuffer.resize(static_cast<size_t>(playbackData->framesPerBuffer) * playbackData->numChannels);
+    tempFloatBuffer.resize(static_cast<size_t>(playbackData->samplesPerBuffer) * playbackData->numberOfChannels);
     tempShortBufferPool.init(TEMP_SHORT_BUFFER_POOL_SIZE, std::vector<short>(tempFloatBuffer.size(), 0));
 
     crossfadeSamplesCount = Math::RoundToInt(
@@ -167,7 +167,7 @@ void VocalPartAudioPlayer::setTempoFactor(double tempoFactor) {
         return;
     }
 
-    PortAudioPlayer::setTempoFactor(tempoFactor);
+    AudioPlayer::setTempoFactor(tempoFactor);
     {
         PLAYING_PITCHES_LOCK;
         playingPitches.clear();

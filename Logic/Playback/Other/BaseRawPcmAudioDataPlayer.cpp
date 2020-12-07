@@ -27,5 +27,5 @@ void BaseRawPcmAudioDataPlayer::providePlaybackData(PlaybackData *playbackData) 
 }
 
 void BaseRawPcmAudioDataPlayer::setPlaybackData(const WavConfig &wavConfig, int framesPerBuffer) {
-    PortAudioPlayer::setPlaybackData(PlaybackData(wavConfig, framesPerBuffer));
+    AudioPlayer::setPlaybackData(PlaybackData(wavConfig, framesPerBuffer));
 }

@@ -20,7 +20,7 @@ void AudioPlayerWithDefaultSeekHandler::setBufferSeek(int bufferSeek) {
         this->bufferSeek = bufferSeek;
         onBufferSeekChanged(seekBefore, bufferSeek);
     }
-    PortAudioPlayer::setBufferSeek(bufferSeek);
+    AudioPlayer::setBufferSeek(bufferSeek);
 }
 
 void AudioPlayerWithDefaultSeekHandler::moveBufferSeekIfNotChangedBefore(int moveBy, int seekBefore) {
@@ -29,7 +29,7 @@ void AudioPlayerWithDefaultSeekHandler::moveBufferSeekIfNotChangedBefore(int mov
         this->bufferSeek = bufferSeek + moveBy;
         onBufferSeekChanged(seekBefore, this->bufferSeek);
         bufferSeekMutex.unlock();
-        PortAudioPlayer::setBufferSeek(bufferSeek);
+        AudioPlayer::setBufferSeek(bufferSeek);
     } else {
         bufferSeekMutex.unlock();
     }

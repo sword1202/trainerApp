@@ -6,9 +6,11 @@
 #include "AudioInputManager.h"
 #include "AubioPitchDetector.h"
 #include "Executors.h"
-#include "PortAudioInputReader.h"
+#include "AudioInputReader.h"
 #include "AudioAverageInputLevelMonitor.h"
 #include "AudioUtils.h"
+#include "AudioToolboxInputReader.h"
+#include "NotImplementedAssert.h"
 
 static constexpr float THRESHOLD = 0.1;
 static const int BUFFER_SIZE = 1024;
@@ -24,7 +26,7 @@ AudioInputManager::AudioInputManager(const char* deviceName) {
         return pitchDetector;
     };
     
-    audioInputReader = new PortAudioInputReader(BUFFER_SIZE, true, deviceName);
+    audioInputReader = new AudioToolboxInputReader(BUFFER_SIZE);
     pitchesRecorder = new AudioInputPitchesRecorder();
     pitchesRecorder->init(audioInputReader, SMOOTH_LEVEL, pitchDetectorFactory);
     audioInputReader->start();
@@ -39,15 +41,15 @@ AudioInputManager::~AudioInputManager() {
 }
 
 void AudioInputManager::setInputSensitivity(float value) {
-    audioInputReader->setSensitivity(value);
+    NOT_IMPLEMENTED_ASSERT;
 }
 
 float AudioInputManager::getInputSensitivity() const {
-    return audioInputReader->getSensitivity();
+    return 0;
 }
 
 void AudioInputManager::setOutputVolume(float value) {
-    audioInputReader->setOutputVolume(value);
+    //audioInputReader->setOutputVolume(value);
 }
 
 float AudioInputManager::getOutputVolume() const {

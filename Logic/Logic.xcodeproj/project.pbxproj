@@ -55,7 +55,6 @@
 		71AD23E4D9E30B615AA3B3FE /* MidiEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2A7011DBA6662C539DA9 /* MidiEvent.cpp */; };
 		71AD23F960115827E3B1FA13 /* OpenGLUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2449F5FC253FB2137EE6 /* OpenGLUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD23FA86029C6BE7E25B3D /* MetalNvgDrawer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD231133D6E227F2998881 /* MetalNvgDrawer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		71AD24006338ADBC16FCC7AC /* PortAudioInputReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD27516738520757942B22 /* PortAudioInputReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD240986A753F64D117209 /* VocalPartAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD209135C7FA838CA89DA2 /* VocalPartAudioPlayer.cpp */; };
 		71AD240E1B88527C7ECB66AC /* MidiEventList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2DA56D72EDCBFE2E94DA /* MidiEventList.cpp */; };
 		71AD243F08BD1F00E1D1A43A /* MvxFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2CDF8FE9522FA0CAC810 /* MvxFile.cpp */; };
@@ -77,7 +76,7 @@
 		71AD253873D06CBDE4CE0597 /* MidiFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2DA8614D4FCC3BF0E274 /* MidiFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD254B1524521B0ECC32BA /* MidiTrack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD23BE99E133BC64DBAD12 /* MidiTrack.cpp */; };
 		71AD2564D683E226F144AE68 /* NvgDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2DDA0E3CBB32F123DFD7 /* NvgDrawer.cpp */; };
-		71AD25760ACBBF82683D4964 /* PrepareFailedException.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD215113A75359CC5E2E70 /* PrepareFailedException.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		71AD25760ACBBF82683D4964 /* AudioOperationFailedException.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD215113A75359CC5E2E70 /* AudioOperationFailedException.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD25B220717DC55E26D7AA /* stlassert.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD27AA2ADCE4B94FB43C3F /* stlassert.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD25CF9150A4A8523F7240 /* VxFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD26E37576200389619E0A /* VxFile.cpp */; };
 		71AD25D1EEF4320B29722565 /* Options.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2C0835F3CAFCA74F00B5 /* Options.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -100,7 +99,6 @@
 		71AD269C2B964639CB4B49D4 /* MouseEventsReceiver.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD29B63432CC53ABDEE731 /* MouseEventsReceiver.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD26B21A77803937B6D970 /* Point.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2FB3472951B99E04FB5F /* Point.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD26CBCDE423D5BAD5C1EB /* Primitives.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD26ECA1B1BB6ED2DE86D9 /* Primitives.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		71AD26CCB51222EA74B4B5E1 /* PortAudioInputReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD26F41B89115672775BC0 /* PortAudioInputReader.cpp */; };
 		71AD26D291037A7AEF67EC3D /* Binasc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD289CC2F3F67CD4DD7DDB /* Binasc.cpp */; };
 		71AD26DD28A49E4CA382CAFB /* BoundsSelectionDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD28A1306F3AB1C307C7A3 /* BoundsSelectionDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD26DED9D52EDF9C073688 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD252F70E0880DEA1B3B35 /* Timer.cpp */; };
@@ -119,7 +117,7 @@
 		71AD2869900DEAC405F8226C /* Binasc.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD276486F3E97C8F0A03AF /* Binasc.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD287095C9F34B98B13878 /* RealtimeStreamingAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2AC1E555DF04693C77E5 /* RealtimeStreamingAudioPlayer.cpp */; };
 		71AD2870EAF4CBDB63728D14 /* BeatsPerMinuteProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD207AAC24B1DE61B27C51 /* BeatsPerMinuteProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		71AD287686DD051E07C39901 /* PrepareFailedException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD200C605140EAB4684FC9 /* PrepareFailedException.cpp */; };
+		71AD287686DD051E07C39901 /* AudioOperationFailedException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD200C605140EAB4684FC9 /* AudioOperationFailedException.cpp */; };
 		71AD288341FB025D20B4690A /* MemoryUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD23EC4AE6175997855CE2 /* MemoryUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2887CA08EC2971D110F2 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD20D41C01B209AEA40BD3 /* config.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD288DC6905850E4B69FAB /* BaseRawPcmAudioDataPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD25967B6AA3159660C839 /* BaseRawPcmAudioDataPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -131,14 +129,12 @@
 		71AD290EF23AE66AE308E34E /* ApplicationModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD20E7EAC70D42EDAA7136 /* ApplicationModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD29426FB829B8982799EF /* VocalPartAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2DF4EFA3C8E483900EB6 /* VocalPartAudioPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD294EEB4F9C20D8BB33BD /* MidiFileReaderException.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD20553D4D95B50697DC50 /* MidiFileReaderException.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		71AD29691DA1FB339FBF986C /* PortAudioUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD27B5B5F9B983712E41FA /* PortAudioUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD298CF3D4B222D17021E7 /* AudioAverageInputLevelMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD29E963BFE13E12D4B1E1 /* AudioAverageInputLevelMonitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2992E77829583B8186CC /* VocalTrainerPlayerPrepareException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD28E587C2E17A1449FEB1 /* VocalTrainerPlayerPrepareException.cpp */; };
 		71AD29980128826D4C4D08A3 /* px_mixer.c in Sources */ = {isa = PBXBuildFile; fileRef = 71AD26B5599DB53B728689DA /* px_mixer.c */; };
 		71AD29A61EE85F6579B1E668 /* ListenersSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD26A35DFE11EE996E629B /* ListenersSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD29A859655E4F757B0B04 /* FunctionsList.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD28A639C48C998EF07670 /* FunctionsList.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD29CDFE16BF042E268C55 /* MidiTrack.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD21366B3DB9FB2DDD10CB /* MidiTrack.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		71AD29D70BFBEB149807B14F /* PortAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD26510E43A804E401A178 /* PortAudioPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD29EE4E3E33D464C674DD /* PitchDuration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2F8E9DB0340EEF8E5551 /* PitchDuration.cpp */; };
 		71AD29F2433AE33E6819229A /* DecodedTrack.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2C6157EC8C243B56D626 /* DecodedTrack.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2A123DD2A219B5DAFC48 /* VocalPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD284C1B557C8A1A303283 /* VocalPart.cpp */; };
@@ -179,7 +175,6 @@
 		71AD2C98FB86C6EDEA4CBD56 /* Rewinder.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD21D71D18F1E4B8499E64 /* Rewinder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2C9BF46F611460B27153 /* Executors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD21AC540E7A81DE11B940 /* Executors.cpp */; };
 		71AD2CA81E32340CD7064D6C /* MidiFileReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2127BA2CABB62C05552A /* MidiFileReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		71AD2CAEAB4A095573DC1EA8 /* PortAudioUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2C798A127824B65DDF44 /* PortAudioUtils.cpp */; };
 		71AD2CBC3EC386F36315A268 /* nanovg_mtl.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AD22A4AEEAB7D48F089AFD /* nanovg_mtl.m */; };
 		71AD2CDC0CF7D9F2BC59160B /* PeriodicallySleepingBackgroundTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2FF2194C1B9EF33E4F93 /* PeriodicallySleepingBackgroundTask.cpp */; };
 		71AD2CEF8F1B5108E74E611F /* Line.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD22AD99429ABB7581539F /* Line.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -198,7 +193,6 @@
 		71AD2E29ED0C0070CEDA61F9 /* ZipFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD25B20FC08B87125506D6 /* ZipFile.h */; };
 		71AD2E347B27203430EE4485 /* Maps.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD22681AC572B2799F6483 /* Maps.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2E38E871FD91E2383B2A /* audiodecodercoreaudio_mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD29C6287FB817B5159A31 /* audiodecodercoreaudio_mac.cpp */; };
-		71AD2E568E96BB768B67DAA6 /* PortAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD260D0BBDC79636A85DE3 /* PortAudioPlayer.cpp */; };
 		71AD2E71637EDE5162582640 /* NvgDrawer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2F86E4F78B08336152A6 /* NvgDrawer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2E8998A6828E9C169C0D /* SfzFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD25AE7BC536A7ECD50D06 /* SfzFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2EAADC789DC169663BE7 /* SfzSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2872971B5679D300420E /* SfzSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -250,29 +244,38 @@
 		C9FFF0AC84247BCF8F6600D5 /* F#3vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFED6C10BBE39AE96DD8D /* F#3vL.wav */; };
 		C9FFF12B52932EDE6AF4B9FA /* C2vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFFAE3565C7594BC72B92 /* C2vL.wav */; };
 		C9FFF15A808AE8663AE8C7DB /* D#6vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF0CCC29EF18ADF7CDCB7 /* D#6vL.wav */; };
+		C9FFF198252F5F8719F0117F /* AudioOutputWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF0F1342469A70FAF3768 /* AudioOutputWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF1FFF19B396DAB23801E /* PlaybackData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFEA213247298F347ED90 /* PlaybackData.cpp */; };
 		C9FFF2B7C09B4F1C90AD00A0 /* F#6vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF51E467A94329EF39AA1 /* F#6vL.wav */; };
 		C9FFF2BE1FA31B2C410F3129 /* D#2vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF3069C97AF2EAA6B7CFE /* D#2vL.wav */; };
 		C9FFF30BC00BFE2B10577C42 /* F#2vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF7112499A420B8CA87D1 /* F#2vL.wav */; };
+		C9FFF31C9088A64AFBFF09D5 /* AudioToolboxUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD768C89C1B8FF44E58D /* AudioToolboxUtils.cpp */; };
 		C9FFF329224F386056046F39 /* C4vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF7E998999691294C7913 /* C4vL.wav */; };
+		C9FFF330A1F8BB02610963C1 /* AudioToolboxUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF019334CAB088EC54E4C /* AudioToolboxUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF33400B7B65A7282367E /* C3vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF3464A320A47B8481F15 /* C3vL.wav */; };
 		C9FFF427A0226D7D653B1322 /* D#1vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFB7436D833AE12BB7428 /* D#1vL.wav */; };
+		C9FFF432A91EA87AF70D3E34 /* AudioToolboxQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF12C8D3F0F8AA81C2E06 /* AudioToolboxQueue.cpp */; };
 		C9FFF4E8D5F20543F1DE04E4 /* C5vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFEEBC432B387AA4B95E7 /* C5vL.wav */; };
 		C9FFF4FF967890F0B8D4F59F /* C6vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF83CBE4963E385E2E422 /* C6vL.wav */; };
 		C9FFF57BA02D786A26B6D7BB /* A5vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF2C9436D837BD97751AA /* A5vL.wav */; };
 		C9FFF5B142D160E96C1EA73C /* A7vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFB2BB54C4A3B47467E77 /* A7vL.wav */; };
+		C9FFF675D2225261112A0C5D /* AudioStreamDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC90367A8ADD207F39D9 /* AudioStreamDescription.cpp */; };
+		C9FFF6A17B42F47EF36B64D2 /* AudioToolboxInputReader.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF2649FE180FAB5FE4553 /* AudioToolboxInputReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF6B099003B07FCBB25BC /* C7vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF0B0D072D863661F28D9 /* C7vL.wav */; };
 		C9FFF6E7DA9E066482829782 /* C8vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF9D82C4D660D7FE97259 /* C8vL.wav */; };
 		C9FFF7444536578104634E16 /* F#1vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF49E2E85F780A9AEC5AE /* F#1vL.wav */; };
 		C9FFF76D1BCBB05AA991E349 /* D#7vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFA7A71977FC73F08C461 /* D#7vL.wav */; };
+		C9FFF770DFE89C133F8AFDEF /* AudioToolboxQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF0A451D05327E2DE59B8 /* AudioToolboxQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF7ACF60680A1E4A317AA /* F#7vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF709CBEFCF8F5E9949E3 /* F#7vL.wav */; };
 		C9FFF8039D5FBBAF18F3783C /* AudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF93B13F01C590643A6A7 /* AudioPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF85ED89B5750C0FC5ADA /* D#5vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFE2601EC836796D25F73 /* D#5vL.wav */; };
 		C9FFF889A162381CA1D7213A /* D#4vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFBC5F89C8F29361990E2 /* D#4vL.wav */; };
+		C9FFF8B9EE16D7402AC98823 /* AudioToolboxInputReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFBA07A1480342A9F451A /* AudioToolboxInputReader.cpp */; };
 		C9FFF95B741E0D318B598368 /* FixedSizeObjectPool.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFFED99F0A661C0C7CDFE /* FixedSizeObjectPool.h */; };
 		C9FFF994FFA7992364AF80BB /* AudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF1D4D58FBFDE258E3441 /* AudioPlayer.cpp */; };
 		C9FFF9AA159603162815E383 /* A6vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFEE2F56D5CCB9378EFFB /* A6vL.wav */; };
 		C9FFFA04C5039300D4347389 /* A1vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF4553C50C7EB14C0B514 /* A1vL.wav */; };
+		C9FFFA3C45A3CDFF274CC955 /* AudioStreamDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF8CF418998FD71DEF3A7 /* AudioStreamDescription.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFFAE84ED097CB4521782D /* SfzRegion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA8E492E4ACAD82DF944 /* SfzRegion.cpp */; };
 		C9FFFB9ADFF2D62E247BD58F /* MouseClickChecker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8557DD0DA640840A097 /* MouseClickChecker.cpp */; };
 		C9FFFC3DFC034BD5701BA85C /* SfzFileProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF1C1C631A1D447973D07 /* SfzFileProvider.mm */; };
@@ -285,6 +288,7 @@
 		C9FFFE2DDD602690E1C53FB3 /* A4vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF36F3E2C63DD9FCFA229 /* A4vL.wav */; };
 		C9FFFEB7B645150428CFEF49 /* MouseClickChecker.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFC6D1098747848058E71 /* MouseClickChecker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFFEE048BA7FD334459541 /* C1vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF9BD386740812CDFD1F9 /* C1vL.wav */; };
+		C9FFFF592537E9B9296C585E /* AudioToolboxOutputWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6CECF83E94F19796312 /* AudioToolboxOutputWriter.cpp */; };
 		C9FFFF9C52CF84B487AE1A98 /* A3vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF232394F9A1F84DABCD7 /* A3vL.wav */; };
 /* End PBXBuildFile section */
 
@@ -302,7 +306,7 @@
 
 /* Begin PBXFileReference section */
 		71AD200521649A156A2F0149 /* BoundsSelectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoundsSelectionController.h; sourceTree = "<group>"; };
-		71AD200C605140EAB4684FC9 /* PrepareFailedException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PrepareFailedException.cpp; sourceTree = "<group>"; };
+		71AD200C605140EAB4684FC9 /* AudioOperationFailedException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioOperationFailedException.cpp; sourceTree = "<group>"; };
 		71AD2029CD71A9EC26251309 /* MidiFileReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiFileReader.cpp; sourceTree = "<group>"; };
 		71AD202CC662584B2F399D12 /* OperationCanceler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OperationCanceler.cpp; sourceTree = "<group>"; };
 		71AD20553D4D95B50697DC50 /* MidiFileReaderException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiFileReaderException.h; sourceTree = "<group>"; };
@@ -319,7 +323,7 @@
 		71AD210FFC8DF292438CA6E0 /* VocalTrainerFilePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VocalTrainerFilePlayer.h; sourceTree = "<group>"; };
 		71AD2127BA2CABB62C05552A /* MidiFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiFileReader.h; sourceTree = "<group>"; };
 		71AD21366B3DB9FB2DDD10CB /* MidiTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiTrack.h; sourceTree = "<group>"; };
-		71AD215113A75359CC5E2E70 /* PrepareFailedException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrepareFailedException.h; sourceTree = "<group>"; };
+		71AD215113A75359CC5E2E70 /* AudioOperationFailedException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioOperationFailedException.h; sourceTree = "<group>"; };
 		71AD216006F16B88040C0712 /* MetronomeAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetronomeAudioPlayer.h; sourceTree = "<group>"; };
 		71AD21892999775A135F276A /* PitchDuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchDuration.h; sourceTree = "<group>"; };
 		71AD21AC540E7A81DE11B940 /* Executors.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Executors.cpp; sourceTree = "<group>"; };
@@ -372,11 +376,9 @@
 		71AD25D28AB6980DB6AD54FE /* NotImplementedAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotImplementedAssert.h; sourceTree = "<group>"; };
 		71AD25DBEBB7D907CB04B84B /* PitchInputReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchInputReader.h; sourceTree = "<group>"; };
 		71AD25E0CF7A5E97BF4CB17C /* Color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Color.cpp; sourceTree = "<group>"; };
-		71AD260D0BBDC79636A85DE3 /* PortAudioPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PortAudioPlayer.cpp; sourceTree = "<group>"; };
 		71AD26179700FDC84158D199 /* AudioInputManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioInputManager.cpp; sourceTree = "<group>"; };
 		71AD261D970249A90BDAE248 /* MidiMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiMessage.h; sourceTree = "<group>"; };
 		71AD2636B9DE49D31F43C412 /* libSoundTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSoundTouch.a; sourceTree = "<group>"; };
-		71AD26510E43A804E401A178 /* PortAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PortAudioPlayer.h; sourceTree = "<group>"; };
 		71AD26A35DFE11EE996E629B /* ListenersSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListenersSet.h; sourceTree = "<group>"; };
 		71AD26B2BEC5BEE09F688699 /* BaseRawPcmAudioDataPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseRawPcmAudioDataPlayer.cpp; sourceTree = "<group>"; };
 		71AD26B5599DB53B728689DA /* px_mixer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = px_mixer.c; sourceTree = "<group>"; };
@@ -388,15 +390,12 @@
 		71AD26E37576200389619E0A /* VxFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VxFile.cpp; sourceTree = "<group>"; };
 		71AD26E5BB21F5F5A870F2E5 /* PeriodicallySleepingBackgroundTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeriodicallySleepingBackgroundTask.h; sourceTree = "<group>"; };
 		71AD26ECA1B1BB6ED2DE86D9 /* Primitives.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Primitives.h; sourceTree = "<group>"; };
-		71AD26F41B89115672775BC0 /* PortAudioInputReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PortAudioInputReader.cpp; sourceTree = "<group>"; };
 		71AD2707F4246BE482E7459A /* VxFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VxFile.h; sourceTree = "<group>"; };
 		71AD2714D4031485B4BFC649 /* CountAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountAssert.h; sourceTree = "<group>"; };
 		71AD27255263181A5AA81BB7 /* Rect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rect.h; sourceTree = "<group>"; };
 		71AD272A33B932D76B466FBD /* CallbacksQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallbacksQueue.h; sourceTree = "<group>"; };
-		71AD27516738520757942B22 /* PortAudioInputReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PortAudioInputReader.h; sourceTree = "<group>"; };
 		71AD276486F3E97C8F0A03AF /* Binasc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Binasc.h; sourceTree = "<group>"; };
 		71AD27AA2ADCE4B94FB43C3F /* stlassert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stlassert.h; sourceTree = "<group>"; };
-		71AD27B5B5F9B983712E41FA /* PortAudioUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PortAudioUtils.h; sourceTree = "<group>"; };
 		71AD27D731E6BDBC7BD01782 /* Random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Random.h; sourceTree = "<group>"; };
 		71AD27EF95A75BE5F3F262FE /* px_mixer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = px_mixer.h; sourceTree = "<group>"; };
 		71AD27F0C180C52947B1B171 /* AudioInputPitchesRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioInputPitchesRecorder.h; sourceTree = "<group>"; };
@@ -460,7 +459,6 @@
 		71AD2C17A6DD7902CABC6911 /* AudioFilePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFilePlayer.h; sourceTree = "<group>"; };
 		71AD2C6157EC8C243B56D626 /* DecodedTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DecodedTrack.h; sourceTree = "<group>"; };
 		71AD2C73A80F48698DC31BB4 /* MathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathUtils.h; sourceTree = "<group>"; };
-		71AD2C798A127824B65DDF44 /* PortAudioUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PortAudioUtils.cpp; sourceTree = "<group>"; };
 		71AD2C7BF7FB96D16A8EF16C /* EnumMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumMap.h; sourceTree = "<group>"; };
 		71AD2C9D6872D12BA87CD4BC /* MainController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainController.cpp; sourceTree = "<group>"; };
 		71AD2CBED6FA1E08D2F2F940 /* DecodedTrack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DecodedTrack.cpp; sourceTree = "<group>"; };
@@ -535,12 +533,17 @@
 		ACF18AAC22EC74E9008E7DAA /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		ACF18AAE22EC7512008E7DAA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		ACF18AB622EC77D5008E7DAA /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		C9FFF019334CAB088EC54E4C /* AudioToolboxUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioToolboxUtils.h; sourceTree = "<group>"; };
 		C9FFF0846F1C05B1E364AA3D /* F#4vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "F#4vL.wav"; sourceTree = "<group>"; };
+		C9FFF0A451D05327E2DE59B8 /* AudioToolboxQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioToolboxQueue.h; sourceTree = "<group>"; };
 		C9FFF0B0D072D863661F28D9 /* C7vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = C7vL.wav; sourceTree = "<group>"; };
 		C9FFF0CCC29EF18ADF7CDCB7 /* D#6vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "D#6vL.wav"; sourceTree = "<group>"; };
+		C9FFF0F1342469A70FAF3768 /* AudioOutputWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioOutputWriter.h; sourceTree = "<group>"; };
+		C9FFF12C8D3F0F8AA81C2E06 /* AudioToolboxQueue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioToolboxQueue.cpp; sourceTree = "<group>"; };
 		C9FFF1C1C631A1D447973D07 /* SfzFileProvider.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SfzFileProvider.mm; sourceTree = "<group>"; };
 		C9FFF1D4D58FBFDE258E3441 /* AudioPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioPlayer.cpp; sourceTree = "<group>"; };
 		C9FFF232394F9A1F84DABCD7 /* A3vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = A3vL.wav; sourceTree = "<group>"; };
+		C9FFF2649FE180FAB5FE4553 /* AudioToolboxInputReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioToolboxInputReader.h; sourceTree = "<group>"; };
 		C9FFF2C9436D837BD97751AA /* A5vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = A5vL.wav; sourceTree = "<group>"; };
 		C9FFF3069C97AF2EAA6B7CFE /* D#2vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "D#2vL.wav"; sourceTree = "<group>"; };
 		C9FFF3464A320A47B8481F15 /* C3vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = C3vL.wav; sourceTree = "<group>"; };
@@ -548,6 +551,7 @@
 		C9FFF4553C50C7EB14C0B514 /* A1vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = A1vL.wav; sourceTree = "<group>"; };
 		C9FFF49E2E85F780A9AEC5AE /* F#1vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "F#1vL.wav"; sourceTree = "<group>"; };
 		C9FFF51E467A94329EF39AA1 /* F#6vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "F#6vL.wav"; sourceTree = "<group>"; };
+		C9FFF6CECF83E94F19796312 /* AudioToolboxOutputWriter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioToolboxOutputWriter.cpp; sourceTree = "<group>"; };
 		C9FFF709CBEFCF8F5E9949E3 /* F#7vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "F#7vL.wav"; sourceTree = "<group>"; };
 		C9FFF7112499A420B8CA87D1 /* F#2vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "F#2vL.wav"; sourceTree = "<group>"; };
 		C9FFF78D3C38A1C47882BA71 /* SfzFileProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SfzFileProvider.h; sourceTree = "<group>"; };
@@ -555,6 +559,7 @@
 		C9FFF7E998999691294C7913 /* C4vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = C4vL.wav; sourceTree = "<group>"; };
 		C9FFF83CBE4963E385E2E422 /* C6vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = C6vL.wav; sourceTree = "<group>"; };
 		C9FFF8557DD0DA640840A097 /* MouseClickChecker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MouseClickChecker.cpp; sourceTree = "<group>"; };
+		C9FFF8CF418998FD71DEF3A7 /* AudioStreamDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioStreamDescription.h; sourceTree = "<group>"; };
 		C9FFF92B31B2C77BAD62F0E1 /* D#3vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "D#3vL.wav"; sourceTree = "<group>"; };
 		C9FFF93B13F01C590643A6A7 /* AudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayer.h; sourceTree = "<group>"; };
 		C9FFF9BD386740812CDFD1F9 /* C1vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = C1vL.wav; sourceTree = "<group>"; };
@@ -564,8 +569,11 @@
 		C9FFFA8E492E4ACAD82DF944 /* SfzRegion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SfzRegion.cpp; sourceTree = "<group>"; };
 		C9FFFB2BB54C4A3B47467E77 /* A7vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = A7vL.wav; sourceTree = "<group>"; };
 		C9FFFB7436D833AE12BB7428 /* D#1vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "D#1vL.wav"; sourceTree = "<group>"; };
+		C9FFFBA07A1480342A9F451A /* AudioToolboxInputReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioToolboxInputReader.cpp; sourceTree = "<group>"; };
 		C9FFFBC5F89C8F29361990E2 /* D#4vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "D#4vL.wav"; sourceTree = "<group>"; };
 		C9FFFC6D1098747848058E71 /* MouseClickChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MouseClickChecker.h; sourceTree = "<group>"; };
+		C9FFFC90367A8ADD207F39D9 /* AudioStreamDescription.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioStreamDescription.cpp; sourceTree = "<group>"; };
+		C9FFFD768C89C1B8FF44E58D /* AudioToolboxUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioToolboxUtils.cpp; sourceTree = "<group>"; };
 		C9FFFE2601EC836796D25F73 /* D#5vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "D#5vL.wav"; sourceTree = "<group>"; };
 		C9FFFE26CDE1FC6E88447AC4 /* A2vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = A2vL.wav; sourceTree = "<group>"; };
 		C9FFFEA213247298F347ED90 /* PlaybackData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlaybackData.cpp; sourceTree = "<group>"; };
@@ -728,6 +736,7 @@
 			isa = PBXGroup;
 			children = (
 				71AD2673A22213546CF3BC15 /* Bridge */,
+				C9FFFD52E7269E3D5E65C31F /* AudioToolbox */,
 			);
 			path = Apple;
 			sourceTree = "<group>";
@@ -768,15 +777,11 @@
 		71AD25BD30CAFB342E49E96D /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				71AD26510E43A804E401A178 /* PortAudioPlayer.h */,
 				71AD20E6C3A255A4EF630588 /* PlaybackData.h */,
-				71AD260D0BBDC79636A85DE3 /* PortAudioPlayer.cpp */,
 				71AD226F0F6AD40B7F1DA0FD /* PlaybackBounds.h */,
-				71AD27B5B5F9B983712E41FA /* PortAudioUtils.h */,
 				71AD224683097BE5C42F6AD3 /* PlaybackBounds.cpp */,
-				71AD2C798A127824B65DDF44 /* PortAudioUtils.cpp */,
-				71AD215113A75359CC5E2E70 /* PrepareFailedException.h */,
-				71AD200C605140EAB4684FC9 /* PrepareFailedException.cpp */,
+				71AD215113A75359CC5E2E70 /* AudioOperationFailedException.h */,
+				71AD200C605140EAB4684FC9 /* AudioOperationFailedException.cpp */,
 				71AD2A794C2677296B79EB0E /* AudioPlayerWithDefaultSeekHandler.h */,
 				71AD207BE14EBF38979267BA /* AudioPlayerWithDefaultSeekHandler.cpp */,
 				71AD2A156EE8EB3830CB5A0B /* AudioData.h */,
@@ -788,6 +793,7 @@
 				C9FFF93B13F01C590643A6A7 /* AudioPlayer.h */,
 				C9FFF1D4D58FBFDE258E3441 /* AudioPlayer.cpp */,
 				C9FFFEA213247298F347ED90 /* PlaybackData.cpp */,
+				C9FFF5719AE060FE96476C14 /* Apple */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -929,9 +935,7 @@
 				71AD26C8E0202DA2AE962F86 /* AubioPitchDetector.cpp */,
 				71AD2941678BB40B5B475363 /* AudioInputRecorder.cpp */,
 				71AD2868ABD61AD7E92F8958 /* PitchesMutableList.cpp */,
-				71AD27516738520757942B22 /* PortAudioInputReader.h */,
 				71AD28522487D79AEC70DAAD /* SeekablePitchesList.cpp */,
-				71AD26F41B89115672775BC0 /* PortAudioInputReader.cpp */,
 				71AD27F0C180C52947B1B171 /* AudioInputPitchesRecorder.h */,
 				71AD25758139F4B8B31A4E97 /* AudioInputPitchesRecorder.cpp */,
 				71AD29E963BFE13E12D4B1E1 /* AudioAverageInputLevelMonitor.h */,
@@ -941,6 +945,8 @@
 				71AD253C5FA3B3B7EB7DDEB5 /* Portmixer */,
 				71AD2F8E9DB0340EEF8E5551 /* PitchDuration.cpp */,
 				71AD21892999775A135F276A /* PitchDuration.h */,
+				C9FFFBA07A1480342A9F451A /* AudioToolboxInputReader.cpp */,
+				C9FFF2649FE180FAB5FE4553 /* AudioToolboxInputReader.h */,
 			);
 			path = AudioInput;
 			sourceTree = "<group>";
@@ -1084,6 +1090,7 @@
 				71AD21E686A21FAF2930E6BB /* Apple */,
 				71AD2FCEDF32E8C2DFE0A2A3 /* zip */,
 				71AD27871EF838B555F025D5 /* SfzParser */,
+				C9FFF3AB121624CA70653E4B /* BaseAudio */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1118,6 +1125,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C9FFF203E1EF4E6ABDBE3490 /* Apple */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFFD768C89C1B8FF44E58D /* AudioToolboxUtils.cpp */,
+				C9FFF019334CAB088EC54E4C /* AudioToolboxUtils.h */,
+				C9FFF12C8D3F0F8AA81C2E06 /* AudioToolboxQueue.cpp */,
+				C9FFF0A451D05327E2DE59B8 /* AudioToolboxQueue.h */,
+			);
+			path = Apple;
+			sourceTree = "<group>";
+		};
 		C9FFF21303C741D2D15A040A /* Sfz */ = {
 			isa = PBXGroup;
 			children = (
@@ -1125,6 +1143,25 @@
 				C9FFF9083537AD9DAEA4D5FE /* samples */,
 			);
 			path = Sfz;
+			sourceTree = "<group>";
+		};
+		C9FFF3AB121624CA70653E4B /* BaseAudio */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFF203E1EF4E6ABDBE3490 /* Apple */,
+				C9FFFC90367A8ADD207F39D9 /* AudioStreamDescription.cpp */,
+				C9FFF8CF418998FD71DEF3A7 /* AudioStreamDescription.h */,
+			);
+			path = BaseAudio;
+			sourceTree = "<group>";
+		};
+		C9FFF5719AE060FE96476C14 /* Apple */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFF0F1342469A70FAF3768 /* AudioOutputWriter.h */,
+				C9FFF6CECF83E94F19796312 /* AudioToolboxOutputWriter.cpp */,
+			);
+			path = Apple;
 			sourceTree = "<group>";
 		};
 		C9FFF9083537AD9DAEA4D5FE /* samples */ = {
@@ -1163,6 +1200,13 @@
 			path = samples;
 			sourceTree = "<group>";
 		};
+		C9FFFD52E7269E3D5E65C31F /* AudioToolbox */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AudioToolbox;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1170,6 +1214,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9FFF6A17B42F47EF36B64D2 /* AudioToolboxInputReader.h in Headers */,
+				C9FFF198252F5F8719F0117F /* AudioOutputWriter.h in Headers */,
+				C9FFF330A1F8BB02610963C1 /* AudioToolboxUtils.h in Headers */,
+				C9FFFA3C45A3CDFF274CC955 /* AudioStreamDescription.h in Headers */,
+				C9FFF770DFE89C133F8AFDEF /* AudioToolboxQueue.h in Headers */,
 				71AD23A3EEC0645D7875B544 /* SfzSectionsParser.h in Headers */,
 				71AD2E8998A6828E9C169C0D /* SfzFile.h in Headers */,
 				71AD2346B1447ACA12DDACFB /* SfzRegion.h in Headers */,
@@ -1193,14 +1242,12 @@
 				71AD2C30E9A2CD0AC885DBBA /* AudioInputRecorder.h in Headers */,
 				71AD21CC9BBCC3CC2A8A28E0 /* PitchesMutableList.h in Headers */,
 				71AD261D431B9945FD3087C7 /* SeekablePitchesList.h in Headers */,
-				71AD24006338ADBC16FCC7AC /* PortAudioInputReader.h in Headers */,
 				71AD22A1906968592094FBDE /* AudioInputPitchesRecorder.h in Headers */,
 				71AD298CF3D4B222D17021E7 /* AudioAverageInputLevelMonitor.h in Headers */,
 				71AD2C805B929CF56308169D /* PitchDetectionSmoothingAudioBuffer.h in Headers */,
 				71AD2740F1AB3A19F6F1BBBC /* MainController.h in Headers */,
 				71AD251135D1A50EC0D8E6B0 /* VocalTrainerPlayerPrepareException.h in Headers */,
-				71AD29691DA1FB339FBF986C /* PortAudioUtils.h in Headers */,
-				71AD25760ACBBF82683D4964 /* PrepareFailedException.h in Headers */,
+				71AD25760ACBBF82683D4964 /* AudioOperationFailedException.h in Headers */,
 				71AD23B9EDD17997AE1C0118 /* AudioPlayerWithDefaultSeekHandler.h in Headers */,
 				71AD26992D0ACA986205B8F3 /* MidiNote.h in Headers */,
 				71AD29CDFE16BF042E268C55 /* MidiTrack.h in Headers */,
@@ -1266,7 +1313,6 @@
 				71AD2840EBECB2FE9D051ED9 /* ConcurrentModificationAssert.h in Headers */,
 				71AD25F46DC899D3760D0DFD /* PeriodicallySleepingBackgroundTask.h in Headers */,
 				71AD23541470EBA844832CD7 /* PlaybackData.h in Headers */,
-				71AD29D70BFBEB149807B14F /* PortAudioPlayer.h in Headers */,
 				71AD29426FB829B8982799EF /* VocalPartAudioPlayer.h in Headers */,
 				71AD224E4CC8B48D0689B661 /* LyricsInterval.h in Headers */,
 				71AD2680E83553583A3D3E77 /* LyricsPart.h in Headers */,
@@ -1459,7 +1505,6 @@
 				71AD21AA646AD2E01EA19C1D /* AudioInputRecorder.cpp in Sources */,
 				71AD24E126F8E19FE0D7BDD3 /* PitchesMutableList.cpp in Sources */,
 				71AD2C19DA1F6FC1BF2E248E /* SeekablePitchesList.cpp in Sources */,
-				71AD26CCB51222EA74B4B5E1 /* PortAudioInputReader.cpp in Sources */,
 				71AD2F35A22E486D4879C9AF /* AudioInputPitchesRecorder.cpp in Sources */,
 				71AD22866B4167C8EEDE9AD6 /* AudioAverageInputLevelMonitor.cpp in Sources */,
 				71AD28E4F71699223E0BA0D1 /* PitchDetectionSmoothingAudioBuffer.cpp in Sources */,
@@ -1481,10 +1526,8 @@
 				71AD243F08BD1F00E1D1A43A /* MvxFile.cpp in Sources */,
 				71AD251D3FF2D66C37D53BA4 /* VocalTrainerFilePlayer.cpp in Sources */,
 				71AD2992E77829583B8186CC /* VocalTrainerPlayerPrepareException.cpp in Sources */,
-				71AD2E568E96BB768B67DAA6 /* PortAudioPlayer.cpp in Sources */,
 				71AD26185A534A512D11E19B /* PlaybackBounds.cpp in Sources */,
-				71AD2CAEAB4A095573DC1EA8 /* PortAudioUtils.cpp in Sources */,
-				71AD287686DD051E07C39901 /* PrepareFailedException.cpp in Sources */,
+				71AD287686DD051E07C39901 /* AudioOperationFailedException.cpp in Sources */,
 				71AD24AF086DC7F70E3D5F38 /* AudioPlayerWithDefaultSeekHandler.cpp in Sources */,
 				71AD254B1524521B0ECC32BA /* MidiTrack.cpp in Sources */,
 				71AD26D291037A7AEF67EC3D /* Binasc.cpp in Sources */,
@@ -1537,6 +1580,11 @@
 				C9FFFC3DFC034BD5701BA85C /* SfzFileProvider.mm in Sources */,
 				C9FFF1FFF19B396DAB23801E /* PlaybackData.cpp in Sources */,
 				C9FFFAE84ED097CB4521782D /* SfzRegion.cpp in Sources */,
+				C9FFF8B9EE16D7402AC98823 /* AudioToolboxInputReader.cpp in Sources */,
+				C9FFFF592537E9B9296C585E /* AudioToolboxOutputWriter.cpp in Sources */,
+				C9FFF31C9088A64AFBFF09D5 /* AudioToolboxUtils.cpp in Sources */,
+				C9FFF675D2225261112A0C5D /* AudioStreamDescription.cpp in Sources */,
+				C9FFF432A91EA87AF70D3E34 /* AudioToolboxQueue.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,7 +19,7 @@
 #include <iostream>
 #include <memory>
 #include "PitchesMutableList.h"
-#include "PrepareFailedException.h"
+#include "AudioOperationFailedException.h"
 #include "SfzFileProvider.h"
 
 using namespace CppUtils;
@@ -129,7 +129,7 @@ void VocalTrainerFilePlayer::onComplete() {
 
 void VocalTrainerFilePlayer::pausePlayer(AudioPlayer *player) {
     Executors::ExecuteOnBackgroundThread([=] {
-        player->pauseSync();
+        player->pause();
         Executors::ExecuteOnMainThread([=] {
             if (--pauseRequestedCounter == 0) {
                 onPlaybackStopped();
@@ -222,19 +222,19 @@ void VocalTrainerFilePlayer::prepare() {
         if (instrumentalPlayer.getAudioData() != nullptr) {
             instrumentalPlayer.prepare();
         }
-    } catch (PrepareFailedException&) {
-        throw VocalTrainerPlayerPrepareException(VocalTrainerPlayerPrepareException::BROKEN_INSTRUMENTAL);
+    } catch (AudioOperationFailedException& e) {
+        throw VocalTrainerPlayerPrepareException(VocalTrainerPlayerPrepareException::BROKEN_INSTRUMENTAL, e.what());
     }
     try {
         vocalPartPianoPlayer.prepare();
-    } catch (PrepareFailedException&) {
-        throw VocalTrainerPlayerPrepareException(VocalTrainerPlayerPrepareException::BROKEN_VOCAL_PART);
+    } catch (AudioOperationFailedException& e) {
+        throw VocalTrainerPlayerPrepareException(VocalTrainerPlayerPrepareException::BROKEN_VOCAL_PART, e.what());
     }
     if (isRecording()) {
         try {
             recordingPlayer.prepare();
-        } catch (PrepareFailedException&) {
-            throw VocalTrainerPlayerPrepareException(VocalTrainerPlayerPrepareException::BROKEN_RECORDING);
+        } catch (AudioOperationFailedException& e) {
+            throw VocalTrainerPlayerPrepareException(VocalTrainerPlayerPrepareException::BROKEN_RECORDING, e.what());
         }
     }
 

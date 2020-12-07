@@ -6,11 +6,12 @@
 #define TEXTIMAGESGENERATOR_PREPAREFAILEDEXCEPTION_H
 
 #include <stdexcept>
+#include <string>
 
-class PrepareFailedException : public std::runtime_error {
+class AudioOperationFailedException : public std::runtime_error {
 public:
-    explicit PrepareFailedException(const std::string &string);
-    PrepareFailedException();
+    explicit AudioOperationFailedException(const std::string &string);
+    AudioOperationFailedException();
 };
 
 

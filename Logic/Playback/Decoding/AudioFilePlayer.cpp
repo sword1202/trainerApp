@@ -14,14 +14,14 @@ using std::endl;
 int AudioFilePlayer::readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) {
     int bufferSeekBefore = getBufferSeek();
 
-    if (audioDecoder->positionInSamples() != bufferSeekBefore * playbackData.numChannels) {
-        audioDecoder->seek(bufferSeekBefore * playbackData.numChannels);
-        assert (audioDecoder->positionInSamples() == bufferSeekBefore * playbackData.numChannels);
+    if (audioDecoder->positionInSamples() != bufferSeekBefore * playbackData.numberOfChannels) {
+        audioDecoder->seek(bufferSeekBefore * playbackData.numberOfChannels);
+        assert (audioDecoder->positionInSamples() == bufferSeekBefore * playbackData.numberOfChannels);
     }
 
-    int samplesCount = framesCount * playbackData.numChannels;
+    int samplesCount = framesCount * playbackData.numberOfChannels;
     int readFramesCount = audioDecoder->read(samplesCount, (short*)intoBuffer)
-            / playbackData.numChannels;
+            / playbackData.numberOfChannels;
     if (readFramesCount > 0) {
         moveBufferSeekIfNotChangedBefore(readFramesCount, bufferSeekBefore);
     }
@@ -33,10 +33,10 @@ void AudioFilePlayer::providePlaybackData(PlaybackData *playbackData) {
     assert(!audioDecoder);
     audioDecoder = AudioDecoder::create();
     audioDecoder->open(audioData);
-    playbackData->numChannels = audioDecoder->channels();
-    playbackData->format = paInt16;
-    playbackData->sampleRate = audioDecoder->sampleRate();
-    playbackData->framesPerBuffer = 256;
+    playbackData->numberOfChannels = static_cast<unsigned int>(audioDecoder->channels());
+    playbackData->bitsPerChannel = 16;
+    playbackData->sampleRate = static_cast<unsigned int>(audioDecoder->sampleRate());
+    playbackData->samplesPerBuffer = 256;
     playbackData->totalDurationInSeconds = audioDecoder->duration();
 }
 
@@ -52,7 +52,7 @@ void AudioFilePlayer::setAudioData(const AudioData* audioData) {
 }
 
 void AudioFilePlayer::destroy() {
-    PortAudioPlayer::destroy();
+    AudioPlayer::destroy();
     if (audioDecoder) {
         delete audioDecoder;
     }
