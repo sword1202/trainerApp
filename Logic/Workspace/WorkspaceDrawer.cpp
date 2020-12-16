@@ -393,7 +393,7 @@ float WorkspaceDrawer::drawPianoTrackAndCalculateHeight() {
 
     drawer->setFillColor(pianoTrackPitchesColor);
 
-    const auto& pitches = vocalPart->getPitches();
+    const auto& pitches = vocalPart->getNotes();
     for (const NoteInterval& vxPitch : pitches) {
         float pitchX = vxPitch.startTickNumber * tickSize;
         float pitchWidth = vxPitch.ticksCount * tickSize;

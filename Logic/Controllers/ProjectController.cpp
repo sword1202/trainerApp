@@ -56,7 +56,7 @@ ProjectController::ProjectController(ProjectControllerDelegate* delegate) : dele
     }, this);
 
     player->setInstrumentalVolume(1.0);
-    player->setVocalPartPianoVolume(0.5);
+    player->setVocalPartPianoVolume(2.0);
     audioInputManager->setOutputVolume(0.0);
 
     audioInputManager->getPitchDetectedListeners().addListener([=] (const Pitch& pitch, double) {

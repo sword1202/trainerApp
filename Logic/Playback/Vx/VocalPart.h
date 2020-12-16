@@ -15,14 +15,14 @@
 #include <iostream>
 
 class VocalPart {
-    std::vector<NoteInterval> pitches;
+    std::vector<NoteInterval> notes;
     double ticksPerSecond = 0;
     int durationInTicks = 0;
     int endSilenceDurationInTicks = 0;
     int lowestPitchIndex;
     int highestPitchIndex;
 
-    bool validatePitches();
+    bool validateNotes();
     void postInit();
 
     friend class boost::serialization::access;
@@ -30,13 +30,13 @@ class VocalPart {
     template<class Archive>
     void save(Archive & ar, const unsigned int version) const {
         ar & ticksPerSecond;
-        ar & pitches;
+        ar & notes;
         ar & endSilenceDurationInTicks;
     }
     template<class Archive>
     void load(Archive & ar, const unsigned int version) {
         ar & ticksPerSecond;
-        ar & pitches;
+        ar & notes;
         ar & endSilenceDurationInTicks;
         postInit();
     }
@@ -63,11 +63,11 @@ public:
     int samplesCountFromTicks(int ticks, int sampleRate) const;
     int ticksFromSamplesCount(int samplesCount, int sampleRate) const;
 
-    const std::vector<NoteInterval> &getPitches() const;
+    const std::vector<NoteInterval> &getNotes() const;
 
-    void setPitches(const std::vector<NoteInterval> &pitches);
+    void setNotes(const std::vector<NoteInterval> &pitches);
 
-    int getTicksPerSecond() const;
+    double getTicksPerSecond() const;
     int getDurationInTicks() const;
     int getEndSilenceDurationInTicks() const;
     const NoteInterval& getShortestPitch() const;
@@ -88,8 +88,8 @@ public:
     int getLowestPitchIndex() const;
     int getHighestPitchIndex() const;
 
-    const NoteInterval& getLowestVxPitch() const;
-    const NoteInterval& getHighestVxPitch() const;
+    const NoteInterval& getLowestNote() const;
+    const NoteInterval& getHighestNote() const;
 
     const Pitch& getLowestPitch() const;
     const Pitch& getHighestPitch() const;
@@ -102,7 +102,7 @@ public:
 
     template<typename Function>
     void iteratePitchesInTickRange(int startTick, int endTick, const Function& function) const {
-        for (const auto& pitch : pitches) {
+        for (const auto& pitch : notes) {
             if (pitch.intersectsWith(startTick, endTick)) {
                 function(pitch);
             }
@@ -111,8 +111,8 @@ public:
 
     template<typename Function>
     void iteratePitchesIndexesInTickRange(int startTick, int endTick, const Function& function) const {
-        for (int i = 0; i < pitches.size(); ++i) {
-            const NoteInterval& pitch = pitches[i];
+        for (int i = 0; i < notes.size(); ++i) {
+            const NoteInterval& pitch = notes[i];
             if (pitch.intersectsWith(startTick, endTick)) {
                 function(i);
             }

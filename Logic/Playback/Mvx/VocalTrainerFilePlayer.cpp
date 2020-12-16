@@ -20,7 +20,6 @@
 #include <memory>
 #include "PitchesMutableList.h"
 #include "AudioOperationFailedException.h"
-#include "SfzFileProvider.h"
 
 using namespace CppUtils;
 using std::cout;
@@ -29,7 +28,6 @@ using std::endl;
 constexpr int BEATS_IN_TACT = 4;
 
 VocalTrainerFilePlayer::VocalTrainerFilePlayer() : metronomeEnabled(false) {
-    vocalPartPianoPlayer.setSfz(SfzFileProvider::get());
 }
 
 void VocalTrainerFilePlayer::setSource(VocalTrainerFile *file, bool destroyFileOnDestructor) {

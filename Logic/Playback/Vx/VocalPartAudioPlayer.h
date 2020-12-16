@@ -7,57 +7,37 @@
 #define VOCALTRAINER_VXFILEAUDIOPLAYER_H
 
 #include "StlDebugUtils.h"
-#include "AudioPlayerWithDefaultSeekHandler.h"
+#include "AudioFilePlayer.h"
 #include "VocalPart.h"
-#include "SfzFile.h"
-#include "AudioData.h"
-#include "SoundTouch/SoundTouch.h"
-#include "FixedSizeObjectPool.h"
+#include "VocalPartAudioDataGenerator.h"
 #include "PeriodicallySleepingBackgroundTask.h"
 #include <atomic>
-#include <optional>
-#include <queue>
 
-class VocalPartAudioPlayer : public AudioPlayerWithDefaultSeekHandler {
+class VocalPartAudioPlayer : public BaseAudioPlayer {
+    VocalPartAudioDataGenerator* generator = nullptr;
     VocalPart originalVocalPart;
-    VocalPart vocalPart;
-    const SfzFile* sfz = nullptr;
-
-    struct PlayingPitch {
-        const SfzRegion* region;
-        int vocalPartPitchIndex;
-        int bufferSeek = 0;
-    };
-
-    std::vector<const short*> soundsToMix;
-    std::vector<int> soundsToMixSizes;
-    std::vector<float> tempFloatBuffer;
-    CppUtils::FixedSizeObjectPool<std::vector<short>> tempShortBufferPool;
-    std::vector<PlayingPitch> playingPitches;
-    std::mutex playingPitchesMutex;
-    std::mutex vocalPartMutex;
-    soundtouch::SoundTouch soundTouch;
-    int crossfadeSamplesCount;
-
-    PlayingPitch* findPlayingPitch(int vocalPartPitchIndex);
 protected:
-    void onTonalityChanged(int pitchShift) override;
-    void providePlaybackData(PlaybackData *playbackData) override;
     int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) override;
+    void providePlaybackData(PlaybackData *playbackData) override;
+    void onComplete() override;
+    int getBufferSeek() const override;
+    void onTonalityChanged(int pitchShift) override;
 
-    void onBufferSeekChanged(int seekBefore, int seekNow) override;
+    void destroy() override;
+
+private:
+    void setBufferSeek(int samplesCountSeek) override;
 
 public:
     VocalPartAudioPlayer();
     virtual ~VocalPartAudioPlayer();
 
     bool isPitchShiftingAvailable(int distance) const;
-    void setSfz(const SfzFile* sfz);
+
+public:
     void setTempoFactor(double tempoFactor) override;
     const VocalPart& getVocalPart() const;
     void setVocalPart(const VocalPart &vocalPart);
-
-    void addPitchWithIndexToMixingSounds(int framesCount, int index);
 };
 
 

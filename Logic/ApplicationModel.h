@@ -11,9 +11,10 @@
 class ApplicationModel {
     VocalTrainerFilePlayer* player;
     AudioInputManager* audioInputManager;
+    std::string getSfzFilePath() const;
 public:
     ApplicationModel();
-    static void init(ApplicationModel* instance);
+    static void init();
     static ApplicationModel* instance();
     VocalTrainerFilePlayer *getPlayer();
 

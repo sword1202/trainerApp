@@ -3,6 +3,7 @@
 #include "AudioUtils.h"
 #include "AudioOperationFailedException.h"
 #include <boost/assert.hpp>
+#include "MathUtils.h"
 
 using namespace CppUtils;
 using namespace std::placeholders;
@@ -23,7 +24,7 @@ void BaseAudioPlayer::writerCallback(void* outputBuffer, int samplesPerBuffer) {
     } else {
         if (volume == 0.0f) {
             memset(outputBuffer, 0, sampleSize * samplesCopiedToOutputBufferCount);
-        } else if (volume != 1.0f) {
+        } else if (volume < 1.0f) {
             int bufferSize = samplesCopiedToOutputBufferCount * playbackData.numberOfChannels;
             int bytesPerChannel = playbackData.getBytesPerChannel();
             switch (bytesPerChannel) {
@@ -40,6 +41,43 @@ void BaseAudioPlayer::writerCallback(void* outputBuffer, int samplesPerBuffer) {
                 case 4:
                     for (int i = 0; i < bufferSize; ++i) {
                         static_cast<int32_t*>(outputBuffer)[i] *= volume;
+                    }
+                    break;
+                default:
+                    throw std::runtime_error("Unsupported bytesPerChannel " + std::to_string(bytesPerChannel));
+            }
+        } else {
+            // handle overload
+            int bufferSize = samplesCopiedToOutputBufferCount * playbackData.numberOfChannels;
+            int bytesPerChannel = playbackData.getBytesPerChannel();
+
+            int lowLimit, highLimit;
+            switch (bytesPerChannel) {
+                case 1:
+                    lowLimit = std::numeric_limits<int8_t>::min();
+                    highLimit = std::numeric_limits<int8_t>::max();
+                    for (int i = 0; i < bufferSize; ++i) {
+                        int8_t* ptr = static_cast<int8_t*>(outputBuffer) + i;
+                        int newValue = Math::CutIfOutOfClosedRange(*ptr * volume, lowLimit, highLimit);
+                        *ptr = static_cast<int8_t>(newValue);
+                    }
+                    break;
+                case 2:
+                    lowLimit = std::numeric_limits<int16_t>::min();
+                    highLimit = std::numeric_limits<int16_t>::max();
+                    for (int i = 0; i < bufferSize; ++i) {
+                        int16_t* ptr = static_cast<int16_t*>(outputBuffer) + i;
+                        int newValue = Math::CutIfOutOfClosedRange(*ptr * volume, lowLimit, highLimit);
+                        *ptr = static_cast<int16_t>(newValue);
+                    }
+                    break;
+                case 4:
+                    lowLimit = std::numeric_limits<int32_t>::min();
+                    highLimit = std::numeric_limits<int32_t>::max();
+                    for (int i = 0; i < bufferSize; ++i) {
+                        int32_t* ptr = static_cast<int32_t*>(outputBuffer) + i;
+                        int newValue = Math::CutIfOutOfClosedRange(*ptr * volume, lowLimit, highLimit);
+                        *ptr = static_cast<int32_t>(newValue);
                     }
                     break;
                 default:
@@ -174,7 +212,7 @@ float BaseAudioPlayer::getVolume() const {
 }
 
 void BaseAudioPlayer::setVolume(float volume) {
-    BOOST_ASSERT(volume >= 0.0f && volume <= 1.0f);
+    BOOST_ASSERT(volume >= 0.0f && volume <= 10.0f);
     this->volume = volume;
 }
 

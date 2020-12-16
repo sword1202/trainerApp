@@ -42,14 +42,14 @@ std::ostream& operator<<(std::ostream& os, const NoteInterval& pitch) {
 }
 
 VocalPart::VocalPart(std::vector<NoteInterval> &&pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, double ticksPerSecond)
-        : pitches(std::move(pitches)),
+        : notes(std::move(pitches)),
           ticksPerSecond(ticksPerSecond),
           endSilenceDurationInTicks(distanceInTicksBetweenLastPitchEndAndTrackEnd) {
     postInit();
 }
 
 VocalPart::VocalPart(const std::vector<NoteInterval> &pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, double ticksPerSecond)
-        : pitches(pitches),
+        : notes(pitches),
           ticksPerSecond(ticksPerSecond),
           endSilenceDurationInTicks(distanceInTicksBetweenLastPitchEndAndTrackEnd)
 {
@@ -66,19 +66,19 @@ double VocalPart::getTickDurationInSeconds() const {
     return 1.0 / (double) ticksPerSecond;
 }
 
-bool VocalPart::validatePitches() {
-    if (!pitches.empty()) {
-        if (pitches[0].startTickNumber < 0) {
+bool VocalPart::validateNotes() {
+    if (!notes.empty()) {
+        if (notes[0].startTickNumber < 0) {
             return false;
         }
         
-        if (pitches[0].ticksCount < 1) {
+        if (notes[0].ticksCount < 1) {
             return false;
         }
     }
     
-    for (int i = 1; i < pitches.size(); ++i) {
-        const NoteInterval &vxPitch = pitches[i];
+    for (int i = 1; i < notes.size(); ++i) {
+        const NoteInterval &vxPitch = notes[i];
         if (!vxPitch.pitch.hasPerfectFrequency()) {
             return false;
         }
@@ -92,18 +92,18 @@ bool VocalPart::validatePitches() {
 }
 
 void VocalPart::postInit() {
-    SortByKey(pitches, startTickNumberKeyProvider);
-    auto pair = FindMinMaxUsingKeyProvider(pitches, [](const NoteInterval& vxPitch) {
+    SortByKey(notes, startTickNumberKeyProvider);
+    auto pair = FindMinMaxUsingKeyProvider(notes, [](const NoteInterval& vxPitch) {
         return vxPitch.pitch.getPerfectFrequencyIndex();
     });
 
-    lowestPitchIndex = pair.first - pitches.begin();
-    highestPitchIndex = pair.second - pitches.begin();
+    lowestPitchIndex = static_cast<int>(pair.first - notes.begin());
+    highestPitchIndex = static_cast<int>(pair.second - notes.begin());
 
     BOOST_ASSERT(endSilenceDurationInTicks >= 0);
-    BOOST_ASSERT(validatePitches());
-    if (!pitches.empty()) {
-        auto lastPitchIter = MaxByKey(pitches, [] (const NoteInterval& vxPitch) {
+    BOOST_ASSERT(validateNotes());
+    if (!notes.empty()) {
+        auto lastPitchIter = MaxByKey(notes, [] (const NoteInterval& vxPitch) {
             return vxPitch.endTickNumber();
         });
         durationInTicks = lastPitchIter->endTickNumber() + endSilenceDurationInTicks;
@@ -114,11 +114,11 @@ double VocalPart::getDurationInSeconds() const {
     return getTickDurationInSeconds() * durationInTicks;
 }
 
-const std::vector<NoteInterval> &VocalPart::getPitches() const {
-    return pitches;
+const std::vector<NoteInterval> &VocalPart::getNotes() const {
+    return notes;
 }
 
-int VocalPart::getTicksPerSecond() const {
+double VocalPart::getTicksPerSecond() const {
     return ticksPerSecond;
 }
 
@@ -167,7 +167,7 @@ int VocalPart::startTickNumberKeyProvider(const NoteInterval &pitch) {
 }
 
 const NoteInterval &VocalPart::getShortestPitch() const {
-    return FindMinValueUsingKeyProvider(pitches, [](const NoteInterval& pitch) {
+    return FindMinValueUsingKeyProvider(notes, [](const NoteInterval& pitch) {
         return pitch.ticksCount;
     });
 }
@@ -176,19 +176,19 @@ VocalPart::VocalPart() {
 
 }
 
-void VocalPart::setPitches(const std::vector<NoteInterval> &pitches) {
-    VocalPart::pitches = pitches;
+void VocalPart::setNotes(const std::vector<NoteInterval> &pitches) {
+    VocalPart::notes = pitches;
     postInit();
 }
 
 bool VocalPart::canBeShifted(int distance) const {
-    return pitches[lowestPitchIndex].pitch.canBeShifted(distance) &&
-            pitches[highestPitchIndex].pitch.canBeShifted(distance);
+    return notes[lowestPitchIndex].pitch.canBeShifted(distance) &&
+            notes[highestPitchIndex].pitch.canBeShifted(distance);
 }
 
 void VocalPart::shift(int distance) {
     assert(canBeShifted(distance));
-    for (auto& pitch : pitches) {
+    for (auto& pitch : notes) {
         pitch.pitch.shift(distance);
     }
 }
@@ -200,34 +200,34 @@ VocalPart VocalPart::shifted(int distance) {
 }
 
 void VocalPart::removeSilenceSpaceFromBeginning() {
-    assert(!pitches.empty());
+    assert(!notes.empty());
 
-    int firstPitchStartTickNumber = pitches[0].startTickNumber;
-    for (auto& pitch : pitches) {
+    int firstPitchStartTickNumber = notes[0].startTickNumber;
+    for (auto& pitch : notes) {
         pitch.startTickNumber -= firstPitchStartTickNumber;
     }
 }
 
 bool VocalPart::hasPitchesInMoment(double time) const {
     int tick = timeInSecondsToTicks(time);
-    return Contains(pitches, [=] (const NoteInterval& pitch) {
+    return Contains(notes, [=] (const NoteInterval& pitch) {
         return pitch.containsTick(tick);
     });
 }
 
 bool VocalPart::hasPitchInMoment(double time, const Pitch &pitch) const {
     int tick = timeInSecondsToTicks(time);
-    return Contains(pitches, [=] (const NoteInterval& vxPitch) {
+    return Contains(notes, [=] (const NoteInterval& vxPitch) {
         return vxPitch.containsTick(tick) && vxPitch.pitch.getPerfectFrequencyIndex() == pitch.getPerfectFrequencyIndex();
     });
 }
 
 double VocalPart::getFirstPitchStartTime() const {
-    return ticksToSeconds(pitches.front().startTickNumber);
+    return ticksToSeconds(notes.front().startTickNumber);
 }
 
 VocalPart VocalPart::withChangedTempo(double tempoFactor) const {
-    return VocalPart(pitches, endSilenceDurationInTicks, (int)round(ticksPerSecond * tempoFactor));
+    return VocalPart(notes, endSilenceDurationInTicks, (int)round(ticksPerSecond * tempoFactor));
 }
 
 VocalPart VocalPart::cutOrExpand(double start, double end) {
@@ -247,7 +247,7 @@ VocalPart VocalPart::cutOrExpand(double start, double end) {
             newPitches.push_back(vxPitch);
         });
     } else {
-        newPitches = pitches;
+        newPitches = notes;
     }
 
     int distanceInTicksBetweenLastPitchEndAndTrackEnd = std::max(0,
@@ -264,22 +264,22 @@ int VocalPart::getHighestPitchIndex() const {
     return highestPitchIndex;
 }
 
-const NoteInterval& VocalPart::getLowestVxPitch() const {
+const NoteInterval& VocalPart::getLowestNote() const {
     assert(lowestPitchIndex >= 0);
-    return pitches[lowestPitchIndex];
+    return notes[lowestPitchIndex];
 }
 
-const NoteInterval& VocalPart::getHighestVxPitch() const {
+const NoteInterval& VocalPart::getHighestNote() const {
     assert(highestPitchIndex >= 0);
-    return pitches[highestPitchIndex];
+    return notes[highestPitchIndex];
 }
 
 const Pitch& VocalPart::getLowestPitch() const {
-    return getLowestVxPitch().pitch;
+    return getLowestNote().pitch;
 }
 
 const Pitch &VocalPart::getHighestPitch() const {
-    return getHighestVxPitch().pitch;
+    return getHighestNote().pitch;
 }
 
 bool VocalPart::isEmpty() const {
@@ -287,6 +287,6 @@ bool VocalPart::isEmpty() const {
 }
 
 double VocalPart::getPitchDuration(int index) const {
-    assert(index < pitches.size());
-    return ticksToSeconds(pitches[index].ticksCount);
+    assert(index < notes.size());
+    return ticksToSeconds(notes[index].ticksCount);
 }

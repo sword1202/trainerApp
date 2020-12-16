@@ -76,7 +76,7 @@ public:
     virtual bool isPrepared() const;
     virtual void pause();
 
-    // volume - [0.0, 1.0]
+    // volume - [0.0, 5.0], (1.0, 5.0] - overload
     virtual float getVolume() const;
     virtual void setVolume(float volume);
 
