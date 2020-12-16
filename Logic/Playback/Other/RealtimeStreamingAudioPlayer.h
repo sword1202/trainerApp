@@ -6,11 +6,11 @@
 #ifndef VOCALTRAINER_REALTIMEAUDIOPLAYER_H
 #define VOCALTRAINER_REALTIMEAUDIOPLAYER_H
 
-#include "PortAudioPlayer.h"
 #include <deque>
 #include <vector>
+#include "BaseAudioPlayer.h"
 
-class RealtimeStreamingAudioPlayer : public PortAudioPlayer {
+class RealtimeStreamingAudioPlayer : public BaseAudioPlayer {
 public:
     explicit RealtimeStreamingAudioPlayer(const PlaybackData& playbackData);
     void pushAudioData(const void* data, int size);

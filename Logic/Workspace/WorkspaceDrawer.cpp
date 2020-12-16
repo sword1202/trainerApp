@@ -393,7 +393,7 @@ float WorkspaceDrawer::drawPianoTrackAndCalculateHeight() {
 
     drawer->setFillColor(pianoTrackPitchesColor);
 
-    const auto& pitches = vocalPart->getPitches();
+    const auto& pitches = vocalPart->getNotes();
     for (const NoteInterval& vxPitch : pitches) {
         float pitchX = vxPitch.startTickNumber * tickSize;
         float pitchWidth = vxPitch.ticksCount * tickSize;
@@ -977,7 +977,7 @@ void WorkspaceDrawer::drawTracks() {
         drawer->translate(0, -ScrollBar::SCROLLBAR_WEIGHT);
     }
     float pianoTrackHeight = drawPianoTrackAndCalculateHeight();
-    captureClickEventsInTracksArea(pianoTrackHeight);
+    //captureClickEventsInTracksArea(pianoTrackHeight);
     drawInstrumentalTrack();
     if (horizontalScrollBarVisible) {
         drawer->translate(0, ScrollBar::SCROLLBAR_WEIGHT);

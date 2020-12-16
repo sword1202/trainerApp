@@ -4,8 +4,27 @@
 
 #include "VocalTrainerPlayerPrepareException.h"
 
-VocalTrainerPlayerPrepareException::VocalTrainerPlayerPrepareException(Reason reason) : reason(reason) {
-
+VocalTrainerPlayerPrepareException::VocalTrainerPlayerPrepareException(Reason reason, const std::string& description)
+: reason(reason), description(description) {
+    this->description = description.empty() ? "" : ": " + description;
+    const char* message;
+    switch (reason) {
+        case BROKEN_INSTRUMENTAL:
+            message = "Instrumental file is broken";
+            break;
+        case BROKEN_VOCAL_PART:
+            message = "Vocal part is broken";
+            break;
+        case BROKEN_RECORDING:
+            message = "Recording file is broken";
+            break;
+        case DIFFERENT_DURATIONS:
+            message = "Instrumental and vocal tracks have different durations";
+            break;
+        default:
+            message = "unknown error";
+    }
+    this->description = message + this->description;
 }
 
 VocalTrainerPlayerPrepareException::Reason VocalTrainerPlayerPrepareException::getReason() const {
@@ -13,16 +32,5 @@ VocalTrainerPlayerPrepareException::Reason VocalTrainerPlayerPrepareException::g
 }
 
 const char *VocalTrainerPlayerPrepareException::what() const noexcept {
-    switch (reason) {
-        case BROKEN_INSTRUMENTAL:
-            return "Instrumental file is broken";
-        case BROKEN_VOCAL_PART:
-            return "Vocal part is broken";
-        case BROKEN_RECORDING:
-            return "Recording file is broken";
-        case DIFFERENT_DURATIONS:
-            return "Instrumental and vocal tracks have different durations";
-        default:
-            return "unknown error";
-    }
+    return description.data();
 }

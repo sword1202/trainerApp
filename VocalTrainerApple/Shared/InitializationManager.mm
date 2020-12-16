@@ -13,8 +13,7 @@
 
 + (void)initializeApplicationIfNeed {
     if (ApplicationModel::instance() == nullptr) {
-        PortAudio::init();
-        ApplicationModel::init(new ApplicationModel());
+        ApplicationModel::init();
         auto* player = ApplicationModel::instance()->getPlayer();
         //player->setSource("/Users/semyontykhonenko/Desktop/Ария-Дай руку мне.mvx");
         player->setSource("/Users/semyon/drm.mvx");

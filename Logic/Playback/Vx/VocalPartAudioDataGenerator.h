@@ -9,34 +9,30 @@
 #include <vector>
 #include <mutex>
 
-#include "VocalPartAudioDataGeneratorConfig.h"
 #include "VocalPart.h"
-#include "tsf.h"
+#include "PlaybackData.h"
+#include "PitchRenderer.h"
 
 class VocalPartAudioDataGenerator {
     VocalPart vocalPart;
     mutable std::mutex vxFileMutex;
 
-    int outBufferSize;
     int seek = 0;
     mutable std::mutex seekMutex;
-    int sampleRate;
+    int pcmDataSamplesCount;
 
     std::vector<int> pitchesIndexes;
     std::vector<int> tempPitchIndexes;
     std::vector<int> difference;
 
-    int pcmDataSize = 0;
-
-    tsf* _tsf;
+    PlaybackData playbackData;
+    PitchRenderer* pitchRenderer;
 public:
-    VocalPartAudioDataGenerator();
-    VocalPartAudioDataGenerator(const VocalPart& vocalPart, const VocalPartAudioDataGeneratorConfig &config);
-    VocalPartAudioDataGenerator(const VocalPart& vocalPart);
+    VocalPartAudioDataGenerator(PitchRenderer* pitchRenderer);
+    void init(const PlaybackData &config);
     ~VocalPartAudioDataGenerator();
 
     int readNextSamplesBatch(short *intoBuffer, bool moveSeekAndFillWithZero = false);
-    std::vector<short> readAll();
     int getSeek() const;
     void setSeek(int seek);
 

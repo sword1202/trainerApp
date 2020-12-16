@@ -5,22 +5,30 @@
 
 #include <thread>
 #include "VocalPartAudioPlayer.h"
+#include "SfzPitchRenderer.h"
+
+constexpr int SAMPLES_PER_BUFFER = 256;
+constexpr int NUMBER_OF_CHANNELS = 2;
 
 int VocalPartAudioPlayer::readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) {
-    return generator->readNextSamplesBatch((short*)intoBuffer, getVolume() <= 0.00001f);
+    bool moveSeekAndFillWithZero = getVolume() <= 0.00001f;
+    return generator->readNextSamplesBatch((short*)intoBuffer, moveSeekAndFillWithZero);
 }
 
 void VocalPartAudioPlayer::providePlaybackData(PlaybackData *playbackData) {
-    playbackData->format = paInt16;
+    playbackData->samplesPerBuffer = SAMPLES_PER_BUFFER;
+    playbackData->numberOfChannels = NUMBER_OF_CHANNELS;
+    playbackData->sampleRate = 44100;
+    playbackData->numberOfChannels = NUMBER_OF_CHANNELS;
+
+    generator->init(*playbackData);
+    generator->resetVocalPart(originalVocalPart);
     playbackData->totalDurationInSeconds = generator->getDurationInSeconds();
-    playbackData->framesPerBuffer = generator->getOutBufferSize();
-    playbackData->sampleRate = generator->getSampleRate();
-    playbackData->numChannels = 1;
 }
 
 VocalPartAudioPlayer::VocalPartAudioPlayer() {
-    generator = new VocalPartAudioDataGenerator();
-    setPlayerName("VxFileAudioPlayer");
+    setPlayerName("VocalPartAudioPlayer");
+    generator = new VocalPartAudioDataGenerator(new SfzPitchRenderer());
 }
 
 int VocalPartAudioPlayer::getBufferSeek() const {
@@ -29,7 +37,7 @@ int VocalPartAudioPlayer::getBufferSeek() const {
 
 void VocalPartAudioPlayer::setBufferSeek(int samplesCountSeek) {
     generator->setSeek(samplesCountSeek);
-    PortAudioPlayer::setBufferSeek(samplesCountSeek);
+    BaseAudioPlayer::setBufferSeek(samplesCountSeek);
 }
 
 VocalPartAudioPlayer::~VocalPartAudioPlayer() {
@@ -37,7 +45,7 @@ VocalPartAudioPlayer::~VocalPartAudioPlayer() {
 }
 
 void VocalPartAudioPlayer::onComplete() {
-    PortAudioPlayer::onComplete();
+    BaseAudioPlayer::onComplete();
 }
 
 bool VocalPartAudioPlayer::isPitchShiftingAvailable(int distance) const {
@@ -51,7 +59,9 @@ const VocalPart &VocalPartAudioPlayer::getVocalPart() const {
 void VocalPartAudioPlayer::setVocalPart(const VocalPart &vocalPart) {
     destroy();
     originalVocalPart = vocalPart;
-    generator->resetVocalPart(vocalPart);
+    if (generator) {
+        generator->resetVocalPart(vocalPart);
+    }
 }
 
 void VocalPartAudioPlayer::setTempoFactor(double tempoFactor) {
@@ -59,7 +69,7 @@ void VocalPartAudioPlayer::setTempoFactor(double tempoFactor) {
         return;
     }
 
-    PortAudioPlayer::setTempoFactor(tempoFactor);
+    BaseAudioPlayer::setTempoFactor(tempoFactor);
     VocalPart vocalPart = originalVocalPart.withChangedTempo(tempoFactor);
     generator->setVocalPart(vocalPart);
 }
@@ -67,4 +77,8 @@ void VocalPartAudioPlayer::setTempoFactor(double tempoFactor) {
 void VocalPartAudioPlayer::onTonalityChanged(int value) {
     VocalPart vxFile = originalVocalPart.shifted(value);
     generator->setVocalPart(vxFile);
+}
+
+void VocalPartAudioPlayer::destroy() {
+    BaseAudioPlayer::destroy();
 }

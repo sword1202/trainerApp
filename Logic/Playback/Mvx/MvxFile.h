@@ -149,8 +149,6 @@ public:
 
     const std::map<double, int> &getRecordingTonalityChanges() const;
     void setRecordingTonalityChanges(const std::map<double, int> &recordingTonalityChanges);
-
-    std::string convertInstrumentalAndVocalTrackToWav(float vocalVolume = 0.5f) const;
 };
 
 

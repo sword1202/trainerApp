@@ -7,14 +7,14 @@
 #define VOCALTRAINER_VXFILEAUDIOPLAYER_H
 
 #include "StlDebugUtils.h"
-#include "PortAudioPlayer.h"
+#include "AudioFilePlayer.h"
 #include "VocalPart.h"
 #include "VocalPartAudioDataGenerator.h"
 #include "PeriodicallySleepingBackgroundTask.h"
 #include <atomic>
 
-class VocalPartAudioPlayer : public PortAudioPlayer {
-    VocalPartAudioDataGenerator* generator;
+class VocalPartAudioPlayer : public BaseAudioPlayer {
+    VocalPartAudioDataGenerator* generator = nullptr;
     VocalPart originalVocalPart;
 protected:
     int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) override;
@@ -22,6 +22,9 @@ protected:
     void onComplete() override;
     int getBufferSeek() const override;
     void onTonalityChanged(int pitchShift) override;
+
+    void destroy() override;
+
 private:
     void setBufferSeek(int samplesCountSeek) override;
 

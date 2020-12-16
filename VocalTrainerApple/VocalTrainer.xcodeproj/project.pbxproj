@@ -11,6 +11,7 @@
 		5482F424256E8C3800299548 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5482F423256E8C3800299548 /* ContentView.swift */; };
 		5482F426256E8C3900299548 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5482F425256E8C3900299548 /* Assets.xcassets */; };
 		5482F429256E8C3900299548 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5482F428256E8C3900299548 /* Preview Assets.xcassets */; };
+		5482F44C256E9A0100299548 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2EAAB39ED7617C96D30 /* Color.swift */; };
 		71AD21242278085DEBD45787 /* NSImage+Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2DEA9FC7B3F13CD06FF3 /* NSImage+Drawing.swift */; };
 		71AD2137071D834E915C2D44 /* HeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2AD0DC2A1BD1B9B058AA /* HeaderViewController.swift */; };
 		71AD221A602A44D64B950BFA /* ProjectWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD21C74A29AB6B2D6F7582 /* ProjectWindowController.swift */; };
@@ -45,13 +46,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5454909C2554014B00E8E7F2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 545490982554014B00E8E7F2 /* MvxGenerator.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5454908E2554014B00E8E7F2;
-			remoteInfo = MvxGenerator;
-		};
 		ACF18AE022EC7EBF008E7DAA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ACF18AC522EC7EBF008E7DAA /* Project object */;
@@ -111,6 +105,7 @@
 		ACF18AE522EC7EBF008E7DAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ACF18B0022EC8611008E7DAA /* Logic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Logic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF18B2422ECB97C008E7DAA /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
+		C9FFF2EAAB39ED7617C96D30 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		CBBB957AD6C6D1C202253CA9 /* Pods-VocalTrainer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VocalTrainer.debug.xcconfig"; path = "Target Support Files/Pods-VocalTrainer/Pods-VocalTrainer.debug.xcconfig"; sourceTree = "<group>"; };
 		E4182398962A0FCB5CFBD20F /* Pods-VocalTrainerMacOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VocalTrainerMacOS.release.xcconfig"; path = "Target Support Files/Pods-VocalTrainerMacOS/Pods-VocalTrainerMacOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -146,7 +141,6 @@
 		545490992554014B00E8E7F2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5454909D2554014B00E8E7F2 /* MvxGenerator */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -159,6 +153,7 @@
 				5482F425256E8C3900299548 /* Assets.xcassets */,
 				5482F42A256E8C3900299548 /* Info.plist */,
 				5482F427256E8C3900299548 /* Preview Content */,
+				C9FFF1C7086CF620F8B38795 /* Extensions */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -326,6 +321,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		C9FFF1C7086CF620F8B38795 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFF2EAAB39ED7617C96D30 /* Color.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		FAAA747C4DF5693877F41DFE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -441,16 +444,6 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXReferenceProxy section */
-		5454909D2554014B00E8E7F2 /* MvxGenerator */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = MvxGenerator;
-			remoteRef = 5454909C2554014B00E8E7F2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
-
 /* Begin PBXResourcesBuildPhase section */
 		5482F41D256E8C3800299548 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
@@ -526,6 +519,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5482F44C256E9A0100299548 /* Color.swift in Sources */,
 				5482F424256E8C3800299548 /* ContentView.swift in Sources */,
 				5482F422256E8C3800299548 /* VocalTrainerApp.swift in Sources */,
 			);

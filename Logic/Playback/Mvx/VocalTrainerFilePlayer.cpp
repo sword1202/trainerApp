@@ -19,7 +19,7 @@
 #include <iostream>
 #include <memory>
 #include "PitchesMutableList.h"
-#include "PrepareFailedException.h"
+#include "AudioOperationFailedException.h"
 
 using namespace CppUtils;
 using std::cout;
@@ -28,7 +28,6 @@ using std::endl;
 constexpr int BEATS_IN_TACT = 4;
 
 VocalTrainerFilePlayer::VocalTrainerFilePlayer() : metronomeEnabled(false) {
-
 }
 
 void VocalTrainerFilePlayer::setSource(VocalTrainerFile *file, bool destroyFileOnDestructor) {
@@ -61,7 +60,7 @@ void VocalTrainerFilePlayer::setSource(VocalTrainerFile *file, bool destroyFileO
         }
     }
 
-    PortAudioPlayer* mainPlayer = getMainPlayer();
+    BaseAudioPlayer* mainPlayer = getMainPlayer();
     mainPlayer->seekChangedListeners.clear();
     mainPlayer->onCompleteListeners.clear();
     mainPlayer->onPlaybackStartedListeners.clear();
@@ -126,9 +125,9 @@ void VocalTrainerFilePlayer::onComplete() {
     onCompleteListeners.executeAll();
 }
 
-void VocalTrainerFilePlayer::pausePlayer(PortAudioPlayer *player) {
+void VocalTrainerFilePlayer::pausePlayer(BaseAudioPlayer *player) {
     Executors::ExecuteOnBackgroundThread([=] {
-        player->pauseSync();
+        player->pause();
         Executors::ExecuteOnMainThread([=] {
             if (--pauseRequestedCounter == 0) {
                 onPlaybackStopped();
@@ -154,7 +153,7 @@ void VocalTrainerFilePlayer::play() {
     playRequestedListeners.executeAll();
     updateMetronomeVolume();
 
-    PortAudioPlayer* mainPlayer = getMainPlayer();
+    BaseAudioPlayer* mainPlayer = getMainPlayer();
     if (bounds) {
         double seekValue = mainPlayer->getSeek();
         if (!bounds.isInside(seekValue)) {
@@ -172,7 +171,7 @@ void VocalTrainerFilePlayer::play() {
         recordingPlayer.setSeek(seek);
     }
 
-    for (PortAudioPlayer* player : players) {
+    for (BaseAudioPlayer* player : players) {
         player->play();
     }
 }
@@ -221,19 +220,19 @@ void VocalTrainerFilePlayer::prepare() {
         if (instrumentalPlayer.getAudioData() != nullptr) {
             instrumentalPlayer.prepare();
         }
-    } catch (PrepareFailedException&) {
-        throw VocalTrainerPlayerPrepareException(VocalTrainerPlayerPrepareException::BROKEN_INSTRUMENTAL);
+    } catch (AudioOperationFailedException& e) {
+        throw VocalTrainerPlayerPrepareException(VocalTrainerPlayerPrepareException::BROKEN_INSTRUMENTAL, e.what());
     }
     try {
         vocalPartPianoPlayer.prepare();
-    } catch (PrepareFailedException&) {
-        throw VocalTrainerPlayerPrepareException(VocalTrainerPlayerPrepareException::BROKEN_VOCAL_PART);
+    } catch (AudioOperationFailedException& e) {
+        throw VocalTrainerPlayerPrepareException(VocalTrainerPlayerPrepareException::BROKEN_VOCAL_PART, e.what());
     }
     if (isRecording()) {
         try {
             recordingPlayer.prepare();
-        } catch (PrepareFailedException&) {
-            throw VocalTrainerPlayerPrepareException(VocalTrainerPlayerPrepareException::BROKEN_RECORDING);
+        } catch (AudioOperationFailedException& e) {
+            throw VocalTrainerPlayerPrepareException(VocalTrainerPlayerPrepareException::BROKEN_RECORDING, e.what());
         }
     }
 
@@ -454,7 +453,7 @@ const std::string& VocalTrainerFilePlayer::getLyricsTextForPart(int partIndex) c
     return file->getLyrics().getCurrentLyricsTextForPart(partIndex, seek);
 }
 
-const PortAudioPlayer &VocalTrainerFilePlayer::getInstrumentalPlayer() const {
+const BaseAudioPlayer & VocalTrainerFilePlayer::getInstrumentalPlayer() const {
     return instrumentalPlayer;
 }
 
@@ -475,10 +474,10 @@ void VocalTrainerFilePlayer::editLyrics(const std::function<void(Lyrics *lyrics)
     }
 }
 
-const PortAudioPlayer* VocalTrainerFilePlayer::getMainPlayer() const {
+const BaseAudioPlayer * VocalTrainerFilePlayer::getMainPlayer() const {
     return players.at(0);
 }
 
-PortAudioPlayer* VocalTrainerFilePlayer::getMainPlayer() {
+BaseAudioPlayer * VocalTrainerFilePlayer::getMainPlayer() {
     return players.at(0);
 }

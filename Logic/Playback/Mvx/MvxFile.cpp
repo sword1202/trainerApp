@@ -8,7 +8,6 @@
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include "audiodecoder.h"
-#include <VocalPartAudioDataGenerator.h>
 #include "StringUtils.h"
 #include "AudioUtils.h"
 
@@ -156,35 +155,6 @@ static std::vector<short> makeVocalMultiChannel(const std::vector<short>& vocal,
             result[i * channelsCount + channelIndex] = vocal[i];
         }
     }
-
-    return result;
-}
-
-std::string MvxFile::convertInstrumentalAndVocalTrackToWav(float vocalVolume) const {
-    DecodedTrack decoded = AudioDecoder::decodeAllIntoRawPcm(instrumental);
-    if (decoded.wavConfig.bitsPerChannel != sizeof(short) * 8) {
-        throw std::runtime_error("Unsupported instrumental bitsPerChannel");
-    }
-
-    VocalPartAudioDataGeneratorConfig config;
-    config.sampleRate = decoded.wavConfig.sampleRate;
-    VocalPartAudioDataGenerator generator(vocalPart, config);
-    std::vector<short> vocal = generator.readAll();
-    int numberOfChannels = decoded.wavConfig.numberOfChannels;
-    if (numberOfChannels >= 2) {
-        vocal = makeVocalMultiChannel(vocal, numberOfChannels);
-    }
-    
-    std::string result = WAVFile::addWavHeaderToRawPcmData<std::string>("", 0, decoded.wavConfig);
-    const short* instrumental = reinterpret_cast<const short *>(decoded.rawPcm.data());
-    int instrumentalSize = int(decoded.rawPcm.size()) / sizeof(short);
-    if (vocal.size() < instrumentalSize) {
-        vocal.resize(size_t(instrumentalSize), 0);
-    }
-    result.resize(WAVFile::DATA_POSITION + instrumentalSize * sizeof(short));
-
-    AudioUtils::Mix2Sounds(instrumental, vocal.data(), instrumentalSize,
-            (short *) (result.data() + WAVFile::DATA_POSITION), 1.0f, vocalVolume);
 
     return result;
 }

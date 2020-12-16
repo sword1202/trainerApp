@@ -5,14 +5,14 @@
 #ifndef VOCALTRAINER_PLAYBACKDATA_H
 #define VOCALTRAINER_PLAYBACKDATA_H
 
-#include "PortAudioUtils.h"
+#include "WAVFile.h"
+#include "AudioStreamDescription.h"
 
-struct PlaybackData {
-    int sampleRate = -1;
-    int framesPerBuffer = -1;
-    int numChannels = -1;
+struct PlaybackData : AudioStreamDescription {
     double totalDurationInSeconds = -1;
-    PaSampleFormat format = paInt16;
+
+    PlaybackData() = default;
+    PlaybackData(const WavConfig &wavConfig, int samplesPerBuffer);
 };
 
 

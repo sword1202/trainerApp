@@ -7,9 +7,9 @@
 #define VOCALTRAINER_AUDIOPLAYERWITHDEFAULTSEEKHANDLER_H
 
 
-#include "PortAudioPlayer.h"
+#include "BaseAudioPlayer.h"
 
-class AudioPlayerWithDefaultSeekHandler : public PortAudioPlayer {
+class AudioPlayerWithDefaultSeekHandler : public BaseAudioPlayer {
     int bufferSeek = 0;
     mutable std::mutex bufferSeekMutex;
 protected:
@@ -17,6 +17,7 @@ protected:
     void setBufferSeek(int bufferSeek) override;
     // handle a case, when seek is set from outside while audioDecoder is reading the data
     void moveBufferSeekIfNotChangedBefore(int moveBy, int seekBefore);
+    virtual void onBufferSeekChanged(int before, int now);
 };
 
 

@@ -8,7 +8,6 @@
 #include "AudioUtils.h"
 #include <iostream>
 #include "MemoryUtils.h"
-#include "LoadTsf.h"
 #include "Sets.h"
 #include "StringUtils.h"
 #include <iostream>
@@ -25,63 +24,58 @@ using std::endl;
 int VocalPartAudioDataGenerator::readNextSamplesBatch(short *intoBuffer, bool moveSeekAndFillWithZero) {
     assert(!vocalPart.isEmpty());
     int seek = getSeek();
-    int size = std::min(pcmDataSize - seek, outBufferSize);
+    int framesCount = std::min(pcmDataSamplesCount - seek, playbackData.samplesPerBuffer);
 
     if (!moveSeekAndFillWithZero) {
-        double startTime = GetSampleTimeInSeconds(seek, sampleRate);
-        double endTime = GetSampleTimeInSeconds(seek + size, sampleRate);
+        double startTime = GetSampleTimeInSeconds(seek, playbackData.sampleRate);
+        double endTime = GetSampleTimeInSeconds(seek + framesCount, playbackData.sampleRate);
 
-        VocalPart vxFile = getVocalPart();
+        const VocalPart& vocalPart = getVocalPart();
 
         tempPitchIndexes.clear();
-        vxFile.getPitchesIndexesInTimeRange(startTime, endTime, std::back_inserter(tempPitchIndexes));
+        vocalPart.getPitchesIndexesInTimeRange(startTime, endTime, std::back_inserter(tempPitchIndexes));
 
         difference.clear();
         Sets::Difference(pitchesIndexes, tempPitchIndexes, std::back_inserter(difference));
         for (int pitchIndex : difference) {
-            const Pitch& pitch = vxFile.getPitches()[pitchIndex].pitch;
-            tsf_note_off(_tsf, 0, pitch.getSoundFont2Index());
+            const Pitch& pitch = vocalPart.getNotes()[pitchIndex].pitch;
+            pitchRenderer->off(pitch);
         }
 
         difference.clear();
         Sets::Difference(tempPitchIndexes, pitchesIndexes, std::back_inserter(difference));
         for (int pitchIndex : difference) {
-            const Pitch& pitch = vxFile.getPitches()[pitchIndex].pitch;
-            tsf_note_on(_tsf, 0, pitch.getSoundFont2Index(), 1.0f);
+            const Pitch& pitch = vocalPart.getNotes()[pitchIndex].pitch;
+            pitchRenderer->on(pitch);
         }
 
-        tsf_render_short(_tsf, intoBuffer, size, 0);
+        pitchRenderer->render(intoBuffer, framesCount);
 
         pitchesIndexes = std::move(tempPitchIndexes);
     } else {
-        Memory::FillZero(intoBuffer, size);
+        Memory::FillZero(intoBuffer, framesCount * playbackData.numberOfChannels);
     }
 
     {
         SEEK_LOCK;
         if (seek == this->seek) {
-            this->seek += size;
+            this->seek += framesCount;
         }
     }
 
-    return size;
+    return framesCount;
 }
 
-VocalPartAudioDataGenerator::VocalPartAudioDataGenerator(const VocalPart& vocalPart, const VocalPartAudioDataGeneratorConfig &config)
-        : outBufferSize(config.outBufferSize), sampleRate(config.sampleRate) {
+VocalPartAudioDataGenerator::VocalPartAudioDataGenerator(PitchRenderer* pitchRenderer)
+        : pitchRenderer(pitchRenderer) {
     pitchesIndexes.reserve(10);
     tempPitchIndexes.reserve(10);
     difference.reserve(10);
-
-    _tsf = LoadTsf();
-    assert(_tsf);
-    tsf_set_output(_tsf, TSF_MONO, sampleRate, 0);
-    resetVocalPart(vocalPart);
 }
 
-VocalPartAudioDataGenerator::VocalPartAudioDataGenerator(const VocalPart& vocalPart) :
-VocalPartAudioDataGenerator(vocalPart, VocalPartAudioDataGeneratorConfig()) {
-
+void VocalPartAudioDataGenerator::init(const PlaybackData &config) {
+    this->playbackData = config;
+    pitchRenderer->init(config.sampleRate, config.numberOfChannels, config.samplesPerBuffer);
 }
 
 int VocalPartAudioDataGenerator::getSeek() const {
@@ -95,11 +89,11 @@ void VocalPartAudioDataGenerator::setSeek(int seek) {
 }
 
 int VocalPartAudioDataGenerator::getOutBufferSize() const {
-    return outBufferSize;
+    return playbackData.samplesPerBuffer * playbackData.numberOfChannels;
 }
 
 int VocalPartAudioDataGenerator::getSampleRate() const {
-    return sampleRate;
+    return playbackData.sampleRate;
 }
 
 double VocalPartAudioDataGenerator::getDurationInSeconds() const {
@@ -122,30 +116,11 @@ void VocalPartAudioDataGenerator::setVocalPart(const VocalPart &vocalPart) {
 void VocalPartAudioDataGenerator::resetVocalPart(const VocalPart &vocalPart) {
     setSeek(0);
     double durationInSeconds = vocalPart.getDurationInSeconds();
-    pcmDataSize = (int)ceil(durationInSeconds * sampleRate);
+    pcmDataSamplesCount = (int)ceil(durationInSeconds * playbackData.sampleRate);
     VXFILE_LOCK;
     this->vocalPart = vocalPart;
 }
 
 VocalPartAudioDataGenerator::~VocalPartAudioDataGenerator() {
-    tsf_close(_tsf);
-}
-
-std::vector<short> VocalPartAudioDataGenerator::readAll() {
-    assert(!vocalPart.isEmpty());
-    std::vector<short> result;
-    result.reserve(size_t(pcmDataSize));
-
-    std::vector<short> temp(static_cast<size_t>(outBufferSize));
-    int size = 0;
-    do {
-        size = readNextSamplesBatch(temp.data());
-        result.insert(result.end(), temp.begin(), temp.begin() + size);
-    } while (size == outBufferSize);
-
-    return result;
-}
-
-VocalPartAudioDataGenerator::VocalPartAudioDataGenerator() : VocalPartAudioDataGenerator(VocalPart()) {
-
+    delete pitchRenderer;
 }

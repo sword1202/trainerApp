@@ -6,7 +6,7 @@
 #ifndef VOCALTRAINER_AUDIOINPUTLEVELMONITOR_H
 #define VOCALTRAINER_AUDIOINPUTLEVELMONITOR_H
 
-#include "PortAudioInputReader.h"
+#include "AudioInputReader.h"
 
 class AudioAverageInputLevelMonitor {
 public:

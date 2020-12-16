@@ -11,21 +11,21 @@ TEST_CASE("VxFile parser test 1") {
     int beatsPerMinute;
     auto vocalPart = file.getVocalPart()
     REQUIRE(beatsPerMinute == 123);
-    REQUIRE(vocalPart.getPitches().size() == 3);
+    REQUIRE(vocalPart.getNotes().size() == 3);
 
     double beatsCount = 5.25;
     REQUIRE(Primitives::CompareFloatsUsingEpsilon(vocalPart.getDurationInSeconds(), beatsCount / beatsPerMinute * 60.0, 0.0001));
     REQUIRE(vocalPart.getDurationInTicks() == 21);
 
-    REQUIRE(vocalPart.getPitches().at(0).pitch.getPerfectFrequencyIndex() == Pitch("C5").getPerfectFrequencyIndex());
-    REQUIRE(vocalPart.getPitches().at(0).startTickNumber == 0);
-    REQUIRE(vocalPart.getPitches().at(0).ticksCount == 1);
+    REQUIRE(vocalPart.getNotes().at(0).pitch.getPerfectFrequencyIndex() == Pitch("C5").getPerfectFrequencyIndex());
+    REQUIRE(vocalPart.getNotes().at(0).startTickNumber == 0);
+    REQUIRE(vocalPart.getNotes().at(0).ticksCount == 1);
 
-    REQUIRE(vocalPart.getPitches().at(1).pitch.getPerfectFrequencyIndex() == Pitch("E#4").getPerfectFrequencyIndex());
-    REQUIRE(vocalPart.getPitches().at(1).startTickNumber == 2);
-    REQUIRE(vocalPart.getPitches().at(1).ticksCount == 16);
+    REQUIRE(vocalPart.getNotes().at(1).pitch.getPerfectFrequencyIndex() == Pitch("E#4").getPerfectFrequencyIndex());
+    REQUIRE(vocalPart.getNotes().at(1).startTickNumber == 2);
+    REQUIRE(vocalPart.getNotes().at(1).ticksCount == 16);
 
-    REQUIRE(vocalPart.getPitches().at(2).pitch.getPerfectFrequencyIndex() == Pitch("F4").getPerfectFrequencyIndex());
-    REQUIRE(vocalPart.getPitches().at(2).startTickNumber == 18);
-    REQUIRE(vocalPart.getPitches().at(2).ticksCount == 3);
+    REQUIRE(vocalPart.getNotes().at(2).pitch.getPerfectFrequencyIndex() == Pitch("F4").getPerfectFrequencyIndex());
+    REQUIRE(vocalPart.getNotes().at(2).startTickNumber == 18);
+    REQUIRE(vocalPart.getNotes().at(2).ticksCount == 3);
 }

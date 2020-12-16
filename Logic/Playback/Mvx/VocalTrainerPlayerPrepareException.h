@@ -6,6 +6,7 @@
 #define TEXTIMAGESGENERATOR_MVXPLAYERPREPAREEXCEPTION_H
 
 #include <exception>
+#include <string>
 
 class VocalTrainerPlayerPrepareException : public std::exception {
 public:
@@ -17,8 +18,9 @@ public:
     };
 private:
     Reason reason;
+    std::string description;
 public:
-    explicit VocalTrainerPlayerPrepareException(Reason reason);
+    explicit VocalTrainerPlayerPrepareException(Reason reason, const std::string& description = "");
     Reason getReason() const;
 
     const char *what() const noexcept override;

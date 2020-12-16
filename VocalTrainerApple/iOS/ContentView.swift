@@ -10,8 +10,17 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack(alignment: .leading) {
+            HStack {
+
+            }.frame(maxWidth: .infinity, maxHeight: 100).background(
+                    LinearGradient(gradient:
+                    Gradient(colors: [Color(hex: 0xC0D1FF), Color(hex: 0xCBC7F9)]),
+                            startPoint: .top,
+                            endPoint: .bottom)
+            )
+            Spacer()
+        }.frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
