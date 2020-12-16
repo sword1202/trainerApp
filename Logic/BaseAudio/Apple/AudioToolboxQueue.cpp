@@ -91,6 +91,7 @@ void AudioToolboxQueue::allocateBuffers(int bufferSizeInBytes, const AudioStream
                 &buffers[i]);
         AudioToolboxUtils::throwExceptionIfError(status);
         buffers[i]->mAudioDataByteSize = buffers[i]->mAudioDataBytesCapacity;
+        memset(buffers[i]->mAudioData, 0, buffers[i]->mAudioDataByteSize);
 
         status = AudioQueueEnqueueBuffer(queue,
                 buffers[i],
