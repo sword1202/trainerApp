@@ -7,7 +7,6 @@
 #define VOCALTRAINER_WORKSPACEDRAWER_H
 
 #include <atomic>
-#include <nanovg/nanovg.h>
 #include "Drawer.h"
 #include <array>
 #include "PitchesCollection.h"

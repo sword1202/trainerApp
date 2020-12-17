@@ -7,31 +7,11 @@
 
 #import "WorkspaceDrawerView.h"
 #import "MacOSWorkspaceDrawerResourcesProvider.h"
-#import <Logic/WorkspaceDrawer.h>
-#import <Logic/MetalNvgDrawer.h>
-#import <Logic/BaseMouseEventsReceiver.h>
-#import <Logic/ProjectControllerBridge.h>
-#import <Logic/ProjectControllerBridge.h>
 
 using namespace CppUtils;
 
 @implementation WorkspaceDrawerView {
-    WorkspaceDrawer* _workspaceDrawer;
-    BaseMouseEventsReceiver* _mouseEventsReceiver;
     NSTrackingArea *_trackingArea;
-    ProjectControllerBridge *_projectController;
-}
-
-- (instancetype)initWithCoder:(nonnull NSCoder *)coder {
-    self = [super initWithCoder:coder];
-    if (self) {
-        _workspaceDrawer = nullptr;
-        _mouseEventsReceiver = new BaseMouseEventsReceiver();
-        self.device = MTLCreateSystemDefaultDevice();
-        self.delegate = self;
-    }
-
-    return self;
 }
 
 - (void)updateTrackingAreas {
@@ -48,73 +28,24 @@ using namespace CppUtils;
     [self addTrackingArea:_trackingArea];
 }
 
-
-- (CAMetalLayer*)metalLayer {
-    return self.currentDrawable.layer;
-}
-
-- (void)mtkView:(nonnull MTKView *)view drawableSizeWillChange:(CGSize)size {
-    [self initWorkspaceDrawerIfNeed];
-    [self resizeWorkspaceDrawer:size];
-}
-
-- (BOOL)initWorkspaceDrawerIfNeed {
-    if (!_workspaceDrawer) {
-        Drawer* drawer = new MetalNvgDrawer((__bridge void *) self.metalLayer);
-
-#ifdef TARGET_OS_MAC
-        auto* resourcesProvider = new MacOSWorkspaceDrawerResourcesProvider();
-#else
-#error Define resourcesProvider
-#endif
-        _workspaceDrawer = new WorkspaceDrawer(drawer, _mouseEventsReceiver, resourcesProvider, [] {
-            // update workspace drawer automatically, nothing to do here
-        });
-
-        if (_projectController != nil) {
-            [_projectController setWorkspaceController:_workspaceDrawer];
-        }
-
-        return YES;
-    }
-
-    return NO;
-}
-
-- (void)resizeWorkspaceDrawer:(CGSize)size {
-    float devicePixelRatio = float(NSScreen.mainScreen.backingScaleFactor);
-    _workspaceDrawer->resize(float(size.width) / devicePixelRatio, float(size.height) / devicePixelRatio,
-            devicePixelRatio);
-}
-
-- (void)drawInMTKView:(nonnull MTKView *)view {
-    if ([self initWorkspaceDrawerIfNeed]) {
-        [self resizeWorkspaceDrawer:self.frame.size];
-    }
-
-    if (_projectController) {
-        _workspaceDrawer->draw();
-    }
-}
-
 - (void)mouseDown:(NSEvent *)event {
-    _mouseEventsReceiver->setLeftMouseDown(true);
+    self.mouseEventsReceiver->setLeftMouseDown(true);
     [self updateMouseLocation:event];
 }
 
 - (void)mouseUp:(NSEvent *)event {
-    _mouseEventsReceiver->setLeftMouseDown(false);
+    self.mouseEventsReceiver->setLeftMouseDown(false);
     [self updateMouseLocation:event];
 }
 
 
 - (void)rightMouseDown:(NSEvent *)event {
-    _mouseEventsReceiver->setRightMouseDown(true);
+    self.mouseEventsReceiver->setRightMouseDown(true);
     [self updateMouseLocation:event];
 }
 
 - (void)rightMouseUp:(NSEvent *)event {
-    _mouseEventsReceiver->setRightMouseDown(false);
+    self.mouseEventsReceiver->setRightMouseDown(false);
     [self updateMouseLocation:event];
 }
 
@@ -133,18 +64,11 @@ using namespace CppUtils;
 - (void)updateMouseLocation:(NSEvent *)event {
     NSPoint mouseLocation = [self convertPoint:[event locationInWindow] fromView:nil];
     mouseLocation.y = self.frame.size.height - mouseLocation.y;
-    _mouseEventsReceiver->setCurrentMousePosition(PointF(float(mouseLocation.x), float(mouseLocation.y)));
+    self.mouseEventsReceiver->setCurrentMousePosition(PointF(float(mouseLocation.x), float(mouseLocation.y)));
 }
 
-- (void)configure:(ProjectControllerBridge*)projectController {
-    _projectController = projectController;
-    if (_workspaceDrawer) {
-        [_projectController setWorkspaceController:_workspaceDrawer];
-    }
-}
-
-- (void)dealloc {
-    delete _workspaceDrawer;
+- (WorkspaceDrawerResourcesProvider *)createResourcesProvider {
+    return new MacOSWorkspaceDrawerResourcesProvider();
 }
 
 

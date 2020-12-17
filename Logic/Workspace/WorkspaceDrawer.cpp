@@ -352,7 +352,10 @@ void WorkspaceDrawer::drawInstrumentalTrack() {
 }
 
 void WorkspaceDrawer::drawInstrumentalTrackButton() {
-    assert(instrumentalTrackButtonImage != nullptr);
+    if (instrumentalTrackButtonImage == nullptr) {
+        return;
+    }
+
     float trackMiddle = height - INSTRUMENTAL_TRACK_BOTTOM_MARGIN - INSTRUMENTAL_TRACK_HEIGHT / 2.f;
     float y = trackMiddle - TRACK_BUTTON_HEIGHT / 2;
     drawer->drawImage(INSTRUMENTAL_TRACK_BUTTON_LEFT, y,
@@ -409,7 +412,10 @@ float WorkspaceDrawer::drawPianoTrackAndCalculateHeight() {
 }
 
 void WorkspaceDrawer::drawPianoTrackButton(float pianoTrackHeight) {
-    assert(pianoTrackButtonImage != nullptr);
+    if (pianoTrackButtonImage == nullptr) {
+        return;
+    }
+
     float trackMiddle = height - PIANO_TRACK_BOTTOM - pianoTrackHeight / 2.f;
     float y = trackMiddle - TRACK_BUTTON_HEIGHT / 2;
     drawer->drawImage(PIANO_TRACK_BUTTON_LEFT, y,
@@ -591,10 +597,12 @@ void WorkspaceDrawer::drawPlayHead(float x, float timeInSeconds) {
     drawer->setStrokeColor(playHeadColor);
     drawer->drawVerticalLine(x, YARD_STICK_HEIGHT, height);
 
+    if (!clockImage) {
+        return;
+    }
     // Draw clock above playhead
     float clockX = x - CLOCK_WIDTH / 2;
     float clockY = triangleY - CLOCK_HEIGHT;
-    assert(clockImage);
     drawer->drawImage(clockX, clockY, CLOCK_WIDTH, CLOCK_HEIGHT, clockImage);
 
     // Draw clock text
@@ -1007,7 +1015,8 @@ void WorkspaceDrawer::setBoundsSelectionEnabled(bool boundsSelectionEnabled) {
 
 void WorkspaceDrawer::initImages() {
     auto createImage = [&] (WorkspaceDrawerResourcesProvider::Image image, float width, float height) {
-        return drawer->createImage(resourcesProvider->createImageForName(image, RoundToInt(width), RoundToInt(height), devicePixelRatio));
+        return drawer->createImage(
+                resourcesProvider->createImageForName(image, RoundToInt(width), RoundToInt(height), devicePixelRatio));
     };
     playHeadTriangleImage = createImage(R(playHeadTriangle), PLAYHEAD_TRIANGLE_WIDTH, PLAYHEAD_TRIANGLE_HEIGHT);
     clockImage = createImage(R(clock), CLOCK_WIDTH, CLOCK_HEIGHT);
