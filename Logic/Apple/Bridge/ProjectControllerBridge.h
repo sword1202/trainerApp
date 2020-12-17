@@ -14,9 +14,7 @@
 - (void)addDelegate:(id<ProjectControllerBridgeDelegate>)delegate NS_SWIFT_NAME(add(delegate:));
 - (void)removeDelegate:(id<ProjectControllerBridgeDelegate>)delegate NS_SWIFT_NAME(remove(delegate:));
 
-#ifdef __cplusplus
 - (void)setWorkspaceController:(void*)workspaceController;
-#endif
 
 @property (readonly) NSString* artistName;
 @property (readonly) NSString* songTitle;

@@ -19,6 +19,7 @@
 		54ADDE86258BBDA000F1163F /* Logic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54ADDE85258BBDA000F1163F /* Logic.framework */; };
 		54ADDEAA258BCBF900F1163F /* InitializationManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 71AD29605A6EF90E1D9E2F98 /* InitializationManager.mm */; };
 		54ADDEAB258BCBF900F1163F /* InitializationManager.h in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2ACE3A195D54F918916A /* InitializationManager.h */; };
+		54ADDEC7258C0DC800F1163F /* BaseWorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8FE42466B28CAAB81B9 /* BaseWorkspaceDrawerView.mm */; };
 		71AD21242278085DEBD45787 /* NSImage+Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2DEA9FC7B3F13CD06FF3 /* NSImage+Drawing.swift */; };
 		71AD2137071D834E915C2D44 /* HeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2AD0DC2A1BD1B9B058AA /* HeaderViewController.swift */; };
 		71AD221A602A44D64B950BFA /* ProjectWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD21C74A29AB6B2D6F7582 /* ProjectWindowController.swift */; };
@@ -50,8 +51,6 @@
 		C9FFF0A6DC29C41C836A272F /* NSAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF75984620E90683329A9 /* NSAttributedString+Extensions.swift */; };
 		C9FFF1A61CC78731ED6EF231 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF774A22E8B2F85EA6664 /* Array+Extensions.swift */; };
 		C9FFF1CC35BFB853F799A067 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC52FFD52111E4F8EA1C /* CGPoint+Extensions.swift */; };
-		C9FFF1E34AFA522A191CF2F1 /* MacOSWorkspaceDrawerResourcesProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFDFAB4FE80258A6D53A9 /* MacOSWorkspaceDrawerResourcesProvider.mm */; };
-		C9FFF22FA3227FA4CDC2C3C5 /* WorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD2BA8DC11DDABEB46AE /* WorkspaceDrawerView.mm */; };
 		C9FFF36C6140C724632BAA67 /* Sequence+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF854128820437B780180 /* Sequence+Extensions.swift */; };
 		C9FFF3F713E181FA7B8210A4 /* CGRect+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFFAE7CC0D189849A9037 /* CGRect+Extensions.swift */; };
 		C9FFF68D7E7F115CA46D8B73 /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE40E57F82E0441136B6 /* UIView+Constraints.swift */; };
@@ -59,7 +58,9 @@
 		C9FFF92F2CAA4605DF8DFBC1 /* BaseWorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8FE42466B28CAAB81B9 /* BaseWorkspaceDrawerView.mm */; };
 		C9FFF9F48A6D816A30F0AE35 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2396E0BB5102967F5B2 /* UIView+Extensions.swift */; };
 		C9FFFAC7A9EEC42DB7900780 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD04B887D1AA905A010C /* Math.swift */; };
+		C9FFFB60BAB5296AE6F06BD9 /* WorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA03F8C9753204A48D4F /* WorkspaceDrawerView.mm */; };
 		C9FFFB7F402FBE74FC015F81 /* MacOSWorkspaceDrawerDelegateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFCA54695F1C745C71A9F /* MacOSWorkspaceDrawerDelegateHelper.swift */; };
+		C9FFFBF45045514B7285BF8A /* MacOSWorkspaceDrawerResourcesProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF5B9019937C01C72D703 /* MacOSWorkspaceDrawerResourcesProvider.mm */; };
 		C9FFFC357FB17DBCE0DA3B28 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6D026277BCE01AFF619 /* UIImage+Extensions.swift */; };
 		C9FFFC752DA482CBE97EB7E2 /* CGSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF72A1F66910885A40FE2 /* CGSize+Extensions.swift */; };
 		C9FFFE30D469382B52DBA18B /* CGContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF079046892811FDEB34E /* CGContext+Extensions.swift */; };
@@ -129,22 +130,22 @@
 		C9FFF2396E0BB5102967F5B2 /* UIView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF2EAAB39ED7617C96D30 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		C9FFF3402FB10ADCC44F05D8 /* iOSWorkspaceDrawerResourcesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSWorkspaceDrawerResourcesProvider.h; sourceTree = "<group>"; };
+		C9FFF3CF4F4C6C2BB99ABCD7 /* WorkspaceDrawerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceDrawerView.h; sourceTree = "<group>"; };
+		C9FFF4307F629035C6B49841 /* MacOSWorkspaceDrawerResourcesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacOSWorkspaceDrawerResourcesProvider.h; sourceTree = "<group>"; };
 		C9FFF56BA4C227BDD029B68D /* UILabel+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
+		C9FFF5B9019937C01C72D703 /* MacOSWorkspaceDrawerResourcesProvider.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MacOSWorkspaceDrawerResourcesProvider.mm; sourceTree = "<group>"; };
 		C9FFF6D026277BCE01AFF619 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF72A1F66910885A40FE2 /* CGSize+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGSize+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF75984620E90683329A9 /* NSAttributedString+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF774A22E8B2F85EA6664 /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
-		C9FFF78F1BB01FD6DB6110A7 /* MacOSWorkspaceDrawerResourcesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacOSWorkspaceDrawerResourcesProvider.h; sourceTree = "<group>"; };
 		C9FFF854128820437B780180 /* Sequence+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sequence+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF8FE42466B28CAAB81B9 /* BaseWorkspaceDrawerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BaseWorkspaceDrawerView.mm; sourceTree = "<group>"; };
+		C9FFFA03F8C9753204A48D4F /* WorkspaceDrawerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WorkspaceDrawerView.mm; sourceTree = "<group>"; };
 		C9FFFA377929BCD79ED71678 /* BaseWorkspaceDrawerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseWorkspaceDrawerView.h; sourceTree = "<group>"; };
-		C9FFFAB0C4240454654C5098 /* WorkspaceDrawerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceDrawerView.h; sourceTree = "<group>"; };
 		C9FFFB1987526EE43216966B /* iOS-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "iOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		C9FFFC52FFD52111E4F8EA1C /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFFCA54695F1C745C71A9F /* MacOSWorkspaceDrawerDelegateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacOSWorkspaceDrawerDelegateHelper.swift; sourceTree = "<group>"; };
 		C9FFFD04B887D1AA905A010C /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
-		C9FFFD2BA8DC11DDABEB46AE /* WorkspaceDrawerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WorkspaceDrawerView.mm; sourceTree = "<group>"; };
-		C9FFFDFAB4FE80258A6D53A9 /* MacOSWorkspaceDrawerResourcesProvider.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MacOSWorkspaceDrawerResourcesProvider.mm; sourceTree = "<group>"; };
 		C9FFFE302DCFBB0ABE54FB5D /* UIFont+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFFE40E57F82E0441136B6 /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		C9FFFE4F5AC0BB8DDAE24683 /* WorkspaceDrawerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WorkspaceDrawerView.mm; sourceTree = "<group>"; };
@@ -286,7 +287,7 @@
 				71AD2D9271E270F476840FA3 /* ConfigurableWithProjectController.swift */,
 				71AD2148A0A936CEF229EC25 /* Utils */,
 				C9FFFCA54695F1C745C71A9F /* MacOSWorkspaceDrawerDelegateHelper.swift */,
-				C9FFF4FC607BF1D49CC5BB69 /* Workspace */,
+				C9FFF07912A8FEBD875A11C7 /* Workspace */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -360,6 +361,17 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		C9FFF07912A8FEBD875A11C7 /* Workspace */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFF3CF4F4C6C2BB99ABCD7 /* WorkspaceDrawerView.h */,
+				C9FFFA03F8C9753204A48D4F /* WorkspaceDrawerView.mm */,
+				C9FFF4307F629035C6B49841 /* MacOSWorkspaceDrawerResourcesProvider.h */,
+				C9FFF5B9019937C01C72D703 /* MacOSWorkspaceDrawerResourcesProvider.mm */,
+			);
+			path = Workspace;
+			sourceTree = "<group>";
+		};
 		C9FFF161EC7B56BBE962C01E /* Workspace */ = {
 			isa = PBXGroup;
 			children = (
@@ -392,18 +404,6 @@
 			);
 			path = Extensions;
 			sourceTree = "<group>";
-		};
-		C9FFF4FC607BF1D49CC5BB69 /* Workspace */ = {
-			isa = PBXGroup;
-			children = (
-				C9FFFAB0C4240454654C5098 /* WorkspaceDrawerView.h */,
-				C9FFFD2BA8DC11DDABEB46AE /* WorkspaceDrawerView.mm */,
-				C9FFFDFAB4FE80258A6D53A9 /* MacOSWorkspaceDrawerResourcesProvider.mm */,
-				C9FFF78F1BB01FD6DB6110A7 /* MacOSWorkspaceDrawerResourcesProvider.h */,
-			);
-			name = Workspace;
-			path = MacOS/Workspace;
-			sourceTree = SOURCE_ROOT;
 		};
 		C9FFFD27BCD1504BBC7BE60A /* Workspace */ = {
 			isa = PBXGroup;
@@ -638,6 +638,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54ADDEC7258C0DC800F1163F /* BaseWorkspaceDrawerView.mm in Sources */,
 				ACF18AD122EC7EBF008E7DAA /* AppDelegate.swift in Sources */,
 				71AD27AD436983C0D551C6D6 /* ProjectViewController.swift in Sources */,
 				71AD221A602A44D64B950BFA /* ProjectWindowController.swift in Sources */,
@@ -661,8 +662,8 @@
 				71AD2B394396133A287AC5AD /* ColorView.swift in Sources */,
 				71AD231BA344CB7DFBBB38CF /* NSView+Extensions.swift in Sources */,
 				C9FFFB7F402FBE74FC015F81 /* MacOSWorkspaceDrawerDelegateHelper.swift in Sources */,
-				C9FFF22FA3227FA4CDC2C3C5 /* WorkspaceDrawerView.mm in Sources */,
-				C9FFF1E34AFA522A191CF2F1 /* MacOSWorkspaceDrawerResourcesProvider.mm in Sources */,
+				C9FFFB60BAB5296AE6F06BD9 /* WorkspaceDrawerView.mm in Sources */,
+				C9FFFBF45045514B7285BF8A /* MacOSWorkspaceDrawerResourcesProvider.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

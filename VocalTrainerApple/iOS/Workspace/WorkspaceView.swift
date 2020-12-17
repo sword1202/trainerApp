@@ -10,7 +10,11 @@ struct WorkspaceView : UIViewRepresentable {
     typealias UIViewType = WorkspaceDrawerView
 
     func makeUIView(context: Context) -> UIViewType {
-        WorkspaceDrawerView()
+        let view = WorkspaceDrawerView()
+        view.onWorkspaceControllerChanged = { [unowned view] in
+            ProjectController.shared.setWorkspaceController(view.workspaceController());
+        }
+        return view
     }
 
     func updateUIView(_ uiView: UIViewType, context: Context) {

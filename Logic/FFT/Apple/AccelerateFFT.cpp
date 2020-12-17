@@ -18,7 +18,7 @@ void AccelerateFFT::setup(int size) {
 }
 
 void AccelerateFFT::execute(std::vector<std::complex<float>> *inOutData, bool forward) {
-    assert(!fft && "call setup before execute");
+    assert(fft && "call setup before execute");
     size_t size = static_cast<size_t>(this->size);
     inOutData->resize(size);
     auto* ref = inOutData->data();

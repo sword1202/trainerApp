@@ -12,4 +12,5 @@
 @class ProjectControllerBridge;
 
 @interface WorkspaceDrawerView : BaseWorkspaceDrawerView
+
 @end

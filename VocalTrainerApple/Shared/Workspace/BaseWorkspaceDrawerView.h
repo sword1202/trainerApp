@@ -13,8 +13,8 @@
 @class ProjectControllerBridge;
 
 @interface BaseWorkspaceDrawerView : MTKView <MTKViewDelegate>
-- (void)configure:(ProjectControllerBridge*)projectController;
-
+@property void(^onWorkspaceControllerChanged)();
+- (void*)workspaceController;
 #ifdef  __cplusplus
 - (WorkspaceDrawerResourcesProvider*)createResourcesProvider;
 - (BaseMouseEventsReceiver*)mouseEventsReceiver;

@@ -6,24 +6,35 @@
 #import "BaseWorkspaceDrawerView.h"
 #import <Logic/WorkspaceDrawer.h>
 #import <Logic/MetalNvgDrawer.h>
-#import <Logic/BaseMouseEventsReceiver.h>
-#import <Logic/ProjectControllerBridge.h>
+#include "DefineAppleConditionals.h"
 
 using namespace CppUtils;
 
 @implementation BaseWorkspaceDrawerView {
     WorkspaceDrawer* _workspaceDrawer;
     BaseMouseEventsReceiver* _mouseEventsReceiver;
-    ProjectControllerBridge *_projectController;
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [self initMetal];
+    }
+
+    return self;
+}
+
+- (void)initMetal {
+    _workspaceDrawer = nullptr;
+    _mouseEventsReceiver = new BaseMouseEventsReceiver();
+    self.device = MTLCreateSystemDefaultDevice();
+    self.delegate = self;
 }
 
 - (instancetype)initWithCoder:(nonnull NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
-        _workspaceDrawer = nullptr;
-        _mouseEventsReceiver = new BaseMouseEventsReceiver();
-        self.device = MTLCreateSystemDefaultDevice();
-        self.delegate = self;
+        [self initMetal];
     }
 
     return self;
@@ -48,10 +59,7 @@ using namespace CppUtils;
         _workspaceDrawer = new WorkspaceDrawer(drawer, _mouseEventsReceiver, resourcesProvider, [] {
             // update workspace drawer automatically, nothing to do here
         });
-
-        if (_projectController != nil) {
-            [_projectController setWorkspaceController:_workspaceDrawer];
-        }
+        self.onWorkspaceControllerChanged();
 
         return YES;
     }
@@ -60,7 +68,12 @@ using namespace CppUtils;
 }
 
 - (void)resizeWorkspaceDrawer:(CGSize)size {
-    float devicePixelRatio = float(UIScreen.mainScreen.scale);
+    float devicePixelRatio =
+#ifdef HAS_UIKIT
+            float(UIScreen.mainScreen.scale);
+#else
+            float(NSScreen.mainScreen.backingScaleFactor);
+#endif
     _workspaceDrawer->resize(float(size.width) / devicePixelRatio, float(size.height) / devicePixelRatio,
             devicePixelRatio);
 }
@@ -70,17 +83,15 @@ using namespace CppUtils;
         [self resizeWorkspaceDrawer:self.frame.size];
     }
 
-    if (_projectController) {
+    if (_workspaceDrawer) {
         _workspaceDrawer->draw();
     }
 }
 
-- (void)configure:(ProjectControllerBridge*)projectController {
-    _projectController = projectController;
-    if (_workspaceDrawer) {
-        [_projectController setWorkspaceController:_workspaceDrawer];
-    }
+- (void *)workspaceController {
+    return _workspaceDrawer;
 }
+
 
 - (WorkspaceDrawerResourcesProvider*)createResourcesProvider {
     return nullptr;
