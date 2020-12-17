@@ -75,11 +75,311 @@
 		54338F25258A38F300C7D5E2 /* A0vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338F00258A38F200C7D5E2 /* A0vH.wav */; };
 		54338F26258A38F300C7D5E2 /* A3vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338F01258A38F200C7D5E2 /* A3vH.wav */; };
 		54338F27258A38F300C7D5E2 /* B7vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338F02258A38F300C7D5E2 /* B7vH.wav */; };
+		54338F7A258A599300C7D5E2 /* LogiciOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54338F79258A599300C7D5E2 /* LogiciOSTests.swift */; };
+		54338F8F258A59A500C7D5E2 /* PitchRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF771DFE1C5C499A0BFC5 /* PitchRenderer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338F90258A59A500C7D5E2 /* SfzPitchRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF6B1F8BE59C83102D658 /* SfzPitchRenderer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338F91258A59A500C7D5E2 /* VocalPartAudioDataGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF1BDBADBA522C9A65AAC /* VocalPartAudioDataGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338F92258A59A500C7D5E2 /* AudioToolboxInputReader.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF2649FE180FAB5FE4553 /* AudioToolboxInputReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338F93258A59A500C7D5E2 /* AudioOutputWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF0F1342469A70FAF3768 /* AudioOutputWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338F94258A59A500C7D5E2 /* AudioToolboxUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF019334CAB088EC54E4C /* AudioToolboxUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338F95258A59A500C7D5E2 /* AudioStreamDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF8CF418998FD71DEF3A7 /* AudioStreamDescription.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338F96258A59A500C7D5E2 /* AudioToolboxQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF0A451D05327E2DE59B8 /* AudioToolboxQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338F97258A59A500C7D5E2 /* BaseAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF93B13F01C590643A6A7 /* BaseAudioPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338F98258A59A500C7D5E2 /* MouseClickChecker.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFC6D1098747848058E71 /* MouseClickChecker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338F99258A59A500C7D5E2 /* VocalTrainerFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD24FC1DBD1FA16695EC2E /* VocalTrainerFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338F9A258A59A500C7D5E2 /* Rewindable.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2AD48BB6F8F772646F38 /* Rewindable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338F9B258A59A500C7D5E2 /* BeatsPerMinuteProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD207AAC24B1DE61B27C51 /* BeatsPerMinuteProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338F9C258A59A500C7D5E2 /* Seeker.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2A9C7FAC41D1ABF211B5 /* Seeker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338F9D258A59A500C7D5E2 /* Rewinder.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD21D71D18F1E4B8499E64 /* Rewinder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338F9E258A59A500C7D5E2 /* ProjectController.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2340D3DFB4C44EAEFD9C /* ProjectController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338F9F258A59A500C7D5E2 /* BoundsSelectionController.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD200521649A156A2F0149 /* BoundsSelectionController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FA0258A59A500C7D5E2 /* BoundsSelectionDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD28A1306F3AB1C307C7A3 /* BoundsSelectionDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FA1258A59A500C7D5E2 /* AudioData.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2A156EE8EB3830CB5A0B /* AudioData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FA3258A59A500C7D5E2 /* AudioInputReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2B4AC4925000EA46F164 /* AudioInputReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FA6258A59A500C7D5E2 /* AudioInputRecorder.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD29640B8391A0E9255C2B /* AudioInputRecorder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FA9258A59A500C7D5E2 /* AudioInputPitchesRecorder.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD27F0C180C52947B1B171 /* AudioInputPitchesRecorder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FAA258A59A500C7D5E2 /* AudioAverageInputLevelMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD29E963BFE13E12D4B1E1 /* AudioAverageInputLevelMonitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FAC258A59A500C7D5E2 /* MainController.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2517A2FFF4F54D3C2844 /* MainController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FAD258A59A500C7D5E2 /* VocalTrainerPlayerPrepareException.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD29FCF07352850CB8D807 /* VocalTrainerPlayerPrepareException.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FAE258A59A500C7D5E2 /* AudioOperationFailedException.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD215113A75359CC5E2E70 /* AudioOperationFailedException.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FAF258A59A500C7D5E2 /* AudioPlayerWithDefaultSeekHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2A794C2677296B79EB0E /* AudioPlayerWithDefaultSeekHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FB0258A59A500C7D5E2 /* MidiNote.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2D721667BCF1CBF26338 /* MidiNote.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FB1258A59A500C7D5E2 /* MidiTrack.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD21366B3DB9FB2DDD10CB /* MidiTrack.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FB2258A59A500C7D5E2 /* MidiFileReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2127BA2CABB62C05552A /* MidiFileReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FB3258A59A500C7D5E2 /* Binasc.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD276486F3E97C8F0A03AF /* Binasc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FB4258A59A500C7D5E2 /* Options.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2C0835F3CAFCA74F00B5 /* Options.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FB5258A59A500C7D5E2 /* MidiFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2DA8614D4FCC3BF0E274 /* MidiFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FB6258A59A500C7D5E2 /* MidiEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2D5696C34D7A096CDAF8 /* MidiEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FB7258A59A500C7D5E2 /* MidiMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD261D970249A90BDAE248 /* MidiMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FB8258A59A500C7D5E2 /* MidiEventList.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD251366DECBA91D25DE4C /* MidiEventList.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FB9258A59A500C7D5E2 /* MidiFileReaderException.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD20553D4D95B50697DC50 /* MidiFileReaderException.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FBA258A59A500C7D5E2 /* WavAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD24669F8DD78AF572D004 /* WavAudioPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FBB258A59A500C7D5E2 /* MetronomeAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD216006F16B88040C0712 /* MetronomeAudioPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FBC258A59A500C7D5E2 /* BaseRawPcmAudioDataPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD25967B6AA3159660C839 /* BaseRawPcmAudioDataPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FBD258A59A500C7D5E2 /* RealtimeStreamingAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD237BA848E184310FD5AC /* RealtimeStreamingAudioPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FBE258A59A500C7D5E2 /* CADebugMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2F01FB6D1F6BB5C2D518 /* CADebugMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FBF258A59A500C7D5E2 /* CAStreamBasicDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2E627137CE17224299E7 /* CAStreamBasicDescription.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FC0258A59A500C7D5E2 /* audiodecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2CFA32A9950C2F4148BC /* audiodecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FC1258A59A500C7D5E2 /* DecodedTrack.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2C6157EC8C243B56D626 /* DecodedTrack.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FC2258A59A500C7D5E2 /* audiodecodercoreaudio_mac.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2A73FCF87877F9F15046 /* audiodecodercoreaudio_mac.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FC3258A59A500C7D5E2 /* AudioFilePlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2C17A6DD7902CABC6911 /* AudioFilePlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FC4258A59A500C7D5E2 /* px_mixer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD27EF95A75BE5F3F262FE /* px_mixer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FC5258A59A500C7D5E2 /* Core.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD233FA0B515CA1C4761CE /* Core.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FC6258A59A500C7D5E2 /* Line.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD22AD99429ABB7581539F /* Line.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FC7258A59A500C7D5E2 /* Maps.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD22681AC572B2799F6483 /* Maps.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FC8258A59A500C7D5E2 /* Rect.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD27255263181A5AA81BB7 /* Rect.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FC9258A59A500C7D5E2 /* Sets.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD282673483D84327CD0BB /* Sets.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FCA258A59A500C7D5E2 /* Color.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD25724B56C931778F09E3 /* Color.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FCB258A59A500C7D5E2 /* Debug.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2CCF3203B75F86BB2484 /* Debug.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FCC258A59A500C7D5E2 /* Bitmap.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2CFD3311926C531FAB76 /* Bitmap.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FCD258A59A500C7D5E2 /* Circle.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2F7E72FAC9A7C7482E87 /* Circle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FCE258A59A500C7D5E2 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD20D41C01B209AEA40BD3 /* config.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FCF258A59A500C7D5E2 /* Random.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD27D731E6BDBC7BD01782 /* Random.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FD0258A59A500C7D5E2 /* System.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD29B5DA2060C9AD0297FA /* System.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FD1258A59A500C7D5E2 /* Streams.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2B9DACA8B7A8B945D38B /* Streams.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FD2258A59A500C7D5E2 /* WAVFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD23ECA6859643BFD78B14 /* WAVFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FD3258A59A500C7D5E2 /* Executors.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2A074624A4440C4500BC /* Executors.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FD4258A59A500C7D5E2 /* Functions.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD20CE27BFD1C15CA430DF /* Functions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FD5258A59A500C7D5E2 /* HashUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2F247F44A7E00F482B8A /* HashUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FD6258A59A500C7D5E2 /* MathUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2C73A80F48698DC31BB4 /* MathUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FD7258A59A500C7D5E2 /* stlassert.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD27AA2ADCE4B94FB43C3F /* stlassert.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FD8258A59A500C7D5E2 /* TimeUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD224238D2A013D97F1FF7 /* TimeUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FD9258A59A500C7D5E2 /* Algorithms.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2F88E9F96CCA941F0D00 /* Algorithms.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FDA258A59A500C7D5E2 /* AudioUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD24A7D6FF336CB01AFCA7 /* AudioUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FDB258A59A500C7D5E2 /* BinaryMath.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD28B229F1A82AD9DB0EA1 /* BinaryMath.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FDC258A59A500C7D5E2 /* DummyMutex.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2B7B57F26947CF3E953A /* DummyMutex.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FDD258A59A500C7D5E2 /* Primitives.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD26ECA1B1BB6ED2DE86D9 /* Primitives.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FDE258A59A500C7D5E2 /* CountAssert.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2714D4031485B4BFC649 /* CountAssert.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FDF258A59A500C7D5E2 /* MemoryUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD23EC4AE6175997855CE2 /* MemoryUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FE0258A59A500C7D5E2 /* OpenGLUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2449F5FC253FB2137EE6 /* OpenGLUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FE1258A59A500C7D5E2 /* RoundedRect.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2EBD85A9C338A59AF590 /* RoundedRect.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FE2258A59A500C7D5E2 /* StringUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD226168FB3DF55ADFBC6D /* StringUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FE3258A59A500C7D5E2 /* ListenersSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD26A35DFE11EE996E629B /* ListenersSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FE4258A59A500C7D5E2 /* FunctionsList.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD28A639C48C998EF07670 /* FunctionsList.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FE5258A59A500C7D5E2 /* GeometryUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2FB90CF936CCF0B9004C /* GeometryUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FE6258A59A500C7D5E2 /* StlDebugUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD296596D0ECB90CE7388F /* StlDebugUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FE7258A59A500C7D5E2 /* CallbacksQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD272A33B932D76B466FBD /* CallbacksQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FE8258A59A500C7D5E2 /* CircularBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2AF1CC9A8198F56AED70 /* CircularBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FE9258A59A500C7D5E2 /* DestructorQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2D47E50D99B107E5CE7D /* DestructorQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FEA258A59A500C7D5E2 /* PointerOrObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2B94A635B3C7D23F69E7 /* PointerOrObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FEB258A59A500C7D5E2 /* OperationCanceler.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2983DF5DE5CDF8981FBA /* OperationCanceler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FEC258A59A500C7D5E2 /* NotImplementedAssert.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD25D28AB6980DB6AD54FE /* NotImplementedAssert.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FED258A59A500C7D5E2 /* ConcurrentModificationAssert.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD283FF1075FCE8ADA05D5 /* ConcurrentModificationAssert.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FEE258A59A500C7D5E2 /* PeriodicallySleepingBackgroundTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD26E5BB21F5F5A870F2E5 /* PeriodicallySleepingBackgroundTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FEF258A59A500C7D5E2 /* PlaybackData.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD20E6C3A255A4EF630588 /* PlaybackData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FF0258A59A500C7D5E2 /* VocalPartAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2DF4EFA3C8E483900EB6 /* VocalPartAudioPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FF1258A59A500C7D5E2 /* LyricsInterval.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2ED104FB1B8F88542501 /* LyricsInterval.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FF2258A59A500C7D5E2 /* LyricsPart.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2A39D4A97D9CDF2936F9 /* LyricsPart.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FF3258A59A500C7D5E2 /* Lyrics.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD280126FD96A1307B690C /* Lyrics.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FF4258A59A500C7D5E2 /* MvxFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2EB79028339CE09CE2E0 /* MvxFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FF5258A59A500C7D5E2 /* AudioInputManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD220FA49518F9EA38C1EC /* AudioInputManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FF6258A59A500C7D5E2 /* VocalTrainerFilePlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD210FFC8DF292438CA6E0 /* VocalTrainerFilePlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FF7258A59A500C7D5E2 /* ApplicationModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD20E7EAC70D42EDAA7136 /* ApplicationModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FF8258A59A500C7D5E2 /* WorkspaceDrawerResourcesProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD22F90632570F2D6CD6B1 /* WorkspaceDrawerResourcesProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FF9258A59A500C7D5E2 /* NvgDrawer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2F86E4F78B08336152A6 /* NvgDrawer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FFA258A59A500C7D5E2 /* ScrollBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2A2B5E49A45A8193C285 /* ScrollBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FFB258A59A500C7D5E2 /* PianoDrawer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD288843DEF244C2871801 /* PianoDrawer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FFC258A59A500C7D5E2 /* NoteInterval.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2B932A605AAD33035987 /* NoteInterval.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FFD258A59A500C7D5E2 /* VocalPart.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2896C9F692B34665C49A /* VocalPart.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FFE258A59A500C7D5E2 /* PlaybackBounds.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD226F0F6AD40B7F1DA0FD /* PlaybackBounds.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54338FFF258A59A500C7D5E2 /* PlayingPitchSequence.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2F83477D83058966BDE9 /* PlayingPitchSequence.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54339002258A59A500C7D5E2 /* ProjectControllerBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2E08478C8AAE2F6D3DFA /* ProjectControllerBridge.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54339003258A59A500C7D5E2 /* WorkspaceController.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2311746EC9D95FEDBFB6 /* WorkspaceController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54339004258A59A500C7D5E2 /* Point.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2FB3472951B99E04FB5F /* Point.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54339005258A59A500C7D5E2 /* BaseMouseEventsReceiver.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2D0AC802F7CF13ECDA0F /* BaseMouseEventsReceiver.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54339006258A59A500C7D5E2 /* MouseEventsReceiver.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD29B63432CC53ABDEE731 /* MouseEventsReceiver.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54339007258A59A500C7D5E2 /* BaseSynchronizedMouseEventsReceiver.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD23AFD23696FFCBC778CF /* BaseSynchronizedMouseEventsReceiver.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54339008258A59A500C7D5E2 /* MetalNvgDrawer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD231133D6E227F2998881 /* MetalNvgDrawer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54339009258A59A500C7D5E2 /* Drawer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD26D6AB61C6C3B675AA46 /* Drawer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5433900A258A59A500C7D5E2 /* WorkspaceDrawer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2A5C234185C9CE21811A /* WorkspaceDrawer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5433900B258A59A500C7D5E2 /* Logic.h in Headers */ = {isa = PBXBuildFile; fileRef = ACF18AA222EC711A008E7DAA /* Logic.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5433900C258A59A500C7D5E2 /* EnumMap.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2C7BF7FB96D16A8EF16C /* EnumMap.h */; };
+		5433900D258A59A500C7D5E2 /* Timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2CFEF3E509143AE5B370 /* Timer.h */; };
+		5433900E258A59A500C7D5E2 /* VxFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2707F4246BE482E7459A /* VxFile.h */; };
+		54339010258A59A500C7D5E2 /* Collections.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD25C2AAAAD50117883FE0 /* Collections.h */; };
+		54339011258A59A500C7D5E2 /* zip.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2F3A827765BD9E5F8595 /* zip.h */; };
+		54339012258A59A500C7D5E2 /* miniz.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2CD97A761DACB81845E9 /* miniz.h */; };
+		54339013258A59A500C7D5E2 /* ZipFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD25B20FC08B87125506D6 /* ZipFile.h */; };
+		54339014258A59A500C7D5E2 /* FixedSizeObjectPool.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFFED99F0A661C0C7CDFE /* FixedSizeObjectPool.h */; };
+		54339015258A59A500C7D5E2 /* log.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFD79D420990C0BBEC118 /* log.hh */; };
+		54339016258A59A500C7D5E2 /* curve.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFC33442250265DC42295 /* curve.hh */; };
+		54339017258A59A500C7D5E2 /* synth.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF4D38B0405AAB494519B /* synth.hh */; };
+		54339018258A59A500C7D5E2 /* utils.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF568A3AA5BAE1B5449B0 /* utils.hh */; };
+		54339019258A59A500C7D5E2 /* voice.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF10026EDF1D9497F1974 /* voice.hh */; };
+		5433901A258A59A500C7D5E2 /* loader.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF25533EF3ACD6071D0A5 /* loader.hh */; };
+		5433901B258A59A500C7D5E2 /* pugixml.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFB3FC89740A2C0F1A3D5 /* pugixml.hh */; };
+		5433901C258A59A500C7D5E2 /* envelope.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF21DBBE3430B34123A70 /* envelope.hh */; };
+		5433901D258A59A500C7D5E2 /* liquidsfz.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF682C44A586F4A455B65 /* liquidsfz.hh */; };
+		5433901E258A59A500C7D5E2 /* pugiconfig.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFE1A9795F1014748594E /* pugiconfig.hh */; };
+		5433901F258A59A500C7D5E2 /* hydrogenimport.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF8D8F0099984C24D9A58 /* hydrogenimport.hh */; };
+		54339021258A59A500C7D5E2 /* ApplicationModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2CC2F3597DFE26AD1373 /* ApplicationModel.cpp */; };
+		54339025258A59A500C7D5E2 /* AudioInputRecorder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2941678BB40B5B475363 /* AudioInputRecorder.cpp */; };
+		54339028258A59A500C7D5E2 /* AudioInputPitchesRecorder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD25758139F4B8B31A4E97 /* AudioInputPitchesRecorder.cpp */; };
+		54339029258A59A500C7D5E2 /* AudioAverageInputLevelMonitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD29E29D0D023E4F123946 /* AudioAverageInputLevelMonitor.cpp */; };
+		5433902B258A59A500C7D5E2 /* ProjectController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2AFF531AB4E1EDD9E2D9 /* ProjectController.cpp */; };
+		5433902C258A59A500C7D5E2 /* Drawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2EDC93E7FA3DAC893492 /* Drawer.cpp */; };
+		5433902D258A59A500C7D5E2 /* NvgDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2DDA0E3CBB32F123DFD7 /* NvgDrawer.cpp */; };
+		5433902E258A59A500C7D5E2 /* MetalNvgDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2CFD99DCF20663FFEA80 /* MetalNvgDrawer.cpp */; };
+		5433902F258A59A500C7D5E2 /* nanovg_mtl.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AD22A4AEEAB7D48F089AFD /* nanovg_mtl.m */; };
+		54339030258A59A500C7D5E2 /* nanovg_mtl_shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2FC54AA6E9E13392F2F4 /* nanovg_mtl_shaders.metal */; };
+		54339031258A59A500C7D5E2 /* nanovg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD24D21615674E61590BFF /* nanovg.cpp */; };
+		54339032258A59A500C7D5E2 /* MainController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2C9D6872D12BA87CD4BC /* MainController.cpp */; };
+		54339033258A59A500C7D5E2 /* AudioInputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD26179700FDC84158D199 /* AudioInputManager.cpp */; };
+		54339034258A59A500C7D5E2 /* ScrollBar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2F1B03A4D6E9A2E8238A /* ScrollBar.cpp */; };
+		54339035258A59A500C7D5E2 /* PianoDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD296481A675BAF8BF9922 /* PianoDrawer.cpp */; };
+		54339036258A59A500C7D5E2 /* WorkspaceDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2AF776B9B7054524E921 /* WorkspaceDrawer.cpp */; };
+		54339037258A59A500C7D5E2 /* VocalPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD284C1B557C8A1A303283 /* VocalPart.cpp */; };
+		54339038258A59A500C7D5E2 /* VocalPartAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD209135C7FA838CA89DA2 /* VocalPartAudioPlayer.cpp */; };
+		54339039258A59A500C7D5E2 /* Lyrics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD20B7128829EC073BB509 /* Lyrics.cpp */; };
+		5433903A258A59A500C7D5E2 /* MvxFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2CDF8FE9522FA0CAC810 /* MvxFile.cpp */; };
+		5433903B258A59A500C7D5E2 /* VocalTrainerFilePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2E9F4BB2AC696697E078 /* VocalTrainerFilePlayer.cpp */; };
+		5433903C258A59A500C7D5E2 /* VocalTrainerPlayerPrepareException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD28E587C2E17A1449FEB1 /* VocalTrainerPlayerPrepareException.cpp */; };
+		5433903D258A59A500C7D5E2 /* PlaybackBounds.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD224683097BE5C42F6AD3 /* PlaybackBounds.cpp */; };
+		5433903E258A59A500C7D5E2 /* AudioOperationFailedException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD200C605140EAB4684FC9 /* AudioOperationFailedException.cpp */; };
+		5433903F258A59A500C7D5E2 /* AudioPlayerWithDefaultSeekHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD207BE14EBF38979267BA /* AudioPlayerWithDefaultSeekHandler.cpp */; };
+		54339040258A59A500C7D5E2 /* MidiTrack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD23BE99E133BC64DBAD12 /* MidiTrack.cpp */; };
+		54339041258A59A500C7D5E2 /* Binasc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD289CC2F3F67CD4DD7DDB /* Binasc.cpp */; };
+		54339042258A59A500C7D5E2 /* Options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2E5AB05278F00C3E0B92 /* Options.cpp */; };
+		54339043258A59A500C7D5E2 /* MidiFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2E32A57825EF1C972DD7 /* MidiFile.cpp */; };
+		54339044258A59A500C7D5E2 /* MidiEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2A7011DBA6662C539DA9 /* MidiEvent.cpp */; };
+		54339045258A59A500C7D5E2 /* MidiMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2E92E9B8FA30974E0F73 /* MidiMessage.cpp */; };
+		54339046258A59A500C7D5E2 /* MidiEventList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2DA56D72EDCBFE2E94DA /* MidiEventList.cpp */; };
+		54339047258A59A500C7D5E2 /* MidiFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2029CD71A9EC26251309 /* MidiFileReader.cpp */; };
+		54339048258A59A500C7D5E2 /* MidiFileReaderException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD24B01A582050A99E4A53 /* MidiFileReaderException.cpp */; };
+		54339049258A59A500C7D5E2 /* WavAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD28F98AEE718515AC6765 /* WavAudioPlayer.cpp */; };
+		5433904A258A59A500C7D5E2 /* MetronomeAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2DC58AC83E34143EAAD7 /* MetronomeAudioPlayer.cpp */; };
+		5433904B258A59A500C7D5E2 /* BaseRawPcmAudioDataPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD26B2BEC5BEE09F688699 /* BaseRawPcmAudioDataPlayer.cpp */; };
+		5433904C258A59A500C7D5E2 /* RealtimeStreamingAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2AC1E555DF04693C77E5 /* RealtimeStreamingAudioPlayer.cpp */; };
+		5433904D258A59A500C7D5E2 /* audiodecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD223E8F388DCA86BDF8A3 /* audiodecoder.cpp */; };
+		5433904E258A59A500C7D5E2 /* DecodedTrack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2CBED6FA1E08D2F2F940 /* DecodedTrack.cpp */; };
+		5433904F258A59A500C7D5E2 /* audiodecodercoreaudio_mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD29C6287FB817B5159A31 /* audiodecodercoreaudio_mac.cpp */; };
+		54339050258A59A500C7D5E2 /* AudioFilePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2E2F1B0618043F8069B6 /* AudioFilePlayer.cpp */; };
+		54339051258A59A500C7D5E2 /* BaseSynchronizedMouseEventsReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD26BA5294013E17E6F9A5 /* BaseSynchronizedMouseEventsReceiver.cpp */; };
+		54339052258A59A500C7D5E2 /* px_mixer.c in Sources */ = {isa = PBXBuildFile; fileRef = 71AD26B5599DB53B728689DA /* px_mixer.c */; };
+		54339053258A59A500C7D5E2 /* px_example_api.c in Sources */ = {isa = PBXBuildFile; fileRef = 71AD28B309ACB488FB4BD3EC /* px_example_api.c */; };
+		54339054258A59A500C7D5E2 /* px_mac_coreaudio.c in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2D1BC098513D3AAF017C /* px_mac_coreaudio.c */; };
+		54339055258A59A500C7D5E2 /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD25E0CF7A5E97BF4CB17C /* Color.cpp */; };
+		54339056258A59A500C7D5E2 /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2531D5F149F98814DE21 /* Bitmap.cpp */; };
+		54339057258A59A500C7D5E2 /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2B0C5806B1AC2B0E0DE6 /* Random.cpp */; };
+		54339058258A59A500C7D5E2 /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2258F4F58DFA4E4DBE81 /* System.cpp */; };
+		54339059258A59A500C7D5E2 /* WAVFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2AFCA74EA2F943591D32 /* WAVFile.cpp */; };
+		5433905A258A59A500C7D5E2 /* Executors.mm in Sources */ = {isa = PBXBuildFile; fileRef = 71AD20B4800038FC25DD4A77 /* Executors.mm */; };
+		5433905B258A59A500C7D5E2 /* TimeUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2F993E58D837C2925EB2 /* TimeUtils.cpp */; };
+		5433905C258A59A500C7D5E2 /* AudioUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2A7EE98C193865A7F185 /* AudioUtils.cpp */; };
+		5433905D258A59A500C7D5E2 /* OpenGLUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD24CF0B4FFA8025ECA606 /* OpenGLUtils.cpp */; };
+		5433905E258A59A500C7D5E2 /* OperationCanceler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD202CC662584B2F399D12 /* OperationCanceler.cpp */; };
+		5433905F258A59A500C7D5E2 /* PeriodicallySleepingBackgroundTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2FF2194C1B9EF33E4F93 /* PeriodicallySleepingBackgroundTask.cpp */; };
+		54339060258A59A500C7D5E2 /* ProjectControllerBridgeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2D7D172C5EE44191A527 /* ProjectControllerBridgeDelegate.swift */; };
+		54339061258A59A500C7D5E2 /* ProjectControllerBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 71AD223DC452CCD04574FC8B /* ProjectControllerBridge.mm */; };
+		54339062258A59A500C7D5E2 /* BaseMouseEventsReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD223712B4878E8451D22D /* BaseMouseEventsReceiver.cpp */; };
+		54339063258A59A500C7D5E2 /* BoundsSelectionController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2F6C47686C40182C94EA /* BoundsSelectionController.cpp */; };
+		54339064258A59A500C7D5E2 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD252F70E0880DEA1B3B35 /* Timer.cpp */; };
+		54339065258A59A500C7D5E2 /* Executors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD21AC540E7A81DE11B940 /* Executors.cpp */; };
+		54339066258A59A500C7D5E2 /* Rewinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD28D1184D185A0EECCF9A /* Rewinder.cpp */; };
+		54339067258A59A500C7D5E2 /* VxFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD26E37576200389619E0A /* VxFile.cpp */; };
+		54339069258A59A500C7D5E2 /* VocalTrainerFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2F2DD5FA27CDA8148941 /* VocalTrainerFile.cpp */; };
+		5433906A258A59A500C7D5E2 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2533D5DDAD77BE9E03EF /* zip.c */; };
+		5433906B258A59A500C7D5E2 /* ZipFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD20E456C09A26C42D9214 /* ZipFile.cpp */; };
+		5433906C258A59A500C7D5E2 /* MouseClickChecker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8557DD0DA640840A097 /* MouseClickChecker.cpp */; };
+		5433906D258A59A500C7D5E2 /* BaseAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF1D4D58FBFDE258E3441 /* BaseAudioPlayer.cpp */; };
+		5433906E258A59A500C7D5E2 /* PlaybackData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFEA213247298F347ED90 /* PlaybackData.cpp */; };
+		5433906F258A59A500C7D5E2 /* AudioToolboxInputReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFBA07A1480342A9F451A /* AudioToolboxInputReader.cpp */; };
+		54339070258A59A500C7D5E2 /* AudioToolboxOutputWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6CECF83E94F19796312 /* AudioToolboxOutputWriter.cpp */; };
+		54339071258A59A500C7D5E2 /* AudioToolboxUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD768C89C1B8FF44E58D /* AudioToolboxUtils.cpp */; };
+		54339072258A59A500C7D5E2 /* AudioStreamDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC90367A8ADD207F39D9 /* AudioStreamDescription.cpp */; };
+		54339073258A59A500C7D5E2 /* AudioToolboxQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF12C8D3F0F8AA81C2E06 /* AudioToolboxQueue.cpp */; };
+		54339074258A59A500C7D5E2 /* SfzPitchRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFBC5E2248DFA32CB58C3 /* SfzPitchRenderer.cpp */; };
+		54339075258A59A500C7D5E2 /* VocalPartAudioDataGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6C42A0C8F7F2E4F242C /* VocalPartAudioDataGenerator.cpp */; };
+		54339076258A59A500C7D5E2 /* ApplicationModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8951A623C40AB2CE915 /* ApplicationModel.mm */; };
+		54339077258A59A500C7D5E2 /* log.cc in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE737E79706B2714E8F5 /* log.cc */; };
+		54339078258A59A500C7D5E2 /* synth.cc in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC9CD69C33417DC50B22 /* synth.cc */; };
+		54339079258A59A500C7D5E2 /* utils.cc in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD56742584E880665CE3 /* utils.cc */; };
+		5433907A258A59A500C7D5E2 /* voice.cc in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE7297C9A22187363B82 /* voice.cc */; };
+		5433907B258A59A500C7D5E2 /* loader.cc in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF649820E832C888FD580 /* loader.cc */; };
+		5433907C258A59A500C7D5E2 /* pugixml.cc in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF410847352F0264B7A8C /* pugixml.cc */; };
+		5433907D258A59A500C7D5E2 /* liquidsfz.cc in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC488245B1D43CDB681D /* liquidsfz.cc */; };
+		5433907E258A59A500C7D5E2 /* hydrogenimport.cc in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF35FFE3131D23E666DB6 /* hydrogenimport.cc */; };
+		54339080258A59A500C7D5E2 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF18AB622EC77D5008E7DAA /* Accelerate.framework */; };
+		54339082258A59A500C7D5E2 /* libboost_serialization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AD2A9C1712FA7209654902 /* libboost_serialization.a */; };
+		54339083258A59A500C7D5E2 /* sndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54338E4D258A304100C7D5E2 /* sndfile.a */; };
+		54339084258A59A500C7D5E2 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AD21D64A16620D548B5571 /* libboost_system.a */; };
+		54339085258A59A500C7D5E2 /* libboost_thread.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AD238B8025EC96A3CC45B1 /* libboost_thread.a */; };
+		54339086258A59A500C7D5E2 /* libportaudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AD27FB01D73C14638A6EDB /* libportaudio.a */; };
+		54339087258A59A500C7D5E2 /* libSoundTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AD2636B9DE49D31F43C412 /* libSoundTouch.a */; };
+		54339088258A59A500C7D5E2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF18AAE22EC7512008E7DAA /* AudioToolbox.framework */; };
+		54339089258A59A500C7D5E2 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF18AAC22EC74E9008E7DAA /* CoreAudio.framework */; };
+		5433908B258A59A500C7D5E2 /* F#2vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EE1258A38F100C7D5E2 /* F#2vH.wav */; };
+		5433908C258A59A500C7D5E2 /* C2vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EF2258A38F200C7D5E2 /* C2vH.wav */; };
+		5433908D258A59A500C7D5E2 /* C5vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFEEBC432B387AA4B95E7 /* C5vL.wav */; };
+		5433908E258A59A500C7D5E2 /* D#5vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EDE258A38F100C7D5E2 /* D#5vH.wav */; };
+		5433908F258A59A500C7D5E2 /* A6vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFEE2F56D5CCB9378EFFB /* A6vL.wav */; };
+		54339090258A59A500C7D5E2 /* A1vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EE3258A38F100C7D5E2 /* A1vH.wav */; };
+		54339091258A59A500C7D5E2 /* D#1vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFB7436D833AE12BB7428 /* D#1vL.wav */; };
+		54339092258A59A500C7D5E2 /* F#7vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF709CBEFCF8F5E9949E3 /* F#7vL.wav */; };
+		54339093258A59A500C7D5E2 /* C7vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF0B0D072D863661F28D9 /* C7vL.wav */; };
+		54339094258A59A500C7D5E2 /* D#3vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF92B31B2C77BAD62F0E1 /* D#3vL.wav */; };
+		54339095258A59A500C7D5E2 /* C6vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF83CBE4963E385E2E422 /* C6vL.wav */; };
+		54339096258A59A500C7D5E2 /* A5vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EE8258A38F200C7D5E2 /* A5vH.wav */; };
+		54339097258A59A500C7D5E2 /* A7vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFB2BB54C4A3B47467E77 /* A7vL.wav */; };
+		54339098258A59A500C7D5E2 /* B0vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EED258A38F200C7D5E2 /* B0vH.wav */; };
+		54339099258A59A500C7D5E2 /* F#4vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF0846F1C05B1E364AA3D /* F#4vL.wav */; };
+		5433909A258A59A500C7D5E2 /* D#4vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFBC5F89C8F29361990E2 /* D#4vL.wav */; };
+		5433909B258A59A500C7D5E2 /* C8vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF9D82C4D660D7FE97259 /* C8vL.wav */; };
+		5433909C258A59A500C7D5E2 /* A6vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EF9258A38F200C7D5E2 /* A6vH.wav */; };
+		5433909D258A59A500C7D5E2 /* F#6vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF51E467A94329EF39AA1 /* F#6vL.wav */; };
+		5433909E258A59A500C7D5E2 /* A7vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EE9258A38F200C7D5E2 /* A7vH.wav */; };
+		5433909F258A59A500C7D5E2 /* D#5vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFE2601EC836796D25F73 /* D#5vL.wav */; };
+		543390A0258A59A500C7D5E2 /* A4vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EE6258A38F200C7D5E2 /* A4vH.wav */; };
+		543390A1258A59A500C7D5E2 /* A5vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF2C9436D837BD97751AA /* A5vL.wav */; };
+		543390A2258A59A500C7D5E2 /* D#2vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF3069C97AF2EAA6B7CFE /* D#2vL.wav */; };
+		543390A3258A59A500C7D5E2 /* C5vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EFD258A38F200C7D5E2 /* C5vH.wav */; };
+		543390A4258A59A500C7D5E2 /* B5vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EF0258A38F200C7D5E2 /* B5vH.wav */; };
+		543390A5258A59A500C7D5E2 /* F#6vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EE2258A38F100C7D5E2 /* F#6vH.wav */; };
+		543390A6258A59A500C7D5E2 /* C8vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EE0258A38F100C7D5E2 /* C8vH.wav */; };
+		543390A7258A59A500C7D5E2 /* A3vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF232394F9A1F84DABCD7 /* A3vL.wav */; };
+		543390A8258A59A500C7D5E2 /* D#3vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EFF258A38F200C7D5E2 /* D#3vH.wav */; };
+		543390A9258A59A500C7D5E2 /* A4vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF36F3E2C63DD9FCFA229 /* A4vL.wav */; };
+		543390AA258A59A500C7D5E2 /* A0vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338F00258A38F200C7D5E2 /* A0vH.wav */; };
+		543390AB258A59A500C7D5E2 /* D#4vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EF6258A38F200C7D5E2 /* D#4vH.wav */; };
+		543390AC258A59A500C7D5E2 /* C2vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFFAE3565C7594BC72B92 /* C2vL.wav */; };
+		543390AD258A59A500C7D5E2 /* A3vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338F01258A38F200C7D5E2 /* A3vH.wav */; };
+		543390AE258A59A500C7D5E2 /* C3vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EFC258A38F200C7D5E2 /* C3vH.wav */; };
+		543390AF258A59A500C7D5E2 /* F#3vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFED6C10BBE39AE96DD8D /* F#3vL.wav */; };
+		543390B0258A59A500C7D5E2 /* F#5vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF7A9D2D0646725A22DF3 /* F#5vL.wav */; };
+		543390B1258A59A500C7D5E2 /* D#6vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EEC258A38F200C7D5E2 /* D#6vH.wav */; };
+		543390B2258A59A500C7D5E2 /* C3vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF3464A320A47B8481F15 /* C3vL.wav */; };
+		543390B3258A59A500C7D5E2 /* C4vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF7E998999691294C7913 /* C4vL.wav */; };
+		543390B4258A59A500C7D5E2 /* B7vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338F02258A38F300C7D5E2 /* B7vH.wav */; };
+		543390B5258A59A500C7D5E2 /* F#1vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF49E2E85F780A9AEC5AE /* F#1vL.wav */; };
+		543390B6258A59A500C7D5E2 /* C7vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EF7258A38F200C7D5E2 /* C7vH.wav */; };
+		543390B7258A59A500C7D5E2 /* B3vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EEB258A38F200C7D5E2 /* B3vH.wav */; };
+		543390B8258A59A500C7D5E2 /* F#7vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EEA258A38F200C7D5E2 /* F#7vH.wav */; };
+		543390B9258A59A500C7D5E2 /* F#4vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EEE258A38F200C7D5E2 /* F#4vH.wav */; };
+		543390BA258A59A500C7D5E2 /* F#5vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EF1258A38F200C7D5E2 /* F#5vH.wav */; };
+		543390BB258A59A500C7D5E2 /* C1vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF9BD386740812CDFD1F9 /* C1vL.wav */; };
+		543390BC258A59A500C7D5E2 /* F#2vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF7112499A420B8CA87D1 /* F#2vL.wav */; };
+		543390BD258A59A500C7D5E2 /* D#2vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EE5258A38F200C7D5E2 /* D#2vH.wav */; };
+		543390BE258A59A500C7D5E2 /* D#7vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFA7A71977FC73F08C461 /* D#7vL.wav */; };
+		543390BF258A59A500C7D5E2 /* C1vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EFB258A38F200C7D5E2 /* C1vH.wav */; };
+		543390C0258A59A500C7D5E2 /* B1vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EFE258A38F200C7D5E2 /* B1vH.wav */; };
+		543390C1258A59A500C7D5E2 /* A1vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF4553C50C7EB14C0B514 /* A1vL.wav */; };
+		543390C2258A59A500C7D5E2 /* B2vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EF8258A38F200C7D5E2 /* B2vH.wav */; };
+		543390C3258A59A500C7D5E2 /* A2vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFE26CDE1FC6E88447AC4 /* A2vL.wav */; };
+		543390C4258A59A500C7D5E2 /* B6vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EF4258A38F200C7D5E2 /* B6vH.wav */; };
+		543390C5258A59A500C7D5E2 /* D#7vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EF3258A38F200C7D5E2 /* D#7vH.wav */; };
+		543390C6258A59A500C7D5E2 /* B4vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EFA258A38F200C7D5E2 /* B4vH.wav */; };
+		543390C7258A59A500C7D5E2 /* D#6vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF0CCC29EF18ADF7CDCB7 /* D#6vL.wav */; };
+		543390C8258A59A500C7D5E2 /* C6vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EEF258A38F200C7D5E2 /* C6vH.wav */; };
+		543390C9258A59A500C7D5E2 /* A0vL.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EF5258A38F200C7D5E2 /* A0vL.wav */; };
+		543390CA258A59A500C7D5E2 /* piano.sfz in Resources */ = {isa = PBXBuildFile; fileRef = C9FFF9D8FF4D3EE38E8BA2DD /* piano.sfz */; };
+		543390CB258A59A500C7D5E2 /* F#1vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EE7258A38F200C7D5E2 /* F#1vH.wav */; };
+		543390CC258A59A500C7D5E2 /* F#3vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EDF258A38F100C7D5E2 /* F#3vH.wav */; };
+		543390CD258A59A500C7D5E2 /* D#1vH.wav in Resources */ = {isa = PBXBuildFile; fileRef = 54338EE4258A38F200C7D5E2 /* D#1vH.wav */; };
+		54B73D14258AA19E0072321A /* mlpack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B73D13258AA19E0072321A /* mlpack.a */; };
 		71AD202BB3D0B792CDC57759 /* MetalNvgDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2CFD99DCF20663FFEA80 /* MetalNvgDrawer.cpp */; };
 		71AD207E2B3F6E5F286AAE43 /* EnumMap.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2C7BF7FB96D16A8EF16C /* EnumMap.h */; };
 		71AD208CE6A13F9D3C9BB473 /* AudioUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2A7EE98C193865A7F185 /* AudioUtils.cpp */; };
 		71AD20C742A14945D7C35666 /* AudioFilePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2E2F1B0618043F8069B6 /* AudioFilePlayer.cpp */; };
-		71AD20CF0DF266AC1D2CCFFA /* Pitch.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2D90DDE092CAA7D1471B /* Pitch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD20F054D4B6E60864942D /* AudioInputReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2B4AC4925000EA46F164 /* AudioInputReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2142DB57B2C387624236 /* CAStreamBasicDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2E627137CE17224299E7 /* CAStreamBasicDescription.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD21493BF6F4026B3A9CBE /* CADebugMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2F01FB6D1F6BB5C2D518 /* CADebugMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -87,7 +387,6 @@
 		71AD21A5F13C290F23339473 /* MetronomeAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2DC58AC83E34143EAAD7 /* MetronomeAudioPlayer.cpp */; };
 		71AD21AA646AD2E01EA19C1D /* AudioInputRecorder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2941678BB40B5B475363 /* AudioInputRecorder.cpp */; };
 		71AD21B47E1CC57B89E6F9BE /* StringUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD226168FB3DF55ADFBC6D /* StringUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		71AD21CC9BBCC3CC2A8A28E0 /* PitchesMutableList.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2E62CBC8811236DE4C0A /* PitchesMutableList.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD21D8589B8CE19EE19887 /* MetronomeAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD216006F16B88040C0712 /* MetronomeAudioPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD21F8263873B13A66B067 /* TimeUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2F993E58D837C2925EB2 /* TimeUtils.cpp */; };
 		71AD21FEA3AF24A0AB92A117 /* AudioUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD24A7D6FF336CB01AFCA7 /* AudioUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -97,16 +396,13 @@
 		71AD224D7F458E378862F3B1 /* MainController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2C9D6872D12BA87CD4BC /* MainController.cpp */; };
 		71AD224E4CC8B48D0689B661 /* LyricsInterval.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2ED104FB1B8F88542501 /* LyricsInterval.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD22554BBE06B78963E043 /* VocalTrainerFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2F2DD5FA27CDA8148941 /* VocalTrainerFile.cpp */; };
-		71AD225CB876E241A907527F /* PitchInputReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD29CCFBD8682C0E0B6021 /* PitchInputReader.cpp */; };
 		71AD226B299AD3C9A9DA3D46 /* DummyMutex.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2B7B57F26947CF3E953A /* DummyMutex.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD22829C83E037186F2A2F /* MvxFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2EB79028339CE09CE2E0 /* MvxFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2284EB4867FE84DDB5C2 /* StlDebugUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD296596D0ECB90CE7388F /* StlDebugUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD22866B4167C8EEDE9AD6 /* AudioAverageInputLevelMonitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD29E29D0D023E4F123946 /* AudioAverageInputLevelMonitor.cpp */; };
 		71AD228D16FBA9729731BCFE /* PianoDrawer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD288843DEF244C2871801 /* PianoDrawer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		71AD229FC8B93D7EE55579E7 /* PitchesCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD26CD08AB67347F6A2D4D /* PitchesCollection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD22A1906968592094FBDE /* AudioInputPitchesRecorder.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD27F0C180C52947B1B171 /* AudioInputPitchesRecorder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD22BC02081D0ACB711D46 /* AudioInputManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD220FA49518F9EA38C1EC /* AudioInputManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		71AD22C10E09C0BF430DEDA6 /* PitchInputReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD25DBEBB7D907CB04B84B /* PitchInputReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD22C5278A1EA18D6156C6 /* Collections.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD25C2AAAAD50117883FE0 /* Collections.h */; };
 		71AD230A76F05BFA7E3EF66B /* NotImplementedAssert.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD25D28AB6980DB6AD54FE /* NotImplementedAssert.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD23248280AC3FE0938463 /* CircularBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2AF1CC9A8198F56AED70 /* CircularBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -134,7 +430,6 @@
 		71AD24A66BC9F49815C8A94F /* ProjectController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2AFF531AB4E1EDD9E2D9 /* ProjectController.cpp */; };
 		71AD24AF086DC7F70E3D5F38 /* AudioPlayerWithDefaultSeekHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD207BE14EBF38979267BA /* AudioPlayerWithDefaultSeekHandler.cpp */; };
 		71AD24C99A6F409AD6B0B900 /* VocalPart.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2896C9F692B34665C49A /* VocalPart.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		71AD24E126F8E19FE0D7BDD3 /* PitchesMutableList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2868ABD61AD7E92F8958 /* PitchesMutableList.cpp */; };
 		71AD24F57230D685E6CC7125 /* VxFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2707F4246BE482E7459A /* VxFile.h */; };
 		71AD251135D1A50EC0D8E6B0 /* VocalTrainerPlayerPrepareException.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD29FCF07352850CB8D807 /* VocalTrainerPlayerPrepareException.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD251D3FF2D66C37D53BA4 /* VocalTrainerFilePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2E9F4BB2AC696697E078 /* VocalTrainerFilePlayer.cpp */; };
@@ -154,8 +449,6 @@
 		71AD26039B99E6D1B824969C /* ProjectController.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2340D3DFB4C44EAEFD9C /* ProjectController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD26185A534A512D11E19B /* PlaybackBounds.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD224683097BE5C42F6AD3 /* PlaybackBounds.cpp */; };
 		71AD2618C4FC4640FCBBC986 /* Seeker.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2A9C7FAC41D1ABF211B5 /* Seeker.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		71AD261D431B9945FD3087C7 /* SeekablePitchesList.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD23CDB5B4727C71D4263D /* SeekablePitchesList.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		71AD26325CCAFB63FBB09C32 /* PitchDuration.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD21892999775A135F276A /* PitchDuration.h */; };
 		71AD26389C2986030F5B1417 /* px_example_api.c in Sources */ = {isa = PBXBuildFile; fileRef = 71AD28B309ACB488FB4BD3EC /* px_example_api.c */; };
 		71AD263B95BA44FBCFAB31CB /* OperationCanceler.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2983DF5DE5CDF8981FBA /* OperationCanceler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD267A93DCFABFC3DF220C /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2258F4F58DFA4E4DBE81 /* System.cpp */; };
@@ -175,7 +468,6 @@
 		71AD2783B9A964FA343FE6D4 /* Rewinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD28D1184D185A0EECCF9A /* Rewinder.cpp */; };
 		71AD27BC22031D3861F3988D /* RoundedRect.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2EBD85A9C338A59AF590 /* RoundedRect.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD27D359D1B8AF77B4CBDD /* MidiEventList.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD251366DECBA91D25DE4C /* MidiEventList.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		71AD2822F473D55AE1E4EF1B /* Pitch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD286291A8B71FD81C3287 /* Pitch.cpp */; };
 		71AD2840EBECB2FE9D051ED9 /* ConcurrentModificationAssert.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD283FF1075FCE8ADA05D5 /* ConcurrentModificationAssert.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD284269963EA52C961DC7 /* MidiFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2E32A57825EF1C972DD7 /* MidiFile.cpp */; };
 		71AD28528A54DD188E73F9E0 /* ProjectControllerBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2E08478C8AAE2F6D3DFA /* ProjectControllerBridge.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -188,8 +480,6 @@
 		71AD288DC6905850E4B69FAB /* BaseRawPcmAudioDataPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD25967B6AA3159660C839 /* BaseRawPcmAudioDataPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD28A2E7EA3D54EBE687DF /* ProjectControllerBridgeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2D7D172C5EE44191A527 /* ProjectControllerBridgeDelegate.swift */; };
 		71AD28C615E5E4012943D513 /* Rewindable.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2AD48BB6F8F772646F38 /* Rewindable.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		71AD28E4F71699223E0BA0D1 /* PitchDetectionSmoothingAudioBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD26B66A07C58154A68BBF /* PitchDetectionSmoothingAudioBuffer.cpp */; };
-		71AD28FE262CF7D4EA7DAE22 /* PitchDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2F81688C6EA2184FD389 /* PitchDetector.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2906D626B61015497753 /* MidiFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2029CD71A9EC26251309 /* MidiFileReader.cpp */; };
 		71AD290EF23AE66AE308E34E /* ApplicationModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD20E7EAC70D42EDAA7136 /* ApplicationModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD29426FB829B8982799EF /* VocalPartAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2DF4EFA3C8E483900EB6 /* VocalPartAudioPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -200,7 +490,6 @@
 		71AD29A61EE85F6579B1E668 /* ListenersSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD26A35DFE11EE996E629B /* ListenersSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD29A859655E4F757B0B04 /* FunctionsList.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD28A639C48C998EF07670 /* FunctionsList.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD29CDFE16BF042E268C55 /* MidiTrack.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD21366B3DB9FB2DDD10CB /* MidiTrack.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		71AD29EE4E3E33D464C674DD /* PitchDuration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2F8E9DB0340EEF8E5551 /* PitchDuration.cpp */; };
 		71AD29F2433AE33E6819229A /* DecodedTrack.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2C6157EC8C243B56D626 /* DecodedTrack.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2A123DD2A219B5DAFC48 /* VocalPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD284C1B557C8A1A303283 /* VocalPart.cpp */; };
 		71AD2A22FC38BF0EEE879F7D /* audiodecodercoreaudio_mac.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2A73FCF87877F9F15046 /* audiodecodercoreaudio_mac.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -210,7 +499,6 @@
 		71AD2AB4F815FD1476F770DD /* DecodedTrack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2CBED6FA1E08D2F2F940 /* DecodedTrack.cpp */; };
 		71AD2AF1257D88C7A8FBCD45 /* BoundsSelectionController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2F6C47686C40182C94EA /* BoundsSelectionController.cpp */; };
 		71AD2B0CBDFAF76D56342AF0 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2533D5DDAD77BE9E03EF /* zip.c */; };
-		71AD2B2C108276AD8827DD81 /* AubioPitchDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD26C8E0202DA2AE962F86 /* AubioPitchDetector.cpp */; };
 		71AD2B3DE851A5F99AE5CF69 /* CountAssert.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2714D4031485B4BFC649 /* CountAssert.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2B478A714ED9DC3C2445 /* BinaryMath.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD28B229F1A82AD9DB0EA1 /* BinaryMath.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2B52ECDF680B1321640E /* nanovg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD24D21615674E61590BFF /* nanovg.cpp */; };
@@ -220,20 +508,17 @@
 		71AD2BA74E1657C2BF6556BB /* Executors.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2A074624A4440C4500BC /* Executors.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2BBA92879ACC93E2353A /* NoteInterval.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2B932A605AAD33035987 /* NoteInterval.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2BBBE09B86B58F1C292E /* VocalTrainerFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD24FC1DBD1FA16695EC2E /* VocalTrainerFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		71AD2BD5DF0C1F85D9089936 /* AubioPitchDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2DEB468C81169A2D7900 /* AubioPitchDetector.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2BDADAAA67371616E46B /* System.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD29B5DA2060C9AD0297FA /* System.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2BDF7DAA21FC1C74C960 /* VocalTrainerFilePlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD210FFC8DF292438CA6E0 /* VocalTrainerFilePlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2BFDFEC1F5E0825AD905 /* HashUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2F247F44A7E00F482B8A /* HashUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2C03544136BF23ABA0A1 /* Timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2CFEF3E509143AE5B370 /* Timer.h */; };
 		71AD2C07E22DDD03B66824DD /* Sets.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD282673483D84327CD0BB /* Sets.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2C153B91561FABB8BF35 /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2B0C5806B1AC2B0E0DE6 /* Random.cpp */; };
-		71AD2C19DA1F6FC1BF2E248E /* SeekablePitchesList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD28522487D79AEC70DAAD /* SeekablePitchesList.cpp */; };
 		71AD2C1E65627211A3F010E1 /* TimeUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD224238D2A013D97F1FF7 /* TimeUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2C30E9A2CD0AC885DBBA /* AudioInputRecorder.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD29640B8391A0E9255C2B /* AudioInputRecorder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2C49C7CE49D9B4918E3B /* Streams.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2B9DACA8B7A8B945D38B /* Streams.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2C5326677CBE9586A2F3 /* WorkspaceDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2AF776B9B7054524E921 /* WorkspaceDrawer.cpp */; };
 		71AD2C5658DD0C8890C94EA8 /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2531D5F149F98814DE21 /* Bitmap.cpp */; };
-		71AD2C805B929CF56308169D /* PitchDetectionSmoothingAudioBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2E0B5C86BD1857507173 /* PitchDetectionSmoothingAudioBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2C8FB8BAEE226E73D6E5 /* WAVFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2AFCA74EA2F943591D32 /* WAVFile.cpp */; };
 		71AD2C9288A8E8C98FAA72D4 /* ScrollBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD2A2B5E49A45A8193C285 /* ScrollBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71AD2C98FB86C6EDEA4CBD56 /* Rewinder.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AD21D71D18F1E4B8499E64 /* Rewinder.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -278,10 +563,7 @@
 		ACB0245723D5CFFC00CD08A7 /* VxFile.h in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2707F4246BE482E7459A /* VxFile.h */; };
 		ACB0245823D5D1B500CD08A7 /* VocalPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD284C1B557C8A1A303283 /* VocalPart.cpp */; };
 		ACB0245A23D5D29F00CD08A7 /* libboost_serialization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB0245923D5D29F00CD08A7 /* libboost_serialization.a */; };
-		ACB0245B23D5D30900CD08A7 /* PitchDuration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2F8E9DB0340EEF8E5551 /* PitchDuration.cpp */; };
-		ACB0245C23D5D30900CD08A7 /* PitchDuration.h in Sources */ = {isa = PBXBuildFile; fileRef = 71AD21892999775A135F276A /* PitchDuration.h */; };
 		ACB0245D23D5D31700CD08A7 /* MidiFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2029CD71A9EC26251309 /* MidiFileReader.cpp */; };
-		ACB0245E23D5D31E00CD08A7 /* Pitch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD286291A8B71FD81C3287 /* Pitch.cpp */; };
 		ACB0245F23D5D32800CD08A7 /* MidiFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2E32A57825EF1C972DD7 /* MidiFile.cpp */; };
 		ACB0246023D5D3C200CD08A7 /* AudioUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2A7EE98C193865A7F185 /* AudioUtils.cpp */; };
 		ACB0246123D5D3D000CD08A7 /* MidiEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2A7011DBA6662C539DA9 /* MidiEvent.cpp */; };
@@ -295,54 +577,107 @@
 		ACF18AA422EC711A008E7DAA /* Logic.h in Headers */ = {isa = PBXBuildFile; fileRef = ACF18AA222EC711A008E7DAA /* Logic.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ACF18AAD22EC74E9008E7DAA /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF18AAC22EC74E9008E7DAA /* CoreAudio.framework */; };
 		ACF18AAF22EC7512008E7DAA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF18AAE22EC7512008E7DAA /* AudioToolbox.framework */; };
-		ACF18AB022EC76E3008E7DAA /* libaubio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AD2F9DD0BC11D0D3A2154E /* libaubio.a */; };
 		ACF18AB122EC76E3008E7DAA /* libboost_serialization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AD2A9C1712FA7209654902 /* libboost_serialization.a */; };
 		ACF18AB222EC76E3008E7DAA /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AD21D64A16620D548B5571 /* libboost_system.a */; };
 		ACF18AB322EC76E3008E7DAA /* libboost_thread.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AD238B8025EC96A3CC45B1 /* libboost_thread.a */; };
 		ACF18AB422EC76E3008E7DAA /* libportaudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AD27FB01D73C14638A6EDB /* libportaudio.a */; };
 		ACF18AB522EC76E3008E7DAA /* libSoundTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AD2636B9DE49D31F43C412 /* libSoundTouch.a */; };
 		ACF18AB722EC77D5008E7DAA /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF18AB622EC77D5008E7DAA /* Accelerate.framework */; };
+		C9FFF023F54B6766739CEE62 /* autocorrelation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFEA184D63983601718CF /* autocorrelation.cpp */; };
 		C9FFF034827A709C016C8CDD /* log.cc in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE737E79706B2714E8F5 /* log.cc */; };
+		C9FFF03F4C350A79F0DC69FD /* PitchDuration.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF08CE7791AC8415E0EF0 /* PitchDuration.h */; };
+		C9FFF078686EF6758EF105DB /* AccelerateFFT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF152816628A242B0B470 /* AccelerateFFT.cpp */; };
+		C9FFF08BE2531425293899B6 /* SevaghPitchDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF112B31CD8B941BA49E3 /* SevaghPitchDetector.cpp */; };
 		C9FFF186A32E68918C943F35 /* loader.cc in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF649820E832C888FD580 /* loader.cc */; };
 		C9FFF198252F5F8719F0117F /* AudioOutputWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF0F1342469A70FAF3768 /* AudioOutputWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C9FFF1B8930B5DF0E55AD1CF /* FFT.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF4416ED39131E1C96568 /* FFT.h */; };
 		C9FFF1FFF19B396DAB23801E /* PlaybackData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFEA213247298F347ED90 /* PlaybackData.cpp */; };
+		C9FFF2094882557F6946365B /* PitchInputReader.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF1DBEF12B36FA549F3B0 /* PitchInputReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C9FFF22D402E99D96A0A2453 /* AccelerateFFT.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFA0145FBA9C42E3C8BB3 /* AccelerateFFT.h */; };
 		C9FFF233DB4DBAEC69EFFB3D /* curve.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFC33442250265DC42295 /* curve.hh */; };
 		C9FFF279A8F30DD960853DC1 /* liquidsfz.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF682C44A586F4A455B65 /* liquidsfz.hh */; };
+		C9FFF2B05948F0D481AB2712 /* SeekablePitchesList.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFAF4A7981E386B4E562C /* SeekablePitchesList.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C9FFF303FDE3D4875336FF9D /* Pitch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFFA519AE7B1F46B05654 /* Pitch.cpp */; };
+		C9FFF30869CFEC1192A70E5E /* Pitch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFFA519AE7B1F46B05654 /* Pitch.cpp */; };
 		C9FFF31C9088A64AFBFF09D5 /* AudioToolboxUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD768C89C1B8FF44E58D /* AudioToolboxUtils.cpp */; };
 		C9FFF330A1F8BB02610963C1 /* AudioToolboxUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF019334CAB088EC54E4C /* AudioToolboxUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF34AFD6CF44FA06C9C93 /* utils.cc in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD56742584E880665CE3 /* utils.cc */; };
+		C9FFF3DE0E2135B46A096DD1 /* SevaghPitchDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF0412083CC812E7412DD /* SevaghPitchDetector.h */; };
 		C9FFF432A91EA87AF70D3E34 /* AudioToolboxQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF12C8D3F0F8AA81C2E06 /* AudioToolboxQueue.cpp */; };
+		C9FFF47708618FEDD8DCBCF7 /* PitchDuration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFAC12ABF20BC1CC8E0B4 /* PitchDuration.cpp */; };
 		C9FFF48DCEBA1117D099FE16 /* ApplicationModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8951A623C40AB2CE915 /* ApplicationModel.mm */; };
+		C9FFF4DD21D1BFECF23BB5EC /* PitchesCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF553A000FD77E0AA3909 /* PitchesCollection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C9FFF4F9CA314284806C56E9 /* SeekablePitchesList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF137B055DAB82B4D5F75 /* SeekablePitchesList.cpp */; };
+		C9FFF4FA23587E0923B00B31 /* mpm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFDC446C4E6DD69FC4CE3 /* mpm.cpp */; };
+		C9FFF51D4892C72BB4CB34B2 /* PitchInputReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF955FDC02E251D044DFF /* PitchInputReader.cpp */; };
+		C9FFF5504FCFD0E25C6F38AB /* FFT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF4C5B870020014D44D61 /* FFT.cpp */; };
+		C9FFF5839A027215248881F1 /* PitchDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFEB2A8C708772977F110 /* PitchDetector.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF5ADE1325ED07D1D2704 /* pugixml.cc in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF410847352F0264B7A8C /* pugixml.cc */; };
+		C9FFF62DBEAD5135E00F2E5C /* Pitch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFFA519AE7B1F46B05654 /* Pitch.cpp */; };
 		C9FFF675D2225261112A0C5D /* AudioStreamDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC90367A8ADD207F39D9 /* AudioStreamDescription.cpp */; };
 		C9FFF69203ED6830C2A83AE6 /* VocalPartAudioDataGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF1BDBADBA522C9A65AAC /* VocalPartAudioDataGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF69672E063C964DFFDCA /* loader.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF25533EF3ACD6071D0A5 /* loader.hh */; };
 		C9FFF6A17B42F47EF36B64D2 /* AudioToolboxInputReader.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF2649FE180FAB5FE4553 /* AudioToolboxInputReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF770DFE89C133F8AFDEF /* AudioToolboxQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF0A451D05327E2DE59B8 /* AudioToolboxQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF78B25B019C99021DF7C /* PitchRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF771DFE1C5C499A0BFC5 /* PitchRenderer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C9FFF7C327A7E70B11790753 /* PitchInputReader.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF1DBEF12B36FA549F3B0 /* PitchInputReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF8039D5FBBAF18F3783C /* BaseAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF93B13F01C590643A6A7 /* BaseAudioPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF8073BF9456F0986AF20 /* pugiconfig.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFE1A9795F1014748594E /* pugiconfig.hh */; };
+		C9FFF8637CF97D67D4CBBD3E /* hmm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2621E905F109D56ECE4 /* hmm.cpp */; };
+		C9FFF87F596EC01713BD6AF3 /* yin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE0BCC6F1DFFD4D269EB /* yin.cpp */; };
+		C9FFF8812CB864D4AA1D6E80 /* Pitch.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF72BF4EE7A7194A1C0B7 /* Pitch.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C9FFF883D39731C95DE4EB55 /* PitchesMutableList.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFD34BCC0688B5A5E1838 /* PitchesMutableList.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF8B9EE16D7402AC98823 /* AudioToolboxInputReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFBA07A1480342A9F451A /* AudioToolboxInputReader.cpp */; };
 		C9FFF9035656362FF5E444A6 /* utils.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF568A3AA5BAE1B5449B0 /* utils.hh */; };
 		C9FFF9377D106B5280AD99A6 /* log.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFD79D420990C0BBEC118 /* log.hh */; };
+		C9FFF93AC04930444A9F4DCC /* SeekablePitchesList.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFAF4A7981E386B4E562C /* SeekablePitchesList.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF95B741E0D318B598368 /* FixedSizeObjectPool.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFFED99F0A661C0C7CDFE /* FixedSizeObjectPool.h */; };
 		C9FFF994FFA7992364AF80BB /* BaseAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF1D4D58FBFDE258E3441 /* BaseAudioPlayer.cpp */; };
+		C9FFF9A7F519C50CC2DA3224 /* PitchesMutableList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC786F901FE7A8101871 /* PitchesMutableList.cpp */; };
+		C9FFF9C652C9D2537B910A60 /* FFT.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF4416ED39131E1C96568 /* FFT.h */; };
 		C9FFF9D6C519816B2EF630F5 /* liquidsfz.cc in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC488245B1D43CDB681D /* liquidsfz.cc */; };
 		C9FFF9E17707E9E4FDD3CC9D /* hydrogenimport.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF8D8F0099984C24D9A58 /* hydrogenimport.hh */; };
+		C9FFF9FC4171AC210F5B4F73 /* pitch_detection.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF1089637FC528A8C5156 /* pitch_detection.h */; };
+		C9FFFA157AFE16229B73B743 /* hmm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2621E905F109D56ECE4 /* hmm.cpp */; };
+		C9FFFA20E3C4A6736FC492A5 /* PitchDuration.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF08CE7791AC8415E0EF0 /* PitchDuration.h */; };
+		C9FFFA2773FBA115FF222751 /* PitchesCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF553A000FD77E0AA3909 /* PitchesCollection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFFA3C45A3CDFF274CC955 /* AudioStreamDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF8CF418998FD71DEF3A7 /* AudioStreamDescription.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C9FFFA3C67392FB69C1845B3 /* PitchDetectionSmoothingAudioBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF06ADDBFCDB52FB5DC8A /* PitchDetectionSmoothingAudioBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFFAA4D40E39A03491BC2E /* synth.cc in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC9CD69C33417DC50B22 /* synth.cc */; };
+		C9FFFAD21D92DF065E814712 /* mpm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFDC446C4E6DD69FC4CE3 /* mpm.cpp */; };
+		C9FFFB6ADBAB234B8FBF830B /* PitchDetectionSmoothingAudioBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8C6C90A66E376F685DC /* PitchDetectionSmoothingAudioBuffer.cpp */; };
+		C9FFFB72AE0F7B59EB464BBC /* pitch_detection.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF1089637FC528A8C5156 /* pitch_detection.h */; };
+		C9FFFB7A9B514847031FE31C /* autocorrelation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFEA184D63983601718CF /* autocorrelation.cpp */; };
 		C9FFFB9ADFF2D62E247BD58F /* MouseClickChecker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8557DD0DA640840A097 /* MouseClickChecker.cpp */; };
+		C9FFFBA003308E635B2D11F4 /* SevaghPitchDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF0412083CC812E7412DD /* SevaghPitchDetector.h */; };
+		C9FFFBA53A45E7561F2D52F8 /* PitchDuration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFAC12ABF20BC1CC8E0B4 /* PitchDuration.cpp */; };
+		C9FFFBB284130F06362A014B /* PitchInputReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF955FDC02E251D044DFF /* PitchInputReader.cpp */; };
+		C9FFFBE50B81FFFCC4F17B1E /* parabolic_interpolation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF02E93F34948D52C4F42 /* parabolic_interpolation.cpp */; };
+		C9FFFBE724AEF464050A2E0B /* PitchesMutableList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC786F901FE7A8101871 /* PitchesMutableList.cpp */; };
 		C9FFFC148F9C430023289217 /* hydrogenimport.cc in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF35FFE3131D23E666DB6 /* hydrogenimport.cc */; };
+		C9FFFC730B1CC3A0BBA45037 /* AccelerateFFT.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFA0145FBA9C42E3C8BB3 /* AccelerateFFT.h */; };
+		C9FFFCEBF26383D700C08739 /* SevaghPitchDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF112B31CD8B941BA49E3 /* SevaghPitchDetector.cpp */; };
 		C9FFFCF031B1B57FB558424B /* synth.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF4D38B0405AAB494519B /* synth.hh */; };
+		C9FFFD001CBF9ABCC639AE6F /* SeekablePitchesList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF137B055DAB82B4D5F75 /* SeekablePitchesList.cpp */; };
 		C9FFFD286C657E8EF5717774 /* VocalPartAudioDataGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6C42A0C8F7F2E4F242C /* VocalPartAudioDataGenerator.cpp */; };
+		C9FFFD420E77C54CE05C5321 /* PitchDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFEB2A8C708772977F110 /* PitchDetector.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C9FFFDA3E3EAB874637EDC5C /* PitchDetectionSmoothingAudioBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8C6C90A66E376F685DC /* PitchDetectionSmoothingAudioBuffer.cpp */; };
+		C9FFFDBA6FC03B6D65549858 /* yin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE0BCC6F1DFFD4D269EB /* yin.cpp */; };
+		C9FFFE02BD704DDD97F1064E /* parabolic_interpolation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF02E93F34948D52C4F42 /* parabolic_interpolation.cpp */; };
+		C9FFFE26C25ED8F278C552CC /* PitchesMutableList.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFD34BCC0688B5A5E1838 /* PitchesMutableList.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C9FFFE41B548100563E7CAB8 /* Pitch.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF72BF4EE7A7194A1C0B7 /* Pitch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFFE70C9FC214EB583A153 /* voice.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF10026EDF1D9497F1974 /* voice.hh */; };
+		C9FFFEA7E83E8E9543878B7A /* PitchDuration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFAC12ABF20BC1CC8E0B4 /* PitchDuration.cpp */; };
 		C9FFFEB7B645150428CFEF49 /* MouseClickChecker.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFC6D1098747848058E71 /* MouseClickChecker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFFEE5068D27D8523C48D3 /* voice.cc in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE7297C9A22187363B82 /* voice.cc */; };
 		C9FFFEE566937346548654BE /* SfzPitchRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFBC5E2248DFA32CB58C3 /* SfzPitchRenderer.cpp */; };
 		C9FFFEE891489FF56BE553C2 /* SfzPitchRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF6B1F8BE59C83102D658 /* SfzPitchRenderer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C9FFFEF8E8B63E56D86DACB2 /* PitchDetectionSmoothingAudioBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF06ADDBFCDB52FB5DC8A /* PitchDetectionSmoothingAudioBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFFF1020621585053E6A56 /* envelope.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF21DBBE3430B34123A70 /* envelope.hh */; };
 		C9FFFF592537E9B9296C585E /* AudioToolboxOutputWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6CECF83E94F19796312 /* AudioToolboxOutputWriter.cpp */; };
+		C9FFFFB0390C465684C7A98D /* FFT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF4C5B870020014D44D61 /* FFT.cpp */; };
 		C9FFFFE61F29AF8731A22BB0 /* pugixml.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFB3FC89740A2C0F1A3D5 /* pugixml.hh */; };
+		C9FFFFEC5C53CC423D4CD6C9 /* AccelerateFFT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF152816628A242B0B470 /* AccelerateFFT.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -399,6 +734,14 @@
 		54338F00258A38F200C7D5E2 /* A0vH.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = A0vH.wav; sourceTree = "<group>"; };
 		54338F01258A38F200C7D5E2 /* A3vH.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = A3vH.wav; sourceTree = "<group>"; };
 		54338F02258A38F300C7D5E2 /* B7vH.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = B7vH.wav; sourceTree = "<group>"; };
+		54338F6E258A599300C7D5E2 /* LogiciOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LogiciOS.h; sourceTree = "<group>"; };
+		54338F6F258A599300C7D5E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		54338F74258A599300C7D5E2 /* LogiciOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LogiciOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		54338F79258A599300C7D5E2 /* LogiciOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogiciOSTests.swift; sourceTree = "<group>"; };
+		54338F7B258A599300C7D5E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		543390D1258A59A500C7D5E2 /* LogiciOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LogiciOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		543390D2258A59A500C7D5E2 /* Logic copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Logic copy-Info.plist"; path = "/Users/semyon/Projects/VocalTrainer2/Logic/Logic copy-Info.plist"; sourceTree = "<absolute>"; };
+		54B73D13258AA19E0072321A /* mlpack.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = mlpack.a; path = ../libs/macos/Release/mlpack.a; sourceTree = "<group>"; };
 		71AD200521649A156A2F0149 /* BoundsSelectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoundsSelectionController.h; sourceTree = "<group>"; };
 		71AD200C605140EAB4684FC9 /* AudioOperationFailedException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioOperationFailedException.cpp; sourceTree = "<group>"; };
 		71AD2029CD71A9EC26251309 /* MidiFileReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiFileReader.cpp; sourceTree = "<group>"; };
@@ -419,7 +762,6 @@
 		71AD21366B3DB9FB2DDD10CB /* MidiTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiTrack.h; sourceTree = "<group>"; };
 		71AD215113A75359CC5E2E70 /* AudioOperationFailedException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioOperationFailedException.h; sourceTree = "<group>"; };
 		71AD216006F16B88040C0712 /* MetronomeAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetronomeAudioPlayer.h; sourceTree = "<group>"; };
-		71AD21892999775A135F276A /* PitchDuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchDuration.h; sourceTree = "<group>"; };
 		71AD21AC540E7A81DE11B940 /* Executors.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Executors.cpp; sourceTree = "<group>"; };
 		71AD21D64A16620D548B5571 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libboost_system.a; sourceTree = "<group>"; };
 		71AD21D71D18F1E4B8499E64 /* Rewinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rewinder.h; sourceTree = "<group>"; };
@@ -444,7 +786,6 @@
 		71AD238B8025EC96A3CC45B1 /* libboost_thread.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libboost_thread.a; sourceTree = "<group>"; };
 		71AD23AFD23696FFCBC778CF /* BaseSynchronizedMouseEventsReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseSynchronizedMouseEventsReceiver.h; sourceTree = "<group>"; };
 		71AD23BE99E133BC64DBAD12 /* MidiTrack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiTrack.cpp; sourceTree = "<group>"; };
-		71AD23CDB5B4727C71D4263D /* SeekablePitchesList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeekablePitchesList.h; sourceTree = "<group>"; };
 		71AD23EC4AE6175997855CE2 /* MemoryUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryUtils.h; sourceTree = "<group>"; };
 		71AD23ECA6859643BFD78B14 /* WAVFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAVFile.h; sourceTree = "<group>"; };
 		71AD2449F5FC253FB2137EE6 /* OpenGLUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLUtils.h; sourceTree = "<group>"; };
@@ -465,7 +806,6 @@
 		71AD25B20FC08B87125506D6 /* ZipFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipFile.h; sourceTree = "<group>"; };
 		71AD25C2AAAAD50117883FE0 /* Collections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Collections.h; sourceTree = "<group>"; };
 		71AD25D28AB6980DB6AD54FE /* NotImplementedAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotImplementedAssert.h; sourceTree = "<group>"; };
-		71AD25DBEBB7D907CB04B84B /* PitchInputReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchInputReader.h; sourceTree = "<group>"; };
 		71AD25E0CF7A5E97BF4CB17C /* Color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Color.cpp; sourceTree = "<group>"; };
 		71AD26179700FDC84158D199 /* AudioInputManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioInputManager.cpp; sourceTree = "<group>"; };
 		71AD261D970249A90BDAE248 /* MidiMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiMessage.h; sourceTree = "<group>"; };
@@ -473,10 +813,7 @@
 		71AD26A35DFE11EE996E629B /* ListenersSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListenersSet.h; sourceTree = "<group>"; };
 		71AD26B2BEC5BEE09F688699 /* BaseRawPcmAudioDataPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseRawPcmAudioDataPlayer.cpp; sourceTree = "<group>"; };
 		71AD26B5599DB53B728689DA /* px_mixer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = px_mixer.c; sourceTree = "<group>"; };
-		71AD26B66A07C58154A68BBF /* PitchDetectionSmoothingAudioBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PitchDetectionSmoothingAudioBuffer.cpp; sourceTree = "<group>"; };
 		71AD26BA5294013E17E6F9A5 /* BaseSynchronizedMouseEventsReceiver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseSynchronizedMouseEventsReceiver.cpp; sourceTree = "<group>"; };
-		71AD26C8E0202DA2AE962F86 /* AubioPitchDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AubioPitchDetector.cpp; sourceTree = "<group>"; };
-		71AD26CD08AB67347F6A2D4D /* PitchesCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchesCollection.h; sourceTree = "<group>"; };
 		71AD26D6AB61C6C3B675AA46 /* Drawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drawer.h; sourceTree = "<group>"; };
 		71AD26E37576200389619E0A /* VxFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VxFile.cpp; sourceTree = "<group>"; };
 		71AD26E5BB21F5F5A870F2E5 /* PeriodicallySleepingBackgroundTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeriodicallySleepingBackgroundTask.h; sourceTree = "<group>"; };
@@ -495,10 +832,6 @@
 		71AD282673483D84327CD0BB /* Sets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sets.h; sourceTree = "<group>"; };
 		71AD283FF1075FCE8ADA05D5 /* ConcurrentModificationAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcurrentModificationAssert.h; sourceTree = "<group>"; };
 		71AD284C1B557C8A1A303283 /* VocalPart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VocalPart.cpp; sourceTree = "<group>"; };
-		71AD28522487D79AEC70DAAD /* SeekablePitchesList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SeekablePitchesList.cpp; sourceTree = "<group>"; };
-		71AD286291A8B71FD81C3287 /* Pitch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pitch.cpp; sourceTree = "<group>"; };
-		71AD2868ABD61AD7E92F8958 /* PitchesMutableList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PitchesMutableList.cpp; sourceTree = "<group>"; };
-		71AD28786DEAE035219E16EA /* libaubio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libaubio.a; sourceTree = "<group>"; };
 		71AD288843DEF244C2871801 /* PianoDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PianoDrawer.h; sourceTree = "<group>"; };
 		71AD2896C9F692B34665C49A /* VocalPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VocalPart.h; sourceTree = "<group>"; };
 		71AD289CC2F3F67CD4DD7DDB /* Binasc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Binasc.cpp; sourceTree = "<group>"; };
@@ -517,7 +850,6 @@
 		71AD29B5DA2060C9AD0297FA /* System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
 		71AD29B63432CC53ABDEE731 /* MouseEventsReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MouseEventsReceiver.h; sourceTree = "<group>"; };
 		71AD29C6287FB817B5159A31 /* audiodecodercoreaudio_mac.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = audiodecodercoreaudio_mac.cpp; sourceTree = "<group>"; };
-		71AD29CCFBD8682C0E0B6021 /* PitchInputReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PitchInputReader.cpp; sourceTree = "<group>"; };
 		71AD29E29D0D023E4F123946 /* AudioAverageInputLevelMonitor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioAverageInputLevelMonitor.cpp; sourceTree = "<group>"; };
 		71AD29E963BFE13E12D4B1E1 /* AudioAverageInputLevelMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioAverageInputLevelMonitor.h; sourceTree = "<group>"; };
 		71AD29FCF07352850CB8D807 /* VocalTrainerPlayerPrepareException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VocalTrainerPlayerPrepareException.h; sourceTree = "<group>"; };
@@ -567,21 +899,17 @@
 		71AD2D5696C34D7A096CDAF8 /* MidiEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiEvent.h; sourceTree = "<group>"; };
 		71AD2D721667BCF1CBF26338 /* MidiNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiNote.h; sourceTree = "<group>"; };
 		71AD2D7D172C5EE44191A527 /* ProjectControllerBridgeDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectControllerBridgeDelegate.swift; sourceTree = "<group>"; };
-		71AD2D90DDE092CAA7D1471B /* Pitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pitch.h; sourceTree = "<group>"; };
 		71AD2DA56D72EDCBFE2E94DA /* MidiEventList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiEventList.cpp; sourceTree = "<group>"; };
 		71AD2DA8614D4FCC3BF0E274 /* MidiFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiFile.h; sourceTree = "<group>"; };
 		71AD2DC58AC83E34143EAAD7 /* MetronomeAudioPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MetronomeAudioPlayer.cpp; sourceTree = "<group>"; };
 		71AD2DDA0E3CBB32F123DFD7 /* NvgDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NvgDrawer.cpp; sourceTree = "<group>"; };
-		71AD2DEB468C81169A2D7900 /* AubioPitchDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AubioPitchDetector.h; sourceTree = "<group>"; };
 		71AD2DF4EFA3C8E483900EB6 /* VocalPartAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VocalPartAudioPlayer.h; sourceTree = "<group>"; };
 		71AD2E08478C8AAE2F6D3DFA /* ProjectControllerBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectControllerBridge.h; sourceTree = "<group>"; };
-		71AD2E0B5C86BD1857507173 /* PitchDetectionSmoothingAudioBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchDetectionSmoothingAudioBuffer.h; sourceTree = "<group>"; };
 		71AD2E2CDBC366468049A641 /* VxFileTests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VxFileTests.cpp; sourceTree = "<group>"; };
 		71AD2E2F1B0618043F8069B6 /* AudioFilePlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioFilePlayer.cpp; sourceTree = "<group>"; };
 		71AD2E32A57825EF1C972DD7 /* MidiFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiFile.cpp; sourceTree = "<group>"; };
 		71AD2E5AB05278F00C3E0B92 /* Options.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Options.cpp; sourceTree = "<group>"; };
 		71AD2E627137CE17224299E7 /* CAStreamBasicDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAStreamBasicDescription.h; sourceTree = "<group>"; };
-		71AD2E62CBC8811236DE4C0A /* PitchesMutableList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchesMutableList.h; sourceTree = "<group>"; };
 		71AD2E92E9B8FA30974E0F73 /* MidiMessage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiMessage.cpp; sourceTree = "<group>"; };
 		71AD2E9F4BB2AC696697E078 /* VocalTrainerFilePlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VocalTrainerFilePlayer.cpp; sourceTree = "<group>"; };
 		71AD2EB79028339CE09CE2E0 /* MvxFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvxFile.h; sourceTree = "<group>"; };
@@ -596,11 +924,9 @@
 		71AD2F3A827765BD9E5F8595 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
 		71AD2F6C47686C40182C94EA /* BoundsSelectionController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BoundsSelectionController.cpp; sourceTree = "<group>"; };
 		71AD2F7E72FAC9A7C7482E87 /* Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Circle.h; sourceTree = "<group>"; };
-		71AD2F81688C6EA2184FD389 /* PitchDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchDetector.h; sourceTree = "<group>"; };
 		71AD2F83477D83058966BDE9 /* PlayingPitchSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayingPitchSequence.h; sourceTree = "<group>"; };
 		71AD2F86E4F78B08336152A6 /* NvgDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvgDrawer.h; sourceTree = "<group>"; };
 		71AD2F88E9F96CCA941F0D00 /* Algorithms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Algorithms.h; sourceTree = "<group>"; };
-		71AD2F8E9DB0340EEF8E5551 /* PitchDuration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PitchDuration.cpp; sourceTree = "<group>"; };
 		71AD2F993E58D837C2925EB2 /* TimeUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimeUtils.cpp; sourceTree = "<group>"; };
 		71AD2F9DD0BC11D0D3A2154E /* libaubio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libaubio.a; sourceTree = "<group>"; };
 		71AD2FB3472951B99E04FB5F /* Point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Point.h; sourceTree = "<group>"; };
@@ -622,18 +948,28 @@
 		ACF18AAE22EC7512008E7DAA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		ACF18AB622EC77D5008E7DAA /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		C9FFF019334CAB088EC54E4C /* AudioToolboxUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioToolboxUtils.h; sourceTree = "<group>"; };
+		C9FFF02E93F34948D52C4F42 /* parabolic_interpolation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = parabolic_interpolation.cpp; sourceTree = "<group>"; };
+		C9FFF0412083CC812E7412DD /* SevaghPitchDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SevaghPitchDetector.h; sourceTree = "<group>"; };
+		C9FFF06ADDBFCDB52FB5DC8A /* PitchDetectionSmoothingAudioBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchDetectionSmoothingAudioBuffer.h; sourceTree = "<group>"; };
 		C9FFF0846F1C05B1E364AA3D /* F#4vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "F#4vL.wav"; sourceTree = "<group>"; };
+		C9FFF08CE7791AC8415E0EF0 /* PitchDuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchDuration.h; sourceTree = "<group>"; };
 		C9FFF0A451D05327E2DE59B8 /* AudioToolboxQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioToolboxQueue.h; sourceTree = "<group>"; };
 		C9FFF0B0D072D863661F28D9 /* C7vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = C7vL.wav; sourceTree = "<group>"; };
 		C9FFF0CCC29EF18ADF7CDCB7 /* D#6vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "D#6vL.wav"; sourceTree = "<group>"; };
 		C9FFF0F1342469A70FAF3768 /* AudioOutputWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioOutputWriter.h; sourceTree = "<group>"; };
 		C9FFF10026EDF1D9497F1974 /* voice.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = voice.hh; sourceTree = "<group>"; };
+		C9FFF1089637FC528A8C5156 /* pitch_detection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pitch_detection.h; sourceTree = "<group>"; };
+		C9FFF112B31CD8B941BA49E3 /* SevaghPitchDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SevaghPitchDetector.cpp; sourceTree = "<group>"; };
 		C9FFF12C8D3F0F8AA81C2E06 /* AudioToolboxQueue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioToolboxQueue.cpp; sourceTree = "<group>"; };
+		C9FFF137B055DAB82B4D5F75 /* SeekablePitchesList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SeekablePitchesList.cpp; sourceTree = "<group>"; };
+		C9FFF152816628A242B0B470 /* AccelerateFFT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AccelerateFFT.cpp; sourceTree = "<group>"; };
 		C9FFF1BDBADBA522C9A65AAC /* VocalPartAudioDataGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VocalPartAudioDataGenerator.h; sourceTree = "<group>"; };
 		C9FFF1D4D58FBFDE258E3441 /* BaseAudioPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseAudioPlayer.cpp; sourceTree = "<group>"; };
+		C9FFF1DBEF12B36FA549F3B0 /* PitchInputReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchInputReader.h; sourceTree = "<group>"; };
 		C9FFF21DBBE3430B34123A70 /* envelope.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = envelope.hh; sourceTree = "<group>"; };
 		C9FFF232394F9A1F84DABCD7 /* A3vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = A3vL.wav; sourceTree = "<group>"; };
 		C9FFF25533EF3ACD6071D0A5 /* loader.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = loader.hh; sourceTree = "<group>"; };
+		C9FFF2621E905F109D56ECE4 /* hmm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hmm.cpp; sourceTree = "<group>"; };
 		C9FFF2649FE180FAB5FE4553 /* AudioToolboxInputReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioToolboxInputReader.h; sourceTree = "<group>"; };
 		C9FFF2C9436D837BD97751AA /* A5vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = A5vL.wav; sourceTree = "<group>"; };
 		C9FFF3069C97AF2EAA6B7CFE /* D#2vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "D#2vL.wav"; sourceTree = "<group>"; };
@@ -641,10 +977,13 @@
 		C9FFF35FFE3131D23E666DB6 /* hydrogenimport.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hydrogenimport.cc; sourceTree = "<group>"; };
 		C9FFF36F3E2C63DD9FCFA229 /* A4vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = A4vL.wav; sourceTree = "<group>"; };
 		C9FFF410847352F0264B7A8C /* pugixml.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pugixml.cc; sourceTree = "<group>"; };
+		C9FFF4416ED39131E1C96568 /* FFT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFT.h; sourceTree = "<group>"; };
 		C9FFF4553C50C7EB14C0B514 /* A1vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = A1vL.wav; sourceTree = "<group>"; };
 		C9FFF49E2E85F780A9AEC5AE /* F#1vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "F#1vL.wav"; sourceTree = "<group>"; };
+		C9FFF4C5B870020014D44D61 /* FFT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FFT.cpp; sourceTree = "<group>"; };
 		C9FFF4D38B0405AAB494519B /* synth.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = synth.hh; sourceTree = "<group>"; };
 		C9FFF51E467A94329EF39AA1 /* F#6vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "F#6vL.wav"; sourceTree = "<group>"; };
+		C9FFF553A000FD77E0AA3909 /* PitchesCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchesCollection.h; sourceTree = "<group>"; };
 		C9FFF568A3AA5BAE1B5449B0 /* utils.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = utils.hh; sourceTree = "<group>"; };
 		C9FFF649820E832C888FD580 /* loader.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = loader.cc; sourceTree = "<group>"; };
 		C9FFF682C44A586F4A455B65 /* liquidsfz.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = liquidsfz.hh; sourceTree = "<group>"; };
@@ -653,20 +992,26 @@
 		C9FFF6CECF83E94F19796312 /* AudioToolboxOutputWriter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioToolboxOutputWriter.cpp; sourceTree = "<group>"; };
 		C9FFF709CBEFCF8F5E9949E3 /* F#7vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "F#7vL.wav"; sourceTree = "<group>"; };
 		C9FFF7112499A420B8CA87D1 /* F#2vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "F#2vL.wav"; sourceTree = "<group>"; };
+		C9FFF72BF4EE7A7194A1C0B7 /* Pitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pitch.h; sourceTree = "<group>"; };
 		C9FFF771DFE1C5C499A0BFC5 /* PitchRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchRenderer.h; sourceTree = "<group>"; };
 		C9FFF7A9D2D0646725A22DF3 /* F#5vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "F#5vL.wav"; sourceTree = "<group>"; };
 		C9FFF7E998999691294C7913 /* C4vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = C4vL.wav; sourceTree = "<group>"; };
 		C9FFF83CBE4963E385E2E422 /* C6vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = C6vL.wav; sourceTree = "<group>"; };
 		C9FFF8557DD0DA640840A097 /* MouseClickChecker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MouseClickChecker.cpp; sourceTree = "<group>"; };
 		C9FFF8951A623C40AB2CE915 /* ApplicationModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ApplicationModel.mm; sourceTree = "<group>"; };
+		C9FFF8C6C90A66E376F685DC /* PitchDetectionSmoothingAudioBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PitchDetectionSmoothingAudioBuffer.cpp; sourceTree = "<group>"; };
 		C9FFF8CF418998FD71DEF3A7 /* AudioStreamDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioStreamDescription.h; sourceTree = "<group>"; };
 		C9FFF8D8F0099984C24D9A58 /* hydrogenimport.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = hydrogenimport.hh; sourceTree = "<group>"; };
 		C9FFF92B31B2C77BAD62F0E1 /* D#3vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "D#3vL.wav"; sourceTree = "<group>"; };
 		C9FFF93B13F01C590643A6A7 /* BaseAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseAudioPlayer.h; sourceTree = "<group>"; };
+		C9FFF955FDC02E251D044DFF /* PitchInputReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PitchInputReader.cpp; sourceTree = "<group>"; };
 		C9FFF9BD386740812CDFD1F9 /* C1vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = C1vL.wav; sourceTree = "<group>"; };
 		C9FFF9D82C4D660D7FE97259 /* C8vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = C8vL.wav; sourceTree = "<group>"; };
 		C9FFF9D8FF4D3EE38E8BA2DD /* piano.sfz */ = {isa = PBXFileReference; lastKnownFileType = file.sfz; path = piano.sfz; sourceTree = "<group>"; };
+		C9FFFA0145FBA9C42E3C8BB3 /* AccelerateFFT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccelerateFFT.h; sourceTree = "<group>"; };
 		C9FFFA7A71977FC73F08C461 /* D#7vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "D#7vL.wav"; sourceTree = "<group>"; };
+		C9FFFAC12ABF20BC1CC8E0B4 /* PitchDuration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PitchDuration.cpp; sourceTree = "<group>"; };
+		C9FFFAF4A7981E386B4E562C /* SeekablePitchesList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeekablePitchesList.h; sourceTree = "<group>"; };
 		C9FFFB2BB54C4A3B47467E77 /* A7vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = A7vL.wav; sourceTree = "<group>"; };
 		C9FFFB3FC89740A2C0F1A3D5 /* pugixml.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pugixml.hh; sourceTree = "<group>"; };
 		C9FFFB7436D833AE12BB7428 /* D#1vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "D#1vL.wav"; sourceTree = "<group>"; };
@@ -676,25 +1021,55 @@
 		C9FFFC33442250265DC42295 /* curve.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = curve.hh; sourceTree = "<group>"; };
 		C9FFFC488245B1D43CDB681D /* liquidsfz.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = liquidsfz.cc; sourceTree = "<group>"; };
 		C9FFFC6D1098747848058E71 /* MouseClickChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MouseClickChecker.h; sourceTree = "<group>"; };
+		C9FFFC786F901FE7A8101871 /* PitchesMutableList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PitchesMutableList.cpp; sourceTree = "<group>"; };
 		C9FFFC90367A8ADD207F39D9 /* AudioStreamDescription.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioStreamDescription.cpp; sourceTree = "<group>"; };
 		C9FFFC9CD69C33417DC50B22 /* synth.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = synth.cc; sourceTree = "<group>"; };
+		C9FFFD34BCC0688B5A5E1838 /* PitchesMutableList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchesMutableList.h; sourceTree = "<group>"; };
 		C9FFFD56742584E880665CE3 /* utils.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utils.cc; sourceTree = "<group>"; };
 		C9FFFD768C89C1B8FF44E58D /* AudioToolboxUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioToolboxUtils.cpp; sourceTree = "<group>"; };
 		C9FFFD79D420990C0BBEC118 /* log.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = log.hh; sourceTree = "<group>"; };
+		C9FFFDC446C4E6DD69FC4CE3 /* mpm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mpm.cpp; sourceTree = "<group>"; };
+		C9FFFE0BCC6F1DFFD4D269EB /* yin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = yin.cpp; sourceTree = "<group>"; };
 		C9FFFE1A9795F1014748594E /* pugiconfig.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pugiconfig.hh; sourceTree = "<group>"; };
 		C9FFFE2601EC836796D25F73 /* D#5vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "D#5vL.wav"; sourceTree = "<group>"; };
 		C9FFFE26CDE1FC6E88447AC4 /* A2vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = A2vL.wav; sourceTree = "<group>"; };
 		C9FFFE7297C9A22187363B82 /* voice.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = voice.cc; sourceTree = "<group>"; };
 		C9FFFE737E79706B2714E8F5 /* log.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = log.cc; sourceTree = "<group>"; };
+		C9FFFEA184D63983601718CF /* autocorrelation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = autocorrelation.cpp; sourceTree = "<group>"; };
 		C9FFFEA213247298F347ED90 /* PlaybackData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlaybackData.cpp; sourceTree = "<group>"; };
+		C9FFFEB2A8C708772977F110 /* PitchDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchDetector.h; sourceTree = "<group>"; };
 		C9FFFED6C10BBE39AE96DD8D /* F#3vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "F#3vL.wav"; sourceTree = "<group>"; };
 		C9FFFEE2F56D5CCB9378EFFB /* A6vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = A6vL.wav; sourceTree = "<group>"; };
 		C9FFFEEBC432B387AA4B95E7 /* C5vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = C5vL.wav; sourceTree = "<group>"; };
+		C9FFFFA519AE7B1F46B05654 /* Pitch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pitch.cpp; sourceTree = "<group>"; };
 		C9FFFFAE3565C7594BC72B92 /* C2vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = C2vL.wav; sourceTree = "<group>"; };
 		C9FFFFED99F0A661C0C7CDFE /* FixedSizeObjectPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedSizeObjectPool.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		54338F71258A599300C7D5E2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5433907F258A59A500C7D5E2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				54339080258A59A500C7D5E2 /* Accelerate.framework in Frameworks */,
+				54339082258A59A500C7D5E2 /* libboost_serialization.a in Frameworks */,
+				54339083258A59A500C7D5E2 /* sndfile.a in Frameworks */,
+				54339084258A59A500C7D5E2 /* libboost_system.a in Frameworks */,
+				54339085258A59A500C7D5E2 /* libboost_thread.a in Frameworks */,
+				54339086258A59A500C7D5E2 /* libportaudio.a in Frameworks */,
+				54339087258A59A500C7D5E2 /* libSoundTouch.a in Frameworks */,
+				54339088258A59A500C7D5E2 /* AudioToolbox.framework in Frameworks */,
+				54339089258A59A500C7D5E2 /* CoreAudio.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ACB0244323D5CF6100CD08A7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -708,7 +1083,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACF18AB722EC77D5008E7DAA /* Accelerate.framework in Frameworks */,
-				ACF18AB022EC76E3008E7DAA /* libaubio.a in Frameworks */,
+				54B73D14258AA19E0072321A /* mlpack.a in Frameworks */,
 				ACF18AB122EC76E3008E7DAA /* libboost_serialization.a in Frameworks */,
 				54338E4E258A305800C7D5E2 /* sndfile.a in Frameworks */,
 				ACF18AB222EC76E3008E7DAA /* libboost_system.a in Frameworks */,
@@ -723,6 +1098,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		54338F6D258A599300C7D5E2 /* LogiciOS */ = {
+			isa = PBXGroup;
+			children = (
+				54338F6E258A599300C7D5E2 /* LogiciOS.h */,
+				54338F6F258A599300C7D5E2 /* Info.plist */,
+			);
+			path = LogiciOS;
+			sourceTree = "<group>";
+		};
+		54338F78258A599300C7D5E2 /* LogiciOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				54338F79258A599300C7D5E2 /* LogiciOSTests.swift */,
+				54338F7B258A599300C7D5E2 /* Info.plist */,
+			);
+			path = LogiciOSTests;
+			sourceTree = "<group>";
+		};
 		71AD20010020CADC9FE34ADB /* Mvx */ = {
 			isa = PBXGroup;
 			children = (
@@ -750,14 +1143,6 @@
 				71AD2E2F1B0618043F8069B6 /* AudioFilePlayer.cpp */,
 			);
 			path = Decoding;
-			sourceTree = "<group>";
-		};
-		71AD20C79BE0CEC291A92B27 /* libs */ = {
-			isa = PBXGroup;
-			children = (
-				71AD2B9CFFAA38B02D7FA47F /* macos */,
-			);
-			path = libs;
 			sourceTree = "<group>";
 		};
 		71AD20DAAD9DCFE6382FC9CB /* Other */ = {
@@ -847,7 +1232,6 @@
 			isa = PBXGroup;
 			children = (
 				71AD2673A22213546CF3BC15 /* Bridge */,
-				C9FFFD52E7269E3D5E65C31F /* AudioToolbox */,
 			);
 			path = Apple;
 			sourceTree = "<group>";
@@ -962,6 +1346,8 @@
 				C9FFF6B1F8BE59C83102D658 /* SfzPitchRenderer.h */,
 				C9FFF1BDBADBA522C9A65AAC /* VocalPartAudioDataGenerator.h */,
 				C9FFF6C42A0C8F7F2E4F242C /* VocalPartAudioDataGenerator.cpp */,
+				C9FFFAC12ABF20BC1CC8E0B4 /* PitchDuration.cpp */,
+				C9FFF08CE7791AC8415E0EF0 /* PitchDuration.h */,
 			);
 			path = Vx;
 			sourceTree = "<group>";
@@ -1019,44 +1405,20 @@
 		71AD2B0AAC9C5691B1971D9C /* AudioInput */ = {
 			isa = PBXGroup;
 			children = (
-				71AD20C79BE0CEC291A92B27 /* libs */,
-				71AD2D90DDE092CAA7D1471B /* Pitch.h */,
-				71AD286291A8B71FD81C3287 /* Pitch.cpp */,
-				71AD2F81688C6EA2184FD389 /* PitchDetector.h */,
 				71AD2CF6B941BB357C50635B /* audioinput.cmake */,
 				71AD2B4AC4925000EA46F164 /* AudioInputReader.h */,
-				71AD25DBEBB7D907CB04B84B /* PitchInputReader.h */,
-				71AD26CD08AB67347F6A2D4D /* PitchesCollection.h */,
-				71AD2DEB468C81169A2D7900 /* AubioPitchDetector.h */,
 				71AD29640B8391A0E9255C2B /* AudioInputRecorder.h */,
-				71AD2E62CBC8811236DE4C0A /* PitchesMutableList.h */,
-				71AD29CCFBD8682C0E0B6021 /* PitchInputReader.cpp */,
-				71AD23CDB5B4727C71D4263D /* SeekablePitchesList.h */,
-				71AD26C8E0202DA2AE962F86 /* AubioPitchDetector.cpp */,
 				71AD2941678BB40B5B475363 /* AudioInputRecorder.cpp */,
-				71AD2868ABD61AD7E92F8958 /* PitchesMutableList.cpp */,
-				71AD28522487D79AEC70DAAD /* SeekablePitchesList.cpp */,
 				71AD27F0C180C52947B1B171 /* AudioInputPitchesRecorder.h */,
 				71AD25758139F4B8B31A4E97 /* AudioInputPitchesRecorder.cpp */,
 				71AD29E963BFE13E12D4B1E1 /* AudioAverageInputLevelMonitor.h */,
 				71AD29E29D0D023E4F123946 /* AudioAverageInputLevelMonitor.cpp */,
-				71AD2E0B5C86BD1857507173 /* PitchDetectionSmoothingAudioBuffer.h */,
-				71AD26B66A07C58154A68BBF /* PitchDetectionSmoothingAudioBuffer.cpp */,
 				71AD253C5FA3B3B7EB7DDEB5 /* Portmixer */,
-				71AD2F8E9DB0340EEF8E5551 /* PitchDuration.cpp */,
-				71AD21892999775A135F276A /* PitchDuration.h */,
 				C9FFFBA07A1480342A9F451A /* AudioToolboxInputReader.cpp */,
 				C9FFF2649FE180FAB5FE4553 /* AudioToolboxInputReader.h */,
+				C9FFF3F85DF24C287D20B98C /* PitchDetection */,
 			);
 			path = AudioInput;
-			sourceTree = "<group>";
-		};
-		71AD2B9CFFAA38B02D7FA47F /* macos */ = {
-			isa = PBXGroup;
-			children = (
-				71AD28786DEAE035219E16EA /* libaubio.a */,
-			);
-			path = macos;
 			sourceTree = "<group>";
 		};
 		71AD2BEF6295026F9DF60185 /* Events */ = {
@@ -1174,6 +1536,8 @@
 			children = (
 				ACF18AA122EC711A008E7DAA /* XCodeFiles */,
 				ACB0244723D5CF6100CD08A7 /* LogicTests */,
+				54338F6D258A599300C7D5E2 /* LogiciOS */,
+				54338F78258A599300C7D5E2 /* LogiciOSTests */,
 				ACF18AA022EC711A008E7DAA /* Products */,
 				71AD2CC2F3597DFE26AD1373 /* ApplicationModel.cpp */,
 				71AD20E7EAC70D42EDAA7136 /* ApplicationModel.h */,
@@ -1192,6 +1556,8 @@
 				71AD2FCEDF32E8C2DFE0A2A3 /* zip */,
 				C9FFF3AB121624CA70653E4B /* BaseAudio */,
 				C9FFF8951A623C40AB2CE915 /* ApplicationModel.mm */,
+				543390D2258A59A500C7D5E2 /* Logic copy-Info.plist */,
+				C9FFF5E6A626168CB0C968B2 /* FFT */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1200,6 +1566,8 @@
 			children = (
 				ACF18A9F22EC711A008E7DAA /* Logic.framework */,
 				ACB0244623D5CF6100CD08A7 /* LogicTests */,
+				54338F74258A599300C7D5E2 /* LogiciOSTests.xctest */,
+				543390D1258A59A500C7D5E2 /* LogiciOS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1216,6 +1584,7 @@
 		ACF18AAB22EC74E9008E7DAA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				54B73D13258AA19E0072321A /* mlpack.a */,
 				54338E4D258A304100C7D5E2 /* sndfile.a */,
 				54338E4B258A2E7200C7D5E2 /* libsndfile.a */,
 				54338E40258A2A2700C7D5E2 /* libliquidsfz.a */,
@@ -1250,6 +1619,19 @@
 			path = Sfz;
 			sourceTree = "<group>";
 		};
+		C9FFF2E1F5ABD5951C37107E /* Sevagh */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFF2621E905F109D56ECE4 /* hmm.cpp */,
+				C9FFFDC446C4E6DD69FC4CE3 /* mpm.cpp */,
+				C9FFFE0BCC6F1DFFD4D269EB /* yin.cpp */,
+				C9FFF1089637FC528A8C5156 /* pitch_detection.h */,
+				C9FFFEA184D63983601718CF /* autocorrelation.cpp */,
+				C9FFF02E93F34948D52C4F42 /* parabolic_interpolation.cpp */,
+			);
+			path = Sevagh;
+			sourceTree = "<group>";
+		};
 		C9FFF3AB121624CA70653E4B /* BaseAudio */ = {
 			isa = PBXGroup;
 			children = (
@@ -1260,11 +1642,52 @@
 			path = BaseAudio;
 			sourceTree = "<group>";
 		};
+		C9FFF3F85DF24C287D20B98C /* PitchDetection */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFFD34BCC0688B5A5E1838 /* PitchesMutableList.h */,
+				C9FFF955FDC02E251D044DFF /* PitchInputReader.cpp */,
+				C9FFF1DBEF12B36FA549F3B0 /* PitchInputReader.h */,
+				C9FFF8C6C90A66E376F685DC /* PitchDetectionSmoothingAudioBuffer.cpp */,
+				C9FFF06ADDBFCDB52FB5DC8A /* PitchDetectionSmoothingAudioBuffer.h */,
+				C9FFF72BF4EE7A7194A1C0B7 /* Pitch.h */,
+				C9FFFC786F901FE7A8101871 /* PitchesMutableList.cpp */,
+				C9FFFEB2A8C708772977F110 /* PitchDetector.h */,
+				C9FFF553A000FD77E0AA3909 /* PitchesCollection.h */,
+				C9FFF137B055DAB82B4D5F75 /* SeekablePitchesList.cpp */,
+				C9FFFAF4A7981E386B4E562C /* SeekablePitchesList.h */,
+				C9FFFFA519AE7B1F46B05654 /* Pitch.cpp */,
+				C9FFF112B31CD8B941BA49E3 /* SevaghPitchDetector.cpp */,
+				C9FFF0412083CC812E7412DD /* SevaghPitchDetector.h */,
+				C9FFF2E1F5ABD5951C37107E /* Sevagh */,
+			);
+			path = PitchDetection;
+			sourceTree = "<group>";
+		};
 		C9FFF5719AE060FE96476C14 /* Apple */ = {
 			isa = PBXGroup;
 			children = (
 				C9FFF0F1342469A70FAF3768 /* AudioOutputWriter.h */,
 				C9FFF6CECF83E94F19796312 /* AudioToolboxOutputWriter.cpp */,
+			);
+			path = Apple;
+			sourceTree = "<group>";
+		};
+		C9FFF5E6A626168CB0C968B2 /* FFT */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFF4416ED39131E1C96568 /* FFT.h */,
+				C9FFF6814E350536C1CB1C67 /* Apple */,
+				C9FFF4C5B870020014D44D61 /* FFT.cpp */,
+			);
+			path = FFT;
+			sourceTree = "<group>";
+		};
+		C9FFF6814E350536C1CB1C67 /* Apple */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFF152816628A242B0B470 /* AccelerateFFT.cpp */,
+				C9FFFA0145FBA9C42E3C8BB3 /* AccelerateFFT.h */,
 			);
 			path = Apple;
 			sourceTree = "<group>";
@@ -1368,16 +1791,164 @@
 			path = samples;
 			sourceTree = "<group>";
 		};
-		C9FFFD52E7269E3D5E65C31F /* AudioToolbox */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AudioToolbox;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		54338F8E258A59A500C7D5E2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				54338F8F258A59A500C7D5E2 /* PitchRenderer.h in Headers */,
+				54338F90258A59A500C7D5E2 /* SfzPitchRenderer.h in Headers */,
+				54338F91258A59A500C7D5E2 /* VocalPartAudioDataGenerator.h in Headers */,
+				54338F92258A59A500C7D5E2 /* AudioToolboxInputReader.h in Headers */,
+				54338F93258A59A500C7D5E2 /* AudioOutputWriter.h in Headers */,
+				54338F94258A59A500C7D5E2 /* AudioToolboxUtils.h in Headers */,
+				54338F95258A59A500C7D5E2 /* AudioStreamDescription.h in Headers */,
+				54338F96258A59A500C7D5E2 /* AudioToolboxQueue.h in Headers */,
+				54338F97258A59A500C7D5E2 /* BaseAudioPlayer.h in Headers */,
+				54338F98258A59A500C7D5E2 /* MouseClickChecker.h in Headers */,
+				54338F99258A59A500C7D5E2 /* VocalTrainerFile.h in Headers */,
+				54338F9A258A59A500C7D5E2 /* Rewindable.h in Headers */,
+				54338F9B258A59A500C7D5E2 /* BeatsPerMinuteProvider.h in Headers */,
+				54338F9C258A59A500C7D5E2 /* Seeker.h in Headers */,
+				54338F9D258A59A500C7D5E2 /* Rewinder.h in Headers */,
+				54338F9E258A59A500C7D5E2 /* ProjectController.h in Headers */,
+				54338F9F258A59A500C7D5E2 /* BoundsSelectionController.h in Headers */,
+				54338FA0258A59A500C7D5E2 /* BoundsSelectionDelegate.h in Headers */,
+				54338FA1258A59A500C7D5E2 /* AudioData.h in Headers */,
+				54338FA3258A59A500C7D5E2 /* AudioInputReader.h in Headers */,
+				54338FA6258A59A500C7D5E2 /* AudioInputRecorder.h in Headers */,
+				54338FA9258A59A500C7D5E2 /* AudioInputPitchesRecorder.h in Headers */,
+				54338FAA258A59A500C7D5E2 /* AudioAverageInputLevelMonitor.h in Headers */,
+				54338FAC258A59A500C7D5E2 /* MainController.h in Headers */,
+				54338FAD258A59A500C7D5E2 /* VocalTrainerPlayerPrepareException.h in Headers */,
+				54338FAE258A59A500C7D5E2 /* AudioOperationFailedException.h in Headers */,
+				54338FAF258A59A500C7D5E2 /* AudioPlayerWithDefaultSeekHandler.h in Headers */,
+				54338FB0258A59A500C7D5E2 /* MidiNote.h in Headers */,
+				54338FB1258A59A500C7D5E2 /* MidiTrack.h in Headers */,
+				54338FB2258A59A500C7D5E2 /* MidiFileReader.h in Headers */,
+				54338FB3258A59A500C7D5E2 /* Binasc.h in Headers */,
+				54338FB4258A59A500C7D5E2 /* Options.h in Headers */,
+				54338FB5258A59A500C7D5E2 /* MidiFile.h in Headers */,
+				54338FB6258A59A500C7D5E2 /* MidiEvent.h in Headers */,
+				54338FB7258A59A500C7D5E2 /* MidiMessage.h in Headers */,
+				54338FB8258A59A500C7D5E2 /* MidiEventList.h in Headers */,
+				54338FB9258A59A500C7D5E2 /* MidiFileReaderException.h in Headers */,
+				54338FBA258A59A500C7D5E2 /* WavAudioPlayer.h in Headers */,
+				54338FBB258A59A500C7D5E2 /* MetronomeAudioPlayer.h in Headers */,
+				54338FBC258A59A500C7D5E2 /* BaseRawPcmAudioDataPlayer.h in Headers */,
+				54338FBD258A59A500C7D5E2 /* RealtimeStreamingAudioPlayer.h in Headers */,
+				54338FBE258A59A500C7D5E2 /* CADebugMacros.h in Headers */,
+				54338FBF258A59A500C7D5E2 /* CAStreamBasicDescription.h in Headers */,
+				54338FC0258A59A500C7D5E2 /* audiodecoder.h in Headers */,
+				54338FC1258A59A500C7D5E2 /* DecodedTrack.h in Headers */,
+				54338FC2258A59A500C7D5E2 /* audiodecodercoreaudio_mac.h in Headers */,
+				54338FC3258A59A500C7D5E2 /* AudioFilePlayer.h in Headers */,
+				54338FC4258A59A500C7D5E2 /* px_mixer.h in Headers */,
+				54338FC5258A59A500C7D5E2 /* Core.h in Headers */,
+				54338FC6258A59A500C7D5E2 /* Line.h in Headers */,
+				54338FC7258A59A500C7D5E2 /* Maps.h in Headers */,
+				54338FC8258A59A500C7D5E2 /* Rect.h in Headers */,
+				54338FC9258A59A500C7D5E2 /* Sets.h in Headers */,
+				54338FCA258A59A500C7D5E2 /* Color.h in Headers */,
+				54338FCB258A59A500C7D5E2 /* Debug.h in Headers */,
+				54338FCC258A59A500C7D5E2 /* Bitmap.h in Headers */,
+				54338FCD258A59A500C7D5E2 /* Circle.h in Headers */,
+				54338FCE258A59A500C7D5E2 /* config.h in Headers */,
+				54338FCF258A59A500C7D5E2 /* Random.h in Headers */,
+				54338FD0258A59A500C7D5E2 /* System.h in Headers */,
+				54338FD1258A59A500C7D5E2 /* Streams.h in Headers */,
+				54338FD2258A59A500C7D5E2 /* WAVFile.h in Headers */,
+				54338FD3258A59A500C7D5E2 /* Executors.h in Headers */,
+				54338FD4258A59A500C7D5E2 /* Functions.h in Headers */,
+				54338FD5258A59A500C7D5E2 /* HashUtils.h in Headers */,
+				54338FD6258A59A500C7D5E2 /* MathUtils.h in Headers */,
+				54338FD7258A59A500C7D5E2 /* stlassert.h in Headers */,
+				54338FD8258A59A500C7D5E2 /* TimeUtils.h in Headers */,
+				54338FD9258A59A500C7D5E2 /* Algorithms.h in Headers */,
+				54338FDA258A59A500C7D5E2 /* AudioUtils.h in Headers */,
+				54338FDB258A59A500C7D5E2 /* BinaryMath.h in Headers */,
+				54338FDC258A59A500C7D5E2 /* DummyMutex.h in Headers */,
+				54338FDD258A59A500C7D5E2 /* Primitives.h in Headers */,
+				54338FDE258A59A500C7D5E2 /* CountAssert.h in Headers */,
+				54338FDF258A59A500C7D5E2 /* MemoryUtils.h in Headers */,
+				54338FE0258A59A500C7D5E2 /* OpenGLUtils.h in Headers */,
+				54338FE1258A59A500C7D5E2 /* RoundedRect.h in Headers */,
+				54338FE2258A59A500C7D5E2 /* StringUtils.h in Headers */,
+				54338FE3258A59A500C7D5E2 /* ListenersSet.h in Headers */,
+				54338FE4258A59A500C7D5E2 /* FunctionsList.h in Headers */,
+				54338FE5258A59A500C7D5E2 /* GeometryUtils.h in Headers */,
+				54338FE6258A59A500C7D5E2 /* StlDebugUtils.h in Headers */,
+				54338FE7258A59A500C7D5E2 /* CallbacksQueue.h in Headers */,
+				54338FE8258A59A500C7D5E2 /* CircularBuffer.h in Headers */,
+				54338FE9258A59A500C7D5E2 /* DestructorQueue.h in Headers */,
+				54338FEA258A59A500C7D5E2 /* PointerOrObject.h in Headers */,
+				54338FEB258A59A500C7D5E2 /* OperationCanceler.h in Headers */,
+				54338FEC258A59A500C7D5E2 /* NotImplementedAssert.h in Headers */,
+				54338FED258A59A500C7D5E2 /* ConcurrentModificationAssert.h in Headers */,
+				54338FEE258A59A500C7D5E2 /* PeriodicallySleepingBackgroundTask.h in Headers */,
+				54338FEF258A59A500C7D5E2 /* PlaybackData.h in Headers */,
+				54338FF0258A59A500C7D5E2 /* VocalPartAudioPlayer.h in Headers */,
+				54338FF1258A59A500C7D5E2 /* LyricsInterval.h in Headers */,
+				54338FF2258A59A500C7D5E2 /* LyricsPart.h in Headers */,
+				54338FF3258A59A500C7D5E2 /* Lyrics.h in Headers */,
+				54338FF4258A59A500C7D5E2 /* MvxFile.h in Headers */,
+				54338FF5258A59A500C7D5E2 /* AudioInputManager.h in Headers */,
+				54338FF6258A59A500C7D5E2 /* VocalTrainerFilePlayer.h in Headers */,
+				54338FF7258A59A500C7D5E2 /* ApplicationModel.h in Headers */,
+				54338FF8258A59A500C7D5E2 /* WorkspaceDrawerResourcesProvider.h in Headers */,
+				54338FF9258A59A500C7D5E2 /* NvgDrawer.h in Headers */,
+				54338FFA258A59A500C7D5E2 /* ScrollBar.h in Headers */,
+				54338FFB258A59A500C7D5E2 /* PianoDrawer.h in Headers */,
+				54338FFC258A59A500C7D5E2 /* NoteInterval.h in Headers */,
+				54338FFD258A59A500C7D5E2 /* VocalPart.h in Headers */,
+				54338FFE258A59A500C7D5E2 /* PlaybackBounds.h in Headers */,
+				54338FFF258A59A500C7D5E2 /* PlayingPitchSequence.h in Headers */,
+				54339002258A59A500C7D5E2 /* ProjectControllerBridge.h in Headers */,
+				54339003258A59A500C7D5E2 /* WorkspaceController.h in Headers */,
+				54339004258A59A500C7D5E2 /* Point.h in Headers */,
+				54339005258A59A500C7D5E2 /* BaseMouseEventsReceiver.h in Headers */,
+				54339006258A59A500C7D5E2 /* MouseEventsReceiver.h in Headers */,
+				54339007258A59A500C7D5E2 /* BaseSynchronizedMouseEventsReceiver.h in Headers */,
+				54339008258A59A500C7D5E2 /* MetalNvgDrawer.h in Headers */,
+				54339009258A59A500C7D5E2 /* Drawer.h in Headers */,
+				5433900A258A59A500C7D5E2 /* WorkspaceDrawer.h in Headers */,
+				5433900B258A59A500C7D5E2 /* Logic.h in Headers */,
+				5433900C258A59A500C7D5E2 /* EnumMap.h in Headers */,
+				5433900D258A59A500C7D5E2 /* Timer.h in Headers */,
+				5433900E258A59A500C7D5E2 /* VxFile.h in Headers */,
+				54339010258A59A500C7D5E2 /* Collections.h in Headers */,
+				54339011258A59A500C7D5E2 /* zip.h in Headers */,
+				54339012258A59A500C7D5E2 /* miniz.h in Headers */,
+				54339013258A59A500C7D5E2 /* ZipFile.h in Headers */,
+				54339014258A59A500C7D5E2 /* FixedSizeObjectPool.h in Headers */,
+				54339015258A59A500C7D5E2 /* log.hh in Headers */,
+				54339016258A59A500C7D5E2 /* curve.hh in Headers */,
+				54339017258A59A500C7D5E2 /* synth.hh in Headers */,
+				54339018258A59A500C7D5E2 /* utils.hh in Headers */,
+				54339019258A59A500C7D5E2 /* voice.hh in Headers */,
+				5433901A258A59A500C7D5E2 /* loader.hh in Headers */,
+				5433901B258A59A500C7D5E2 /* pugixml.hh in Headers */,
+				5433901C258A59A500C7D5E2 /* envelope.hh in Headers */,
+				5433901D258A59A500C7D5E2 /* liquidsfz.hh in Headers */,
+				5433901E258A59A500C7D5E2 /* pugiconfig.hh in Headers */,
+				5433901F258A59A500C7D5E2 /* hydrogenimport.hh in Headers */,
+				C9FFF883D39731C95DE4EB55 /* PitchesMutableList.h in Headers */,
+				C9FFF7C327A7E70B11790753 /* PitchInputReader.h in Headers */,
+				C9FFFA3C67392FB69C1845B3 /* PitchDetectionSmoothingAudioBuffer.h in Headers */,
+				C9FFFE41B548100563E7CAB8 /* Pitch.h in Headers */,
+				C9FFFD420E77C54CE05C5321 /* PitchDetector.h in Headers */,
+				C9FFFA2773FBA115FF222751 /* PitchesCollection.h in Headers */,
+				C9FFF93AC04930444A9F4DCC /* SeekablePitchesList.h in Headers */,
+				C9FFF03F4C350A79F0DC69FD /* PitchDuration.h in Headers */,
+				C9FFFBA003308E635B2D11F4 /* SevaghPitchDetector.h in Headers */,
+				C9FFF9FC4171AC210F5B4F73 /* pitch_detection.h in Headers */,
+				C9FFF1B8930B5DF0E55AD1CF /* FFT.h in Headers */,
+				C9FFFC730B1CC3A0BBA45037 /* AccelerateFFT.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ACF18A9A22EC711A008E7DAA /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -1401,16 +1972,10 @@
 				71AD2EE3A2900576B0027F18 /* BoundsSelectionController.h in Headers */,
 				71AD26DD28A49E4CA382CAFB /* BoundsSelectionDelegate.h in Headers */,
 				71AD2A383D94110918F84945 /* AudioData.h in Headers */,
-				71AD28FE262CF7D4EA7DAE22 /* PitchDetector.h in Headers */,
 				71AD20F054D4B6E60864942D /* AudioInputReader.h in Headers */,
-				71AD22C10E09C0BF430DEDA6 /* PitchInputReader.h in Headers */,
-				71AD2BD5DF0C1F85D9089936 /* AubioPitchDetector.h in Headers */,
 				71AD2C30E9A2CD0AC885DBBA /* AudioInputRecorder.h in Headers */,
-				71AD21CC9BBCC3CC2A8A28E0 /* PitchesMutableList.h in Headers */,
-				71AD261D431B9945FD3087C7 /* SeekablePitchesList.h in Headers */,
 				71AD22A1906968592094FBDE /* AudioInputPitchesRecorder.h in Headers */,
 				71AD298CF3D4B222D17021E7 /* AudioAverageInputLevelMonitor.h in Headers */,
-				71AD2C805B929CF56308169D /* PitchDetectionSmoothingAudioBuffer.h in Headers */,
 				71AD2740F1AB3A19F6F1BBBC /* MainController.h in Headers */,
 				71AD251135D1A50EC0D8E6B0 /* VocalTrainerPlayerPrepareException.h in Headers */,
 				71AD25760ACBBF82683D4964 /* AudioOperationFailedException.h in Headers */,
@@ -1495,8 +2060,6 @@
 				71AD24C99A6F409AD6B0B900 /* VocalPart.h in Headers */,
 				71AD2B734FDEB3E2A1EF83F3 /* PlaybackBounds.h in Headers */,
 				71AD2D3F74BF8D16914AF612 /* PlayingPitchSequence.h in Headers */,
-				71AD20CF0DF266AC1D2CCFFA /* Pitch.h in Headers */,
-				71AD229FC8B93D7EE55579E7 /* PitchesCollection.h in Headers */,
 				71AD28528A54DD188E73F9E0 /* ProjectControllerBridge.h in Headers */,
 				71AD277D5F566A3B39277BCB /* WorkspaceController.h in Headers */,
 				71AD26B21A77803937B6D970 /* Point.h in Headers */,
@@ -1510,7 +2073,6 @@
 				71AD207E2B3F6E5F286AAE43 /* EnumMap.h in Headers */,
 				71AD2C03544136BF23ABA0A1 /* Timer.h in Headers */,
 				71AD24F57230D685E6CC7125 /* VxFile.h in Headers */,
-				71AD26325CCAFB63FBB09C32 /* PitchDuration.h in Headers */,
 				71AD22C5278A1EA18D6156C6 /* Collections.h in Headers */,
 				71AD267E89A7EDE61EDF13DC /* zip.h in Headers */,
 				71AD2D51A2C1CBE6A438D9BA /* miniz.h in Headers */,
@@ -1527,12 +2089,59 @@
 				C9FFF279A8F30DD960853DC1 /* liquidsfz.hh in Headers */,
 				C9FFF8073BF9456F0986AF20 /* pugiconfig.hh in Headers */,
 				C9FFF9E17707E9E4FDD3CC9D /* hydrogenimport.hh in Headers */,
+				C9FFFE26C25ED8F278C552CC /* PitchesMutableList.h in Headers */,
+				C9FFF2094882557F6946365B /* PitchInputReader.h in Headers */,
+				C9FFFEF8E8B63E56D86DACB2 /* PitchDetectionSmoothingAudioBuffer.h in Headers */,
+				C9FFF8812CB864D4AA1D6E80 /* Pitch.h in Headers */,
+				C9FFF5839A027215248881F1 /* PitchDetector.h in Headers */,
+				C9FFF4DD21D1BFECF23BB5EC /* PitchesCollection.h in Headers */,
+				C9FFF2B05948F0D481AB2712 /* SeekablePitchesList.h in Headers */,
+				C9FFFA20E3C4A6736FC492A5 /* PitchDuration.h in Headers */,
+				C9FFF3DE0E2135B46A096DD1 /* SevaghPitchDetector.h in Headers */,
+				C9FFFB72AE0F7B59EB464BBC /* pitch_detection.h in Headers */,
+				C9FFF9C652C9D2537B910A60 /* FFT.h in Headers */,
+				C9FFF22D402E99D96A0A2453 /* AccelerateFFT.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		54338F73258A599300C7D5E2 /* LogiciOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 54338F82258A599300C7D5E2 /* Build configuration list for PBXNativeTarget "LogiciOSTests" */;
+			buildPhases = (
+				54338F70258A599300C7D5E2 /* Sources */,
+				54338F71258A599300C7D5E2 /* Frameworks */,
+				54338F72258A599300C7D5E2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LogiciOSTests;
+			productName = LogiciOSTests;
+			productReference = 54338F74258A599300C7D5E2 /* LogiciOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		54338F8D258A59A500C7D5E2 /* LogiciOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 543390CE258A59A500C7D5E2 /* Build configuration list for PBXNativeTarget "LogiciOS" */;
+			buildPhases = (
+				54338F8E258A59A500C7D5E2 /* Headers */,
+				54339020258A59A500C7D5E2 /* Sources */,
+				5433907F258A59A500C7D5E2 /* Frameworks */,
+				5433908A258A59A500C7D5E2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LogiciOS;
+			productName = Logic;
+			productReference = 543390D1258A59A500C7D5E2 /* LogiciOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		ACB0244523D5CF6100CD08A7 /* LogicTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = ACB0244C23D5CF6100CD08A7 /* Build configuration list for PBXNativeTarget "LogicTests" */;
@@ -1574,9 +2183,13 @@
 		ACF18A9622EC711A008E7DAA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1220;
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Semyon Tikhonenko";
 				TargetAttributes = {
+					54338F73258A599300C7D5E2 = {
+						CreatedOnToolsVersion = 12.2;
+					};
 					ACB0244523D5CF6100CD08A7 = {
 						CreatedOnToolsVersion = 11.3.1;
 					};
@@ -1599,11 +2212,94 @@
 			targets = (
 				ACF18A9E22EC711A008E7DAA /* Logic */,
 				ACB0244523D5CF6100CD08A7 /* LogicTests */,
+				54338F73258A599300C7D5E2 /* LogiciOSTests */,
+				54338F8D258A59A500C7D5E2 /* LogiciOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		54338F72258A599300C7D5E2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5433908A258A59A500C7D5E2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5433908B258A59A500C7D5E2 /* F#2vH.wav in Resources */,
+				5433908C258A59A500C7D5E2 /* C2vH.wav in Resources */,
+				5433908D258A59A500C7D5E2 /* C5vL.wav in Resources */,
+				5433908E258A59A500C7D5E2 /* D#5vH.wav in Resources */,
+				5433908F258A59A500C7D5E2 /* A6vL.wav in Resources */,
+				54339090258A59A500C7D5E2 /* A1vH.wav in Resources */,
+				54339091258A59A500C7D5E2 /* D#1vL.wav in Resources */,
+				54339092258A59A500C7D5E2 /* F#7vL.wav in Resources */,
+				54339093258A59A500C7D5E2 /* C7vL.wav in Resources */,
+				54339094258A59A500C7D5E2 /* D#3vL.wav in Resources */,
+				54339095258A59A500C7D5E2 /* C6vL.wav in Resources */,
+				54339096258A59A500C7D5E2 /* A5vH.wav in Resources */,
+				54339097258A59A500C7D5E2 /* A7vL.wav in Resources */,
+				54339098258A59A500C7D5E2 /* B0vH.wav in Resources */,
+				54339099258A59A500C7D5E2 /* F#4vL.wav in Resources */,
+				5433909A258A59A500C7D5E2 /* D#4vL.wav in Resources */,
+				5433909B258A59A500C7D5E2 /* C8vL.wav in Resources */,
+				5433909C258A59A500C7D5E2 /* A6vH.wav in Resources */,
+				5433909D258A59A500C7D5E2 /* F#6vL.wav in Resources */,
+				5433909E258A59A500C7D5E2 /* A7vH.wav in Resources */,
+				5433909F258A59A500C7D5E2 /* D#5vL.wav in Resources */,
+				543390A0258A59A500C7D5E2 /* A4vH.wav in Resources */,
+				543390A1258A59A500C7D5E2 /* A5vL.wav in Resources */,
+				543390A2258A59A500C7D5E2 /* D#2vL.wav in Resources */,
+				543390A3258A59A500C7D5E2 /* C5vH.wav in Resources */,
+				543390A4258A59A500C7D5E2 /* B5vH.wav in Resources */,
+				543390A5258A59A500C7D5E2 /* F#6vH.wav in Resources */,
+				543390A6258A59A500C7D5E2 /* C8vH.wav in Resources */,
+				543390A7258A59A500C7D5E2 /* A3vL.wav in Resources */,
+				543390A8258A59A500C7D5E2 /* D#3vH.wav in Resources */,
+				543390A9258A59A500C7D5E2 /* A4vL.wav in Resources */,
+				543390AA258A59A500C7D5E2 /* A0vH.wav in Resources */,
+				543390AB258A59A500C7D5E2 /* D#4vH.wav in Resources */,
+				543390AC258A59A500C7D5E2 /* C2vL.wav in Resources */,
+				543390AD258A59A500C7D5E2 /* A3vH.wav in Resources */,
+				543390AE258A59A500C7D5E2 /* C3vH.wav in Resources */,
+				543390AF258A59A500C7D5E2 /* F#3vL.wav in Resources */,
+				543390B0258A59A500C7D5E2 /* F#5vL.wav in Resources */,
+				543390B1258A59A500C7D5E2 /* D#6vH.wav in Resources */,
+				543390B2258A59A500C7D5E2 /* C3vL.wav in Resources */,
+				543390B3258A59A500C7D5E2 /* C4vL.wav in Resources */,
+				543390B4258A59A500C7D5E2 /* B7vH.wav in Resources */,
+				543390B5258A59A500C7D5E2 /* F#1vL.wav in Resources */,
+				543390B6258A59A500C7D5E2 /* C7vH.wav in Resources */,
+				543390B7258A59A500C7D5E2 /* B3vH.wav in Resources */,
+				543390B8258A59A500C7D5E2 /* F#7vH.wav in Resources */,
+				543390B9258A59A500C7D5E2 /* F#4vH.wav in Resources */,
+				543390BA258A59A500C7D5E2 /* F#5vH.wav in Resources */,
+				543390BB258A59A500C7D5E2 /* C1vL.wav in Resources */,
+				543390BC258A59A500C7D5E2 /* F#2vL.wav in Resources */,
+				543390BD258A59A500C7D5E2 /* D#2vH.wav in Resources */,
+				543390BE258A59A500C7D5E2 /* D#7vL.wav in Resources */,
+				543390BF258A59A500C7D5E2 /* C1vH.wav in Resources */,
+				543390C0258A59A500C7D5E2 /* B1vH.wav in Resources */,
+				543390C1258A59A500C7D5E2 /* A1vL.wav in Resources */,
+				543390C2258A59A500C7D5E2 /* B2vH.wav in Resources */,
+				543390C3258A59A500C7D5E2 /* A2vL.wav in Resources */,
+				543390C4258A59A500C7D5E2 /* B6vH.wav in Resources */,
+				543390C5258A59A500C7D5E2 /* D#7vH.wav in Resources */,
+				543390C6258A59A500C7D5E2 /* B4vH.wav in Resources */,
+				543390C7258A59A500C7D5E2 /* D#6vL.wav in Resources */,
+				543390C8258A59A500C7D5E2 /* C6vH.wav in Resources */,
+				543390C9258A59A500C7D5E2 /* A0vL.wav in Resources */,
+				543390CA258A59A500C7D5E2 /* piano.sfz in Resources */,
+				543390CB258A59A500C7D5E2 /* F#1vH.wav in Resources */,
+				543390CC258A59A500C7D5E2 /* F#3vH.wav in Resources */,
+				543390CD258A59A500C7D5E2 /* D#1vH.wav in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ACF18A9D22EC711A008E7DAA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1681,6 +2377,122 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		54338F70258A599300C7D5E2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				54338F7A258A599300C7D5E2 /* LogiciOSTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		54339020258A59A500C7D5E2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				54339021258A59A500C7D5E2 /* ApplicationModel.cpp in Sources */,
+				54339025258A59A500C7D5E2 /* AudioInputRecorder.cpp in Sources */,
+				54339028258A59A500C7D5E2 /* AudioInputPitchesRecorder.cpp in Sources */,
+				54339029258A59A500C7D5E2 /* AudioAverageInputLevelMonitor.cpp in Sources */,
+				5433902B258A59A500C7D5E2 /* ProjectController.cpp in Sources */,
+				5433902C258A59A500C7D5E2 /* Drawer.cpp in Sources */,
+				5433902D258A59A500C7D5E2 /* NvgDrawer.cpp in Sources */,
+				5433902E258A59A500C7D5E2 /* MetalNvgDrawer.cpp in Sources */,
+				5433902F258A59A500C7D5E2 /* nanovg_mtl.m in Sources */,
+				54339030258A59A500C7D5E2 /* nanovg_mtl_shaders.metal in Sources */,
+				54339031258A59A500C7D5E2 /* nanovg.cpp in Sources */,
+				54339032258A59A500C7D5E2 /* MainController.cpp in Sources */,
+				54339033258A59A500C7D5E2 /* AudioInputManager.cpp in Sources */,
+				54339034258A59A500C7D5E2 /* ScrollBar.cpp in Sources */,
+				54339035258A59A500C7D5E2 /* PianoDrawer.cpp in Sources */,
+				54339036258A59A500C7D5E2 /* WorkspaceDrawer.cpp in Sources */,
+				54339037258A59A500C7D5E2 /* VocalPart.cpp in Sources */,
+				54339038258A59A500C7D5E2 /* VocalPartAudioPlayer.cpp in Sources */,
+				54339039258A59A500C7D5E2 /* Lyrics.cpp in Sources */,
+				5433903A258A59A500C7D5E2 /* MvxFile.cpp in Sources */,
+				5433903B258A59A500C7D5E2 /* VocalTrainerFilePlayer.cpp in Sources */,
+				5433903C258A59A500C7D5E2 /* VocalTrainerPlayerPrepareException.cpp in Sources */,
+				5433903D258A59A500C7D5E2 /* PlaybackBounds.cpp in Sources */,
+				5433903E258A59A500C7D5E2 /* AudioOperationFailedException.cpp in Sources */,
+				5433903F258A59A500C7D5E2 /* AudioPlayerWithDefaultSeekHandler.cpp in Sources */,
+				54339040258A59A500C7D5E2 /* MidiTrack.cpp in Sources */,
+				54339041258A59A500C7D5E2 /* Binasc.cpp in Sources */,
+				54339042258A59A500C7D5E2 /* Options.cpp in Sources */,
+				54339043258A59A500C7D5E2 /* MidiFile.cpp in Sources */,
+				54339044258A59A500C7D5E2 /* MidiEvent.cpp in Sources */,
+				54339045258A59A500C7D5E2 /* MidiMessage.cpp in Sources */,
+				54339046258A59A500C7D5E2 /* MidiEventList.cpp in Sources */,
+				54339047258A59A500C7D5E2 /* MidiFileReader.cpp in Sources */,
+				54339048258A59A500C7D5E2 /* MidiFileReaderException.cpp in Sources */,
+				54339049258A59A500C7D5E2 /* WavAudioPlayer.cpp in Sources */,
+				5433904A258A59A500C7D5E2 /* MetronomeAudioPlayer.cpp in Sources */,
+				5433904B258A59A500C7D5E2 /* BaseRawPcmAudioDataPlayer.cpp in Sources */,
+				5433904C258A59A500C7D5E2 /* RealtimeStreamingAudioPlayer.cpp in Sources */,
+				5433904D258A59A500C7D5E2 /* audiodecoder.cpp in Sources */,
+				5433904E258A59A500C7D5E2 /* DecodedTrack.cpp in Sources */,
+				5433904F258A59A500C7D5E2 /* audiodecodercoreaudio_mac.cpp in Sources */,
+				54339050258A59A500C7D5E2 /* AudioFilePlayer.cpp in Sources */,
+				54339051258A59A500C7D5E2 /* BaseSynchronizedMouseEventsReceiver.cpp in Sources */,
+				54339052258A59A500C7D5E2 /* px_mixer.c in Sources */,
+				54339053258A59A500C7D5E2 /* px_example_api.c in Sources */,
+				54339054258A59A500C7D5E2 /* px_mac_coreaudio.c in Sources */,
+				54339055258A59A500C7D5E2 /* Color.cpp in Sources */,
+				54339056258A59A500C7D5E2 /* Bitmap.cpp in Sources */,
+				54339057258A59A500C7D5E2 /* Random.cpp in Sources */,
+				54339058258A59A500C7D5E2 /* System.cpp in Sources */,
+				54339059258A59A500C7D5E2 /* WAVFile.cpp in Sources */,
+				5433905A258A59A500C7D5E2 /* Executors.mm in Sources */,
+				5433905B258A59A500C7D5E2 /* TimeUtils.cpp in Sources */,
+				5433905C258A59A500C7D5E2 /* AudioUtils.cpp in Sources */,
+				5433905D258A59A500C7D5E2 /* OpenGLUtils.cpp in Sources */,
+				5433905E258A59A500C7D5E2 /* OperationCanceler.cpp in Sources */,
+				5433905F258A59A500C7D5E2 /* PeriodicallySleepingBackgroundTask.cpp in Sources */,
+				54339060258A59A500C7D5E2 /* ProjectControllerBridgeDelegate.swift in Sources */,
+				54339061258A59A500C7D5E2 /* ProjectControllerBridge.mm in Sources */,
+				54339062258A59A500C7D5E2 /* BaseMouseEventsReceiver.cpp in Sources */,
+				54339063258A59A500C7D5E2 /* BoundsSelectionController.cpp in Sources */,
+				54339064258A59A500C7D5E2 /* Timer.cpp in Sources */,
+				54339065258A59A500C7D5E2 /* Executors.cpp in Sources */,
+				54339066258A59A500C7D5E2 /* Rewinder.cpp in Sources */,
+				54339067258A59A500C7D5E2 /* VxFile.cpp in Sources */,
+				54339069258A59A500C7D5E2 /* VocalTrainerFile.cpp in Sources */,
+				5433906A258A59A500C7D5E2 /* zip.c in Sources */,
+				5433906B258A59A500C7D5E2 /* ZipFile.cpp in Sources */,
+				5433906C258A59A500C7D5E2 /* MouseClickChecker.cpp in Sources */,
+				5433906D258A59A500C7D5E2 /* BaseAudioPlayer.cpp in Sources */,
+				5433906E258A59A500C7D5E2 /* PlaybackData.cpp in Sources */,
+				5433906F258A59A500C7D5E2 /* AudioToolboxInputReader.cpp in Sources */,
+				54339070258A59A500C7D5E2 /* AudioToolboxOutputWriter.cpp in Sources */,
+				54339071258A59A500C7D5E2 /* AudioToolboxUtils.cpp in Sources */,
+				54339072258A59A500C7D5E2 /* AudioStreamDescription.cpp in Sources */,
+				54339073258A59A500C7D5E2 /* AudioToolboxQueue.cpp in Sources */,
+				54339074258A59A500C7D5E2 /* SfzPitchRenderer.cpp in Sources */,
+				54339075258A59A500C7D5E2 /* VocalPartAudioDataGenerator.cpp in Sources */,
+				54339076258A59A500C7D5E2 /* ApplicationModel.mm in Sources */,
+				54339077258A59A500C7D5E2 /* log.cc in Sources */,
+				54339078258A59A500C7D5E2 /* synth.cc in Sources */,
+				54339079258A59A500C7D5E2 /* utils.cc in Sources */,
+				5433907A258A59A500C7D5E2 /* voice.cc in Sources */,
+				5433907B258A59A500C7D5E2 /* loader.cc in Sources */,
+				5433907C258A59A500C7D5E2 /* pugixml.cc in Sources */,
+				5433907D258A59A500C7D5E2 /* liquidsfz.cc in Sources */,
+				5433907E258A59A500C7D5E2 /* hydrogenimport.cc in Sources */,
+				C9FFFBB284130F06362A014B /* PitchInputReader.cpp in Sources */,
+				C9FFFDA3E3EAB874637EDC5C /* PitchDetectionSmoothingAudioBuffer.cpp in Sources */,
+				C9FFF9A7F519C50CC2DA3224 /* PitchesMutableList.cpp in Sources */,
+				C9FFFD001CBF9ABCC639AE6F /* SeekablePitchesList.cpp in Sources */,
+				C9FFF62DBEAD5135E00F2E5C /* Pitch.cpp in Sources */,
+				C9FFF47708618FEDD8DCBCF7 /* PitchDuration.cpp in Sources */,
+				C9FFFCEBF26383D700C08739 /* SevaghPitchDetector.cpp in Sources */,
+				C9FFF8637CF97D67D4CBBD3E /* hmm.cpp in Sources */,
+				C9FFFAD21D92DF065E814712 /* mpm.cpp in Sources */,
+				C9FFF87F596EC01713BD6AF3 /* yin.cpp in Sources */,
+				C9FFFB7A9B514847031FE31C /* autocorrelation.cpp in Sources */,
+				C9FFFE02BD704DDD97F1064E /* parabolic_interpolation.cpp in Sources */,
+				C9FFFFEC5C53CC423D4CD6C9 /* AccelerateFFT.cpp in Sources */,
+				C9FFF5504FCFD0E25C6F38AB /* FFT.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ACB0244223D5CF6100CD08A7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1695,15 +2507,14 @@
 				ACB0246223D5D3D000CD08A7 /* MidiEventList.cpp in Sources */,
 				ACB0246023D5D3C200CD08A7 /* AudioUtils.cpp in Sources */,
 				ACB0245F23D5D32800CD08A7 /* MidiFile.cpp in Sources */,
-				ACB0245E23D5D31E00CD08A7 /* Pitch.cpp in Sources */,
 				ACB0245D23D5D31700CD08A7 /* MidiFileReader.cpp in Sources */,
-				ACB0245B23D5D30900CD08A7 /* PitchDuration.cpp in Sources */,
-				ACB0245C23D5D30900CD08A7 /* PitchDuration.h in Sources */,
 				ACB0245823D5D1B500CD08A7 /* VocalPart.cpp in Sources */,
 				ACB0245623D5CFFC00CD08A7 /* VxFile.cpp in Sources */,
 				ACB0245723D5CFFC00CD08A7 /* VxFile.h in Sources */,
 				ACB0245523D5CFC000CD08A7 /* LoadTsf.cpp in Sources */,
 				ACB0245323D5CFC000CD08A7 /* BoostAssert.cpp in Sources */,
+				C9FFF30869CFEC1192A70E5E /* Pitch.cpp in Sources */,
+				C9FFFEA7E83E8E9543878B7A /* PitchDuration.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1712,15 +2523,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				71AD25ED5F15FBA6AC064945 /* ApplicationModel.cpp in Sources */,
-				71AD2822F473D55AE1E4EF1B /* Pitch.cpp in Sources */,
-				71AD225CB876E241A907527F /* PitchInputReader.cpp in Sources */,
-				71AD2B2C108276AD8827DD81 /* AubioPitchDetector.cpp in Sources */,
 				71AD21AA646AD2E01EA19C1D /* AudioInputRecorder.cpp in Sources */,
-				71AD24E126F8E19FE0D7BDD3 /* PitchesMutableList.cpp in Sources */,
-				71AD2C19DA1F6FC1BF2E248E /* SeekablePitchesList.cpp in Sources */,
 				71AD2F35A22E486D4879C9AF /* AudioInputPitchesRecorder.cpp in Sources */,
 				71AD22866B4167C8EEDE9AD6 /* AudioAverageInputLevelMonitor.cpp in Sources */,
-				71AD28E4F71699223E0BA0D1 /* PitchDetectionSmoothingAudioBuffer.cpp in Sources */,
 				71AD24A66BC9F49815C8A94F /* ProjectController.cpp in Sources */,
 				71AD2FBD487EC41AC317678B /* Drawer.cpp in Sources */,
 				71AD2564D683E226F144AE68 /* NvgDrawer.cpp in Sources */,
@@ -1782,7 +2587,6 @@
 				71AD2C9BF46F611460B27153 /* Executors.cpp in Sources */,
 				71AD2783B9A964FA343FE6D4 /* Rewinder.cpp in Sources */,
 				71AD25CF9150A4A8523F7240 /* VxFile.cpp in Sources */,
-				71AD29EE4E3E33D464C674DD /* PitchDuration.cpp in Sources */,
 				71AD22554BBE06B78963E043 /* VocalTrainerFile.cpp in Sources */,
 				71AD2B0CBDFAF76D56342AF0 /* zip.c in Sources */,
 				71AD23C6F09C2F22AC023A82 /* ZipFile.cpp in Sources */,
@@ -1805,12 +2609,150 @@
 				C9FFF5ADE1325ED07D1D2704 /* pugixml.cc in Sources */,
 				C9FFF9D6C519816B2EF630F5 /* liquidsfz.cc in Sources */,
 				C9FFFC148F9C430023289217 /* hydrogenimport.cc in Sources */,
+				C9FFF51D4892C72BB4CB34B2 /* PitchInputReader.cpp in Sources */,
+				C9FFFB6ADBAB234B8FBF830B /* PitchDetectionSmoothingAudioBuffer.cpp in Sources */,
+				C9FFFBE724AEF464050A2E0B /* PitchesMutableList.cpp in Sources */,
+				C9FFF4F9CA314284806C56E9 /* SeekablePitchesList.cpp in Sources */,
+				C9FFF303FDE3D4875336FF9D /* Pitch.cpp in Sources */,
+				C9FFFBA53A45E7561F2D52F8 /* PitchDuration.cpp in Sources */,
+				C9FFF08BE2531425293899B6 /* SevaghPitchDetector.cpp in Sources */,
+				C9FFFA157AFE16229B73B743 /* hmm.cpp in Sources */,
+				C9FFF4FA23587E0923B00B31 /* mpm.cpp in Sources */,
+				C9FFFDBA6FC03B6D65549858 /* yin.cpp in Sources */,
+				C9FFF023F54B6766739CEE62 /* autocorrelation.cpp in Sources */,
+				C9FFFBE50B81FFFCC4F17B1E /* parabolic_interpolation.cpp in Sources */,
+				C9FFF078686EF6758EF105DB /* AccelerateFFT.cpp in Sources */,
+				C9FFFFB0390C465684C7A98D /* FFT.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		54338F7F258A599300C7D5E2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FLHXHQP8H4;
+				INFOPLIST_FILE = LogiciOSTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.neborosoft.SwiftUITest.LogiciOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		54338F80258A599300C7D5E2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FLHXHQP8H4;
+				INFOPLIST_FILE = LogiciOSTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.neborosoft.SwiftUITest.LogiciOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		543390CF258A59A500C7D5E2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = FLHXHQP8H4;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				HEADER_SEARCH_PATHS = (
+					../include,
+					../include/nanovg,
+					CppUtils,
+				);
+				INFOPLIST_FILE = "Logic copy-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"\"${PROJECT_DIR}/libs/macos/Release\"/**",
+					"$(PROJECT_DIR)/libs/macos/Release",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = Neborosoft.Logic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		543390D0258A59A500C7D5E2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = FLHXHQP8H4;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				HEADER_SEARCH_PATHS = (
+					../include,
+					../include/nanovg,
+					CppUtils,
+				);
+				INFOPLIST_FILE = "Logic copy-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"\"${PROJECT_DIR}/libs/macos/Release\"/**",
+					"$(PROJECT_DIR)/libs/macos/Release",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Neborosoft.Logic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		ACB0244A23D5CF6100CD08A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2041,6 +2983,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		54338F82258A599300C7D5E2 /* Build configuration list for PBXNativeTarget "LogiciOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				54338F7F258A599300C7D5E2 /* Debug */,
+				54338F80258A599300C7D5E2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		543390CE258A59A500C7D5E2 /* Build configuration list for PBXNativeTarget "LogiciOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				543390CF258A59A500C7D5E2 /* Debug */,
+				543390D0258A59A500C7D5E2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		ACB0244C23D5CF6100CD08A7 /* Build configuration list for PBXNativeTarget "LogicTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

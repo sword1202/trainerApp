@@ -2,7 +2,7 @@
 #define PITCH_DETECTION_H
 
 #include <complex>
-#include <ffts/ffts.h>
+#include "FFT.h"
 #include <mlpack/core.hpp>
 #include <mlpack/methods/hmm/hmm.hpp>
 #include <stdexcept>
@@ -76,8 +76,7 @@ template <typename T> class BaseAlloc
 	long N;
 	std::vector<std::complex<float>> out_im;
 	std::vector<T> out_real;
-	ffts_plan_t *fft_forward;
-	ffts_plan_t *fft_backward;
+	FFT *fft;
 	mlpack::hmm::HMM<mlpack::distribution::DiscreteDistribution> hmm;
 
 	BaseAlloc(long audio_buffer_size)
@@ -88,16 +87,15 @@ template <typename T> class BaseAlloc
 			throw std::bad_alloc();
 		}
 
-		fft_forward = ffts_init_1d(N * 2, FFTS_FORWARD);
-		fft_backward = ffts_init_1d(N * 2, FFTS_BACKWARD);
+		fft = FFT::create();
+		fft->setup(static_cast<int>(N * 2));
 		detail::init_pitch_bins();
 		hmm = detail::build_hmm();
 	}
 
 	~BaseAlloc()
 	{
-		ffts_free(fft_forward);
-		ffts_free(fft_backward);
+		delete fft;
 	}
 
   protected:

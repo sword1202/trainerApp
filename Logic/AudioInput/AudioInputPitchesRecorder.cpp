@@ -5,7 +5,6 @@
 
 #include "AudioInputPitchesRecorder.h"
 #include "TimeUtils.h"
-#include "AubioPitchDetector.h"
 #include "Executors.h"
 #include "Algorithms.h"
 #include <iostream>
@@ -16,8 +15,8 @@ using namespace std;
 #define LOCK std::lock_guard<std::mutex> _(mutex)
 
 void AudioInputPitchesRecorder::init(AudioInputReader *audioInputReader, int smoothLevel,
-                                     const std::function<PitchDetector*()>& pitchDetectorFactory) {
-    pitchInputReader = new PitchInputReader(audioInputReader, pitchDetectorFactory, smoothLevel);
+        PitchDetector* pitchDetector) {
+    pitchInputReader = new PitchInputReader(audioInputReader, pitchDetector, smoothLevel);
 
     pitchInputReader->setExecuteCallBackOnInvalidPitches(true);
     pitchInputReader->setCallback([=](const Pitch& pitch) {

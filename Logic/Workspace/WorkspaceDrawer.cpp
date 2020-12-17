@@ -8,7 +8,7 @@
 #include "WorkspaceDrawer.h"
 #include <assert.h>
 #include "CountAssert.h"
-#include "Pitch.h"
+#include "Logic/Pitch.h"
 #include "TimeUtils.h"
 #include <iostream>
 #include <cmath>

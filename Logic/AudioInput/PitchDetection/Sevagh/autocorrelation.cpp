@@ -1,7 +1,6 @@
 #include "pitch_detection.h"
 #include <algorithm>
 #include <complex>
-#include <ffts/ffts.h>
 #include <numeric>
 #include <vector>
 
@@ -17,14 +16,14 @@ util::acorr_r(const std::vector<T> &audio_buffer, pitch_alloc::BaseAlloc<T> *ba)
 		    return std::complex(x, static_cast<T>(0.0));
 	    });
 
-	ffts_execute(ba->fft_forward, ba->out_im.data(), ba->out_im.data());
+	ba->fft->execute(&ba->out_im, true);
 
 	std::complex<float> scale = {
 	    1.0f / (float)(ba->N * 2), static_cast<T>(0.0)};
 	for (int i = 0; i < ba->N; ++i)
 		ba->out_im[i] *= std::conj(ba->out_im[i]) * scale;
 
-	ffts_execute(ba->fft_backward, ba->out_im.data(), ba->out_im.data());
+	ba->fft->execute(&ba->out_im, false);
 
 	std::transform(ba->out_im.begin(), ba->out_im.begin() + ba->N,
 	    ba->out_real.begin(),
