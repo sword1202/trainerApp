@@ -21,6 +21,7 @@
 
 @property (readonly) float maxZoom;
 @property (readonly) float minZoom;
+@property (nonatomic) float zoom;
 
 @property (readonly) bool lyricsVisible;
 @property (readonly) bool tracksVisible;

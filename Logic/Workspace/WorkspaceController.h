@@ -20,7 +20,7 @@ public:
 class WorkspaceController {
 public:
     static constexpr float MIN_ZOOM = 1.0;
-    static constexpr float MAX_ZOOM = 2.0;
+    static constexpr float MAX_ZOOM = 4.0;
 
     virtual void setPitchesCollection(const PitchesCollection *pitchesCollection) = 0;
     virtual void setBeatsPerSecond(double intervalsPerSecond) = 0;

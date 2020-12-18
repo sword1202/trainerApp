@@ -16,5 +16,6 @@ target 'VocalTraineriOS' do
 
   # Pods for iOS
   pod 'SwiftHEXColors'
+  pod 'GestureRecognizerClosures'
 
 end

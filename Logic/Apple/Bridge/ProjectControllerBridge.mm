@@ -241,4 +241,12 @@ public:
     delete _cpp;
 }
 
+- (float)zoom {
+    return _cpp->getZoom();
+}
+
+- (void)setZoom:(float)zoom {
+    _cpp->setZoom(zoom);
+}
+
 @end

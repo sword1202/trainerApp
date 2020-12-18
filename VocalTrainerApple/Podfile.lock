@@ -1,16 +1,20 @@
 PODS:
+  - GestureRecognizerClosures (5.0.0)
   - SwiftHEXColors (1.4.1)
 
 DEPENDENCIES:
+  - GestureRecognizerClosures
   - SwiftHEXColors
 
 SPEC REPOS:
   trunk:
+    - GestureRecognizerClosures
     - SwiftHEXColors
 
 SPEC CHECKSUMS:
+  GestureRecognizerClosures: 0dcafb45e669e7a775c840383e54b3d16983037b
   SwiftHEXColors: 1cb6e5d55c52749aa33db8f088ac55eb71ca4c7f
 
-PODFILE CHECKSUM: 7e5af825127e001c7bfa9ad9eb95822e4e83a54f
+PODFILE CHECKSUM: 10d4532aec4facd10ca694dd3af14cb239685b4b
 
 COCOAPODS: 1.10.0

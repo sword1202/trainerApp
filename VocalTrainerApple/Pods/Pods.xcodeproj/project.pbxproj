@@ -7,31 +7,48 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		081C70228534C8B9BE30BB6C52D904C9 /* Pods-VocalTraineriOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C8263E2D5D84BEBD5B48EBF30E0B2374 /* Pods-VocalTraineriOS-dummy.m */; };
+		07C930C63990406244CACD35BD161BC6 /* ClosureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88BE5F5118E7F004BBAB9198B31B0D1 /* ClosureHandler.swift */; };
+		0CD27F496DB10BDD252B85501F71593F /* GestureRecognizerClosures-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 578BB1A7896A6BE80105E557AB374F9B /* GestureRecognizerClosures-dummy.m */; };
 		22663002D399F88FDE1263C9ED2180C5 /* Pods-VocalTrainerMacOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 82B7DD4B256FC619A824BD2586B771BE /* Pods-VocalTrainerMacOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		44A7230D8AC85A9EC339FCC367C4BBB8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A54C97DEB1A3977AC3A62AFF00971BF /* Cocoa.framework */; };
-		507AEE56D5A1D6ED4335474A35DF5AE3 /* SwiftHEXColors-iOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 53583D37B412EBB116E25325C472EB86 /* SwiftHEXColors-iOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2788E9F589E8F661B76557EFA402A2DE /* GestureRecognizerClosures-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EBA42901DF059605DC638EDF36BEFB4 /* GestureRecognizerClosures-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2A51E59835AB30B21DF3FEA526E815BE /* UIBarButtonItem+Closures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1475278845D58B886E11DE7EDCE1DF /* UIBarButtonItem+Closures.swift */; };
+		33134EDCF34CEFD17C4E14841BC2681D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3909C0C43E6A581371C0CA8B16E198D9 /* Foundation.framework */; };
+		3E7D80ECCC76B090ADD94E89E9D33700 /* Pods-VocalTraineriOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C8263E2D5D84BEBD5B48EBF30E0B2374 /* Pods-VocalTraineriOS-dummy.m */; };
+		44A7230D8AC85A9EC339FCC367C4BBB8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 657885352DCBEC1EEDF1F0B0F83A1A82 /* Cocoa.framework */; };
+		4864AD953BFB281A547DA126AA02A553 /* Pods-VocalTraineriOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C851F99B07E75D7BFE7CF61EEC20EF7 /* Pods-VocalTraineriOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		507AEE56D5A1D6ED4335474A35DF5AE3 /* SwiftHEXColors-iOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0555DF8A0094272615AA398006061416 /* SwiftHEXColors-iOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		588C7B6AEC8626D8871787D4EA9251B8 /* UIView+Closures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7243F5D93961F43024B08C50420A1E /* UIView+Closures.swift */; };
+		6696856EFDB79AF45B1E2D3D0E5B19B3 /* UIControl+Closures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AABC0F46F5054691DD3D555C828153D /* UIControl+Closures.swift */; };
+		6D1EA830036818DA2E4B3F76A64437AA /* GestureClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A6EEE06CDE9B10EC6DD5898F6DC877 /* GestureClosure.swift */; };
 		70E4FD41F1CF2135FCDE7ABE5344A8DB /* Pods-VocalTrainerMacOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 49588EEC2DD9237334F2CE49496A0E16 /* Pods-VocalTrainerMacOS-dummy.m */; };
-		73C725D96FDDD6134154A5AF95C605D0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A54C97DEB1A3977AC3A62AFF00971BF /* Cocoa.framework */; };
-		794DFA2AE9AFB3E32E3B2CAEFB4B513F /* SwiftHEXColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC38DC8F650E65289785666728AB90C /* SwiftHEXColors.swift */; };
-		7A9A60033BCA695A16722C8D24FBAD6F /* SwiftHEXColors-iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5524E198CF1420E36E8802028F3ED120 /* SwiftHEXColors-iOS-dummy.m */; };
-		8D82C8944B446E72ACFB6498CEDA8F15 /* SwiftHEXColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC38DC8F650E65289785666728AB90C /* SwiftHEXColors.swift */; };
-		B8F3513EB6B27BAA437874EDAF7F9E2D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3261E5A5395F45780622405F504B2804 /* Foundation.framework */; };
-		B9D6C6A9DF0ADA5FD488F24FC7D140E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3261E5A5395F45780622405F504B2804 /* Foundation.framework */; };
-		CCED2803285EEFF0488828AD8066E64F /* SwiftHEXColors-macOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = ADB374E78E13CB489FE64FB5A1E1C94B /* SwiftHEXColors-macOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D69CB3F895D3258EF98A786F86D31324 /* Pods-VocalTraineriOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C851F99B07E75D7BFE7CF61EEC20EF7 /* Pods-VocalTraineriOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E68D3A2B638A69E5C35A313EF2807256 /* SwiftHEXColors-macOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 15BED13885714C4C1EDCBD18F7BC3D7A /* SwiftHEXColors-macOS-dummy.m */; };
+		73C725D96FDDD6134154A5AF95C605D0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 657885352DCBEC1EEDF1F0B0F83A1A82 /* Cocoa.framework */; };
+		794DFA2AE9AFB3E32E3B2CAEFB4B513F /* SwiftHEXColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185E30780D892E56ADF76E94E1C812F3 /* SwiftHEXColors.swift */; };
+		7A9A60033BCA695A16722C8D24FBAD6F /* SwiftHEXColors-iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = ED08274D411786A3071D35BAE4BA776E /* SwiftHEXColors-iOS-dummy.m */; };
+		85861979AF114F0809DDDD42F0755F14 /* UIGestureRecognizer+Closures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF6EB1AA5FED333D68F39291C4F1467 /* UIGestureRecognizer+Closures.swift */; };
+		8D82C8944B446E72ACFB6498CEDA8F15 /* SwiftHEXColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185E30780D892E56ADF76E94E1C812F3 /* SwiftHEXColors.swift */; };
+		8E4EC1EDA37D1E6954F6F16ADAB1D69D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3909C0C43E6A581371C0CA8B16E198D9 /* Foundation.framework */; };
+		B9D6C6A9DF0ADA5FD488F24FC7D140E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3909C0C43E6A581371C0CA8B16E198D9 /* Foundation.framework */; };
+		CCED2803285EEFF0488828AD8066E64F /* SwiftHEXColors-macOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 997011794706529CFB0D0507A1FDB503 /* SwiftHEXColors-macOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D12130A4EA1418D13E3B94868147E0D2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C818B9C9EE836CA18461E8CA529A54F /* UIKit.framework */; };
+		E68D3A2B638A69E5C35A313EF2807256 /* SwiftHEXColors-macOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 328334E878B2C9A9977CC939191A4A81 /* SwiftHEXColors-macOS-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		8103B94F6A7BB5834BCBFECD48A16D27 /* PBXContainerItemProxy */ = {
+		477EA35A9238BF8CB88A73D0E49728DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 872DEBAB8DABC1BA93120BE8157F6E4C;
+			remoteInfo = GestureRecognizerClosures;
+		};
+		A6BD023D219BAC2CD52B9D68D8D7D369 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = ED1051D0590BEB0F31D1CA8AF56F372C;
 			remoteInfo = "SwiftHEXColors-macOS";
 		};
-		FB4F643D352B665F835661E90109A47C /* PBXContainerItemProxy */ = {
+		DE0004761C7CAF5A8EF4793C50DD43BC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -42,45 +59,60 @@
 
 /* Begin PBXFileReference section */
 		0328CEE4B804359978D2601D4B94C873 /* SwiftHEXColors.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftHEXColors.framework; path = "SwiftHEXColors-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0BEB359869BCE597D137C7B4982D1912 /* SwiftHEXColors-macOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "SwiftHEXColors-macOS-prefix.pch"; path = "../SwiftHEXColors-macOS/SwiftHEXColors-macOS-prefix.pch"; sourceTree = "<group>"; };
-		14AE7CFFD246189B2C6D9E8569D6613A /* SwiftHEXColors-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "SwiftHEXColors-macOS.release.xcconfig"; path = "../SwiftHEXColors-macOS/SwiftHEXColors-macOS.release.xcconfig"; sourceTree = "<group>"; };
-		15BED13885714C4C1EDCBD18F7BC3D7A /* SwiftHEXColors-macOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "SwiftHEXColors-macOS-dummy.m"; path = "../SwiftHEXColors-macOS/SwiftHEXColors-macOS-dummy.m"; sourceTree = "<group>"; };
+		0555DF8A0094272615AA398006061416 /* SwiftHEXColors-iOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftHEXColors-iOS-umbrella.h"; sourceTree = "<group>"; };
+		0AABC0F46F5054691DD3D555C828153D /* UIControl+Closures.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIControl+Closures.swift"; path = "GestureRecognizerClosures/UIControl+Closures.swift"; sourceTree = "<group>"; };
+		0B7243F5D93961F43024B08C50420A1E /* UIView+Closures.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIView+Closures.swift"; path = "GestureRecognizerClosures/UIView+Closures.swift"; sourceTree = "<group>"; };
+		12B8D3D8DE51E3E5C2F0E75AF67F65A1 /* GestureRecognizerClosures.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GestureRecognizerClosures.release.xcconfig; sourceTree = "<group>"; };
+		14E00DB46B081742E791DDBBFF6DFBBE /* SwiftHEXColors-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "SwiftHEXColors-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		16B52C2765F60A659AEC2072E0AD89F0 /* Pods-VocalTraineriOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-VocalTraineriOS.modulemap"; sourceTree = "<group>"; };
-		1CA3F3ADCEDF962BE39F994B90BF192E /* SwiftHEXColors-macOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "SwiftHEXColors-macOS-Info.plist"; path = "../SwiftHEXColors-macOS/SwiftHEXColors-macOS-Info.plist"; sourceTree = "<group>"; };
+		185E30780D892E56ADF76E94E1C812F3 /* SwiftHEXColors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftHEXColors.swift; path = Sources/SwiftHEXColors/SwiftHEXColors.swift; sourceTree = "<group>"; };
 		2E1F7EAE3FC6B062FC1EAC63C640A117 /* Pods-VocalTraineriOS-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-VocalTraineriOS-frameworks.sh"; sourceTree = "<group>"; };
-		2FC38DC8F650E65289785666728AB90C /* SwiftHEXColors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftHEXColors.swift; path = Sources/SwiftHEXColors/SwiftHEXColors.swift; sourceTree = "<group>"; };
-		3261E5A5395F45780622405F504B2804 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		3F9440FBBC8E5FD1272917FD4BECDD56 /* SwiftHEXColors-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "SwiftHEXColors-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		2E8C2A9C4D188DB4B2A0A94650FAE830 /* SwiftHEXColors-macOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "SwiftHEXColors-macOS-Info.plist"; path = "../SwiftHEXColors-macOS/SwiftHEXColors-macOS-Info.plist"; sourceTree = "<group>"; };
+		328334E878B2C9A9977CC939191A4A81 /* SwiftHEXColors-macOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "SwiftHEXColors-macOS-dummy.m"; path = "../SwiftHEXColors-macOS/SwiftHEXColors-macOS-dummy.m"; sourceTree = "<group>"; };
+		3909C0C43E6A581371C0CA8B16E198D9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		3EBA42901DF059605DC638EDF36BEFB4 /* GestureRecognizerClosures-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GestureRecognizerClosures-umbrella.h"; sourceTree = "<group>"; };
+		3FD72C907AE609B9E4CDA838D7356434 /* SwiftHEXColors-iOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftHEXColors-iOS-Info.plist"; sourceTree = "<group>"; };
 		40DAFBEA40BDF4D13778CA2CA10A546E /* Pods-VocalTrainerMacOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-VocalTrainerMacOS-acknowledgements.plist"; sourceTree = "<group>"; };
+		43E22049A278D1E2918B97414E6C3859 /* GestureRecognizerClosures-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GestureRecognizerClosures-prefix.pch"; sourceTree = "<group>"; };
 		467FC94DCE46C986E37EFE5C9BE95CF1 /* Pods_VocalTraineriOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_VocalTraineriOS.framework; path = "Pods-VocalTraineriOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		48EE622947E6F1A653663511DC0AF33C /* GestureRecognizerClosures-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "GestureRecognizerClosures-Info.plist"; sourceTree = "<group>"; };
 		49588EEC2DD9237334F2CE49496A0E16 /* Pods-VocalTrainerMacOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-VocalTrainerMacOS-dummy.m"; sourceTree = "<group>"; };
-		53583D37B412EBB116E25325C472EB86 /* SwiftHEXColors-iOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftHEXColors-iOS-umbrella.h"; sourceTree = "<group>"; };
-		5524E198CF1420E36E8802028F3ED120 /* SwiftHEXColors-iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftHEXColors-iOS-dummy.m"; sourceTree = "<group>"; };
-		5A54C97DEB1A3977AC3A62AFF00971BF /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		4AF6EB1AA5FED333D68F39291C4F1467 /* UIGestureRecognizer+Closures.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIGestureRecognizer+Closures.swift"; path = "GestureRecognizerClosures/UIGestureRecognizer+Closures.swift"; sourceTree = "<group>"; };
+		4EC0B81BECE3A3CDE845FFF2771DC3EF /* SwiftHEXColors-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "SwiftHEXColors-macOS.release.xcconfig"; path = "../SwiftHEXColors-macOS/SwiftHEXColors-macOS.release.xcconfig"; sourceTree = "<group>"; };
+		578BB1A7896A6BE80105E557AB374F9B /* GestureRecognizerClosures-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "GestureRecognizerClosures-dummy.m"; sourceTree = "<group>"; };
+		5C818B9C9EE836CA18461E8CA529A54F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		5CFBAC2D16B8864858F15543AEDB8823 /* Pods-VocalTraineriOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-VocalTraineriOS-acknowledgements.plist"; sourceTree = "<group>"; };
 		5F9CBCC5CD55097A269661A42656089A /* Pods-VocalTraineriOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-VocalTraineriOS-Info.plist"; sourceTree = "<group>"; };
-		6269770D41A140B428B661F3514130A7 /* SwiftHEXColors-iOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftHEXColors-iOS-Info.plist"; sourceTree = "<group>"; };
+		60E273DF23DC803EB7FCEE7802FDE013 /* SwiftHEXColors-macOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "SwiftHEXColors-macOS-prefix.pch"; path = "../SwiftHEXColors-macOS/SwiftHEXColors-macOS-prefix.pch"; sourceTree = "<group>"; };
 		63B9E0867227298F31359B08B59EDAC2 /* Pods-VocalTrainerMacOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VocalTrainerMacOS.debug.xcconfig"; sourceTree = "<group>"; };
+		657885352DCBEC1EEDF1F0B0F83A1A82 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		6819C8E29E1622A130002C0C705123CD /* GestureRecognizerClosures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = GestureRecognizerClosures.framework; path = GestureRecognizerClosures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B1475278845D58B886E11DE7EDCE1DF /* UIBarButtonItem+Closures.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIBarButtonItem+Closures.swift"; path = "GestureRecognizerClosures/UIBarButtonItem+Closures.swift"; sourceTree = "<group>"; };
 		6CE40FB8D1C4D238310875E231932BB4 /* Pods-VocalTrainerMacOS-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-VocalTrainerMacOS-frameworks.sh"; sourceTree = "<group>"; };
-		74817D5A83B1A4CC3094EAAA4B6EA5A1 /* SwiftHEXColors-iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "SwiftHEXColors-iOS.modulemap"; sourceTree = "<group>"; };
+		6E821ECA540FE2B49602A110EF43F305 /* SwiftHEXColors-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "SwiftHEXColors-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		78A6EEE06CDE9B10EC6DD5898F6DC877 /* GestureClosure.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GestureClosure.swift; path = GestureRecognizerClosures/GestureClosure.swift; sourceTree = "<group>"; };
 		78FBD9D10BEF001DB48285DE8982E917 /* Pods-VocalTraineriOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-VocalTraineriOS-acknowledgements.markdown"; sourceTree = "<group>"; };
 		7A8DBA7CA71D6DE1704EFE0E57C5B942 /* Pods-VocalTrainerMacOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-VocalTrainerMacOS.modulemap"; sourceTree = "<group>"; };
-		7EF0695F70F1A18D7C62A3E0C94D377B /* SwiftHEXColors-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "SwiftHEXColors-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		82B7DD4B256FC619A824BD2586B771BE /* Pods-VocalTrainerMacOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-VocalTrainerMacOS-umbrella.h"; sourceTree = "<group>"; };
 		84AC6E3129E28A1CD0F3210278340BB5 /* Pods-VocalTrainerMacOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-VocalTrainerMacOS-acknowledgements.markdown"; sourceTree = "<group>"; };
+		84BFFFFDBB92DA9A5B70E93F288B6FEA /* SwiftHEXColors-iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "SwiftHEXColors-iOS.modulemap"; sourceTree = "<group>"; };
 		87FE9A57E5CDB2980D62D618EBA3D83D /* Pods_VocalTrainerMacOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_VocalTrainerMacOS.framework; path = "Pods-VocalTrainerMacOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		997011794706529CFB0D0507A1FDB503 /* SwiftHEXColors-macOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "SwiftHEXColors-macOS-umbrella.h"; path = "../SwiftHEXColors-macOS/SwiftHEXColors-macOS-umbrella.h"; sourceTree = "<group>"; };
 		9C851F99B07E75D7BFE7CF61EEC20EF7 /* Pods-VocalTraineriOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-VocalTraineriOS-umbrella.h"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		AC92910DF562DAF5B945701C9F425C9D /* Pods-VocalTraineriOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VocalTraineriOS.debug.xcconfig"; sourceTree = "<group>"; };
-		ADB374E78E13CB489FE64FB5A1E1C94B /* SwiftHEXColors-macOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "SwiftHEXColors-macOS-umbrella.h"; path = "../SwiftHEXColors-macOS/SwiftHEXColors-macOS-umbrella.h"; sourceTree = "<group>"; };
 		AF7691B217961D6891FEF3E8F27CC509 /* Pods-VocalTrainerMacOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VocalTrainerMacOS.release.xcconfig"; sourceTree = "<group>"; };
+		B8256AA6F157A454BCA8BF4A843EF9BE /* GestureRecognizerClosures.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GestureRecognizerClosures.debug.xcconfig; sourceTree = "<group>"; };
+		B88BE5F5118E7F004BBAB9198B31B0D1 /* ClosureHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ClosureHandler.swift; path = GestureRecognizerClosures/ClosureHandler.swift; sourceTree = "<group>"; };
 		BDE9CF30B77C25B25482DEF950863354 /* SwiftHEXColors.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftHEXColors.framework; path = "SwiftHEXColors-macOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8263E2D5D84BEBD5B48EBF30E0B2374 /* Pods-VocalTraineriOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-VocalTraineriOS-dummy.m"; sourceTree = "<group>"; };
+		CA4FB4031A56A047C36DA3066226F247 /* SwiftHEXColors-macOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; name = "SwiftHEXColors-macOS.modulemap"; path = "../SwiftHEXColors-macOS/SwiftHEXColors-macOS.modulemap"; sourceTree = "<group>"; };
 		CD2FDE88CDECFEB8B67A3BD8AEBD7403 /* Pods-VocalTraineriOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VocalTraineriOS.release.xcconfig"; sourceTree = "<group>"; };
 		CEE86D904EF34E0CBBA4CD7D2BA9A508 /* Pods-VocalTrainerMacOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-VocalTrainerMacOS-Info.plist"; sourceTree = "<group>"; };
-		E6ADF3A42F5D19E5C8F8C420B6F31FAA /* SwiftHEXColors-macOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; name = "SwiftHEXColors-macOS.modulemap"; path = "../SwiftHEXColors-macOS/SwiftHEXColors-macOS.modulemap"; sourceTree = "<group>"; };
-		F89077D8583B30D6D0BFE8A9ABE6FC08 /* SwiftHEXColors-iOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftHEXColors-iOS-prefix.pch"; sourceTree = "<group>"; };
-		FE952D88F42F05624E858AF19DD36EDD /* SwiftHEXColors-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "SwiftHEXColors-macOS.debug.xcconfig"; path = "../SwiftHEXColors-macOS/SwiftHEXColors-macOS.debug.xcconfig"; sourceTree = "<group>"; };
+		D7353111D9B818B93BC0112AD734B4C0 /* SwiftHEXColors-iOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftHEXColors-iOS-prefix.pch"; sourceTree = "<group>"; };
+		E41B8D69B29ADB4DC39A1D21A7B22987 /* GestureRecognizerClosures.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = GestureRecognizerClosures.modulemap; sourceTree = "<group>"; };
+		ED08274D411786A3071D35BAE4BA776E /* SwiftHEXColors-iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftHEXColors-iOS-dummy.m"; sourceTree = "<group>"; };
+		F2D159ADD62C21495B0811B16D42664D /* SwiftHEXColors-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "SwiftHEXColors-macOS.debug.xcconfig"; path = "../SwiftHEXColors-macOS/SwiftHEXColors-macOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +124,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3D404D4B337D744498E3281600F5B407 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33134EDCF34CEFD17C4E14841BC2681D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		63A0A96C9F5EACCB684346BC5710063D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -100,11 +140,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A00B63101552977D9EB72740CE2355BF /* Frameworks */ = {
+		9D7B0C09C3562BD5B8B95FBBA52E63E9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8F3513EB6B27BAA437874EDAF7F9E2D /* Foundation.framework in Frameworks */,
+				8E4EC1EDA37D1E6954F6F16ADAB1D69D /* Foundation.framework in Frameworks */,
+				D12130A4EA1418D13E3B94868147E0D2 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,21 +160,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		41C052635D3E21350AC08C5F316759F6 /* OS X */ = {
+		0560633DE7C98A22BA0EE5E6FD3DDBEF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5A54C97DEB1A3977AC3A62AFF00971BF /* Cocoa.framework */,
+				6819C8E29E1622A130002C0C705123CD /* GestureRecognizerClosures.framework */,
+				467FC94DCE46C986E37EFE5C9BE95CF1 /* Pods_VocalTraineriOS.framework */,
+				87FE9A57E5CDB2980D62D618EBA3D83D /* Pods_VocalTrainerMacOS.framework */,
+				0328CEE4B804359978D2601D4B94C873 /* SwiftHEXColors.framework */,
+				BDE9CF30B77C25B25482DEF950863354 /* SwiftHEXColors.framework */,
 			);
-			name = "OS X";
+			name = Products;
 			sourceTree = "<group>";
 		};
-		4EDC20B56A0B9A8564E1FCEA191C83C4 /* Frameworks */ = {
+		0A98A62AC2BFF934B07234FDA54FDBA1 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				DABCD2AA1C1DFCD4E2578CE87BDFD93F /* iOS */,
-				41C052635D3E21350AC08C5F316759F6 /* OS X */,
+				3909C0C43E6A581371C0CA8B16E198D9 /* Foundation.framework */,
+				5C818B9C9EE836CA18461E8CA529A54F /* UIKit.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		5527F6BCDF18BA2511D6983B0607D314 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0A98A62AC2BFF934B07234FDA54FDBA1 /* iOS */,
+				ECD56F01C179FBCD22E3EA97B04869EB /* OS X */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5B1B11679A1D8DEEEA8964F0C95FE020 /* GestureRecognizerClosures */ = {
+			isa = PBXGroup;
+			children = (
+				B88BE5F5118E7F004BBAB9198B31B0D1 /* ClosureHandler.swift */,
+				78A6EEE06CDE9B10EC6DD5898F6DC877 /* GestureClosure.swift */,
+				6B1475278845D58B886E11DE7EDCE1DF /* UIBarButtonItem+Closures.swift */,
+				0AABC0F46F5054691DD3D555C828153D /* UIControl+Closures.swift */,
+				4AF6EB1AA5FED333D68F39291C4F1467 /* UIGestureRecognizer+Closures.swift */,
+				0B7243F5D93961F43024B08C50420A1E /* UIView+Closures.swift */,
+				DC29568F84C2A383C59501A3DB187C60 /* Support Files */,
+			);
+			name = GestureRecognizerClosures;
+			path = GestureRecognizerClosures;
 			sourceTree = "<group>";
 		};
 		5CF19780684CA1C2B56D21E8FA0C06B5 /* Pods-VocalTrainerMacOS */ = {
@@ -153,14 +222,13 @@
 			path = "Target Support Files/Pods-VocalTrainerMacOS";
 			sourceTree = "<group>";
 		};
-		6F0784E6F2626C687583A121A74FBADF /* SwiftHEXColors */ = {
+		6D2B8A0F2330B79D5087D45B03B8F164 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2FC38DC8F650E65289785666728AB90C /* SwiftHEXColors.swift */,
-				DBB5D0751DFFFC218BEE7FAC7BF819D6 /* Support Files */,
+				5B1B11679A1D8DEEEA8964F0C95FE020 /* GestureRecognizerClosures */,
+				F2DF37E208F03909AFFBDB77619D9A9E /* SwiftHEXColors */,
 			);
-			name = SwiftHEXColors;
-			path = SwiftHEXColors;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		79B564C125C87011E3ED011D971FD04E /* Pods-VocalTraineriOS */ = {
@@ -180,23 +248,26 @@
 			path = "Target Support Files/Pods-VocalTraineriOS";
 			sourceTree = "<group>";
 		};
-		859230D42FD4C88778FDA54A34E9A103 /* Pods */ = {
+		C18A118391F9D0111D74C2F266C32C3E /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				6F0784E6F2626C687583A121A74FBADF /* SwiftHEXColors */,
+				84BFFFFDBB92DA9A5B70E93F288B6FEA /* SwiftHEXColors-iOS.modulemap */,
+				ED08274D411786A3071D35BAE4BA776E /* SwiftHEXColors-iOS-dummy.m */,
+				3FD72C907AE609B9E4CDA838D7356434 /* SwiftHEXColors-iOS-Info.plist */,
+				D7353111D9B818B93BC0112AD734B4C0 /* SwiftHEXColors-iOS-prefix.pch */,
+				0555DF8A0094272615AA398006061416 /* SwiftHEXColors-iOS-umbrella.h */,
+				6E821ECA540FE2B49602A110EF43F305 /* SwiftHEXColors-iOS.debug.xcconfig */,
+				14E00DB46B081742E791DDBBFF6DFBBE /* SwiftHEXColors-iOS.release.xcconfig */,
+				CA4FB4031A56A047C36DA3066226F247 /* SwiftHEXColors-macOS.modulemap */,
+				328334E878B2C9A9977CC939191A4A81 /* SwiftHEXColors-macOS-dummy.m */,
+				2E8C2A9C4D188DB4B2A0A94650FAE830 /* SwiftHEXColors-macOS-Info.plist */,
+				60E273DF23DC803EB7FCEE7802FDE013 /* SwiftHEXColors-macOS-prefix.pch */,
+				997011794706529CFB0D0507A1FDB503 /* SwiftHEXColors-macOS-umbrella.h */,
+				F2D159ADD62C21495B0811B16D42664D /* SwiftHEXColors-macOS.debug.xcconfig */,
+				4EC0B81BECE3A3CDE845FFF2771DC3EF /* SwiftHEXColors-macOS.release.xcconfig */,
 			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		8CD197D693653BC18D1A3EA1CE99E192 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				467FC94DCE46C986E37EFE5C9BE95CF1 /* Pods_VocalTraineriOS.framework */,
-				87FE9A57E5CDB2980D62D618EBA3D83D /* Pods_VocalTrainerMacOS.framework */,
-				0328CEE4B804359978D2601D4B94C873 /* SwiftHEXColors.framework */,
-				BDE9CF30B77C25B25482DEF950863354 /* SwiftHEXColors.framework */,
-			);
-			name = Products;
+			name = "Support Files";
+			path = "../Target Support Files/SwiftHEXColors-iOS";
 			sourceTree = "<group>";
 		};
 		C62B4DE1AEED82AA719EC7DD4EA91473 /* Targets Support Files */ = {
@@ -212,41 +283,44 @@
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				4EDC20B56A0B9A8564E1FCEA191C83C4 /* Frameworks */,
-				859230D42FD4C88778FDA54A34E9A103 /* Pods */,
-				8CD197D693653BC18D1A3EA1CE99E192 /* Products */,
+				5527F6BCDF18BA2511D6983B0607D314 /* Frameworks */,
+				6D2B8A0F2330B79D5087D45B03B8F164 /* Pods */,
+				0560633DE7C98A22BA0EE5E6FD3DDBEF /* Products */,
 				C62B4DE1AEED82AA719EC7DD4EA91473 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		DABCD2AA1C1DFCD4E2578CE87BDFD93F /* iOS */ = {
+		DC29568F84C2A383C59501A3DB187C60 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				3261E5A5395F45780622405F504B2804 /* Foundation.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		DBB5D0751DFFFC218BEE7FAC7BF819D6 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				74817D5A83B1A4CC3094EAAA4B6EA5A1 /* SwiftHEXColors-iOS.modulemap */,
-				5524E198CF1420E36E8802028F3ED120 /* SwiftHEXColors-iOS-dummy.m */,
-				6269770D41A140B428B661F3514130A7 /* SwiftHEXColors-iOS-Info.plist */,
-				F89077D8583B30D6D0BFE8A9ABE6FC08 /* SwiftHEXColors-iOS-prefix.pch */,
-				53583D37B412EBB116E25325C472EB86 /* SwiftHEXColors-iOS-umbrella.h */,
-				7EF0695F70F1A18D7C62A3E0C94D377B /* SwiftHEXColors-iOS.debug.xcconfig */,
-				3F9440FBBC8E5FD1272917FD4BECDD56 /* SwiftHEXColors-iOS.release.xcconfig */,
-				E6ADF3A42F5D19E5C8F8C420B6F31FAA /* SwiftHEXColors-macOS.modulemap */,
-				15BED13885714C4C1EDCBD18F7BC3D7A /* SwiftHEXColors-macOS-dummy.m */,
-				1CA3F3ADCEDF962BE39F994B90BF192E /* SwiftHEXColors-macOS-Info.plist */,
-				0BEB359869BCE597D137C7B4982D1912 /* SwiftHEXColors-macOS-prefix.pch */,
-				ADB374E78E13CB489FE64FB5A1E1C94B /* SwiftHEXColors-macOS-umbrella.h */,
-				FE952D88F42F05624E858AF19DD36EDD /* SwiftHEXColors-macOS.debug.xcconfig */,
-				14AE7CFFD246189B2C6D9E8569D6613A /* SwiftHEXColors-macOS.release.xcconfig */,
+				E41B8D69B29ADB4DC39A1D21A7B22987 /* GestureRecognizerClosures.modulemap */,
+				578BB1A7896A6BE80105E557AB374F9B /* GestureRecognizerClosures-dummy.m */,
+				48EE622947E6F1A653663511DC0AF33C /* GestureRecognizerClosures-Info.plist */,
+				43E22049A278D1E2918B97414E6C3859 /* GestureRecognizerClosures-prefix.pch */,
+				3EBA42901DF059605DC638EDF36BEFB4 /* GestureRecognizerClosures-umbrella.h */,
+				B8256AA6F157A454BCA8BF4A843EF9BE /* GestureRecognizerClosures.debug.xcconfig */,
+				12B8D3D8DE51E3E5C2F0E75AF67F65A1 /* GestureRecognizerClosures.release.xcconfig */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/SwiftHEXColors-iOS";
+			path = "../Target Support Files/GestureRecognizerClosures";
+			sourceTree = "<group>";
+		};
+		ECD56F01C179FBCD22E3EA97B04869EB /* OS X */ = {
+			isa = PBXGroup;
+			children = (
+				657885352DCBEC1EEDF1F0B0F83A1A82 /* Cocoa.framework */,
+			);
+			name = "OS X";
+			sourceTree = "<group>";
+		};
+		F2DF37E208F03909AFFBDB77619D9A9E /* SwiftHEXColors */ = {
+			isa = PBXGroup;
+			children = (
+				185E30780D892E56ADF76E94E1C812F3 /* SwiftHEXColors.swift */,
+				C18A118391F9D0111D74C2F266C32C3E /* Support Files */,
+			);
+			name = SwiftHEXColors;
+			path = SwiftHEXColors;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,11 +334,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6092099F3A51FF826DDF6D5FB5D1D32D /* Headers */ = {
+		3DACD47BD57D0E064C90DA4A1358D6D8 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D69CB3F895D3258EF98A786F86D31324 /* Pods-VocalTraineriOS-umbrella.h in Headers */,
+				2788E9F589E8F661B76557EFA402A2DE /* GestureRecognizerClosures-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +347,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				507AEE56D5A1D6ED4335474A35DF5AE3 /* SwiftHEXColors-iOS-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C4CD9DAE4E9F07E77C55E522B0F06A2D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4864AD953BFB281A547DA126AA02A553 /* Pods-VocalTraineriOS-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,11 +399,29 @@
 			buildRules = (
 			);
 			dependencies = (
-				F094266E518C945F464AA2C9293A83DE /* PBXTargetDependency */,
+				EA575459811B3F6B5CA7EF4F5EBD094E /* PBXTargetDependency */,
 			);
 			name = "Pods-VocalTrainerMacOS";
 			productName = "Pods-VocalTrainerMacOS";
 			productReference = 87FE9A57E5CDB2980D62D618EBA3D83D /* Pods_VocalTrainerMacOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		872DEBAB8DABC1BA93120BE8157F6E4C /* GestureRecognizerClosures */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B64A775B00FA8681F3511D64460ADFC6 /* Build configuration list for PBXNativeTarget "GestureRecognizerClosures" */;
+			buildPhases = (
+				3DACD47BD57D0E064C90DA4A1358D6D8 /* Headers */,
+				A8083236F8CD5ECBC3B39D493F70C4BB /* Sources */,
+				9D7B0C09C3562BD5B8B95FBBA52E63E9 /* Frameworks */,
+				27337B945D6C905FCBE1F3935FEE7D70 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GestureRecognizerClosures;
+			productName = GestureRecognizerClosures;
+			productReference = 6819C8E29E1622A130002C0C705123CD /* GestureRecognizerClosures.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		ED1051D0590BEB0F31D1CA8AF56F372C /* SwiftHEXColors-macOS */ = {
@@ -344,17 +444,18 @@
 		};
 		F89D11B8F592C63C350862AA9594938F /* Pods-VocalTraineriOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 205C2E1DB48DBCEFBD7006D81460FA18 /* Build configuration list for PBXNativeTarget "Pods-VocalTraineriOS" */;
+			buildConfigurationList = 9C3EFCD578B3E165B5781211D9ECFCCD /* Build configuration list for PBXNativeTarget "Pods-VocalTraineriOS" */;
 			buildPhases = (
-				6092099F3A51FF826DDF6D5FB5D1D32D /* Headers */,
-				632ABDDC9F8CEA57D65F3D254DC4625D /* Sources */,
-				A00B63101552977D9EB72740CE2355BF /* Frameworks */,
-				675AA4D4BADF4B04A6FDD7DF6DBE2A94 /* Resources */,
+				C4CD9DAE4E9F07E77C55E522B0F06A2D /* Headers */,
+				3759D368E3C37479986AA13B045F0DB6 /* Sources */,
+				3D404D4B337D744498E3281600F5B407 /* Frameworks */,
+				E27B105C65DD94C141BE4B30E199A34F /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				0BB4266CA42BEABAF583D8B1187BB9E3 /* PBXTargetDependency */,
+				80D23247171847F0FA17C8BDE359F648 /* PBXTargetDependency */,
+				8CADF1D17930F4493F3F7D205BCA40FC /* PBXTargetDependency */,
 			);
 			name = "Pods-VocalTraineriOS";
 			productName = "Pods-VocalTraineriOS";
@@ -379,10 +480,11 @@
 				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 8CD197D693653BC18D1A3EA1CE99E192 /* Products */;
+			productRefGroup = 0560633DE7C98A22BA0EE5E6FD3DDBEF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				872DEBAB8DABC1BA93120BE8157F6E4C /* GestureRecognizerClosures */,
 				F89D11B8F592C63C350862AA9594938F /* Pods-VocalTraineriOS */,
 				7AFDC4A43C1C751B9580751518681741 /* Pods-VocalTrainerMacOS */,
 				0D5D0A8C272F16D6CEC5AE9359B0E54F /* SwiftHEXColors-iOS */,
@@ -399,7 +501,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		675AA4D4BADF4B04A6FDD7DF6DBE2A94 /* Resources */ = {
+		27337B945D6C905FCBE1F3935FEE7D70 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -414,6 +516,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		E0DE3DC59650570C1D223762B704A99B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E27B105C65DD94C141BE4B30E199A34F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -440,11 +549,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		632ABDDC9F8CEA57D65F3D254DC4625D /* Sources */ = {
+		3759D368E3C37479986AA13B045F0DB6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				081C70228534C8B9BE30BB6C52D904C9 /* Pods-VocalTraineriOS-dummy.m in Sources */,
+				3E7D80ECCC76B090ADD94E89E9D33700 /* Pods-VocalTraineriOS-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,27 +566,47 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A8083236F8CD5ECBC3B39D493F70C4BB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07C930C63990406244CACD35BD161BC6 /* ClosureHandler.swift in Sources */,
+				6D1EA830036818DA2E4B3F76A64437AA /* GestureClosure.swift in Sources */,
+				0CD27F496DB10BDD252B85501F71593F /* GestureRecognizerClosures-dummy.m in Sources */,
+				2A51E59835AB30B21DF3FEA526E815BE /* UIBarButtonItem+Closures.swift in Sources */,
+				6696856EFDB79AF45B1E2D3D0E5B19B3 /* UIControl+Closures.swift in Sources */,
+				85861979AF114F0809DDDD42F0755F14 /* UIGestureRecognizer+Closures.swift in Sources */,
+				588C7B6AEC8626D8871787D4EA9251B8 /* UIView+Closures.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0BB4266CA42BEABAF583D8B1187BB9E3 /* PBXTargetDependency */ = {
+		80D23247171847F0FA17C8BDE359F648 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GestureRecognizerClosures;
+			target = 872DEBAB8DABC1BA93120BE8157F6E4C /* GestureRecognizerClosures */;
+			targetProxy = 477EA35A9238BF8CB88A73D0E49728DF /* PBXContainerItemProxy */;
+		};
+		8CADF1D17930F4493F3F7D205BCA40FC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "SwiftHEXColors-iOS";
 			target = 0D5D0A8C272F16D6CEC5AE9359B0E54F /* SwiftHEXColors-iOS */;
-			targetProxy = FB4F643D352B665F835661E90109A47C /* PBXContainerItemProxy */;
+			targetProxy = DE0004761C7CAF5A8EF4793C50DD43BC /* PBXContainerItemProxy */;
 		};
-		F094266E518C945F464AA2C9293A83DE /* PBXTargetDependency */ = {
+		EA575459811B3F6B5CA7EF4F5EBD094E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "SwiftHEXColors-macOS";
 			target = ED1051D0590BEB0F31D1CA8AF56F372C /* SwiftHEXColors-macOS */;
-			targetProxy = 8103B94F6A7BB5834BCBFECD48A16D27 /* PBXContainerItemProxy */;
+			targetProxy = A6BD023D219BAC2CD52B9D68D8D7D369 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1805416A25FE1AA363C26828E6B38D65 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7EF0695F70F1A18D7C62A3E0C94D377B /* SwiftHEXColors-iOS.debug.xcconfig */;
+			baseConfigurationReference = 6E821ECA540FE2B49602A110EF43F305 /* SwiftHEXColors-iOS.debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -499,6 +628,77 @@
 				MODULEMAP_FILE = "Target Support Files/SwiftHEXColors-iOS/SwiftHEXColors-iOS.modulemap";
 				PRODUCT_MODULE_NAME = SwiftHEXColors;
 				PRODUCT_NAME = SwiftHEXColors;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		1C17BCA3FB11858667125863AEC21673 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AC92910DF562DAF5B945701C9F425C9D /* Pods-VocalTraineriOS.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-VocalTraineriOS/Pods-VocalTraineriOS-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-VocalTraineriOS/Pods-VocalTraineriOS.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		36E32A06D583435E4652089950C73E99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B8256AA6F157A454BCA8BF4A843EF9BE /* GestureRecognizerClosures.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/GestureRecognizerClosures/GestureRecognizerClosures-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/GestureRecognizerClosures/GestureRecognizerClosures-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/GestureRecognizerClosures/GestureRecognizerClosures.modulemap";
+				PRODUCT_MODULE_NAME = GestureRecognizerClosures;
+				PRODUCT_NAME = GestureRecognizerClosures;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
@@ -547,9 +747,44 @@
 			};
 			name = Release;
 		};
+		569432890F81B1487151E08383674700 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 12B8D3D8DE51E3E5C2F0E75AF67F65A1 /* GestureRecognizerClosures.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/GestureRecognizerClosures/GestureRecognizerClosures-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/GestureRecognizerClosures/GestureRecognizerClosures-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/GestureRecognizerClosures/GestureRecognizerClosures.modulemap";
+				PRODUCT_MODULE_NAME = GestureRecognizerClosures;
+				PRODUCT_NAME = GestureRecognizerClosures;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		639F7DE7EC7864F8408850AFB2BDAEA7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 14AE7CFFD246189B2C6D9E8569D6613A /* SwiftHEXColors-macOS.release.xcconfig */;
+			baseConfigurationReference = 4EC0B81BECE3A3CDE845FFF2771DC3EF /* SwiftHEXColors-macOS.release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -584,7 +819,7 @@
 		};
 		65B11C4177ACEB09B2DB973940751B2C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3F9440FBBC8E5FD1272917FD4BECDD56 /* SwiftHEXColors-iOS.release.xcconfig */;
+			baseConfigurationReference = 14E00DB46B081742E791DDBBFF6DFBBE /* SwiftHEXColors-iOS.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -617,9 +852,9 @@
 			};
 			name = Release;
 		};
-		85AFCDB744E9B3DE5ABDC5601BE6F7B8 /* Debug */ = {
+		7E2F1016EC349CAEBD89E5F48B520846 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AC92910DF562DAF5B945701C9F425C9D /* Pods-VocalTraineriOS.debug.xcconfig */;
+			baseConfigurationReference = CD2FDE88CDECFEB8B67A3BD8AEBD7403 /* Pods-VocalTraineriOS.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -649,10 +884,11 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 		A48C2B8F56D6B502663CD3842A95E5A8 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -721,47 +957,9 @@
 			};
 			name = Debug;
 		};
-		A7AD64B3A64BBDBD5BC8AD0071777D3A /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CD2FDE88CDECFEB8B67A3BD8AEBD7403 /* Pods-VocalTraineriOS.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-VocalTraineriOS/Pods-VocalTraineriOS-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-VocalTraineriOS/Pods-VocalTraineriOS.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		B05E83C2D3996D22CFBF479860352E0F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FE952D88F42F05624E858AF19DD36EDD /* SwiftHEXColors-macOS.debug.xcconfig */;
+			baseConfigurationReference = F2D159ADD62C21495B0811B16D42664D /* SwiftHEXColors-macOS.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -907,15 +1105,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		205C2E1DB48DBCEFBD7006D81460FA18 /* Build configuration list for PBXNativeTarget "Pods-VocalTraineriOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				85AFCDB744E9B3DE5ABDC5601BE6F7B8 /* Debug */,
-				A7AD64B3A64BBDBD5BC8AD0071777D3A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		3FAAE60B5C7E387B0304E630D9746DC1 /* Build configuration list for PBXNativeTarget "Pods-VocalTrainerMacOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -930,6 +1119,24 @@
 			buildConfigurations = (
 				A48C2B8F56D6B502663CD3842A95E5A8 /* Debug */,
 				D7F97AB10C8F9F2B8BD48776BCFE8746 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9C3EFCD578B3E165B5781211D9ECFCCD /* Build configuration list for PBXNativeTarget "Pods-VocalTraineriOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1C17BCA3FB11858667125863AEC21673 /* Debug */,
+				7E2F1016EC349CAEBD89E5F48B520846 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B64A775B00FA8681F3511D64460ADFC6 /* Build configuration list for PBXNativeTarget "GestureRecognizerClosures" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				36E32A06D583435E4652089950C73E99 /* Debug */,
+				569432890F81B1487151E08383674700 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
