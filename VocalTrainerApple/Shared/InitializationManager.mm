@@ -19,7 +19,6 @@
         const char *mvxPath = [NSBundle.mainBundle pathForResource:@"drm" ofType:@"mvx"].UTF8String;
         player->setSource(mvxPath);
         player->prepare();
-        player->setPitchShiftInSemiTones(2);
     }
 }
 

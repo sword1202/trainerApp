@@ -13,6 +13,7 @@ struct WorkspaceView : UIViewRepresentable {
         let view = WorkspaceDrawerView()
         view.onWorkspaceControllerChanged = { [unowned view] in
             ProjectController.shared.setWorkspaceController(view.workspaceController());
+            ProjectController.shared.togglePlay()
         }
         return view
     }

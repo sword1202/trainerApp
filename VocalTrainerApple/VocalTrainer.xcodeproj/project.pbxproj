@@ -10,6 +10,7 @@
 		5426B113258CC8EB00AC1A28 /* Logic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54ADDE85258BBDA000F1163F /* Logic.framework */; };
 		5426B114258CC8EB00AC1A28 /* Logic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 54ADDE85258BBDA000F1163F /* Logic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5426B119258CCA7500AC1A28 /* drm.mvx in Resources */ = {isa = PBXBuildFile; fileRef = 5426B118258CCA7500AC1A28 /* drm.mvx */; };
+		5426B131258CE14F00AC1A28 /* drm.mvx in Resources */ = {isa = PBXBuildFile; fileRef = 5426B118258CCA7500AC1A28 /* drm.mvx */; };
 		54338F54258A57D500C7D5E2 /* WorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE4F5AC0BB8DDAE24683 /* WorkspaceDrawerView.mm */; };
 		54338F55258A57D500C7D5E2 /* WorkspaceDrawerView.h in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFFCC49CC10D4ABE76064 /* WorkspaceDrawerView.h */; };
 		54338F5D258A591900C7D5E2 /* iOSWorkspaceDrawerResourcesProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF08E005E0AC456B4F0E8 /* iOSWorkspaceDrawerResourcesProvider.mm */; };
@@ -566,6 +567,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5426B131258CE14F00AC1A28 /* drm.mvx in Resources */,
 				ACF18AD522EC7EBF008E7DAA /* Assets.xcassets in Resources */,
 				ACF18AD822EC7EBF008E7DAA /* Main.storyboard in Resources */,
 			);
