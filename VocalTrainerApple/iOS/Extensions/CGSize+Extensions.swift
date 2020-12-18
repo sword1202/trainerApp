@@ -4,6 +4,7 @@
 //
 
 import UIKit
+import Foundation
 
 extension CGSize {
     static func * (left: CGSize, right: CGFloat) -> CGSize {
@@ -24,6 +25,10 @@ extension CGSize {
 
     func contains(size: CGSize) -> Bool {
         return size.width <= self.width && size.height <= self.height
+    }
+
+    func ceil() -> CGSize {
+        CGSize(width: Foundation.ceil(self.width), height: Foundation.ceil(self.height))
     }
 }
 

@@ -22,6 +22,15 @@ extension UIImage {
         }
     }
 
+    @objc func ceilCanvasSize() -> UIImage {
+        let newSize = size.ceil()
+        if newSize == size {
+            return self
+        } else {
+            return self.resizedCanvas(size: newSize)
+        }
+    }
+
     static func from(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) -> UIImage {
         draw(size: size, drawer: { context in
             context.setFillColor(color.cgColor)
