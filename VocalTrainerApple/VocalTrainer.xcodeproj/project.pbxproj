@@ -63,6 +63,7 @@
 		C9FFFAC7A9EEC42DB7900780 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD04B887D1AA905A010C /* Math.swift */; };
 		C9FFFB60BAB5296AE6F06BD9 /* WorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA03F8C9753204A48D4F /* WorkspaceDrawerView.mm */; };
 		C9FFFB7F402FBE74FC015F81 /* MacOSWorkspaceDrawerDelegateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFCA54695F1C745C71A9F /* MacOSWorkspaceDrawerDelegateHelper.swift */; };
+		C9FFFBC424A0C6B8FA77210F /* ProjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFCB31B3B29DABC17E607 /* ProjectViewModel.swift */; };
 		C9FFFBF45045514B7285BF8A /* MacOSWorkspaceDrawerResourcesProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF5B9019937C01C72D703 /* MacOSWorkspaceDrawerResourcesProvider.mm */; };
 		C9FFFC357FB17DBCE0DA3B28 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6D026277BCE01AFF619 /* UIImage+Extensions.swift */; };
 		C9FFFC752DA482CBE97EB7E2 /* CGSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF72A1F66910885A40FE2 /* CGSize+Extensions.swift */; };
@@ -163,6 +164,7 @@
 		C9FFFB1987526EE43216966B /* iOS-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "iOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		C9FFFC52FFD52111E4F8EA1C /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFFCA54695F1C745C71A9F /* MacOSWorkspaceDrawerDelegateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacOSWorkspaceDrawerDelegateHelper.swift; sourceTree = "<group>"; };
+		C9FFFCB31B3B29DABC17E607 /* ProjectViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectViewModel.swift; sourceTree = "<group>"; };
 		C9FFFD04B887D1AA905A010C /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 		C9FFFE302DCFBB0ABE54FB5D /* UIFont+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFFE40E57F82E0441136B6 /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				C9FFF1C7086CF620F8B38795 /* Extensions */,
 				C9FFF161EC7B56BBE962C01E /* Workspace */,
 				C9FFFB1987526EE43216966B /* iOS-Bridging-Header.h */,
+				C9FFFCB31B3B29DABC17E607 /* ProjectViewModel.swift */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -653,6 +656,7 @@
 				C9FFFAC7A9EEC42DB7900780 /* Math.swift in Sources */,
 				C9FFF36C6140C724632BAA67 /* Sequence+Extensions.swift in Sources */,
 				C9FFF0A6DC29C41C836A272F /* NSAttributedString+Extensions.swift in Sources */,
+				C9FFFBC424A0C6B8FA77210F /* ProjectViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

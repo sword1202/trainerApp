@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ProjectController {
     static let shared: ProjectControllerBridge = ProjectControllerBridge()
@@ -22,10 +23,23 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct VocalTrainerApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @Environment(\.scenePhase) private var scenePhase
+    @ObservedObject private var viewModel = ProjectViewModel()
 
     var body: some Scene {
         WindowGroup {
-            WorkspaceView()
+            WorkspaceView().onChange(of: scenePhase) { phase in
+                switch phase {
+                case .active:
+                    viewModel.didBecomeActive()
+                case .inactive:
+                    viewModel.willBecomeInactive()
+                case .background:
+                    print("App goes background")
+                default:
+                    print("Unknown state")
+                }
+            }
         }
     }
 }

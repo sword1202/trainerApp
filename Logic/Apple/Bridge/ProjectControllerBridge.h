@@ -35,6 +35,7 @@
 - (void)toggleBoundsSelectionEnabled;
 
 - (void)togglePlay;
+- (void)stop;
 - (void)toggleRewindWithBackward:(BOOL)backward;
 
 - (void)setVocalVolume:(float)value;

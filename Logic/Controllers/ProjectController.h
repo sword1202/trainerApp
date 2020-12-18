@@ -44,7 +44,6 @@ class ProjectController : CppUtils::DestructorQueue, public WorkspaceControllerD
     void updateSeek(double seek);
 
     void play();
-    void stop();
 public:
     explicit ProjectController(ProjectControllerDelegate* delegate);
 
@@ -55,6 +54,7 @@ public:
     const std::string& getSongTitleUtf8();
 
     void togglePlay();
+    void stop();
     bool isPlaying() const;
     void toggleRewind(bool backward);
 

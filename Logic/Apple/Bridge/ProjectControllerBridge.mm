@@ -173,6 +173,10 @@ public:
     _cpp->togglePlay();
 }
 
+- (void)stop {
+    _cpp->stop();
+}
+
 - (void)toggleRewindWithBackward:(BOOL)backward {
     _cpp->toggleRewind(backward);
 }
