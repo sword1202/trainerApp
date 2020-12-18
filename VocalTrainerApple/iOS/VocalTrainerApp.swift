@@ -28,17 +28,22 @@ struct VocalTrainerApp: App {
 
     var body: some Scene {
         WindowGroup {
-            WorkspaceView().onChange(of: scenePhase) { phase in
-                switch phase {
-                case .active:
-                    viewModel.didBecomeActive()
-                case .inactive:
-                    viewModel.willBecomeInactive()
-                case .background:
-                    print("App goes background")
-                default:
-                    print("Unknown state")
+            VStack {
+                WorkspaceView().onChange(of: scenePhase) { phase in
+                    switch phase {
+                    case .active:
+                        viewModel.didBecomeActive()
+                    case .inactive:
+                        viewModel.willBecomeInactive()
+                    case .background:
+                        print("App goes background")
+                    default:
+                        print("Unknown state")
+                    }
                 }
+                VStack(alignment: .leading) {
+                    Spacer().frame(maxWidth: .infinity, maxHeight: .infinity)
+                }.background(Colors.light).frame(maxWidth: .infinity, maxHeight: 147, alignment: .bottomLeading)
             }
         }
     }

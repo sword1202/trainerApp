@@ -1,11 +1,20 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-target 'VocalTrainer' do
+target 'VocalTrainerMacOS' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
   # Pods for VocalTrainerMacOS
+  pod 'SwiftHEXColors'
+
+end
+
+target 'VocalTraineriOS' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for iOS
   pod 'SwiftHEXColors'
 
 end

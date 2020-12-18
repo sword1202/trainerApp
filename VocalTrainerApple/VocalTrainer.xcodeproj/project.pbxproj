@@ -16,13 +16,12 @@
 		54338F5D258A591900C7D5E2 /* iOSWorkspaceDrawerResourcesProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF08E005E0AC456B4F0E8 /* iOSWorkspaceDrawerResourcesProvider.mm */; };
 		54338F5E258A591900C7D5E2 /* iOSWorkspaceDrawerResourcesProvider.h in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF3402FB10ADCC44F05D8 /* iOSWorkspaceDrawerResourcesProvider.h */; };
 		5482F422256E8C3800299548 /* VocalTrainerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5482F421256E8C3800299548 /* VocalTrainerApp.swift */; };
-		5482F424256E8C3800299548 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5482F423256E8C3800299548 /* ContentView.swift */; };
 		5482F426256E8C3900299548 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5482F425256E8C3900299548 /* Assets.xcassets */; };
 		5482F429256E8C3900299548 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5482F428256E8C3900299548 /* Preview Assets.xcassets */; };
-		5482F44C256E9A0100299548 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2EAAB39ED7617C96D30 /* Color.swift */; };
 		54ADDEAA258BCBF900F1163F /* InitializationManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 71AD29605A6EF90E1D9E2F98 /* InitializationManager.mm */; };
 		54ADDEAB258BCBF900F1163F /* InitializationManager.h in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2ACE3A195D54F918916A /* InitializationManager.h */; };
 		54ADDEC7258C0DC800F1163F /* BaseWorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8FE42466B28CAAB81B9 /* BaseWorkspaceDrawerView.mm */; };
+		66F3F6FE95F2F7E206AC3A7B /* Pods_VocalTraineriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DCF35BAD0081EDD4853BCC3 /* Pods_VocalTraineriOS.framework */; };
 		71AD21242278085DEBD45787 /* NSImage+Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2DEA9FC7B3F13CD06FF3 /* NSImage+Drawing.swift */; };
 		71AD2137071D834E915C2D44 /* HeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2AD0DC2A1BD1B9B058AA /* HeaderViewController.swift */; };
 		71AD221A602A44D64B950BFA /* ProjectWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD21C74A29AB6B2D6F7582 /* ProjectWindowController.swift */; };
@@ -50,10 +49,12 @@
 		ACF18AE422EC7EBF008E7DAA /* VocalTrainerMacOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF18AE322EC7EBF008E7DAA /* VocalTrainerMacOSUITests.swift */; };
 		ACF18B0122EC8611008E7DAA /* Logic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF18B0022EC8611008E7DAA /* Logic.framework */; };
 		ACF18B2522ECB97C008E7DAA /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF18B2422ECB97C008E7DAA /* MetalKit.framework */; };
-		BE59FEE2E72C096CA824A0DE /* Pods_VocalTrainer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 316CF42FAAC5685B522A455A /* Pods_VocalTrainer.framework */; };
+		BAF99EA1E439B8DDE5CA7FE8 /* Pods_VocalTrainerMacOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5884C119A97C874E1D3CB85D /* Pods_VocalTrainerMacOS.framework */; };
 		C9FFF0A6DC29C41C836A272F /* NSAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF75984620E90683329A9 /* NSAttributedString+Extensions.swift */; };
+		C9FFF0C4CA29947B37BD0C4C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF18E11AA44C9B5A6225B /* Color.swift */; };
 		C9FFF1A61CC78731ED6EF231 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF774A22E8B2F85EA6664 /* Array+Extensions.swift */; };
 		C9FFF1CC35BFB853F799A067 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC52FFD52111E4F8EA1C /* CGPoint+Extensions.swift */; };
+		C9FFF2979636C30023334438 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF7DE831C9EFAE9A0AB40 /* Colors.swift */; };
 		C9FFF36C6140C724632BAA67 /* Sequence+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF854128820437B780180 /* Sequence+Extensions.swift */; };
 		C9FFF3F713E181FA7B8210A4 /* CGRect+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFFAE7CC0D189849A9037 /* CGRect+Extensions.swift */; };
 		C9FFF68D7E7F115CA46D8B73 /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE40E57F82E0441136B6 /* UIView+Constraints.swift */; };
@@ -97,20 +98,22 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		316CF42FAAC5685B522A455A /* Pods_VocalTrainer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VocalTrainer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EB14089B9F185478AB5567 /* Pods-VocalTrainer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VocalTrainer.release.xcconfig"; path = "Target Support Files/Pods-VocalTrainer/Pods-VocalTrainer.release.xcconfig"; sourceTree = "<group>"; };
+		3D9D3F285466B306FD870B01 /* Pods-VocalTraineriOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VocalTraineriOS.debug.xcconfig"; path = "Target Support Files/Pods-VocalTraineriOS/Pods-VocalTraineriOS.debug.xcconfig"; sourceTree = "<group>"; };
 		5426B118258CCA7500AC1A28 /* drm.mvx */ = {isa = PBXFileReference; lastKnownFileType = text; name = drm.mvx; path = Shared/Resources/drm.mvx; sourceTree = "<group>"; };
 		543390D7258A59D900C7D5E2 /* LogiciOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LogiciOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		545490982554014B00E8E7F2 /* MvxGenerator.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MvxGenerator.xcodeproj; path = ../MvxGenerator/MvxGenerator.xcodeproj; sourceTree = "<group>"; };
 		5482F41F256E8C3800299548 /* VocalTraineriOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VocalTraineriOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5482F421256E8C3800299548 /* VocalTrainerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocalTrainerApp.swift; sourceTree = "<group>"; };
-		5482F423256E8C3800299548 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5482F425256E8C3900299548 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5482F428256E8C3900299548 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5482F42A256E8C3900299548 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54ADDE7F258BBBC700F1163F /* Logic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Logic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		54ADDE85258BBDA000F1163F /* Logic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Logic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5670C8640D6CB36256D672CE /* Pods-VocalTraineriOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VocalTraineriOS.release.xcconfig"; path = "Target Support Files/Pods-VocalTraineriOS/Pods-VocalTraineriOS.release.xcconfig"; sourceTree = "<group>"; };
+		5884C119A97C874E1D3CB85D /* Pods_VocalTrainerMacOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VocalTrainerMacOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67748B5386791DDBEBEF3101 /* Pods-VocalTrainerMacOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VocalTrainerMacOS.debug.xcconfig"; path = "Target Support Files/Pods-VocalTrainerMacOS/Pods-VocalTrainerMacOS.debug.xcconfig"; sourceTree = "<group>"; };
+		6DCF35BAD0081EDD4853BCC3 /* Pods_VocalTraineriOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VocalTraineriOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		71AD21C74A29AB6B2D6F7582 /* ProjectWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectWindowController.swift; sourceTree = "<group>"; };
 		71AD22FAC42E30FA831A8953 /* ProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
 		71AD2331042B9D6CB1A4E6E7 /* HeaderUiUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderUiUtils.swift; sourceTree = "<group>"; };
@@ -146,8 +149,8 @@
 		ACF18B2422ECB97C008E7DAA /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
 		C9FFF079046892811FDEB34E /* CGContext+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGContext+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF08E005E0AC456B4F0E8 /* iOSWorkspaceDrawerResourcesProvider.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = iOSWorkspaceDrawerResourcesProvider.mm; sourceTree = "<group>"; };
+		C9FFF18E11AA44C9B5A6225B /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		C9FFF2396E0BB5102967F5B2 /* UIView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
-		C9FFF2EAAB39ED7617C96D30 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		C9FFF3402FB10ADCC44F05D8 /* iOSWorkspaceDrawerResourcesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSWorkspaceDrawerResourcesProvider.h; sourceTree = "<group>"; };
 		C9FFF3CF4F4C6C2BB99ABCD7 /* WorkspaceDrawerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceDrawerView.h; sourceTree = "<group>"; };
 		C9FFF4307F629035C6B49841 /* MacOSWorkspaceDrawerResourcesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacOSWorkspaceDrawerResourcesProvider.h; sourceTree = "<group>"; };
@@ -157,6 +160,7 @@
 		C9FFF72A1F66910885A40FE2 /* CGSize+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGSize+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF75984620E90683329A9 /* NSAttributedString+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF774A22E8B2F85EA6664 /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		C9FFF7DE831C9EFAE9A0AB40 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		C9FFF854128820437B780180 /* Sequence+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sequence+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF8FE42466B28CAAB81B9 /* BaseWorkspaceDrawerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BaseWorkspaceDrawerView.mm; sourceTree = "<group>"; };
 		C9FFFA03F8C9753204A48D4F /* WorkspaceDrawerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WorkspaceDrawerView.mm; sourceTree = "<group>"; };
@@ -183,6 +187,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5426B113258CC8EB00AC1A28 /* Logic.framework in Frameworks */,
+				66F3F6FE95F2F7E206AC3A7B /* Pods_VocalTraineriOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,7 +197,7 @@
 			files = (
 				ACF18B2522ECB97C008E7DAA /* MetalKit.framework in Frameworks */,
 				ACF18B0122EC8611008E7DAA /* Logic.framework in Frameworks */,
-				BE59FEE2E72C096CA824A0DE /* Pods_VocalTrainer.framework in Frameworks */,
+				BAF99EA1E439B8DDE5CA7FE8 /* Pods_VocalTrainerMacOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,7 +222,6 @@
 			isa = PBXGroup;
 			children = (
 				5482F421256E8C3800299548 /* VocalTrainerApp.swift */,
-				5482F423256E8C3800299548 /* ContentView.swift */,
 				5482F425256E8C3900299548 /* Assets.xcassets */,
 				5482F42A256E8C3900299548 /* Info.plist */,
 				5482F427256E8C3900299548 /* Preview Content */,
@@ -225,6 +229,7 @@
 				C9FFF161EC7B56BBE962C01E /* Workspace */,
 				C9FFFB1987526EE43216966B /* iOS-Bridging-Header.h */,
 				C9FFFCB31B3B29DABC17E607 /* ProjectViewModel.swift */,
+				C9FFF7DE831C9EFAE9A0AB40 /* Colors.swift */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -379,6 +384,8 @@
 				E4182398962A0FCB5CFBD20F /* Pods-VocalTrainerMacOS.release.xcconfig */,
 				CBBB957AD6C6D1C202253CA9 /* Pods-VocalTrainer.debug.xcconfig */,
 				37EB14089B9F185478AB5567 /* Pods-VocalTrainer.release.xcconfig */,
+				3D9D3F285466B306FD870B01 /* Pods-VocalTraineriOS.debug.xcconfig */,
+				5670C8640D6CB36256D672CE /* Pods-VocalTraineriOS.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -409,7 +416,6 @@
 		C9FFF1C7086CF620F8B38795 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				C9FFF2EAAB39ED7617C96D30 /* Color.swift */,
 				C9FFF079046892811FDEB34E /* CGContext+Extensions.swift */,
 				C9FFFC52FFD52111E4F8EA1C /* CGPoint+Extensions.swift */,
 				C9FFFFAE7CC0D189849A9037 /* CGRect+Extensions.swift */,
@@ -423,6 +429,7 @@
 				C9FFFD04B887D1AA905A010C /* Math.swift */,
 				C9FFF854128820437B780180 /* Sequence+Extensions.swift */,
 				C9FFF75984620E90683329A9 /* NSAttributedString+Extensions.swift */,
+				C9FFF18E11AA44C9B5A6225B /* Color.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -444,7 +451,8 @@
 				543390D7258A59D900C7D5E2 /* LogiciOS.framework */,
 				ACF18B2422ECB97C008E7DAA /* MetalKit.framework */,
 				ACF18B0022EC8611008E7DAA /* Logic.framework */,
-				316CF42FAAC5685B522A455A /* Pods_VocalTrainer.framework */,
+				5884C119A97C874E1D3CB85D /* Pods_VocalTrainerMacOS.framework */,
+				6DCF35BAD0081EDD4853BCC3 /* Pods_VocalTraineriOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -456,10 +464,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5482F42B256E8C3900299548 /* Build configuration list for PBXNativeTarget "VocalTraineriOS" */;
 			buildPhases = (
+				03F4D2228A3CD6E1A24ED7F1 /* [CP] Check Pods Manifest.lock */,
 				5482F41B256E8C3800299548 /* Sources */,
 				5482F41C256E8C3800299548 /* Frameworks */,
 				5482F41D256E8C3800299548 /* Resources */,
 				5426B115258CC8EB00AC1A28 /* Embed Frameworks */,
+				97BD86366886003293214BEC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -586,6 +596,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		03F4D2228A3CD6E1A24ED7F1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VocalTraineriOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		18CC11A8514F6FD74ECA2DB5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -601,7 +633,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-VocalTrainer-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-VocalTrainerMacOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -614,15 +646,32 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VocalTrainer/Pods-VocalTrainer-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-VocalTrainerMacOS/Pods-VocalTrainerMacOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VocalTrainer/Pods-VocalTrainer-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-VocalTrainerMacOS/Pods-VocalTrainerMacOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VocalTrainer/Pods-VocalTrainer-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VocalTrainerMacOS/Pods-VocalTrainerMacOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		97BD86366886003293214BEC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VocalTraineriOS/Pods-VocalTraineriOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VocalTraineriOS/Pods-VocalTraineriOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VocalTraineriOS/Pods-VocalTraineriOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -638,8 +687,6 @@
 				54338F5E258A591900C7D5E2 /* iOSWorkspaceDrawerResourcesProvider.h in Sources */,
 				54338F54258A57D500C7D5E2 /* WorkspaceDrawerView.mm in Sources */,
 				54338F55258A57D500C7D5E2 /* WorkspaceDrawerView.h in Sources */,
-				5482F44C256E9A0100299548 /* Color.swift in Sources */,
-				5482F424256E8C3800299548 /* ContentView.swift in Sources */,
 				5482F422256E8C3800299548 /* VocalTrainerApp.swift in Sources */,
 				C9FFFE30D469382B52DBA18B /* CGContext+Extensions.swift in Sources */,
 				C9FFF1CC35BFB853F799A067 /* CGPoint+Extensions.swift in Sources */,
@@ -657,6 +704,8 @@
 				C9FFF36C6140C724632BAA67 /* Sequence+Extensions.swift in Sources */,
 				C9FFF0A6DC29C41C836A272F /* NSAttributedString+Extensions.swift in Sources */,
 				C9FFFBC424A0C6B8FA77210F /* ProjectViewModel.swift in Sources */,
+				C9FFF2979636C30023334438 /* Colors.swift in Sources */,
+				C9FFF0C4CA29947B37BD0C4C /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -725,6 +774,7 @@
 /* Begin XCBuildConfiguration section */
 		5482F42C256E8C3900299548 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D9D3F285466B306FD870B01 /* Pods-VocalTraineriOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -755,6 +805,7 @@
 		};
 		5482F42D256E8C3900299548 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5670C8640D6CB36256D672CE /* Pods-VocalTraineriOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -901,7 +952,7 @@
 		};
 		ACF18AE922EC7EBF008E7DAA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CBBB957AD6C6D1C202253CA9 /* Pods-VocalTrainer.debug.xcconfig */;
+			baseConfigurationReference = 67748B5386791DDBEBEF3101 /* Pods-VocalTrainerMacOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
@@ -928,7 +979,7 @@
 		};
 		ACF18AEA22EC7EBF008E7DAA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 37EB14089B9F185478AB5567 /* Pods-VocalTrainer.release.xcconfig */;
+			baseConfigurationReference = E4182398962A0FCB5CFBD20F /* Pods-VocalTrainerMacOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
