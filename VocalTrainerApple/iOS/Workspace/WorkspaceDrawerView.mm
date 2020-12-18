@@ -15,4 +15,14 @@
     return new iOSWorkspaceDrawerResourcesProvider();
 }
 
+- (BOOL)drawScrollbars {
+    return NO;
+}
+
+- (void)workspaceDrawerDidInitialize:(WorkspaceDrawer *)drawer {
+    [super workspaceDrawerDidInitialize:drawer];
+    drawer->setDrawTracks(false);
+}
+
+
 @end

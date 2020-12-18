@@ -56,10 +56,12 @@ using namespace CppUtils;
 
         WorkspaceDrawerResourcesProvider* resourcesProvider = [self createResourcesProvider];
         assert(resourcesProvider && "Override createResourcesProvider");
-        _workspaceDrawer = new WorkspaceDrawer(drawer, _mouseEventsReceiver, resourcesProvider, [] {
+        _workspaceDrawer = new WorkspaceDrawer(
+                drawer, _mouseEventsReceiver, resourcesProvider, self.drawScrollbars, [] {
             // update workspace drawer automatically, nothing to do here
         });
         self.onWorkspaceControllerChanged();
+        [self workspaceDrawerDidInitialize:_workspaceDrawer];
 
         return YES;
     }
@@ -92,6 +94,14 @@ using namespace CppUtils;
     return _workspaceDrawer;
 }
 
+- (BOOL)drawScrollbars {
+    return YES;
+}
+
+- (void)workspaceDrawerDidInitialize:(WorkspaceDrawer *)drawer {
+
+}
+
 
 - (WorkspaceDrawerResourcesProvider*)createResourcesProvider {
     return nullptr;
@@ -100,7 +110,6 @@ using namespace CppUtils;
 - (BaseMouseEventsReceiver *)mouseEventsReceiver {
     return _mouseEventsReceiver;
 }
-
 
 - (void)dealloc {
     delete _workspaceDrawer;

@@ -100,8 +100,10 @@ class WorkspaceDrawer : public WorkspaceController {
 
     std::atomic<float> zoom;
 
+    // Scrollbars are not drawn for small screens
     ScrollBar horizontalScrollBar;
     ScrollBar verticalScrollBar;
+    std::atomic_bool willDrawScrollbars;
 
     WorkspaceDrawerResourcesProvider* resourcesProvider;
     WorkspaceControllerDelegate* delegate = nullptr;
@@ -163,8 +165,10 @@ public:
     static const Color YARD_STICK_DOT_AND_TEXT_COLOR;
     static constexpr int BEATS_IN_TACT = 4;
 
-    WorkspaceDrawer(Drawer *drawer, MouseEventsReceiver *mouseEventsReceiver,
+    WorkspaceDrawer(Drawer *drawer,
+            MouseEventsReceiver *mouseEventsReceiver,
             WorkspaceDrawerResourcesProvider *resourcesProvider,
+            bool drawScrollbars,
             const std::function<void()> &onUpdateRequested);
     ~WorkspaceDrawer();
 

@@ -1161,6 +1161,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5426B0EE258CC85C00AC1A28 /* yfgjhghgh */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = yfgjhghgh;
+			sourceTree = "<group>";
+		};
+		5426B0F9258CC85C00AC1A28 /* yfgjhghghTests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = yfgjhghghTests;
+			sourceTree = "<group>";
+		};
 		54338F6D258A599300C7D5E2 /* LogiciOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -1591,6 +1605,8 @@
 				ACB0244723D5CF6100CD08A7 /* LogicTests */,
 				54338F6D258A599300C7D5E2 /* LogiciOS */,
 				54338F78258A599300C7D5E2 /* LogiciOSTests */,
+				5426B0EE258CC85C00AC1A28 /* yfgjhghgh */,
+				5426B0F9258CC85C00AC1A28 /* yfgjhghghTests */,
 				ACF18AA022EC711A008E7DAA /* Products */,
 				71AD2CC2F3597DFE26AD1373 /* ApplicationModel.cpp */,
 				71AD20E7EAC70D42EDAA7136 /* ApplicationModel.h */,
@@ -2839,6 +2855,7 @@
 				);
 				INFOPLIST_FILE = "Logic copy-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -2876,6 +2893,7 @@
 				);
 				INFOPLIST_FILE = "Logic copy-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",

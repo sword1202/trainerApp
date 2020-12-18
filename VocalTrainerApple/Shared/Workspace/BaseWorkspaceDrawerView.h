@@ -8,6 +8,7 @@
 #ifdef  __cplusplus
 #include <Logic/WorkspaceDrawerResourcesProvider.h>
 #include <Logic/BaseMouseEventsReceiver.h>
+#include <Logic/WorkspaceDrawer.h>
 #endif
 
 @class ProjectControllerBridge;
@@ -15,7 +16,9 @@
 @interface BaseWorkspaceDrawerView : MTKView <MTKViewDelegate>
 @property void(^onWorkspaceControllerChanged)();
 - (void*)workspaceController;
+- (BOOL)drawScrollbars;
 #ifdef  __cplusplus
+- (void)workspaceDrawerDidInitialize:(WorkspaceDrawer*)drawer;
 - (WorkspaceDrawerResourcesProvider*)createResourcesProvider;
 - (BaseMouseEventsReceiver*)mouseEventsReceiver;
 #endif

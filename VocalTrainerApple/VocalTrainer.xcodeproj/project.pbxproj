@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5426B113258CC8EB00AC1A28 /* Logic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54ADDE85258BBDA000F1163F /* Logic.framework */; };
+		5426B114258CC8EB00AC1A28 /* Logic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 54ADDE85258BBDA000F1163F /* Logic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5426B119258CCA7500AC1A28 /* drm.mvx in Resources */ = {isa = PBXBuildFile; fileRef = 5426B118258CCA7500AC1A28 /* drm.mvx */; };
 		54338F54258A57D500C7D5E2 /* WorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE4F5AC0BB8DDAE24683 /* WorkspaceDrawerView.mm */; };
 		54338F55258A57D500C7D5E2 /* WorkspaceDrawerView.h in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFFCC49CC10D4ABE76064 /* WorkspaceDrawerView.h */; };
 		54338F5D258A591900C7D5E2 /* iOSWorkspaceDrawerResourcesProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF08E005E0AC456B4F0E8 /* iOSWorkspaceDrawerResourcesProvider.mm */; };
@@ -16,7 +19,6 @@
 		5482F426256E8C3900299548 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5482F425256E8C3900299548 /* Assets.xcassets */; };
 		5482F429256E8C3900299548 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5482F428256E8C3900299548 /* Preview Assets.xcassets */; };
 		5482F44C256E9A0100299548 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2EAAB39ED7617C96D30 /* Color.swift */; };
-		54ADDE86258BBDA000F1163F /* Logic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54ADDE85258BBDA000F1163F /* Logic.framework */; };
 		54ADDEAA258BCBF900F1163F /* InitializationManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 71AD29605A6EF90E1D9E2F98 /* InitializationManager.mm */; };
 		54ADDEAB258BCBF900F1163F /* InitializationManager.h in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2ACE3A195D54F918916A /* InitializationManager.h */; };
 		54ADDEC7258C0DC800F1163F /* BaseWorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8FE42466B28CAAB81B9 /* BaseWorkspaceDrawerView.mm */; };
@@ -78,9 +80,24 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		5426B115258CC8EB00AC1A28 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5426B114258CC8EB00AC1A28 /* Logic.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		316CF42FAAC5685B522A455A /* Pods_VocalTrainer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VocalTrainer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EB14089B9F185478AB5567 /* Pods-VocalTrainer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VocalTrainer.release.xcconfig"; path = "Target Support Files/Pods-VocalTrainer/Pods-VocalTrainer.release.xcconfig"; sourceTree = "<group>"; };
+		5426B118258CCA7500AC1A28 /* drm.mvx */ = {isa = PBXFileReference; lastKnownFileType = text; name = drm.mvx; path = Shared/Resources/drm.mvx; sourceTree = "<group>"; };
 		543390D7258A59D900C7D5E2 /* LogiciOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LogiciOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		545490982554014B00E8E7F2 /* MvxGenerator.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MvxGenerator.xcodeproj; path = ../MvxGenerator/MvxGenerator.xcodeproj; sourceTree = "<group>"; };
 		5482F41F256E8C3800299548 /* VocalTraineriOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VocalTraineriOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -162,7 +179,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54ADDE86258BBDA000F1163F /* Logic.framework in Frameworks */,
+				5426B113258CC8EB00AC1A28 /* Logic.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +322,7 @@
 		ACF18AC422EC7EBF008E7DAA = {
 			isa = PBXGroup;
 			children = (
+				5426B118258CCA7500AC1A28 /* drm.mvx */,
 				545490982554014B00E8E7F2 /* MvxGenerator.xcodeproj */,
 				ACF18ACF22EC7EBF008E7DAA /* MacOS */,
 				ACF18AE222EC7EBF008E7DAA /* VocalTrainerUITests */,
@@ -437,6 +455,7 @@
 				5482F41B256E8C3800299548 /* Sources */,
 				5482F41C256E8C3800299548 /* Frameworks */,
 				5482F41D256E8C3800299548 /* Resources */,
+				5426B115258CC8EB00AC1A28 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -537,6 +556,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5426B119258CCA7500AC1A28 /* drm.mvx in Resources */,
 				5482F429256E8C3900299548 /* Preview Assets.xcassets in Resources */,
 				5482F426256E8C3900299548 /* Assets.xcassets in Resources */,
 			);
@@ -713,7 +733,7 @@
 					../Logic/CppUtils,
 				);
 				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -743,7 +763,7 @@
 					../Logic/CppUtils,
 				);
 				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

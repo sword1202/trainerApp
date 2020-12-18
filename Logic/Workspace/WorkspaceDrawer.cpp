@@ -227,6 +227,10 @@ void WorkspaceDrawer::captureClickEventsInTracksArea(float pianoTrackHeight) {
 }
 
 void WorkspaceDrawer::drawScrollBars() {
+    if (!willDrawScrollbars) {
+        return;
+    }
+
     horizontalScrollBar.draw(1, height - ScrollBar::SCROLLBAR_WEIGHT, getVisibleGridWidth());
     if (horizontalScrollBar.isPositionWasChangedFromUser()) {
         float position = horizontalScrollBar.getPosition();
@@ -678,8 +682,10 @@ void WorkspaceDrawer::setAccentGridColor(const Color& color) {
     this->accentGridColor = color;
 }
 
-WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, MouseEventsReceiver *mouseEventsReceiver,
+WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer,
+        MouseEventsReceiver *mouseEventsReceiver,
         WorkspaceDrawerResourcesProvider *resourcesProvider,
+        bool drawScrollbars,
         const std::function<void()> &onUpdateRequested)
         :
         intervalWidth(-1),
@@ -697,6 +703,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer, MouseEventsReceiver *mouseEvent
         secondPlayHeadPosition(0),
         playbackBounds(PlaybackBounds()),
         willDrawTracks(true),
+        willDrawScrollbars(drawScrollbars),
         mouseEventsReceiver(mouseEventsReceiver),
         verticalScrollBar(drawer, mouseEventsReceiver, ScrollBar::VERTICAL),
         horizontalScrollBar(drawer, mouseEventsReceiver, ScrollBar::HORIZONTAL),
