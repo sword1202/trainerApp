@@ -177,7 +177,9 @@ void BaseAudioPlayer::pause() {
     playing = false;
     writer->stop();
     onDataSentToOutputListeners.removeListener(dataSentToOutputListenerKey);
-    onPlaybackStoppedListeners.executeAll();
+    Executors::ExecuteOnMainThread([this] {
+        this->onPlaybackStoppedListeners.executeAll();
+    });
 }
 
 void BaseAudioPlayer::setSeek(double timeStamp) {

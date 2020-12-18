@@ -7,5 +7,5 @@ import SwiftUI
 import SwiftHEXColors
 
 struct Colors {
-    static let light = Color(hex: 0xC5CDFC, alpha: 1.0)
+    static let main = Color(hex: 0xC5CDFC, alpha: 1.0)
 }

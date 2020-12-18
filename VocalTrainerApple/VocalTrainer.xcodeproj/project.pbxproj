@@ -11,6 +11,7 @@
 		5426B114258CC8EB00AC1A28 /* Logic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 54ADDE85258BBDA000F1163F /* Logic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5426B119258CCA7500AC1A28 /* drm.mvx in Resources */ = {isa = PBXBuildFile; fileRef = 5426B118258CCA7500AC1A28 /* drm.mvx */; };
 		5426B131258CE14F00AC1A28 /* drm.mvx in Resources */ = {isa = PBXBuildFile; fileRef = 5426B118258CCA7500AC1A28 /* drm.mvx */; };
+		5426B177258D151300AC1A28 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5426B176258D151300AC1A28 /* ProjectView.swift */; };
 		54338F54258A57D500C7D5E2 /* WorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE4F5AC0BB8DDAE24683 /* WorkspaceDrawerView.mm */; };
 		54338F55258A57D500C7D5E2 /* WorkspaceDrawerView.h in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFFCC49CC10D4ABE76064 /* WorkspaceDrawerView.h */; };
 		54338F5D258A591900C7D5E2 /* iOSWorkspaceDrawerResourcesProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF08E005E0AC456B4F0E8 /* iOSWorkspaceDrawerResourcesProvider.mm */; };
@@ -52,6 +53,7 @@
 		BAF99EA1E439B8DDE5CA7FE8 /* Pods_VocalTrainerMacOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5884C119A97C874E1D3CB85D /* Pods_VocalTrainerMacOS.framework */; };
 		C9FFF0A6DC29C41C836A272F /* NSAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF75984620E90683329A9 /* NSAttributedString+Extensions.swift */; };
 		C9FFF0C4CA29947B37BD0C4C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF18E11AA44C9B5A6225B /* Color.swift */; };
+		C9FFF1259D0CAC1732CA75B4 /* SwiftUIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8676254998A2E1557B2 /* SwiftUIUtils.swift */; };
 		C9FFF1A61CC78731ED6EF231 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF774A22E8B2F85EA6664 /* Array+Extensions.swift */; };
 		C9FFF1CC35BFB853F799A067 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC52FFD52111E4F8EA1C /* CGPoint+Extensions.swift */; };
 		C9FFF2979636C30023334438 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF7DE831C9EFAE9A0AB40 /* Colors.swift */; };
@@ -101,6 +103,7 @@
 		37EB14089B9F185478AB5567 /* Pods-VocalTrainer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VocalTrainer.release.xcconfig"; path = "Target Support Files/Pods-VocalTrainer/Pods-VocalTrainer.release.xcconfig"; sourceTree = "<group>"; };
 		3D9D3F285466B306FD870B01 /* Pods-VocalTraineriOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VocalTraineriOS.debug.xcconfig"; path = "Target Support Files/Pods-VocalTraineriOS/Pods-VocalTraineriOS.debug.xcconfig"; sourceTree = "<group>"; };
 		5426B118258CCA7500AC1A28 /* drm.mvx */ = {isa = PBXFileReference; lastKnownFileType = text; name = drm.mvx; path = Shared/Resources/drm.mvx; sourceTree = "<group>"; };
+		5426B176258D151300AC1A28 /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
 		543390D7258A59D900C7D5E2 /* LogiciOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LogiciOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		545490982554014B00E8E7F2 /* MvxGenerator.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MvxGenerator.xcodeproj; path = ../MvxGenerator/MvxGenerator.xcodeproj; sourceTree = "<group>"; };
 		5482F41F256E8C3800299548 /* VocalTraineriOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VocalTraineriOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -162,6 +165,7 @@
 		C9FFF774A22E8B2F85EA6664 /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF7DE831C9EFAE9A0AB40 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		C9FFF854128820437B780180 /* Sequence+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sequence+Extensions.swift"; sourceTree = "<group>"; };
+		C9FFF8676254998A2E1557B2 /* SwiftUIUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUIUtils.swift; sourceTree = "<group>"; };
 		C9FFF8FE42466B28CAAB81B9 /* BaseWorkspaceDrawerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BaseWorkspaceDrawerView.mm; sourceTree = "<group>"; };
 		C9FFFA03F8C9753204A48D4F /* WorkspaceDrawerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WorkspaceDrawerView.mm; sourceTree = "<group>"; };
 		C9FFFA377929BCD79ED71678 /* BaseWorkspaceDrawerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseWorkspaceDrawerView.h; sourceTree = "<group>"; };
@@ -230,6 +234,7 @@
 				C9FFFB1987526EE43216966B /* iOS-Bridging-Header.h */,
 				C9FFFCB31B3B29DABC17E607 /* ProjectViewModel.swift */,
 				C9FFF7DE831C9EFAE9A0AB40 /* Colors.swift */,
+				5426B176258D151300AC1A28 /* ProjectView.swift */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -430,6 +435,7 @@
 				C9FFF854128820437B780180 /* Sequence+Extensions.swift */,
 				C9FFF75984620E90683329A9 /* NSAttributedString+Extensions.swift */,
 				C9FFF18E11AA44C9B5A6225B /* Color.swift */,
+				C9FFF8676254998A2E1557B2 /* SwiftUIUtils.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -691,6 +697,7 @@
 				C9FFFE30D469382B52DBA18B /* CGContext+Extensions.swift in Sources */,
 				C9FFF1CC35BFB853F799A067 /* CGPoint+Extensions.swift in Sources */,
 				C9FFF3F713E181FA7B8210A4 /* CGRect+Extensions.swift in Sources */,
+				5426B177258D151300AC1A28 /* ProjectView.swift in Sources */,
 				C9FFFC752DA482CBE97EB7E2 /* CGSize+Extensions.swift in Sources */,
 				C9FFFC357FB17DBCE0DA3B28 /* UIImage+Extensions.swift in Sources */,
 				C9FFF75F9918AF94842CC30B /* UIFont+Extensions.swift in Sources */,
@@ -706,6 +713,7 @@
 				C9FFFBC424A0C6B8FA77210F /* ProjectViewModel.swift in Sources */,
 				C9FFF2979636C30023334438 /* Colors.swift in Sources */,
 				C9FFF0C4CA29947B37BD0C4C /* Color.swift in Sources */,
+				C9FFF1259D0CAC1732CA75B4 /* SwiftUIUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,9 +7,13 @@ import Foundation
 import SwiftUI
 
 struct WorkspaceView : UIViewRepresentable {
-    typealias UIViewType = WorkspaceDrawerView
+    typealias UIViewType = UIView
 
     func makeUIView(context: Context) -> UIViewType {
+        guard !SwiftUIUtils.isPreview() else {
+            return UIView()
+        }
+
         let view = WorkspaceDrawerView()
         view.onWorkspaceControllerChanged = { [unowned view] in
             ProjectController.shared.setWorkspaceController(view.workspaceController());

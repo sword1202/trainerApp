@@ -23,27 +23,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct VocalTrainerApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    @Environment(\.scenePhase) private var scenePhase
-    @ObservedObject private var viewModel = ProjectViewModel()
 
     var body: some Scene {
         WindowGroup {
             VStack {
-                WorkspaceView().onChange(of: scenePhase) { phase in
-                    switch phase {
-                    case .active:
-                        viewModel.didBecomeActive()
-                    case .inactive:
-                        viewModel.willBecomeInactive()
-                    case .background:
-                        print("App goes background")
-                    default:
-                        print("Unknown state")
-                    }
-                }
-                VStack(alignment: .leading) {
-                    Spacer().frame(maxWidth: .infinity, maxHeight: .infinity)
-                }.background(Colors.light).frame(maxWidth: .infinity, maxHeight: 147, alignment: .bottomLeading)
+                ProjectView()
             }
         }
     }
