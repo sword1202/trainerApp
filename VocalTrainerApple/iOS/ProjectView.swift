@@ -14,6 +14,9 @@ struct ProjectView: View {
     
     var body: some View {
         VStack {
+            VStack {
+                Spacer().frame(maxWidth: .infinity)
+            }.background(Colors.mainDark).frame(maxWidth: .infinity, maxHeight: 122, alignment: .topLeading)
             WorkspaceView().onChange(of: scenePhase) { phase in
                 switch phase {
                 case .active:
@@ -38,7 +41,7 @@ struct ProjectView: View {
                     Image("SelectBoundsButton")
                 }.padding(.bottom, 33)
             }.background(Colors.main).frame(maxWidth: .infinity, maxHeight: 147, alignment: .bottomLeading)
-        }.edgesIgnoringSafeArea(.bottom)
+        }.edgesIgnoringSafeArea(.bottom).edgesIgnoringSafeArea(.top)
     }
 }
 

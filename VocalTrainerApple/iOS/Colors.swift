@@ -8,4 +8,5 @@ import SwiftHEXColors
 
 struct Colors {
     static let main = Color(hex: 0xC5CDFC, alpha: 1.0)
+    static let mainDark = Color(hex: 0x353368, alpha: 1.0)
 }
