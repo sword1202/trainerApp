@@ -2,7 +2,7 @@
 #define CATCH_CONFIG_MAIN
 #endif
 #include "../CppUtils/tests/catch.hpp"
-#include "../Pitch.h"
+#include "Logic/Pitch.h"
 
 TEST_CASE("perfect frequency detection") {
     // near lower bound

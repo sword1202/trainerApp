@@ -2,7 +2,7 @@
 // Created by Semyon Tikhonenko on 1/25/17.
 //
 #include "../CppUtils/tests/catch.hpp"
-#include "../PitchDetectionSmoothingAudioBuffer.h"
+#include "Logic/PitchDetectionSmoothingAudioBuffer.h"
 
 TEST_CASE("pitch detection smoothing buffer test") {
     PitchDetectionSmoothingAudioBuffer buffer(4, 5);

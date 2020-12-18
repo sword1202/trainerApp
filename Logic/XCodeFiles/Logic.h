@@ -6,7 +6,7 @@
 //  Copyright © 2019 Semyon Tikhonenko. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for Logic.
 FOUNDATION_EXPORT double LogicVersionNumber;

@@ -17,7 +17,9 @@ class ProjectViewController: NSViewController {
         super.viewDidLoad()
         InitializationManager.initializeApplicationIfNeed()
         projectController = ProjectControllerBridge()
-        self.workspaceView.configure(projectController)
+        self.workspaceView.onWorkspaceControllerChanged = { [unowned self] in
+            projectController.setWorkspaceController(self.workspaceView.workspaceController())
+        }
     }
 
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {

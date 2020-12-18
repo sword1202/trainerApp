@@ -23,7 +23,7 @@ public:
 
     void init(AudioInputReader* audioInputReader,
             int smoothLevel,
-            const std::function<PitchDetector*()>& pitchDetectorFactory);
+            PitchDetector* pitchDetector);
 
     void operator()(const int16_t* data, int size);
 

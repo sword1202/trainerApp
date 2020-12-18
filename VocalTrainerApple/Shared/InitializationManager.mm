@@ -16,7 +16,8 @@
         ApplicationModel::init();
         auto* player = ApplicationModel::instance()->getPlayer();
         //player->setSource("/Users/semyontykhonenko/Desktop/Ария-Дай руку мне.mvx");
-        player->setSource("/Users/semyon/drm.mvx");
+        const char *mvxPath = [NSBundle.mainBundle pathForResource:@"drm" ofType:@"mvx"].UTF8String;
+        player->setSource(mvxPath);
         player->prepare();
         player->setPitchShiftInSemiTones(2);
     }

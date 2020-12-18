@@ -7,7 +7,9 @@
 
 #import <Foundation/Foundation.h>
 #import <MetalKit/MetalKit.h>
+#import "BaseWorkspaceDrawerView.h"
 
-@interface WorkspaceDrawerView : MTKView <MTKViewDelegate>
+@class ProjectControllerBridge;
 
+@interface WorkspaceDrawerView : BaseWorkspaceDrawerView
 @end

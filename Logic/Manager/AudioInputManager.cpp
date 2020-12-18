@@ -4,7 +4,7 @@
 //
 
 #include "AudioInputManager.h"
-#include "AubioPitchDetector.h"
+#include "SevaghPitchDetector.h"
 #include "Executors.h"
 #include "AudioInputReader.h"
 #include "AudioAverageInputLevelMonitor.h"
@@ -19,16 +19,9 @@ static const int SMOOTH_LEVEL = 4;
 using namespace CppUtils;
 
 AudioInputManager::AudioInputManager(const char* deviceName) {
-
-    auto pitchDetectorFactory = [] {
-        auto* pitchDetector = new AubioPitchDetector();
-        pitchDetector->setThreshold(THRESHOLD);
-        return pitchDetector;
-    };
-    
     audioInputReader = new AudioToolboxInputReader(BUFFER_SIZE);
     pitchesRecorder = new AudioInputPitchesRecorder();
-    pitchesRecorder->init(audioInputReader, SMOOTH_LEVEL, pitchDetectorFactory);
+    pitchesRecorder->init(audioInputReader, SMOOTH_LEVEL, new SevaghPitchDetector());
     audioInputReader->start();
 
     audioRecorder = new AudioInputRecorder();

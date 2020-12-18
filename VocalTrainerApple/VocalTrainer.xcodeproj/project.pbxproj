@@ -7,11 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5426B113258CC8EB00AC1A28 /* Logic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54ADDE85258BBDA000F1163F /* Logic.framework */; };
+		5426B114258CC8EB00AC1A28 /* Logic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 54ADDE85258BBDA000F1163F /* Logic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5426B119258CCA7500AC1A28 /* drm.mvx in Resources */ = {isa = PBXBuildFile; fileRef = 5426B118258CCA7500AC1A28 /* drm.mvx */; };
+		54338F54258A57D500C7D5E2 /* WorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE4F5AC0BB8DDAE24683 /* WorkspaceDrawerView.mm */; };
+		54338F55258A57D500C7D5E2 /* WorkspaceDrawerView.h in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFFCC49CC10D4ABE76064 /* WorkspaceDrawerView.h */; };
+		54338F5D258A591900C7D5E2 /* iOSWorkspaceDrawerResourcesProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF08E005E0AC456B4F0E8 /* iOSWorkspaceDrawerResourcesProvider.mm */; };
+		54338F5E258A591900C7D5E2 /* iOSWorkspaceDrawerResourcesProvider.h in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF3402FB10ADCC44F05D8 /* iOSWorkspaceDrawerResourcesProvider.h */; };
 		5482F422256E8C3800299548 /* VocalTrainerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5482F421256E8C3800299548 /* VocalTrainerApp.swift */; };
 		5482F424256E8C3800299548 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5482F423256E8C3800299548 /* ContentView.swift */; };
 		5482F426256E8C3900299548 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5482F425256E8C3900299548 /* Assets.xcassets */; };
 		5482F429256E8C3900299548 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5482F428256E8C3900299548 /* Preview Assets.xcassets */; };
 		5482F44C256E9A0100299548 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2EAAB39ED7617C96D30 /* Color.swift */; };
+		54ADDEAA258BCBF900F1163F /* InitializationManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 71AD29605A6EF90E1D9E2F98 /* InitializationManager.mm */; };
+		54ADDEAB258BCBF900F1163F /* InitializationManager.h in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2ACE3A195D54F918916A /* InitializationManager.h */; };
+		54ADDEC7258C0DC800F1163F /* BaseWorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8FE42466B28CAAB81B9 /* BaseWorkspaceDrawerView.mm */; };
 		71AD21242278085DEBD45787 /* NSImage+Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2DEA9FC7B3F13CD06FF3 /* NSImage+Drawing.swift */; };
 		71AD2137071D834E915C2D44 /* HeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2AD0DC2A1BD1B9B058AA /* HeaderViewController.swift */; };
 		71AD221A602A44D64B950BFA /* ProjectWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD21C74A29AB6B2D6F7582 /* ProjectWindowController.swift */; };
@@ -27,15 +37,12 @@
 		71AD28739FBA3A3DF2D20E51 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2D3B87D6702FFDE3939F /* CGPoint+Extensions.swift */; };
 		71AD287439F13E457974A154 /* ToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD274B07C0FB7FF9C4BB32 /* ToggleButton.swift */; };
 		71AD28B69AA7E771B512D067 /* CGContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2849C886EFD054B43C66 /* CGContext+Extensions.swift */; };
-		71AD292BE2211C7B95389888 /* MacOSWorkspaceDrawerResourcesProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2E6EB3AD3596FA6A4A33 /* MacOSWorkspaceDrawerResourcesProvider.mm */; };
 		71AD29577693616F0CF11B4E /* CALayer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2E25FA2D80BDF0849D47 /* CALayer+Extensions.swift */; };
 		71AD2A180D3226B294C54C1A /* CGSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2E2C77501A215B455E28 /* CGSize+Extensions.swift */; };
 		71AD2B086E0F0CA5D32FCADF /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2D6D43DDF8B4D35BD451 /* UIConstants.swift */; };
 		71AD2B394396133A287AC5AD /* ColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD29E4C9F3FD825512414E /* ColorView.swift */; };
 		71AD2BC467EDBF0B234F63B7 /* ConfigurableWithProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2D9271E270F476840FA3 /* ConfigurableWithProjectController.swift */; };
 		71AD2BDDA8810E1A47C09103 /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2884FCDE9A29BCA80D33 /* UI.swift */; };
-		71AD2D51C0A891A5F7D1661E /* WorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2BBFFA971D22C5AD524D /* WorkspaceDrawerView.mm */; };
-		71AD2F84A3BC046210A93DC3 /* MacOSWorkspaceDrawerDelegateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD23A9117362A4F9C0F83E /* MacOSWorkspaceDrawerDelegateHelper.swift */; };
 		ACF18AD122EC7EBF008E7DAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF18AD022EC7EBF008E7DAA /* AppDelegate.swift */; };
 		ACF18AD522EC7EBF008E7DAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACF18AD422EC7EBF008E7DAA /* Assets.xcassets */; };
 		ACF18AD822EC7EBF008E7DAA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACF18AD622EC7EBF008E7DAA /* Main.storyboard */; };
@@ -43,6 +50,24 @@
 		ACF18B0122EC8611008E7DAA /* Logic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF18B0022EC8611008E7DAA /* Logic.framework */; };
 		ACF18B2522ECB97C008E7DAA /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF18B2422ECB97C008E7DAA /* MetalKit.framework */; };
 		BE59FEE2E72C096CA824A0DE /* Pods_VocalTrainer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 316CF42FAAC5685B522A455A /* Pods_VocalTrainer.framework */; };
+		C9FFF0A6DC29C41C836A272F /* NSAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF75984620E90683329A9 /* NSAttributedString+Extensions.swift */; };
+		C9FFF1A61CC78731ED6EF231 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF774A22E8B2F85EA6664 /* Array+Extensions.swift */; };
+		C9FFF1CC35BFB853F799A067 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC52FFD52111E4F8EA1C /* CGPoint+Extensions.swift */; };
+		C9FFF36C6140C724632BAA67 /* Sequence+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF854128820437B780180 /* Sequence+Extensions.swift */; };
+		C9FFF3F713E181FA7B8210A4 /* CGRect+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFFAE7CC0D189849A9037 /* CGRect+Extensions.swift */; };
+		C9FFF68D7E7F115CA46D8B73 /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE40E57F82E0441136B6 /* UIView+Constraints.swift */; };
+		C9FFF75F9918AF94842CC30B /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE302DCFBB0ABE54FB5D /* UIFont+Extensions.swift */; };
+		C9FFF92F2CAA4605DF8DFBC1 /* BaseWorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8FE42466B28CAAB81B9 /* BaseWorkspaceDrawerView.mm */; };
+		C9FFF9F48A6D816A30F0AE35 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2396E0BB5102967F5B2 /* UIView+Extensions.swift */; };
+		C9FFFAC7A9EEC42DB7900780 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD04B887D1AA905A010C /* Math.swift */; };
+		C9FFFB60BAB5296AE6F06BD9 /* WorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA03F8C9753204A48D4F /* WorkspaceDrawerView.mm */; };
+		C9FFFB7F402FBE74FC015F81 /* MacOSWorkspaceDrawerDelegateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFCA54695F1C745C71A9F /* MacOSWorkspaceDrawerDelegateHelper.swift */; };
+		C9FFFBF45045514B7285BF8A /* MacOSWorkspaceDrawerResourcesProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF5B9019937C01C72D703 /* MacOSWorkspaceDrawerResourcesProvider.mm */; };
+		C9FFFC357FB17DBCE0DA3B28 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6D026277BCE01AFF619 /* UIImage+Extensions.swift */; };
+		C9FFFC752DA482CBE97EB7E2 /* CGSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF72A1F66910885A40FE2 /* CGSize+Extensions.swift */; };
+		C9FFFE30D469382B52DBA18B /* CGContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF079046892811FDEB34E /* CGContext+Extensions.swift */; };
+		C9FFFEB481DADF493DD0B9F3 /* WorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFFF578BB7619708AC4A4 /* WorkspaceView.swift */; };
+		C9FFFFCAD2E546CF65263FDF /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF56BA4C227BDD029B68D /* UILabel+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,9 +80,25 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		5426B115258CC8EB00AC1A28 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5426B114258CC8EB00AC1A28 /* Logic.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		316CF42FAAC5685B522A455A /* Pods_VocalTrainer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VocalTrainer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EB14089B9F185478AB5567 /* Pods-VocalTrainer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VocalTrainer.release.xcconfig"; path = "Target Support Files/Pods-VocalTrainer/Pods-VocalTrainer.release.xcconfig"; sourceTree = "<group>"; };
+		5426B118258CCA7500AC1A28 /* drm.mvx */ = {isa = PBXFileReference; lastKnownFileType = text; name = drm.mvx; path = Shared/Resources/drm.mvx; sourceTree = "<group>"; };
+		543390D7258A59D900C7D5E2 /* LogiciOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LogiciOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		545490982554014B00E8E7F2 /* MvxGenerator.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MvxGenerator.xcodeproj; path = ../MvxGenerator/MvxGenerator.xcodeproj; sourceTree = "<group>"; };
 		5482F41F256E8C3800299548 /* VocalTraineriOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VocalTraineriOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5482F421256E8C3800299548 /* VocalTrainerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocalTrainerApp.swift; sourceTree = "<group>"; };
@@ -65,16 +106,15 @@
 		5482F425256E8C3900299548 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5482F428256E8C3900299548 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5482F42A256E8C3900299548 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		54ADDE7F258BBBC700F1163F /* Logic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Logic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		54ADDE85258BBDA000F1163F /* Logic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Logic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67748B5386791DDBEBEF3101 /* Pods-VocalTrainerMacOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VocalTrainerMacOS.debug.xcconfig"; path = "Target Support Files/Pods-VocalTrainerMacOS/Pods-VocalTrainerMacOS.debug.xcconfig"; sourceTree = "<group>"; };
 		71AD21C74A29AB6B2D6F7582 /* ProjectWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectWindowController.swift; sourceTree = "<group>"; };
 		71AD22FAC42E30FA831A8953 /* ProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
 		71AD2331042B9D6CB1A4E6E7 /* HeaderUiUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderUiUtils.swift; sourceTree = "<group>"; };
-		71AD23A9117362A4F9C0F83E /* MacOSWorkspaceDrawerDelegateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacOSWorkspaceDrawerDelegateHelper.swift; sourceTree = "<group>"; };
 		71AD2436A9C6F6406C50A7E6 /* HeaderButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderButton.swift; sourceTree = "<group>"; };
 		71AD25CBF89B6518B64657E2 /* NSAttributedString+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extensions.swift"; sourceTree = "<group>"; };
-		71AD2651F7102F1CF5FE06DA /* Workspace-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Workspace-Bridging-Header.h"; sourceTree = "<group>"; };
 		71AD274B07C0FB7FF9C4BB32 /* ToggleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToggleButton.swift; sourceTree = "<group>"; };
-		71AD27F400CFEF8EA89FB180 /* WorkspaceDrawerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceDrawerView.h; sourceTree = "<group>"; };
 		71AD2849C886EFD054B43C66 /* CGContext+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGContext+Extensions.swift"; sourceTree = "<group>"; };
 		71AD2884FCDE9A29BCA80D33 /* UI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
 		71AD29484D6CEF8CBDEDDA65 /* NSView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSView+Extensions.swift"; sourceTree = "<group>"; };
@@ -83,17 +123,14 @@
 		71AD2ACE3A195D54F918916A /* InitializationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitializationManager.h; sourceTree = "<group>"; };
 		71AD2AD0DC2A1BD1B9B058AA /* HeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderViewController.swift; sourceTree = "<group>"; };
 		71AD2BA3FE6C79FF0FAED7B1 /* CGRect+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+Extensions.swift"; sourceTree = "<group>"; };
-		71AD2BBFFA971D22C5AD524D /* WorkspaceDrawerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WorkspaceDrawerView.mm; sourceTree = "<group>"; };
 		71AD2C4EAB705DCF47CAC77C /* TouchUpDownButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchUpDownButton.swift; sourceTree = "<group>"; };
 		71AD2D3B87D6702FFDE3939F /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
-		71AD2D4FBE1FE1ECA287A3BE /* MacOSWorkspaceDrawerResourcesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacOSWorkspaceDrawerResourcesProvider.h; sourceTree = "<group>"; };
 		71AD2D5AFE24263239C95427 /* ZoomSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomSlider.swift; sourceTree = "<group>"; };
 		71AD2D6D43DDF8B4D35BD451 /* UIConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
 		71AD2D9271E270F476840FA3 /* ConfigurableWithProjectController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurableWithProjectController.swift; sourceTree = "<group>"; };
 		71AD2DEA9FC7B3F13CD06FF3 /* NSImage+Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+Drawing.swift"; sourceTree = "<group>"; };
 		71AD2E25FA2D80BDF0849D47 /* CALayer+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+Extensions.swift"; sourceTree = "<group>"; };
 		71AD2E2C77501A215B455E28 /* CGSize+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGSize+Extensions.swift"; sourceTree = "<group>"; };
-		71AD2E6EB3AD3596FA6A4A33 /* MacOSWorkspaceDrawerResourcesProvider.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MacOSWorkspaceDrawerResourcesProvider.mm; sourceTree = "<group>"; };
 		ACF18ACD22EC7EBF008E7DAA /* VocalTrainerMacOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VocalTrainerMacOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF18AD022EC7EBF008E7DAA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACF18AD422EC7EBF008E7DAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -105,7 +142,34 @@
 		ACF18AE522EC7EBF008E7DAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ACF18B0022EC8611008E7DAA /* Logic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Logic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF18B2422ECB97C008E7DAA /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
+		C9FFF079046892811FDEB34E /* CGContext+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGContext+Extensions.swift"; sourceTree = "<group>"; };
+		C9FFF08E005E0AC456B4F0E8 /* iOSWorkspaceDrawerResourcesProvider.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = iOSWorkspaceDrawerResourcesProvider.mm; sourceTree = "<group>"; };
+		C9FFF2396E0BB5102967F5B2 /* UIView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF2EAAB39ED7617C96D30 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		C9FFF3402FB10ADCC44F05D8 /* iOSWorkspaceDrawerResourcesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSWorkspaceDrawerResourcesProvider.h; sourceTree = "<group>"; };
+		C9FFF3CF4F4C6C2BB99ABCD7 /* WorkspaceDrawerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceDrawerView.h; sourceTree = "<group>"; };
+		C9FFF4307F629035C6B49841 /* MacOSWorkspaceDrawerResourcesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacOSWorkspaceDrawerResourcesProvider.h; sourceTree = "<group>"; };
+		C9FFF56BA4C227BDD029B68D /* UILabel+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
+		C9FFF5B9019937C01C72D703 /* MacOSWorkspaceDrawerResourcesProvider.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MacOSWorkspaceDrawerResourcesProvider.mm; sourceTree = "<group>"; };
+		C9FFF6D026277BCE01AFF619 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
+		C9FFF72A1F66910885A40FE2 /* CGSize+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGSize+Extensions.swift"; sourceTree = "<group>"; };
+		C9FFF75984620E90683329A9 /* NSAttributedString+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extensions.swift"; sourceTree = "<group>"; };
+		C9FFF774A22E8B2F85EA6664 /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		C9FFF854128820437B780180 /* Sequence+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sequence+Extensions.swift"; sourceTree = "<group>"; };
+		C9FFF8FE42466B28CAAB81B9 /* BaseWorkspaceDrawerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BaseWorkspaceDrawerView.mm; sourceTree = "<group>"; };
+		C9FFFA03F8C9753204A48D4F /* WorkspaceDrawerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WorkspaceDrawerView.mm; sourceTree = "<group>"; };
+		C9FFFA377929BCD79ED71678 /* BaseWorkspaceDrawerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseWorkspaceDrawerView.h; sourceTree = "<group>"; };
+		C9FFFB1987526EE43216966B /* iOS-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "iOS-Bridging-Header.h"; sourceTree = "<group>"; };
+		C9FFFC52FFD52111E4F8EA1C /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
+		C9FFFCA54695F1C745C71A9F /* MacOSWorkspaceDrawerDelegateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacOSWorkspaceDrawerDelegateHelper.swift; sourceTree = "<group>"; };
+		C9FFFD04B887D1AA905A010C /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
+		C9FFFE302DCFBB0ABE54FB5D /* UIFont+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
+		C9FFFE40E57F82E0441136B6 /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
+		C9FFFE4F5AC0BB8DDAE24683 /* WorkspaceDrawerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WorkspaceDrawerView.mm; sourceTree = "<group>"; };
+		C9FFFF705C17A992E0DB6F53 /* MacOS-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MacOS-Bridging-Header.h"; sourceTree = "<group>"; };
+		C9FFFFAE7CC0D189849A9037 /* CGRect+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+Extensions.swift"; sourceTree = "<group>"; };
+		C9FFFFCC49CC10D4ABE76064 /* WorkspaceDrawerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceDrawerView.h; sourceTree = "<group>"; };
+		C9FFFFF578BB7619708AC4A4 /* WorkspaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceView.swift; sourceTree = "<group>"; };
 		CBBB957AD6C6D1C202253CA9 /* Pods-VocalTrainer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VocalTrainer.debug.xcconfig"; path = "Target Support Files/Pods-VocalTrainer/Pods-VocalTrainer.debug.xcconfig"; sourceTree = "<group>"; };
 		E4182398962A0FCB5CFBD20F /* Pods-VocalTrainerMacOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VocalTrainerMacOS.release.xcconfig"; path = "Target Support Files/Pods-VocalTrainerMacOS/Pods-VocalTrainerMacOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -115,6 +179,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5426B113258CC8EB00AC1A28 /* Logic.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,6 +219,8 @@
 				5482F42A256E8C3900299548 /* Info.plist */,
 				5482F427256E8C3900299548 /* Preview Content */,
 				C9FFF1C7086CF620F8B38795 /* Extensions */,
+				C9FFF161EC7B56BBE962C01E /* Workspace */,
+				C9FFFB1987526EE43216966B /* iOS-Bridging-Header.h */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -216,26 +283,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		71AD27969E14578C56033F00 /* Workspace */ = {
-			isa = PBXGroup;
-			children = (
-				71AD27F400CFEF8EA89FB180 /* WorkspaceDrawerView.h */,
-				71AD2BBFFA971D22C5AD524D /* WorkspaceDrawerView.mm */,
-				71AD2E6EB3AD3596FA6A4A33 /* MacOSWorkspaceDrawerResourcesProvider.mm */,
-				71AD2D4FBE1FE1ECA287A3BE /* MacOSWorkspaceDrawerResourcesProvider.h */,
-				71AD23A9117362A4F9C0F83E /* MacOSWorkspaceDrawerDelegateHelper.swift */,
-			);
-			path = Workspace;
-			sourceTree = "<group>";
-		};
 		71AD291CFFD069EF352B6BE6 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				71AD2651F7102F1CF5FE06DA /* Workspace-Bridging-Header.h */,
-				71AD27969E14578C56033F00 /* Workspace */,
 				71AD29605A6EF90E1D9E2F98 /* InitializationManager.mm */,
 				71AD2ACE3A195D54F918916A /* InitializationManager.h */,
 				71AD21DA5644C4A3E72E8680 /* Extesnions */,
+				C9FFFD27BCD1504BBC7BE60A /* Workspace */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -249,6 +303,8 @@
 				71AD22E26BEB85EAB8596ACE /* View */,
 				71AD2D9271E270F476840FA3 /* ConfigurableWithProjectController.swift */,
 				71AD2148A0A936CEF229EC25 /* Utils */,
+				C9FFFCA54695F1C745C71A9F /* MacOSWorkspaceDrawerDelegateHelper.swift */,
+				C9FFF07912A8FEBD875A11C7 /* Workspace */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -266,6 +322,7 @@
 		ACF18AC422EC7EBF008E7DAA = {
 			isa = PBXGroup;
 			children = (
+				5426B118258CCA7500AC1A28 /* drm.mvx */,
 				545490982554014B00E8E7F2 /* MvxGenerator.xcodeproj */,
 				ACF18ACF22EC7EBF008E7DAA /* MacOS */,
 				ACF18AE222EC7EBF008E7DAA /* VocalTrainerUITests */,
@@ -297,6 +354,7 @@
 				ACF18ADA22EC7EBF008E7DAA /* VocalTrainerMacOS.entitlements */,
 				71AD2C2F2205065E90BD996C /* Project */,
 				71AD20BB309FA4D4993D4B53 /* Generic */,
+				C9FFFF705C17A992E0DB6F53 /* MacOS-Bridging-Header.h */,
 			);
 			path = MacOS;
 			sourceTree = "<group>";
@@ -321,17 +379,65 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		C9FFF07912A8FEBD875A11C7 /* Workspace */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFF3CF4F4C6C2BB99ABCD7 /* WorkspaceDrawerView.h */,
+				C9FFFA03F8C9753204A48D4F /* WorkspaceDrawerView.mm */,
+				C9FFF4307F629035C6B49841 /* MacOSWorkspaceDrawerResourcesProvider.h */,
+				C9FFF5B9019937C01C72D703 /* MacOSWorkspaceDrawerResourcesProvider.mm */,
+			);
+			path = Workspace;
+			sourceTree = "<group>";
+		};
+		C9FFF161EC7B56BBE962C01E /* Workspace */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFFE4F5AC0BB8DDAE24683 /* WorkspaceDrawerView.mm */,
+				C9FFFFCC49CC10D4ABE76064 /* WorkspaceDrawerView.h */,
+				C9FFF08E005E0AC456B4F0E8 /* iOSWorkspaceDrawerResourcesProvider.mm */,
+				C9FFF3402FB10ADCC44F05D8 /* iOSWorkspaceDrawerResourcesProvider.h */,
+				C9FFFFF578BB7619708AC4A4 /* WorkspaceView.swift */,
+			);
+			path = Workspace;
+			sourceTree = "<group>";
+		};
 		C9FFF1C7086CF620F8B38795 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				C9FFF2EAAB39ED7617C96D30 /* Color.swift */,
+				C9FFF079046892811FDEB34E /* CGContext+Extensions.swift */,
+				C9FFFC52FFD52111E4F8EA1C /* CGPoint+Extensions.swift */,
+				C9FFFFAE7CC0D189849A9037 /* CGRect+Extensions.swift */,
+				C9FFF72A1F66910885A40FE2 /* CGSize+Extensions.swift */,
+				C9FFF6D026277BCE01AFF619 /* UIImage+Extensions.swift */,
+				C9FFFE302DCFBB0ABE54FB5D /* UIFont+Extensions.swift */,
+				C9FFF56BA4C227BDD029B68D /* UILabel+Extensions.swift */,
+				C9FFFE40E57F82E0441136B6 /* UIView+Constraints.swift */,
+				C9FFF2396E0BB5102967F5B2 /* UIView+Extensions.swift */,
+				C9FFF774A22E8B2F85EA6664 /* Array+Extensions.swift */,
+				C9FFFD04B887D1AA905A010C /* Math.swift */,
+				C9FFF854128820437B780180 /* Sequence+Extensions.swift */,
+				C9FFF75984620E90683329A9 /* NSAttributedString+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C9FFFD27BCD1504BBC7BE60A /* Workspace */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFF8FE42466B28CAAB81B9 /* BaseWorkspaceDrawerView.mm */,
+				C9FFFA377929BCD79ED71678 /* BaseWorkspaceDrawerView.h */,
+			);
+			path = Workspace;
 			sourceTree = "<group>";
 		};
 		FAAA747C4DF5693877F41DFE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				54ADDE85258BBDA000F1163F /* Logic.framework */,
+				54ADDE7F258BBBC700F1163F /* Logic.framework */,
+				543390D7258A59D900C7D5E2 /* LogiciOS.framework */,
 				ACF18B2422ECB97C008E7DAA /* MetalKit.framework */,
 				ACF18B0022EC8611008E7DAA /* Logic.framework */,
 				316CF42FAAC5685B522A455A /* Pods_VocalTrainer.framework */,
@@ -349,6 +455,7 @@
 				5482F41B256E8C3800299548 /* Sources */,
 				5482F41C256E8C3800299548 /* Frameworks */,
 				5482F41D256E8C3800299548 /* Resources */,
+				5426B115258CC8EB00AC1A28 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -449,6 +556,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5426B119258CCA7500AC1A28 /* drm.mvx in Resources */,
 				5482F429256E8C3900299548 /* Preview Assets.xcassets in Resources */,
 				5482F426256E8C3900299548 /* Assets.xcassets in Resources */,
 			);
@@ -519,9 +627,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54ADDEAA258BCBF900F1163F /* InitializationManager.mm in Sources */,
+				54ADDEAB258BCBF900F1163F /* InitializationManager.h in Sources */,
+				54338F5D258A591900C7D5E2 /* iOSWorkspaceDrawerResourcesProvider.mm in Sources */,
+				54338F5E258A591900C7D5E2 /* iOSWorkspaceDrawerResourcesProvider.h in Sources */,
+				54338F54258A57D500C7D5E2 /* WorkspaceDrawerView.mm in Sources */,
+				54338F55258A57D500C7D5E2 /* WorkspaceDrawerView.h in Sources */,
 				5482F44C256E9A0100299548 /* Color.swift in Sources */,
 				5482F424256E8C3800299548 /* ContentView.swift in Sources */,
 				5482F422256E8C3800299548 /* VocalTrainerApp.swift in Sources */,
+				C9FFFE30D469382B52DBA18B /* CGContext+Extensions.swift in Sources */,
+				C9FFF1CC35BFB853F799A067 /* CGPoint+Extensions.swift in Sources */,
+				C9FFF3F713E181FA7B8210A4 /* CGRect+Extensions.swift in Sources */,
+				C9FFFC752DA482CBE97EB7E2 /* CGSize+Extensions.swift in Sources */,
+				C9FFFC357FB17DBCE0DA3B28 /* UIImage+Extensions.swift in Sources */,
+				C9FFF75F9918AF94842CC30B /* UIFont+Extensions.swift in Sources */,
+				C9FFF92F2CAA4605DF8DFBC1 /* BaseWorkspaceDrawerView.mm in Sources */,
+				C9FFFEB481DADF493DD0B9F3 /* WorkspaceView.swift in Sources */,
+				C9FFFFCAD2E546CF65263FDF /* UILabel+Extensions.swift in Sources */,
+				C9FFF68D7E7F115CA46D8B73 /* UIView+Constraints.swift in Sources */,
+				C9FFF9F48A6D816A30F0AE35 /* UIView+Extensions.swift in Sources */,
+				C9FFF1A61CC78731ED6EF231 /* Array+Extensions.swift in Sources */,
+				C9FFFAC7A9EEC42DB7900780 /* Math.swift in Sources */,
+				C9FFF36C6140C724632BAA67 /* Sequence+Extensions.swift in Sources */,
+				C9FFF0A6DC29C41C836A272F /* NSAttributedString+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,11 +658,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54ADDEC7258C0DC800F1163F /* BaseWorkspaceDrawerView.mm in Sources */,
 				ACF18AD122EC7EBF008E7DAA /* AppDelegate.swift in Sources */,
 				71AD27AD436983C0D551C6D6 /* ProjectViewController.swift in Sources */,
 				71AD221A602A44D64B950BFA /* ProjectWindowController.swift in Sources */,
-				71AD2D51C0A891A5F7D1661E /* WorkspaceDrawerView.mm in Sources */,
-				71AD292BE2211C7B95389888 /* MacOSWorkspaceDrawerResourcesProvider.mm in Sources */,
 				71AD21242278085DEBD45787 /* NSImage+Drawing.swift in Sources */,
 				71AD27E82582B5E20A3D1F6D /* InitializationManager.mm in Sources */,
 				71AD28739FBA3A3DF2D20E51 /* CGPoint+Extensions.swift in Sources */,
@@ -546,7 +674,6 @@
 				71AD2BC467EDBF0B234F63B7 /* ConfigurableWithProjectController.swift in Sources */,
 				71AD2BDDA8810E1A47C09103 /* UI.swift in Sources */,
 				71AD24EFBDE80511DB2613E8 /* HeaderUiUtils.swift in Sources */,
-				71AD2F84A3BC046210A93DC3 /* MacOSWorkspaceDrawerDelegateHelper.swift in Sources */,
 				71AD28B69AA7E771B512D067 /* CGContext+Extensions.swift in Sources */,
 				71AD24277375FA316F05FFC8 /* NSAttributedString+Extensions.swift in Sources */,
 				71AD287439F13E457974A154 /* ToggleButton.swift in Sources */,
@@ -554,6 +681,9 @@
 				71AD2536137966A89F132D28 /* ZoomSlider.swift in Sources */,
 				71AD2B394396133A287AC5AD /* ColorView.swift in Sources */,
 				71AD231BA344CB7DFBBB38CF /* NSView+Extensions.swift in Sources */,
+				C9FFFB7F402FBE74FC015F81 /* MacOSWorkspaceDrawerDelegateHelper.swift in Sources */,
+				C9FFFB60BAB5296AE6F06BD9 /* WorkspaceDrawerView.mm in Sources */,
+				C9FFFBF45045514B7285BF8A /* MacOSWorkspaceDrawerResourcesProvider.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -592,13 +722,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iOS/Preview Content\"";
 				DEVELOPMENT_TEAM = FLHXHQP8H4;
 				ENABLE_PREVIEWS = YES;
+				HEADER_SEARCH_PATHS = (
+					../include,
+					../Logic/CppUtils,
+				);
 				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -606,6 +741,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.neborosoft.VocalTrainer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "iOS/iOS-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -616,13 +752,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iOS/Preview Content\"";
 				DEVELOPMENT_TEAM = FLHXHQP8H4;
 				ENABLE_PREVIEWS = YES;
+				HEADER_SEARCH_PATHS = (
+					../include,
+					../Logic/CppUtils,
+				);
 				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -630,6 +771,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.neborosoft.VocalTrainer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "iOS/iOS-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -773,7 +915,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Neborosoft.VocalTrainerMacOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Shared/Workspace-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "MacOS/MacOS-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -800,7 +942,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Neborosoft.VocalTrainerMacOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Shared/Workspace-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "MacOS/MacOS-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;

@@ -18,7 +18,7 @@
 #include "VocalTrainerPlayerPrepareException.h"
 #include <iostream>
 #include <memory>
-#include "PitchesMutableList.h"
+#include "Logic/PitchesMutableList.h"
 #include "AudioOperationFailedException.h"
 
 using namespace CppUtils;
