@@ -11,7 +11,7 @@
 #include <functional>
 
 class AudioToolboxQueue {
-    static const int kNumberBuffers = 3;
+    static const int kNumberBuffers = 10;
 
     void* userData;
     AudioQueueRef queue = NULL;
