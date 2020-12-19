@@ -18,12 +18,13 @@ struct WorkspaceView : UIViewRepresentable {
             return UIView()
         }
 
+        var baseZoom: Float = 1.0
         let view = WorkspaceDrawerView()
         view.onWorkspaceControllerChanged = { [unowned view] in
             projectController.setWorkspaceController(view.workspaceController());
+            baseZoom = projectController.minZoom
         }
 
-        var baseZoom = projectController.minZoom
         view.onPinch { pinch in
             if pinch.state == .began {
                 baseZoom = projectController.zoom

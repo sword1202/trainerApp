@@ -19,9 +19,6 @@ public:
 
 class WorkspaceController {
 public:
-    static constexpr float MIN_ZOOM = 1.0;
-    static constexpr float MAX_ZOOM = 4.0;
-
     virtual void setPitchesCollection(const PitchesCollection *pitchesCollection) = 0;
     virtual void setBeatsPerSecond(double intervalsPerSecond) = 0;
     virtual void setTotalDurationInSeconds(double totalDurationInSeconds) = 0;
@@ -49,6 +46,8 @@ public:
     virtual bool shouldDrawTracks() = 0;
     virtual float getZoom() const = 0;
     virtual void setZoom(float zoom) = 0;
+    virtual float getMinZoom() const = 0;
+    virtual float getMaxZoom() const = 0;
     virtual void setDelegate(WorkspaceControllerDelegate* delegate) = 0;
     virtual void setBoundsSelectionEnabled(bool boundsSelectionEnabled) = 0;
     virtual bool isBoundsSelectionEnabled() const = 0;

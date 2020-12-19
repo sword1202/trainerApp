@@ -22,6 +22,7 @@
 - (void)workspaceDrawerDidInitialize:(WorkspaceDrawer *)drawer {
     [super workspaceDrawerDidInitialize:drawer];
     drawer->setDrawTracks(false);
+    drawer->setMaxZoom(2.5);
 }
 
 

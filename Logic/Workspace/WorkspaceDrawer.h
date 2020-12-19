@@ -6,7 +6,6 @@
 #ifndef VOCALTRAINER_WORKSPACEDRAWER_H
 #define VOCALTRAINER_WORKSPACEDRAWER_H
 
-#include <atomic>
 #include "Drawer.h"
 #include <array>
 #include "PitchesCollection.h"
@@ -32,17 +31,17 @@ class WorkspaceDrawer : public WorkspaceController {
     bool checkExecutedOnRenderingThread();
 #endif
 
-    std::atomic<float> intervalWidth;
-    std::atomic<float> intervalHeight;
-    std::atomic<float> verticalOffset;
-    std::atomic<float> horizontalOffset;
-    std::atomic<double> beatsPerSecond;
-    std::atomic<double> totalDurationInSeconds;
-    std::atomic_bool running;
+    float intervalWidth;
+    float intervalHeight;
+    float verticalOffset;
+    float horizontalOffset;
+    double beatsPerSecond;
+    double totalDurationInSeconds;
+    bool running;
     std::atomic_int firstPitchIndex;
     std::atomic_int lastPitchIndex;
 
-    std::atomic<PlaybackBounds> playbackBounds;
+    PlaybackBounds playbackBounds;
 
     bool recording = false;
 
@@ -83,10 +82,10 @@ class WorkspaceDrawer : public WorkspaceController {
     Drawer::Image* playHeadTriangleImage = nullptr;
     Drawer::Image* clockImage = nullptr;
 
-    std::atomic<const VocalPart*> vocalPart;
+    const VocalPart* vocalPart;
 
-    std::atomic<double> frameTime;
-    std::atomic<float> firstPlayHeadPosition, secondPlayHeadPosition;
+    double frameTime;
+    float firstPlayHeadPosition, secondPlayHeadPosition;
 
     std::vector<float> pitchesFrequencies;
     std::vector<double> pitchesTimes;
@@ -96,14 +95,16 @@ class WorkspaceDrawer : public WorkspaceController {
     Drawer::Image* instrumentalTrackButtonImage = nullptr;
     Drawer::Image* pianoTrackButtonImage = nullptr;
 
-    std::atomic_bool willDrawTracks;
+    bool willDrawTracks;
 
-    std::atomic<float> zoom;
+    float zoom;
+    float minZoom;
+    float maxZoom;
 
     // Scrollbars are not drawn for small screens
     ScrollBar horizontalScrollBar;
     ScrollBar verticalScrollBar;
-    std::atomic_bool willDrawScrollbars;
+    bool willDrawScrollbars;
 
     WorkspaceDrawerResourcesProvider* resourcesProvider;
     WorkspaceControllerDelegate* delegate = nullptr;
@@ -246,6 +247,11 @@ public:
 
     float getZoom() const override;
     void setZoom(float zoom) override;
+
+    float getMinZoom() const override;
+    void setMinZoom(float minZoom);
+    float getMaxZoom() const override;
+    void setMaxZoom(float maxZoom);
 
     void updateSeek(float seek) override;
 

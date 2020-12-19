@@ -226,11 +226,11 @@ void ProjectController::onSeekChangedByUserEvent(float newSeek) {
 }
 
 float ProjectController::getMinZoom() const {
-    return WorkspaceController::MIN_ZOOM;
+    return workspaceController->getMinZoom();
 }
 
 float ProjectController::getMaxZoom() const {
-    return WorkspaceController::MAX_ZOOM;
+    return workspaceController->getMaxZoom();
 }
 
 void ProjectController::setBoundsSelectionEnabled(bool boundsSelectionEnabled) {

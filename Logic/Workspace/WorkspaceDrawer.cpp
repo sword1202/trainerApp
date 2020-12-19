@@ -3,8 +3,6 @@
 // Copyright (c) 2018 Mac. All rights reserved.
 //
 
-#define _USE_MATH_DEFINES
-
 #include "WorkspaceDrawer.h"
 #include <assert.h>
 #include "CountAssert.h"
@@ -64,6 +62,8 @@ const Drawer::Color WorkspaceDrawer::YARD_STICK_DOT_AND_TEXT_COLOR(0x24, 0x23, 0
 constexpr float ZOOM_BASE_WIDTH = 1374.0;
 constexpr float ZOOM_FACTOR = 12.0f * 4; // number of beats in screen of BASE_WIDTH for zoom = 1.0
 constexpr float HORIZONTAL_TO_VERTICAL_INTERVAL_WIDTH_RELATION = 2.4117701323665077f;
+constexpr float DEFAULT_MIN_ZOOM = 1.0;
+constexpr float DEFAULT_MAX_ZOOM = 4.0;
 
 constexpr int YARD_STICK_FONT_WEIGHT = 1;
 static const char* FONT_FAMILY = "Lato";
@@ -221,7 +221,7 @@ void WorkspaceDrawer::captureClickEventsInTracksArea(float pianoTrackHeight) {
                 clickPosition.x,
                 horizontalTouchScrollingArea.A.x, horizontalTouchScrollingArea.getB().x,
                 0.0f, 1.0f);
-        float seek = position * totalDurationInSeconds;
+        float seek = static_cast<float>(position * totalDurationInSeconds);
         updateSeek(seek);
     }
 }
@@ -669,7 +669,7 @@ const WorkspaceDrawer::Color & WorkspaceDrawer::getGridColor() const {
 }
 
 void WorkspaceDrawer::setGridColor(const Color& color) {
-    // Should be called only once before rendering to avoid synchronization issues
+    CHECK_IF_RENDER_THREAD;
     this->gridColor = color;
 }
 
@@ -678,7 +678,7 @@ const WorkspaceDrawer::Color & WorkspaceDrawer::getAccentGridColor() const {
 }
 
 void WorkspaceDrawer::setAccentGridColor(const Color& color) {
-    // Should be called only once before rendering to avoid synchronization issues
+    CHECK_IF_RENDER_THREAD;
     this->accentGridColor = color;
 }
 
@@ -737,7 +737,9 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer,
     setFirstVisiblePitch(Pitch("C1"));
     lastPitchIndex = Pitch("B6").getPerfectFrequencyIndex();
 
-    this->zoom = MIN_ZOOM;
+    minZoom = DEFAULT_MIN_ZOOM;
+    maxZoom = DEFAULT_MAX_ZOOM;
+    this->zoom = minZoom;
 }
 
 WorkspaceDrawer::~WorkspaceDrawer() {
@@ -753,6 +755,7 @@ float WorkspaceDrawer::getSizeMultiplier() const {
 }
 
 void WorkspaceDrawer::setSizeMultiplier(float sizeMultiplier) {
+    CHECK_IF_RENDER_THREAD;
     assert(sizeMultiplier > 0);
     this->sizeMultiplier = sizeMultiplier;
 }
@@ -762,6 +765,7 @@ double WorkspaceDrawer::getBeatsPerSecond() const {
 }
 
 void WorkspaceDrawer::setBeatsPerSecond(double beatsPerSecond) {
+    CHECK_IF_RENDER_THREAD;
     this->beatsPerSecond = beatsPerSecond;
     updateHorizontalScrollBarPageSize();
 }
@@ -771,11 +775,13 @@ double WorkspaceDrawer::getTotalDurationInSeconds() const {
 }
 
 void WorkspaceDrawer::setTotalDurationInSeconds(double totalDurationInSeconds) {
+    CHECK_IF_RENDER_THREAD;
     this->totalDurationInSeconds = totalDurationInSeconds;
     updateHorizontalScrollBarPageSize();
 }
 
 void WorkspaceDrawer::setPitchesCollection(const PitchesCollection *pitchesCollection) {
+    CHECK_IF_RENDER_THREAD;
     this->pitchesCollection = pitchesCollection;
 }
 
@@ -784,6 +790,7 @@ const WorkspaceDrawer::Color &WorkspaceDrawer::getPitchGraphColor() const {
 }
 
 void WorkspaceDrawer::setPitchGraphColor(const WorkspaceDrawer::Color &pitchGraphColor) {
+    CHECK_IF_RENDER_THREAD;
     this->pitchGraphColor = pitchGraphColor;
 }
 
@@ -792,6 +799,7 @@ const WorkspaceDrawer::Color &WorkspaceDrawer::getPitchColor() const {
 }
 
 void WorkspaceDrawer::setPitchColor(const WorkspaceDrawer::Color &pitchColor) {
+    CHECK_IF_RENDER_THREAD;
     this->pitchColor = pitchColor;
 }
 
@@ -800,11 +808,13 @@ float WorkspaceDrawer::getPitchRadius() const {
 }
 
 void WorkspaceDrawer::setPitchRadius(float pitchRadius) {
+    CHECK_IF_RENDER_THREAD;
     assert(pitchRadius >= 0);
     this->pitchRadius = pitchRadius;
 }
 
 void WorkspaceDrawer::setFirstVisiblePitch(const Pitch &firstPitch) {
+    CHECK_IF_RENDER_THREAD;
     assert(firstPitch.isValid());
     this->firstPitchIndex = firstPitch.getPerfectFrequencyIndex();
     pianoDrawer->setFirstPitch(firstPitch);
@@ -815,6 +825,7 @@ bool WorkspaceDrawer::isRunning() const {
 }
 
 void WorkspaceDrawer::setRunning(bool value) {
+    CHECK_IF_RENDER_THREAD;
     frameTime = TimeUtils::NowInSeconds();
     running = value;
 }
@@ -824,14 +835,17 @@ void WorkspaceDrawer::update() {
 }
 
 void WorkspaceDrawer::setOnUpdateRequested(const std::function<void()> &onUpdateRequested) {
+    CHECK_IF_RENDER_THREAD;
     this->onUpdateRequested = onUpdateRequested;
 }
 
 void WorkspaceDrawer::setDetectedPitch(const Pitch &detectedPitch) {
+    CHECK_IF_RENDER_THREAD;
     pianoDrawer->setDetectedPitch(detectedPitch);
 }
 
 void WorkspaceDrawer::setPitchSequence(PlayingPitchSequence *pitchSequence) {
+    CHECK_IF_RENDER_THREAD;
     pianoDrawer->setPitchSequence(pitchSequence);
 }
 
@@ -849,6 +863,7 @@ float WorkspaceDrawer::getVerticalScrollPosition() const {
 }
 
 void WorkspaceDrawer::setVerticalScrollPosition(float verticalScrollPosition) {
+    CHECK_IF_RENDER_THREAD;
     if (verticalScrollBar.getPageSize() <= 0) {
         return;
     }
@@ -861,6 +876,7 @@ const PlaybackBounds &WorkspaceDrawer::getPlaybackBounds() const {
 }
 
 void WorkspaceDrawer::setPlaybackBounds(const PlaybackBounds &playbackBounds) {
+    CHECK_IF_RENDER_THREAD;
     this->playbackBounds = playbackBounds;
 }
 
@@ -908,10 +924,12 @@ float WorkspaceDrawer::getPlayHeadXPosition(int playHeadIndex) {
 }
 
 void WorkspaceDrawer::setRecording(bool recording) {
+    CHECK_IF_RENDER_THREAD;
     this->recording = recording;
 }
 
 void WorkspaceDrawer::setInstrumentalTrackSamples(const std::vector<short> &instrumentalTrackSamples) {
+    CHECK_IF_RENDER_THREAD;
     this->instrumentalTrackSamples = instrumentalTrackSamples;
     if (width > 0 && height > 0 && devicePixelRatio > 0) {
         generateInstrumentalTrackSamplesImage(width - PIANO_WIDTH);
@@ -919,6 +937,7 @@ void WorkspaceDrawer::setInstrumentalTrackSamples(const std::vector<short> &inst
 }
 
 void WorkspaceDrawer::setDrawTracks(bool value) {
+    CHECK_IF_RENDER_THREAD;
     willDrawTracks = value;
 }
 
@@ -927,7 +946,8 @@ float WorkspaceDrawer::getZoom() const {
 }
 
 void WorkspaceDrawer::setZoom(float zoom) {
-    assert(zoom >= MIN_ZOOM && zoom <= MAX_ZOOM);
+    CHECK_IF_RENDER_THREAD;
+    assert(zoom >= minZoom && zoom <= maxZoom);
     this->zoom = zoom;
     updateZoom();
 }
@@ -954,7 +974,8 @@ void WorkspaceDrawer::updateZoom() {
 }
 
 void WorkspaceDrawer::updateSeek(float seek) {
-    horizontalOffset = beatsPerSecond * seek * intervalWidth;
+    CHECK_IF_RENDER_THREAD;
+    horizontalOffset = static_cast<float>(beatsPerSecond * seek * intervalWidth);
     updateHorizontalScrollBarPagePosition();
 }
 
@@ -1071,4 +1092,28 @@ void WorkspaceDrawer::initImages() {
 
 bool WorkspaceDrawer::isBoundsSelectionEnabled() const {
     return boundsSelectionController->isBoundsSelectionEnabled();
+}
+
+float WorkspaceDrawer::getMinZoom() const {
+    return minZoom;
+}
+
+void WorkspaceDrawer::setMinZoom(float minZoom) {
+    if (zoom < minZoom) {
+        setZoom(zoom);
+    }
+
+    this->minZoom = minZoom;
+}
+
+float WorkspaceDrawer::getMaxZoom() const {
+    return maxZoom;
+}
+
+void WorkspaceDrawer::setMaxZoom(float maxZoom) {
+    if (zoom > maxZoom) {
+        setZoom(maxZoom);
+    }
+
+    this->maxZoom = maxZoom;
 }
