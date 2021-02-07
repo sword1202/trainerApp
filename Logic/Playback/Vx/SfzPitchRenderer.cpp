@@ -12,7 +12,7 @@ using namespace CppUtils;
 
 void SfzPitchRenderer::init(int sampleRate, int numberOfChannels, int maxFramesPerBuffer) {
     assert(sfz && "Call initSfz before using SfzPitchRenderer");
-    assert(!isSfzLocked && "Sfz is clocked, you can't use 2 SfzPitchRenderer at the same time");
+    assert(!isSfzLocked && "Sfz is locked, you can't use 2 SfzPitchRenderer at the same time");
     assert(this->numberOfChannels == -1 && "init should not be called twice");
     assert(maxFramesPerBuffer > 0);
     assert(numberOfChannels > 0 && numberOfChannels <= NUMBER_OF_OUTPUTS);
@@ -53,7 +53,7 @@ void SfzPitchRenderer::render(int16_t *outBuffer, int framesCount) {
             break;
         case 1:
             for (int i = 0; i < framesCount; ++i) {
-                short shortSample = Math::RoundToShort((outputs[0][i] + outputs[1][i]) / 2.0f);
+                short shortSample = Math::RoundToShort((outputs[0][i] + outputs[1][i]) / 2.0f * maxSample);
                 outBuffer[i] = shortSample;
             }
             break;
