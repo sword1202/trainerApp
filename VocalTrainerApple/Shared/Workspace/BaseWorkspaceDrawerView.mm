@@ -98,6 +98,11 @@ using namespace CppUtils;
     return YES;
 }
 
+- (void)scrollBy:(CGPoint)distance {
+    _workspaceDrawer->scrollBy(static_cast<float>(distance.x), static_cast<float>(distance.y));
+}
+
+
 - (void)workspaceDrawerDidInitialize:(WorkspaceDrawer *)drawer {
 
 }

@@ -26,6 +26,10 @@ extension CGPoint {
         return sqr(point.x - x) + sqr(point.y - y)
     }
 
+    prefix static func - (_ point: CGPoint) -> CGPoint {
+        CGPoint(x: -point.x, y: -point.y)
+    }
+
     static func findPointOnLine(distanceFromA: CGFloat, A: CGPoint, B: CGPoint) -> CGPoint {
         let segmentDistance = A.distance(to: B)
         let ratio: CGFloat = distanceFromA / segmentDistance

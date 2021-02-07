@@ -17,6 +17,7 @@
 @property void(^onWorkspaceControllerChanged)();
 - (void*)workspaceController;
 - (BOOL)drawScrollbars;
+- (void)scrollBy:(CGPoint)distance;
 #ifdef  __cplusplus
 - (void)workspaceDrawerDidInitialize:(WorkspaceDrawer*)drawer;
 - (WorkspaceDrawerResourcesProvider*)createResourcesProvider;

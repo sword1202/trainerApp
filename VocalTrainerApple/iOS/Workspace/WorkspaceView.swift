@@ -20,16 +20,24 @@ struct WorkspaceView : UIViewRepresentable {
 
         let view = WorkspaceDrawerView()
         setupZoom(view: view)
-
-        view.onSwipeUp { swipe in
-
-        }
+        setupPan(view: view)
 
         return view
     }
 
-    private func handleSwipe() {
+    private func setupPan(view: WorkspaceDrawerView) {
+        var lastTranslation = CGPoint.zero
+        view.onPan { pan in
+            let translation = -pan.translation(in: view)
+            let relativeTranslation = translation - lastTranslation
+            view.scroll(by: relativeTranslation)
 
+            if pan.state == .ended {
+                lastTranslation = .zero
+            } else {
+                lastTranslation = translation
+            }
+        }
     }
 
     private func setupZoom(view: WorkspaceDrawerView) {

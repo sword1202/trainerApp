@@ -191,6 +191,8 @@ public:
     float getVerticalScrollPosition() const override;
     void setVerticalScrollPosition(float verticalScrollPosition) override;
 
+    void scrollBy(float x, float y) override;
+
     bool isRunning() const override;
     void setRunning(bool value) override;
 

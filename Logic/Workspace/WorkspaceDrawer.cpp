@@ -873,6 +873,18 @@ void WorkspaceDrawer::setVerticalScrollPosition(float verticalScrollPosition) {
     verticalScrollBar.setPosition(verticalScrollPosition);
 }
 
+void WorkspaceDrawer::scrollBy(float x, float y) {
+    float maxY = getMaximumGridYTranslation();
+    float newYTranslation = CutIfOutOfClosedRange(y + getGridYTranslation(), 0.0f, maxY);
+    setVerticalScrollPosition(newYTranslation / getMaximumGridYTranslation());
+
+    horizontalOffset = CutIfOutOfClosedRange(horizontalOffset + x, 0.0f, getSummarizedPlayableGridWidth());
+    updateHorizontalScrollBarPagePosition();
+    if (delegate) {
+        delegate->onSeekChangedByUserEvent(getWorkspaceSeek());
+    }
+}
+
 const PlaybackBounds &WorkspaceDrawer::getPlaybackBounds() const {
     return playbackBounds;
 }
