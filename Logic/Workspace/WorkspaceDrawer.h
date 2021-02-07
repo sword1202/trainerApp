@@ -33,7 +33,6 @@ class WorkspaceDrawer : public WorkspaceController {
 
     float intervalWidth;
     float intervalHeight;
-    float verticalOffset;
     float horizontalOffset;
     double beatsPerSecond;
     double totalDurationInSeconds;
@@ -141,8 +140,8 @@ class WorkspaceDrawer : public WorkspaceController {
     std::function<void()> onUpdateRequested;
 
     Pitch getFirstPitch() const;
-    float getGridTranslation() const;
-    float getMaximumGridTranslation() const;
+    float getGridYTranslation() const;
+    float getMaximumGridYTranslation() const;
 
     float getWorkspaceDuration() const;
 
@@ -232,6 +231,8 @@ public:
 
     float getWorkspaceSeek() const override;
     float getGridBeginXPosition() const;
+    float getGridBeginYPosition() const;
+    float getZeroSeekGridOffset() const;
     float getSeekFromXPositionOnWorkspace(float x) const;
 
     float getPlayHeadXPosition(int playHeadIndex);
@@ -247,6 +248,7 @@ public:
 
     float getZoom() const override;
     void setZoom(float zoom) override;
+    void setZoom(float zoom, const CppUtils::PointF& intoPoint) override;
 
     float getMinZoom() const override;
     void setMinZoom(float minZoom);

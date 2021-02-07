@@ -7,10 +7,6 @@ import Combine
 
 class ProjectViewModel : ObservableObject {
     init() {
-        if (!SwiftUIUtils.isPreview()) {
-            InitializationManager.initializeApplicationIfNeed()
-            ProjectController.shared.togglePlay()
-        }
     }
 
     func willBecomeInactive() {

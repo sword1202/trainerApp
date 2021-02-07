@@ -166,10 +166,10 @@ void WorkspaceDrawer::draw() {
 
     drawer->translate(PIANO_WIDTH, 0);
     drawer->translate(0, YARD_STICK_HEIGHT + 1);
-    drawer->translate(0, getGridTranslation());
+    drawer->translate(0, getGridYTranslation());
     drawVerticalGrid();
     drawHorizontalGrid();
-    drawer->translate(0, -getGridTranslation());
+    drawer->translate(0, -getGridYTranslation());
     drawPitches();
     drawPitchesGraph();
     drawer->translate(0, -YARD_STICK_HEIGHT - 1);
@@ -192,7 +192,7 @@ void WorkspaceDrawer::draw() {
     drawer->translateTo(0, 0);
     drawer->setFillColor(Color::white());
     drawer->fillRect(0, 0, PIANO_WIDTH, height);
-    float pianoHeight = height - ScrollBar::SCROLLBAR_WEIGHT + getMaximumGridTranslation() - getGridTranslation();
+    float pianoHeight = height - ScrollBar::SCROLLBAR_WEIGHT + getMaximumGridYTranslation() - getGridYTranslation();
     pianoDrawer->draw(PIANO_WIDTH, pianoHeight, devicePixelRatio);
     drawer->setFillColor(Color::white());
     drawer->fillRect(0, 0, PIANO_WIDTH, YARD_STICK_HEIGHT);
@@ -246,11 +246,11 @@ void WorkspaceDrawer::drawScrollBars() {
             YARD_STICK_HEIGHT + 1, getVisibleGridHeight());
 }
 
-float WorkspaceDrawer::getGridTranslation() const {
-    return getMaximumGridTranslation() * verticalScrollBar.getPosition();
+float WorkspaceDrawer::getGridYTranslation() const {
+    return getMaximumGridYTranslation() * verticalScrollBar.getPosition();
 }
 
-float WorkspaceDrawer::getMaximumGridTranslation() const {
+float WorkspaceDrawer::getMaximumGridYTranslation() const {
     return getSummarizedGridHeight() - getVisibleGridHeight();
 }
 
@@ -260,7 +260,7 @@ float WorkspaceDrawer::getHorizontalOffset() const {
 
 void WorkspaceDrawer::iterateHorizontalIntervals(const std::function<void(float x, bool isBeat)> &func) const {
     int index = 1;
-    float offset = fmod(horizontalOffset, intervalWidth * BEATS_IN_TACT);
+    float offset = fmod(horizontalOffset, getZeroSeekGridOffset());
     for (float x = intervalWidth - offset; x < width + offset; x += intervalWidth, index++) {
         bool isBeat = index % BEATS_IN_TACT != 0;
         func(x, isBeat);
@@ -294,11 +294,10 @@ void WorkspaceDrawer::drawVerticalLine(float x, const WorkspaceDrawer::Color &co
 
 void WorkspaceDrawer::drawHorizontalGrid() const {
     int index = 1;
-    float offset = fmod(verticalOffset, intervalHeight * Pitch::PITCHES_IN_OCTAVE);
-    float gridTranslation = getGridTranslation();
-    float baseHeight = getMaximumGridTranslation() - gridTranslation + getVisibleGridHeight();
-    for (float y = baseHeight - intervalHeight - gridTranslation + offset;
-         y > -offset - gridTranslation; y -= intervalHeight, index++) {
+    float gridTranslation = getGridYTranslation();
+    float baseHeight = getMaximumGridYTranslation() - gridTranslation + getVisibleGridHeight();
+    for (float y = baseHeight - intervalHeight - gridTranslation;
+         y > - gridTranslation; y -= intervalHeight, index++) {
 
         bool isOctaveBegin = index % Pitch::PITCHES_IN_OCTAVE == 0;
         drawHorizontalLine(y, isOctaveBegin ? accentGridColor : gridColor);
@@ -329,7 +328,7 @@ void WorkspaceDrawer::drawPitches() const {
     double timeBegin = workspaceSeek - getSingingPitchGraphDuration();
     double timeEnd = timeBegin + workspaceDuration;
 
-    float relativeHeight = getMaximumGridTranslation() - getGridTranslation() + getVisibleGridHeight();
+    float relativeHeight = getMaximumGridYTranslation() - getGridYTranslation() + getVisibleGridHeight();
     vocalPart->iteratePitchesInTimeRange(timeBegin, timeEnd, [&] (const NoteInterval& vxPitch) {
         double pitchTimeBegin = vocalPart->ticksToSeconds(vxPitch.startTickNumber);
         double pitchDuration = vocalPart->ticksToSeconds(vxPitch.ticksCount);
@@ -438,11 +437,15 @@ float WorkspaceDrawer::getWorkspaceDuration() const {
 
 
 float WorkspaceDrawer::getVisibleGridHeight() const {
-    return height - YARD_STICK_HEIGHT - 1 - ScrollBar::SCROLLBAR_WEIGHT;
+    if (willDrawScrollbars) {
+        return height - getGridBeginYPosition() - ScrollBar::SCROLLBAR_WEIGHT;
+    } else {
+        return height - getGridBeginYPosition();
+    }
 }
 
 float WorkspaceDrawer::getVisibleGridWidth() const {
-    return width - PIANO_WIDTH - 1;
+    return width - getGridBeginXPosition() - (willDrawScrollbars ? ScrollBar::SCROLLBAR_WEIGHT : 0);
 }
 
 float WorkspaceDrawer::getSummarizedPlayableGridWidth() const {
@@ -499,7 +502,7 @@ void WorkspaceDrawer::drawPitchesGraph() {
     double x;
     double y;
 
-    float relativeHeight = getMaximumGridTranslation() - getGridTranslation() + getVisibleGridHeight();
+    float relativeHeight = getMaximumGridYTranslation() - getGridYTranslation() + getVisibleGridHeight();
     auto getXY = [&](double time, const Pitch& pitch) {
         x = (time - workspaceSeek + duration) / duration * pitchGraphWidth;
         float distanceFromFirstPitch = getDistanceFromFirstPitch(pitch);
@@ -555,7 +558,7 @@ void WorkspaceDrawer::drawYardStick() const {
 
     drawer->translate(0, YARD_STICK_Y_OFFSET);
     drawer->setFillColor(YARD_STICK_DOT_AND_TEXT_COLOR);
-    int startTactIndex = (int)(getHorizontalOffset() / (intervalWidth * BEATS_IN_TACT));
+    int startTactIndex = (int)(getHorizontalOffset() / getZeroSeekGridOffset());
 
     iterateHorizontalIntervals([&](float x, bool isBeat) {
         if (isBeat) {
@@ -690,7 +693,6 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer,
         :
         intervalWidth(-1),
         intervalHeight(-1),
-        verticalOffset(0),
         horizontalOffset(0),
         sizeMultiplier(1),
         beatsPerSecond(0),
@@ -897,7 +899,7 @@ bool WorkspaceDrawer::getBoundsStartXAndWidth(const PlaybackBounds &bounds, floa
         return false;
     }
 
-    float tactHeight = intervalWidth * BEATS_IN_TACT;
+    float tactHeight = getZeroSeekGridOffset();
     *startX = durationToWidth(bounds.getStartSeek() - workspaceTimeBegin) + tactHeight;
     *width = durationToWidth(bounds.getEndSeek() - workspaceTimeBegin) - *startX + tactHeight;
 
@@ -905,7 +907,7 @@ bool WorkspaceDrawer::getBoundsStartXAndWidth(const PlaybackBounds &bounds, floa
 }
 
 float WorkspaceDrawer::getSeekFromXPositionOnWorkspace(float x) const {
-    x -= intervalWidth * BEATS_IN_TACT;
+    x -= getZeroSeekGridOffset();
     x -= getGridBeginXPosition();
 
     float seek = x / intervalWidth / beatsPerSecond;
@@ -916,6 +918,10 @@ float WorkspaceDrawer::getSeekFromXPositionOnWorkspace(float x) const {
 
 float WorkspaceDrawer::getGridBeginXPosition() const {
     return PIANO_WIDTH;
+}
+
+float WorkspaceDrawer::getGridBeginYPosition() const {
+    return YARD_STICK_HEIGHT + 1;
 }
 
 float WorkspaceDrawer::getPlayHeadXPosition(int playHeadIndex) {
@@ -1116,4 +1122,23 @@ void WorkspaceDrawer::setMaxZoom(float maxZoom) {
     }
 
     this->maxZoom = maxZoom;
+}
+
+float WorkspaceDrawer::getZeroSeekGridOffset() const {
+    return intervalWidth * BEATS_IN_TACT;
+}
+
+void WorkspaceDrawer::setZoom(float zoom, const CppUtils::PointF& intoPoint) {
+    float currentZoom = this->zoom;
+    float y = std::max(0.0f, intoPoint.y - getGridBeginYPosition()) + getGridYTranslation();
+    float top = y / getMaximumGridYTranslation();
+    if (top > 1) {
+        top = 1;
+    }
+
+    float zoomMultiplier = zoom / currentZoom;
+    float moveDistance = zoomMultiplier * getMaximumGridYTranslation() * (1.0f - top);
+    setZoom(zoom);
+    float scrollYPositionMoveDistance = moveDistance / getMaximumGridYTranslation();
+    setVerticalScrollPosition(scrollYPositionMoveDistance + getVerticalScrollPosition());
 }

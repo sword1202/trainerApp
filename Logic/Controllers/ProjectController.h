@@ -11,6 +11,7 @@
 #include "AudioInputManager.h"
 #include "Timer.h"
 #include "Rewinder.h"
+#include "Point.h"
 
 class ProjectControllerDelegate {
 public:
@@ -77,9 +78,13 @@ public:
     bool isMetronomeEnabled() const;
 
     void setZoom(float zoom);
+    void setZoom(float zoom, const CppUtils::PointF& intoPoint);
     float getZoom() const;
     float getMinZoom() const;
     float getMaxZoom() const;
+
+    float getVerticalScrollPosition() const;
+    void setVerticalScrollPosition(float position);
 
     // Delegates
     void onPlaybackBoundsChangedByUserEvent(const PlaybackBounds &newBounds) override;

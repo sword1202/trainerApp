@@ -18,13 +18,13 @@ using namespace CppUtils;
 - (instancetype)init {
     self = [super init];
     if (self) {
-        [self initMetal];
+        [self internalInit];
     }
 
     return self;
 }
 
-- (void)initMetal {
+- (void)internalInit {
     _workspaceDrawer = nullptr;
     _mouseEventsReceiver = new BaseMouseEventsReceiver();
     self.device = MTLCreateSystemDefaultDevice();
@@ -34,7 +34,7 @@ using namespace CppUtils;
 - (instancetype)initWithCoder:(nonnull NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
-        [self initMetal];
+        [self internalInit];
     }
 
     return self;
@@ -101,7 +101,6 @@ using namespace CppUtils;
 - (void)workspaceDrawerDidInitialize:(WorkspaceDrawer *)drawer {
 
 }
-
 
 - (WorkspaceDrawerResourcesProvider*)createResourcesProvider {
     return nullptr;

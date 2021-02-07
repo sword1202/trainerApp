@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Combine
+import AVFoundation
 
 struct ProjectController {
     static let shared: ProjectControllerBridge = ProjectControllerBridge()
@@ -15,7 +16,14 @@ struct ProjectController {
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        guard !SwiftUIUtils.isPreview() else {
+            return true
+        }
+
+        try! AVAudioSession.sharedInstance().setCategory(.playAndRecord, options: .allowBluetoothA2DP)
+        //try! AVAudioSession.sharedInstance().overrideOutputAudioPort(.speaker)
         InitializationManager.initializeApplicationIfNeed()
+        ProjectController.shared.togglePlay()
         return true
     }
 }

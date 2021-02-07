@@ -5,6 +5,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Logic/Logic-Swift.h>
+#include <CoreGraphics/CoreGraphics.h>
 
 @protocol ProjectControllerBridgeDelegate;
 
@@ -22,6 +23,8 @@
 @property (readonly) float maxZoom;
 @property (readonly) float minZoom;
 @property (nonatomic) float zoom;
+- (void)setZoom:(float)zoom intoPoint:(CGPoint)point;
+@property (nonatomic) float verticalScrollPosition;
 
 @property (readonly) bool lyricsVisible;
 @property (readonly) bool tracksVisible;

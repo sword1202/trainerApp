@@ -10,6 +10,7 @@
 #include "PitchesCollection.h"
 #include "PlayingPitchSequence.h"
 #include "VocalPart.h"
+#include "Point.h"
 #include "BoundsSelectionDelegate.h"
 
 class WorkspaceControllerDelegate : public BoundsSelectionDelegate {
@@ -46,6 +47,7 @@ public:
     virtual bool shouldDrawTracks() = 0;
     virtual float getZoom() const = 0;
     virtual void setZoom(float zoom) = 0;
+    virtual void setZoom(float zoom, const CppUtils::PointF& intoPoint) = 0;
     virtual float getMinZoom() const = 0;
     virtual float getMaxZoom() const = 0;
     virtual void setDelegate(WorkspaceControllerDelegate* delegate) = 0;

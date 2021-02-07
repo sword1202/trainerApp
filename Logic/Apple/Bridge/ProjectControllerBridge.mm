@@ -5,10 +5,9 @@
 
 #import "ProjectControllerBridge.h"
 #include "ProjectController.h"
-#import <Foundation/Foundation.h>
 #include "config.h"
-#include "Algorithms.h"
 
+using namespace CppUtils;
 
 CPP_UTILS_DLLHIDE class DelegateWrapper : public ProjectControllerDelegate {
     std::vector<__weak id<ProjectControllerBridgeDelegate> > delegates;
@@ -214,6 +213,14 @@ public:
 }
 
 
+- (float)verticalScrollPosition {
+    return _cpp->getVerticalScrollPosition();
+}
+
+- (void)setVerticalScrollPosition:(float)position {
+    _cpp->setVerticalScrollPosition(position);
+}
+
 - (bool)lyricsVisible {
     return _cpp->isLyricsVisible();
 }
@@ -248,5 +255,10 @@ public:
 - (void)setZoom:(float)zoom {
     _cpp->setZoom(zoom);
 }
+
+- (void)setZoom:(float)zoom intoPoint:(CGPoint)point {
+    _cpp->setZoom(zoom, PointF(point));
+}
+
 
 @end

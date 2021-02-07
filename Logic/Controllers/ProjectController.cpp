@@ -272,3 +272,15 @@ void ProjectController::toggleRewind(bool backward) {
 void ProjectController::goToBeginning() {
     player->stopAndMoveSeekToBeginning();
 }
+
+void ProjectController::setZoom(float zoom, const PointF& intoPoint) {
+    workspaceController->setZoom(zoom, intoPoint);
+}
+
+float ProjectController::getVerticalScrollPosition() const {
+    return workspaceController->getVerticalScrollPosition();
+}
+
+void ProjectController::setVerticalScrollPosition(float position) {
+    workspaceController->setVerticalScrollPosition(position);
+}
