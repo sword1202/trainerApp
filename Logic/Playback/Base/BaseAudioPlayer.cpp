@@ -46,7 +46,7 @@ void BaseAudioPlayer::writerCallback(void* outputBuffer, int samplesPerBuffer) {
                 default:
                     throw std::runtime_error("Unsupported bytesPerChannel " + std::to_string(bytesPerChannel));
             }
-        } else {
+        } else if (volume > 1.0f) {
             // handle overload
             int bufferSize = samplesCopiedToOutputBufferCount * playbackData.numberOfChannels;
             int bytesPerChannel = playbackData.getBytesPerChannel();
