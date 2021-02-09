@@ -1,6 +1,6 @@
 //
 // Created by Semyon Tykhonenko on 2019-06-06.
-// Copyright (c) 2019 Indiglobal Ltd. All rights reserved.
+
 //
 
 import UIKit
