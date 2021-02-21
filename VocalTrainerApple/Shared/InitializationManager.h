@@ -8,4 +8,5 @@
 
 @interface InitializationManager : NSObject
 + (void)initializeApplicationIfNeed;
++ (BOOL)isInitialized;
 @end

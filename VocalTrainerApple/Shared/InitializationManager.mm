@@ -12,7 +12,7 @@
 }
 
 + (void)initializeApplicationIfNeed {
-    if (ApplicationModel::instance() == nullptr) {
+    if (!self.isInitialized) {
         ApplicationModel::init();
         auto* player = ApplicationModel::instance()->getPlayer();
         //player->setSource("/Users/semyontykhonenko/Desktop/Ария-Дай руку мне.mvx");
@@ -21,5 +21,10 @@
         player->prepare();
     }
 }
+
++ (BOOL)isInitialized {
+    return ApplicationModel::instance() != nullptr;
+}
+
 
 @end

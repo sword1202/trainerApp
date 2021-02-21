@@ -6,7 +6,13 @@
 import Combine
 
 class ProjectViewModel : ObservableObject {
+    @Published private(set) var isMetronomeEnabled = false
+    private lazy var projectController = ProjectController.shared
+
     init() {
+        if !SwiftUIUtils.isPreview() {
+            isMetronomeEnabled = projectController.metronomeEnabled
+        }
     }
 
     func willBecomeInactive() {
@@ -19,5 +25,11 @@ class ProjectViewModel : ObservableObject {
     
     func didTapPlayButton() {
         ProjectController.shared.togglePlay()
+    }
+}
+
+extension ProjectViewModel : ProjectControllerBridgeDelegate {
+    public func projectController(didChangeMetronomeEnabled enabled: Bool) {
+        self.isMetronomeEnabled = enabled
     }
 }

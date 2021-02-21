@@ -11,7 +11,6 @@ private let baseZoomScaleFactor: CGFloat = 1.5
 
 struct WorkspaceView : UIViewRepresentable {
     typealias UIViewType = UIView
-    private let projectController = ProjectController.shared
 
     func makeUIView(context: Context) -> UIViewType {
         guard !SwiftUIUtils.isPreview() else {
@@ -42,6 +41,7 @@ struct WorkspaceView : UIViewRepresentable {
 
     private func setupZoom(view: WorkspaceDrawerView) {
         var baseZoom: Float = 1.0
+        let projectController = ProjectController.shared
         view.onWorkspaceControllerChanged = { [unowned view] in
             projectController.setWorkspaceController(view.workspaceController());
             baseZoom = projectController.minZoom
