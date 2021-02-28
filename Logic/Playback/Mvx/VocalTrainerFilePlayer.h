@@ -26,6 +26,8 @@
 #include "Rewindable.h"
 #include "BeatsPerMinuteProvider.h"
 #include "VocalTrainerFile.h"
+#include "LyricsDisplayedLinesProvider.h"
+#include "LyricsPlayer.h"
 
 class VocalTrainerFilePlayer : public PlayingPitchSequence, public Rewindable, public BeatsPerMinuteProvider {
 private:
@@ -36,6 +38,7 @@ private:
     WavAudioPlayer recordingPlayer;
 
     std::vector<BaseAudioPlayer*> players;
+    LyricsPlayer* lyricsPlayer = nullptr;
 
     std::atomic_bool metronomeEnabled;
     int pauseRequestedCounter = 0;
@@ -52,7 +55,6 @@ private:
     std::map<double, int> tonalityChanges;
 
     AudioAverageInputLevelMonitor* recordingLevelMonitor = nullptr;
-    Lyrics::Snapshot lastLyricsSnapshot;
 
     void updateMetronomeVolume();
     void pausePlayer(BaseAudioPlayer* player);
@@ -71,8 +73,8 @@ public:
     CppUtils::ListenersSet<> onCompleteListeners;
     CppUtils::ListenersSet<const PlaybackBounds&> boundsChangedListeners;
     CppUtils::SynchronizedListenersSet<double> recordingVoiceLevelListeners;
-    CppUtils::ListenersSet<> lyricsChangedListeners;
-    CppUtils::ListenersSet<> currentLyricsLinesChangedListeners;
+    CppUtils::ListenersSet<Lyrics::LineSelection> lyricsSelectionChangedListeners;
+    CppUtils::ListenersSet<const LyricsDisplayedLinesProvider*> currentLyricsLinesChangedListeners;
 
     VocalTrainerFilePlayer();
     virtual ~VocalTrainerFilePlayer();
@@ -98,7 +100,6 @@ public:
     virtual void seekToPrevTact();
     const VocalPart* getVocalPart() const;
     const VocalTrainerFile &getFile() const;
-    void editLyrics(const std::function<void(Lyrics *lyrics)> &editAction);
 
     const PlaybackBounds &getBounds() const;
     void setBounds(const PlaybackBounds &bounds);
@@ -138,14 +139,12 @@ public:
     // The method is valid only for recordigns
     const PitchesCollection* getPitchesCollection();
 
-    virtual bool hasLyrics() const;
-    int getLyricsLinesCount() const;
-    const std::string& getLyricsTextForPart(int partIndex) const;
-
     const BaseAudioPlayer& getInstrumentalPlayer() const;
     const VocalPartAudioPlayer& getVocalPartPlayer() const;
 
     const std::map<double, int> &getTonalityChanges() const;
+
+    const LyricsDisplayedLinesProvider* getDisplayedLyricsLines() const;
 };
 
 

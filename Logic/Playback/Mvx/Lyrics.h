@@ -5,41 +5,101 @@
 #ifndef TEXTIMAGESGENERATOR_LYRICS_H
 #define TEXTIMAGESGENERATOR_LYRICS_H
 
-#include "boostext/serialization/static_vector.h"
-#include "LyricsPart.h"
+#include <map>
+#include <vector>
+#include <string>
+#include <optional>
 
 class Lyrics {
 public:
-    static constexpr int MAX_PARTS_COUNT = 2;
-    static const Lyrics EMPTY;
-    typedef boost::container::static_vector<std::string, MAX_PARTS_COUNT> Snapshot;
+    struct SnapshotDescription {
+        double playbackSeek;
+        int requestedNumberOfLines;
+        double lyricsLineDisplayDelay;
+    };
+
+    enum SectionType {
+        CHORUS, VERSE, BRIDGE
+    };
+
+    struct Section {
+        SectionType sectionType;
+        int number;
+        int startCharacterIndex;
+    };
+
+    struct Range {
+        int startCharacterIndex;
+        int charactersCount;
+        double startSeek;
+        double endSeek;
+        const Section* section = nullptr;
+
+        inline double getDuration() const {
+            return endSeek - startSeek;
+        }
+
+        void writeToStream(std::ostream& os) const;
+    };
+
+    struct Line {
+        int startCharacterIndex = 0;
+        int charactersCount = 0;
+        double startSeek;
+        double duration;
+
+        inline double getEndSeek() const {
+            return startSeek + duration;
+        }
+    };
+
+    struct LineSelection {
+        int charactersCount = -1;
+        // [0.0;1.0]
+        double lastCharacterSelectionPosition = 0.0;
+
+        inline bool operator == (const LineSelection& o) const {
+            return charactersCount == o.charactersCount &&
+            lastCharacterSelectionPosition == o.lastCharacterSelectionPosition;
+        }
+
+        inline bool operator != (const LineSelection& o) const {
+            return charactersCount != o.charactersCount ||
+                    lastCharacterSelectionPosition != o.lastCharacterSelectionPosition;
+        }
+    };
+
 private:
-    boost::container::static_vector<LyricsPart, MAX_PARTS_COUNT> lyrics;
+    std::u32string text;
+    std::vector<Section> sections;
+    std::map<double, Range> ranges;
+    std::vector<Line> lines;
 
-    friend class boost::serialization::access;
+    static std::pair<double, double> parseRange(const std::u32string, int begin, int end);
+    static SectionType getSectionTypeByTypeId(char32_t sectionType);
+    static char sectionTypeToChar(SectionType sectionType);
 
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
-        ar & lyrics;
-    }
+    std::u32string getRangeText(const Range& range) const;
+    std::string getRangeUtf8Text(const Range& range) const;
 public:
+    static Lyrics EMPTY;
+
+    const std::vector<Section>& getSections() const;
+    const Line& getLineAt(int index) const;
+    int getLinesCount() const;
+    std::u32string_view getLineText(const Line& line) const;
+    std::u32string_view getLineTextAt(int index) const;
+
+    LineSelection getLineSelection(
+            const Line& line,
+            double seek) const;
 
     Lyrics() = default;
-    explicit Lyrics(const LyricsPart& lyricsLine);
-    Lyrics(const LyricsPart& lyricsLine1, const LyricsPart& lyricsLine2);
+    Lyrics(const std::string& utf8);
 
-    int getNumberOfParts() const;
-    const LyricsPart& getLyricsPart(int index);
-    const std::string& getPartName(int index) const;
-    const std::string &getCurrentLyricsTextForPart(int partIndex, double time) const;
+    std::string toUtf8String() const;
 
-    Snapshot getCurrentSnapshot(double time) const;
-
-    bool operator==(const Lyrics &rhs) const;
-    bool operator!=(const Lyrics &rhs) const;
-
-    void addLyricsInterval(int lineIndex, const LyricsInterval& interval);
+    bool isEmpty() const;
 };
 
 

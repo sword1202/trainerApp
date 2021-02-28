@@ -28,8 +28,6 @@ public:
     virtual const std::string &getArtistNameUtf8() const = 0;
     virtual const std::string &getSongTitleUtf8() const = 0;
     virtual double getBeatsPerMinute() const = 0;
-    virtual bool isLyricsEditAvailable() const = 0;
-    virtual Lyrics &getLyricsNonConst() = 0;
     virtual const std::vector<short> &getInstrumentalPreviewSamples() const = 0;
 };
 

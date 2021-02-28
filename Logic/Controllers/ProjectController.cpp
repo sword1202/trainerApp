@@ -67,12 +67,12 @@ ProjectController::ProjectController(ProjectControllerDelegate* delegate) : dele
         delegate->updateAudioLevel(level);
     }, this);
 
-    player->lyricsChangedListeners.addListener([=] {
-        delegate->onHasLyricsChanged(player->hasLyrics());
+    player->lyricsSelectionChangedListeners.addListener([=] (const Lyrics::LineSelection& selection) {
+        delegate->updateLyricsSelection(selection);
     }, this);
 
-    player->currentLyricsLinesChangedListeners.addListener([=] {
-        delegate->updateLyricsText(player->getLyricsTextForPart(0));
+    player->currentLyricsLinesChangedListeners.addListener([=] (const LyricsDisplayedLinesProvider* provider) {
+        delegate->updateLyricsLines(provider);
     }, this);
 
     rewinder = new Rewinder(player);
@@ -166,7 +166,7 @@ void ProjectController::setWorkspaceController(WorkspaceController *workspaceCon
 
 void ProjectController::setLyricsVisible(bool value) {
     lyricsVisible = value;
-    delegate->onLyricsVisibilityChanged(value);
+    delegate->updateLyricsVisibilityChanged(value);
 }
 
 void ProjectController::setMetronomeEnabled(bool value) {
@@ -210,7 +210,7 @@ void ProjectController::setZoom(float zoom) {
     }
 
     workspaceController->setZoom(zoom);
-    delegate->onZoomChanged(zoom);
+    delegate->updateZoom(zoom);
 }
 
 float ProjectController::getZoom() const {

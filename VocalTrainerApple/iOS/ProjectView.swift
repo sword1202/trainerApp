@@ -16,15 +16,15 @@ struct ProjectView: View {
         ZStack {
             // Fill safe area with colors
             VStack {
-                Spacer().frame(maxWidth: .infinity, maxHeight: 50).background(Colors.mainDark)
+                Spacer().frame(maxWidth: .infinity, maxHeight: 50).background(Colors.tone2)
                 Spacer().frame(maxWidth: .infinity).background(Color.white)
-                Spacer().frame(maxWidth: .infinity, maxHeight: 50).background(Colors.main)
+                Spacer().frame(maxWidth: .infinity, maxHeight: 50).background(Colors.tone1)
             }.edgesIgnoringSafeArea(.bottom).edgesIgnoringSafeArea(.top)
             // Main Content
             VStack {
                 VStack {
                     Spacer().frame(maxWidth: .infinity)
-                }.background(Colors.mainDark).frame(maxWidth: .infinity, maxHeight: 80, alignment: .topLeading)
+                }.background(Colors.tone2).frame(maxWidth: .infinity, maxHeight: 80, alignment: .topLeading)
                 WorkspaceView().onChange(of: scenePhase) { phase in
                     switch phase {
                     case .active:
@@ -48,7 +48,7 @@ struct ProjectView: View {
                         }.padding(.leading, 50).padding(.trailing, 50)
                         Image("SelectBoundsButton")
                     }.padding(.bottom, 0)
-                }.background(Colors.main).frame(maxWidth: .infinity, maxHeight: 112, alignment: .bottomLeading)
+                }.background(Colors.tone1).frame(maxWidth: .infinity, maxHeight: 112, alignment: .bottomLeading)
             }
         }
     }

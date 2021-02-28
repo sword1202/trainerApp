@@ -32,8 +32,6 @@ public:
     const std::string &getArtistNameUtf8() const override;
     const std::string &getSongTitleUtf8() const override;
     double getBeatsPerMinute() const override;
-    bool isLyricsEditAvailable() const override;
-    Lyrics &getLyricsNonConst() override;
     const std::vector<short> &getInstrumentalPreviewSamples() const override;
 };
 

@@ -166,11 +166,3 @@ const std::map<double, int> &MvxFile::getRecordingTonalityChanges() const {
 void MvxFile::setRecordingTonalityChanges(const std::map<double, int> &recordingTonalityChanges) {
     this->recordingTonalityChanges = recordingTonalityChanges;
 }
-
-Lyrics &MvxFile::getLyricsNonConst() {
-    return lyrics;
-}
-
-bool MvxFile::isLyricsEditAvailable() const {
-    return lyrics.getNumberOfParts() != 0;
-}

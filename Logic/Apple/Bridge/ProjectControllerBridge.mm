@@ -47,27 +47,38 @@ public:
         }
     }
 
-    void onHasLyricsChanged(bool hasLyrics) override {
+    void updateLyricsLines(const LyricsDisplayedLinesProvider *linesProvider) override {
         for (auto delegate : delegates) {
-            [delegate projectControllerWithDidChangeHasLyrics:hasLyrics];
+            int count = linesProvider->getDisplayLinesCount();
+            NSMutableArray *lines = [[NSMutableArray alloc] initWithCapacity:static_cast<NSUInteger>(count)];
+
+            for (int i = 0; i < count; ++i) {
+                std::u32string_view line = linesProvider->getDisplayedLineAt(i);
+                NSString* objCline = [[NSString alloc] initWithBytesNoCopy:(void*)line.data()
+                                                                    length:line.size()
+                                                                  encoding:NSUTF32StringEncoding freeWhenDone:NO];
+                [lines addObject:objCline];
+            }
+            [delegate projectControllerUpdateWithCurrentLyricsLines:lines];
         }
     }
 
-    void updateLyricsText(const std::string &lyricsLineUtf8) override {
+    void updateLyricsSelection(const Lyrics::LineSelection &selection) override {
         for (auto delegate : delegates) {
-            [delegate projectControllerUpdateWithLyricsText:[NSString stringWithUTF8String:lyricsLineUtf8.data()]];
+            [delegate projectControllerUpdateLyricsSelectionWithSelectedCharactersCount:selection.charactersCount
+                                                         lastCharacterSelectionPosition:selection.lastCharacterSelectionPosition];
         }
     }
 
-    void onLyricsVisibilityChanged(bool showLyrics) override {
+    void updateLyricsVisibilityChanged(bool showLyrics) override {
         for (auto delegate : delegates) {
-            [delegate projectControllerWithDidChangeLyricsVisibility:showLyrics];
+            [delegate projectControllerUpdateWithLyricsVisibility:showLyrics];
         }
     }
 
     void onTracksVisibilityChanged(bool value) override {
         for (auto delegate : delegates) {
-            [delegate projectControllerWithDidChangeTracksVisibility:value];
+            [delegate projectControllerUpdateWithTracksVisibility:value];
         }
     }
 
@@ -107,9 +118,9 @@ public:
         }
     }
 
-    void onZoomChanged(float value) override {
+    void updateZoom(float value) override {
         for (auto delegate : delegates) {
-            [delegate projectControllerWithDidChangeZoom:value];
+            [delegate projectControllerUpdateWithZoom:value];
         }
     }
 

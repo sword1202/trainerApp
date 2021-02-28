@@ -8,8 +8,8 @@ TEST_CASE("VxFile parser test 1") {
     std::string str = "VX 1 123 C5 16 P 16 E#4 1 F4 -8";
     VxFile file;
     file.parse(str);
-    int beatsPerMinute;
-    auto vocalPart = file.getVocalPart()
+    int beatsPerMinute = file.getBeatsPerMinute();
+    auto vocalPart = file.getVocalPart();
     REQUIRE(beatsPerMinute == 123);
     REQUIRE(vocalPart.getNotes().size() == 3);
 

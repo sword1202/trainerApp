@@ -28,4 +28,9 @@ extension CGRect {
     static func * (a: CGRect, value: CGFloat) -> CGRect {
         return CGRect(origin: a.origin * value, size: a.size * value)
     }
+
+    func insetBy(left: CGFloat = 0, right: CGFloat = 0, top: CGFloat = 0, bottom: CGFloat = 0) -> CGRect {
+        CGRect(origin: CGPoint(x: self.minX + left, y: self.minY + top),
+                size: CGSize(width: self.width - left - right, height: self.height - top - bottom))
+    }
 }

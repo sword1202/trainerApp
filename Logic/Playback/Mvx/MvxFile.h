@@ -45,19 +45,19 @@ class MvxFile : public VocalTrainerFile {
 
     template<typename Archive>
     void load(Archive & ar, const unsigned int version) {
-        doSerialize(ar, version, readOnlySignature);
+        doSerialize(ar, version, false, readOnlySignature);
     }
 
     template<typename Archive>
     void save(Archive & ar, const unsigned int version) const {
         assert(beatsPerMinute > 0 && "beatsPerMinute not set");
-        const_cast<MvxFile*>(this)->doSerialize(ar, version, false);
+        const_cast<MvxFile*>(this)->doSerialize(ar, version, true, false);
     }
 
     BOOST_SERIALIZATION_SPLIT_MEMBER()
 
     template<typename Archive>
-    void doSerialize(Archive & ar, const unsigned int version, bool readOnlySignature){
+    void doSerialize(Archive & ar, const unsigned int version, bool isSave, bool readOnlySignature){
         this->version = version;
 
         ar & recording;
@@ -84,8 +84,11 @@ class MvxFile : public VocalTrainerFile {
                 ar & recordingTonalityChanges;
             }
 
-            if (version >= 4) {
-                ar & lyrics;
+            if (version >= 6) {
+                std::string str;
+                if (isSave) {
+
+                }
             }
         }
     }
@@ -141,9 +144,6 @@ public:
     void generateInstrumentalPreviewSamplesFromInstrumental();
 
     const Lyrics &getLyrics() const;
-    Lyrics &getLyricsNonConst();
-
-    bool isLyricsEditAvailable() const override;
 
     void setLyrics(const Lyrics &lyrics);
 
@@ -157,8 +157,9 @@ public:
  * Version 3: instrumentalPreviewSamples added
  * Version 4: Lyrics added
  * Version 5: recordingTonalityChanges added
+ * Version 6: lyrics reworked
  */
-BOOST_CLASS_VERSION(MvxFile, 5)
+BOOST_CLASS_VERSION(MvxFile, 6)
 
 
 #endif //VOCALTRAINER_MVXFILE_H

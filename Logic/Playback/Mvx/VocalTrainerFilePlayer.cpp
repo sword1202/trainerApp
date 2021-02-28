@@ -90,10 +90,8 @@ void VocalTrainerFilePlayer::setSource(VocalTrainerFile *file, bool destroyFileO
                 tonalityChanges.erase(iter, tonalityChanges.end());
             }
 
-            auto currentSnapshot = file->getLyrics().getCurrentSnapshot(seek);
-            if (lastLyricsSnapshot != currentSnapshot) {
-                lyricsChangedListeners.executeAll();
-                lastLyricsSnapshot = currentSnapshot;
+            if (lyricsPlayer) {
+                lyricsPlayer->setSeek(seek);
             }
         });
 
@@ -108,6 +106,17 @@ void VocalTrainerFilePlayer::setSource(VocalTrainerFile *file, bool destroyFileO
     mainPlayer->onPlaybackStartedListeners.addListener([=] {
         this->onPlaybackStarted();
     });
+
+    const Lyrics& lyrics = file->getLyrics();
+    if (!lyrics.isEmpty()) {
+        lyricsPlayer = new LyricsPlayer(&lyrics);
+        lyricsPlayer->onSelectionChanged = [this] (const Lyrics::LineSelection& selection) {
+            this->lyricsSelectionChangedListeners.executeAll(selection);
+        };
+        lyricsPlayer->onLinesChanged = [this] (const LyricsDisplayedLinesProvider* linesProvider) {
+            this->currentLyricsLinesChangedListeners.executeAll(linesProvider);
+        };
+    }
 }
 
 void VocalTrainerFilePlayer::setSource(std::istream &is) {
@@ -210,6 +219,7 @@ void VocalTrainerFilePlayer::setRecordingVolume(float volume) {
 VocalTrainerFilePlayer::~VocalTrainerFilePlayer() {
     delete pitchesCollection;
     delete recordingLevelMonitor;
+    delete lyricsPlayer;
     if (destroyMvxFileOnDestructor) {
         delete file;
     }
@@ -440,19 +450,6 @@ const VocalTrainerFile &VocalTrainerFilePlayer::getFile() const {
     return *file;
 }
 
-bool VocalTrainerFilePlayer::hasLyrics() const {
-    return getLyricsLinesCount() > 0;
-}
-
-int VocalTrainerFilePlayer::getLyricsLinesCount() const {
-    return file->getLyrics().getNumberOfParts();
-}
-
-const std::string& VocalTrainerFilePlayer::getLyricsTextForPart(int partIndex) const {
-    double seek = getSeek();
-    return file->getLyrics().getCurrentLyricsTextForPart(partIndex, seek);
-}
-
 const BaseAudioPlayer & VocalTrainerFilePlayer::getInstrumentalPlayer() const {
     return instrumentalPlayer;
 }
@@ -465,19 +462,14 @@ const std::map<double, int> &VocalTrainerFilePlayer::getTonalityChanges() const 
     return tonalityChanges;
 }
 
-void VocalTrainerFilePlayer::editLyrics(const std::function<void(Lyrics *lyrics)> &editAction) {
-    assert(file->isLyricsEditAvailable());
-    auto lyrics = file->getLyrics();
-    editAction(&file->getLyricsNonConst());
-    if (lyrics != file->getLyrics()) {
-        lyricsChangedListeners.executeAll();
-    }
-}
-
 const BaseAudioPlayer * VocalTrainerFilePlayer::getMainPlayer() const {
     return players.at(0);
 }
 
 BaseAudioPlayer * VocalTrainerFilePlayer::getMainPlayer() {
     return players.at(0);
+}
+
+const LyricsDisplayedLinesProvider *VocalTrainerFilePlayer::getDisplayedLyricsLines() const {
+    return lyricsPlayer;
 }

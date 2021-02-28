@@ -7,8 +7,12 @@
 
 #define LOCK std::lock_guard<std::mutex> _(mutex)
 
-void PitchesMutableList::getPitchesInTimeRange(double begin, double end, std::vector<double> *timesOut,
-                                               std::vector<float> *frequenciesOut) const {
+void PitchesMutableList::getPitchesInTimeRange(
+        double begin,
+        double end,
+        std::vector<double> *timesOut,
+        std::vector<float> *frequenciesOut
+        ) const {
     LOCK;
     auto range = CppUtils::FindRangeInSortedCollection(times, begin, end);
     size_t i1 = range.first - times.begin();

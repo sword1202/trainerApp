@@ -4,22 +4,25 @@
 //
 
 import Foundation
+import CoreGraphics
 
 @objc public protocol ProjectControllerBridgeDelegate {
     @objc optional func projectControllerUpdate(audioLevel: Double)
     @objc optional func projectControllerUpdate(seek: Double)
     @objc optional func projectControllerPlaybackDidStart()
     @objc optional func projectControllerPlaybackDidStop()
-    @objc optional func projectController(didChangeHasLyrics hasLyrics: Bool)
-    @objc optional func projectControllerUpdate(lyricsText: String)
-    @objc optional func projectController(didChangeLyricsVisibility showLyrics: Bool)
-    @objc optional func projectController(didChangeTracksVisibility showTracks: Bool)
+    @objc optional func projectControllerUpdateLyricsSelection(
+            selectedCharactersCount: Int,
+            lastCharacterSelectionPosition: CGFloat)
+    @objc optional func projectControllerUpdate(currentLyricsLines: [String])
+    @objc optional func projectControllerUpdate(lyricsVisibility: Bool)
+    @objc optional func projectControllerUpdate(tracksVisibility: Bool)
     @objc optional func projectController(didChangeMetronomeEnabled enabled: Bool)
     @objc optional func projectControllerUpdate(vocalPianoVolume: Float)
     @objc optional func projectControllerUpdate(instrumentalVolume: Float)
     @objc optional func projectControllerUpdate(vocalVolume: Float)
     @objc optional func projectControllerUpdate(inputSensitivity: Float)
     @objc optional func projectControllerUpdate(hasSaveIndicator: Bool)
-    @objc optional func projectController(didChangeZoom: Float)
+    @objc optional func projectControllerUpdate(zoom: Float)
     @objc optional func projectController(didChangeRewindStatus running: Bool, isBackward: Bool)
 }

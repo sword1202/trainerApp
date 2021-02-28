@@ -19,9 +19,9 @@ public:
     virtual inline void updateSeek(double seek) {}
     virtual inline void onPlaybackStarted() {}
     virtual inline void onPlaybackStopped() {}
-    virtual inline void onHasLyricsChanged(bool hasLyrics) {}
-    virtual inline void updateLyricsText(const std::string& lyricsLineUtf8) {}
-    virtual inline void onLyricsVisibilityChanged(bool showLyrics) {}
+    virtual inline void updateLyricsLines(const LyricsDisplayedLinesProvider* linesProvider) {}
+    virtual inline void updateLyricsSelection(const Lyrics::LineSelection& selection) {}
+    virtual inline void updateLyricsVisibilityChanged(bool showLyrics) {}
     virtual inline void onMetronomeEnabledChanged(bool enabled) {}
     virtual inline void onTracksVisibilityChanged(bool value) {}
     virtual inline void updateVocalPianoVolume(float volume) {}
@@ -29,7 +29,7 @@ public:
     virtual inline void updateVocalVolume(float volume) {}
     virtual inline void updateInputSensitivity(float value) {}
     virtual inline void updateSaveIndicator(bool hasSaveIndicator) {}
-    virtual inline void onZoomChanged(float value) {}
+    virtual inline void updateZoom(float value) {}
     virtual inline void onRewindStatusChanged(bool rewindRunning, bool backward) {}
 };
 

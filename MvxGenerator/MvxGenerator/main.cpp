@@ -55,7 +55,7 @@ int main(int argc, char *argv[]) {
 
     VocalPart vocalPart;
     try {
-        int midiIndex = Strings::ParseInt(args["midiTrackId"], 1);
+        int midiIndex = Strings::TryParseInt(args["midiTrackId"], 1);
         vocalPart = reader.tryGetVocalPartFromMidiTrackWithId(midiIndex);
     } catch (MidiFileReaderException& e) {
         cout << "Failed to parse midi file: " << e.what() << endl;

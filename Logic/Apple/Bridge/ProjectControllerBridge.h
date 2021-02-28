@@ -4,8 +4,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreGraphics/CoreGraphics.h>
 #import <Logic/Logic-Swift.h>
-#include <CoreGraphics/CoreGraphics.h>
 
 @protocol ProjectControllerBridgeDelegate;
 

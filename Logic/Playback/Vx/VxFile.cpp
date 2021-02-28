@@ -143,14 +143,6 @@ double VxFile::getBeatsPerMinute() const {
     return beatsPerMinute;
 }
 
-bool VxFile::isLyricsEditAvailable() const {
-    return false;
-}
-
-Lyrics &VxFile::getLyricsNonConst() {
-    throw std::runtime_error("Lyrics are not available");
-}
-
 const std::vector<short> &VxFile::getInstrumentalPreviewSamples() const {
     return Collections::emptyVector<short>();
 }
