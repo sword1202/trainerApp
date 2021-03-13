@@ -16,13 +16,22 @@
 #include <map>
 #include <boost/serialization/map.hpp>
 
-class MvxFile : public VocalTrainerFile {
-    // signature
+struct MvxFileSignature {
     bool recording = false;
     std::string songTitleUtf8;
     std::string artistNameUtf8;
     double score = -1.0;
 
+    template<class Archive>
+    void serialize(Archive &ar, const unsigned int version){
+        ar & recording;
+        ar & songTitleUtf8;
+        ar & artistNameUtf8;
+        ar & score;
+    }
+};
+
+class MvxFile : public VocalTrainerFile, private MvxFileSignature {
     // core data
     VocalPart vocalPart;
     AudioData instrumental;
@@ -38,57 +47,55 @@ class MvxFile : public VocalTrainerFile {
 
     Lyrics lyrics;
 
-    bool readOnlySignature = false;
     int version = 0;
 
     friend class boost::serialization::access;
 
     template<typename Archive>
     void load(Archive & ar, const unsigned int version) {
-        doSerialize(ar, version, false, readOnlySignature);
+        doSerialize(ar, version, false);
     }
 
     template<typename Archive>
     void save(Archive & ar, const unsigned int version) const {
         assert(beatsPerMinute > 0 && "beatsPerMinute not set");
-        const_cast<MvxFile*>(this)->doSerialize(ar, version, true, false);
+        const_cast<MvxFile*>(this)->doSerialize(ar, version, true);
     }
 
     BOOST_SERIALIZATION_SPLIT_MEMBER()
 
     template<typename Archive>
-    void doSerialize(Archive & ar, const unsigned int version, bool isSave, bool readOnlySignature){
+    void doSerialize(Archive & ar, const unsigned int version, bool isSave){
         this->version = version;
 
-        ar & recording;
-        ar & songTitleUtf8;
-        ar & artistNameUtf8;
-        ar & score;
+        ar & boost::serialization::base_object<MvxFileSignature>(*this);
 
-        if (!readOnlySignature) {
-            ar & beatsPerMinute;
-            ar & vocalPart;
-            ar & instrumental;
-            ar & recordingData;
+        ar & beatsPerMinute;
+        ar & vocalPart;
+        ar & instrumental;
+        ar & recordingData;
 
-            if (version >= 2) {
-                ar & recordedPitchesTimes;
-                ar & recordedPitchesFrequencies;
+        if (version >= 2) {
+            ar & recordedPitchesTimes;
+            ar & recordedPitchesFrequencies;
+        }
+
+        if (version >= 3) {
+            ar & instrumentalPreviewSamples;
+        }
+
+        if (version >= 5) {
+            ar & recordingTonalityChanges;
+        }
+
+        if (version >= 6) {
+            std::string str;
+            if (isSave) {
+                str = lyrics.toUtf8String();
             }
-
-            if (version >= 3) {
-                ar & instrumentalPreviewSamples;
-            }
-
-            if (version >= 5) {
-                ar & recordingTonalityChanges;
-            }
-
-            if (version >= 6) {
-                std::string str;
-                if (isSave) {
-
-                }
+            ar & str;
+            if (!isSave) {
+                lyrics = Lyrics(str);
             }
         }
     }
@@ -104,8 +111,8 @@ public:
     void writeToStream(std::ostream& os) const;
     void writeToFile(const char* outFilePath) const;
 
-    void readFromStream(std::istream &is, bool readOnlySignature = false);
-    void readFromFile(const char *filePath, bool readOnlySignature = false);
+    void readFromStream(std::istream &is);
+    void readFromFile(const char *filePath);
 
     const VocalPart &getVocalPart() const;
     void setVocalPart(const VocalPart &vocalPart);

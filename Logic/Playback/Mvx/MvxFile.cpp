@@ -25,15 +25,14 @@ void MvxFile::writeToFile(const char *outFilePath) const {
     writeToStream(file);
 }
 
-void MvxFile::readFromStream(std::istream &is, bool readOnlySignature) {
-    this->readOnlySignature = readOnlySignature;
+void MvxFile::readFromStream(std::istream &is) {
     boost::archive::text_iarchive ar(is);
     ar >> *this;
 }
 
-void MvxFile::readFromFile(const char *filePath, bool readOnlySignature) {
+void MvxFile::readFromFile(const char *filePath) {
     std::fstream file = Streams::OpenFile(filePath, std::ios::binary | std::ios::in);
-    readFromStream(file, readOnlySignature);
+    readFromStream(file);
 }
 
 const VocalPart &MvxFile::getVocalPart() const {
