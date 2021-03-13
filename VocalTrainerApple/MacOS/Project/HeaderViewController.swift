@@ -84,22 +84,16 @@ class HeaderViewController : NSViewController, ConfigurableWithProjectController
 }
 
 extension HeaderViewController : ProjectControllerBridgeDelegate {
-    public func projectController(didChangeLyricsVisibility showLyrics: Bool) {
-        updateButtonState(button: lyricsButton, value: showLyrics)
+    public func projectControllerUpdate(lyricsVisibility: Bool) {
+        updateButtonState(button: lyricsButton, value: lyricsVisibility)
     }
 
-    public func projectController(didChangeTracksVisibility showTracks: Bool) {
-        updateButtonState(button: tracksButton, value: showTracks)
+    public func projectControllerUpdate(tracksVisibility: Bool) {
+        updateButtonState(button: tracksButton, value: tracksVisibility)
     }
 
     public func projectController(didChangeMetronomeEnabled enabled: Bool) {
         updateButtonState(button: metronomeButton, value: enabled)
-    }
-
-    public func projectControllerUpdate(audioLevel: Double) {
-    }
-
-    public func projectControllerUpdate(seek: Double) {
     }
 
     public func projectControllerPlaybackDidStart() {
@@ -108,30 +102,6 @@ extension HeaderViewController : ProjectControllerBridgeDelegate {
 
     public func projectControllerPlaybackDidStop() {
         self.playButton.state = .off
-    }
-
-    public func projectController(didChangeHasLyrics hasLyrics: Bool) {
-    }
-
-    public func projectControllerUpdate(lyricsText: String) {
-    }
-
-    public func projectControllerUpdate(vocalPianoVolume: Float) {
-    }
-
-    public func projectControllerUpdate(instrumentalVolume: Float) {
-    }
-
-    public func projectControllerUpdate(vocalVolume: Float) {
-    }
-
-    public func projectControllerUpdate(inputSensitivity: Float) {
-    }
-
-    public func projectControllerUpdate(hasSaveIndicator: Bool) {
-    }
-
-    public func projectController(didChangeZoom: Float) {
     }
 
     public func projectController(didChangeRewindStatus running: Bool, isBackward: Bool) {

@@ -45,6 +45,7 @@ public:
     void setDetectedPitch(const Pitch &detectedPitch);
     void drawPitchNames(float height) const;
     void drawSharpPitches() const;
+    int getFontSize() const;
 };
 
 

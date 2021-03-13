@@ -232,7 +232,10 @@ void Drawer::drawTextUsingImages(const std::string &text, float x, float y) {
     float width = 0;
     for (char ch : text) {
         Image* image = textImagesFactory->findImage(ch, (int) round(fontSize), getFillColor(), fontStyle);
-        assert(image);
+        if (!image) {
+            throw std::runtime_error("Image not found for " + std::string(1, ch));
+        }
+
         if (height < image->height()) {
             height = image->height();
         }

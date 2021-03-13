@@ -646,7 +646,7 @@
 		C9FFF9377D106B5280AD99A6 /* log.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFD79D420990C0BBEC118 /* log.hh */; };
 		C9FFF93AC04930444A9F4DCC /* SeekablePitchesList.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFAF4A7981E386B4E562C /* SeekablePitchesList.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF95B741E0D318B598368 /* FixedSizeObjectPool.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFFED99F0A661C0C7CDFE /* FixedSizeObjectPool.h */; };
-		C9FFF962E37F10AE874E3743 /* LyricsPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF17AFA1024F0A1FC2A2F /* LyricsPlayer.h */; };
+		C9FFF962E37F10AE874E3743 /* LyricsPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF17AFA1024F0A1FC2A2F /* LyricsPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF96A3EAC8DB9A7CA8FFC /* void_cast.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFBC4F8D9053210966BCF /* void_cast.cpp */; };
 		C9FFF994FFA7992364AF80BB /* BaseAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF1D4D58FBFDE258E3441 /* BaseAudioPlayer.cpp */; };
 		C9FFF9A7F519C50CC2DA3224 /* PitchesMutableList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC786F901FE7A8101871 /* PitchesMutableList.cpp */; };
@@ -706,7 +706,7 @@
 		C9FFFEF8E8B63E56D86DACB2 /* PitchDetectionSmoothingAudioBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF06ADDBFCDB52FB5DC8A /* PitchDetectionSmoothingAudioBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFFEFB74DED2493DA16896 /* polymorphic_iarchive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF3062B8881B2641DF387 /* polymorphic_iarchive.cpp */; };
 		C9FFFF1020621585053E6A56 /* envelope.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF21DBBE3430B34123A70 /* envelope.hh */; };
-		C9FFFF1473913572AA544612 /* LyricsDisplayedLinesProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF2EE3D1EE221F56F2A6F /* LyricsDisplayedLinesProvider.h */; };
+		C9FFFF1473913572AA544612 /* LyricsDisplayedLinesProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF2EE3D1EE221F56F2A6F /* LyricsDisplayedLinesProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFFF17CE1452B72256E80B /* xml_iarchive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF4E97F2ABD3B0378D450 /* xml_iarchive.cpp */; };
 		C9FFFF3B5634659CC644B106 /* xml_wgrammar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF0632F685ABCDE0960D3 /* xml_wgrammar.cpp */; };
 		C9FFFF592537E9B9296C585E /* AudioToolboxOutputWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6CECF83E94F19796312 /* AudioToolboxOutputWriter.cpp */; };
@@ -2094,6 +2094,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9FFF962E37F10AE874E3743 /* LyricsPlayer.h in Headers */,
+				C9FFFF1473913572AA544612 /* LyricsDisplayedLinesProvider.h in Headers */,
 				C9FFF78B25B019C99021DF7C /* PitchRenderer.h in Headers */,
 				C9FFFEE891489FF56BE553C2 /* SfzPitchRenderer.h in Headers */,
 				C9FFF69203ED6830C2A83AE6 /* VocalPartAudioDataGenerator.h in Headers */,
@@ -2240,8 +2242,6 @@
 				C9FFF1D665C089C3103FCDFE /* DefineAppleConditionals.h in Headers */,
 				C9FFFC285E8800DFF44AC486 /* UndefAppleConditionals.h in Headers */,
 				C9FFF7E61A3D26D1D5818AE8 /* StringEncodingUtils.h in Headers */,
-				C9FFF962E37F10AE874E3743 /* LyricsPlayer.h in Headers */,
-				C9FFFF1473913572AA544612 /* LyricsDisplayedLinesProvider.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

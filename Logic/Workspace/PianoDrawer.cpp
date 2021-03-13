@@ -212,3 +212,7 @@ void PianoDrawer::setFontSize(int fontSize) {
 void PianoDrawer::setFontStyle(Drawer::FontStyle fontStyle) {
     this->fontStyle = fontStyle;
 }
+
+int PianoDrawer::getFontSize() const {
+    return fontSize;
+}

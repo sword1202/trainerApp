@@ -25,25 +25,33 @@ public:
 
     void updateAudioLevel(double level) override {
         for (auto delegate : delegates) {
-            [delegate projectControllerUpdateWithAudioLevel:level];
+            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerUpdateWithAudioLevel:)]) {
+                [delegate projectControllerUpdateWithAudioLevel:level];
+            }
         }
     }
 
     void updateSeek(double seek) override {
         for (auto delegate : delegates) {
-            [delegate projectControllerUpdateWithSeek:seek];
+            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerUpdateWithSeek:)]) {
+                [delegate projectControllerUpdateWithSeek:seek];
+            }
         }
     }
 
     void onPlaybackStarted() override {
         for (auto delegate : delegates) {
-            [delegate projectControllerPlaybackDidStart];
+            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerPlaybackDidStart)]) {
+                [delegate projectControllerPlaybackDidStart];
+            }
         }
     }
 
     void onPlaybackStopped() override {
         for (auto delegate : delegates) {
-            [delegate projectControllerPlaybackDidStop];
+            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerPlaybackDidStop)]) {
+                [delegate projectControllerPlaybackDidStop];
+            }
         }
     }
 
@@ -65,68 +73,91 @@ public:
 
     void updateLyricsSelection(const Lyrics::LineSelection &selection) override {
         for (auto delegate : delegates) {
-            [delegate projectControllerUpdateLyricsSelectionWithSelectedCharactersCount:selection.charactersCount
-                                                         lastCharacterSelectionPosition:selection.lastCharacterSelectionPosition];
+            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerUpdateLyricsSelectionWithSelectedCharactersCount:lastCharacterSelectionPosition:)]) {
+                [delegate projectControllerUpdateLyricsSelectionWithSelectedCharactersCount:selection.charactersCount
+                                                             lastCharacterSelectionPosition:selection.lastCharacterSelectionPosition];
+            }
         }
     }
 
     void updateLyricsVisibilityChanged(bool showLyrics) override {
         for (auto delegate : delegates) {
-            [delegate projectControllerUpdateWithLyricsVisibility:showLyrics];
+            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerUpdateWithLyricsVisibility:)]) {
+                [delegate projectControllerUpdateWithLyricsVisibility:showLyrics];
+            }
         }
     }
 
     void onTracksVisibilityChanged(bool value) override {
         for (auto delegate : delegates) {
-            [delegate projectControllerUpdateWithTracksVisibility:value];
+            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerUpdateWithTracksVisibility)]) {
+                [delegate projectControllerUpdateWithTracksVisibility:value];
+            }
         }
     }
 
     void onMetronomeEnabledChanged(bool enabled) override {
         for (auto delegate : delegates) {
-            [delegate projectControllerWithDidChangeMetronomeEnabled:enabled];
+            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerWithDidChangeMetronomeEnabled:)]) {
+                [delegate projectControllerWithDidChangeMetronomeEnabled:enabled];
+            }
         }
     }
 
     void updateVocalPianoVolume(float volume) override {
         for (auto delegate : delegates) {
-            [delegate projectControllerUpdateWithVocalPianoVolume:volume];
+            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerUpdateWithVocalPianoVolume:)]) {
+                [delegate projectControllerUpdateWithVocalPianoVolume:volume];
+            }
         }
     }
 
     void updateInstrumentalVolume(float volume) override {
         for (auto delegate : delegates) {
-            [delegate projectControllerUpdateWithInstrumentalVolume:volume];
+            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerUpdateWithInstrumentalVolume:)]) {
+                [delegate projectControllerUpdateWithInstrumentalVolume:volume];
+            }
         }
     }
 
     void updateVocalVolume(float volume) override {
         for (auto delegate : delegates) {
-            [delegate projectControllerUpdateWithVocalVolume:volume];
+            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerUpdateWithVocalVolume:)]) {
+                [delegate projectControllerUpdateWithVocalVolume:volume];
+            }
         }
     }
 
     void updateInputSensitivity(float value) override {
         for (auto delegate : delegates) {
-            [delegate projectControllerUpdateWithInputSensitivity:value];
+            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerUpdateWithInputSensitivity:)]) {
+                [delegate projectControllerUpdateWithInputSensitivity:value];
+            }
         }
     }
 
     void updateSaveIndicator(bool hasSaveIndicator) override {
         for (auto delegate : delegates) {
-            [delegate projectControllerUpdateWithHasSaveIndicator:hasSaveIndicator];
+            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerUpdateWithHasSaveIndicator:)]) {
+                [delegate projectControllerUpdateWithHasSaveIndicator:hasSaveIndicator];
+            }
         }
     }
 
     void updateZoom(float value) override {
         for (auto delegate : delegates) {
-            [delegate projectControllerUpdateWithZoom:value];
+            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerUpdateWithZoom:)]) {
+                [delegate projectControllerUpdateWithZoom:value];
+            }
         }
     }
 
     void onRewindStatusChanged(bool rewindRunning, bool backward) override {
         for (auto delegate : delegates) {
-            [delegate projectControllerWithDidChangeRewindStatus:rewindRunning isBackward:backward];
+            if ([(NSObject*)delegate respondsToSelector:
+                    @selector(projectControllerWithDidChangeRewindStatus:isBackward:)]) {
+                [delegate projectControllerWithDidChangeRewindStatus:rewindRunning isBackward:backward];
+            }
         }
     }
 };

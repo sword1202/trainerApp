@@ -5,6 +5,7 @@
 
 #ifndef VOCALTRAINER_WORKSPACEDRAWER_H
 #define VOCALTRAINER_WORKSPACEDRAWER_H
+#define DRAW_TIME_UNDER_PITCHES
 
 #include "Drawer.h"
 #include <array>
@@ -115,7 +116,7 @@ class WorkspaceDrawer : public WorkspaceController {
     void drawVerticalLine(float x, const Color& color) const;
     void drawVerticalGrid() const;
     void drawHorizontalGrid() const;
-    void drawPitch(float x, float y, float width) const;
+    void drawPitch(float x, float y, float width, double timeBegin, double timeEnd) const;
     void drawPitches() const;
     void initGraphPitchesArrays(float workspaceSeek);
     void drawPitchesGraph();

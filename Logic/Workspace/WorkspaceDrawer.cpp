@@ -304,10 +304,18 @@ void WorkspaceDrawer::drawHorizontalGrid() const {
     }
 }
 
-void WorkspaceDrawer::drawPitch(float x, float y, float width) const {
+void WorkspaceDrawer::drawPitch(float x, float y, float width, double timeBegin, double timeEnd) const {
     float radius = pitchRadius * zoom;
-    drawer->roundedRect(x, y, width, intervalHeight, radius);
+    RoundedRectF rect(x, y, width, intervalHeight, radius);
+    drawer->roundedRect(rect);
     drawer->fill();
+    if (rect.containsPoint(mouseEventsReceiver->getMousePosition())) {
+        std::stringstream timeText;
+        timeText << timeBegin << ';' << timeEnd;
+        drawer->setTextFontSize(pianoDrawer->getFontSize());
+        drawer->setFillColor(PianoDrawer::PITCH_TEXT_COLOR);
+        drawer->fillText(timeText.str(), 10.0f, height - 20.0f);
+    }
 }
 
 void WorkspaceDrawer::drawPitches() const {
@@ -337,7 +345,7 @@ void WorkspaceDrawer::drawPitches() const {
         double pitchWidth = pitchDuration / workspaceDuration * width;
         int distanceFromFirstPitch = getDistanceFromFirstPitch(vxPitch.pitch);
         float y = relativeHeight - (distanceFromFirstPitch + 1) * intervalHeight;
-        drawPitch((float)x, y, (float)pitchWidth);
+        drawPitch((float)x, y, (float)pitchWidth, timeBegin, timeEnd);
     });
 }
 
@@ -1100,6 +1108,11 @@ void WorkspaceDrawer::initImages() {
     for (char ch = 'A'; ch <= 'G'; ch++) {
         createImageForCharacter(ch, pianoFontSize, PianoDrawer::PITCH_TEXT_COLOR, pianoFontStyle);
         createImageForCharacter(ch, pianoFontSize, PianoDrawer::SELECTED_PITCH_TEXT_COLOR, pianoFontStyle);
+    }
+
+    // For drawing time under pitches
+    for (char ch : std::array<char, 2> {'.', ';'}) {
+        createImageForCharacter(ch, pianoFontSize, PianoDrawer::PITCH_TEXT_COLOR, pianoFontStyle);
     }
 
     createImageForCharacter(':', clockFontSize, WorkspaceDrawer::YARD_STICK_DOT_AND_TEXT_COLOR, clockFontStyle);
