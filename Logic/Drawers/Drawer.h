@@ -65,6 +65,8 @@ public:
     virtual void arcTo(float x1, float y1, float x2, float y2, float radius) = 0;
     virtual void arc(float x, float y, float r, float sAngle, float eAngle) = 0;
     virtual void circle(float x, float y, float r);
+    virtual void circle(const CppUtils::PointF& center, float r);
+    virtual void circle(const CppUtils::CircleF& circle);
     virtual void setStrokeColor(const Color& color) = 0;
     virtual void setFillColor(const Color& color) = 0;
     virtual void setStrokeWidth(float strokeWidth) = 0;
@@ -102,6 +104,14 @@ public:
     virtual void setTextStyle(FontStyle fontStyle);
     virtual void setTextBaseline(TextBaseline baseline);
     virtual void fillText(const std::string &text, float x, float y);
+
+    virtual CppUtils::PointF convertRelativeToAbsolute(const CppUtils::PointF& point) const;
+    virtual CppUtils::PointF convertRelativeToAbsolute(float x, float y) const;
+
+    virtual CppUtils::PointF convertAbsoluteToRelative(const CppUtils::PointF& point) const;
+    virtual CppUtils::PointF convertAbsoluteToRelative(float x, float y) const;
+
+    virtual void drawInAbsoluteCoordinates(const std::function<void()>& drawerCallback);
 
     virtual void
     drawShadow(float x, float y, float w, float h, float radius, float blurFactor, const Color &color) = 0;

@@ -2,6 +2,7 @@
 #include "Drawer.h"
 #include "Sets.h"
 #include "Core.h"
+#include <sstream>
 #include <iostream>
 
 using namespace CppUtils;
@@ -139,6 +140,14 @@ void Drawer::circle(float x, float y, float r) {
     arc(x, y, r, 0, 2 * M_PI);
 }
 
+void Drawer::circle(const PointF &center, float r) {
+    circle(center.x, center.y, r);
+}
+
+void Drawer::circle(const CircleF& circle) {
+    this->circle(circle.center, circle.getRadius());
+}
+
 Drawer::Image* Drawer::createImage(const void* data, int w, int h) {
     auto* image = createImageNative(w, h, data);
     registerImage(image);
@@ -231,9 +240,13 @@ void Drawer::drawTextUsingImages(const std::string &text, float x, float y) {
     float height = 0;
     float width = 0;
     for (char ch : text) {
-        Image* image = textImagesFactory->findImage(ch, (int) round(fontSize), getFillColor(), fontStyle);
+        Color color = getFillColor();
+        Image* image = textImagesFactory->findImage(ch, (int) round(fontSize), color, fontStyle);
         if (!image) {
-            throw std::runtime_error("Image not found for " + std::string(1, ch));
+            std::stringstream errorMessage;
+            errorMessage << "Image not found for character='"
+            << ch << "', color=" << color.toHexString() << ", fontSize=" << fontSize << ", style=" << fontStyle;
+            throw std::runtime_error(errorMessage.str());
         }
 
         if (height < image->height()) {
@@ -282,6 +295,30 @@ void Drawer::fillRect(const RectF &rect) {
 
 void Drawer::setTextStyle(FontStyle fontStyle) {
     this->fontStyle = fontStyle;
+}
+
+PointF Drawer::convertRelativeToAbsolute(float x, float y) const {
+    return PointF(x - translateX, y - translateY);
+}
+
+PointF Drawer::convertRelativeToAbsolute(const PointF& point) const {
+    return convertRelativeToAbsolute(point.x, point.y);
+}
+
+PointF Drawer::convertAbsoluteToRelative(const PointF &point) const {
+    return convertAbsoluteToRelative(point.x, point.y);
+}
+
+PointF Drawer::convertAbsoluteToRelative(float x, float y) const {
+    return PointF(x - translateX, y - translateY);
+}
+
+void Drawer::drawInAbsoluteCoordinates(const std::function<void()>& drawerCallback) {
+    float translateX = this->translateX;
+    float translateY = this->translateY;
+    this->translateTo(0, 0);
+    drawerCallback();
+    this->translateTo(translateX, translateY);
 }
 
 void DrawerTextImagesFactory::addImage(const DrawerTextImagesFactoryCharacterData &data) {

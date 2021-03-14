@@ -20,6 +20,7 @@
 #include "WorkspaceDrawerResourcesProvider.h"
 #include "BoundsSelectionController.h"
 #include "MouseClickChecker.h"
+#include "CallbacksQueue.h"
 #include <thread>
 
 class BoundsSelectionController;
@@ -110,14 +111,16 @@ class WorkspaceDrawer : public WorkspaceController {
     WorkspaceControllerDelegate* delegate = nullptr;
     BoundsSelectionController* boundsSelectionController = nullptr;
 
+    CppUtils::CallbacksQueue drawAboveQueue;
+
     void iterateHorizontalIntervals(const std::function<void(float x, bool isBeat)>& func) const;
 
     void drawHorizontalLine(float y, const Color& color) const;
     void drawVerticalLine(float x, const Color& color) const;
     void drawVerticalGrid() const;
     void drawHorizontalGrid() const;
-    void drawPitch(float x, float y, float width, double timeBegin, double timeEnd) const;
-    void drawPitches() const;
+    void drawPitch(float x, float y, float width);
+    void drawPitches();
     void initGraphPitchesArrays(float workspaceSeek);
     void drawPitchesGraph();
     void drawBoundsIfNeed() const;
@@ -155,6 +158,8 @@ class WorkspaceDrawer : public WorkspaceController {
 
     void initImages();
     void captureClickEventsInTracksArea(float pianoTrackHeight);
+
+    CppUtils::PointF getRelativeMousePosition() const;
 public:
 
     static constexpr int PIANO_WIDTH = 67;

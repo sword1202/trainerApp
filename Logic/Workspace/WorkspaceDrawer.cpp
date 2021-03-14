@@ -204,6 +204,9 @@ void WorkspaceDrawer::draw() {
     drawVerticalLine(PIANO_WIDTH + 0.5, borderLineColor);
     drawer->translate(0, -PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN);
 
+    drawer->translate(0, 0);
+    drawAboveQueue.process();
+
     drawer->endFrame();
 }
 
@@ -304,21 +307,13 @@ void WorkspaceDrawer::drawHorizontalGrid() const {
     }
 }
 
-void WorkspaceDrawer::drawPitch(float x, float y, float width, double timeBegin, double timeEnd) const {
+void WorkspaceDrawer::drawPitch(float x, float y, float width) {
     float radius = pitchRadius * zoom;
-    RoundedRectF rect(x, y, width, intervalHeight, radius);
-    drawer->roundedRect(rect);
+    drawer->roundedRect(x, y, width, intervalHeight, radius);
     drawer->fill();
-    if (rect.containsPoint(mouseEventsReceiver->getMousePosition())) {
-        std::stringstream timeText;
-        timeText << timeBegin << ';' << timeEnd;
-        drawer->setTextFontSize(pianoDrawer->getFontSize());
-        drawer->setFillColor(PianoDrawer::PITCH_TEXT_COLOR);
-        drawer->fillText(timeText.str(), 10.0f, height - 20.0f);
-    }
 }
 
-void WorkspaceDrawer::drawPitches() const {
+void WorkspaceDrawer::drawPitches() {
     assert(getFirstPitch().isValid());
     const VocalPart* vocalPart = this->vocalPart;
     if (!vocalPart) {
@@ -345,7 +340,7 @@ void WorkspaceDrawer::drawPitches() const {
         double pitchWidth = pitchDuration / workspaceDuration * width;
         int distanceFromFirstPitch = getDistanceFromFirstPitch(vxPitch.pitch);
         float y = relativeHeight - (distanceFromFirstPitch + 1) * intervalHeight;
-        drawPitch((float)x, y, (float)pitchWidth, timeBegin, timeEnd);
+        drawPitch((float)x, y, (float)pitchWidth);
     });
 }
 
@@ -1102,6 +1097,7 @@ void WorkspaceDrawer::initImages() {
         createImageForCharacter(ch, yardStickFontSize, WorkspaceDrawer::YARD_STICK_DOT_AND_TEXT_COLOR, yardStickFontStyle);
         createImageForCharacter(ch, pianoFontSize, PianoDrawer::PITCH_TEXT_COLOR, pianoFontStyle);
         createImageForCharacter(ch, pianoFontSize, PianoDrawer::SELECTED_PITCH_TEXT_COLOR, pianoFontStyle);
+        createImageForCharacter(ch, 14, Color::blue(), Drawer::BOLD);
     }
 
     // pitch names
@@ -1112,7 +1108,7 @@ void WorkspaceDrawer::initImages() {
 
     // For drawing time under pitches
     for (char ch : std::array<char, 2> {'.', ';'}) {
-        createImageForCharacter(ch, pianoFontSize, PianoDrawer::PITCH_TEXT_COLOR, pianoFontStyle);
+        createImageForCharacter(ch, 14, Color::blue(), Drawer::BOLD);
     }
 
     createImageForCharacter(':', clockFontSize, WorkspaceDrawer::YARD_STICK_DOT_AND_TEXT_COLOR, clockFontStyle);
@@ -1166,4 +1162,8 @@ void WorkspaceDrawer::setZoom(float zoom, const CppUtils::PointF& intoPoint) {
     setZoom(zoom);
     float scrollYPositionMoveDistance = moveDistance / getMaximumGridYTranslation();
     setVerticalScrollPosition(scrollYPositionMoveDistance + getVerticalScrollPosition());
+}
+
+CppUtils::PointF WorkspaceDrawer::getRelativeMousePosition() const {
+    return drawer->convertAbsoluteToRelative(mouseEventsReceiver->getMousePosition());
 }
