@@ -226,7 +226,7 @@ bool Lyrics::isEmpty() const {
 }
 
 void Lyrics::Range::writeToStream(std::ostream &os) const {
-    os << '[' << startSeek << ';' << getDuration() << ']';
+    os << '[' << startSeek << ';' << endSeek << ']';
 }
 
 Lyrics Lyrics::EMPTY;
