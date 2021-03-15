@@ -135,6 +135,9 @@ public:
     void loadInstrumentalFromStream(std::istream& is);
     void loadInstrumentalFromFile(const char* filePath);
 
+    void loadLyricsFromStream(std::istream& is);
+    void loadLyricsFromFile(const char* filePath);
+
     bool isRecording() const;
 
     const std::vector<double> &getRecordedPitchesTimes() const;

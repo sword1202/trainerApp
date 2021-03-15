@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5406B2A4256D09CE007D8922 /* Pods_VocalTrainer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5406B2A3256D09CE007D8922 /* Pods_VocalTrainer.framework */; };
-		5406B2A5256D09CE007D8922 /* Pods_VocalTrainer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5406B2A3256D09CE007D8922 /* Pods_VocalTrainer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		545490A5255401D600E8E7F2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 545490A1255401D600E8E7F2 /* main.cpp */; };
 		545490AC2554065900E8E7F2 /* Logic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 545490AB2554065900E8E7F2 /* Logic.framework */; };
 		545490AD2554065900E8E7F2 /* Logic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 545490AB2554065900E8E7F2 /* Logic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -30,7 +28,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				5406B2A5256D09CE007D8922 /* Pods_VocalTrainer.framework in Embed Frameworks */,
 				545490AD2554065900E8E7F2 /* Logic.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -50,7 +47,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5406B2A4256D09CE007D8922 /* Pods_VocalTrainer.framework in Frameworks */,
 				545490AC2554065900E8E7F2 /* Logic.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -273,6 +269,7 @@
 					../include,
 					../Logic/CppUtils,
 				);
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -290,6 +287,7 @@
 					../include,
 					../Logic/CppUtils,
 				);
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

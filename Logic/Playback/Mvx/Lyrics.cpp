@@ -26,7 +26,7 @@ Lyrics::Lyrics(const std::string &utf8) {
         char32_t ch = u32[i];
         if (ch == U'[') {
             // Parse range description
-            size_t rangeEndIndex = u32.find_first_not_of(']', static_cast<size_t>(i + 1));
+            size_t rangeEndIndex = u32.find(']', static_cast<size_t>(i + 1));
             if (rangeEndIndex == std::string::npos) {
                 throw std::runtime_error("Lyrics parse failed, can't find ] for range description");
             }
@@ -41,13 +41,13 @@ Lyrics::Lyrics(const std::string &utf8) {
             range.startCharacterIndex = rangeStartCharacter - skippedCharactersCount;
             range.charactersCount = i - rangeStartCharacter;
             range.startSeek = parsedRange.first;
-            range.endSeek = parsedRange.first + parsedRange.second;
+            range.endSeek = parsedRange.second;
 
             if (previousRange && previousRange->endSeek > range.startSeek) {
                 std::stringstream message;
                 message << "Lyrics parse failed, invalid range: ["
-                << range.startSeek << ";" << range.getDuration() << "] "
-                << "after range: [" << previousRange->startSeek << ";" << previousRange->getDuration() << "]";
+                << range.startSeek << ";" << range.endSeek << "] "
+                << "after range: [" << previousRange->startSeek << ";" << previousRange->endSeek << "]";
                 throw std::runtime_error(message.str());
             }
 
@@ -68,19 +68,15 @@ Lyrics::Lyrics(const std::string &utf8) {
             }
 
             skippedCharactersCount += (rangeEndIndex - i + 1);
-            i = static_cast<int>(rangeEndIndex) + 1;
+            i = static_cast<int>(rangeEndIndex);
             rangeStartCharacter = -1;
         } else if (ch == U'{') {
-            if (!u32.empty() && u32[i - 1] != U'\n') {
+            if (!u32.empty() && u32[i - 1] != U'\n' && i != 0) {
                 throw std::runtime_error("Lyrics parse error, section description should be at a new line");
             }
 
-            if (!u32.empty() && u32[i - 2]) {
-
-            }
-
             // Parse section
-            size_t sectionEndIndex = u32.find_first_not_of('}', static_cast<size_t>(i + 1));
+            size_t sectionEndIndex = u32.find('}', static_cast<size_t>(i + 1));
             if (sectionEndIndex == std::string::npos) {
                 throw std::runtime_error("Lyrics parse failed, can't find } for section description");
             }

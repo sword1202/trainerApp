@@ -166,3 +166,11 @@ const std::map<double, int> &MvxFile::getRecordingTonalityChanges() const {
 void MvxFile::setRecordingTonalityChanges(const std::map<double, int> &recordingTonalityChanges) {
     this->recordingTonalityChanges = recordingTonalityChanges;
 }
+
+void MvxFile::loadLyricsFromFile(const char *filePath) {
+    lyrics = Lyrics(Strings::ReadFileIntoString(filePath));
+}
+
+void MvxFile::loadLyricsFromStream(std::istream &is) {
+    lyrics = Lyrics(Strings::StreamToString(is));
+}

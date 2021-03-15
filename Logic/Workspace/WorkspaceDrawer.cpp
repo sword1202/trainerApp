@@ -1097,18 +1097,12 @@ void WorkspaceDrawer::initImages() {
         createImageForCharacter(ch, yardStickFontSize, WorkspaceDrawer::YARD_STICK_DOT_AND_TEXT_COLOR, yardStickFontStyle);
         createImageForCharacter(ch, pianoFontSize, PianoDrawer::PITCH_TEXT_COLOR, pianoFontStyle);
         createImageForCharacter(ch, pianoFontSize, PianoDrawer::SELECTED_PITCH_TEXT_COLOR, pianoFontStyle);
-        createImageForCharacter(ch, 14, Color::blue(), Drawer::BOLD);
     }
 
     // pitch names
     for (char ch = 'A'; ch <= 'G'; ch++) {
         createImageForCharacter(ch, pianoFontSize, PianoDrawer::PITCH_TEXT_COLOR, pianoFontStyle);
         createImageForCharacter(ch, pianoFontSize, PianoDrawer::SELECTED_PITCH_TEXT_COLOR, pianoFontStyle);
-    }
-
-    // For drawing time under pitches
-    for (char ch : std::array<char, 2> {'.', ';'}) {
-        createImageForCharacter(ch, 14, Color::blue(), Drawer::BOLD);
     }
 
     createImageForCharacter(':', clockFontSize, WorkspaceDrawer::YARD_STICK_DOT_AND_TEXT_COLOR, clockFontStyle);
