@@ -89,6 +89,8 @@ public:
     // Delegates
     void onPlaybackBoundsChangedByUserEvent(const PlaybackBounds &newBounds) override;
     void onSeekChangedByUserEvent(float newSeek) override;
+
+    void updateDelegate();
 };
 
 

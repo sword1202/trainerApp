@@ -37,6 +37,10 @@ struct ProjectView: View {
                         print("Unknown state")
                     }
                 }
+                LyricsView(lines: $viewModel.lyricsLines).frame(maxWidth: .infinity, maxHeight: 82).background(Colors.tone2)
+                        .onChange(of: viewModel.lyricsLines) { lyrics in
+
+                        }
                 VStack(alignment: .center) {
                     Spacer().frame(maxWidth: .infinity)
                     HStack {

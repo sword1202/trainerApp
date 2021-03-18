@@ -21,6 +21,7 @@ Lyrics::Lyrics(const std::string &utf8) {
     const Range* previousRange = nullptr;
     int rangeStartCharacter = -1;
     Line* currentLine = nullptr;
+    const Section* currentSection = nullptr;
 
     for (int i = 0; i < u32.size(); ++i) {
         char32_t ch = u32[i];
@@ -38,10 +39,12 @@ Lyrics::Lyrics(const std::string &utf8) {
                 throw std::runtime_error("Lyrics parse failed, range doesn't contain any characters");
             }
 
+            assert(currentSection);
             range.startCharacterIndex = rangeStartCharacter - skippedCharactersCount;
             range.charactersCount = i - rangeStartCharacter;
             range.startSeek = parsedRange.first;
             range.endSeek = parsedRange.second;
+            range.section = currentSection;
 
             if (previousRange && previousRange->endSeek > range.startSeek) {
                 std::stringstream message;
@@ -92,6 +95,8 @@ Lyrics::Lyrics(const std::string &utf8) {
 
             skippedCharactersCount += (sectionEndIndex - i + 1) + 1; // +1 new line
             i = static_cast<int>(sectionEndIndex) + 1;
+            sections.push_back(section);
+            currentSection = &sections.back();
         } else {
             text.push_back(ch);
             if (ch == U'\n') {
@@ -148,13 +153,23 @@ std::string Lyrics::toUtf8String() const {
     std::stringstream result;
 
     auto rangeIter = ranges.begin();
+    auto lineIter = lines.begin();
     for (const Section& section : sections) {
-        result << '{' << sectionTypeToChar(section.sectionType) << "}\n";
+        result << '{' << sectionTypeToChar(section.sectionType) << section.number << "}\n";
         const Range* range = &rangeIter->second;
         while (range->section == &section) {
+            if (lineIter->startCharacterIndex + lineIter->charactersCount < range->startCharacterIndex) {
+                result << "\n";
+                ++lineIter;
+            }
+
             result << getRangeUtf8Text(*range);
             range->writeToStream(result);
-            rangeIter++;
+            if (++rangeIter == ranges.end()) {
+                break;
+            }
+
+            range = &rangeIter->second;
         }
     }
 

@@ -56,18 +56,23 @@ public:
     }
 
     void updateLyricsLines(const LyricsDisplayedLinesProvider *linesProvider) override {
-        for (auto delegate : delegates) {
-            int count = linesProvider->getDisplayLinesCount();
-            NSMutableArray *lines = [[NSMutableArray alloc] initWithCapacity:static_cast<NSUInteger>(count)];
+        if (delegates.empty()) {
+            return;
+        }
 
-            for (int i = 0; i < count; ++i) {
-                std::u32string_view line = linesProvider->getDisplayedLineAt(i);
-                NSString* objCline = [[NSString alloc] initWithBytesNoCopy:(void*)line.data()
-                                                                    length:line.size()
-                                                                  encoding:NSUTF32StringEncoding freeWhenDone:NO];
-                [lines addObject:objCline];
+        int count = linesProvider->getDisplayLinesCount();
+        NSMutableArray *lines = [[NSMutableArray alloc] initWithCapacity:static_cast<NSUInteger>(count)];
+
+        for (int i = 0; i < count; ++i) {
+            std::u32string_view line = linesProvider->getDisplayedLineAt(i);
+            NSString* objCline = Strings::ToNSString(line);
+            [lines addObject:objCline];
+        }
+
+        for (auto delegate : delegates) {
+            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerUpdateWithCurrentLyricsLines:)]) {
+                [delegate projectControllerUpdateWithCurrentLyricsLines:lines];
             }
-            [delegate projectControllerUpdateWithCurrentLyricsLines:lines];
         }
     }
 
@@ -90,7 +95,7 @@ public:
 
     void onTracksVisibilityChanged(bool value) override {
         for (auto delegate : delegates) {
-            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerUpdateWithTracksVisibility)]) {
+            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerUpdateWithTracksVisibility:)]) {
                 [delegate projectControllerUpdateWithTracksVisibility:value];
             }
         }
@@ -179,6 +184,7 @@ public:
 
 - (void)addDelegate:(id <ProjectControllerBridgeDelegate>)delegate {
     _delegate->addDelegate(delegate);
+    _cpp->updateDelegate();
 }
 
 - (void)removeDelegate:(id <ProjectControllerBridgeDelegate>)delegate {

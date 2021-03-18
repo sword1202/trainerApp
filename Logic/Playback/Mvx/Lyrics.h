@@ -12,12 +12,6 @@
 
 class Lyrics {
 public:
-    struct SnapshotDescription {
-        double playbackSeek;
-        int requestedNumberOfLines;
-        double lyricsLineDisplayDelay;
-    };
-
     enum SectionType {
         CHORUS, VERSE, BRIDGE
     };

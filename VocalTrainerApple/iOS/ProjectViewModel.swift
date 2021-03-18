@@ -7,11 +7,19 @@ import Combine
 
 class ProjectViewModel : ObservableObject {
     @Published private(set) var isMetronomeEnabled = false
+    @Published var lyricsLines: [String] = []
     private lazy var projectController = ProjectController.shared
 
     init() {
         if !SwiftUIUtils.isPreview() {
             isMetronomeEnabled = projectController.metronomeEnabled
+            projectController.add(delegate: self)
+        }
+    }
+
+    deinit {
+        if !SwiftUIUtils.isPreview() {
+            projectController.remove(delegate: self)
         }
     }
 
@@ -31,5 +39,9 @@ class ProjectViewModel : ObservableObject {
 extension ProjectViewModel : ProjectControllerBridgeDelegate {
     public func projectController(didChangeMetronomeEnabled enabled: Bool) {
         self.isMetronomeEnabled = enabled
+    }
+
+    public func projectControllerUpdate(currentLyricsLines: [String]) {
+        self.lyricsLines = currentLyricsLines;
     }
 }

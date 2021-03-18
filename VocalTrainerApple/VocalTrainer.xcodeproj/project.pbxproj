@@ -66,6 +66,7 @@
 		C9FFF9F48A6D816A30F0AE35 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2396E0BB5102967F5B2 /* UIView+Extensions.swift */; };
 		C9FFFAC7A9EEC42DB7900780 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD04B887D1AA905A010C /* Math.swift */; };
 		C9FFFB60BAB5296AE6F06BD9 /* WorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA03F8C9753204A48D4F /* WorkspaceDrawerView.mm */; };
+		C9FFFB637630A74003EB9A48 /* LyricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF694E3426C76E0D7D416 /* LyricsView.swift */; };
 		C9FFFB7F402FBE74FC015F81 /* MacOSWorkspaceDrawerDelegateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFCA54695F1C745C71A9F /* MacOSWorkspaceDrawerDelegateHelper.swift */; };
 		C9FFFB977A2FE597CEF41A41 /* PlaybackSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF321A69756EA7BF38A54 /* PlaybackSlider.swift */; };
 		C9FFFBC424A0C6B8FA77210F /* ProjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFCB31B3B29DABC17E607 /* ProjectViewModel.swift */; };
@@ -162,6 +163,7 @@
 		C9FFF4307F629035C6B49841 /* MacOSWorkspaceDrawerResourcesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacOSWorkspaceDrawerResourcesProvider.h; sourceTree = "<group>"; };
 		C9FFF56BA4C227BDD029B68D /* UILabel+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF5B9019937C01C72D703 /* MacOSWorkspaceDrawerResourcesProvider.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MacOSWorkspaceDrawerResourcesProvider.mm; sourceTree = "<group>"; };
+		C9FFF694E3426C76E0D7D416 /* LyricsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsView.swift; sourceTree = "<group>"; };
 		C9FFF6B6CE54A534CEEF0922 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF6D026277BCE01AFF619 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF72A1F66910885A40FE2 /* CGSize+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGSize+Extensions.swift"; sourceTree = "<group>"; };
@@ -450,6 +452,7 @@
 			isa = PBXGroup;
 			children = (
 				C9FFF321A69756EA7BF38A54 /* PlaybackSlider.swift */,
+				C9FFF694E3426C76E0D7D416 /* LyricsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -730,6 +733,7 @@
 				C9FFF1259D0CAC1732CA75B4 /* SwiftUIUtils.swift in Sources */,
 				C9FFFB977A2FE597CEF41A41 /* PlaybackSlider.swift in Sources */,
 				C9FFF451B9ED8CB8302A93FC /* CGFloat+Extensions.swift in Sources */,
+				C9FFFB637630A74003EB9A48 /* LyricsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

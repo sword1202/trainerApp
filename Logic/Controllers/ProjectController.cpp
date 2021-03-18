@@ -284,3 +284,10 @@ float ProjectController::getVerticalScrollPosition() const {
 void ProjectController::setVerticalScrollPosition(float position) {
     workspaceController->setVerticalScrollPosition(position);
 }
+
+void ProjectController::updateDelegate() {
+    if (workspaceController) {
+        delegate->updateZoom(workspaceController->getZoom());
+    }
+    delegate->updateLyricsLines(player->getDisplayedLyricsLines());
+}
