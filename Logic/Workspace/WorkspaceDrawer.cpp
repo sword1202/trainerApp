@@ -192,7 +192,10 @@ void WorkspaceDrawer::draw() {
     drawer->translateTo(0, 0);
     drawer->setFillColor(Color::white());
     drawer->fillRect(0, 0, PIANO_WIDTH, height);
-    float pianoHeight = height - ScrollBar::SCROLLBAR_WEIGHT + getMaximumGridYTranslation() - getGridYTranslation();
+    float pianoHeight = height -
+            (willDrawScrollbars ? ScrollBar::SCROLLBAR_WEIGHT : 0) +
+            getMaximumGridYTranslation() -
+            getGridYTranslation();
     pianoDrawer->draw(PIANO_WIDTH, pianoHeight, devicePixelRatio);
     drawer->setFillColor(Color::white());
     drawer->fillRect(0, 0, PIANO_WIDTH, YARD_STICK_HEIGHT);
