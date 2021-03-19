@@ -290,7 +290,9 @@ void WorkspaceDrawer::drawHorizontalLine(float y, const Color& color) const {
 
 void WorkspaceDrawer::drawVerticalLine(float x, const WorkspaceDrawer::Color &color) const {
     drawer->beginPath();
-    float y = -drawer->getTranslateY() - ScrollBar::SCROLLBAR_WEIGHT + height - getVisibleGridHeight();
+    float y = -drawer->getTranslateY() -
+            (willDrawScrollbars ? ScrollBar::SCROLLBAR_WEIGHT : 0) +
+            height - getVisibleGridHeight();
     drawer->moveTo(x * sizeMultiplier, y);
     drawer->setStrokeWidth(sizeMultiplier);
     drawer->lineTo(x * sizeMultiplier, height * sizeMultiplier);

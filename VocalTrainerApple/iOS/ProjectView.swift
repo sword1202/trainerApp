@@ -21,7 +21,7 @@ struct ProjectView: View {
                 Spacer().frame(maxWidth: .infinity, maxHeight: 50).background(Colors.tone1)
             }.edgesIgnoringSafeArea(.bottom).edgesIgnoringSafeArea(.top)
             // Main Content
-            VStack {
+            VStack(spacing: 0) {
                 VStack {
                     Spacer().frame(maxWidth: .infinity)
                 }.background(Colors.tone2).frame(maxWidth: .infinity, maxHeight: 80, alignment: .topLeading)
