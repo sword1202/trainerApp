@@ -193,6 +193,7 @@ int Lyrics::getLinesCount() const {
 }
 
 const Lyrics::Line& Lyrics::getLineAt(int index) const {
+    assert(index < lines.size());
     return lines[index];
 }
 
@@ -227,7 +228,8 @@ Lyrics::LineSelection Lyrics::getLineSelection(
         } else {
             selection.lastCharacterSelectionPosition = 1.0;
         }
-        selection.charactersCount =  Math::RoundToInt((seekInRange - f) / characterDuration);
+        selection.charactersCount =  Math::RoundToInt((seekInRange - f) / characterDuration)
+                + range.startCharacterIndex - line.startCharacterIndex;
         if (f != 0) {
             selection.charactersCount++;
         }
@@ -238,6 +240,10 @@ Lyrics::LineSelection Lyrics::getLineSelection(
 
 bool Lyrics::isEmpty() const {
     return text.empty();
+}
+
+const Lyrics::Line &Lyrics::getLastLine() const {
+    return getLineAt(getLinesCount() - 1);
 }
 
 void Lyrics::Range::writeToStream(std::ostream &os) const {

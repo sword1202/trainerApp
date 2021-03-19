@@ -8,6 +8,7 @@ import Combine
 class ProjectViewModel : ObservableObject {
     @Published private(set) var isMetronomeEnabled = false
     @Published var lyricsLines: [String] = []
+    @Published var lyricsSelection = LyricsSelection(characterIndex: 0, position: 0, lineIndex: 0)
     private lazy var projectController = ProjectController.shared
 
     init() {
@@ -43,5 +44,20 @@ extension ProjectViewModel : ProjectControllerBridgeDelegate {
 
     public func projectControllerUpdate(currentLyricsLines: [String]) {
         self.lyricsLines = currentLyricsLines;
+    }
+
+    func projectControllerUpdateLyricsSelection(
+            selectedCharactersCount: Int,
+            lastCharacterSelectionPosition: CGFloat,
+            lineIndex: Int
+    ) {
+        lyricsSelection = LyricsSelection(
+                characterIndex: selectedCharactersCount == 0 ? 0 : selectedCharactersCount - 1,
+                position: lastCharacterSelectionPosition,
+                lineIndex: lineIndex)
+
+        if (lineIndex != 0) {
+            print(lyricsSelection)
+        }
     }
 }

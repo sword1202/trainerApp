@@ -12,17 +12,27 @@
 #include <functional>
 
 class LyricsPlayer : public LyricsDisplayedLinesProvider {
+public:
+    struct Selection  {
+        Lyrics::LineSelection lineSelection;
+        int lineIndex = 0;
+
+        bool operator==(const Selection &rhs) const;
+
+        bool operator!=(const Selection &rhs) const;
+    };
+private:
     const Lyrics* lyrics;
     double seek = 0;
     int simultaneouslyLinesDisplayCount;
     int currentFirstLineIndex = 0;
-    Lyrics::LineSelection selection;
+    Selection selection;
 
     void updateLines();
     void updateSelection();
 public:
     std::function<void(const LyricsDisplayedLinesProvider*)> onLinesChanged;
-    std::function<void(const Lyrics::LineSelection&)> onSelectionChanged;
+    std::function<void(const Selection&)> onSelectionChanged;
 
     LyricsPlayer(const Lyrics *lyrics, int simultaneouslyLinesDisplayCount = 2);
 

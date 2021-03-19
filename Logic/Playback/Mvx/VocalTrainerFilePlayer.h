@@ -73,7 +73,7 @@ public:
     CppUtils::ListenersSet<> onCompleteListeners;
     CppUtils::ListenersSet<const PlaybackBounds&> boundsChangedListeners;
     CppUtils::SynchronizedListenersSet<double> recordingVoiceLevelListeners;
-    CppUtils::ListenersSet<Lyrics::LineSelection> lyricsSelectionChangedListeners;
+    CppUtils::ListenersSet<LyricsPlayer::Selection> lyricsSelectionChangedListeners;
     CppUtils::ListenersSet<const LyricsDisplayedLinesProvider*> currentLyricsLinesChangedListeners;
 
     VocalTrainerFilePlayer();

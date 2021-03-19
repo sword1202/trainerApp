@@ -13,7 +13,9 @@ import CoreGraphics
     @objc optional func projectControllerPlaybackDidStop()
     @objc optional func projectControllerUpdateLyricsSelection(
             selectedCharactersCount: Int,
-            lastCharacterSelectionPosition: CGFloat)
+            lastCharacterSelectionPosition: CGFloat,
+            lineIndex: Int
+    )
     @objc optional func projectControllerUpdate(currentLyricsLines: [String])
     @objc optional func projectControllerUpdate(lyricsVisibility: Bool)
     @objc optional func projectControllerUpdate(tracksVisibility: Bool)

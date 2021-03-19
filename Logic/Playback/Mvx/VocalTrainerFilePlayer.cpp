@@ -110,7 +110,7 @@ void VocalTrainerFilePlayer::setSource(VocalTrainerFile *file, bool destroyFileO
     const Lyrics& lyrics = file->getLyrics();
     if (!lyrics.isEmpty()) {
         lyricsPlayer = new LyricsPlayer(&lyrics);
-        lyricsPlayer->onSelectionChanged = [this] (const Lyrics::LineSelection& selection) {
+        lyricsPlayer->onSelectionChanged = [this] (const LyricsPlayer::Selection& selection) {
             this->lyricsSelectionChangedListeners.executeAll(selection);
         };
         lyricsPlayer->onLinesChanged = [this] (const LyricsDisplayedLinesProvider* linesProvider) {

@@ -48,7 +48,7 @@ public:
     };
 
     struct LineSelection {
-        int charactersCount = -1;
+        int charactersCount = 0;
         // [0.0;1.0]
         double lastCharacterSelectionPosition = 0.0;
 
@@ -80,6 +80,7 @@ public:
 
     const std::vector<Section>& getSections() const;
     const Line& getLineAt(int index) const;
+    const Line& getLastLine() const;
     int getLinesCount() const;
     std::u32string_view getLineText(const Line& line) const;
     std::u32string_view getLineTextAt(int index) const;

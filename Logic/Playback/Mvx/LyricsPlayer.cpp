@@ -28,10 +28,10 @@ void LyricsPlayer::updateLines() {
     int currentFirstLineIndexBefore = currentFirstLineIndex;
 
     const Lyrics::Line* firstLine = &lyrics->getLineAt(currentFirstLineIndex);
-    if (firstLine->getEndSeek() < seek) {
+    if (firstLine->getEndSeek() < seek && currentFirstLineIndex < getDisplayLinesCount() - 1) {
         do {
             firstLine = &lyrics->getLineAt(++currentFirstLineIndex);
-        } while(firstLine->getEndSeek() < seek);
+        } while(firstLine->getEndSeek() < seek && currentFirstLineIndex < getDisplayLinesCount() - 1);
     } else if (firstLine->startSeek > seek && currentFirstLineIndex != 0) {
         int i = currentFirstLineIndex;
         do {
@@ -53,7 +53,18 @@ void LyricsPlayer::updateLines() {
 
 void LyricsPlayer::updateSelection() {
     const auto& line = lyrics->getLineAt(currentFirstLineIndex);
-    Lyrics::LineSelection selection = lyrics->getLineSelection(line, seek);
+
+    Selection selection;
+    if (seek > lyrics->getLastLine().getEndSeek()) {
+        selection.lineSelection.charactersCount = lyrics->getLastLine().charactersCount;
+        selection.lineSelection.lastCharacterSelectionPosition = 1.0;
+        selection.lineIndex = 1;
+    } else {
+        selection.lineSelection = lyrics->getLineSelection(line, seek);
+        assert(simultaneouslyLinesDisplayCount == 2 && "Hardcoded, pls fix");
+        selection.lineIndex = currentFirstLineIndex == lyrics->getLinesCount() - 1 ? 1 : 0;
+    }
+
     if (selection != this->selection) {
         this->selection = selection;
         onSelectionChanged(this->selection);
@@ -67,4 +78,12 @@ int LyricsPlayer::getDisplayLinesCount() const {
 std::u32string_view LyricsPlayer::getDisplayedLineAt(int index) const {
     assert(index < getDisplayLinesCount());
     return lyrics->getLineTextAt(index);
+}
+
+bool LyricsPlayer::Selection::operator==(const LyricsPlayer::Selection &rhs) const {
+    return lineSelection == rhs.lineSelection && lineIndex == rhs.lineIndex;
+}
+
+bool LyricsPlayer::Selection::operator!=(const LyricsPlayer::Selection &rhs) const {
+    return !(rhs == *this);
 }

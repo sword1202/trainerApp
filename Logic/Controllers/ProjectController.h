@@ -20,7 +20,7 @@ public:
     virtual inline void onPlaybackStarted() {}
     virtual inline void onPlaybackStopped() {}
     virtual inline void updateLyricsLines(const LyricsDisplayedLinesProvider* linesProvider) {}
-    virtual inline void updateLyricsSelection(const Lyrics::LineSelection& selection) {}
+    virtual inline void updateLyricsSelection(const LyricsPlayer::Selection& selection) {}
     virtual inline void updateLyricsVisibilityChanged(bool showLyrics) {}
     virtual inline void onMetronomeEnabledChanged(bool enabled) {}
     virtual inline void onTracksVisibilityChanged(bool value) {}

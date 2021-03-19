@@ -37,7 +37,7 @@ struct ProjectView: View {
                         print("Unknown state")
                     }
                 }
-                LyricsView(lines: $viewModel.lyricsLines).frame(maxWidth: .infinity, maxHeight: 82).background(Colors.tone2)
+                LyricsView(lines: $viewModel.lyricsLines, lyricsSelection: $viewModel.lyricsSelection).frame(maxWidth: .infinity, maxHeight: 82).background(Colors.tone2)
                         .onChange(of: viewModel.lyricsLines) { lyrics in
 
                         }

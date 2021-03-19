@@ -67,7 +67,7 @@ ProjectController::ProjectController(ProjectControllerDelegate* delegate) : dele
         delegate->updateAudioLevel(level);
     }, this);
 
-    player->lyricsSelectionChangedListeners.addListener([=] (const Lyrics::LineSelection& selection) {
+    player->lyricsSelectionChangedListeners.addListener([=] (const LyricsPlayer::Selection& selection) {
         delegate->updateLyricsSelection(selection);
     }, this);
 
@@ -95,6 +95,7 @@ void ProjectController::updateSeek(double seek) {
 
 void ProjectController::play() {
     player->play();
+    player->setSeek(player->getVocalPart()->getFirstPitchStartTime() - 0.5);
 }
 
 void ProjectController::stop() {

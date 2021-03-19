@@ -76,11 +76,12 @@ public:
         }
     }
 
-    void updateLyricsSelection(const Lyrics::LineSelection &selection) override {
+    void updateLyricsSelection(const LyricsPlayer::Selection& selection) override {
         for (auto delegate : delegates) {
-            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerUpdateLyricsSelectionWithSelectedCharactersCount:lastCharacterSelectionPosition:)]) {
-                [delegate projectControllerUpdateLyricsSelectionWithSelectedCharactersCount:selection.charactersCount
-                                                             lastCharacterSelectionPosition:selection.lastCharacterSelectionPosition];
+            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerUpdateLyricsSelectionWithSelectedCharactersCount:lastCharacterSelectionPosition:lineIndex:)]) {
+                [delegate projectControllerUpdateLyricsSelectionWithSelectedCharactersCount:selection.lineSelection.charactersCount
+                                                             lastCharacterSelectionPosition:selection.lineSelection.lastCharacterSelectionPosition
+                                                             lineIndex: selection.lineIndex];
             }
         }
     }
