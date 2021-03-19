@@ -55,9 +55,5 @@ extension ProjectViewModel : ProjectControllerBridgeDelegate {
                 characterIndex: selectedCharactersCount == 0 ? 0 : selectedCharactersCount - 1,
                 position: lastCharacterSelectionPosition,
                 lineIndex: lineIndex)
-
-        if (lineIndex != 0) {
-            print(lyricsSelection)
-        }
     }
 }
