@@ -37,11 +37,11 @@ struct ProjectView: View {
                         print("Unknown state")
                     }
                 }
-                LyricsView(lines: $viewModel.lyricsLines, lyricsSelection: $viewModel.lyricsSelection).frame(maxWidth: .infinity, maxHeight: 82).background(Colors.tone2)
-                        .onChange(of: viewModel.lyricsLines) { lyrics in
-
-                        }
+                LyricsView(lines: $viewModel.lyricsLines, lyricsSelection: $viewModel.lyricsSelection)
+                        .frame(maxWidth: .infinity, maxHeight: 82)
+                        .background(Colors.tone2)
                 VStack(alignment: .center) {
+                    PlaybackSlider(progress: $viewModel.progress)
                     Spacer().frame(maxWidth: .infinity)
                     HStack {
                         Image("RetryButton")

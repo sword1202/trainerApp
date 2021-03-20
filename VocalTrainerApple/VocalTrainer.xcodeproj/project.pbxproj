@@ -58,6 +58,7 @@
 		C9FFF1CC35BFB853F799A067 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC52FFD52111E4F8EA1C /* CGPoint+Extensions.swift */; };
 		C9FFF21CCE66232D3BD5D0D5 /* SwiftUI+View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF4CBD38366784EA507D4 /* SwiftUI+View+Extensions.swift */; };
 		C9FFF2979636C30023334438 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF7DE831C9EFAE9A0AB40 /* Colors.swift */; };
+		C9FFF34C1612C15FF57F4AE5 /* SwiftUI+ClickGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF3DAD525F726E84AA8F2 /* SwiftUI+ClickGesture.swift */; };
 		C9FFF36C6140C724632BAA67 /* Sequence+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF854128820437B780180 /* Sequence+Extensions.swift */; };
 		C9FFF3F713E181FA7B8210A4 /* CGRect+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFFAE7CC0D189849A9037 /* CGRect+Extensions.swift */; };
 		C9FFF451B9ED8CB8302A93FC /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6B6CE54A534CEEF0922 /* CGFloat+Extensions.swift */; };
@@ -162,6 +163,7 @@
 		C9FFF321A69756EA7BF38A54 /* PlaybackSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackSlider.swift; sourceTree = "<group>"; };
 		C9FFF3402FB10ADCC44F05D8 /* iOSWorkspaceDrawerResourcesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSWorkspaceDrawerResourcesProvider.h; sourceTree = "<group>"; };
 		C9FFF3CF4F4C6C2BB99ABCD7 /* WorkspaceDrawerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceDrawerView.h; sourceTree = "<group>"; };
+		C9FFF3DAD525F726E84AA8F2 /* SwiftUI+ClickGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftUI+ClickGesture.swift"; sourceTree = "<group>"; };
 		C9FFF4307F629035C6B49841 /* MacOSWorkspaceDrawerResourcesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacOSWorkspaceDrawerResourcesProvider.h; sourceTree = "<group>"; };
 		C9FFF4CBD38366784EA507D4 /* SwiftUI+View+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftUI+View+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF56BA4C227BDD029B68D /* UILabel+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
@@ -450,6 +452,7 @@
 				C9FFF8676254998A2E1557B2 /* SwiftUIUtils.swift */,
 				C9FFF6B6CE54A534CEEF0922 /* CGFloat+Extensions.swift */,
 				C9FFF4CBD38366784EA507D4 /* SwiftUI+View+Extensions.swift */,
+				C9FFF3DAD525F726E84AA8F2 /* SwiftUI+ClickGesture.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -750,6 +753,7 @@
 				C9FFF21CCE66232D3BD5D0D5 /* SwiftUI+View+Extensions.swift in Sources */,
 				C9FFFED71B1F99969D7E4C6B /* LyricsView.swift in Sources */,
 				C9FFFCAD8789F460417A34D1 /* LyricsSelection.swift in Sources */,
+				C9FFF34C1612C15FF57F4AE5 /* SwiftUI+ClickGesture.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

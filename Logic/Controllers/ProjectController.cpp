@@ -5,6 +5,7 @@
 #include "ProjectController.h"
 #include "ApplicationModel.h"
 #include "Primitives.h"
+#include "Executors.h"
 
 using namespace CppUtils;
 
@@ -34,7 +35,7 @@ ProjectController::ProjectController(ProjectControllerDelegate* delegate) : dele
         } else {
             this->delegate->onPlaybackStopped();
         }
-        updateSeek(this->player->getSeek());
+        updateWorkspaceSeek(this->player->getSeek());
     }, this);
 
     player->vocalPartChangedListeners.addListener([this] (const VocalPart* vocalPart) {
@@ -53,6 +54,9 @@ ProjectController::ProjectController(ProjectControllerDelegate* delegate) : dele
         if (!player->isCompleted()) {
             audioInputManager->setPitchesRecorderSeek(seek);
         }
+        Executors::ExecuteOnMainThread([=] {
+            this->delegate->updateSeek(seek);
+        });
     }, this);
 
     player->setInstrumentalVolume(1.0);
@@ -82,10 +86,10 @@ void ProjectController::onStopPlaybackRequested() {
     if (workspaceController) {
         workspaceController->setRunning(false);
     }
-    updateSeek(player->getSeek());
+    updateWorkspaceSeek(player->getSeek());
 }
 
-void ProjectController::updateSeek(double seek) {
+void ProjectController::updateWorkspaceSeek(double seek) {
     if (workspaceController) {
         workspaceController->updateSeek(float(seek));
         workspaceController->update();
@@ -95,7 +99,6 @@ void ProjectController::updateSeek(double seek) {
 
 void ProjectController::play() {
     player->play();
-    player->setSeek(player->getVocalPart()->getFirstPitchStartTime() - 0.5);
 }
 
 void ProjectController::stop() {
@@ -152,7 +155,7 @@ void ProjectController::setWorkspaceController(WorkspaceController *workspaceCon
     player->seekChangedFromUserListeners.addListener([=] (double seek) {
         if (!player->isCompleted()) {
             audioInputManager->setAudioRecorderSeek(seek);
-            updateSeek(seek);
+            updateWorkspaceSeek(seek);
         }
     });
 
@@ -291,4 +294,19 @@ void ProjectController::updateDelegate() {
         delegate->updateZoom(workspaceController->getZoom());
     }
     delegate->updateLyricsLines(player->getDisplayedLyricsLines());
+}
+
+void ProjectController::setPlaybackProgress(double value) {
+    assert(value >= 0 && value <= 1);
+    player->setSeek(player->getDuration() * value);
+}
+
+double ProjectController::convertSeekToPlaybackProgress(double seek) const {
+    assert(seek >= 0);
+    double result = seek / player->getDuration();
+    if (result > 1.0) {
+        return 1.0;
+    } else {
+        return result;
+    }
 }

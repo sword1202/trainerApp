@@ -42,6 +42,9 @@
 - (void)stop;
 - (void)toggleRewindWithBackward:(BOOL)backward;
 
+- (void)setPlaybackProgress:(double)value;
+- (double)convertSeekToPlaybackProgress:(double)seek;
+
 - (void)setVocalVolume:(float)value;
 - (void)setInputSensitivity:(float)value;
 - (void)setVocalPianoVolume:(float)value;

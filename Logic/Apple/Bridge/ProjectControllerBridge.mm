@@ -229,6 +229,15 @@ public:
     _cpp->toggleRewind(backward);
 }
 
+- (void)setPlaybackProgress:(double)value {
+    _cpp->setPlaybackProgress(value);
+}
+
+- (double)convertSeekToPlaybackProgress:(double)seek {
+    return _cpp->convertSeekToPlaybackProgress(seek);
+}
+
+
 - (void)setVocalVolume:(float)value {
     _cpp->setVocalVolume(value);
 }

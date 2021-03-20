@@ -42,7 +42,7 @@ class ProjectController : CppUtils::DestructorQueue, public WorkspaceControllerD
     Rewinder* rewinder = nullptr;
 
     void onStopPlaybackRequested();
-    void updateSeek(double seek);
+    void updateWorkspaceSeek(double seek);
 
     void play();
 public:
@@ -60,6 +60,9 @@ public:
     void toggleRewind(bool backward);
 
     void goToBeginning();
+
+    void setPlaybackProgress(double value);
+    double convertSeekToPlaybackProgress(double seek) const;
 
     bool isBoundsSelectionEnabled() const;
     void setBoundsSelectionEnabled(bool boundsSelectionEnabled);

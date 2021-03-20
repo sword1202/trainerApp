@@ -9,6 +9,14 @@ class ProjectViewModel : ObservableObject {
     @Published private(set) var isMetronomeEnabled = false
     @Published var lyricsLines: [String] = []
     @Published var lyricsSelection = LyricsSelection(characterIndex: 0, position: 0, lineIndex: 0)
+    private var disableProgressUpdate = false
+    @Published var progress: CGFloat = 0 {
+        didSet {
+            if (oldValue != progress && !disableProgressUpdate) {
+                projectController.setPlaybackProgress(Double(progress))
+            }
+        }
+    }
     private lazy var projectController = ProjectController.shared
 
     init() {
@@ -55,5 +63,11 @@ extension ProjectViewModel : ProjectControllerBridgeDelegate {
                 characterIndex: selectedCharactersCount == 0 ? 0 : selectedCharactersCount - 1,
                 position: lastCharacterSelectionPosition,
                 lineIndex: lineIndex)
+    }
+
+    func projectControllerUpdate(seek: Double) {
+        disableProgressUpdate = true
+        progress = CGFloat(projectController.convertSeek(toPlaybackProgress: seek))
+        disableProgressUpdate = false
     }
 }
