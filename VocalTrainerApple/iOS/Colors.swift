@@ -11,4 +11,5 @@ struct Colors {
     static let tone2 = Color(hex: 0x353368, alpha: 1.0)
     static let tone3 = Color(hex: 0x615F97, alpha: 1.0)
     static let tone4 = Color(hex: 0x514F7D, alpha: 1.0)
+    static let tone5 = Color(hex: 0x24232D, alpha: 1.0)
 }

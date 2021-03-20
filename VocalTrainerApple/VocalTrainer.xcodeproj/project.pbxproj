@@ -16,13 +16,13 @@
 		54338F55258A57D500C7D5E2 /* WorkspaceDrawerView.h in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFFCC49CC10D4ABE76064 /* WorkspaceDrawerView.h */; };
 		54338F5D258A591900C7D5E2 /* iOSWorkspaceDrawerResourcesProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF08E005E0AC456B4F0E8 /* iOSWorkspaceDrawerResourcesProvider.mm */; };
 		54338F5E258A591900C7D5E2 /* iOSWorkspaceDrawerResourcesProvider.h in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF3402FB10ADCC44F05D8 /* iOSWorkspaceDrawerResourcesProvider.h */; };
-		545CF26826063788005B876E /* Strings.strings in Resources */ = {isa = PBXBuildFile; fileRef = 545CF26726063788005B876E /* Strings.strings */; };
 		5482F422256E8C3800299548 /* VocalTrainerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5482F421256E8C3800299548 /* VocalTrainerApp.swift */; };
 		5482F426256E8C3900299548 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5482F425256E8C3900299548 /* Assets.xcassets */; };
 		5482F429256E8C3900299548 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5482F428256E8C3900299548 /* Preview Assets.xcassets */; };
 		54ADDEAA258BCBF900F1163F /* InitializationManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 71AD29605A6EF90E1D9E2F98 /* InitializationManager.mm */; };
 		54ADDEAB258BCBF900F1163F /* InitializationManager.h in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2ACE3A195D54F918916A /* InitializationManager.h */; };
 		54ADDEC7258C0DC800F1163F /* BaseWorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8FE42466B28CAAB81B9 /* BaseWorkspaceDrawerView.mm */; };
+		54C2D2EA26065E08005F2092 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 54C2D2EC26065E08005F2092 /* Localizable.strings */; };
 		66F3F6FE95F2F7E206AC3A7B /* Pods_VocalTraineriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DCF35BAD0081EDD4853BCC3 /* Pods_VocalTraineriOS.framework */; };
 		71AD21242278085DEBD45787 /* NSImage+Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2DEA9FC7B3F13CD06FF3 /* NSImage+Drawing.swift */; };
 		71AD2137071D834E915C2D44 /* HeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AD2AD0DC2A1BD1B9B058AA /* HeaderViewController.swift */; };
@@ -114,7 +114,6 @@
 		5426B176258D151300AC1A28 /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
 		543390D7258A59D900C7D5E2 /* LogiciOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LogiciOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		545490982554014B00E8E7F2 /* MvxGenerator.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MvxGenerator.xcodeproj; path = ../MvxGenerator/MvxGenerator.xcodeproj; sourceTree = "<group>"; };
-		545CF26726063788005B876E /* Strings.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Strings.strings; sourceTree = "<group>"; };
 		5482F41F256E8C3800299548 /* VocalTraineriOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VocalTraineriOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5482F421256E8C3800299548 /* VocalTrainerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocalTrainerApp.swift; sourceTree = "<group>"; };
 		5482F425256E8C3900299548 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -122,6 +121,7 @@
 		5482F42A256E8C3900299548 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54ADDE7F258BBBC700F1163F /* Logic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Logic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		54ADDE85258BBDA000F1163F /* Logic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Logic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		54C2D2EB26065E08005F2092 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5670C8640D6CB36256D672CE /* Pods-VocalTraineriOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VocalTraineriOS.release.xcconfig"; path = "Target Support Files/Pods-VocalTraineriOS/Pods-VocalTraineriOS.release.xcconfig"; sourceTree = "<group>"; };
 		5884C119A97C874E1D3CB85D /* Pods_VocalTrainerMacOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VocalTrainerMacOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67748B5386791DDBEBEF3101 /* Pods-VocalTrainerMacOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VocalTrainerMacOS.debug.xcconfig"; path = "Target Support Files/Pods-VocalTrainerMacOS/Pods-VocalTrainerMacOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -253,7 +253,7 @@
 				5426B176258D151300AC1A28 /* ProjectView.swift */,
 				C9FFFB39F918EA6236426E2D /* Views */,
 				C9FFFA712644FAF5D04B8E4E /* Data */,
-				545CF26726063788005B876E /* Strings.strings */,
+				54C2D2EC26065E08005F2092 /* Localizable.strings */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -617,7 +617,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5426B119258CCA7500AC1A28 /* drm.mvx in Resources */,
-				545CF26826063788005B876E /* Strings.strings in Resources */,
+				54C2D2EA26065E08005F2092 /* Localizable.strings in Resources */,
 				5482F429256E8C3900299548 /* Preview Assets.xcassets in Resources */,
 				5482F426256E8C3900299548 /* Assets.xcassets in Resources */,
 			);
@@ -817,6 +817,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		54C2D2EC26065E08005F2092 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				54C2D2EB26065E08005F2092 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		ACF18AD622EC7EBF008E7DAA /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

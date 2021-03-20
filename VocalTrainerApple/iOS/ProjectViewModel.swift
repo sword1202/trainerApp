@@ -30,6 +30,15 @@ class ProjectViewModel : ObservableObject {
                 let position = CGFloat(projectController.convertSeek(toPlaybackProgress: $0.seek))
                 return PlaybackSection(name: name, position: position)
             }
+        } else {
+            playbackSections = [
+                .init(name: "Verse 1", position: 0.2),
+                .init(name: "Chorus 1", position: 0.25),
+                .init(name: "Verse 2", position: 0.35),
+                .init(name: "Chorus 2", position: 0.5),
+                .init(name: "Bridge 1", position: 0.6),
+                .init(name: "Chorus 3", position: 0.8),
+            ]
         }
     }
 
