@@ -23,6 +23,7 @@ struct PlaybackSection {
 
 struct PlaybackSlider : View {
     @Binding var progress: CGFloat
+    @State private var dotDragTempProgress: CGFloat = -1
 
     func onProgressClick(location: CGPoint, width: CGFloat) {
         var x = location.x - progressDotSize / 2
@@ -54,6 +55,19 @@ struct PlaybackSlider : View {
                         }
                 Circle().fill(Colors.tone2).frame(maxWidth: progressDotSize, maxHeight: progressDotSize, alignment: .leading)
                         .offset(x: (geometry.size.width - progressDotSize) * progress)
+                        .gesture(DragGesture().onChanged { value in
+                            if (dotDragTempProgress < 0) {
+                                dotDragTempProgress = progress
+                            }
+
+                            let gestureDotOffset = value.location.x - value.startLocation.x
+                            let progressOffset = gestureDotOffset / (geometry.size.width - progressDotSize)
+                            progress = (dotDragTempProgress + progressOffset).cutToMatchClosedRange(min: 0, max: 1.0)
+                        }.onEnded { value in
+                            dotDragTempProgress = -1
+                        }).onClickGesture { (location) -> () in
+                            onProgressClick(location: location, width: geometry.size.width)
+                        }
             }.frame(width: geometry.size.width, height: progressDotSize)
         }
     }
