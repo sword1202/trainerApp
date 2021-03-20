@@ -1,0 +1,11 @@
+/* 
+  Strings.strings
+  VocalTrainer
+
+  Created by Semyon Tikhonenko on 3/20/21.
+  Copyright © 2021 Semyon Tikhonenko. All rights reserved.
+*/
+
+"verse" = "Verse";
+"chorus" = "Chorus";
+"bridge" = "Bridge";

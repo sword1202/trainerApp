@@ -16,6 +16,7 @@
 		54338F55258A57D500C7D5E2 /* WorkspaceDrawerView.h in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFFCC49CC10D4ABE76064 /* WorkspaceDrawerView.h */; };
 		54338F5D258A591900C7D5E2 /* iOSWorkspaceDrawerResourcesProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF08E005E0AC456B4F0E8 /* iOSWorkspaceDrawerResourcesProvider.mm */; };
 		54338F5E258A591900C7D5E2 /* iOSWorkspaceDrawerResourcesProvider.h in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF3402FB10ADCC44F05D8 /* iOSWorkspaceDrawerResourcesProvider.h */; };
+		545CF26826063788005B876E /* Strings.strings in Resources */ = {isa = PBXBuildFile; fileRef = 545CF26726063788005B876E /* Strings.strings */; };
 		5482F422256E8C3800299548 /* VocalTrainerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5482F421256E8C3800299548 /* VocalTrainerApp.swift */; };
 		5482F426256E8C3900299548 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5482F425256E8C3900299548 /* Assets.xcassets */; };
 		5482F429256E8C3900299548 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5482F428256E8C3900299548 /* Preview Assets.xcassets */; };
@@ -58,6 +59,7 @@
 		C9FFF1CC35BFB853F799A067 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC52FFD52111E4F8EA1C /* CGPoint+Extensions.swift */; };
 		C9FFF21CCE66232D3BD5D0D5 /* SwiftUI+View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF4CBD38366784EA507D4 /* SwiftUI+View+Extensions.swift */; };
 		C9FFF2979636C30023334438 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF7DE831C9EFAE9A0AB40 /* Colors.swift */; };
+		C9FFF30D5DC223798F402711 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE11E22C2516D645DF01 /* Strings.swift */; };
 		C9FFF34C1612C15FF57F4AE5 /* SwiftUI+ClickGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF3DAD525F726E84AA8F2 /* SwiftUI+ClickGesture.swift */; };
 		C9FFF36C6140C724632BAA67 /* Sequence+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF854128820437B780180 /* Sequence+Extensions.swift */; };
 		C9FFF3F713E181FA7B8210A4 /* CGRect+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFFAE7CC0D189849A9037 /* CGRect+Extensions.swift */; };
@@ -112,6 +114,7 @@
 		5426B176258D151300AC1A28 /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
 		543390D7258A59D900C7D5E2 /* LogiciOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LogiciOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		545490982554014B00E8E7F2 /* MvxGenerator.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MvxGenerator.xcodeproj; path = ../MvxGenerator/MvxGenerator.xcodeproj; sourceTree = "<group>"; };
+		545CF26726063788005B876E /* Strings.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Strings.strings; sourceTree = "<group>"; };
 		5482F41F256E8C3800299548 /* VocalTraineriOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VocalTraineriOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5482F421256E8C3800299548 /* VocalTrainerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocalTrainerApp.swift; sourceTree = "<group>"; };
 		5482F425256E8C3900299548 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -186,6 +189,7 @@
 		C9FFFCB31B3B29DABC17E607 /* ProjectViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectViewModel.swift; sourceTree = "<group>"; };
 		C9FFFCE6EA302941AB7FBF25 /* LyricsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsView.swift; sourceTree = "<group>"; };
 		C9FFFD04B887D1AA905A010C /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
+		C9FFFE11E22C2516D645DF01 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		C9FFFE302DCFBB0ABE54FB5D /* UIFont+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFFE40E57F82E0441136B6 /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		C9FFFE4F5AC0BB8DDAE24683 /* WorkspaceDrawerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WorkspaceDrawerView.mm; sourceTree = "<group>"; };
@@ -249,6 +253,7 @@
 				5426B176258D151300AC1A28 /* ProjectView.swift */,
 				C9FFFB39F918EA6236426E2D /* Views */,
 				C9FFFA712644FAF5D04B8E4E /* Data */,
+				545CF26726063788005B876E /* Strings.strings */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -461,6 +466,7 @@
 			isa = PBXGroup;
 			children = (
 				C9FFFA9B5D4BA7CDD7E17563 /* LyricsSelection.swift */,
+				C9FFFE11E22C2516D645DF01 /* Strings.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -611,6 +617,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5426B119258CCA7500AC1A28 /* drm.mvx in Resources */,
+				545CF26826063788005B876E /* Strings.strings in Resources */,
 				5482F429256E8C3900299548 /* Preview Assets.xcassets in Resources */,
 				5482F426256E8C3900299548 /* Assets.xcassets in Resources */,
 			);
@@ -754,6 +761,7 @@
 				C9FFFED71B1F99969D7E4C6B /* LyricsView.swift in Sources */,
 				C9FFFCAD8789F460417A34D1 /* LyricsSelection.swift in Sources */,
 				C9FFF34C1612C15FF57F4AE5 /* SwiftUI+ClickGesture.swift in Sources */,
+				C9FFF30D5DC223798F402711 /* Strings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

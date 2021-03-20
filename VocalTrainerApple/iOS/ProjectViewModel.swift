@@ -9,6 +9,8 @@ class ProjectViewModel : ObservableObject {
     @Published private(set) var isMetronomeEnabled = false
     @Published var lyricsLines: [String] = []
     @Published var lyricsSelection = LyricsSelection(characterIndex: 0, position: 0, lineIndex: 0)
+    @Published var playbackSections: [PlaybackSection] = []
+
     private var disableProgressUpdate = false
     @Published var progress: CGFloat = 0 {
         didSet {
@@ -23,6 +25,11 @@ class ProjectViewModel : ObservableObject {
         if !SwiftUIUtils.isPreview() {
             isMetronomeEnabled = projectController.metronomeEnabled
             projectController.add(delegate: self)
+            playbackSections = projectController.lyricsSections.map {
+                let name = Strings.from(sectionType: $0.type).localized + " " + String($0.number)
+                let position = CGFloat(projectController.convertSeek(toPlaybackProgress: $0.seek))
+                return PlaybackSection(name: name, position: position)
+            }
         }
     }
 

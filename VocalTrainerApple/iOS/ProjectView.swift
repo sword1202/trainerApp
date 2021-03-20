@@ -41,7 +41,7 @@ struct ProjectView: View {
                         .frame(maxWidth: .infinity, maxHeight: 82)
                         .background(Colors.tone2)
                 VStack(alignment: .center) {
-                    PlaybackSlider(progress: $viewModel.progress)
+                    PlaybackSlider(progress: $viewModel.progress, sections: $viewModel.playbackSections)
                     Spacer().frame(maxWidth: .infinity)
                     HStack {
                         Image("RetryButton")

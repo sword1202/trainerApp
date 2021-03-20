@@ -205,6 +205,30 @@ public:
     return [NSString stringWithUTF8String:_cpp->getSongTitleUtf8().data()];
 }
 
+static LyricsSectionType fromCppToObjCSectionType(Lyrics::SectionType type) {
+    switch (type) {
+        case Lyrics::CHORUS:
+            return LyricsSectionTypeCHORUS;
+        case Lyrics::VERSE:
+            return LyricsSectionTypeVERSE;
+        case Lyrics::BRIDGE:
+            return LyricsSectionTypeBRIDGE;
+    }
+}
+
+- (NSArray<LyricsSection*>*)lyricsSections {
+    const auto& sections = _cpp->getLyricsSections();
+    NSMutableArray *result = [NSMutableArray arrayWithCapacity:sections.size()];
+    for (const auto& section : sections) {
+        LyricsSectionType type = fromCppToObjCSectionType(section.sectionType);
+        LyricsSection *lyricsSection =
+                [[LyricsSection alloc] initWithType:type number:section.number seek:section.seek];
+        [result addObject:lyricsSection];
+    }
+
+    return result;
+}
+
 - (float)minZoom {
     return _cpp->getMinZoom();
 }

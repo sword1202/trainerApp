@@ -473,3 +473,7 @@ BaseAudioPlayer * VocalTrainerFilePlayer::getMainPlayer() {
 const LyricsDisplayedLinesProvider *VocalTrainerFilePlayer::getDisplayedLyricsLines() const {
     return lyricsPlayer;
 }
+
+const std::vector<Lyrics::Section> VocalTrainerFilePlayer::getLyricsSections() const {
+    return file->getLyrics().getSections();
+}

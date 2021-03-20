@@ -89,6 +89,8 @@ public:
     float getVerticalScrollPosition() const;
     void setVerticalScrollPosition(float position);
 
+    const std::vector<Lyrics::Section> getLyricsSections() const;
+
     // Delegates
     void onPlaybackBoundsChangedByUserEvent(const PlaybackBounds &newBounds) override;
     void onSeekChangedByUserEvent(float newSeek) override;

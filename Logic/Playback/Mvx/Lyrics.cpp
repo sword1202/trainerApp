@@ -21,7 +21,7 @@ Lyrics::Lyrics(const std::string &utf8) {
     const Range* previousRange = nullptr;
     int rangeStartCharacter = -1;
     Line* currentLine = nullptr;
-    const Section* currentSection = nullptr;
+    Section* currentSection = nullptr;
 
     for (int i = 0; i < u32.size(); ++i) {
         char32_t ch = u32[i];
@@ -68,6 +68,11 @@ Lyrics::Lyrics(const std::string &utf8) {
                 currentLine->duration = (range.startSeek - currentLine->startSeek) + range.getDuration();
                 currentLine->charactersCount = (range.startCharacterIndex - currentLine->startCharacterIndex) +
                         range.charactersCount;
+            }
+
+            assert(currentSection);
+            if (currentSection->seek < 0) {
+                currentSection->seek = range.startSeek;
             }
 
             skippedCharactersCount += (rangeEndIndex - i + 1);

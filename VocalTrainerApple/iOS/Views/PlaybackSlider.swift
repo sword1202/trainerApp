@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-private let progressSectionHeight: CGFloat = 12
+private let progressSectionHeight: CGFloat = 11
 private let progressSectionWidth: CGFloat = 1
 private let progressLineHeight: CGFloat = 8
 private let progressDotSize: CGFloat = 14
@@ -15,7 +15,7 @@ struct PlaybackSection {
     let position: CGFloat
 
     init(name: String, position: CGFloat) {
-        assert(position <= 0 && position >= 1)
+        assert(position >= 0 && position <= 1)
         self.name = name
         self.position = position
     }
@@ -23,6 +23,7 @@ struct PlaybackSection {
 
 struct PlaybackSlider : View {
     @Binding var progress: CGFloat
+    @Binding var sections: [PlaybackSection]
     @State private var dotDragTempProgress: CGFloat = -1
 
     func onProgressClick(location: CGPoint, width: CGFloat) {
@@ -42,18 +43,27 @@ struct PlaybackSlider : View {
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: progressLineHeight / 2)
                         .fill(Colors.tone3)
-                        .frame(maxWidth: .infinity, maxHeight: progressLineHeight).onClickGesture { (location) -> () in
+                        .frame(maxWidth: .infinity, maxHeight: progressLineHeight, alignment: .bottomLeading).onClickGesture { (location) -> () in
                             onProgressClick(location: location, width: geometry.size.width)
                         }
                 RoundedRectangle(cornerRadius: progressLineHeight / 2)
                         .fill(Colors.tone2)
                         .frame(
                                 maxWidth: (geometry.size.width - progressDotSize) * progress + progressDotSize,
-                                maxHeight: progressLineHeight
+                                maxHeight: progressLineHeight,
+                                alignment: .bottomLeading
                         ).onClickGesture { (location) -> () in
                             onProgressClick(location: location, width: geometry.size.width)
                         }
-                Circle().fill(Colors.tone2).frame(maxWidth: progressDotSize, maxHeight: progressDotSize, alignment: .leading)
+                ForEach(0 ..< sections.count, id: \.self) {
+                    let sectionIndex = $0
+                    let section = sections[sectionIndex]
+                    let sectionX = section.position * (geometry.size.width - progressDotSize) + progressDotSize / 2
+                    Rectangle().fill(Colors.tone4)
+                            .frame(width: progressSectionWidth, height: progressSectionHeight, alignment: .bottom)
+                            .offset(x: sectionX, y: -(progressSectionHeight - progressLineHeight) / 2)
+                }
+                Circle().fill(Colors.tone2).frame(maxWidth: progressDotSize, maxHeight: progressDotSize, alignment: .bottomLeading)
                         .offset(x: (geometry.size.width - progressDotSize) * progress)
                         .gesture(DragGesture().onChanged { value in
                             if (dotDragTempProgress < 0) {
@@ -68,7 +78,7 @@ struct PlaybackSlider : View {
                         }).onClickGesture { (location) -> () in
                             onProgressClick(location: location, width: geometry.size.width)
                         }
-            }.frame(width: geometry.size.width, height: progressDotSize)
+            }.frame(width: geometry.size.width, height: 14)
         }
     }
 }

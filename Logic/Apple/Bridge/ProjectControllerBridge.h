@@ -31,6 +31,7 @@
 @property (readonly) bool metronomeEnabled;
 @property (readonly) bool boundsSelectionEnabled;
 @property (readonly) bool isPlaying;
+@property (readonly) NSArray<LyricsSection*>* lyricsSections;
 
 - (void)goToBeginning;
 - (void)toggleTracksVisibility;

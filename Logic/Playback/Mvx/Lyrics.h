@@ -20,6 +20,7 @@ public:
         SectionType sectionType;
         int number;
         int startCharacterIndex;
+        double seek = -1;
     };
 
     struct Range {

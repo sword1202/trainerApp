@@ -310,3 +310,7 @@ double ProjectController::convertSeekToPlaybackProgress(double seek) const {
         return result;
     }
 }
+
+const std::vector<Lyrics::Section> ProjectController::getLyricsSections() const {
+    return player->getLyricsSections();
+}

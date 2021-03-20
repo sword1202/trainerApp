@@ -622,6 +622,7 @@
 		C9FFF5ADE1325ED07D1D2704 /* pugixml.cc in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF410847352F0264B7A8C /* pugixml.cc */; };
 		C9FFF5C92A38BFB1B5946698 /* basic_iarchive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFEB1FAEC5DB36BD0ACC7 /* basic_iarchive.cpp */; };
 		C9FFF62DBEAD5135E00F2E5C /* Pitch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFFA519AE7B1F46B05654 /* Pitch.cpp */; };
+		C9FFF63E5F26AA339B5D08B4 /* LyricsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6733FF0808963282DEB /* LyricsSection.swift */; };
 		C9FFF64249C87BB1393D08D2 /* basic_xml_grammar.ipp in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF03A28B45B4AA9A6995D /* basic_xml_grammar.ipp */; };
 		C9FFF675D2225261112A0C5D /* AudioStreamDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC90367A8ADD207F39D9 /* AudioStreamDescription.cpp */; };
 		C9FFF69203ED6830C2A83AE6 /* VocalPartAudioDataGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF1BDBADBA522C9A65AAC /* VocalPartAudioDataGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -683,6 +684,7 @@
 		C9FFFCEBF26383D700C08739 /* SevaghPitchDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF112B31CD8B941BA49E3 /* SevaghPitchDetector.cpp */; };
 		C9FFFCF031B1B57FB558424B /* synth.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF4D38B0405AAB494519B /* synth.hh */; };
 		C9FFFD001CBF9ABCC639AE6F /* SeekablePitchesList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF137B055DAB82B4D5F75 /* SeekablePitchesList.cpp */; };
+		C9FFFD1D85309776D0DFEACA /* LyricsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6733FF0808963282DEB /* LyricsSection.swift */; };
 		C9FFFD286C657E8EF5717774 /* VocalPartAudioDataGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6C42A0C8F7F2E4F242C /* VocalPartAudioDataGenerator.cpp */; };
 		C9FFFD420E77C54CE05C5321 /* PitchDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFEB2A8C708772977F110 /* PitchDetector.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFFD869A63DFACD0F3F823 /* text_woarchive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD24DD9BE81C226C1DC4 /* text_woarchive.cpp */; };
@@ -1040,6 +1042,7 @@
 		C9FFF629575A71AAEBB1741A /* basic_text_iprimitive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = basic_text_iprimitive.cpp; sourceTree = "<group>"; };
 		C9FFF649820E832C888FD580 /* loader.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = loader.cc; sourceTree = "<group>"; };
 		C9FFF669A664C5C165826DC4 /* DefineAppleConditionals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefineAppleConditionals.h; sourceTree = "<group>"; };
+		C9FFF6733FF0808963282DEB /* LyricsSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsSection.swift; sourceTree = "<group>"; };
 		C9FFF682C44A586F4A455B65 /* liquidsfz.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = liquidsfz.hh; sourceTree = "<group>"; };
 		C9FFF6A76814EF1A1ED1C18E /* basic_text_wiprimitive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = basic_text_wiprimitive.cpp; sourceTree = "<group>"; };
 		C9FFF6B1F8BE59C83102D658 /* SfzPitchRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SfzPitchRenderer.h; sourceTree = "<group>"; };
@@ -1410,6 +1413,7 @@
 				71AD2D7D172C5EE44191A527 /* ProjectControllerBridgeDelegate.swift */,
 				71AD2E08478C8AAE2F6D3DFA /* ProjectControllerBridge.h */,
 				71AD223DC452CCD04574FC8B /* ProjectControllerBridge.mm */,
+				C9FFF6733FF0808963282DEB /* LyricsSection.swift */,
 			);
 			path = Bridge;
 			sourceTree = "<group>";
@@ -2670,6 +2674,7 @@
 				C9FFF38DF1569E79B074ECDD /* basic_pointer_oserializer.cpp in Sources */,
 				C9FFF082C49191DD3DF6F62C /* extended_type_info_typeid.cpp in Sources */,
 				C9FFF4BCD8DF651E17BC8AB4 /* extended_type_info_no_rtti.cpp in Sources */,
+				C9FFFD1D85309776D0DFEACA /* LyricsSection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2805,6 +2810,7 @@
 				C9FFFFB0390C465684C7A98D /* FFT.cpp in Sources */,
 				C9FFF26B4F9C5FDD564E3B0D /* StringEncodingUtils.cpp in Sources */,
 				C9FFFE214C509249EDC71BA3 /* LyricsPlayer.cpp in Sources */,
+				C9FFF63E5F26AA339B5D08B4 /* LyricsSection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

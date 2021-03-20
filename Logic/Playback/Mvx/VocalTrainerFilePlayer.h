@@ -145,6 +145,8 @@ public:
     const std::map<double, int> &getTonalityChanges() const;
 
     const LyricsDisplayedLinesProvider* getDisplayedLyricsLines() const;
+
+    const std::vector<Lyrics::Section> getLyricsSections() const;
 };
 
 
