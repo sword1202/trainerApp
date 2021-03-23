@@ -40,45 +40,56 @@ struct PlaybackSlider : View {
 
     var body: some View {
         GeometryReader { geometry in
-            ZStack(alignment: .leading) {
-                RoundedRectangle(cornerRadius: progressLineHeight / 2)
-                        .fill(Colors.tone3)
-                        .frame(maxWidth: .infinity, maxHeight: progressLineHeight, alignment: .bottomLeading).onClickGesture { (location) -> () in
-                            onProgressClick(location: location, width: geometry.size.width)
-                        }
-                RoundedRectangle(cornerRadius: progressLineHeight / 2)
-                        .fill(Colors.tone2)
-                        .frame(
-                                maxWidth: (geometry.size.width - progressDotSize) * progress + progressDotSize,
-                                maxHeight: progressLineHeight,
-                                alignment: .bottomLeading
-                        ).onClickGesture { (location) -> () in
-                            onProgressClick(location: location, width: geometry.size.width)
-                        }
-                ForEach(0 ..< sections.count, id: \.self) {
-                    let sectionIndex = $0
-                    let section = sections[sectionIndex]
-                    let sectionX = section.position * (geometry.size.width - progressDotSize) + progressDotSize / 2
-                    Rectangle().fill(Colors.tone4)
-                            .frame(width: progressSectionWidth, height: progressSectionHeight, alignment: .bottom)
-                            .offset(x: sectionX, y: -(progressSectionHeight - progressLineHeight) / 2)
+            VStack {
+                ZStack {
+                    ForEach(0..<sections.count, id: \.self) {
+                        let sectionIndex = $0
+                        let section = sections[sectionIndex]
+                        let sectionX = section.position * (geometry.size.width - progressDotSize) + progressDotSize / 2
+                        Text(section.name).font(Font.system(size: 10, weight: .bold)).foregroundColor(Colors.tone5)
+                                .position(x: sectionX)
+                    }
                 }
-                Circle().fill(Colors.tone2).frame(maxWidth: progressDotSize, maxHeight: progressDotSize, alignment: .bottomLeading)
-                        .offset(x: (geometry.size.width - progressDotSize) * progress)
-                        .gesture(DragGesture().onChanged { value in
-                            if (dotDragTempProgress < 0) {
-                                dotDragTempProgress = progress
+                ZStack(alignment: .leading) {
+                    RoundedRectangle(cornerRadius: progressLineHeight / 2)
+                            .fill(Colors.tone3)
+                            .frame(maxWidth: .infinity, maxHeight: progressLineHeight, alignment: .bottomLeading).onClickGesture { (location) -> () in
+                                onProgressClick(location: location, width: geometry.size.width)
                             }
+                    RoundedRectangle(cornerRadius: progressLineHeight / 2)
+                            .fill(Colors.tone2)
+                            .frame(
+                                    maxWidth: (geometry.size.width - progressDotSize) * progress + progressDotSize,
+                                    maxHeight: progressLineHeight,
+                                    alignment: .bottomLeading
+                            ).onClickGesture { (location) -> () in
+                                onProgressClick(location: location, width: geometry.size.width)
+                            }
+                    ForEach(0..<sections.count, id: \.self) {
+                        let sectionIndex = $0
+                        let section = sections[sectionIndex]
+                        let sectionX = section.position * (geometry.size.width - progressDotSize) + progressDotSize / 2
+                        Rectangle().fill(Colors.tone4)
+                                .frame(width: progressSectionWidth, height: progressSectionHeight, alignment: .bottom)
+                                .offset(x: sectionX, y: -(progressSectionHeight - progressLineHeight) / 2)
+                    }
+                    Circle().fill(Colors.tone2).frame(maxWidth: progressDotSize, maxHeight: progressDotSize, alignment: .bottomLeading)
+                            .offset(x: (geometry.size.width - progressDotSize) * progress)
+                            .gesture(DragGesture().onChanged { value in
+                                if (dotDragTempProgress < 0) {
+                                    dotDragTempProgress = progress
+                                }
 
-                            let gestureDotOffset = value.location.x - value.startLocation.x
-                            let progressOffset = gestureDotOffset / (geometry.size.width - progressDotSize)
-                            progress = (dotDragTempProgress + progressOffset).cutToMatchClosedRange(min: 0, max: 1.0)
-                        }.onEnded { value in
-                            dotDragTempProgress = -1
-                        }).onClickGesture { (location) -> () in
-                            onProgressClick(location: location, width: geometry.size.width)
-                        }
-            }.frame(width: geometry.size.width, height: 14)
+                                let gestureDotOffset = value.location.x - value.startLocation.x
+                                let progressOffset = gestureDotOffset / (geometry.size.width - progressDotSize)
+                                progress = (dotDragTempProgress + progressOffset).cutToMatchClosedRange(min: 0, max: 1.0)
+                            }.onEnded { value in
+                                dotDragTempProgress = -1
+                            }).onClickGesture { (location) -> () in
+                                onProgressClick(location: location, width: geometry.size.width)
+                            }
+                }.frame(width: geometry.size.width, height: 14, alignment: .bottom)
+            }.frame(height: 26)
         }
     }
 }

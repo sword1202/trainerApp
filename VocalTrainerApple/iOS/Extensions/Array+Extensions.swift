@@ -70,6 +70,17 @@ extension Array {
 
         return self.remove(at: index)
     }
+
+    func count(predicate: (Element)->Bool) -> Int {
+        var count = 0
+        for item in self {
+            if (predicate(item)) {
+                count+=1
+            }
+        }
+
+        return count
+    }
 }
 
 extension Array where Element : Equatable & Hashable {

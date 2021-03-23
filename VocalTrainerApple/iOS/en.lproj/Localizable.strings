@@ -6,6 +6,6 @@
   Copyright © 2021 Semyon Tikhonenko. All rights reserved.
 */
 
-"verse" = "Verse";
-"chorus" = "Chorus";
-"bridge" = "Bridge";
+"verse" = "Vr";
+"chorus" = "Ch";
+"bridge" = "Br";
