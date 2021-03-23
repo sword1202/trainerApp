@@ -76,6 +76,7 @@
 		C9FFFB977A2FE597CEF41A41 /* PlaybackSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF321A69756EA7BF38A54 /* PlaybackSlider.swift */; };
 		C9FFFBC424A0C6B8FA77210F /* ProjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFCB31B3B29DABC17E607 /* ProjectViewModel.swift */; };
 		C9FFFBF45045514B7285BF8A /* MacOSWorkspaceDrawerResourcesProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF5B9019937C01C72D703 /* MacOSWorkspaceDrawerResourcesProvider.mm */; };
+		C9FFFBF67228CD92C9CD5AB1 /* BottomDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD46FFA71344BAFB98B1 /* BottomDialog.swift */; };
 		C9FFFC357FB17DBCE0DA3B28 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6D026277BCE01AFF619 /* UIImage+Extensions.swift */; };
 		C9FFFC752DA482CBE97EB7E2 /* CGSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF72A1F66910885A40FE2 /* CGSize+Extensions.swift */; };
 		C9FFFCAD8789F460417A34D1 /* LyricsSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA9B5D4BA7CDD7E17563 /* LyricsSelection.swift */; };
@@ -192,6 +193,7 @@
 		C9FFFCB31B3B29DABC17E607 /* ProjectViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectViewModel.swift; sourceTree = "<group>"; };
 		C9FFFCE6EA302941AB7FBF25 /* LyricsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsView.swift; sourceTree = "<group>"; };
 		C9FFFD04B887D1AA905A010C /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
+		C9FFFD46FFA71344BAFB98B1 /* BottomDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomDialog.swift; sourceTree = "<group>"; };
 		C9FFFE11E22C2516D645DF01 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		C9FFFE302DCFBB0ABE54FB5D /* UIFont+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFFE40E57F82E0441136B6 /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
@@ -480,6 +482,7 @@
 			children = (
 				C9FFF321A69756EA7BF38A54 /* PlaybackSlider.swift */,
 				C9FFFCE6EA302941AB7FBF25 /* LyricsView.swift */,
+				C9FFFD46FFA71344BAFB98B1 /* BottomDialog.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -526,6 +529,8 @@
 			dependencies = (
 			);
 			name = VocalTraineriOS;
+			packageProductDependencies = (
+			);
 			productName = VocalTraineriOS;
 			productReference = 5482F41F256E8C3800299548 /* VocalTraineriOS.app */;
 			productType = "com.apple.product-type.application";
@@ -598,6 +603,8 @@
 				Base,
 			);
 			mainGroup = ACF18AC422EC7EBF008E7DAA;
+			packageReferences = (
+			);
 			productRefGroup = ACF18ACE22EC7EBF008E7DAA /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -768,6 +775,7 @@
 				C9FFFCAD8789F460417A34D1 /* LyricsSelection.swift in Sources */,
 				C9FFF34C1612C15FF57F4AE5 /* SwiftUI+ClickGesture.swift in Sources */,
 				C9FFF30D5DC223798F402711 /* Strings.swift in Sources */,
+				C9FFFBF67228CD92C9CD5AB1 /* BottomDialog.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

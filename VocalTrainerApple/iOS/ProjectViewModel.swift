@@ -23,7 +23,7 @@ class ProjectViewModel : ObservableObject {
     private var disableProgressUpdate = false
     @Published var progress: CGFloat = 0 {
         didSet {
-            if (oldValue != progress && !disableProgressUpdate) {
+            if oldValue != progress && !disableProgressUpdate {
                 projectController.setPlaybackProgress(Double(progress))
             }
         }

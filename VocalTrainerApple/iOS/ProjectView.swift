@@ -28,6 +28,7 @@ struct TopPanelToggleButton: View {
 struct ProjectView: View {
     @Environment(\.scenePhase) private var scenePhase
     @ObservedObject private var viewModel = ProjectViewModel()
+    @State private var levelsVisible = false
 
     var body: some View {
         ZStack {
@@ -42,6 +43,7 @@ struct ProjectView: View {
                 VStack {
                     HStack(spacing: 8) {
                         Spacer().frame(maxWidth: .infinity, maxHeight: .infinity)
+                        TopPanelToggleButton(image: "LevelsButton", isSelected: $levelsVisible)
                         TopPanelToggleButton(image: "LyricsToggleButton", isSelected: $viewModel.isLyricsVisible)
                         TopPanelToggleButton(image: "MetronomeButton", isSelected: $viewModel.isMetronomeEnabled)
                     }.frame(maxWidth: .infinity, maxHeight: topButtonFrameSize).padding(.trailing, 8)
@@ -80,6 +82,11 @@ struct ProjectView: View {
                         Image("SelectBoundsButton")
                     }.padding(.bottom, 0)
                 }.background(Colors.tone1).frame(maxWidth: .infinity, maxHeight: 112, alignment: .bottomLeading)
+            }
+            if levelsVisible {
+                BottomDialog(title: "Tempo", titleIcon:"TempoIcon") {
+                    Rectangle().fill(Color.green).frame(height: 100)
+                }
             }
         }
     }
