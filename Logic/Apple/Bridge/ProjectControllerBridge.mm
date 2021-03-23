@@ -306,6 +306,11 @@ static LyricsSectionType fromCppToObjCSectionType(Lyrics::SectionType type) {
 - (bool)lyricsVisible {
     return _cpp->isLyricsVisible();
 }
+
+- (void)setLyricsVisible:(bool)value {
+    _cpp->setLyricsVisible(value);
+}
+
 - (bool)tracksVisible {
     return _cpp->isTracksVisible();
 }

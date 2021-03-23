@@ -28,7 +28,7 @@ struct TopPanelToggleButton: View {
 struct ProjectView: View {
     @Environment(\.scenePhase) private var scenePhase
     @ObservedObject private var viewModel = ProjectViewModel()
-    
+
     var body: some View {
         ZStack {
             // Fill safe area with colors
@@ -42,6 +42,7 @@ struct ProjectView: View {
                 VStack {
                     HStack(spacing: 8) {
                         Spacer().frame(maxWidth: .infinity, maxHeight: .infinity)
+                        TopPanelToggleButton(image: "LyricsToggleButton", isSelected: $viewModel.isLyricsVisible)
                         TopPanelToggleButton(image: "MetronomeButton", isSelected: $viewModel.isMetronomeEnabled)
                     }.frame(maxWidth: .infinity, maxHeight: topButtonFrameSize).padding(.trailing, 8)
                     Spacer().frame(maxWidth: .infinity)
@@ -58,9 +59,11 @@ struct ProjectView: View {
                         print("Unknown state")
                     }
                 }
-                LyricsView(lines: $viewModel.lyricsLines, lyricsSelection: $viewModel.lyricsSelection)
-                        .frame(maxWidth: .infinity, maxHeight: 82)
-                        .background(Colors.tone2)
+                if (viewModel.isLyricsVisible) {
+                    LyricsView(lines: $viewModel.lyricsLines, lyricsSelection: $viewModel.lyricsSelection)
+                            .frame(maxWidth: .infinity, maxHeight: 82)
+                            .background(Colors.tone2)
+                }
                 VStack(alignment: .center) {
                     PlaybackSlider(progress: $viewModel.progress, sections: $viewModel.playbackSections)
                             .padding(.leading, 16)

@@ -26,7 +26,7 @@
 - (void)setZoom:(float)zoom intoPoint:(CGPoint)point;
 @property (nonatomic) float verticalScrollPosition;
 
-@property (readonly) bool lyricsVisible;
+@property (nonatomic) bool lyricsVisible;
 @property (readonly) bool tracksVisible;
 @property (nonatomic) bool metronomeEnabled;
 @property (readonly) bool boundsSelectionEnabled;

@@ -169,6 +169,10 @@ void ProjectController::setWorkspaceController(WorkspaceController *workspaceCon
 }
 
 void ProjectController::setLyricsVisible(bool value) {
+    if (value == lyricsVisible) {
+        return;
+    }
+
     lyricsVisible = value;
     delegate->updateLyricsVisibilityChanged(value);
 }
