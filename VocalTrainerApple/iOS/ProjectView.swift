@@ -8,6 +8,23 @@
 
 import SwiftUI
 
+private let topButtonFrameSize: CGFloat = 46
+
+struct TopPanelToggleButton: View {
+    let image: String
+    @Binding var isSelected: Bool
+
+    var body: some View {
+        Button(action: {
+            isSelected.toggle()
+        }) {
+            Image(image)
+        }.frame(width: topButtonFrameSize, height: topButtonFrameSize)
+                .background(isSelected ? Colors.tone3 : Color.white.opacity(0.0))
+                .cornerRadius(3)
+    }
+}
+
 struct ProjectView: View {
     @Environment(\.scenePhase) private var scenePhase
     @ObservedObject private var viewModel = ProjectViewModel()
@@ -23,6 +40,10 @@ struct ProjectView: View {
             // Main Content
             VStack(spacing: 0) {
                 VStack {
+                    HStack(spacing: 8) {
+                        Spacer().frame(maxWidth: .infinity, maxHeight: .infinity)
+                        TopPanelToggleButton(image: "MetronomeButton", isSelected: $viewModel.isMetronomeEnabled)
+                    }.frame(maxWidth: .infinity, maxHeight: topButtonFrameSize).padding(.trailing, 8)
                     Spacer().frame(maxWidth: .infinity)
                 }.background(Colors.tone2).frame(maxWidth: .infinity, maxHeight: 80, alignment: .topLeading)
                 WorkspaceView().onChange(of: scenePhase) { phase in

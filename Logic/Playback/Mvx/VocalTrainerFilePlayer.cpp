@@ -60,6 +60,10 @@ void VocalTrainerFilePlayer::setSource(VocalTrainerFile *file, bool destroyFileO
         }
     }
 
+    if (metronomePlayer.isPrepared()) {
+        players.push_back(&metronomePlayer);
+    }
+
     BaseAudioPlayer* mainPlayer = getMainPlayer();
     mainPlayer->seekChangedListeners.clear();
     mainPlayer->onCompleteListeners.clear();
@@ -402,7 +406,7 @@ bool VocalTrainerFilePlayer::isMetronomeSoundDataSet() const {
 void VocalTrainerFilePlayer::updateMetronomeVolume() {
     if (metronomeEnabled) {
         metronomePlayer.setVolume(std::max({instrumentalPlayer.getVolume(),
-                vocalPartPianoPlayer.getVolume(), recordingPlayer.getVolume()}) * 1.f);
+                vocalPartPianoPlayer.getVolume(), recordingPlayer.getVolume()}) * 0.6f);
     } else {
         metronomePlayer.setVolume(0.0f);
     }

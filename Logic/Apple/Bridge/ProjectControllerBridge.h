@@ -28,7 +28,7 @@
 
 @property (readonly) bool lyricsVisible;
 @property (readonly) bool tracksVisible;
-@property (readonly) bool metronomeEnabled;
+@property (nonatomic) bool metronomeEnabled;
 @property (readonly) bool boundsSelectionEnabled;
 @property (readonly) bool isPlaying;
 @property (readonly) NSArray<LyricsSection*>* lyricsSections;

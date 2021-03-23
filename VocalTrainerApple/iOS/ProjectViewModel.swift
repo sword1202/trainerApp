@@ -6,7 +6,11 @@
 import Combine
 
 class ProjectViewModel : ObservableObject {
-    @Published private(set) var isMetronomeEnabled = false
+    @Published var isMetronomeEnabled = false {
+        didSet {
+            projectController.metronomeEnabled = isMetronomeEnabled
+        }
+    }
     @Published var lyricsLines: [String] = []
     @Published var lyricsSelection = LyricsSelection(characterIndex: 0, position: 0, lineIndex: 0)
     @Published var playbackSections: [PlaybackSection] = []

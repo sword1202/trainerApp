@@ -12,6 +12,7 @@ class ApplicationModel {
     VocalTrainerFilePlayer* player;
     AudioInputManager* audioInputManager;
     std::string getSfzFilePath() const;
+    std::string getMetronomeDataFilePath() const;
 public:
     ApplicationModel();
     static void init();

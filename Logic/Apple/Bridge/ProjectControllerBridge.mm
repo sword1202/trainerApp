@@ -313,6 +313,10 @@ static LyricsSectionType fromCppToObjCSectionType(Lyrics::SectionType type) {
     return _cpp->isMetronomeEnabled();
 }
 
+- (void)setMetronomeEnabled:(bool)value {
+    _cpp->setMetronomeEnabled(value);
+}
+
 - (bool)boundsSelectionEnabled {
     return _cpp->isBoundsSelectionEnabled();
 }

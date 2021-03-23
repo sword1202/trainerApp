@@ -4,6 +4,9 @@
 
 #include "ApplicationModel.h"
 #include "SfzPitchRenderer.h"
+#include "StringUtils.h"
+
+using namespace CppUtils;
 
 static ApplicationModel* model = nullptr;
 
@@ -11,6 +14,9 @@ ApplicationModel::ApplicationModel() {
     auto sfzPath = getSfzFilePath();
     SfzPitchRenderer::initSfz(sfzPath);
     player = new VocalTrainerFilePlayer();
+    std::string metronomeFilePath = getMetronomeDataFilePath();
+    std::string metronomeData = Strings::ReadBinaryFileContent(metronomeFilePath.data());
+    player->setMetronomeSoundData(std::move(metronomeData));
     audioInputManager = new AudioInputManager("");
 }
 
