@@ -9,3 +9,8 @@
 "verse" = "Vr";
 "chorus" = "Ch";
 "bridge" = "Br";
+
+"instrumentalLevelLabel" = "Instrumental:";
+"vocalLineLevelLabel" = "Vocal line:";
+"voiceLevelLabel" = "Voice:";
+

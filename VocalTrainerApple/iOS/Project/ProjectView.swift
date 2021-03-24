@@ -10,7 +10,7 @@ import SwiftUI
 
 private let topButtonFrameSize: CGFloat = 46
 
-struct TopPanelToggleButton: View {
+private struct TopPanelToggleButton: View {
     let image: String
     @Binding var isSelected: Bool
 
@@ -84,9 +84,12 @@ struct ProjectView: View {
                 }.background(Colors.tone1).frame(maxWidth: .infinity, maxHeight: 112, alignment: .bottomLeading)
             }
             if levelsVisible {
-                BottomDialog(title: "Tempo", titleIcon:"TempoIcon") {
-                    Rectangle().fill(Color.green).frame(height: 100)
-                }
+                LevelsDialog(
+                        instrumentalLevel: $viewModel.instrumentalLevel,
+                        vocalLineLevel: $viewModel.vocalLineLevel,
+                        voiceLevel: $viewModel.voiceLevel,
+                        isShown: $levelsVisible
+                )
             }
         }
     }

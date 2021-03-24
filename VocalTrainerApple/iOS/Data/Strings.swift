@@ -14,6 +14,10 @@ enum Strings : String {
     case verse
     case bridge
 
+    case instrumentalLevelLabel
+    case vocalLineLevelLabel
+    case voiceLevelLabel
+
     static func from(sectionType: LyricsSectionType) -> Strings {
         switch (sectionType) {
         case .CHORUS:

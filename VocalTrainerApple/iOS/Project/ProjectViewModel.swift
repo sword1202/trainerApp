@@ -4,6 +4,7 @@
 //
 
 import Combine
+import AVFoundation
 
 class ProjectViewModel : ObservableObject {
     @Published var isMetronomeEnabled = false {
@@ -19,6 +20,24 @@ class ProjectViewModel : ObservableObject {
     @Published var lyricsLines: [String] = []
     @Published var lyricsSelection = LyricsSelection(characterIndex: 0, position: 0, lineIndex: 0)
     @Published var playbackSections: [PlaybackSection] = []
+
+    @Published var instrumentalLevel: Float = 1.0 {
+        didSet {
+            projectController.setInstrumentalVolume(instrumentalLevel)
+        }
+    }
+
+    @Published var vocalLineLevel: Float = 1.0 {
+        didSet {
+            projectController.setVocalPianoVolume(vocalLineLevel)
+        }
+    }
+
+    @Published var voiceLevel: Float = AVAudioSession.sharedInstance().isInputGainSettable ? 1.0 : -1.0 {
+        didSet {
+            try! AVAudioSession.sharedInstance().setInputGain(voiceLevel)
+        }
+    }
 
     private var disableProgressUpdate = false
     @Published var progress: CGFloat = 0 {
@@ -103,5 +122,13 @@ extension ProjectViewModel : ProjectControllerBridgeDelegate {
 
     func projectControllerUpdate(lyricsVisibility: Bool) {
         isLyricsVisible = lyricsVisibility;
+    }
+
+    func projectControllerUpdate(vocalPianoVolume: Float) {
+        self.vocalLineLevel = vocalPianoVolume
+    }
+
+    func projectControllerUpdate(instrumentalVolume: Float) {
+        self.instrumentalLevel = instrumentalVolume
     }
 }

@@ -36,10 +36,13 @@ struct BottomDialog<Content: View> : View {
     private let title: String
     private let titleIcon: String
 
-    init(title: String, titleIcon: String, @ViewBuilder content: () -> Content) {
+    @Binding var isShown: Bool
+
+    init(title: String, titleIcon: String, isShown: Binding<Bool>, @ViewBuilder content: () -> Content) {
         self.content = content()
         self.title = title
         self.titleIcon = titleIcon
+        _isShown = isShown
     }
 
     var body: some View {
@@ -49,7 +52,7 @@ struct BottomDialog<Content: View> : View {
                 VStack(spacing: 0) {
                     HStack {
                         ZStack {
-                            RoundedRectangle(cornerRadius: 4).fill(Colors.tone2).frame(width: 40, height: 40)
+                            RoundedRectangle(cornerRadius: 5).fill(Colors.tone2).frame(width: 40, height: 40)
                             Image(titleIcon)
                         }.padding(.leading, 16)
                         Text(title).foregroundColor(Colors.tone2)
@@ -59,7 +62,9 @@ struct BottomDialog<Content: View> : View {
                         ZStack {
                             Circle().fill(Colors.buttonTone1)
                             Image("x")
-                        }.frame(width: 30, height: 30).padding(.trailing, 16)
+                        }.frame(width: 30, height: 30).padding(.trailing, 16).onTapGesture {
+                            isShown = false
+                        }
                     }.frame(width: geometry.size.width, height: 72).background(BlurView(style: .systemMaterial))
                     content
                     Spacer().frame(width: geometry.size.width, height: geometry.safeAreaInsets.bottom)

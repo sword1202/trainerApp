@@ -60,7 +60,7 @@ ProjectController::ProjectController(ProjectControllerDelegate* delegate) : dele
     }, this);
 
     player->setInstrumentalVolume(1.0);
-    player->setVocalPartPianoVolume(2.0);
+    player->setVocalPartPianoVolume(1.0);
     audioInputManager->setOutputVolume(0.0);
 
     audioInputManager->getPitchDetectedListeners().addListener([=] (const Pitch& pitch, double) {
@@ -124,11 +124,19 @@ void ProjectController::setInputSensitivity(float value) {
 }
 
 void ProjectController::setVocalPianoVolume(float value) {
+    if (value == player->getVocalPianoVolume()) {
+        return;
+    }
+
     player->setVocalPartPianoVolume(value);
     delegate->updateVocalPianoVolume(player->getVocalPianoVolume());
 }
 
 void ProjectController::setInstrumentalVolume(float value) {
+    if (value == player->getInstrumentalVolume()) {
+        return;
+    }
+
     player->setInstrumentalVolume(value);
     delegate->updateInstrumentalVolume(player->getInstrumentalVolume());
 }

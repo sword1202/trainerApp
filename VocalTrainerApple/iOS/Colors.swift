@@ -14,5 +14,5 @@ struct Colors {
     static let tone5 = Color(hex: 0x24232D, alpha: 1.0)
     static let header = Color(hex: 0xF9F9F9, alpha: 0.94)
     static let buttonTone1 = Color(hex: 0x767680, alpha: 0.12)
-
+    static let divider = Color(hex: 0x3C3C43, alpha: 0.29)
 }
