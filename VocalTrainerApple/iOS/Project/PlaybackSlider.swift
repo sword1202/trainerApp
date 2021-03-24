@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-private let progressSectionHeight: CGFloat = 11
+private let progressSectionHeight: CGFloat = 12
 private let progressSectionWidth: CGFloat = 1
 private let progressLineHeight: CGFloat = 8
 private let progressDotSize: CGFloat = 14
@@ -38,22 +38,30 @@ struct PlaybackSlider : View {
         self.progress = x / maxX
     }
 
+    func generateSectionNamesViews(width: CGFloat, indexCondition: @escaping (Int) -> Bool) -> some View {
+        ZStack(alignment: .leading) {
+            ForEach(0..<sections.count, id: \.self) {
+                let sectionIndex = $0
+                if indexCondition(sectionIndex) {
+                    let section = sections[sectionIndex]
+                    let sectionX = section.position * (width - progressDotSize) + progressDotSize / 2
+                    Text(section.name).font(Font.system(size: 10, weight: .bold)).foregroundColor(Colors.tone5)
+                            .position(x: sectionX, y: 6).layoutPriority(1)
+                } else {
+                    EmptyView()
+                }
+            }
+        }.frame(width: width, height: 12)
+    }
+
     var body: some View {
         GeometryReader { geometry in
-            VStack {
-                ZStack {
-                    ForEach(0..<sections.count, id: \.self) {
-                        let sectionIndex = $0
-                        let section = sections[sectionIndex]
-                        let sectionX = section.position * (geometry.size.width - progressDotSize) + progressDotSize / 2
-                        Text(section.name).font(Font.system(size: 10, weight: .bold)).foregroundColor(Colors.tone5)
-                                .position(x: sectionX)
-                    }
-                }
+            VStack(spacing: 0) {
+                generateSectionNamesViews(width: geometry.size.width, indexCondition: { $0 % 2 == 0 })
                 ZStack(alignment: .leading) {
                     RoundedRectangle(cornerRadius: progressLineHeight / 2)
                             .fill(Colors.tone3)
-                            .frame(maxWidth: .infinity, maxHeight: progressLineHeight, alignment: .bottomLeading).onClickGesture { (location) -> () in
+                            .frame(maxWidth: .infinity, maxHeight: progressLineHeight, alignment: .center).onClickGesture { (location) -> () in
                                 onProgressClick(location: location, width: geometry.size.width)
                             }
                     RoundedRectangle(cornerRadius: progressLineHeight / 2)
@@ -61,7 +69,7 @@ struct PlaybackSlider : View {
                             .frame(
                                     maxWidth: (geometry.size.width - progressDotSize) * progress + progressDotSize,
                                     maxHeight: progressLineHeight,
-                                    alignment: .bottomLeading
+                                    alignment: .center
                             ).onClickGesture { (location) -> () in
                                 onProgressClick(location: location, width: geometry.size.width)
                             }
@@ -69,11 +77,12 @@ struct PlaybackSlider : View {
                         let sectionIndex = $0
                         let section = sections[sectionIndex]
                         let sectionX = section.position * (geometry.size.width - progressDotSize) + progressDotSize / 2
+                        let offsetSign: CGFloat = sectionIndex % 2 == 0 ? -1 : +1
                         Rectangle().fill(Colors.tone4)
                                 .frame(width: progressSectionWidth, height: progressSectionHeight, alignment: .bottom)
-                                .offset(x: sectionX, y: -(progressSectionHeight - progressLineHeight) / 2)
+                                .offset(x: sectionX, y: offsetSign * (progressSectionHeight - progressLineHeight) / 2)
                     }
-                    Circle().fill(Colors.tone2).frame(maxWidth: progressDotSize, maxHeight: progressDotSize, alignment: .bottomLeading)
+                    Circle().fill(Colors.tone2).frame(maxWidth: progressDotSize, maxHeight: progressDotSize, alignment: .center)
                             .offset(x: (geometry.size.width - progressDotSize) * progress)
                             .gesture(DragGesture().onChanged { value in
                                 if (dotDragTempProgress < 0) {
@@ -88,8 +97,9 @@ struct PlaybackSlider : View {
                             }).onClickGesture { (location) -> () in
                                 onProgressClick(location: location, width: geometry.size.width)
                             }
-                }.frame(width: geometry.size.width, height: 14, alignment: .bottom)
-            }.frame(height: 26)
+                }.frame(width: geometry.size.width, height: progressSectionHeight * 2 - progressLineHeight, alignment: .center)
+                generateSectionNamesViews(width: geometry.size.width, indexCondition: { $0 % 2 == 1 })
+            }
         }
     }
 }

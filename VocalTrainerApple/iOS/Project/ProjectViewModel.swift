@@ -56,21 +56,18 @@ class ProjectViewModel : ObservableObject {
             let lyricsSections: [LyricsSection] = projectController.lyricsSections
             playbackSections = lyricsSections.map {
                 let type = $0.type
-                var name = Strings.from(sectionType: type).localized
-                if (lyricsSections.count { $0.type == type } >= 2) {
-                    name += " " + String($0.number)
-                }
+                let name = Strings.from(sectionType: type).localized
                 let position = CGFloat(projectController.convertSeek(toPlaybackProgress: $0.seek))
                 return PlaybackSection(name: name, position: position)
             }
         } else {
             playbackSections = [
-                .init(name: "Vr 1", position: 0.2),
-                .init(name: "Ch 1", position: 0.25),
-                .init(name: "Vr 2", position: 0.35),
-                .init(name: "Ch 2", position: 0.5),
-                .init(name: "Br 1", position: 0.6),
-                .init(name: "Ch 3", position: 0.8),
+                .init(name: "Verse", position: 0.2),
+                .init(name: "Chorus", position: 0.25),
+                .init(name: "Verse", position: 0.35),
+                .init(name: "Chorus", position: 0.5),
+                .init(name: "Bridge", position: 0.6),
+                .init(name: "Chorus", position: 0.8),
             ]
         }
     }

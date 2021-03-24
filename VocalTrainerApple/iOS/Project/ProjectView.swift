@@ -81,7 +81,9 @@ struct ProjectView: View {
                         }.padding(.leading, 50).padding(.trailing, 50)
                         Image("SelectBoundsButton")
                     }.padding(.bottom, 0)
-                }.background(Colors.tone1).frame(maxWidth: .infinity, maxHeight: 112, alignment: .bottomLeading)
+                }.background(Colors.tone1).frame(maxWidth: .infinity,
+                        maxHeight: viewModel.playbackSections.count > 1 ? 124 : 112,
+                        alignment: .bottomLeading)
             }
             if levelsVisible {
                 LevelsDialog(
