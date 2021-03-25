@@ -41,6 +41,7 @@ ProjectController::ProjectController(ProjectControllerDelegate* delegate) : dele
     player->vocalPartChangedListeners.addListener([this] (const VocalPart* vocalPart) {
         if (workspaceController) {
             workspaceController->setVocalPart(vocalPart, player->getBeatsPerSecond());
+            updateWorkspaceSeek(player->getSeek());
         }
     }, this);
 

@@ -185,7 +185,7 @@ void BaseAudioPlayer::pause() {
 
 void BaseAudioPlayer::setSeek(double timeStamp) {
     assert(timeStamp >= 0);
-    double durationInSeconds = getOriginalTrackDurationInSeconds();
+    double durationInSeconds = getTrackDurationInSecondsWithTempoApplied();
     if (timeStamp > durationInSeconds) {
         timeStamp = durationInSeconds;
     }
@@ -243,12 +243,12 @@ double BaseAudioPlayer::bufferSeekToSecondsSeek(int bufferSeek) const {
 }
 
 int BaseAudioPlayer::secondsSeekToBufferSeek(double timestamp) const {
-    return (int)round(timestamp * playbackData.sampleRate);
+    return Math::RoundToInt(timestamp * playbackData.sampleRate / tempoFactor);
 }
 
 void BaseAudioPlayer::setBufferSeek(int bufferSeek) {
     double seek = bufferSeekToSecondsSeek(bufferSeek);
-    double total = getOriginalTrackDurationInSeconds();
+    double total = getTrackDurationInSecondsWithTempoApplied();
     seekChangedListeners.executeAll(seek, total);
 }
 
@@ -293,8 +293,9 @@ void BaseAudioPlayer::setTempoFactor(double tempoFactor) {
         return;
     }
 
+    double oldValue = this->tempoFactor;
     this->tempoFactor = tempoFactor;
-    onTempoFactorChanged(tempoFactor);
+    onTempoFactorChanged(tempoFactor, oldValue);
 }
 
 double BaseAudioPlayer::getCallbackBufferDurationInSeconds() const {
@@ -340,8 +341,8 @@ void BaseAudioPlayer::onTonalityChanged(int value) {
     soundTouch->setPitchSemiTones(value);
 }
 
-void BaseAudioPlayer::onTempoFactorChanged(double value) {
-    assert(value == 0 || soundTouch && "tempo changes are not allowed, soundtouch not "
+void BaseAudioPlayer::onTempoFactorChanged(double value, double oldValue) {
+    assert(value == 1 || soundTouch && "tempo changes are not allowed, soundtouch not "
                                             "initialised, call initSoundTouch() before prepare to use tempo changing");
     soundTouch->setTempo(value);
 }

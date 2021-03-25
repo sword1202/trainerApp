@@ -74,7 +74,7 @@ void VocalPartAudioPlayer::destroy() {
     BaseAudioPlayer::destroy();
 }
 
-void VocalPartAudioPlayer::onTempoFactorChanged(double value) {
+void VocalPartAudioPlayer::onTempoFactorChanged(double value, double oldValue) {
     VocalPart vocalPart = originalVocalPart.withChangedTempo(value);
     generator->setVocalPart(std::move(vocalPart));
 }

@@ -23,7 +23,7 @@ protected:
     int getBufferSeek() const override;
 
     void onTonalityChanged(int pitchShift) override;
-    void onTempoFactorChanged(double value) override;
+    void onTempoFactorChanged(double value, double oldValue) override;
 
     void destroy() override;
 

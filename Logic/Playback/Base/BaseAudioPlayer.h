@@ -46,7 +46,7 @@ protected:
 
     virtual void onComplete();
     virtual void onTonalityChanged(int value);
-    virtual void onTempoFactorChanged(double value);
+    virtual void onTempoFactorChanged(double value, double oldValue);
 
     int getSampleSize() const;
 
