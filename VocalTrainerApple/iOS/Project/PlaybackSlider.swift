@@ -24,6 +24,8 @@ struct PlaybackSection {
 struct PlaybackSlider : View {
     @Binding var progress: CGFloat
     @Binding var sections: [PlaybackSection]
+    @Binding var currentTime: String
+    @Binding var endTime: String
     @State private var dotDragTempProgress: CGFloat = -1
 
     func onProgressClick(location: CGPoint, width: CGFloat) {
@@ -98,7 +100,14 @@ struct PlaybackSlider : View {
                                 onProgressClick(location: location, width: geometry.size.width)
                             }
                 }.frame(width: geometry.size.width, height: progressSectionHeight * 2 - progressLineHeight, alignment: .center)
-                generateSectionNamesViews(width: geometry.size.width, indexCondition: { $0 % 2 == 1 })
+                ZStack {
+                    HStack {
+                        Text(currentTime).font(Font.system(size: 10)).foregroundColor(Colors.tone5)
+                        Spacer()
+                        Text(endTime).font(Font.system(size: 10)).foregroundColor(Colors.tone5)
+                    }
+                    generateSectionNamesViews(width: geometry.size.width, indexCondition: { $0 % 2 == 1 })
+                }
             }
         }
     }

@@ -374,3 +374,7 @@ void ProjectController::setTempoFactor(double value) {
     player->setTempoFactor(value);
     delegate->updateTempoFactor(value);
 }
+
+double ProjectController::getDuration() const {
+    return player->getDuration();
+}

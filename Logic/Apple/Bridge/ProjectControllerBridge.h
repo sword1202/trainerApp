@@ -35,6 +35,7 @@
 @property (readonly) SongTonality* originalTonality;
 @property (readonly) double beatsPerMinute;
 @property (readonly) double originalBeatsPerMinute;
+@property (readonly) double duration;
 
 - (void)goToBeginning;
 - (void)toggleTracksVisibility;

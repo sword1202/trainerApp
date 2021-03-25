@@ -386,6 +386,10 @@ static LyricsSectionType fromCppToObjCSectionType(Lyrics::SectionType type) {
     return _cpp->getBeatsPerMinute();
 }
 
+- (double)duration {
+    return _cpp->getDuration();
+}
+
 - (double)originalBeatsPerMinute {
     return _cpp->getOriginalBeatsPerMinute();
 }

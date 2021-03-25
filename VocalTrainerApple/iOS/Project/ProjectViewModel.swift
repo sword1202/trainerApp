@@ -21,6 +21,9 @@ class ProjectViewModel : ObservableObject {
     @Published var lyricsSelection = LyricsSelection(characterIndex: 0, position: 0, lineIndex: 0)
     @Published var playbackSections: [PlaybackSection] = []
     @Published var title: String = ""
+    @Published var playbackCurrentTime: String = ""
+    @Published var playbackEndTime: String = ""
+    private let timeFormatter = DateFormatter()
 
     private var disableProgressUpdate = false
     @Published var progress: CGFloat = 0 {
@@ -39,6 +42,10 @@ class ProjectViewModel : ObservableObject {
 
     private lazy var projectController = ProjectController.shared
 
+    private func updatePlaybackEndTime() {
+        playbackEndTime = timeFormatter.string(from: Date(timeIntervalSince1970: projectController.duration))
+    }
+
     init() {
         if !SwiftUIUtils.isPreview() {
             isMetronomeEnabled = projectController.metronomeEnabled
@@ -51,6 +58,8 @@ class ProjectViewModel : ObservableObject {
                 return PlaybackSection(name: name, position: position)
             }
             title = projectController.artistName + " - " + projectController.songTitle
+            timeFormatter.dateFormat = "m:ss"
+            updatePlaybackEndTime()
         } else {
             playbackSections = [
                 .init(name: "Verse", position: 0.2),
@@ -106,9 +115,14 @@ extension ProjectViewModel : ProjectControllerBridgeDelegate {
         disableProgressUpdate = true
         progress = CGFloat(projectController.convertSeek(toPlaybackProgress: seek))
         disableProgressUpdate = false
+        playbackCurrentTime = timeFormatter.string(from: Date(timeIntervalSince1970: seek))
     }
 
     func projectControllerUpdate(lyricsVisibility: Bool) {
         isLyricsVisible = lyricsVisibility;
+    }
+
+    func projectControllerUpdateTempo(factor: Double) {
+        updatePlaybackEndTime()
     }
 }

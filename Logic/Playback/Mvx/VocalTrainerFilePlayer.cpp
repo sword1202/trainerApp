@@ -190,6 +190,10 @@ void VocalTrainerFilePlayer::play() {
 }
 
 void VocalTrainerFilePlayer::setSeek(double value) {
+    if (value == getMainPlayer()->getSeek()) {
+        return;
+    }
+
     assert(value >= 0 && value <= getMainPlayer()->getOriginalTrackDurationInSeconds());
     for (auto* player : players) {
         player->setSeek(value);

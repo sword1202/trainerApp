@@ -101,6 +101,7 @@ public:
 
     double getBeatsPerMinute() const;
     double getOriginalBeatsPerMinute() const;
+    double getDuration() const;
 
     float getVerticalScrollPosition() const;
     void setVerticalScrollPosition(float position);

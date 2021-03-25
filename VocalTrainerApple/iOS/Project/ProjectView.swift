@@ -111,7 +111,11 @@ struct ProjectView: View {
                             .background(Colors.tone2)
                 }
                 VStack(alignment: .center) {
-                    PlaybackSlider(progress: $viewModel.progress, sections: $viewModel.playbackSections)
+                    PlaybackSlider(
+                            progress: $viewModel.progress,
+                            sections: $viewModel.playbackSections,
+                            currentTime: $viewModel.playbackCurrentTime,
+                            endTime: $viewModel.playbackEndTime)
                             .padding(.leading, 16)
                             .padding(.trailing, 16)
                             .padding(.top, 14)
