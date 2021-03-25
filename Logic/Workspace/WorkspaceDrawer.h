@@ -39,8 +39,8 @@ class WorkspaceDrawer : public WorkspaceController {
     double beatsPerSecond;
     double totalDurationInSeconds;
     bool running;
-    std::atomic_int firstPitchIndex;
-    std::atomic_int lastPitchIndex;
+    int firstPitchIndex;
+    int lastPitchIndex;
 
     PlaybackBounds playbackBounds;
 
@@ -186,11 +186,9 @@ public:
     float getHorizontalOffset() const override;
 
     double getBeatsPerSecond() const override;
-    void setBeatsPerSecond(double beatsPerSecond) override;
     double getBeatDuration() const;
 
     double getTotalDurationInSeconds() const;
-    void setTotalDurationInSeconds(double totalDurationInSeconds) override;
 
     float getSummarizedGridHeight() const override;
 
@@ -222,7 +220,7 @@ public:
     void setPitchesCollection(const PitchesCollection *pitchesCollection) override;
 
     // Warning: VocalPart should not be changed from outside
-    void setVocalPart(const VocalPart *vocalPart) override;
+    void setVocalPart(const VocalPart *vocalPart, double beatsPerSecond) override;
     int getDistanceFromFirstPitch(const Pitch &pitch) const;
 
     void update() override;

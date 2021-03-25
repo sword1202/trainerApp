@@ -461,8 +461,11 @@ float WorkspaceDrawer::getSummarizedPlayableGridWidth() const {
     return intervalsCount * intervalWidth;
 }
 
-void WorkspaceDrawer::setVocalPart(const VocalPart *vocalPart) {
+void WorkspaceDrawer::setVocalPart(const VocalPart *vocalPart, double beatsPerSecond) {
     this->vocalPart = vocalPart;
+    this->beatsPerSecond = beatsPerSecond;
+    this->totalDurationInSeconds = vocalPart->getDurationInSeconds();
+    updateHorizontalScrollBarPageSize();
 }
 
 void WorkspaceDrawer::initGraphPitchesArrays(float workspaceSeek) {
@@ -774,20 +777,8 @@ double WorkspaceDrawer::getBeatsPerSecond() const {
     return beatsPerSecond;
 }
 
-void WorkspaceDrawer::setBeatsPerSecond(double beatsPerSecond) {
-    CHECK_IF_RENDER_THREAD;
-    this->beatsPerSecond = beatsPerSecond;
-    updateHorizontalScrollBarPageSize();
-}
-
 double WorkspaceDrawer::getTotalDurationInSeconds() const {
     return totalDurationInSeconds;
-}
-
-void WorkspaceDrawer::setTotalDurationInSeconds(double totalDurationInSeconds) {
-    CHECK_IF_RENDER_THREAD;
-    this->totalDurationInSeconds = totalDurationInSeconds;
-    updateHorizontalScrollBarPageSize();
 }
 
 void WorkspaceDrawer::setPitchesCollection(const PitchesCollection *pitchesCollection) {

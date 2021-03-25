@@ -21,8 +21,6 @@ public:
 class WorkspaceController {
 public:
     virtual void setPitchesCollection(const PitchesCollection *pitchesCollection) = 0;
-    virtual void setBeatsPerSecond(double intervalsPerSecond) = 0;
-    virtual void setTotalDurationInSeconds(double totalDurationInSeconds) = 0;
     virtual bool isRunning() const = 0;
     virtual void setRunning(bool value) = 0;
     virtual double getBeatsPerSecond() const = 0;
@@ -32,7 +30,7 @@ public:
     virtual float getVisibleGridHeight() const = 0;
     virtual float getSummarizedPlayableGridWidth() const = 0;
     virtual float getSummarizedGridHeight() const = 0;
-    virtual void setVocalPart(const VocalPart *vocalPart) = 0;
+    virtual void setVocalPart(const VocalPart *vocalPart, double beatsPerSecond) = 0;
     virtual void setFirstVisiblePitch(const Pitch &firstPitch) = 0;
     virtual void update() = 0;
     virtual void setDetectedPitch(const Pitch &detectedPitch) = 0;
