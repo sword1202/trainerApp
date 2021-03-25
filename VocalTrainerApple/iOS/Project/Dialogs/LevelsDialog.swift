@@ -38,18 +38,16 @@ private struct LevelSection : View {
 }
 
 struct LevelsDialog : View {
-    @Binding var instrumentalLevel: Float
-    @Binding var vocalLineLevel: Float
-    @Binding var voiceLevel: Float
     @Binding var isShown: Bool
+    @ObservedObject private var viewModel = LevelsViewModel()
 
     var body: some View {
-        BottomDialog(title: "Levels", titleIcon:"LevelsButton", isShown: $isShown) {
+        BottomDialog(title: Strings.levels.localized, titleIcon:"LevelsButton", isShown: $isShown) {
             VStack{
-                LevelSection(label: Strings.instrumentalLevelLabel.localized, value: $instrumentalLevel)
-                LevelSection(label: Strings.vocalLineLevelLabel.localized, value: $vocalLineLevel)
-                if (voiceLevel >= 0) {
-                    LevelSection(label: Strings.voiceLevelLabel.localized, value: $voiceLevel)
+                LevelSection(label: Strings.instrumentalLevelLabel.localized, value: $viewModel.instrumentalLevel)
+                LevelSection(label: Strings.vocalLineLevelLabel.localized, value: $viewModel.vocalLineLevel)
+                if (viewModel.voiceLevel >= 0) {
+                    LevelSection(label: Strings.voiceLevelLabel.localized, value: $viewModel.voiceLevel)
                 }
             }.background(Color.white)
         }

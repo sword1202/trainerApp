@@ -12,6 +12,7 @@
 #include "StringUtils.h"
 #include "Collections.h"
 #include "Maps.h"
+#include "NotImplementedAssert.h"
 
 using namespace CppUtils;
 using namespace Math;
@@ -145,4 +146,9 @@ double VxFile::getBeatsPerMinute() const {
 
 const std::vector<short> &VxFile::getInstrumentalPreviewSamples() const {
     return Collections::emptyVector<short>();
+}
+
+const Tonality &VxFile::getOriginalTonality() const {
+    NOT_IMPLEMENTED_ASSERT;
+    return Tonality();
 }

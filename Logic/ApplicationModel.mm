@@ -10,5 +10,9 @@ std::string ApplicationModel::getSfzFilePath() const {
 
 std::string ApplicationModel::getMetronomeDataFilePath() const {
     NSString *result = [NSBundle.mainBundle pathForResource:@"metronome" ofType:@"wav"];
+    if (!result) {
+        return "";
+    }
+
     return std::string(result.UTF8String);
 }

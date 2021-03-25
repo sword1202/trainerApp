@@ -15,8 +15,10 @@ ApplicationModel::ApplicationModel() {
     SfzPitchRenderer::initSfz(sfzPath);
     player = new VocalTrainerFilePlayer();
     std::string metronomeFilePath = getMetronomeDataFilePath();
-    std::string metronomeData = Strings::ReadBinaryFileContent(metronomeFilePath.data());
-    player->setMetronomeSoundData(std::move(metronomeData));
+    if (!metronomeFilePath.empty()) {
+        std::string metronomeData = Strings::ReadBinaryFileContent(metronomeFilePath.data());
+        player->setMetronomeSoundData(std::move(metronomeData));
+    }
     audioInputManager = new AudioInputManager("");
 }
 

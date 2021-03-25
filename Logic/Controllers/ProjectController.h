@@ -12,6 +12,7 @@
 #include "Timer.h"
 #include "Rewinder.h"
 #include "Point.h"
+#include "Tonality.h"
 
 class ProjectControllerDelegate {
 public:
@@ -30,6 +31,7 @@ public:
     virtual inline void updateInputSensitivity(float value) {}
     virtual inline void updateSaveIndicator(bool hasSaveIndicator) {}
     virtual inline void updateZoom(float value) {}
+    virtual inline void updateTonality(int shift) {}
     virtual inline void onRewindStatusChanged(bool rewindRunning, bool backward) {}
 };
 
@@ -54,6 +56,8 @@ public:
     const std::string& getArtistNameUtf8();
     const std::string& getSongTitleUtf8();
 
+    const Tonality& getOriginalTonality() const;
+
     void togglePlay();
     void stop();
     bool isPlaying() const;
@@ -72,9 +76,16 @@ public:
     void setVocalPianoVolume(float value);
     void setInstrumentalVolume(float value);
 
+    float getVocalVolume() const;
+    float getInputSensitivity() const;
+    float getVocalPianoVolume() const;
+    float getInstrumentalVolume() const;
+    
     void setLyricsVisible(bool value);
     void setMetronomeEnabled(bool value);
     void setTracksVisible(bool value);
+
+    void setPitchShift(int value);
 
     bool isLyricsVisible() const;
     bool isTracksVisible() const;

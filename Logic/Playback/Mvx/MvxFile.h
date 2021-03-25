@@ -12,6 +12,7 @@
 #include "Lyrics.h"
 #include "AudioData.h"
 #import "VocalTrainerFile.h"
+#include "Tonality.h"
 #include <boost/variant.hpp>
 #include <map>
 #include <boost/serialization/map.hpp>
@@ -22,6 +23,7 @@ class MvxFile : public VocalTrainerFile {
     std::string songTitleUtf8;
     std::string artistNameUtf8;
     double score = -1.0;
+    Tonality originalTonality;
 
     // core data
     VocalPart vocalPart;
@@ -64,6 +66,7 @@ class MvxFile : public VocalTrainerFile {
         ar & songTitleUtf8;
         ar & artistNameUtf8;
         ar & score;
+        ar & originalTonality;
 
         if (!readOnlySignature) {
             ar & beatsPerMinute;
@@ -71,21 +74,11 @@ class MvxFile : public VocalTrainerFile {
             ar & instrumental;
             ar & recordingData;
 
-            if (version >= 2) {
-                ar & recordedPitchesTimes;
-                ar & recordedPitchesFrequencies;
-            }
+            ar & recordedPitchesTimes;
+            ar & recordedPitchesFrequencies;
+            ar & instrumentalPreviewSamples;
+            ar & recordingTonalityChanges;
 
-            if (version >= 3) {
-                ar & instrumentalPreviewSamples;
-            }
-
-            if (version >= 5) {
-                ar & recordingTonalityChanges;
-            }
-        }
-
-        if (version >= 6) {
             std::string str;
             if (isSave) {
                 str = lyrics.toUtf8String();
@@ -156,17 +149,14 @@ public:
 
     const std::map<double, int> &getRecordingTonalityChanges() const;
     void setRecordingTonalityChanges(const std::map<double, int> &recordingTonalityChanges);
+
+    const Tonality &getOriginalTonality() const override;
+
+    void setOriginalTonality(const Tonality &originalTonality);
 };
 
 
-/**
- * Version 2: recordedPitchesTimes and recordedPitchesFrequencies are added
- * Version 3: instrumentalPreviewSamples added
- * Version 4: Lyrics added
- * Version 5: recordingTonalityChanges added
- * Version 6: lyrics reworked
- */
-BOOST_CLASS_VERSION(MvxFile, 6)
+BOOST_CLASS_VERSION(MvxFile, 1)
 
 
 #endif //VOCALTRAINER_MVXFILE_H

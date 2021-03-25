@@ -59,10 +59,7 @@ struct BottomDialog<Content: View> : View {
                                 .font(Font.system(size: 24, weight: .semibold))
                                 .padding(.leading, 8)
                         Spacer()
-                        ZStack {
-                            Circle().fill(Colors.buttonTone1)
-                            Image("x")
-                        }.frame(width: 30, height: 30).padding(.trailing, 16).onTapGesture {
+                        CircleButton(icon: "x").padding(.trailing, 16).onTapGesture {
                             isShown = false
                         }
                     }.frame(width: geometry.size.width, height: 72).background(BlurView(style: .systemMaterial))

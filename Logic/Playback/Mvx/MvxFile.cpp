@@ -174,3 +174,11 @@ void MvxFile::loadLyricsFromFile(const char *filePath) {
 void MvxFile::loadLyricsFromStream(std::istream &is) {
     lyrics = Lyrics(Strings::StreamToString(is));
 }
+
+const Tonality &MvxFile::getOriginalTonality() const {
+    return originalTonality;
+}
+
+void MvxFile::setOriginalTonality(const Tonality &originalTonality) {
+    MvxFile::originalTonality = originalTonality;
+}

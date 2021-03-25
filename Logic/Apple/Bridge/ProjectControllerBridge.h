@@ -32,6 +32,7 @@
 @property (readonly) bool boundsSelectionEnabled;
 @property (readonly) bool isPlaying;
 @property (readonly) NSArray<LyricsSection*>* lyricsSections;
+@property (readonly) SongTonality* originalTonality;
 
 - (void)goToBeginning;
 - (void)toggleTracksVisibility;
@@ -50,4 +51,6 @@
 - (void)setInputSensitivity:(float)value;
 - (void)setVocalPianoVolume:(float)value;
 - (void)setInstrumentalVolume:(float)value;
+
+- (void)setPitchShift:(NSInteger)value;
 @end

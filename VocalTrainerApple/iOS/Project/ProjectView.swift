@@ -25,10 +25,34 @@ private struct TopPanelToggleButton: View {
     }
 }
 
+private struct TonalityButton: View {
+    @Binding var isSelected: Bool
+    @Binding var tonality: String
+
+    var body: some View {
+        Button(action: {
+            isSelected.toggle()
+        }) {
+            VStack(spacing: 3) {
+                Text(tonality)
+                        .font(Font.system(size: 16, weight: .semibold))
+                        .foregroundColor(Color.white)
+                Text(Strings.key.localized.uppercased())
+                        .font(Font.system(size: 9, weight: .regular))
+                        .foregroundColor(Color.white)
+            }
+        }.frame(width: topButtonFrameSize + 12, height: topButtonFrameSize)
+                .background(isSelected ? Colors.tone3 : Color.white.opacity(0.0))
+                .cornerRadius(3)
+    }
+}
+
 struct ProjectView: View {
     @Environment(\.scenePhase) private var scenePhase
     @ObservedObject private var viewModel = ProjectViewModel()
+    @ObservedObject private var tonalityViewModel = TonalityViewModel()
     @State private var levelsVisible = false
+    @State private var tonalityDialogVisible = false
 
     var body: some View {
         ZStack {
@@ -43,6 +67,7 @@ struct ProjectView: View {
                 VStack {
                     HStack(spacing: 8) {
                         Spacer().frame(maxWidth: .infinity, maxHeight: .infinity)
+                        TonalityButton(isSelected: $tonalityDialogVisible, tonality: $tonalityViewModel.tonality)
                         TopPanelToggleButton(image: "LevelsButton", isSelected: $levelsVisible)
                         TopPanelToggleButton(image: "LyricsToggleButton", isSelected: $viewModel.isLyricsVisible)
                         TopPanelToggleButton(image: "MetronomeButton", isSelected: $viewModel.isMetronomeEnabled)
@@ -86,12 +111,10 @@ struct ProjectView: View {
                         alignment: .bottomLeading)
             }
             if levelsVisible {
-                LevelsDialog(
-                        instrumentalLevel: $viewModel.instrumentalLevel,
-                        vocalLineLevel: $viewModel.vocalLineLevel,
-                        voiceLevel: $viewModel.voiceLevel,
-                        isShown: $levelsVisible
-                )
+                LevelsDialog(isShown: $levelsVisible)
+            }
+            if tonalityDialogVisible {
+                TonalityDialog(viewModel: tonalityViewModel, isShown: $tonalityDialogVisible)
             }
         }
     }

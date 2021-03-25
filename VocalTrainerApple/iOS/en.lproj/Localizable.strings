@@ -10,7 +10,28 @@
 "chorus" = "Ch";
 "bridge" = "Br";
 
+"levels" = "Levels";
+"tempo" = "Tempo";
+"key" = "Key";
+
+"C" = "C";
+"Cs" = "C#";
+"D" = "D";
+"Eb" = "E♭";
+"F" = "F";
+"Fs" = "F#";
+"G" = "G";
+"Gs" = "G#";
+"A" = "A";
+"Bb" = "B♭";
+"B" = "B";
+
+"minor" = "min";
+"major" = "maj";
+
 "instrumentalLevelLabel" = "Instrumental:";
 "vocalLineLevelLabel" = "Vocal line:";
 "voiceLevelLabel" = "Voice:";
+
+"originalTonalityLabel" = "Original:";
 

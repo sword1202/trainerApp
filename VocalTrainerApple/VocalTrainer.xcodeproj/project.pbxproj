@@ -54,11 +54,13 @@
 		C9FFF1CC35BFB853F799A067 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC52FFD52111E4F8EA1C /* CGPoint+Extensions.swift */; };
 		C9FFF21CCE66232D3BD5D0D5 /* SwiftUI+View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF4CBD38366784EA507D4 /* SwiftUI+View+Extensions.swift */; };
 		C9FFF2979636C30023334438 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF7DE831C9EFAE9A0AB40 /* Colors.swift */; };
+		C9FFF2F5CB244F6DBBCA7A41 /* LevelsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFCFB7BC97E2712B303B3 /* LevelsViewModel.swift */; };
 		C9FFF30D5DC223798F402711 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE11E22C2516D645DF01 /* Strings.swift */; };
 		C9FFF34C1612C15FF57F4AE5 /* SwiftUI+ClickGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF3DAD525F726E84AA8F2 /* SwiftUI+ClickGesture.swift */; };
 		C9FFF36C6140C724632BAA67 /* Sequence+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF854128820437B780180 /* Sequence+Extensions.swift */; };
 		C9FFF3F713E181FA7B8210A4 /* CGRect+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFFAE7CC0D189849A9037 /* CGRect+Extensions.swift */; };
 		C9FFF451B9ED8CB8302A93FC /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6B6CE54A534CEEF0922 /* CGFloat+Extensions.swift */; };
+		C9FFF4A92FE069332443CDB2 /* SongTonality+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF1756DDFE9ED2936A436 /* SongTonality+Extensions.swift */; };
 		C9FFF4C53A59C75C850804B7 /* PlaybackSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFED7F11D6AF3519851A4 /* PlaybackSlider.swift */; };
 		C9FFF51E2A83C9955ED92971 /* LyricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF62862ADA76292D2C339 /* LyricsView.swift */; };
 		C9FFF5234D4EAB1506C3AA9B /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFB04D3EC00676045C44B /* ProjectView.swift */; };
@@ -70,6 +72,7 @@
 		C9FFF88694CBA04B6DD00263 /* metronome.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFC6AA64F7DE371AEF4C4 /* metronome.wav */; };
 		C9FFF92F2CAA4605DF8DFBC1 /* BaseWorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8FE42466B28CAAB81B9 /* BaseWorkspaceDrawerView.mm */; };
 		C9FFF9793FA19D6309F5BC02 /* WorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFBFBC3CF33B1EFAA4E4A /* WorkspaceDrawerView.mm */; };
+		C9FFF9B5CDD7D8A3D2E2A06B /* TonalityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF5C089DA6D0BBCBA539C /* TonalityViewModel.swift */; };
 		C9FFF9F48A6D816A30F0AE35 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2396E0BB5102967F5B2 /* UIView+Extensions.swift */; };
 		C9FFFAC7A9EEC42DB7900780 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD04B887D1AA905A010C /* Math.swift */; };
 		C9FFFB60BAB5296AE6F06BD9 /* WorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA03F8C9753204A48D4F /* WorkspaceDrawerView.mm */; };
@@ -78,11 +81,13 @@
 		C9FFFBF45045514B7285BF8A /* MacOSWorkspaceDrawerResourcesProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF5B9019937C01C72D703 /* MacOSWorkspaceDrawerResourcesProvider.mm */; };
 		C9FFFBF67228CD92C9CD5AB1 /* BottomDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD46FFA71344BAFB98B1 /* BottomDialog.swift */; };
 		C9FFFBFACE925CE7B2964C33 /* ProjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF35C725ACB57DDF897B4 /* ProjectViewModel.swift */; };
+		C9FFFC11A538A86E041DB8F9 /* TonalityDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA7518DDA6BC7C05D962 /* TonalityDialog.swift */; };
 		C9FFFC357FB17DBCE0DA3B28 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6D026277BCE01AFF619 /* UIImage+Extensions.swift */; };
 		C9FFFC752DA482CBE97EB7E2 /* CGSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF72A1F66910885A40FE2 /* CGSize+Extensions.swift */; };
 		C9FFFCAD8789F460417A34D1 /* LyricsSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA9B5D4BA7CDD7E17563 /* LyricsSelection.swift */; };
 		C9FFFDE8CFC1A43BAEC2DC0D /* WorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF26A997DC1A4CE026760 /* WorkspaceView.swift */; };
 		C9FFFE30D469382B52DBA18B /* CGContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF079046892811FDEB34E /* CGContext+Extensions.swift */; };
+		C9FFFF31D6729113A12EF565 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFCD7899414D9FD2AB7C1 /* CircleButton.swift */; };
 		C9FFFFCAD2E546CF65263FDF /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF56BA4C227BDD029B68D /* UILabel+Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -163,6 +168,7 @@
 		ACF18B2422ECB97C008E7DAA /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
 		C9FFF079046892811FDEB34E /* CGContext+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGContext+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF08F2EBCC23D22942B2D /* LevelsDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsDialog.swift; sourceTree = "<group>"; };
+		C9FFF1756DDFE9ED2936A436 /* SongTonality+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SongTonality+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF18E11AA44C9B5A6225B /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		C9FFF2396E0BB5102967F5B2 /* UIView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF26A997DC1A4CE026760 /* WorkspaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceView.swift; sourceTree = "<group>"; };
@@ -174,6 +180,7 @@
 		C9FFF4CBD38366784EA507D4 /* SwiftUI+View+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftUI+View+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF56BA4C227BDD029B68D /* UILabel+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF5B9019937C01C72D703 /* MacOSWorkspaceDrawerResourcesProvider.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MacOSWorkspaceDrawerResourcesProvider.mm; sourceTree = "<group>"; };
+		C9FFF5C089DA6D0BBCBA539C /* TonalityViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TonalityViewModel.swift; sourceTree = "<group>"; };
 		C9FFF62862ADA76292D2C339 /* LyricsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsView.swift; sourceTree = "<group>"; };
 		C9FFF6B6CE54A534CEEF0922 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF6D026277BCE01AFF619 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
@@ -188,6 +195,7 @@
 		C9FFFA03F8C9753204A48D4F /* WorkspaceDrawerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WorkspaceDrawerView.mm; sourceTree = "<group>"; };
 		C9FFFA377929BCD79ED71678 /* BaseWorkspaceDrawerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseWorkspaceDrawerView.h; sourceTree = "<group>"; };
 		C9FFFA66C60034B706AAE8AA /* WorkspaceDrawerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceDrawerView.h; sourceTree = "<group>"; };
+		C9FFFA7518DDA6BC7C05D962 /* TonalityDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TonalityDialog.swift; sourceTree = "<group>"; };
 		C9FFFA9B5D4BA7CDD7E17563 /* LyricsSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsSelection.swift; sourceTree = "<group>"; };
 		C9FFFAB4B781EDD20802F9BB /* iOSWorkspaceDrawerResourcesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSWorkspaceDrawerResourcesProvider.h; sourceTree = "<group>"; };
 		C9FFFB04D3EC00676045C44B /* ProjectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
@@ -196,6 +204,8 @@
 		C9FFFC52FFD52111E4F8EA1C /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFFC6AA64F7DE371AEF4C4 /* metronome.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = metronome.wav; path = Resources/metronome.wav; sourceTree = "<group>"; };
 		C9FFFCA54695F1C745C71A9F /* MacOSWorkspaceDrawerDelegateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacOSWorkspaceDrawerDelegateHelper.swift; sourceTree = "<group>"; };
+		C9FFFCD7899414D9FD2AB7C1 /* CircleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
+		C9FFFCFB7BC97E2712B303B3 /* LevelsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsViewModel.swift; sourceTree = "<group>"; };
 		C9FFFD04B887D1AA905A010C /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 		C9FFFD46FFA71344BAFB98B1 /* BottomDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomDialog.swift; sourceTree = "<group>"; };
 		C9FFFE11E22C2516D645DF01 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
@@ -473,6 +483,9 @@
 			isa = PBXGroup;
 			children = (
 				C9FFF08F2EBCC23D22942B2D /* LevelsDialog.swift */,
+				C9FFFA7518DDA6BC7C05D962 /* TonalityDialog.swift */,
+				C9FFFCFB7BC97E2712B303B3 /* LevelsViewModel.swift */,
+				C9FFF5C089DA6D0BBCBA539C /* TonalityViewModel.swift */,
 			);
 			path = Dialogs;
 			sourceTree = "<group>";
@@ -482,6 +495,7 @@
 			children = (
 				C9FFFA9B5D4BA7CDD7E17563 /* LyricsSelection.swift */,
 				C9FFFE11E22C2516D645DF01 /* Strings.swift */,
+				C9FFF1756DDFE9ED2936A436 /* SongTonality+Extensions.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -491,6 +505,7 @@
 			children = (
 				C9FFFD46FFA71344BAFB98B1 /* BottomDialog.swift */,
 				C9FFF9FCDE2ED69025456B41 /* Divider.swift */,
+				C9FFFCD7899414D9FD2AB7C1 /* CircleButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -796,6 +811,11 @@
 				C9FFFDE8CFC1A43BAEC2DC0D /* WorkspaceView.swift in Sources */,
 				C9FFFBA18C3D61CAED56E8D5 /* LevelsDialog.swift in Sources */,
 				C9FFF78036C9ABE74E81FDD3 /* Divider.swift in Sources */,
+				C9FFFF31D6729113A12EF565 /* CircleButton.swift in Sources */,
+				C9FFFC11A538A86E041DB8F9 /* TonalityDialog.swift in Sources */,
+				C9FFF4A92FE069332443CDB2 /* SongTonality+Extensions.swift in Sources */,
+				C9FFF2F5CB244F6DBBCA7A41 /* LevelsViewModel.swift in Sources */,
+				C9FFF9B5CDD7D8A3D2E2A06B /* TonalityViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

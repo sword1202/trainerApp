@@ -10,6 +10,7 @@
 #include "VocalPart.h"
 #include "Lyrics.h"
 #include "AudioData.h"
+#include "Tonality.h"
 #include <map>
 
 class VocalTrainerFile {
@@ -29,6 +30,7 @@ public:
     virtual const std::string &getSongTitleUtf8() const = 0;
     virtual double getBeatsPerMinute() const = 0;
     virtual const std::vector<short> &getInstrumentalPreviewSamples() const = 0;
+    virtual const Tonality& getOriginalTonality() const = 0;
 };
 
 

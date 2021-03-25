@@ -141,6 +141,22 @@ void ProjectController::setInstrumentalVolume(float value) {
     delegate->updateInstrumentalVolume(player->getInstrumentalVolume());
 }
 
+float ProjectController::getVocalVolume() const {
+    return audioInputManager->getOutputVolume();
+}
+
+float ProjectController::getInputSensitivity() const {
+    return audioInputManager->getInputSensitivity();
+}
+
+float ProjectController::getVocalPianoVolume() const {
+    return player->getVocalPianoVolume();
+}
+
+float ProjectController::getInstrumentalVolume() const {
+    return player->getInstrumentalVolume();
+}
+
 void ProjectController::setWorkspaceController(WorkspaceController *workspaceController) {
     assert(!this->workspaceController && workspaceController);
     this->workspaceController = workspaceController;
@@ -325,4 +341,17 @@ double ProjectController::convertSeekToPlaybackProgress(double seek) const {
 
 const std::vector<Lyrics::Section> ProjectController::getLyricsSections() const {
     return player->getLyricsSections();
+}
+
+const Tonality &ProjectController::getOriginalTonality() const {
+    return player->getFile().getOriginalTonality();
+}
+
+void ProjectController::setPitchShift(int value) {
+    if (value == player->getPitchShiftInSemiTones()) {
+        return;
+    }
+
+    player->setPitchShiftInSemiTones(value);
+    delegate->updateTonality(value);
 }

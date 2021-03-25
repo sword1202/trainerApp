@@ -166,6 +166,14 @@ public:
             }
         }
     }
+
+    void updateTonality(int shift) override {
+        for (auto delegate : delegates) {
+            if ([(NSObject *) delegate respondsToSelector:@selector(projectControllerUpdateTonalityWithPitchShift:)]) {
+                [delegate projectControllerUpdateTonalityWithPitchShift:shift];
+            }
+        }
+    }
 };
 
 @implementation ProjectControllerBridge {
@@ -278,6 +286,11 @@ static LyricsSectionType fromCppToObjCSectionType(Lyrics::SectionType type) {
     _cpp->setInstrumentalVolume(value);
 }
 
+- (void)setPitchShift:(NSInteger)value {
+    _cpp->setPitchShift(static_cast<int>(value));
+}
+
+
 - (void)toggleTracksVisibility {
     _cpp->setTracksVisible(!_cpp->isTracksVisible());
 }
@@ -351,5 +364,10 @@ static LyricsSectionType fromCppToObjCSectionType(Lyrics::SectionType type) {
     _cpp->setZoom(zoom, PointF(point));
 }
 
+- (SongTonality*)originalTonality {
+    const auto& tonality = _cpp->getOriginalTonality();
+    return [[SongTonality alloc] initWithPitchInOctaveIndex:tonality.getPitchInOctaveIndex()
+                                                    isMajor:tonality.isMajor()];
+}
 
 @end

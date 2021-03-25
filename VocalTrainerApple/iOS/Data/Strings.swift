@@ -5,18 +5,30 @@
 
 import Foundation
 
-enum Strings : String {
+protocol Localizable {
+    var localized: String { get }
+}
+
+extension Localizable  where Self : RawRepresentable, Self.RawValue == String {
     var localized: String {
         NSLocalizedString(self.rawValue, comment: "")
     }
+}
+
+enum Strings : String, Localizable {
+    case tempo
+    case levels
+    case key
+
+    case instrumentalLevelLabel
+    case vocalLineLevelLabel
+    case voiceLevelLabel
 
     case chorus
     case verse
     case bridge
 
-    case instrumentalLevelLabel
-    case vocalLineLevelLabel
-    case voiceLevelLabel
+    case originalTonalityLabel
 
     static func from(sectionType: LyricsSectionType) -> Strings {
         switch (sectionType) {
@@ -28,4 +40,10 @@ enum Strings : String {
             return bridge
         }
     }
+
+    enum Pitches : String, Localizable, CaseIterable {
+        case C, Cs, D, Eb, E, F, Fs, G, Gs, A, Bb,	B
+    }
+
+    case major, minor
 }
