@@ -12,15 +12,20 @@ class TonalityViewModel : ObservableObject {
         didSet {
             projectController.setPitchShift(shift)
             tonality = projectController.originalTonality.toString(shiftedBy: shift)
+            shiftString = shift <= 0 ? shift.description : "+" + shift.description
         }
     }
 
-    @Published var originalTonality: String = ""
+    @Published var shiftString: String = "0"
+
+    @Published var originalTonalityLabel: String = ""
     @Published var tonality: String = ""
 
     init() {
         if !SwiftUIUtils.isPreview() {
-            originalTonality = projectController.originalTonality.toString()
+            let originalTonality = projectController.originalTonality.toString()
+            originalTonalityLabel = Strings.originalLabel.localized + " " +
+                    projectController.originalTonality.toString()
             tonality = originalTonality
             projectController.add(delegate: self)
         }

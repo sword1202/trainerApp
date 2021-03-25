@@ -60,6 +60,7 @@
 		C9FFF36C6140C724632BAA67 /* Sequence+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF854128820437B780180 /* Sequence+Extensions.swift */; };
 		C9FFF3F713E181FA7B8210A4 /* CGRect+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFFAE7CC0D189849A9037 /* CGRect+Extensions.swift */; };
 		C9FFF451B9ED8CB8302A93FC /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6B6CE54A534CEEF0922 /* CGFloat+Extensions.swift */; };
+		C9FFF473CD51E320B8713338 /* TempoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF282B4D0640E6E04ECE0 /* TempoViewModel.swift */; };
 		C9FFF4A92FE069332443CDB2 /* SongTonality+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF1756DDFE9ED2936A436 /* SongTonality+Extensions.swift */; };
 		C9FFF4C53A59C75C850804B7 /* PlaybackSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFED7F11D6AF3519851A4 /* PlaybackSlider.swift */; };
 		C9FFF51E2A83C9955ED92971 /* LyricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF62862ADA76292D2C339 /* LyricsView.swift */; };
@@ -75,9 +76,11 @@
 		C9FFF9B5CDD7D8A3D2E2A06B /* TonalityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF5C089DA6D0BBCBA539C /* TonalityViewModel.swift */; };
 		C9FFF9F48A6D816A30F0AE35 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2396E0BB5102967F5B2 /* UIView+Extensions.swift */; };
 		C9FFFAC7A9EEC42DB7900780 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD04B887D1AA905A010C /* Math.swift */; };
+		C9FFFB4117D7E4EF6A075F4B /* TempoDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2EABC2C4C23563ADD96 /* TempoDialog.swift */; };
 		C9FFFB60BAB5296AE6F06BD9 /* WorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA03F8C9753204A48D4F /* WorkspaceDrawerView.mm */; };
 		C9FFFB7F402FBE74FC015F81 /* MacOSWorkspaceDrawerDelegateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFCA54695F1C745C71A9F /* MacOSWorkspaceDrawerDelegateHelper.swift */; };
 		C9FFFBA18C3D61CAED56E8D5 /* LevelsDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF08F2EBCC23D22942B2D /* LevelsDialog.swift */; };
+		C9FFFBD39D317854C69C0D6F /* PlusMinusDialogPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF95DC554BB3ACFBAB693 /* PlusMinusDialogPanel.swift */; };
 		C9FFFBF45045514B7285BF8A /* MacOSWorkspaceDrawerResourcesProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF5B9019937C01C72D703 /* MacOSWorkspaceDrawerResourcesProvider.mm */; };
 		C9FFFBF67228CD92C9CD5AB1 /* BottomDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD46FFA71344BAFB98B1 /* BottomDialog.swift */; };
 		C9FFFBFACE925CE7B2964C33 /* ProjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF35C725ACB57DDF897B4 /* ProjectViewModel.swift */; };
@@ -172,6 +175,8 @@
 		C9FFF18E11AA44C9B5A6225B /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		C9FFF2396E0BB5102967F5B2 /* UIView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF26A997DC1A4CE026760 /* WorkspaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceView.swift; sourceTree = "<group>"; };
+		C9FFF282B4D0640E6E04ECE0 /* TempoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TempoViewModel.swift; sourceTree = "<group>"; };
+		C9FFF2EABC2C4C23563ADD96 /* TempoDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TempoDialog.swift; sourceTree = "<group>"; };
 		C9FFF34E5F2FDB3D52CAB4FF /* iOSWorkspaceDrawerResourcesProvider.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = iOSWorkspaceDrawerResourcesProvider.mm; sourceTree = "<group>"; };
 		C9FFF35C725ACB57DDF897B4 /* ProjectViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectViewModel.swift; sourceTree = "<group>"; };
 		C9FFF3CF4F4C6C2BB99ABCD7 /* WorkspaceDrawerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceDrawerView.h; sourceTree = "<group>"; };
@@ -191,6 +196,7 @@
 		C9FFF854128820437B780180 /* Sequence+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sequence+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF8676254998A2E1557B2 /* SwiftUIUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUIUtils.swift; sourceTree = "<group>"; };
 		C9FFF8FE42466B28CAAB81B9 /* BaseWorkspaceDrawerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BaseWorkspaceDrawerView.mm; sourceTree = "<group>"; };
+		C9FFF95DC554BB3ACFBAB693 /* PlusMinusDialogPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlusMinusDialogPanel.swift; sourceTree = "<group>"; };
 		C9FFF9FCDE2ED69025456B41 /* Divider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Divider.swift; sourceTree = "<group>"; };
 		C9FFFA03F8C9753204A48D4F /* WorkspaceDrawerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WorkspaceDrawerView.mm; sourceTree = "<group>"; };
 		C9FFFA377929BCD79ED71678 /* BaseWorkspaceDrawerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseWorkspaceDrawerView.h; sourceTree = "<group>"; };
@@ -486,6 +492,9 @@
 				C9FFFA7518DDA6BC7C05D962 /* TonalityDialog.swift */,
 				C9FFFCFB7BC97E2712B303B3 /* LevelsViewModel.swift */,
 				C9FFF5C089DA6D0BBCBA539C /* TonalityViewModel.swift */,
+				C9FFF2EABC2C4C23563ADD96 /* TempoDialog.swift */,
+				C9FFF282B4D0640E6E04ECE0 /* TempoViewModel.swift */,
+				C9FFF95DC554BB3ACFBAB693 /* PlusMinusDialogPanel.swift */,
 			);
 			path = Dialogs;
 			sourceTree = "<group>";
@@ -816,6 +825,9 @@
 				C9FFF4A92FE069332443CDB2 /* SongTonality+Extensions.swift in Sources */,
 				C9FFF2F5CB244F6DBBCA7A41 /* LevelsViewModel.swift in Sources */,
 				C9FFF9B5CDD7D8A3D2E2A06B /* TonalityViewModel.swift in Sources */,
+				C9FFFB4117D7E4EF6A075F4B /* TempoDialog.swift in Sources */,
+				C9FFF473CD51E320B8713338 /* TempoViewModel.swift in Sources */,
+				C9FFFBD39D317854C69C0D6F /* PlusMinusDialogPanel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

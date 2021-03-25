@@ -32,6 +32,7 @@ public:
     virtual inline void updateSaveIndicator(bool hasSaveIndicator) {}
     virtual inline void updateZoom(float value) {}
     virtual inline void updateTonality(int shift) {}
+    virtual inline void updateTempoFactor(double tempoFactor) {}
     virtual inline void onRewindStatusChanged(bool rewindRunning, bool backward) {}
 };
 
@@ -86,6 +87,7 @@ public:
     void setTracksVisible(bool value);
 
     void setPitchShift(int value);
+    void setTempoFactor(double value);
 
     bool isLyricsVisible() const;
     bool isTracksVisible() const;
@@ -96,6 +98,9 @@ public:
     float getZoom() const;
     float getMinZoom() const;
     float getMaxZoom() const;
+
+    double getBeatsPerMinute() const;
+    double getOriginalBeatsPerMinute() const;
 
     float getVerticalScrollPosition() const;
     void setVerticalScrollPosition(float position);

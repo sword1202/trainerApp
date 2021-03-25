@@ -28,4 +28,5 @@ import CoreGraphics
     @objc optional func projectControllerUpdate(zoom: Float)
     @objc optional func projectController(didChangeRewindStatus running: Bool, isBackward: Bool)
     @objc optional func projectControllerUpdateTonality(pitchShift: Int)
+    @objc optional func projectControllerUpdateTempo(factor: Double)
 }

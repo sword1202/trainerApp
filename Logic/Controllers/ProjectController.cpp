@@ -355,3 +355,20 @@ void ProjectController::setPitchShift(int value) {
     player->setPitchShiftInSemiTones(value);
     delegate->updateTonality(value);
 }
+
+double ProjectController::getBeatsPerMinute() const {
+    return player->getBeatsPerMinute();
+}
+
+double ProjectController::getOriginalBeatsPerMinute() const {
+    return player->getOriginalBeatsPerMinute();
+}
+
+void ProjectController::setTempoFactor(double value) {
+    if (Primitives::CompareFloatsUsingEpsilon(value, player->getTempoFactor(), 0.000001)) {
+        return;
+    }
+
+    player->setTempoFactor(value);
+    delegate->updateTempoFactor(value);
+}

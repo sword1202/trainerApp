@@ -4,6 +4,7 @@
 #include "AudioOperationFailedException.h"
 #include <boost/assert.hpp>
 #include "MathUtils.h"
+#include "Primitives.h"
 
 using namespace CppUtils;
 using namespace std::placeholders;
@@ -184,7 +185,7 @@ void BaseAudioPlayer::pause() {
 
 void BaseAudioPlayer::setSeek(double timeStamp) {
     assert(timeStamp >= 0);
-    double durationInSeconds = getTrackDurationInSeconds();
+    double durationInSeconds = getOriginalTrackDurationInSeconds();
     if (timeStamp > durationInSeconds) {
         timeStamp = durationInSeconds;
     }
@@ -196,7 +197,7 @@ void BaseAudioPlayer::setSeek(double timeStamp) {
     setBufferSeek(secondsSeekToBufferSeek(timeStamp));
 }
 
-double BaseAudioPlayer::getTrackDurationInSeconds() const {
+double BaseAudioPlayer::getOriginalTrackDurationInSeconds() const {
     return playbackData.totalDurationInSeconds;
 }
 
@@ -222,14 +223,6 @@ double BaseAudioPlayer::getSeek() const {
     return bufferSeekToSecondsSeek(getBufferSeek());
 }
 
-int BaseAudioPlayer::secondsToSamplesCount(double secondsSeek) const {
-    return (int)round(secondsSeek * playbackData.sampleRate);
-}
-
-double BaseAudioPlayer::samplesCountToSeconds(int samplesCount) const {
-    return AudioUtils::GetSampleTimeInSeconds(samplesCount, playbackData.sampleRate);
-}
-
 void BaseAudioPlayer::onComplete() {
     playing = false;
     completed = true;
@@ -246,16 +239,16 @@ int BaseAudioPlayer::getSampleSize() const {
 }
 
 double BaseAudioPlayer::bufferSeekToSecondsSeek(int bufferSeek) const {
-    return samplesCountToSeconds(bufferSeek);
+    return AudioUtils::GetSampleTimeInSeconds(bufferSeek, playbackData.sampleRate) / tempoFactor;
 }
 
 int BaseAudioPlayer::secondsSeekToBufferSeek(double timestamp) const {
-    return secondsToSamplesCount(timestamp);
+    return (int)round(timestamp * playbackData.sampleRate);
 }
 
 void BaseAudioPlayer::setBufferSeek(int bufferSeek) {
     double seek = bufferSeekToSecondsSeek(bufferSeek);
-    double total = getTrackDurationInSeconds();
+    double total = getOriginalTrackDurationInSeconds();
     seekChangedListeners.executeAll(seek, total);
 }
 
@@ -296,7 +289,12 @@ double BaseAudioPlayer::getTempoFactor() const {
 }
 
 void BaseAudioPlayer::setTempoFactor(double tempoFactor) {
+    if (Primitives::CompareFloatsUsingEpsilon(double(this->tempoFactor), tempoFactor, 0.000001)) {
+        return;
+    }
+
     this->tempoFactor = tempoFactor;
+    onTempoFactorChanged(tempoFactor);
 }
 
 double BaseAudioPlayer::getCallbackBufferDurationInSeconds() const {
@@ -342,6 +340,12 @@ void BaseAudioPlayer::onTonalityChanged(int value) {
     soundTouch->setPitchSemiTones(value);
 }
 
+void BaseAudioPlayer::onTempoFactorChanged(double value) {
+    assert(value == 0 || soundTouch && "tempo changes are not allowed, soundtouch not "
+                                            "initialised, call initSoundTouch() before prepare to use tempo changing");
+    soundTouch->setTempo(value);
+}
+
 int BaseAudioPlayer::readAudioDataApplySoundTouchIfNeed(void *outputBuffer, int requestedSamplesCount) {
     // Apply tempo and tonality changes, if need.
     if (soundTouch && (pitchShift != 0 || tempoFactor != 1)) {
@@ -369,4 +373,8 @@ int BaseAudioPlayer::readAudioDataApplySoundTouchIfNeed(void *outputBuffer, int 
     } else {
         return readNextSamplesBatch(outputBuffer, requestedSamplesCount, playbackData);
     }
+}
+
+double BaseAudioPlayer::getTrackDurationInSecondsWithTempoApplied() const {
+    return getOriginalTrackDurationInSeconds() / tempoFactor;
 }

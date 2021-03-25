@@ -22,7 +22,7 @@ class BaseAudioPlayer {
     std::string playerName;
 
     std::atomic_int pitchShift;
-    double tempoFactor = 1;
+    std::atomic<double> tempoFactor;
     int dataSentToOutputListenerKey = 0;
     std::atomic_bool looping;
 
@@ -46,9 +46,8 @@ protected:
 
     virtual void onComplete();
     virtual void onTonalityChanged(int value);
+    virtual void onTempoFactorChanged(double value);
 
-    int secondsToSamplesCount(double secondsSeek) const;
-    double samplesCountToSeconds(int samplesCount) const;
     int getSampleSize() const;
 
     virtual void destroy();
@@ -89,7 +88,8 @@ public:
     virtual double getTempoFactor() const;
     virtual void setTempoFactor(double tempoFactor);
 
-    virtual double getTrackDurationInSeconds() const;
+    virtual double getOriginalTrackDurationInSeconds() const;
+    virtual double getTrackDurationInSecondsWithTempoApplied() const;
 
     virtual double getCallbackBufferDurationInSeconds() const;
 

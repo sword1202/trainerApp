@@ -174,6 +174,14 @@ public:
             }
         }
     }
+
+    void updateTempoFactor(double factor) override {
+        for (auto delegate : delegates) {
+            if ([(NSObject *) delegate respondsToSelector:@selector(projectControllerUpdateTempoWithFactor:)]) {
+                [delegate projectControllerUpdateTempoWithFactor:factor];
+            }
+        }
+    }
 };
 
 @implementation ProjectControllerBridge {
@@ -286,6 +294,10 @@ static LyricsSectionType fromCppToObjCSectionType(Lyrics::SectionType type) {
     _cpp->setInstrumentalVolume(value);
 }
 
+- (void)setTempoFactor:(double)value {
+    _cpp->setTempoFactor(value);
+}
+
 - (void)setPitchShift:(NSInteger)value {
     _cpp->setPitchShift(static_cast<int>(value));
 }
@@ -368,6 +380,14 @@ static LyricsSectionType fromCppToObjCSectionType(Lyrics::SectionType type) {
     const auto& tonality = _cpp->getOriginalTonality();
     return [[SongTonality alloc] initWithPitchInOctaveIndex:tonality.getPitchInOctaveIndex()
                                                     isMajor:tonality.isMajor()];
+}
+
+- (double)beatsPerMinute {
+    return _cpp->getBeatsPerMinute();
+}
+
+- (double)originalBeatsPerMinute {
+    return _cpp->getOriginalBeatsPerMinute();
 }
 
 @end

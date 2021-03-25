@@ -31,12 +31,12 @@ void MetronomeAudioPlayer::setAudioDataInfo(double beatsPerMinute, double totalD
 
     int sampleSize = getSampleSize();
     double beatDuration = 60.0 / beatsPerMinute;
-    int beatBufferSize = secondsToSamplesCount(beatDuration) * sampleSize;
+    int beatBufferSize = secondsSeekToBufferSeek(beatDuration) * sampleSize;
     int metronomeBufferSize = (int)metronomeAudioData.size() - WAVFile::DATA_POSITION;
 
     assert(beatBufferSize - metronomeBufferSize >= 0);
 
-    int totalBufferSize = secondsToSamplesCount(totalDurationInSeconds) * sampleSize;
+    int totalBufferSize = secondsSeekToBufferSeek(totalDurationInSeconds) * sampleSize;
 
     audioData.clear();
     audioData.reserve((size_t)totalBufferSize);

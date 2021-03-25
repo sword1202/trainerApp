@@ -113,6 +113,7 @@ public:
     double getDuration() const;
 
     double getBeatsPerMinute() const override;
+    double getOriginalBeatsPerMinute() const;
 
     double getTempoFactor() const;
 

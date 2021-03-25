@@ -28,7 +28,8 @@ enum Strings : String, Localizable {
     case verse
     case bridge
 
-    case originalTonalityLabel
+    case originalLabel
+    case bpmSuffix
 
     static func from(sectionType: LyricsSectionType) -> Strings {
         switch (sectionType) {

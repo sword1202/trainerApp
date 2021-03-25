@@ -33,5 +33,7 @@
 "vocalLineLevelLabel" = "Vocal line:";
 "voiceLevelLabel" = "Voice:";
 
-"originalTonalityLabel" = "Original:";
+"originalLabel" = "Original:";
+
+"bpmSuffix" = "bpm";
 

@@ -22,7 +22,7 @@ void VocalPartAudioPlayer::providePlaybackData(PlaybackData *playbackData) {
     playbackData->numberOfChannels = NUMBER_OF_CHANNELS;
 
     generator->init(*playbackData);
-    generator->resetVocalPart(originalVocalPart);
+    generator->setVocalPart(originalVocalPart);
     playbackData->totalDurationInSeconds = generator->getDurationInSeconds();
 }
 
@@ -60,18 +60,9 @@ void VocalPartAudioPlayer::setVocalPart(const VocalPart &vocalPart) {
     destroy();
     originalVocalPart = vocalPart;
     if (generator) {
-        generator->resetVocalPart(vocalPart);
+        generator->setSeek(0);
+        generator->setVocalPart(vocalPart);
     }
-}
-
-void VocalPartAudioPlayer::setTempoFactor(double tempoFactor) {
-    if (getTempoFactor() == tempoFactor) {
-        return;
-    }
-
-    BaseAudioPlayer::setTempoFactor(tempoFactor);
-    VocalPart vocalPart = originalVocalPart.withChangedTempo(tempoFactor);
-    generator->setVocalPart(vocalPart);
 }
 
 void VocalPartAudioPlayer::onTonalityChanged(int value) {
@@ -81,4 +72,9 @@ void VocalPartAudioPlayer::onTonalityChanged(int value) {
 
 void VocalPartAudioPlayer::destroy() {
     BaseAudioPlayer::destroy();
+}
+
+void VocalPartAudioPlayer::onTempoFactorChanged(double value) {
+    VocalPart vocalPart = originalVocalPart.withChangedTempo(value);
+    generator->setVocalPart(vocalPart);
 }

@@ -21,12 +21,26 @@ class VocalPartAudioDataGenerator {
     mutable std::mutex seekMutex;
     int pcmDataSamplesCount;
 
+    bool requestOffPitches;
     std::vector<int> pitchesIndexes;
     std::vector<int> tempPitchIndexes;
     std::vector<int> difference;
 
     PlaybackData playbackData;
     PitchRenderer* pitchRenderer;
+
+    template <typename Callback>
+    void iteratePitches(const std::vector<int>& indexes, const Callback& callback) {
+        for (int pitchIndex : indexes) {
+            const Pitch& pitch = vocalPart.getNotes()[pitchIndex].pitch;
+            callback(pitch);
+        }
+    }
+
+    void onPitches(const std::vector<int>& indexes);
+    void offPitches(const std::vector<int>& indexes);
+
+    void prepareForVocalPartSet(const VocalPart& vocalPart);
 public:
     VocalPartAudioDataGenerator(PitchRenderer* pitchRenderer);
     void init(const PlaybackData &config);
@@ -42,9 +56,8 @@ public:
 
     const VocalPart &getVocalPart() const;
 
+    void setVocalPart(VocalPart &&vocalPart);
     void setVocalPart(const VocalPart &vocalPart);
-    // setVocalPart and set seek to 0
-    void resetVocalPart(const VocalPart &vocalPart);
 };
 
 

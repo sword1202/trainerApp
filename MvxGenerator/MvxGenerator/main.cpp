@@ -145,7 +145,7 @@ int main(int argc, char *argv[]) {
     } catch (VocalTrainerPlayerPrepareException& e) {
         if (e.getReason() == VocalTrainerPlayerPrepareException::DIFFERENT_DURATIONS) {
             double vocalPartDuration = vocalPart.getDurationInSeconds();
-            double instrumentalDuration = player->getInstrumentalPlayer().getTrackDurationInSeconds();
+            double instrumentalDuration = player->getInstrumentalPlayer().getOriginalTrackDurationInSeconds();
             vocalPart = vocalPart.cutOrExpand(0, instrumentalDuration);
             mvxFile.setVocalPart(vocalPart);
             cout << "Vocal part has duration "

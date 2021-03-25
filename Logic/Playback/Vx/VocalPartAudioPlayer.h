@@ -21,7 +21,9 @@ protected:
     void providePlaybackData(PlaybackData *playbackData) override;
     void onComplete() override;
     int getBufferSeek() const override;
+
     void onTonalityChanged(int pitchShift) override;
+    void onTempoFactorChanged(double value) override;
 
     void destroy() override;
 
@@ -35,7 +37,6 @@ public:
     bool isPitchShiftingAvailable(int distance) const;
 
 public:
-    void setTempoFactor(double tempoFactor) override;
     const VocalPart& getVocalPart() const;
     void setVocalPart(const VocalPart &vocalPart);
 };

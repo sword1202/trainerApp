@@ -190,7 +190,7 @@ void VocalTrainerFilePlayer::play() {
 }
 
 void VocalTrainerFilePlayer::setSeek(double value) {
-    assert(value >= 0 && value <= getMainPlayer()->getTrackDurationInSeconds());
+    assert(value >= 0 && value <= getMainPlayer()->getOriginalTrackDurationInSeconds());
     for (auto* player : players) {
         player->setSeek(value);
     }
@@ -251,10 +251,10 @@ void VocalTrainerFilePlayer::prepare() {
     }
 
     if (metronomePlayer.isPrepared()) {
-        metronomePlayer.setAudioDataInfo(getBeatsPerMinute(), getMainPlayer()->getTrackDurationInSeconds());
+        metronomePlayer.setAudioDataInfo(getBeatsPerMinute(), getMainPlayer()->getOriginalTrackDurationInSeconds());
     }
     if (instrumentalPlayer.getAudioData()) {
-        if (fabs(instrumentalPlayer.getTrackDurationInSeconds() - vocalPartPianoPlayer.getTrackDurationInSeconds()) > 0.005) {
+        if (fabs(instrumentalPlayer.getOriginalTrackDurationInSeconds() - vocalPartPianoPlayer.getOriginalTrackDurationInSeconds()) > 0.005) {
             throw VocalTrainerPlayerPrepareException(VocalTrainerPlayerPrepareException::DIFFERENT_DURATIONS);
         }
     }
@@ -276,7 +276,7 @@ const PlaybackBounds & VocalTrainerFilePlayer::getBounds() const {
 
 void VocalTrainerFilePlayer::setBounds(const PlaybackBounds &bounds) {
     assert(!bounds || (bounds.getStartSeek() >= 0 &&
-            bounds.getEndSeek() <= getMainPlayer()->getTrackDurationInSeconds()));
+            bounds.getEndSeek() <= getMainPlayer()->getOriginalTrackDurationInSeconds()));
     if (!isPlaying()) {
         this->bounds = bounds;
         boundsChangedListeners.executeAll(bounds);
@@ -314,11 +314,11 @@ double VocalTrainerFilePlayer::getPlayStartedTime() const {
 }
 
 double VocalTrainerFilePlayer::getDuration() const {
-    return getMainPlayer()->getTrackDurationInSeconds();
+    return getMainPlayer()->getTrackDurationInSecondsWithTempoApplied();
 }
 
 double VocalTrainerFilePlayer::getBeatsPerMinute() const {
-    return file->getBeatsPerMinute();
+    return getOriginalBeatsPerMinute() * getTempoFactor();
 }
 
 void VocalTrainerFilePlayer::onPlaybackStarted() {
@@ -480,4 +480,8 @@ const LyricsDisplayedLinesProvider *VocalTrainerFilePlayer::getDisplayedLyricsLi
 
 const std::vector<Lyrics::Section> VocalTrainerFilePlayer::getLyricsSections() const {
     return file->getLyrics().getSections();
+}
+
+double VocalTrainerFilePlayer::getOriginalBeatsPerMinute() const {
+    return file->getBeatsPerMinute();
 }

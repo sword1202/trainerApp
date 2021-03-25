@@ -33,6 +33,8 @@
 @property (readonly) bool isPlaying;
 @property (readonly) NSArray<LyricsSection*>* lyricsSections;
 @property (readonly) SongTonality* originalTonality;
+@property (readonly) double beatsPerMinute;
+@property (readonly) double originalBeatsPerMinute;
 
 - (void)goToBeginning;
 - (void)toggleTracksVisibility;
@@ -52,5 +54,6 @@
 - (void)setVocalPianoVolume:(float)value;
 - (void)setInstrumentalVolume:(float)value;
 
+- (void)setTempoFactor:(double)value;
 - (void)setPitchShift:(NSInteger)value;
 @end
