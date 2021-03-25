@@ -6,8 +6,11 @@
 #include "ApplicationModel.h"
 #include "Primitives.h"
 #include "Executors.h"
+#include <iostream>
 
 using namespace CppUtils;
+using std::cout;
+using std::endl;
 
 ProjectController::ProjectController(ProjectControllerDelegate* delegate) : delegate(delegate) {
     auto* model = ApplicationModel::instance();

@@ -28,6 +28,7 @@
 using namespace CppUtils;
 using  namespace Math;
 using std::cout;
+using std::cerr;
 using std::endl;
 
 constexpr float PITCHES_GRAPH_WIDTH_IN_INTERVALS = 4.0f;
@@ -208,6 +209,7 @@ void WorkspaceDrawer::draw() {
     drawer->translate(0, -PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN);
 
     drawer->translate(0, 0);
+    //drawFps(fps);
     drawAboveQueue.process();
 
     drawer->endFrame();
@@ -1014,14 +1016,15 @@ void WorkspaceDrawer::updateHorizontalScrollBarPagePosition() {
 
 void WorkspaceDrawer::drawFps(float fps) {
     auto str = std::to_string(int(round(fps)));
-    if (fps < 53) {
-        str = "0000000";
-    }
-
     drawer->setTextFontSize(yardStickFontSize);
     drawer->setTextStyle(yardStickFontStyle);
     drawer->setFillColor(YARD_STICK_DOT_AND_TEXT_COLOR);
-    drawer->fillText(str, 0, 0);
+    drawer->fillText(str, 20, 20);
+    if (fps < 50) {
+        cerr << "fps=" << fps << endl;
+    } else {
+        cout << "fps=" << fps << endl;
+    }
 }
 
 void WorkspaceDrawer::drawTracks() {
