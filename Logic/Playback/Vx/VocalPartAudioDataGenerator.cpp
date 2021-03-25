@@ -11,6 +11,7 @@
 #include "Sets.h"
 #include "StringUtils.h"
 #include "Primitives.h"
+#include "MathUtils.h"
 #include <iostream>
 
 using namespace CppUtils;
@@ -112,6 +113,7 @@ int VocalPartAudioDataGenerator::getSampleRate() const {
 }
 
 double VocalPartAudioDataGenerator::getDurationInSeconds() const {
+    VXFILE_LOCK;
     return vocalPart.getDurationInSeconds();
 }
 
@@ -121,8 +123,13 @@ const VocalPart &VocalPartAudioDataGenerator::getVocalPart() const {
 }
 
 void VocalPartAudioDataGenerator::prepareForVocalPartSet(const VocalPart& vocalPart) {
-    double durationInSeconds = vocalPart.getDurationInSeconds();
-    pcmDataSamplesCount = (int)ceil(durationInSeconds * playbackData.sampleRate);
+    double newDuration = vocalPart.getDurationInSeconds();
+    double currentDuration = this->vocalPart.getDurationInSeconds();
+    if (!Primitives::CompareFloatsUsingEpsilon(newDuration, currentDuration, 0.000001)) {
+        SEEK_LOCK;
+        seek = Math::RoundToInt(seek * newDuration / currentDuration);
+    }
+    pcmDataSamplesCount = (int)ceil(newDuration * playbackData.sampleRate);
     requestOffPitches = true;
 }
 
