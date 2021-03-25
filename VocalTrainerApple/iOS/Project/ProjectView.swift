@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-private let topButtonFrameSize: CGFloat = 46
+private let topButtonFrameHeight: CGFloat = 46
 
 private struct TopPanelToggleButton: View {
     let image: String
@@ -19,7 +19,7 @@ private struct TopPanelToggleButton: View {
             isSelected.toggle()
         }) {
             Image(image)
-        }.frame(width: topButtonFrameSize, height: topButtonFrameSize)
+        }.frame(width: topButtonFrameHeight + 4, height: topButtonFrameHeight)
                 .background(isSelected ? Colors.tone3 : Color.white.opacity(0.0))
                 .cornerRadius(3)
     }
@@ -43,7 +43,7 @@ private struct TwoLinesButton: View {
                         .font(Font.system(size: 9, weight: .regular))
                         .foregroundColor(Color.white)
             }
-        }.frame(width: width, height: topButtonFrameSize)
+        }.frame(width: width, height: topButtonFrameHeight)
                 .background(isSelected ? Colors.tone3 : Color.white.opacity(0.0))
                 .cornerRadius(3)
     }
@@ -68,25 +68,31 @@ struct ProjectView: View {
             }.edgesIgnoringSafeArea(.bottom).edgesIgnoringSafeArea(.top)
             // Main Content
             VStack(spacing: 0) {
-                VStack {
-                    HStack(spacing: 8) {
+                VStack(spacing: 0) {
+                    HStack(spacing: 6) {
                         Spacer().frame(maxWidth: .infinity, maxHeight: .infinity)
                         TwoLinesButton(
                                 isSelected: $tonalityDialogVisible,
                                 topText: $tonalityViewModel.tonality,
                                 bottomText: Strings.key.localized,
-                                width: topButtonFrameSize + 12)
+                                width: topButtonFrameHeight + 12)
                         TwoLinesButton(
                                 isSelected: $tempoDialogVisible,
                                 topText: $tempoViewModel.bpm,
                                 bottomText: Strings.tempo.localized,
-                                width: topButtonFrameSize + 4)
+                                width: topButtonFrameHeight + 4)
                         TopPanelToggleButton(image: "LevelsButton", isSelected: $levelsVisible)
                         TopPanelToggleButton(image: "LyricsToggleButton", isSelected: $viewModel.isLyricsVisible)
                         TopPanelToggleButton(image: "MetronomeButton", isSelected: $viewModel.isMetronomeEnabled)
-                    }.frame(maxWidth: .infinity, maxHeight: topButtonFrameSize).padding(.trailing, 8)
-                    Spacer().frame(maxWidth: .infinity)
-                }.background(Colors.tone2).frame(maxWidth: .infinity, maxHeight: 80, alignment: .topLeading)
+                    }.frame(maxWidth: .infinity, maxHeight: topButtonFrameHeight).padding(.trailing, 8)
+                    Text(viewModel.title)
+                            .font(Font.system(size: 18, weight: .bold))
+                            .foregroundColor(Color.white)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.top, 8)
+                            .padding(.bottom, 8)
+                            .padding(.leading, 16)
+                }.background(Colors.tone2).frame(maxWidth: .infinity, alignment: .topLeading)
                 WorkspaceView().onChange(of: scenePhase) { phase in
                     switch phase {
                     case .active:

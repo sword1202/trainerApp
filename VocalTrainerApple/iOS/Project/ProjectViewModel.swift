@@ -20,6 +20,7 @@ class ProjectViewModel : ObservableObject {
     @Published var lyricsLines: [String] = []
     @Published var lyricsSelection = LyricsSelection(characterIndex: 0, position: 0, lineIndex: 0)
     @Published var playbackSections: [PlaybackSection] = []
+    @Published var title: String = ""
 
     private var disableProgressUpdate = false
     @Published var progress: CGFloat = 0 {
@@ -49,6 +50,7 @@ class ProjectViewModel : ObservableObject {
                 let position = CGFloat(projectController.convertSeek(toPlaybackProgress: $0.seek))
                 return PlaybackSection(name: name, position: position)
             }
+            title = projectController.artistName + " - " + projectController.songTitle
         } else {
             playbackSections = [
                 .init(name: "Verse", position: 0.2),
