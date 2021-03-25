@@ -39,11 +39,11 @@ private struct LevelSection : View {
 
 struct LevelsDialog : View {
     @Binding var isShown: Bool
-    @ObservedObject private var viewModel = LevelsViewModel()
+    @StateObject private var viewModel = LevelsViewModel()
 
     var body: some View {
         BottomDialog(title: Strings.levels.localized, titleIcon:"LevelsButton", isShown: $isShown) {
-            VStack{
+            VStack {
                 LevelSection(label: Strings.instrumentalLevelLabel.localized, value: $viewModel.instrumentalLevel)
                 LevelSection(label: Strings.vocalLineLevelLabel.localized, value: $viewModel.vocalLineLevel)
                 if (viewModel.voiceLevel >= 0) {

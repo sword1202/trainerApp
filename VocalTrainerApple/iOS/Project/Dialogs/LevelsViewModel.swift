@@ -32,6 +32,12 @@ class LevelsViewModel : ObservableObject {
             projectController.add(delegate: self)
         }
     }
+
+    deinit {
+        if !SwiftUIUtils.isPreview() {
+            projectController.remove(delegate: self)
+        }
+    }
 }
 
 extension LevelsViewModel : ProjectControllerBridgeDelegate {

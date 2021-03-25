@@ -49,8 +49,8 @@ private struct TonalityButton: View {
 
 struct ProjectView: View {
     @Environment(\.scenePhase) private var scenePhase
-    @ObservedObject private var viewModel = ProjectViewModel()
-    @ObservedObject private var tonalityViewModel = TonalityViewModel()
+    @StateObject private var viewModel = ProjectViewModel()
+    @StateObject private var tonalityViewModel = TonalityViewModel()
     @State private var levelsVisible = false
     @State private var tonalityDialogVisible = false
 
