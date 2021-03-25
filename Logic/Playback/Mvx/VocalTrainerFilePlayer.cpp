@@ -366,6 +366,8 @@ void VocalTrainerFilePlayer::setPitchShiftInSemiTones(int value) {
             tonalityChanges[seek] = value;
         }
     }
+
+    vocalPartChangedListeners.executeAll(&vocalPartPianoPlayer.getVocalPart());
 }
 
 bool VocalTrainerFilePlayer::canBeShifted(int distance) const {
@@ -379,6 +381,7 @@ double VocalTrainerFilePlayer::getTempoFactor() const {
 void VocalTrainerFilePlayer::setTempoFactor(double tempoFactor) {
     vocalPartPianoPlayer.setTempoFactor(tempoFactor);
     instrumentalPlayer.setTempoFactor(tempoFactor);
+    vocalPartChangedListeners.executeAll(&vocalPartPianoPlayer.getVocalPart());
 }
 
 void VocalTrainerFilePlayer::setMetronomeSoundData(std::string &&data) {

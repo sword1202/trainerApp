@@ -25,23 +25,25 @@ private struct TopPanelToggleButton: View {
     }
 }
 
-private struct TonalityButton: View {
+private struct TwoLinesButton: View {
     @Binding var isSelected: Bool
-    @Binding var tonality: String
+    @Binding var topText: String
+    let bottomText: String
+    let width: CGFloat
 
     var body: some View {
         Button(action: {
             isSelected.toggle()
         }) {
             VStack(spacing: 3) {
-                Text(tonality)
+                Text(topText)
                         .font(Font.system(size: 16, weight: .semibold))
                         .foregroundColor(Color.white)
-                Text(Strings.key.localized.uppercased())
+                Text(bottomText.uppercased())
                         .font(Font.system(size: 9, weight: .regular))
                         .foregroundColor(Color.white)
             }
-        }.frame(width: topButtonFrameSize + 12, height: topButtonFrameSize)
+        }.frame(width: width, height: topButtonFrameSize)
                 .background(isSelected ? Colors.tone3 : Color.white.opacity(0.0))
                 .cornerRadius(3)
     }
@@ -51,8 +53,10 @@ struct ProjectView: View {
     @Environment(\.scenePhase) private var scenePhase
     @StateObject private var viewModel = ProjectViewModel()
     @StateObject private var tonalityViewModel = TonalityViewModel()
+    @StateObject private var tempoViewModel = TempoViewModel()
     @State private var levelsVisible = false
     @State private var tonalityDialogVisible = false
+    @State private var tempoDialogVisible = false
 
     var body: some View {
         ZStack {
@@ -67,7 +71,16 @@ struct ProjectView: View {
                 VStack {
                     HStack(spacing: 8) {
                         Spacer().frame(maxWidth: .infinity, maxHeight: .infinity)
-                        TonalityButton(isSelected: $tonalityDialogVisible, tonality: $tonalityViewModel.tonality)
+                        TwoLinesButton(
+                                isSelected: $tonalityDialogVisible,
+                                topText: $tonalityViewModel.tonality,
+                                bottomText: Strings.key.localized,
+                                width: topButtonFrameSize + 12)
+                        TwoLinesButton(
+                                isSelected: $tempoDialogVisible,
+                                topText: $tempoViewModel.bpm,
+                                bottomText: Strings.tempo.localized,
+                                width: topButtonFrameSize + 4)
                         TopPanelToggleButton(image: "LevelsButton", isSelected: $levelsVisible)
                         TopPanelToggleButton(image: "LyricsToggleButton", isSelected: $viewModel.isLyricsVisible)
                         TopPanelToggleButton(image: "MetronomeButton", isSelected: $viewModel.isMetronomeEnabled)
@@ -115,6 +128,9 @@ struct ProjectView: View {
             }
             if tonalityDialogVisible {
                 TonalityDialog(viewModel: tonalityViewModel, isShown: $tonalityDialogVisible)
+            }
+            if tempoDialogVisible {
+                TempoDialog(viewModel: tempoViewModel, isShown: $tempoDialogVisible)
             }
         }
     }
