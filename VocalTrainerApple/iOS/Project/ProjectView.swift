@@ -122,6 +122,21 @@ struct ProjectView: View {
                 }.background(Colors.tone1).frame(maxWidth: .infinity,
                         maxHeight: viewModel.playbackSections.count > 1 ? 124 : 112,
                         alignment: .bottomLeading)
+            }.onChange(of: levelsVisible) {
+                if ($0) {
+                    tempoDialogVisible = false
+                    tonalityDialogVisible = false
+                }
+            }.onChange(of: tempoDialogVisible) {
+                if ($0) {
+                    levelsVisible = false
+                    tonalityDialogVisible = false
+                }
+            }.onChange(of: tonalityDialogVisible) {
+                if ($0) {
+                    tempoDialogVisible = false
+                    levelsVisible = false
+                }
             }
             if levelsVisible {
                 LevelsDialog(isShown: $levelsVisible)
