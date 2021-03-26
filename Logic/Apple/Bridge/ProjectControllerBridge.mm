@@ -6,8 +6,11 @@
 #import "ProjectControllerBridge.h"
 #include "ProjectController.h"
 #include "config.h"
+#include <iostream>
 
 using namespace CppUtils;
+using std::cout;
+using std::endl;
 
 CPP_UTILS_DLLHIDE class DelegateWrapper : public ProjectControllerDelegate {
     std::vector<__weak id<ProjectControllerBridgeDelegate> > delegates;
@@ -20,7 +23,9 @@ public:
     }
 
     void removeDelegate(id <ProjectControllerBridgeDelegate> delegate) {
-        CppUtils::Remove(delegates, delegate);
+        CppUtils::RemoveIf(delegates, [&] (id o) {
+            return (__bridge void *)(delegate) == (__bridge void *)(o);
+        });
     }
 
     void updateAudioLevel(double level) override {
