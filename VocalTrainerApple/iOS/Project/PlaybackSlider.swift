@@ -59,7 +59,7 @@ struct PlaybackSlider : View {
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
-                generateSectionNamesViews(width: geometry.size.width, indexCondition: { $0 % 2 == 0 })
+                generateSectionNamesViews(width: geometry.size.width, indexCondition: { $0 % 2 == 0 }).padding(.bottom, 2)
                 ZStack(alignment: .leading) {
                     RoundedRectangle(cornerRadius: progressLineHeight / 2)
                             .fill(Colors.tone3)
@@ -106,7 +106,7 @@ struct PlaybackSlider : View {
                         Spacer()
                         Text(endTime).font(Font.system(size: 10)).foregroundColor(Colors.tone5)
                     }
-                    generateSectionNamesViews(width: geometry.size.width, indexCondition: { $0 % 2 == 1 })
+                    generateSectionNamesViews(width: geometry.size.width, indexCondition: { $0 % 2 == 1 }).padding(.top, 2)
                 }
             }
         }

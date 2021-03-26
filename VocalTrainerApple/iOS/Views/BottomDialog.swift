@@ -62,7 +62,7 @@ struct BottomDialog<Content: View> : View {
                         CircleButton(icon: "x").padding(.trailing, 16).onTapGesture {
                             isShown = false
                         }
-                    }.frame(width: geometry.size.width, height: 72).background(BlurView(style: .systemMaterial))
+                    }.frame(width: geometry.size.width, height: 72).background(BlurView(style: .systemMaterialLight))
                     content
                     Spacer().frame(width: geometry.size.width, height: geometry.safeAreaInsets.bottom)
                             .background(Color.white)
