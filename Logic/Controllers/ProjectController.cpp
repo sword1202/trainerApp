@@ -68,7 +68,9 @@ ProjectController::ProjectController(ProjectControllerDelegate* delegate) : dele
     audioInputManager->setOutputVolume(0.0);
 
     audioInputManager->getPitchDetectedListeners().addListener([=] (const Pitch& pitch, double) {
-        workspaceController->setDetectedPitch(pitch);
+        if (workspaceController) {
+            workspaceController->setDetectedPitch(pitch);
+        }
     }, this);
 
     audioInputManager->addAudioInputLevelMonitor([=] (double level) {

@@ -13,57 +13,54 @@ using std::cout;
 using std::endl;
 
 CPP_UTILS_DLLHIDE class DelegateWrapper : public ProjectControllerDelegate {
-    std::vector<id<ProjectControllerBridgeDelegate> > delegates;
+    NSMutableArray<id<ProjectControllerBridgeDelegate> >* delegates;
+public:
+    DelegateWrapper() {
+        delegates = [NSMutableArray new];
+    }
 
-    template <typename Func>
-    void forEach(SEL checkSelector, const Func& func) {
-        for (auto delegate : delegates) {
-            if ([(NSObject*)delegate respondsToSelector:checkSelector]) {
-                func(delegate);
+    void addDelegate(id <ProjectControllerBridgeDelegate> delegate) {
+        [delegates addObject:delegate];
+    }
+
+    void removeDelegate(id <ProjectControllerBridgeDelegate> delegate) {
+        [delegates removeObject:delegate];
+    }
+
+    void updateAudioLevel(double level) override {
+        for (id delegate in delegates) {
+            if ([delegate respondsToSelector:@selector(projectControllerUpdateWithAudioLevel:)]) {
+                [delegate projectControllerUpdateWithAudioLevel:level];
             }
         }
     }
 
-public:
-    DelegateWrapper(){
-    }
-
-    void addDelegate(id <ProjectControllerBridgeDelegate> delegate) {
-        delegates.push_back(delegate);
-    }
-
-    void removeDelegate(id <ProjectControllerBridgeDelegate> delegate) {
-        CppUtils::RemoveIf(delegates, [&] (id o) {
-            return (__bridge void *)(delegate) == (__bridge void *)(o);
-        });
-    }
-
-    void updateAudioLevel(double level) override {
-        forEach(@selector(projectControllerUpdateWithAudioLevel:), [&] (id delegate) {
-            [delegate projectControllerUpdateWithAudioLevel:level];
-        });
-    }
-
     void updateSeek(double seek) override {
-        forEach(@selector(projectControllerUpdateWithSeek:), [&] (id delegate) {
-            [delegate projectControllerUpdateWithSeek:seek];
-        });
+        for (id delegate in delegates) {
+            if ([delegate respondsToSelector:@selector(projectControllerUpdateWithSeek:)]) {
+                [delegate projectControllerUpdateWithSeek:seek];
+            }
+        }
     }
 
     void onPlaybackStarted() override {
-        forEach(@selector(projectControllerPlaybackDidStart), [&] (id delegate) {
-            [delegate projectControllerPlaybackDidStart];
-        });
+        for (id delegate in delegates) {
+            if ([delegate respondsToSelector:@selector(projectControllerPlaybackDidStart)]) {
+                [delegate projectControllerPlaybackDidStart];
+            }
+        }
     }
 
     void onPlaybackStopped() override {
-        forEach(@selector(projectControllerPlaybackDidStop), [&] (id delegate) {
-            [delegate projectControllerPlaybackDidStop];
-        });
+        for (id delegate in delegates) {
+            if ([delegate respondsToSelector:@selector(projectControllerPlaybackDidStop)]) {
+                [delegate projectControllerPlaybackDidStop];
+            }
+        }
     }
 
     void updateLyricsLines(const LyricsDisplayedLinesProvider *linesProvider) override {
-        if (delegates.empty()) {
+        if (delegates.count == 0) {
             return;
         }
 
@@ -76,90 +73,118 @@ public:
             [lines addObject:objCline];
         }
 
-        forEach(@selector(projectControllerUpdateWithCurrentLyricsLines:), [&] (id delegate) {
-            [delegate projectControllerUpdateWithCurrentLyricsLines:lines];
-        });
+        for (id delegate in delegates) {
+            if ([delegate respondsToSelector:@selector(projectControllerUpdateWithCurrentLyricsLines:)]) {
+                [delegate projectControllerUpdateWithCurrentLyricsLines:lines];
+            }
+        }
     }
 
     void updateLyricsSelection(const LyricsPlayer::Selection& selection) override {
-        forEach(@selector(projectControllerUpdateLyricsSelectionWithSelectedCharactersCount:lastCharacterSelectionPosition:lineIndex:),
-                [&] (id delegate) {
-                    [delegate projectControllerUpdateLyricsSelectionWithSelectedCharactersCount:selection.lineSelection.charactersCount
-                                                                 lastCharacterSelectionPosition:selection.lineSelection.lastCharacterSelectionPosition
-                                                                                      lineIndex: selection.lineIndex];
-        });
+        for (id delegate in delegates) {
+            if ([delegate respondsToSelector:@selector(projectControllerUpdateLyricsSelectionWithSelectedCharactersCount:lastCharacterSelectionPosition:lineIndex:)]) {
+                [delegate projectControllerUpdateLyricsSelectionWithSelectedCharactersCount:selection.lineSelection.charactersCount
+                                                             lastCharacterSelectionPosition:selection.lineSelection.lastCharacterSelectionPosition
+                                                                                  lineIndex: selection.lineIndex];
+            }
+        }
     }
 
     void updateLyricsVisibilityChanged(bool showLyrics) override {
-        forEach(@selector(projectControllerUpdateWithLyricsVisibility:), [&] (id delegate) {
-            [delegate projectControllerUpdateWithLyricsVisibility:showLyrics];
-        });
+        for (id delegate in delegates) {
+            if ([delegate respondsToSelector:@selector(projectControllerUpdateWithLyricsVisibility:)]) {
+                [delegate projectControllerUpdateWithLyricsVisibility:showLyrics];
+            }
+        }
     }
 
     void onTracksVisibilityChanged(bool value) override {
-        forEach(@selector(projectControllerUpdateWithTracksVisibility:), [&] (id delegate) {
-            [delegate projectControllerUpdateWithTracksVisibility:value];
-        });
+        for (id delegate in delegates) {
+            if ([delegate respondsToSelector:@selector(projectControllerUpdateWithTracksVisibility:)]) {
+                [delegate projectControllerUpdateWithTracksVisibility:value];
+            }
+        }
     }
 
     void onMetronomeEnabledChanged(bool enabled) override {
-        forEach(@selector(projectControllerWithDidChangeMetronomeEnabled:), [&] (id delegate) {
-            [delegate projectControllerWithDidChangeMetronomeEnabled:enabled];
-        });
+        for (id delegate in delegates) {
+            if ([delegate respondsToSelector:@selector(projectControllerWithDidChangeMetronomeEnabled:)]) {
+                [delegate projectControllerWithDidChangeMetronomeEnabled:enabled];
+            }
+        }
     }
 
     void updateVocalPianoVolume(float volume) override {
-        forEach(@selector(projectControllerUpdateWithVocalPianoVolume:), [&] (id delegate) {
-            [delegate projectControllerUpdateWithVocalPianoVolume:volume];
-        });
+        for (id delegate in delegates) {
+            if ([delegate respondsToSelector:@selector(projectControllerUpdateWithVocalPianoVolume:)]) {
+                [delegate projectControllerUpdateWithVocalPianoVolume:volume];
+            }
+        }
     }
 
     void updateInstrumentalVolume(float volume) override {
-        forEach(@selector(projectControllerUpdateWithInstrumentalVolume:), [&] (id delegate) {
-            [delegate projectControllerUpdateWithInstrumentalVolume:volume];
-        });
+        for (id delegate in delegates) {
+            if ([delegate respondsToSelector:@selector(projectControllerUpdateWithInstrumentalVolume:)]) {
+                [delegate projectControllerUpdateWithInstrumentalVolume:volume];
+            }
+        }
     }
 
     void updateVocalVolume(float volume) override {
-        forEach(@selector(projectControllerUpdateWithVocalVolume:), [&] (id delegate) {
-            [delegate projectControllerUpdateWithVocalVolume:volume];
-        });
+        for (id delegate in delegates) {
+            if ([delegate respondsToSelector:@selector(projectControllerUpdateWithVocalVolume:)]) {
+                [delegate projectControllerUpdateWithVocalVolume:volume];
+            }
+        }
     }
 
     void updateInputSensitivity(float value) override {
-        forEach(@selector(projectControllerUpdateWithInputSensitivity:), [&] (id delegate) {
-            [delegate projectControllerUpdateWithInputSensitivity:value];
-        });
+        for (id delegate in delegates) {
+            if ([delegate respondsToSelector:@selector(projectControllerUpdateWithInputSensitivity:)]) {
+                [delegate projectControllerUpdateWithInputSensitivity:value];
+            }
+        }
     }
 
     void updateSaveIndicator(bool hasSaveIndicator) override {
-        forEach(@selector(projectControllerUpdateWithHasSaveIndicator:), [&] (id delegate) {
-            [delegate projectControllerUpdateWithHasSaveIndicator:hasSaveIndicator];
-        });
+        for (id delegate in delegates) {
+            if ([delegate respondsToSelector:@selector(projectControllerUpdateWithHasSaveIndicator:)]) {
+                [delegate projectControllerUpdateWithHasSaveIndicator:hasSaveIndicator];
+            }
+        }
     }
 
     void updateZoom(float value) override {
-        forEach(@selector(projectControllerUpdateWithZoom:), [&] (id delegate) {
-            [delegate projectControllerUpdateWithZoom:value];
-        });
+        for (id delegate in delegates) {
+            if ([delegate respondsToSelector:@selector(projectControllerUpdateWithZoom:)]) {
+                [delegate projectControllerUpdateWithZoom:value];
+            }
+        }
     }
 
     void onRewindStatusChanged(bool rewindRunning, bool backward) override {
-        forEach(@selector(projectControllerWithDidChangeRewindStatus:isBackward:), [&] (id delegate) {
-            [delegate projectControllerWithDidChangeRewindStatus:rewindRunning isBackward:backward];
-        });
+        for (id delegate in delegates) {
+            if ([delegate respondsToSelector:
+                    @selector(projectControllerWithDidChangeRewindStatus:isBackward:)]) {
+                [delegate projectControllerWithDidChangeRewindStatus:rewindRunning isBackward:backward];
+            }
+        }
     }
 
     void updateTonality(int shift) override {
-        forEach(@selector(projectControllerUpdateTonalityWithPitchShift:), [&] (id delegate) {
-            [delegate projectControllerUpdateTonalityWithPitchShift:shift];
-        });
+        for (id delegate in delegates) {
+            if ([delegate respondsToSelector:@selector(projectControllerUpdateTonalityWithPitchShift:)]) {
+                [delegate projectControllerUpdateTonalityWithPitchShift:shift];
+            }
+        }
     }
 
     void updateTempoFactor(double factor) override {
-        forEach(@selector(projectControllerUpdateTempoWithFactor:), [&] (id delegate) {
-            [delegate projectControllerUpdateTempoWithFactor:factor];
-        });
+        for (id delegate in delegates) {
+            if ([delegate respondsToSelector:@selector(projectControllerUpdateTempoWithFactor:)]) {
+                [delegate projectControllerUpdateTempoWithFactor:factor];
+            }
+        }
     }
 };
 

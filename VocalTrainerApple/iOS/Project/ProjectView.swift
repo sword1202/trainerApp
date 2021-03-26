@@ -16,7 +16,9 @@ private struct TopPanelToggleButton: View {
 
     var body: some View {
         Button(action: {
-            isSelected.toggle()
+            withAnimation {
+                isSelected.toggle()
+            }
         }) {
             Image(image)
         }.frame(width: topButtonFrameHeight + 4, height: topButtonFrameHeight)
@@ -33,7 +35,9 @@ private struct TwoLinesButton: View {
 
     var body: some View {
         Button(action: {
-            isSelected.toggle()
+            withAnimation {
+                isSelected.toggle()
+            }
         }) {
             VStack(spacing: 3) {
                 Text(topText)
@@ -93,22 +97,25 @@ struct ProjectView: View {
                             .padding(.bottom, 8)
                             .padding(.leading, 16)
                 }.background(Colors.tone2).frame(maxWidth: .infinity, alignment: .topLeading)
-                WorkspaceView().onChange(of: scenePhase) { phase in
-                    switch phase {
-                    case .active:
-                        viewModel.didBecomeActive()
-                    case .inactive:
-                        viewModel.willBecomeInactive()
-                    case .background:
-                        print("App goes background")
-                    default:
-                        print("Unknown state")
+                ZStack(alignment: .bottom) {
+                    WorkspaceView().onChange(of: scenePhase) { phase in
+                        switch phase {
+                        case .active:
+                            viewModel.didBecomeActive()
+                        case .inactive:
+                            viewModel.willBecomeInactive()
+                        case .background:
+                            print("App goes background")
+                        default:
+                            print("Unknown state")
+                        }
                     }
-                }
-                if (viewModel.isLyricsVisible) {
-                    LyricsView(lines: $viewModel.lyricsLines, lyricsSelection: $viewModel.lyricsSelection)
-                            .frame(maxWidth: .infinity, maxHeight: 82)
-                            .background(Colors.tone2)
+
+                    if (viewModel.isLyricsVisible) {
+                        LyricsView(lines: $viewModel.lyricsLines, lyricsSelection: $viewModel.lyricsSelection)
+                                .frame(maxWidth: .infinity, maxHeight: 82)
+                                .background(Colors.tone2)
+                    }
                 }
                 VStack(alignment: .center) {
                     PlaybackSlider(
@@ -148,14 +155,22 @@ struct ProjectView: View {
                     levelsVisible = false
                 }
             }
-            if levelsVisible {
-                LevelsDialog(isShown: $levelsVisible)
+            // Dialogs
+            // Put all the dialogs into zstacks to make the animation work
+            ZStack {
+                if levelsVisible {
+                    LevelsDialog(isShown: $levelsVisible.animation()).transition(.move(edge: .bottom))
+                }
             }
-            if tonalityDialogVisible {
-                TonalityDialog(viewModel: tonalityViewModel, isShown: $tonalityDialogVisible)
+            ZStack {
+                if tonalityDialogVisible {
+                    TonalityDialog(viewModel: tonalityViewModel, isShown: $tonalityDialogVisible).transition(.move(edge: .bottom))
+                }
             }
-            if tempoDialogVisible {
-                TempoDialog(viewModel: tempoViewModel, isShown: $tempoDialogVisible)
+            ZStack {
+                if tempoDialogVisible {
+                    TempoDialog(viewModel: tempoViewModel, isShown: $tempoDialogVisible).transition(.move(edge: .bottom))
+                }
             }
         }
     }
