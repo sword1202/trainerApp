@@ -23,6 +23,8 @@ class ProjectViewModel : ObservableObject {
     @Published var title: String = ""
     @Published var playbackCurrentTime: String = ""
     @Published var playbackEndTime: String = ""
+    @Published private(set) var retrySeconds = 5
+
     private let timeFormatter = DateFormatter()
 
     private var disableProgressUpdate = false
@@ -88,6 +90,10 @@ class ProjectViewModel : ObservableObject {
     
     func didTapPlayButton() {
         ProjectController.shared.togglePlay()
+    }
+
+    func didTapRetry() {
+        projectController.rewindBack(bySeconds: Double(retrySeconds))
     }
 }
 

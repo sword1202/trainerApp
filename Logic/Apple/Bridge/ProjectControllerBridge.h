@@ -48,6 +48,7 @@
 - (void)toggleRewindWithBackward:(BOOL)backward;
 
 - (void)setPlaybackProgress:(double)value;
+- (void)rewindBackBySeconds:(double)seconds;
 - (double)convertSeekToPlaybackProgress:(double)seek;
 
 - (void)setVocalVolume:(float)value;

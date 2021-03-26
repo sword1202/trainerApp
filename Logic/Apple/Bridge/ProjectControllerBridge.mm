@@ -277,6 +277,11 @@ static LyricsSectionType fromCppToObjCSectionType(Lyrics::SectionType type) {
     _cpp->setPlaybackProgress(value);
 }
 
+- (void)rewindBackBySeconds:(double)seconds {
+    _cpp->rewindBackBySeconds(seconds);
+}
+
+
 - (double)convertSeekToPlaybackProgress:(double)seek {
     return _cpp->convertSeekToPlaybackProgress(seek);
 }

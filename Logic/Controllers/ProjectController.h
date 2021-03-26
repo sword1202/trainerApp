@@ -64,6 +64,8 @@ public:
     bool isPlaying() const;
     void toggleRewind(bool backward);
 
+    void rewindBackBySeconds(double seconds);
+
     void goToBeginning();
 
     void setPlaybackProgress(double value);

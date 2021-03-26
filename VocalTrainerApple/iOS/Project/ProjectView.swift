@@ -97,27 +97,22 @@ struct ProjectView: View {
                             .padding(.bottom, 8)
                             .padding(.leading, 16)
                 }.background(Colors.tone2).frame(maxWidth: .infinity, alignment: .topLeading)
-                ZStack(alignment: .bottom) {
-                    WorkspaceView().onChange(of: scenePhase) { phase in
-                        switch phase {
-                        case .active:
-                            viewModel.didBecomeActive()
-                        case .inactive:
-                            viewModel.willBecomeInactive()
-                        case .background:
-                            print("App goes background")
-                        default:
-                            print("Unknown state")
-                        }
+                WorkspaceView().onChange(of: scenePhase) { phase in
+                    switch phase {
+                    case .active:
+                        viewModel.didBecomeActive()
+                    case .inactive:
+                        viewModel.willBecomeInactive()
+                    case .background:
+                        print("App goes background")
+                    default:
+                        print("Unknown state")
                     }
-
-                    ZStack {
-                        if (viewModel.isLyricsVisible) {
-                            LyricsView(lines: $viewModel.lyricsLines, lyricsSelection: $viewModel.lyricsSelection)
-                                    .frame(maxWidth: .infinity, maxHeight: 82)
-                                    .background(Colors.tone2)
-                        }
-                    }
+                }
+                if (viewModel.isLyricsVisible) {
+                    LyricsView(lines: $viewModel.lyricsLines, lyricsSelection: $viewModel.lyricsSelection)
+                            .frame(maxWidth: .infinity, maxHeight: 82)
+                            .background(Colors.tone2)
                 }
                 VStack(alignment: .center) {
                     PlaybackSlider(
@@ -130,7 +125,15 @@ struct ProjectView: View {
                             .padding(.top, 14)
                     Spacer().frame(maxWidth: .infinity)
                     HStack {
-                        Image("RetryButton")
+                        Button(action: {
+                            viewModel.didTapRetry()
+                        }) {
+                            ZStack {
+                                Image("RetryButton")
+                                Text(viewModel.retrySeconds.description).font(Font.system(size: 10, weight: .bold))
+                                        .foregroundColor(Colors.tone3).offset(y: 2)
+                            }
+                        }
                         Button(action: {
                             viewModel.didTapPlayButton()
                         }) {

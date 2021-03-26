@@ -380,3 +380,11 @@ void ProjectController::setTempoFactor(double value) {
 double ProjectController::getDuration() const {
     return player->getDuration();
 }
+
+void ProjectController::rewindBackBySeconds(double seconds) {
+    double result = player->getSeek() - seconds;
+    if (result < 0) {
+        result = 0;
+    }
+    player->setSeek(result);
+}
