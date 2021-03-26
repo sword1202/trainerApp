@@ -13,7 +13,17 @@ using std::cout;
 using std::endl;
 
 CPP_UTILS_DLLHIDE class DelegateWrapper : public ProjectControllerDelegate {
-    std::vector<__weak id<ProjectControllerBridgeDelegate> > delegates;
+    std::vector<id<ProjectControllerBridgeDelegate> > delegates;
+
+    template <typename Func>
+    void forEach(SEL checkSelector, const Func& func) {
+        for (auto delegate : delegates) {
+            if ([(NSObject*)delegate respondsToSelector:checkSelector]) {
+                func(delegate);
+            }
+        }
+    }
+
 public:
     DelegateWrapper(){
     }
@@ -29,35 +39,27 @@ public:
     }
 
     void updateAudioLevel(double level) override {
-        for (auto delegate : delegates) {
-            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerUpdateWithAudioLevel:)]) {
-                [delegate projectControllerUpdateWithAudioLevel:level];
-            }
-        }
+        forEach(@selector(projectControllerUpdateWithAudioLevel:), [&] (id delegate) {
+            [delegate projectControllerUpdateWithAudioLevel:level];
+        });
     }
 
     void updateSeek(double seek) override {
-        for (auto delegate : delegates) {
-            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerUpdateWithSeek:)]) {
-                [delegate projectControllerUpdateWithSeek:seek];
-            }
-        }
+        forEach(@selector(projectControllerUpdateWithSeek:), [&] (id delegate) {
+            [delegate projectControllerUpdateWithSeek:seek];
+        });
     }
 
     void onPlaybackStarted() override {
-        for (auto delegate : delegates) {
-            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerPlaybackDidStart)]) {
-                [delegate projectControllerPlaybackDidStart];
-            }
-        }
+        forEach(@selector(projectControllerPlaybackDidStart), [&] (id delegate) {
+            [delegate projectControllerPlaybackDidStart];
+        });
     }
 
     void onPlaybackStopped() override {
-        for (auto delegate : delegates) {
-            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerPlaybackDidStop)]) {
-                [delegate projectControllerPlaybackDidStop];
-            }
-        }
+        forEach(@selector(projectControllerPlaybackDidStop), [&] (id delegate) {
+            [delegate projectControllerPlaybackDidStop];
+        });
     }
 
     void updateLyricsLines(const LyricsDisplayedLinesProvider *linesProvider) override {
@@ -74,118 +76,90 @@ public:
             [lines addObject:objCline];
         }
 
-        for (auto delegate : delegates) {
-            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerUpdateWithCurrentLyricsLines:)]) {
-                [delegate projectControllerUpdateWithCurrentLyricsLines:lines];
-            }
-        }
+        forEach(@selector(projectControllerUpdateWithCurrentLyricsLines:), [&] (id delegate) {
+            [delegate projectControllerUpdateWithCurrentLyricsLines:lines];
+        });
     }
 
     void updateLyricsSelection(const LyricsPlayer::Selection& selection) override {
-        for (auto delegate : delegates) {
-            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerUpdateLyricsSelectionWithSelectedCharactersCount:lastCharacterSelectionPosition:lineIndex:)]) {
-                [delegate projectControllerUpdateLyricsSelectionWithSelectedCharactersCount:selection.lineSelection.charactersCount
-                                                             lastCharacterSelectionPosition:selection.lineSelection.lastCharacterSelectionPosition
-                                                             lineIndex: selection.lineIndex];
-            }
-        }
+        forEach(@selector(projectControllerUpdateLyricsSelectionWithSelectedCharactersCount:lastCharacterSelectionPosition:lineIndex:),
+                [&] (id delegate) {
+                    [delegate projectControllerUpdateLyricsSelectionWithSelectedCharactersCount:selection.lineSelection.charactersCount
+                                                                 lastCharacterSelectionPosition:selection.lineSelection.lastCharacterSelectionPosition
+                                                                                      lineIndex: selection.lineIndex];
+        });
     }
 
     void updateLyricsVisibilityChanged(bool showLyrics) override {
-        for (auto delegate : delegates) {
-            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerUpdateWithLyricsVisibility:)]) {
-                [delegate projectControllerUpdateWithLyricsVisibility:showLyrics];
-            }
-        }
+        forEach(@selector(projectControllerUpdateWithLyricsVisibility:), [&] (id delegate) {
+            [delegate projectControllerUpdateWithLyricsVisibility:showLyrics];
+        });
     }
 
     void onTracksVisibilityChanged(bool value) override {
-        for (auto delegate : delegates) {
-            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerUpdateWithTracksVisibility:)]) {
-                [delegate projectControllerUpdateWithTracksVisibility:value];
-            }
-        }
+        forEach(@selector(projectControllerUpdateWithTracksVisibility:), [&] (id delegate) {
+            [delegate projectControllerUpdateWithTracksVisibility:value];
+        });
     }
 
     void onMetronomeEnabledChanged(bool enabled) override {
-        for (auto delegate : delegates) {
-            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerWithDidChangeMetronomeEnabled:)]) {
-                [delegate projectControllerWithDidChangeMetronomeEnabled:enabled];
-            }
-        }
+        forEach(@selector(projectControllerWithDidChangeMetronomeEnabled:), [&] (id delegate) {
+            [delegate projectControllerWithDidChangeMetronomeEnabled:enabled];
+        });
     }
 
     void updateVocalPianoVolume(float volume) override {
-        for (auto delegate : delegates) {
-            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerUpdateWithVocalPianoVolume:)]) {
-                [delegate projectControllerUpdateWithVocalPianoVolume:volume];
-            }
-        }
+        forEach(@selector(projectControllerUpdateWithVocalPianoVolume:), [&] (id delegate) {
+            [delegate projectControllerUpdateWithVocalPianoVolume:volume];
+        });
     }
 
     void updateInstrumentalVolume(float volume) override {
-        for (auto delegate : delegates) {
-            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerUpdateWithInstrumentalVolume:)]) {
-                [delegate projectControllerUpdateWithInstrumentalVolume:volume];
-            }
-        }
+        forEach(@selector(projectControllerUpdateWithInstrumentalVolume:), [&] (id delegate) {
+            [delegate projectControllerUpdateWithInstrumentalVolume:volume];
+        });
     }
 
     void updateVocalVolume(float volume) override {
-        for (auto delegate : delegates) {
-            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerUpdateWithVocalVolume:)]) {
-                [delegate projectControllerUpdateWithVocalVolume:volume];
-            }
-        }
+        forEach(@selector(projectControllerUpdateWithVocalVolume:), [&] (id delegate) {
+            [delegate projectControllerUpdateWithVocalVolume:volume];
+        });
     }
 
     void updateInputSensitivity(float value) override {
-        for (auto delegate : delegates) {
-            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerUpdateWithInputSensitivity:)]) {
-                [delegate projectControllerUpdateWithInputSensitivity:value];
-            }
-        }
+        forEach(@selector(projectControllerUpdateWithInputSensitivity:), [&] (id delegate) {
+            [delegate projectControllerUpdateWithInputSensitivity:value];
+        });
     }
 
     void updateSaveIndicator(bool hasSaveIndicator) override {
-        for (auto delegate : delegates) {
-            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerUpdateWithHasSaveIndicator:)]) {
-                [delegate projectControllerUpdateWithHasSaveIndicator:hasSaveIndicator];
-            }
-        }
+        forEach(@selector(projectControllerUpdateWithHasSaveIndicator:), [&] (id delegate) {
+            [delegate projectControllerUpdateWithHasSaveIndicator:hasSaveIndicator];
+        });
     }
 
     void updateZoom(float value) override {
-        for (auto delegate : delegates) {
-            if ([(NSObject*)delegate respondsToSelector:@selector(projectControllerUpdateWithZoom:)]) {
-                [delegate projectControllerUpdateWithZoom:value];
-            }
-        }
+        forEach(@selector(projectControllerUpdateWithZoom:), [&] (id delegate) {
+            [delegate projectControllerUpdateWithZoom:value];
+        });
     }
 
     void onRewindStatusChanged(bool rewindRunning, bool backward) override {
-        for (auto delegate : delegates) {
-            if ([(NSObject*)delegate respondsToSelector:
-                    @selector(projectControllerWithDidChangeRewindStatus:isBackward:)]) {
-                [delegate projectControllerWithDidChangeRewindStatus:rewindRunning isBackward:backward];
-            }
-        }
+        forEach(@selector(projectControllerWithDidChangeRewindStatus:isBackward:), [&] (id delegate) {
+            [delegate projectControllerWithDidChangeRewindStatus:rewindRunning isBackward:backward];
+        });
     }
 
     void updateTonality(int shift) override {
-        for (auto delegate : delegates) {
-            if ([(NSObject *) delegate respondsToSelector:@selector(projectControllerUpdateTonalityWithPitchShift:)]) {
-                [delegate projectControllerUpdateTonalityWithPitchShift:shift];
-            }
-        }
+        forEach(@selector(projectControllerUpdateTonalityWithPitchShift:), [&] (id delegate) {
+            [delegate projectControllerUpdateTonalityWithPitchShift:shift];
+        });
     }
 
     void updateTempoFactor(double factor) override {
-        for (auto delegate : delegates) {
-            if ([(NSObject *) delegate respondsToSelector:@selector(projectControllerUpdateTempoWithFactor:)]) {
-                [delegate projectControllerUpdateTempoWithFactor:factor];
-            }
-        }
+        forEach(@selector(projectControllerUpdateTempoWithFactor:), [&] (id delegate) {
+            [delegate projectControllerUpdateTempoWithFactor:factor];
+        });
     }
 };
 
