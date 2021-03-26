@@ -111,10 +111,12 @@ struct ProjectView: View {
                         }
                     }
 
-                    if (viewModel.isLyricsVisible) {
-                        LyricsView(lines: $viewModel.lyricsLines, lyricsSelection: $viewModel.lyricsSelection)
-                                .frame(maxWidth: .infinity, maxHeight: 82)
-                                .background(Colors.tone2)
+                    ZStack {
+                        if (viewModel.isLyricsVisible) {
+                            LyricsView(lines: $viewModel.lyricsLines, lyricsSelection: $viewModel.lyricsSelection)
+                                    .frame(maxWidth: .infinity, maxHeight: 82)
+                                    .background(Colors.tone2)
+                        }
                     }
                 }
                 VStack(alignment: .center) {
