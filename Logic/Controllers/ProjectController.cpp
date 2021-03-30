@@ -325,7 +325,10 @@ void ProjectController::updateDelegate() {
     if (workspaceController) {
         delegate->updateZoom(workspaceController->getZoom());
     }
-    delegate->updateLyricsLines(player->getDisplayedLyricsLines());
+    const LyricsDisplayedLinesProvider *lyricsLines = player->getDisplayedLyricsLines();
+    if (lyricsLines) {
+        delegate->updateLyricsLines(lyricsLines);
+    }
 }
 
 void ProjectController::setPlaybackProgress(double value) {
@@ -343,7 +346,7 @@ double ProjectController::convertSeekToPlaybackProgress(double seek) const {
     }
 }
 
-const std::vector<Lyrics::Section> ProjectController::getLyricsSections() const {
+const std::deque<Lyrics::Section>& ProjectController::getLyricsSections() const {
     return player->getLyricsSections();
 }
 

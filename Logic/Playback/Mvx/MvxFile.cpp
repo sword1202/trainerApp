@@ -168,7 +168,7 @@ void MvxFile::setRecordingTonalityChanges(const std::map<double, int> &recording
 }
 
 void MvxFile::loadLyricsFromFile(const char *filePath) {
-    lyrics = Lyrics(Strings::ReadFileIntoString(filePath));
+    lyrics = Lyrics(Strings::ReadFileIntoString(filePath), &vocalPart);
 }
 
 void MvxFile::loadLyricsFromStream(std::istream &is) {

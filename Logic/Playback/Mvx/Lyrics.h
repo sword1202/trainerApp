@@ -6,9 +6,10 @@
 #define TEXTIMAGESGENERATOR_LYRICS_H
 
 #include <map>
-#include <vector>
+#include <deque>
 #include <string>
 #include <optional>
+#include "VocalPart.h"
 
 class Lyrics {
 public:
@@ -24,10 +25,10 @@ public:
     };
 
     struct Range {
-        int startCharacterIndex;
-        int charactersCount;
-        double startSeek;
-        double endSeek;
+        int startCharacterIndex = 0;
+        int charactersCount = 0;
+        double startSeek = 0;
+        double endSeek = 0;
         const Section* section = nullptr;
 
         inline double getDuration() const {
@@ -66,9 +67,10 @@ public:
 
 private:
     std::u32string text;
-    std::vector<Section> sections;
+    std::deque<Section> sections;
     std::map<double, Range> ranges;
-    std::vector<Line> lines;
+    std::deque<Line> lines;
+    std::map<double, int> endSeekLineIndexesMap;
 
     static std::pair<double, double> parseRange(const std::u32string, int begin, int end);
     static SectionType getSectionTypeByTypeId(char32_t sectionType);
@@ -79,19 +81,22 @@ private:
 public:
     static Lyrics EMPTY;
 
-    const std::vector<Section>& getSections() const;
+    const std::deque<Section>& getSections() const;
     const Line& getLineAt(int index) const;
     const Line& getLastLine() const;
     int getLinesCount() const;
     std::u32string_view getLineText(const Line& line) const;
     std::u32string_view getLineTextAt(int index) const;
 
+    int getNextOrCurrentLineIndexBySeek(double seek) const;
+
     LineSelection getLineSelection(
             const Line& line,
             double seek) const;
 
     Lyrics() = default;
-    Lyrics(const std::string& utf8);
+    // vocalPart is used for fast lyrics format
+    Lyrics(const std::string& utf8, const VocalPart* vocalPart = nullptr);
 
     std::string toUtf8String() const;
 

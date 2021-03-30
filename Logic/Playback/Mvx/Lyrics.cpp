@@ -8,10 +8,15 @@
 #include "StringUtils.h"
 #include "Maps.h"
 #include "MathUtils.h"
+#include <boost/logic/tribool.hpp>
+#include <iostream>
 
 using namespace CppUtils;
+using boost::logic::tribool;
 
-Lyrics::Lyrics(const std::string &utf8) {
+BOOST_TRIBOOL_THIRD_STATE(undefined)
+
+Lyrics::Lyrics(const std::string &utf8, const VocalPart* vocalPart) {
     std::u32string u32 = UtfUtils::ToUtf32(utf8);
     u32 = Strings::LeftTrim(u32);
     u32 = Strings::RemoveAllCharacterRepetitions(u32, U'\n');
@@ -22,35 +27,80 @@ Lyrics::Lyrics(const std::string &utf8) {
     int rangeStartCharacter = -1;
     Line* currentLine = nullptr;
     Section* currentSection = nullptr;
+    tribool isFastLyricsFormat = undefined;
+    // Used for fast-format lyrics
+    int currentNoteIndex = 0;
+    // Used for fast-format lyrics
+    std::vector<NoteInterval> notes;
 
     for (int i = 0; i < u32.size(); ++i) {
         char32_t ch = u32[i];
-        if (ch == U'[') {
-            // Parse range description
-            size_t rangeEndIndex = u32.find(']', static_cast<size_t>(i + 1));
-            if (rangeEndIndex == std::string::npos) {
-                throw std::runtime_error("Lyrics parse failed, can't find ] for range description");
+        if (ch == U'[' || ch == U'*') {
+            if (ch == U'[') {
+                if (isFastLyricsFormat) {
+                    throw std::runtime_error("[] range operators are not supported for fast lyrics format use either * or []");
+                } else {
+                    isFastLyricsFormat = false;
+                }
+            } else {
+                if (!isFastLyricsFormat) {
+                    throw std::runtime_error("* operator is not supported for non-fast lyrics format use either * or []");
+                } else {
+                    if (!vocalPart) {
+                        throw std::runtime_error("vocalPart must be defined for fast lyrics format. Fast lyrics format uses * operator");
+                    }
+                    notes = CppUtils::RemoveDuplicatesInSortedCollection(
+                            vocalPart->getNotes(), [&](const NoteInterval &a, const NoteInterval &b) {
+                        return a.intersectsWith(b);
+                    });
+                    isFastLyricsFormat = true;
+                }
             }
 
-            auto parsedRange = parseRange(u32, i + 1, static_cast<int>(rangeEndIndex));
             Range range;
+            int rangeEndIndex;
 
-            if (rangeStartCharacter < 0) {
-                throw std::runtime_error("Lyrics parse failed, range doesn't contain any characters");
+            if (!isFastLyricsFormat) {
+                // Parse range description
+                rangeEndIndex = static_cast<int>(u32.find(']', static_cast<size_t>(i + 1)));
+                if (rangeEndIndex == std::string::npos) {
+                    throw std::runtime_error("Lyrics parse failed, can't find ] for range description");
+                }
+
+                auto parsedRange = parseRange(u32, i + 1, rangeEndIndex);
+
+                if (rangeStartCharacter < 0) {
+                    throw std::runtime_error("Lyrics parse failed, range doesn't contain any characters");
+                }
+
+                range.startSeek = parsedRange.first;
+                range.endSeek = parsedRange.second;
+            } else {
+                rangeEndIndex = i - 1;
+                for (int j = i; j < u32.size() && u32[j] == U'*'; ++j) {
+                    if (currentNoteIndex >= notes.size()) {
+                        throw std::runtime_error("Lyrics parse failed, number of notes marked in "
+                                                 "lyrics doesn't match number of notes specified in the vocal part");
+                    }
+                    const auto& note = notes[currentNoteIndex++];
+                    if (j == i) {
+                        range.startSeek = vocalPart->ticksToSeconds(note.startTickNumber);
+                    }
+                    rangeEndIndex++;
+                    range.endSeek = vocalPart->ticksToSeconds(note.endTickNumber());
+                }
             }
 
             assert(currentSection);
             range.startCharacterIndex = rangeStartCharacter - skippedCharactersCount;
             range.charactersCount = i - rangeStartCharacter;
-            range.startSeek = parsedRange.first;
-            range.endSeek = parsedRange.second;
             range.section = currentSection;
 
             if (previousRange && previousRange->endSeek > range.startSeek) {
                 std::stringstream message;
                 message << "Lyrics parse failed, invalid range: ["
-                << range.startSeek << ";" << range.endSeek << "] "
-                << "after range: [" << previousRange->startSeek << ";" << previousRange->endSeek << "]";
+                        << range.startSeek << ";" << range.endSeek << "] "
+                        << "after range: [" << previousRange->startSeek << ";" << previousRange->endSeek << "]";
                 throw std::runtime_error(message.str());
             }
 
@@ -76,7 +126,7 @@ Lyrics::Lyrics(const std::string &utf8) {
             }
 
             skippedCharactersCount += (rangeEndIndex - i + 1);
-            i = static_cast<int>(rangeEndIndex);
+            i = rangeEndIndex;
             rangeStartCharacter = -1;
         } else if (ch == U'{') {
             if (!u32.empty() && u32[i - 1] != U'\n' && i != 0) {
@@ -112,6 +162,10 @@ Lyrics::Lyrics(const std::string &utf8) {
                 }
             }
         }
+    }
+
+    for (int i = 0; i < lines.size(); ++i) {
+        endSeekLineIndexesMap[lines[i].getEndSeek()] = i;
     }
 }
 
@@ -160,7 +214,7 @@ std::string Lyrics::toUtf8String() const {
     auto rangeIter = ranges.begin();
     auto lineIter = lines.begin();
     for (const Section& section : sections) {
-        result << '{' << sectionTypeToChar(section.sectionType) << section.number << "}\n";
+        result << "\n{" << sectionTypeToChar(section.sectionType) << section.number << "}\n";
         const Range* range = &rangeIter->second;
         while (range->section == &section) {
             if (lineIter->startCharacterIndex + lineIter->charactersCount < range->startCharacterIndex) {
@@ -189,7 +243,7 @@ std::string Lyrics::getRangeUtf8Text(const Lyrics::Range &range) const {
     return UtfUtils::ToUtf8(getRangeText(range));
 }
 
-const std::vector<Lyrics::Section> &Lyrics::getSections() const {
+const std::deque<Lyrics::Section> & Lyrics::getSections() const {
     return sections;
 }
 
@@ -225,6 +279,7 @@ Lyrics::LineSelection Lyrics::getLineSelection(
     if (range.endSeek < seek) {
         return selection;
     } else {
+        assert(range.startSeek >= line.startSeek && range.endSeek <= line.getEndSeek());
         double characterDuration = range.getDuration() / range.charactersCount;
         double seekInRange = seek - range.startSeek;
         double f = fmod(seekInRange, characterDuration);
@@ -249,6 +304,15 @@ bool Lyrics::isEmpty() const {
 
 const Lyrics::Line &Lyrics::getLastLine() const {
     return getLineAt(getLinesCount() - 1);
+}
+
+int Lyrics::getNextOrCurrentLineIndexBySeek(double seek) const {
+    auto iter = endSeekLineIndexesMap.upper_bound(seek);
+    if (iter == endSeekLineIndexesMap.end()) {
+        return -1;
+    }
+
+    return iter->second;
 }
 
 void Lyrics::Range::writeToStream(std::ostream &os) const {

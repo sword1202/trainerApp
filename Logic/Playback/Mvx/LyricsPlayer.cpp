@@ -21,52 +21,41 @@ double LyricsPlayer::getSeek() const {
 void LyricsPlayer::setSeek(double seek) {
     this->seek = seek;
     updateLines();
-    updateSelection();
 }
 
 void LyricsPlayer::updateLines() {
-    int currentFirstLineIndexBefore = currentFirstLineIndex;
-
-    const Lyrics::Line* firstLine = &lyrics->getLineAt(currentFirstLineIndex);
-    if (firstLine->getEndSeek() < seek && currentFirstLineIndex < getDisplayLinesCount() - 1) {
-        do {
-            firstLine = &lyrics->getLineAt(++currentFirstLineIndex);
-        } while(firstLine->getEndSeek() < seek && currentFirstLineIndex < getDisplayLinesCount() - 1);
-    } else if (firstLine->startSeek > seek && currentFirstLineIndex != 0) {
-        int i = currentFirstLineIndex;
-        do {
-            firstLine = &lyrics->getLineAt(--i);
-        } while(i > 0 && firstLine->startSeek > seek);
-
-        currentFirstLineIndex = i;
-        if (firstLine->getEndSeek() < seek) {
-            currentFirstLineIndex++;
-        }
+    int currentFirstLineIndexBefore = currentOrNextLineIndex;
+    currentOrNextLineIndex = lyrics->getNextOrCurrentLineIndexBySeek(seek);
+    if (currentOrNextLineIndex < 0 || currentOrNextLineIndex >= lyrics->getLinesCount()) {
+        currentOrNextLineIndex = lyrics->getLinesCount() - 1;
     }
 
-    if (currentFirstLineIndexBefore != currentFirstLineIndex) {
+    if (currentFirstLineIndexBefore != currentOrNextLineIndex) {
         if (onLinesChanged) {
             onLinesChanged(this);
         }
     }
+
+    updateSelection();
 }
 
 void LyricsPlayer::updateSelection() {
-    const auto& line = lyrics->getLineAt(currentFirstLineIndex);
-
     Selection selection;
     if (seek > lyrics->getLastLine().getEndSeek()) {
         selection.lineSelection.charactersCount = lyrics->getLastLine().charactersCount;
         selection.lineSelection.lastCharacterSelectionPosition = 1.0;
         selection.lineIndex = 1;
     } else {
+        selection.lineIndex = currentOrNextLineIndex == lyrics->getLinesCount() - 1 ? 1 : 0;
+        int index = convertDisplayedLineIndexIntoGlobalIndex(selection.lineIndex);
+        const auto& line = lyrics->getLineAt(index);
         selection.lineSelection = lyrics->getLineSelection(line, seek);
         assert(simultaneouslyLinesDisplayCount == 2 && "Hardcoded, pls fix");
-        selection.lineIndex = currentFirstLineIndex == lyrics->getLinesCount() - 1 ? 1 : 0;
     }
 
     if (selection != this->selection) {
         this->selection = selection;
+        assert(getDisplayedLineAt(selection.lineIndex).size() >= selection.lineSelection.charactersCount);
         onSelectionChanged(this->selection);
     }
 }
@@ -76,8 +65,18 @@ int LyricsPlayer::getDisplayLinesCount() const {
 }
 
 std::u32string_view LyricsPlayer::getDisplayedLineAt(int index) const {
-    assert(index < getDisplayLinesCount());
+    index = convertDisplayedLineIndexIntoGlobalIndex(index);
     return lyrics->getLineTextAt(index);
+}
+
+int LyricsPlayer::convertDisplayedLineIndexIntoGlobalIndex(int index) const {
+    assert(index < getDisplayLinesCount());
+    int firstDisplayedLineIndex = currentOrNextLineIndex;
+    if (firstDisplayedLineIndex > lyrics->getLinesCount() - simultaneouslyLinesDisplayCount) {
+        firstDisplayedLineIndex = lyrics->getLinesCount() - simultaneouslyLinesDisplayCount;
+    }
+
+    return firstDisplayedLineIndex + index;
 }
 
 bool LyricsPlayer::Selection::operator==(const LyricsPlayer::Selection &rhs) const {

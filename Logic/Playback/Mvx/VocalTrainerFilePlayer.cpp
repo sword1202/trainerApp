@@ -485,7 +485,7 @@ const LyricsDisplayedLinesProvider *VocalTrainerFilePlayer::getDisplayedLyricsLi
     return lyricsPlayer;
 }
 
-const std::vector<Lyrics::Section> VocalTrainerFilePlayer::getLyricsSections() const {
+const std::deque<Lyrics::Section>& VocalTrainerFilePlayer::getLyricsSections() const {
     return file->getLyrics().getSections();
 }
 

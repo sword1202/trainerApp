@@ -25,11 +25,13 @@ private:
     const Lyrics* lyrics;
     double seek = 0;
     int simultaneouslyLinesDisplayCount;
-    int currentFirstLineIndex = 0;
+    int currentOrNextLineIndex = 0;
     Selection selection;
 
     void updateLines();
     void updateSelection();
+
+    int convertDisplayedLineIndexIntoGlobalIndex(int index) const;
 public:
     std::function<void(const LyricsDisplayedLinesProvider*)> onLinesChanged;
     std::function<void(const Selection&)> onSelectionChanged;

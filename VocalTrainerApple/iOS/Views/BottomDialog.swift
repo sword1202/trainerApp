@@ -5,11 +5,6 @@
 
 import SwiftUI
 
-import SwiftUI
-
-@available(OSX 10.15, *)
-@available(iOS 13.0, *)
-
 private struct BlurView: UIViewRepresentable {
     let style: UIBlurEffect.Style
 

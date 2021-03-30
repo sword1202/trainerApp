@@ -147,7 +147,7 @@ public:
 
     const LyricsDisplayedLinesProvider* getDisplayedLyricsLines() const;
 
-    const std::vector<Lyrics::Section> getLyricsSections() const;
+    const std::deque<Lyrics::Section> & getLyricsSections() const;
 };
 
 

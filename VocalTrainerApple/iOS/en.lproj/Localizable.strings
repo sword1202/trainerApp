@@ -6,9 +6,9 @@
   Copyright © 2021 Semyon Tikhonenko. All rights reserved.
 */
 
-"verse" = "Vr";
-"chorus" = "Ch";
-"bridge" = "Br";
+"verse" = "Verse";
+"chorus" = "Chorus";
+"bridge" = "Bridge";
 
 "levels" = "Levels";
 "tempo" = "Tempo";
