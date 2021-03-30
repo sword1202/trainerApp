@@ -89,7 +89,9 @@
 		C9FFFC357FB17DBCE0DA3B28 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6D026277BCE01AFF619 /* UIImage+Extensions.swift */; };
 		C9FFFC752DA482CBE97EB7E2 /* CGSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF72A1F66910885A40FE2 /* CGSize+Extensions.swift */; };
 		C9FFFCAD8789F460417A34D1 /* LyricsSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA9B5D4BA7CDD7E17563 /* LyricsSelection.swift */; };
+		C9FFFD5D7E98D6EDA7814BEF /* BoundsSelectionDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE3111A176B9B9D3E9A9 /* BoundsSelectionDialog.swift */; };
 		C9FFFDE8CFC1A43BAEC2DC0D /* WorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF26A997DC1A4CE026760 /* WorkspaceView.swift */; };
+		C9FFFE24912609CFB9A2A4F7 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF134111E663C22048469 /* CheckBox.swift */; };
 		C9FFFE30D469382B52DBA18B /* CGContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF079046892811FDEB34E /* CGContext+Extensions.swift */; };
 		C9FFFF31D6729113A12EF565 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFCD7899414D9FD2AB7C1 /* CircleButton.swift */; };
 		C9FFFFCAD2E546CF65263FDF /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF56BA4C227BDD029B68D /* UILabel+Extensions.swift */; };
@@ -172,6 +174,7 @@
 		ACF18B2422ECB97C008E7DAA /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
 		C9FFF079046892811FDEB34E /* CGContext+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGContext+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF08F2EBCC23D22942B2D /* LevelsDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsDialog.swift; sourceTree = "<group>"; };
+		C9FFF134111E663C22048469 /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		C9FFF1756DDFE9ED2936A436 /* SongTonality+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SongTonality+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF18E11AA44C9B5A6225B /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		C9FFF2396E0BB5102967F5B2 /* UIView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
@@ -217,6 +220,7 @@
 		C9FFFD46FFA71344BAFB98B1 /* BottomDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomDialog.swift; sourceTree = "<group>"; };
 		C9FFFE11E22C2516D645DF01 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		C9FFFE302DCFBB0ABE54FB5D /* UIFont+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
+		C9FFFE3111A176B9B9D3E9A9 /* BoundsSelectionDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundsSelectionDialog.swift; sourceTree = "<group>"; };
 		C9FFFE40E57F82E0441136B6 /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		C9FFFED7F11D6AF3519851A4 /* PlaybackSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackSlider.swift; sourceTree = "<group>"; };
 		C9FFFF1E82D8552CD4FBCE28 /* Double+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
@@ -498,6 +502,7 @@
 				C9FFF2EABC2C4C23563ADD96 /* TempoDialog.swift */,
 				C9FFF282B4D0640E6E04ECE0 /* TempoViewModel.swift */,
 				C9FFF95DC554BB3ACFBAB693 /* PlusMinusDialogPanel.swift */,
+				C9FFFE3111A176B9B9D3E9A9 /* BoundsSelectionDialog.swift */,
 			);
 			path = Dialogs;
 			sourceTree = "<group>";
@@ -518,6 +523,7 @@
 				C9FFFD46FFA71344BAFB98B1 /* BottomDialog.swift */,
 				C9FFF9FCDE2ED69025456B41 /* Divider.swift */,
 				C9FFFCD7899414D9FD2AB7C1 /* CircleButton.swift */,
+				C9FFF134111E663C22048469 /* CheckBox.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -832,6 +838,8 @@
 				C9FFF473CD51E320B8713338 /* TempoViewModel.swift in Sources */,
 				C9FFFBD39D317854C69C0D6F /* PlusMinusDialogPanel.swift in Sources */,
 				C9FFFB37E08B97046BF252A7 /* Double+Extensions.swift in Sources */,
+				C9FFFD5D7E98D6EDA7814BEF /* BoundsSelectionDialog.swift in Sources */,
+				C9FFFE24912609CFB9A2A4F7 /* CheckBox.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

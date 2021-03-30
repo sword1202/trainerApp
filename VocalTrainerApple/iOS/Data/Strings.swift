@@ -31,6 +31,8 @@ enum Strings : String, Localizable {
     case originalLabel
     case bpmSuffix
 
+    case lyrics
+
     static func from(sectionType: LyricsSectionType) -> Strings {
         switch (sectionType) {
         case .CHORUS:
@@ -47,4 +49,6 @@ enum Strings : String, Localizable {
     }
 
     case major, minor
+
+    case loopIt
 }

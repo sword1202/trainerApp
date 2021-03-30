@@ -31,6 +31,34 @@ private struct BlurView: UIViewRepresentable {
     }
 }
 
+struct BottomDialogHeader : View {
+    private let title: String
+    private let titleIcon: String
+    @Binding var isShown: Bool
+
+    init(title: String, titleIcon: String, isShown: Binding<Bool>) {
+        self.title = title
+        self.titleIcon = titleIcon
+        _isShown = isShown
+    }
+
+    var body: some View {
+        HStack {
+            ZStack {
+                RoundedRectangle(cornerRadius: 5).fill(Colors.tone2).frame(width: 40, height: 40)
+                Image(titleIcon)
+            }.padding(.leading, 16)
+            Text(title).foregroundColor(Colors.tone2)
+                    .font(Font.system(size: 24, weight: .semibold))
+                    .padding(.leading, 8)
+            Spacer()
+            CircleButton(icon: "x").padding(.trailing, 16).onTapGesture {
+                isShown = false
+            }
+        }.frame(height: 72).background(BlurView(style: .systemMaterialLight))
+    }
+}
+
 struct BottomDialog<Content: View> : View {
     private let content: Content
     private let title: String
@@ -50,19 +78,7 @@ struct BottomDialog<Content: View> : View {
             VStack(spacing: 0) {
                 Spacer()
                 VStack(spacing: 0) {
-                    HStack {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 5).fill(Colors.tone2).frame(width: 40, height: 40)
-                            Image(titleIcon)
-                        }.padding(.leading, 16)
-                        Text(title).foregroundColor(Colors.tone2)
-                                .font(Font.system(size: 24, weight: .semibold))
-                                .padding(.leading, 8)
-                        Spacer()
-                        CircleButton(icon: "x").padding(.trailing, 16).onTapGesture {
-                            isShown = false
-                        }
-                    }.frame(width: geometry.size.width, height: 72).background(BlurView(style: .systemMaterialLight))
+                    BottomDialogHeader(title: title, titleIcon: titleIcon, isShown: $isShown)
                     content
                     Spacer().frame(width: geometry.size.width, height: geometry.safeAreaInsets.bottom)
                             .background(Color.white)
