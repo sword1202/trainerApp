@@ -1084,7 +1084,7 @@ void WorkspaceDrawer::initImages() {
     };
 
     int pianoFontSize = 8;
-    Drawer::FontStyle pianoFontStyle = Drawer::NORMAL;
+    Drawer::FontStyle pianoFontStyle = Drawer::SEMIBOLD;
     resourcesProvider->providePianoFont(&pianoFontSize, &pianoFontStyle);
     resourcesProvider->provideClockFont(&clockFontSize, &clockFontStyle);
     resourcesProvider->provideYardStickFont(&yardStickFontSize, &yardStickFontStyle);
