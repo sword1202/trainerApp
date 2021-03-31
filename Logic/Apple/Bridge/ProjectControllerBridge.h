@@ -36,6 +36,7 @@
 @property (readonly) double beatsPerMinute;
 @property (readonly) double originalBeatsPerMinute;
 @property (readonly) double duration;
+@property (readonly) NSInteger linesCount;
 
 - (void)goToBeginning;
 - (void)toggleTracksVisibility;
@@ -58,4 +59,8 @@
 
 - (void)setTempoFactor:(double)value;
 - (void)setPitchShift:(NSInteger)value;
+
+- (NSString*)getLineByIndex:(NSInteger)index NS_SWIFT_NAME(getLine(index:));
+
+- (void)loopLines:(NSInteger)firstLineIndex lastLineIndex:(NSInteger)lastLineIndex NS_SWIFT_NAME(loopLines(firstLineIndex:lastLineIndex:));
 @end

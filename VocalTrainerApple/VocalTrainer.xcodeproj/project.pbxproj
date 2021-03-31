@@ -57,6 +57,7 @@
 		C9FFF2F5CB244F6DBBCA7A41 /* LevelsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFCFB7BC97E2712B303B3 /* LevelsViewModel.swift */; };
 		C9FFF30D5DC223798F402711 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE11E22C2516D645DF01 /* Strings.swift */; };
 		C9FFF34C1612C15FF57F4AE5 /* SwiftUI+ClickGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF3DAD525F726E84AA8F2 /* SwiftUI+ClickGesture.swift */; };
+		C9FFF352BBF3893943C53619 /* BoundsSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF62823F5DACCCA114DD1 /* BoundsSelectionViewModel.swift */; };
 		C9FFF36C6140C724632BAA67 /* Sequence+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF854128820437B780180 /* Sequence+Extensions.swift */; };
 		C9FFF3F713E181FA7B8210A4 /* CGRect+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFFAE7CC0D189849A9037 /* CGRect+Extensions.swift */; };
 		C9FFF451B9ED8CB8302A93FC /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6B6CE54A534CEEF0922 /* CGFloat+Extensions.swift */; };
@@ -190,6 +191,7 @@
 		C9FFF56BA4C227BDD029B68D /* UILabel+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF5B9019937C01C72D703 /* MacOSWorkspaceDrawerResourcesProvider.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MacOSWorkspaceDrawerResourcesProvider.mm; sourceTree = "<group>"; };
 		C9FFF5C089DA6D0BBCBA539C /* TonalityViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TonalityViewModel.swift; sourceTree = "<group>"; };
+		C9FFF62823F5DACCCA114DD1 /* BoundsSelectionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundsSelectionViewModel.swift; sourceTree = "<group>"; };
 		C9FFF62862ADA76292D2C339 /* LyricsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsView.swift; sourceTree = "<group>"; };
 		C9FFF6B6CE54A534CEEF0922 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF6D026277BCE01AFF619 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
@@ -503,6 +505,7 @@
 				C9FFF282B4D0640E6E04ECE0 /* TempoViewModel.swift */,
 				C9FFF95DC554BB3ACFBAB693 /* PlusMinusDialogPanel.swift */,
 				C9FFFE3111A176B9B9D3E9A9 /* BoundsSelectionDialog.swift */,
+				C9FFF62823F5DACCCA114DD1 /* BoundsSelectionViewModel.swift */,
 			);
 			path = Dialogs;
 			sourceTree = "<group>";
@@ -840,6 +843,7 @@
 				C9FFFB37E08B97046BF252A7 /* Double+Extensions.swift in Sources */,
 				C9FFFD5D7E98D6EDA7814BEF /* BoundsSelectionDialog.swift in Sources */,
 				C9FFFE24912609CFB9A2A4F7 /* CheckBox.swift in Sources */,
+				C9FFF352BBF3893943C53619 /* BoundsSelectionViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

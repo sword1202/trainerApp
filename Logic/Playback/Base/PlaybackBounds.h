@@ -17,7 +17,6 @@ public:
     double getEndSeek() const;
 
     void setStartSeek(double startSeek);
-
     void setEndSeek(double endSeek);
 
     double getDuration() const;

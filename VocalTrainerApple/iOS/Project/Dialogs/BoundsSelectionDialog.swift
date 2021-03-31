@@ -6,30 +6,36 @@
 import SwiftUI
 
 private struct LyricsSectionView : View {
-    private let sectionType: LyricsSectionType
-    private let lines: [String]
-    @State private var selectedLinesState: [Bool] = []
+    @ObservedObject private var viewModel: BoundsSelectionViewModel
+    private let sectionIndex: Int
 
-    init(sectionType: LyricsSectionType, lines: [String]) {
-        self.sectionType = sectionType
-        self.lines = lines
-        self.selectedLinesState = Array(repeating: false, count: lines.count)
+    init(viewModel: BoundsSelectionViewModel, sectionIndex: Int) {
+        self.viewModel = viewModel
+        self.sectionIndex = sectionIndex
     }
 
     var body: some View {
-        VStack {
-            Text(Strings.from(sectionType: sectionType).localized)
+        VStack(alignment: .leading, spacing: 0) {
+            Text(viewModel.getSection(at: sectionIndex))
                     .foregroundColor(Colors.tone7)
                     .font(Font.system(size: 24, weight: .bold))
-            ForEach(0..<lines.count, id: \.self) {
-                let lineIndex = $0
-                let line = lines[lineIndex]
-                HStack {
-                    CheckBox(isSelected: $selectedLinesState[lineIndex])
-                    Text(line)
+                    .padding(.leading, 14)
+                    .padding(.bottom, 12)
+                    .padding(.top, sectionIndex == 0 ? 18 : 12)
+            ForEach(0..<viewModel.getLinesCount(inSection: sectionIndex), id: \.self) {
+                let lineIndex = $0 + viewModel.getSectionFirstLineIndex(sectionIndex: sectionIndex)
+                let line = viewModel.getLine(index: lineIndex)
+
+                HStack(spacing: 0) {
+                    CheckBox(isSelected: $viewModel.lineSelectionStates[lineIndex])
+                    Text(line).font(Font.system(size: 18, weight: .semibold))
+                            .foregroundColor(Colors.tone5)
+                            .padding(.leading, 18)
+                }.frame(maxWidth: .infinity, alignment: .leading).padding(16).background(viewModel.lineSelectionStates[lineIndex] ? Colors.tone1 : Color.white).onTapGesture {
+                    viewModel.didTapOnLine(lineIndex: lineIndex)
                 }
             }
-        }
+        }.frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
@@ -37,40 +43,45 @@ struct BoundsSelectionDialog : View {
     private let safeAreaInsets: EdgeInsets
     @Binding var isShown: Bool
 
+    @StateObject private var viewModel = BoundsSelectionViewModel()
+
     init(safeAreaInsets: EdgeInsets, isShown: Binding<Bool>) {
         _isShown = isShown
         self.safeAreaInsets = safeAreaInsets
     }
 
     var body: some View {
-        VStack {
+        VStack(alignment: .leading, spacing: 0) {
             Spacer().frame(height: 96)
-            VStack(spacing: 0) {
-                BottomDialogHeader(
-                        title: Strings.lyrics.localized,
-                        titleIcon: "LyricsToggleButton",
-                        isShown: $isShown)
-                Spacer().frame(maxWidth: .infinity, maxHeight: safeAreaInsets.bottom)
-                        .background(Color.white)
-            }
+            BottomDialogHeader(
+                    title: Strings.lyrics.localized,
+                    titleIcon: "LyricsToggleButton",
+                    isShown: $isShown).frame(maxWidth: .infinity)
 
             ZStack {
                 ScrollView {
-
+                    VStack(alignment: .leading, spacing: 0) {
+                        ForEach(0..<viewModel.getSectionsCount(), id: \.self) {
+                            LyricsSectionView(viewModel: viewModel, sectionIndex: $0)
+                        }
+                    }
                 }
                 VStack {
                     Spacer()
                     ZStack {
-                        Button(action: {
-
-                        }) {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 8).fill(Colors.tone6).frame(height: 50)
-                                Text(Strings.loopIt.localized).foregroundColor(Color.white).font(Font.system(size: 17, weight: .semibold))
-                            }
-                        }.frame(maxWidth: .infinity)
-                                .padding(.leading, 16).padding(.trailing, 16)
-                                .padding(.bottom, max(safeAreaInsets.bottom + 2, 16))
+                        if viewModel.isLoopItAvailable {
+                            Button(action: {
+                                viewModel.didTapLoopIt()
+                                isShown = false
+                            }) {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 8).fill(Colors.tone6).frame(height: 50)
+                                    Text(Strings.loopIt.localized).foregroundColor(Color.white).font(Font.system(size: 17, weight: .semibold))
+                                }
+                            }.frame(maxWidth: .infinity)
+                                    .padding(.leading, 16).padding(.trailing, 16)
+                                    .padding(.bottom, max(safeAreaInsets.bottom + 2, 16))
+                        }
                     }.background(LinearGradient(gradient: Gradient(colors: [
                         Color.white.opacity(0.0), Color.white
                     ]), startPoint: .top, endPoint: .bottom)).frame(maxWidth: .infinity)

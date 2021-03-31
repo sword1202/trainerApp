@@ -391,3 +391,23 @@ void ProjectController::rewindBackBySeconds(double seconds) {
     }
     player->setSeek(result);
 }
+
+std::u32string_view ProjectController::getLyricsLine(int index) const {
+    return player->getFile().getLyrics().getLineTextAt(index);
+}
+
+int ProjectController::getLinesCount() const {
+    return player->getFile().getLyrics().getLinesCount();
+}
+
+void ProjectController::setPlaybackBounds(const PlaybackBounds &bounds) {
+    player->setBounds(bounds);
+}
+
+void ProjectController::loopLines(int firstLineIndex, int lastLineIndex) {
+    assert(firstLineIndex >= 0 && firstLineIndex <= lastLineIndex && lastLineIndex < getLinesCount());
+    const Lyrics &lyrics = player->getFile().getLyrics();
+    const auto& firstLine = lyrics.getLineAt(firstLineIndex);
+    const auto& lastLine = lyrics.getLineAt(lastLineIndex);
+    setPlaybackBounds(PlaybackBounds(firstLine.startSeek, lastLine.getEndSeek()));
+}

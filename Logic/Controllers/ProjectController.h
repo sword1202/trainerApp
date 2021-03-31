@@ -74,6 +74,9 @@ public:
     bool isBoundsSelectionEnabled() const;
     void setBoundsSelectionEnabled(bool boundsSelectionEnabled);
 
+    void setPlaybackBounds(const PlaybackBounds& bounds);
+    void loopLines(int firstLineIndex, int lastLineIndex);
+
     void setVocalVolume(float value);
     void setInputSensitivity(float value);
     void setVocalPianoVolume(float value);
@@ -109,6 +112,8 @@ public:
     void setVerticalScrollPosition(float position);
 
     const std::deque<Lyrics::Section> & getLyricsSections() const;
+    std::u32string_view getLyricsLine(int index) const;
+    int getLinesCount() const;
 
     // Delegates
     void onPlaybackBoundsChangedByUserEvent(const PlaybackBounds &newBounds) override;

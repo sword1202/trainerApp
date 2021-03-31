@@ -19,8 +19,10 @@ public:
 
     struct Section {
         SectionType sectionType;
-        int number;
-        int startCharacterIndex;
+        int number = 0;
+        int firstLineIndex = 0;
+        int linesCount = 0;
+        int startCharacterIndex = 0;
         double seek = -1;
     };
 

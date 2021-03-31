@@ -13,11 +13,15 @@ public class LyricsSection : NSObject {
     public let type: LyricsSectionType
     public let number: Int
     public let seek: Double
+    public let firstLineIndex: Int
+    public let linesCount: Int
 
-    @objc public init(type: LyricsSectionType, number: Int, seek: Double) {
+    @objc public init(type: LyricsSectionType, number: Int, seek: Double, firstLineIndex: Int, linesCount: Int) {
         self.type = type
         self.number = number
         self.seek = seek
+        self.firstLineIndex = firstLineIndex
+        self.linesCount = linesCount
         super.init()
     }
 }

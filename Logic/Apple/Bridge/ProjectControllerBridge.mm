@@ -191,6 +191,7 @@ public:
 @implementation ProjectControllerBridge {
     ProjectController* _cpp;
     DelegateWrapper* _delegate;
+    NSArray* _lyricsSectionsCache;
 }
 
 - (instancetype)init {
@@ -237,15 +238,25 @@ static LyricsSectionType fromCppToObjCSectionType(Lyrics::SectionType type) {
 }
 
 - (NSArray<LyricsSection*>*)lyricsSections {
+    if (_lyricsSectionsCache) {
+        return _lyricsSectionsCache;
+    }
+
     const auto& sections = _cpp->getLyricsSections();
     NSMutableArray *result = [NSMutableArray arrayWithCapacity:sections.size()];
     for (const auto& section : sections) {
         LyricsSectionType type = fromCppToObjCSectionType(section.sectionType);
         LyricsSection *lyricsSection =
-                [[LyricsSection alloc] initWithType:type number:section.number seek:section.seek];
+                [[LyricsSection alloc]
+                        initWithType:type
+                              number:section.number
+                                seek:section.seek
+                      firstLineIndex:section.firstLineIndex
+                          linesCount:section.linesCount];
         [result addObject:lyricsSection];
     }
 
+    _lyricsSectionsCache = result;
     return result;
 }
 
@@ -311,6 +322,18 @@ static LyricsSectionType fromCppToObjCSectionType(Lyrics::SectionType type) {
     _cpp->setPitchShift(static_cast<int>(value));
 }
 
+- (NSString *)getLineByIndex:(NSInteger)index {
+    return Strings::ToNSString(_cpp->getLyricsLine(static_cast<int>(index)));;
+}
+
+- (void)loopLines:(NSInteger)firstLineIndex lastLineIndex:(NSInteger)lastLineIndex {
+    _cpp->loopLines(static_cast<int>(firstLineIndex), static_cast<int>(lastLineIndex));
+}
+
+
+- (NSInteger)linesCount {
+    return _cpp->getLinesCount();
+}
 
 - (void)toggleTracksVisibility {
     _cpp->setTracksVisible(!_cpp->isTracksVisible());

@@ -81,6 +81,12 @@ extension Array {
 
         return count
     }
+
+    mutating func fill(value: Element) {
+        for i in 0..<count {
+            self[i] = value
+        }
+    }
 }
 
 extension Array where Element : Equatable & Hashable {
@@ -116,6 +122,29 @@ extension Array where Element : Equatable {
 
     func contains(_ element: Element) -> Bool {
         self.contains(where: { $0 == element })
+    }
+
+    func indexOf(_ element: Element) -> Int? {
+        firstIndex(where: { $0 == element })
+    }
+
+    func lastIndexOf(_ element: Element) -> Int? {
+        lastIndex(where: { $0 == element })
+    }
+
+    func indexOf(_ element: Element, startIndex: Int) -> Int? {
+        assert(startIndex < count)
+        for i in startIndex..<count {
+            if element == self[i] {
+                return i
+            }
+        }
+
+        return nil
+    }
+
+    func count(element: Element) -> Int {
+        count(predicate: { $0 == element })
     }
 }
 

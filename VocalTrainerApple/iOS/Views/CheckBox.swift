@@ -7,19 +7,12 @@ import SwiftUI
 
 struct CheckBox : View {
     @Binding var isSelected: Bool
-    private let selectedStateChanged: ((Bool) -> Void)?
 
-    init(isSelected: Binding<Bool>, selectedStateChanged: ((Bool) -> Void)? = nil) {
-        self.selectedStateChanged = selectedStateChanged
+    init(isSelected: Binding<Bool>) {
         _isSelected = isSelected
     }
 
     var body: some View {
-        Image(isSelected ? "SelectedCheckBox" : "UnelectedCheckBox").onTapGesture {
-            withAnimation {
-                isSelected.toggle()
-            }
-            selectedStateChanged?(isSelected)
-        }
+        Image(isSelected ? "SelectedCheckBox" : "UnselectedCheckBox")
     }
 }

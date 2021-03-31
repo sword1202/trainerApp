@@ -113,6 +113,7 @@ Lyrics::Lyrics(const std::string &utf8, const VocalPart* vocalPart) {
                 line.charactersCount = range.charactersCount;
                 line.duration = range.getDuration();
                 lines.push_back(line);
+                currentSection->linesCount++;
                 currentLine = &lines.back();
             } else {
                 currentLine->duration = (range.startSeek - currentLine->startSeek) + range.getDuration();
@@ -147,6 +148,7 @@ Lyrics::Lyrics(const std::string &utf8, const VocalPart* vocalPart) {
                         UtfUtils::ToUtf8(text.substr(static_cast<size_t>(i),
                                 static_cast<size_t>(sectionEndIndex - i + 1))) + ", invalid section number");
             }
+            section.firstLineIndex = static_cast<int>(lines.size());
 
             skippedCharactersCount += (sectionEndIndex - i + 1) + 1; // +1 new line
             i = static_cast<int>(sectionEndIndex) + 1;
