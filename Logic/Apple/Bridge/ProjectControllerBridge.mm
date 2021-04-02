@@ -13,10 +13,10 @@ using std::cout;
 using std::endl;
 
 CPP_UTILS_DLLHIDE class DelegateWrapper : public ProjectControllerDelegate {
-    NSMutableArray<id<ProjectControllerBridgeDelegate> >* delegates;
+    NSHashTable<id<ProjectControllerBridgeDelegate> >* delegates;
 public:
     DelegateWrapper() {
-        delegates = [NSMutableArray new];
+        delegates = [NSHashTable weakObjectsHashTable];
     }
 
     void addDelegate(id <ProjectControllerBridgeDelegate> delegate) {
