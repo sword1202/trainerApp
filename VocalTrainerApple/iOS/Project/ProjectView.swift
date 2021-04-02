@@ -156,15 +156,24 @@ struct ProjectView: View {
                     if ($0) {
                         tempoDialogVisible = false
                         tonalityDialogVisible = false
+                        boundsSelectionDialogVisible = false
                     }
                 }.onChange(of: tempoDialogVisible) {
                     if ($0) {
                         levelsVisible = false
                         tonalityDialogVisible = false
+                        boundsSelectionDialogVisible = false
                     }
                 }.onChange(of: tonalityDialogVisible) {
                     if ($0) {
                         tempoDialogVisible = false
+                        levelsVisible = false
+                        boundsSelectionDialogVisible = false
+                    }
+                }.onChange(of: boundsSelectionDialogVisible) {
+                    if ($0) {
+                        tempoDialogVisible = false
+                        tonalityDialogVisible = false
                         levelsVisible = false
                     }
                 }
