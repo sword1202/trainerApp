@@ -20,6 +20,7 @@
 #include <memory>
 #include "Logic/PitchesMutableList.h"
 #include "AudioOperationFailedException.h"
+#include "MathUtils.h"
 
 using namespace CppUtils;
 using std::cout;
@@ -194,7 +195,10 @@ void VocalTrainerFilePlayer::setSeek(double value) {
         return;
     }
 
-    assert(value >= 0 && value <= getMainPlayer()->getOriginalTrackDurationInSeconds());
+    value = Math::CutIfOutOfClosedRange(value,
+            bounds ? bounds.getStartSeek() : 0,
+            bounds ? bounds.getEndSeek() : getMainPlayer()->getOriginalTrackDurationInSeconds());
+
     for (auto* player : players) {
         player->setSeek(value);
     }
@@ -283,13 +287,13 @@ void VocalTrainerFilePlayer::setBounds(const PlaybackBounds &bounds) {
             bounds.getEndSeek() <= getMainPlayer()->getOriginalTrackDurationInSeconds()));
     if (!isPlaying()) {
         this->bounds = bounds;
+        if (bounds) {
+            setSeek(bounds.getStartSeek());
+        }
         boundsChangedListeners.executeAll(bounds);
     } else {
         isPlayingChangedListeners.addOneShotListener([=] (bool isPlaying) {
             assert(!isPlaying);
-            if (bounds) {
-                setSeek(bounds.getStartSeek());
-            }
             this->setBounds(bounds);
         });
         pause();

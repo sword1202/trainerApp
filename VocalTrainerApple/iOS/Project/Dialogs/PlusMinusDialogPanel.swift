@@ -18,12 +18,12 @@ struct PlusMinusDialogPanel : View {
                     .foregroundColor(Colors.tone5)
                     .padding(.bottom, 12)
                     .font(Font.system(size: 26, weight: .semibold))
-            HStack(spacing: 24) {
+            HStack(spacing: 22) {
                 CircleButton(icon: "minus").onTapGesture(perform: minus)
                 Text(middleText)
                         .foregroundColor(Colors.tone5)
                         .font(Font.system(size: 50, weight: .semibold))
-                        .frame(width: 160)
+                        .frame(width: 164)
                 CircleButton(icon: "plus").onTapGesture(perform: plus)
             }
             Text(bottomText)
