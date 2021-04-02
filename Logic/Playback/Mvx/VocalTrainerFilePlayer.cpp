@@ -259,7 +259,7 @@ void VocalTrainerFilePlayer::prepare() {
     }
 
     if (metronomePlayer.isPrepared()) {
-        metronomePlayer.setAudioDataInfo(getBeatsPerMinute(), getMainPlayer()->getOriginalTrackDurationInSeconds());
+        metronomePlayer.setAudioDataInfo(getBeatsPerMinute(), getMainPlayer()->getTrackDurationInSecondsWithTempoApplied());
     }
     if (instrumentalPlayer.getAudioData()) {
         if (fabs(instrumentalPlayer.getOriginalTrackDurationInSeconds() - vocalPartPianoPlayer.getOriginalTrackDurationInSeconds()) > 0.005) {
@@ -389,6 +389,8 @@ double VocalTrainerFilePlayer::getTempoFactor() const {
 void VocalTrainerFilePlayer::setTempoFactor(double tempoFactor) {
     vocalPartPianoPlayer.setTempoFactor(tempoFactor);
     instrumentalPlayer.setTempoFactor(tempoFactor);
+    metronomePlayer.setAudioDataInfo(getBeatsPerMinute(),
+            instrumentalPlayer.getTrackDurationInSecondsWithTempoApplied());
     vocalPartChangedListeners.executeAll(&vocalPartPianoPlayer.getVocalPart());
 }
 

@@ -36,30 +36,29 @@ void MetronomeAudioPlayer::setAudioDataInfo(double beatsPerMinute, double totalD
 
     assert(beatBufferSize - metronomeBufferSize >= 0);
 
-    int totalBufferSize = secondsSeekToBufferSeek(totalDurationInSeconds) * sampleSize;
+    this->totalVirtualBufferSize = secondsSeekToBufferSeek(totalDurationInSeconds) * sampleSize;
+    int totalBufferSize = beatBufferSize + metronomeBufferSize / 2;
 
     audioData.clear();
     audioData.reserve((size_t)totalBufferSize);
     audioData.append(beatBufferSize - metronomeBufferSize / 2, '\0');
+    audioData.append(metronomeAudioData.data() + WAVFile::DATA_POSITION, (size_t)metronomeBufferSize);
 
-    while (audioData.size() < totalBufferSize) {
-        audioData.append(metronomeAudioData.data() + WAVFile::DATA_POSITION, (size_t)metronomeBufferSize);
-        audioData.append(beatBufferSize - metronomeBufferSize, '\0');
-    }
-
-    while (audioData.size() != totalBufferSize) {
-        audioData.pop_back();
+    while (audioData.size() % getPlaybackData().getCallbackBufferSizeInBytes() != 0) {
+        audioData.push_back('\0');
     }
 }
 
 int MetronomeAudioPlayer::getAudioDataSizeInBytes() {
-    return audioData.size();
-}
-
-const char *MetronomeAudioPlayer::provideAudioBuffer() {
-    return audioData.data();
+    return totalVirtualBufferSize;
 }
 
 MetronomeAudioPlayer::MetronomeAudioPlayer() {
     setPlayerName("MetronomeAudioPlayer");
+}
+
+const char *MetronomeAudioPlayer::provideAudioBuffer(int offset) {
+    offset %= audioData.size();
+    assert(offset < audioData.size());
+    return audioData.data() + offset;
 }

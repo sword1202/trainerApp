@@ -11,8 +11,8 @@
 
 const int FRAMES_PER_BUFFER = 256;
 
-const char *WavAudioPlayer::provideAudioBuffer() {
-    return audioData->data() + WAVFile::DATA_POSITION;
+const char *WavAudioPlayer::provideAudioBuffer(int offset) {
+    return audioData->data() + WAVFile::DATA_POSITION + offset;
 }
 
 void WavAudioPlayer::setAudioData(const AudioData *audioData) {

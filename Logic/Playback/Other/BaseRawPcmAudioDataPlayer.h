@@ -17,7 +17,7 @@ protected:
             const PlaybackData &playbackData) override;
     void providePlaybackData(PlaybackData *playbackData) override;
     virtual int getAudioDataSizeInBytes() = 0;
-    virtual const char *provideAudioBuffer() = 0;
+    virtual const char *provideAudioBuffer(int offset) = 0;
 };
 
 

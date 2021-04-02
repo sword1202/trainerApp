@@ -13,7 +13,7 @@
 class WavAudioPlayer : public BaseRawPcmAudioDataPlayer {
     const std::string* audioData = nullptr;
 protected:
-    const char *provideAudioBuffer() override;
+    const char *provideAudioBuffer(int offset) override;
     int getAudioDataSizeInBytes() override;
 public:
     WavAudioPlayer();
