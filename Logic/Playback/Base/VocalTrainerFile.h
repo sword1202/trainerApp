@@ -31,6 +31,8 @@ public:
     virtual double getBeatsPerMinute() const = 0;
     virtual const std::vector<short> &getInstrumentalPreviewSamples() const = 0;
     virtual const Tonality& getOriginalTonality() const = 0;
+
+    virtual ~VocalTrainerFile() = default;
 };
 
 
