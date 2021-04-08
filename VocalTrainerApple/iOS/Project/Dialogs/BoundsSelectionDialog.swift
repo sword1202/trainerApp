@@ -70,15 +70,10 @@ struct BoundsSelectionDialog : View {
                     Spacer()
                     ZStack {
                         if viewModel.isLoopItAvailable {
-                            Button(action: {
+                            BigButton(text: Strings.loopIt.localized, action: {
                                 viewModel.didTapLoopIt()
                                 isShown = false
-                            }) {
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 8).fill(Colors.tone6).frame(height: 50)
-                                    Text(Strings.loopIt.localized).foregroundColor(Color.white).font(Font.system(size: 17, weight: .semibold))
-                                }
-                            }.frame(maxWidth: .infinity)
+                            }).frame(maxWidth: .infinity)
                                     .padding(.leading, 16).padding(.trailing, 16)
                                     .padding(.bottom, max(safeAreaInsets.bottom + 2, 16))
                         }

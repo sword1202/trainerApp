@@ -23,7 +23,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         try! AVAudioSession.sharedInstance().setCategory(.playAndRecord, options: .allowBluetoothA2DP)
         //try! AVAudioSession.sharedInstance().overrideOutputAudioPort(.speaker)
         InitializationManager.initializeApplicationIfNeed()
-        ProjectController.shared.togglePlay()
         return true
     }
 }

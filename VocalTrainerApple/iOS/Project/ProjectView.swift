@@ -62,6 +62,7 @@ struct ProjectView: View {
     @State private var tonalityDialogVisible = false
     @State private var tempoDialogVisible = false
     @State private var boundsSelectionDialogVisible = false
+    @State private var showSwipeAndZoomSuggestion = AppSettings.shared.showSwipeAndZoomSuggestion
 
     var body: some View {
         GeometryReader { geom in
@@ -99,16 +100,42 @@ struct ProjectView: View {
                                 .padding(.bottom, 8)
                                 .padding(.leading, 16)
                     }.background(Colors.tone2).frame(maxWidth: .infinity, alignment: .topLeading)
-                    WorkspaceView().onChange(of: scenePhase) { phase in
-                        switch phase {
-                        case .active:
-                            viewModel.didBecomeActive()
-                        case .inactive:
-                            viewModel.willBecomeInactive()
-                        case .background:
-                            print("App goes background")
-                        default:
-                            print("Unknown state")
+                    ZStack {
+                        WorkspaceView().onChange(of: scenePhase) { phase in
+                            switch phase {
+                            case .active:
+                                viewModel.didBecomeActive()
+                            case .inactive:
+                                viewModel.willBecomeInactive()
+                            case .background:
+                                print("App goes background")
+                            default:
+                                print("Unknown state")
+                            }
+                        }
+
+                        ZStack {
+                            if showSwipeAndZoomSuggestion {
+                                VStack(spacing: 24) {
+                                    Spacer()
+                                    Text(Strings.youCan.localized).font(Font.system(size: 32)).foregroundColor(Colors.tone5)
+                                    HStack(spacing: 46) {
+                                        Image("SwipeHelpIcon")
+                                        Image("ZoomHelpIcon")
+                                    }
+                                    Text(Strings.swipeAndZoom.localized).font(Font.system(size: 32)).foregroundColor(Colors.tone5)
+                                    BigButton(text: Strings.gotIt.localized) {
+                                        withAnimation {
+                                            showSwipeAndZoomSuggestion = false
+                                        }
+                                        AppSettings.shared.showSwipeAndZoomSuggestion = false
+                                    }.padding(.leading, 26).padding(.trailing, 26)
+                                    Spacer()
+                                }.frame(maxWidth: .infinity)
+                                        .background(Color.white.opacity(0.9))
+                                        .padding(.leading, WorkspaceView.pianoWidth)
+                                        .padding(.top, WorkspaceView.yardstickHeight + 1)
+                            }
                         }
                     }
                     if (viewModel.isLyricsVisible) {

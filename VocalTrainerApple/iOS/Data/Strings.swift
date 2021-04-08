@@ -51,4 +51,7 @@ enum Strings : String, Localizable {
     case major, minor
 
     case loopIt
+
+    case youCan, swipeAndZoom
+    case gotIt
 }

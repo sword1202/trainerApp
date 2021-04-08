@@ -12,6 +12,9 @@ private let baseZoomScaleFactor: CGFloat = 1.5
 struct WorkspaceView : UIViewRepresentable {
     typealias UIViewType = UIView
 
+    static let pianoWidth = WorkspaceDrawerView.pianoWidth()
+    static let yardstickHeight = WorkspaceDrawerView.yardstickHeight()
+
     func makeUIView(context: Context) -> UIViewType {
         guard !SwiftUIUtils.isPreview() else {
             return UIView()

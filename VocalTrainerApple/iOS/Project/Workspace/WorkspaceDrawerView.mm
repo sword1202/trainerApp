@@ -25,5 +25,12 @@
     drawer->setMaxZoom(2.5);
 }
 
++ (CGFloat)pianoWidth {
+    return WorkspaceDrawer::PIANO_WIDTH;
+}
+
++ (CGFloat)yardstickHeight {
+    return WorkspaceDrawer::YARD_STICK_HEIGHT;
+}
 
 @end

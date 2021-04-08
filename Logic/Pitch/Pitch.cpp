@@ -63,6 +63,11 @@ static const char* PITCHES[]  = {
         "C", "C#", "D", "Eb", "E", "F", "F#", "G", "G#", "A", "Bb",	"B"
 };
 
+// Without #
+static const int PITCH_NAME_TO_IN_OCTAVE_INDEX[] = {
+        9, 11, 0, 2, 4, 5, 7
+};
+
 // used in distance to next frequency calculation A = 2**(1/24)
 static const float A = 1.029302236643492f;
 
@@ -369,16 +374,35 @@ Pitch Pitch::getNextWhitePitch() const {
 }
 
 int Pitch::getPitchInOctaveIndexFromName(const std::string& name) {
-    static std::unordered_map<std::string, int> map = ([&] {
-        static std::unordered_map<std::string, int> result;
-        for (int i = 0; i < PITCHES_IN_OCTAVE; ++i) {
-            result[PITCHES[i]] = i;
-        }
+    size_t size = name.size();
+    if (size < 1 || size > 2) {
+        return -1;
+    }
 
+    int index = name[0] - 'A';
+    if (index < 0 || index >= WHITE_PITCHES_IN_OCTAVE) {
+        return -1;
+    }
+
+    int diff;
+    if (name.size() == 1) {
+        diff = 0;
+    } else if (name[1] == '#') {
+        diff = 1;
+    } else if (name[1] == 'b') {
+        diff = -1;
+    } else {
+        return -1;
+    }
+
+    int result = PITCH_NAME_TO_IN_OCTAVE_INDEX[index] + diff;
+    if (result < 0) {
+        return PITCHES_IN_OCTAVE - 1;
+    } else if (result == PITCHES_IN_OCTAVE) {
+        return 0;
+    } else {
         return result;
-    })();
-
-    return Maps::GetOrDefault(map, name, -1);
+    }
 }
 
 

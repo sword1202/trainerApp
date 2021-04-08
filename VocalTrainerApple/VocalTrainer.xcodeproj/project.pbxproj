@@ -71,11 +71,13 @@
 		C9FFF6EEA9F5893BA907590C /* iOSWorkspaceDrawerResourcesProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF34E5F2FDB3D52CAB4FF /* iOSWorkspaceDrawerResourcesProvider.mm */; };
 		C9FFF75F9918AF94842CC30B /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE302DCFBB0ABE54FB5D /* UIFont+Extensions.swift */; };
 		C9FFF78036C9ABE74E81FDD3 /* Divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF9FCDE2ED69025456B41 /* Divider.swift */; };
+		C9FFF7DEA9F4C41B547AA8A8 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFDE022FCD75907ABC899 /* AppSettings.swift */; };
 		C9FFF88694CBA04B6DD00263 /* metronome.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFC6AA64F7DE371AEF4C4 /* metronome.wav */; };
 		C9FFF92F2CAA4605DF8DFBC1 /* BaseWorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8FE42466B28CAAB81B9 /* BaseWorkspaceDrawerView.mm */; };
 		C9FFF9793FA19D6309F5BC02 /* WorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFBFBC3CF33B1EFAA4E4A /* WorkspaceDrawerView.mm */; };
 		C9FFF9B5CDD7D8A3D2E2A06B /* TonalityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF5C089DA6D0BBCBA539C /* TonalityViewModel.swift */; };
 		C9FFF9F48A6D816A30F0AE35 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2396E0BB5102967F5B2 /* UIView+Extensions.swift */; };
+		C9FFFA07A94FBE4832C6004E /* BigButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF18E9C15E6FAF0C18086 /* BigButton.swift */; };
 		C9FFFAC7A9EEC42DB7900780 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD04B887D1AA905A010C /* Math.swift */; };
 		C9FFFB37E08B97046BF252A7 /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFF1E82D8552CD4FBCE28 /* Double+Extensions.swift */; };
 		C9FFFB4117D7E4EF6A075F4B /* TempoDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2EABC2C4C23563ADD96 /* TempoDialog.swift */; };
@@ -178,6 +180,7 @@
 		C9FFF134111E663C22048469 /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		C9FFF1756DDFE9ED2936A436 /* SongTonality+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SongTonality+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF18E11AA44C9B5A6225B /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		C9FFF18E9C15E6FAF0C18086 /* BigButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigButton.swift; sourceTree = "<group>"; };
 		C9FFF2396E0BB5102967F5B2 /* UIView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF26A997DC1A4CE026760 /* WorkspaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceView.swift; sourceTree = "<group>"; };
 		C9FFF282B4D0640E6E04ECE0 /* TempoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TempoViewModel.swift; sourceTree = "<group>"; };
@@ -220,6 +223,7 @@
 		C9FFFCFB7BC97E2712B303B3 /* LevelsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsViewModel.swift; sourceTree = "<group>"; };
 		C9FFFD04B887D1AA905A010C /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 		C9FFFD46FFA71344BAFB98B1 /* BottomDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomDialog.swift; sourceTree = "<group>"; };
+		C9FFFDE022FCD75907ABC899 /* AppSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		C9FFFE11E22C2516D645DF01 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		C9FFFE302DCFBB0ABE54FB5D /* UIFont+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFFE3111A176B9B9D3E9A9 /* BoundsSelectionDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundsSelectionDialog.swift; sourceTree = "<group>"; };
@@ -283,6 +287,7 @@
 				C9FFFA712644FAF5D04B8E4E /* Data */,
 				54C2D2EC26065E08005F2092 /* Localizable.strings */,
 				C9FFF0C139F74C8705A9EC88 /* Project */,
+				C9FFF20A8A238859F1B1A601 /* Storage */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -494,6 +499,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		C9FFF20A8A238859F1B1A601 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFFDE022FCD75907ABC899 /* AppSettings.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
 		C9FFF97F47D585784A7258F6 /* Dialogs */ = {
 			isa = PBXGroup;
 			children = (
@@ -527,6 +540,7 @@
 				C9FFF9FCDE2ED69025456B41 /* Divider.swift */,
 				C9FFFCD7899414D9FD2AB7C1 /* CircleButton.swift */,
 				C9FFF134111E663C22048469 /* CheckBox.swift */,
+				C9FFF18E9C15E6FAF0C18086 /* BigButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -844,6 +858,8 @@
 				C9FFFD5D7E98D6EDA7814BEF /* BoundsSelectionDialog.swift in Sources */,
 				C9FFFE24912609CFB9A2A4F7 /* CheckBox.swift in Sources */,
 				C9FFF352BBF3893943C53619 /* BoundsSelectionViewModel.swift in Sources */,
+				C9FFFA07A94FBE4832C6004E /* BigButton.swift in Sources */,
+				C9FFF7DEA9F4C41B547AA8A8 /* AppSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

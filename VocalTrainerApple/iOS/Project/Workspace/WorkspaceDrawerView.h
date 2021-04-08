@@ -12,5 +12,6 @@
 @class ProjectControllerBridge;
 
 @interface WorkspaceDrawerView : BaseWorkspaceDrawerView
-
++ (CGFloat)pianoWidth;
++ (CGFloat)yardstickHeight;
 @end

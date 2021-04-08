@@ -18,6 +18,7 @@ public:
     static const int OCTAVES_COUNT = 7;
     static const int FIRST_SUPPORTED_OCTAVE = 1;
     static const int PITCHES_IN_OCTAVE = 12;
+    static const int WHITE_PITCHES_IN_OCTAVE = 7;
     static const int FREQUENCIES_COUNT = OCTAVES_COUNT * PITCHES_IN_OCTAVE;
 
     static const int C_INDEX = 0;
