@@ -60,3 +60,9 @@ PitchesMutableList::PitchesMutableList(std::vector<float> &&frequencies, std::ve
     this->frequencies = std::move(frequencies);
     this->times = std::move(times);
 }
+
+void PitchesMutableList::clearPitches() {
+    LOCK;
+    frequencies.clear();
+    times.clear();
+}

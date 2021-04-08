@@ -3,9 +3,11 @@
 //
 
 #include "AudioInputRecorder.h"
+#include "MemoryUtils.h"
 #include <iostream>
 
 using namespace std;
+using namespace CppUtils;
 
 #define SEEK_LOCK std::lock_guard<std::mutex> _(seekMutex)
 #define DATA_LOCK std::lock_guard<std::mutex> _(dataMutex)
@@ -47,3 +49,8 @@ void AudioInputRecorder::setSeek(int seek) {
 }
 
 AudioInputRecorder::AudioInputRecorder(): seek(0) {}
+
+void AudioInputRecorder::clearRecordedData() {
+    DATA_LOCK;
+    Memory::FillZero(recordedData.data(), static_cast<int>(recordedData.size()));
+}

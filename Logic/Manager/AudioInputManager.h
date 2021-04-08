@@ -41,6 +41,8 @@ public:
     CppUtils::ListenersSet<const Pitch&, double >& getPitchDetectedListeners();
     const PitchesCollection *getRecordedPitches() const;
 
+    void clearRecordedData();
+
     ~AudioInputManager();
 };
 

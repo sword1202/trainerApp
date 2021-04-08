@@ -33,6 +33,8 @@ public:
     void setSeek(double seek);
 
     const PitchesCollection* getPitches() const;
+
+    void clearRecordedPitches();
 };
 
 

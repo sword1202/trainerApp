@@ -54,4 +54,6 @@ enum Strings : String, Localizable {
 
     case youCan, swipeAndZoom
     case gotIt
+
+    case tempoChangeWarning
 }

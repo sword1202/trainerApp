@@ -372,10 +372,12 @@ double ProjectController::getOriginalBeatsPerMinute() const {
 }
 
 void ProjectController::setTempoFactor(double value) {
+    assert(!player->isRecording() && "tempoFactor change is not allowed while recording playback");
     if (Primitives::CompareFloatsUsingEpsilon(value, player->getTempoFactor(), 0.000001)) {
         return;
     }
 
+    audioInputManager->clearRecordedData();
     player->setTempoFactor(value);
     delegate->updateTempoFactor(value);
 }

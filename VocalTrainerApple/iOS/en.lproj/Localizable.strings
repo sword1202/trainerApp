@@ -42,4 +42,5 @@
 "youCan" = "You can";
 "swipeAndZoom" = "swipe and zoom";
 "gotIt" = "Got it!";
+"tempoChangeWarning" = "Warning: Changing the song tempo cleares all previously recorded data";
 

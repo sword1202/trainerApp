@@ -19,6 +19,7 @@ public:
 
     AudioInputRecorder();
 
+    void clearRecordedData();
 private:
     std::string recordedData;
     int seek;

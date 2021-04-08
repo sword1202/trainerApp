@@ -113,3 +113,8 @@ std::string AudioInputManager::getRecordedDataInWavFormat() const {
     const std::string& recordedData = audioRecorder->getRecordedData();
     return WAVFile::addWavHeaderToRawPcmData<std::string>(recordedData.data(), recordedData.size(), wavConfig);
 }
+
+void AudioInputManager::clearRecordedData() {
+    pitchesRecorder->clearRecordedPitches();
+    audioRecorder->clearRecordedData();
+}

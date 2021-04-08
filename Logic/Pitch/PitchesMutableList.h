@@ -27,6 +27,8 @@ public:
     std::vector<float> getFrequencies() const override;
 
     Pitch getNearestPitch(double time) const override;
+
+    void clearPitches();
 };
 
 

@@ -48,3 +48,7 @@ void AudioInputPitchesRecorder::setSeek(double seek) {
 const PitchesCollection* AudioInputPitchesRecorder::getPitches() const {
     return &pitches;
 }
+
+void AudioInputPitchesRecorder::clearRecordedPitches() {
+    pitches.clearPitches();
+}
