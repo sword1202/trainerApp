@@ -166,7 +166,7 @@ struct ProjectView: View {
                             Button(action: {
                                 viewModel.didTapPlayButton()
                             }) {
-                                Image("PlayButton")
+                                Image(viewModel.isPlaying ? "PauseButton" : "PlayButton")
                             }.padding(.leading, 50).padding(.trailing, 50)
                             Button(action: {
                                 withAnimation {

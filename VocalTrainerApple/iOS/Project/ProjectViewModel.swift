@@ -24,6 +24,7 @@ class ProjectViewModel : ObservableObject {
     @Published var playbackCurrentTime: String = ""
     @Published var playbackEndTime: String = ""
     @Published private(set) var retrySeconds = 5
+    @Published private(set) var isPlaying: Bool = false
 
     private let timeFormatter = DateFormatter()
 
@@ -130,5 +131,13 @@ extension ProjectViewModel : ProjectControllerBridgeDelegate {
 
     func projectControllerUpdateTempo(factor: Double) {
         updatePlaybackEndTime()
+    }
+
+    func projectControllerPlaybackDidStart() {
+        isPlaying = true
+    }
+
+    func projectControllerPlaybackDidStop() {
+        isPlaying = false
     }
 }
