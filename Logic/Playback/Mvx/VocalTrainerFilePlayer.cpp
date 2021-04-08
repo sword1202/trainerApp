@@ -26,8 +26,6 @@ using namespace CppUtils;
 using std::cout;
 using std::endl;
 
-constexpr int BEATS_IN_TACT = 4;
-
 VocalTrainerFilePlayer::VocalTrainerFilePlayer() : metronomeEnabled(false) {
 }
 

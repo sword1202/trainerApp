@@ -24,6 +24,7 @@ class MvxFile : public VocalTrainerFile {
     std::string artistNameUtf8;
     double score = -1.0;
     Tonality originalTonality;
+    double recordingTempoFactor = 1.0;
 
     // core data
     VocalPart vocalPart;
@@ -67,6 +68,7 @@ class MvxFile : public VocalTrainerFile {
         ar & artistNameUtf8;
         ar & score;
         ar & originalTonality;
+        ar & recordingTempoFactor;
 
         if (!readOnlySignature) {
             ar & beatsPerMinute;
@@ -153,6 +155,9 @@ public:
     const Tonality &getOriginalTonality() const override;
 
     void setOriginalTonality(const Tonality &originalTonality);
+
+    double getRecordingTempoFactor() const override;
+    void setRecordingTempoFactor(double tempoFactor);
 };
 
 

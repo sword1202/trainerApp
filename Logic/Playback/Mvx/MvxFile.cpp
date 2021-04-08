@@ -182,3 +182,11 @@ const Tonality &MvxFile::getOriginalTonality() const {
 void MvxFile::setOriginalTonality(const Tonality &originalTonality) {
     MvxFile::originalTonality = originalTonality;
 }
+
+double MvxFile::getRecordingTempoFactor() const {
+    return recordingTempoFactor;
+}
+
+void MvxFile::setRecordingTempoFactor(double tempoFactor) {
+    MvxFile::recordingTempoFactor = tempoFactor;
+}
