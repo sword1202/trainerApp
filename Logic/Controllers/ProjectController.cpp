@@ -365,8 +365,16 @@ double ProjectController::convertSeekToPlaybackProgress(double seek) const {
     }
 }
 
-const std::deque<Lyrics::Section>& ProjectController::getLyricsSections() const {
-    return player->getLyricsSections();
+const std::vector<Lyrics::Section> & ProjectController::getLyricsSections() const {
+    const PlaybackBounds &bounds = player->getBounds();
+    if (bounds) {
+        auto range = player->getFile().getLyrics().getSectionsInTimeRange(bounds.getStartSeek(), bounds.getEndSeek());
+        sections.assign(range.first, range.second);
+    } else {
+        sections.assign(player->getLyricsSections().begin(), player->getLyricsSections().end());
+    }
+
+    return sections;
 }
 
 const Tonality &ProjectController::getOriginalTonality() const {

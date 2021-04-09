@@ -44,6 +44,7 @@ class ProjectController : CppUtils::DestructorQueue, public WorkspaceControllerD
     AudioInputManager* audioInputManager;
     bool lyricsVisible = true;
     Rewinder* rewinder = nullptr;
+    mutable std::vector<Lyrics::Section> sections;
 
     void onStopPlaybackRequested();
     void updateWorkspaceSeek(double seek);
@@ -114,7 +115,7 @@ public:
     float getVerticalScrollPosition() const;
     void setVerticalScrollPosition(float position);
 
-    const std::deque<Lyrics::Section> & getLyricsSections() const;
+    const std::vector<Lyrics::Section>& getLyricsSections() const;
     std::u32string_view getLyricsLine(int index) const;
     int getLinesCount() const;
 

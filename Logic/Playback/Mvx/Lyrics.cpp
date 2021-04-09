@@ -249,6 +249,13 @@ const std::deque<Lyrics::Section> & Lyrics::getSections() const {
     return sections;
 }
 
+std::pair<typename std::deque<Lyrics::Section>::const_iterator, typename std::deque<Lyrics::Section>::const_iterator>
+Lyrics::getSectionsInTimeRange(double begin, double end) const {
+    return CppUtils::FindRangeInSortedCollectionUsingKeyProvider(sections, [] (const Section& s) {
+        return s.seek;
+    }, begin, end);
+}
+
 int Lyrics::getLinesCount() const {
     return static_cast<int>(lines.size());
 }

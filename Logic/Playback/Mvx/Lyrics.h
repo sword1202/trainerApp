@@ -84,6 +84,8 @@ public:
     static Lyrics EMPTY;
 
     const std::deque<Section>& getSections() const;
+    std::pair<typename std::deque<Section>::const_iterator, typename std::deque<Section>::const_iterator>
+    getSectionsInTimeRange(double begin, double end) const;
     const Line& getLineAt(int index) const;
     const Line& getLastLine() const;
     int getLinesCount() const;

@@ -54,13 +54,7 @@ class ProjectViewModel : ObservableObject {
     init() {
         isMetronomeEnabled = projectController.metronomeEnabled
         projectController.add(delegate: self)
-        let lyricsSections: [LyricsSection] = projectController.lyricsSections
-        playbackSections = lyricsSections.map {
-            let type = $0.type
-            let name = Strings.from(sectionType: type).localized
-            let position = CGFloat(projectController.convertSeek(toPlaybackProgress: $0.seek))
-            return PlaybackSection(name: name, position: position)
-        }
+        updatePlaybackSections()
         title = projectController.artistName + " - " + projectController.songTitle
         timeFormatter.dateFormat = "m:ss"
         updatePlaybackEndTime()
@@ -69,6 +63,16 @@ class ProjectViewModel : ObservableObject {
                 audioEngine.inputNode,
                 to: audioEngine.outputNode,
                 format: audioEngine.inputNode.inputFormat(forBus: 0))
+    }
+
+    private func updatePlaybackSections() {
+        let lyricsSections: [LyricsSection] = projectController.lyricsSections
+        playbackSections = lyricsSections.map {
+            let type = $0.type
+            let name = Strings.from(sectionType: type).localized
+            let position = CGFloat(projectController.convertSeek(toPlaybackProgress: $0.seek))
+            return PlaybackSection(name: name, position: position)
+        }
     }
 
     deinit {
@@ -132,6 +136,7 @@ extension ProjectViewModel : ProjectControllerBridgeDelegate {
 
     func projectControllerUpdate(endSeek: Double) {
         updatePlaybackEndTime()
+        updatePlaybackSections()
     }
 
     func projectControllerPlaybackDidStart() {

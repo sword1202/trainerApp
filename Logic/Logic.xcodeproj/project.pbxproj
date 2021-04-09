@@ -1331,6 +1331,7 @@
 				C9FFFC7A9783B4C82A6FE42C /* UndefAppleConditionals.h */,
 				C9FFF13039CBC1561E3F82E4 /* StringEncodingUtils.cpp */,
 				C9FFFFAE08B7263D85CA449B /* StringEncodingUtils.h */,
+				C9FFFFF62813DCC61634E864 /* Iterators */,
 			);
 			path = CppUtils;
 			sourceTree = "<group>";
@@ -1956,6 +1957,13 @@
 				C9FFF46DDE1E461CEF2FA322 /* serialization */,
 			);
 			path = boost;
+			sourceTree = "<group>";
+		};
+		C9FFFFF62813DCC61634E864 /* Iterators */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Iterators;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

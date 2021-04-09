@@ -199,7 +199,6 @@ public:
 @implementation ProjectControllerBridge {
     ProjectController* _cpp;
     DelegateWrapper* _delegate;
-    NSArray* _lyricsSectionsCache;
 }
 
 - (instancetype)init {
@@ -246,10 +245,6 @@ static LyricsSectionType fromCppToObjCSectionType(Lyrics::SectionType type) {
 }
 
 - (NSArray<LyricsSection*>*)lyricsSections {
-    if (_lyricsSectionsCache) {
-        return _lyricsSectionsCache;
-    }
-
     const auto& sections = _cpp->getLyricsSections();
     NSMutableArray *result = [NSMutableArray arrayWithCapacity:sections.size()];
     for (const auto& section : sections) {
@@ -264,7 +259,6 @@ static LyricsSectionType fromCppToObjCSectionType(Lyrics::SectionType type) {
         [result addObject:lyricsSection];
     }
 
-    _lyricsSectionsCache = result;
     return result;
 }
 
