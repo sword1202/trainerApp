@@ -303,8 +303,10 @@ bool VocalTrainerFilePlayer::isPlaying() const {
 }
 
 void VocalTrainerFilePlayer::stopAndMoveSeekToBeginning() {
+    isPlayingChangedListeners.addOneShotListener([=] (bool) {
+        setSeek(bounds ? bounds.getStartSeek() : 0);
+    });
     pause();
-    setSeek(bounds ? bounds.getStartSeek() : 0);
 }
 
 double VocalTrainerFilePlayer::getSeek() const {
