@@ -48,7 +48,7 @@ class ProjectViewModel : ObservableObject {
     private lazy var projectController = ProjectController.shared
 
     private func updatePlaybackEndTime() {
-        playbackEndTime = timeFormatter.string(from: Date(timeIntervalSince1970: projectController.duration))
+        playbackEndTime = timeFormatter.string(from: Date(timeIntervalSince1970: projectController.endSeek))
     }
 
     init() {
@@ -130,7 +130,7 @@ extension ProjectViewModel : ProjectControllerBridgeDelegate {
         isLyricsVisible = lyricsVisibility;
     }
 
-    func projectControllerUpdateTempo(factor: Double) {
+    func projectControllerUpdate(endSeek: Double) {
         updatePlaybackEndTime()
     }
 

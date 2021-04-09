@@ -186,6 +186,14 @@ public:
             }
         }
     }
+
+    void updateEndSeek(double endSeek) override {
+        for (id delegate in delegates) {
+            if ([delegate respondsToSelector:@selector(projectControllerUpdateWithEndSeek:)]) {
+                [delegate projectControllerUpdateWithEndSeek:endSeek];
+            }
+        }
+    }
 };
 
 @implementation ProjectControllerBridge {
@@ -426,8 +434,8 @@ static LyricsSectionType fromCppToObjCSectionType(Lyrics::SectionType type) {
     return _cpp->getBeatsPerMinute();
 }
 
-- (double)duration {
-    return _cpp->getDuration();
+- (double)endSeek {
+    return _cpp->getEndSeek();
 }
 
 - (double)originalBeatsPerMinute {

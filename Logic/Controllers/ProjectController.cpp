@@ -85,6 +85,11 @@ ProjectController::ProjectController(ProjectControllerDelegate* delegate) : dele
         delegate->updateLyricsLines(provider);
     }, this);
 
+    player->boundsChangedListeners.addListener([=] (const PlaybackBounds& bounds) {
+        delegate->updateEndSeek(getEndSeek());
+        delegate->updateSeek(player->getSeek());
+    }, this);
+
     rewinder = new Rewinder(player);
 }
 
@@ -333,12 +338,26 @@ void ProjectController::updateDelegate() {
 
 void ProjectController::setPlaybackProgress(double value) {
     assert(value >= 0 && value <= 1);
-    player->setSeek(player->getDuration() * value);
+    const PlaybackBounds& bounds = player->getBounds();
+    double seek;
+    if (bounds) {
+        seek = bounds.getDuration() * value + bounds.getStartSeek();
+    } else {
+        seek = player->getDuration() * value;
+    }
+    player->setSeek(seek);
 }
 
 double ProjectController::convertSeekToPlaybackProgress(double seek) const {
     assert(seek >= 0);
-    double result = seek / player->getDuration();
+    const PlaybackBounds& bounds = player->getBounds();
+    double duration = bounds ? bounds.getDuration() : player->getDuration();
+    seek = bounds ? seek - bounds.getStartSeek() : seek;
+    if (seek < 0) {
+        seek = 0;
+    }
+
+    double result = seek / duration;
     if (result > 1.0) {
         return 1.0;
     } else {
@@ -382,8 +401,9 @@ void ProjectController::setTempoFactor(double value) {
     delegate->updateTempoFactor(value);
 }
 
-double ProjectController::getDuration() const {
-    return player->getDuration();
+double ProjectController::getEndSeek() const {
+    const auto& bounds = player->getBounds();
+    return bounds ? bounds.getEndSeek() : player->getDuration();
 }
 
 void ProjectController::rewindBackBySeconds(double seconds) {

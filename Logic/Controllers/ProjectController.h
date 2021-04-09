@@ -33,6 +33,7 @@ public:
     virtual inline void updateZoom(float value) {}
     virtual inline void updateTonality(int shift) {}
     virtual inline void updateTempoFactor(double tempoFactor) {}
+    virtual inline void updateEndSeek(double endSeek) {}
     virtual inline void onRewindStatusChanged(bool rewindRunning, bool backward) {}
 };
 
@@ -108,7 +109,7 @@ public:
 
     double getBeatsPerMinute() const;
     double getOriginalBeatsPerMinute() const;
-    double getDuration() const;
+    double getEndSeek() const;
 
     float getVerticalScrollPosition() const;
     void setVerticalScrollPosition(float position);

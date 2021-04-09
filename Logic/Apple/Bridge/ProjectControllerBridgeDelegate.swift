@@ -29,4 +29,5 @@ import CoreGraphics
     @objc optional func projectController(didChangeRewindStatus running: Bool, isBackward: Bool)
     @objc optional func projectControllerUpdateTonality(pitchShift: Int)
     @objc optional func projectControllerUpdateTempo(factor: Double)
+    @objc optional func projectControllerUpdate(endSeek: Double)
 }

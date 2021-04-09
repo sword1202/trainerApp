@@ -35,7 +35,7 @@
 @property (readonly) SongTonality* originalTonality;
 @property (readonly) double beatsPerMinute;
 @property (readonly) double originalBeatsPerMinute;
-@property (readonly) double duration;
+@property (readonly) double endSeek;
 @property (readonly) NSInteger linesCount;
 
 - (void)goToBeginning;
