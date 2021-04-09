@@ -28,6 +28,7 @@ void PitchesMutableList::getPitchesInTimeRange(
 
 void PitchesMutableList::appendPitch(double time, float frequency) {
     LOCK;
+    assert(time < times.back() && "Unable to add a new pitch behind the time");
     frequencies.push_back(frequency);
     times.push_back(time);
 }
