@@ -326,8 +326,16 @@ static LyricsSectionType fromCppToObjCSectionType(Lyrics::SectionType type) {
     return Strings::ToNSString(_cpp->getLyricsLine(static_cast<int>(index)));;
 }
 
-- (void)loopLines:(NSInteger)firstLineIndex lastLineIndex:(NSInteger)lastLineIndex {
-    _cpp->loopLines(static_cast<int>(firstLineIndex), static_cast<int>(lastLineIndex));
+- (void)setPlaybackBounds:(NSInteger)firstLineIndex lastLineIndex:(NSInteger)lastLineIndex {
+    _cpp->setPlaybackBoundsUsingLineIndexes(static_cast<int>(firstLineIndex), static_cast<int>(lastLineIndex));
+}
+
+- (void)clearPlaybackBounds {
+    _cpp->setPlaybackBounds(PlaybackBounds());
+}
+
+- (BOOL)hasPlaybackBounds {
+    return _cpp->hasPlaybackBounds();
 }
 
 

@@ -69,6 +69,6 @@ class BoundsSelectionViewModel : ObservableObject {
             return
         }
 
-        projectController.loopLines(firstLineIndex: firstSelectedLineIndex, lastLineIndex: lastSelectedLineIndex)
+        projectController.setPlaybackBounds(firstLineIndex: firstSelectedLineIndex, lastLineIndex: lastSelectedLineIndex)
     }
 }

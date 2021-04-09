@@ -173,8 +173,12 @@ struct ProjectView: View {
                                 Image(viewModel.isPlaying ? "PauseButton" : "PlayButton")
                             }.padding(.leading, 50).padding(.trailing, 50)
                             Button(action: {
-                                withAnimation {
-                                    boundsSelectionDialogVisible.toggle()
+                                var showDialog = false
+                                viewModel.didTapBoundsSelection(showBoundsSelectionDialog: &showDialog)
+                                if showDialog {
+                                    withAnimation {
+                                        boundsSelectionDialogVisible = true
+                                    }
                                 }
                             }) {
                                 Image("SelectBoundsButton")

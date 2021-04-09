@@ -406,10 +406,14 @@ void ProjectController::setPlaybackBounds(const PlaybackBounds &bounds) {
     player->setBounds(bounds);
 }
 
-void ProjectController::loopLines(int firstLineIndex, int lastLineIndex) {
+void ProjectController::setPlaybackBoundsUsingLineIndexes(int firstLineIndex, int lastLineIndex) {
     assert(firstLineIndex >= 0 && firstLineIndex <= lastLineIndex && lastLineIndex < getLinesCount());
     const Lyrics &lyrics = player->getFile().getLyrics();
     const auto& firstLine = lyrics.getLineAt(firstLineIndex);
     const auto& lastLine = lyrics.getLineAt(lastLineIndex);
     setPlaybackBounds(PlaybackBounds(firstLine.startSeek, lastLine.getEndSeek()));
+}
+
+bool ProjectController::hasPlaybackBounds() const {
+    return player->getBounds();
 }

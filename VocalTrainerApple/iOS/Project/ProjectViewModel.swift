@@ -90,6 +90,13 @@ class ProjectViewModel : ObservableObject {
     func didTapRetry() {
         projectController.rewindBack(bySeconds: Double(retrySeconds))
     }
+
+    func didTapBoundsSelection(showBoundsSelectionDialog: inout Bool) {
+        showBoundsSelectionDialog = !projectController.hasPlaybackBounds()
+        if !showBoundsSelectionDialog {
+            projectController.clearPlaybackBounds()
+        }
+    }
 }
 
 extension ProjectViewModel : ProjectControllerBridgeDelegate {

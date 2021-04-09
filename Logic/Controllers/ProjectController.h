@@ -75,7 +75,9 @@ public:
     void setBoundsSelectionEnabled(bool boundsSelectionEnabled);
 
     void setPlaybackBounds(const PlaybackBounds& bounds);
-    void loopLines(int firstLineIndex, int lastLineIndex);
+    bool hasPlaybackBounds() const;
+    void setPlaybackBoundsUsingLineIndexes(int firstLineIndex, int lastLineIndex);
+
 
     void setVocalVolume(float value);
     void setInputSensitivity(float value);

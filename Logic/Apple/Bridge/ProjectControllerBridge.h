@@ -62,5 +62,7 @@
 
 - (NSString*)getLineByIndex:(NSInteger)index NS_SWIFT_NAME(getLine(index:));
 
-- (void)loopLines:(NSInteger)firstLineIndex lastLineIndex:(NSInteger)lastLineIndex NS_SWIFT_NAME(loopLines(firstLineIndex:lastLineIndex:));
+- (void)setPlaybackBounds:(NSInteger)firstLineIndex lastLineIndex:(NSInteger)lastLineIndex NS_SWIFT_NAME(setPlaybackBounds(firstLineIndex:lastLineIndex:));
+- (void)clearPlaybackBounds;
+- (BOOL)hasPlaybackBounds;
 @end
