@@ -7,6 +7,8 @@ import Combine
 import AVFoundation
 
 class ProjectViewModel : ObservableObject {
+    private let audioEngine = AVAudioEngine()
+
     @Published var isMetronomeEnabled = false {
         didSet {
             projectController.metronomeEnabled = isMetronomeEnabled
@@ -50,35 +52,27 @@ class ProjectViewModel : ObservableObject {
     }
 
     init() {
-        if !SwiftUIUtils.isPreview() {
-            isMetronomeEnabled = projectController.metronomeEnabled
-            projectController.add(delegate: self)
-            let lyricsSections: [LyricsSection] = projectController.lyricsSections
-            playbackSections = lyricsSections.map {
-                let type = $0.type
-                let name = Strings.from(sectionType: type).localized
-                let position = CGFloat(projectController.convertSeek(toPlaybackProgress: $0.seek))
-                return PlaybackSection(name: name, position: position)
-            }
-            title = projectController.artistName + " - " + projectController.songTitle
-            timeFormatter.dateFormat = "m:ss"
-            updatePlaybackEndTime()
-        } else {
-            playbackSections = [
-                .init(name: "Verse", position: 0.2),
-                .init(name: "Chorus", position: 0.25),
-                .init(name: "Verse", position: 0.35),
-                .init(name: "Chorus", position: 0.5),
-                .init(name: "Bridge", position: 0.6),
-                .init(name: "Chorus", position: 0.8),
-            ]
+        isMetronomeEnabled = projectController.metronomeEnabled
+        projectController.add(delegate: self)
+        let lyricsSections: [LyricsSection] = projectController.lyricsSections
+        playbackSections = lyricsSections.map {
+            let type = $0.type
+            let name = Strings.from(sectionType: type).localized
+            let position = CGFloat(projectController.convertSeek(toPlaybackProgress: $0.seek))
+            return PlaybackSection(name: name, position: position)
         }
+        title = projectController.artistName + " - " + projectController.songTitle
+        timeFormatter.dateFormat = "m:ss"
+        updatePlaybackEndTime()
+
+        audioEngine.connect(
+                audioEngine.inputNode,
+                to: audioEngine.outputNode,
+                format: audioEngine.inputNode.inputFormat(forBus: 0))
     }
 
     deinit {
-        if !SwiftUIUtils.isPreview() {
-            projectController.remove(delegate: self)
-        }
+        projectController.remove(delegate: self)
     }
 
     func willBecomeInactive() {
@@ -134,10 +128,12 @@ extension ProjectViewModel : ProjectControllerBridgeDelegate {
     }
 
     func projectControllerPlaybackDidStart() {
+        try! audioEngine.start()
         isPlaying = true
     }
 
     func projectControllerPlaybackDidStop() {
+        audioEngine.stop()
         isPlaying = false
     }
 }
