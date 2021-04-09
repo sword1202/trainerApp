@@ -6,6 +6,7 @@
 import Foundation
 
 private let notShowSwipeAndZoomSuggestionKey = "notShowSwipeAndZoomSuggestionKey";
+private let notShowBoundsSuggestion = "notShowBoundsSuggestion";
 
 class AppSettings {
     static let shared = AppSettings()
@@ -18,6 +19,15 @@ class AppSettings {
         }
         set {
             userDefaults.set(!newValue, forKey: notShowSwipeAndZoomSuggestionKey)
+        }
+    }
+
+    var showBoundsSuggestion: Bool {
+        get {
+            userDefaults.value(forKey: notShowBoundsSuggestion) as? Bool != true
+        }
+        set {
+            userDefaults.set(!newValue, forKey: notShowBoundsSuggestion)
         }
     }
 }

@@ -118,12 +118,16 @@ struct ProjectView: View {
                             if showSwipeAndZoomSuggestion {
                                 VStack(spacing: 24) {
                                     Spacer()
-                                    Text(Strings.youCan.localized).font(Font.system(size: 32)).foregroundColor(Colors.tone5)
+                                    Text(Strings.youCan.localized)
+                                            .font(Font.system(size: 32, weight: .semibold))
+                                            .foregroundColor(Colors.tone5)
                                     HStack(spacing: 46) {
                                         Image("SwipeHelpIcon")
                                         Image("ZoomHelpIcon")
                                     }
-                                    Text(Strings.swipeAndZoom.localized).font(Font.system(size: 32)).foregroundColor(Colors.tone5)
+                                    Text(Strings.swipeAndZoom.localized)
+                                            .font(Font.system(size: 32, weight: .semibold))
+                                            .foregroundColor(Colors.tone5)
                                     BigButton(text: Strings.gotIt.localized) {
                                         withAnimation {
                                             showSwipeAndZoomSuggestion = false
@@ -225,7 +229,7 @@ struct ProjectView: View {
                 ZStack {
                     if boundsSelectionDialogVisible {
                         BoundsSelectionDialog(
-                                safeAreaInsets: geom.safeAreaInsets,
+                                screenGeometry: geom,
                                 isShown: $boundsSelectionDialogVisible).transition(.move(edge: .bottom))
                     }
                 }

@@ -40,14 +40,15 @@ private struct LyricsSectionView : View {
 }
 
 struct BoundsSelectionDialog : View {
-    private let safeAreaInsets: EdgeInsets
+    private let screenGeometry: GeometryProxy
     @Binding var isShown: Bool
+    @State private var showBoundsSuggestion = AppSettings.shared.showBoundsSuggestion
 
     @StateObject private var viewModel = BoundsSelectionViewModel()
 
-    init(safeAreaInsets: EdgeInsets, isShown: Binding<Bool>) {
+    init(screenGeometry: GeometryProxy, isShown: Binding<Bool>) {
         _isShown = isShown
-        self.safeAreaInsets = safeAreaInsets
+        self.screenGeometry = screenGeometry
     }
 
     var body: some View {
@@ -59,29 +60,56 @@ struct BoundsSelectionDialog : View {
                     isShown: $isShown).frame(maxWidth: .infinity)
 
             ZStack {
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 0) {
-                        ForEach(0..<viewModel.getSectionsCount(), id: \.self) {
-                            LyricsSectionView(viewModel: viewModel, sectionIndex: $0)
-                        }
+                ZStack {
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 0) {
+                            ForEach(0..<viewModel.getSectionsCount(), id: \.self) {
+                                LyricsSectionView(viewModel: viewModel, sectionIndex: $0)
+                            }
+                        }.padding(.bottom, screenGeometry.safeAreaInsets.bottom)
                     }
-                }
-                VStack {
-                    Spacer()
+                    VStack {
+                        Spacer()
+                        ZStack {
+                            if viewModel.isLoopItAvailable {
+                                BigButton(text: Strings.loopIt.localized, action: {
+                                    viewModel.didTapLoopIt()
+                                    isShown = false
+                                }).frame(maxWidth: .infinity)
+                                        .padding(.leading, 16).padding(.trailing, 16)
+                                        .padding(.bottom, max(screenGeometry.safeAreaInsets.bottom + 2, 16))
+                            }
+                        }.background(LinearGradient(gradient: Gradient(colors: [
+                            Color.white.opacity(0.0), Color.white
+                        ]), startPoint: .top, endPoint: .bottom)).frame(maxWidth: .infinity)
+                    }
+                }.background(Color.white)
+                if showBoundsSuggestion {
                     ZStack {
-                        if viewModel.isLoopItAvailable {
-                            BigButton(text: Strings.loopIt.localized, action: {
-                                viewModel.didTapLoopIt()
-                                isShown = false
-                            }).frame(maxWidth: .infinity)
-                                    .padding(.leading, 16).padding(.trailing, 16)
-                                    .padding(.bottom, max(safeAreaInsets.bottom + 2, 16))
-                        }
-                    }.background(LinearGradient(gradient: Gradient(colors: [
-                        Color.white.opacity(0.0), Color.white
-                    ]), startPoint: .top, endPoint: .bottom)).frame(maxWidth: .infinity)
+                        VStack(alignment: .center, spacing: 0) {
+                            Spacer()
+                            HStack {
+                                HStack(alignment: .top) {
+                                    Image("UnselectedCheckBox").padding(.trailing, 24)
+                                    Image("BoundsSelectionHelpArrow").padding(.top, 4).frame(width: screenGeometry.size.width / 2 - 64)
+                                }
+                                Spacer().layoutPriority(-1)
+                            }.padding(.leading, 16)
+                            VStack(spacing: 24) {
+                                Text(Strings.lyricsSuggestion.localized)
+                                        .multilineTextAlignment(.center)
+                                        .font(Font.system(size: 32, weight: .semibold))
+                                        .foregroundColor(Colors.tone5)
+                                BigButton(text: Strings.gotIt.localized) {
+                                    showBoundsSuggestion = false
+                                    AppSettings.shared.showBoundsSuggestion = false
+                                }
+                            }.padding(.leading, 60).padding(.trailing, 60)
+                            Spacer()
+                        }.padding(.bottom, screenGeometry.safeAreaInsets.bottom)
+                    }.background(Color.white.opacity(0.9))
                 }
-            }.background(Color.white)
+            }
         }.ignoresSafeArea(edges: .bottom)
     }
 }

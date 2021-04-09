@@ -56,4 +56,6 @@ enum Strings : String, Localizable {
     case gotIt
 
     case tempoChangeWarning
+
+    case lyricsSuggestion
 }
