@@ -949,6 +949,10 @@ void WorkspaceDrawer::setRecording(bool recording) {
 
 void WorkspaceDrawer::setInstrumentalTrackSamples(const std::vector<short> &instrumentalTrackSamples) {
     CHECK_IF_RENDER_THREAD;
+    if (willDrawTracks) {
+        return;
+    }
+
     this->instrumentalTrackSamples = instrumentalTrackSamples;
     if (width > 0 && height > 0 && devicePixelRatio > 0) {
         generateInstrumentalTrackSamplesImage(width - PIANO_WIDTH);
