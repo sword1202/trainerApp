@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5406AC5B263D6403000E6E04 /* WorkspaceDrawerColorScheme.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFA97A9FCEF8113EA289F /* WorkspaceDrawerColorScheme.h */; };
 		54105FC025EA53540013D131 /* Lyrics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD20B7128829EC073BB509 /* Lyrics.cpp */; };
 		54105FC525EA539F0013D131 /* StringEncodingUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF13039CBC1561E3F82E4 /* StringEncodingUtils.cpp */; };
 		54105FD225EA555B0013D131 /* LyricsTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFF86158F5BF100CF4E33 /* LyricsTest.cpp */; };
@@ -643,6 +644,7 @@
 		C9FFF7E61A3D26D1D5818AE8 /* StringEncodingUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFFAE08B7263D85CA449B /* StringEncodingUtils.h */; };
 		C9FFF8039D5FBBAF18F3783C /* BaseAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF93B13F01C590643A6A7 /* BaseAudioPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF8073BF9456F0986AF20 /* pugiconfig.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFE1A9795F1014748594E /* pugiconfig.hh */; };
+		C9FFF84EEFED840D781A0896 /* WorkspaceDrawerColorScheme.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFA97A9FCEF8113EA289F /* WorkspaceDrawerColorScheme.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF8637CF97D67D4CBBD3E /* hmm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2621E905F109D56ECE4 /* hmm.cpp */; };
 		C9FFF87F596EC01713BD6AF3 /* yin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE0BCC6F1DFFD4D269EB /* yin.cpp */; };
 		C9FFF8B9EE16D7402AC98823 /* AudioToolboxInputReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFBA07A1480342A9F451A /* AudioToolboxInputReader.cpp */; };
@@ -680,6 +682,7 @@
 		C9FFFBA2B6BA5581C9CA515D /* SeekablePitchesList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFFBBBD6D7C362F5F02CA /* SeekablePitchesList.cpp */; };
 		C9FFFBA53A45E7561F2D52F8 /* PitchDuration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFAC12ABF20BC1CC8E0B4 /* PitchDuration.cpp */; };
 		C9FFFBB284130F06362A014B /* PitchInputReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF955FDC02E251D044DFF /* PitchInputReader.cpp */; };
+		C9FFFBDD827AED2BA908BB4F /* WorkspaceDrawerColorScheme.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD25D1F83D1B5F7944D9 /* WorkspaceDrawerColorScheme.cpp */; };
 		C9FFFBDDF43F9B1C79F2B487 /* SeekablePitchesList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFFBBBD6D7C362F5F02CA /* SeekablePitchesList.cpp */; };
 		C9FFFBE50B81FFFCC4F17B1E /* parabolic_interpolation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF02E93F34948D52C4F42 /* parabolic_interpolation.cpp */; };
 		C9FFFBF34C432EB5443FD4CC /* codecvt_null.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC46AA1196339A1FAE56 /* codecvt_null.cpp */; };
@@ -695,6 +698,7 @@
 		C9FFFD869A63DFACD0F3F823 /* text_woarchive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD24DD9BE81C226C1DC4 /* text_woarchive.cpp */; };
 		C9FFFDA3E3EAB874637EDC5C /* PitchDetectionSmoothingAudioBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8C6C90A66E376F685DC /* PitchDetectionSmoothingAudioBuffer.cpp */; };
 		C9FFFDBA6FC03B6D65549858 /* yin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE0BCC6F1DFFD4D269EB /* yin.cpp */; };
+		C9FFFDFECF645FB2C919D854 /* WorkspaceDrawerColorScheme.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD25D1F83D1B5F7944D9 /* WorkspaceDrawerColorScheme.cpp */; };
 		C9FFFE02BD704DDD97F1064E /* parabolic_interpolation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF02E93F34948D52C4F42 /* parabolic_interpolation.cpp */; };
 		C9FFFE0C0723E92C6FE5F591 /* extended_type_info.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF4596D53BE79D1226A3F /* extended_type_info.cpp */; };
 		C9FFFE214C509249EDC71BA3 /* LyricsPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF03387F3706882FF8E44 /* LyricsPlayer.cpp */; };
@@ -1092,6 +1096,7 @@
 		C9FFFA71DEA9CB5E1158B25B /* xml_wiarchive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = xml_wiarchive.cpp; sourceTree = "<group>"; };
 		C9FFFA75D87FB0B021B3BA3F /* xml_grammar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = xml_grammar.cpp; sourceTree = "<group>"; };
 		C9FFFA7A71977FC73F08C461 /* D#7vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "D#7vL.wav"; sourceTree = "<group>"; };
+		C9FFFA97A9FCEF8113EA289F /* WorkspaceDrawerColorScheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceDrawerColorScheme.h; sourceTree = "<group>"; };
 		C9FFFAC12ABF20BC1CC8E0B4 /* PitchDuration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PitchDuration.cpp; sourceTree = "<group>"; };
 		C9FFFB2BB54C4A3B47467E77 /* A7vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = A7vL.wav; sourceTree = "<group>"; };
 		C9FFFB3FC89740A2C0F1A3D5 /* pugixml.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pugixml.hh; sourceTree = "<group>"; };
@@ -1109,6 +1114,7 @@
 		C9FFFC90367A8ADD207F39D9 /* AudioStreamDescription.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioStreamDescription.cpp; sourceTree = "<group>"; };
 		C9FFFC9CD69C33417DC50B22 /* synth.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = synth.cc; sourceTree = "<group>"; };
 		C9FFFD24DD9BE81C226C1DC4 /* text_woarchive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = text_woarchive.cpp; sourceTree = "<group>"; };
+		C9FFFD25D1F83D1B5F7944D9 /* WorkspaceDrawerColorScheme.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WorkspaceDrawerColorScheme.cpp; sourceTree = "<group>"; };
 		C9FFFD56742584E880665CE3 /* utils.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utils.cc; sourceTree = "<group>"; };
 		C9FFFD768C89C1B8FF44E58D /* AudioToolboxUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioToolboxUtils.cpp; sourceTree = "<group>"; };
 		C9FFFD79D420990C0BBEC118 /* log.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = log.hh; sourceTree = "<group>"; };
@@ -1473,6 +1479,8 @@
 				71AD2F6C47686C40182C94EA /* BoundsSelectionController.cpp */,
 				71AD200521649A156A2F0149 /* BoundsSelectionController.h */,
 				71AD28A1306F3AB1C307C7A3 /* BoundsSelectionDelegate.h */,
+				C9FFFA97A9FCEF8113EA289F /* WorkspaceDrawerColorScheme.h */,
+				C9FFFD25D1F83D1B5F7944D9 /* WorkspaceDrawerColorScheme.cpp */,
 			);
 			path = Workspace;
 			sourceTree = "<group>";
@@ -1973,6 +1981,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9FFF84EEFED840D781A0896 /* WorkspaceDrawerColorScheme.h in Headers */,
 				54852493260B586600690C84 /* Tonality.h in Headers */,
 				5410600E25EBE8F50013D131 /* LyricsPlayer.h in Headers */,
 				5410600825EBE8CA0013D131 /* LyricsDisplayedLinesProvider.h in Headers */,
@@ -2249,6 +2258,7 @@
 				71AD267E89A7EDE61EDF13DC /* zip.h in Headers */,
 				71AD2D51A2C1CBE6A438D9BA /* miniz.h in Headers */,
 				71AD2E29ED0C0070CEDA61F9 /* ZipFile.h in Headers */,
+				5406AC5B263D6403000E6E04 /* WorkspaceDrawerColorScheme.h in Headers */,
 				C9FFF95B741E0D318B598368 /* FixedSizeObjectPool.h in Headers */,
 				C9FFF9377D106B5280AD99A6 /* log.hh in Headers */,
 				C9FFF233DB4DBAEC69EFFB3D /* curve.hh in Headers */,
@@ -2707,6 +2717,7 @@
 				C9FFFBDDF43F9B1C79F2B487 /* SeekablePitchesList.cpp in Sources */,
 				C9FFFECAFBD50C4A4300EE0F /* Pitch.cpp in Sources */,
 				C9FFF1862E9AAE35C66FCDA6 /* SongTonality.swift in Sources */,
+				C9FFFDFECF645FB2C919D854 /* WorkspaceDrawerColorScheme.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2845,6 +2856,7 @@
 				C9FFF953098640AFA4376B9D /* Pitch.cpp in Sources */,
 				C9FFF72E61784FDFE4D0BC86 /* Tonality.cpp in Sources */,
 				C9FFFF24F85461A364B481E5 /* SongTonality.swift in Sources */,
+				C9FFFBDD827AED2BA908BB4F /* WorkspaceDrawerColorScheme.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

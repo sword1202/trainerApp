@@ -7,7 +7,7 @@
 #define VOCALTRAINER_WORKSPACEDRAWER_H
 #define DRAW_TIME_UNDER_PITCHES
 
-#include "Drawer.h"
+#include "WorkspaceDrawerColorScheme.h"
 #include <array>
 #include "PitchesCollection.h"
 #include "VocalPart.h"
@@ -49,21 +49,7 @@ class WorkspaceDrawer : public WorkspaceController {
     float sizeMultiplier;
     float pitchRadius = 0;
 
-    Color gridColor;
-    Color accentGridColor;
-    Color pitchGraphColor;
-    Color pitchColor;
-    Color borderLineColor;
-    Color boundsColor;
-    Color playHeadColor;
-    Color instrumentalTrackColor;
-    Color trackButtonColor;
-    Color pianoTrackColor;
-    Color pianoTrackShadowColor;
-    Color pianoTrackPitchesColor;
-    Color playbackMarksLineColor;
-    Color endingColor;
-    Color playbackMarksRectColor;
+    const WorkspaceDrawerColorScheme* colors;
 
     int yardStickFontSize = 11;
     Drawer::FontStyle yardStickFontStyle = Drawer::NORMAL;
@@ -175,7 +161,9 @@ public:
             MouseEventsReceiver *mouseEventsReceiver,
             WorkspaceDrawerResourcesProvider *resourcesProvider,
             bool drawScrollbars,
-            const std::function<void()> &onUpdateRequested);
+            const std::function<void()> &onUpdateRequested,
+            const WorkspaceDrawerColorScheme* colorScheme = WorkspaceDrawerColorScheme::getDefault()
+            );
     ~WorkspaceDrawer();
 
     void setOnUpdateRequested(const std::function<void()> &onUpdateRequested);
@@ -207,15 +195,6 @@ public:
 
     float getPitchRadius() const;
     void setPitchRadius(float pitchRadius);
-
-    const Color &getGridColor() const;
-    void setGridColor(const Color& color);
-    const Color &getAccentGridColor() const;
-    void setAccentGridColor(const Color& color);
-    const Color &getPitchGraphColor() const;
-    void setPitchGraphColor(const Color &pitchGraphColor);
-    const Color &getPitchColor() const;
-    void setPitchColor(const Color &pitchColor);
 
     void setPitchesCollection(const PitchesCollection *pitchesCollection) override;
 
