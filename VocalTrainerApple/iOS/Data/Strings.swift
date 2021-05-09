@@ -58,4 +58,6 @@ enum Strings : String, Localizable {
     case tempoChangeWarning
 
     case lyricsSuggestion
+
+    case listenToTheResult
 }

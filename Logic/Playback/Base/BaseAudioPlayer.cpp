@@ -226,7 +226,6 @@ double BaseAudioPlayer::getSeek() const {
 void BaseAudioPlayer::onComplete() {
     playing = false;
     completed = true;
-    setSeek(0);
 
     Executors::ExecuteOnMainThread([=] {
         onPlaybackStoppedListeners.executeAll();

@@ -211,7 +211,15 @@ struct ProjectView: View {
                         tonalityDialogVisible = false
                         levelsVisible = false
                     }
+                }.onChange(of: viewModel.showSongCompletionFlow) {
+                    if ($0) {
+                        tempoDialogVisible = false
+                        tonalityDialogVisible = false
+                        levelsVisible = false
+                        boundsSelectionDialogVisible = false
+                    }
                 }
+
                 // Dialogs
                 // Put all the dialogs into zstacks to make the animation work
                 ZStack {
@@ -235,6 +243,12 @@ struct ProjectView: View {
                         BoundsSelectionDialog(
                                 screenGeometry: geom,
                                 isShown: $boundsSelectionDialogVisible).transition(.move(edge: .bottom))
+                    }
+                }
+
+                ZStack {
+                    if viewModel.showSongCompletionFlow {
+                        SongCompletionDialog(isShown: $viewModel.showSongCompletionFlow).transition(.move(edge: .bottom))
                     }
                 }
             }

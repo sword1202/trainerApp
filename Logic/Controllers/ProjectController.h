@@ -29,12 +29,12 @@ public:
     virtual inline void updateInstrumentalVolume(float volume) {}
     virtual inline void updateVocalVolume(float volume) {}
     virtual inline void updateInputSensitivity(float value) {}
-    virtual inline void updateSaveIndicator(bool hasSaveIndicator) {}
     virtual inline void updateZoom(float value) {}
     virtual inline void updateTonality(int shift) {}
     virtual inline void updateTempoFactor(double tempoFactor) {}
     virtual inline void updateEndSeek(double endSeek) {}
     virtual inline void onRewindStatusChanged(bool rewindRunning, bool backward) {}
+    virtual inline void onPlaybackCompleted() {}
 };
 
 class ProjectController : CppUtils::DestructorQueue, public WorkspaceControllerDelegate {

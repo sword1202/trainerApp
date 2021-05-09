@@ -103,7 +103,6 @@ void VocalTrainerFilePlayer::setSource(VocalTrainerFile *file, bool destroyFileO
 
     mainPlayer->onCompleteListeners.addListener([=] {
         this->onComplete();
-        onPlaybackStopped();
     });
 
     mainPlayer->onPlaybackStartedListeners.addListener([=] {
@@ -133,7 +132,7 @@ void VocalTrainerFilePlayer::setSource(const char *filePath) {
 }
 
 void VocalTrainerFilePlayer::onComplete() {
-    stopAndMoveSeekToBeginning();
+    onPlaybackStopped();
     onCompleteListeners.executeAll();
 }
 

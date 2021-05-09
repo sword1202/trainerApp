@@ -27,6 +27,7 @@ class ProjectViewModel : ObservableObject {
     @Published var playbackEndTime: String = ""
     @Published private(set) var retrySeconds = 5
     @Published private(set) var isPlaying: Bool = false
+    @Published var showSongCompletionFlow: Bool = false
 
     private let timeFormatter = DateFormatter()
 
@@ -147,5 +148,9 @@ extension ProjectViewModel : ProjectControllerBridgeDelegate {
     func projectControllerPlaybackDidStop() {
         audioEngine.stop()
         isPlaying = false
+    }
+
+    func projectControllerPlaybackDidComplete() {
+        showSongCompletionFlow = true
     }
 }

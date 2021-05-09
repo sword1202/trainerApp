@@ -24,10 +24,10 @@ import CoreGraphics
     @objc optional func projectControllerUpdate(instrumentalVolume: Float)
     @objc optional func projectControllerUpdate(vocalVolume: Float)
     @objc optional func projectControllerUpdate(inputSensitivity: Float)
-    @objc optional func projectControllerUpdate(hasSaveIndicator: Bool)
     @objc optional func projectControllerUpdate(zoom: Float)
     @objc optional func projectController(didChangeRewindStatus running: Bool, isBackward: Bool)
     @objc optional func projectControllerUpdateTonality(pitchShift: Int)
     @objc optional func projectControllerUpdateTempo(factor: Double)
     @objc optional func projectControllerUpdate(endSeek: Double)
+    @objc optional func projectControllerPlaybackDidComplete()
 }

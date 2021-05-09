@@ -146,14 +146,6 @@ public:
         }
     }
 
-    void updateSaveIndicator(bool hasSaveIndicator) override {
-        for (id delegate in delegates) {
-            if ([delegate respondsToSelector:@selector(projectControllerUpdateWithHasSaveIndicator:)]) {
-                [delegate projectControllerUpdateWithHasSaveIndicator:hasSaveIndicator];
-            }
-        }
-    }
-
     void updateZoom(float value) override {
         for (id delegate in delegates) {
             if ([delegate respondsToSelector:@selector(projectControllerUpdateWithZoom:)]) {
@@ -191,6 +183,14 @@ public:
         for (id delegate in delegates) {
             if ([delegate respondsToSelector:@selector(projectControllerUpdateWithEndSeek:)]) {
                 [delegate projectControllerUpdateWithEndSeek:endSeek];
+            }
+        }
+    }
+
+    void onPlaybackCompleted() override {
+        for (id delegate in delegates) {
+            if ([delegate respondsToSelector:@selector(projectControllerPlaybackDidComplete)]) {
+                [delegate projectControllerPlaybackDidComplete];
             }
         }
     }

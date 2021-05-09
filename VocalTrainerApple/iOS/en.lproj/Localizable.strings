@@ -44,4 +44,5 @@
 "gotIt" = "Got it!";
 "tempoChangeWarning" = "Warning: Changing the song tempo cleares all previously recorded data";
 "lyricsSuggestion" = "Select one or two lines to loop a part of the track";
+"listenToTheResult" = "Listen to the result";
 

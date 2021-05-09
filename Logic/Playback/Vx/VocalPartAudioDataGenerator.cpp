@@ -49,6 +49,10 @@ int VocalPartAudioDataGenerator::readNextSamplesBatch(short *intoBuffer, bool mo
         }
     }
 
+    if (framesCount == 0) {
+        return 0;
+    }
+
     if (!moveSeekAndFillWithZero) {
         double startTime = GetSampleTimeInSeconds(seek, playbackData.sampleRate);
         double endTime = GetSampleTimeInSeconds(seek + framesCount, playbackData.sampleRate);

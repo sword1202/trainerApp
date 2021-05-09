@@ -90,6 +90,10 @@ ProjectController::ProjectController(ProjectControllerDelegate* delegate) : dele
         delegate->updateSeek(player->getSeek());
     }, this);
 
+    player->onCompleteListeners.addListener([=] {
+        delegate->onPlaybackCompleted();
+    }, this);
+
     rewinder = new Rewinder(player);
 }
 
