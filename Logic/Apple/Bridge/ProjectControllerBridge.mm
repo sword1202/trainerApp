@@ -4,9 +4,9 @@
 //
 
 #import "ProjectControllerBridge.h"
+#import "SongCompletionFlowObjCWrapper.h"
 #include "ProjectController.h"
 #include "config.h"
-#include <iostream>
 
 using namespace CppUtils;
 using std::cout;
@@ -189,8 +189,10 @@ public:
 
     void onPlaybackCompleted(SongCompletionFlow* songCompletionFlow) override {
         for (id delegate in delegates) {
-            if ([delegate respondsToSelector:@selector(projectControllerPlaybackDidComplete)]) {
-                [delegate projectControllerPlaybackDidComplete];
+            if ([delegate respondsToSelector:@selector(projectControllerPlaybackDidCompleteWithFlow:)]) {
+                [delegate projectControllerPlaybackDidCompleteWithFlow:
+                        [[SongCompletionFlowObjCWrapper alloc] initWithCpp:songCompletionFlow]
+                ];
             }
         }
     }

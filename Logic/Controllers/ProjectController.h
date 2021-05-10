@@ -13,14 +13,7 @@
 #include "Rewinder.h"
 #include "Point.h"
 #include "Tonality.h"
-
-class SongCompletionFlow {
-public:
-    virtual void tryAgain() = 0;
-    virtual void save() = 0;
-    virtual void listen() = 0;
-    virtual ~SongCompletionFlow() = default;
-};
+#include "SongCompletionFlow.h"
 
 class ProjectControllerDelegate {
 public:
@@ -42,7 +35,10 @@ public:
     virtual inline void updateTempoFactor(double tempoFactor) {}
     virtual inline void updateEndSeek(double endSeek) {}
     virtual inline void onRewindStatusChanged(bool rewindRunning, bool backward) {}
-virtual inline void onPlaybackCompleted(SongCompletionFlow* songCompletionFlow) {}
+    virtual inline void onPlaybackCompleted(SongCompletionFlow* songCompletionFlow) {}
+    virtual std::optional<std::ostream> createStreamToSaveRecording(const VocalTrainerFile* recording) {
+        return std::nullopt;
+    }
 };
 
 class ProjectController : CppUtils::DestructorQueue, public WorkspaceControllerDelegate, private SongCompletionFlow {
@@ -59,6 +55,8 @@ class ProjectController : CppUtils::DestructorQueue, public WorkspaceControllerD
     void updateWorkspaceSeek(double seek);
 
     void play();
+
+    MvxFile* generateRecording() const;
 
     void tryAgain() override;
     void save() override;

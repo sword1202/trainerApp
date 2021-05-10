@@ -6,6 +6,7 @@
 #include "ApplicationModel.h"
 #include "Primitives.h"
 #include "Executors.h"
+#include "Core.h"
 #include <iostream>
 
 using namespace CppUtils;
@@ -440,16 +441,7 @@ bool ProjectController::hasPlaybackBounds() const {
     return player->getBounds();
 }
 
-// Song completion flow
-void ProjectController::tryAgain() {
-    player->setSeek(0);
-}
-
-void ProjectController::save() {
-
-}
-
-void ProjectController::listen() {
+MvxFile *ProjectController::generateRecording() const {
     assert(source);
     MvxFile* recordingFile = new MvxFile(source);
     recordingFile->setRecordingData(audioInputManager->getRecordedDataInWavFormat());
@@ -461,6 +453,28 @@ void ProjectController::listen() {
     player->onSourceChanged.addOneShotListener([=] {
         player->setSeek(0);
     });
+
+    return recordingFile;
+}
+
+// Song completion flow
+void ProjectController::tryAgain() {
+    player->setSeek(0);
+}
+
+void ProjectController::save() {
+    MvxFile* recordingFile = generateRecording();
+    ExecuteInTheEndOfScope([=] {
+        delete recordingFile;
+    });
+
+    if (auto stream = delegate->createStreamToSaveRecording(recordingFile)) {
+        recordingFile->writeToStream(*stream);
+    }
+}
+
+void ProjectController::listen() {
+    MvxFile* recordingFile = generateRecording();
     setPlaybackSource(recordingFile);
 }
 

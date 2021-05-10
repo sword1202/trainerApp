@@ -5,6 +5,12 @@
 
 import Foundation
 
+@objc public protocol SongCompletionFlowBridge {
+    func tryAgain()
+    func save()
+    func listen()
+}
+
 @objc public protocol ProjectControllerBridgeDelegate {
     @objc optional func projectControllerUpdate(audioLevel: Double)
     @objc optional func projectControllerUpdate(seek: Double)
@@ -28,5 +34,5 @@ import Foundation
     @objc optional func projectControllerUpdateTonality(pitchShift: Int)
     @objc optional func projectControllerUpdateTempo(factor: Double)
     @objc optional func projectControllerUpdate(endSeek: Double)
-    @objc optional func projectControllerPlaybackDidComplete()
+    @objc optional func projectControllerPlaybackDidComplete(flow: SongCompletionFlowBridge)
 }
