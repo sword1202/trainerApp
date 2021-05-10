@@ -14,11 +14,6 @@
 + (void)initializeApplicationIfNeed {
     if (!self.isInitialized) {
         ApplicationModel::init();
-        auto* player = ApplicationModel::instance()->getPlayer();
-        //player->setSource("/Users/semyontykhonenko/Desktop/Ария-Дай руку мне.mvx");
-        const char *mvxPath = [NSBundle.mainBundle pathForResource:@"drm" ofType:@"mvx"].UTF8String;
-        player->setSource(mvxPath);
-        player->prepare();
     }
 }
 

@@ -100,6 +100,8 @@ public:
     // Preferably use move constructor instead
     MvxFile(const MvxFile& mvxFile) = delete;
 
+    MvxFile(const VocalTrainerFile* file);
+
     void writeToStream(std::ostream& os) const;
     void writeToFile(const char* outFilePath) const;
 

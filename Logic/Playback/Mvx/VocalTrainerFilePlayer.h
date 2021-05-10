@@ -47,7 +47,7 @@ private:
     double playStartedSeek = -1;
     double playStartedTime = -1;
     VocalTrainerFile* file = nullptr;
-    bool destroyMvxFileOnDestructor;
+    bool destroyFileOnDestructor;
     // is valid only for recordings
     PitchesCollection* pitchesCollection = nullptr;
 
@@ -61,6 +61,8 @@ private:
 
     const BaseAudioPlayer* getMainPlayer() const;
     BaseAudioPlayer* getMainPlayer();
+
+    void setSourceInternal(VocalTrainerFile *file, bool destroyFileOnDestructor = true);
 public:
     CppUtils::ListenersSet<bool> isPlayingChangedListeners;
     CppUtils::ListenersSet<> stopRequestedListeners;
@@ -75,12 +77,14 @@ public:
     CppUtils::SynchronizedListenersSet<double> recordingVoiceLevelListeners;
     CppUtils::ListenersSet<LyricsPlayer::Selection> lyricsSelectionChangedListeners;
     CppUtils::ListenersSet<const LyricsDisplayedLinesProvider*> currentLyricsLinesChangedListeners;
+    CppUtils::ListenersSet<> onSourceChanged;
 
     VocalTrainerFilePlayer();
     virtual ~VocalTrainerFilePlayer();
     void setSource(std::istream &is);
     void setSource(const char *filePath);
     void setSource(VocalTrainerFile *file, bool destroyFileOnDestructor = true);
+    void clearSource(const std::function<void()>& onFinish = 0);
     void prepare();
     virtual void setInstrumentalVolume(float instrumentalVolume);
     virtual void setVocalPartPianoVolume(float pianoVolume);
@@ -148,6 +152,8 @@ public:
     const LyricsDisplayedLinesProvider* getDisplayedLyricsLines() const;
 
     const std::deque<Lyrics::Section> & getLyricsSections() const;
+
+    void setDestroyFileOnDestructor(bool destroyFileOnDestructor);
 };
 
 

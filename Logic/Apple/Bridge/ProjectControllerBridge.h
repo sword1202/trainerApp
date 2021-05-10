@@ -38,6 +38,8 @@
 @property (readonly) double endSeek;
 @property (readonly) NSInteger linesCount;
 
+- (void)setPlaybackSource:(NSString*)filePath NS_SWIFT_NAME(setPlaybackSource(filePath:));
+
 - (void)goToBeginning;
 - (void)toggleTracksVisibility;
 - (void)toggleLyricsVisibility;

@@ -115,12 +115,12 @@ extension ProjectViewModel : ProjectControllerBridgeDelegate {
 
     func projectControllerUpdateLyricsSelection(
             selectedCharactersCount: Int,
-            lastCharacterSelectionPosition: CGFloat,
+            lastCharacterSelectionPosition: Float,
             lineIndex: Int
     ) {
         lyricsSelection = LyricsSelection(
                 characterIndex: selectedCharactersCount == 0 ? 0 : selectedCharactersCount - 1,
-                position: lastCharacterSelectionPosition,
+                position: CGFloat(lastCharacterSelectionPosition),
                 lineIndex: lineIndex)
     }
 

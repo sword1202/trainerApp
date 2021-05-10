@@ -4,7 +4,6 @@
 //
 
 import Foundation
-import CoreGraphics
 
 @objc public protocol ProjectControllerBridgeDelegate {
     @objc optional func projectControllerUpdate(audioLevel: Double)
@@ -13,7 +12,7 @@ import CoreGraphics
     @objc optional func projectControllerPlaybackDidStop()
     @objc optional func projectControllerUpdateLyricsSelection(
             selectedCharactersCount: Int,
-            lastCharacterSelectionPosition: CGFloat,
+            lastCharacterSelectionPosition: Float,
             lineIndex: Int
     )
     @objc optional func projectControllerUpdate(currentLyricsLines: [String])

@@ -190,3 +190,19 @@ double MvxFile::getRecordingTempoFactor() const {
 void MvxFile::setRecordingTempoFactor(double tempoFactor) {
     MvxFile::recordingTempoFactor = tempoFactor;
 }
+
+MvxFile::MvxFile(const VocalTrainerFile* file) {
+    setVocalPart(file->getVocalPart());
+    setOriginalTonality(file->getOriginalTonality());
+    setLyrics(file->getLyrics());
+    setArtistNameUtf8(file->getArtistNameUtf8());
+    setSongTitleUtf8(file->getSongTitleUtf8());
+    setBeatsPerMinute(file->getBeatsPerMinute());
+    setInstrumental(file->getInstrumental());
+    setInstrumentalPreviewSamples(file->getInstrumentalPreviewSamples());
+    setRecordedPitchesFrequencies(file->getRecordedPitchesFrequencies());
+    setRecordedPitchesTimes(file->getRecordedPitchesTimes());
+    setRecordingData(file->getRecordingData());
+    setRecordingTonalityChanges(file->getRecordingTonalityChanges());
+    setRecordingTempoFactor(file->getRecordingTempoFactor());
+}

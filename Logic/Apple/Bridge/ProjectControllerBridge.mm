@@ -187,7 +187,7 @@ public:
         }
     }
 
-    void onPlaybackCompleted() override {
+    void onPlaybackCompleted(SongCompletionFlow* songCompletionFlow) override {
         for (id delegate in delegates) {
             if ([delegate respondsToSelector:@selector(projectControllerPlaybackDidComplete)]) {
                 [delegate projectControllerPlaybackDidComplete];
@@ -223,6 +223,10 @@ public:
 
 - (void)setWorkspaceController:(void*)workspaceController {
     _cpp->setWorkspaceController(static_cast<WorkspaceController *>(workspaceController));
+}
+
+- (void)setPlaybackSource:(NSString *)filePath {
+    _cpp->setPlaybackSource(filePath.UTF8String);
 }
 
 - (NSString *)artistName {

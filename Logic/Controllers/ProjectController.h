@@ -14,6 +14,14 @@
 #include "Point.h"
 #include "Tonality.h"
 
+class SongCompletionFlow {
+public:
+    virtual void tryAgain() = 0;
+    virtual void save() = 0;
+    virtual void listen() = 0;
+    virtual ~SongCompletionFlow() = default;
+};
+
 class ProjectControllerDelegate {
 public:
     virtual inline void updateAudioLevel(double level) {}
@@ -34,13 +42,14 @@ public:
     virtual inline void updateTempoFactor(double tempoFactor) {}
     virtual inline void updateEndSeek(double endSeek) {}
     virtual inline void onRewindStatusChanged(bool rewindRunning, bool backward) {}
-    virtual inline void onPlaybackCompleted() {}
+virtual inline void onPlaybackCompleted(SongCompletionFlow* songCompletionFlow) {}
 };
 
-class ProjectController : CppUtils::DestructorQueue, public WorkspaceControllerDelegate {
+class ProjectController : CppUtils::DestructorQueue, public WorkspaceControllerDelegate, private SongCompletionFlow {
     WorkspaceController* workspaceController = nullptr;
     ProjectControllerDelegate* delegate = nullptr;
     VocalTrainerFilePlayer* player;
+    VocalTrainerFile* source = nullptr;
     AudioInputManager* audioInputManager;
     bool lyricsVisible = true;
     Rewinder* rewinder = nullptr;
@@ -50,6 +59,13 @@ class ProjectController : CppUtils::DestructorQueue, public WorkspaceControllerD
     void updateWorkspaceSeek(double seek);
 
     void play();
+
+    void tryAgain() override;
+    void save() override;
+    void listen() override;
+
+    void setPlaybackSource(VocalTrainerFile* file);
+    void handlePlaybackSourceChange();
 public:
     explicit ProjectController(ProjectControllerDelegate* delegate);
 
@@ -123,7 +139,11 @@ public:
     void onPlaybackBoundsChangedByUserEvent(const PlaybackBounds &newBounds) override;
     void onSeekChangedByUserEvent(float newSeek) override;
 
+    void setPlaybackSource(const char* filePath);
+
     void updateDelegate();
+
+    ~ProjectController();
 };
 
 

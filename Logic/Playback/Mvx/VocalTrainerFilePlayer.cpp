@@ -30,8 +30,14 @@ VocalTrainerFilePlayer::VocalTrainerFilePlayer() : metronomeEnabled(false) {
 }
 
 void VocalTrainerFilePlayer::setSource(VocalTrainerFile *file, bool destroyFileOnDestructor) {
+    clearSource([=] {
+        this->setSourceInternal(file, destroyFileOnDestructor);
+    });
+}
+
+void VocalTrainerFilePlayer::setSourceInternal(VocalTrainerFile *file, bool destroyFileOnDestructor) {
     this->file = file;
-    this->destroyMvxFileOnDestructor = destroyFileOnDestructor;
+    this->destroyFileOnDestructor = destroyFileOnDestructor;
     players.clear();
     const AudioData* instrumental = &file->getInstrumental();
     if (!instrumental->empty()) {
@@ -43,6 +49,8 @@ void VocalTrainerFilePlayer::setSource(VocalTrainerFile *file, bool destroyFileO
 
     vocalPartPianoPlayer.setVocalPart(file->getVocalPart());
     players.push_back(&vocalPartPianoPlayer);
+    delete pitchesCollection;
+    pitchesCollection = nullptr;
     if (file->isRecording()) {
         pitchesCollection = new PitchesMutableList(file->getRecordedPitchesFrequencies(),
                                                    file->getRecordedPitchesTimes());
@@ -109,6 +117,8 @@ void VocalTrainerFilePlayer::setSource(VocalTrainerFile *file, bool destroyFileO
         this->onPlaybackStarted();
     });
 
+    delete lyricsPlayer;
+    lyricsPlayer = nullptr;
     const Lyrics& lyrics = file->getLyrics();
     if (!lyrics.isEmpty()) {
         lyricsPlayer = new LyricsPlayer(&lyrics);
@@ -119,6 +129,8 @@ void VocalTrainerFilePlayer::setSource(VocalTrainerFile *file, bool destroyFileO
             this->currentLyricsLinesChangedListeners.executeAll(linesProvider);
         };
     }
+
+    onSourceChanged.executeAll();
 }
 
 void VocalTrainerFilePlayer::setSource(std::istream &is) {
@@ -229,7 +241,7 @@ VocalTrainerFilePlayer::~VocalTrainerFilePlayer() {
     delete pitchesCollection;
     delete recordingLevelMonitor;
     delete lyricsPlayer;
-    if (destroyMvxFileOnDestructor) {
+    if (destroyFileOnDestructor) {
         delete file;
     }
 }
@@ -496,4 +508,37 @@ const std::deque<Lyrics::Section>& VocalTrainerFilePlayer::getLyricsSections() c
 
 double VocalTrainerFilePlayer::getOriginalBeatsPerMinute() const {
     return file->getBeatsPerMinute();
+}
+
+void VocalTrainerFilePlayer::setDestroyFileOnDestructor(bool destroyFileOnDestructor) {
+    this->destroyFileOnDestructor = destroyFileOnDestructor;
+}
+
+void VocalTrainerFilePlayer::clearSource(const std::function<void()>& onFinish) {
+    VocalTrainerFile* file = this->file;
+    bool destroyFileOnDestructor = this->destroyFileOnDestructor;
+    this->file = nullptr;
+    if (isPlaying()) {
+        isPlayingChangedListeners.addListenerWithAction([=](bool playing) {
+            if (!playing) {
+                if (destroyFileOnDestructor) {
+                    delete file;
+                }
+                if (onFinish) {
+                    onFinish();
+                }
+                return DELETE_LISTENER;
+            } else {
+                return DONT_DELETE_LISTENER;
+            }
+        });
+        stopAndMoveSeekToBeginning();
+    } else {
+        if (destroyFileOnDestructor) {
+            delete file;
+        }
+        if (onFinish) {
+            onFinish();
+        }
+    }
 }

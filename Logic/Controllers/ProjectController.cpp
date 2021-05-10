@@ -91,7 +91,7 @@ ProjectController::ProjectController(ProjectControllerDelegate* delegate) : dele
     }, this);
 
     player->onCompleteListeners.addListener([=] {
-        delegate->onPlaybackCompleted();
+        delegate->onPlaybackCompleted(this);
     }, this);
 
     rewinder = new Rewinder(player);
@@ -177,17 +177,7 @@ void ProjectController::setWorkspaceController(WorkspaceController *workspaceCon
     this->workspaceController = workspaceController;
 
     workspaceController->setDelegate(this);
-    workspaceController->setVocalPart(player->getVocalPart(), player->getBeatsPerSecond());
-    workspaceController->setInstrumentalTrackSamples(
-            this->player->getFile().getInstrumentalPreviewSamples());
-    workspaceController->setPitchSequence(player);
-    bool isRecording = player->isRecording();
-    workspaceController->setRecording(isRecording);
-    if (isRecording) {
-        workspaceController->setPitchesCollection(player->getPitchesCollection());
-    } else {
-        workspaceController->setPitchesCollection(audioInputManager->getRecordedPitches());
-    }
+    handlePlaybackSourceChange();
 
     player->seekChangedFromUserListeners.addListener([=] (double seek) {
         if (!player->isCompleted()) {
@@ -448,4 +438,65 @@ void ProjectController::setPlaybackBoundsUsingLineIndexes(int firstLineIndex, in
 
 bool ProjectController::hasPlaybackBounds() const {
     return player->getBounds();
+}
+
+// Song completion flow
+void ProjectController::tryAgain() {
+    player->setSeek(0);
+}
+
+void ProjectController::save() {
+
+}
+
+void ProjectController::listen() {
+    assert(source);
+    MvxFile* recordingFile = new MvxFile(source);
+    recordingFile->setRecordingData(audioInputManager->getRecordedDataInWavFormat());
+    const PitchesCollection *recordedPitches = audioInputManager->getRecordedPitches();
+    recordingFile->setRecordedPitchesTimes(recordedPitches->getTimes());
+    recordingFile->setRecordedPitchesFrequencies(recordedPitches->getFrequencies());
+    recordingFile->setRecordingTonalityChanges(player->getTonalityChanges());
+    recordingFile->setRecordingTempoFactor(player->getTempoFactor());
+    player->onSourceChanged.addOneShotListener([=] {
+        player->setSeek(0);
+    });
+    setPlaybackSource(recordingFile);
+}
+
+void ProjectController::setPlaybackSource(const char* filePath) {
+    std::fstream is = Streams::OpenFile(filePath, std::ios::in | std::ios::binary);
+    auto* source = VocalTrainerFile::read(is);
+    setPlaybackSource(source);
+}
+
+ProjectController::~ProjectController() {
+    player->clearSource();
+    delete source;
+}
+
+void ProjectController::setPlaybackSource(VocalTrainerFile *source) {
+    if (this->source) {
+        auto* lastSource = this->source;
+        player->onSourceChanged.addOneShotListener([=] {
+            delete lastSource;
+        });
+    }
+    this->source = source;
+    player->setSource(source, /*destroyFileOnDestructor =*/ false);
+    player->prepare();
+}
+
+void ProjectController::handlePlaybackSourceChange() {
+    workspaceController->setVocalPart(player->getVocalPart(), player->getBeatsPerSecond());
+    workspaceController->setInstrumentalTrackSamples(
+            this->player->getFile().getInstrumentalPreviewSamples());
+    workspaceController->setPitchSequence(player);
+    bool isRecording = player->isRecording();
+    workspaceController->setRecording(isRecording);
+    if (isRecording) {
+        workspaceController->setPitchesCollection(player->getPitchesCollection());
+    } else {
+        workspaceController->setPitchesCollection(audioInputManager->getRecordedPitches());
+    }
 }

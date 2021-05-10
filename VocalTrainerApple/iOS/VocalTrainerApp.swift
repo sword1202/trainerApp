@@ -21,8 +21,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         }
 
         try! AVAudioSession.sharedInstance().setCategory(.playAndRecord, options: .allowBluetoothA2DP)
-        //try! AVAudioSession.sharedInstance().overrideOutputAudioPort(.speaker)
         InitializationManager.initializeApplicationIfNeed()
+        let mvxFilePath = Bundle.main.path(forResource: "drm", ofType: "mvx")
+        ProjectController.shared.setPlaybackSource(filePath: mvxFilePath)
         return true
     }
 }
