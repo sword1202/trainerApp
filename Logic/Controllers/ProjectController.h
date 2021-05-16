@@ -36,8 +36,8 @@ public:
     virtual inline void updateEndSeek(double endSeek) {}
     virtual inline void onRewindStatusChanged(bool rewindRunning, bool backward) {}
     virtual inline void onPlaybackCompleted(SongCompletionFlow* songCompletionFlow) {}
-    virtual std::optional<std::ostream> createStreamToSaveRecording(const VocalTrainerFile* recording) {
-        return std::nullopt;
+    virtual std::shared_ptr<std::ostream> createStreamToSaveRecording(const VocalTrainerFile* recording) {
+        return nullptr;
     }
 };
 
@@ -138,6 +138,8 @@ public:
     void onSeekChangedByUserEvent(float newSeek) override;
 
     void setPlaybackSource(const char* filePath);
+
+    std::vector<float> getRecordingPreview(int numberOfSamples) const;
 
     void updateDelegate();
 

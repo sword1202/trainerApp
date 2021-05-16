@@ -49,6 +49,7 @@
 		BAF99EA1E439B8DDE5CA7FE8 /* Pods_VocalTrainerMacOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5884C119A97C874E1D3CB85D /* Pods_VocalTrainerMacOS.framework */; };
 		C9FFF0A6DC29C41C836A272F /* NSAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF75984620E90683329A9 /* NSAttributedString+Extensions.swift */; };
 		C9FFF0C4CA29947B37BD0C4C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF18E11AA44C9B5A6225B /* Color.swift */; };
+		C9FFF0CEF4671CBC307E2771 /* UiUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFDA890B96D4ABFC60D75 /* UiUtils.swift */; };
 		C9FFF1259D0CAC1732CA75B4 /* SwiftUIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8676254998A2E1557B2 /* SwiftUIUtils.swift */; };
 		C9FFF1A61CC78731ED6EF231 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF774A22E8B2F85EA6664 /* Array+Extensions.swift */; };
 		C9FFF1CC35BFB853F799A067 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC52FFD52111E4F8EA1C /* CGPoint+Extensions.swift */; };
@@ -79,6 +80,7 @@
 		C9FFF9B5CDD7D8A3D2E2A06B /* TonalityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF5C089DA6D0BBCBA539C /* TonalityViewModel.swift */; };
 		C9FFF9F48A6D816A30F0AE35 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2396E0BB5102967F5B2 /* UIView+Extensions.swift */; };
 		C9FFFA07A94FBE4832C6004E /* BigButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF18E9C15E6FAF0C18086 /* BigButton.swift */; };
+		C9FFFA0DB398E2B48B77C23A /* SongCompletionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF78F0BBB67E5152ACA63 /* SongCompletionViewModel.swift */; };
 		C9FFFAC7A9EEC42DB7900780 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD04B887D1AA905A010C /* Math.swift */; };
 		C9FFFB37E08B97046BF252A7 /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFF1E82D8552CD4FBCE28 /* Double+Extensions.swift */; };
 		C9FFFB4117D7E4EF6A075F4B /* TempoDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2EABC2C4C23563ADD96 /* TempoDialog.swift */; };
@@ -202,6 +204,7 @@
 		C9FFF72A1F66910885A40FE2 /* CGSize+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGSize+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF75984620E90683329A9 /* NSAttributedString+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF774A22E8B2F85EA6664 /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		C9FFF78F0BBB67E5152ACA63 /* SongCompletionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongCompletionViewModel.swift; sourceTree = "<group>"; };
 		C9FFF7DE831C9EFAE9A0AB40 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		C9FFF854128820437B780180 /* Sequence+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sequence+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF8676254998A2E1557B2 /* SwiftUIUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUIUtils.swift; sourceTree = "<group>"; };
@@ -225,6 +228,7 @@
 		C9FFFCFB7BC97E2712B303B3 /* LevelsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsViewModel.swift; sourceTree = "<group>"; };
 		C9FFFD04B887D1AA905A010C /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 		C9FFFD46FFA71344BAFB98B1 /* BottomDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomDialog.swift; sourceTree = "<group>"; };
+		C9FFFDA890B96D4ABFC60D75 /* UiUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UiUtils.swift; sourceTree = "<group>"; };
 		C9FFFDE022FCD75907ABC899 /* AppSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		C9FFFE11E22C2516D645DF01 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		C9FFFE302DCFBB0ABE54FB5D /* UIFont+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
@@ -522,6 +526,7 @@
 				C9FFFE3111A176B9B9D3E9A9 /* BoundsSelectionDialog.swift */,
 				C9FFF62823F5DACCCA114DD1 /* BoundsSelectionViewModel.swift */,
 				C9FFF8E1CBCE3FB107681D8E /* SongCompletionDialog.swift */,
+				C9FFF78F0BBB67E5152ACA63 /* SongCompletionViewModel.swift */,
 			);
 			path = Dialogs;
 			sourceTree = "<group>";
@@ -544,6 +549,7 @@
 				C9FFFCD7899414D9FD2AB7C1 /* CircleButton.swift */,
 				C9FFF134111E663C22048469 /* CheckBox.swift */,
 				C9FFF18E9C15E6FAF0C18086 /* BigButton.swift */,
+				C9FFFDA890B96D4ABFC60D75 /* UiUtils.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -864,6 +870,8 @@
 				C9FFFA07A94FBE4832C6004E /* BigButton.swift in Sources */,
 				C9FFF7DEA9F4C41B547AA8A8 /* AppSettings.swift in Sources */,
 				C9FFF8809867862F81D0A1DF /* SongCompletionDialog.swift in Sources */,
+				C9FFF0CEF4671CBC307E2771 /* UiUtils.swift in Sources */,
+				C9FFFA0DB398E2B48B77C23A /* SongCompletionViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

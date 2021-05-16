@@ -67,4 +67,6 @@
 - (void)setPlaybackBounds:(NSInteger)firstLineIndex lastLineIndex:(NSInteger)lastLineIndex NS_SWIFT_NAME(setPlaybackBounds(firstLineIndex:lastLineIndex:));
 - (void)clearPlaybackBounds;
 - (BOOL)hasPlaybackBounds;
+
+- (NSArray<NSNumber*>*)getRecordingPreviewSamples:(NSInteger)numberOfSamples NS_SWIFT_NAME(getRecordingPreviewSamples(numberOfSamples:));
 @end

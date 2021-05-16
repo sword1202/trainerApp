@@ -9,6 +9,7 @@
 #include "AudioInputPitchesRecorder.h"
 #include "AudioInputRecorder.h"
 #include "DestructorQueue.h"
+#include "AudioData.h"
 
 class AudioInputManager {
     AudioInputReaderWithOutput* audioInputReader = nullptr;
@@ -34,7 +35,8 @@ public:
 
     bool isAudioRecordingEnabled() const;
     void setAudioRecordingEnabled(bool audioDataCollectorEnabled);
-    std::string getRecordedDataInWavFormat() const;
+    AudioData getRecordedDataInWavFormat() const;
+    const AudioData& getRecordedData() const;
     void setAudioRecorderSeek(double timeSeek);
     void setPitchesRecorderSeek(double timeSeek);
 

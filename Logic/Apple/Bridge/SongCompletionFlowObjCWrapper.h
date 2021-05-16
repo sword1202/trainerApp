@@ -9,6 +9,4 @@
 
 @interface SongCompletionFlowObjCWrapper : NSObject<SongCompletionFlowBridge>
 - (instancetype)initWithCpp:(SongCompletionFlow *)cpp;
-+ (instancetype)wrapperWithCpp:(SongCompletionFlow *)cpp;
-
 @end

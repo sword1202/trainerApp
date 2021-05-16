@@ -17,10 +17,6 @@
     return self;
 }
 
-+ (instancetype)wrapperWithCpp:(SongCompletionFlow *)cpp {
-    return [[self alloc] initWithCpp:cpp];
-}
-
 - (void)tryAgain {
     _cpp->tryAgain();
 }

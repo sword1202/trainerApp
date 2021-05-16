@@ -58,3 +58,25 @@ extension Sequence {
         return result
     }
 }
+
+extension Sequence where Element == Float {
+    func sum() -> Double {
+        var result: Double = 0
+        forEach {
+            result += Double($0)
+        }
+
+        return result
+    }
+
+    func average() -> Float {
+        var sum: Double = 0
+        var count: Int = 0
+        forEach {
+            sum += Double($0)
+            count+=1;
+        }
+
+        return Float(sum / Double(count))
+    }
+}

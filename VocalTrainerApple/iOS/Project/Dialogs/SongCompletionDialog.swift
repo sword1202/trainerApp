@@ -7,11 +7,14 @@ import SwiftUI
 
 struct SongCompletionDialog : View {
     @Binding var isShown: Bool
+    @StateObject private var viewModel = SongCompletionViewModel()
 
     var body: some View {
         BottomDialog(title: Strings.listenToTheResult.localized, titleIcon:"Headphones", isShown: $isShown) {
             VStack {
                 Image("SongCompletionDialogIcon")
+                Text(Strings.listenToTheResultDescription.localized)
+                Image(uiImage: viewModel.getRecordingPreviewImage())
             }
         }
     }

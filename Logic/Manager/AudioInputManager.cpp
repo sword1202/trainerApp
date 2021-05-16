@@ -111,10 +111,14 @@ const PitchesCollection *AudioInputManager::getRecordedPitches() const {
 std::string AudioInputManager::getRecordedDataInWavFormat() const {
     WavConfig wavConfig = audioInputReader->generateWavConfig();
     const std::string& recordedData = audioRecorder->getRecordedData();
-    return WAVFile::addWavHeaderToRawPcmData<std::string>(recordedData.data(), recordedData.size(), wavConfig);
+    return WAVFile::addWavHeaderToRawPcmData<AudioData>(recordedData.data(), recordedData.size(), wavConfig);
 }
 
 void AudioInputManager::clearRecordedData() {
     pitchesRecorder->clearRecordedPitches();
     audioRecorder->clearRecordedData();
+}
+
+const AudioData &AudioInputManager::getRecordedData() const {
+    return audioRecorder->getRecordedData();
 }

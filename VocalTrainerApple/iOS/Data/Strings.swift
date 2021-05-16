@@ -60,4 +60,5 @@ enum Strings : String, Localizable {
     case lyricsSuggestion
 
     case listenToTheResult
+    case listenToTheResultDescription
 }

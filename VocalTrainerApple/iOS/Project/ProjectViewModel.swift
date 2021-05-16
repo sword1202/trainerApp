@@ -150,7 +150,7 @@ extension ProjectViewModel : ProjectControllerBridgeDelegate {
         isPlaying = false
     }
 
-    func projectControllerPlaybackDidComplete() {
+    func projectControllerPlaybackDidComplete(flow: SongCompletionFlowBridge) {
         showSongCompletionFlow = true
     }
 }

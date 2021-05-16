@@ -7,6 +7,7 @@
 #include "Primitives.h"
 #include "Executors.h"
 #include "Core.h"
+#include "AudioUtils.h"
 #include <iostream>
 
 using namespace CppUtils;
@@ -513,4 +514,8 @@ void ProjectController::handlePlaybackSourceChange() {
     } else {
         workspaceController->setPitchesCollection(audioInputManager->getRecordedPitches());
     }
+}
+
+std::vector<float> ProjectController::getRecordingPreview(int numberOfSamples) const {
+    return AudioUtils::ResizePreviewSamplesIntoFloatSamples(audioInputManager->getRecordedData(), numberOfSamples);
 }
