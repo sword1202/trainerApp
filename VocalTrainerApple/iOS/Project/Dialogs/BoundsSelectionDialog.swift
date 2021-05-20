@@ -75,9 +75,7 @@ struct BoundsSelectionDialog : View {
                                 BigButton(text: Strings.loopIt.localized, action: {
                                     viewModel.didTapLoopIt()
                                     isShown = false
-                                }).frame(maxWidth: .infinity)
-                                        .padding(.leading, 16).padding(.trailing, 16)
-                                        .padding(.bottom, max(screenGeometry.safeAreaInsets.bottom + 2, 16))
+                                }).moveToBottom(screenGeometry: screenGeometry)
                             }
                         }.background(LinearGradient(gradient: Gradient(colors: [
                             Color.white.opacity(0.0), Color.white

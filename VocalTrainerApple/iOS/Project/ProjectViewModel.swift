@@ -28,6 +28,7 @@ class ProjectViewModel : ObservableObject {
     @Published private(set) var retrySeconds = 5
     @Published private(set) var isPlaying: Bool = false
     @Published var showSongCompletionFlow: Bool = false
+    private(set) var songCompletionFlow: SongCompletionFlowBridge?
 
     private let timeFormatter = DateFormatter()
 
@@ -151,6 +152,7 @@ extension ProjectViewModel : ProjectControllerBridgeDelegate {
     }
 
     func projectControllerPlaybackDidComplete(flow: SongCompletionFlowBridge) {
+        songCompletionFlow = flow
         showSongCompletionFlow = true
     }
 }

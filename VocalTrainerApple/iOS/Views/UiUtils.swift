@@ -21,17 +21,20 @@ struct UiUtils {
             max = 0.5
         }
 
+        let heights: [CGFloat] = samples.map { sample in
+            CGFloat(CGFloat(abs(sample)) / CGFloat(max) * (sampleMaxHeight - sampleMinHeight) + sampleMinHeight)
+        }
+
         let size = CGSize(
                 width: CGFloat(samples.count) * sampleWidth + CGFloat(samples.count - 1) * distanceBetweenSamples,
-                height: sampleMaxHeight
+                height: heights.max() ?? sampleMaxHeight
         )
 
         return UIImage.draw(size: size) { ctx in
+            ctx.setFillColor(Colors.recordingTrack.cgColor ?? UIColor.gray.cgColor)
             var x: CGFloat = 0
-            samples.forEach { sample in
-                let height = CGFloat(sample) / CGFloat(max) * sampleMaxHeight
-                let y: CGFloat = (sampleMaxHeight - height) / 2
-                ctx.setFillColor(Colors.tone8.cgColor ?? UIColor.gray.cgColor)
+            heights.forEach { height in
+                let y: CGFloat = (size.height - height) / 2
                 ctx.fill(
                         roundedRect: CGRect(x: x, y: y, width: sampleWidth, height: height),
                         cornerRadius: sampleWidth / 2.0)

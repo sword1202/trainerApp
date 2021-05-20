@@ -8,14 +8,11 @@
 #include "ProjectController.h"
 #include "config.h"
 #include "TimeUtils.h"
+#include "Collections.h"
 
 using namespace CppUtils;
 using std::cout;
 using std::endl;
-
-static std::string getRecordingsPath() {
-    return [NSHomeDirectory() stringByAppendingString:@"/Recordings/"].UTF8String;
-}
 
 CPP_UTILS_DLLHIDE class DelegateWrapper : public ProjectControllerDelegate {
     NSHashTable<id<ProjectControllerBridgeDelegate> >* delegates;
@@ -202,6 +199,10 @@ public:
         }
     }
 
+    static std::string getRecordingsPath() {
+        return [NSHomeDirectory() stringByAppendingString:@"/Recordings/"].UTF8String;
+    }
+
     std::shared_ptr<std::ostream> createStreamToSaveRecording(const VocalTrainerFile *recording) override {
         std::ostringstream filePath;
         filePath << getRecordingsPath() << TimeUtils::NowInMicroseconds() << ".rvx";
@@ -359,13 +360,8 @@ static LyricsSectionType fromCppToObjCSectionType(Lyrics::SectionType type) {
 
 - (NSArray<NSNumber *> *)getRecordingPreviewSamples:(NSInteger)numberOfSamples {
     assert(numberOfSamples > 0);
-    NSMutableArray* result = [NSMutableArray arrayWithCapacity:static_cast<NSUInteger>(numberOfSamples)];
     auto samples = _cpp->getRecordingPreview(static_cast<int>(numberOfSamples));
-    for (float sample : samples) {
-        [result addObject:@(sample)];
-    }
-
-    return result;
+    return Collections::ToPrimitivesNSArray(samples);
 }
 
 

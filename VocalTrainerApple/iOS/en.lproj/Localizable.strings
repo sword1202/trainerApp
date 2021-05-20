@@ -46,4 +46,7 @@
 "lyricsSuggestion" = "Select one or two lines to loop a part of the track";
 "listenToTheResult" = "Listen to the result";
 "listenToTheResultDescription" = "Fine! Now you can listen it!";
+"tryAgain" = "Try again";
+"save" = "Save";
+"listen" = "Listen";
 

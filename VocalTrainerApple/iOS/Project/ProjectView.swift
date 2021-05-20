@@ -248,7 +248,11 @@ struct ProjectView: View {
 
                 ZStack {
                     if viewModel.showSongCompletionFlow {
-                        SongCompletionDialog(isShown: $viewModel.showSongCompletionFlow).transition(.move(edge: .bottom))
+                        SongCompletionDialog(
+                                screenGeometry: geom,
+                                isShown: $viewModel.showSongCompletionFlow,
+                                flow: viewModel.songCompletionFlow!)
+                                .transition(.move(edge: .bottom))
                     }
                 }
             }
