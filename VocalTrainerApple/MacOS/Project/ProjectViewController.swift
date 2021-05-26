@@ -15,8 +15,12 @@ class ProjectViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        InitializationManager.initializeApplicationIfNeed()
-        projectController = ProjectControllerBridge()
+        if (!InitializationManager.isInitialized()) {
+            InitializationManager.initializeApplicationIfNeed()
+            projectController = ProjectControllerBridge()
+            let mvxFilePath = Bundle.main.path(forResource: "drm", ofType: "mvx")
+            projectController.setPlaybackSource(filePath: mvxFilePath)
+        }
         self.workspaceView.onWorkspaceControllerChanged = { [unowned self] in
             projectController.setWorkspaceController(self.workspaceView.workspaceController())
         }

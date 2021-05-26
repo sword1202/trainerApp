@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5406AC5B263D6403000E6E04 /* WorkspaceDrawerColorScheme.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFA97A9FCEF8113EA289F /* WorkspaceDrawerColorScheme.h */; };
+		5406AC5B263D6403000E6E04 /* WorkspaceDrawerColorScheme.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFA97A9FCEF8113EA289F /* WorkspaceDrawerColorScheme.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		54105FC025EA53540013D131 /* Lyrics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71AD20B7128829EC073BB509 /* Lyrics.cpp */; };
 		54105FC525EA539F0013D131 /* StringEncodingUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF13039CBC1561E3F82E4 /* StringEncodingUtils.cpp */; };
 		54105FD225EA555B0013D131 /* LyricsTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFF86158F5BF100CF4E33 /* LyricsTest.cpp */; };
@@ -2186,6 +2186,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5406AC5B263D6403000E6E04 /* WorkspaceDrawerColorScheme.h in Headers */,
 				C9FFFC98895333DFEC3093FA /* BinaryArchive.h in Headers */,
 				C9FFF0914C37411A2A4AE1F0 /* Serializers.h in Headers */,
 				C9FFFEAE617BCA92B8A7FFD1 /* TypeTraits.h in Headers */,
@@ -2312,7 +2313,6 @@
 				71AD267E89A7EDE61EDF13DC /* zip.h in Headers */,
 				71AD2D51A2C1CBE6A438D9BA /* miniz.h in Headers */,
 				71AD2E29ED0C0070CEDA61F9 /* ZipFile.h in Headers */,
-				5406AC5B263D6403000E6E04 /* WorkspaceDrawerColorScheme.h in Headers */,
 				C9FFF95B741E0D318B598368 /* FixedSizeObjectPool.h in Headers */,
 				C9FFF9377D106B5280AD99A6 /* log.hh in Headers */,
 				C9FFF233DB4DBAEC69EFFB3D /* curve.hh in Headers */,

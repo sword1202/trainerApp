@@ -23,7 +23,7 @@ public:
     }
 
     virtual int read(void *into, int offset, int numberOfBytes) const override {
-        auto begin = data.begin();
+        auto begin = data.begin() + offset;
         int size = getNumberOfBytes();
         assert(numberOfBytes >= 0);
         assert(offset >= 0 && offset <= size);

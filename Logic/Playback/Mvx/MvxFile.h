@@ -16,6 +16,7 @@
 #include <boost/variant.hpp>
 #include <map>
 #include "Serializers.h"
+#include "StringUtils.h"
 
 struct MvxFileSignature {
     bool recording = false;

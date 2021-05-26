@@ -7,6 +7,12 @@
 
 #include <string>
 
+#ifndef NDEBUG
+#define DEBUG_INIT fullName = getFullName();
+#else
+#define DEBUG_INIT
+#endif
+
 class Pitch {
     float frequency;
     int perfectFrequencyIndex;
@@ -91,10 +97,13 @@ public:
     void saveOrLoad(Archive& archive, bool save) {
         archive(frequency);
         archive(perfectFrequencyIndex);
+        DEBUG_INIT
     }
 };
 
 std::ostream& operator<<(std::ostream& os, const Pitch& pitch);
 std::istream& operator>>(std::istream& is, Pitch& pitch);
+
+#undef DEBUG_INIT
 
 #endif //PITCHDETECTION_PITCH_H
