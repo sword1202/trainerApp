@@ -13,9 +13,9 @@ class Tonality {
     bool major = false;
 public:
     template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & pitchInOctaveIndex;
-        ar & major;
+    void saveOrLoad(Archive& ar, bool save) {
+        ar(pitchInOctaveIndex);
+        ar(major);
     }
 
     Tonality(int pitchInOctaveIndex, bool isMajor);

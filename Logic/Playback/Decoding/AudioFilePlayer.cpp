@@ -45,7 +45,7 @@ AudioFilePlayer::AudioFilePlayer() {
     initSoundTouch();
 }
 
-void AudioFilePlayer::setAudioData(const AudioData* audioData) {
+void AudioFilePlayer::setAudioData(AudioDataBufferConstPtr audioData) {
     destroy();
     this->audioData = audioData;
     setBufferSeek(0);
@@ -53,11 +53,10 @@ void AudioFilePlayer::setAudioData(const AudioData* audioData) {
 
 void AudioFilePlayer::destroy() {
     BaseAudioPlayer::destroy();
-    if (audioDecoder) {
-        delete audioDecoder;
-    }
+    delete audioDecoder;
+    audioDecoder = nullptr;
 }
 
-const AudioData* AudioFilePlayer::getAudioData() const {
-    return audioData;
+const AudioDataBuffer* AudioFilePlayer::getAudioData() const {
+    return audioData.get();
 }

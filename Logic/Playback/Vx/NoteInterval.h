@@ -24,6 +24,12 @@ struct Interval {
     bool containsTick(int tick) const;
     bool intersectsWith(int begin, int end) const;
     bool intersectsWith(const Interval& interval) const;
+
+    template <typename Archive>
+    void saveOrLoad(Archive& archive, bool save) {
+        archive(startTickNumber);
+        archive(ticksCount);
+    }
 };
 
 struct NoteInterval : Interval {
@@ -50,10 +56,13 @@ struct NoteInterval : Interval {
         ar & ticksCount;
     }
 
-    BOOST_SERIALIZATION_SPLIT_MEMBER()
+    template <typename Archive>
+    void saveOrLoad(Archive& archive, bool save) {
+        Interval::saveOrLoad(archive, save);
+        archive(pitch);
+    }
 };
 
 std::ostream& operator<<(std::ostream& os, const NoteInterval& pitch);
-
 
 #endif //VOCALTRAINER_VXPITCHDEFENITION_H

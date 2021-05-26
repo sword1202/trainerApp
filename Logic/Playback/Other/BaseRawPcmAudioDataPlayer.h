@@ -8,6 +8,7 @@
 #include <string>
 #include "WAVFile.h"
 #include "AudioPlayerWithDefaultSeekHandler.h"
+#include "AudioDataBuffer.h"
 
 class BaseRawPcmAudioDataPlayer : public AudioPlayerWithDefaultSeekHandler {
 public:
@@ -17,7 +18,7 @@ protected:
             const PlaybackData &playbackData) override;
     void providePlaybackData(PlaybackData *playbackData) override;
     virtual int getAudioDataSizeInBytes() = 0;
-    virtual const char *provideAudioBuffer(int offset) = 0;
+    virtual AudioDataBufferConstPtr provideAudioBuffer() = 0;
 };
 
 

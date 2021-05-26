@@ -87,12 +87,14 @@
 		C9FFFB60BAB5296AE6F06BD9 /* WorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA03F8C9753204A48D4F /* WorkspaceDrawerView.mm */; };
 		C9FFFB7F402FBE74FC015F81 /* MacOSWorkspaceDrawerDelegateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFCA54695F1C745C71A9F /* MacOSWorkspaceDrawerDelegateHelper.swift */; };
 		C9FFFBA18C3D61CAED56E8D5 /* LevelsDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF08F2EBCC23D22942B2D /* LevelsDialog.swift */; };
+		C9FFFBC285BAFFB4D157C1E6 /* RecordingPathProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF38BFE133FBB0692B488 /* RecordingPathProvider.swift */; };
 		C9FFFBD39D317854C69C0D6F /* PlusMinusDialogPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF95DC554BB3ACFBAB693 /* PlusMinusDialogPanel.swift */; };
 		C9FFFBF45045514B7285BF8A /* MacOSWorkspaceDrawerResourcesProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF5B9019937C01C72D703 /* MacOSWorkspaceDrawerResourcesProvider.mm */; };
 		C9FFFBF67228CD92C9CD5AB1 /* BottomDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD46FFA71344BAFB98B1 /* BottomDialog.swift */; };
 		C9FFFBFACE925CE7B2964C33 /* ProjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF35C725ACB57DDF897B4 /* ProjectViewModel.swift */; };
 		C9FFFC11A538A86E041DB8F9 /* TonalityDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA7518DDA6BC7C05D962 /* TonalityDialog.swift */; };
 		C9FFFC357FB17DBCE0DA3B28 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6D026277BCE01AFF619 /* UIImage+Extensions.swift */; };
+		C9FFFC4DD5B1FBC3870FEDFB /* RecordingPathProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF38BFE133FBB0692B488 /* RecordingPathProvider.swift */; };
 		C9FFFC752DA482CBE97EB7E2 /* CGSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF72A1F66910885A40FE2 /* CGSize+Extensions.swift */; };
 		C9FFFCAD8789F460417A34D1 /* LyricsSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA9B5D4BA7CDD7E17563 /* LyricsSelection.swift */; };
 		C9FFFD5D7E98D6EDA7814BEF /* BoundsSelectionDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE3111A176B9B9D3E9A9 /* BoundsSelectionDialog.swift */; };
@@ -190,6 +192,7 @@
 		C9FFF2EABC2C4C23563ADD96 /* TempoDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TempoDialog.swift; sourceTree = "<group>"; };
 		C9FFF34E5F2FDB3D52CAB4FF /* iOSWorkspaceDrawerResourcesProvider.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = iOSWorkspaceDrawerResourcesProvider.mm; sourceTree = "<group>"; };
 		C9FFF35C725ACB57DDF897B4 /* ProjectViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectViewModel.swift; sourceTree = "<group>"; };
+		C9FFF38BFE133FBB0692B488 /* RecordingPathProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingPathProvider.swift; sourceTree = "<group>"; };
 		C9FFF3CF4F4C6C2BB99ABCD7 /* WorkspaceDrawerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceDrawerView.h; sourceTree = "<group>"; };
 		C9FFF3DAD525F726E84AA8F2 /* SwiftUI+ClickGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftUI+ClickGesture.swift"; sourceTree = "<group>"; };
 		C9FFF4307F629035C6B49841 /* MacOSWorkspaceDrawerResourcesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacOSWorkspaceDrawerResourcesProvider.h; sourceTree = "<group>"; };
@@ -364,6 +367,7 @@
 				71AD21DA5644C4A3E72E8680 /* Extesnions */,
 				C9FFFD27BCD1504BBC7BE60A /* Workspace */,
 				C9FFFC6AA64F7DE371AEF4C4 /* metronome.wav */,
+				C9FFFCB42F64B2AC6D718D6A /* Recordings */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -552,6 +556,14 @@
 				C9FFFDA890B96D4ABFC60D75 /* UiUtils.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		C9FFFCB42F64B2AC6D718D6A /* Recordings */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFF38BFE133FBB0692B488 /* RecordingPathProvider.swift */,
+			);
+			path = Recordings;
 			sourceTree = "<group>";
 		};
 		C9FFFD27BCD1504BBC7BE60A /* Workspace */ = {
@@ -872,6 +884,7 @@
 				C9FFF8809867862F81D0A1DF /* SongCompletionDialog.swift in Sources */,
 				C9FFF0CEF4671CBC307E2771 /* UiUtils.swift in Sources */,
 				C9FFFA0DB398E2B48B77C23A /* SongCompletionViewModel.swift in Sources */,
+				C9FFFBC285BAFFB4D157C1E6 /* RecordingPathProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -905,6 +918,7 @@
 				C9FFFB7F402FBE74FC015F81 /* MacOSWorkspaceDrawerDelegateHelper.swift in Sources */,
 				C9FFFB60BAB5296AE6F06BD9 /* WorkspaceDrawerView.mm in Sources */,
 				C9FFFBF45045514B7285BF8A /* MacOSWorkspaceDrawerResourcesProvider.mm in Sources */,
+				C9FFFC4DD5B1FBC3870FEDFB /* RecordingPathProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

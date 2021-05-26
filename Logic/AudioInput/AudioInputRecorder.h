@@ -6,13 +6,13 @@
 #define VOCALTRAINER_AUDIOINPUTDATACOLLECTOR_H
 
 #include <stdint.h>
-#include <string>
+#include "StlContainerAudioDataBuffer.h"
 #include <mutex>
 
 class AudioInputRecorder {
 public:
     void operator()(const int16_t* data, int size);
-    const std::string &getRecordedData() const;
+    AudioDataBufferConstPtr getRecordedData() const;
 
     int getSeek() const;
     void setSeek(int seek);
@@ -21,7 +21,7 @@ public:
 
     void clearRecordedData();
 private:
-    std::string recordedData;
+    std::shared_ptr<StdStringAudioDataBuffer> recordedData;
     int seek;
     mutable std::mutex seekMutex;
     mutable std::mutex dataMutex;

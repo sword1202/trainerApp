@@ -86,6 +86,12 @@ public:
     static int getPitchInOctaveIndexFromName(const std::string& name);
 
     static bool isMidiPitchSupported(int midiIndex);
+
+    template <typename Archive>
+    void saveOrLoad(Archive& archive, bool save) {
+        archive(frequency);
+        archive(perfectFrequencyIndex);
+    }
 };
 
 std::ostream& operator<<(std::ostream& os, const Pitch& pitch);

@@ -39,8 +39,8 @@ void VocalTrainerFilePlayer::setSourceInternal(VocalTrainerFile *file, bool dest
     this->file = file;
     this->destroyFileOnDestructor = destroyFileOnDestructor;
     players.clear();
-    const AudioData* instrumental = &file->getInstrumental();
-    if (!instrumental->empty()) {
+    AudioDataBufferConstPtr instrumental = file->getInstrumental();
+    if (instrumental) {
         instrumentalPlayer.setAudioData(instrumental);
         players.push_back(&instrumentalPlayer);
     } else {
@@ -54,7 +54,7 @@ void VocalTrainerFilePlayer::setSourceInternal(VocalTrainerFile *file, bool dest
     if (file->isRecording()) {
         pitchesCollection = new PitchesMutableList(file->getRecordedPitchesFrequencies(),
                                                    file->getRecordedPitchesTimes());
-        recordingPlayer.setAudioData(&file->getRecordingData());
+        recordingPlayer.setAudioData(file->getRecordingData());
         players.push_back(&recordingPlayer);
 
         if (recordingLevelMonitor == nullptr) {
@@ -310,7 +310,8 @@ void VocalTrainerFilePlayer::setBounds(const PlaybackBounds &bounds) {
 }
 
 bool VocalTrainerFilePlayer::isPlaying() const {
-    return getMainPlayer()->isPlaying();
+    const auto *player = getMainPlayer();
+    return player ? player->isPlaying() : false;
 }
 
 void VocalTrainerFilePlayer::stopAndMoveSeekToBeginning() {
@@ -462,10 +463,6 @@ const std::string &VocalTrainerFilePlayer::getSongTitleUtf8() const {
     return file->getSongTitleUtf8();
 }
 
-const std::string &VocalTrainerFilePlayer::getInstrumental() {
-    return file->getInstrumental();
-}
-
 bool VocalTrainerFilePlayer::isCompleted() const {
     return instrumentalPlayer.isCompleted();
 }
@@ -491,11 +488,11 @@ const std::map<double, int> &VocalTrainerFilePlayer::getTonalityChanges() const 
 }
 
 const BaseAudioPlayer * VocalTrainerFilePlayer::getMainPlayer() const {
-    return players.at(0);
+    return players.empty() ? nullptr : players.at(0);
 }
 
 BaseAudioPlayer * VocalTrainerFilePlayer::getMainPlayer() {
-    return players.at(0);
+    return players.empty() ? nullptr : players.at(0);
 }
 
 const LyricsDisplayedLinesProvider *VocalTrainerFilePlayer::getDisplayedLyricsLines() const {

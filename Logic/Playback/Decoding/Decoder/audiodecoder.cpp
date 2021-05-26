@@ -74,10 +74,10 @@ AudioDecoder *AudioDecoder::create() {
 static const int MP3_FRAME_COMMON_SIZE = 1152;
 
 DecodedTrack
-AudioDecoder::decodeAllIntoRawPcm(const AudioData &data, const std::function<void(float)> &progressListener,
+AudioDecoder::decodeAllIntoRawPcm(AudioDataBufferConstPtr data, const std::function<void(float)> &progressListener,
                                   CppUtils::OperationCancelerPtr operationCanceller) {
     std::unique_ptr<AudioDecoder> decoder(AudioDecoder::create());
-    decoder->open(&data);
+    decoder->open(data);
 
     WavConfig wavConfig = decoder->generateWavConfig();
     std::string result;

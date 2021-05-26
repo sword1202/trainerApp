@@ -9,8 +9,6 @@
 #include <istream>
 #include "NoteInterval.h"
 #include <vector>
-#include <boost/container/static_vector.hpp>
-#include <boost/serialization/vector.hpp>
 #include "StlDebugUtils.h"
 #include <iostream>
 
@@ -24,24 +22,6 @@ class VocalPart {
 
     bool validateNotes();
     void postInit();
-
-    friend class boost::serialization::access;
-
-    template<class Archive>
-    void save(Archive & ar, const unsigned int version) const {
-        ar & ticksPerSecond;
-        ar & notes;
-        ar & endSilenceDurationInTicks;
-    }
-    template<class Archive>
-    void load(Archive & ar, const unsigned int version) {
-        ar & ticksPerSecond;
-        ar & notes;
-        ar & endSilenceDurationInTicks;
-        postInit();
-    }
-    BOOST_SERIALIZATION_SPLIT_MEMBER()
-
 public:
     VocalPart();
     VocalPart(std::vector<NoteInterval> &&pitches, int distanceInTicksBetweenLastPitchEndAndTrackEnd, double ticksPerSecond);
@@ -49,10 +29,6 @@ public:
     VocalPart(VocalPart&& vxFile) = default;
     VocalPart(const VocalPart& vocalPart) = default;
     VocalPart& operator=(const VocalPart& vocalPart) = default;
-
-    static VocalPart fromFilePath(const char* filePath);
-    VocalPart(std::istream& is);
-    void writeToStream(std::ostream& os) const;
 
     static int startTickNumberKeyProvider(const NoteInterval &pitch);
 
@@ -145,6 +121,16 @@ public:
         iteratePitchesIndexesInTimeRange(startTime, endTime, [&] (int index) {
             *iterator++ = index;
         });
+    }
+
+    template <typename Archive>
+    void saveOrLoad(Archive& archive, bool save) {
+        archive(ticksPerSecond);
+        archive(notes);
+        archive(endSilenceDurationInTicks);
+        if (!save) {
+            postInit();
+        }
     }
 };
 

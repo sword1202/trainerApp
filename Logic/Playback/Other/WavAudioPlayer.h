@@ -7,18 +7,18 @@
 #define VOCALTRAINER_WAVAUDIOPLAYER_H
 
 #include "BaseRawPcmAudioDataPlayer.h"
-#include "AudioData.h"
+#include "AudioDataBuffer.h"
 #include <string>
 
 class WavAudioPlayer : public BaseRawPcmAudioDataPlayer {
-    const std::string* audioData = nullptr;
+    AudioDataBufferConstPtr audioData = nullptr;
 protected:
-    const char *provideAudioBuffer(int offset) override;
+    AudioDataBufferConstPtr provideAudioBuffer() override;
     int getAudioDataSizeInBytes() override;
 public:
     WavAudioPlayer();
-
-    virtual void setAudioData(const AudioData *audioData);
+public:
+    virtual void setAudioData(AudioDataBufferConstPtr audioData);
 };
 
 

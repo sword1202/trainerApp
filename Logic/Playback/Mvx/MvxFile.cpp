@@ -5,19 +5,17 @@
 
 #include "MvxFile.h"
 #include <fstream>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
 #include "audiodecoder.h"
 #include "StringUtils.h"
 #include "AudioUtils.h"
+#include "BinaryArchive.h"
 
 constexpr int MAX_SAMPLES_PREVIEW_COUNT = 5000;
 
 using namespace CppUtils;
 
 void MvxFile::writeToStream(std::ostream &os) const {
-    boost::archive::text_oarchive ar(os);
-    ar << *this;
+    Serialization::WriteObjectToBinaryStream(*this, os);
 }
 
 void MvxFile::writeToFile(const char *outFilePath) const {
@@ -25,15 +23,13 @@ void MvxFile::writeToFile(const char *outFilePath) const {
     writeToStream(file);
 }
 
-void MvxFile::readFromStream(std::istream &is, bool readOnlySignature) {
-    this->readOnlySignature = readOnlySignature;
-    boost::archive::text_iarchive ar(is);
-    ar >> *this;
+void MvxFile::readFromStream(std::istream &is) {
+    Serialization::ReadObjectFromBinaryStream(*this, is);
 }
 
-void MvxFile::readFromFile(const char *filePath, bool readOnlySignature) {
+void MvxFile::readFromFile(const char *filePath) {
     std::fstream file = Streams::OpenFile(filePath, std::ios::binary | std::ios::in);
-    readFromStream(file, readOnlySignature);
+    readFromStream(file);
 }
 
 const VocalPart &MvxFile::getVocalPart() const {
@@ -49,7 +45,7 @@ void MvxFile::setBeatsPerMinute(double beatsPerMinute) {
 }
 
 void MvxFile::loadInstrumentalFromStream(std::istream &is) {
-    instrumental = Strings::StreamToString(is);
+    instrumental.reset(new StdStringAudioDataBuffer(std::move(Strings::StreamToString(is))));
 }
 
 void MvxFile::loadInstrumentalFromFile(const char *filePath) {
@@ -57,17 +53,8 @@ void MvxFile::loadInstrumentalFromFile(const char *filePath) {
     loadInstrumentalFromStream(file);
 }
 
-const std::string &MvxFile::getInstrumental() const {
+AudioDataBufferConstPtr MvxFile::getInstrumental() const {
     return instrumental;
-}
-
-double MvxFile::getScore() const {
-    return score;
-}
-
-void MvxFile::setScore(double score) {
-    assert(score <= 100);
-    MvxFile::score = score;
 }
 
 const std::string &MvxFile::getSongTitleUtf8() const {
@@ -86,12 +73,12 @@ void MvxFile::setArtistNameUtf8(const std::string &artistNameUtf8) {
     MvxFile::artistNameUtf8 = artistNameUtf8;
 }
 
-const std::string &MvxFile::getRecordingData() const {
+AudioDataBufferConstPtr MvxFile::getRecordingData() const {
     return recordingData;
 }
 
 void MvxFile::setInstrumental(const std::string &instrumental) {
-    this->instrumental = instrumental;
+    this->instrumental.reset(new StdStringAudioDataBuffer(instrumental));
 }
 
 bool MvxFile::isRecording() const {
@@ -99,8 +86,13 @@ bool MvxFile::isRecording() const {
 }
 
 void MvxFile::setRecordingData(const std::string &recordingData) {
-    MvxFile::recordingData = recordingData;
+    this->recordingData.reset(new StdStringAudioDataBuffer(recordingData));
     recording = !recordingData.empty();
+}
+
+void MvxFile::setRecordingData(AudioDataBufferConstPtr recordingData) {
+    this->recordingData = recordingData;
+    recording = recordingData != nullptr;
 }
 
 void MvxFile::setVocalPart(const VocalPart &vocalPart) {
@@ -205,4 +197,8 @@ MvxFile::MvxFile(const VocalTrainerFile* file) {
     setRecordingData(file->getRecordingData());
     setRecordingTonalityChanges(file->getRecordingTonalityChanges());
     setRecordingTempoFactor(file->getRecordingTempoFactor());
+}
+
+void MvxFile::setInstrumental(AudioDataBufferConstPtr instrumental) {
+    MvxFile::instrumental = instrumental;
 }

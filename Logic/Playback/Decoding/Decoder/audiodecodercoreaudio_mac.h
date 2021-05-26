@@ -69,15 +69,15 @@ public:
     AudioDecoderCoreAudio();
     ~AudioDecoderCoreAudio();
     // Overriding AudioDecoderBase 
-    void open(const std::string *data) override;
+    void open(AudioDataBufferConstPtr data) override;
     void seek(int sampleIdx) override;
     int read(int samplesCount, SAMPLE *buffer) override;
     std::vector<std::string> supportedFileExtensions() override;
 private:
-    const std::string* audioData;
+    AudioDataBufferConstPtr audioData;
     SInt64 headerFrames;
     ExtAudioFileRef audioFile;
-    AudioFileID audioFileID;
+    AudioFileID audioFileID = nullptr;
     CAStreamBasicDescription clientFormat;
     CAStreamBasicDescription inputFormat;
 };

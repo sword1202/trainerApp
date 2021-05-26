@@ -136,7 +136,7 @@
    in memory or the heap, on disk (using stdio.h), or you can specify custom
    file read/write callbacks.
 
-     - Archive reading: Just call this function to read a single file from a
+     - BinaryWriteArchive reading: Just call this function to read a single file from a
    disk archive:
 
       void *mz_zip_extract_archive_file_to_heap(const char *pZip_filename, const
@@ -161,7 +161,7 @@
    mz_zip_reader_get_num_files()) and retrieve detailed info on each file by
    calling mz_zip_reader_file_stat().
 
-     - Archive creation: Use the "mz_zip_writer" functions. The ZIP writer
+     - BinaryWriteArchive creation: Use the "mz_zip_writer" functions. The ZIP writer
    immediately writes compressed file data to disk and builds an exact image of
    the central directory in memory. The central directory image is written all
    at once at the end of the archive file when the archive is finalized.
@@ -172,7 +172,7 @@
    blobs at the very beginning of ZIP archives. Archives written using either
    feature are still readable by any ZIP tool.
 
-     - Archive appending: The simple way to add a single file to an archive is
+     - BinaryWriteArchive appending: The simple way to add a single file to an archive is
    to call this function:
 
       mz_bool mz_zip_add_mem_to_archive_file_in_place(const char *pZip_filename,
@@ -5910,7 +5910,7 @@ mz_bool mz_zip_writer_init_from_reader(mz_zip_archive *pZip,
     pFilename;
     return MZ_FALSE;
 #else
-    // Archive is being read from stdio - try to reopen as writable.
+    // BinaryWriteArchive is being read from stdio - try to reopen as writable.
     if (pZip->m_pIO_opaque != pZip)
       return MZ_FALSE;
     if (!pFilename)
@@ -5925,14 +5925,14 @@ mz_bool mz_zip_writer_init_from_reader(mz_zip_archive *pZip,
     }
 #endif // #ifdef MINIZ_NO_STDIO
   } else if (pState->m_pMem) {
-    // Archive lives in a memory block. Assume it's from the heap that we can
+    // BinaryWriteArchive lives in a memory block. Assume it's from the heap that we can
     // resize using the realloc callback.
     if (pZip->m_pIO_opaque != pZip)
       return MZ_FALSE;
     pState->m_mem_capacity = pState->m_mem_size;
     pZip->m_pWrite = mz_zip_heap_write_func;
   }
-  // Archive is being read via a user provided read function - make sure the
+  // BinaryWriteArchive is being read via a user provided read function - make sure the
   // user has specified a write function too.
   else if (!pZip->m_pWrite)
     return MZ_FALSE;

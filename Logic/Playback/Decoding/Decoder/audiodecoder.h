@@ -46,7 +46,7 @@
 #include <WAVFile.h>
 #include "DecodedTrack.h"
 #include "OperationCanceler.h"
-#include "AudioData.h"
+#include "AudioDataBuffer.h"
 
 //#ifdef _WIN32
 //#define DllExport   __declspec( dllexport )
@@ -67,12 +67,13 @@ At present, all API calls are blocking and none are considered real-time safe. F
 try to avoid calling read() or any other libaudiodecoder function from inside your audio callback.
 */
 
+
 class AudioDecoder {
 public:
     virtual ~AudioDecoder() = default;
 
     /** Opens the file for decoding */
-    virtual void open(const std::string *data) = 0;
+    virtual void open(AudioDataBufferConstPtr data) = 0;
 
     /** Seek to a sample in the file */
     virtual void seek(int filepos) = 0;
@@ -112,7 +113,7 @@ protected:
 public:
     static AudioDecoder* create();
     static DecodedTrack
-    decodeAllIntoRawPcm(const AudioData &data, const std::function<void(float)> &progressListener = nullptr,
+    decodeAllIntoRawPcm(AudioDataBufferConstPtr data, const std::function<void(float)> &progressListener = nullptr,
                         CppUtils::OperationCancelerPtr operationCanceller = nullptr);
 
     WavConfig generateWavConfig() const;

@@ -105,6 +105,18 @@ public:
     std::string toUtf8String() const;
 
     bool isEmpty() const;
+
+    template<typename Archive>
+    void saveOrLoad(Archive &ar, bool isSave) {
+        std::string str;
+        if (isSave) {
+            str = toUtf8String();
+        }
+        ar(str);
+        if (!isSave) {
+            *this = Lyrics(str);
+        }
+    }
 };
 
 

@@ -1,7 +1,4 @@
 #include <boost/assert.hpp>
-#include <boost/icl/interval_map.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
 #include <utf8.h>
 
 #include "config.h"
@@ -130,22 +127,6 @@ int VocalPart::getEndSilenceDurationInTicks() const {
     return endSilenceDurationInTicks;
 }
 
-void VocalPart::writeToStream(std::ostream &os) const {
-    boost::archive::text_oarchive ar(os);
-    ar << *this;
-}
-
-VocalPart::VocalPart(std::istream &is) {
-    boost::archive::text_iarchive ar(is);
-    ar >> *this;
-    postInit();
-}
-
-VocalPart VocalPart::fromFilePath(const char *filePath) {
-    std::ifstream is(filePath);
-    return VocalPart(is);
-}
-
 int VocalPart::timeInSecondsToTicks(double timeInSeconds)const {
     return static_cast<int>(round(timeInSeconds / getTickDurationInSeconds()));
 }
@@ -173,7 +154,6 @@ const NoteInterval &VocalPart::getShortestPitch() const {
 }
 
 VocalPart::VocalPart() {
-
 }
 
 void VocalPart::setNotes(const std::vector<NoteInterval> &pitches) {

@@ -517,5 +517,7 @@ void ProjectController::handlePlaybackSourceChange() {
 }
 
 std::vector<float> ProjectController::getRecordingPreview(int numberOfSamples) const {
-    return AudioUtils::ResizePreviewSamplesIntoFloatSamples(audioInputManager->getRecordedData(), numberOfSamples);
+    return AudioUtils::ResizePreviewSamplesIntoFloatSamples(
+            audioInputManager->getRecordedData()->toBinaryString(), numberOfSamples
+    );
 }

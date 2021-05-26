@@ -137,8 +137,6 @@ public:
     const std::string& getArtistNameUtf8() const;
     const std::string& getSongTitleUtf8() const;
 
-    const std::string &getInstrumental();
-
     bool isCompleted() const;
 
     // The method is valid only for recordigns

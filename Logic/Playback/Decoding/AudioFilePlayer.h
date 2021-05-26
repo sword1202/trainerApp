@@ -8,14 +8,14 @@
 
 #include "AudioPlayerWithDefaultSeekHandler.h"
 #include "audiodecoder.h"
-#include "AudioData.h"
+#include "AudioDataBuffer.h"
 #include "SoundTouch/SoundTouch.h"
 
 class AudioFilePlayer : public AudioPlayerWithDefaultSeekHandler {
 public:
     AudioFilePlayer();
-    void setAudioData(const AudioData* audioData);
-    const AudioData* getAudioData() const;
+    void setAudioData(AudioDataBufferConstPtr audioData);
+    const AudioDataBuffer* getAudioData() const;
 protected:
     int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) override;
     void providePlaybackData(PlaybackData *playbackData) override;
@@ -25,7 +25,7 @@ protected:
 
 private:
     AudioDecoder* audioDecoder = nullptr;
-    const std::string* audioData = nullptr;
+    AudioDataBufferConstPtr audioData;
 };
 
 

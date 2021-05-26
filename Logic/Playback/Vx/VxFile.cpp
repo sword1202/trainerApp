@@ -112,8 +112,8 @@ const Lyrics &VxFile::getLyrics() const {
     return Lyrics::EMPTY;
 }
 
-const AudioData &VxFile::getInstrumental() const {
-    return Strings::EMPTY;
+AudioDataBufferConstPtr VxFile::getInstrumental() const {
+    return nullptr;
 }
 
 bool VxFile::isRecording() const {
@@ -128,8 +128,8 @@ const std::vector<double> &VxFile::getRecordedPitchesTimes() const {
     return Collections::emptyVector<double>();
 }
 
-const AudioData &VxFile::getRecordingData() const {
-    return Strings::EMPTY;
+AudioDataBufferConstPtr VxFile::getRecordingData() const {
+    return nullptr;
 }
 
 const std::string &VxFile::getArtistNameUtf8() const {

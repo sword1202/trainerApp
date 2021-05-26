@@ -11,21 +11,21 @@
 
 const int FRAMES_PER_BUFFER = 256;
 
-const char *WavAudioPlayer::provideAudioBuffer(int offset) {
-    return audioData->data() + WAVFile::DATA_POSITION + offset;
-}
-
-void WavAudioPlayer::setAudioData(const AudioData *audioData) {
-    this->audioData = audioData;
-    setPlaybackData(WAVFile::parseWavHeader(*this->audioData), FRAMES_PER_BUFFER);
+AudioDataBufferConstPtr WavAudioPlayer::provideAudioBuffer() {
+    return audioData;
 }
 
 int WavAudioPlayer::getAudioDataSizeInBytes() {
-    return (int)audioData->size() - WAVFile::DATA_POSITION;
+    return audioData->getNumberOfBytes() - WAVFile::DATA_POSITION;
 }
 
 WavAudioPlayer::WavAudioPlayer() {
     setPlayerName("WavAudioPlayer");
     initSoundTouch();
+}
+
+void WavAudioPlayer::setAudioData(AudioDataBufferConstPtr audioData) {
+    this->audioData = audioData;
+    setPlaybackData(audioData->parseWavHeader(), FRAMES_PER_BUFFER);
 }
 

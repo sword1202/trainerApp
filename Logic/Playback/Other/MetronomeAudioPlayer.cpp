@@ -5,16 +5,28 @@
 
 #include <cmath>
 #include "MetronomeAudioPlayer.h"
-#include "WAVFile.h"
+#include "StringUtils.h"
+#include "config.h"
 #include <iostream>
-#include <cassert>
 
+using namespace CppUtils;
 
 using std::cout;
 using std::endl;
 
+CPP_UTILS_DLLHIDE class Buffer : public StdStringAudioDataBuffer {
+public:
+    Buffer() {
+    }
 
-void MetronomeAudioPlayer::setMetronomeAudioData(AudioData&& metronomeAudioData) {
+    int read(void *into, int offset, int numberOfBytes) const override {
+        offset %= getNumberOfBytes();
+        return StdStringAudioDataBuffer::read(into, offset, numberOfBytes);
+    }
+};
+
+void MetronomeAudioPlayer::setMetronomeAudioData(std::string&& metronomeAudioData) {
+    this->audioData.reset(new Buffer());
     this->metronomeAudioData = std::move(metronomeAudioData);
     setPlaybackData(WAVFile::parseWavHeader(this->metronomeAudioData));
 }
@@ -39,13 +51,14 @@ void MetronomeAudioPlayer::setAudioDataInfo(double beatsPerMinute, double totalD
     this->totalVirtualBufferSize = secondsSeekToBufferSeek(totalDurationInSeconds) * sampleSize;
     int totalBufferSize = beatBufferSize + metronomeBufferSize / 2;
 
-    audioData.clear();
-    audioData.reserve((size_t)totalBufferSize);
-    audioData.append(beatBufferSize - metronomeBufferSize / 2, '\0');
-    audioData.append(metronomeAudioData.data() + WAVFile::DATA_POSITION, (size_t)metronomeBufferSize);
+    std::string& data = audioData->getData();
+    data.clear();
+    data.reserve((size_t)totalBufferSize);
+    data.append(beatBufferSize - metronomeBufferSize / 2, '\0');
+    data.append(metronomeAudioData.data() + WAVFile::DATA_POSITION, (size_t)metronomeBufferSize);
 
-    while (audioData.size() % getPlaybackData().getCallbackBufferSizeInBytes() != 0) {
-        audioData.push_back('\0');
+    while (data.size() % getPlaybackData().getCallbackBufferSizeInBytes() != 0) {
+        data.push_back('\0');
     }
 }
 
@@ -57,8 +70,6 @@ MetronomeAudioPlayer::MetronomeAudioPlayer() {
     setPlayerName("MetronomeAudioPlayer");
 }
 
-const char *MetronomeAudioPlayer::provideAudioBuffer(int offset) {
-    offset %= audioData.size();
-    assert(offset < audioData.size());
-    return audioData.data() + offset;
+AudioDataBufferConstPtr MetronomeAudioPlayer::provideAudioBuffer() {
+    return audioData;
 }

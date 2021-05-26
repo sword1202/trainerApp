@@ -21,8 +21,8 @@ void AudioInputRecorder::operator()(const int16_t *data, int size) {
     size *= sizeof(int16_t);
     {
         DATA_LOCK;
-        recordedData.resize(seek);
-        recordedData.append(reinterpret_cast<const char*>(data), size);
+        recordedData->getData().resize(static_cast<size_t>(seek));
+        recordedData->getData().append(reinterpret_cast<const char*>(data), static_cast<size_t>(size));
     }
 
     {
@@ -33,7 +33,7 @@ void AudioInputRecorder::operator()(const int16_t *data, int size) {
     }
 }
 
-const std::string &AudioInputRecorder::getRecordedData() const {
+AudioDataBufferConstPtr AudioInputRecorder::getRecordedData() const {
     DATA_LOCK;
     return recordedData;
 }
@@ -48,9 +48,11 @@ void AudioInputRecorder::setSeek(int seek) {
     this->seek = seek;
 }
 
-AudioInputRecorder::AudioInputRecorder(): seek(0) {}
+AudioInputRecorder::AudioInputRecorder(): seek(0) {
+    this->recordedData.reset(new StdStringAudioDataBuffer());
+}
 
 void AudioInputRecorder::clearRecordedData() {
     DATA_LOCK;
-    Memory::FillZero(recordedData.data(), static_cast<int>(recordedData.size()));
+    Memory::FillZero(recordedData->getData().data(), static_cast<int>(recordedData->getNumberOfBytes()));
 }

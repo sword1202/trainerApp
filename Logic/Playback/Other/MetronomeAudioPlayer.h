@@ -7,25 +7,25 @@
 #define VOCALTRAINER_METRONOMEAUDIOPLAYER_H
 
 #include "WavAudioPlayer.h"
+#include "StlContainerAudioDataBuffer.h"
 #include <string>
 
 class MetronomeAudioPlayer : public BaseRawPcmAudioDataPlayer {
     double beatsPerMinute = 0;
-    AudioData metronomeAudioData;
-    AudioData audioData;
+    std::string metronomeAudioData;
+    std::shared_ptr<StdStringAudioDataBuffer> audioData;
     int totalVirtualBufferSize;
 public:
     MetronomeAudioPlayer();
 
-    void setMetronomeAudioData(AudioData&& metronomeAudioData);
+    void setMetronomeAudioData(std::string&& metronomeAudioData);
 
     double getBeatsPerMinute() const;
     void setAudioDataInfo(double beatsPerMinute, double totalDurationInSeconds);
 
 protected:
     int getAudioDataSizeInBytes() override;
-
-    const char *provideAudioBuffer(int offset) override;
+    AudioDataBufferConstPtr provideAudioBuffer() override;
 };
 
 

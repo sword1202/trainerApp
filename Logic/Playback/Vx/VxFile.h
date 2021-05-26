@@ -10,7 +10,7 @@
 #include "VocalPart.h"
 #include "VocalTrainerFile.h"
 #include "Lyrics.h"
-#include "AudioData.h"
+#include "Logic/AudioDataBuffer.h"
 #include <sstream>
 
 class VxFile : public VocalTrainerFile {
@@ -24,11 +24,11 @@ public:
     const VocalPart &getVocalPart() const override;
     const std::map<double, int> &getRecordingTonalityChanges() const override;
     const Lyrics &getLyrics() const override;
-    const AudioData &getInstrumental() const override;
+    virtual AudioDataBufferConstPtr getInstrumental() const override;
     bool isRecording() const override;
     const std::vector<float> &getRecordedPitchesFrequencies() const override;
     const std::vector<double> &getRecordedPitchesTimes() const override;
-    const AudioData &getRecordingData() const override;
+    virtual AudioDataBufferConstPtr getRecordingData() const override;
     const std::string &getArtistNameUtf8() const override;
     const std::string &getSongTitleUtf8() const override;
     double getBeatsPerMinute() const override;

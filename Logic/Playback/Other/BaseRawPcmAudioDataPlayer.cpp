@@ -3,7 +3,6 @@
 //
 
 #include "BaseRawPcmAudioDataPlayer.h"
-#include <cstring>
 
 int BaseRawPcmAudioDataPlayer::readNextSamplesBatch(void *intoBuffer, int framesCount,
                                          const PlaybackData &playbackData) {
@@ -11,15 +10,11 @@ int BaseRawPcmAudioDataPlayer::readNextSamplesBatch(void *intoBuffer, int frames
     int seek = getBufferSeek();
     int offset = seek * frameSize;
 
-    int audioDataSize = getAudioDataSizeInBytes();
-    const char* audioData = provideAudioBuffer(offset);
-    int size = std::min(framesCount * frameSize, audioDataSize - offset);
-    if (size > 0) {
-        memcpy(intoBuffer, audioData, (size_t)size);
-        moveBufferSeekIfNotChangedBefore(size / frameSize, seek);
-    }
-
-    return size / frameSize;
+    AudioDataBufferConstPtr audioData = provideAudioBuffer();
+    int readCount = audioData->read(intoBuffer, offset, framesCount * frameSize);
+    int readFramesCount = readCount / frameSize;
+    moveBufferSeekIfNotChangedBefore(readFramesCount, seek);
+    return readFramesCount;
 }
 
 void BaseRawPcmAudioDataPlayer::providePlaybackData(PlaybackData *playbackData) {

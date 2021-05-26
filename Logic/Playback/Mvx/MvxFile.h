@@ -10,29 +10,31 @@
 #include "VocalPart.h"
 #include "StringUtils.h"
 #include "Lyrics.h"
-#include "AudioData.h"
+#include "StlContainerAudioDataBuffer.h"
 #import "VocalTrainerFile.h"
 #include "Tonality.h"
 #include <boost/variant.hpp>
 #include <map>
-#include <boost/serialization/map.hpp>
+#include "Serializers.h"
 
-class MvxFile : public VocalTrainerFile {
-    // signature
+struct MvxFileSignature {
     bool recording = false;
     std::string songTitleUtf8;
     std::string artistNameUtf8;
-    double score = -1.0;
     Tonality originalTonality;
     double recordingTempoFactor = 1.0;
+};
+
+class MvxFile : private MvxFileSignature, public VocalTrainerFile {
+    static const int VERSION = 1;
 
     // core data
     VocalPart vocalPart;
-    AudioData instrumental;
+    AudioDataBufferConstPtr instrumental = nullptr;
     double beatsPerMinute = 0;
 
     // recording
-    AudioData recordingData;
+    AudioDataBufferConstPtr recordingData = nullptr;
     std::vector<double> recordedPitchesTimes;
     std::vector<float> recordedPitchesFrequencies;
     std::map<double, int> recordingTonalityChanges; // seek -> pitchSifting
@@ -41,129 +43,110 @@ class MvxFile : public VocalTrainerFile {
 
     Lyrics lyrics;
 
-    bool readOnlySignature = false;
-    int version = 0;
-
-    friend class boost::serialization::access;
-
-    template<typename Archive>
-    void load(Archive & ar, const unsigned int version) {
-        doSerialize(ar, version, false, readOnlySignature);
+    template <typename Archive>
+    void saveOrLoadSignature(Archive& ar, int* version) {
+        ar(*version);
+        ar(recording);
+        ar(songTitleUtf8);
+        ar(artistNameUtf8);
+        ar(originalTonality);
+        ar(recordingTempoFactor);
     }
-
+public:
     template<typename Archive>
-    void save(Archive & ar, const unsigned int version) const {
-        assert(beatsPerMinute > 0 && "beatsPerMinute not set");
-        const_cast<MvxFile*>(this)->doSerialize(ar, version, true, false);
-    }
+    void saveOrLoad(Archive &ar, bool isSave) {
+        int version = VERSION;
+        saveOrLoadSignature(ar, &version);
 
-    BOOST_SERIALIZATION_SPLIT_MEMBER()
+        ar(beatsPerMinute);
+        ar(vocalPart);
 
-    template<typename Archive>
-    void doSerialize(Archive & ar, const unsigned int version, bool isSave, bool readOnlySignature){
-        this->version = version;
-
-        ar & recording;
-        ar & songTitleUtf8;
-        ar & artistNameUtf8;
-        ar & score;
-        ar & originalTonality;
-        ar & recordingTempoFactor;
-
-        if (!readOnlySignature) {
-            ar & beatsPerMinute;
-            ar & vocalPart;
-            ar & instrumental;
-            ar & recordingData;
-
-            ar & recordedPitchesTimes;
-            ar & recordedPitchesFrequencies;
-            ar & instrumentalPreviewSamples;
-            ar & recordingTonalityChanges;
-
+        auto serializeStdStringAudioDataBuffer = [&] (AudioDataBufferConstPtr& buffer) {
             std::string str;
             if (isSave) {
-                str = lyrics.toUtf8String();
+                if (buffer) {
+                    str = buffer->toBinaryString();
+                }
             }
-            ar & str;
+            ar(str);
             if (!isSave) {
-                lyrics = Lyrics(str);
+                if (!str.empty()) {
+                    buffer.reset(new StdStringAudioDataBuffer(std::move(str)));
+                } else {
+                    buffer = nullptr;
+                }
             }
-        }
+        };
+
+        serializeStdStringAudioDataBuffer(instrumental);
+        serializeStdStringAudioDataBuffer(recordingData);
+
+        ar(recordedPitchesTimes);
+        ar(recordedPitchesFrequencies);
+        ar(instrumentalPreviewSamples);
+        ar(recordingTonalityChanges);
+        ar(lyrics);
     }
 
-public:
-    MvxFile() = default;
-
-    MvxFile(MvxFile&&) = default;
-    MvxFile& operator=(MvxFile&&) = default;
     // Preferably use move constructor instead
-    MvxFile(const MvxFile& mvxFile) = delete;
+    MvxFile(const MvxFile &mvxFile) = delete;
+    MvxFile(const VocalTrainerFile *file);
 
-    MvxFile(const VocalTrainerFile* file);
+    MvxFile() = default;
+    MvxFile(MvxFile &&) = default;
+    MvxFile &operator=(MvxFile &&) = default;
 
-    void writeToStream(std::ostream& os) const;
-    void writeToFile(const char* outFilePath) const;
+    void writeToStream(std::ostream &os) const;
+    void writeToFile(const char *outFilePath) const;
 
-    void readFromStream(std::istream &is, bool readOnlySignature = false);
-    void readFromFile(const char *filePath, bool readOnlySignature = false);
+    void readFromStream(std::istream &is);
+    void readFromFile(const char *filePath);
 
     const VocalPart &getVocalPart() const;
     void setVocalPart(const VocalPart &vocalPart);
 
-    const AudioData &getInstrumental() const;
-    void setInstrumental(const AudioData &instrumental);
+    virtual AudioDataBufferConstPtr getInstrumental() const;
+    void setInstrumental(const std::string &instrumental);
+    void setInstrumental(AudioDataBufferConstPtr instrumental);
 
-    const AudioData &getRecordingData() const;
-    void setRecordingData(const AudioData &recordingData);
+
+    virtual AudioDataBufferConstPtr getRecordingData() const;
+    void setRecordingData(const std::string &recordingData);
+    void setRecordingData(AudioDataBufferConstPtr recordingData);
 
     double getBeatsPerMinute() const;
     void setBeatsPerMinute(double beatsPerMinute);
 
-    double getScore() const;
-    void setScore(double score);
-
     const std::string &getSongTitleUtf8() const;
     void setSongTitleUtf8(const std::string &songTitleUtf8);
-
     const std::string &getArtistNameUtf8() const;
     void setArtistNameUtf8(const std::string &artistNameUtf8);
 
-    void loadInstrumentalFromStream(std::istream& is);
-    void loadInstrumentalFromFile(const char* filePath);
-
-    void loadLyricsFromStream(std::istream& is);
-    void loadLyricsFromFile(const char* filePath);
+    void loadInstrumentalFromStream(std::istream &is);
+    void loadInstrumentalFromFile(const char *filePath);
+    void loadLyricsFromStream(std::istream &is);
+    void loadLyricsFromFile(const char *filePath);
 
     bool isRecording() const;
-
     const std::vector<double> &getRecordedPitchesTimes() const;
     void setRecordedPitchesTimes(const std::vector<double> &recordedPitchesTimes);
     const std::vector<float> &getRecordedPitchesFrequencies() const;
     void setRecordedPitchesFrequencies(const std::vector<float> &recordedPitchesFrequencies);
+    const std::map<double, int> &getRecordingTonalityChanges() const;
+    void setRecordingTonalityChanges(const std::map<double, int> &recordingTonalityChanges);
+    double getRecordingTempoFactor() const override;
+    void setRecordingTempoFactor(double tempoFactor);
 
     const std::vector<short> &getInstrumentalPreviewSamples() const;
     void setInstrumentalPreviewSamples(const std::vector<short> &instrumentalPreviewSamples);
-
     void generateInstrumentalPreviewSamplesFromInstrumental();
 
     const Lyrics &getLyrics() const;
-
     void setLyrics(const Lyrics &lyrics);
 
-    const std::map<double, int> &getRecordingTonalityChanges() const;
-    void setRecordingTonalityChanges(const std::map<double, int> &recordingTonalityChanges);
-
     const Tonality &getOriginalTonality() const override;
-
     void setOriginalTonality(const Tonality &originalTonality);
-
-    double getRecordingTempoFactor() const override;
-    void setRecordingTempoFactor(double tempoFactor);
 };
-
-
-BOOST_CLASS_VERSION(MvxFile, 1)
 
 
 #endif //VOCALTRAINER_MVXFILE_H
