@@ -574,20 +574,14 @@
 		ACF18AB322EC76E3008E7DAA /* libboost_thread.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AD238B8025EC96A3CC45B1 /* libboost_thread.a */; };
 		ACF18AB522EC76E3008E7DAA /* libSoundTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AD2636B9DE49D31F43C412 /* libSoundTouch.a */; };
 		ACF18AB722EC77D5008E7DAA /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF18AB622EC77D5008E7DAA /* Accelerate.framework */; };
-		C9FFF01411329FFA2405891A /* binary_woarchive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF9588FB9A851EDD29C89 /* binary_woarchive.cpp */; };
 		C9FFF0161E84027903AA2BEE /* AudioDataBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFDA86237F9521D9B605B /* AudioDataBuffer.cpp */; };
 		C9FFF01BC18F3E77D296314B /* BinaryArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF24C6BB061C53E8D79CA /* BinaryArchive.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF023F54B6766739CEE62 /* autocorrelation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFEA184D63983601718CF /* autocorrelation.cpp */; };
 		C9FFF034827A709C016C8CDD /* log.cc in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE737E79706B2714E8F5 /* log.cc */; };
 		C9FFF03F4C350A79F0DC69FD /* PitchDuration.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF08CE7791AC8415E0EF0 /* PitchDuration.h */; };
-		C9FFF074F5072B5703F3A275 /* basic_text_iprimitive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF629575A71AAEBB1741A /* basic_text_iprimitive.cpp */; };
 		C9FFF078686EF6758EF105DB /* AccelerateFFT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF152816628A242B0B470 /* AccelerateFFT.cpp */; };
-		C9FFF082C49191DD3DF6F62C /* extended_type_info_typeid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFF3F7F8630F5B82A94CF /* extended_type_info_typeid.cpp */; };
 		C9FFF08BE2531425293899B6 /* SevaghPitchDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF112B31CD8B941BA49E3 /* SevaghPitchDetector.cpp */; };
 		C9FFF0914C37411A2A4AE1F0 /* Serializers.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF5E52856392130F9CB18 /* Serializers.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C9FFF11AFC6F3182804407A4 /* basic_oserializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF38A17DD9708693366FB /* basic_oserializer.cpp */; };
-		C9FFF12CE6033EEA51BB93B6 /* xml_wiarchive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA71DEA9CB5E1158B25B /* xml_wiarchive.cpp */; };
-		C9FFF1677D9BF0D3B63A6448 /* xml_oarchive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC1AC71B6E0509FB77FA /* xml_oarchive.cpp */; };
 		C9FFF1862E9AAE35C66FCDA6 /* SongTonality.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6079FA42275CB385EEA /* SongTonality.swift */; };
 		C9FFF186A32E68918C943F35 /* loader.cc in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF649820E832C888FD580 /* loader.cc */; };
 		C9FFF198252F5F8719F0117F /* AudioOutputWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF0F1342469A70FAF3768 /* AudioOutputWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -597,18 +591,12 @@
 		C9FFF2094882557F6946365B /* PitchInputReader.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF1DBEF12B36FA549F3B0 /* PitchInputReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF22D402E99D96A0A2453 /* AccelerateFFT.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFA0145FBA9C42E3C8BB3 /* AccelerateFFT.h */; };
 		C9FFF233DB4DBAEC69EFFB3D /* curve.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFC33442250265DC42295 /* curve.hh */; };
-		C9FFF238E1A01EF604F12067 /* text_iarchive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF1B551232F002CEA19AC /* text_iarchive.cpp */; };
-		C9FFF24E512190BC4010EA98 /* basic_text_wiprimitive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6A76814EF1A1ED1C18E /* basic_text_wiprimitive.cpp */; };
 		C9FFF26B4F9C5FDD564E3B0D /* StringEncodingUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF13039CBC1561E3F82E4 /* StringEncodingUtils.cpp */; };
 		C9FFF279A8F30DD960853DC1 /* liquidsfz.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF682C44A586F4A455B65 /* liquidsfz.hh */; };
 		C9FFF30FB88840933F8AC7FD /* PitchesCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF0EB180E2340999BE994 /* PitchesCollection.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C9FFF31B3FB621C6E6FF93C2 /* basic_text_oprimitive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF61930083D06EB0E077D /* basic_text_oprimitive.cpp */; };
 		C9FFF31C9088A64AFBFF09D5 /* AudioToolboxUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD768C89C1B8FF44E58D /* AudioToolboxUtils.cpp */; };
-		C9FFF327A4D0B5196F3AFDE3 /* stl_port.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF08F59B523C82E18C87A /* stl_port.cpp */; };
 		C9FFF330A1F8BB02610963C1 /* AudioToolboxUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF019334CAB088EC54E4C /* AudioToolboxUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF34AFD6CF44FA06C9C93 /* utils.cc in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD56742584E880665CE3 /* utils.cc */; };
-		C9FFF369A7AABB2B07DD5293 /* basic_pointer_iserializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF857CACEDBB3C702010F /* basic_pointer_iserializer.cpp */; };
-		C9FFF38DF1569E79B074ECDD /* basic_pointer_oserializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF7AAE7D7F76D2C525C79 /* basic_pointer_oserializer.cpp */; };
 		C9FFF3AE93AEA1138083752D /* AudioDataBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFDA86237F9521D9B605B /* AudioDataBuffer.cpp */; };
 		C9FFF3DE0E2135B46A096DD1 /* SevaghPitchDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF0412083CC812E7412DD /* SevaghPitchDetector.h */; };
 		C9FFF3EFC5B0EC0109B918E7 /* AudioDataBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF56DF1CF99731F8FDB9B /* AudioDataBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -616,36 +604,26 @@
 		C9FFF47708618FEDD8DCBCF7 /* PitchDuration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFAC12ABF20BC1CC8E0B4 /* PitchDuration.cpp */; };
 		C9FFF48DCEBA1117D099FE16 /* ApplicationModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8951A623C40AB2CE915 /* ApplicationModel.mm */; };
 		C9FFF4ADD395480DA1C2E024 /* TypeTraits.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFAF0E59434E1A3EE5586 /* TypeTraits.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C9FFF4BCD8DF651E17BC8AB4 /* extended_type_info_no_rtti.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF4073AEC748A86DE6D5E /* extended_type_info_no_rtti.cpp */; };
 		C9FFF4CADF02416196E1083B /* PitchesMutableList.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF2DEE924F30D2C289F92 /* PitchesMutableList.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF4DE7235A258AA65BC50 /* Tonality.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF6EAC4E42D20363DFE41 /* Tonality.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C9FFF4EBED8FDA30A700ABF6 /* archive_exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF73E4BAF36B2B61C85B9 /* archive_exception.cpp */; };
 		C9FFF4FA23587E0923B00B31 /* mpm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFDC446C4E6DD69FC4CE3 /* mpm.cpp */; };
 		C9FFF5047F9D3C0BCE45FA4C /* Pitch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8CAFC32E15B703B8FDD /* Pitch.cpp */; };
-		C9FFF5073BB9E5C7CEE230EC /* text_oarchive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF9A4FEA07F1AA2ECE0A6 /* text_oarchive.cpp */; };
 		C9FFF51D4892C72BB4CB34B2 /* PitchInputReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF955FDC02E251D044DFF /* PitchInputReader.cpp */; };
-		C9FFF5249E0F494AC5B35DBD /* basic_xml_archive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFF8443D7801CD1B89FE8 /* basic_xml_archive.cpp */; };
 		C9FFF54DE285E67126F2E7BB /* PitchesMutableList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF3DC6219A6EF9DCCE348 /* PitchesMutableList.cpp */; };
 		C9FFF5504FCFD0E25C6F38AB /* FFT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF4C5B870020014D44D61 /* FFT.cpp */; };
 		C9FFF579BF86B5103571E5F0 /* SongCompletionFlow.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFD1B1183F2B6F2150EC0 /* SongCompletionFlow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF5839A027215248881F1 /* PitchDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFEB2A8C708772977F110 /* PitchDetector.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF5ADE1325ED07D1D2704 /* pugixml.cc in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF410847352F0264B7A8C /* pugixml.cc */; };
-		C9FFF5C92A38BFB1B5946698 /* basic_iarchive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFEB1FAEC5DB36BD0ACC7 /* basic_iarchive.cpp */; };
 		C9FFF63E5F26AA339B5D08B4 /* LyricsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6733FF0808963282DEB /* LyricsSection.swift */; };
-		C9FFF64249C87BB1393D08D2 /* basic_xml_grammar.ipp in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF03A28B45B4AA9A6995D /* basic_xml_grammar.ipp */; };
 		C9FFF675D2225261112A0C5D /* AudioStreamDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC90367A8ADD207F39D9 /* AudioStreamDescription.cpp */; };
 		C9FFF69203ED6830C2A83AE6 /* VocalPartAudioDataGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF1BDBADBA522C9A65AAC /* VocalPartAudioDataGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF69672E063C964DFFDCA /* loader.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF25533EF3ACD6071D0A5 /* loader.hh */; };
-		C9FFF69C389F83104CA43ABB /* basic_oarchive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF790B8AE9775BBDD8E63 /* basic_oarchive.cpp */; };
 		C9FFF6A17B42F47EF36B64D2 /* AudioToolboxInputReader.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF2649FE180FAB5FE4553 /* AudioToolboxInputReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF6F021BBD4693388CD03 /* Pitch.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF9709DE6702915DC9E53 /* Pitch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF72E61784FDFE4D0BC86 /* Tonality.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2D3D89B29EF0E398A90 /* Tonality.cpp */; };
-		C9FFF753ED0F0E11BE71D16C /* xml_woarchive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF5FF3F428443E264A5A7 /* xml_woarchive.cpp */; };
 		C9FFF770DFE89C133F8AFDEF /* AudioToolboxQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF0A451D05327E2DE59B8 /* AudioToolboxQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF77C5BB7BDA2E3D32486 /* SongCompletionFlowObjCWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF766E0730D418DEDEFC0 /* SongCompletionFlowObjCWrapper.mm */; };
-		C9FFF77F55547DD924D478EC /* text_wiarchive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF256DA37C8829CD207A2 /* text_wiarchive.cpp */; };
 		C9FFF78B25B019C99021DF7C /* PitchRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF771DFE1C5C499A0BFC5 /* PitchRenderer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C9FFF7A8E73653F20897F08A /* basic_text_woprimitive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8CDA23ECAAACABD9963 /* basic_text_woprimitive.cpp */; };
 		C9FFF7AAAB1F5DAA1539D97D /* SeekablePitchesList.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF2C9E71BDFE0B8F1CABA /* SeekablePitchesList.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF7C327A7E70B11790753 /* PitchInputReader.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF1DBEF12B36FA549F3B0 /* PitchInputReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF7E61A3D26D1D5818AE8 /* StringEncodingUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFFAE08B7263D85CA449B /* StringEncodingUtils.h */; };
@@ -662,9 +640,7 @@
 		C9FFF95770926D660D93BF3E /* Serializers.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF5E52856392130F9CB18 /* Serializers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF95B741E0D318B598368 /* FixedSizeObjectPool.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFFED99F0A661C0C7CDFE /* FixedSizeObjectPool.h */; };
 		C9FFF962E37F10AE874E3743 /* LyricsPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF17AFA1024F0A1FC2A2F /* LyricsPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C9FFF96A3EAC8DB9A7CA8FFC /* void_cast.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFBC4F8D9053210966BCF /* void_cast.cpp */; };
 		C9FFF994FFA7992364AF80BB /* BaseAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF1D4D58FBFDE258E3441 /* BaseAudioPlayer.cpp */; };
-		C9FFF9BA30A96B6E2B8245E3 /* xml_grammar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA75D87FB0B021B3BA3F /* xml_grammar.cpp */; };
 		C9FFF9C652C9D2537B910A60 /* FFT.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF4416ED39131E1C96568 /* FFT.h */; };
 		C9FFF9D6C519816B2EF630F5 /* liquidsfz.cc in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC488245B1D43CDB681D /* liquidsfz.cc */; };
 		C9FFF9E17707E9E4FDD3CC9D /* hydrogenimport.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF8D8F0099984C24D9A58 /* hydrogenimport.hh */; };
@@ -675,17 +651,13 @@
 		C9FFFA38C5B0B213ACCB47D2 /* StlContainerAudioDataBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF0B9F8EB9D8FD5311CB6 /* StlContainerAudioDataBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFFA3C45A3CDFF274CC955 /* AudioStreamDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF8CF418998FD71DEF3A7 /* AudioStreamDescription.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFFA3C67392FB69C1845B3 /* PitchDetectionSmoothingAudioBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF06ADDBFCDB52FB5DC8A /* PitchDetectionSmoothingAudioBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C9FFFA47B17A2AB57F5FB0CE /* binary_oarchive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF0561166A57B999F8DA9 /* binary_oarchive.cpp */; };
 		C9FFFA9F77C6B1D5E3CEE226 /* Pitch.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF9709DE6702915DC9E53 /* Pitch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFFAA4D40E39A03491BC2E /* synth.cc in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC9CD69C33417DC50B22 /* synth.cc */; };
-		C9FFFAAA602747D040ACE344 /* utf8_codecvt_facet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF86231DE9AB326BD2AB9 /* utf8_codecvt_facet.cpp */; };
 		C9FFFAD21D92DF065E814712 /* mpm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFDC446C4E6DD69FC4CE3 /* mpm.cpp */; };
-		C9FFFB47DA562CCC6914C812 /* binary_iarchive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFFCACF0D0E019A9AA970 /* binary_iarchive.cpp */; };
 		C9FFFB4C9AA93E6B9829441D /* PitchesMutableList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF3DC6219A6EF9DCCE348 /* PitchesMutableList.cpp */; };
 		C9FFFB6ADBAB234B8FBF830B /* PitchDetectionSmoothingAudioBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8C6C90A66E376F685DC /* PitchDetectionSmoothingAudioBuffer.cpp */; };
 		C9FFFB72AE0F7B59EB464BBC /* pitch_detection.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF1089637FC528A8C5156 /* pitch_detection.h */; };
 		C9FFFB7A9B514847031FE31C /* autocorrelation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFEA184D63983601718CF /* autocorrelation.cpp */; };
-		C9FFFB8E51C4824E2300F7F7 /* binary_wiarchive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8BCA2A5BD385F96A513 /* binary_wiarchive.cpp */; };
 		C9FFFB9ADFF2D62E247BD58F /* MouseClickChecker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8557DD0DA640840A097 /* MouseClickChecker.cpp */; };
 		C9FFFBA003308E635B2D11F4 /* SevaghPitchDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF0412083CC812E7412DD /* SevaghPitchDetector.h */; };
 		C9FFFBA2B6BA5581C9CA515D /* SeekablePitchesList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFFBBBD6D7C362F5F02CA /* SeekablePitchesList.cpp */; };
@@ -695,45 +667,34 @@
 		C9FFFBDDF43F9B1C79F2B487 /* SeekablePitchesList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFFBBBD6D7C362F5F02CA /* SeekablePitchesList.cpp */; };
 		C9FFFBE50B81FFFCC4F17B1E /* parabolic_interpolation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF02E93F34948D52C4F42 /* parabolic_interpolation.cpp */; };
 		C9FFFBF2DBAFC7D74FF516AD /* SongCompletionFlowObjCWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFB935C0C1954549B39F7 /* SongCompletionFlowObjCWrapper.h */; };
-		C9FFFBF34C432EB5443FD4CC /* codecvt_null.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC46AA1196339A1FAE56 /* codecvt_null.cpp */; };
 		C9FFFC148F9C430023289217 /* hydrogenimport.cc in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF35FFE3131D23E666DB6 /* hydrogenimport.cc */; };
 		C9FFFC285E8800DFF44AC486 /* UndefAppleConditionals.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFC7A9783B4C82A6FE42C /* UndefAppleConditionals.h */; };
 		C9FFFC730B1CC3A0BBA45037 /* AccelerateFFT.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFA0145FBA9C42E3C8BB3 /* AccelerateFFT.h */; };
 		C9FFFC98895333DFEC3093FA /* BinaryArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF24C6BB061C53E8D79CA /* BinaryArchive.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C9FFFCC24907C0E7FC9681F3 /* basic_archive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF23148492B397A80DA0D /* basic_archive.cpp */; };
 		C9FFFCE58515FB3031954273 /* AudioDataBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF56DF1CF99731F8FDB9B /* AudioDataBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFFCEBF26383D700C08739 /* SevaghPitchDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF112B31CD8B941BA49E3 /* SevaghPitchDetector.cpp */; };
 		C9FFFCF031B1B57FB558424B /* synth.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF4D38B0405AAB494519B /* synth.hh */; };
 		C9FFFD1D85309776D0DFEACA /* LyricsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6733FF0808963282DEB /* LyricsSection.swift */; };
 		C9FFFD286C657E8EF5717774 /* VocalPartAudioDataGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6C42A0C8F7F2E4F242C /* VocalPartAudioDataGenerator.cpp */; };
 		C9FFFD420E77C54CE05C5321 /* PitchDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFEB2A8C708772977F110 /* PitchDetector.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C9FFFD869A63DFACD0F3F823 /* text_woarchive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD24DD9BE81C226C1DC4 /* text_woarchive.cpp */; };
 		C9FFFDA3E3EAB874637EDC5C /* PitchDetectionSmoothingAudioBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8C6C90A66E376F685DC /* PitchDetectionSmoothingAudioBuffer.cpp */; };
 		C9FFFDBA6FC03B6D65549858 /* yin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE0BCC6F1DFFD4D269EB /* yin.cpp */; };
 		C9FFFDF3511473CDFD8409D6 /* StlContainerAudioDataBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF0B9F8EB9D8FD5311CB6 /* StlContainerAudioDataBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFFDFECF645FB2C919D854 /* WorkspaceDrawerColorScheme.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD25D1F83D1B5F7944D9 /* WorkspaceDrawerColorScheme.cpp */; };
 		C9FFFE02BD704DDD97F1064E /* parabolic_interpolation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF02E93F34948D52C4F42 /* parabolic_interpolation.cpp */; };
-		C9FFFE0C0723E92C6FE5F591 /* extended_type_info.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF4596D53BE79D1226A3F /* extended_type_info.cpp */; };
 		C9FFFE214C509249EDC71BA3 /* LyricsPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF03387F3706882FF8E44 /* LyricsPlayer.cpp */; };
-		C9FFFE22C39F1FF226C81066 /* basic_serializer_map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2E95B41916F5DD91AD4 /* basic_serializer_map.cpp */; };
 		C9FFFE70C9FC214EB583A153 /* voice.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF10026EDF1D9497F1974 /* voice.hh */; };
-		C9FFFEA64984D7152A3290E6 /* basic_iserializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF794FF6AE6687715186F /* basic_iserializer.cpp */; };
 		C9FFFEA7E83E8E9543878B7A /* PitchDuration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFAC12ABF20BC1CC8E0B4 /* PitchDuration.cpp */; };
 		C9FFFEAE617BCA92B8A7FFD1 /* TypeTraits.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFAF0E59434E1A3EE5586 /* TypeTraits.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C9FFFEB6EE34147A0B57F8C6 /* xml_archive_exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF0CC73269AA64CBEF257 /* xml_archive_exception.cpp */; };
 		C9FFFEB7B645150428CFEF49 /* MouseClickChecker.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFC6D1098747848058E71 /* MouseClickChecker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFFECAFBD50C4A4300EE0F /* Pitch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8CAFC32E15B703B8FDD /* Pitch.cpp */; };
 		C9FFFEE5068D27D8523C48D3 /* voice.cc in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE7297C9A22187363B82 /* voice.cc */; };
 		C9FFFEE566937346548654BE /* SfzPitchRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFBC5E2248DFA32CB58C3 /* SfzPitchRenderer.cpp */; };
 		C9FFFEE891489FF56BE553C2 /* SfzPitchRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF6B1F8BE59C83102D658 /* SfzPitchRenderer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C9FFFEF70492F803AFD229E5 /* polymorphic_oarchive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE2088D7F6FDCD037625 /* polymorphic_oarchive.cpp */; };
 		C9FFFEF8E8B63E56D86DACB2 /* PitchDetectionSmoothingAudioBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF06ADDBFCDB52FB5DC8A /* PitchDetectionSmoothingAudioBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C9FFFEFB74DED2493DA16896 /* polymorphic_iarchive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF3062B8881B2641DF387 /* polymorphic_iarchive.cpp */; };
 		C9FFFF1020621585053E6A56 /* envelope.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF21DBBE3430B34123A70 /* envelope.hh */; };
 		C9FFFF1473913572AA544612 /* LyricsDisplayedLinesProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF2EE3D1EE221F56F2A6F /* LyricsDisplayedLinesProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C9FFFF17CE1452B72256E80B /* xml_iarchive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF4E97F2ABD3B0378D450 /* xml_iarchive.cpp */; };
 		C9FFFF24F85461A364B481E5 /* SongTonality.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6079FA42275CB385EEA /* SongTonality.swift */; };
-		C9FFFF3B5634659CC644B106 /* xml_wgrammar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF0632F685ABCDE0960D3 /* xml_wgrammar.cpp */; };
 		C9FFFF592537E9B9296C585E /* AudioToolboxOutputWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6CECF83E94F19796312 /* AudioToolboxOutputWriter.cpp */; };
 		C9FFFFB0390C465684C7A98D /* FFT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF4C5B870020014D44D61 /* FFT.cpp */; };
 		C9FFFFE458CBBC467C51244B /* PitchesCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF0EB180E2340999BE994 /* PitchesCollection.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1007,18 +968,13 @@
 		C9FFF019334CAB088EC54E4C /* AudioToolboxUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioToolboxUtils.h; sourceTree = "<group>"; };
 		C9FFF02E93F34948D52C4F42 /* parabolic_interpolation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = parabolic_interpolation.cpp; sourceTree = "<group>"; };
 		C9FFF03387F3706882FF8E44 /* LyricsPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LyricsPlayer.cpp; sourceTree = "<group>"; };
-		C9FFF03A28B45B4AA9A6995D /* basic_xml_grammar.ipp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = basic_xml_grammar.ipp; sourceTree = "<group>"; };
 		C9FFF0412083CC812E7412DD /* SevaghPitchDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SevaghPitchDetector.h; sourceTree = "<group>"; };
-		C9FFF0561166A57B999F8DA9 /* binary_oarchive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = binary_oarchive.cpp; sourceTree = "<group>"; };
-		C9FFF0632F685ABCDE0960D3 /* xml_wgrammar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = xml_wgrammar.cpp; sourceTree = "<group>"; };
 		C9FFF06ADDBFCDB52FB5DC8A /* PitchDetectionSmoothingAudioBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchDetectionSmoothingAudioBuffer.h; sourceTree = "<group>"; };
 		C9FFF0846F1C05B1E364AA3D /* F#4vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "F#4vL.wav"; sourceTree = "<group>"; };
 		C9FFF08CE7791AC8415E0EF0 /* PitchDuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchDuration.h; sourceTree = "<group>"; };
-		C9FFF08F59B523C82E18C87A /* stl_port.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stl_port.cpp; sourceTree = "<group>"; };
 		C9FFF0A451D05327E2DE59B8 /* AudioToolboxQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioToolboxQueue.h; sourceTree = "<group>"; };
 		C9FFF0B0D072D863661F28D9 /* C7vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = C7vL.wav; sourceTree = "<group>"; };
 		C9FFF0B9F8EB9D8FD5311CB6 /* StlContainerAudioDataBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StlContainerAudioDataBuffer.h; sourceTree = "<group>"; };
-		C9FFF0CC73269AA64CBEF257 /* xml_archive_exception.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = xml_archive_exception.cpp; sourceTree = "<group>"; };
 		C9FFF0CCC29EF18ADF7CDCB7 /* D#6vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "D#6vL.wav"; sourceTree = "<group>"; };
 		C9FFF0EB180E2340999BE994 /* PitchesCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchesCollection.h; sourceTree = "<group>"; };
 		C9FFF0F1342469A70FAF3768 /* AudioOutputWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioOutputWriter.h; sourceTree = "<group>"; };
@@ -1029,90 +985,65 @@
 		C9FFF13039CBC1561E3F82E4 /* StringEncodingUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StringEncodingUtils.cpp; sourceTree = "<group>"; };
 		C9FFF152816628A242B0B470 /* AccelerateFFT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AccelerateFFT.cpp; sourceTree = "<group>"; };
 		C9FFF17AFA1024F0A1FC2A2F /* LyricsPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LyricsPlayer.h; sourceTree = "<group>"; };
-		C9FFF1B551232F002CEA19AC /* text_iarchive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = text_iarchive.cpp; sourceTree = "<group>"; };
 		C9FFF1BDBADBA522C9A65AAC /* VocalPartAudioDataGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VocalPartAudioDataGenerator.h; sourceTree = "<group>"; };
 		C9FFF1D4D58FBFDE258E3441 /* BaseAudioPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseAudioPlayer.cpp; sourceTree = "<group>"; };
 		C9FFF1DBEF12B36FA549F3B0 /* PitchInputReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchInputReader.h; sourceTree = "<group>"; };
 		C9FFF21DBBE3430B34123A70 /* envelope.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = envelope.hh; sourceTree = "<group>"; };
-		C9FFF23148492B397A80DA0D /* basic_archive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = basic_archive.cpp; sourceTree = "<group>"; };
 		C9FFF232394F9A1F84DABCD7 /* A3vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = A3vL.wav; sourceTree = "<group>"; };
 		C9FFF24C6BB061C53E8D79CA /* BinaryArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BinaryArchive.h; sourceTree = "<group>"; };
 		C9FFF25533EF3ACD6071D0A5 /* loader.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = loader.hh; sourceTree = "<group>"; };
-		C9FFF256DA37C8829CD207A2 /* text_wiarchive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = text_wiarchive.cpp; sourceTree = "<group>"; };
 		C9FFF2621E905F109D56ECE4 /* hmm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hmm.cpp; sourceTree = "<group>"; };
 		C9FFF2649FE180FAB5FE4553 /* AudioToolboxInputReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioToolboxInputReader.h; sourceTree = "<group>"; };
 		C9FFF2C9436D837BD97751AA /* A5vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = A5vL.wav; sourceTree = "<group>"; };
 		C9FFF2C9E71BDFE0B8F1CABA /* SeekablePitchesList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeekablePitchesList.h; sourceTree = "<group>"; };
 		C9FFF2D3D89B29EF0E398A90 /* Tonality.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tonality.cpp; sourceTree = "<group>"; };
 		C9FFF2DEE924F30D2C289F92 /* PitchesMutableList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchesMutableList.h; sourceTree = "<group>"; };
-		C9FFF2E95B41916F5DD91AD4 /* basic_serializer_map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = basic_serializer_map.cpp; sourceTree = "<group>"; };
 		C9FFF2EE3D1EE221F56F2A6F /* LyricsDisplayedLinesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LyricsDisplayedLinesProvider.h; sourceTree = "<group>"; };
-		C9FFF3062B8881B2641DF387 /* polymorphic_iarchive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = polymorphic_iarchive.cpp; sourceTree = "<group>"; };
 		C9FFF3069C97AF2EAA6B7CFE /* D#2vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "D#2vL.wav"; sourceTree = "<group>"; };
 		C9FFF3464A320A47B8481F15 /* C3vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = C3vL.wav; sourceTree = "<group>"; };
 		C9FFF35FFE3131D23E666DB6 /* hydrogenimport.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hydrogenimport.cc; sourceTree = "<group>"; };
 		C9FFF36F3E2C63DD9FCFA229 /* A4vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = A4vL.wav; sourceTree = "<group>"; };
-		C9FFF38A17DD9708693366FB /* basic_oserializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = basic_oserializer.cpp; sourceTree = "<group>"; };
 		C9FFF3DC6219A6EF9DCCE348 /* PitchesMutableList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PitchesMutableList.cpp; sourceTree = "<group>"; };
-		C9FFF4073AEC748A86DE6D5E /* extended_type_info_no_rtti.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = extended_type_info_no_rtti.cpp; sourceTree = "<group>"; };
 		C9FFF410847352F0264B7A8C /* pugixml.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pugixml.cc; sourceTree = "<group>"; };
 		C9FFF4416ED39131E1C96568 /* FFT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFT.h; sourceTree = "<group>"; };
 		C9FFF4553C50C7EB14C0B514 /* A1vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = A1vL.wav; sourceTree = "<group>"; };
-		C9FFF4596D53BE79D1226A3F /* extended_type_info.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = extended_type_info.cpp; sourceTree = "<group>"; };
 		C9FFF49E2E85F780A9AEC5AE /* F#1vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "F#1vL.wav"; sourceTree = "<group>"; };
 		C9FFF4C5B870020014D44D61 /* FFT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FFT.cpp; sourceTree = "<group>"; };
 		C9FFF4D38B0405AAB494519B /* synth.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = synth.hh; sourceTree = "<group>"; };
-		C9FFF4E97F2ABD3B0378D450 /* xml_iarchive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = xml_iarchive.cpp; sourceTree = "<group>"; };
 		C9FFF51E467A94329EF39AA1 /* F#6vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "F#6vL.wav"; sourceTree = "<group>"; };
 		C9FFF568A3AA5BAE1B5449B0 /* utils.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = utils.hh; sourceTree = "<group>"; };
 		C9FFF56DF1CF99731F8FDB9B /* AudioDataBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioDataBuffer.h; sourceTree = "<group>"; };
 		C9FFF5E52856392130F9CB18 /* Serializers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Serializers.h; sourceTree = "<group>"; };
-		C9FFF5FF3F428443E264A5A7 /* xml_woarchive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = xml_woarchive.cpp; sourceTree = "<group>"; };
 		C9FFF6079FA42275CB385EEA /* SongTonality.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTonality.swift; sourceTree = "<group>"; };
-		C9FFF61930083D06EB0E077D /* basic_text_oprimitive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = basic_text_oprimitive.cpp; sourceTree = "<group>"; };
-		C9FFF629575A71AAEBB1741A /* basic_text_iprimitive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = basic_text_iprimitive.cpp; sourceTree = "<group>"; };
 		C9FFF649820E832C888FD580 /* loader.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = loader.cc; sourceTree = "<group>"; };
 		C9FFF669A664C5C165826DC4 /* DefineAppleConditionals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefineAppleConditionals.h; sourceTree = "<group>"; };
 		C9FFF6733FF0808963282DEB /* LyricsSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsSection.swift; sourceTree = "<group>"; };
 		C9FFF682C44A586F4A455B65 /* liquidsfz.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = liquidsfz.hh; sourceTree = "<group>"; };
-		C9FFF6A76814EF1A1ED1C18E /* basic_text_wiprimitive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = basic_text_wiprimitive.cpp; sourceTree = "<group>"; };
 		C9FFF6B1F8BE59C83102D658 /* SfzPitchRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SfzPitchRenderer.h; sourceTree = "<group>"; };
 		C9FFF6C42A0C8F7F2E4F242C /* VocalPartAudioDataGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VocalPartAudioDataGenerator.cpp; sourceTree = "<group>"; };
 		C9FFF6CECF83E94F19796312 /* AudioToolboxOutputWriter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioToolboxOutputWriter.cpp; sourceTree = "<group>"; };
 		C9FFF6EAC4E42D20363DFE41 /* Tonality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tonality.h; sourceTree = "<group>"; };
 		C9FFF709CBEFCF8F5E9949E3 /* F#7vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "F#7vL.wav"; sourceTree = "<group>"; };
 		C9FFF7112499A420B8CA87D1 /* F#2vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "F#2vL.wav"; sourceTree = "<group>"; };
-		C9FFF73E4BAF36B2B61C85B9 /* archive_exception.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = archive_exception.cpp; sourceTree = "<group>"; };
 		C9FFF766E0730D418DEDEFC0 /* SongCompletionFlowObjCWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SongCompletionFlowObjCWrapper.mm; sourceTree = "<group>"; };
 		C9FFF771DFE1C5C499A0BFC5 /* PitchRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchRenderer.h; sourceTree = "<group>"; };
-		C9FFF790B8AE9775BBDD8E63 /* basic_oarchive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = basic_oarchive.cpp; sourceTree = "<group>"; };
-		C9FFF794FF6AE6687715186F /* basic_iserializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = basic_iserializer.cpp; sourceTree = "<group>"; };
 		C9FFF7A9D2D0646725A22DF3 /* F#5vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "F#5vL.wav"; sourceTree = "<group>"; };
-		C9FFF7AAE7D7F76D2C525C79 /* basic_pointer_oserializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = basic_pointer_oserializer.cpp; sourceTree = "<group>"; };
 		C9FFF7E998999691294C7913 /* C4vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = C4vL.wav; sourceTree = "<group>"; };
 		C9FFF83CBE4963E385E2E422 /* C6vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = C6vL.wav; sourceTree = "<group>"; };
 		C9FFF8557DD0DA640840A097 /* MouseClickChecker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MouseClickChecker.cpp; sourceTree = "<group>"; };
-		C9FFF857CACEDBB3C702010F /* basic_pointer_iserializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = basic_pointer_iserializer.cpp; sourceTree = "<group>"; };
-		C9FFF86231DE9AB326BD2AB9 /* utf8_codecvt_facet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utf8_codecvt_facet.cpp; sourceTree = "<group>"; };
 		C9FFF8951A623C40AB2CE915 /* ApplicationModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ApplicationModel.mm; sourceTree = "<group>"; };
-		C9FFF8BCA2A5BD385F96A513 /* binary_wiarchive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = binary_wiarchive.cpp; sourceTree = "<group>"; };
 		C9FFF8C6C90A66E376F685DC /* PitchDetectionSmoothingAudioBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PitchDetectionSmoothingAudioBuffer.cpp; sourceTree = "<group>"; };
 		C9FFF8CAFC32E15B703B8FDD /* Pitch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pitch.cpp; sourceTree = "<group>"; };
-		C9FFF8CDA23ECAAACABD9963 /* basic_text_woprimitive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = basic_text_woprimitive.cpp; sourceTree = "<group>"; };
 		C9FFF8CF418998FD71DEF3A7 /* AudioStreamDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioStreamDescription.h; sourceTree = "<group>"; };
 		C9FFF8D8F0099984C24D9A58 /* hydrogenimport.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = hydrogenimport.hh; sourceTree = "<group>"; };
 		C9FFF92B31B2C77BAD62F0E1 /* D#3vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "D#3vL.wav"; sourceTree = "<group>"; };
 		C9FFF93B13F01C590643A6A7 /* BaseAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseAudioPlayer.h; sourceTree = "<group>"; };
 		C9FFF955FDC02E251D044DFF /* PitchInputReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PitchInputReader.cpp; sourceTree = "<group>"; };
-		C9FFF9588FB9A851EDD29C89 /* binary_woarchive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = binary_woarchive.cpp; sourceTree = "<group>"; };
 		C9FFF9709DE6702915DC9E53 /* Pitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pitch.h; sourceTree = "<group>"; };
-		C9FFF9A4FEA07F1AA2ECE0A6 /* text_oarchive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = text_oarchive.cpp; sourceTree = "<group>"; };
 		C9FFF9BD386740812CDFD1F9 /* C1vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = C1vL.wav; sourceTree = "<group>"; };
 		C9FFF9D82C4D660D7FE97259 /* C8vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = C8vL.wav; sourceTree = "<group>"; };
 		C9FFF9D8FF4D3EE38E8BA2DD /* piano.sfz */ = {isa = PBXFileReference; lastKnownFileType = file.sfz; path = piano.sfz; sourceTree = "<group>"; };
 		C9FFFA0145FBA9C42E3C8BB3 /* AccelerateFFT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccelerateFFT.h; sourceTree = "<group>"; };
-		C9FFFA71DEA9CB5E1158B25B /* xml_wiarchive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = xml_wiarchive.cpp; sourceTree = "<group>"; };
-		C9FFFA75D87FB0B021B3BA3F /* xml_grammar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = xml_grammar.cpp; sourceTree = "<group>"; };
 		C9FFFA7A71977FC73F08C461 /* D#7vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "D#7vL.wav"; sourceTree = "<group>"; };
 		C9FFFA97A9FCEF8113EA289F /* WorkspaceDrawerColorScheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceDrawerColorScheme.h; sourceTree = "<group>"; };
 		C9FFFAC12ABF20BC1CC8E0B4 /* PitchDuration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PitchDuration.cpp; sourceTree = "<group>"; };
@@ -1122,19 +1053,15 @@
 		C9FFFB7436D833AE12BB7428 /* D#1vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "D#1vL.wav"; sourceTree = "<group>"; };
 		C9FFFB935C0C1954549B39F7 /* SongCompletionFlowObjCWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongCompletionFlowObjCWrapper.h; sourceTree = "<group>"; };
 		C9FFFBA07A1480342A9F451A /* AudioToolboxInputReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioToolboxInputReader.cpp; sourceTree = "<group>"; };
-		C9FFFBC4F8D9053210966BCF /* void_cast.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = void_cast.cpp; sourceTree = "<group>"; };
 		C9FFFBC5E2248DFA32CB58C3 /* SfzPitchRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SfzPitchRenderer.cpp; sourceTree = "<group>"; };
 		C9FFFBC5F89C8F29361990E2 /* D#4vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "D#4vL.wav"; sourceTree = "<group>"; };
-		C9FFFC1AC71B6E0509FB77FA /* xml_oarchive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = xml_oarchive.cpp; sourceTree = "<group>"; };
 		C9FFFC33442250265DC42295 /* curve.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = curve.hh; sourceTree = "<group>"; };
-		C9FFFC46AA1196339A1FAE56 /* codecvt_null.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = codecvt_null.cpp; sourceTree = "<group>"; };
 		C9FFFC488245B1D43CDB681D /* liquidsfz.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = liquidsfz.cc; sourceTree = "<group>"; };
 		C9FFFC6D1098747848058E71 /* MouseClickChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MouseClickChecker.h; sourceTree = "<group>"; };
 		C9FFFC7A9783B4C82A6FE42C /* UndefAppleConditionals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UndefAppleConditionals.h; sourceTree = "<group>"; };
 		C9FFFC90367A8ADD207F39D9 /* AudioStreamDescription.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioStreamDescription.cpp; sourceTree = "<group>"; };
 		C9FFFC9CD69C33417DC50B22 /* synth.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = synth.cc; sourceTree = "<group>"; };
 		C9FFFD1B1183F2B6F2150EC0 /* SongCompletionFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongCompletionFlow.h; sourceTree = "<group>"; };
-		C9FFFD24DD9BE81C226C1DC4 /* text_woarchive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = text_woarchive.cpp; sourceTree = "<group>"; };
 		C9FFFD25D1F83D1B5F7944D9 /* WorkspaceDrawerColorScheme.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WorkspaceDrawerColorScheme.cpp; sourceTree = "<group>"; };
 		C9FFFD56742584E880665CE3 /* utils.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utils.cc; sourceTree = "<group>"; };
 		C9FFFD768C89C1B8FF44E58D /* AudioToolboxUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioToolboxUtils.cpp; sourceTree = "<group>"; };
@@ -1143,25 +1070,20 @@
 		C9FFFDC446C4E6DD69FC4CE3 /* mpm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mpm.cpp; sourceTree = "<group>"; };
 		C9FFFE0BCC6F1DFFD4D269EB /* yin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = yin.cpp; sourceTree = "<group>"; };
 		C9FFFE1A9795F1014748594E /* pugiconfig.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pugiconfig.hh; sourceTree = "<group>"; };
-		C9FFFE2088D7F6FDCD037625 /* polymorphic_oarchive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = polymorphic_oarchive.cpp; sourceTree = "<group>"; };
 		C9FFFE2601EC836796D25F73 /* D#5vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "D#5vL.wav"; sourceTree = "<group>"; };
 		C9FFFE26CDE1FC6E88447AC4 /* A2vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = A2vL.wav; sourceTree = "<group>"; };
 		C9FFFE7297C9A22187363B82 /* voice.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = voice.cc; sourceTree = "<group>"; };
 		C9FFFE737E79706B2714E8F5 /* log.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = log.cc; sourceTree = "<group>"; };
 		C9FFFEA184D63983601718CF /* autocorrelation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = autocorrelation.cpp; sourceTree = "<group>"; };
 		C9FFFEA213247298F347ED90 /* PlaybackData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlaybackData.cpp; sourceTree = "<group>"; };
-		C9FFFEB1FAEC5DB36BD0ACC7 /* basic_iarchive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = basic_iarchive.cpp; sourceTree = "<group>"; };
 		C9FFFEB2A8C708772977F110 /* PitchDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchDetector.h; sourceTree = "<group>"; };
 		C9FFFED6C10BBE39AE96DD8D /* F#3vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "F#3vL.wav"; sourceTree = "<group>"; };
 		C9FFFEE2F56D5CCB9378EFFB /* A6vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = A6vL.wav; sourceTree = "<group>"; };
 		C9FFFEEBC432B387AA4B95E7 /* C5vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = C5vL.wav; sourceTree = "<group>"; };
-		C9FFFF3F7F8630F5B82A94CF /* extended_type_info_typeid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = extended_type_info_typeid.cpp; sourceTree = "<group>"; };
-		C9FFFF8443D7801CD1B89FE8 /* basic_xml_archive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = basic_xml_archive.cpp; sourceTree = "<group>"; };
 		C9FFFF86158F5BF100CF4E33 /* LyricsTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LyricsTest.cpp; path = Tests/LyricsTest.cpp; sourceTree = SOURCE_ROOT; };
 		C9FFFFAE08B7263D85CA449B /* StringEncodingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringEncodingUtils.h; sourceTree = "<group>"; };
 		C9FFFFAE3565C7594BC72B92 /* C2vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = C2vL.wav; sourceTree = "<group>"; };
 		C9FFFFBBBD6D7C362F5F02CA /* SeekablePitchesList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SeekablePitchesList.cpp; sourceTree = "<group>"; };
-		C9FFFFCACF0D0E019A9AA970 /* binary_iarchive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = binary_iarchive.cpp; sourceTree = "<group>"; };
 		C9FFFFED99F0A661C0C7CDFE /* FixedSizeObjectPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedSizeObjectPool.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1691,7 +1613,6 @@
 				C9FFF8951A623C40AB2CE915 /* ApplicationModel.mm */,
 				543390D2258A59A500C7D5E2 /* Logic copy-Info.plist */,
 				C9FFF5E6A626168CB0C968B2 /* FFT */,
-				C9FFFEDEE435DB90B0B5417A /* boost */,
 				C9FFF84FDE031A0EADF4359F /* Pitch */,
 			);
 			sourceTree = "<group>";
@@ -1804,52 +1725,6 @@
 				C9FFF2E1F5ABD5951C37107E /* Sevagh */,
 			);
 			path = PitchDetection;
-			sourceTree = "<group>";
-		};
-		C9FFF46DDE1E461CEF2FA322 /* serialization */ = {
-			isa = PBXGroup;
-			children = (
-				C9FFF08F59B523C82E18C87A /* stl_port.cpp */,
-				C9FFFBC4F8D9053210966BCF /* void_cast.cpp */,
-				C9FFFA75D87FB0B021B3BA3F /* xml_grammar.cpp */,
-				C9FFFC46AA1196339A1FAE56 /* codecvt_null.cpp */,
-				C9FFF4E97F2ABD3B0378D450 /* xml_iarchive.cpp */,
-				C9FFFC1AC71B6E0509FB77FA /* xml_oarchive.cpp */,
-				C9FFF0632F685ABCDE0960D3 /* xml_wgrammar.cpp */,
-				C9FFF23148492B397A80DA0D /* basic_archive.cpp */,
-				C9FFF1B551232F002CEA19AC /* text_iarchive.cpp */,
-				C9FFF9A4FEA07F1AA2ECE0A6 /* text_oarchive.cpp */,
-				C9FFFA71DEA9CB5E1158B25B /* xml_wiarchive.cpp */,
-				C9FFF5FF3F428443E264A5A7 /* xml_woarchive.cpp */,
-				C9FFFEB1FAEC5DB36BD0ACC7 /* basic_iarchive.cpp */,
-				C9FFF790B8AE9775BBDD8E63 /* basic_oarchive.cpp */,
-				C9FFF256DA37C8829CD207A2 /* text_wiarchive.cpp */,
-				C9FFFD24DD9BE81C226C1DC4 /* text_woarchive.cpp */,
-				C9FFFFCACF0D0E019A9AA970 /* binary_iarchive.cpp */,
-				C9FFF0561166A57B999F8DA9 /* binary_oarchive.cpp */,
-				C9FFF8BCA2A5BD385F96A513 /* binary_wiarchive.cpp */,
-				C9FFF9588FB9A851EDD29C89 /* binary_woarchive.cpp */,
-				C9FFF73E4BAF36B2B61C85B9 /* archive_exception.cpp */,
-				C9FFF794FF6AE6687715186F /* basic_iserializer.cpp */,
-				C9FFF38A17DD9708693366FB /* basic_oserializer.cpp */,
-				C9FFFF8443D7801CD1B89FE8 /* basic_xml_archive.cpp */,
-				C9FFF03A28B45B4AA9A6995D /* basic_xml_grammar.ipp */,
-				C9FFF4596D53BE79D1226A3F /* extended_type_info.cpp */,
-				C9FFF86231DE9AB326BD2AB9 /* utf8_codecvt_facet.cpp */,
-				C9FFF2E95B41916F5DD91AD4 /* basic_serializer_map.cpp */,
-				C9FFF3062B8881B2641DF387 /* polymorphic_iarchive.cpp */,
-				C9FFFE2088D7F6FDCD037625 /* polymorphic_oarchive.cpp */,
-				C9FFF629575A71AAEBB1741A /* basic_text_iprimitive.cpp */,
-				C9FFF61930083D06EB0E077D /* basic_text_oprimitive.cpp */,
-				C9FFF0CC73269AA64CBEF257 /* xml_archive_exception.cpp */,
-				C9FFF6A76814EF1A1ED1C18E /* basic_text_wiprimitive.cpp */,
-				C9FFF8CDA23ECAAACABD9963 /* basic_text_woprimitive.cpp */,
-				C9FFF857CACEDBB3C702010F /* basic_pointer_iserializer.cpp */,
-				C9FFF7AAE7D7F76D2C525C79 /* basic_pointer_oserializer.cpp */,
-				C9FFFF3F7F8630F5B82A94CF /* extended_type_info_typeid.cpp */,
-				C9FFF4073AEC748A86DE6D5E /* extended_type_info_no_rtti.cpp */,
-			);
-			path = serialization;
 			sourceTree = "<group>";
 		};
 		C9FFF5719AE060FE96476C14 /* Apple */ = {
@@ -2003,14 +1878,6 @@
 				C9FFF709CBEFCF8F5E9949E3 /* F#7vL.wav */,
 			);
 			path = samples;
-			sourceTree = "<group>";
-		};
-		C9FFFEDEE435DB90B0B5417A /* boost */ = {
-			isa = PBXGroup;
-			children = (
-				C9FFF46DDE1E461CEF2FA322 /* serialization */,
-			);
-			path = boost;
 			sourceTree = "<group>";
 		};
 		C9FFFFF62813DCC61634E864 /* Iterators */ = {
@@ -2173,7 +2040,6 @@
 				C9FFF9FC4171AC210F5B4F73 /* pitch_detection.h in Headers */,
 				C9FFF1B8930B5DF0E55AD1CF /* FFT.h in Headers */,
 				C9FFFC730B1CC3A0BBA45037 /* AccelerateFFT.h in Headers */,
-				C9FFF64249C87BB1393D08D2 /* basic_xml_grammar.ipp in Headers */,
 				C9FFFA9F77C6B1D5E3CEE226 /* Pitch.h in Headers */,
 				C9FFF7AAAB1F5DAA1539D97D /* SeekablePitchesList.h in Headers */,
 				C9FFFFE458CBBC467C51244B /* PitchesCollection.h in Headers */,
@@ -2731,44 +2597,6 @@
 				C9FFFE02BD704DDD97F1064E /* parabolic_interpolation.cpp in Sources */,
 				C9FFFFEC5C53CC423D4CD6C9 /* AccelerateFFT.cpp in Sources */,
 				C9FFF5504FCFD0E25C6F38AB /* FFT.cpp in Sources */,
-				C9FFF327A4D0B5196F3AFDE3 /* stl_port.cpp in Sources */,
-				C9FFF96A3EAC8DB9A7CA8FFC /* void_cast.cpp in Sources */,
-				C9FFF9BA30A96B6E2B8245E3 /* xml_grammar.cpp in Sources */,
-				C9FFFBF34C432EB5443FD4CC /* codecvt_null.cpp in Sources */,
-				C9FFFF17CE1452B72256E80B /* xml_iarchive.cpp in Sources */,
-				C9FFF1677D9BF0D3B63A6448 /* xml_oarchive.cpp in Sources */,
-				C9FFFF3B5634659CC644B106 /* xml_wgrammar.cpp in Sources */,
-				C9FFFCC24907C0E7FC9681F3 /* basic_archive.cpp in Sources */,
-				C9FFF238E1A01EF604F12067 /* text_iarchive.cpp in Sources */,
-				C9FFF5073BB9E5C7CEE230EC /* text_oarchive.cpp in Sources */,
-				C9FFF12CE6033EEA51BB93B6 /* xml_wiarchive.cpp in Sources */,
-				C9FFF753ED0F0E11BE71D16C /* xml_woarchive.cpp in Sources */,
-				C9FFF5C92A38BFB1B5946698 /* basic_iarchive.cpp in Sources */,
-				C9FFF69C389F83104CA43ABB /* basic_oarchive.cpp in Sources */,
-				C9FFF77F55547DD924D478EC /* text_wiarchive.cpp in Sources */,
-				C9FFFD869A63DFACD0F3F823 /* text_woarchive.cpp in Sources */,
-				C9FFFB47DA562CCC6914C812 /* binary_iarchive.cpp in Sources */,
-				C9FFFA47B17A2AB57F5FB0CE /* binary_oarchive.cpp in Sources */,
-				C9FFFB8E51C4824E2300F7F7 /* binary_wiarchive.cpp in Sources */,
-				C9FFF01411329FFA2405891A /* binary_woarchive.cpp in Sources */,
-				C9FFF4EBED8FDA30A700ABF6 /* archive_exception.cpp in Sources */,
-				C9FFFEA64984D7152A3290E6 /* basic_iserializer.cpp in Sources */,
-				C9FFF11AFC6F3182804407A4 /* basic_oserializer.cpp in Sources */,
-				C9FFF5249E0F494AC5B35DBD /* basic_xml_archive.cpp in Sources */,
-				C9FFFE0C0723E92C6FE5F591 /* extended_type_info.cpp in Sources */,
-				C9FFFAAA602747D040ACE344 /* utf8_codecvt_facet.cpp in Sources */,
-				C9FFFE22C39F1FF226C81066 /* basic_serializer_map.cpp in Sources */,
-				C9FFFEFB74DED2493DA16896 /* polymorphic_iarchive.cpp in Sources */,
-				C9FFFEF70492F803AFD229E5 /* polymorphic_oarchive.cpp in Sources */,
-				C9FFF074F5072B5703F3A275 /* basic_text_iprimitive.cpp in Sources */,
-				C9FFF31B3FB621C6E6FF93C2 /* basic_text_oprimitive.cpp in Sources */,
-				C9FFFEB6EE34147A0B57F8C6 /* xml_archive_exception.cpp in Sources */,
-				C9FFF24E512190BC4010EA98 /* basic_text_wiprimitive.cpp in Sources */,
-				C9FFF7A8E73653F20897F08A /* basic_text_woprimitive.cpp in Sources */,
-				C9FFF369A7AABB2B07DD5293 /* basic_pointer_iserializer.cpp in Sources */,
-				C9FFF38DF1569E79B074ECDD /* basic_pointer_oserializer.cpp in Sources */,
-				C9FFF082C49191DD3DF6F62C /* extended_type_info_typeid.cpp in Sources */,
-				C9FFF4BCD8DF651E17BC8AB4 /* extended_type_info_no_rtti.cpp in Sources */,
 				C9FFFD1D85309776D0DFEACA /* LyricsSection.swift in Sources */,
 				C9FFF54DE285E67126F2E7BB /* PitchesMutableList.cpp in Sources */,
 				C9FFFBDDF43F9B1C79F2B487 /* SeekablePitchesList.cpp in Sources */,

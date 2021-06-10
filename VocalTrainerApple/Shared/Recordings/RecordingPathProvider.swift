@@ -6,7 +6,7 @@
 import Foundation
 
 class RecordingPathProvider : NSObject {
-    func getRecordingsPath() -> String {
+    @objc static func getRecordingsPath() -> String {
         NSHomeDirectory() + "/Recordings/"
     }
 }

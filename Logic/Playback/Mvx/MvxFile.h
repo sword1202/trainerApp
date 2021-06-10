@@ -16,7 +16,6 @@
 #include <boost/variant.hpp>
 #include <map>
 #include "Serializers.h"
-#include "StringUtils.h"
 
 struct MvxFileSignature {
     bool recording = false;
@@ -54,6 +53,9 @@ class MvxFile : private MvxFileSignature, public VocalTrainerFile {
         ar(recordingTempoFactor);
     }
 public:
+    static constexpr int MVX_SIGNATURE_LENGTH = 3;
+    static constexpr const char* MVX_SIGNATURE = "MVX";
+
     template<typename Archive>
     void saveOrLoad(Archive &ar, bool isSave) {
         int version = VERSION;
@@ -62,7 +64,7 @@ public:
         ar(beatsPerMinute);
         ar(vocalPart);
 
-        auto serializeStdStringAudioDataBuffer = [&] (AudioDataBufferConstPtr& buffer) {
+        auto serializeAudioDataBuffer = [&] (AudioDataBufferConstPtr& buffer) {
             std::string str;
             if (isSave) {
                 if (buffer) {
@@ -79,8 +81,8 @@ public:
             }
         };
 
-        serializeStdStringAudioDataBuffer(instrumental);
-        serializeStdStringAudioDataBuffer(recordingData);
+        serializeAudioDataBuffer(instrumental);
+        serializeAudioDataBuffer(recordingData);
 
         ar(recordedPitchesTimes);
         ar(recordedPitchesFrequencies);

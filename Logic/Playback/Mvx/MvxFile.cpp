@@ -15,6 +15,7 @@ constexpr int MAX_SAMPLES_PREVIEW_COUNT = 5000;
 using namespace CppUtils;
 
 void MvxFile::writeToStream(std::ostream &os) const {
+    os.write(MVX_SIGNATURE, MVX_SIGNATURE_LENGTH);
     Serialization::WriteObjectToBinaryStream(*this, os);
 }
 
@@ -24,6 +25,12 @@ void MvxFile::writeToFile(const char *outFilePath) const {
 }
 
 void MvxFile::readFromStream(std::istream &is) {
+    char signature[MVX_SIGNATURE_LENGTH];
+    is.read(signature, MVX_SIGNATURE_LENGTH);
+    if (strncmp(signature, MVX_SIGNATURE, (size_t) MVX_SIGNATURE_LENGTH)) {
+        throw std::runtime_error("Invalid mvx file signature");
+    }
+
     Serialization::ReadObjectFromBinaryStream(*this, is);
 }
 
