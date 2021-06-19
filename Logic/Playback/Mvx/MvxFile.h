@@ -17,15 +17,31 @@
 #include <map>
 #include "Serializers.h"
 
-struct MvxFileSignature {
+struct MvxFileHeader {
     bool recording = false;
     std::string songTitleUtf8;
     std::string artistNameUtf8;
     Tonality originalTonality;
     double recordingTempoFactor = 1.0;
+    // recording
+    std::vector<short> recordingPreviewSamples;
+
+    template <typename Archive>
+    void saveOrLoadHeader(Archive& ar, int* version) {
+        ar(*version);
+        ar(recording);
+        ar(songTitleUtf8);
+        ar(artistNameUtf8);
+        ar(originalTonality);
+        ar(recordingTempoFactor);
+        ar(recordingPreviewSamples);
+    }
+
+    void readFromStream(std::istream& is);
+    void readFromFile(const char* filePath);
 };
 
-class MvxFile : private MvxFileSignature, public VocalTrainerFile {
+class MvxFile : private MvxFileHeader, public VocalTrainerFile {
     static const int VERSION = 1;
 
     // core data
@@ -37,21 +53,10 @@ class MvxFile : private MvxFileSignature, public VocalTrainerFile {
     AudioDataBufferConstPtr recordingData = nullptr;
     std::vector<double> recordedPitchesTimes;
     std::vector<float> recordedPitchesFrequencies;
+    std::vector<short> instrumentalPreviewSamples;
     std::map<double, int> recordingTonalityChanges; // seek -> pitchSifting
 
-    std::vector<short> instrumentalPreviewSamples;
-
     Lyrics lyrics;
-
-    template <typename Archive>
-    void saveOrLoadSignature(Archive& ar, int* version) {
-        ar(*version);
-        ar(recording);
-        ar(songTitleUtf8);
-        ar(artistNameUtf8);
-        ar(originalTonality);
-        ar(recordingTempoFactor);
-    }
 public:
     static constexpr int MVX_SIGNATURE_LENGTH = 3;
     static constexpr const char* MVX_SIGNATURE = "MVX";
@@ -59,7 +64,7 @@ public:
     template<typename Archive>
     void saveOrLoad(Archive &ar, bool isSave) {
         int version = VERSION;
-        saveOrLoadSignature(ar, &version);
+        saveOrLoadHeader(ar, &version);
 
         ar(beatsPerMinute);
         ar(vocalPart);
@@ -86,9 +91,9 @@ public:
 
         ar(recordedPitchesTimes);
         ar(recordedPitchesFrequencies);
-        ar(instrumentalPreviewSamples);
         ar(recordingTonalityChanges);
         ar(lyrics);
+        ar(instrumentalPreviewSamples);
     }
 
     // Preferably use move constructor instead
@@ -143,6 +148,9 @@ public:
     const std::vector<short> &getInstrumentalPreviewSamples() const;
     void setInstrumentalPreviewSamples(const std::vector<short> &instrumentalPreviewSamples);
     void generateInstrumentalPreviewSamplesFromInstrumental();
+
+    const std::vector<short> &getRecordingPreviewSamples() const;
+    void setRecordingPreviewSamples(const std::vector<short> &recordingPreviewSamples);
 
     const Lyrics &getLyrics() const;
     void setLyrics(const Lyrics &lyrics);

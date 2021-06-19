@@ -77,6 +77,9 @@ struct ProjectView: View {
                 VStack(spacing: 0) {
                     VStack(spacing: 0) {
                         HStack(spacing: 6) {
+                            NavigationLink(destination: ProjectView()) {
+                                Circle().background(Colors.warningColor).frame(width: 20, height: 20)
+                            }
                             Spacer().frame(maxWidth: .infinity, maxHeight: .infinity)
                             TwoLinesButton(
                                     isSelected: $tonalityDialogVisible,

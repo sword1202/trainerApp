@@ -14,6 +14,8 @@ using namespace CppUtils;
 using std::cout;
 using std::endl;
 
+constexpr int RECORDING_PREVIEW_SAMPLES_COUNT = 1000;
+
 ProjectController::ProjectController(ProjectControllerDelegate* delegate) : delegate(delegate) {
     auto* model = ApplicationModel::instance();
     player = model->getPlayer();
@@ -445,12 +447,17 @@ bool ProjectController::hasPlaybackBounds() const {
 MvxFile *ProjectController::generateRecording() const {
     assert(source);
     MvxFile* recordingFile = new MvxFile(source);
-    recordingFile->setRecordingData(audioInputManager->getRecordedDataInWavFormat());
+    const std::string &recordingData = audioInputManager->getRecordedDataInWavFormat();
+    recordingFile->setRecordingData(recordingData);
     const PitchesCollection *recordedPitches = audioInputManager->getRecordedPitches();
     recordingFile->setRecordedPitchesTimes(recordedPitches->getTimes());
     recordingFile->setRecordedPitchesFrequencies(recordedPitches->getFrequencies());
     recordingFile->setRecordingTonalityChanges(player->getTonalityChanges());
     recordingFile->setRecordingTempoFactor(player->getTempoFactor());
+    std::vector<short> previewSamples = AudioUtils::ResizePreviewSamplesFromWavData(
+            recordingData,
+            RECORDING_PREVIEW_SAMPLES_COUNT);
+    recordingFile->setRecordingPreviewSamples(previewSamples);
     player->onSourceChanged.addOneShotListener([=] {
         player->setSeek(0);
     });

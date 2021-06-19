@@ -161,6 +161,9 @@ int main(int argc, char *argv[]) {
 
     mvxFile.writeToFile(outputFilepath.data());
 
+    std::fstream f = Streams::OpenFile(outputFilepath.data(), std::ios::in | std::ios::binary);
+    VocalTrainerFile::read(f);
+
     cout << "mvx file has been created: " << outputFilepath << endl;
 
     return 0;

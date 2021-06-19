@@ -4,9 +4,7 @@
 //
 
 #include "MvxFile.h"
-#include <fstream>
 #include "audiodecoder.h"
-#include "StringUtils.h"
 #include "AudioUtils.h"
 #include "BinaryArchive.h"
 
@@ -27,6 +25,7 @@ void MvxFile::writeToFile(const char *outFilePath) const {
 void MvxFile::readFromStream(std::istream &is) {
     char signature[MVX_SIGNATURE_LENGTH];
     is.read(signature, MVX_SIGNATURE_LENGTH);
+    assert(is.tellg() == MVX_SIGNATURE_LENGTH);
     if (strncmp(signature, MVX_SIGNATURE, (size_t) MVX_SIGNATURE_LENGTH)) {
         throw std::runtime_error("Invalid mvx file signature");
     }
@@ -130,6 +129,14 @@ void MvxFile::setInstrumentalPreviewSamples(const std::vector<short> &instrument
     this->instrumentalPreviewSamples = instrumentalPreviewSamples;
 }
 
+const std::vector<short>& MvxFile::getRecordingPreviewSamples() const {
+    return recordingPreviewSamples;
+}
+
+void MvxFile::setRecordingPreviewSamples(const std::vector<short>& recordingPreviewSamples) {
+    this->recordingPreviewSamples = recordingPreviewSamples;
+}
+
 void MvxFile::generateInstrumentalPreviewSamplesFromInstrumental() {
     DecodedTrack decoded = AudioDecoder::decodeAllIntoRawPcm(instrumental);
     int previewSamplesCount = std::min(MAX_SAMPLES_PREVIEW_COUNT, int(decoded.rawPcm.size() / sizeof(short)));
@@ -208,4 +215,15 @@ MvxFile::MvxFile(const VocalTrainerFile* file) {
 
 void MvxFile::setInstrumental(AudioDataBufferConstPtr instrumental) {
     MvxFile::instrumental = instrumental;
+}
+
+void MvxFileHeader::readFromStream(std::istream& is) {
+    Serialization::BinaryReadArchive archive(is);
+    int version;
+    this->saveOrLoadHeader(archive, &version);
+}
+
+void MvxFileHeader::readFromFile(const char* filePath) {
+    std::fstream is = Streams::OpenFile(filePath, std::ios::binary | std::ios::in);
+    readFromStream(is);
 }

@@ -47,6 +47,7 @@
 		ACF18B0122EC8611008E7DAA /* Logic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF18B0022EC8611008E7DAA /* Logic.framework */; };
 		ACF18B2522ECB97C008E7DAA /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF18B2422ECB97C008E7DAA /* MetalKit.framework */; };
 		BAF99EA1E439B8DDE5CA7FE8 /* Pods_VocalTrainerMacOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5884C119A97C874E1D3CB85D /* Pods_VocalTrainerMacOS.framework */; };
+		C9FFF05401359DF5275AA9D6 /* RecordingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF15AFE6BD9892B3AE3E3 /* RecordingsView.swift */; };
 		C9FFF0A6DC29C41C836A272F /* NSAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF75984620E90683329A9 /* NSAttributedString+Extensions.swift */; };
 		C9FFF0C4CA29947B37BD0C4C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF18E11AA44C9B5A6225B /* Color.swift */; };
 		C9FFF0CEF4671CBC307E2771 /* UiUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFDA890B96D4ABFC60D75 /* UiUtils.swift */; };
@@ -183,6 +184,7 @@
 		C9FFF079046892811FDEB34E /* CGContext+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGContext+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF08F2EBCC23D22942B2D /* LevelsDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsDialog.swift; sourceTree = "<group>"; };
 		C9FFF134111E663C22048469 /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
+		C9FFF15AFE6BD9892B3AE3E3 /* RecordingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingsView.swift; sourceTree = "<group>"; };
 		C9FFF1756DDFE9ED2936A436 /* SongTonality+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SongTonality+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF18E11AA44C9B5A6225B /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		C9FFF18E9C15E6FAF0C18086 /* BigButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigButton.swift; sourceTree = "<group>"; };
@@ -479,6 +481,7 @@
 				C9FFFED7F11D6AF3519851A4 /* PlaybackSlider.swift */,
 				C9FFFE06E97E413484428ACE /* Workspace */,
 				C9FFF97F47D585784A7258F6 /* Dialogs */,
+				C9FFF15AFE6BD9892B3AE3E3 /* RecordingsView.swift */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -885,6 +888,7 @@
 				C9FFF0CEF4671CBC307E2771 /* UiUtils.swift in Sources */,
 				C9FFFA0DB398E2B48B77C23A /* SongCompletionViewModel.swift in Sources */,
 				C9FFFBC285BAFFB4D157C1E6 /* RecordingPathProvider.swift in Sources */,
+				C9FFF05401359DF5275AA9D6 /* RecordingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

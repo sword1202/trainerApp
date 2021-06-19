@@ -34,7 +34,7 @@ struct VocalTrainerApp: App {
 
     var body: some Scene {
         WindowGroup {
-            VStack {
+            NavigationView {
                 ProjectView()
             }
         }
