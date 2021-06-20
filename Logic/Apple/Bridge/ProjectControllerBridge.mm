@@ -16,9 +16,11 @@ using std::endl;
 
 CPP_UTILS_DLLHIDE class DelegateWrapper : public ProjectControllerDelegate {
     NSHashTable<id<ProjectControllerBridgeDelegate> >* delegates;
+    NSString* recordingsPath;
 public:
-    DelegateWrapper() {
+    DelegateWrapper(NSString* recordingsPath) {
         delegates = [NSHashTable weakObjectsHashTable];
+        this->recordingsPath = recordingsPath;
     }
 
     void addDelegate(id <ProjectControllerBridgeDelegate> delegate) {
@@ -199,13 +201,9 @@ public:
         }
     }
 
-    static std::string getRecordingsPath() {
-        return [NSHomeDirectory() stringByAppendingString:@"/Recordings/"].UTF8String;
-    }
-
     std::shared_ptr<std::ostream> createStreamToSaveRecording(const VocalTrainerFile *recording) override {
         std::ostringstream filePath;
-        filePath << getRecordingsPath() << TimeUtils::NowInMicroseconds() << ".rvx";
+        filePath << recordingsPath.UTF8String << TimeUtils::NowInMicroseconds() << ".rvx";
         return Streams::OpenFileAsSharedPtr(filePath.str().data(), std::ios::binary | std::ios::out);
     }
 };
@@ -213,13 +211,15 @@ public:
 @implementation ProjectControllerBridge {
     ProjectController* _cpp;
     DelegateWrapper* _delegate;
+    NSString* _playbackSource;
 }
 
-- (instancetype)init {
+- (instancetype)initWithRecordingsPath:(NSString*)recordingsPath {
     self = [super init];
     if (self) {
-        _delegate = new DelegateWrapper();
+        _delegate = new DelegateWrapper(recordingsPath);
         _cpp = new ProjectController(_delegate);
+        _playbackSource = nil;
     }
 
     return self;
@@ -240,6 +240,10 @@ public:
 }
 
 - (void)setPlaybackSource:(NSString *)filePath {
+    if ([filePath isEqualToString:_playbackSource]) {
+        return;
+    }
+    _playbackSource = filePath;
     _cpp->setPlaybackSource(filePath.UTF8String);
 }
 

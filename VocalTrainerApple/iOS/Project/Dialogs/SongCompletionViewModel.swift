@@ -11,6 +11,7 @@ private let numberOfPreviewSamples = 38
 class SongCompletionViewModel : ObservableObject {
     private let projectController = ProjectController.shared
     private let flow: SongCompletionFlowBridge
+    @Published var shouldNavigateToRecordings: Bool = false
     @Binding var isActive: Bool {
         didSet {
             if (!isActive) {
@@ -37,6 +38,7 @@ class SongCompletionViewModel : ObservableObject {
 
     func didTapSave() {
         flow.save()
+        shouldNavigateToRecordings = true
     }
 
     func didTapListen() {

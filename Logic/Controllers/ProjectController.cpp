@@ -177,7 +177,6 @@ float ProjectController::getInstrumentalVolume() const {
 }
 
 void ProjectController::setWorkspaceController(WorkspaceController *workspaceController) {
-    assert(!this->workspaceController && workspaceController);
     this->workspaceController = workspaceController;
 
     workspaceController->setDelegate(this);
@@ -472,7 +471,7 @@ void ProjectController::tryAgain() {
 
 void ProjectController::save() {
     MvxFile* recordingFile = generateRecording();
-    ExecuteInTheEndOfScope([=] {
+    ExecuteInTheEndOfScope _([=] {
         delete recordingFile;
     });
 

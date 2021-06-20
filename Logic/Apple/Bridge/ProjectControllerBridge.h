@@ -11,7 +11,7 @@
 
 
 @interface ProjectControllerBridge : NSObject
-- (instancetype)init;
+- (instancetype)initWithRecordingsPath:(NSString*)recordingsPath;
 - (void)addDelegate:(id<ProjectControllerBridgeDelegate>)delegate NS_SWIFT_NAME(add(delegate:));
 - (void)removeDelegate:(id<ProjectControllerBridgeDelegate>)delegate NS_SWIFT_NAME(remove(delegate:));
 

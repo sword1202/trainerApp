@@ -55,7 +55,8 @@ private struct TwoLinesButton: View {
 
 struct ProjectView: View {
     @Environment(\.scenePhase) private var scenePhase
-    @StateObject private var viewModel = ProjectViewModel()
+    @Environment(\.presentationMode) var presentationMode
+    @StateObject private var viewModel: ProjectViewModel
     @StateObject private var tonalityViewModel = TonalityViewModel()
     @StateObject private var tempoViewModel = TempoViewModel()
     @State private var levelsVisible = false
@@ -63,6 +64,10 @@ struct ProjectView: View {
     @State private var tempoDialogVisible = false
     @State private var boundsSelectionDialogVisible = false
     @State private var showSwipeAndZoomSuggestion = AppSettings.shared.showSwipeAndZoomSuggestion
+
+    init(filePath: String?) {
+        _viewModel = StateObject(wrappedValue: ProjectViewModel(filePath: filePath))
+    }
 
     var body: some View {
         GeometryReader { geom in
@@ -77,8 +82,12 @@ struct ProjectView: View {
                 VStack(spacing: 0) {
                     VStack(spacing: 0) {
                         HStack(spacing: 6) {
-                            NavigationLink(destination: ProjectView()) {
-                                Circle().background(Colors.warningColor).frame(width: 20, height: 20)
+                            Button(action: {
+                                presentationMode.wrappedValue.dismiss()
+                            }) {
+                                Image(systemName: "chevron.left")
+                                        .imageScale(.large)
+                                        .foregroundColor(Color.white).padding(.leading, 16)
                             }
                             Spacer().frame(maxWidth: .infinity, maxHeight: .infinity)
                             TwoLinesButton(
@@ -265,6 +274,6 @@ struct ProjectView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ProjectView()
+        ProjectView(filePath: nil)
     }
 }

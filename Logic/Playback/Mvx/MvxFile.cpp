@@ -9,8 +9,19 @@
 #include "BinaryArchive.h"
 
 constexpr int MAX_SAMPLES_PREVIEW_COUNT = 5000;
+constexpr int MVX_SIGNATURE_LENGTH = 3;
+constexpr const char* MVX_SIGNATURE = "MVX";
 
 using namespace CppUtils;
+
+static void checkMvxSignature(std::istream& is) {
+    char signature[MVX_SIGNATURE_LENGTH];
+    is.read(signature, MVX_SIGNATURE_LENGTH);
+    assert(is.tellg() == MVX_SIGNATURE_LENGTH);
+    if (strncmp(signature, MVX_SIGNATURE, (size_t) MVX_SIGNATURE_LENGTH)) {
+        throw std::runtime_error("Invalid mvx file signature");
+    }
+}
 
 void MvxFile::writeToStream(std::ostream &os) const {
     os.write(MVX_SIGNATURE, MVX_SIGNATURE_LENGTH);
@@ -23,13 +34,7 @@ void MvxFile::writeToFile(const char *outFilePath) const {
 }
 
 void MvxFile::readFromStream(std::istream &is) {
-    char signature[MVX_SIGNATURE_LENGTH];
-    is.read(signature, MVX_SIGNATURE_LENGTH);
-    assert(is.tellg() == MVX_SIGNATURE_LENGTH);
-    if (strncmp(signature, MVX_SIGNATURE, (size_t) MVX_SIGNATURE_LENGTH)) {
-        throw std::runtime_error("Invalid mvx file signature");
-    }
-
+    checkMvxSignature(is);
     Serialization::ReadObjectFromBinaryStream(*this, is);
 }
 
@@ -218,6 +223,7 @@ void MvxFile::setInstrumental(AudioDataBufferConstPtr instrumental) {
 }
 
 void MvxFileHeader::readFromStream(std::istream& is) {
+    checkMvxSignature(is);
     Serialization::BinaryReadArchive archive(is);
     int version;
     this->saveOrLoadHeader(archive, &version);

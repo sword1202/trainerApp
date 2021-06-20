@@ -43,7 +43,7 @@ class ProjectViewModel : ObservableObject {
 
     var originalTonality : String {
         get {
-            ProjectController.shared.originalTonality.toString()
+            projectController.originalTonality.toString()
         }
     }
 
@@ -53,7 +53,12 @@ class ProjectViewModel : ObservableObject {
         playbackEndTime = timeFormatter.string(from: Date(timeIntervalSince1970: projectController.endSeek))
     }
 
-    init() {
+    init(filePath: String?) {
+        if filePath == nil {
+            let mvxFilePath = Bundle.main.path(forResource: "drm", ofType: "mvx")
+            projectController.setPlaybackSource(filePath: mvxFilePath)
+        }
+
         isMetronomeEnabled = projectController.metronomeEnabled
         projectController.add(delegate: self)
         updatePlaybackSections()
@@ -82,7 +87,7 @@ class ProjectViewModel : ObservableObject {
     }
 
     func willBecomeInactive() {
-        ProjectController.shared.stop()
+        projectController.stop()
     }
     
     func didBecomeActive() {
@@ -90,7 +95,7 @@ class ProjectViewModel : ObservableObject {
     }
     
     func didTapPlayButton() {
-        ProjectController.shared.togglePlay()
+        projectController.togglePlay()
     }
 
     func didTapRetry() {

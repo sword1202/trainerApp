@@ -50,3 +50,6 @@
 "save" = "Save";
 "listen" = "Listen";
 
+"recordings" = "Recordings";
+"noRecordingsMessage" = "You don't have recordings yet";
+

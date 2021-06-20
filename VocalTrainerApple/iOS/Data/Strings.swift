@@ -64,4 +64,7 @@ enum Strings : String, Localizable {
     case tryAgain
     case save
     case listen
+
+    case recordings
+    case noRecordingsMessage
 }

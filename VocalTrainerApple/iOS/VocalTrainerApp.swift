@@ -10,8 +10,20 @@ import SwiftUI
 import Combine
 import AVFoundation
 
-struct ProjectController {
-    static let shared: ProjectControllerBridge = ProjectControllerBridge()
+class RecordingsListController : RecordingsListControllerBridge {
+    static let recordingsPath = NSHomeDirectory() + "/Recordings/"
+
+    init(previewSamplesCount: Int) {
+        super.init(recordingsPath: RecordingsListController.recordingsPath, previewSamplesCount: previewSamplesCount)
+    }
+}
+
+class ProjectController : ProjectControllerBridge {
+    static let shared = ProjectController()
+
+    override init() {
+        super.init(recordingsPath: RecordingsListController.recordingsPath)
+    }
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
@@ -22,8 +34,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
         try! AVAudioSession.sharedInstance().setCategory(.playAndRecord, options: .allowBluetoothA2DP)
         InitializationManager.initializeApplicationIfNeed()
-        let mvxFilePath = Bundle.main.path(forResource: "drm", ofType: "mvx")
-        ProjectController.shared.setPlaybackSource(filePath: mvxFilePath)
         return true
     }
 }
@@ -35,7 +45,7 @@ struct VocalTrainerApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                ProjectView()
+                RecordingsView().navigationBarHidden(true)
             }
         }
     }

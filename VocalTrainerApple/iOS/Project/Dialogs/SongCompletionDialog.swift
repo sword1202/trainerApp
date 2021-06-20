@@ -26,6 +26,7 @@ struct SongCompletionDialog : View {
                     BigButton(text: Strings.save.localized) {
                         viewModel.didTapSave()
                     }
+                    RecordingsView().navigatePush(whenTrue: $viewModel.shouldNavigateToRecordings)
                     BigButton(text: Strings.listen.localized, backgroundColor: Colors.alternativeButton) {
                         viewModel.didTapListen()
                     }

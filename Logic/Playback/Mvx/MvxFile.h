@@ -58,9 +58,6 @@ class MvxFile : private MvxFileHeader, public VocalTrainerFile {
 
     Lyrics lyrics;
 public:
-    static constexpr int MVX_SIGNATURE_LENGTH = 3;
-    static constexpr const char* MVX_SIGNATURE = "MVX";
-
     template<typename Archive>
     void saveOrLoad(Archive &ar, bool isSave) {
         int version = VERSION;
