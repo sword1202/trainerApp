@@ -470,12 +470,8 @@ void ProjectController::tryAgain() {
 }
 
 void ProjectController::save() {
-    MvxFile* recordingFile = generateRecording();
-    ExecuteInTheEndOfScope _([=] {
-        delete recordingFile;
-    });
-
-    if (auto stream = delegate->createStreamToSaveRecording(recordingFile)) {
+    std::unique_ptr<MvxFile> recordingFile(generateRecording());
+    if (auto stream = delegate->createStreamToSaveRecording(recordingFile.get())) {
         recordingFile->writeToStream(*stream);
     }
 }
