@@ -10,9 +10,12 @@ private let distanceBetweenSamples: CGFloat = 3
 private let sampleMaxHeight: CGFloat = 72
 private let sampleMinHeight: CGFloat = 8
 
+struct PreviewSamplesDraw {
+    static func calculateSamplesCount(width: CGFloat) -> Int {
+        Int(floor((width + distanceBetweenSamples) / (sampleWidth + distanceBetweenSamples)))
+    }
 
-struct UiUtils {
-    static func drawRecordingPreviewTrack(samples: [Float]) -> UIImage {
+    static func drawRecordingPreviewTrack(samples: [Float], color: CGColor? = Colors.recordingTrack.cgColor) -> UIImage {
         guard var max = samples.max() else {
             return UIImage()
         }
@@ -31,7 +34,7 @@ struct UiUtils {
         )
 
         return UIImage.draw(size: size) { ctx in
-            ctx.setFillColor(Colors.recordingTrack.cgColor ?? UIColor.gray.cgColor)
+            ctx.setFillColor(color ?? UIColor.gray.cgColor)
             var x: CGFloat = 0
             heights.forEach { height in
                 let y: CGFloat = (size.height - height) / 2

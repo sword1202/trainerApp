@@ -54,10 +54,8 @@ class ProjectViewModel : ObservableObject {
     }
 
     init(filePath: String?) {
-        if filePath == nil {
-            let mvxFilePath = Bundle.main.path(forResource: "drm", ofType: "mvx")
-            projectController.setPlaybackSource(filePath: mvxFilePath)
-        }
+        let mvxFilePath = filePath ?? Bundle.main.path(forResource: "drm", ofType: "mvx")
+        projectController.setPlaybackSource(filePath: mvxFilePath)
 
         isMetronomeEnabled = projectController.metronomeEnabled
         projectController.add(delegate: self)

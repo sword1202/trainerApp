@@ -7,7 +7,8 @@
 #import <Logic/Logic-Swift.h>
 
 @interface RecordingsListControllerBridge : NSObject
-- (instancetype)initWithRecordingsPath:(NSString*)path previewSamplesCount:(NSInteger)previewSamplesCount;
+- (instancetype)initWithRecordingsPath:(NSString*)path;
 - (NSInteger)recordingsCount;
 - (RecordingInfo*)getRecording:(NSInteger)index NS_SWIFT_NAME(getRecording(at:));
+- (NSArray<NSNumber*>*)getPreviewSamplesForRecordingAt:(NSInteger)index samplesCount:(NSInteger)samplesCount NS_SWIFT_NAME(getPreviewSamples(recordingIndex:samplesCount:));
 @end

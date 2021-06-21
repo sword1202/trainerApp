@@ -25,8 +25,8 @@ Lyrics::Lyrics(const std::string &utf8, const VocalPart* vocalPart) {
     int skippedCharactersCount = 0;
     const Range* previousRange = nullptr;
     int rangeStartCharacter = -1;
-    Line* currentLine = nullptr;
-    Section* currentSection = nullptr;
+    int currentLineIndex = -1;
+    int currentSectionIndex = -1;
     tribool isFastLyricsFormat = undefined;
     // Used for fast-format lyrics
     int currentNoteIndex = 0;
@@ -91,10 +91,10 @@ Lyrics::Lyrics(const std::string &utf8, const VocalPart* vocalPart) {
                 }
             }
 
-            assert(currentSection);
+            assert(currentSectionIndex >= 0);
             range.startCharacterIndex = rangeStartCharacter - skippedCharactersCount;
             range.charactersCount = i - rangeStartCharacter;
-            range.section = currentSection;
+            range.sectionIndex = currentSectionIndex;
 
             if (previousRange && previousRange->endSeek > range.startSeek) {
                 std::stringstream message;
@@ -106,24 +106,24 @@ Lyrics::Lyrics(const std::string &utf8, const VocalPart* vocalPart) {
 
             previousRange = Maps::InsertAndGetInsertedValue(ranges, range.startSeek, range);
 
-            if (!currentLine) {
+            if (currentLineIndex < 0) {
                 Line line;
                 line.startSeek = range.startSeek;
                 line.startCharacterIndex = range.startCharacterIndex;
                 line.charactersCount = range.charactersCount;
                 line.duration = range.getDuration();
                 lines.push_back(line);
-                currentSection->linesCount++;
-                currentLine = &lines.back();
+                sections[currentSectionIndex].linesCount++;
+                currentLineIndex = static_cast<int>(lines.size() - 1);
             } else {
-                currentLine->duration = (range.startSeek - currentLine->startSeek) + range.getDuration();
-                currentLine->charactersCount = (range.startCharacterIndex - currentLine->startCharacterIndex) +
+                lines[currentLineIndex].duration = (range.startSeek - lines[currentLineIndex].startSeek) + range.getDuration();
+                lines[currentLineIndex].charactersCount = (range.startCharacterIndex - lines[currentLineIndex].startCharacterIndex) +
                         range.charactersCount;
             }
 
-            assert(currentSection);
-            if (currentSection->seek < 0) {
-                currentSection->seek = range.startSeek;
+            assert(currentSectionIndex >= 0);
+            if (sections[currentSectionIndex].seek < 0) {
+                sections[currentSectionIndex].seek = range.startSeek;
             }
 
             skippedCharactersCount += (rangeEndIndex - i + 1);
@@ -153,11 +153,11 @@ Lyrics::Lyrics(const std::string &utf8, const VocalPart* vocalPart) {
             skippedCharactersCount += (sectionEndIndex - i + 1) + 1; // +1 new line
             i = static_cast<int>(sectionEndIndex) + 1;
             sections.push_back(section);
-            currentSection = &sections.back();
+            currentSectionIndex = static_cast<int>(sections.size() - 1);
         } else {
             text.push_back(ch);
             if (ch == U'\n') {
-                currentLine = nullptr;
+                currentLineIndex = -1;
             } else {
                 if (rangeStartCharacter < 0) {
                     rangeStartCharacter = i;
@@ -215,10 +215,12 @@ std::string Lyrics::toUtf8String() const {
 
     auto rangeIter = ranges.begin();
     auto lineIter = lines.begin();
-    for (const Section& section : sections) {
+    size_t sectionsCount = sections.size();
+    for (int i = 0; i < sectionsCount; ++i) {
+        const Section& section = sections[i];
         result << "\n{" << sectionTypeToChar(section.sectionType) << section.number << "}\n";
         const Range* range = &rangeIter->second;
-        while (range->section == &section) {
+        while (range->sectionIndex == i) {
             if (lineIter->startCharacterIndex + lineIter->charactersCount < range->startCharacterIndex) {
                 result << "\n";
                 ++lineIter;
@@ -245,11 +247,11 @@ std::string Lyrics::getRangeUtf8Text(const Lyrics::Range &range) const {
     return UtfUtils::ToUtf8(getRangeText(range));
 }
 
-const std::deque<Lyrics::Section> & Lyrics::getSections() const {
+const std::vector<Lyrics::Section>& Lyrics::getSections() const {
     return sections;
 }
 
-std::pair<typename std::deque<Lyrics::Section>::const_iterator, typename std::deque<Lyrics::Section>::const_iterator>
+std::pair<typename std::vector<Lyrics::Section>::const_iterator, typename std::vector<Lyrics::Section>::const_iterator>
 Lyrics::getSectionsInTimeRange(double begin, double end) const {
     return CppUtils::FindRangeInSortedCollectionUsingKeyProvider(sections, [] (const Section& s) {
         return s.seek;

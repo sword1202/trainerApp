@@ -6,7 +6,7 @@
 #define TEXTIMAGESGENERATOR_LYRICS_H
 
 #include <map>
-#include <deque>
+#include <vector>
 #include <string>
 #include <optional>
 #include "VocalPart.h"
@@ -31,7 +31,7 @@ public:
         int charactersCount = 0;
         double startSeek = 0;
         double endSeek = 0;
-        const Section* section = nullptr;
+        int sectionIndex = -1;
 
         inline double getDuration() const {
             return endSeek - startSeek;
@@ -69,9 +69,9 @@ public:
 
 private:
     std::u32string text;
-    std::deque<Section> sections;
+    std::vector<Section> sections;
     std::map<double, Range> ranges;
-    std::deque<Line> lines;
+    std::vector<Line> lines;
     std::map<double, int> endSeekLineIndexesMap;
 
     static std::pair<double, double> parseRange(const std::u32string, int begin, int end);
@@ -83,8 +83,8 @@ private:
 public:
     static Lyrics EMPTY;
 
-    const std::deque<Section>& getSections() const;
-    std::pair<typename std::deque<Section>::const_iterator, typename std::deque<Section>::const_iterator>
+    const std::vector<Section>& getSections() const;
+    std::pair<typename std::vector<Section>::const_iterator, typename std::vector<Section>::const_iterator>
     getSectionsInTimeRange(double begin, double end) const;
     const Line& getLineAt(int index) const;
     const Line& getLastLine() const;

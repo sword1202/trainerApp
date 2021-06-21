@@ -29,7 +29,7 @@ class SongCompletionViewModel : ObservableObject {
         let samples = projectController.getRecordingPreviewSamples(numberOfSamples: numberOfPreviewSamples).map {
             $0.floatValue
         }
-        return UiUtils.drawRecordingPreviewTrack(samples: samples)
+        return PreviewSamplesDraw.drawRecordingPreviewTrack(samples: samples)
     }
 
     func didTapTryAgain() {

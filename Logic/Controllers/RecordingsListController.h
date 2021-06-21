@@ -21,6 +21,7 @@ public:
     RecordingsListController(const char* recordingsPath);
     int getRecordingsCount() const;
     Recording getRecordingAt(int index) const;
+    std::vector<float> getSamplesForRecordingAt(int index, int samplesCount) const;
 };
 
 

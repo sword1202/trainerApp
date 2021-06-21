@@ -10,21 +10,17 @@ public class RecordingInfo: NSObject {
     public let filePath: String
     public let songTitle: String
     public let originalArtistName: String
-    // array of floats
-    public let previewSamples: NSArray
 
     @objc public init(
         date: TimeInterval,
         filePath: String,
         songTitle: String,
-        originalArtistName: String,
-        previewSamples: NSArray
+        originalArtistName: String
     ) {
         self.date = date
         self.filePath = filePath
         self.songTitle = songTitle
         self.originalArtistName = originalArtistName
-        self.previewSamples = previewSamples
         super.init()
     }
 }

@@ -6,12 +6,24 @@
 import Foundation
 
 class RecordingsViewModel : ObservableObject {
-    private let recordingsController = RecordingsListController(previewSamplesCount: 36)
-    @Published var recordings: [RecordingInfo] = []
+    private let recordingsController = RecordingsListController()
+    @Published private(set) var recordingsCount: Int
 
     init() {
-        recordings = (0..<recordingsController.recordingsCount()).map {
-            recordingsController.getRecording(at: $0)
+        recordingsCount = recordingsController.recordingsCount()
+    }
+
+    func getPreviewSamplesImage(at index: Int, width: CGFloat) -> UIImage {
+        let samplesCount = PreviewSamplesDraw.calculateSamplesCount(width: width)
+        let samples = recordingsController.getPreviewSamples(recordingIndex: index, samplesCount: samplesCount).map {
+            $0.floatValue
         }
+        return PreviewSamplesDraw.drawRecordingPreviewTrack(
+                samples: samples,
+                color: Colors.recordingBackgroundTrack.cgColor)
+    }
+
+    func getRecording(at index: Int) -> RecordingInfo {
+        return recordingsController.getRecording(at: index)
     }
 }

@@ -6,6 +6,7 @@
 #include "RecordingsListController.h"
 #include "FileUtils.h"
 #include "Algorithms.h"
+#include "AudioUtils.h"
 
 using namespace CppUtils;
 
@@ -36,4 +37,12 @@ int RecordingsListController::getRecordingsCount() const {
 
 Recording RecordingsListController::getRecordingAt(int index) const {
     return recordings.at(static_cast<size_t>(index));
+}
+
+std::vector<float> RecordingsListController::getSamplesForRecordingAt(int index, int samplesCount) const {
+    const std::vector<short> &samples = getRecordingAt(index).header.recordingPreviewSamples;
+    return AudioUtils::ResizePreviewSamplesIntoFloatSamples(
+            samples.data(),
+            static_cast<int>(samples.size()),
+            samplesCount);
 }

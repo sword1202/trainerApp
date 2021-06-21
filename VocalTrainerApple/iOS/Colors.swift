@@ -15,6 +15,7 @@ struct Colors {
     static let tone6 = Color(hex: 0x5452AD, alpha: 1.0)
     static let tone7 = Color(hex: 0xAEAEB3, alpha: 1.0)
     static let recordingTrack = Color(hex: 0xC4C4C4, alpha: 1.0)
+    static let recordingBackgroundTrack = Color(hex: 0xC7C7C7, alpha: 0.2)
     static let fadedButton = Color(hex: 0xF5F5F5, alpha: 1.0)
     static let alternativeButton = Color(hex: 0x2D2D2D, alpha: 1.0)
     static let warningColor = Color(hex: 0xEA3D3D, alpha: 1.0)

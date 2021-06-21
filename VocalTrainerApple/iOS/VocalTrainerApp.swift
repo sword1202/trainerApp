@@ -13,8 +13,8 @@ import AVFoundation
 class RecordingsListController : RecordingsListControllerBridge {
     static let recordingsPath = NSHomeDirectory() + "/Recordings/"
 
-    init(previewSamplesCount: Int) {
-        super.init(recordingsPath: RecordingsListController.recordingsPath, previewSamplesCount: previewSamplesCount)
+    override init() {
+        super.init(recordingsPath: RecordingsListController.recordingsPath)
     }
 }
 
