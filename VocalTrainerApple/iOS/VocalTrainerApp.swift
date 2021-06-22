@@ -11,10 +11,13 @@ import Combine
 import AVFoundation
 
 class RecordingsListController : RecordingsListControllerBridge {
-    static let recordingsPath = NSHomeDirectory() + "/Recordings/"
+    static func recordingsPath() -> String {
+        let documentsDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        return documentsDirectory + "/Recordings/"
+    }
 
     override init() {
-        super.init(recordingsPath: RecordingsListController.recordingsPath)
+        super.init(recordingsPath: RecordingsListController.recordingsPath())
     }
 }
 
@@ -22,7 +25,7 @@ class ProjectController : ProjectControllerBridge {
     static let shared = ProjectController()
 
     override init() {
-        super.init(recordingsPath: RecordingsListController.recordingsPath)
+        super.init(recordingsPath: RecordingsListController.recordingsPath())
     }
 }
 

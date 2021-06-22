@@ -77,6 +77,10 @@ void VocalTrainerFilePlayer::setSourceInternal(VocalTrainerFile *file, bool dest
     mainPlayer->onPlaybackStartedListeners.clear();
     mainPlayer->seekChangedListeners.addListener([=](double seek, double) {
         Executors::ExecuteOnMainThread([=] {
+            if (players.empty()) {
+                return;
+            }
+
             if (bounds) {
                 if (seek >= bounds.getEndSeek()) {
                     // avoid multiple onComplete calls
