@@ -21,6 +21,7 @@ struct TonalityDialog : View {
                         topText: $viewModel.shiftString,
                         middleText: $viewModel.tonality,
                         bottomText: $viewModel.originalTonalityLabel,
+                        changeAllowed: viewModel.isTonalityChangeAllowed(),
                         plus: {
                             viewModel.shift += 1
                         },

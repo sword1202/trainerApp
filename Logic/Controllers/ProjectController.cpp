@@ -292,6 +292,10 @@ bool ProjectController::isPlaying() const {
     return player->isPlaying();
 }
 
+bool ProjectController::isRecording() const {
+    return player->isRecording();
+}
+
 void ProjectController::toggleRewind(bool backward) {
     bool isCurrentRewindBackward;
     if (rewinder->isRewindRunning(&isCurrentRewindBackward)) {

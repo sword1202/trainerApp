@@ -21,6 +21,7 @@ struct TempoDialog : View {
                         topText: $viewModel.bpmLabel,
                         middleText: $viewModel.factorString,
                         bottomText: $viewModel.originalBpm,
+                        changeAllowed: viewModel.isTempoChangeAllowed(),
                         plus: {
                             viewModel.incrementFactor()
                         },
@@ -28,11 +29,13 @@ struct TempoDialog : View {
                             viewModel.decrementFactor()
                         }
                 )
-                Text(Strings.tempoChangeWarning.localized)
-                        .foregroundColor(Colors.warningColor)
-                        .multilineTextAlignment(.center)
-                        .font(Font.system(size: 13, weight: .semibold))
-                        .padding(.top, 22)
+                if viewModel.isTempoChangeAllowed() {
+                    Text(Strings.tempoChangeWarning.localized)
+                            .foregroundColor(Colors.warningColor)
+                            .multilineTextAlignment(.center)
+                            .font(Font.system(size: 13, weight: .semibold))
+                            .padding(.top, 22)
+                }
             }.frame(maxWidth: .infinity, maxHeight: 244).background(Color.white)
         }
     }

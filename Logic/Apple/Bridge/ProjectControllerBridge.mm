@@ -425,6 +425,10 @@ static LyricsSectionType fromCppToObjCSectionType(Lyrics::SectionType type) {
     return _cpp->isPlaying();
 }
 
+- (bool)isRecording {
+    return _cpp->isRecording();
+}
+
 - (void)goToBeginning {
     _cpp->goToBeginning();
 }

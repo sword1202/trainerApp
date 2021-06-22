@@ -9,6 +9,7 @@ struct PlusMinusDialogPanel : View {
     @Binding var topText: String
     @Binding var middleText: String
     @Binding var bottomText: String
+    let changeAllowed: Bool
     let plus: () -> Void
     let minus: () -> Void
 
@@ -19,12 +20,16 @@ struct PlusMinusDialogPanel : View {
                     .padding(.bottom, 12)
                     .font(Font.system(size: 26, weight: .semibold))
             HStack(spacing: 22) {
-                CircleButton(icon: "minus").onTapGesture(perform: minus)
+                if changeAllowed {
+                    CircleButton(icon: "minus").onTapGesture(perform: minus)
+                }
                 Text(middleText)
                         .foregroundColor(Colors.tone5)
                         .font(Font.system(size: 50, weight: .semibold))
                         .frame(width: 164)
-                CircleButton(icon: "plus").onTapGesture(perform: plus)
+                if changeAllowed {
+                    CircleButton(icon: "plus").onTapGesture(perform: plus)
+                }
             }
             Text(bottomText)
                     .foregroundColor(Colors.tone5)

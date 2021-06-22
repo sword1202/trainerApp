@@ -78,6 +78,7 @@ public:
     void togglePlay();
     void stop();
     bool isPlaying() const;
+    bool isRecording() const;
     void toggleRewind(bool backward);
 
     void rewindBackBySeconds(double seconds);

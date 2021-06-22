@@ -106,6 +106,10 @@ class ProjectViewModel : ObservableObject {
             projectController.clearPlaybackBounds()
         }
     }
+
+    func isRecording() -> Bool {
+        projectController.isRecording
+    }
 }
 
 extension ProjectViewModel : ProjectControllerBridgeDelegate {

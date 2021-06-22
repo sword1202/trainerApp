@@ -21,6 +21,10 @@ class TonalityViewModel : ObservableObject {
     @Published var originalTonalityLabel: String = ""
     @Published var tonality: String = ""
 
+    func isTonalityChangeAllowed() -> Bool {
+        !projectController.isRecording
+    }
+
     init() {
         if !SwiftUIUtils.isPreview() {
             let originalTonality = projectController.originalTonality.toString()

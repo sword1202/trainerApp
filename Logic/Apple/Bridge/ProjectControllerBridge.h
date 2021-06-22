@@ -31,6 +31,7 @@
 @property (nonatomic) bool metronomeEnabled;
 @property (readonly) bool boundsSelectionEnabled;
 @property (readonly) bool isPlaying;
+@property (readonly) bool isRecording;
 @property (readonly) NSArray<LyricsSection*>* lyricsSections;
 @property (readonly) SongTonality* originalTonality;
 @property (readonly) double beatsPerMinute;

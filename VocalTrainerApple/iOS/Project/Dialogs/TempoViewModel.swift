@@ -52,6 +52,10 @@ class TempoViewModel : ObservableObject {
         factor -= factorStep
     }
 
+    func isTempoChangeAllowed() -> Bool {
+        !projectController.isRecording
+    }
+
     init() {
         if !SwiftUIUtils.isPreview() {
             updateBpm()
