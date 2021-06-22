@@ -7,17 +7,58 @@ import SwiftUI
 
 struct RecordingView : View {
     private let recordingBackground: UIImage
+    private let title: String
+    private let artistName: String
+    private let date: String
+    private let time: String
 
-    init(recordingBackground: UIImage) {
+    init(recordingBackground: UIImage, title: String, artistName: String, date: Date) {
         self.recordingBackground = recordingBackground
+        self.title = title
+        self.artistName = artistName
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMM yyy"
+        self.date = formatter.string(from: date)
+        formatter.dateFormat = "HH:mm"
+        time = formatter.string(from: date)
     }
 
     var body: some View {
-        HStack {
-            Spacer()
-            Image(uiImage: recordingBackground)
-            Spacer()
-        }.frame(alignment: .center)
+        VStack(spacing: 0) {
+            ZStack {
+                HStack {
+                    Spacer()
+                    Image(uiImage: recordingBackground)
+                    Spacer()
+                }.frame(alignment: .center).frame(maxHeight: .infinity)
+                HStack {
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text(title)
+                                .foregroundColor(Colors.tone5)
+                                .font(Font.system(size: 18, weight: .medium))
+                        Spacer()
+                        Text(artistName)
+                                .foregroundColor(Colors.secondaryTextColor)
+                                .font(Font.system(size: 18, weight: .medium))
+                    }.frame(maxHeight: .infinity)
+                    Spacer()
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text(date)
+                                .foregroundColor(Colors.secondaryTextColor)
+                                .font(Font.system(size: 18, weight: .medium))
+                        Spacer()
+                        Text(time)
+                                .foregroundColor(Colors.secondaryTextColor)
+                                .font(Font.system(size: 18, weight: .medium))
+                    }.frame(maxHeight: .infinity)
+                }.frame(maxWidth: .infinity)
+                        .padding(.leading, 16)
+                        .padding(.trailing, 16)
+                        .padding(.top, 22)
+                        .padding(.bottom, 22)
+            }
+            Divider()
+        }
     }
 }
 
@@ -33,7 +74,7 @@ struct RecordingsView : View {
             }.edgesIgnoringSafeArea(.bottom).edgesIgnoringSafeArea(.top)
 
             // Main content
-            VStack {
+            VStack(spacing: 0) {
                 HStack {
                     Text(Strings.recordings.localized)
                             .font(Font.system(size: 34))
@@ -46,14 +87,24 @@ struct RecordingsView : View {
                 }.frame(height: 72, alignment: .center).background(Colors.tone2)
 
                 if (viewModel.recordingsCount > 0) {
-                    LazyVStack {
-                        ForEach(0..<viewModel.recordingsCount) { index in
-                            NavigationLink(
-                                    destination: ProjectView(filePath: viewModel.getRecording(at: index).filePath)
-                                            .navigationBarHidden(true)
-                            ) {
-                                RecordingView(recordingBackground: viewModel.getPreviewSamplesImage(
-                                        at: index, width: geom.size.width - 32))
+                    ScrollView {
+                        LazyVStack(spacing: 0) {
+                            ForEach(0..<viewModel.recordingsCount) { index in
+                                let recording = viewModel.getRecording(at: index)
+                                NavigationLink(
+                                        destination: ProjectView(filePath: recording.filePath)
+                                                .navigationBarHidden(true)
+                                ) {
+                                    RecordingView(
+                                            recordingBackground: viewModel.getPreviewSamplesImage(
+                                                    at: index, width: geom.size.width - 30),
+                                            title: recording.songTitle,
+                                            artistName: recording.originalArtistName,
+                                            date: Date(timeIntervalSince1970: recording.date)
+                                    ).frame(minHeight: 100).frame(maxWidth: .infinity).onDelete {
+                                        viewModel.deleteRecording(at: index)
+                                    }
+                                }
                             }
                         }
                     }

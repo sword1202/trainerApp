@@ -32,9 +32,9 @@ using namespace CppUtils;
     const Recording& recording = _cpp->getRecordingAt(static_cast<int>(index));
     return [[RecordingInfo alloc]
             initWithDate:recording.date / 1000000.0
-                filePath:Strings::ToNSString(recording.filePath)
-               songTitle:Strings::ToNSString(recording.header.songTitleUtf8)
-      originalArtistName:Strings::ToNSString(recording.header.artistNameUtf8)];
+                filePath:Strings::Utf8ToNSString(recording.filePath)
+               songTitle:Strings::Utf8ToNSString(recording.header.songTitleUtf8)
+      originalArtistName:Strings::Utf8ToNSString(recording.header.artistNameUtf8)];
 }
 
 - (NSArray<NSNumber *> *)getPreviewSamplesForRecordingAt:(NSInteger)index samplesCount:(NSInteger)samplesCount {
@@ -42,6 +42,11 @@ using namespace CppUtils;
             static_cast<int>(index), static_cast<int>(samplesCount));
     return Collections::ToPrimitivesNSArray(samples);
 }
+
+- (void)deleteRecordingAt:(NSInteger)index {
+    _cpp->deleteRecording(static_cast<int>(index));
+}
+
 
 - (void)dealloc {
     delete _cpp;

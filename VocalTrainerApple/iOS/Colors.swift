@@ -19,7 +19,8 @@ struct Colors {
     static let fadedButton = Color(hex: 0xF5F5F5, alpha: 1.0)
     static let alternativeButton = Color(hex: 0x2D2D2D, alpha: 1.0)
     static let warningColor = Color(hex: 0xEA3D3D, alpha: 1.0)
-    static let header = Color(hex: 0xF9F9F9, alpha: 0.94)
+    static let headerBackground = Color(hex: 0xF9F9F9, alpha: 0.94)
     static let buttonTone1 = Color(hex: 0x767680, alpha: 0.12)
-    static let divider = Color(hex: 0x3C3C43, alpha: 0.29)
+    static let divider = Color(hex: 0xEFEFEF, alpha: 1.0)
+    static let secondaryTextColor = Color(hex: 0x767676, alpha: 1.0)
 }

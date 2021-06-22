@@ -5,17 +5,17 @@
 
 import UIKit
 
-private let sampleWidth: CGFloat = 3
-private let distanceBetweenSamples: CGFloat = 3
 private let sampleMaxHeight: CGFloat = 72
-private let sampleMinHeight: CGFloat = 8
+private let sampleMinHeight: CGFloat = 24
 
 struct PreviewSamplesDraw {
-    static func calculateSamplesCount(width: CGFloat) -> Int {
-        Int(floor((width + distanceBetweenSamples) / (sampleWidth + distanceBetweenSamples)))
+    static func calculateSamplesCount(width: CGFloat, sampleWidth: CGFloat) -> Int {
+        Int(floor((width + sampleWidth) / (sampleWidth + sampleWidth)))
     }
 
-    static func drawRecordingPreviewTrack(samples: [Float], color: CGColor? = Colors.recordingTrack.cgColor) -> UIImage {
+    static func drawRecordingPreviewTrack(samples: [Float],
+                                          sampleWidth: CGFloat,
+                                          color: CGColor? = Colors.recordingTrack.cgColor) -> UIImage {
         guard var max = samples.max() else {
             return UIImage()
         }
@@ -29,7 +29,7 @@ struct PreviewSamplesDraw {
         }
 
         let size = CGSize(
-                width: CGFloat(samples.count) * sampleWidth + CGFloat(samples.count - 1) * distanceBetweenSamples,
+                width: CGFloat(samples.count) * sampleWidth + CGFloat(samples.count - 1) * sampleWidth,
                 height: heights.max() ?? sampleMaxHeight
         )
 
@@ -41,7 +41,7 @@ struct PreviewSamplesDraw {
                 ctx.fill(
                         roundedRect: CGRect(x: x, y: y, width: sampleWidth, height: height),
                         cornerRadius: sampleWidth / 2.0)
-                x += sampleWidth + distanceBetweenSamples
+                x += sampleWidth + sampleWidth
             }
         }
     }

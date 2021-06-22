@@ -11,4 +11,5 @@
 - (NSInteger)recordingsCount;
 - (RecordingInfo*)getRecording:(NSInteger)index NS_SWIFT_NAME(getRecording(at:));
 - (NSArray<NSNumber*>*)getPreviewSamplesForRecordingAt:(NSInteger)index samplesCount:(NSInteger)samplesCount NS_SWIFT_NAME(getPreviewSamples(recordingIndex:samplesCount:));
+- (void)deleteRecordingAt:(NSInteger)index;
 @end

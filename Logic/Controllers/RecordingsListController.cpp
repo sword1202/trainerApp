@@ -6,6 +6,7 @@
 #include "RecordingsListController.h"
 #include "FileUtils.h"
 #include "Algorithms.h"
+#include "Executors.h"
 #include "AudioUtils.h"
 
 using namespace CppUtils;
@@ -45,4 +46,13 @@ std::vector<float> RecordingsListController::getSamplesForRecordingAt(int index,
             samples.data(),
             static_cast<int>(samples.size()),
             samplesCount);
+}
+
+void RecordingsListController::deleteRecording(int index) {
+    assert(index >= 0 && index < recordings.size());
+    const std::string& filePath = recordings[index].filePath;
+    Executors::ExecuteOnBackgroundThread([=] {
+        std::filesystem::remove(filePath);
+    });
+    recordings.erase(recordings.cbegin() + index);
 }

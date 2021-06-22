@@ -7,6 +7,7 @@ import CoreGraphics
 
 extension CGFloat {
     func cutToMatchClosedRange(min: CGFloat, max: CGFloat) -> CGFloat {
+        assert(min <= max)
         if self < min {
             return min
         }

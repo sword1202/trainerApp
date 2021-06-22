@@ -52,6 +52,7 @@
 		C9FFF0CEF4671CBC307E2771 /* PreviewSamplesDraw.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFDA890B96D4ABFC60D75 /* PreviewSamplesDraw.swift */; };
 		C9FFF1259D0CAC1732CA75B4 /* SwiftUIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8676254998A2E1557B2 /* SwiftUIUtils.swift */; };
 		C9FFF1A61CC78731ED6EF231 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF774A22E8B2F85EA6664 /* Array+Extensions.swift */; };
+		C9FFF1BD7D39A36AEEF8DB20 /* Deleter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8C15824B27E2727EC80 /* Deleter.swift */; };
 		C9FFF1CC35BFB853F799A067 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC52FFD52111E4F8EA1C /* CGPoint+Extensions.swift */; };
 		C9FFF21CCE66232D3BD5D0D5 /* SwiftUI+View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF4CBD38366784EA507D4 /* SwiftUI+View+Extensions.swift */; };
 		C9FFF2979636C30023334438 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF7DE831C9EFAE9A0AB40 /* Colors.swift */; };
@@ -215,6 +216,7 @@
 		C9FFF7DE831C9EFAE9A0AB40 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		C9FFF854128820437B780180 /* Sequence+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sequence+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF8676254998A2E1557B2 /* SwiftUIUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUIUtils.swift; sourceTree = "<group>"; };
+		C9FFF8C15824B27E2727EC80 /* Deleter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deleter.swift; sourceTree = "<group>"; };
 		C9FFF8E1CBCE3FB107681D8E /* SongCompletionDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongCompletionDialog.swift; sourceTree = "<group>"; };
 		C9FFF8FE42466B28CAAB81B9 /* BaseWorkspaceDrawerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BaseWorkspaceDrawerView.mm; sourceTree = "<group>"; };
 		C9FFF95DC554BB3ACFBAB693 /* PlusMinusDialogPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlusMinusDialogPanel.swift; sourceTree = "<group>"; };
@@ -571,6 +573,7 @@
 				C9FFF134111E663C22048469 /* CheckBox.swift */,
 				C9FFF18E9C15E6FAF0C18086 /* BigButton.swift */,
 				C9FFFDA890B96D4ABFC60D75 /* PreviewSamplesDraw.swift */,
+				C9FFF8C15824B27E2727EC80 /* Deleter.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -905,6 +908,7 @@
 				C9FFF2DAD64479280275D7A8 /* RecordingsView.swift in Sources */,
 				C9FFF4CAD303AC3E1EDEDEF4 /* RecordingsViewModel.swift in Sources */,
 				C9FFFF50CFC92D19307766ED /* View+Navigation.swift in Sources */,
+				C9FFF1BD7D39A36AEEF8DB20 /* Deleter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
