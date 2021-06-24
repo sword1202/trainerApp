@@ -8,10 +8,11 @@
 
 #include "PitchRenderer.h"
 #include "liquidsfz.hh"
+#include <atomic>
 
 class SfzPitchRenderer : public PitchRenderer {
     static LiquidSFZ::Synth* sfz;
-    static bool isSfzLocked;
+    static std::atomic_bool isSfzLocked;
     constexpr static int NUMBER_OF_OUTPUTS = 2;
     int numberOfChannels = -1;
     float* outputs[NUMBER_OF_OUTPUTS];

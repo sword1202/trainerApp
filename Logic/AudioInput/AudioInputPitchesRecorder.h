@@ -12,10 +12,11 @@
 #include "PitchesCollection.h"
 #include "SeekablePitchesList.h"
 #include "ListenersSet.h"
+#include "Executors.h"
 #include <functional>
 #include <mutex>
 
-class AudioInputPitchesRecorder {
+class AudioInputPitchesRecorder : private CppUtils::OnThreadExecutor {
     PitchInputReader* pitchInputReader = nullptr;
     SeekablePitchesList pitches;
 public:

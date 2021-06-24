@@ -62,8 +62,10 @@ ProjectController::ProjectController(ProjectControllerDelegate* delegate) : dele
         if (!player->isCompleted()) {
             audioInputManager->setPitchesRecorderSeek(seek);
         }
-        Executors::ExecuteOnMainThread([=] {
-            this->delegate->updateSeek(seek);
+        executeOnMainThread([=] {
+            if (player->hasSource()) {
+                this->delegate->updateSeek(seek);
+            }
         });
     }, this);
 
@@ -497,15 +499,11 @@ ProjectController::~ProjectController() {
 }
 
 void ProjectController::setPlaybackSource(VocalTrainerFile *source) {
-    if (this->source) {
-        auto* lastSource = this->source;
-        player->onSourceChanged.addOneShotListener([=] {
-            delete lastSource;
-        });
-    }
+    auto* lastSource = this->source;
     this->source = source;
     player->setSource(source, /*destroyFileOnDestructor =*/ false);
     player->prepare();
+    delete lastSource;
 }
 
 void ProjectController::handlePlaybackSourceChange() {

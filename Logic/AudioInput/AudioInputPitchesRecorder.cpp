@@ -36,7 +36,7 @@ AudioInputPitchesRecorder::~AudioInputPitchesRecorder() {
 }
 
 void AudioInputPitchesRecorder::pitchDetected(float frequency, double time) {
-    Executors::ExecuteOnMainThread([=] {
+    executeOnMainThread([=] {
         pitchDetectedListeners.executeAll(Pitch(frequency), time);
     });
 }

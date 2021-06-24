@@ -63,7 +63,6 @@ void SfzPitchRenderer::render(int16_t *outBuffer, int framesCount) {
 }
 
 LiquidSFZ::Synth* SfzPitchRenderer::sfz = nullptr;
-bool SfzPitchRenderer::isSfzLocked = false;
 
 void SfzPitchRenderer::initSfz(const std::string &sfzFilePath) {
     assert(!sfz && "sfz has been already initialized");
@@ -77,3 +76,5 @@ SfzPitchRenderer::~SfzPitchRenderer() {
         delete[] outputs[i];
     }
 }
+
+std::atomic_bool SfzPitchRenderer::isSfzLocked = false;

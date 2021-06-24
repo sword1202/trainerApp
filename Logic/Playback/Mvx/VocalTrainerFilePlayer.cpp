@@ -30,9 +30,8 @@ VocalTrainerFilePlayer::VocalTrainerFilePlayer() : metronomeEnabled(false) {
 }
 
 void VocalTrainerFilePlayer::setSource(VocalTrainerFile *file, bool destroyFileOnDestructor) {
-    clearSource([=] {
-        this->setSourceInternal(file, destroyFileOnDestructor);
-    });
+    clearSource();
+    setSourceInternal(file, destroyFileOnDestructor);
 }
 
 void VocalTrainerFilePlayer::setSourceInternal(VocalTrainerFile *file, bool destroyFileOnDestructor) {
@@ -76,7 +75,7 @@ void VocalTrainerFilePlayer::setSourceInternal(VocalTrainerFile *file, bool dest
     mainPlayer->onCompleteListeners.clear();
     mainPlayer->onPlaybackStartedListeners.clear();
     mainPlayer->seekChangedListeners.addListener([=](double seek, double) {
-        Executors::ExecuteOnMainThread([=] {
+        executeOnMainThread([=] {
             if (players.empty()) {
                 return;
             }
@@ -153,9 +152,9 @@ void VocalTrainerFilePlayer::onComplete() {
 }
 
 void VocalTrainerFilePlayer::pausePlayer(BaseAudioPlayer *player) {
-    Executors::ExecuteOnBackgroundThread([=] {
+    executeOnBackgroundThread([=] {
         player->pause();
-        Executors::ExecuteOnMainThread([=] {
+        executeOnMainThread([=] {
             if (--pauseRequestedCounter == 0) {
                 onPlaybackStopped();
             }
@@ -515,31 +514,17 @@ void VocalTrainerFilePlayer::setDestroyFileOnDestructor(bool destroyFileOnDestru
     this->destroyFileOnDestructor = destroyFileOnDestructor;
 }
 
-void VocalTrainerFilePlayer::clearSource(const std::function<void()>& onFinish) {
-    VocalTrainerFile* file = this->file;
-    bool destroyFileOnDestructor = this->destroyFileOnDestructor;
-    this->file = nullptr;
-    if (isPlaying()) {
-        isPlayingChangedListeners.addListenerWithAction([=](bool playing) {
-            if (!playing) {
-                if (destroyFileOnDestructor) {
-                    delete file;
-                }
-                if (onFinish) {
-                    onFinish();
-                }
-                return DELETE_LISTENER;
-            } else {
-                return DONT_DELETE_LISTENER;
-            }
-        });
-        stopAndMoveSeekToBeginning();
-    } else {
-        if (destroyFileOnDestructor) {
-            delete file;
-        }
-        if (onFinish) {
-            onFinish();
-        }
+void VocalTrainerFilePlayer::clearSource() {
+    cancelAllOperations();
+    instrumentalPlayer.reset();
+    vocalPartPianoPlayer.reset();
+    recordingPlayer.reset();
+    if (destroyFileOnDestructor) {
+        delete file;
     }
+    file = nullptr;
+}
+
+bool VocalTrainerFilePlayer::hasSource() const {
+    return !players.empty();
 }

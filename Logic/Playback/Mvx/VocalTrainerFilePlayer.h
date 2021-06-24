@@ -28,8 +28,9 @@
 #include "VocalTrainerFile.h"
 #include "LyricsDisplayedLinesProvider.h"
 #include "LyricsPlayer.h"
+#include "Executors.h"
 
-class VocalTrainerFilePlayer : public PlayingPitchSequence, public Rewindable, public BeatsPerMinuteProvider {
+class VocalTrainerFilePlayer : public PlayingPitchSequence, public Rewindable, public BeatsPerMinuteProvider, private CppUtils::OnThreadExecutor {
 private:
 
     AudioFilePlayer instrumentalPlayer;
@@ -84,7 +85,7 @@ public:
     void setSource(std::istream &is);
     void setSource(const char *filePath);
     void setSource(VocalTrainerFile *file, bool destroyFileOnDestructor = true);
-    void clearSource(const std::function<void()>& onFinish = 0);
+    void clearSource();
     void prepare();
     virtual void setInstrumentalVolume(float instrumentalVolume);
     virtual void setVocalPartPianoVolume(float pianoVolume);
@@ -98,6 +99,7 @@ public:
     virtual int getPitchShiftInSemiTones() const;
     virtual void setPitchShiftInSemiTones(int value);
     bool isPlaying() const;
+    bool hasSource() const;
     void setSeek(double value) override;
     double getSeek() const override;
     virtual void seekToNextTact();

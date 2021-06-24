@@ -76,7 +76,7 @@ void AudioInputManager::stopPitchDetection() {
 
 void AudioInputManager::addAudioInputLevelMonitor(const std::function<void(double)> &callback, CppUtils::AbstractDestructorQueue* parent) {
     addAudioInputReaderCallback(AudioAverageInputLevelMonitor([=] (double value) {
-        Executors::ExecuteOnMainThread([=] {
+        executeOnMainThread([=] {
             callback(value);
         });
     }), parent);

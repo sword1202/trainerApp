@@ -41,7 +41,8 @@ public:
     }
 };
 
-class ProjectController : CppUtils::DestructorQueue, public WorkspaceControllerDelegate, private SongCompletionFlow {
+class ProjectController : CppUtils::DestructorQueue, public WorkspaceControllerDelegate, private SongCompletionFlow,
+                          private CppUtils::OnThreadExecutor {
     WorkspaceController* workspaceController = nullptr;
     ProjectControllerDelegate* delegate = nullptr;
     VocalTrainerFilePlayer* player;

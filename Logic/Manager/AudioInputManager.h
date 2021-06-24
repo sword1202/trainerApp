@@ -10,8 +10,9 @@
 #include "AudioInputRecorder.h"
 #include "DestructorQueue.h"
 #include "AudioDataBuffer.h"
+#include "Executors.h"
 
-class AudioInputManager {
+class AudioInputManager : private CppUtils::OnThreadExecutor {
     AudioInputReaderWithOutput* audioInputReader = nullptr;
     AudioInputRecorder* audioRecorder = nullptr;
     AudioInputPitchesRecorder* pitchesRecorder;

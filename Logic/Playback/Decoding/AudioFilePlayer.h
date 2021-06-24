@@ -16,13 +16,10 @@ public:
     AudioFilePlayer();
     void setAudioData(AudioDataBufferConstPtr audioData);
     const AudioDataBuffer* getAudioData() const;
+    void reset() override;
 protected:
     int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData &playbackData) override;
     void providePlaybackData(PlaybackData *playbackData) override;
-
-protected:
-    void destroy() override;
-
 private:
     AudioDecoder* audioDecoder = nullptr;
     AudioDataBufferConstPtr audioData;

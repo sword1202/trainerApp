@@ -170,13 +170,15 @@ struct ProjectView: View {
                                 .padding(.top, 14)
                         Spacer().frame(maxWidth: .infinity)
                         HStack {
-                            Button(action: {
-                                viewModel.didTapRetry()
-                            }) {
-                                ZStack {
-                                    Image("RetryButton")
-                                    Text(viewModel.retrySeconds.description).font(Font.system(size: 10, weight: .bold))
-                                            .foregroundColor(Colors.tone3).offset(y: 2)
+                            if !viewModel.isRecording() {
+                                Button(action: {
+                                    viewModel.didTapRetry()
+                                }) {
+                                    ZStack {
+                                        Image("RetryButton")
+                                        Text(viewModel.retrySeconds.description).font(Font.system(size: 10, weight: .bold))
+                                                .foregroundColor(Colors.tone3).offset(y: 2)
+                                    }
                                 }
                             }
                             Button(action: {
@@ -184,16 +186,18 @@ struct ProjectView: View {
                             }) {
                                 Image(viewModel.isPlaying ? "PauseButton" : "PlayButton")
                             }.padding(.leading, 50).padding(.trailing, 50)
-                            Button(action: {
-                                var showDialog = false
-                                viewModel.didTapBoundsSelection(showBoundsSelectionDialog: &showDialog)
-                                if showDialog {
-                                    withAnimation {
-                                        boundsSelectionDialogVisible = true
+                            if !viewModel.isRecording() {
+                                Button(action: {
+                                    var showDialog = false
+                                    viewModel.didTapBoundsSelection(showBoundsSelectionDialog: &showDialog)
+                                    if showDialog {
+                                        withAnimation {
+                                            boundsSelectionDialogVisible = true
+                                        }
                                     }
+                                }) {
+                                    Image("SelectBoundsButton")
                                 }
-                            }) {
-                                Image("SelectBoundsButton")
                             }
                         }.padding(.bottom, 0)
                     }.background(Colors.tone1).frame(maxWidth: .infinity,

@@ -46,13 +46,13 @@ AudioFilePlayer::AudioFilePlayer() {
 }
 
 void AudioFilePlayer::setAudioData(AudioDataBufferConstPtr audioData) {
-    destroy();
+    reset();
     this->audioData = audioData;
     setBufferSeek(0);
 }
 
-void AudioFilePlayer::destroy() {
-    BaseAudioPlayer::destroy();
+void AudioFilePlayer::reset() {
+    BaseAudioPlayer::reset();
     delete audioDecoder;
     audioDecoder = nullptr;
 }

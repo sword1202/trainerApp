@@ -11,8 +11,9 @@
 #include "PlaybackData.h"
 #include "AudioOutputWriter.h"
 #include <SoundTouch/SoundTouch.h>
+#include "Executors.h"
 
-class BaseAudioPlayer {
+class BaseAudioPlayer : protected CppUtils::OnThreadExecutor {
     AudioOutputWriter* writer = nullptr;
     PlaybackData playbackData;
     std::atomic_bool playing;
@@ -50,8 +51,6 @@ protected:
 
     int getSampleSize() const;
 
-    virtual void destroy();
-
     // Used for players, where totalDurationInSeconds can be changed after prepare
     void setTotalDurationInSeconds(double totalDurationInSeconds);
 
@@ -68,7 +67,6 @@ public:
 
     BaseAudioPlayer();
     virtual void prepare();
-    virtual void prepareAsync(const std::function<void()>& callback);
     virtual void play(double seek);
     virtual void play();
     virtual bool isPlaying() const;
@@ -100,6 +98,7 @@ public:
 
     virtual const std::string &getPlayerName() const;
 
+    virtual void reset();
     virtual ~BaseAudioPlayer();
 };
 

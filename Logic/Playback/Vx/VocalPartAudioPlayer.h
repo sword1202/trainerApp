@@ -24,19 +24,14 @@ protected:
 
     void onTonalityChanged(int pitchShift) override;
     void onTempoFactorChanged(double value, double oldValue) override;
-
-    void destroy() override;
-
 private:
     void setBufferSeek(int samplesCountSeek) override;
 
 public:
     VocalPartAudioPlayer();
-    virtual ~VocalPartAudioPlayer();
-
     bool isPitchShiftingAvailable(int distance) const;
+    void reset() override;
 
-public:
     const VocalPart& getVocalPart() const;
     void setVocalPart(const VocalPart &vocalPart);
 };

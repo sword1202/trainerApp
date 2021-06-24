@@ -18,7 +18,7 @@ void BaseAudioPlayer::writerCallback(void* outputBuffer, int samplesPerBuffer) {
 
     // no data available, return silence and wait
     if (samplesCopiedToOutputBufferCount < 0) {
-        Executors::ExecuteOnMainThread([=] {
+        executeOnMainThread([=] {
             onNoDataAvailableListeners.executeAll();
         });
         return;
@@ -103,13 +103,6 @@ void BaseAudioPlayer::play() {
     play(getSeek());
 }
 
-void BaseAudioPlayer::prepareAsync(const std::function<void()>& callback) {
-    Executors::ExecuteOnBackgroundThread([=] {
-        prepare();
-        Executors::ExecuteOnMainThread(callback);
-    });
-}
-
 void BaseAudioPlayer::prepare() {
     assert(!isPrepared());
     providePlaybackData(&playbackData);
@@ -158,16 +151,19 @@ bool BaseAudioPlayer::isPlaying() const {
 }
 
 BaseAudioPlayer::~BaseAudioPlayer() {
-    destroy();
+    reset();
     delete soundTouch;
     soundTouch = nullptr;
 }
 
-void BaseAudioPlayer::destroy() {
+void BaseAudioPlayer::reset() {
+    return;
     playing = false;
     playbackData = PlaybackData();
     delete writer;
     writer = nullptr;
+
+    cancelAllOperations();
 }
 
 void BaseAudioPlayer::pause() {
@@ -179,7 +175,7 @@ void BaseAudioPlayer::pause() {
     playing = false;
     writer->stop();
     onDataSentToOutputListeners.removeListener(dataSentToOutputListenerKey);
-    Executors::ExecuteOnMainThread([this] {
+    executeOnMainThread([this] {
         this->onPlaybackStoppedListeners.executeAll();
     });
 }
@@ -228,7 +224,7 @@ void BaseAudioPlayer::onComplete() {
     playing = false;
     completed = true;
 
-    Executors::ExecuteOnMainThread([=] {
+    executeOnMainThread([=] {
         onPlaybackStoppedListeners.executeAll();
         onCompleteListeners.executeAll();
     });
@@ -272,7 +268,7 @@ const PlaybackData &BaseAudioPlayer::getPlaybackData() const {
 void BaseAudioPlayer::setupPlaybackStartedListener() {
     assert(dataSentToOutputListenerKey == 0);
     dataSentToOutputListenerKey = onDataSentToOutputListeners.addOneShotListener([=] (void*, int) {
-        Executors::ExecuteOnMainThread([this] {
+        executeOnMainThread([this] {
             playing = true;
             onPlaybackStartedListeners.executeAll();
             dataSentToOutputListenerKey = 0;

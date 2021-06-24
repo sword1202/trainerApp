@@ -64,10 +64,10 @@ class ProjectViewModel : ObservableObject {
         timeFormatter.dateFormat = "m:ss"
         updatePlaybackEndTime()
 
-        audioEngine.connect(
-                audioEngine.inputNode,
-                to: audioEngine.outputNode,
-                format: audioEngine.inputNode.inputFormat(forBus: 0))
+//        audioEngine.connect(
+//                audioEngine.inputNode,
+//                to: audioEngine.outputNode,
+//                format: audioEngine.inputNode.inputFormat(forBus: 0))
     }
 
     private func updatePlaybackSections() {
@@ -149,12 +149,12 @@ extension ProjectViewModel : ProjectControllerBridgeDelegate {
     }
 
     func projectControllerPlaybackDidStart() {
-        try! audioEngine.start()
+        //try! audioEngine.start()
         isPlaying = true
     }
 
     func projectControllerPlaybackDidStop() {
-        audioEngine.stop()
+        //audioEngine.stop()
         isPlaying = false
     }
 

@@ -16,6 +16,7 @@ int VocalPartAudioPlayer::readNextSamplesBatch(void *intoBuffer, int framesCount
 }
 
 void VocalPartAudioPlayer::providePlaybackData(PlaybackData *playbackData) {
+    assert(generator && "prepare should be called after setVocalPart");
     playbackData->samplesPerBuffer = SAMPLES_PER_BUFFER;
     playbackData->numberOfChannels = NUMBER_OF_CHANNELS;
     playbackData->sampleRate = 44100;
@@ -28,7 +29,6 @@ void VocalPartAudioPlayer::providePlaybackData(PlaybackData *playbackData) {
 
 VocalPartAudioPlayer::VocalPartAudioPlayer() {
     setPlayerName("VocalPartAudioPlayer");
-    generator = new VocalPartAudioDataGenerator(new SfzPitchRenderer());
 }
 
 int VocalPartAudioPlayer::getBufferSeek() const {
@@ -38,10 +38,6 @@ int VocalPartAudioPlayer::getBufferSeek() const {
 void VocalPartAudioPlayer::setBufferSeek(int samplesCountSeek) {
     generator->setSeek(samplesCountSeek);
     BaseAudioPlayer::setBufferSeek(samplesCountSeek);
-}
-
-VocalPartAudioPlayer::~VocalPartAudioPlayer() {
-    delete generator;
 }
 
 void VocalPartAudioPlayer::onComplete() {
@@ -57,12 +53,11 @@ const VocalPart &VocalPartAudioPlayer::getVocalPart() const {
 }
 
 void VocalPartAudioPlayer::setVocalPart(const VocalPart &vocalPart) {
-    destroy();
+    reset();
     originalVocalPart = vocalPart;
-    if (generator) {
-        generator->setSeek(0);
-        generator->setVocalPart(vocalPart);
-    }
+    generator = new VocalPartAudioDataGenerator(new SfzPitchRenderer());
+    generator->setSeek(0);
+    generator->setVocalPart(vocalPart);
 }
 
 void VocalPartAudioPlayer::onTonalityChanged(int value) {
@@ -70,8 +65,10 @@ void VocalPartAudioPlayer::onTonalityChanged(int value) {
     generator->setVocalPart(vxFile);
 }
 
-void VocalPartAudioPlayer::destroy() {
-    BaseAudioPlayer::destroy();
+void VocalPartAudioPlayer::reset() {
+    BaseAudioPlayer::reset();
+    delete generator;
+    generator = nullptr;
 }
 
 void VocalPartAudioPlayer::onTempoFactorChanged(double value, double oldValue) {
