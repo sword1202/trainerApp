@@ -5,6 +5,7 @@
 #include <boost/assert.hpp>
 #include "MathUtils.h"
 #include "Primitives.h"
+#include "Functions.h"
 
 using namespace CppUtils;
 using namespace std::placeholders;
@@ -126,8 +127,11 @@ void BaseAudioPlayer::prepare() {
     writer = AudioOutputWriter::create(playbackData);
     writer->callback = std::bind(&BaseAudioPlayer::writerCallback, this, _1, _2);
 
-    onNoDataAvailableListeners.addListener([=] {
+    int key = onNoDataAvailableListeners.addListener([=] {
         onPlaybackStoppedListeners.executeAll();
+    });
+    onResetQueue.push_back([=] {
+        onNoDataAvailableListeners.removeListener(key);
     });
 }
 
@@ -163,6 +167,7 @@ void BaseAudioPlayer::reset() {
     delete writer;
     writer = nullptr;
 
+    Functions::ExecuteAllAndClear(onResetQueue);
     cancelAllOperations();
 }
 

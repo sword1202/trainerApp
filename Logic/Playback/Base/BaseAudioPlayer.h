@@ -30,6 +30,8 @@ class BaseAudioPlayer : protected CppUtils::OnThreadExecutor {
     soundtouch::SoundTouch* soundTouch = nullptr;
     std::vector<float> soundTouchTempFloatBuffer;
 
+    std::vector<std::function<void()>> onResetQueue;
+
     void setupPlaybackStartedListener();
 
     int readAudioDataApplySoundTouchIfNeed(void *outputBuffer, int requestedSamplesCount);
