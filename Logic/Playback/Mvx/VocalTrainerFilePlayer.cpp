@@ -90,7 +90,7 @@ void VocalTrainerFilePlayer::setSourceInternal(VocalTrainerFile *file, bool dest
             }
 
             if (isRecording()) {
-                const auto& tonalityChanges = file->getRecordingTonalityChanges();
+                const auto& tonalityChanges = this->file->getRecordingTonalityChanges();
                 auto iter = tonalityChanges.upper_bound(seek);
                 if (iter != tonalityChanges.begin()) {
                     --iter;

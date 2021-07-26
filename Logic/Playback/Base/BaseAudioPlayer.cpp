@@ -123,7 +123,6 @@ void BaseAudioPlayer::prepare() {
         soundTouchTempFloatBuffer.resize(static_cast<size_t>(playbackData.samplesPerBuffer) * playbackData.numberOfChannels);
     }
 
-    delete writer;
     writer = AudioOutputWriter::create(playbackData);
     writer->callback = std::bind(&BaseAudioPlayer::writerCallback, this, _1, _2);
 
@@ -161,7 +160,6 @@ BaseAudioPlayer::~BaseAudioPlayer() {
 }
 
 void BaseAudioPlayer::reset() {
-    return;
     playing = false;
     playbackData = PlaybackData();
     delete writer;

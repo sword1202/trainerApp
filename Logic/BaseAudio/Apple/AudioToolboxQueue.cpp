@@ -69,18 +69,22 @@ void AudioToolboxQueue::initAsOutput(const AudioStreamDescription &description, 
 }
 
 void AudioToolboxQueue::start() {
+    assert(queue);
     auto status = AudioQueueStart(queue, NULL);
     AudioToolboxUtils::throwExceptionIfError(status);
 }
 
 void AudioToolboxQueue::pause() {
+    assert(queue);
     auto status = AudioQueuePause(queue);
     AudioToolboxUtils::throwExceptionIfError(status);
 }
 
 AudioToolboxQueue::~AudioToolboxQueue() {
     if (queue) {
-        AudioQueueDispose(queue, true);
+        OSStatus status = AudioQueueDispose(queue, false);
+        AudioToolboxUtils::throwExceptionIfError(status);
+        queue = NULL;
     }
 }
 
