@@ -659,7 +659,12 @@ void WorkspaceDrawer::drawEnding() {
     float distance = static_cast<float>(BEATS_IN_TACT * intervalWidth + distanceInSeconds * beatsPerSecond * intervalWidth);
     if (distance < getVisibleGridWidth()) {
         float y = YARD_STICK_HEIGHT;
-        float scrollBarHeight = horizontalScrollBar.getPageSize() > 0 ? ScrollBar::SCROLLBAR_WEIGHT : 0;
+        float scrollBarHeight;
+        if (willDrawScrollbars) {
+            scrollBarHeight = horizontalScrollBar.getPageSize() > 0 ? ScrollBar::SCROLLBAR_WEIGHT : 0;
+        } else {
+            scrollBarHeight = 0;
+        }
         drawer->setStrokeColor(colors->endingColor);
         drawer->drawVerticalLine(distance, y, height - y - scrollBarHeight);
     }
