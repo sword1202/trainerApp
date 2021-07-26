@@ -12,13 +12,9 @@ class SongCompletionViewModel : ObservableObject {
     private let projectController = ProjectController.shared
     private let flow: SongCompletionFlowBridge
     @Published var shouldNavigateToRecordings: Bool = false
-    @Binding var isActive: Bool {
-        didSet {
-            if (!isActive) {
-                flow.tryAgain()
-            }
-        }
-    }
+    @Binding var isActive: Bool
+    private var tryAgainExecuted = false
+    private var tryAgainOnDeinit = true
 
     init(flow: SongCompletionFlowBridge, isActive: Binding<Bool>) {
         self.flow = flow
@@ -34,14 +30,26 @@ class SongCompletionViewModel : ObservableObject {
 
     func didTapTryAgain() {
         flow.tryAgain()
+        isActive = false
+        tryAgainOnDeinit = false
     }
 
     func didTapSave() {
         flow.save()
         shouldNavigateToRecordings = true
+        isActive = false
+        tryAgainOnDeinit = false
     }
 
     func didTapListen() {
         flow.listen()
+        isActive = false
+        tryAgainOnDeinit = false
+    }
+
+    deinit {
+        if tryAgainOnDeinit {
+            flow.tryAgain()
+        }
     }
 }

@@ -4,11 +4,7 @@
 
 #include "ProjectController.h"
 #include "ApplicationModel.h"
-#include "Primitives.h"
-#include "Executors.h"
-#include "Core.h"
 #include "AudioUtils.h"
-#include <iostream>
 
 using namespace CppUtils;
 using std::cout;
@@ -185,10 +181,8 @@ void ProjectController::setWorkspaceController(WorkspaceController *workspaceCon
     handlePlaybackSourceChange();
 
     player->seekChangedFromUserListeners.addListener([=] (double seek) {
-        if (!player->isCompleted()) {
-            audioInputManager->setAudioRecorderSeek(seek);
-            updateWorkspaceSeek(seek);
-        }
+        audioInputManager->setAudioRecorderSeek(seek);
+        updateWorkspaceSeek(seek);
     });
 
     player->boundsChangedListeners.addListener([=] (const PlaybackBounds& bounds) {
