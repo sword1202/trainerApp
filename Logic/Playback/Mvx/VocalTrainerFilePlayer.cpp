@@ -491,11 +491,11 @@ const std::map<double, int> &VocalTrainerFilePlayer::getTonalityChanges() const 
 }
 
 const BaseAudioPlayer * VocalTrainerFilePlayer::getMainPlayer() const {
-    return players.empty() ? nullptr : players.at(0);
+    return &instrumentalPlayer;
 }
 
 BaseAudioPlayer * VocalTrainerFilePlayer::getMainPlayer() {
-    return players.empty() ? nullptr : players.at(0);
+    return &instrumentalPlayer;
 }
 
 const LyricsDisplayedLinesProvider *VocalTrainerFilePlayer::getDisplayedLyricsLines() const {
@@ -526,5 +526,5 @@ void VocalTrainerFilePlayer::clearSource() {
 }
 
 bool VocalTrainerFilePlayer::hasSource() const {
-    return !players.empty();
+    return file != nullptr;
 }

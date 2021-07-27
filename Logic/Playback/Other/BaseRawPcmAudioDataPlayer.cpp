@@ -10,8 +10,7 @@ int BaseRawPcmAudioDataPlayer::readNextSamplesBatch(void *intoBuffer, int frames
     int seek = getBufferSeek();
     int offset = seek * frameSize;
 
-    AudioDataBufferConstPtr audioData = provideAudioBuffer();
-    int readCount = audioData->read(intoBuffer, offset, framesCount * frameSize);
+    int readCount = readAudioData(intoBuffer, offset, framesCount * frameSize);
     int readFramesCount = readCount / frameSize;
     moveBufferSeekIfNotChangedBefore(readFramesCount, seek);
     return readFramesCount;

@@ -46,13 +46,14 @@ AudioFilePlayer::AudioFilePlayer() {
 }
 
 void AudioFilePlayer::setAudioData(AudioDataBufferConstPtr audioData) {
-    reset();
+    assert(!audioData && "Call reset first to reset audioData");
     this->audioData = audioData;
     setBufferSeek(0);
 }
 
 void AudioFilePlayer::reset() {
     BaseAudioPlayer::reset();
+    this->audioData = nullptr;
     delete audioDecoder;
     audioDecoder = nullptr;
 }

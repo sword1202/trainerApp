@@ -62,7 +62,7 @@ void MetronomeAudioPlayer::setAudioDataInfo(double beatsPerMinute, double totalD
     }
 }
 
-int MetronomeAudioPlayer::getAudioDataSizeInBytes() {
+int MetronomeAudioPlayer::getAudioDataSizeInBytes() const {
     return totalVirtualBufferSize;
 }
 
@@ -70,6 +70,6 @@ MetronomeAudioPlayer::MetronomeAudioPlayer() {
     setPlayerName("MetronomeAudioPlayer");
 }
 
-AudioDataBufferConstPtr MetronomeAudioPlayer::provideAudioBuffer() {
-    return audioData;
+int MetronomeAudioPlayer::readAudioData(void *into, int offset, int numberOfBytes) {
+    return audioData->read(into, offset, numberOfBytes);
 }

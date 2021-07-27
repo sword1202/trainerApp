@@ -13,12 +13,13 @@
 class WavAudioPlayer : public BaseRawPcmAudioDataPlayer {
     AudioDataBufferConstPtr audioData = nullptr;
 protected:
-    AudioDataBufferConstPtr provideAudioBuffer() override;
-    int getAudioDataSizeInBytes() override;
+    int readAudioData(void *into, int offset, int numberOfBytes) override;
+    int getAudioDataSizeInBytes() const override;
 public:
     WavAudioPlayer();
 public:
     virtual void setAudioData(AudioDataBufferConstPtr audioData);
+    void reset() override;
 };
 
 

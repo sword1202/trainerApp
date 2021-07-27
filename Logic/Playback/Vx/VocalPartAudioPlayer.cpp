@@ -53,7 +53,7 @@ const VocalPart &VocalPartAudioPlayer::getVocalPart() const {
 }
 
 void VocalPartAudioPlayer::setVocalPart(const VocalPart &vocalPart) {
-    reset();
+    assert(!generator && "Call reset first to reset vocalPart");
     originalVocalPart = vocalPart;
     generator = new VocalPartAudioDataGenerator(new SfzPitchRenderer());
     generator->setSeek(0);

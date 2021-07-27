@@ -39,6 +39,7 @@
 @property (readonly) double endSeek;
 @property (readonly) NSInteger linesCount;
 
+- (bool)hasPlaybackSource NS_SWIFT_NAME(hasPlaybackSource());
 - (void)setPlaybackSource:(NSString*)filePath NS_SWIFT_NAME(setPlaybackSource(filePath:));
 
 - (void)goToBeginning;

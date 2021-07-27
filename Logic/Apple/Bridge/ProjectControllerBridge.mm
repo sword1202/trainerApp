@@ -373,6 +373,11 @@ static LyricsSectionType fromCppToObjCSectionType(Lyrics::SectionType type) {
     return _cpp->getLinesCount();
 }
 
+- (bool)hasPlaybackSource {
+    return _cpp->hasPlaybackSource();
+}
+
+
 - (void)toggleTracksVisibility {
     _cpp->setTracksVisible(!_cpp->isTracksVisible());
 }

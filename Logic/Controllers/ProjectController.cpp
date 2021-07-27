@@ -479,12 +479,17 @@ void ProjectController::save() {
 void ProjectController::listen() {
     MvxFile* recordingFile = generateRecording();
     setPlaybackSource(recordingFile);
+    play();
 }
 
 void ProjectController::setPlaybackSource(const char* filePath) {
     std::fstream is = Streams::OpenFile(filePath, std::ios::in | std::ios::binary);
     auto* source = VocalTrainerFile::read(is);
     setPlaybackSource(source);
+}
+
+bool ProjectController::hasPlaybackSource() const {
+    return player->hasSource();
 }
 
 ProjectController::~ProjectController() {

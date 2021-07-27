@@ -139,6 +139,7 @@ public:
     void onPlaybackBoundsChangedByUserEvent(const PlaybackBounds &newBounds) override;
     void onSeekChangedByUserEvent(float newSeek) override;
 
+    bool hasPlaybackSource() const;
     void setPlaybackSource(const char* filePath);
 
     std::vector<float> getRecordingPreview(int numberOfSamples) const;
