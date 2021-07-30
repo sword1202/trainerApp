@@ -206,6 +206,14 @@ public:
         filePath << recordingsPath.UTF8String << TimeUtils::NowInMicroseconds() << ".rvx";
         return Streams::OpenFileAsSharedPtr(filePath.str().data(), std::ios::binary | std::ios::out);
     }
+
+    void onPlaybackSourceChanged() override {
+        for (id delegate in delegates) {
+            if ([delegate respondsToSelector:@selector(projectControllerPlaybackSourceDidChange)]) {
+                [delegate projectControllerPlaybackSourceDidChange];
+            }
+        }
+    }
 };
 
 @implementation ProjectControllerBridge {
@@ -366,6 +374,33 @@ static LyricsSectionType fromCppToObjCSectionType(Lyrics::SectionType type) {
     assert(numberOfSamples > 0);
     auto samples = _cpp->getRecordingPreview(static_cast<int>(numberOfSamples));
     return Collections::ToPrimitivesNSArray(samples);
+}
+
+- (void)setWorkspaceColorScheme:(WorkspaceColorSchemeBridge *)scheme {
+    WorkspaceColorScheme s;
+
+#define R(color) \
+    if (scheme.color) { \
+        s.color = Color::fromRgba(static_cast<uint32_t>(scheme.color)); \
+    } \
+    
+    R(gridColor)
+    R(accentGridColor)
+    R(pianoBorderColor)
+    R(pitchGraphColor)
+    R(pitchColor)
+    R(borderLineColor)
+    R(boundsColor)
+    R(playHeadColor)
+    R(instrumentalTrackColor)
+    R(pianoTrackColor)
+    R(pianoTrackShadowColor)
+    R(pianoTrackPitchesColor)
+    R(pianoSharpPitchColor)
+    R(endingColor)
+#undef R
+    
+    _cpp->setWorkspaceColors(s);
 }
 
 

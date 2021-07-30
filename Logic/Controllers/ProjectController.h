@@ -36,6 +36,7 @@ public:
     virtual inline void updateEndSeek(double endSeek) {}
     virtual inline void onRewindStatusChanged(bool rewindRunning, bool backward) {}
     virtual inline void onPlaybackCompleted(SongCompletionFlow* songCompletionFlow) {}
+    virtual inline void onPlaybackSourceChanged() {}
     virtual std::shared_ptr<std::ostream> createStreamToSaveRecording(const VocalTrainerFile* recording) {
         return nullptr;
     }
@@ -44,6 +45,7 @@ public:
 class ProjectController : CppUtils::DestructorQueue, public WorkspaceControllerDelegate, private SongCompletionFlow,
                           private CppUtils::OnThreadExecutor {
     WorkspaceController* workspaceController = nullptr;
+    WorkspaceColorScheme workspaceColorScheme;
     ProjectControllerDelegate* delegate = nullptr;
     VocalTrainerFilePlayer* player;
     VocalTrainerFile* source = nullptr;
@@ -143,6 +145,8 @@ public:
     void setPlaybackSource(const char* filePath);
 
     std::vector<float> getRecordingPreview(int numberOfSamples) const;
+
+    void setWorkspaceColors(WorkspaceColorScheme colorScheme);
 
     void updateDelegate();
 

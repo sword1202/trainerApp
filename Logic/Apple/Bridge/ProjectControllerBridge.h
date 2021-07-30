@@ -71,4 +71,6 @@
 - (BOOL)hasPlaybackBounds;
 
 - (NSArray<NSNumber*>*)getRecordingPreviewSamples:(NSInteger)numberOfSamples NS_SWIFT_NAME(getRecordingPreviewSamples(numberOfSamples:));
+
+- (void)setWorkspaceColorScheme:(WorkspaceColorSchemeBridge *)scheme;
 @end

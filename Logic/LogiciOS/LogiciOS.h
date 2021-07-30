@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NativeColorUtils.h"
 
 //! Project version number for LogiciOS.
 FOUNDATION_EXPORT double LogiciOSVersionNumber;

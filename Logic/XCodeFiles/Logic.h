@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NativeColorUtils.h"
 
 //! Project version number for Logic.
 FOUNDATION_EXPORT double LogicVersionNumber;

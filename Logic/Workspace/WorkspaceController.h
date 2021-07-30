@@ -12,6 +12,7 @@
 #include "VocalPart.h"
 #include "Point.h"
 #include "BoundsSelectionDelegate.h"
+#include "WorkspaceColorScheme.h"
 
 class WorkspaceControllerDelegate : public BoundsSelectionDelegate {
 public:
@@ -52,6 +53,7 @@ public:
     virtual void setDelegate(WorkspaceControllerDelegate* delegate) = 0;
     virtual void setBoundsSelectionEnabled(bool boundsSelectionEnabled) = 0;
     virtual bool isBoundsSelectionEnabled() const = 0;
+    virtual void setColors(const WorkspaceColorScheme& scheme) = 0;
     virtual ~WorkspaceController() = default;
 };
 

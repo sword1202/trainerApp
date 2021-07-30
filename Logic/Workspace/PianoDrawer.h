@@ -10,6 +10,7 @@
 #include "Drawer.h"
 #include "Pitch.h"
 #include "PlayingPitchSequence.h"
+#include "WorkspaceColorScheme.h"
 #include <unordered_set>
 #include <atomic>
 
@@ -25,6 +26,7 @@ class PianoDrawer {
     std::unordered_set<int> selectedPitchIndexes;
     int fontSize = 8;
     Drawer::FontStyle fontStyle;
+    const WorkspaceColorScheme* colors;
 
     float getIntervalOctaveHeightToPianoOctaveHeightRelation() const;
 
@@ -36,7 +38,7 @@ public:
     static const Drawer::Color PITCH_TEXT_COLOR;
     static const Drawer::Color SELECTED_PITCH_TEXT_COLOR;
 
-    PianoDrawer(Drawer *drawer);
+    PianoDrawer(Drawer *drawer, const WorkspaceColorScheme* colors);
 
     void setPitchSequence(PlayingPitchSequence *pitchSequence);
     void draw(float pianoWidth, float height, float devicePixelRation);

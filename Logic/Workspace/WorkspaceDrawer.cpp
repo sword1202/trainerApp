@@ -57,7 +57,7 @@ constexpr float PIANO_TRACK_PITCH_RADIUS = 1.f;
 constexpr float PIANO_TRACK_BUTTON_WIDTH = 90.f;
 constexpr float VOLUME_CONTROLLER_HEIGHT = 110.5f;
 
-const Drawer::Color WorkspaceDrawer::YARD_STICK_DOT_AND_TEXT_COLOR(0x24, 0x23, 0x2D, 0xFF);
+const Drawer::Color WorkspaceDrawer::YARD_STICK_DOT_AND_TEXT_COLOR = Drawer::Color::fromRgba(0x24232DFF);
 
 // Zoom
 constexpr float ZOOM_BASE_WIDTH = 1374.0;
@@ -121,7 +121,7 @@ void WorkspaceDrawer::generateInstrumentalTrackSamplesImage(float width) {
         for (int y = middle - value; y < middle + value; ++y) {
             int offset = abs(y - middle);
             double k = double(offset) / value;
-            Color color = colors->instrumentalTrackColor;
+            Color color = colors.instrumentalTrackColor;
             if (k >= minimumK) {
                 double factor = (k - minimumK) / (1.0 - minimumK);
                 double opacity = 1.0 - factor;
@@ -177,7 +177,7 @@ void WorkspaceDrawer::draw() {
     drawer->translate(-PIANO_WIDTH, 0);
 
     drawer->translateTo(0, 0);
-    drawHorizontalLine(YARD_STICK_HEIGHT + 0.5f, colors->borderLineColor);
+    drawHorizontalLine(YARD_STICK_HEIGHT + 0.5f, colors.borderLineColor);
     drawer->translate(PIANO_WIDTH, 0);
 
     drawEnding();
@@ -198,12 +198,12 @@ void WorkspaceDrawer::draw() {
     pianoDrawer->draw(PIANO_WIDTH, pianoHeight, devicePixelRatio);
     drawer->setFillColor(Color::white());
     drawer->fillRect(0, 0, PIANO_WIDTH, YARD_STICK_HEIGHT);
-    drawer->setStrokeColor(colors->borderLineColor);
+    drawer->setStrokeColor(colors.borderLineColor);
     // Draw border line above piano
     drawer->drawLine(0, YARD_STICK_HEIGHT + 0.5f, PIANO_WIDTH, YARD_STICK_HEIGHT + 0.5f);
 
     drawer->translate(0, PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN);
-    drawVerticalLine(PIANO_WIDTH + 0.5, colors->borderLineColor);
+    drawVerticalLine(PIANO_WIDTH + 0.5, colors.borderLineColor);
     drawer->translate(0, -PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN);
 
     drawer->translate(0, 0);
@@ -275,7 +275,7 @@ void WorkspaceDrawer::iterateHorizontalIntervals(const std::function<void(float 
 
 void WorkspaceDrawer::drawVerticalGrid() const {
     iterateHorizontalIntervals([=] (float x, bool isBeat) {
-        drawVerticalLine(x, isBeat ? colors->gridColor : colors->accentGridColor);
+        drawVerticalLine(x, isBeat ? colors.gridColor : colors.accentGridColor);
     });
 }
 
@@ -308,7 +308,7 @@ void WorkspaceDrawer::drawHorizontalGrid() const {
          y > - gridTranslation; y -= intervalHeight, index++) {
 
         bool isOctaveBegin = index % Pitch::PITCHES_IN_OCTAVE == 0;
-        drawHorizontalLine(y, isOctaveBegin ? colors->accentGridColor : colors->gridColor);
+        drawHorizontalLine(y, isOctaveBegin ? colors.accentGridColor : colors.gridColor);
     }
 }
 
@@ -329,7 +329,7 @@ void WorkspaceDrawer::drawPitches() {
         return;
     }
 
-    drawer->setFillColor(colors->pitchColor);
+    drawer->setFillColor(colors.pitchColor);
 
     double workspaceDuration = getWorkspaceDuration();
     double workspaceSeek = getWorkspaceSeek();
@@ -354,7 +354,7 @@ void WorkspaceDrawer::drawInstrumentalTrack() {
         drawer->drawImage(0, height - INSTRUMENTAL_TRACK_BOTTOM_MARGIN - INSTRUMENTAL_TRACK_HEIGHT,
                           instrumentalTrackImage);
     } else {
-        drawer->setStrokeColor(colors->instrumentalTrackColor);
+        drawer->setStrokeColor(colors.instrumentalTrackColor);
         drawer->drawHorizontalLine(0, height - INSTRUMENTAL_TRACK_BOTTOM_MARGIN - INSTRUMENTAL_TRACK_HEIGHT / 2,
                 width);
     }
@@ -397,15 +397,15 @@ float WorkspaceDrawer::drawPianoTrackAndCalculateHeight() {
     float height = pianoTrackHeight;
     // make a width of shadow a bit bigger than rect width
     drawer->drawShadow(x - 200, y, width + 400, height, PIANO_TRACK_SHADOW_RADIUS,
-                       PIANO_TRACK_SHADOW_BLUR, colors->pianoTrackShadowColor);
-    drawer->setFillColor(colors->pianoTrackColor);
+                       PIANO_TRACK_SHADOW_BLUR, colors.pianoTrackShadowColor);
+    drawer->setFillColor(colors.pianoTrackColor);
     drawer->fillRect(x, y, width, height);
 
     // Draw pitches
     int durationInTicks = vocalPart->getDurationInTicks();
     float tickSize = width / durationInTicks;
 
-    drawer->setFillColor(colors->pianoTrackPitchesColor);
+    drawer->setFillColor(colors.pianoTrackPitchesColor);
 
     const auto& pitches = vocalPart->getNotes();
     for (const NoteInterval& vxPitch : pitches) {
@@ -491,7 +491,7 @@ void WorkspaceDrawer::initGraphPitchesArrays(float workspaceSeek) {
 void WorkspaceDrawer::drawPitchesGraph() {
     assert(getFirstPitch().isValid());
     assert(pitchesCollection);
-    assert(colors->pitchGraphColor[3] > 0 && "pitchGraphColor not initialized or is completely transparent");
+    assert(colors.pitchGraphColor[3] > 0 && "pitchGraphColor not initialized or is completely transparent");
 
     float workspaceSeek = getWorkspaceSeek();
     initGraphPitchesArrays(workspaceSeek);
@@ -505,7 +505,7 @@ void WorkspaceDrawer::drawPitchesGraph() {
 
     drawer->beginPath();
     drawer->setStrokeWidth(sizeMultiplier);
-    drawer->setStrokeColor(colors->pitchGraphColor);
+    drawer->setStrokeColor(colors.pitchGraphColor);
 
     float pitchGraphWidth = intervalWidth * PITCHES_GRAPH_WIDTH_IN_INTERVALS;
     double duration = getSingingPitchGraphDuration();
@@ -591,7 +591,7 @@ void WorkspaceDrawer::drawBoundsIfNeed() const {
         return;
     }
 
-    drawer->setFillColor(colors->boundsColor);
+    drawer->setFillColor(colors.boundsColor);
     float y = YARD_STICK_HEIGHT - PLAYBACK_BOUNDS_BOTTOM_MARGIN - PLAYBACK_BOUNDS_HEIGHT;
     drawer->roundedRect(startX, y, width, PLAYBACK_BOUNDS_HEIGHT, PLAYBACK_BOUNDS_ROUND_RECT_RADIUS);
     drawer->fill();
@@ -612,7 +612,7 @@ void WorkspaceDrawer::drawPlayHead(float x, float timeInSeconds) {
     float triangleX = x - PLAYHEAD_TRIANGLE_WIDTH / 2;
 
     drawer->drawImage(triangleX, triangleY, PLAYHEAD_TRIANGLE_WIDTH, PLAYHEAD_TRIANGLE_HEIGHT, playHeadTriangleImage);
-    drawer->setStrokeColor(colors->playHeadColor);
+    drawer->setStrokeColor(colors.playHeadColor);
     drawer->drawVerticalLine(x, YARD_STICK_HEIGHT, height);
 
     if (!clockImage) {
@@ -665,7 +665,7 @@ void WorkspaceDrawer::drawEnding() {
         } else {
             scrollBarHeight = 0;
         }
-        drawer->setStrokeColor(colors->endingColor);
+        drawer->setStrokeColor(colors.endingColor);
         drawer->drawVerticalLine(distance, y, height - y - scrollBarHeight);
     }
 }
@@ -687,8 +687,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer,
         MouseEventsReceiver *mouseEventsReceiver,
         WorkspaceDrawerResourcesProvider *resourcesProvider,
         bool drawScrollbars,
-        const std::function<void()> &onUpdateRequested,
-        const WorkspaceDrawerColorScheme* colorScheme)
+        const std::function<void()> &onUpdateRequested)
         :
         intervalWidth(-1),
         intervalHeight(-1),
@@ -702,7 +701,6 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer,
         vocalPart(nullptr),
         firstPlayHeadPosition(0),
         secondPlayHeadPosition(0),
-        colors(colorScheme),
         playbackBounds(PlaybackBounds()),
         willDrawTracks(true),
         willDrawScrollbars(drawScrollbars),
@@ -715,7 +713,7 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer,
     CHECK_IF_RENDER_THREAD;
     setPitchRadius(PITCH_RADIUS);
 
-    pianoDrawer = new PianoDrawer(drawer);
+    pianoDrawer = new PianoDrawer(drawer, &colors);
     drawer->setTextFontFamily(FONT_FAMILY);
 
     pitchesTimes.reserve(5000);
@@ -997,7 +995,7 @@ void WorkspaceDrawer::drawTracks() {
         drawer->translate(0, ScrollBar::SCROLLBAR_WEIGHT);
     }
 
-    drawHorizontalLine(height - VOLUME_CONTROLLER_HEIGHT, colors->borderLineColor);
+    drawHorizontalLine(height - VOLUME_CONTROLLER_HEIGHT, colors.borderLineColor);
 }
 
 bool WorkspaceDrawer::shouldDrawTracks() {
@@ -1117,4 +1115,8 @@ void WorkspaceDrawer::setZoom(float zoom, const CppUtils::PointF& intoPoint) {
 
 CppUtils::PointF WorkspaceDrawer::getRelativeMousePosition() const {
     return drawer->convertAbsoluteToRelative(mouseEventsReceiver->getMousePosition());
+}
+
+void WorkspaceDrawer::setColors(const WorkspaceColorScheme &scheme) {
+    this->colors = scheme;
 }

@@ -18,4 +18,8 @@ extension CGFloat {
 
         return self
     }
+
+    func roundToUInt8() -> UInt8 {
+        UInt8(rounded().cutToMatchClosedRange(min: CGFloat(UInt8.min), max: CGFloat(UInt8.max)))
+    }
 }

@@ -3,17 +3,22 @@
 // Copyright (c) 2021 Semyon Tikhonenko. All rights reserved.
 //
 
-#ifndef VOCALTRAINER_WORKSPACEDRAWERCOLORSCHEME_H
-#define VOCALTRAINER_WORKSPACEDRAWERCOLORSCHEME_H
+#ifndef VOCALTRAINER_WORKSPACECOLORSCHEME_H
+#define VOCALTRAINER_WORKSPACECOLORSCHEME_H
 
 #include "Drawer.h"
 
-struct WorkspaceDrawerColorScheme {
+struct WorkspaceColorScheme {
     typedef Drawer::Color Color;
     Color gridColor;
     Color accentGridColor;
     Color pitchGraphColor;
+    Color pianoBorderColor;
     Color pitchColor;
+    Color reachedPitchColor;
+    Color missedPitchColor;
+    Color pianoSharpPitchColor;
+    Color pianoSelectedPitchColor;
     Color borderLineColor;
     Color boundsColor;
     Color playHeadColor;
@@ -23,8 +28,8 @@ struct WorkspaceDrawerColorScheme {
     Color pianoTrackPitchesColor;
     Color endingColor;
 
-    static const WorkspaceDrawerColorScheme* getDefault();
+    WorkspaceColorScheme();
 };
 
 
-#endif //VOCALTRAINER_WORKSPACEDRAWERCOLORSCHEME_H
+#endif //VOCALTRAINER_WORKSPACECOLORSCHEME_H

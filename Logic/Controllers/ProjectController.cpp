@@ -96,6 +96,10 @@ ProjectController::ProjectController(ProjectControllerDelegate* delegate) : dele
         delegate->onPlaybackCompleted(this);
     }, this);
 
+    player->onSourceChanged.addListener([=] {
+        delegate->onPlaybackSourceChanged();
+    });
+
     rewinder = new Rewinder(player);
 }
 
@@ -178,6 +182,7 @@ void ProjectController::setWorkspaceController(WorkspaceController *workspaceCon
     this->workspaceController = workspaceController;
 
     workspaceController->setDelegate(this);
+    workspaceController->setColors(workspaceColorScheme);
     handlePlaybackSourceChange();
 
     player->seekChangedFromUserListeners.addListener([=] (double seek) {
@@ -523,4 +528,11 @@ std::vector<float> ProjectController::getRecordingPreview(int numberOfSamples) c
     return AudioUtils::ResizePreviewSamplesIntoFloatSamples(
             audioInputManager->getRecordedData()->toBinaryString(), numberOfSamples
     );
+}
+
+void ProjectController::setWorkspaceColors(WorkspaceColorScheme colorScheme) {
+    workspaceColorScheme = colorScheme;
+    if (workspaceController) {
+        workspaceController->setColors(colorScheme);
+    }
 }

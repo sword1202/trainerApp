@@ -5,6 +5,7 @@
 
 import Combine
 import AVFoundation
+import SwiftUI
 
 class ProjectViewModel : ObservableObject {
     private let audioEngine = AVAudioEngine()
@@ -30,6 +31,8 @@ class ProjectViewModel : ObservableObject {
     @Published var showSongCompletionFlow: Bool = false
     private(set) var songCompletionFlow: SongCompletionFlowBridge?
 
+    @Published private(set) var tone: [Color] = []
+
     private let timeFormatter = DateFormatter()
 
     private var disableProgressUpdate = false
@@ -54,11 +57,11 @@ class ProjectViewModel : ObservableObject {
     }
 
     init(filePath: String?) {
+        projectController.add(delegate: self)
         let mvxFilePath = filePath ?? Bundle.main.path(forResource: "drm", ofType: "mvx")
         projectController.setPlaybackSource(filePath: mvxFilePath)
 
         isMetronomeEnabled = projectController.metronomeEnabled
-        projectController.add(delegate: self)
         updatePlaybackSections()
         title = projectController.artistName + " - " + projectController.songTitle
         timeFormatter.dateFormat = "m:ss"
@@ -161,5 +164,21 @@ extension ProjectViewModel : ProjectControllerBridgeDelegate {
     func projectControllerPlaybackDidComplete(flow: SongCompletionFlowBridge) {
         songCompletionFlow = flow
         showSongCompletionFlow = true
+    }
+
+    func projectControllerPlaybackSourceDidChange() {
+        tone = [
+            Colors.tone1,
+            Colors.tone2,
+            Colors.tone3,
+            Colors.tone4,
+            Colors.tone5,
+            Colors.tone6,
+            Colors.tone7,
+        ]
+        if isRecording() {
+            tone = tone.map { $0.rotate(angle: Colors.recordingPaletteRotation) }
+        }
+        projectController.setWorkspaceColorScheme(Colors.getWorkspaceScheme(isRecording: isRecording()))
     }
 }

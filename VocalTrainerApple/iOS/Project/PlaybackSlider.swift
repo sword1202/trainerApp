@@ -26,6 +26,7 @@ struct PlaybackSlider : View {
     @Binding var sections: [PlaybackSection]
     @Binding var currentTime: String
     @Binding var endTime: String
+    let tone: [Color]
     @State private var dotDragTempProgress: CGFloat = -1
 
     func onProgressClick(location: CGPoint, width: CGFloat) {
@@ -47,7 +48,7 @@ struct PlaybackSlider : View {
                 if indexCondition(sectionIndex) {
                     let section = sections[sectionIndex]
                     let sectionX = section.position * (width - progressDotSize) + progressDotSize / 2
-                    Text(section.name).font(Font.system(size: 10, weight: .bold)).foregroundColor(Colors.tone5)
+                    Text(section.name).font(Font.system(size: 10, weight: .bold)).foregroundColor(tone[4])
                             .position(x: sectionX, y: 6).layoutPriority(1)
                 } else {
                     EmptyView()
@@ -62,12 +63,12 @@ struct PlaybackSlider : View {
                 generateSectionNamesViews(width: geometry.size.width, indexCondition: { $0 % 2 == 0 }).padding(.bottom, 2)
                 ZStack(alignment: .leading) {
                     RoundedRectangle(cornerRadius: progressLineHeight / 2)
-                            .fill(Colors.tone3)
+                            .fill(tone[2])
                             .frame(maxWidth: .infinity, maxHeight: progressLineHeight, alignment: .center).onClickGesture { (location) -> () in
                                 onProgressClick(location: location, width: geometry.size.width)
                             }
                     RoundedRectangle(cornerRadius: progressLineHeight / 2)
-                            .fill(Colors.tone2)
+                            .fill(tone[1])
                             .frame(
                                     maxWidth: (geometry.size.width - progressDotSize) * progress + progressDotSize,
                                     maxHeight: progressLineHeight,
@@ -80,11 +81,11 @@ struct PlaybackSlider : View {
                         let section = sections[sectionIndex]
                         let sectionX = section.position * (geometry.size.width - progressDotSize) + progressDotSize / 2
                         let offsetSign: CGFloat = sectionIndex % 2 == 0 ? -1 : +1
-                        Rectangle().fill(Colors.tone4)
+                        Rectangle().fill(tone[3])
                                 .frame(width: progressSectionWidth, height: progressSectionHeight, alignment: .bottom)
                                 .offset(x: sectionX, y: offsetSign * (progressSectionHeight - progressLineHeight) / 2)
                     }
-                    Circle().fill(Colors.tone2).frame(maxWidth: progressDotSize, maxHeight: progressDotSize, alignment: .center)
+                    Circle().fill(tone[1]).frame(maxWidth: progressDotSize, maxHeight: progressDotSize, alignment: .center)
                             .offset(x: (geometry.size.width - progressDotSize) * progress)
                             .gesture(DragGesture().onChanged { value in
                                 if (dotDragTempProgress < 0) {
@@ -102,9 +103,9 @@ struct PlaybackSlider : View {
                 }.frame(width: geometry.size.width, height: progressSectionHeight * 2 - progressLineHeight, alignment: .center)
                 ZStack {
                     HStack {
-                        Text(currentTime).font(Font.system(size: 10)).foregroundColor(Colors.tone5)
+                        Text(currentTime).font(Font.system(size: 10)).foregroundColor(tone[4])
                         Spacer()
-                        Text(endTime).font(Font.system(size: 10)).foregroundColor(Colors.tone5)
+                        Text(endTime).font(Font.system(size: 10)).foregroundColor(tone[4])
                     }
                     generateSectionNamesViews(width: geometry.size.width, indexCondition: { $0 % 2 == 1 }).padding(.top, 2)
                 }

@@ -7,7 +7,7 @@
 #define VOCALTRAINER_WORKSPACEDRAWER_H
 #define DRAW_TIME_UNDER_PITCHES
 
-#include "WorkspaceDrawerColorScheme.h"
+#include "WorkspaceColorScheme.h"
 #include <array>
 #include "PitchesCollection.h"
 #include "VocalPart.h"
@@ -49,7 +49,7 @@ class WorkspaceDrawer : public WorkspaceController {
     float sizeMultiplier;
     float pitchRadius = 0;
 
-    const WorkspaceDrawerColorScheme* colors;
+    WorkspaceColorScheme colors;
 
     int yardStickFontSize = 11;
     Drawer::FontStyle yardStickFontStyle = Drawer::NORMAL;
@@ -161,8 +161,7 @@ public:
             MouseEventsReceiver *mouseEventsReceiver,
             WorkspaceDrawerResourcesProvider *resourcesProvider,
             bool drawScrollbars,
-            const std::function<void()> &onUpdateRequested,
-            const WorkspaceDrawerColorScheme* colorScheme = WorkspaceDrawerColorScheme::getDefault()
+            const std::function<void()> &onUpdateRequested
             );
     ~WorkspaceDrawer();
 
@@ -245,6 +244,8 @@ public:
     void setDelegate(WorkspaceControllerDelegate *delegate) override;
     void setBoundsSelectionEnabled(bool boundsSelectionEnabled) override;
     bool isBoundsSelectionEnabled() const override;
+
+    void setColors(const WorkspaceColorScheme &scheme) override;
 };
 
 

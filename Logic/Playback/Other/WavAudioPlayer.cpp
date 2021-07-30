@@ -21,7 +21,7 @@ WavAudioPlayer::WavAudioPlayer() {
 }
 
 void WavAudioPlayer::setAudioData(AudioDataBufferConstPtr audioData) {
-    assert(!audioData && "Call reset to set audio data again");
+    assert(!this->audioData && "Call reset to set audio data again");
     this->audioData = audioData;
     setPlaybackData(audioData->parseWavHeader(), FRAMES_PER_BUFFER);
 }

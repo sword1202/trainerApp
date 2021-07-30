@@ -21,13 +21,9 @@ constexpr float heightMap[] = {smallPitchHeight, bigPitchHeight,
         smallPitchHeight, smallPitchHeight, bigPitchHeight, bigPitchHeight, smallPitchHeight};
 constexpr int heightMapLength = 7;
 constexpr bool hasSharpMap[] = {true, true, false, true, true, true, false};
-static const Drawer::Color borderColor = {0x9A, 0x98, 0xD0, 0x7f};
-static const Drawer::Color sharpPitchColor = {0x9A, 0x98, 0xD0, 0xff};
-static const Drawer::Color reachedPitchColor = {0x31, 0xDD, 0x6C, 0xff};
-static const Drawer::Color missedPitchColor = {0xFF, 0x5E, 0x85, 0xff};
-static const Drawer::Color selectedPitchColor = {0x61, 0x5F, 0x97, 0xff};
 
-const Drawer::Color PianoDrawer::PITCH_TEXT_COLOR(0x24, 0x23, 0x2D, 0xe6);
+typedef unsigned char uchar;
+const Drawer::Color PianoDrawer::PITCH_TEXT_COLOR(uchar(0x24), uchar(0x23), uchar(0x2D), uchar(0xe6));
 const Drawer::Color PianoDrawer::SELECTED_PITCH_TEXT_COLOR(Drawer::Color::white());
 
 constexpr int FONT_WEIGHT = 60;
@@ -44,8 +40,8 @@ void PianoDrawer::setIntervalHeight(float intervalHeight) {
     this->intervalHeight = intervalHeight;
 }
 
-PianoDrawer::PianoDrawer(Drawer *drawer)
-        : drawer(drawer){
+PianoDrawer::PianoDrawer(Drawer *drawer, const WorkspaceColorScheme* colors)
+        : drawer(drawer), colors(colors) {
     drawSharpPitchesFillColor.reserve(100);
     drawSharpPitchesY.reserve(100);
     intervalHeight = 0;
@@ -62,8 +58,8 @@ void PianoDrawer::draw(float width, float height, float devicePixelRation) {
     drawer->setTextFontSize(fontSize);
     drawer->setTextStyle(fontStyle);
 
-    drawer->setStrokeColor(borderColor);
-    drawer->setFillColor(sharpPitchColor);
+    drawer->setStrokeColor(colors->pianoBorderColor);
+    drawer->setFillColor(colors->pianoSharpPitchColor);
 
     int index = getFirstPitch().getWhiteIndex();
     int perfectFrequencyIndex = firstPitchIndex;
@@ -83,22 +79,22 @@ void PianoDrawer::draw(float width, float height, float devicePixelRation) {
             Pitch detectedPitch = Pitch::fromPerfectFrequencyIndex(detectedPitchIndex);
             if (detectedPitchIndex == perfectFrequencyIndex) {
                 if (pitchSequence->hasPitchNow(detectedPitch)) {
-                    return reachedPitchColor;
+                    return colors->reachedPitchColor;
                 } else {
-                    return selectedPitchColor;
+                    return colors->pianoSelectedPitchColor;
                 }
             } else {
                 if (pitchSequence->hasPitchNow(Pitch::fromPerfectFrequencyIndex(perfectFrequencyIndex)) &&
                         !pitchSequence->hasPitchNow(detectedPitch)) {
-                    return missedPitchColor;
+                    return colors->missedPitchColor;
                 } else {
-                    return sharpPitchColor;
+                    return colors->pianoSharpPitchColor;
                 }
             }
         };
 
         Drawer::Color fillColor = getFillColor(perfectFrequencyIndex);
-        if (fillColor != sharpPitchColor) {
+        if (fillColor != colors->pianoSharpPitchColor) {
             fill = true;
             drawer->setFillColor(fillColor);
             selectedPitchIndexes.insert(perfectFrequencyIndex);

@@ -12,6 +12,7 @@ private let topButtonFrameHeight: CGFloat = 46
 
 private struct TopPanelToggleButton: View {
     let image: String
+    let selectedColor: Color
     @Binding var isSelected: Bool
 
     var body: some View {
@@ -22,7 +23,7 @@ private struct TopPanelToggleButton: View {
         }) {
             Image(image)
         }.frame(width: topButtonFrameHeight + 4, height: topButtonFrameHeight)
-                .background(isSelected ? Colors.tone3 : Color.white.opacity(0.0))
+                .background(isSelected ? selectedColor : Color.white.opacity(0.0))
                 .cornerRadius(3)
     }
 }
@@ -32,6 +33,7 @@ private struct TwoLinesButton: View {
     @Binding var topText: String
     let bottomText: String
     let width: CGFloat
+    let selectedColor: Color
 
     var body: some View {
         Button(action: {
@@ -48,7 +50,7 @@ private struct TwoLinesButton: View {
                         .foregroundColor(Color.white)
             }
         }.frame(width: width, height: topButtonFrameHeight)
-                .background(isSelected ? Colors.tone3 : Color.white.opacity(0.0))
+                .background(isSelected ? selectedColor : Color.white.opacity(0.0))
                 .cornerRadius(3)
     }
 }
@@ -74,9 +76,9 @@ struct ProjectView: View {
             ZStack {
                 // Fill safe area with colors
                 VStack {
-                    Spacer().frame(maxWidth: .infinity, maxHeight: 50).background(Colors.tone2)
+                    Spacer().frame(maxWidth: .infinity, maxHeight: 50).background(viewModel.tone[1])
                     Spacer().frame(maxWidth: .infinity).background(Color.white)
-                    Spacer().frame(maxWidth: .infinity, maxHeight: 50).background(Colors.tone1)
+                    Spacer().frame(maxWidth: .infinity, maxHeight: 50).background(viewModel.tone[0])
                 }.edgesIgnoringSafeArea(.bottom).edgesIgnoringSafeArea(.top)
                 // Main Content
                 VStack(spacing: 0) {
@@ -94,15 +96,17 @@ struct ProjectView: View {
                                     isSelected: $tonalityDialogVisible,
                                     topText: $tonalityViewModel.tonality,
                                     bottomText: Strings.key.localized,
-                                    width: topButtonFrameHeight + 12)
+                                    width: topButtonFrameHeight + 12,
+                                    selectedColor: viewModel.tone[2])
                             TwoLinesButton(
                                     isSelected: $tempoDialogVisible,
                                     topText: $tempoViewModel.bpm,
                                     bottomText: Strings.tempo.localized,
-                                    width: topButtonFrameHeight + 4)
-                            TopPanelToggleButton(image: "LevelsButton", isSelected: $levelsVisible)
-                            TopPanelToggleButton(image: "LyricsToggleButton", isSelected: $viewModel.isLyricsVisible)
-                            TopPanelToggleButton(image: "MetronomeButton", isSelected: $viewModel.isMetronomeEnabled)
+                                    width: topButtonFrameHeight + 4,
+                                    selectedColor: viewModel.tone[2])
+                            TopPanelToggleButton(image: "LevelsButton", selectedColor: viewModel.tone[2], isSelected: $levelsVisible)
+                            TopPanelToggleButton(image: "LyricsToggleButton", selectedColor: viewModel.tone[2], isSelected: $viewModel.isLyricsVisible)
+                            TopPanelToggleButton(image: "MetronomeButton", selectedColor: viewModel.tone[2], isSelected: $viewModel.isMetronomeEnabled)
                         }.frame(maxWidth: .infinity, maxHeight: topButtonFrameHeight).padding(.trailing, 8)
                         Text(viewModel.title)
                                 .font(Font.system(size: 18, weight: .bold))
@@ -111,7 +115,7 @@ struct ProjectView: View {
                                 .padding(.top, 8)
                                 .padding(.bottom, 8)
                                 .padding(.leading, 16)
-                    }.background(Colors.tone2).frame(maxWidth: .infinity, alignment: .topLeading)
+                    }.background(viewModel.tone[1]).frame(maxWidth: .infinity, alignment: .topLeading)
                     ZStack {
                         WorkspaceView().onChange(of: scenePhase) { phase in
                             switch phase {
@@ -132,14 +136,14 @@ struct ProjectView: View {
                                     Spacer()
                                     Text(Strings.youCan.localized)
                                             .font(Font.system(size: 32, weight: .semibold))
-                                            .foregroundColor(Colors.tone5)
+                                            .foregroundColor(viewModel.tone[4])
                                     HStack(spacing: 46) {
                                         Image("SwipeHelpIcon")
                                         Image("ZoomHelpIcon")
                                     }
                                     Text(Strings.swipeAndZoom.localized)
                                             .font(Font.system(size: 32, weight: .semibold))
-                                            .foregroundColor(Colors.tone5)
+                                            .foregroundColor(viewModel.tone[4])
                                     BigButton(text: Strings.gotIt.localized) {
                                         withAnimation {
                                             showSwipeAndZoomSuggestion = false
@@ -157,14 +161,15 @@ struct ProjectView: View {
                     if (viewModel.isLyricsVisible) {
                         LyricsView(lines: $viewModel.lyricsLines, lyricsSelection: $viewModel.lyricsSelection)
                                 .frame(maxWidth: .infinity, maxHeight: 82)
-                                .background(Colors.tone2)
+                                .background(viewModel.tone[1])
                     }
                     VStack(alignment: .center) {
                         PlaybackSlider(
                                 progress: $viewModel.progress,
                                 sections: $viewModel.playbackSections,
                                 currentTime: $viewModel.playbackCurrentTime,
-                                endTime: $viewModel.playbackEndTime)
+                                endTime: $viewModel.playbackEndTime,
+                                tone: viewModel.tone)
                                 .padding(.leading, 16)
                                 .padding(.trailing, 16)
                                 .padding(.top, 14)
@@ -177,7 +182,7 @@ struct ProjectView: View {
                                     ZStack {
                                         Image("RetryButton")
                                         Text(viewModel.retrySeconds.description).font(Font.system(size: 10, weight: .bold))
-                                                .foregroundColor(Colors.tone3).offset(y: 2)
+                                                .foregroundColor(viewModel.tone[2]).offset(y: 2)
                                     }
                                 }
                             }
@@ -200,7 +205,7 @@ struct ProjectView: View {
                                 }
                             }
                         }.padding(.bottom, 0)
-                    }.background(Colors.tone1).frame(maxWidth: .infinity,
+                    }.background(viewModel.tone[0]).frame(maxWidth: .infinity,
                             maxHeight: viewModel.playbackSections.count > 1 ? 124 : 112,
                             alignment: .bottomLeading)
                 }.onChange(of: levelsVisible) {

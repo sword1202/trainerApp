@@ -11,8 +11,8 @@ using namespace std;
 
 constexpr float SCROLLBAR_PADDING = 2.f;
 
-static const Color backgroundColor = {0xE8, 0xE7, 0xF0, 0xFF};
-static const Color stripeColor = {0x61, 0x5F, 0x97, 0xFF};
+static const Color backgroundColor = Color::fromRgba(0xE8E7F0FF);
+static const Color stripeColor = Color::fromRgba(0x615F97FF);
 
 ScrollBar::ScrollBar(Drawer *drawer, MouseEventsReceiver *mouseEventsReceiver, ScrollBar::Orientation orientation)
         : drawer(drawer), mouseEventsReceiver(mouseEventsReceiver), orientation(orientation) {
