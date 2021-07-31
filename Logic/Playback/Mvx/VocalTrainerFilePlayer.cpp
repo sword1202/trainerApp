@@ -441,14 +441,14 @@ void VocalTrainerFilePlayer::updateMetronomeVolume() {
 }
 
 void VocalTrainerFilePlayer::seekToNextTact() {
-    double tactDuration = getTactDuration();
+    double tactDuration = getBarDuration();
     double seek = getSeek() + tactDuration;
     double mod = fmod(seek, tactDuration);
     setSeek(seek - mod);
 }
 
 void VocalTrainerFilePlayer::seekToPrevTact() {
-    double tactDuration = getTactDuration();
+    double tactDuration = getBarDuration();
     double seek = getSeek();
     double mod = fmod(seek, tactDuration);
     setSeek(seek - mod);
@@ -527,4 +527,8 @@ void VocalTrainerFilePlayer::clearSource() {
 
 bool VocalTrainerFilePlayer::hasSource() const {
     return file != nullptr;
+}
+
+int VocalTrainerFilePlayer::getBeatsInBar() const {
+    return file->getTimeSignature().getNumberOfBeatsInBar();
 }

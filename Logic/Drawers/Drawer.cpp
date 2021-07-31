@@ -174,9 +174,8 @@ void Drawer::deleteImage(Drawer::Image *&image) {
     image = nullptr;
 }
 
-Drawer::Image * Drawer::registerImage(Drawer::Image *image) {
+void Drawer::registerImage(Drawer::Image *image) {
     images.insert(image);
-    return image;
 }
 
 void Drawer::onImageDelete(Drawer::Image *image) {

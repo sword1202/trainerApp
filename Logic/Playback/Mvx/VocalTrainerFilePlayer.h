@@ -121,6 +121,8 @@ public:
     double getBeatsPerMinute() const override;
     double getOriginalBeatsPerMinute() const;
 
+    int getBeatsInBar() const override;
+
     double getTempoFactor() const;
 
     void setTempoFactor(double tempoFactor);

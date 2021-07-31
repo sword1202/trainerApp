@@ -38,7 +38,7 @@ void BoundsSelectionController::update() {
     if (boundsSelectionRunning) {
         float x = mouseEventsReceiver->getMousePosition().x;
         float seek = workspaceDrawer->getSeekFromXPositionOnWorkspace(x);
-        float minimumBoundsDuration = float(workspaceDrawer->getBeatDuration() * WorkspaceDrawer::BEATS_IN_TACT);
+        float minimumBoundsDuration = float(workspaceDrawer->getBeatDuration() * workspaceDrawer->getBeatsInBar());
         seek = std::max(seek, minimumBoundsDuration);
         selectedBounds.setEndSeek(seek);
         workspaceDrawer->setPlaybackBounds(selectedBounds);

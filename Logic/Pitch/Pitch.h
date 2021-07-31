@@ -88,6 +88,7 @@ public:
     static bool isWhite(int pitchInOctaveIndex);
     static int getWhitePitchIndexFromInOctaveIndex(int pitchInOctaveIndex);
     static int getBlackPitchIndexFromInOctaveIndex(int pitchInOctaveIndex);
+    static int getInOctaveIndexFromWhitePitchIndex(int whitePitchIndex);
 
     static int getPitchInOctaveIndexFromName(const std::string& name);
 

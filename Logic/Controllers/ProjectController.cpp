@@ -43,7 +43,9 @@ ProjectController::ProjectController(ProjectControllerDelegate* delegate) : dele
 
     player->vocalPartChangedListeners.addListener([this] (const VocalPart* vocalPart) {
         if (workspaceController) {
-            workspaceController->setVocalPart(vocalPart, player->getBeatsPerSecond());
+            workspaceController->setVocalPart(vocalPart,
+                    player->getBeatsPerSecond(),
+                    player->getFile().getTimeSignature().getNumberOfBeatsInBar());
             updateWorkspaceSeek(player->getSeek());
         }
     }, this);
@@ -511,7 +513,10 @@ void ProjectController::setPlaybackSource(VocalTrainerFile *source) {
 }
 
 void ProjectController::handlePlaybackSourceChange() {
-    workspaceController->setVocalPart(player->getVocalPart(), player->getBeatsPerSecond());
+    workspaceController->setVocalPart(
+            player->getVocalPart(),
+            player->getBeatsPerSecond(),
+            player->getFile().getTimeSignature().getNumberOfBeatsInBar());
     workspaceController->setInstrumentalTrackSamples(
             this->player->getFile().getInstrumentalPreviewSamples());
     workspaceController->setPitchSequence(player);

@@ -18,6 +18,8 @@
 #include "MidiFile.h"
 
 #include "VocalPart.h"
+#include "Tonality.h"
+#include "TimeSignature.h"
 
 class MidiFileReader {
 
@@ -28,6 +30,8 @@ class MidiFileReader {
     double beatsPerMinute;
     int    ticksPerBeat;
     double beatsPerTick;
+    Tonality tonality;
+    TimeSignature timeSignature;
 
     int    currentChannelPrefix;
 
@@ -43,6 +47,11 @@ public:
 	bool read(std::istream &is);
 
 	double getBeatsPerMinute() const;
+
+	const Tonality &getTonality() const;
+
+	const TimeSignature &getTimeSignature() const;
+
 	VocalPart tryGetVocalPartFromMidiTrackWithId(int midiTrackId) const;
 
 private:

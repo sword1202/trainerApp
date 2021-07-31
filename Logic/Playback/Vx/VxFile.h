@@ -16,6 +16,7 @@
 class VxFile : public VocalTrainerFile {
     VocalPart vocalPart;
     int beatsPerMinute;
+    TimeSignature timeSignature;
 public:
     void readFromStream(std::istream &is);
     void parse(const std::string& source);
@@ -33,6 +34,8 @@ public:
     const std::string &getSongTitleUtf8() const override;
     double getBeatsPerMinute() const override;
     const std::vector<short> &getInstrumentalPreviewSamples() const override;
+
+    const TimeSignature &getTimeSignature() const override;
 
     const Tonality &getOriginalTonality() const override;
 };

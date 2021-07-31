@@ -23,7 +23,6 @@ int main(int argc, char *argv[]) {
                                   "-trackid midiTrackId(default 1) "
                                   "-instrumental instrumental.mp3 "
                                   "-lyrics lyrics.txt "
-                                  "-tonality tonality "
                                   "-artistname artistName "
                                   "-title title\n";
     if (argc == 0) {
@@ -39,9 +38,8 @@ int main(int argc, char *argv[]) {
     std::string outputFilepath, midiFilepath, instrumentalFilePath, lyricsFilePath;
     std::string title, artistName;
     int midiTrackId;
-    std::string tonalityString;
 
-    std::set<std::string> argDefinitions {"-o", "-midi", "-trackid", "-instrumental", "-artistname", "-title", "-lyrics", "-tonality"};
+    std::set<std::string> argDefinitions {"-o", "-midi", "-trackid", "-instrumental", "-artistname", "-title", "-lyrics"};
 
     for (int i = 1; i < argc; ++i) {
         std::string argDefinition(argv[i]);
@@ -83,18 +81,11 @@ int main(int argc, char *argv[]) {
             title = Strings::Unquote(arg);
         } else if (argDefinition == "-lyrics") {
             lyricsFilePath = Strings::Unquote(arg);
-        } else if (argDefinition == "-tonality") {
-            tonalityString = Strings::Unquote(arg);
         }
     }
 
     if (outputFilepath.empty()) {
         cerr << "Please specify output file path using -o command\n";
-        return -1;
-    }
-
-    if (tonalityString.empty()) {
-        cerr << "Please specify tonality using -tonality command\n";
         return -1;
     }
 
@@ -126,8 +117,10 @@ int main(int argc, char *argv[]) {
     mvxFile.setBeatsPerMinute(beatsPerMinute);
     mvxFile.generateInstrumentalPreviewSamplesFromInstrumental();
 
-    Tonality tonality = Tonality::parse(tonalityString);
+    Tonality tonality = reader.getTonality();
     mvxFile.setOriginalTonality(tonality);
+    TimeSignature timeSignature = reader.getTimeSignature();
+    mvxFile.setTimeSignature(timeSignature);
 
     if (!lyricsFilePath.empty()) {
         mvxFile.loadLyricsFromFile(lyricsFilePath.data());

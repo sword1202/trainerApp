@@ -405,6 +405,11 @@ int Pitch::getPitchInOctaveIndexFromName(const std::string& name) {
     }
 }
 
+int Pitch::getInOctaveIndexFromWhitePitchIndex(int whitePitchIndex) {
+    assert(whitePitchIndex >= 0 && whitePitchIndex < WHITE_PITCHES_IN_OCTAVE);
+    return WHITE_PITCH_INDEX_TO_IN_OCTAVE_INDEX[whitePitchIndex];
+}
+
 
 std::ostream& operator<<(std::ostream& os, const Pitch& pitch) {
     os<<pitch.getName()<<pitch.getOctave()<<" ("<<pitch.getFrequency()<<")";

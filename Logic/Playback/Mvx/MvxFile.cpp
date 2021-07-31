@@ -222,6 +222,14 @@ void MvxFile::setInstrumental(AudioDataBufferConstPtr instrumental) {
     MvxFile::instrumental = instrumental;
 }
 
+const TimeSignature &MvxFile::getTimeSignature() const {
+    return timeSignature;
+}
+
+void MvxFile::setTimeSignature(const TimeSignature &timeSignature) {
+    MvxFile::timeSignature = timeSignature;
+}
+
 void MvxFileHeader::readFromStream(std::istream& is) {
     checkMvxSignature(is);
     Serialization::BinaryReadArchive archive(is);

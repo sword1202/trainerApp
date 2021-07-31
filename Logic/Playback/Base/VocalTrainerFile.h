@@ -11,6 +11,7 @@
 #include "Lyrics.h"
 #include "AudioDataBuffer.h"
 #include "Tonality.h"
+#include "TimeSignature.h"
 #include <map>
 #include <memory>
 
@@ -32,6 +33,7 @@ public:
     virtual double getBeatsPerMinute() const = 0;
     virtual const std::vector<short> &getInstrumentalPreviewSamples() const = 0;
     virtual const Tonality& getOriginalTonality() const = 0;
+    virtual const TimeSignature &getTimeSignature() const = 0;
     inline virtual double getRecordingTempoFactor() const {
         return 1.0;
     }

@@ -15,7 +15,9 @@
 #include "Tonality.h"
 #include <boost/variant.hpp>
 #include <map>
+#import <Logic/TimeSignature.h>
 #include "Serializers.h"
+#include "TimeSignature.h"
 
 struct MvxFileHeader {
     bool recording = false;
@@ -48,6 +50,7 @@ class MvxFile : private MvxFileHeader, public VocalTrainerFile {
     VocalPart vocalPart;
     AudioDataBufferConstPtr instrumental = nullptr;
     double beatsPerMinute = 0;
+    TimeSignature timeSignature;
 
     // recording
     AudioDataBufferConstPtr recordingData = nullptr;
@@ -64,6 +67,7 @@ public:
         saveOrLoadHeader(ar, &version);
 
         ar(beatsPerMinute);
+        ar(timeSignature);
         ar(vocalPart);
 
         auto serializeAudioDataBuffer = [&] (AudioDataBufferConstPtr& buffer) {
@@ -154,6 +158,9 @@ public:
 
     const Tonality &getOriginalTonality() const override;
     void setOriginalTonality(const Tonality &originalTonality);
+
+    const TimeSignature &getTimeSignature() const override;
+    void setTimeSignature(const TimeSignature &timeSignature);
 };
 
 

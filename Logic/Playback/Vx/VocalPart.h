@@ -12,6 +12,8 @@
 #include "StlDebugUtils.h"
 #include <iostream>
 
+static constexpr int VERSION = 1;
+
 class VocalPart {
     std::vector<NoteInterval> notes;
     double ticksPerSecond = 0;
@@ -125,6 +127,8 @@ public:
 
     template <typename Archive>
     void saveOrLoad(Archive& archive, bool save) {
+        int version = VERSION;
+        archive(version);
         archive(ticksPerSecond);
         archive(notes);
         archive(endSilenceDurationInTicks);

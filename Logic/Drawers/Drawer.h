@@ -139,7 +139,7 @@ protected:
     virtual void drawTextUsingImages(const std::string &text, float x, float y);
     virtual void doTranslate(float x, float y) = 0;
     virtual Image *createImageNative(int w, int h, const void *data) = 0;
-    virtual Image* registerImage(Image* image);
+    virtual void registerImage(Image* image);
     virtual bool imageRegistered(Image* image) const;
     virtual void onImageDelete(Image* image);
     virtual CppUtils::Color getFillColor() const = 0;

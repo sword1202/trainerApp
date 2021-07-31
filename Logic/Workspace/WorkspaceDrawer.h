@@ -38,6 +38,7 @@ class WorkspaceDrawer : public WorkspaceController {
     float horizontalOffset;
     double beatsPerSecond;
     double totalDurationInSeconds;
+    int beatsInBar = 4;
     bool running;
     int firstPitchIndex;
     int lastPitchIndex;
@@ -155,7 +156,6 @@ public:
     static constexpr float CLOCK_HEIGHT = 22.f;
     static constexpr float YARD_STICK_HEIGHT = CLOCK_HEIGHT  + PLAYHEAD_TRIANGLE_HEIGHT / 2;
     static const Color YARD_STICK_DOT_AND_TEXT_COLOR;
-    static constexpr int BEATS_IN_TACT = 4;
 
     WorkspaceDrawer(Drawer *drawer,
             MouseEventsReceiver *mouseEventsReceiver,
@@ -174,6 +174,8 @@ public:
 
     double getBeatsPerSecond() const override;
     double getBeatDuration() const;
+
+    int getBeatsInBar() const;
 
     double getTotalDurationInSeconds() const;
 
@@ -198,7 +200,7 @@ public:
     void setPitchesCollection(const PitchesCollection *pitchesCollection) override;
 
     // Warning: VocalPart should not be changed from outside
-    void setVocalPart(const VocalPart *vocalPart, double beatsPerSecond) override;
+    void setVocalPart(const VocalPart *vocalPart, double beatsPerSecond, int beatsInBar) override;
     int getDistanceFromFirstPitch(const Pitch &pitch) const;
 
     void update() override;

@@ -10,13 +10,14 @@
 class BeatsPerMinuteProvider {
 public:
     virtual double getBeatsPerMinute() const = 0;
+    virtual int getBeatsInBar() const = 0;
 
     inline double getBeatDuration() const {
         return 60 / getBeatsPerMinute();
     }
 
-    inline double getTactDuration() const {
-        return 4 * getBeatDuration();
+    inline double getBarDuration() const {
+        return getBeatsInBar() * getBeatDuration();
     }
 
     inline double getBeatsPerSecond() const {

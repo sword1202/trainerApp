@@ -223,9 +223,26 @@ void MidiFileReader::processEvent(const MidiEvent &event)
         }
 
             // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            // FF 20 01 сс
+            // FF 20 01 сс mi
             // Key signature (sf is a byte specifying the number of flats (-ve) or sharps (+ve) that identifies the key signature (-7 = 7 flats, -1 = 1 flat, 0 = key of C, 1 = 1 sharp, etc). mi is a byte specifying a major (0) or minor (1) key)
         case 0x59: {
+            int key =  event[MIDI_MESSAGE_BYTE_INDEX_3];
+            int pitchInOctaveIndex = key >= 0 ? key : Pitch::getInOctaveIndexFromWhitePitchIndex(-key);
+            bool isMajor = event[MIDI_MESSAGE_BYTE_INDEX_4] == 0;
+            tonality = Tonality(pitchInOctaveIndex, isMajor);
+            break;
+        }
+
+        /*
+         FF 58 04 nn dd cc bb
+        Time signature is expressed as 4 numbers. nn and dd represent the "numerator" and "denominator" of the signature as notated on sheet music. The denominator is a negative power of 2: 2 = quarter note, 3 = eighth, etc.
+        The cc expresses the number of MIDI clocks in a metronome click.
+        The bb parameter expresses the number of notated 32nd notes in a MIDI quarter note (24 MIDI clocks). This event allows a program to relate what MIDI thinks of as a quarter, to something entirely different.
+        */
+        case 0x58: {
+            int beatsInBar = event[MIDI_MESSAGE_BYTE_INDEX_3];
+            int beatDuration = event[MIDI_MESSAGE_BYTE_INDEX_4];
+            timeSignature = TimeSignature(beatsInBar, beatDuration);
             break;
         }
 
@@ -512,4 +529,12 @@ VocalPart MidiFileReader::tryGetVocalPartFromMidiTrackWithId(int midiTrackId) co
     return VocalPart(std::move(pitches),
                      durationInTicks - track->finalTick, //endSilenceLengthInTicks
                      ticksPerSecond);
+}
+
+const Tonality &MidiFileReader::getTonality() const {
+    return tonality;
+}
+
+const TimeSignature &MidiFileReader::getTimeSignature() const {
+    return timeSignature;
 }

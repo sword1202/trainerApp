@@ -31,7 +31,7 @@ public:
     virtual float getVisibleGridHeight() const = 0;
     virtual float getSummarizedPlayableGridWidth() const = 0;
     virtual float getSummarizedGridHeight() const = 0;
-    virtual void setVocalPart(const VocalPart *vocalPart, double beatsPerSecond) = 0;
+    virtual void setVocalPart(const VocalPart *vocalPart, double beatsPerSecond, int beatsInBar) = 0;
     virtual void setFirstVisiblePitch(const Pitch &firstPitch) = 0;
     virtual void update() = 0;
     virtual void setDetectedPitch(const Pitch &detectedPitch) = 0;

@@ -13,6 +13,7 @@
 #include "Collections.h"
 #include "Maps.h"
 #include "NotImplementedAssert.h"
+#include "StringUtils.h"
 
 using namespace CppUtils;
 using namespace Math;
@@ -31,6 +32,12 @@ void VxFile::readFromStream(std::istream &is) {
     if (beatsPerMinute <= 0) {
         throw std::runtime_error("invalid beatsPerMinute");
     }
+
+    std::string timeSignature;
+    is >> timeSignature;
+    auto split = Strings::SplitIntegers(timeSignature, '/');
+    assert(split.size() == 2 && "Wrong time signature should be n/n, where n is integer");
+    this->timeSignature = TimeSignature(split[0], split[1]);
 
     std::vector<std::optional<Pitch>> pitches;
     pitches.reserve(200);
@@ -151,4 +158,8 @@ const std::vector<short> &VxFile::getInstrumentalPreviewSamples() const {
 const Tonality &VxFile::getOriginalTonality() const {
     NOT_IMPLEMENTED_ASSERT;
     return Tonality();
+}
+
+const TimeSignature &VxFile::getTimeSignature() const {
+    return timeSignature;
 }

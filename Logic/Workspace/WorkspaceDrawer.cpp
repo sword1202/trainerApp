@@ -268,7 +268,7 @@ void WorkspaceDrawer::iterateHorizontalIntervals(const std::function<void(float 
     int index = 1;
     float offset = fmod(horizontalOffset, getZeroSeekGridOffset());
     for (float x = intervalWidth - offset; x < width + offset; x += intervalWidth, index++) {
-        bool isBeat = index % BEATS_IN_TACT != 0;
+        bool isBeat = index % beatsInBar != 0;
         func(x, isBeat);
     }
 }
@@ -461,10 +461,11 @@ float WorkspaceDrawer::getSummarizedPlayableGridWidth() const {
     return intervalsCount * intervalWidth;
 }
 
-void WorkspaceDrawer::setVocalPart(const VocalPart *vocalPart, double beatsPerSecond) {
+void WorkspaceDrawer::setVocalPart(const VocalPart *vocalPart, double beatsPerSecond, int beatsInBar) {
     this->vocalPart = vocalPart;
     this->beatsPerSecond = beatsPerSecond;
     this->totalDurationInSeconds = vocalPart->getDurationInSeconds();
+    this->beatsInBar = beatsInBar;
     updateHorizontalScrollBarPageSize();
 }
 
@@ -478,7 +479,7 @@ void WorkspaceDrawer::initGraphPitchesArrays(float workspaceSeek) {
         pitchesGraphDrawEndTime = getWorkspaceDuration() + pitchesGraphDrawBeginTime + intervalDuration;
     } else {
         // Pre-draw one beat more to avoid graph interruption
-        double drawInterval = this->getBeatDuration() * (BEATS_IN_TACT + 1);
+        double drawInterval = this->getBeatDuration() * (beatsInBar + 1);
         pitchesGraphDrawBeginTime = workspaceSeek - drawInterval;
         pitchesGraphDrawEndTime = workspaceSeek + 0.001;
     }
@@ -649,14 +650,14 @@ void WorkspaceDrawer::drawSecondPlayHead() {
 
 void WorkspaceDrawer::drawFirstPlayHead() {
     double time = getWorkspaceSeek();
-    float x = BEATS_IN_TACT * intervalWidth;
+    float x = beatsInBar * intervalWidth;
     firstPlayHeadPosition = x;
-    drawPlayHead(BEATS_IN_TACT * intervalWidth, time);
+    drawPlayHead(beatsInBar * intervalWidth, time);
 }
 
 void WorkspaceDrawer::drawEnding() {
     float distanceInSeconds = static_cast<float>(totalDurationInSeconds - getWorkspaceSeek());
-    float distance = static_cast<float>(BEATS_IN_TACT * intervalWidth + distanceInSeconds * beatsPerSecond * intervalWidth);
+    float distance = static_cast<float>(beatsInBar * intervalWidth + distanceInSeconds * beatsPerSecond * intervalWidth);
     if (distance < getVisibleGridWidth()) {
         float y = YARD_STICK_HEIGHT;
         float scrollBarHeight;
@@ -1095,7 +1096,7 @@ void WorkspaceDrawer::setMaxZoom(float maxZoom) {
 }
 
 float WorkspaceDrawer::getZeroSeekGridOffset() const {
-    return intervalWidth * BEATS_IN_TACT;
+    return intervalWidth * beatsInBar;
 }
 
 void WorkspaceDrawer::setZoom(float zoom, const CppUtils::PointF& intoPoint) {
@@ -1119,4 +1120,8 @@ CppUtils::PointF WorkspaceDrawer::getRelativeMousePosition() const {
 
 void WorkspaceDrawer::setColors(const WorkspaceColorScheme &scheme) {
     this->colors = scheme;
+}
+
+int WorkspaceDrawer::getBeatsInBar() const {
+    return beatsInBar;
 }
