@@ -16,4 +16,6 @@ WorkspaceColorScheme::WorkspaceColorScheme() {
     endingColor = Color::fromRgba(0xFF5E85FF);
     pianoBorderColor = Color::fromRgba(0x9A98D07f);
     pianoSelectedPitchColor = Color::fromRgba(0x615F97ff);
+    reachedPitchColor = Color::fromRgba(0x31DD6Cff);
+    missedPitchColor = Color::fromRgba(0xFF5E85ff);
 }

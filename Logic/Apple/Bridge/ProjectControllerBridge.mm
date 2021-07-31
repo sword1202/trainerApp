@@ -397,6 +397,9 @@ static LyricsSectionType fromCppToObjCSectionType(Lyrics::SectionType type) {
     R(pianoTrackShadowColor)
     R(pianoTrackPitchesColor)
     R(pianoSharpPitchColor)
+    R(pianoSelectedPitchColor)
+    R(reachedPitchColor)
+    R(missedPitchColor)
     R(endingColor)
 #undef R
     
