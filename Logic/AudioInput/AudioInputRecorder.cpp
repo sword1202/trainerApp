@@ -35,6 +35,7 @@ void AudioInputRecorder::operator()(const int16_t *data, int size) {
 
 AudioDataBufferConstPtr AudioInputRecorder::getRecordedData() const {
     DATA_LOCK;
+    recordedData->getData().resize(static_cast<size_t>(seek));
     return recordedData;
 }
 
