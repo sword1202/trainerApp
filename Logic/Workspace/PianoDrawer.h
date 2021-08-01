@@ -15,12 +15,12 @@
 #include <atomic>
 
 class PianoDrawer {
-    std::atomic<float> intervalHeight;
+    float intervalHeight;
     Drawer* drawer;
     PlayingPitchSequence* pitchSequence = nullptr;
 
-    std::atomic_int firstPitchIndex;
-    std::atomic_int detectedPitchIndex;
+    int firstPitchIndex;
+    int detectedPitchIndex;
     std::vector<Drawer::Color> drawSharpPitchesFillColor;
     std::vector<float> drawSharpPitchesY;
     std::unordered_set<int> selectedPitchIndexes;
