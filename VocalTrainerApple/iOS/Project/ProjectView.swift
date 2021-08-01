@@ -161,7 +161,7 @@ struct ProjectView: View {
                     if (viewModel.isLyricsVisible) {
                         LyricsView(lines: $viewModel.lyricsLines, lyricsSelection: $viewModel.lyricsSelection)
                                 .frame(maxWidth: .infinity, maxHeight: 82)
-                                .background(viewModel.tone[1])
+                                .background(viewModel.tone[1]).transition(.move(edge: .bottom))
                     }
                     VStack(alignment: .center) {
                         PlaybackSlider(
