@@ -142,15 +142,12 @@ void WorkspaceDrawer::draw() {
     assert(intervalWidth >= 0);
     assert(intervalHeight >= 0);
 
-    double now = TimeUtils::NowInSeconds();
-    float frameDuration = now - frameTime;
-    float fps = 1.0 / frameDuration;
+    float frameDuration = drawer->getTimeBetweenFrames();
     // old logic
     if (running) {
-        horizontalOffset = horizontalOffset + beatsPerSecond * intervalWidth * frameDuration;
+        horizontalOffset += beatsPerSecond * intervalWidth * frameDuration;
         updateHorizontalScrollBarPagePosition();
     }
-    frameTime = now;
 
     drawer->clear();
     drawer->beginFrame(width, height, devicePixelRatio);
@@ -203,7 +200,7 @@ void WorkspaceDrawer::draw() {
     drawer->drawLine(0, YARD_STICK_HEIGHT + 0.5f, PIANO_WIDTH, YARD_STICK_HEIGHT + 0.5f);
 
     drawer->translate(0, PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN);
-    drawVerticalLine(PIANO_WIDTH + 0.5, colors.borderLineColor);
+    drawVerticalLine(PIANO_WIDTH + 0.5f, colors.borderLineColor);
     drawer->translate(0, -PIANO_WORKSPACE_VERTICAL_LINE_TOP_MARGIN);
 
     drawer->translate(0, 0);
@@ -242,7 +239,7 @@ void WorkspaceDrawer::drawScrollBars() {
         float position = horizontalScrollBar.getPosition();
         horizontalOffset = position * getSummarizedPlayableGridWidth();
         assert(position <= 1);
-        float seek = position * totalDurationInSeconds;
+        float seek = static_cast<float>(position * totalDurationInSeconds);
         if (delegate) {
             delegate->onSeekChangedByUserEvent(seek);
         }
@@ -436,11 +433,11 @@ void WorkspaceDrawer::drawPianoTrackButton(float pianoTrackHeight) {
 }
 
 float WorkspaceDrawer::getWorkspaceSeek() const {
-    return (horizontalOffset / intervalWidth) / beatsPerSecond;
+    return static_cast<float>((horizontalOffset / intervalWidth) / beatsPerSecond);
 }
 
 float WorkspaceDrawer::getWorkspaceDuration() const {
-    return width / intervalWidth / beatsPerSecond;
+    return static_cast<float>(width / intervalWidth / beatsPerSecond);
 }
 
 
@@ -645,11 +642,11 @@ void WorkspaceDrawer::drawSecondPlayHead() {
 
     float x = startX + width;
     secondPlayHeadPosition = x;
-    drawPlayHead(x, bounds.getEndSeek());
+    drawPlayHead(x, static_cast<float>(bounds.getEndSeek()));
 }
 
 void WorkspaceDrawer::drawFirstPlayHead() {
-    double time = getWorkspaceSeek();
+    float time = getWorkspaceSeek();
     float x = beatsInBar * intervalWidth;
     firstPlayHeadPosition = x;
     drawPlayHead(beatsInBar * intervalWidth, time);
@@ -697,7 +694,6 @@ WorkspaceDrawer::WorkspaceDrawer(Drawer *drawer,
         beatsPerSecond(0),
         running(false),
         firstPitchIndex(-1),
-        frameTime(0),
         drawer(drawer),
         vocalPart(nullptr),
         firstPlayHeadPosition(0),
@@ -782,7 +778,7 @@ bool WorkspaceDrawer::isRunning() const {
 
 void WorkspaceDrawer::setRunning(bool value) {
     CHECK_IF_RENDER_THREAD;
-    frameTime = TimeUtils::NowInSeconds();
+    drawer->resetFrameTime();
     running = value;
 }
 
@@ -876,7 +872,7 @@ float WorkspaceDrawer::getSeekFromXPositionOnWorkspace(float x) const {
     x -= getZeroSeekGridOffset();
     x -= getGridBeginXPosition();
 
-    float seek = x / intervalWidth / beatsPerSecond;
+    float seek = static_cast<float>(x / intervalWidth / beatsPerSecond);
     float workspaceSeek = getWorkspaceSeek();
     seek += workspaceSeek;
     return seek;

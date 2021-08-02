@@ -129,6 +129,13 @@ public:
     void setTextImagesFactory(DrawerTextImagesFactory *textImagesFactory);
 
     virtual Image *renderIntoImage(const std::function<void()> &renderingFunction, int w, int h) = 0;
+
+    void resetFrameTime();
+
+    float getFrameTime() const;
+
+    float getTimeBetweenFrames() const;
+
 protected:
 
     float getWidth() const;
@@ -159,6 +166,9 @@ private:
     std::unordered_set<Image*> images;
     TextDrawStrategy textDrawStrategy = DRAW_USING_FONTS;
     DrawerTextImagesFactory* textImagesFactory = nullptr;
+
+    float frameTime = -1;
+    float timeBetweenFrames = 0;
 
     std::vector<Image*> tempTextImages;
 };

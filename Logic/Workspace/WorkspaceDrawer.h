@@ -72,7 +72,6 @@ class WorkspaceDrawer : public WorkspaceController {
 
     const VocalPart* vocalPart;
 
-    double frameTime;
     float firstPlayHeadPosition, secondPlayHeadPosition;
 
     std::vector<float> pitchesFrequencies;

@@ -2,6 +2,7 @@
 #include "Drawer.h"
 #include "Sets.h"
 #include "Core.h"
+#include "TimeUtils.h"
 #include <sstream>
 #include <iostream>
 
@@ -94,6 +95,10 @@ void Drawer::beginFrame(float width, float height, float devicePixelRatio) {
     this->devicePixelRatio = devicePixelRatio;
     translateX = 0;
     translateY = 0;
+
+    double now = TimeUtils::NowInSeconds();
+    timeBetweenFrames = static_cast<float>(frameTime > 0 ? now - frameTime : 0);
+    frameTime = static_cast<float>(now);
 }
 
 void Drawer::rect(float x, float y, float w, float h) {
@@ -318,6 +323,19 @@ void Drawer::drawInAbsoluteCoordinates(const std::function<void()>& drawerCallba
     this->translateTo(0, 0);
     drawerCallback();
     this->translateTo(translateX, translateY);
+}
+
+void Drawer::resetFrameTime() {
+    frameTime = -1;
+    timeBetweenFrames = 0;
+}
+
+float Drawer::getFrameTime() const {
+    return frameTime;
+}
+
+float Drawer::getTimeBetweenFrames() const {
+    return timeBetweenFrames;
 }
 
 void DrawerTextImagesFactory::addImage(const DrawerTextImagesFactoryCharacterData &data) {
