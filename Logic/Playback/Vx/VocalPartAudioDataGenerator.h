@@ -8,6 +8,8 @@
 
 #include <vector>
 #include <mutex>
+#include <map>
+#include <unordered_set>
 
 #include "VocalPart.h"
 #include "PlaybackData.h"
@@ -22,9 +24,10 @@ class VocalPartAudioDataGenerator {
     int pcmDataSamplesCount;
 
     bool requestOffPitches;
-    std::vector<int> pitchesIndexes;
-    std::vector<int> tempPitchIndexes;
+    std::vector<int> onnedPitches;
     std::vector<int> difference;
+    // batchIndex -> [playing pitch]
+    std::map<int, std::vector<int>> batchPlayingPitchesMap;
 
     PlaybackData playbackData;
     PitchRenderer* pitchRenderer;

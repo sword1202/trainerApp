@@ -13,6 +13,7 @@
 #include "Primitives.h"
 #include "MathUtils.h"
 #include <iostream>
+#include <unordered_set>
 
 using namespace CppUtils;
 using namespace AudioUtils;
@@ -43,8 +44,8 @@ int VocalPartAudioDataGenerator::readNextSamplesBatch(short *intoBuffer, bool mo
     {
         VXFILE_LOCK;
         if (requestOffPitches) {
-            offPitches(pitchesIndexes);
-            pitchesIndexes.clear();
+            offPitches(onnedPitches);
+            onnedPitches.clear();
             requestOffPitches = false;
         }
     }
@@ -54,23 +55,29 @@ int VocalPartAudioDataGenerator::readNextSamplesBatch(short *intoBuffer, bool mo
     }
 
     if (!moveSeekAndFillWithZero) {
-        double startTime = GetSampleTimeInSeconds(seek, playbackData.sampleRate);
-        double endTime = GetSampleTimeInSeconds(seek + framesCount, playbackData.sampleRate);
+        VXFILE_LOCK;
+        if (batchPlayingPitchesMap.empty()) {
+            Memory::FillZero(intoBuffer, framesCount * playbackData.numberOfChannels);
+        } else {
+            int batchIndex = seek / playbackData.samplesPerBuffer;
+            auto iter = batchPlayingPitchesMap.find(batchIndex);
+            if (iter == batchPlayingPitchesMap.end()) {
+                offPitches(onnedPitches);
+                onnedPitches.clear();
+            } else {
+                Sets::Difference(onnedPitches, iter->second, std::back_inserter(difference));
+                offPitches(difference);
 
-        tempPitchIndexes.clear();
-        vocalPart.getPitchesIndexesInTimeRange(startTime, endTime, std::back_inserter(tempPitchIndexes));
+                difference.clear();
+                Sets::Difference(iter->second, onnedPitches, std::back_inserter(difference));
+                onPitches(difference);
+                difference.clear();
 
-        difference.clear();
-        Sets::Difference(pitchesIndexes, tempPitchIndexes, std::back_inserter(difference));
-        offPitches(difference);
+                onnedPitches = iter->second;
+            }
 
-        difference.clear();
-        Sets::Difference(tempPitchIndexes, pitchesIndexes, std::back_inserter(difference));
-        onPitches(difference);
-
-        pitchRenderer->render(intoBuffer, framesCount);
-
-        pitchesIndexes = std::move(tempPitchIndexes);
+            pitchRenderer->render(intoBuffer, framesCount);
+        }
     } else {
         Memory::FillZero(intoBuffer, framesCount * playbackData.numberOfChannels);
     }
@@ -88,9 +95,7 @@ int VocalPartAudioDataGenerator::readNextSamplesBatch(short *intoBuffer, bool mo
 VocalPartAudioDataGenerator::VocalPartAudioDataGenerator(PitchRenderer* pitchRenderer)
         : pitchRenderer(pitchRenderer) {
     requestOffPitches = false;
-    pitchesIndexes.reserve(10);
-    tempPitchIndexes.reserve(10);
-    difference.reserve(10);
+    onnedPitches.reserve(10);
 }
 
 void VocalPartAudioDataGenerator::init(const PlaybackData &config) {
@@ -134,6 +139,46 @@ void VocalPartAudioDataGenerator::prepareForVocalPartSet(const VocalPart& vocalP
         seek = Math::RoundToInt(seek * newDuration / currentDuration);
     }
     pcmDataSamplesCount = (int)ceil(newDuration * playbackData.sampleRate);
+    int batchSamplesCount = playbackData.samplesPerBuffer;
+    const auto &notes = vocalPart.getNotes();
+    batchPlayingPitchesMap.clear();
+
+    std::unordered_set<int> onBatchIndexes;
+    std::unordered_set<int> offBatchIndexes;
+    for (int noteIndex = 0; noteIndex < notes.size(); ++noteIndex) {
+        const NoteInterval& note = notes[noteIndex];
+        int onSampleIndex = vocalPart.samplesCountFromTicks(note.startTickNumber, playbackData.sampleRate);
+        int onBatchIndex = onSampleIndex / batchSamplesCount;
+        int offSampleIndex = vocalPart.samplesCountFromTicks(note.endTickNumber(), playbackData.sampleRate);
+        int offBatchIndex = offSampleIndex / batchSamplesCount;
+        if (onBatchIndex == offBatchIndex) {
+            offBatchIndex++;
+        }
+
+        // Prevent a situation, when a batch has on and off at the same time
+        while (offBatchIndexes.count(onBatchIndex)) {
+            onBatchIndex++;
+        }
+
+        while (onBatchIndexes.count(offBatchIndex)) {
+            offBatchIndex--;
+        }
+
+        for (int batchIndex = onBatchIndex; batchIndex < offBatchIndex; ++batchIndex) {
+            batchPlayingPitchesMap[batchIndex].push_back(noteIndex);
+        }
+
+        // Check if the note is valid
+        if (onBatchIndex < offBatchIndex) {
+            onBatchIndexes.insert(onBatchIndex);
+            offBatchIndexes.insert(offBatchIndex);
+        }
+    }
+
+    for (auto& entry : batchPlayingPitchesMap) {
+        std::sort(entry.second.begin(), entry.second.end());
+    }
+    
     requestOffPitches = true;
 }
 

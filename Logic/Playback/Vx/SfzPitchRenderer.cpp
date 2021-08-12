@@ -5,7 +5,10 @@
 
 #include "SfzPitchRenderer.h"
 #include "MathUtils.h"
+#include <iostream>
 
+using std::cout;
+using std::endl;
 using namespace CppUtils;
 
 #define CHECK_NUMBER_OF_CHANNELS assert(numberOfChannels >= 1 && "wrong number of channels, don't forget to call init before")
