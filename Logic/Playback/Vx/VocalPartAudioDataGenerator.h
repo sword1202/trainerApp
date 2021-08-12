@@ -8,7 +8,7 @@
 
 #include <vector>
 #include <mutex>
-#include <map>
+#include "IntervalMap.h"
 #include <unordered_set>
 
 #include "VocalPart.h"
@@ -26,8 +26,8 @@ class VocalPartAudioDataGenerator {
     bool requestOffPitches;
     std::vector<int> onnedPitches;
     std::vector<int> difference;
-    // batchIndex -> [playing pitch]
-    std::map<int, std::vector<int>> batchPlayingPitchesMap;
+    // [batchIndexBegin,batchIndexEnd) -> [playing pitch]
+    CppUtils::IntervalMap<int, int> batchPlayingPitchesMap;
 
     PlaybackData playbackData;
     PitchRenderer* pitchRenderer;

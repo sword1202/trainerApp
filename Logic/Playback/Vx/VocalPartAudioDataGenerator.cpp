@@ -14,6 +14,7 @@
 #include "MathUtils.h"
 #include <iostream>
 #include <unordered_set>
+#include <boost/icl/interval_map.hpp>
 
 using namespace CppUtils;
 using namespace AudioUtils;
@@ -60,20 +61,20 @@ int VocalPartAudioDataGenerator::readNextSamplesBatch(short *intoBuffer, bool mo
             Memory::FillZero(intoBuffer, framesCount * playbackData.numberOfChannels);
         } else {
             int batchIndex = seek / playbackData.samplesPerBuffer;
-            auto iter = batchPlayingPitchesMap.find(batchIndex);
-            if (iter == batchPlayingPitchesMap.end()) {
+            const auto& pitches = batchPlayingPitchesMap.get(batchIndex);
+            if (pitches.empty()) {
                 offPitches(onnedPitches);
                 onnedPitches.clear();
             } else {
-                Sets::Difference(onnedPitches, iter->second, std::back_inserter(difference));
+                Sets::Difference(onnedPitches, pitches, std::back_inserter(difference));
                 offPitches(difference);
 
                 difference.clear();
-                Sets::Difference(iter->second, onnedPitches, std::back_inserter(difference));
+                Sets::Difference(pitches, onnedPitches, std::back_inserter(difference));
                 onPitches(difference);
                 difference.clear();
 
-                onnedPitches = iter->second;
+                onnedPitches.assign(pitches.begin(), pitches.end());
             }
 
             pitchRenderer->render(intoBuffer, framesCount);
@@ -164,19 +165,12 @@ void VocalPartAudioDataGenerator::prepareForVocalPartSet(const VocalPart& vocalP
             offBatchIndex--;
         }
 
-        for (int batchIndex = onBatchIndex; batchIndex < offBatchIndex; ++batchIndex) {
-            batchPlayingPitchesMap[batchIndex].push_back(noteIndex);
-        }
-
         // Check if the note is valid
         if (onBatchIndex < offBatchIndex) {
+            batchPlayingPitchesMap.add(onBatchIndex, offBatchIndex, noteIndex);
             onBatchIndexes.insert(onBatchIndex);
             offBatchIndexes.insert(offBatchIndex);
         }
-    }
-
-    for (auto& entry : batchPlayingPitchesMap) {
-        std::sort(entry.second.begin(), entry.second.end());
     }
     
     requestOffPitches = true;
