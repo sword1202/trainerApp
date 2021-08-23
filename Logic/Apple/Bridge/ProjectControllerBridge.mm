@@ -264,6 +264,12 @@ public:
     _cpp->setPlaybackSource(filePath.UTF8String);
 }
 
+- (void)setPlaybackSourceWithVocalTrainerFile:(void *)vocalTrainerFile {
+    _playbackSource = nil;
+    _cpp->setPlaybackSource(static_cast<VocalTrainerFile*>(vocalTrainerFile));
+}
+
+
 - (NSString *)artistName {
     return [NSString stringWithUTF8String:_cpp->getArtistNameUtf8().data()];
 }

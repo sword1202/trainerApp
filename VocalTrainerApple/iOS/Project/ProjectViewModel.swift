@@ -30,6 +30,8 @@ class ProjectViewModel : ObservableObject {
     @Published private(set) var isPlaying: Bool = false
     @Published var showSongCompletionFlow: Bool = false
     private(set) var songCompletionFlow: SongCompletionFlowBridge?
+    @Published var showListenScreen = false
+    @Published private(set) var recording: UnsafeMutableRawPointer? = nil
 
     @Published private(set) var tone: [Color] = []
 
@@ -56,11 +58,7 @@ class ProjectViewModel : ObservableObject {
         playbackEndTime = timeFormatter.string(from: Date(timeIntervalSince1970: projectController.endSeek))
     }
 
-    init(filePath: String?) {
-        projectController.add(delegate: self)
-        let mvxFilePath = filePath ?? Bundle.main.path(forResource: "drm", ofType: "mvx")
-        projectController.setPlaybackSource(filePath: mvxFilePath)
-
+    private func postInit() {
         isMetronomeEnabled = projectController.metronomeEnabled
         updatePlaybackSections()
         title = projectController.artistName + " - " + projectController.songTitle
@@ -71,6 +69,19 @@ class ProjectViewModel : ObservableObject {
 //                audioEngine.inputNode,
 //                to: audioEngine.outputNode,
 //                format: audioEngine.inputNode.inputFormat(forBus: 0))
+    }
+
+    init(filePath: String?) {
+        projectController.add(delegate: self)
+        let mvxFilePath = filePath ?? Bundle.main.path(forResource: "drm", ofType: "mvx")
+        projectController.setPlaybackSource(filePath: mvxFilePath)
+        postInit()
+    }
+
+    init(vocalTrainerFilePointer: UnsafeMutableRawPointer) {
+        projectController.add(delegate: self)
+        projectController.setPlaybackSource(vocalTrainerFile: vocalTrainerFilePointer)
+        postInit()
     }
 
     private func updatePlaybackSections() {
@@ -184,9 +195,11 @@ extension ProjectViewModel : ProjectControllerBridgeDelegate {
             Colors.tone6,
             Colors.tone7,
         ]
-        if isRecording() {
-            tone = tone.map { $0.rotate(angle: Colors.recordingPaletteRotation) }
-        }
-        projectController.setWorkspaceColorScheme(Colors.getWorkspaceScheme(isRecording: isRecording()))
+        projectController.setWorkspaceColorScheme(Colors.getWorkspaceScheme(isRecording: false))
+    }
+
+    func projectControllerStartListeningToRecording(recording: UnsafeMutableRawPointer) {
+        self.recording = recording
+        showListenScreen = true
     }
 }

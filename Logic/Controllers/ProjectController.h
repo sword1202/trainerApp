@@ -67,7 +67,6 @@ class ProjectController : CppUtils::DestructorQueue, public WorkspaceControllerD
     void save() override;
     void listen() override;
 
-    void setPlaybackSource(VocalTrainerFile* file);
     void handlePlaybackSourceChange();
 public:
     explicit ProjectController(ProjectControllerDelegate* delegate);
@@ -144,6 +143,7 @@ public:
     void onSeekChangedByUserEvent(float newSeek) override;
 
     bool hasPlaybackSource() const;
+    void setPlaybackSource(VocalTrainerFile* file);
     void setPlaybackSource(const char* filePath);
 
     std::vector<float> getRecordingPreview(int numberOfSamples) const;

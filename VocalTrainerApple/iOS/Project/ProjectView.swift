@@ -67,11 +67,18 @@ struct ProjectView: View {
     @State private var boundsSelectionDialogVisible = false
     @State private var showSwipeAndZoomSuggestion = AppSettings.shared.showSwipeAndZoomSuggestion
 
-    init(filePath: String?) {
-        let viewModel = ProjectViewModel(filePath: filePath)
+    private init(viewModel: ProjectViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
         _tonalityViewModel = StateObject(wrappedValue: viewModel.createTonalityViewModel())
         _tempoViewModel = StateObject(wrappedValue: viewModel.createTempoViewModel())
+    }
+
+    init(vocalTrainerFilePointer: UnsafeMutableRawPointer) {
+        self.init(viewModel: ProjectViewModel(vocalTrainerFilePointer: vocalTrainerFilePointer))
+    }
+
+    init(filePath: String?) {
+        self.init(viewModel: ProjectViewModel(filePath: filePath))
     }
 
     var body: some View {
@@ -282,6 +289,8 @@ struct ProjectView: View {
                                 .transition(.move(edge: .bottom))
                     }
                 }
+
+                NavigationLazyView(ProjectView(vocalTrainerFilePointer: viewModel.recording!)).navigatePush(whenTrue: $viewModel.showListenScreen)
             }
         }
     }

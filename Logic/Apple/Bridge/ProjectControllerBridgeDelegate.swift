@@ -36,5 +36,5 @@ import Foundation
     @objc optional func projectControllerUpdate(endSeek: Double)
     @objc optional func projectControllerPlaybackDidComplete(flow: SongCompletionFlowBridge)
     @objc optional func projectControllerPlaybackSourceDidChange()
-    @objc optional func projectControllerStartListeningToRecording(recording: UnsafeMutablePointer<Void>)
+    @objc optional func projectControllerStartListeningToRecording(recording: UnsafeMutableRawPointer)
 }
