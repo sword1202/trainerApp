@@ -66,9 +66,7 @@ void VocalTrainerFilePlayer::setSourceInternal(VocalTrainerFile *file, bool dest
         }
     }
 
-    if (metronomePlayer.isPrepared()) {
-        players.push_back(&metronomePlayer);
-    }
+    players.push_back(&metronomePlayer);
 
     BaseAudioPlayer* mainPlayer = getMainPlayer();
     mainPlayer->seekChangedListeners.clear();
@@ -190,9 +188,7 @@ void VocalTrainerFilePlayer::play() {
 
     double seek = mainPlayer->getSeek();
     vocalPartPianoPlayer.setSeek(seek);
-    if (metronomePlayer.isPrepared()) {
-        metronomePlayer.setSeek(seek);
-    }
+    metronomePlayer.setSeek(seek);
     if (isRecording()) {
         recordingPlayer.setSeek(seek);
     }
@@ -269,10 +265,8 @@ void VocalTrainerFilePlayer::prepare() {
             throw VocalTrainerPlayerPrepareException(VocalTrainerPlayerPrepareException::BROKEN_RECORDING, e.what());
         }
     }
-
-    if (metronomePlayer.isPrepared()) {
-        metronomePlayer.setAudioDataInfo(getBeatsPerMinute(), getMainPlayer()->getTrackDurationInSecondsWithTempoApplied());
-    }
+    metronomePlayer.prepare();
+    metronomePlayer.setAudioDataInfo(getBeatsPerMinute(), getMainPlayer()->getTrackDurationInSecondsWithTempoApplied());
     if (instrumentalPlayer.getAudioData()) {
         if (fabs(instrumentalPlayer.getOriginalTrackDurationInSeconds() - vocalPartPianoPlayer.getOriginalTrackDurationInSeconds()) > 0.005) {
             throw VocalTrainerPlayerPrepareException(VocalTrainerPlayerPrepareException::DIFFERENT_DURATIONS);
@@ -409,12 +403,6 @@ void VocalTrainerFilePlayer::setTempoFactor(double tempoFactor) {
     vocalPartChangedListeners.executeAll(&vocalPartPianoPlayer.getVocalPart());
 }
 
-void VocalTrainerFilePlayer::setMetronomeSoundData(std::string &&data) {
-    metronomePlayer.setMetronomeAudioData(std::move(data));
-    metronomePlayer.prepare();
-    players.push_back(&metronomePlayer);
-}
-
 bool VocalTrainerFilePlayer::isMetronomeEnabled() const {
     return metronomeEnabled;
 }
@@ -425,10 +413,6 @@ void VocalTrainerFilePlayer::setMetronomeEnabled(bool metronomeEnabled) {
                                                                 "before enabling metronome");
     this->metronomeEnabled = metronomeEnabled;
     updateMetronomeVolume();
-}
-
-bool VocalTrainerFilePlayer::isMetronomeSoundDataSet() const {
-    return metronomePlayer.isPrepared();
 }
 
 void VocalTrainerFilePlayer::updateMetronomeVolume() {

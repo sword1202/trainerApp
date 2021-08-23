@@ -99,6 +99,7 @@
 		C9FFFC357FB17DBCE0DA3B28 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6D026277BCE01AFF619 /* UIImage+Extensions.swift */; };
 		C9FFFC4DD5B1FBC3870FEDFB /* RecordingPathProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF38BFE133FBB0692B488 /* RecordingPathProvider.swift */; };
 		C9FFFC752DA482CBE97EB7E2 /* CGSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF72A1F66910885A40FE2 /* CGSize+Extensions.swift */; };
+		C9FFFCA4B0CA4D65A120B25F /* NavigationLazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFC0E255EB55ACE3C38B8 /* NavigationLazyView.swift */; };
 		C9FFFCAD8789F460417A34D1 /* LyricsSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA9B5D4BA7CDD7E17563 /* LyricsSelection.swift */; };
 		C9FFFD5D7E98D6EDA7814BEF /* BoundsSelectionDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE3111A176B9B9D3E9A9 /* BoundsSelectionDialog.swift */; };
 		C9FFFDE8CFC1A43BAEC2DC0D /* WorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF26A997DC1A4CE026760 /* WorkspaceView.swift */; };
@@ -231,6 +232,7 @@
 		C9FFFB1987526EE43216966B /* iOS-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "iOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		C9FFFBAE43302A45FDF944FD /* RecordingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingsView.swift; sourceTree = "<group>"; };
 		C9FFFBFBC3CF33B1EFAA4E4A /* WorkspaceDrawerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WorkspaceDrawerView.mm; sourceTree = "<group>"; };
+		C9FFFC0E255EB55ACE3C38B8 /* NavigationLazyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationLazyView.swift; sourceTree = "<group>"; };
 		C9FFFC52FFD52111E4F8EA1C /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFFC55BE38C779C866CE5A /* RecordingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingsViewModel.swift; sourceTree = "<group>"; };
 		C9FFFC6AA64F7DE371AEF4C4 /* metronome.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = metronome.wav; path = Resources/metronome.wav; sourceTree = "<group>"; };
@@ -574,6 +576,7 @@
 				C9FFF18E9C15E6FAF0C18086 /* BigButton.swift */,
 				C9FFFDA890B96D4ABFC60D75 /* PreviewSamplesDraw.swift */,
 				C9FFF8C15824B27E2727EC80 /* Deleter.swift */,
+				C9FFFC0E255EB55ACE3C38B8 /* NavigationLazyView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -909,6 +912,7 @@
 				C9FFF4CAD303AC3E1EDEDEF4 /* RecordingsViewModel.swift in Sources */,
 				C9FFFF50CFC92D19307766ED /* View+Navigation.swift in Sources */,
 				C9FFF1BD7D39A36AEEF8DB20 /* Deleter.swift in Sources */,
+				C9FFFCA4B0CA4D65A120B25F /* NavigationLazyView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

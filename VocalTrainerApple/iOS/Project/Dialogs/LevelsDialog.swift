@@ -39,7 +39,12 @@ private struct LevelSection : View {
 
 struct LevelsDialog : View {
     @Binding var isShown: Bool
-    @StateObject private var viewModel = LevelsViewModel()
+    @StateObject private var viewModel: LevelsViewModel
+
+    init(projectController: ProjectController, isShown: Binding<Bool>) {
+        _viewModel = StateObject(wrappedValue: LevelsViewModel(projectController: projectController))
+        _isShown = isShown
+    }
 
     var body: some View {
         BottomDialog(title: Strings.levels.localized, titleIcon:"LevelsButton", isShown: $isShown) {

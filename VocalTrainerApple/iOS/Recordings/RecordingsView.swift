@@ -81,7 +81,9 @@ struct RecordingsView : View {
                             .foregroundColor(Color.white)
                             .padding(.leading, 16)
                     Spacer()
-                    NavigationLink(destination: ProjectView(filePath: nil).navigationBarHidden(true)) {
+                    NavigationLink(
+                            destination: NavigationLazyView(ProjectView(filePath: nil).navigationBarHidden(true))
+                    ) {
                         Image("WhitePlusButton")
                     }.padding(.trailing, 18)
                 }.frame(height: 72, alignment: .center).background(Colors.tone2)
@@ -92,8 +94,8 @@ struct RecordingsView : View {
                             ForEach(0..<viewModel.recordingsCount) { index in
                                 let recording = viewModel.getRecording(at: index)
                                 NavigationLink(
-                                        destination: ProjectView(filePath: recording.filePath)
-                                                .navigationBarHidden(true)
+                                        destination: NavigationLazyView(
+                                                ProjectView(filePath: recording.filePath).navigationBarHidden(true))
                                 ) {
                                     RecordingView(
                                             recordingBackground: viewModel.getPreviewSamplesImage(

@@ -26,9 +26,14 @@ public:
 };
 
 void MetronomeAudioPlayer::setMetronomeAudioData(std::string&& metronomeAudioData) {
+    MetronomeAudioPlayer::metronomeAudioData = std::move(metronomeAudioData);
+}
+
+void MetronomeAudioPlayer::prepare() {
     this->audioData.reset(new Buffer());
-    this->metronomeAudioData = std::move(metronomeAudioData);
+    assert(!metronomeAudioData.empty());
     setPlaybackData(WAVFile::parseWavHeader(this->metronomeAudioData));
+    BaseAudioPlayer::prepare();
 }
 
 double MetronomeAudioPlayer::getBeatsPerMinute() const {
@@ -68,8 +73,13 @@ int MetronomeAudioPlayer::getAudioDataSizeInBytes() const {
 
 MetronomeAudioPlayer::MetronomeAudioPlayer() {
     setPlayerName("MetronomeAudioPlayer");
+    if (!metronomeAudioData.empty()) {
+
+    }
 }
 
 int MetronomeAudioPlayer::readAudioData(void *into, int offset, int numberOfBytes) {
     return audioData->read(into, offset, numberOfBytes);
 }
+
+std::string MetronomeAudioPlayer::metronomeAudioData;

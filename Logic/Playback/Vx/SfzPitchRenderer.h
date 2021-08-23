@@ -8,15 +8,17 @@
 
 #include "PitchRenderer.h"
 #include "liquidsfz.hh"
-#include <atomic>
+#include <mutex>
 
 class SfzPitchRenderer : public PitchRenderer {
-    static LiquidSFZ::Synth* sfz;
-    static std::atomic_bool isSfzLocked;
+    static LiquidSFZInternal::Loader* sfzLoader;
     constexpr static int NUMBER_OF_OUTPUTS = 2;
+
+    LiquidSFZ::Synth* sfz;
     int numberOfChannels = -1;
     float* outputs[NUMBER_OF_OUTPUTS];
     int maxFramesPerBuffer;
+    mutable std::mutex mutex;
 public:
     static void initSfz(const std::string& sfzFilePath);
 

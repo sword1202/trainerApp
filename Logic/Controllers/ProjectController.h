@@ -14,6 +14,7 @@
 #include "Point.h"
 #include "Tonality.h"
 #include "SongCompletionFlow.h"
+#include "NotImplementedAssert.h"
 
 class ProjectControllerDelegate {
 public:
@@ -37,6 +38,7 @@ public:
     virtual inline void onRewindStatusChanged(bool rewindRunning, bool backward) {}
     virtual inline void onPlaybackCompleted(SongCompletionFlow* songCompletionFlow) {}
     virtual inline void onPlaybackSourceChanged() {}
+    virtual inline void startListeningToRecording(MvxFile* recording) { NOT_IMPLEMENTED_ASSERT }
     virtual std::shared_ptr<std::ostream> createStreamToSaveRecording(const VocalTrainerFile* recording) {
         return nullptr;
     }

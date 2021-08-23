@@ -3,6 +3,7 @@
 // Copyright (c) 2019 Semyon Tikhonenko. All rights reserved.
 //
 
+#import <Logic/Logic.h>
 #import "ProjectControllerBridge.h"
 #import "SongCompletionFlowObjCWrapper.h"
 #include "ProjectController.h"
@@ -211,6 +212,14 @@ public:
         for (id delegate in delegates) {
             if ([delegate respondsToSelector:@selector(projectControllerPlaybackSourceDidChange)]) {
                 [delegate projectControllerPlaybackSourceDidChange];
+            }
+        }
+    }
+
+    void startListeningToRecording(MvxFile *recording) override {
+        for (id delegate in delegates) {
+            if ([delegate respondsToSelector:@selector(projectControllerStartListeningToRecordingWithRecording:)]) {
+                [delegate projectControllerStartListeningToRecordingWithRecording:recording];
             }
         }
     }

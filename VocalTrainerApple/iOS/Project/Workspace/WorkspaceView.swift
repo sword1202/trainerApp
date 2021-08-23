@@ -15,6 +15,12 @@ struct WorkspaceView : UIViewRepresentable {
     static let pianoWidth = WorkspaceDrawerView.pianoWidth()
     static let yardstickHeight = WorkspaceDrawerView.yardstickHeight()
 
+    private let projectController: ProjectController
+
+    init(projectController: ProjectController) {
+        self.projectController = projectController
+    }
+
     func makeUIView(context: Context) -> UIViewType {
         guard !SwiftUIUtils.isPreview() else {
             return UIView()
@@ -44,7 +50,6 @@ struct WorkspaceView : UIViewRepresentable {
 
     private func setupZoom(view: WorkspaceDrawerView) {
         var baseZoom: Float = 1.0
-        let projectController = ProjectController.shared
         view.onWorkspaceControllerChanged = { [unowned view] in
             projectController.setWorkspaceController(view.workspaceController());
             baseZoom = projectController.minZoom

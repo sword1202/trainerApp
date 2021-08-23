@@ -7,7 +7,7 @@ import Foundation
 import AVFoundation
 
 class LevelsViewModel : ObservableObject {
-    private lazy var projectController = ProjectController.shared
+    private let projectController: ProjectController
 
     @Published var instrumentalLevel: Float = 1.0 {
         didSet {
@@ -27,7 +27,8 @@ class LevelsViewModel : ObservableObject {
         }
     }
 
-    init() {
+    init(projectController: ProjectController) {
+        self.projectController = projectController
         if !SwiftUIUtils.isPreview() {
             projectController.add(delegate: self)
         }

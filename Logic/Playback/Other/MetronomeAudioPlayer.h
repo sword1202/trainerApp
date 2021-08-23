@@ -12,16 +12,18 @@
 
 class MetronomeAudioPlayer : public BaseRawPcmAudioDataPlayer {
     double beatsPerMinute = 0;
-    std::string metronomeAudioData;
+    static std::string metronomeAudioData;
     int totalVirtualBufferSize;
     std::unique_ptr<StdStringAudioDataBuffer> audioData;
 public:
     MetronomeAudioPlayer();
 
-    void setMetronomeAudioData(std::string&& metronomeAudioData);
+    static void setMetronomeAudioData(std::string&& metronomeAudioData);
 
     double getBeatsPerMinute() const;
     void setAudioDataInfo(double beatsPerMinute, double totalDurationInSeconds);
+
+    void prepare() override;
 
 protected:
     int getAudioDataSizeInBytes() const override;

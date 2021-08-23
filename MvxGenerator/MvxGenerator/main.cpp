@@ -127,7 +127,7 @@ int main(int argc, char *argv[]) {
     }
 
     ApplicationModel::init();
-    VocalTrainerFilePlayer* player = ApplicationModel::instance()->getPlayer();
+    VocalTrainerFilePlayer* player = ApplicationModel::instance()->createPlayer();
     player->setSource(
             &mvxFile,
             false //destroyFileOnDestructor

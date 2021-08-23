@@ -14,8 +14,8 @@ constexpr int RECORDING_PREVIEW_SAMPLES_COUNT = 1000;
 
 ProjectController::ProjectController(ProjectControllerDelegate* delegate) : delegate(delegate) {
     auto* model = ApplicationModel::instance();
-    player = model->getPlayer();
-    audioInputManager = model->getAudioInputManager();
+    player = model->createPlayer();
+    audioInputManager = model->createAudioInputManager();
 
     player->stopRequestedListeners.addListener([=] {
         onStopPlaybackRequested();
@@ -485,8 +485,7 @@ void ProjectController::save() {
 
 void ProjectController::listen() {
     MvxFile* recordingFile = generateRecording();
-    setPlaybackSource(recordingFile);
-    play();
+    delegate->startListeningToRecording(recordingFile);
 }
 
 void ProjectController::setPlaybackSource(const char* filePath) {

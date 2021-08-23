@@ -6,7 +6,7 @@
 import Foundation
 
 class TonalityViewModel : ObservableObject {
-    private lazy var projectController = ProjectController.shared
+    private let projectController: ProjectController
 
     @Published var shift: Int = 0 {
         didSet {
@@ -25,7 +25,8 @@ class TonalityViewModel : ObservableObject {
         !projectController.isRecording
     }
 
-    init() {
+    init(projectController: ProjectController) {
+        self.projectController = projectController
         if !SwiftUIUtils.isPreview() {
             let originalTonality = projectController.originalTonality.toString()
             originalTonalityLabel = Strings.originalLabel.localized + " " +

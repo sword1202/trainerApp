@@ -9,17 +9,14 @@
 #include "AudioInputManager.h"
 
 class ApplicationModel {
-    VocalTrainerFilePlayer* player;
-    AudioInputManager* audioInputManager;
     std::string getSfzFilePath() const;
     std::string getMetronomeDataFilePath() const;
 public:
     ApplicationModel();
     static void init();
     static ApplicationModel* instance();
-    VocalTrainerFilePlayer *getPlayer();
-
-    AudioInputManager *getAudioInputManager();
+    VocalTrainerFilePlayer *createPlayer();
+    AudioInputManager *createAudioInputManager();
 };
 
 

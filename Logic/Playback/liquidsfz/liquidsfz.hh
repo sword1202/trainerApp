@@ -23,6 +23,7 @@
 
 #include <memory>
 #include <functional>
+#include "loader.hh"
 
 typedef unsigned int uint;
 
@@ -188,6 +189,9 @@ namespace LiquidSFZ
          * it will be treated as hydrogen if it contains typical hydrogen tags.
          */
         bool load (const std::string& filename);
+
+        LiquidSFZInternal::Loader* createLoader(const std::string& filename);
+        void load(const LiquidSFZInternal::Loader* loader);
 
         /**
          * \brief List CCs supported by this .sfz file

@@ -6,7 +6,7 @@
 import Foundation
 
 class BoundsSelectionViewModel : ObservableObject {
-    private let projectController = ProjectController.shared
+    private let projectController: ProjectController
     @Published var lineSelectionStates: [Bool] {
         didSet {
             isLoopItAvailable = lineSelectionStates.contains(true)
@@ -14,7 +14,8 @@ class BoundsSelectionViewModel : ObservableObject {
     }
     @Published private(set) var isLoopItAvailable = false
 
-    init() {
+    init(projectController: ProjectController) {
+        self.projectController = projectController
         lineSelectionStates = Array(repeating: false, count: projectController.linesCount)
     }
 

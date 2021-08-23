@@ -59,8 +59,8 @@ struct ProjectView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.presentationMode) var presentationMode
     @StateObject private var viewModel: ProjectViewModel
-    @StateObject private var tonalityViewModel = TonalityViewModel()
-    @StateObject private var tempoViewModel = TempoViewModel()
+    @StateObject private var tonalityViewModel: TonalityViewModel
+    @StateObject private var tempoViewModel: TempoViewModel
     @State private var levelsVisible = false
     @State private var tonalityDialogVisible = false
     @State private var tempoDialogVisible = false
@@ -68,7 +68,10 @@ struct ProjectView: View {
     @State private var showSwipeAndZoomSuggestion = AppSettings.shared.showSwipeAndZoomSuggestion
 
     init(filePath: String?) {
-        _viewModel = StateObject(wrappedValue: ProjectViewModel(filePath: filePath))
+        let viewModel = ProjectViewModel(filePath: filePath)
+        _viewModel = StateObject(wrappedValue: viewModel)
+        _tonalityViewModel = StateObject(wrappedValue: viewModel.createTonalityViewModel())
+        _tempoViewModel = StateObject(wrappedValue: viewModel.createTempoViewModel())
     }
 
     var body: some View {
@@ -117,7 +120,7 @@ struct ProjectView: View {
                                 .padding(.leading, 16)
                     }.background(viewModel.tone[1]).frame(maxWidth: .infinity, alignment: .topLeading)
                     ZStack {
-                        WorkspaceView().onChange(of: scenePhase) { phase in
+                        WorkspaceView(projectController: viewModel.projectController).onChange(of: scenePhase) { phase in
                             switch phase {
                             case .active:
                                 viewModel.didBecomeActive()
@@ -245,7 +248,8 @@ struct ProjectView: View {
                 // Put all the dialogs into zstacks to make the animation work
                 ZStack {
                     if levelsVisible {
-                        LevelsDialog(isShown: $levelsVisible.animation()).transition(.move(edge: .bottom))
+                        LevelsDialog(projectController: viewModel.projectController,
+                                isShown: $levelsVisible.animation()).transition(.move(edge: .bottom))
                     }
                 }
                 ZStack {
@@ -262,6 +266,7 @@ struct ProjectView: View {
                 ZStack {
                     if boundsSelectionDialogVisible {
                         BoundsSelectionDialog(
+                                projectController: viewModel.projectController,
                                 screenGeometry: geom,
                                 isShown: $boundsSelectionDialogVisible).transition(.move(edge: .bottom))
                     }
@@ -270,6 +275,7 @@ struct ProjectView: View {
                 ZStack {
                     if viewModel.showSongCompletionFlow {
                         SongCompletionDialog(
+                                projectController: viewModel.projectController,
                                 screenGeometry: geom,
                                 isShown: $viewModel.showSongCompletionFlow,
                                 flow: viewModel.songCompletionFlow!)

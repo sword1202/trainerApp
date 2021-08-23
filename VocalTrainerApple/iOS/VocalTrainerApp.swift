@@ -22,8 +22,6 @@ class RecordingsListController : RecordingsListControllerBridge {
 }
 
 class ProjectController : ProjectControllerBridge {
-    static let shared = ProjectController()
-
     override init() {
         super.init(recordingsPath: RecordingsListController.recordingsPath())
     }

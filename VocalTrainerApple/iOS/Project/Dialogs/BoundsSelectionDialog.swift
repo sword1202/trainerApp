@@ -44,10 +44,11 @@ struct BoundsSelectionDialog : View {
     @Binding var isShown: Bool
     @State private var showBoundsSuggestion = AppSettings.shared.showBoundsSuggestion
 
-    @StateObject private var viewModel = BoundsSelectionViewModel()
+    @StateObject private var viewModel: BoundsSelectionViewModel
 
-    init(screenGeometry: GeometryProxy, isShown: Binding<Bool>) {
+    init(projectController: ProjectController, screenGeometry: GeometryProxy, isShown: Binding<Bool>) {
         _isShown = isShown
+        _viewModel = StateObject(wrappedValue: BoundsSelectionViewModel(projectController: projectController))
         self.screenGeometry = screenGeometry
     }
 

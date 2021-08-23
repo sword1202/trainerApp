@@ -10,10 +10,14 @@ struct SongCompletionDialog : View {
     @Binding var isShown: Bool
     @StateObject private var viewModel: SongCompletionViewModel
 
-    init(screenGeometry: GeometryProxy, isShown: Binding<Bool>, flow: SongCompletionFlowBridge) {
+    init(projectController: ProjectController,
+         screenGeometry: GeometryProxy,
+         isShown: Binding<Bool>,
+         flow: SongCompletionFlowBridge) {
         self.screenGeometry = screenGeometry
         _isShown = isShown
-        _viewModel = StateObject(wrappedValue: SongCompletionViewModel(flow: flow, isActive: isShown))
+        _viewModel = StateObject(wrappedValue: SongCompletionViewModel(
+                projectController: projectController, flow: flow, isActive: isShown))
     }
 
     var body: some View {

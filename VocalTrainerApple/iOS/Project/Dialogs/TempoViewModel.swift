@@ -8,7 +8,7 @@ import Foundation
 private let factorStep: Double = 0.05
 
 class TempoViewModel : ObservableObject {
-    private lazy var projectController = ProjectController.shared
+    private let projectController: ProjectController
 
     private var factor: Double = 1 {
         didSet {
@@ -56,7 +56,8 @@ class TempoViewModel : ObservableObject {
         !projectController.isRecording
     }
 
-    init() {
+    init(projectController: ProjectController) {
+        self.projectController = projectController
         if !SwiftUIUtils.isPreview() {
             updateBpm()
             originalBpm = Strings.originalLabel.localized + " " +

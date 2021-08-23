@@ -50,7 +50,7 @@ class ProjectViewModel : ObservableObject {
         }
     }
 
-    private lazy var projectController = ProjectController.shared
+    private(set) lazy var projectController = ProjectController()
 
     private func updatePlaybackEndTime() {
         playbackEndTime = timeFormatter.string(from: Date(timeIntervalSince1970: projectController.endSeek))
@@ -112,6 +112,14 @@ class ProjectViewModel : ObservableObject {
 
     func isRecording() -> Bool {
         projectController.isRecording
+    }
+
+    func createTonalityViewModel() -> TonalityViewModel {
+        TonalityViewModel(projectController: projectController)
+    }
+
+    func createTempoViewModel() -> TempoViewModel {
+        TempoViewModel(projectController: projectController)
     }
 }
 

@@ -175,13 +175,36 @@ public:
         control_      = loader.control;
         cc_list_      = loader.cc_list;
         key_list_     = loader.key_list;
-        curve_table_  = std::move (loader.curve_table);
+        curve_table_  = std::move(loader.curve_table);
 
         init_channels();
         return true;
       }
     return false;
   }
+
+  void load(const Loader* loader) {
+    for (auto& v : voices_) // kill all voices to avoid dangling region pointers
+      v = Voice (this);
+
+    regions_      = loader->regions;
+    control_      = loader->control;
+    cc_list_      = loader->cc_list;
+    key_list_     = loader->key_list;
+    curve_table_  = loader->curve_table;
+    init_channels();
+  }
+
+  Loader* createLoader(const std::string& filename) {
+    Loader* loader = new Loader(this);
+    if (loader->parse(filename, *global_.sample_cache)) {
+      return loader;
+    } else {
+      delete loader;
+      return nullptr;
+    }
+  }
+
   std::vector<CCInfo>
   list_ccs()
   {

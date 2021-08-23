@@ -14,14 +14,14 @@ using namespace CppUtils;
 #define CHECK_NUMBER_OF_CHANNELS assert(numberOfChannels >= 1 && "wrong number of channels, don't forget to call init before")
 
 void SfzPitchRenderer::init(int sampleRate, int numberOfChannels, int maxFramesPerBuffer) {
-    assert(sfz && "Call initSfz before using SfzPitchRenderer");
-    assert(!isSfzLocked && "Sfz is locked, you can't use 2 SfzPitchRenderer at the same time");
+    assert(sfzLoader && "Call initSfz before using SfzPitchRenderer");
     assert(this->numberOfChannels == -1 && "init should not be called twice");
     assert(maxFramesPerBuffer > 0);
     assert(numberOfChannels > 0 && numberOfChannels <= NUMBER_OF_OUTPUTS);
-    isSfzLocked = true;
     this->maxFramesPerBuffer = maxFramesPerBuffer;
     this->numberOfChannels = numberOfChannels;
+    sfz = new LiquidSFZ::Synth();
+    sfz->load(sfzLoader);
     sfz->system_reset();
     sfz->set_sample_rate(static_cast<uint>(sampleRate));
     for (int i = 0; i < NUMBER_OF_OUTPUTS; ++i) {
@@ -65,19 +65,17 @@ void SfzPitchRenderer::render(int16_t *outBuffer, int framesCount) {
     }
 }
 
-LiquidSFZ::Synth* SfzPitchRenderer::sfz = nullptr;
+LiquidSFZInternal::Loader* SfzPitchRenderer::sfzLoader = nullptr;
 
 void SfzPitchRenderer::initSfz(const std::string &sfzFilePath) {
-    assert(!sfz && "sfz has been already initialized");
-    sfz = new LiquidSFZ::Synth();
-    sfz->load(sfzFilePath);
+    LiquidSFZ::Synth temp;
+    assert(!sfzLoader && "sfz has been already initialized");
+    sfzLoader = temp.createLoader(sfzFilePath);
 }
 
 SfzPitchRenderer::~SfzPitchRenderer() {
-    isSfzLocked = false;
+    delete sfz;
     for (int i = 0; i < NUMBER_OF_OUTPUTS; ++i) {
         delete[] outputs[i];
     }
 }
-
-std::atomic_bool SfzPitchRenderer::isSfzLocked = false;

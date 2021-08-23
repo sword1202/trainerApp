@@ -130,9 +130,6 @@ public:
     bool hasPitchNow(const Pitch& pitch) const;
     bool hasAnyPitchNow() const;
 
-    void setMetronomeSoundData(std::string&& data);
-    bool isMetronomeSoundDataSet() const;
-
     bool isMetronomeEnabled() const;
     virtual void setMetronomeEnabled(bool metronomeEnabled);
 

@@ -68,6 +68,14 @@ Synth::load (const std::string& filename)
   return impl->synth.load (filename);
 }
 
+LiquidSFZInternal::Loader* Synth::createLoader(const std::string& filename) {
+  return impl->synth.createLoader(filename);
+}
+
+void Synth::load(const LiquidSFZInternal::Loader* loader) {
+  impl->synth.load(loader);
+}
+
 void
 Synth::add_event_note_on (uint time_frames, int channel, int key, int velocity)
 {
