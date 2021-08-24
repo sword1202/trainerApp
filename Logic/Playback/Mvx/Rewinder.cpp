@@ -15,7 +15,7 @@ void Rewinder::startRewind(bool backward) {
     this->backward = backward;
 
     timer.onStop = [=] {
-        double timeDiff = (TimeUtils::NowInMicroseconds() - timer.getTimerStartedTime()) / 1000000.0;
+        double timeDiff = (TimeUtils::NowInMicrosecondsSinceStart() - timer.getTimerStartedTime()) / 1000000.0;
         double postRewindDuration = minimumRewindDuration - timeDiff;
         if (postRewindDuration > 0) {
             rewindWithDuration(postRewindDuration);
@@ -23,7 +23,7 @@ void Rewinder::startRewind(bool backward) {
     };
 
     timer.start(RoundToInt(rewindInterval * 1000), [=] {
-        double timeDiff = (TimeUtils::NowInMicroseconds() - timer.getLastIterationTimeInMicroseconds()) / 1000000.0;
+        double timeDiff = (TimeUtils::NowInMicrosecondsSinceStart() - timer.getLastIterationTimeInMicroseconds()) / 1000000.0;
         rewindWithDuration(timeDiff);
     }, RoundToInt(initialDelay * 1000));
 }

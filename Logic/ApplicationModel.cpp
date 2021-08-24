@@ -5,8 +5,11 @@
 #include "ApplicationModel.h"
 #include "SfzPitchRenderer.h"
 #include "StringUtils.h"
+#include "TimeUtils.h"
+#include <iostream>
 
 using namespace CppUtils;
+using std::cout;
 
 static ApplicationModel* model = nullptr;
 

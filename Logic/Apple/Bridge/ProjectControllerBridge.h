@@ -41,7 +41,7 @@
 
 - (bool)hasPlaybackSource NS_SWIFT_NAME(hasPlaybackSource());
 - (void)setPlaybackSource:(NSString*)filePath NS_SWIFT_NAME(setPlaybackSource(filePath:));
-- (void)setPlaybackSourceWithVocalTrainerFile:(void*)vocalTrainerFile NS_SWIFT_NAME(setPlaybackSource(vocalTrainerFile:));
+- (void)setPlaybackSourceWithRecording:(RecordingFile*)file NS_SWIFT_NAME(setPlaybackSource(recording:));
 
 - (void)goToBeginning;
 - (void)toggleTracksVisibility;

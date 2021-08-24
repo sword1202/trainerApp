@@ -3,3 +3,4 @@
 #import <Logic/RecordingsListControllerBridge.h>
 #import "../Shared/InitializationManager.h"
 #import <Logic/NativeColorUtils.h>
+#import <Logic/RecordingFile.h>

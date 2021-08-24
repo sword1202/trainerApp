@@ -73,8 +73,8 @@ struct ProjectView: View {
         _tempoViewModel = StateObject(wrappedValue: viewModel.createTempoViewModel())
     }
 
-    init(vocalTrainerFilePointer: UnsafeMutableRawPointer) {
-        self.init(viewModel: ProjectViewModel(vocalTrainerFilePointer: vocalTrainerFilePointer))
+    init(recording: RecordingFile) {
+        self.init(viewModel: ProjectViewModel(recording: recording))
     }
 
     init(filePath: String?) {
@@ -118,13 +118,29 @@ struct ProjectView: View {
                             TopPanelToggleButton(image: "LyricsToggleButton", selectedColor: viewModel.tone[2], isSelected: $viewModel.isLyricsVisible)
                             TopPanelToggleButton(image: "MetronomeButton", selectedColor: viewModel.tone[2], isSelected: $viewModel.isMetronomeEnabled)
                         }.frame(maxWidth: .infinity, maxHeight: topButtonFrameHeight).padding(.trailing, 8)
-                        Text(viewModel.title)
-                                .font(Font.system(size: 18, weight: .bold))
-                                .foregroundColor(Color.white)
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                        HStack(spacing: 8) {
+                            if viewModel.isRecording() {
+                                Image("RecordingIcon")
+                            }
+                            Text(viewModel.title)
+                                    .font(Font.system(size: 18, weight: .bold))
+                                    .foregroundColor(Color.white)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                        }.frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.top, 8)
                                 .padding(.bottom, 8)
                                 .padding(.leading, 16)
+
+                        if viewModel.isRecording() {
+                            HStack {
+                                Text(viewModel.recordingTimeLabel)
+                                        .foregroundColor(Color.white)
+                                        .font(Font.system(size: 12))
+                                        .frame(width: 148, height: 32, alignment: .center)
+                                        .background(RoundedRectangle(cornerRadius: 16).fill(Colors.recordedAgoLabelBackground))
+                                Spacer()
+                            }.padding(.bottom, 8).padding(.leading, 16)
+                        }
                     }.background(viewModel.tone[1]).frame(maxWidth: .infinity, alignment: .topLeading)
                     ZStack {
                         WorkspaceView(projectController: viewModel.projectController).onChange(of: scenePhase) { phase in
@@ -290,7 +306,7 @@ struct ProjectView: View {
                     }
                 }
 
-                NavigationLazyView(ProjectView(vocalTrainerFilePointer: viewModel.recording!)).navigatePush(whenTrue: $viewModel.showListenScreen)
+                NavigationLazyView(ProjectView(recording: viewModel.recording!)).navigatePush(whenTrue: $viewModel.showListenScreen)
             }
         }
     }

@@ -46,4 +46,5 @@ class Colors : NSObject {
     static let buttonTone1 = Color(hex: 0x767680, alpha: 0.12)
     static let divider = Color(hex: 0xEFEFEF, alpha: 1.0)
     static let secondaryTextColor = Color(hex: 0x767676, alpha: 1.0)
+    static let recordedAgoLabelBackground = Color(hex: 0x202020, alpha: 1.0)
 }

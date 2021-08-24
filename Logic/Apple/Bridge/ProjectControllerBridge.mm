@@ -204,7 +204,7 @@ public:
 
     std::shared_ptr<std::ostream> createStreamToSaveRecording(const VocalTrainerFile *recording) override {
         std::ostringstream filePath;
-        filePath << recordingsPath.UTF8String << TimeUtils::NowInMicroseconds() << ".rvx";
+        filePath << recordingsPath.UTF8String << TimeUtils::NowInMicrosecondsSince1970() << ".rvx";
         return Streams::OpenFileAsSharedPtr(filePath.str().data(), std::ios::binary | std::ios::out);
     }
 
@@ -219,7 +219,9 @@ public:
     void startListeningToRecording(MvxFile *recording) override {
         for (id delegate in delegates) {
             if ([delegate respondsToSelector:@selector(projectControllerStartListeningToRecordingWithRecording:)]) {
-                [delegate projectControllerStartListeningToRecordingWithRecording:recording];
+                [delegate projectControllerStartListeningToRecordingWithRecording:
+                        [[RecordingFile alloc] initWithFile:recording]
+                ];
             }
         }
     }
@@ -264,11 +266,10 @@ public:
     _cpp->setPlaybackSource(filePath.UTF8String);
 }
 
-- (void)setPlaybackSourceWithVocalTrainerFile:(void *)vocalTrainerFile {
+- (void)setPlaybackSourceWithRecording:(RecordingFile*)recording {
     _playbackSource = nil;
-    _cpp->setPlaybackSource(static_cast<VocalTrainerFile*>(vocalTrainerFile));
+    _cpp->setPlaybackSource(recording.file);
 }
-
 
 - (NSString *)artistName {
     return [NSString stringWithUTF8String:_cpp->getArtistNameUtf8().data()];

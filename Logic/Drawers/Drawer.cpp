@@ -96,7 +96,7 @@ void Drawer::beginFrame(float width, float height, float devicePixelRatio) {
     translateX = 0;
     translateY = 0;
 
-    double now = TimeUtils::NowInSeconds();
+    double now = TimeUtils::NowInSecondsSinceStart();
     timeBetweenFrames = static_cast<float>(frameTime > 0 ? now - frameTime : 0);
     frameTime = static_cast<float>(now);
 }

@@ -31,7 +31,8 @@ class ProjectViewModel : ObservableObject {
     @Published var showSongCompletionFlow: Bool = false
     private(set) var songCompletionFlow: SongCompletionFlowBridge?
     @Published var showListenScreen = false
-    @Published private(set) var recording: UnsafeMutableRawPointer? = nil
+    @Published private(set) var recording: RecordingFile? = nil
+    @Published private(set) var recordingTimeLabel: String = ""
 
     @Published private(set) var tone: [Color] = []
 
@@ -58,12 +59,22 @@ class ProjectViewModel : ObservableObject {
         playbackEndTime = timeFormatter.string(from: Date(timeIntervalSince1970: projectController.endSeek))
     }
 
-    private func postInit() {
+    private func postInit(recordingTime: Date?) {
         isMetronomeEnabled = projectController.metronomeEnabled
         updatePlaybackSections()
         title = projectController.artistName + " - " + projectController.songTitle
         timeFormatter.dateFormat = "m:ss"
         updatePlaybackEndTime()
+
+        if isRecording(), let recordingTime = recordingTime {
+            let formatter = RelativeDateTimeFormatter()
+            formatter.unitsStyle = .full
+            recordingTimeLabel = Strings.recordedAgoLabel.localized + " " +
+                    formatter.localizedString(for: recordingTime, relativeTo: Date())
+            if recordingTimeLabel.contains(" 0 ") {
+                recordingTimeLabel = Strings.recordedAgoLabel.localized + " " + Strings.justNow.localized
+            }
+        }
 
 //        audioEngine.connect(
 //                audioEngine.inputNode,
@@ -75,13 +86,13 @@ class ProjectViewModel : ObservableObject {
         projectController.add(delegate: self)
         let mvxFilePath = filePath ?? Bundle.main.path(forResource: "drm", ofType: "mvx")
         projectController.setPlaybackSource(filePath: mvxFilePath)
-        postInit()
+        postInit(recordingTime: FileUtils.getFileModificationDate(filePath: filePath))
     }
 
-    init(vocalTrainerFilePointer: UnsafeMutableRawPointer) {
+    init(recording: RecordingFile) {
         projectController.add(delegate: self)
-        projectController.setPlaybackSource(vocalTrainerFile: vocalTrainerFilePointer)
-        postInit()
+        projectController.setPlaybackSource(recording: recording)
+        postInit(recordingTime: Date(timeIntervalSince1970: recording.creationTime))
     }
 
     private func updatePlaybackSections() {
@@ -198,7 +209,7 @@ extension ProjectViewModel : ProjectControllerBridgeDelegate {
         projectController.setWorkspaceColorScheme(Colors.getWorkspaceScheme(isRecording: false))
     }
 
-    func projectControllerStartListeningToRecording(recording: UnsafeMutableRawPointer) {
+    func projectControllerStartListeningToRecording(recording: RecordingFile) {
         self.recording = recording
         showListenScreen = true
     }

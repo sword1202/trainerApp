@@ -53,3 +53,6 @@
 "recordings" = "Recordings";
 "noRecordingsMessage" = "You don't have recordings yet";
 
+"recordedAgoLabel" = "Recorded";
+"justNow" = "just now";
+

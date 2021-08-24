@@ -339,7 +339,7 @@ double VocalTrainerFilePlayer::getBeatsPerMinute() const {
 }
 
 void VocalTrainerFilePlayer::onPlaybackStarted() {
-    playStartedTime = TimeUtils::NowInSeconds();
+    playStartedTime = TimeUtils::NowInSecondsSinceStart();
     playStartedSeek = getSeek();
     isPlayingChangedListeners.executeAll(true);
 }

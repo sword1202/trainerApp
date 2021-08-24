@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "NativeColorUtils.h"
+#import "RecordingFile.h"
 
 //! Project version number for Logic.
 FOUNDATION_EXPORT double LogicVersionNumber;

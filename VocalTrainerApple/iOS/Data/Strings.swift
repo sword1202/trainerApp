@@ -67,4 +67,7 @@ enum Strings : String, Localizable {
 
     case recordings
     case noRecordingsMessage
+
+    case recordedAgoLabel
+    case justNow
 }

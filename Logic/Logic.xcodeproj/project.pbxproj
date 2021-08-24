@@ -621,6 +621,7 @@
 		C9FFF4CADF02416196E1083B /* PitchesMutableList.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF2DEE924F30D2C289F92 /* PitchesMutableList.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF4DE7235A258AA65BC50 /* Tonality.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF6EAC4E42D20363DFE41 /* Tonality.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF4FA23587E0923B00B31 /* mpm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFDC446C4E6DD69FC4CE3 /* mpm.cpp */; };
+		C9FFF4FFAC3915FF5451E70A /* RecordingFile.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA67BBFA48E0200FAE1A /* RecordingFile.mm */; };
 		C9FFF5047F9D3C0BCE45FA4C /* Pitch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8CAFC32E15B703B8FDD /* Pitch.cpp */; };
 		C9FFF51D4892C72BB4CB34B2 /* PitchInputReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF955FDC02E251D044DFF /* PitchInputReader.cpp */; };
 		C9FFF54DE285E67126F2E7BB /* PitchesMutableList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF3DC6219A6EF9DCCE348 /* PitchesMutableList.cpp */; };
@@ -635,6 +636,7 @@
 		C9FFF69203ED6830C2A83AE6 /* VocalPartAudioDataGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF1BDBADBA522C9A65AAC /* VocalPartAudioDataGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF69672E063C964DFFDCA /* loader.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF25533EF3ACD6071D0A5 /* loader.hh */; };
 		C9FFF6A17B42F47EF36B64D2 /* AudioToolboxInputReader.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF2649FE180FAB5FE4553 /* AudioToolboxInputReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C9FFF6B76DD57D20F5634903 /* RecordingFile.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA67BBFA48E0200FAE1A /* RecordingFile.mm */; };
 		C9FFF6DD824EEDEF335DE044 /* TimeSignature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFFB48B450818EC93A1C1 /* TimeSignature.cpp */; };
 		C9FFF6F021BBD4693388CD03 /* Pitch.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF9709DE6702915DC9E53 /* Pitch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF72E61784FDFE4D0BC86 /* Tonality.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2D3D89B29EF0E398A90 /* Tonality.cpp */; };
@@ -646,6 +648,7 @@
 		C9FFF7BF3DB468BC22715D6F /* NativeColorUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFBBD5F1EB07511490235 /* NativeColorUtils.mm */; };
 		C9FFF7C327A7E70B11790753 /* PitchInputReader.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF1DBEF12B36FA549F3B0 /* PitchInputReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF7E61A3D26D1D5818AE8 /* StringEncodingUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFFAE08B7263D85CA449B /* StringEncodingUtils.h */; };
+		C9FFF803820FDDCE13FC8B03 /* RecordingFile.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF90FCC2C59262A7A3068 /* RecordingFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF8039D5FBBAF18F3783C /* BaseAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF93B13F01C590643A6A7 /* BaseAudioPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFF8073BF9456F0986AF20 /* pugiconfig.hh in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFE1A9795F1014748594E /* pugiconfig.hh */; };
 		C9FFF84EEFED840D781A0896 /* WorkspaceColorScheme.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFA97A9FCEF8113EA289F /* WorkspaceColorScheme.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -709,6 +712,7 @@
 		C9FFFD420E77C54CE05C5321 /* PitchDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFFEB2A8C708772977F110 /* PitchDetector.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFFD7F14E302F325AE99E0 /* FileUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF57172FABF7410D4BC87 /* FileUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFFDA3E3EAB874637EDC5C /* PitchDetectionSmoothingAudioBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8C6C90A66E376F685DC /* PitchDetectionSmoothingAudioBuffer.cpp */; };
+		C9FFFDB2847E2B70B2E1FAE7 /* RecordingFile.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF90FCC2C59262A7A3068 /* RecordingFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFFDBA6FC03B6D65549858 /* yin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE0BCC6F1DFFD4D269EB /* yin.cpp */; };
 		C9FFFDF3511473CDFD8409D6 /* StlContainerAudioDataBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = C9FFF0B9F8EB9D8FD5311CB6 /* StlContainerAudioDataBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9FFFDFECF645FB2C919D854 /* WorkspaceColorScheme.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD25D1F83D1B5F7944D9 /* WorkspaceColorScheme.cpp */; };
@@ -1075,6 +1079,7 @@
 		C9FFF8CF418998FD71DEF3A7 /* AudioStreamDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioStreamDescription.h; sourceTree = "<group>"; };
 		C9FFF8D8F0099984C24D9A58 /* hydrogenimport.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = hydrogenimport.hh; sourceTree = "<group>"; };
 		C9FFF8D9FF4B3DD7F8470809 /* RecordingsListControllerBridge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RecordingsListControllerBridge.mm; sourceTree = "<group>"; };
+		C9FFF90FCC2C59262A7A3068 /* RecordingFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordingFile.h; sourceTree = "<group>"; };
 		C9FFF92A2F6FA58B99DA57D0 /* VocalTrainerColorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VocalTrainerColorUtils.h; sourceTree = "<group>"; };
 		C9FFF92B31B2C77BAD62F0E1 /* D#3vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "D#3vL.wav"; sourceTree = "<group>"; };
 		C9FFF93B13F01C590643A6A7 /* BaseAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseAudioPlayer.h; sourceTree = "<group>"; };
@@ -1086,6 +1091,7 @@
 		C9FFF9D82C4D660D7FE97259 /* C8vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = C8vL.wav; sourceTree = "<group>"; };
 		C9FFF9D8FF4D3EE38E8BA2DD /* piano.sfz */ = {isa = PBXFileReference; lastKnownFileType = file.sfz; path = piano.sfz; sourceTree = "<group>"; };
 		C9FFFA0145FBA9C42E3C8BB3 /* AccelerateFFT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccelerateFFT.h; sourceTree = "<group>"; };
+		C9FFFA67BBFA48E0200FAE1A /* RecordingFile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RecordingFile.mm; sourceTree = "<group>"; };
 		C9FFFA7A71977FC73F08C461 /* D#7vL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "D#7vL.wav"; sourceTree = "<group>"; };
 		C9FFFA97A9FCEF8113EA289F /* WorkspaceColorScheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceColorScheme.h; sourceTree = "<group>"; };
 		C9FFFAC12ABF20BC1CC8E0B4 /* PitchDuration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PitchDuration.cpp; sourceTree = "<group>"; };
@@ -1438,6 +1444,8 @@
 				C9FFFB1773B3BEF8D576338C /* WorkspaceColorSchemeBridge.swift */,
 				C9FFFBBD5F1EB07511490235 /* NativeColorUtils.mm */,
 				C9FFF365D4C8824486729ED6 /* NativeColorUtils.h */,
+				C9FFFA67BBFA48E0200FAE1A /* RecordingFile.mm */,
+				C9FFF90FCC2C59262A7A3068 /* RecordingFile.h */,
 			);
 			path = Bridge;
 			sourceTree = "<group>";
@@ -1958,6 +1966,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9FFF803820FDDCE13FC8B03 /* RecordingFile.h in Headers */,
 				C9FFF1BB2A87B334FDDFB303 /* TimeSignature.h in Headers */,
 				C9FFF77F88004BD137D2F961 /* NativeColorUtils.h in Headers */,
 				C9FFFB145B92CF52CFCB15C3 /* RecordingsListController.h in Headers */,
@@ -2123,6 +2132,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9FFFDB2847E2B70B2E1FAE7 /* RecordingFile.h in Headers */,
 				C9FFF9367C76070BFFE68B56 /* NativeColorUtils.h in Headers */,
 				C9FFFBDC458D66A785E7DA87 /* VocalTrainerColorUtils.h in Headers */,
 				C9FFF3CAE33AA8629EDC5490 /* TimeSignature.h in Headers */,
@@ -2691,6 +2701,7 @@
 				C9FFFA295F21A4A89D4032AA /* NativeColorUtils.mm in Sources */,
 				C9FFF16A20A59C55D71EBDD9 /* VocalTrainerColorUtils.cpp in Sources */,
 				C9FFFA4E996C5D087F262B06 /* TimeSignature.cpp in Sources */,
+				C9FFF6B76DD57D20F5634903 /* RecordingFile.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2841,6 +2852,7 @@
 				C9FFF7BF3DB468BC22715D6F /* NativeColorUtils.mm in Sources */,
 				C9FFF21A3D46FF5DC6E55855 /* VocalTrainerColorUtils.cpp in Sources */,
 				C9FFF6DD824EEDEF335DE044 /* TimeSignature.cpp in Sources */,
+				C9FFF4FFAC3915FF5451E70A /* RecordingFile.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

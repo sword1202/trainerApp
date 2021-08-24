@@ -33,7 +33,7 @@ void MetronomeAudioPlayer::prepare() {
     this->audioData.reset(new Buffer());
     assert(!metronomeAudioData.empty());
     setPlaybackData(WAVFile::parseWavHeader(this->metronomeAudioData));
-    BaseAudioPlayer::prepare();
+    BaseRawPcmAudioDataPlayer::prepare();
 }
 
 double MetronomeAudioPlayer::getBeatsPerMinute() const {

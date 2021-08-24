@@ -71,6 +71,7 @@
 		C9FFF51E2A83C9955ED92971 /* LyricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF62862ADA76292D2C339 /* LyricsView.swift */; };
 		C9FFF5234D4EAB1506C3AA9B /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFB04D3EC00676045C44B /* ProjectView.swift */; };
 		C9FFF5E58D2099F8A7727DDA /* metronome.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFC6AA64F7DE371AEF4C4 /* metronome.wav */; };
+		C9FFF65948E2C2FDC53146ED /* FileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2DA41982D4F3F7C963C /* FileUtils.swift */; };
 		C9FFF68D7E7F115CA46D8B73 /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE40E57F82E0441136B6 /* UIView+Constraints.swift */; };
 		C9FFF6EEA9F5893BA907590C /* iOSWorkspaceDrawerResourcesProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF34E5F2FDB3D52CAB4FF /* iOSWorkspaceDrawerResourcesProvider.mm */; };
 		C9FFF75F9918AF94842CC30B /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE302DCFBB0ABE54FB5D /* UIFont+Extensions.swift */; };
@@ -194,6 +195,7 @@
 		C9FFF2396E0BB5102967F5B2 /* UIView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF26A997DC1A4CE026760 /* WorkspaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceView.swift; sourceTree = "<group>"; };
 		C9FFF282B4D0640E6E04ECE0 /* TempoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TempoViewModel.swift; sourceTree = "<group>"; };
+		C9FFF2DA41982D4F3F7C963C /* FileUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtils.swift; sourceTree = "<group>"; };
 		C9FFF2EABC2C4C23563ADD96 /* TempoDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TempoDialog.swift; sourceTree = "<group>"; };
 		C9FFF34E5F2FDB3D52CAB4FF /* iOSWorkspaceDrawerResourcesProvider.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = iOSWorkspaceDrawerResourcesProvider.mm; sourceTree = "<group>"; };
 		C9FFF35C725ACB57DDF897B4 /* ProjectViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectViewModel.swift; sourceTree = "<group>"; };
@@ -517,6 +519,7 @@
 				C9FFF3DAD525F726E84AA8F2 /* SwiftUI+ClickGesture.swift */,
 				C9FFFF1E82D8552CD4FBCE28 /* Double+Extensions.swift */,
 				C9FFF53C42BF0DD8FBBD5A74 /* View+Navigation.swift */,
+				C9FFF2DA41982D4F3F7C963C /* FileUtils.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -913,6 +916,7 @@
 				C9FFFF50CFC92D19307766ED /* View+Navigation.swift in Sources */,
 				C9FFF1BD7D39A36AEEF8DB20 /* Deleter.swift in Sources */,
 				C9FFFCA4B0CA4D65A120B25F /* NavigationLazyView.swift in Sources */,
+				C9FFF65948E2C2FDC53146ED /* FileUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
