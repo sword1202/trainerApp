@@ -28,7 +28,7 @@ void MetronomeAudioPlayer::setMetronomeAudioData(std::string&& metronomeAudioDat
 void MetronomeAudioPlayer::providePlaybackData(PlaybackData *playbackData) {
     assert(!metronomeAudioData.empty());
     *playbackData = PlaybackData(WAVFile::parseWavHeader(this->metronomeAudioData), SAMPLES_PER_BUFFER);
-    BaseRawPcmAudioDataPlayer::providePlaybackData(playbackData);
+    playbackData->totalDurationInSeconds = 0;
 }
 
 double MetronomeAudioPlayer::getBeatsPerMinute() const {
