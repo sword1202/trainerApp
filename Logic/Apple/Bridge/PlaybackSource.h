@@ -8,10 +8,11 @@
 #include "VocalTrainerFile.h"
 #endif
 
-@interface RecordingFile : NSObject
+@interface PlaybackSource : NSObject
 @property (readonly) NSTimeInterval creationTime;
 #ifdef __cplusplus
 @property (readonly) VocalTrainerFile* file;
 - (instancetype)initWithFile:(VocalTrainerFile *)file;
 #endif
+- (instancetype)initWithFilePath:(NSString *)filePath;
 @end

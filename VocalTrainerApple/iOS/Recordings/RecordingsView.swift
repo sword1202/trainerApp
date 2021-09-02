@@ -82,7 +82,7 @@ struct RecordingsView : View {
                             .padding(.leading, 16)
                     Spacer()
                     NavigationLink(
-                            destination: NavigationLazyView(ProjectView(filePath: nil).navigationBarHidden(true))
+                            destination: NavigationLazyView(ProjectView(source: PlaybackSource.training()).navigationBarHidden(true))
                     ) {
                         Image("WhitePlusButton")
                     }.padding(.trailing, 18)
@@ -95,7 +95,7 @@ struct RecordingsView : View {
                                 let recording = viewModel.getRecording(at: index)
                                 NavigationLink(
                                         destination: NavigationLazyView(
-                                                ProjectView(filePath: recording.filePath).navigationBarHidden(true))
+                                                ProjectView(source: PlaybackSource(filePath: recording.filePath)).navigationBarHidden(true))
                                 ) {
                                     RecordingView(
                                             recordingBackground: viewModel.getPreviewSamplesImage(

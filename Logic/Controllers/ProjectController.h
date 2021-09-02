@@ -37,7 +37,6 @@ public:
     virtual inline void updateEndSeek(double endSeek) {}
     virtual inline void onRewindStatusChanged(bool rewindRunning, bool backward) {}
     virtual inline void onPlaybackCompleted(SongCompletionFlow* songCompletionFlow) {}
-    virtual inline void onPlaybackSourceChanged() {}
     virtual inline void startListeningToRecording(MvxFile* recording) { NOT_IMPLEMENTED_ASSERT }
     virtual std::shared_ptr<std::ostream> createStreamToSaveRecording(const VocalTrainerFile* recording) {
         return nullptr;
@@ -49,9 +48,9 @@ class ProjectController : CppUtils::DestructorQueue, public WorkspaceControllerD
     WorkspaceController* workspaceController = nullptr;
     WorkspaceColorScheme workspaceColorScheme;
     ProjectControllerDelegate* delegate = nullptr;
-    VocalTrainerFilePlayer* player;
+    VocalTrainerFilePlayer* player = nullptr;
     VocalTrainerFile* source = nullptr;
-    AudioInputManager* audioInputManager;
+    AudioInputManager* audioInputManager = nullptr;
     bool lyricsVisible = true;
     Rewinder* rewinder = nullptr;
     mutable std::vector<Lyrics::Section> sections;
@@ -66,8 +65,6 @@ class ProjectController : CppUtils::DestructorQueue, public WorkspaceControllerD
     void tryAgain() override;
     void save() override;
     void listen() override;
-
-    void handlePlaybackSourceChange();
 public:
     explicit ProjectController(ProjectControllerDelegate* delegate);
 

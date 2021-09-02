@@ -31,8 +31,8 @@ public:
     const char * getInputDeviceName() const;
     void setInputDeviceName(const char *deviceName) const;
 
-    void addAudioInputReaderCallback(const AudioInputReader::Callback& callback, CppUtils::AbstractDestructorQueue* parent);
-    void addAudioInputLevelMonitor(const std::function<void(double)>& callback, CppUtils::AbstractDestructorQueue* parent);
+    void addAudioInputReaderCallback(const AudioInputReader::Callback& callback, CppUtils::AbstractDestructorQueue* parent = nullptr);
+    void addAudioInputLevelMonitor(const std::function<void(double)>& callback, CppUtils::AbstractDestructorQueue* parent = nullptr);
 
     bool isAudioRecordingEnabled() const;
     void setAudioRecordingEnabled(bool audioDataCollectorEnabled);

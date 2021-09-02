@@ -29,12 +29,21 @@ class ProjectViewModel : ObservableObject {
     @Published private(set) var retrySeconds = 5
     @Published private(set) var isPlaying: Bool = false
     @Published var showSongCompletionFlow: Bool = false
-    private(set) var songCompletionFlow: SongCompletionFlowBridge?
+    private(set) var songCompletionFlow: SongCompletionFlowBridge? = nil
     @Published var showListenScreen = false
-    @Published private(set) var recording: RecordingFile? = nil
+    @Published private(set) var recording: PlaybackSource? = nil
     @Published private(set) var recordingTimeLabel: String = ""
+    @Published private(set) var isRecording: Bool = false
 
-    @Published private(set) var tone: [Color] = []
+    @Published private(set) var tone: [Color] = [
+        Colors.tone1,
+        Colors.tone2,
+        Colors.tone3,
+        Colors.tone4,
+        Colors.tone5,
+        Colors.tone6,
+        Colors.tone7
+    ]
 
     private let timeFormatter = DateFormatter()
 
@@ -59,40 +68,29 @@ class ProjectViewModel : ObservableObject {
         playbackEndTime = timeFormatter.string(from: Date(timeIntervalSince1970: projectController.endSeek))
     }
 
-    private func postInit(recordingTime: Date?) {
+    func configure(source: PlaybackSource) {
+        projectController.add(delegate: self)
+        projectController.setPlaybackSource(source)
+        isRecording = projectController.isRecording
+
         isMetronomeEnabled = projectController.metronomeEnabled
         updatePlaybackSections()
         title = projectController.artistName + " - " + projectController.songTitle
         timeFormatter.dateFormat = "m:ss"
         updatePlaybackEndTime()
 
-        if isRecording(), let recordingTime = recordingTime {
+        if isRecording {
+            let recordingTime = source.creationTime
             let formatter = RelativeDateTimeFormatter()
             formatter.unitsStyle = .full
             recordingTimeLabel = Strings.recordedAgoLabel.localized + " " +
-                    formatter.localizedString(for: recordingTime, relativeTo: Date())
+                    formatter.localizedString(fromTimeInterval: Date().timeIntervalSince1970 - recordingTime)
             if recordingTimeLabel.contains(" 0 ") {
                 recordingTimeLabel = Strings.recordedAgoLabel.localized + " " + Strings.justNow.localized
             }
         }
 
-//        audioEngine.connect(
-//                audioEngine.inputNode,
-//                to: audioEngine.outputNode,
-//                format: audioEngine.inputNode.inputFormat(forBus: 0))
-    }
-
-    init(filePath: String?) {
-        projectController.add(delegate: self)
-        let mvxFilePath = filePath ?? Bundle.main.path(forResource: "drm", ofType: "mvx")
-        projectController.setPlaybackSource(filePath: mvxFilePath)
-        postInit(recordingTime: FileUtils.getFileModificationDate(filePath: filePath))
-    }
-
-    init(recording: RecordingFile) {
-        projectController.add(delegate: self)
-        projectController.setPlaybackSource(recording: recording)
-        postInit(recordingTime: Date(timeIntervalSince1970: recording.creationTime))
+        projectController.setWorkspaceColorScheme(Colors.getWorkspaceScheme(isRecording: false))
     }
 
     private func updatePlaybackSections() {
@@ -130,18 +128,6 @@ class ProjectViewModel : ObservableObject {
         if !showBoundsSelectionDialog {
             projectController.clearPlaybackBounds()
         }
-    }
-
-    func isRecording() -> Bool {
-        projectController.isRecording
-    }
-
-    func createTonalityViewModel() -> TonalityViewModel {
-        TonalityViewModel(projectController: projectController)
-    }
-
-    func createTempoViewModel() -> TempoViewModel {
-        TempoViewModel(projectController: projectController)
     }
 }
 
@@ -196,20 +182,7 @@ extension ProjectViewModel : ProjectControllerBridgeDelegate {
         showSongCompletionFlow = true
     }
 
-    func projectControllerPlaybackSourceDidChange() {
-        tone = [
-            Colors.tone1,
-            Colors.tone2,
-            Colors.tone3,
-            Colors.tone4,
-            Colors.tone5,
-            Colors.tone6,
-            Colors.tone7,
-        ]
-        projectController.setWorkspaceColorScheme(Colors.getWorkspaceScheme(isRecording: false))
-    }
-
-    func projectControllerStartListeningToRecording(recording: RecordingFile) {
+    func projectControllerStartListeningToRecording(recording: PlaybackSource) {
         self.recording = recording
         showListenScreen = true
     }

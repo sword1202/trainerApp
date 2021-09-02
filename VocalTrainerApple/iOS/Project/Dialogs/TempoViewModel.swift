@@ -8,7 +8,7 @@ import Foundation
 private let factorStep: Double = 0.05
 
 class TempoViewModel : ObservableObject {
-    private let projectController: ProjectController
+    private var projectController: ProjectController!
 
     private var factor: Double = 1 {
         didSet {
@@ -56,21 +56,17 @@ class TempoViewModel : ObservableObject {
         !projectController.isRecording
     }
 
-    init(projectController: ProjectController) {
+    func configure(projectController: ProjectController) {
         self.projectController = projectController
-        if !SwiftUIUtils.isPreview() {
-            updateBpm()
-            originalBpm = Strings.originalLabel.localized + " " +
-                    String(Int(projectController.originalBeatsPerMinute.rounded()))
-            updateFactorString()
-            projectController.add(delegate: self)
-        }
+        updateBpm()
+        originalBpm = Strings.originalLabel.localized + " " +
+                String(Int(projectController.originalBeatsPerMinute.rounded()))
+        updateFactorString()
+        projectController.add(delegate: self)
     }
 
     deinit {
-        if !SwiftUIUtils.isPreview() {
-            projectController.remove(delegate: self)
-        }
+        projectController.remove(delegate: self)
     }
 }
 

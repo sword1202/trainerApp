@@ -19,10 +19,10 @@ ProjectController::ProjectController(ProjectControllerDelegate* delegate) : dele
 
     player->stopRequestedListeners.addListener([=] {
         onStopPlaybackRequested();
-    }, this);
+    });
 
     player->isPlayingChangedListeners.addListener([this] (bool playing) {
-        if (!this->player->isRecording()) {
+        if (audioInputManager) {
             if (playing) {
                 this->audioInputManager->startPitchDetection(this->player->getSeek());
             } else {
@@ -39,7 +39,7 @@ ProjectController::ProjectController(ProjectControllerDelegate* delegate) : dele
             this->delegate->onPlaybackStopped();
         }
         updateWorkspaceSeek(this->player->getSeek());
-    }, this);
+    });
 
     player->vocalPartChangedListeners.addListener([this] (const VocalPart* vocalPart) {
         if (workspaceController) {
@@ -48,16 +48,16 @@ ProjectController::ProjectController(ProjectControllerDelegate* delegate) : dele
                     player->getFile().getTimeSignature().getNumberOfBeatsInBar());
             updateWorkspaceSeek(player->getSeek());
         }
-    }, this);
+    });
 
     player->tonalityChangedListeners.addListener([=] {
         if (workspaceController) {
             workspaceController->update();
         }
-    }, this);
+    });
 
     player->seekChangedListeners.addListener([=] (double seek) {
-        if (!player->isCompleted()) {
+        if (!player->isCompleted() && audioInputManager) {
             audioInputManager->setPitchesRecorderSeek(seek);
         }
         executeOnMainThread([=] {
@@ -65,41 +65,26 @@ ProjectController::ProjectController(ProjectControllerDelegate* delegate) : dele
                 this->delegate->updateSeek(seek);
             }
         });
-    }, this);
+    });
 
     player->setInstrumentalVolume(1.0);
     player->setVocalPartPianoVolume(1.0);
-    audioInputManager->setOutputVolume(0.0);
-
-    audioInputManager->getPitchDetectedListeners().addListener([=] (const Pitch& pitch, double) {
-        if (workspaceController) {
-            workspaceController->setDetectedPitch(pitch);
-        }
-    }, this);
-
-    audioInputManager->addAudioInputLevelMonitor([=] (double level) {
-        delegate->updateAudioLevel(level);
-    }, this);
 
     player->lyricsSelectionChangedListeners.addListener([=] (const LyricsPlayer::Selection& selection) {
         delegate->updateLyricsSelection(selection);
-    }, this);
+    });
 
     player->currentLyricsLinesChangedListeners.addListener([=] (const LyricsDisplayedLinesProvider* provider) {
         delegate->updateLyricsLines(provider);
-    }, this);
+    });
 
     player->boundsChangedListeners.addListener([=] (const PlaybackBounds& bounds) {
         delegate->updateEndSeek(getEndSeek());
         delegate->updateSeek(player->getSeek());
-    }, this);
+    });
 
     player->onCompleteListeners.addListener([=] {
         delegate->onPlaybackCompleted(this);
-    }, this);
-
-    player->onSourceChanged.addListener([=] {
-        delegate->onPlaybackSourceChanged();
     });
 
     rewinder = new Rewinder(player);
@@ -129,11 +114,11 @@ void ProjectController::stop() {
 }
 
 const std::string & ProjectController::getArtistNameUtf8() {
-    return player->getArtistNameUtf8();
+    return source->getArtistNameUtf8();
 }
 
 const std::string & ProjectController::getSongTitleUtf8() {
-    return player->getSongTitleUtf8();
+    return source->getSongTitleUtf8();
 }
 
 void ProjectController::setVocalVolume(float value) {
@@ -185,10 +170,26 @@ void ProjectController::setWorkspaceController(WorkspaceController *workspaceCon
 
     workspaceController->setDelegate(this);
     workspaceController->setColors(workspaceColorScheme);
-    handlePlaybackSourceChange();
+
+    workspaceController->setVocalPart(
+            player->getVocalPart(),
+            player->getBeatsPerSecond(),
+            player->getFile().getTimeSignature().getNumberOfBeatsInBar());
+    workspaceController->setInstrumentalTrackSamples(
+            this->player->getFile().getInstrumentalPreviewSamples());
+    workspaceController->setPitchSequence(player);
+    bool isRecording = player->isRecording();
+    workspaceController->setRecording(isRecording);
+    if (isRecording) {
+        workspaceController->setPitchesCollection(player->getPitchesCollection());
+    } else {
+        workspaceController->setPitchesCollection(audioInputManager->getRecordedPitches());
+    }
 
     player->seekChangedFromUserListeners.addListener([=] (double seek) {
-        audioInputManager->setAudioRecorderSeek(seek);
+        if (audioInputManager) {
+            audioInputManager->setAudioRecorderSeek(seek);
+        }
         updateWorkspaceSeek(seek);
     });
 
@@ -296,7 +297,7 @@ bool ProjectController::isPlaying() const {
 }
 
 bool ProjectController::isRecording() const {
-    return player->isRecording();
+    return source->isRecording();
 }
 
 void ProjectController::toggleRewind(bool backward) {
@@ -408,7 +409,9 @@ void ProjectController::setTempoFactor(double value) {
         return;
     }
 
-    audioInputManager->clearRecordedData();
+    if (audioInputManager) {
+        audioInputManager->clearRecordedData();
+    }
     player->setTempoFactor(value);
     delegate->updateTempoFactor(value);
 }
@@ -464,9 +467,6 @@ MvxFile *ProjectController::generateRecording() const {
             recordingData,
             RECORDING_PREVIEW_SAMPLES_COUNT);
     recordingFile->setRecordingPreviewSamples(previewSamples);
-    player->onSourceChanged.addOneShotListener([=] {
-        player->setSeek(0);
-    });
 
     return recordingFile;
 }
@@ -499,32 +499,32 @@ bool ProjectController::hasPlaybackSource() const {
 }
 
 ProjectController::~ProjectController() {
-    player->clearSource();
+    delete player;
+    delete audioInputManager;
     delete source;
+    delete rewinder;
 }
 
 void ProjectController::setPlaybackSource(VocalTrainerFile *source) {
-    auto* lastSource = this->source;
+    assert(this->source == nullptr && "setPlaybackSource should be called once");
     this->source = source;
     player->setSource(source, /*destroyFileOnDestructor =*/ false);
     player->prepare();
-    delete lastSource;
-}
 
-void ProjectController::handlePlaybackSourceChange() {
-    workspaceController->setVocalPart(
-            player->getVocalPart(),
-            player->getBeatsPerSecond(),
-            player->getFile().getTimeSignature().getNumberOfBeatsInBar());
-    workspaceController->setInstrumentalTrackSamples(
-            this->player->getFile().getInstrumentalPreviewSamples());
-    workspaceController->setPitchSequence(player);
-    bool isRecording = player->isRecording();
-    workspaceController->setRecording(isRecording);
-    if (isRecording) {
-        workspaceController->setPitchesCollection(player->getPitchesCollection());
-    } else {
-        workspaceController->setPitchesCollection(audioInputManager->getRecordedPitches());
+    if (source->isRecording()) {
+        audioInputManager = ApplicationModel::instance()->createAudioInputManager();
+
+        audioInputManager->setOutputVolume(0.0);
+
+        audioInputManager->getPitchDetectedListeners().addListener([=](const Pitch &pitch, double) {
+            if (workspaceController) {
+                workspaceController->setDetectedPitch(pitch);
+            }
+        });
+
+        audioInputManager->addAudioInputLevelMonitor([=](double level) {
+            delegate->updateAudioLevel(level);
+        });
     }
 }
 

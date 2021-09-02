@@ -208,19 +208,11 @@ public:
         return Streams::OpenFileAsSharedPtr(filePath.str().data(), std::ios::binary | std::ios::out);
     }
 
-    void onPlaybackSourceChanged() override {
-        for (id delegate in delegates) {
-            if ([delegate respondsToSelector:@selector(projectControllerPlaybackSourceDidChange)]) {
-                [delegate projectControllerPlaybackSourceDidChange];
-            }
-        }
-    }
-
     void startListeningToRecording(MvxFile *recording) override {
         for (id delegate in delegates) {
             if ([delegate respondsToSelector:@selector(projectControllerStartListeningToRecordingWithRecording:)]) {
                 [delegate projectControllerStartListeningToRecordingWithRecording:
-                        [[RecordingFile alloc] initWithFile:recording]
+                        [[PlaybackSource alloc] initWithFile:recording]
                 ];
             }
         }
@@ -258,15 +250,11 @@ public:
     _cpp->setWorkspaceController(static_cast<WorkspaceController *>(workspaceController));
 }
 
-- (void)setPlaybackSource:(NSString *)filePath {
-    if ([filePath isEqualToString:_playbackSource]) {
-        return;
-    }
-    _playbackSource = filePath;
-    _cpp->setPlaybackSource(filePath.UTF8String);
+- (void)setPlaybackSource:(PlaybackSource*)source {
+    _cpp->setPlaybackSource(source.file);
 }
 
-- (void)setPlaybackSourceWithRecording:(RecordingFile*)recording {
+- (void)setPlaybackSourceWithRecording:(PlaybackSource*)recording {
     _playbackSource = nil;
     _cpp->setPlaybackSource(recording.file);
 }

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "NativeColorUtils.h"
-#import "RecordingFile.h"
+#import "PlaybackSource.h"
 
 //! Project version number for LogiciOS.
 FOUNDATION_EXPORT double LogiciOSVersionNumber;

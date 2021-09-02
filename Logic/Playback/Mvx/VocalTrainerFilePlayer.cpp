@@ -30,14 +30,9 @@ VocalTrainerFilePlayer::VocalTrainerFilePlayer() : metronomeEnabled(false) {
 }
 
 void VocalTrainerFilePlayer::setSource(VocalTrainerFile *file, bool destroyFileOnDestructor) {
-    clearSource();
-    setSourceInternal(file, destroyFileOnDestructor);
-}
-
-void VocalTrainerFilePlayer::setSourceInternal(VocalTrainerFile *file, bool destroyFileOnDestructor) {
+    assert(this->file == nullptr && "setSource can only be called once");
     this->file = file;
     this->destroyFileOnDestructor = destroyFileOnDestructor;
-    players.clear();
     AudioDataBufferConstPtr instrumental = file->getInstrumental();
     if (instrumental) {
         instrumentalPlayer.setAudioData(instrumental);
@@ -48,11 +43,9 @@ void VocalTrainerFilePlayer::setSourceInternal(VocalTrainerFile *file, bool dest
 
     vocalPartPianoPlayer.setVocalPart(file->getVocalPart());
     players.push_back(&vocalPartPianoPlayer);
-    delete pitchesCollection;
-    pitchesCollection = nullptr;
     if (file->isRecording()) {
         pitchesCollection = new PitchesMutableList(file->getRecordedPitchesFrequencies(),
-                                                   file->getRecordedPitchesTimes());
+                file->getRecordedPitchesTimes());
         recordingPlayer.setAudioData(file->getRecordingData());
         players.push_back(&recordingPlayer);
 
@@ -118,8 +111,6 @@ void VocalTrainerFilePlayer::setSourceInternal(VocalTrainerFile *file, bool dest
         this->onPlaybackStarted();
     });
 
-    delete lyricsPlayer;
-    lyricsPlayer = nullptr;
     const Lyrics& lyrics = file->getLyrics();
     if (!lyrics.isEmpty()) {
         lyricsPlayer = new LyricsPlayer(&lyrics);
@@ -130,8 +121,6 @@ void VocalTrainerFilePlayer::setSourceInternal(VocalTrainerFile *file, bool dest
             this->currentLyricsLinesChangedListeners.executeAll(linesProvider);
         };
     }
-
-    onSourceChanged.executeAll();
 }
 
 void VocalTrainerFilePlayer::setSource(std::istream &is) {
@@ -496,17 +485,6 @@ double VocalTrainerFilePlayer::getOriginalBeatsPerMinute() const {
 
 void VocalTrainerFilePlayer::setDestroyFileOnDestructor(bool destroyFileOnDestructor) {
     this->destroyFileOnDestructor = destroyFileOnDestructor;
-}
-
-void VocalTrainerFilePlayer::clearSource() {
-    cancelAllOperations();
-    instrumentalPlayer.reset();
-    vocalPartPianoPlayer.reset();
-    recordingPlayer.reset();
-    if (destroyFileOnDestructor) {
-        delete file;
-    }
-    file = nullptr;
 }
 
 bool VocalTrainerFilePlayer::hasSource() const {

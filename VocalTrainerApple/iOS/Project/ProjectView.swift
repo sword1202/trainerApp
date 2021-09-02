@@ -58,27 +58,18 @@ private struct TwoLinesButton: View {
 struct ProjectView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.presentationMode) var presentationMode
-    @StateObject private var viewModel: ProjectViewModel
-    @StateObject private var tonalityViewModel: TonalityViewModel
-    @StateObject private var tempoViewModel: TempoViewModel
+    @StateObject private var viewModel = ProjectViewModel()
+    @StateObject private var tonalityViewModel = TonalityViewModel()
+    @StateObject private var tempoViewModel = TempoViewModel()
     @State private var levelsVisible = false
     @State private var tonalityDialogVisible = false
     @State private var tempoDialogVisible = false
     @State private var boundsSelectionDialogVisible = false
     @State private var showSwipeAndZoomSuggestion = AppSettings.shared.showSwipeAndZoomSuggestion
+    private let source: PlaybackSource
 
-    private init(viewModel: ProjectViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-        _tonalityViewModel = StateObject(wrappedValue: viewModel.createTonalityViewModel())
-        _tempoViewModel = StateObject(wrappedValue: viewModel.createTempoViewModel())
-    }
-
-    init(recording: RecordingFile) {
-        self.init(viewModel: ProjectViewModel(recording: recording))
-    }
-
-    init(filePath: String?) {
-        self.init(viewModel: ProjectViewModel(filePath: filePath))
+    init(source: PlaybackSource) {
+        self.source = source
     }
 
     var body: some View {
@@ -119,7 +110,7 @@ struct ProjectView: View {
                             TopPanelToggleButton(image: "MetronomeButton", selectedColor: viewModel.tone[2], isSelected: $viewModel.isMetronomeEnabled)
                         }.frame(maxWidth: .infinity, maxHeight: topButtonFrameHeight).padding(.trailing, 8)
                         HStack(spacing: 8) {
-                            if viewModel.isRecording() {
+                            if viewModel.isRecording {
                                 Image("RecordingIcon")
                             }
                             Text(viewModel.title)
@@ -131,7 +122,7 @@ struct ProjectView: View {
                                 .padding(.bottom, 8)
                                 .padding(.leading, 16)
 
-                        if viewModel.isRecording() {
+                        if viewModel.isRecording {
                             HStack {
                                 Text(viewModel.recordingTimeLabel)
                                         .foregroundColor(Color.white)
@@ -201,7 +192,7 @@ struct ProjectView: View {
                                 .padding(.top, 14)
                         Spacer().frame(maxWidth: .infinity)
                         HStack {
-                            if !viewModel.isRecording() {
+                            if !viewModel.isRecording {
                                 Button(action: {
                                     viewModel.didTapRetry()
                                 }) {
@@ -217,7 +208,7 @@ struct ProjectView: View {
                             }) {
                                 Image(viewModel.isPlaying ? "PauseButton" : "PlayButton")
                             }.padding(.leading, 50).padding(.trailing, 50)
-                            if !viewModel.isRecording() {
+                            if !viewModel.isRecording {
                                 Button(action: {
                                     var showDialog = false
                                     viewModel.didTapBoundsSelection(showBoundsSelectionDialog: &showDialog)
@@ -306,14 +297,10 @@ struct ProjectView: View {
                     }
                 }
 
-                NavigationLazyView(ProjectView(recording: viewModel.recording!)).navigatePush(whenTrue: $viewModel.showListenScreen)
+                NavigationLazyView(ProjectView(source: viewModel.recording!)).navigatePush(whenTrue: $viewModel.showListenScreen)
             }
+        }.onAppear {
+            viewModel.configure(source: source)
         }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProjectView(filePath: nil)
     }
 }

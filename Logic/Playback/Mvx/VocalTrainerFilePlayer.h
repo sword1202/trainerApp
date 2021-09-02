@@ -62,8 +62,6 @@ private:
 
     const BaseAudioPlayer* getMainPlayer() const;
     BaseAudioPlayer* getMainPlayer();
-
-    void setSourceInternal(VocalTrainerFile *file, bool destroyFileOnDestructor = true);
 public:
     CppUtils::ListenersSet<bool> isPlayingChangedListeners;
     CppUtils::ListenersSet<> stopRequestedListeners;
@@ -78,14 +76,12 @@ public:
     CppUtils::SynchronizedListenersSet<double> recordingVoiceLevelListeners;
     CppUtils::ListenersSet<LyricsPlayer::Selection> lyricsSelectionChangedListeners;
     CppUtils::ListenersSet<const LyricsDisplayedLinesProvider*> currentLyricsLinesChangedListeners;
-    CppUtils::ListenersSet<> onSourceChanged;
 
     VocalTrainerFilePlayer();
     virtual ~VocalTrainerFilePlayer();
     void setSource(std::istream &is);
     void setSource(const char *filePath);
     void setSource(VocalTrainerFile *file, bool destroyFileOnDestructor = true);
-    void clearSource();
     void prepare();
     virtual void setInstrumentalVolume(float instrumentalVolume);
     virtual void setVocalPartPianoVolume(float pianoVolume);
