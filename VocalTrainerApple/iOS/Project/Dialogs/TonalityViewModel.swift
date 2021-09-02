@@ -26,6 +26,10 @@ class TonalityViewModel : ObservableObject {
     }
 
     func configure(projectController: ProjectController) {
+        guard self.projectController == nil else {
+            return
+        }
+
         self.projectController = projectController
         let originalTonality = projectController.originalTonality.toString()
         originalTonalityLabel = Strings.originalLabel.localized + " " +

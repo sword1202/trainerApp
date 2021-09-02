@@ -57,6 +57,10 @@ class TempoViewModel : ObservableObject {
     }
 
     func configure(projectController: ProjectController) {
+        guard self.projectController == nil else {
+            return
+        }
+
         self.projectController = projectController
         updateBpm()
         originalBpm = Strings.originalLabel.localized + " " +

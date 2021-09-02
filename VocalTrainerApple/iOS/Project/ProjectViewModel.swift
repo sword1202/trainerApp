@@ -69,6 +69,10 @@ class ProjectViewModel : ObservableObject {
     }
 
     func configure(source: PlaybackSource) {
+        guard !projectController.hasPlaybackSource() else {
+            return
+        }
+
         projectController.add(delegate: self)
         projectController.setPlaybackSource(source)
         isRecording = projectController.isRecording

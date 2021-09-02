@@ -301,6 +301,8 @@ struct ProjectView: View {
             }
         }.onAppear {
             viewModel.configure(source: source)
+            tonalityViewModel.configure(projectController: viewModel.projectController)
+            tempoViewModel.configure(projectController: viewModel.projectController)
         }
     }
 }
