@@ -39,6 +39,7 @@ class BaseAudioPlayer : protected CppUtils::OnThreadExecutor {
     void writerCallback(void* buffer, int samplesCount);
 protected:
     virtual int readNextSamplesBatch(void *intoBuffer, int framesCount, const PlaybackData& playbackData) = 0;
+
     virtual void providePlaybackData(PlaybackData *playbackData) = 0;
     // Call this method if you have a predefined PlaybackData, which should not be retrieved during prepare
     void setPlaybackData(const PlaybackData &playbackData);
@@ -68,7 +69,7 @@ public:
     CppUtils::SynchronizedListenersSet<double, double> seekChangedListeners; // <seek, totalDuration>
 
     BaseAudioPlayer();
-    virtual void prepare();
+    void prepare();
     virtual void play(double seek);
     virtual void play();
     virtual bool isPlaying() const;

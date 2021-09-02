@@ -16,7 +16,7 @@ public:
 protected:
     int readNextSamplesBatch(void *intoBuffer, int framesCount,
             const PlaybackData &playbackData) override;
-    void providePlaybackData(PlaybackData *playbackData) override;
+    virtual void providePlaybackData(PlaybackData *playbackData) override;
     virtual int getAudioDataSizeInBytes() const = 0;
     virtual int readAudioData(void* into, int offset, int numberOfBytes) = 0;
 };

@@ -14,26 +14,21 @@ using namespace CppUtils;
 using std::cout;
 using std::endl;
 
-CPP_UTILS_DLLHIDE class Buffer : public StdStringAudioDataBuffer {
-public:
-    Buffer() {
-    }
+static constexpr int SAMPLES_PER_BUFFER = 256;
 
-    int read(void *into, int offset, int numberOfBytes) const override {
-        offset %= getNumberOfBytes();
-        return StdStringAudioDataBuffer::read(into, offset, numberOfBytes);
-    }
-};
+int MetronomeAudioPlayer::read(void *into, int offset, int numberOfBytes) {
+    offset %= getNumberOfBytes();
+    return StdStringAudioDataBuffer::read(into, offset, numberOfBytes);
+}
 
 void MetronomeAudioPlayer::setMetronomeAudioData(std::string&& metronomeAudioData) {
     MetronomeAudioPlayer::metronomeAudioData = std::move(metronomeAudioData);
 }
 
-void MetronomeAudioPlayer::prepare() {
-    this->audioData.reset(new Buffer());
+void MetronomeAudioPlayer::providePlaybackData(PlaybackData *playbackData) {
     assert(!metronomeAudioData.empty());
-    setPlaybackData(WAVFile::parseWavHeader(this->metronomeAudioData));
-    BaseRawPcmAudioDataPlayer::prepare();
+    *playbackData = PlaybackData(WAVFile::parseWavHeader(this->metronomeAudioData), SAMPLES_PER_BUFFER);
+    BaseRawPcmAudioDataPlayer::providePlaybackData(playbackData);
 }
 
 double MetronomeAudioPlayer::getBeatsPerMinute() const {
@@ -56,7 +51,7 @@ void MetronomeAudioPlayer::setAudioDataInfo(double beatsPerMinute, double totalD
     this->totalVirtualBufferSize = secondsSeekToBufferSeek(totalDurationInSeconds) * sampleSize;
     int totalBufferSize = beatBufferSize + metronomeBufferSize / 2;
 
-    std::string& data = audioData->getData();
+    std::string& data = getData();
     data.clear();
     data.reserve((size_t)totalBufferSize);
     data.append(beatBufferSize - metronomeBufferSize / 2, '\0');
@@ -73,13 +68,10 @@ int MetronomeAudioPlayer::getAudioDataSizeInBytes() const {
 
 MetronomeAudioPlayer::MetronomeAudioPlayer() {
     setPlayerName("MetronomeAudioPlayer");
-    if (!metronomeAudioData.empty()) {
-
-    }
 }
 
 int MetronomeAudioPlayer::readAudioData(void *into, int offset, int numberOfBytes) {
-    return audioData->read(into, offset, numberOfBytes);
+    return read(into, offset, numberOfBytes);
 }
 
 std::string MetronomeAudioPlayer::metronomeAudioData;

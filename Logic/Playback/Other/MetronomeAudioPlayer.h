@@ -10,11 +10,10 @@
 #include "StlContainerAudioDataBuffer.h"
 #include <string>
 
-class MetronomeAudioPlayer : public BaseRawPcmAudioDataPlayer {
+class MetronomeAudioPlayer : public BaseRawPcmAudioDataPlayer, private StdStringAudioDataBuffer {
     double beatsPerMinute = 0;
     static std::string metronomeAudioData;
     int totalVirtualBufferSize;
-    std::unique_ptr<StdStringAudioDataBuffer> audioData;
 public:
     MetronomeAudioPlayer();
 
@@ -23,11 +22,16 @@ public:
     double getBeatsPerMinute() const;
     void setAudioDataInfo(double beatsPerMinute, double totalDurationInSeconds);
 
-    void prepare() override;
+protected:
+    virtual void providePlaybackData(PlaybackData *playbackData) override;
 
 protected:
     int getAudioDataSizeInBytes() const override;
     int readAudioData(void *into, int offset, int numberOfBytes) override;
+
+private:
+    // StdStringAudioDataBuffer
+    int read(void *into, int offset, int numberOfBytes);
 };
 
 
