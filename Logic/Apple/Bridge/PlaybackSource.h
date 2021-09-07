@@ -10,9 +10,10 @@
 
 @interface PlaybackSource : NSObject
 @property (readonly) NSTimeInterval creationTime;
+@property (readonly) bool isTempRecording;
 #ifdef __cplusplus
 @property (readonly) VocalTrainerFile* file;
-- (instancetype)initWithFile:(VocalTrainerFile *)file;
+- (instancetype)initWithFile:(VocalTrainerFile *)file isTempRecording:(bool)isTempRecording;
 #endif
 - (instancetype)initWithFilePath:(NSString *)filePath;
 @end

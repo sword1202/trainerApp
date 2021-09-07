@@ -212,7 +212,7 @@ public:
         for (id delegate in delegates) {
             if ([delegate respondsToSelector:@selector(projectControllerStartListeningToRecordingWithRecording:)]) {
                 [delegate projectControllerStartListeningToRecordingWithRecording:
-                        [[PlaybackSource alloc] initWithFile:recording]
+                        [[PlaybackSource alloc] initWithFile:recording isTempRecording:true]
                 ];
             }
         }

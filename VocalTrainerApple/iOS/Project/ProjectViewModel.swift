@@ -34,6 +34,7 @@ class ProjectViewModel : ObservableObject {
     @Published private(set) var recording: PlaybackSource? = nil
     @Published private(set) var recordingTimeLabel: String = ""
     @Published private(set) var isRecording: Bool = false
+    private var source: PlaybackSource!
 
     @Published private(set) var tone: [Color] = [
         Colors.tone1,
@@ -69,10 +70,11 @@ class ProjectViewModel : ObservableObject {
     }
 
     func configure(source: PlaybackSource) {
-        guard !projectController.hasPlaybackSource() else {
+        guard self.source == nil else {
             return
         }
 
+        self.source = source
         projectController.add(delegate: self)
         projectController.setPlaybackSource(source)
         isRecording = projectController.isRecording
@@ -182,8 +184,10 @@ extension ProjectViewModel : ProjectControllerBridgeDelegate {
     }
 
     func projectControllerPlaybackDidComplete(flow: SongCompletionFlowBridge) {
-        songCompletionFlow = flow
-        showSongCompletionFlow = true
+        if source.isTempRecording || !projectController.isRecording {
+            songCompletionFlow = flow
+            showSongCompletionFlow = true
+        }
     }
 
     func projectControllerStartListeningToRecording(recording: PlaybackSource) {
