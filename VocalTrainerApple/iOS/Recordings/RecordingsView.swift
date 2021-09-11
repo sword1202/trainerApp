@@ -68,10 +68,8 @@ struct RecordingsView : View {
     var body: some View {
         GeometryReader { geom in
             // Fill safe area with colors
-            VStack {
-                Spacer().frame(maxWidth: .infinity, maxHeight: geom.safeAreaInsets.top).background(Colors.tone2)
-                Spacer().frame(maxWidth: .infinity).background(Color.white)
-            }.edgesIgnoringSafeArea(.bottom).edgesIgnoringSafeArea(.top)
+            Spacer().frame(maxWidth: .infinity).background(Colors.tone2).ignoresSafeArea()
+            Spacer().frame(maxWidth: .infinity).background(Color.white)
 
             // Main content
             VStack(spacing: 0) {
