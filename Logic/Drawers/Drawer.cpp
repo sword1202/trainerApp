@@ -193,7 +193,7 @@ Drawer::~Drawer() {
         delete image;
     }
 
-    CheckedDelete(textImagesFactory);
+    delete textImagesFactory;
 }
 
 bool Drawer::imageRegistered(Drawer::Image *image) const {
@@ -225,7 +225,7 @@ void Drawer::setTextFontSize(float fontSize) {
 
 void Drawer::setTextImagesFactory(DrawerTextImagesFactory *textImagesFactory) {
     assert(textImagesFactory);
-    CheckedDelete(this->textImagesFactory);
+    delete this->textImagesFactory;
     this->textImagesFactory = textImagesFactory;
 }
 

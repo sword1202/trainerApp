@@ -68,7 +68,7 @@ struct RecordingsView : View {
     var body: some View {
         GeometryReader { geom in
             // Fill safe area with colors
-            Spacer().frame(maxWidth: .infinity).background(Colors.tone2).ignoresSafeArea()
+            Spacer().frame(maxWidth: .infinity).background(Colors.tone2).ignoresSafeArea(edges: .top)
             Spacer().frame(maxWidth: .infinity).background(Color.white)
 
             // Main content
