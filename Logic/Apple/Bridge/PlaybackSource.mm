@@ -12,14 +12,12 @@ using namespace CppUtils;
 @implementation PlaybackSource {
     NSTimeInterval _creationTime;
     VocalTrainerFile* _file;
-    bool _isTempRecording;
 }
 
-- (instancetype)initWithFile:(VocalTrainerFile *)file isTempRecording:(bool)isTempRecording {
+- (instancetype)initWithFile:(VocalTrainerFile *)file {
     self = [super init];
     if (self) {
         _file = file;
-        _isTempRecording = isTempRecording;
         _creationTime = [[NSDate date] timeIntervalSince1970];
     }
 
@@ -32,7 +30,6 @@ using namespace CppUtils;
         const char *path = filePath.UTF8String;
         std::fstream is = Streams::OpenFile(path, std::ios::in | std::ios::binary);
         _file = VocalTrainerFile::read(is);
-        _isTempRecording = false;
         _creationTime = FileUtils::GetLastWriteTimeInMicroseconds(path) / 1000000.0;
     }
 
@@ -48,10 +45,6 @@ using namespace CppUtils;
     auto* result = _file;
     _file = nullptr;
     return result;
-}
-
-- (bool)isTempRecording {
-    return _isTempRecording;
 }
 
 - (void)dealloc {

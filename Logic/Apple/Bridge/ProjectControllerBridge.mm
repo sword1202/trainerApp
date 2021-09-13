@@ -5,7 +5,7 @@
 
 #import <Logic/Logic.h>
 #import "ProjectControllerBridge.h"
-#import "SongCompletionFlowObjCWrapper.h"
+#import "SingingCompletionFlowObjCWrapper.h"
 #include "ProjectController.h"
 #include "config.h"
 #include "TimeUtils.h"
@@ -192,11 +192,11 @@ public:
         }
     }
 
-    void onPlaybackCompleted(SongCompletionFlow* songCompletionFlow) override {
+    void showSingingCompletionFlow(SingingCompletionFlow* songCompletionFlow) override {
         for (id delegate in delegates) {
             if ([delegate respondsToSelector:@selector(projectControllerPlaybackDidCompleteWithFlow:)]) {
                 [delegate projectControllerPlaybackDidCompleteWithFlow:
-                        [[SongCompletionFlowObjCWrapper alloc] initWithCpp:songCompletionFlow]
+                        [[SingingCompletionFlowObjCWrapper alloc] initWithCpp:songCompletionFlow]
                 ];
             }
         }
@@ -212,7 +212,7 @@ public:
         for (id delegate in delegates) {
             if ([delegate respondsToSelector:@selector(projectControllerStartListeningToRecordingWithRecording:)]) {
                 [delegate projectControllerStartListeningToRecordingWithRecording:
-                        [[PlaybackSource alloc] initWithFile:recording isTempRecording:true]
+                        [[PlaybackSource alloc] initWithFile:recording]
                 ];
             }
         }

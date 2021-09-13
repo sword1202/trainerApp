@@ -77,14 +77,14 @@
 		C9FFF75F9918AF94842CC30B /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFE302DCFBB0ABE54FB5D /* UIFont+Extensions.swift */; };
 		C9FFF78036C9ABE74E81FDD3 /* Divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF9FCDE2ED69025456B41 /* Divider.swift */; };
 		C9FFF7DEA9F4C41B547AA8A8 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFDE022FCD75907ABC899 /* AppSettings.swift */; };
-		C9FFF8809867862F81D0A1DF /* SongCompletionDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8E1CBCE3FB107681D8E /* SongCompletionDialog.swift */; };
+		C9FFF8809867862F81D0A1DF /* SingingCompletionDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8E1CBCE3FB107681D8E /* SingingCompletionDialog.swift */; };
 		C9FFF88694CBA04B6DD00263 /* metronome.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9FFFC6AA64F7DE371AEF4C4 /* metronome.wav */; };
 		C9FFF92F2CAA4605DF8DFBC1 /* BaseWorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF8FE42466B28CAAB81B9 /* BaseWorkspaceDrawerView.mm */; };
 		C9FFF9793FA19D6309F5BC02 /* WorkspaceDrawerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFBFBC3CF33B1EFAA4E4A /* WorkspaceDrawerView.mm */; };
 		C9FFF9B5CDD7D8A3D2E2A06B /* TonalityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF5C089DA6D0BBCBA539C /* TonalityViewModel.swift */; };
 		C9FFF9F48A6D816A30F0AE35 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2396E0BB5102967F5B2 /* UIView+Extensions.swift */; };
 		C9FFFA07A94FBE4832C6004E /* BigButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF18E9C15E6FAF0C18086 /* BigButton.swift */; };
-		C9FFFA0DB398E2B48B77C23A /* SongCompletionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF78F0BBB67E5152ACA63 /* SongCompletionViewModel.swift */; };
+		C9FFFA0DB398E2B48B77C23A /* SingingCompletionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF78F0BBB67E5152ACA63 /* SingingCompletionViewModel.swift */; };
 		C9FFFAC7A9EEC42DB7900780 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD04B887D1AA905A010C /* Math.swift */; };
 		C9FFFB37E08B97046BF252A7 /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFF1E82D8552CD4FBCE28 /* Double+Extensions.swift */; };
 		C9FFFB4117D7E4EF6A075F4B /* TempoDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF2EABC2C4C23563ADD96 /* TempoDialog.swift */; };
@@ -216,12 +216,12 @@
 		C9FFF72A1F66910885A40FE2 /* CGSize+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGSize+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF75984620E90683329A9 /* NSAttributedString+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF774A22E8B2F85EA6664 /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
-		C9FFF78F0BBB67E5152ACA63 /* SongCompletionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongCompletionViewModel.swift; sourceTree = "<group>"; };
+		C9FFF78F0BBB67E5152ACA63 /* SingingCompletionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingingCompletionViewModel.swift; sourceTree = "<group>"; };
 		C9FFF7DE831C9EFAE9A0AB40 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		C9FFF854128820437B780180 /* Sequence+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sequence+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF8676254998A2E1557B2 /* SwiftUIUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUIUtils.swift; sourceTree = "<group>"; };
 		C9FFF8C15824B27E2727EC80 /* Deleter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deleter.swift; sourceTree = "<group>"; };
-		C9FFF8E1CBCE3FB107681D8E /* SongCompletionDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongCompletionDialog.swift; sourceTree = "<group>"; };
+		C9FFF8E1CBCE3FB107681D8E /* SingingCompletionDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingingCompletionDialog.swift; sourceTree = "<group>"; };
 		C9FFF8FE42466B28CAAB81B9 /* BaseWorkspaceDrawerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BaseWorkspaceDrawerView.mm; sourceTree = "<group>"; };
 		C9FFF95DC554BB3ACFBAB693 /* PlusMinusDialogPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlusMinusDialogPanel.swift; sourceTree = "<group>"; };
 		C9FFF9ECEB18BDC91B12EFB8 /* PlaybackSource+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PlaybackSource+Extensions.swift"; sourceTree = "<group>"; };
@@ -547,8 +547,8 @@
 				C9FFF95DC554BB3ACFBAB693 /* PlusMinusDialogPanel.swift */,
 				C9FFFE3111A176B9B9D3E9A9 /* BoundsSelectionDialog.swift */,
 				C9FFF62823F5DACCCA114DD1 /* BoundsSelectionViewModel.swift */,
-				C9FFF8E1CBCE3FB107681D8E /* SongCompletionDialog.swift */,
-				C9FFF78F0BBB67E5152ACA63 /* SongCompletionViewModel.swift */,
+				C9FFF8E1CBCE3FB107681D8E /* SingingCompletionDialog.swift */,
+				C9FFF78F0BBB67E5152ACA63 /* SingingCompletionViewModel.swift */,
 			);
 			path = Dialogs;
 			sourceTree = "<group>";
@@ -910,9 +910,9 @@
 				C9FFF352BBF3893943C53619 /* BoundsSelectionViewModel.swift in Sources */,
 				C9FFFA07A94FBE4832C6004E /* BigButton.swift in Sources */,
 				C9FFF7DEA9F4C41B547AA8A8 /* AppSettings.swift in Sources */,
-				C9FFF8809867862F81D0A1DF /* SongCompletionDialog.swift in Sources */,
+				C9FFF8809867862F81D0A1DF /* SingingCompletionDialog.swift in Sources */,
 				C9FFF0CEF4671CBC307E2771 /* PreviewSamplesDraw.swift in Sources */,
-				C9FFFA0DB398E2B48B77C23A /* SongCompletionViewModel.swift in Sources */,
+				C9FFFA0DB398E2B48B77C23A /* SingingCompletionViewModel.swift in Sources */,
 				C9FFFBC285BAFFB4D157C1E6 /* RecordingPathProvider.swift in Sources */,
 				C9FFF2DAD64479280275D7A8 /* RecordingsView.swift in Sources */,
 				C9FFF4CAD303AC3E1EDEDEF4 /* RecordingsViewModel.swift in Sources */,

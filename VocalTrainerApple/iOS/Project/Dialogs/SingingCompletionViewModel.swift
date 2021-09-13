@@ -8,21 +8,24 @@ import SwiftUI
 
 private let numberOfPreviewSamples = 38
 
-class SongCompletionViewModel : ObservableObject {
-    private let projectController: ProjectController
-    private let flow: SongCompletionFlowBridge
+class SingingCompletionViewModel: ObservableObject {
+    private var projectController: ProjectController!
+    private var flow: SingingCompletionFlowBridge!
     @Published var shouldNavigateToRecordings: Bool = false
-    @Binding var isActive: Bool
-    private var tryAgainExecuted = false
+    @Published var recordingPreviewImage: UIImage?
     private var tryAgainOnDeinit = true
 
-    init(projectController: ProjectController, flow: SongCompletionFlowBridge, isActive: Binding<Bool>) {
+    func configure(projectController: ProjectController, flow: SingingCompletionFlowBridge) {
+        guard self.projectController == nil else {
+            return
+        }
+
         self.flow = flow
         self.projectController = projectController
-        _isActive = isActive
+        recordingPreviewImage = getRecordingPreviewImage()
     }
 
-    func getRecordingPreviewImage() -> UIImage {
+    private func getRecordingPreviewImage() -> UIImage {
         let samples = projectController.getRecordingPreviewSamples(numberOfSamples: numberOfPreviewSamples).map {
             $0.floatValue
         }
@@ -31,21 +34,15 @@ class SongCompletionViewModel : ObservableObject {
 
     func didTapTryAgain() {
         flow.tryAgain()
-        isActive = false
-        tryAgainOnDeinit = false
     }
 
     func didTapSave() {
         flow.save()
         shouldNavigateToRecordings = true
-        isActive = false
-        tryAgainOnDeinit = false
     }
 
     func didTapListen() {
         flow.listen()
-        isActive = false
-        tryAgainOnDeinit = false
     }
 
     deinit {

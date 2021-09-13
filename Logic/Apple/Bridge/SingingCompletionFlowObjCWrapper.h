@@ -5,8 +5,8 @@
 
 #import <Foundation/Foundation.h>
 #import <Logic/Logic-Swift.h>
-#include "SongCompletionFlow.h"
+#include "SingingCompletionFlow.h"
 
-@interface SongCompletionFlowObjCWrapper : NSObject<SongCompletionFlowBridge>
-- (instancetype)initWithCpp:(SongCompletionFlow *)cpp;
+@interface SingingCompletionFlowObjCWrapper : NSObject<SingingCompletionFlowBridge>
+- (instancetype)initWithCpp:(SingingCompletionFlow *)cpp;
 @end

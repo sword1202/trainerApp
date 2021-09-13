@@ -3,17 +3,17 @@
 // Copyright (c) 2021 Semyon Tikhonenko. All rights reserved.
 //
 
-#ifndef VOCALTRAINER_SONGCOMPLETIONFLOW_H
-#define VOCALTRAINER_SONGCOMPLETIONFLOW_H
+#ifndef VOCALTRAINER_SINGINGCOMPLETIONFLOW_H
+#define VOCALTRAINER_SINGINGCOMPLETIONFLOW_H
 
 
-class SongCompletionFlow {
+class SingingCompletionFlow {
 public:
     virtual void tryAgain() = 0;
     virtual void save() = 0;
     virtual void listen() = 0;
-    virtual ~SongCompletionFlow() = default;
+    virtual ~SingingCompletionFlow() = default;
 };
 
 
-#endif //VOCALTRAINER_SONGCOMPLETIONFLOW_H
+#endif //VOCALTRAINER_SINGINGCOMPLETIONFLOW_H

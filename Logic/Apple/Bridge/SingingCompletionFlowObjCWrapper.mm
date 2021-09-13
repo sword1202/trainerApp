@@ -3,12 +3,12 @@
 // Copyright (c) 2021 Semyon Tikhonenko. All rights reserved.
 //
 
-#import "SongCompletionFlowObjCWrapper.h"
+#import "SingingCompletionFlowObjCWrapper.h"
 
-@implementation SongCompletionFlowObjCWrapper {
-    SongCompletionFlow* _cpp;
+@implementation SingingCompletionFlowObjCWrapper {
+    SingingCompletionFlow* _cpp;
 }
-- (instancetype)initWithCpp:(SongCompletionFlow *)cpp {
+- (instancetype)initWithCpp:(SingingCompletionFlow *)cpp {
     self = [super init];
     if (self) {
         _cpp = cpp;

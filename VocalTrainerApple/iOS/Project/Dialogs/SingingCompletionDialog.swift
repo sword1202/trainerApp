@@ -5,19 +5,21 @@
 
 import SwiftUI
 
-struct SongCompletionDialog : View {
+struct SingingCompletionDialog: View {
     private let screenGeometry: GeometryProxy
     @Binding var isShown: Bool
-    @StateObject private var viewModel: SongCompletionViewModel
+    @StateObject private var viewModel = SingingCompletionViewModel()
+    private let projectController: ProjectController
+    private let flow: SingingCompletionFlowBridge
 
     init(projectController: ProjectController,
          screenGeometry: GeometryProxy,
          isShown: Binding<Bool>,
-         flow: SongCompletionFlowBridge) {
+         flow: SingingCompletionFlowBridge) {
         self.screenGeometry = screenGeometry
         _isShown = isShown
-        _viewModel = StateObject(wrappedValue: SongCompletionViewModel(
-                projectController: projectController, flow: flow, isActive: isShown))
+        self.projectController = projectController
+        self.flow = flow
     }
 
     var body: some View {
@@ -25,7 +27,7 @@ struct SongCompletionDialog : View {
             VStack(spacing: 0) {
                 Image("SongCompletionDialogIcon").padding(.top, 36).padding(.bottom, 22)
                 Text(Strings.listenToTheResultDescription.localized)
-                Image(uiImage: viewModel.getRecordingPreviewImage()).padding(.top, 38)
+                Image(uiImage: viewModel.recordingPreviewImage ?? UIImage()).padding(.top, 38)
                 HStack(spacing: 8) {
                     BigButton(text: Strings.save.localized) {
                         viewModel.didTapSave()
@@ -42,6 +44,8 @@ struct SongCompletionDialog : View {
                     viewModel.didTapTryAgain()
                 }.moveToBottom(screenGeometry: screenGeometry)
             }.frame(maxWidth: .infinity).background(Color.white)
-        }.ignoresSafeArea(edges: .bottom)
+        }.ignoresSafeArea(edges: .bottom).onAppear {
+            viewModel.configure(projectController: projectController, flow: flow)
+        }
     }
 }

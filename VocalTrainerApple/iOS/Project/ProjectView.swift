@@ -288,7 +288,7 @@ struct ProjectView: View {
 
                 ZStack {
                     if viewModel.showSongCompletionFlow {
-                        SongCompletionDialog(
+                        SingingCompletionDialog(
                                 projectController: viewModel.projectController,
                                 screenGeometry: geom,
                                 isShown: $viewModel.showSongCompletionFlow,
@@ -298,6 +298,10 @@ struct ProjectView: View {
                 }
 
                 NavigationLazyView(ProjectView(source: viewModel.recording!)).navigatePush(whenTrue: $viewModel.showListenScreen)
+
+                NavigationLink(destination: EmptyView()) {
+                    EmptyView()
+                }
             }
         }.onAppear {
             viewModel.configure(source: source)

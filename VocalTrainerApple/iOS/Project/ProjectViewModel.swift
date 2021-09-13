@@ -29,7 +29,7 @@ class ProjectViewModel : ObservableObject {
     @Published private(set) var retrySeconds = 5
     @Published private(set) var isPlaying: Bool = false
     @Published var showSongCompletionFlow: Bool = false
-    private(set) var songCompletionFlow: SongCompletionFlowBridge? = nil
+    private(set) var songCompletionFlow: SingingCompletionFlowBridge? = nil
     @Published var showListenScreen = false
     @Published private(set) var recording: PlaybackSource? = nil
     @Published private(set) var recordingTimeLabel: String = ""
@@ -183,11 +183,9 @@ extension ProjectViewModel : ProjectControllerBridgeDelegate {
         isPlaying = false
     }
 
-    func projectControllerPlaybackDidComplete(flow: SongCompletionFlowBridge) {
-        if source.isTempRecording || !projectController.isRecording {
-            songCompletionFlow = flow
-            showSongCompletionFlow = true
-        }
+    func projectControllerPlaybackDidComplete(flow: SingingCompletionFlowBridge) {
+        songCompletionFlow = flow
+        showSongCompletionFlow = true
     }
 
     func projectControllerStartListeningToRecording(recording: PlaybackSource) {

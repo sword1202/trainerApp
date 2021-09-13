@@ -84,7 +84,11 @@ ProjectController::ProjectController(ProjectControllerDelegate* delegate) : dele
     });
 
     player->onCompleteListeners.addListener([=] {
-        delegate->onPlaybackCompleted(this);
+        if (isRecording()) {
+            player->stopAndMoveSeekToBeginning();
+        } else {
+            delegate->showSingingCompletionFlow(this);
+        }
     });
 
     rewinder = new Rewinder(player);
