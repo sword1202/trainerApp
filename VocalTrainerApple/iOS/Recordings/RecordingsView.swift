@@ -86,23 +86,22 @@ struct RecordingsView : View {
                     }.padding(.trailing, 18)
                 }.frame(height: 72, alignment: .center).background(Colors.tone2)
 
-                if (viewModel.recordingsCount > 0) {
+                if (!viewModel.recordings.isEmpty) {
                     ScrollView {
                         LazyVStack(spacing: 0) {
-                            ForEach(0..<viewModel.recordingsCount) { index in
-                                let recording = viewModel.getRecording(at: index)
+                            ForEach(viewModel.recordings, id: \.filePath) { recording in
                                 NavigationLink(
                                         destination: NavigationLazyView(
                                                 ProjectView(source: PlaybackSource(filePath: recording.filePath)).navigationBarHidden(true))
                                 ) {
                                     RecordingView(
                                             recordingBackground: viewModel.getPreviewSamplesImage(
-                                                    at: index, width: geom.size.width - 30),
+                                                    ofRecording: recording, width: geom.size.width - 30),
                                             title: recording.songTitle,
                                             artistName: recording.originalArtistName,
                                             date: Date(timeIntervalSince1970: recording.date)
                                     ).frame(minHeight: 100).frame(maxWidth: .infinity).onDelete {
-                                        viewModel.deleteRecording(at: index)
+                                        viewModel.deleteRecording(recording)
                                     }
                                 }
                             }

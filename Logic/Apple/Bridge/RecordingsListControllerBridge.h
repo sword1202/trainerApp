@@ -12,4 +12,7 @@
 - (RecordingInfo*)getRecording:(NSInteger)index NS_SWIFT_NAME(getRecording(at:));
 - (NSArray<NSNumber*>*)getPreviewSamplesForRecordingAt:(NSInteger)index samplesCount:(NSInteger)samplesCount NS_SWIFT_NAME(getPreviewSamples(recordingIndex:samplesCount:));
 - (void)deleteRecordingAt:(NSInteger)index;
+
+- (void)addDelegate:(id<RecordingsListControllerBridgeDelegate>)delegate NS_SWIFT_NAME(add(delegate:));
+- (void)removeDelegate:(id<RecordingsListControllerBridgeDelegate>)delegate NS_SWIFT_NAME(remove(delegate:));
 @end

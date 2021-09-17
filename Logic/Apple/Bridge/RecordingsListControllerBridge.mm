@@ -8,17 +8,32 @@
 #include "StringUtils.h"
 #include "AudioUtils.h"
 #include "Collections.h"
+#include "config.h"
+#include "BaseCppDelegateWrapper.h"
 
 using namespace CppUtils;
 
+namespace {
+    class DelegateWrapper : public BaseCppDelegateWrapper, public RecordingsListControllerDelegate {
+    public:
+        void updateRecordingsList() override {
+            for (id delegate in delegates) {
+                [delegate recordingsListControllerUpdate];
+            }
+        }
+    };
+}
+
 @implementation RecordingsListControllerBridge {
     RecordingsListController* _cpp;
+    DelegateWrapper* _delegate;
 }
 
 - (instancetype)initWithRecordingsPath:(NSString*)path {
     self = [super init];
     if (self) {
-        _cpp = new RecordingsListController(path.UTF8String);
+        _delegate = new DelegateWrapper();
+        _cpp = new RecordingsListController(path.UTF8String, _delegate);
     }
 
     return self;
@@ -47,9 +62,18 @@ using namespace CppUtils;
     _cpp->deleteRecording(static_cast<int>(index));
 }
 
+- (void)addDelegate:(id)delegate {
+    _delegate->addDelegate(delegate);
+}
+
+- (void)removeDelegate:(id)delegate {
+    _delegate->removeDelegate(delegate);
+}
+
 
 - (void)dealloc {
     delete _cpp;
+    delete _delegate;
 }
 
 @end

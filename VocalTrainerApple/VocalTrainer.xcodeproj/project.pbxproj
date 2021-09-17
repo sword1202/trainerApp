@@ -97,6 +97,7 @@
 		C9FFFBF67228CD92C9CD5AB1 /* BottomDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFD46FFA71344BAFB98B1 /* BottomDialog.swift */; };
 		C9FFFBFACE925CE7B2964C33 /* ProjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF35C725ACB57DDF897B4 /* ProjectViewModel.swift */; };
 		C9FFFC11A538A86E041DB8F9 /* TonalityDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFFA7518DDA6BC7C05D962 /* TonalityDialog.swift */; };
+		C9FFFC291114730E028D4EF3 /* NavigationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF0D3EAA141F9BD2F4AFC /* NavigationUtil.swift */; };
 		C9FFFC349612E62ADD0069BA /* PlaybackSource+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF9ECEB18BDC91B12EFB8 /* PlaybackSource+Extensions.swift */; };
 		C9FFFC357FB17DBCE0DA3B28 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF6D026277BCE01AFF619 /* UIImage+Extensions.swift */; };
 		C9FFFC4DD5B1FBC3870FEDFB /* RecordingPathProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFF38BFE133FBB0692B488 /* RecordingPathProvider.swift */; };
@@ -189,6 +190,7 @@
 		ACF18B2422ECB97C008E7DAA /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
 		C9FFF079046892811FDEB34E /* CGContext+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGContext+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF08F2EBCC23D22942B2D /* LevelsDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsDialog.swift; sourceTree = "<group>"; };
+		C9FFF0D3EAA141F9BD2F4AFC /* NavigationUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationUtil.swift; sourceTree = "<group>"; };
 		C9FFF134111E663C22048469 /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		C9FFF1756DDFE9ED2936A436 /* SongTonality+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SongTonality+Extensions.swift"; sourceTree = "<group>"; };
 		C9FFF18E11AA44C9B5A6225B /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -523,6 +525,7 @@
 				C9FFFF1E82D8552CD4FBCE28 /* Double+Extensions.swift */,
 				C9FFF53C42BF0DD8FBBD5A74 /* View+Navigation.swift */,
 				C9FFF2DA41982D4F3F7C963C /* FileUtils.swift */,
+				C9FFF0D3EAA141F9BD2F4AFC /* NavigationUtil.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -921,6 +924,7 @@
 				C9FFFCA4B0CA4D65A120B25F /* NavigationLazyView.swift in Sources */,
 				C9FFF65948E2C2FDC53146ED /* FileUtils.swift in Sources */,
 				C9FFFC349612E62ADD0069BA /* PlaybackSource+Extensions.swift in Sources */,
+				C9FFFC291114730E028D4EF3 /* NavigationUtil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

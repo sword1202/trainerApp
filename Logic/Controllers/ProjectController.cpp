@@ -5,6 +5,7 @@
 #include "ProjectController.h"
 #include "ApplicationModel.h"
 #include "AudioUtils.h"
+#include "InterControllerCommunicationEvents.h"
 
 using namespace CppUtils;
 using std::cout;
@@ -482,8 +483,13 @@ void ProjectController::tryAgain() {
 
 void ProjectController::save() {
     std::unique_ptr<MvxFile> recordingFile(generateRecording());
+    bool notify = false;
     if (auto stream = delegate->createStreamToSaveRecording(recordingFile.get())) {
         recordingFile->writeToStream(*stream);
+        notify = true;
+    }
+    if (notify) {
+        InterControllerCommunicationEvents::instance().onNewRecordingAdded.executeAll();
     }
 }
 

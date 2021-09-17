@@ -8,16 +8,18 @@
 #include "Algorithms.h"
 #include "Executors.h"
 #include "AudioUtils.h"
+#include "InterControllerCommunicationEvents.h"
 
 using namespace CppUtils;
 
-RecordingsListController::RecordingsListController(const char *recordingsPath) {
+void RecordingsListController::updateList() {
     std::error_code errorCode;
     std::filesystem::directory_iterator iter(recordingsPath, errorCode);
     if (errorCode) {
         return;
     }
 
+    recordings.clear();
     for (const auto & entry : iter) {
         if (!entry.is_directory()) {
             Recording recording;
@@ -30,6 +32,17 @@ RecordingsListController::RecordingsListController(const char *recordingsPath) {
     SortByKey(recordings, [] (const Recording& r) {
         return -r.date;
     });
+}
+
+RecordingsListController::RecordingsListController(const char *recordingsPath, RecordingsListControllerDelegate *delegate)
+        : delegate(delegate) {
+    this->recordingsPath = recordingsPath;
+    updateList();
+
+    InterControllerCommunicationEvents::instance().onNewRecordingAdded.addListener([=] {
+        updateList();
+        this->delegate->updateRecordingsList();
+    }, this);
 }
 
 int RecordingsListController::getRecordingsCount() const {

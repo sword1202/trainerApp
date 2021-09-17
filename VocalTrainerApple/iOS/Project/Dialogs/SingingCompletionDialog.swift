@@ -32,7 +32,6 @@ struct SingingCompletionDialog: View {
                     BigButton(text: Strings.save.localized) {
                         viewModel.didTapSave()
                     }
-                    RecordingsView().navigatePush(whenTrue: $viewModel.shouldNavigateToRecordings)
                     BigButton(text: Strings.listen.localized, backgroundColor: Colors.alternativeButton) {
                         viewModel.didTapListen()
                     }
@@ -46,6 +45,10 @@ struct SingingCompletionDialog: View {
             }.frame(maxWidth: .infinity).background(Color.white)
         }.ignoresSafeArea(edges: .bottom).onAppear {
             viewModel.configure(projectController: projectController, flow: flow)
+        }.onChange(of: viewModel.shouldNavigateToRecordings) {
+            if ($0) {
+                NavigationUtil.popToRootView()
+            }
         }
     }
 }

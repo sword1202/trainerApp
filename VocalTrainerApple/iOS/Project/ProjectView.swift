@@ -70,6 +70,7 @@ struct ProjectView: View {
 
     init(source: PlaybackSource) {
         self.source = source
+        presentationMode.wrappedValue.dismiss()
     }
 
     var body: some View {

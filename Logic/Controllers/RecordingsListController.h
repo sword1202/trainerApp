@@ -8,6 +8,7 @@
 
 #include <stdint.h>
 #include "MvxFile.h"
+#include "DestructorQueue.h"
 
 struct Recording {
     uint64_t date;
@@ -15,10 +16,19 @@ struct Recording {
     MvxFileHeader header;
 };
 
-class RecordingsListController {
-    std::vector<Recording> recordings;
+class RecordingsListControllerDelegate {
 public:
-    RecordingsListController(const char* recordingsPath);
+    virtual void updateRecordingsList() = 0;
+    virtual ~RecordingsListControllerDelegate() = default;
+};
+
+class RecordingsListController : public CppUtils::DestructorQueue {
+    std::vector<Recording> recordings;
+    std::string recordingsPath;
+    RecordingsListControllerDelegate* delegate = nullptr;
+    void updateList();
+public:
+    RecordingsListController(const char *recordingsPath, RecordingsListControllerDelegate *delegate);
     int getRecordingsCount() const;
     Recording getRecordingAt(int index) const;
     std::vector<float> getSamplesForRecordingAt(int index, int samplesCount) const;

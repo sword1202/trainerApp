@@ -9,13 +9,17 @@ private let sampleWidth: CGFloat = 4.7
 
 class RecordingsViewModel : ObservableObject {
     private let recordingsController = RecordingsListController()
-    @Published private(set) var recordingsCount: Int
+    @Published private(set) var recordings = [RecordingInfo]()
 
     init() {
-        recordingsCount = recordingsController.recordingsCount()
+        recordingsController.add(delegate: self)
+        recordingsListControllerUpdate()
     }
 
-    func getPreviewSamplesImage(at index: Int, width: CGFloat) -> UIImage {
+    func getPreviewSamplesImage(ofRecording recording: RecordingInfo, width: CGFloat) -> UIImage {
+        guard let index = recordings.firstIndex(of: recording) else {
+            return UIImage()
+        }
         let samplesCount = PreviewSamplesDraw.calculateSamplesCount(width: width, sampleWidth: sampleWidth)
         let samples = recordingsController.getPreviewSamples(recordingIndex: index, samplesCount: samplesCount).map {
             $0.floatValue
@@ -26,12 +30,23 @@ class RecordingsViewModel : ObservableObject {
                 color: Colors.recordingBackgroundTrack.cgColor)
     }
 
-    func getRecording(at index: Int) -> RecordingInfo {
-        recordingsController.getRecording(at: index)
+    func deleteRecording(_ recording: RecordingInfo) {
+        guard let index = recordings.firstIndex(of: recording) else {
+            return
+        }
+        recordings.remove(at: index)
+        recordingsController.deleteRecording(at: index)
     }
 
-    func deleteRecording(at index: Int) {
-        recordingsController.deleteRecording(at: index)
-        recordingsCount = recordingsController.recordingsCount()
+    deinit {
+        recordingsController.remove(delegate: self)
+    }
+}
+
+extension RecordingsViewModel : RecordingsListControllerBridgeDelegate {
+    public func recordingsListControllerUpdate() {
+        recordings = (0..<recordingsController.recordingsCount()).map {
+            recordingsController.getRecording(at: $0)
+        }
     }
 }
