@@ -51,7 +51,7 @@ struct LevelsDialog : View {
             VStack {
                 LevelSection(label: Strings.instrumentalLevelLabel.localized, value: $viewModel.instrumentalLevel)
                 LevelSection(label: Strings.vocalLineLevelLabel.localized, value: $viewModel.vocalLineLevel)
-                if (viewModel.voiceLevel >= 0) {
+                if (viewModel.hasVoiceSection) {
                     LevelSection(label: Strings.voiceLevelLabel.localized, value: $viewModel.voiceLevel)
                 }
             }.background(Color.white)

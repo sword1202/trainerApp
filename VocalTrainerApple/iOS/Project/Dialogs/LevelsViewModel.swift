@@ -21,14 +21,28 @@ class LevelsViewModel : ObservableObject {
         }
     }
 
-    @Published var voiceLevel: Float = AVAudioSession.sharedInstance().isInputGainSettable ? 1.0 : -1.0 {
+    @Published var voiceLevel: Float  {
         didSet {
-            try! AVAudioSession.sharedInstance().setInputGain(voiceLevel)
+            if !projectController.isRecording {
+                try! AVAudioSession.sharedInstance().setInputGain(voiceLevel)
+            }
+            projectController.setVocalVolume(voiceLevel)
         }
     }
 
+    let hasVoiceSection: Bool
+
     init(projectController: ProjectController) {
         self.projectController = projectController
+        if projectController.isRecording {
+            voiceLevel = 1.0
+            hasVoiceSection = true
+        } else {
+            let audioSession = AVAudioSession.sharedInstance()
+            hasVoiceSection = audioSession.isInputGainSettable
+            voiceLevel = audioSession.inputGain
+        }
+
         if !SwiftUIUtils.isPreview() {
             projectController.add(delegate: self)
         }

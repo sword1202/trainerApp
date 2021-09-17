@@ -127,7 +127,11 @@ const std::string & ProjectController::getSongTitleUtf8() {
 }
 
 void ProjectController::setVocalVolume(float value) {
-    audioInputManager->setOutputVolume(value);
+    if (isRecording()) {
+        player->setRecordingVolume(value);
+    } else {
+        audioInputManager->setOutputVolume(value);
+    }
     delegate->updateVocalVolume(audioInputManager->getOutputVolume());
 }
 
