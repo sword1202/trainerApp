@@ -10,6 +10,7 @@
 #include "WAVFile.h"
 #include "DestructorQueue.h"
 #include <memory>
+#include "Serializers.h"
 
 class AudioDataBuffer {
 public:

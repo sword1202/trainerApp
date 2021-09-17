@@ -18,6 +18,7 @@
 #import <Logic/TimeSignature.h>
 #include "Serializers.h"
 #include "TimeSignature.h"
+#include "AudioDataBufferSerialization.h"
 
 struct MvxFileHeader {
     bool recording = false;
@@ -70,25 +71,8 @@ public:
         ar(timeSignature);
         ar(vocalPart);
 
-        auto serializeAudioDataBuffer = [&] (AudioDataBufferConstPtr& buffer) {
-            std::string str;
-            if (isSave) {
-                if (buffer) {
-                    str = buffer->toBinaryString();
-                }
-            }
-            ar(str);
-            if (!isSave) {
-                if (!str.empty()) {
-                    buffer.reset(new StdStringAudioDataBuffer(std::move(str)));
-                } else {
-                    buffer = nullptr;
-                }
-            }
-        };
-
-        serializeAudioDataBuffer(instrumental);
-        serializeAudioDataBuffer(recordingData);
+        ar(instrumental);
+        ar(recordingData);
 
         ar(recordedPitchesTimes);
         ar(recordedPitchesFrequencies);
