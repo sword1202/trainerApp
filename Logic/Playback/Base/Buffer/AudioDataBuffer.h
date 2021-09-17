@@ -19,6 +19,10 @@ public:
     virtual int getNumberOfBytes() const = 0;
     virtual WavConfig parseWavHeader() const;
     virtual std::string toBinaryString() const;
+    // Returns raw pointer to binary data if available or null otherwise. Use toBinaryString for buffers without raw data.
+    inline virtual const char* provideBinaryDataBuffer() const {
+        return nullptr;
+    }
     virtual ~AudioDataBuffer() = default;
 };
 

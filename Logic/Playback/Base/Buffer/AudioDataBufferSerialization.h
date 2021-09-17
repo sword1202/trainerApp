@@ -14,14 +14,23 @@ namespace CppUtils {
         namespace {
             template<typename Buffer, typename Archive>
             void AudioDataBufferSaveOrLoad(Buffer &buffer, Archive &archive, bool save) {
-                std::string str;
                 if (save) {
                     if (buffer) {
-                        str = buffer->toBinaryString();
+                        if (const char* data = buffer->provideBinaryDataBuffer()) {
+                            int64_t s = buffer->getNumberOfBytes();
+                            archive.asRaw(s);
+                            archive.asBytes(const_cast<char*>(data), s);
+                        } else {
+                            std::string str = buffer->toBinaryString();
+                            archive(str);
+                        }
+                    } else {
+                        int64_t s = 0;
+                        archive.asRaw(s);
                     }
-                }
-                archive(str);
-                if (!save) {
+                } else {
+                    std::string str;
+                    archive(str);
                     if (!str.empty()) {
                         buffer.reset(new StdStringAudioDataBuffer(std::move(str)));
                     } else {

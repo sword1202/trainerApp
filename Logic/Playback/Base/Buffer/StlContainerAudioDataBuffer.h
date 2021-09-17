@@ -54,6 +54,10 @@ public:
     inline std::string toBinaryString() const override {
         return getData();
     }
+
+    const char *provideBinaryDataBuffer() const override {
+        return getData().data();
+    }
 };
 
 #endif //VOCALTRAINER_STLCONTAINERAUDIODATABUFFER_H
