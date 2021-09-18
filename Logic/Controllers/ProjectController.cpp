@@ -483,6 +483,8 @@ MvxFile *ProjectController::generateRecording() const {
 // Song completion flow
 void ProjectController::tryAgain() {
     player->setSeek(0);
+    player->play();
+    delegate->hideSingingCompletionFlow();
 }
 
 void ProjectController::save() {

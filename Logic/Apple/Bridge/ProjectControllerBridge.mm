@@ -186,10 +186,18 @@ namespace {
 
         void showSingingCompletionFlow(SingingCompletionFlow* songCompletionFlow) override {
             for (id delegate in delegates) {
-                if ([delegate respondsToSelector:@selector(projectControllerPlaybackDidCompleteWithFlow:)]) {
-                    [delegate projectControllerPlaybackDidCompleteWithFlow:
+                if ([delegate respondsToSelector:@selector(projectControllerShowSingingCompletionFlowWithFlow:)]) {
+                    [delegate projectControllerShowSingingCompletionFlowWithFlow:
                             [[SingingCompletionFlowObjCWrapper alloc] initWithCpp:songCompletionFlow]
                     ];
+                }
+            }
+        }
+
+        void hideSingingCompletionFlow() override {
+            for (id delegate in delegates) {
+                if ([delegate respondsToSelector:@selector(projectControllerHideSingingCompletionFlow)]) {
+                    [delegate projectControllerHideSingingCompletionFlow];
                 }
             }
         }

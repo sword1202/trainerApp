@@ -37,6 +37,7 @@ public:
     virtual inline void updateEndSeek(double endSeek) {}
     virtual inline void onRewindStatusChanged(bool rewindRunning, bool backward) {}
     virtual inline void showSingingCompletionFlow(SingingCompletionFlow* songCompletionFlow) {}
+    virtual inline void hideSingingCompletionFlow() {}
     virtual inline void startListeningToRecording(MvxFile* recording) { NOT_IMPLEMENTED_ASSERT }
     virtual std::shared_ptr<std::ostream> createStreamToSaveRecording(const VocalTrainerFile* recording) {
         return nullptr;

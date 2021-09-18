@@ -34,6 +34,7 @@ import Foundation
     @objc optional func projectControllerUpdateTonality(pitchShift: Int)
     @objc optional func projectControllerUpdateTempo(factor: Double)
     @objc optional func projectControllerUpdate(endSeek: Double)
-    @objc optional func projectControllerPlaybackDidComplete(flow: SingingCompletionFlowBridge)
+    @objc optional func projectControllerShowSingingCompletionFlow(flow: SingingCompletionFlowBridge)
+    @objc optional func projectControllerHideSingingCompletionFlow()
     @objc optional func projectControllerStartListeningToRecording(recording: PlaybackSource)
 }

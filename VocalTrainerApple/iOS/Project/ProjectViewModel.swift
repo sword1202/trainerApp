@@ -183,9 +183,14 @@ extension ProjectViewModel : ProjectControllerBridgeDelegate {
         isPlaying = false
     }
 
-    func projectControllerPlaybackDidComplete(flow: SingingCompletionFlowBridge) {
+    func projectControllerShowSingingCompletionFlow(flow: SingingCompletionFlowBridge) {
         songCompletionFlow = flow
         showSongCompletionFlow = true
+    }
+
+    public func projectControllerHideSingingCompletionFlow() {
+        showSongCompletionFlow = false
+        songCompletionFlow = nil
     }
 
     func projectControllerStartListeningToRecording(recording: PlaybackSource) {
