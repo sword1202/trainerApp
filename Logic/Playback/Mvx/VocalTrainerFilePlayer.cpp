@@ -254,8 +254,10 @@ void VocalTrainerFilePlayer::prepare() {
             throw VocalTrainerPlayerPrepareException(VocalTrainerPlayerPrepareException::BROKEN_RECORDING, e.what());
         }
     }
-    metronomePlayer.prepare();
-    metronomePlayer.setAudioDataInfo(getBeatsPerMinute(), getMainPlayer()->getTrackDurationInSecondsWithTempoApplied());
+    if (MetronomeAudioPlayer::isMetronomeAudioDataSet()) {
+        metronomePlayer.prepare();
+        metronomePlayer.setAudioDataInfo(getBeatsPerMinute(), getMainPlayer()->getTrackDurationInSecondsWithTempoApplied());
+    }
     if (instrumentalPlayer.getAudioData()) {
         if (fabs(instrumentalPlayer.getOriginalTrackDurationInSeconds() - vocalPartPianoPlayer.getOriginalTrackDurationInSeconds()) > 0.005) {
             throw VocalTrainerPlayerPrepareException(VocalTrainerPlayerPrepareException::DIFFERENT_DURATIONS);

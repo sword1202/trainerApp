@@ -74,4 +74,8 @@ int MetronomeAudioPlayer::readAudioData(void *into, int offset, int numberOfByte
     return read(into, offset, numberOfBytes);
 }
 
+bool MetronomeAudioPlayer::isMetronomeAudioDataSet() {
+    return !metronomeAudioData.empty();
+}
+
 std::string MetronomeAudioPlayer::metronomeAudioData;

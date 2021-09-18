@@ -30,8 +30,7 @@ struct MvxFileHeader {
     std::vector<short> recordingPreviewSamples;
 
     template <typename Archive>
-    void saveOrLoadHeader(Archive& ar, int* version) {
-        ar(*version);
+    void saveOrLoadHeader(Archive& ar, int version) {
         ar(recording);
         ar(songTitleUtf8);
         ar(artistNameUtf8);
@@ -45,8 +44,6 @@ struct MvxFileHeader {
 };
 
 class MvxFile : private MvxFileHeader, public VocalTrainerFile {
-    static const int VERSION = 1;
-
     // core data
     VocalPart vocalPart;
     AudioDataBufferConstPtr instrumental = nullptr;
@@ -62,10 +59,12 @@ class MvxFile : private MvxFileHeader, public VocalTrainerFile {
 
     Lyrics lyrics;
 public:
+    static constexpr int VERSION = 1;
+    static constexpr int SERIALIZATION_ID = 12343434;
+
     template<typename Archive>
-    void saveOrLoad(Archive &ar, bool isSave) {
-        int version = VERSION;
-        saveOrLoadHeader(ar, &version);
+    void saveOrLoad(Archive &ar, bool isSave, int version) {
+        saveOrLoadHeader(ar, version);
 
         ar(beatsPerMinute);
         ar(timeSignature);

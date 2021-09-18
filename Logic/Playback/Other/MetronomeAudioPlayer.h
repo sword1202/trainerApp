@@ -18,6 +18,7 @@ public:
     MetronomeAudioPlayer();
 
     static void setMetronomeAudioData(std::string&& metronomeAudioData);
+    static bool isMetronomeAudioDataSet();
 
     double getBeatsPerMinute() const;
     void setAudioDataInfo(double beatsPerMinute, double totalDurationInSeconds);

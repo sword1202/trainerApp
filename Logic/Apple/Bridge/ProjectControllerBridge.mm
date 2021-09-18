@@ -57,21 +57,20 @@ namespace {
         }
 
         void updateLyricsLines(const LyricsDisplayedLinesProvider *linesProvider) override {
-            if (delegates.count == 0) {
-                return;
-            }
-
-            int count = linesProvider->getDisplayLinesCount();
-            NSMutableArray *lines = [[NSMutableArray alloc] initWithCapacity:static_cast<NSUInteger>(count)];
-
-            for (int i = 0; i < count; ++i) {
-                std::u32string_view line = linesProvider->getDisplayedLineAt(i);
-                NSString* objCline = Strings::ToNSString(line);
-                [lines addObject:objCline];
-            }
-
+            NSMutableArray *lines = nil;
             for (id delegate in delegates) {
                 if ([delegate respondsToSelector:@selector(projectControllerUpdateWithCurrentLyricsLines:)]) {
+                    if (!lines) {
+                        int count = linesProvider->getDisplayLinesCount();
+                        lines = [[NSMutableArray alloc] initWithCapacity:static_cast<NSUInteger>(count)];
+
+                        for (int i = 0; i < count; ++i) {
+                            std::u32string_view line = linesProvider->getDisplayedLineAt(i);
+                            NSString* objCline = Strings::ToNSString(line);
+                            [lines addObject:objCline];
+                        }
+                    }
+
                     [delegate projectControllerUpdateWithCurrentLyricsLines:lines];
                 }
             }

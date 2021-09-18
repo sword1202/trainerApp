@@ -233,8 +233,8 @@ void MvxFile::setTimeSignature(const TimeSignature &timeSignature) {
 void MvxFileHeader::readFromStream(std::istream& is) {
     checkMvxSignature(is);
     Serialization::BinaryReadArchive archive(is);
-    int version;
-    this->saveOrLoadHeader(archive, &version);
+    int version = archive.getSerializationVersion<MvxFile>();
+    this->saveOrLoadHeader(archive, version);
 }
 
 void MvxFileHeader::readFromFile(const char* filePath) {
